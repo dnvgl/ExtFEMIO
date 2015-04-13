@@ -1,0 +1,22 @@
+;; Object test
+;; EDE Project Files are auto generated: Do Not Edit
+(ede-proj-project "test"
+  :file "Project.ede"
+  :name "test"
+  :targets
+  (list
+    (ede-proj-target-makefile-program "test_bdf_types"
+      :name "test_bdf_types"
+      :path ""
+      :source '("test_bdf_types.cpp" "test_bdf_int.cpp" "test_bdf_float.cpp")
+      :auxsource '("test_bdf_int.h" "test_bdf_float.h")
+      :configuration-variables nil
+      :rules
+      (list
+        (ede-makefile-rule "Custom-new"
+          :target "../src/libbdfreadpp.la"
+          :rules '("$(MAKE) -C ..")))
+      :ldlibs-local '("../src/libbdfreadpp.la")))
+  :makefile-type 'Makefile.am
+  :variables '(("AM_CPPFLAGS" . "-I../include"))
+  :configuration-variables nil)

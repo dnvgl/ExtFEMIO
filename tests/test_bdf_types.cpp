@@ -13,82 +13,33 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include <iostream>
-#include <climits>
-
-#include <assert.h>
+#include <cassert>
 
 #include "bdf_types.h"
+
+#include "test_bdf_int.h"
+#include "test_bdf_float.h"
 
 int main(const int argc, char * argv[]) {
 
   {
-    ::std::cerr << "::bdf_types::bdf_int("").type  : " << ::bdf_types::bdf_int("").get_type()   << "\n";
-    ::std::cerr << "::bdf_types::bdf_float("").type: " << ::bdf_types::bdf_float("").get_type() << "\n";
+    assert(::bdf_types::bdf_int("").type() == ::bdf_types::Int);
+    assert(::bdf_types::bdf_float("").type() == ::bdf_types::Float);
     assert(::bdf_types::bdf_int("") < ::bdf_types::bdf_float(""));
   }
 
-  // {
-  //   ::bdf_types::bdf_type_base* obj_int = new ::bdf_types::bdf_int("");
-  //   ::bdf_types::bdf_type_base* obj_float = new ::bdf_types::bdf_float("");
-  //   assert(*obj_int < *obj_float);
-  // }
-
   {
-    ::bdf_types::bdf_int obj("dummy", 1, 100000000 - 1);
-    obj("   2    ");
-    assert(obj.value == 2);
+    ::bdf_types::bdf_type_base* obj_int = new ::bdf_types::bdf_int("");
+    ::bdf_types::bdf_type_base* obj_float = new ::bdf_types::bdf_float("");
+    assert(obj_int->type() == ::bdf_types::Int);
+    assert(obj_float->type() == ::bdf_types::Float);
+    assert(*obj_int < *obj_float);
   }
 
-  {
-    ::bdf_types::bdf_int obj("dummy", 1, 100000000 - 1);
-    obj("   2    ");
-    assert(obj.value == 2);
-  }
+  test_bdf_int();
+  test_bdf_float();
 
-  {
-    ::bdf_types::bdf_int obj("dummy", 0, LONG_MAX);
-    obj("       2");
-    assert(obj.value == 2);
-  }
-
-  // def test_Int3(self):
-  //     obj = bdf_types.Int('dummy', minval=0, default=0)
-  //     assert obj("2       ") == 2
-
-    // def test_Int4(self):
-    //     obj = bdf_types.Int('dummy', minval=-1, default=None)
-    //     assert obj("    -1  ") == -1
-
-    // class TestFloat1(object):
-
-    //     @pytest.fixture(scope='class')
-    //     def probe(self):
-    //         return bdf_types.Float('dummy', default=0.0)
-
-    //     def test_neg(self, probe):
-    //         assert probe("  -1    ") == -1.
-
-    //     def test_default(self, probe):
-    //         assert probe("        ") == 0.
-
-    // class TestFloat2(object):
-
-    //     @pytest.fixture(scope='class')
-    //     def probe(self):
-    //         return bdf_types.Float('dummy')
-
-    //     def test_dot(self, probe):
-    //         assert probe('123.') == 123.
-
-    //     def test_exp(self, probe):
-    //         assert probe('123+3') == 123000.
-
-    // def test_List1(self):
-    //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
-    //     assert obj("1236") == (1, 2, 3, 6)
-
-    // class TestChoose1(object):
+      // class TestChoose1(object):
 
     //     @pytest.fixture(scope='class')
     //     def probe(self):

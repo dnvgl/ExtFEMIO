@@ -1,0 +1,9 @@
+;; Object BDFRead++
+;; EDE Project Files are auto generated: Do Not Edit
+(ede-proj-project "BDFRead++"
+  :file "Project.ede"
+  :name "BDFRead++"
+  :targets nil
+  :makefile-type 'Makefile.am
+  :variables '(("ACLOCAL_AMFLAGS" . "-Im4"))
+  :configuration-variables nil)
