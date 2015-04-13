@@ -15,6 +15,27 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <typeinfo>
+
+namespace bdf_type_restrict {
+
+  class bdf_type_restrict {
+  protected:
+    ~bdf_type_restrict () {};
+    bool has_min;
+    bool has_max;
+    bool has_default;
+  public:
+    virtual bool check_range() = 0;
+  };
+
+  template <class T> class bdf_num_restrict : bdf_type_restrict {
+  private:
+    T min_val;
+    T max_val;
+    T default_val;
+  };
+}
 
 namespace bdf_types {
 
@@ -32,27 +53,23 @@ namespace bdf_types {
     std::string name;
 
   protected:
-    static const bdf_types type = None;
+    static const bdf_types _type = None;
 
   public:
     bdf_type_base(std::string name);
     ~bdf_type_base() {};
     virtual void operator()(std::string) = 0;
-    virtual int get_type() = 0;
+    virtual bdf_types type() const = 0;
   };
 
   template <class T1, class T2>
   inline bool operator== (const T1& one, const T2& other) {
-    ::std::cerr << one.type << " :==: " << other.type << ::std::endl;
-    ::std::cerr << (one.type == other.type) << ::std::endl;
-    return (one.type == other.type);
+    return (one.type() == other.type());
   }
 
   template <class T1, class T2>
   inline bool operator< (const T1& one, const T2& other) {
-    ::std::cerr << one.type << " :<: " << other.type << ::std::endl;
-    ::std::cerr << (one.type < other.type) << ::std::endl;
-    return (one.type < other.type);
+    return (one.type() < other.type());
   }
 
   class bdf_int : public bdf_type_base {
@@ -79,14 +96,13 @@ namespace bdf_types {
     long _default;
 
   protected:
-    static const bdf_types type = Int;
+    static const bdf_types _type = Int;
 
   public:
     long value;
     bdf_int(std::string, long minval=0, long maxval=0, long _default=0);
     void operator()(std::string);
-    int get_type() {return type;};
-
+    bdf_types type() const {return _type;};
   };
 
 //     def __init__(self, name, minval=None, maxval=None, default=False):
@@ -177,12 +193,12 @@ namespace bdf_types {
     double value;
 
   protected:
+    static const bdf_types _type = Float;
 
   public:
-    static const bdf_types type = Float;
-    bdf_float(std::string, double =0, double =0, double =0);
+    bdf_float(std::string, double =0., double =0., double =0.);
     void operator()(std::string);
-    int get_type() {return type;};
+    bdf_types type() const {return _type;};
   };
 
 //     def __call__(self, inp):
