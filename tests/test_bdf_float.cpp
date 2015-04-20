@@ -13,20 +13,24 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "test_bdf_float.h"
+#include <limits>
 
-void test_bdf_float () {
+#include <catch.hpp>
 
-    // class TestFloat1(object):
+#include "bdf_types.h"
 
-    //     @pytest.fixture(scope='class')
-    //     def probe(self):
-    //         return bdf_types.Float('dummy', default=0.0)
+TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
-    //     def test_neg(self, probe):
-    //         assert probe("  -1    ") == -1.
+#if 0
+  ::bdf_types::bdf_float probe("dummy", 0., std::numeric_limits<double>::max(), 0.);
 
-    //     def test_default(self, probe):
+  SECTION("'  -1    '") {
+    probe("  -1    ");
+    CHECK(probe.value == -1.);
+  }
+#endif
+
+  //     def test_default(self, probe):
     //         assert probe("        ") == 0.
 
     // class TestFloat2(object):

@@ -14,6 +14,7 @@ namespace {
 }
 
 #include <sstream>
+#include <climits>
 
 #include "bdf_types.h"
 
@@ -93,7 +94,9 @@ namespace bdf_types {
   {};
 
 // Convert string to float
-  void bdf_float::operator()(std::string inp) {value = 0.;}
+  void bdf_float::operator()(std::string inp) {
+    ::std::istringstream buffer(inp);
+    buffer >> value;}
 
 
 // >>> f = Float('dummy')
@@ -259,7 +262,7 @@ namespace bdf_types {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. test"
+  compile-command: "make -C .. check"
   coding: utf-8
   End:
 */

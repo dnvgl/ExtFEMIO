@@ -13,33 +13,46 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include <cassert>
+#include <utility>
+
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
+#include <catch.hpp>
 
 #include "bdf_types.h"
 
-#include "test_bdf_int.h"
-#include "test_bdf_float.h"
+TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-int main(const int argc, char * argv[]) {
+  ::bdf_types::bdf_type_base* obj_int = new ::bdf_types::bdf_int("");
+  ::bdf_types::bdf_type_base* obj_float = new ::bdf_types::bdf_float("");
 
-  {
-    assert(::bdf_types::bdf_int("").type() == ::bdf_types::Int);
-    assert(::bdf_types::bdf_float("").type() == ::bdf_types::Float);
-    assert(::bdf_types::bdf_int("") < ::bdf_types::bdf_float(""));
+  SECTION("Checking 'bdf_int.type' against 'Int'") {
+    CHECK(::bdf_types::bdf_int("").type() == ::bdf_types::Int);
   }
 
-  {
-    ::bdf_types::bdf_type_base* obj_int = new ::bdf_types::bdf_int("");
-    ::bdf_types::bdf_type_base* obj_float = new ::bdf_types::bdf_float("");
-    assert(obj_int->type() == ::bdf_types::Int);
-    assert(obj_float->type() == ::bdf_types::Float);
-    assert(*obj_int < *obj_float);
+  SECTION("Checking 'bdf_int->type' against 'Int'") {
+    CHECK(obj_int->type() == ::bdf_types::Int);
   }
 
-  test_bdf_int();
-  test_bdf_float();
+  SECTION("Checking 'bdf_float.type' against 'Float'") {
+    CHECK(::bdf_types::bdf_float("").type() == ::bdf_types::Float);
+  }
 
-      // class TestChoose1(object):
+  SECTION("Checking 'bdf_float->type' against 'Float'") {
+    CHECK(obj_float->type() == ::bdf_types::Float);
+  }
+
+  SECTION("Comparing 'bdf_int' with 'bdf_float'") {
+    CHECK(::bdf_types::bdf_int("") < ::bdf_types::bdf_float(""));
+    CHECK(::bdf_types::bdf_float("") > ::bdf_types::bdf_int(""));
+    CHECK(::bdf_types::bdf_int("") != ::bdf_types::bdf_float(""));
+  }
+
+  SECTION("Comparing '*bdf_int' with '*bdf_float'") {
+    CHECK(*obj_int < *obj_float);
+  }
+}
+
+// class TestChoose1(object):
 
     //     @pytest.fixture(scope='class')
     //     def probe(self):
@@ -99,7 +112,6 @@ int main(const int argc, char * argv[]) {
     //     with pytest.raises(ValueError):
     //         obj("")
 
-}
 
 /*
   Local Variables:
@@ -107,7 +119,7 @@ int main(const int argc, char * argv[]) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. test"
+  compile-command: "make -C ../ check"
   coding: utf-8
   End:
 */

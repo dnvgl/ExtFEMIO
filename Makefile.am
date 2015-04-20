@@ -11,7 +11,8 @@ ACLOCAL_AMFLAGS=-Im4
 top="$(CURDIR)"/
 ede_FILES=Project.ede Makefile.am
 
-SUBDIRS= src/ tests/
+SUBDIRS= src tests
 EXTRA_DIST=Project.ede
+test_MISC=configure
 
 # End of Makefile.am

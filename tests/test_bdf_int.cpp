@@ -13,40 +13,49 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "test_bdf_int.h"
+#include <limits>
 
-void test_bdf_int () {
+#include <catch.hpp>
 
-  {
-    ::bdf_types::bdf_int obj("dummy", 1, 100000000 - 1);
+#include "bdf_types.h"
+
+TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
+
+  SECTION("'   2    '") {
+    ::bdf_types::bdf_int obj("dummy", 1, std::numeric_limits<long>::max());
     obj("   2    ");
-    assert(obj.value == 2);
+    CHECK(obj.value == 2);
   }
 
-  {
-    ::bdf_types::bdf_int obj("dummy", 1, 100000000 - 1);
-    obj("   2    ");
-    assert(obj.value == 2);
-  }
-
-  {
-    ::bdf_types::bdf_int obj("dummy", 0, LONG_MAX);
+  SECTION("'       2'") {
+    ::bdf_types::bdf_int obj("dummy", 0, std::numeric_limits<long>::max());
     obj("       2");
-    assert(obj.value == 2);
+    CHECK(obj.value == 2);
   }
 
-  {
-    ::bdf_types::bdf_int obj("dummy", 0, LONG_MAX, 0);
+  SECTION("'2       '") {
+    ::bdf_types::bdf_int obj("dummy", 0, std::numeric_limits<long>::max(), 0);
     obj("2       ");
-    assert(obj.value == 2);
+    CHECK(obj.value == 2);
   }
 
-  {
-    ::bdf_types::bdf_int obj("dummy", -1, LONG_MAX, 0);
+  SECTION("'    -1  '") {
+    ::bdf_types::bdf_int obj("dummy", -1, std::numeric_limits<long>::max(), 0);
     obj("    -1  ");
-    assert(obj.value == -1);
+    CHECK(obj.value == -1);
   }
 
+  SECTION("default 1") {
+    ::bdf_types::bdf_int obj("dummy", -1, std::numeric_limits<long>::max(), 0);
+    obj("        ");
+    CHECK(obj.value == 0);
+  }
+
+  // SECTION("default 2") {
+  //   ::bdf_types::bdf_int obj("dummy", -1, std::numeric_limits<long>::max(), 100);
+  //   obj("        ");
+  //   CHECK(obj.value == 100);
+  // }
 }
 
 /*

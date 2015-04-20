@@ -3,7 +3,20 @@
 (ede-proj-project "BDFRead++"
   :file "Project.ede"
   :name "BDFRead++"
-  :targets nil
+  :targets
+  (list
+    (ede-proj-target-makefile-miscelaneous "test"
+      :name "test"
+      :path ""
+      :source '("configure" "TAGS" "config.log")
+      :compiler 'ede-misc-compile
+      :rules
+      (list
+        (ede-makefile-rule "Custom-new"
+          :target "test_bdf_types"
+          :dependencies "./tests/test_bdf_types"
+          :rules '("./tests/test_bdf_types")
+          :phony t))))
   :makefile-type 'Makefile.am
   :variables '(("ACLOCAL_AMFLAGS" . "-Im4"))
   :configuration-variables nil)

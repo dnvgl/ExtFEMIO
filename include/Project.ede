@@ -1,0 +1,7 @@
+;; Object includes
+;; EDE Project Files are auto generated: Do Not Edit
+(ede-proj-project "includes"
+  :file "Project.ede"
+  :name "includes"
+  :targets nil
+  :makefile-type 'Makefile.am)
