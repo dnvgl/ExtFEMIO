@@ -13,11 +13,20 @@ namespace {
     = "@(#) $Id$";
 }
 
+#include "stdafx.h"
+
+#define NOMINMAX
+
 #include <utility>
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
+#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
+
 #include <catch.hpp>
 
+#ifndef _MSC_VER
+#include <config.h>
+#endif
 #include "bdf_types.h"
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {

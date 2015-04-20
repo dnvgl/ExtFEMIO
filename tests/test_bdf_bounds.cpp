@@ -13,12 +13,15 @@ namespace {
     = "@(#) $Id$";
 }
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
+#include "stdafx.h"
 
 #include <limits>
 
 #include <catch.hpp>
 
+#ifndef _MSC_VER
+#include <config.h>
+#endif
 #include "bdf_types.h"
 
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
@@ -31,45 +34,45 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
   ::bdf_type_bounds::bdf_num_bounds<long> *probe_min = new ::bdf_type_bounds::bdf_num_bounds_min<long>(-12);
 
   SECTION("<nothing>") {
-    CHECK(not probe->has_default());
+    CHECK_FALSE(probe->has_default());
     CHECK(probe->in_bounds(std::numeric_limits<long>::min()));
     CHECK(probe->in_bounds(0));
     CHECK(probe->in_bounds(std::numeric_limits<long>::max()));
   }
 
   SECTION("min") {
-    CHECK(not probe_m->has_default());
-    CHECK(not probe_m->in_bounds(std::numeric_limits<long>::min()));
+    CHECK_FALSE(probe_m->has_default());
+    CHECK_FALSE(probe_m->in_bounds(std::numeric_limits<long>::min()));
     CHECK(probe_m->in_bounds(-12));
     CHECK(probe_m->in_bounds(0));
     CHECK(probe_m->in_bounds(std::numeric_limits<long>::max()));
   }
 
   SECTION("min class") {
-    CHECK(not probe_min->has_default());
-    CHECK(not probe_min->in_bounds(std::numeric_limits<long>::min()));
+    CHECK_FALSE(probe_min->has_default());
+    CHECK_FALSE(probe_min->in_bounds(std::numeric_limits<long>::min()));
     CHECK(probe_m->in_bounds(-12));
     CHECK(probe_m->in_bounds(0));
     CHECK(probe_m->in_bounds(std::numeric_limits<long>::max()));
   }
 
   SECTION("min_max") {
-    CHECK(not probe_mm->has_default());
-    CHECK(not probe_mm->in_bounds(std::numeric_limits<long>::min()));
+    CHECK_FALSE(probe_mm->has_default());
+    CHECK_FALSE(probe_mm->in_bounds(std::numeric_limits<long>::min()));
     CHECK(probe_mm->in_bounds(-12));
     CHECK(probe_mm->in_bounds(0));
     CHECK(probe_mm->in_bounds(12));
-    CHECK(not probe_mm->in_bounds(std::numeric_limits<long>::max()));
+    CHECK_FALSE(probe_mm->in_bounds(std::numeric_limits<long>::max()));
   }
 
   SECTION("min_max") {
     CHECK(probe_mmd->has_default());
         CHECK(probe_mmd->get_default() == 6);
-    CHECK(not probe_mmd->in_bounds(std::numeric_limits<long>::min()));
+    CHECK_FALSE(probe_mmd->in_bounds(std::numeric_limits<long>::min()));
     CHECK(probe_mm->in_bounds(-12));
     CHECK(probe_mmd->in_bounds(0));
     CHECK(probe_mm->in_bounds(12));
-    CHECK(not probe_mmd->in_bounds(std::numeric_limits<long>::max()));
+    CHECK_FALSE(probe_mmd->in_bounds(std::numeric_limits<long>::max()));
   }
 
   SECTION("<nothing> (with default)") {
@@ -84,7 +87,7 @@ TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
   ::bdf_type_bounds::bdf_num_default<double> *probe_def = new ::bdf_type_bounds::bdf_num_default<double>(1.);
 
   SECTION("<nothing>") {
-    CHECK(not probe->has_default());
+    CHECK_FALSE(probe->has_default());
   }
 
   SECTION("<nothing> (with default)") {

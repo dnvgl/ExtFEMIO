@@ -13,10 +13,15 @@ namespace {
     = "@(#) $Id$";
 }
 
+#include "stdafx.h"
+
 #include <limits>
 
 #include <catch.hpp>
 
+#ifndef _MSC_VER
+#include <config.h>
+#endif
 #include "bdf_types.h"
 
 TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {

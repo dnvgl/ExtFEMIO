@@ -13,9 +13,14 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include <sstream>
-#include <climits>
+#include "stdafx.h"
 
+#include <sstream>
+#include <limits>
+
+#ifndef _MSC_VER
+#include <config.h>
+#endif
 #include "bdf_types.h"
 
 namespace bdf_types {

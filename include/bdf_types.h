@@ -17,8 +17,6 @@
 #include <typeinfo>
 #include <limits>
 
-#include <config.h>
-
 namespace bdf_type_bounds {
 
   class bdf_type_bounds {
@@ -66,7 +64,7 @@ namespace bdf_type_bounds {
 
     bdf_num_bounds() {};
 
-    bdf_num_bounds(const T _min) : bdf_num_bounds() {
+    bdf_num_bounds(const T _min) {
       set_min(_min);
     };
 
@@ -97,14 +95,14 @@ namespace bdf_type_bounds {
     };
 
     T get_default() const {
-      if (not has_default())
+      if (!has_default())
         throw "** ERROR **: No default value avaliable.";
       return this->default_val;
     };
 
     bool in_bounds(T val) const {
-      return (((not has_min()) or val >= this->min_val) and
-              ((not has_max()) or val <= this->max_val));
+      return ((!has_min() || val >= this->min_val) &&
+              (!has_max() || val <= this->max_val));
     };
   };
 
@@ -150,8 +148,7 @@ namespace bdf_types {
     virtual bdf_types type() const = 0;
 
     template <class T1, class T2>
-
-    friend bool operator== (const T1&, const T2&);
+	friend bool operator== (const T1&, const T2&);
 
     template <class T1, class T2>
     friend inline bool operator< (const T1&, const T2&);
@@ -163,7 +160,7 @@ namespace bdf_types {
 
     template <class T1, class T2>
     friend inline bool operator!= (const T1& one, const T2& other) {
-      return not(other == one);
+      return !(other == one);
     };
 
   };
