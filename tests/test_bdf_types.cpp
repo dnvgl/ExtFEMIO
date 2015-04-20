@@ -13,8 +13,6 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "stdafx.h"
-
 #define NOMINMAX
 
 #include <utility>

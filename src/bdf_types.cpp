@@ -13,8 +13,6 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "Stdafx.h"
-
 #include <sstream>
 #include <limits>
 
