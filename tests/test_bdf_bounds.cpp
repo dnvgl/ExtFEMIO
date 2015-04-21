@@ -22,14 +22,16 @@ namespace {
 #endif
 #include "bdf_types.h"
 
+using namespace bdf::type_bounds;
+
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
-  ::bdf_type_bounds::bdf_num_bounds<long> *probe = new ::bdf_type_bounds::bdf_num_bounds<long>();
-  ::bdf_type_bounds::bdf_num_bounds<long> *probe_m = new ::bdf_type_bounds::bdf_num_bounds<long>(-12);
-  ::bdf_type_bounds::bdf_num_bounds<long> *probe_mm = new ::bdf_type_bounds::bdf_num_bounds<long>(-12, 12);
-  ::bdf_type_bounds::bdf_num_bounds<long> *probe_mmd = new ::bdf_type_bounds::bdf_num_bounds<long>(-12, 12, 6);
-  ::bdf_type_bounds::bdf_num_default<long> *probe_def = new ::bdf_type_bounds::bdf_num_default<long>(1);
-  ::bdf_type_bounds::bdf_num_bounds<long> *probe_min = new ::bdf_type_bounds::bdf_num_bounds_min<long>(-12);
+  bdf_num_bounds<long> *probe = new bdf_num_bounds<long>();
+  bdf_num_bounds<long> *probe_m = new bdf_num_bounds<long>(-12);
+  bdf_num_bounds<long> *probe_mm = new bdf_num_bounds<long>(-12, 12);
+  bdf_num_bounds<long> *probe_mmd = new bdf_num_bounds<long>(-12, 12, 6);
+  bdf_num_default<long> *probe_def = new bdf_num_default<long>(1);
+  bdf_num_bounds<long> *probe_min = new bdf_num_bounds_min<long>(-12);
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());
@@ -81,8 +83,8 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
 TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
 
-  ::bdf_type_bounds::bdf_num_bounds<double> *probe = new ::bdf_type_bounds::bdf_num_bounds<double>();
-  ::bdf_type_bounds::bdf_num_default<double> *probe_def = new ::bdf_type_bounds::bdf_num_default<double>(1.);
+  bdf_num_bounds<double> *probe = new bdf_num_bounds<double>();
+  bdf_num_default<double> *probe_def = new bdf_num_default<double>(1.);
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());

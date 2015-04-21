@@ -22,10 +22,12 @@ namespace {
 #endif
 #include "bdf_types.h"
 
+using namespace bdf::types;
+
 TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
 #if 0
-  ::bdf_types::bdf_float probe("dummy", 0., std::numeric_limits<double>::max(), 0.);
+  bdf_float probe("dummy", 0., std::numeric_limits<double>::max(), 0.);
 
   SECTION("'  -1    '") {
     probe("  -1    ");
@@ -61,7 +63,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make test"
+  compile-command: "make -C .. check"
   coding: utf-8
   End:
 */

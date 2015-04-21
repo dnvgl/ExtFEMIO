@@ -17,165 +17,166 @@
 #include <typeinfo>
 #include <limits>
 
-namespace bdf_type_bounds {
+namespace bdf {
 
-  class bdf_type_bounds {
+  namespace type_bounds {
 
-  private:
+    class bdf_type_bounds {
 
-    bool _has_min;
-    bool _has_max;
-    bool _has_default;
+    private:
 
-  protected:
+      bool _has_min;
+      bool _has_max;
+      bool _has_default;
 
-    ~bdf_type_bounds () {};
+    protected:
 
-    bool has_min() const {return _has_min;};
+      ~bdf_type_bounds () {};
 
-    void got_min() {_has_min = true;};
+      bool has_min() const {return _has_min;};
 
-    bool has_max() const {return _has_max;};
+      void got_min() {_has_min = true;};
 
-    void got_max() {_has_max = true;};
+      bool has_max() const {return _has_max;};
 
-    void got_default() {_has_default = true;};
+      void got_max() {_has_max = true;};
 
-  public:
+      void got_default() {_has_default = true;};
 
-    bdf_type_bounds() : _has_min(false), _has_max(false), _has_default(false) {};
+    public:
 
-    bool has_default() const {
-      return _has_default;
+      bdf_type_bounds() : _has_min(false), _has_max(false), _has_default(false) {};
+
+      bool has_default() const {
+        return _has_default;
+      };
+    };
+
+    template <class T> class bdf_num_bounds : public bdf_type_bounds {
+
+    protected:
+
+      T min_val;
+      T max_val;
+      T default_val;
+
+    public:
+
+      ~bdf_num_bounds() {};
+
+      bdf_num_bounds() {};
+
+      bdf_num_bounds(const T _min) {
+        set_min(_min);
+      };
+
+      bdf_num_bounds(const T _min, const T _max) {
+        set_min(_min);
+        set_max(_max);
+      };
+
+      bdf_num_bounds(const T _min, const T _max, const T _default) {
+        set_min(_min);
+        set_max(_max);
+        set_default(_default);
+      };
+
+      void set_min(const T inp) {
+        this->min_val = inp;
+        got_min();
+      };
+
+      void set_max(const T inp) {
+        this->max_val = inp;
+        got_max();
+      };
+
+      void set_default(const T inp) {
+        this->default_val = inp;
+        got_default();
+      };
+
+      T get_default() const {
+        if (!has_default())
+          throw "** ERROR **: No default value avaliable.";
+        return this->default_val;
+      };
+
+      bool in_bounds(T val) const {
+        return ((!has_min() || val >= this->min_val) &&
+                (!has_max() || val <= this->max_val));
+      };
+    };
+
+    template <class T> class bdf_num_bounds_min : public bdf_num_bounds<T> {
+    public:
+      bdf_num_bounds_min(T val) : bdf_num_bounds<T>(val) {};
+    };
+
+    template <class T> class bdf_num_default : public bdf_num_bounds<T> {
+
+    public:
+
+      ~bdf_num_default() {};
+
+      bdf_num_default(const T _default) {
+        bdf_num_bounds<T>::set_default(_default);
+      }
     };
   };
 
-  template <class T> class bdf_num_bounds : public bdf_type_bounds {
+  namespace types {
 
-  protected:
+    typedef enum {None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
 
-    T min_val;
-    T max_val;
-    T default_val;
+    class bdf_type_base {
 
-  public:
+    private:
 
-    ~bdf_num_bounds() {};
+      std::string name;
 
-    bdf_num_bounds() {};
+    protected:
 
-    bdf_num_bounds(const T _min) {
-      set_min(_min);
+      static const bdf_types _type = None;
+
+    public:
+
+      bdf_type_base(std::string name);
+
+      ~bdf_type_base() {};
+
+      virtual void operator()(std::string) = 0;
+
+      virtual bdf_types type() const = 0;
+
+      template <class T1, class T2>
+      friend bool operator== (const T1&, const T2&);
+      
+      template <class T1, class T2>
+      friend inline bool operator< (const T1&, const T2&);
+
+      template <class T1, class T2>
+      friend inline bool operator> (const T1& one, const T2& other) {
+        return other < one;
+      };
+
+      template <class T1, class T2>
+      friend inline bool operator!= (const T1& one, const T2& other) {
+        return !(other == one);
+      };
     };
 
-    bdf_num_bounds(const T _min, const T _max) {
-      set_min(_min);
-      set_max(_max);
-    };
-
-    bdf_num_bounds(const T _min, const T _max, const T _default) {
-      set_min(_min);
-      set_max(_max);
-      set_default(_default);
-    };
-
-    void set_min(const T inp) {
-      this->min_val = inp;
-      got_min();
-    };
-
-    void set_max(const T inp) {
-      this->max_val = inp;
-      got_max();
-    };
-
-    void set_default(const T inp) {
-      this->default_val = inp;
-      got_default();
-    };
-
-    T get_default() const {
-      if (!has_default())
-        throw "** ERROR **: No default value avaliable.";
-      return this->default_val;
-    };
-
-    bool in_bounds(T val) const {
-      return ((!has_min() || val >= this->min_val) &&
-              (!has_max() || val <= this->max_val));
-    };
-  };
-
-  template <class T> class bdf_num_bounds_min : public bdf_num_bounds<T> {
-  public:
-    bdf_num_bounds_min(T val) : bdf_num_bounds<T>(val) {};
-  };
-
-  template <class T> class bdf_num_default : public bdf_num_bounds<T> {
-
-  public:
-
-    ~bdf_num_default() {};
-
-    bdf_num_default(const T _default) {
-      bdf_num_bounds<T>::set_default(_default);
+    template <class T1, class T2>
+    inline bool operator== (const T1& one, const T2& other) {
+      return (one.type() == other.type());
     }
-  };
-}
-
-namespace bdf_types {
-
-  typedef enum {None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
-
-  class bdf_type_base {
-
-  private:
-
-    std::string name;
-
-  protected:
-
-    static const bdf_types _type = None;
-
-  public:
-
-    bdf_type_base(std::string name);
-
-    ~bdf_type_base() {};
-
-    virtual void operator()(std::string) = 0;
-
-    virtual bdf_types type() const = 0;
 
     template <class T1, class T2>
-	friend bool operator== (const T1&, const T2&);
+    inline bool operator< (const T1& one, const T2& other) {
+      return (one.type() < other.type());
+    }
 
-    template <class T1, class T2>
-    friend inline bool operator< (const T1&, const T2&);
-
-    template <class T1, class T2>
-    friend inline bool operator> (const T1& one, const T2& other) {
-      return other < one;
-    };
-
-    template <class T1, class T2>
-    friend inline bool operator!= (const T1& one, const T2& other) {
-      return !(other == one);
-    };
-
-  };
-
-  template <class T1, class T2>
-  inline bool operator== (const T1& one, const T2& other) {
-    return (one.type() == other.type());
-  }
-
-  template <class T1, class T2>
-  inline bool operator< (const T1& one, const T2& other) {
-    return (one.type() < other.type());
-  }
-
-  class bdf_int : public bdf_type_base {
+    class bdf_int : public bdf_type_base {
 
 // Integer value.
 
@@ -187,32 +188,32 @@ namespace bdf_types {
 //     `default` == `False` is set for value required.
 // :type default: int
 
-  private:
+    private:
 
-    long _minval;
-    long _maxval;
-    long _default;
+      long _minval;
+      long _maxval;
+      long _default;
 
-  protected:
+    protected:
 
-    static const bdf_types _type = Int;
+      static const bdf_types _type = Int;
 
-  public:
+    public:
 
-    long value;
+      long value;
 
-    bdf_int(std::string, long minval=0, long maxval=std::numeric_limits<long>::max(), long _default=0);
+      bdf_int(std::string, long minval=0, long maxval=std::numeric_limits<long>::max(), long _default=0);
 
-    void operator()(std::string);
+      void operator()(std::string);
 
-    bdf_types type() const {return _type;};
+      bdf_types type() const {return _type;};
 
-    template <class T1, class T2>
-    friend bool operator== (const T1& one, const T2& other);
+      template <class T1, class T2>
+      friend bool operator== (const T1& one, const T2& other);
 
-    template <class T1, class T2>
-    friend inline bool operator< (const T1& one, const T2& other);
-  };
+      template <class T1, class T2>
+      friend inline bool operator< (const T1& one, const T2& other);
+    };
 
 //     def __init__(self, name, minval=None, maxval=None, default=False):
 //         """
@@ -257,7 +258,7 @@ namespace bdf_types {
 //                 return self.default
 
 
-  class bdf_float : public bdf_type_base {
+    class bdf_float : public bdf_type_base {
 
 // Real value.
 
@@ -290,31 +291,31 @@ namespace bdf_types {
 //         self.default = default
 
 
-  private:
+    private:
 
-    double _minval;
-    double _maxval;
-    double _default;
+      double _minval;
+      double _maxval;
+      double _default;
 
-  protected:
+    protected:
 
-    static const bdf_types _type = Float;
+      static const bdf_types _type = Float;
 
-  public:
+    public:
 
-    double value;
+      double value;
 
-    bdf_float(std::string, double minval=0., double maxval=std::numeric_limits<double>::max(), double _default=0.);
+      bdf_float(std::string, double minval=0., double maxval=std::numeric_limits<double>::max(), double _default=0.);
 
-    void operator()(std::string);
+      void operator()(std::string);
 
-    bdf_types type() const {return _type;};
+      bdf_types type() const {return _type;};
 
-    template <class T1, class T2>
-    friend bool operator== (const T1& one, const T2& other);
+      template <class T1, class T2>
+      friend bool operator== (const T1& one, const T2& other);
 
-    template <class T1, class T2>
-    friend inline bool operator< (const T1& one, const T2& other);
+      template <class T1, class T2>
+      friend inline bool operator< (const T1& one, const T2& other);
   };
 
 //     def __call__(self, inp):
@@ -474,6 +475,7 @@ namespace bdf_types {
 //         _bdfTypeBase.__init__(self, 'Blank')
 
 
+  };
 }
 
 

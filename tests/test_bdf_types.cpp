@@ -27,31 +27,33 @@ namespace {
 #endif
 #include "bdf_types.h"
 
+using namespace bdf::types;
+
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-  ::bdf_types::bdf_type_base* obj_int = new ::bdf_types::bdf_int("");
-  ::bdf_types::bdf_type_base* obj_float = new ::bdf_types::bdf_float("");
+  bdf_type_base* obj_int = new bdf_int("");
+  bdf_type_base* obj_float = new bdf_float("");
 
   SECTION("Checking 'bdf_int.type' against 'Int'") {
-    CHECK(::bdf_types::bdf_int("").type() == ::bdf_types::Int);
+    CHECK(bdf_int("").type() == Int);
   }
 
   SECTION("Checking 'bdf_int->type' against 'Int'") {
-    CHECK(obj_int->type() == ::bdf_types::Int);
+    CHECK(obj_int->type() == Int);
   }
 
   SECTION("Checking 'bdf_float.type' against 'Float'") {
-    CHECK(::bdf_types::bdf_float("").type() == ::bdf_types::Float);
+    CHECK(bdf_float("").type() == Float);
   }
 
   SECTION("Checking 'bdf_float->type' against 'Float'") {
-    CHECK(obj_float->type() == ::bdf_types::Float);
+    CHECK(obj_float->type() == Float);
   }
 
   SECTION("Comparing 'bdf_int' with 'bdf_float'") {
-    CHECK(::bdf_types::bdf_int("") < ::bdf_types::bdf_float(""));
-    CHECK(::bdf_types::bdf_float("") > ::bdf_types::bdf_int(""));
-    CHECK(::bdf_types::bdf_int("") != ::bdf_types::bdf_float(""));
+    CHECK(bdf_int("") < bdf_float(""));
+    CHECK(bdf_float("") > bdf_int(""));
+    CHECK(bdf_int("") != bdf_float(""));
   }
 
   SECTION("Comparing '*bdf_int' with '*bdf_float'") {

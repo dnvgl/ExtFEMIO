@@ -21,18 +21,20 @@ namespace {
 #endif
 #include "bdf_types.h"
 
-namespace bdf_types {
+namespace bdf {
 
-  bdf_type_base::bdf_type_base(std::string name) : name(name) {};
+  namespace types {
 
-  bdf_int::bdf_int(std::string name, long minval, long maxval, long def) :
-    bdf_type_base(name), _minval(minval), _maxval(maxval), _default(def)
-  {};
+    bdf_type_base::bdf_type_base(std::string name) : name(name) {};
 
-  void bdf_int::operator()(std::string inp) {
-    ::std::istringstream buffer(inp);
-    buffer >> value;
-  }
+    bdf_int::bdf_int(std::string name, long minval, long maxval, long def) :
+      bdf_type_base(name), _minval(minval), _maxval(maxval), _default(def)
+    {};
+
+    void bdf_int::operator()(std::string inp) {
+      ::std::istringstream buffer(inp);
+      buffer >> value;
+    }
 
 // Convert string `inp` to integer.
 
@@ -256,6 +258,7 @@ namespace bdf_types {
 //         _bdfTypeBase.__init__(self, 'Blank')
 
 
+  }
 }
 
 
