@@ -21,7 +21,8 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_LANG([C++])
 
 # Checking for catch.
-AC_CHECK_HEADER([catch.hpp], [], [AC_MSG_ERROR([Could not find catch.hpp. Please download and install it from http://builds.catch-lib.net])])
+# AC_CHECK_HEADER([catch.hpp], [], [AC_MSG_ERROR([Could not find catch.hpp. Please download and install it from http://builds.catch-lib.net])])
+# catch is provided in local inlude directory
 
 # End the configure script.
 AC_OUTPUT(Makefile src/Makefile tests/Makefile, [date > stamp-h] )
