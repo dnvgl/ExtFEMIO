@@ -13,6 +13,8 @@ namespace {
     = "@(#) $Id$";
 }
 
+#define NOMINMAX // To avoid problems with "numdric_limits"
+
 #include <limits>
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
