@@ -15,6 +15,9 @@ namespace {
 
 #include <limits>
 
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
+#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
+
 #include <catch.hpp>
 
 #ifndef _MSC_VER
@@ -23,32 +26,37 @@ namespace {
 #include "bdf_types.h"
 
 using namespace bdf::types;
+using namespace bdf::type_bounds;
 
 TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
-#if 0
-  bdf_float probe("dummy", 0., std::numeric_limits<double>::max(), 0.);
+  bdf_float probe("dummy", bdf_num_bounds<double>(NULL, NULL, new double(0.)));
 
-  SECTION("'  -1    '") {
-    probe("  -1    ");
+  SECTION("'  -1.   '") {
+    probe("  -1.   ");
     CHECK(probe.value == -1.);
   }
-#endif
 
-  //     def test_default(self, probe):
-    //         assert probe("        ") == 0.
+  SECTION("'  -1.   ', min 0.") {
+    bdf_float probe("dummy", bdf_num_bounds<double>(new double(0.), NULL, new double(0.)));
+    CHECK_THROWS(probe("  -1.   "));
+  }
 
-    // class TestFloat2(object):
+  SECTION("'        '") {
+    probe("        ");
+    CHECK(probe.value == 0.);
+  }
 
-    //     @pytest.fixture(scope='class')
-    //     def probe(self):
-    //         return bdf_types.Float('dummy')
 
-    //     def test_dot(self, probe):
-    //         assert probe('123.') == 123.
+  SECTION("'   123.  '") {
+    probe("   123.  ");
+    CHECK(probe.value == 123.);
+  }
 
-    //     def test_exp(self, probe):
-    //         assert probe('123+3') == 123000.
+  SECTION("'  123+3  '") {
+    probe("  123+3        ");
+    CHECK(probe.value == 123000.);
+  }
 
     // def test_List1(self):
     //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)

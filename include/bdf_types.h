@@ -17,6 +17,10 @@
 #include <typeinfo>
 #include <limits>
 
+std::string trim(const std::string&,
+                 const std::string& = " \t");
+
+
 namespace bdf {
 
   namespace type_bounds {
@@ -66,19 +70,13 @@ namespace bdf {
 
       bdf_num_bounds() {};
 
-      bdf_num_bounds(const T _min) {
-        set_min(_min);
-      };
-
-      bdf_num_bounds(const T _min, const T _max) {
-        set_min(_min);
-        set_max(_max);
-      };
-
-      bdf_num_bounds(const T _min, const T _max, const T _default) {
-        set_min(_min);
-        set_max(_max);
-        set_default(_default);
+      bdf_num_bounds(const T* _min, const T* _max=NULL, const T* _default=NULL) {
+        if (_min != NULL)
+          set_min(*_min);
+        if (_max != NULL)
+          set_max(*_max);
+        if (_default != NULL)
+          set_default(*_default);
       };
 
       void set_min(const T inp) {
@@ -107,25 +105,11 @@ namespace bdf {
                 (!has_max() || val <= this->max_val));
       };
     };
-
-    template <class T> class bdf_num_bounds_min : public bdf_num_bounds<T> {
-    public:
-      bdf_num_bounds_min(T val) : bdf_num_bounds<T>(val) {};
-    };
-
-    template <class T> class bdf_num_default : public bdf_num_bounds<T> {
-
-    public:
-
-      ~bdf_num_default() {};
-
-      bdf_num_default(const T _default) {
-        bdf_num_bounds<T>::set_default(_default);
-      }
-    };
   };
 
   namespace types {
+
+    using namespace ::bdf::type_bounds;
 
     typedef enum {None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
 
@@ -151,7 +135,7 @@ namespace bdf {
 
       template <class T1, class T2>
       friend bool operator== (const T1&, const T2&);
-      
+
       template <class T1, class T2>
       friend inline bool operator< (const T1&, const T2&);
 
@@ -188,21 +172,20 @@ namespace bdf {
 //     `default` == `False` is set for value required.
 // :type default: int
 
-    private:
-
-      long _minval;
-      long _maxval;
-      long _default;
-
     protected:
 
       static const bdf_types _type = Int;
+
+    private:
+      bdf_num_bounds<long> bounds;
 
     public:
 
       long value;
 
-      bdf_int(std::string, long minval=0, long maxval=std::numeric_limits<long>::max(), long _default=0);
+      bdf_int(std::string);
+
+      bdf_int(std::string, bdf_num_bounds<long>);
 
       void operator()(std::string);
 
@@ -293,9 +276,7 @@ namespace bdf {
 
     private:
 
-      double _minval;
-      double _maxval;
-      double _default;
+      bdf_num_bounds<double> bounds;
 
     protected:
 
@@ -305,7 +286,9 @@ namespace bdf {
 
       double value;
 
-      bdf_float(std::string, double minval=0., double maxval=std::numeric_limits<double>::max(), double _default=0.);
+      bdf_float(std::string);
+
+      bdf_float(std::string, bdf_num_bounds<double>);
 
       void operator()(std::string);
 

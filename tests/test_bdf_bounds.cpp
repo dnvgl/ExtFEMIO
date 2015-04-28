@@ -15,6 +15,9 @@ namespace {
 
 #include <limits>
 
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
+#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
+
 #include <catch.hpp>
 
 #ifndef _MSC_VER
@@ -27,11 +30,11 @@ using namespace bdf::type_bounds;
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
   bdf_num_bounds<long> *probe = new bdf_num_bounds<long>();
-  bdf_num_bounds<long> *probe_m = new bdf_num_bounds<long>(-12);
-  bdf_num_bounds<long> *probe_mm = new bdf_num_bounds<long>(-12, 12);
-  bdf_num_bounds<long> *probe_mmd = new bdf_num_bounds<long>(-12, 12, 6);
-  bdf_num_default<long> *probe_def = new bdf_num_default<long>(1);
-  bdf_num_bounds<long> *probe_min = new bdf_num_bounds_min<long>(-12);
+  bdf_num_bounds<long> *probe_min = new bdf_num_bounds<long>(new long(-12), NULL, NULL);
+  bdf_num_bounds<long> *probe_max = new bdf_num_bounds<long>(NULL, new long(12), NULL);
+  bdf_num_bounds<long> *probe_mm = new bdf_num_bounds<long>(new long(-12), new long(12), NULL);
+  bdf_num_bounds<long> *probe_mmd = new bdf_num_bounds<long>(new long(-12), new long(12), new long(6));
+  bdf_num_bounds<long> *probe_def = new bdf_num_bounds<long>(NULL, NULL, new long(1));
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());
@@ -41,19 +44,35 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
   }
 
   SECTION("min") {
-    CHECK_FALSE(probe_m->has_default());
-    CHECK_FALSE(probe_m->in_bounds(std::numeric_limits<long>::min()));
-    CHECK(probe_m->in_bounds(-12));
-    CHECK(probe_m->in_bounds(0));
-    CHECK(probe_m->in_bounds(std::numeric_limits<long>::max()));
+    CHECK_FALSE(probe_min->has_default());
+    CHECK_FALSE(probe_min->in_bounds(std::numeric_limits<long>::min()));
+    CHECK(probe_min->in_bounds(-12));
+    CHECK(probe_min->in_bounds(0));
+    CHECK(probe_min->in_bounds(std::numeric_limits<long>::max()));
   }
 
   SECTION("min class") {
     CHECK_FALSE(probe_min->has_default());
     CHECK_FALSE(probe_min->in_bounds(std::numeric_limits<long>::min()));
-    CHECK(probe_m->in_bounds(-12));
-    CHECK(probe_m->in_bounds(0));
-    CHECK(probe_m->in_bounds(std::numeric_limits<long>::max()));
+    CHECK(probe_min->in_bounds(-12));
+    CHECK(probe_min->in_bounds(0));
+    CHECK(probe_min->in_bounds(std::numeric_limits<long>::max()));
+  }
+
+  SECTION("max") {
+    CHECK_FALSE(probe_max->has_default());
+    CHECK_FALSE(probe_max->in_bounds(std::numeric_limits<long>::max()));
+    CHECK(probe_max->in_bounds(12));
+    CHECK(probe_max->in_bounds(0));
+    CHECK(probe_max->in_bounds(std::numeric_limits<long>::min()));
+  }
+
+  SECTION("max class") {
+    CHECK_FALSE(probe_max->has_default());
+    CHECK_FALSE(probe_max->in_bounds(std::numeric_limits<long>::max()));
+    CHECK(probe_max->in_bounds(12));
+    CHECK(probe_max->in_bounds(0));
+    CHECK(probe_max->in_bounds(std::numeric_limits<long>::min()));
   }
 
   SECTION("min_max") {
@@ -84,7 +103,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
 
   bdf_num_bounds<double> *probe = new bdf_num_bounds<double>();
-  bdf_num_default<double> *probe_def = new bdf_num_default<double>(1.);
+  bdf_num_bounds<double> *probe_def = new bdf_num_bounds<double>(NULL, NULL, new double(1.));
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());

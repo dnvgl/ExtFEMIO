@@ -8,7 +8,7 @@
     (ede-proj-target-makefile-miscelaneous "test"
       :name "test"
       :path ""
-      :source '("configure" "TAGS" "config.log")
+      :source '("configure" "TAGS" "config.log" "ChangeLog")
       :compiler 'ede-misc-compile
       :rules
       (list

@@ -21,20 +21,45 @@ namespace {
 #endif
 #include "bdf_types.h"
 
-namespace bdf {
+using namespace bdf::types;
+using namespace bdf::type_bounds;
 
-  namespace types {
 
-    bdf_type_base::bdf_type_base(std::string name) : name(name) {};
+// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
+std::string trim(const std::string& str,
+                 const std::string& whitespace) {
+    const auto strBegin = str.find_first_not_of(whitespace);
+    if (strBegin == std::string::npos)
+        return ""; // no content
 
-    bdf_int::bdf_int(std::string name, long minval, long maxval, long def) :
-      bdf_type_base(name), _minval(minval), _maxval(maxval), _default(def)
-    {};
+    const auto strEnd = str.find_last_not_of(whitespace);
+    const auto strRange = strEnd - strBegin + 1;
 
-    void bdf_int::operator()(std::string inp) {
-      ::std::istringstream buffer(inp);
-      buffer >> value;
-    }
+    return str.substr(strBegin, strRange);
+}
+
+bdf_type_base::bdf_type_base(std::string name) : name(name) {};
+
+bdf_int::bdf_int(std::string name) :
+  bdf_type_base(name), bounds(bdf_num_bounds<long>()) {};
+
+bdf_int::bdf_int(std::string name, bdf_num_bounds<long> _bounds) :
+  bdf_type_base(name), bounds(_bounds) {};
+
+void bdf_int::operator()(std::string inp) {
+  ::std::string sval = trim(inp);
+  if (sval.find('+') != ::std::string::npos) throw "*** FOUND '+'";
+  if (sval.length() == 0) {
+    if (!this->bounds.has_default())
+      throw "** BDF INP ERROR **: empty entry without default";
+    value = this->bounds.get_default();
+  } else {
+    ::std::istringstream buffer(sval);
+    buffer >> value;
+  }
+  if (!this->bounds.in_bounds(value))
+    throw  "** BDF INP ERROR **: boundary condition violated";
+}
 
 // Convert string `inp` to integer.
 
@@ -94,14 +119,25 @@ namespace bdf {
 //         self.default = default
 
 //     def __call__(self, inp):
-  bdf_float::bdf_float(std::string name, double minval, double maxval, double def) :
-    bdf_type_base(name), _minval(minval), _maxval(maxval), _default(def)
-  {};
+bdf_float::bdf_float(std::string name) :
+  bdf_type_base(name), bounds(bdf_num_bounds<double>()) {};
+
+bdf_float::bdf_float(std::string name, bdf_num_bounds<double> _bounds) :
+  bdf_type_base(name), bounds(_bounds) {};
 
 // Convert string to float
-  void bdf_float::operator()(std::string inp) {
-    ::std::istringstream buffer(inp);
-    buffer >> value;}
+void bdf_float::operator()(std::string inp) {
+  ::std::string sval = trim(inp);
+  if (sval.find('+') != ::std::string::npos) throw "*** FOUND '+'";
+  if (sval.length() == 0) {
+    value = this->bounds.get_default();
+  } else {
+    ::std::istringstream buffer(sval);
+    buffer >> value;
+  }
+  if (!this->bounds.in_bounds(value))
+    throw  "** BDF INP ERROR **: boundary condition violated";
+}
 
 
 // >>> f = Float('dummy')
@@ -256,11 +292,6 @@ namespace bdf {
 
 //     def __init__(self):
 //         _bdfTypeBase.__init__(self, 'Blank')
-
-
-  }
-}
-
 
 /*
   Local Variables:

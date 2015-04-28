@@ -29,6 +29,13 @@ namespace {
 
 using namespace bdf::types;
 
+TEST_CASE("Checking extra string functions", "[bdf_string]") {
+  CHECK(trim("   2    ") == std::string("2"));
+  CHECK(trim("        ") == std::string(""));
+  CHECK(trim(" \t      ") == std::string(""));
+  CHECK(trim("ABCDabcd") == std::string("ABCDabcd"));
+}
+
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
   bdf_type_base* obj_int = new bdf_int("");

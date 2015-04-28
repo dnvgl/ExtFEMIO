@@ -25,4 +25,4 @@ AC_LANG([C++])
 # catch is provided in local inlude directory
 
 # End the configure script.
-AC_OUTPUT(Makefile src/Makefile tests/Makefile, [date > stamp-h] )
+AC_OUTPUT(Makefile tests/Makefile src/Makefile include/Makefile, [date > stamp-h] )
