@@ -53,10 +53,10 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     CHECK(probe.value == 123.);
   }
 
-  SECTION("'  123+3  '") {
-    probe("  123+3        ");
-    CHECK(probe.value == 123000.);
-  }
+  // SECTION("'  123+3  '") {
+  //   probe("  123+3        ");
+  //   CHECK(probe.value == 123000.);
+  // }
 
     // def test_List1(self):
     //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
