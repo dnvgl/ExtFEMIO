@@ -14,6 +14,8 @@ namespace {
 }
 
 #include <limits>
+#include <string>
+#include <vector>
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
 #define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
@@ -25,6 +27,7 @@ namespace {
 #endif
 #include "bdf_types.h"
 
+using namespace std;
 using namespace bdf::types;
 using namespace bdf::type_bounds;
 
@@ -42,21 +45,49 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     CHECK_THROWS(probe("  -1.   "));
   }
 
+  SECTION("Quick Reference") {
+    vector<string> samples({
+        "7.0", ".7E1", "0.7+1", ".70+1", "7.E0", "70.-1"});
+    for (vector<string>::iterator pos = samples.begin(); pos != samples.end(); ++pos) {
+      probe(*pos);
+      CHECK(probe.value == 7.);
+    }
+  }
+
   SECTION("'        '") {
     probe("        ");
     CHECK(probe.value == 0.);
   }
-
 
   SECTION("'   123.  '") {
     probe("   123.  ");
     CHECK(probe.value == 123.);
   }
 
-  // SECTION("'  123+3  '") {
-  //   probe("  123+3        ");
-  //   CHECK(probe.value == 123000.);
-  // }
+  SECTION("'  123+3  '") {
+    probe("  123+3        ");
+    CHECK(probe.value == 123000.);
+  }
+
+  SECTION("' +123+3  '") {
+    probe(" +123+3        ");
+    CHECK(probe.value == 123000.);
+  }
+
+  SECTION("' -123+3  '") {
+    probe(" -123+3        ");
+    CHECK(probe.value == -123000.);
+  }
+
+  SECTION("' +123-3  '") {
+    probe(" +123-3        ");
+    CHECK(probe.value == .123);
+  }
+
+  SECTION("' -123-3  '") {
+    probe(" -123-3        ");
+    CHECK(probe.value == -.123);
+  }
 
     // def test_List1(self):
     //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)

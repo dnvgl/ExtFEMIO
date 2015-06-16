@@ -15,21 +15,24 @@ namespace {
 
 #include <sstream>
 #include <limits>
+#include <algorithm>
+#include <string>
 
 #ifndef _MSC_VER
 #include <config.h>
 #endif
 #include "bdf_types.h"
 
+using namespace std;
 using namespace bdf::types;
 using namespace bdf::type_bounds;
 
 
 // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-std::string trim(const std::string& str,
-                 const std::string& whitespace) {
+string trim(const string& str,
+                 const string& whitespace) {
     const auto strBegin = str.find_first_not_of(whitespace);
-    if (strBegin == std::string::npos)
+    if (strBegin == string::npos)
         return ""; // no content
 
     const auto strEnd = str.find_last_not_of(whitespace);
@@ -38,23 +41,23 @@ std::string trim(const std::string& str,
     return str.substr(strBegin, strRange);
 }
 
-bdf_type_base::bdf_type_base(std::string name) : name(name) {};
+bdf_type_base::bdf_type_base(string name) : name(name) {};
 
-bdf_int::bdf_int(std::string name) :
+bdf_int::bdf_int(string name) :
   bdf_type_base(name), bounds(bdf_num_bounds<long>()) {};
 
-bdf_int::bdf_int(std::string name, bdf_num_bounds<long> _bounds) :
+bdf_int::bdf_int(string name, bdf_num_bounds<long> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
-void bdf_int::operator()(std::string inp) {
-  ::std::string sval = trim(inp);
-  if (sval.find('+') != ::std::string::npos) throw "*** FOUND '+'";
+void bdf_int::operator()(string inp) {
+  string sval = trim(inp);
+  if (sval.find('+') != string::npos) throw "*** FOUND '+'";
   if (sval.length() == 0) {
     if (!this->bounds.has_default())
       throw "** BDF INP ERROR **: empty entry without default";
     value = this->bounds.get_default();
   } else {
-    ::std::istringstream buffer(sval);
+    istringstream buffer(sval);
     buffer >> value;
   }
   if (!this->bounds.in_bounds(value))
@@ -119,20 +122,27 @@ void bdf_int::operator()(std::string inp) {
 //         self.default = default
 
 //     def __call__(self, inp):
-bdf_float::bdf_float(std::string name) :
+bdf_float::bdf_float(string name) :
   bdf_type_base(name), bounds(bdf_num_bounds<double>()) {};
 
-bdf_float::bdf_float(std::string name, bdf_num_bounds<double> _bounds) :
+bdf_float::bdf_float(string name, bdf_num_bounds<double> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
 // Convert string to float
-void bdf_float::operator()(std::string inp) {
-  ::std::string sval = trim(inp);
-  if (sval.find('+') != ::std::string::npos) throw "*** FOUND '+'";
+void bdf_float::operator()(string inp) {
+  string sval = trim(inp);
+  transform(sval.begin(), sval.end(),sval.begin(), ::toupper);
+  string::size_type ppos = sval.find('+', 1);
+  string::size_type npos = sval.find('-', 1);
+  string::size_type pos = min(ppos, npos);
+  if (pos != string::npos) {
+    if (sval[ppos - 1] != 'E')
+      sval.insert(pos, "E");
+  }
   if (sval.length() == 0) {
     value = this->bounds.get_default();
   } else {
-    ::std::istringstream buffer(sval);
+    istringstream buffer(sval);
     buffer >> value;
   }
   if (!this->bounds.in_bounds(value))
