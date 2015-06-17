@@ -49,9 +49,11 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     ::std::vector<string> samples;
     samples.push_back("7.0");
     samples.push_back(".7E1");
+    samples.push_back(".7e1");
     samples.push_back("0.7+1");
     samples.push_back(".70+1");
     samples.push_back("7.E0");
+    samples.push_back("7.e0");
     samples.push_back("70.-1");
     for (::std::vector<string>::iterator pos = samples.begin(); pos != samples.end(); ++pos) {
       probe(*pos);
@@ -64,32 +66,37 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     CHECK(probe.value == 0.);
   }
 
+  SECTION("'        ', no default") {
+    bdf_float probe("dummy", bdf_num_bounds<double>(NULL, NULL, NULL));
+    CHECK_THROWS(probe("        "));
+  }
+
   SECTION("'   123.  '") {
     probe("   123.  ");
     CHECK(probe.value == 123.);
   }
 
-  SECTION("'  123+3  '") {
+  SECTION("'  123+3        '") {
     probe("  123+3        ");
     CHECK(probe.value == 123000.);
   }
 
-  SECTION("' +123+3  '") {
+  SECTION("' +123+3        '") {
     probe(" +123+3        ");
     CHECK(probe.value == 123000.);
   }
 
-  SECTION("' -123+3  '") {
+  SECTION("' -123+3        '") {
     probe(" -123+3        ");
     CHECK(probe.value == -123000.);
   }
 
-  SECTION("' +123-3  '") {
+  SECTION("' +123-3        '") {
     probe(" +123-3        ");
     CHECK(probe.value == .123);
   }
 
-  SECTION("' -123-3  '") {
+  SECTION("' -123-3        '") {
     probe(" -123-3        ");
     CHECK(probe.value == -.123);
   }

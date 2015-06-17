@@ -17,6 +17,11 @@ namespace {
 #include <limits>
 #include <algorithm>
 #include <string>
+#ifdef __GNUC__
+#include <boost/regex.hpp>
+#else
+#include <regex>
+#endif
 
 #ifndef _MSC_VER
 #include <config.h>
@@ -26,11 +31,14 @@ namespace {
 using namespace std;
 using namespace bdf::types;
 using namespace bdf::type_bounds;
+#ifdef __GNUC__
+using namespace boost;
+#endif
 
 
 // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
 string trim(const string& str,
-                 const string& whitespace) {
+            const string& whitespace) {
     const auto strBegin = str.find_first_not_of(whitespace);
     if (strBegin == string::npos)
         return ""; // no content
@@ -131,14 +139,13 @@ bdf_float::bdf_float(string name, bdf_num_bounds<double> _bounds) :
 // Convert string to float
 void bdf_float::operator()(string inp) {
   string sval = trim(inp);
-  transform(sval.begin(), sval.end(),sval.begin(), ::toupper);
-  string::size_type ppos = sval.find('+', 1);
-  string::size_type npos = sval.find('-', 1);
-  string::size_type pos = min(ppos, npos);
-  if (pos != string::npos) {
-    if (sval[ppos - 1] != 'E')
-      sval.insert(pos, "E");
-  }
+  smatch m;
+  regex exp("([\\+-]?[.0-9]+)([+-][.0-9]+)");
+  transform(sval.begin(), sval.end(), sval.begin(), ::toupper);
+
+  if (regex_search (sval, m, exp))
+    sval = m[1] + "E" + m[2];
+
   if (sval.length() == 0) {
     value = this->bounds.get_default();
   } else {
