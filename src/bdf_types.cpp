@@ -144,7 +144,7 @@ void bdf_float::operator()(string inp) {
   transform(sval.begin(), sval.end(), sval.begin(), ::toupper);
 
   if (regex_search (sval, m, exp))
-    sval = m[1] + "E" + m[2];
+    sval = m[1].str() + "E" + m[2].str();
 
   if (sval.length() == 0) {
     value = this->bounds.get_default();
