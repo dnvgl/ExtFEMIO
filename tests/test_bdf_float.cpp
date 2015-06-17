@@ -46,9 +46,14 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("Quick Reference") {
-    vector<string> samples({
-        "7.0", ".7E1", "0.7+1", ".70+1", "7.E0", "70.-1"});
-    for (vector<string>::iterator pos = samples.begin(); pos != samples.end(); ++pos) {
+    ::std::vector<string> samples;
+    samples.push_back("7.0");
+    samples.push_back(".7E1");
+    samples.push_back("0.7+1");
+    samples.push_back(".70+1");
+    samples.push_back("7.E0");
+    samples.push_back("70.-1");
+    for (::std::vector<string>::iterator pos = samples.begin(); pos != samples.end(); ++pos) {
       probe(*pos);
       CHECK(probe.value == 7.);
     }
