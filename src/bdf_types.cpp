@@ -27,6 +27,7 @@ namespace {
 #include <config.h>
 #endif
 #include "bdf_types.h"
+#include "bdf_string.h"
 
 using namespace std;
 using namespace bdf::types;
@@ -36,20 +37,8 @@ using namespace boost;
 #endif
 
 
-// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-string trim(const string& str,
-            const string& whitespace) {
-    const auto strBegin = str.find_first_not_of(whitespace);
-    if (strBegin == string::npos)
-        return ""; // no content
-
-    const auto strEnd = str.find_last_not_of(whitespace);
-    const auto strRange = strEnd - strBegin + 1;
-
-    return str.substr(strBegin, strRange);
-}
-
-bdf_type_base::bdf_type_base(string name) : name(name) {};
+bdf_type_base::bdf_type_base(string name) :
+  name(name) {};
 
 bdf_int::bdf_int(string name) :
   bdf_type_base(name), bounds(bdf_num_bounds<long>()) {};
@@ -58,8 +47,7 @@ bdf_int::bdf_int(string name, bdf_num_bounds<long> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
 void bdf_int::operator()(string inp) {
-  string sval = trim(inp);
-  if (sval.find('+') != string::npos) throw "*** FOUND '+'";
+  string sval = ::bdf_string::string::trim(inp);
   if (sval.length() == 0) {
     if (!this->bounds.has_default())
       throw "** BDF INP ERROR **: empty entry without default";
@@ -138,10 +126,10 @@ bdf_float::bdf_float(string name, bdf_num_bounds<double> _bounds) :
 
 // Convert string to float
 void bdf_float::operator()(string inp) {
-  string sval = trim(inp);
+  string sval = ::bdf_string::string::trim(inp);
   smatch m;
   regex exp("([\\+-]?[.0-9]+)([+-][.0-9]+)");
-  transform(sval.begin(), sval.end(), sval.begin(), ::toupper);
+  ::bdf_string::string::upper(sval);
 
   if (regex_search (sval, m, exp))
     sval = m[1].str() + "E" + m[2].str();

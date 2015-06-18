@@ -14,6 +14,6 @@ ede_FILES=Project.ede Makefile.am
 SUBDIRS=
 EXTRA_DIST=Project.ede
 lib_LTLIBRARIES=libbdfreadpp.la
-libbdfreadpp_la_SOURCES=bdf_types.cpp
+libbdfreadpp_la_SOURCES=bdf_types.cpp bdf_string.cpp
 
 # End of Makefile.am

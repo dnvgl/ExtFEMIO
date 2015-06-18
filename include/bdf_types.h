@@ -17,10 +17,6 @@
 #include <typeinfo>
 #include <limits>
 
-std::string trim(const std::string&,
-                 const std::string& = " \t");
-
-
 namespace bdf {
 
   namespace type_bounds {
