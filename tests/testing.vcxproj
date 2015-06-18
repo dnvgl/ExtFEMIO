@@ -113,7 +113,8 @@
       <Command>"$(OutputPath)test_bdf_bounds.exe"
 "$(OutputPath)test_bdf_types.exe"
 "$(OutputPath)test_bdf_int.exe"
-"$(OutputPath)test_bdf_float.exe"</Command>
+"$(OutputPath)test_bdf_float.exe"
+"$(OutputPath)test_bdf_string.exe"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
