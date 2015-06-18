@@ -47,7 +47,7 @@ bdf_int::bdf_int(string name, bdf_num_bounds<long> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
 void bdf_int::operator()(string inp) {
-  string sval = ::bdf_string::string::trim(inp);
+  string sval = ::bdf_string::string(inp).trim();
   if (sval.length() == 0) {
     if (!this->bounds.has_default())
       throw "** BDF INP ERROR **: empty entry without default";
@@ -126,10 +126,9 @@ bdf_float::bdf_float(string name, bdf_num_bounds<double> _bounds) :
 
 // Convert string to float
 void bdf_float::operator()(string inp) {
-  string sval = ::bdf_string::string::trim(inp);
+  string sval = ::bdf_string::string(inp).trim().upper();
   smatch m;
   regex exp("([\\+-]?[.0-9]+)([+-][.0-9]+)");
-  ::bdf_string::string::upper(sval);
 
   if (regex_search (sval, m, exp))
     sval = m[1].str() + "E" + m[2].str();

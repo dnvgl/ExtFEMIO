@@ -14,12 +14,12 @@
 
 namespace bdf_string {
 
-  class string {
+  class string : public std::string {
   public:
-    static ::std::string trim(const ::std::string&,
-                              const ::std::string& = " \t");
-    static ::std::string upper(const ::std::string&);
-    static ::std::string lower(const ::std::string&);
+    string(const std::string& in) : std::string(in) {};
+    string trim(const std::string& = " \t");
+    string upper();
+    string lower();
   };
 }
 

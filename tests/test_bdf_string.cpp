@@ -28,30 +28,30 @@ namespace {
 TEST_CASE("Checking extra string functions", "[bdf_string]") {
 
   SECTION("checking trim functionality") {
-    CHECK(::bdf_string::string::trim("   2    ") == std::string("2"));
-    CHECK(::bdf_string::string::trim("        ") == std::string(""));
-    CHECK(::bdf_string::string::trim(" \t      ") == std::string(""));
-    CHECK(::bdf_string::string::trim(" \txxx\t ") == std::string("xxx"));
-    CHECK(::bdf_string::string::trim(" \tXXX\t ") == std::string("XXX"));
-    CHECK(::bdf_string::string::trim("ABCDabcd") == std::string("ABCDabcd"));
+    CHECK(::bdf_string::string("   2    ").trim() == std::string("2"));
+    CHECK(::bdf_string::string("        ").trim() == std::string(""));
+    CHECK(::bdf_string::string(" \t      ").trim() == std::string(""));
+    CHECK(::bdf_string::string(" \txxx\t ").trim() == std::string("xxx"));
+    CHECK(::bdf_string::string(" \tXXX\t ").trim() == std::string("XXX"));
+    CHECK(::bdf_string::string("ABCDabcd").trim() == std::string("ABCDabcd"));
   }
 
   SECTION("checking lower functionality") {
-    CHECK(::bdf_string::string::lower("   2     ") == std::string("   2     "));
-    CHECK(::bdf_string::string::lower("         ") == std::string("         "));
-    CHECK(::bdf_string::string::lower(" \t      ") == std::string(" \t      "));
-    CHECK(::bdf_string::string::lower(" \txxx\t ") == std::string(" \txxx\t "));
-    CHECK(::bdf_string::string::lower(" \tXXX\t ") == std::string(" \txxx\t "));
-    CHECK(::bdf_string::string::lower("ABCDabcd ") == std::string("abcdabcd "));
+    CHECK(::bdf_string::string("   2     ").lower() == std::string("   2     "));
+    CHECK(::bdf_string::string("         ").lower() == std::string("         "));
+    CHECK(::bdf_string::string(" \t      ").lower() == std::string(" \t      "));
+    CHECK(::bdf_string::string(" \txxx\t ").lower() == std::string(" \txxx\t "));
+    CHECK(::bdf_string::string(" \tXXX\t ").lower() == std::string(" \txxx\t "));
+    CHECK(::bdf_string::string("ABCDabcd ").lower() == std::string("abcdabcd "));
   }
 
     SECTION("checking upper functionality") {
-    CHECK(::bdf_string::string::upper("   2     ") == std::string("   2     "));
-    CHECK(::bdf_string::string::upper("         ") == std::string("         "));
-    CHECK(::bdf_string::string::upper(" \t      ") == std::string(" \t      "));
-    CHECK(::bdf_string::string::upper(" \txxx\t ") == std::string(" \tXXX\t "));
-    CHECK(::bdf_string::string::upper(" \tXXX\t ") == std::string(" \tXXX\t "));
-    CHECK(::bdf_string::string::upper("ABCDabcd ") == std::string("ABCDABCD "));
+    CHECK(::bdf_string::string("   2     ").upper() == std::string("   2     "));
+    CHECK(::bdf_string::string("         ").upper() == std::string("         "));
+    CHECK(::bdf_string::string(" \t      ").upper() == std::string(" \t      "));
+    CHECK(::bdf_string::string(" \txxx\t ").upper() == std::string(" \tXXX\t "));
+    CHECK(::bdf_string::string(" \tXXX\t ").upper() == std::string(" \tXXX\t "));
+    CHECK(::bdf_string::string("ABCDabcd ").upper() == std::string("ABCDABCD "));
   }
 
 }
