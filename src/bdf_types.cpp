@@ -32,22 +32,23 @@ namespace {
 using namespace std;
 using namespace bdf::types;
 using namespace bdf::type_bounds;
+using namespace bdf::string;
 #ifdef __GNUC__
 using namespace boost;
 #endif
 
 
-bdf_type_base::bdf_type_base(string name) :
+bdf_type_base::bdf_type_base(std::string name) :
   name(name) {};
 
-bdf_int::bdf_int(string name) :
+bdf_int::bdf_int(std::string name) :
   bdf_type_base(name), bounds(bdf_num_bounds<long>()) {};
 
-bdf_int::bdf_int(string name, bdf_num_bounds<long> _bounds) :
+bdf_int::bdf_int(std::string name, bdf_num_bounds<long> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
-void bdf_int::operator()(string inp) {
-  string sval = ::bdf_string::string(inp).trim();
+void bdf_int::operator()(std::string inp) {
+  std::string sval = bdf::string::string(inp).trim();
   if (sval.length() == 0) {
     if (!this->bounds.has_default())
       throw "** BDF INP ERROR **: empty entry without default";
@@ -118,15 +119,15 @@ void bdf_int::operator()(string inp) {
 //         self.default = default
 
 //     def __call__(self, inp):
-bdf_float::bdf_float(string name) :
+bdf_float::bdf_float(std::string name) :
   bdf_type_base(name), bounds(bdf_num_bounds<double>()) {};
 
-bdf_float::bdf_float(string name, bdf_num_bounds<double> _bounds) :
+bdf_float::bdf_float(std::string name, bdf_num_bounds<double> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
 // Convert string to float
-void bdf_float::operator()(string inp) {
-  string sval = ::bdf_string::string(inp).trim().upper();
+void bdf_float::operator()(std::string inp) {
+  std::string sval = ::bdf::string::string(inp).trim().upper();
   smatch m;
   regex exp("([\\+-]?[.0-9]+)([+-][.0-9]+)");
 

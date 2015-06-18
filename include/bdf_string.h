@@ -12,15 +12,18 @@
 #include <string>
 #include <algorithm>
 
-namespace bdf_string {
+namespace bdf {
 
-  class string : public std::string {
-  public:
-    string(const std::string& in) : std::string(in) {};
-    string trim(const std::string& = " \t");
-    string upper();
-    string lower();
-  };
+  namespace string {
+
+    class string : public std::string {
+    public:
+      string(const std::string& in) : std::string(in) {};
+      string trim(const std::string& = " \t");
+      string upper();
+      string lower();
+    };
+  }
 }
 
 #endif // _BERHOL20150618_BDF_STRING

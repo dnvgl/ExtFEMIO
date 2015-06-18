@@ -16,10 +16,10 @@ namespace {
 #include "bdf_string.h"
 
 // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-bdf_string::string bdf_string::string::trim(const std::string &whitespace) {
+bdf::string::string bdf::string::string::trim(const std::string &whitespace) {
   const auto strBegin = this->find_first_not_of(whitespace);
   if (strBegin == ::std::string::npos)
-    return bdf_string::string(""); // no content
+    return bdf::string::string(""); // no content
 
   const auto strEnd = this->find_last_not_of(whitespace);
   const auto strRange = strEnd - strBegin + 1;
@@ -27,12 +27,12 @@ bdf_string::string bdf_string::string::trim(const std::string &whitespace) {
   return this->substr(strBegin, strRange);
 }
 
-bdf_string::string bdf_string::string::upper() {
+bdf::string::string bdf::string::string::upper() {
   transform(this->begin(), this->end(), this->begin(), ::toupper);
   return *this;
 }
 
-bdf_string::string bdf_string::string::lower() {
+bdf::string::string bdf::string::string::lower() {
   transform(this->begin(), this->end(), this->begin(), ::tolower);
   return *this;
 }
