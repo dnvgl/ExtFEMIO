@@ -35,9 +35,24 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
   bdf_float probe("dummy", bdf_num_bounds<double>(NULL, NULL, new double(0.)));
 
+  SECTION("'   1.   '") {
+    probe("   1.   ");
+    CHECK(probe.value == 1.);
+  }
+
+  SECTION("'  .1    '") {
+    probe("  .1    ");
+    CHECK(probe.value == .1);
+  }
+
   SECTION("'  -1.   '") {
     probe("  -1.   ");
     CHECK(probe.value == -1.);
+  }
+
+  SECTION("'  -.1   '") {
+    probe("  -.1   ");
+    CHECK(probe.value == -.1);
   }
 
   SECTION("'  -1.   ', min 0.") {
@@ -47,18 +62,37 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
   SECTION("Quick Reference") {
     ::std::vector<string> samples;
-    samples.push_back("7.0");
-    samples.push_back(".7E1");
-    samples.push_back(".7e1");
-    samples.push_back("0.7+1");
-    samples.push_back(".70+1");
-    samples.push_back("7.E0");
-    samples.push_back("7.e0");
-    samples.push_back("70.-1");
-    for (vector<string>::iterator pos = samples.begin(); pos != samples.end(); ++pos) {
-      probe(*pos);
-      CHECK(probe.value == 7.);
-    }
+    probe("   7.0  ");
+    CHECK(probe.value == 7.);
+    probe("   7.   ");
+    CHECK(probe.value == 7.);
+    probe("   .7"   );
+    CHECK(probe.value == .7);
+    probe("   .7E1 ");
+    CHECK(probe.value == 7.);
+    probe("   .7e1 ");
+    CHECK(probe.value == 7.);
+    probe("   0.7+1");
+    CHECK(probe.value == 7.);
+    probe("   .70+1");
+    CHECK(probe.value == 7.);
+    probe("   7.E+0");
+    CHECK(probe.value == 7.);
+    probe("   7.e+0");
+    CHECK(probe.value == 7.);
+    probe("   70.-1");
+    CHECK(probe.value == 7.);
+  }
+
+  SECTION("Invalid values") {
+    CHECK_THROWS(probe("   7    "));
+    CHECK_THROWS(probe("   7E1  "));
+    CHECK_THROWS(probe("   7e1  "));
+    CHECK_THROWS(probe("   7E0  "));
+    CHECK_THROWS(probe("   7e0  "));
+    CHECK_THROWS(probe("   7E+0 "));
+    CHECK_THROWS(probe("   7e+0 "));
+    CHECK_THROWS(probe("   70-1 "));
   }
 
   SECTION("'        '") {
@@ -76,34 +110,40 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     CHECK(probe.value == 123.);
   }
 
-  SECTION("'  123+3        '") {
-    probe("  123+3        ");
-    CHECK(probe.value == 123000.);
-  }
-
-  SECTION("' +123+3        '") {
-    probe(" +123+3        ");
-    CHECK(probe.value == 123000.);
-  }
-
-  SECTION("' -123+3        '") {
-    probe(" -123+3        ");
-    CHECK(probe.value == -123000.);
-  }
-
-  SECTION("' +123-3        '") {
-    probe(" +123-3        ");
+  SECTION("'   .123  '") {
+    probe("   .123  ");
     CHECK(probe.value == .123);
   }
 
-  SECTION("' -123-3        '") {
-    probe(" -123-3        ");
-    CHECK(probe.value == -.123);
+  SECTION("'   .123+3  '") {
+    probe("   .123+3  ");
+    CHECK(probe.value == 123.);
   }
 
-    // def test_List1(self):
-    //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
-    //     assert obj("1236") == (1, 2, 3, 6)
+  SECTION("'  123.+3        '") {
+    probe("  123.+3        ");
+    CHECK(probe.value == 123000.);
+  }
+
+  SECTION("' +123.+3        '") {
+    probe(" +123.+3        ");
+    CHECK(probe.value == 123000.);
+  }
+
+  SECTION("' -123.+3        '") {
+    probe(" -123.+3        ");
+    CHECK(probe.value == -123000.);
+  }
+
+  SECTION("' +123.-3        '") {
+    probe(" +123.-3        ");
+    CHECK(probe.value == .123);
+  }
+
+  SECTION("' -123.-3        '") {
+    probe(" -123.-3        ");
+    CHECK(probe.value == -.123);
+  }
 
 }
 

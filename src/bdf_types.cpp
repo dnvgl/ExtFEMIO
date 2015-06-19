@@ -41,6 +41,8 @@ using namespace boost;
 bdf_type_base::bdf_type_base(std::string name) :
   name(name) {};
 
+const regex bdf_int::int_re("[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
+
 bdf_int::bdf_int(std::string name) :
   bdf_type_base(name), bounds(bdf_num_bounds<long>()) {};
 
@@ -54,6 +56,10 @@ void bdf_int::operator()(std::string inp) {
       throw "** BDF INP ERROR **: empty entry without default";
     value = this->bounds.get_default();
   } else {
+    if (not regex_match(inp, int_re)) {
+      std::string msg("illegal input, no integer\n");
+      throw msg;
+    }
     istringstream buffer(sval);
     buffer >> value;
   }
@@ -125,25 +131,35 @@ bdf_float::bdf_float(std::string name) :
 bdf_float::bdf_float(std::string name, bdf_num_bounds<double> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
+const regex bdf_float::float_exp_re("([\\+-]?[.[:digit:]]+)([+-][[:digit:]]+)");
+
+const regex bdf_float::float_re(
+  "([\\+-]?((0|([1-9][[:digit:]]*))?[.][[:digit:]]*)|[.][[:digit:]]+)(((E[+-]?)|[+-])[[:digit:]]+)?",
+  regex_constants::ECMAScript);
+
 // Convert string to float
 void bdf_float::operator()(std::string inp) {
   std::string sval = ::bdf::string::string(inp).trim().upper();
-  smatch m;
-  regex exp("([\\+-]?[.0-9]+)([+-][.0-9]+)");
-
-  if (regex_search (sval, m, exp))
-    sval = m[1].str() + "E" + m[2].str();
 
   if (sval.length() == 0) {
     value = this->bounds.get_default();
   } else {
+    if (not regex_match(sval, float_re)) {
+      std::string msg("illegal input, no float");
+      throw msg + "; !" + sval + "!\n";
+    }
+
+    smatch m;
+
+    if (regex_search (sval, m, float_exp_re))
+      sval = m[1].str() + "E" + m[2].str();
+
     istringstream buffer(sval);
     buffer >> value;
   }
   if (!this->bounds.in_bounds(value))
     throw  "** BDF INP ERROR **: boundary condition violated";
 }
-
 
 // >>> f = Float('dummy')
 // >>> assert f('123.') == 123.0
@@ -225,6 +241,11 @@ void bdf_float::operator()(std::string inp) {
 
 //     def __call__(self, inp):
 //         return tuple([int(i) for i in inp.strip()])
+
+bdf_list::bdf_list(std::string name) :
+  bdf_type_base(name) {};
+
+void bdf_list::operator() (::std::string inp) {}
 
 
 // class Choose(_bdfTypeBase):

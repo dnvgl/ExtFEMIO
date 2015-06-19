@@ -13,9 +13,18 @@
 #define _BERHOL20150407_BDF_TYPES
 
 #include <string>
+#include <vector>
 #include <iostream>
 #include <typeinfo>
 #include <limits>
+#ifdef __GNUC__
+#include <boost/regex.hpp>
+#else
+#include <regex>
+#endif
+#ifdef __GNUC__
+using namespace boost;
+#endif
 
 namespace bdf {
 
@@ -117,7 +126,7 @@ namespace bdf {
 
     protected:
 
-      static const bdf_types _type = None;
+      static const bdf_types _type;
 
     public:
 
@@ -173,7 +182,9 @@ namespace bdf {
       static const bdf_types _type = Int;
 
     private:
+
       bdf_num_bounds<long> bounds;
+      static const regex int_re;
 
     public:
 
@@ -273,6 +284,8 @@ namespace bdf {
     private:
 
       bdf_num_bounds<double> bounds;
+      static const regex float_exp_re;
+      static const regex float_re;
 
     protected:
 
@@ -365,6 +378,8 @@ namespace bdf {
 //         return res
 
 
+    class bdf_list : public bdf_type_base {
+
 // class List(_bdfTypeBase):
 
 //     """List of integers.
@@ -380,6 +395,22 @@ namespace bdf {
 
 //     def __call__(self, inp):
 //         return tuple([int(i) for i in inp.strip()])
+
+    protected:
+
+      static const bdf_types _type = List;
+
+    public:
+
+      ::std::vector<char> value;
+
+      bdf_list(::std::string);
+
+      void operator() (::std::string);
+
+      bdf_types type() const {return _type;};
+
+    };
 
 
 // class Choose(_bdfTypeBase):

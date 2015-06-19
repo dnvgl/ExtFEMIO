@@ -65,6 +65,17 @@ TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
     obj("        ");
     CHECK(obj.value == 100);
   }
+
+  SECTION("123") {
+    bdf_int obj("dummy");
+    obj("123");
+    CHECK(obj.value == 123);
+  }
+
+  SECTION("123.") {
+    bdf_int obj("dummy");
+    CHECK_THROWS(obj("123."));
+  }
 }
 
 /*
