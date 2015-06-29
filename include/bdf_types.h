@@ -26,6 +26,9 @@
 using namespace boost;
 #endif
 
+#include "bdf_string.h"
+
+
 namespace bdf {
 
   namespace type_bounds {
@@ -378,7 +381,7 @@ namespace bdf {
 //         return res
 
 
-    class bdf_list : public bdf_type_base {
+    template <class T> class bdf_list : public bdf_type_base {
 
 // class List(_bdfTypeBase):
 
@@ -396,21 +399,41 @@ namespace bdf {
 //     def __call__(self, inp):
 //         return tuple([int(i) for i in inp.strip()])
 
+    private:
+
+      static const regex int_re;
+
     protected:
 
       static const bdf_types _type = List;
 
+
     public:
 
-      ::std::vector<char> value;
+      ::std::vector<T> value;
 
-      bdf_list(::std::string);
+      bdf_list(std::string name) :
+        bdf_type_base(name) {};
 
-      void operator() (::std::string);
+      inline void operator() (::std::string inp);
 
-      bdf_types type() const {return _type;};
+      inline bdf_types type() const {return _type;};
 
     };
+
+    template <class T>
+    const regex bdf_list<T>::int_re("[[:digit:]]+");
+
+    template <> inline void bdf_list<int>::operator() (std::string inp) {
+      std::string sval = ::bdf::string::string(inp).trim();
+      if (not regex_match(sval, int_re)) {
+        std::string msg("illegal input, no integer\n");
+        throw msg;
+      }
+      value.empty();
+      for (::std::string::iterator pos = sval.begin(); pos != sval.end(); ++pos)
+        value.push_back(*pos - '0');
+    }
 
 
 // class Choose(_bdfTypeBase):

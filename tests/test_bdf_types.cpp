@@ -33,7 +33,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
   bdf_type_base* obj_int = new bdf_int("");
   bdf_type_base* obj_float = new bdf_float("");
-  bdf_type_base* obj_list = new bdf_list("");
+  bdf_type_base* obj_list = new bdf_list<int>("");
 
   SECTION("Checking 'bdf_int.type' against 'Int'") {
     CHECK(bdf_int("").type() == Int);
@@ -52,7 +52,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
   }
 
   SECTION("Checking 'bdf_list.type' against 'List'") {
-    CHECK(bdf_list("").type() == List);
+    CHECK(bdf_list<int>("").type() == List);
   }
 
   SECTION("Checking 'bdf_list->type' against 'List'") {

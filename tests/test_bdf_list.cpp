@@ -33,12 +33,34 @@ using namespace bdf::type_bounds;
 
 TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 
-  bdf_list probe("dummy");
-
-
-    // def test_List1(self):
+  // def test_List1(self):
     //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
     //     assert obj("1236") == (1, 2, 3, 6)
+  bdf_list<int> probe("dummy");
+
+  SECTION("' 1234   '") {
+    probe("  1234  ");
+    vector<int> ref;
+    ref.push_back(1);
+    ref.push_back(2);
+    ref.push_back(3);
+    ref.push_back(4);
+    CHECK(probe.value == ref);
+  }
+
+  SECTION("' 1236   '") {
+    probe(" 1236   ");
+    vector<int> ref;
+    ref.push_back(1);
+    ref.push_back(2);
+    ref.push_back(3);
+    ref.push_back(6);
+    CHECK(probe.value == ref);
+  }
+
+  SECTION("' 1a3b   '") {
+    CHECK_THROWS(probe(" 1a3b   "));
+  }
 }
 
 
@@ -48,5 +70,5 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C .. check"
 // End:

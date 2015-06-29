@@ -82,6 +82,26 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     CHECK(probe.value == 7.);
     probe("   70.-1");
     CHECK(probe.value == 7.);
+    probe("  -7.0  ");
+    CHECK(probe.value == -7.);
+    probe("  -7.   ");
+    CHECK(probe.value == -7.);
+    probe("  -.7"   );
+    CHECK(probe.value == -.7);
+    probe("  -.7E1 ");
+    CHECK(probe.value == -7.);
+    probe("  -.7e1 ");
+    CHECK(probe.value == -7.);
+    probe("  -0.7+1");
+    CHECK(probe.value == -7.);
+    probe("  -.70+1");
+    CHECK(probe.value == -7.);
+    probe("  -7.E+0");
+    CHECK(probe.value == -7.);
+    probe("  -7.e+0");
+    CHECK(probe.value == -7.);
+    probe("  -70.-1");
+    CHECK(probe.value == -7.);
   }
 
   SECTION("Invalid values") {

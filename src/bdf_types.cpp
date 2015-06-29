@@ -242,11 +242,6 @@ void bdf_float::operator()(std::string inp) {
 //     def __call__(self, inp):
 //         return tuple([int(i) for i in inp.strip()])
 
-bdf_list::bdf_list(std::string name) :
-  bdf_type_base(name) {};
-
-void bdf_list::operator() (::std::string inp) {}
-
 
 // class Choose(_bdfTypeBase):
 
