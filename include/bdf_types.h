@@ -24,6 +24,8 @@
 #endif
 #ifdef __GNUC__
 using namespace boost;
+#else
+using namespace std;
 #endif
 
 #include "bdf_string.h"
@@ -426,7 +428,7 @@ namespace bdf {
 
     template <> inline void bdf_list<int>::operator() (std::string inp) {
       std::string sval = ::bdf::string::string(inp).trim();
-      if (not regex_match(sval, int_re)) {
+      if (! regex_match(sval, int_re)) {
         std::string msg("illegal input, no integer\n");
         throw msg;
       }

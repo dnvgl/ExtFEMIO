@@ -56,7 +56,7 @@ void bdf_float::operator()(std::string inp) {
   if (sval.length() == 0) {
     value = this->bounds.get_default();
   } else {
-    if (not regex_match(sval, float_re)) {
+    if (! regex_match(sval, float_re)) {
       std::string msg("illegal input, no float");
       throw msg + "; !" + sval + "!\n";
     }

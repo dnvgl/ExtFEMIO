@@ -52,7 +52,7 @@ void bdf_int::operator()(std::string inp) {
       throw "** BDF INP ERROR **: empty entry without default";
     value = this->bounds.get_default();
   } else {
-    if (not regex_match(inp, int_re)) {
+    if (! regex_match(inp, int_re)) {
       std::string msg("illegal input, no integer\n");
       throw msg;
     }
