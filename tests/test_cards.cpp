@@ -10,7 +10,7 @@ namespace {
 #ifdef __GNUC__
   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id: test_bdf_bounds.cpp 22 2015-04-28 16:06:04Z hoel $";
+    = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numdric_limits"

@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include <set>
 
 #include "bdf_types.h"
 
@@ -22,9 +23,13 @@ namespace bdf {
 
     class _bdf_base_card {
 
-    protected:
+    private:
 
-      static const ::std::vector<::bdf::types::bdf_type_base> define;
+      // two character strings for continuation lines in Free Form
+      // Format cards.
+      static const ::std::set<::std::string> free_form_cont;
+
+    protected:
 
       ::std::vector<::std::string> card_split(::std::vector<::std::string>);
 
@@ -93,9 +98,6 @@ Description:
       grid(::std::vector<::std::string>);
 
     };
-
-
-
   }
 }
 
