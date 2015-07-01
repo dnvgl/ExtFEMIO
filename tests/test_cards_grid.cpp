@@ -56,19 +56,19 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)", "[bdf_grid]" ) {
   data.push_back("GRID*                  1              22         111525.          18000.\n");
   data.push_back("                  21000.              11               6               2\n");
 
+  grid probe(data);
 
   SECTION("first grid") {
-    CHECK_THROWS(grid probe(data));
-    // CHECK(probe.ID() == 1);
-    // CHECK(probe.CP() == 22);
-    // CHECK(probe.X1() == 111525.);
-    // CHECK(probe.X2() == 18000.);
-    // CHECK(probe.X3() == 21000.);
-    // CHECK(probe.CD() == 11);
-    // vector<int> ps_ref;
-    // ps_ref.push_back(6);
-    // CHECK(probe.PS() == ps_ref);
-    // CHECK(probe.SEID() == 2);
+    CHECK(probe.ID() == 1);
+    CHECK(probe.CP() == 22);
+    CHECK(probe.X1() == 111525.);
+    CHECK(probe.X2() == 18000.);
+    CHECK(probe.X3() == 21000.);
+    CHECK(probe.CD() == 11);
+    vector<int> ps_ref;
+    ps_ref.push_back(6);
+    CHECK(probe.PS() == ps_ref);
+    CHECK(probe.SEID() == 2);
   }
 }
 

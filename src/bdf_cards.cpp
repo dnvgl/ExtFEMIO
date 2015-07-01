@@ -27,24 +27,27 @@ vector<::std::string> _bdf_base_card::card_split(vector<::std::string> inp) {
 
   for (vector<::std::string>::iterator pos=inp.begin(); pos<inp.end(); ++pos) {
     ::std::string head(string::string(pos->substr(0, 8)).trim());
-    ::std::cerr << "head: !" << head << "!\n";
-    if (head.find(',') != ::std::string::npos)
+    if (head.find(',') != ::std::string::npos) {
+      ::std::string tmp(*pos);
+      tmp = tmp.substr(tmp.find(','));
       throw("Free Field Format not yet supported.\n");
-    else if (head.back() == '*')
-      throw("Large Field Format not yet supported.\n");
-    else {
-
+    } else if (head.back() == '*') {
+      ::std::string tmp(pos->substr(8));
+      tmp.resize(64, ' ');
+      ++pos;
+      tmp += pos->substr(8);
+      tmp.resize(128, ' ');
+      for (int i=0; i<8; ++i) {
+        res.push_back(tmp.substr(i*16, 16));
+      }
+    } else {
+      ::std::string tmp(pos->substr(8));
+      tmp.resize(64, ' ');
+      for (int i=0; i<8; ++i) {
+        res.push_back(tmp.substr(i*8, 8));
+      }
     }
   }
-
-  res.push_back(" 1        ");
-  res.push_back(" 22       ");
-  res.push_back(" 111525.  ");
-  res.push_back(" 18000.   ");
-  res.push_back(" 21000.   ");
-  res.push_back(" 11       ");
-  res.push_back(" 6        ");
-  res.push_back(" 2        ");
   return res;
 }
 
