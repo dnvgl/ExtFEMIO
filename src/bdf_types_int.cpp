@@ -37,11 +37,11 @@ using namespace bdf::string;
 using namespace boost;
 #endif
 
-bdf_int::bdf_int(std::string name) :
-  bdf_type_base(name), bounds(bdf_num_bounds<long>()) {};
+bdf_int::bdf_int() :
+  bdf_type_base(), bounds(num<long>()) {};
 
-bdf_int::bdf_int(std::string name, bdf_num_bounds<long> _bounds) :
-  bdf_type_base(name), bounds(_bounds) {};
+bdf_int::bdf_int(num<long> _bounds) :
+  bdf_type_base(), bounds(_bounds) {};
 
 const regex bdf_int::int_re("[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 

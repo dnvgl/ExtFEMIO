@@ -31,12 +31,12 @@ using namespace bdf::type_bounds;
 
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
-  bdf_num_bounds<long> *probe = new bdf_num_bounds<long>();
-  bdf_num_bounds<long> *probe_min = new bdf_num_bounds<long>(new long(-12), NULL, NULL);
-  bdf_num_bounds<long> *probe_max = new bdf_num_bounds<long>(NULL, new long(12), NULL);
-  bdf_num_bounds<long> *probe_mm = new bdf_num_bounds<long>(new long(-12), new long(12), NULL);
-  bdf_num_bounds<long> *probe_mmd = new bdf_num_bounds<long>(new long(-12), new long(12), new long(6));
-  bdf_num_bounds<long> *probe_def = new bdf_num_bounds<long>(NULL, NULL, new long(1));
+  num<long> *probe = new num<long>();
+  num<long> *probe_min = new num<long>(new long(-12), NULL, NULL);
+  num<long> *probe_max = new num<long>(NULL, new long(12), NULL);
+  num<long> *probe_mm = new num<long>(new long(-12), new long(12), NULL);
+  num<long> *probe_mmd = new num<long>(new long(-12), new long(12), new long(6));
+  num<long> *probe_def = new num<long>(NULL, NULL, new long(1));
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());
@@ -104,8 +104,8 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
 TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
 
-  bdf_num_bounds<double> *probe = new bdf_num_bounds<double>();
-  bdf_num_bounds<double> *probe_def = new bdf_num_bounds<double>(NULL, NULL, new double(1.));
+  num<double> *probe = new num<double>();
+  num<double> *probe_def = new num<double>(NULL, NULL, new double(1.));
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());
@@ -123,7 +123,7 @@ TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check"
+  compile-command: "make -C .. check -l 7"
   coding: utf-8
   End:
 */

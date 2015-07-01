@@ -36,7 +36,7 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
   // def test_List1(self):
     //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
     //     assert obj("1236") == (1, 2, 3, 6)
-  bdf_list<int> probe("dummy");
+  bdf_list<int> probe;
 
   SECTION("' 1234   '") {
     probe.parse("  1234  ");

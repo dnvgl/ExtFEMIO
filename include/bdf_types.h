@@ -66,7 +66,7 @@ namespace bdf {
       };
     };
 
-    template <class T> class bdf_num_bounds : public bdf_type_bounds {
+    template <class T> class num : public bdf_type_bounds {
 
     protected:
 
@@ -76,11 +76,11 @@ namespace bdf {
 
     public:
 
-      ~bdf_num_bounds() {};
+      ~num() {};
 
-      bdf_num_bounds() {};
+      num() {};
 
-      bdf_num_bounds(const T* _min, const T* _max=NULL, const T* _default=NULL) {
+      num(const T* _min, const T* _max=NULL, const T* _default=NULL) {
         if (_min != NULL)
           set_min(*_min);
         if (_max != NULL)
@@ -125,17 +125,13 @@ namespace bdf {
 
     class bdf_type_base {
 
-    private:
-
-      std::string name;
-
     protected:
 
       static const bdf_types _type;
 
     public:
 
-      bdf_type_base(std::string name);
+      bdf_type_base();
 
       ~bdf_type_base() {};
 
@@ -186,7 +182,7 @@ namespace bdf {
 
       long value;
 
-      bdf_num_bounds<long> bounds;
+      num<long> bounds;
       static const regex int_re;
 
     protected:
@@ -195,9 +191,9 @@ namespace bdf {
 
     public:
 
-      bdf_int(std::string);
+      bdf_int();
 
-      bdf_int(std::string, bdf_num_bounds<long>);
+      bdf_int(num<long>);
 
       void parse(std::string);
 
@@ -292,7 +288,7 @@ namespace bdf {
 
       double value;
 
-      bdf_num_bounds<double> bounds;
+      num<double> bounds;
       static const regex float_exp_re;
       static const regex float_re;
 
@@ -302,9 +298,9 @@ namespace bdf {
 
     public:
 
-      bdf_float(std::string);
+      bdf_float();
 
-      bdf_float(std::string, bdf_num_bounds<double>);
+      bdf_float(num<double>);
 
       void parse(std::string);
 
@@ -417,8 +413,8 @@ namespace bdf {
 
     public:
 
-      bdf_list(std::string name) :
-        bdf_type_base(name) {};
+      bdf_list() :
+        bdf_type_base() {};
 
       inline void parse (::std::string inp);
 

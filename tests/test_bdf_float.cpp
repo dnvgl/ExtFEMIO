@@ -33,7 +33,7 @@ using namespace bdf::type_bounds;
 
 TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
-  bdf_float probe("dummy", bdf_num_bounds<double>(NULL, NULL, new double(0.)));
+  bdf_float probe(num<double>(NULL, NULL, new double(0.)));
 
   SECTION("'   1.   '") {
     probe.parse("   1.   ");
@@ -56,7 +56,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'  -1.   ', min 0.") {
-    bdf_float probe("dummy", bdf_num_bounds<double>(new double(0.), NULL, new double(0.)));
+    bdf_float probe(num<double>(new double(0.), NULL, new double(0.)));
     CHECK_THROWS(probe.parse("  -1.   "));
   }
 
@@ -101,7 +101,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'        ', no default") {
-    bdf_float probe("dummy", bdf_num_bounds<double>(NULL, NULL, NULL));
+    bdf_float probe(num<double>(NULL, NULL, NULL));
     CHECK_THROWS(probe.parse("        "));
   }
 
