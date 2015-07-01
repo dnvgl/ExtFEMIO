@@ -39,27 +39,27 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
   bdf_list<int> probe("dummy");
 
   SECTION("' 1234   '") {
-    probe("  1234  ");
+    probe.parse("  1234  ");
     vector<int> ref;
     ref.push_back(1);
     ref.push_back(2);
     ref.push_back(3);
     ref.push_back(4);
-    CHECK(probe.value == ref);
+    CHECK(probe() == ref);
   }
 
   SECTION("' 1236   '") {
-    probe(" 1236   ");
+    probe.parse(" 1236   ");
     vector<int> ref;
     ref.push_back(1);
     ref.push_back(2);
     ref.push_back(3);
     ref.push_back(6);
-    CHECK(probe.value == ref);
+    CHECK(probe() == ref);
   }
 
   SECTION("' 1a3b   '") {
-    CHECK_THROWS(probe(" 1a3b   "));
+    CHECK_THROWS(probe.parse(" 1a3b   "));
   }
 }
 

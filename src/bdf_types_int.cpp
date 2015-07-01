@@ -45,7 +45,7 @@ bdf_int::bdf_int(std::string name, bdf_num_bounds<long> _bounds) :
 
 const regex bdf_int::int_re("[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
-void bdf_int::operator()(std::string inp) {
+void bdf_int::parse(std::string inp) {
   std::string sval = bdf::string::string(inp).trim();
   if (sval.length() == 0) {
     if (!this->bounds.has_default())

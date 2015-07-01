@@ -139,7 +139,7 @@ namespace bdf {
 
       ~bdf_type_base() {};
 
-      virtual void operator()(std::string) = 0;
+      virtual void parse(std::string) = 0;
 
       virtual bdf_types type() const = 0;
 
@@ -182,24 +182,26 @@ namespace bdf {
 //     `default` == `False` is set for value required.
 // :type default: int
 
-    protected:
-
-      static const bdf_types _type = Int;
-
     private:
+
+      long value;
 
       bdf_num_bounds<long> bounds;
       static const regex int_re;
 
-    public:
+    protected:
 
-      long value;
+      static const bdf_types _type = Int;
+
+    public:
 
       bdf_int(std::string);
 
       bdf_int(std::string, bdf_num_bounds<long>);
 
-      void operator()(std::string);
+      void parse(std::string);
+
+      long operator() (void) {return value;};
 
       bdf_types type() const {return _type;};
 
@@ -288,6 +290,8 @@ namespace bdf {
 
     private:
 
+      double value;
+
       bdf_num_bounds<double> bounds;
       static const regex float_exp_re;
       static const regex float_re;
@@ -298,13 +302,13 @@ namespace bdf {
 
     public:
 
-      double value;
-
       bdf_float(std::string);
 
       bdf_float(std::string, bdf_num_bounds<double>);
 
-      void operator()(std::string);
+      void parse(std::string);
+
+      double operator() (void) {return value;}
 
       bdf_types type() const {return _type;};
 
@@ -403,21 +407,22 @@ namespace bdf {
 
     private:
 
+      ::std::vector<T> value;
+
       static const regex int_re;
 
     protected:
 
       static const bdf_types _type = List;
 
-
     public:
-
-      ::std::vector<T> value;
 
       bdf_list(std::string name) :
         bdf_type_base(name) {};
 
-      inline void operator() (::std::string inp);
+      inline void parse (::std::string inp);
+
+      inline ::std::vector<T> operator() (void) {return value;};
 
       inline bdf_types type() const {return _type;};
 
@@ -426,7 +431,7 @@ namespace bdf {
     template <class T>
     const regex bdf_list<T>::int_re("[[:digit:]]+");
 
-    template <> inline void bdf_list<int>::operator() (std::string inp) {
+    template <> inline void bdf_list<int>::parse (std::string inp) {
       std::string sval = ::bdf::string::string(inp).trim();
       if (! regex_match(sval, int_re)) {
         std::string msg("illegal input, no integer\n");

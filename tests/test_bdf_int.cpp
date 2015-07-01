@@ -32,49 +32,49 @@ TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
 
   SECTION("'   2    '") {
     bdf_int obj("dummy", bdf_num_bounds<long>(new long(1)));
-    obj("   2    ");
-    CHECK(obj.value == 2);
+    obj.parse("   2    ");
+    CHECK(obj() == 2);
   }
 
   SECTION("'       2'") {
     bdf_int obj("dummy", bdf_num_bounds<long>(new long(0)));
-    obj("       2");
-    CHECK(obj.value == 2);
+    obj.parse("       2");
+    CHECK(obj() == 2);
   }
 
   SECTION("'2       '") {
     bdf_int obj("dummy", bdf_num_bounds<long>(new long(0), NULL, new long(0)));
-    obj("2       ");
-    CHECK(obj.value == 2);
+    obj.parse("2       ");
+    CHECK(obj() == 2);
   }
 
   SECTION("'    -1  '") {
     bdf_int obj("dummy", bdf_num_bounds<long>(new long(-1), NULL, new long(0)));
-    obj("    -1  ");
-    CHECK(obj.value == -1);
+    obj.parse("    -1  ");
+    CHECK(obj() == -1);
   }
 
   SECTION("default 1") {
     bdf_int obj("dummy", bdf_num_bounds<long>(new long(-1), NULL, new long(0)));
-    obj("        ");
-    CHECK(obj.value == 0);
+    obj.parse("        ");
+    CHECK(obj() == 0);
   }
 
   SECTION("default 2") {
     bdf_int obj("dummy", bdf_num_bounds<long>(new long(-1), NULL, new long(100)));
-    obj("        ");
-    CHECK(obj.value == 100);
+    obj.parse("        ");
+    CHECK(obj() == 100);
   }
 
   SECTION("123") {
     bdf_int obj("dummy");
-    obj("123");
-    CHECK(obj.value == 123);
+    obj.parse("123");
+    CHECK(obj() == 123);
   }
 
   SECTION("123.") {
     bdf_int obj("dummy");
-    CHECK_THROWS(obj("123."));
+    CHECK_THROWS(obj.parse("123."));
   }
 }
 

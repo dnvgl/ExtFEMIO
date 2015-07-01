@@ -50,7 +50,7 @@ const regex bdf_float::float_re(
   regex_constants::ECMAScript);
 
 // Convert string to float
-void bdf_float::operator()(std::string inp) {
+void bdf_float::parse(std::string inp) {
   std::string sval = ::bdf::string::string(inp).trim().upper();
 
   if (sval.length() == 0) {
