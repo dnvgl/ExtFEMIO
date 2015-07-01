@@ -55,5 +55,5 @@ grid::grid(vector<::std::string> inp) :
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -l 7"
+// compile-command: "make -C .. check -j 7"
 // End:

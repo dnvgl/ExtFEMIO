@@ -25,7 +25,7 @@ libbdfreadpp_la_SOURCES+=bdf_cards.cpp bdf_cards_grid.cpp
 # Local Variables:
 # mode: makefile
 # ispell-local-dictionary: "english"
-# compile-command: "make -C .. check -l 7"
+# compile-command: "make -C .. check -j 8"
 # End:
 
 # End of Makefile.am

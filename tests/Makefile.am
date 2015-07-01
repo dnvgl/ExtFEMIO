@@ -41,7 +41,7 @@ TESTS=test_bdf_types test_bdf_bounds test_bdf_int test_bdf_float test_bdf_string
 # Local Variables:
 # mode: makefile-automake
 # ispell-local-dictionary: "english"
-# compile-command: "make -C .. check -l 7"
+# compile-command: "make -C .. check -j 7"
 # End:
 
 # End of Makefile.am

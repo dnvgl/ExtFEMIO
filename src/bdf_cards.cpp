@@ -14,6 +14,7 @@ namespace {
 }
 
 #include "bdf_cards.h"
+#include "bdf_string.h"
 
 using namespace std;
 using namespace bdf;
@@ -23,6 +24,19 @@ _bdf_base_card::_bdf_base_card() {}
 
 vector<::std::string> _bdf_base_card::card_split(vector<::std::string> inp) {
   vector<::std::string> res;
+
+  for (vector<::std::string>::iterator pos=inp.begin(); pos<inp.end(); ++pos) {
+    ::std::string head(string::string(pos->substr(0, 8)).trim());
+    ::std::cerr << "head: !" << head << "!\n";
+    if (head.find(',') != ::std::string::npos)
+      throw("Free Field Format not yet supported.\n");
+    else if (head.back() == '*')
+      throw("Large Field Format not yet supported.\n");
+    else {
+
+    }
+  }
+
   res.push_back(" 1        ");
   res.push_back(" 22       ");
   res.push_back(" 111525.  ");
@@ -40,5 +54,5 @@ vector<::std::string> _bdf_base_card::card_split(vector<::std::string> inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -l 7"
+// compile-command: "make -C .. check -j 7"
 // End:

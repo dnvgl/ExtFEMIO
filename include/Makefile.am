@@ -20,7 +20,7 @@ SUBDIRS=
 # Local Variables:
 # mode: makefile
 # ispell-local-dictionary: "english"
-# compile-command: "make -C .. check -l 7"
+# compile-command: "make -C .. check -j 7"
 # End:
 
 # End of Makefile.am

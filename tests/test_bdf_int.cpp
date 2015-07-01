@@ -84,7 +84,7 @@ TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -l 7"
+  compile-command: "make -C .. check -j 7"
   coding: utf-8
   End:
 */

@@ -123,7 +123,7 @@ TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -l 7"
+  compile-command: "make -C .. check -j 7"
   coding: utf-8
   End:
 */
