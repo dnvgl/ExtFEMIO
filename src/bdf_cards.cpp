@@ -53,8 +53,7 @@ vector<::std::string> _bdf_base_card::card_split(vector<::std::string> inp) {
     } else if (head.back() == '*') {
       ::std::string tmp(pos->substr(8));
       tmp.resize(64, ' ');
-      ++pos;
-      tmp += string::string(pos->substr(8)).trim(" \t\n");
+      tmp += string::string((++pos)->substr(8)).trim(" \t\n");
       tmp.resize(128, ' ');
       for (int i=0; i<8; ++i) {
         res.push_back(tmp.substr(i*16, 16));

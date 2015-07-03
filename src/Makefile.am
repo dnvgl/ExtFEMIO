@@ -19,8 +19,13 @@ top=../
 SUBDIRS=
 EXTRA_DIST=Project.ede
 lib_LTLIBRARIES=libbdfreadpp.la
-libbdfreadpp_la_SOURCES=bdf_types.cpp bdf_types_int.cpp bdf_types_float.cpp bdf_string.cpp
-libbdfreadpp_la_SOURCES+=bdf_cards.cpp bdf_cards_grid.cpp
+libbdfreadpp_la_SOURCES=bdf_file.cpp
+libbdfreadpp_la_SOURCES+=bdf_types.cpp
+libbdfreadpp_la_SOURCES+=bdf_types_int.cpp
+libbdfreadpp_la_SOURCES+=bdf_types_float.cpp
+libbdfreadpp_la_SOURCES+=bdf_string.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_grid.cpp
 
 # Local Variables:
 # mode: makefile
