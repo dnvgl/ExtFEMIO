@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\bdf_types.cpp" />
+    <ClCompile Include="bdf_file.cpp" />
     <ClCompile Include="bdf_string.cpp" />
     <ClCompile Include="bdf_types_float.cpp" />
     <ClCompile Include="bdf_types_int.cpp" />
