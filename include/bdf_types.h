@@ -140,12 +140,6 @@ namespace bdf {
       virtual bdf_types type() const = 0;
 
       template <class T1, class T2>
-      friend bool operator== (const T1&, const T2&);
-
-      template <class T1, class T2>
-      friend inline bool operator< (const T1&, const T2&);
-
-      template <class T1, class T2>
       friend inline bool operator> (const T1& one, const T2& other) {
         return other < one;
       };
@@ -156,13 +150,11 @@ namespace bdf {
       };
     };
 
-    template <class T1, class T2>
-    inline bool operator== (const T1& one, const T2& other) {
+    inline bool operator== (const bdf_type_base& one, const bdf_type_base& other) {
       return (one.type() == other.type());
     }
 
-    template <class T1, class T2>
-    inline bool operator< (const T1& one, const T2& other) {
+    inline bool operator< (const bdf_type_base& one, const bdf_type_base& other) {
       return (one.type() < other.type());
     }
 
@@ -200,12 +192,6 @@ namespace bdf {
       long operator() (void) {return value;};
 
       bdf_types type() const {return _type;};
-
-      template <class T1, class T2>
-      friend bool operator== (const T1& one, const T2& other);
-
-      template <class T1, class T2>
-      friend inline bool operator< (const T1& one, const T2& other);
     };
 
 //     def __init__(self, name, minval=None, maxval=None, default=False):
@@ -307,13 +293,7 @@ namespace bdf {
       double operator() (void) {return value;}
 
       bdf_types type() const {return _type;};
-
-      template <class T1, class T2>
-      friend bool operator== (const T1& one, const T2& other);
-
-      template <class T1, class T2>
-      friend inline bool operator< (const T1& one, const T2& other);
-  };
+    };
 
 //     def __call__(self, inp):
 //         """Convert string to float
