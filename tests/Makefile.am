@@ -17,7 +17,7 @@ AM_CPPFLAGS=-I../include -Wall -std=c++11
 top=../
 
 SUBDIRS=
-EXTRA_DIST=Project.ede
+EXTRA_DIST=base_test.ju
 check_PROGRAMS=test_bdf_types test_bdf_bounds test_bdf_int test_bdf_float test_bdf_string test_bdf_list test_cards
 test_bdf_types_SOURCES=test_bdf_types.cpp
 test_bdf_bounds_SOURCES=test_bdf_bounds.cpp
@@ -36,7 +36,16 @@ test_bdf_string_LDADD= ../src/libbdfreadpp.la -lboost_regex
 test_bdf_list_LDADD= ../src/libbdfreadpp.la -lboost_regex
 test_cards_LDADD= ../src/libbdfreadpp.la -lboost_regex
 
-TESTS=test_bdf_types test_bdf_bounds test_bdf_int test_bdf_float test_bdf_string test_bdf_list test_cards
+TESTS=test_bdf_types.ju
+TESTS+=test_bdf_bounds.ju
+TESTS+=test_bdf_int.ju
+TESTS+=test_bdf_float.ju
+TESTS+=test_bdf_string.ju
+TESTS+=test_bdf_list.ju
+TESTS+=test_cards.ju
+
+test_%.ju: base_test.ju
+	ln -sf $< $@
 
 # Local Variables:
 # mode: makefile-automake
