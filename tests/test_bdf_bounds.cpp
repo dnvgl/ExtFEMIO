@@ -77,7 +77,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
     CHECK(probe_max->in_bounds(std::numeric_limits<long>::min()));
   }
 
-  SECTION("min_max") {
+  SECTION("min_max 1") {
     CHECK_FALSE(probe_mm->has_default());
     CHECK_FALSE(probe_mm->in_bounds(std::numeric_limits<long>::min()));
     CHECK(probe_mm->in_bounds(-12));
@@ -86,7 +86,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
     CHECK_FALSE(probe_mm->in_bounds(std::numeric_limits<long>::max()));
   }
 
-  SECTION("min_max") {
+  SECTION("min_max 2") {
     CHECK(probe_mmd->has_default());
         CHECK(probe_mmd->get_default() == 6);
     CHECK_FALSE(probe_mmd->in_bounds(std::numeric_limits<long>::min()));
