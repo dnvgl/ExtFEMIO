@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -110,12 +110,13 @@
     </Link>
     <PostBuildEvent>
       <Message>Testing the module</Message>
-      <Command>"$(OutputPath)test_bdf_bounds.exe"
-"$(OutputPath)test_bdf_types.exe"
-"$(OutputPath)test_bdf_int.exe"
-"$(OutputPath)test_bdf_float.exe"
-"$(OutputPath)test_bdf_string.exe"
-"$(OutputPath)test_bdf_list.exe"</Command>
+      <Command>"$(OutputPath)test_bdf_bounds.exe --reporter junit > test_bdf_bounds_junit.xml"
+"$(OutputPath)test_bdf_types.exe --reporter junit > test_bdf_types_junit.xml"
+"$(OutputPath)test_bdf_int.exe --reporter junit > test_bdf_int_junit.xml"
+"$(OutputPath)test_bdf_float.exe --reporter junit > test_bdf_float_junit.xml"
+"$(OutputPath)test_bdf_string.exe --reporter junit > test_bdf_string_junit.xml"
+"$(OutputPath)test_bdf_list.exe --reporter junit > test_bdf_list_junit.xml"
+"$(OutputPath)test_cards.exe --reporter junit > test_cards_junit.xml"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
