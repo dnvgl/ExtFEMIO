@@ -13,7 +13,7 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include <vector>
+#include <deque>
 #include <string>
 
 #include "bdf_cards.h"
@@ -22,27 +22,40 @@ using namespace std;
 using namespace bdf;
 using namespace bdf::cards;
 
-grid::grid(vector<::std::string> inp) :
-  _bdf_base_card(),
-  ID(types::bdf_int(type_bounds::num<long>(new long(1), new long(100000000)))),
-  CP(types::bdf_int(type_bounds::num<long>(new long(1), NULL, new long(-1)))),
-  X1(types::bdf_float(type_bounds::num<double>(NULL, NULL, new double(0.)))),
-  X2(types::bdf_float(type_bounds::num<double>(NULL, NULL, new double(0.)))),
-  X3(types::bdf_float(type_bounds::num<double>(NULL, NULL, new double(0.)))),
-  CD(types::bdf_int(type_bounds::num<long>(new long(-1)))),
-  PS(types::bdf_list<int>()),
-  SEID(types::bdf_int(type_bounds::num<long>(new long(0), NULL, new long(0)))) {
-  vector<::std::string> elems = card_split(inp);
-  switch (elems.size()) {
-  case 8: SEID.parse(elems[7]);
-  case 7: PS.parse(elems[6]);
-  case 6: CD.parse(elems[5]);
-  case 5: X3.parse(elems[4]);
-  case 4: X2.parse(elems[3]);
-  case 3: X1.parse(elems[2]);
-  case 2: CP.parse(elems[1]);
+grid::grid(deque<::std::string> inp) :
+  bdf_card(),
+  ID(::bdf::types::bdf_int("ID", type_bounds::num<long>(new long(1), new long(100000000)))),
+  CP(::bdf::types::bdf_int("CP", type_bounds::num<long>(new long(1), NULL, new long(-1)))),
+  X1(::bdf::types::bdf_float("X1", type_bounds::num<double>(NULL, NULL, new double(0.)))),
+  X2(::bdf::types::bdf_float("X2", type_bounds::num<double>(NULL, NULL, new double(0.)))),
+  X3(::bdf::types::bdf_float("X3", type_bounds::num<double>(NULL, NULL, new double(0.)))),
+  CD(::bdf::types::bdf_int("CD", type_bounds::num<long>(new long(-1), NULL, new long(-2)))),
+  PS(::bdf::types::bdf_list<int>("PS")),
+  SEID(::bdf::types::bdf_int("SEID", type_bounds::num<long>(new long(0), NULL, new long(0)))) {
+  switch (inp.size()) {
+  case 8:
+    SEID.parse(inp.back());
+    inp.pop_back();
+  case 7:
+    PS.parse(inp.back());
+    inp.pop_back();
+  case 6:
+    CD.parse(inp.back());
+    inp.pop_back();
+  case 5:
+    X3.parse(inp.back());
+    inp.pop_back();
+  case 4:
+    X2.parse(inp.back());
+    inp.pop_back();
+  case 3:
+    X1.parse(inp.back());
+    inp.pop_back();
+  case 2:
+    CP.parse(inp.back());
+    inp.pop_back();
   case 1:
-    ID.parse(elems[0]);
+    ID.parse(inp.back());
     break;
   default:
     throw "Illegal number of entries for GRID\n";

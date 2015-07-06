@@ -31,49 +31,49 @@ using namespace bdf::types;
 TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
 
   SECTION("'   2    '") {
-    bdf_int obj(type_bounds::num<long>(new long(1)));
+    bdf_int obj("dummy", type_bounds::num<long>(new long(1)));
     obj.parse("   2    ");
     CHECK(obj() == 2);
   }
 
   SECTION("'       2'") {
-    bdf_int obj(type_bounds::num<long>(new long(0)));
+    bdf_int obj("dummy", type_bounds::num<long>(new long(0)));
     obj.parse("       2");
     CHECK(obj() == 2);
   }
 
   SECTION("'2       '") {
-    bdf_int obj(type_bounds::num<long>(new long(0), NULL, new long(0)));
+    bdf_int obj("dummy", type_bounds::num<long>(new long(0), NULL, new long(0)));
     obj.parse("2       ");
     CHECK(obj() == 2);
   }
 
   SECTION("'    -1  '") {
-    bdf_int obj(type_bounds::num<long>(new long(-1), NULL, new long(0)));
+    bdf_int obj("dummy", type_bounds::num<long>(new long(-1), NULL, new long(0)));
     obj.parse("    -1  ");
     CHECK(obj() == -1);
   }
 
   SECTION("default 1") {
-    bdf_int obj(num<long>(new long(-1), NULL, new long(0)));
+    bdf_int obj("dummy", num<long>(new long(-1), NULL, new long(0)));
     obj.parse("        ");
     CHECK(obj() == 0);
   }
 
   SECTION("default 2") {
-    bdf_int obj(num<long>(new long(-1), NULL, new long(100)));
+    bdf_int obj("dummy", num<long>(new long(-1), NULL, new long(100)));
     obj.parse("        ");
     CHECK(obj() == 100);
   }
 
   SECTION("123") {
-    bdf_int obj;
+    bdf_int obj("dummy");
     obj.parse("123");
     CHECK(obj() == 123);
   }
 
   SECTION("123.") {
-    bdf_int obj;
+    bdf_int obj("dummy");
     CHECK_THROWS(obj.parse("123."));
   }
 }

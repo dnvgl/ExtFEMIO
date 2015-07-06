@@ -31,12 +31,12 @@ using namespace bdf::types;
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-  bdf_type_base* obj_int = new bdf_int();
-  bdf_type_base* obj_float = new bdf_float();
-  bdf_type_base* obj_list = new bdf_list<int>();
+  bdf_type_base* obj_int = new bdf_int("dummy1");
+  bdf_type_base* obj_float = new bdf_float("dummy2");
+  bdf_type_base* obj_list = new bdf_list<int>("dummy 3");
 
   SECTION("Checking 'bdf_int.type' against 'Int'") {
-    CHECK(bdf_int().type() == Int);
+    CHECK(bdf_int("dummy idiot").type() == Int);
   }
 
   SECTION("Checking 'bdf_int->type' against 'Int'") {
@@ -44,7 +44,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
   }
 
   SECTION("Checking 'bdf_float.type' against 'Float'") {
-    CHECK(bdf_float().type() == Float);
+    CHECK(bdf_float("dummy float").type() == Float);
   }
 
   SECTION("Checking 'bdf_float->type' against 'Float'") {
@@ -52,7 +52,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
   }
 
   SECTION("Checking 'bdf_list.type' against 'List'") {
-    CHECK(bdf_list<int>().type() == List);
+    CHECK(bdf_list<int>("dummy").type() == List);
   }
 
   SECTION("Checking 'bdf_list->type' against 'List'") {
@@ -60,9 +60,9 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
   }
 
   SECTION("Comparing 'bdf_int' with 'bdf_float'") {
-    CHECK(bdf_int() < bdf_float());
-    CHECK(bdf_float() > bdf_int());
-    CHECK(bdf_int() != bdf_float());
+    CHECK(bdf_int("dummy int") < bdf_float("dummy float"));
+    CHECK(bdf_float("dummy float") > bdf_int("dummy int"));
+    CHECK(bdf_int("dummy int") != bdf_float("dummy float"));
   }
 
   SECTION("Comparing '*bdf_int' with '*bdf_float'") {

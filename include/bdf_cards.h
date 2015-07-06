@@ -9,9 +9,11 @@
 #if !defined _BERHOL20150630_BDF_CARDS
 #define _BERHOL20150630_BDF_CARDS
 
-#include <vector>
+#include <deque>
 #include <string>
 #include <set>
+#include <map>
+#include <utility>
 
 #include "bdf_types.h"
 
@@ -21,25 +23,39 @@ namespace bdf {
 
   namespace cards {
 
-    class _bdf_base_card {
+    typedef enum {UNKNOWN, GRID} types;
+
+    class bdf_card {
 
     private:
 
-      // two character strings for continuation lines in Free Form
+// two character strings for continuation lines in Free Form
       // Format cards.
-      static const ::std::set<::std::string> free_form_cont;
-
-    protected:
-
-      ::std::vector<::std::string> card_split(::std::vector<::std::string>);
+      static const ::std::set<char> free_form_cont;
 
     public:
 
-      _bdf_base_card ();
+      static ::std::deque<::std::string> card_split(::std::deque<::std::string>);
+
+      bdf_card ();
+
+      virtual ::bdf::cards::types card(void) = 0;
 
     };
 
-    class grid : _bdf_base_card {
+    class unknown : public bdf_card {
+
+    public:
+
+      ::bdf::cards::types card(void) { return UNKNOWN; }
+
+      ::std::deque<::std::string> content;
+
+      unknown(::std::deque<::std::string> inp) : content(inp) {};
+
+    };
+
+    class grid : public bdf_card {
 
       /*
 Handle Nastran Bulk GRID entries.
@@ -70,7 +86,7 @@ Description:
   Location of the grid point in coordinate system CP. (Real; Default = 0.0)
 ``CD``
   Identification number of coordinate system in which the
-  displacements, degrees-of-freedom, constraints, and solution vectors
+  displacements, degrees-of-freedom, constraints, and solution deques
   are defined at the grid point. (Integer > -1 or blank)
 ``PS``
   Permanent single-point constraints associated with the grid
@@ -79,10 +95,6 @@ Description:
 ``SEID``
   Superelement identification number. (Integer > 0; Default = 0)
       */
-
-    // protected:
-
-    //   static const ::std::vector<::bdf::types::bdf_type_base> define;
 
     public:
 
@@ -95,9 +107,14 @@ Description:
       bdf_list<int> PS;
       bdf_int SEID;
 
-      grid(::std::vector<::std::string>);
+      grid(::std::deque<::std::string>);
+
+      ::bdf::cards::types card(void) { return GRID; };
 
     };
+
+    bdf_card *dispatch(::std::deque<::std::string>);
+
   }
 }
 

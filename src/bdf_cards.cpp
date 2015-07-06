@@ -20,55 +20,82 @@ using namespace std;
 using namespace bdf;
 using namespace bdf::cards;
 
-_bdf_base_card::_bdf_base_card() {}
+bdf_card::bdf_card() {}
 
 namespace {
-  const char* const initVals[2] = { "+,", "*," };
+  const char initVals[3] = { '+', '*', ',' };
 }
 
-const ::std::set<::std::string> _bdf_base_card::free_form_cont(initVals, initVals + 2);
+const ::std::set<char> bdf_card::free_form_cont(initVals, initVals + 3);
 
-vector<::std::string> _bdf_base_card::card_split(vector<::std::string> inp) {
-  vector<::std::string> res;
+deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
+  deque<::std::string> res;
 
-  for (vector<::std::string>::iterator pos=inp.begin(); pos<inp.end(); ++pos) {
+  bool first = true;
+
+  for (deque<::std::string>::iterator pos=inp.begin(); pos<inp.end(); ++pos) {
     ::std::string head(string::string(pos->substr(0, 8)).trim());
     // Free Field Format
     if (head.find(',') != ::std::string::npos) {
+      if (first) {
+        res.push_back(string::string(head.substr(0, head.find(','))).trim("*"));
+      }
       ::std::string tmp(string::string(*pos).trim(" \t\n"));
       tmp = tmp.substr(tmp.find(',')+1);
-      ::std::string rtmp(tmp.rbegin(), tmp.rend());
 
-      while (rtmp[0] == ',' || free_form_cont.find(rtmp.substr(0, 2)) != free_form_cont.end()) {
+      ::std::string tail(tmp.substr(tmp.rfind(',')+1));
+
+      while (tail.length() == 0 || free_form_cont.find(tail.at(0)) != free_form_cont.end()) {
+        if (tail.length() != 0)
+          tmp = tmp.substr(0, tmp.rfind(',')+1);
         ++pos;
         tmp.append(string::string(pos->substr(pos->find(',')+1)).trim(" \t\n"));
-        rtmp = ::std::string(tmp.rbegin(), tmp.rend());
+        tail = tmp.substr(tmp.rfind(',')+1);
       }
       while (tmp.find(',') != ::std::string::npos) {
         res.push_back(tmp.substr(0, tmp.find(',')));
         tmp = tmp.substr(tmp.find(',')+1);
       }
       res.push_back(tmp);
+      first = false;
     // Long Field Format
-    } else if (head.back() == '*') {
-      ::std::string tmp(pos->substr(8));
-      tmp.resize(64, ' ');
-      tmp += string::string((++pos)->substr(8)).trim(" \t\n");
-      tmp.resize(128, ' ');
-      for (int i=0; i<8; ++i) {
-        res.push_back(tmp.substr(i*16, 16));
-      }
-    // Short Field Format
     } else {
-      ::std::string tmp(pos->substr(8));
-      tmp.resize(64, ' ');
-      for (int i=0; i<8; ++i) {
-        res.push_back(tmp.substr(i*8, 8));
+      if (first) {
+        res.push_back(::bdf::string::string(head).trim(" \t\n*"));
       }
+      if (head.back() == '*') {
+        ::std::string tmp(pos->substr(8));
+        tmp.resize(64, ' ');
+        tmp += string::string((++pos)->substr(8)).trim(" \t\n");
+        tmp.resize(128, ' ');
+        for (int i=0; i<8; ++i) {
+          res.push_back(tmp.substr(i*16, 16));
+        }
+      // Short Field Format
+      } else {
+        ::std::string tmp(pos->substr(8));
+        tmp.resize(64, ' ');
+        for (int i=0; i<8; ++i) {
+          res.push_back(tmp.substr(i*8, 8));
+        }
+      }
+      first = false;
     }
   }
   return res;
 }
+
+bdf_card *::bdf::cards::dispatch(deque<::std::string> inp) {
+  ::std::string key(inp[0]);
+  inp.pop_front();
+
+  if (key == "GRID")
+    return new ::bdf::cards::grid(inp);
+  else
+    return new ::bdf::cards::unknown(inp);
+  return NULL;
+}
+
 
 // Local Variables:
 // mode: c++

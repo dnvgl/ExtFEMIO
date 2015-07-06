@@ -38,7 +38,7 @@ using namespace boost;
 #endif
 
 
-bdf_type_base::bdf_type_base() {};
+bdf_type_base::bdf_type_base(::std::string name) : name(name) {};
 
 // class Str(_bdfTypeBase):
 

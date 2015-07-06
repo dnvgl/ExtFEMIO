@@ -37,11 +37,11 @@ using namespace bdf::string;
 using namespace boost;
 #endif
 
-bdf_int::bdf_int() :
-  bdf_type_base(), bounds(num<long>()) {};
+bdf_int::bdf_int(::std::string name) :
+  bdf_type_base(name), bounds(num<long>()) {};
 
-bdf_int::bdf_int(num<long> _bounds) :
-  bdf_type_base(), bounds(_bounds) {};
+bdf_int::bdf_int(::std::string name, num<long> _bounds) :
+  bdf_type_base(name), bounds(_bounds) {};
 
 const regex bdf_int::int_re("[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
@@ -49,18 +49,27 @@ void bdf_int::parse(std::string inp) {
   std::string sval = bdf::string::string(inp).trim();
   if (sval.length() == 0) {
     if (!this->bounds.has_default())
-      throw "** BDF INP ERROR **: empty entry without default";
+      throw "** BDF INP ERROR ** int: empty entry without default";
     value = this->bounds.get_default();
+    return;
   } else {
     if (! regex_match(inp, int_re)) {
-      std::string msg("illegal input, no integer\n");
+      std::string msg("illegal input (""");
+      msg += inp;
+      msg += """), no integer\n";
       throw msg;
     }
     istringstream buffer(sval);
     buffer >> value;
   }
-  if (!this->bounds.in_bounds(value))
-    throw  "** BDF INP ERROR **: boundary condition violated";
+  if (!this->bounds.in_bounds(value)) {
+    ::std::string msg("** BDF INP ERROR ** int: boundary condition violated (");
+    msg += name;
+    msg += ")\n(""";
+    msg += inp;
+    msg += """)\n";
+    throw  msg;
+  }
 }
 
 /*

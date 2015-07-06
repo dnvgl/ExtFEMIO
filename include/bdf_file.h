@@ -9,7 +9,7 @@
 #if !defined _BERHOL20150703_BDF_FILE
 #define _BERHOL20150703_BDF_FILE
 
-#include <vector>
+#include <deque>
 #include <set>
 #include <string>
 #include <iostream>
@@ -30,9 +30,9 @@ namespace bdf {
 
       bdf_file(::std::istream&);
 
-      // ::std::vector<::std::string> operator << ()
+      // ::std::deque<::std::string> operator << ()
 
-      ::std::vector<::std::string>& get();
+      ::std::deque<::std::string>& get();
 
     };
   }

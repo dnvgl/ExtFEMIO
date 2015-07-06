@@ -13,7 +13,7 @@
 #define _BERHOL20150407_BDF_TYPES
 
 #include <string>
-#include <vector>
+#include <deque>
 #include <iostream>
 #include <typeinfo>
 #include <limits>
@@ -128,10 +128,11 @@ namespace bdf {
     protected:
 
       static const bdf_types _type;
+      ::std::string name;
 
     public:
 
-      bdf_type_base();
+      bdf_type_base(::std::string);
 
       ~bdf_type_base() {};
 
@@ -183,9 +184,9 @@ namespace bdf {
 
     public:
 
-      bdf_int();
+      bdf_int(::std::string);
 
-      bdf_int(num<long>);
+      bdf_int(::std::string, num<long>);
 
       void parse(std::string);
 
@@ -284,11 +285,11 @@ namespace bdf {
 
     public:
 
-      bdf_float();
+      bdf_float(::std::string);
 
-      bdf_float(num<double>);
+      bdf_float(::std::string, num<double>);
 
-      void parse(std::string);
+      void parse(::std::string);
 
       double operator() (void) {return value;}
 
@@ -383,7 +384,7 @@ namespace bdf {
 
     private:
 
-      ::std::vector<T> value;
+      ::std::deque<T> value;
 
       static const regex int_re;
 
@@ -393,24 +394,26 @@ namespace bdf {
 
     public:
 
-      bdf_list() :
-        bdf_type_base() {};
+      bdf_list(::std::string name) :
+        bdf_type_base(name) {};
 
       inline void parse (::std::string inp);
 
-      inline ::std::vector<T> operator() (void) {return value;};
+      inline ::std::deque<T> operator() (void) {return value;};
 
       inline bdf_types type() const {return _type;};
 
     };
 
     template <class T>
-    const regex bdf_list<T>::int_re("[[:digit:]]+");
+    const regex bdf_list<T>::int_re("[[:digit:]]*");
 
     template <> inline void bdf_list<int>::parse (std::string inp) {
       std::string sval = ::bdf::string::string(inp).trim();
       if (! regex_match(sval, int_re)) {
-        std::string msg("illegal input, no integer\n");
+        std::string msg("illegal input (""");
+        msg += sval;
+        msg += """), no integer in list\n";
         throw msg;
       }
       value.empty();
@@ -503,7 +506,7 @@ namespace bdf {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C ../ check"
+  compile-command: "make -C .. check -j 7"
   coding:u tf-8
   End:
 */

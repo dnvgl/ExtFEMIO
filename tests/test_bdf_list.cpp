@@ -15,7 +15,7 @@ namespace {
 
 #include <limits>
 #include <string>
-#include <vector>
+#include <deque>
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
 #define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
@@ -36,11 +36,11 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
   // def test_List1(self):
     //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
     //     assert obj("1236") == (1, 2, 3, 6)
-  bdf_list<int> probe;
+  bdf_list<int> probe("dummy");
 
   SECTION("' 1234   '") {
     probe.parse("  1234  ");
-    vector<int> ref;
+    deque<int> ref;
     ref.push_back(1);
     ref.push_back(2);
     ref.push_back(3);
@@ -50,7 +50,7 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 
   SECTION("' 1236   '") {
     probe.parse(" 1236   ");
-    vector<int> ref;
+    deque<int> ref;
     ref.push_back(1);
     ref.push_back(2);
     ref.push_back(3);

@@ -17,7 +17,7 @@ namespace {
 
 #include <iostream>
 #include <iterator>
-#include <vector>
+#include <deque>
 #include <algorithm>
 
 using namespace std;
@@ -32,8 +32,8 @@ bdf_file::bdf_file(istream &inp) : data(inp) {
   data >> cur_line;
 }
 
-vector<::std::string>& bdf_file::get() {
-  vector<::std::string> *res = new(vector<::std::string>);
+deque<::std::string>& bdf_file::get() {
+  deque<::std::string> *res = new(deque<::std::string>);
   do {
     if (cur_line.length() > 0 && cur_line[0] != '$') res->push_back(cur_line);
     data >> cur_line;
