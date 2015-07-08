@@ -45,16 +45,12 @@ grid::grid(deque<::std::string> inp) :
   case 5:
     X3.parse(inp.back());
     inp.pop_back();
-  case 4:
     X2.parse(inp.back());
     inp.pop_back();
-  case 3:
     X1.parse(inp.back());
     inp.pop_back();
-  case 2:
     CP.parse(inp.back());
     inp.pop_back();
-  case 1:
     ID.parse(inp.back());
     break;
   default:
