@@ -6,6 +6,10 @@
 
 // ID: $Id$
 
+#if _MSC_VER >= 1000
+#pragma once
+#endif // _MSC_VER >= 1000
+
 #if !defined _BERHOL20150703_BDF_FILE
 #define _BERHOL20150703_BDF_FILE
 
@@ -13,6 +17,12 @@
 #include <set>
 #include <string>
 #include <iostream>
+
+#ifdef _MSC_VER
+#define DllExport   __declspec( dllexport ) 
+#else
+#define DllExport
+#endif
 
 namespace bdf {
 
@@ -28,11 +38,9 @@ namespace bdf {
 
     public:
 
-      bdf_file(::std::istream&);
+      DllExport bdf_file(::std::istream&);
 
-      // ::std::deque<::std::string> operator << ()
-
-      ::std::deque<::std::string>& get();
+      DllExport ::std::deque<::std::string>& get();
 
     };
   }

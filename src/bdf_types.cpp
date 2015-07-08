@@ -4,6 +4,8 @@
 
 // Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]

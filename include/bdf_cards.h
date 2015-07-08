@@ -6,6 +6,10 @@
 
 // ID: $Id$
 
+#if _MSC_VER >= 1000
+#pragma once
+#endif // _MSC_VER >= 1000
+
 #if !defined _BERHOL20150630_BDF_CARDS
 #define _BERHOL20150630_BDF_CARDS
 
@@ -17,13 +21,19 @@
 
 #include "bdf_types.h"
 
+#ifdef _MSC_VER
+#define DllExport   __declspec( dllexport ) 
+#else
+#define DllExport
+#endif
+
 namespace bdf {
 
   using namespace types;
 
   namespace cards {
 
-    typedef enum {UNKNOWN, GRID} types;
+    typedef enum {UNKNOWN, ENDDATA, GRID} types;
 
     class bdf_card {
 
@@ -35,9 +45,9 @@ namespace bdf {
 
     public:
 
-      static ::std::deque<::std::string> card_split(::std::deque<::std::string>);
+      DllExport static ::std::deque<::std::string> card_split(::std::deque<::std::string>);
 
-      bdf_card ();
+      DllExport bdf_card ();
 
       virtual ::bdf::cards::types card(void) = 0;
 
@@ -47,11 +57,25 @@ namespace bdf {
 
     public:
 
-      ::bdf::cards::types card(void) { return UNKNOWN; }
+      DllExport unknown(::std::deque<::std::string> inp) : content(inp) {};
+
+      DllExport ::bdf::cards::types card(void) { return UNKNOWN; }
 
       ::std::deque<::std::string> content;
 
-      unknown(::std::deque<::std::string> inp) : content(inp) {};
+    };
+
+    class enddata : public bdf_card {
+
+      /*
+      NASTRAN ``BDF`` ``ENDDATA`` representation.
+      */
+
+    public:
+
+      DllExport enddata(::std::deque<::std::string>) {};
+
+      DllExport ::bdf::cards::types card(void) { return ENDDATA; };
 
     };
 
@@ -107,13 +131,13 @@ Description:
       bdf_list<int> PS;
       bdf_int SEID;
 
-      grid(::std::deque<::std::string>);
+      DllExport grid(::std::deque<::std::string>);
 
-      ::bdf::cards::types card(void) { return GRID; };
+      DllExport ::bdf::cards::types card(void) { return GRID; };
 
     };
 
-    bdf_card *dispatch(::std::deque<::std::string>);
+    DllExport bdf_card *dispatch(::std::deque<::std::string>);
 
   }
 }

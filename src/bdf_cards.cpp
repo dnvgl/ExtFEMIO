@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -92,6 +94,8 @@ bdf_card *::bdf::cards::dispatch(deque<::std::string> inp) {
 
   if (key == "GRID")
     return new ::bdf::cards::grid(inp);
+  else if (key == "ENDDATA")
+    return new ::bdf::cards::enddata(inp);
   else
     return new ::bdf::cards::unknown(inp);
   return NULL;
