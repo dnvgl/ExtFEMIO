@@ -37,14 +37,16 @@ using namespace std;
 using namespace bdf::cards;
 using namespace bdf::input;
 
-struct line_reader: std::ctype<char> {
-  line_reader(): std::ctype<char>(get_table()) {}
-  static ctype_base::mask const* get_table() {
-    static deque<std::ctype_base::mask> rc(table_size, std::ctype_base::mask());
-
-    rc['\n'] = std::ctype_base::space; // probably still want \n as a separator?
-    return &rc[0];
-  }
+struct line_reader : ctype<char> {
+    line_reader() : ctype(make_table()) { }
+private:
+    static mask* make_table() {
+        const mask* classic = classic_table();
+        static vector<mask> v(classic, classic + table_size);
+//        v['\n'] |= space;
+        v[' '] &= ~space;
+        return &v[0];
+    }
 };
 
 
@@ -72,8 +74,6 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
   ref.clear();
   ref.push_back("MAT1    4       2.305+6 80000.0 0.3     7.850-6");
   l = probe.get();
-  cerr << "ref: " << ref[0] << "\n"
-       << "val: " << l[0] << "\n";
   CHECK(l == ref);
 
   ref.clear();
@@ -171,42 +171,34 @@ TEST_CASE("BDF_Dispatch", "[bdf_cards]") {
   bdf_card *current;
 
   l = probe.get();
-  cerr << "probe: " << l[0] << "\n";
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::UNKNOWN);
 
   l = probe.get();
-  cerr << "probe: " << l[0] << "\n";
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::UNKNOWN);
 
   l = probe.get();
-  cerr << "probe: " << l[0] << "\n";
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::UNKNOWN);
 
   l = probe.get();
-  cerr << "probe: " << l[0] << "\n";
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::UNKNOWN);
 
   l = probe.get();
-  cerr << "probe: " << l[0] << "\n";
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::UNKNOWN);
 
   l = probe.get();
-  cerr << "probe: " << l[0] << "\n";
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::UNKNOWN);
 
   l = probe.get();
-  cerr << "probe: " << l[0] << "\n";
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::GRID);
 
   // l = probe.get();
-  // cerr << "probe: " << l[0] << "\n";
   // current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   // CHECK(current->card() == ::bdf::cards::GRID);
 }

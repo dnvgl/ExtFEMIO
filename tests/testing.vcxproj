@@ -74,6 +74,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -109,15 +110,38 @@
       </AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Message>Testing the module</Message>
-      <Command>$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit.xml
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit.xml
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit.xml
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
-$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
-$(OutputPath)test_cards.exe --reporter junit &gt; test_cards_junit.xml</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit.xml
+echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit.xml
+echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit.xml
+echo ==================== test_bdf_float ====================
+$(OutputPath)test_bdf_float.exe
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
+echo ==================== test_bdf_string ====================
+$(OutputPath)test_bdf_string.exe
+$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_bdf_list ====================
+$(OutputPath)test_bdf_list.exe
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
+echo ==================== test_cards ====================
+$(OutputPath)test_cards.exe
+$(OutputPath)test_cards.exe --reporter junit &gt; test_cards_junit.xml</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>Testing the module</Message>
+      <TreatOutputAsContent>
+      </TreatOutputAsContent>
+      <Outputs>__dummy__</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

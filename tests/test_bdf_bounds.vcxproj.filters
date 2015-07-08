@@ -5,10 +5,30 @@
       <UniqueIdentifier>{8bb98995-e576-4421-aae4-0cda870d08f4}</UniqueIdentifier>
       <Extensions>*.cpp</Extensions>
     </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{3bc27312-0da5-4252-959e-0dfd0cbcb426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_bdf_bounds.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\bdf_cards.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf_file.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf_string.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf_types.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\catch.hpp">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -30,11 +30,12 @@ const ::std::set<char> bdf_card::free_form_cont(initVals, initVals + 3);
 
 deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
   deque<::std::string> res;
+  ::std::string head;
 
   bool first = true;
 
   for (deque<::std::string>::iterator pos=inp.begin(); pos<inp.end(); ++pos) {
-    ::std::string head(string::string(pos->substr(0, 8)).trim());
+    head = string::string(pos->substr(0, 8)).trim();
     // Free Field Format
     if (head.find(',') != ::std::string::npos) {
       if (first) {
@@ -63,7 +64,7 @@ deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
       if (first) {
         res.push_back(::bdf::string::string(head).trim(" \t\n*"));
       }
-      if (head.back() == '*') {
+      if (head.length() > 0 && head.back() == '*') {
         ::std::string tmp(pos->substr(8));
         tmp.resize(64, ' ');
         tmp += string::string((++pos)->substr(8)).trim(" \t\n");
