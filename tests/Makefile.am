@@ -28,13 +28,14 @@ test_bdf_list_SOURCES=test_bdf_list.cpp
 test_cards_SOURCES=test_cards.cpp test_cards_grid.cpp
 
 test_MISC=
-test_bdf_types_LDADD= ../src/libbdfreadpp.la -lboost_regex
-test_bdf_bounds_LDADD= ../src/libbdfreadpp.la -lboost_regex
-test_bdf_int_LDADD= ../src/libbdfreadpp.la -lboost_regex
-test_bdf_float_LDADD= ../src/libbdfreadpp.la -lboost_regex
-test_bdf_string_LDADD= ../src/libbdfreadpp.la -lboost_regex
-test_bdf_list_LDADD= ../src/libbdfreadpp.la -lboost_regex
-test_cards_LDADD= ../src/libbdfreadpp.la -lboost_regex
+test_bdf_LDADD=../src/libbdfreadpp.la -lboost_regex
+test_bdf_types_LDADD=$(test_bdf_LDADD)
+test_bdf_bounds_LDADD=$(test_bdf_LDADD)
+test_bdf_int_LDADD=$(test_bdf_LDADD)
+test_bdf_float_LDADD=$(test_bdf_LDADD)
+test_bdf_string_LDADD=$(test_bdf_LDADD)
+test_bdf_list_LDADD=$(test_bdf_LDADD)
+test_cards_LDADD=$(test_bdf_LDADD)
 
 TESTS=test_bdf_types.ju
 TESTS+=test_bdf_bounds.ju
