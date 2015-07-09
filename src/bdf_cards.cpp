@@ -76,8 +76,9 @@ deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
         }
       // Short Field Format
       } else {
-        ::std::string tmp(pos->substr(8));
-        tmp.resize(64, ' ');
+        ::std::string tmp(*pos);
+        tmp.resize(80, ' ');
+        tmp = tmp.substr(8);
         for (int i=0; i<8; ++i) {
           res.push_back(tmp.substr(i*8, 8));
         }
