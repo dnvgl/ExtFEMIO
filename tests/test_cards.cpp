@@ -21,8 +21,6 @@ namespace {
 #define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
 
 #include <iostream>
-#include <locale>
-#include <sstream>
 #include <deque>
 
 #include <catch.hpp>
@@ -37,18 +35,6 @@ using namespace std;
 using namespace bdf::cards;
 using namespace bdf::input;
 
-struct line_reader : ctype<char> {
-    line_reader() : ctype(make_table()) { }
-private:
-    static mask* make_table() {
-        const mask* classic = classic_table();
-        static vector<mask> v(classic, classic + table_size);
-        v[' '] &= ~space;
-        return &v[0];
-    }
-};
-
-
 TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
   ::std::string s(
@@ -60,8 +46,6 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
     "           63.0   340.0    35.0    14.0\n"
     "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n");
   istringstream ist(s);
-  ist.imbue(locale(locale(), new line_reader())); // Added this
-
   bdf_file probe(ist);
   deque<::std::string> l;
   deque<::std::string> ref;
@@ -469,8 +453,6 @@ TEST_CASE("BDF_Dispatch", "[bdf_cards]") {
     "ENDDATA\n");
 
   istringstream ist(s);
-  ist.imbue(locale(locale(), new line_reader())); // Added this
-
   bdf_file probe(ist);
   deque<::std::string> l;
   deque<::std::string> ref;

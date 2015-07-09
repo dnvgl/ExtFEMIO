@@ -17,6 +17,9 @@
 #include <set>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <locale>
+#include <sstream>
 
 #ifdef _MSC_VER
 #define DllExport   __declspec( dllexport ) 
@@ -35,6 +38,17 @@ namespace bdf {
       static const ::std::set<char> cont_chars;
       ::std::string cur_line;
       ::std::istream &data;
+
+      struct line_reader : ::std::ctype<char> {
+        line_reader() : ctype(make_table()) { }
+      private:
+        static mask* make_table() {
+          const mask* classic = classic_table();
+          static ::std::vector<mask> v(classic, classic + table_size);
+          v[' '] &= ~space;
+          return &v[0];
+        }
+      };
 
     public:
 
