@@ -40,7 +40,7 @@ deque<::std::string>& bdf_file::get() {
   do {
     if (cur_line.length() > 0 && cur_line[0] != '$') res->push_back(cur_line);
     data >> cur_line;
-  } while(res->size() == 0 || cont_chars.find(cur_line[0]) != cont_chars.end());
+  } while(!data.eof() && (res->size() == 0 || cont_chars.find(cur_line[0]) != cont_chars.end()));
   return *res;
 }
 

@@ -68,8 +68,7 @@ void bdf_float::parse(std::string inp) {
     if (regex_search (sval, m, float_exp_re))
       sval = m[1].str() + "E" + m[2].str();
 
-    istringstream buffer(sval);
-    buffer >> value;
+    value = ::std::stod(sval);
   }
   if (!this->bounds.in_bounds(value))
     throw  "** BDF INP ERROR **: boundary condition violated";

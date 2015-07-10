@@ -139,10 +139,14 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     probe.parse(" +123.-3        ");
     CHECK(probe() == .123);
   }
-
+  
   SECTION("' -123.-3        '") {
     probe.parse(" -123.-3        ");
     CHECK(probe() == -.123);
+  }
+  SECTION("' .736831        '") {
+    probe.parse(" .736831        ");
+    CHECK(probe() ==  .736831);
   }
 }
 
