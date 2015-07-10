@@ -32,11 +32,11 @@
   <ItemGroup>
     <Filter Include="Header">
       <UniqueIdentifier>{1faadb87-3964-4127-9e75-c97d96b97788}</UniqueIdentifier>
-      <Extensions>*.h</Extensions>
+      <Extensions>h</Extensions>
     </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{36474784-e91c-44e3-bbb0-5163c21a87bd}</UniqueIdentifier>
-      <Extensions>*.cpp</Extensions>
+      <Extensions>cpp</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
