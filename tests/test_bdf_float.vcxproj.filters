@@ -3,10 +3,11 @@
   <ItemGroup>
     <Filter Include="Source">
       <UniqueIdentifier>{6d213d14-8a72-4c95-a4e5-f7116a78c010}</UniqueIdentifier>
-      <Extensions>*.cpp</Extensions>
+      <Extensions>cpp</Extensions>
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{36a387ea-a300-4bc4-aa27-2e80da0098c9}</UniqueIdentifier>
+      <Extensions>h</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
