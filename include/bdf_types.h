@@ -282,6 +282,7 @@ namespace bdf {
       num<double> bounds;
       static const regex float_exp_re;
       static const regex float_re;
+      static const regex float_lead_dot;
 
     protected:
 

@@ -51,6 +51,8 @@ const regex bdf_float::float_re(
   "([\\+-]?((0|([1-9][[:digit:]]*))?[.][[:digit:]]*)|[.][[:digit:]]+)(((E[+-]?)|[+-])[[:digit:]]+)?",
   regex_constants::ECMAScript);
 
+const regex bdf_float::float_lead_dot("^[\\+-]?[.][[:digit:]]+", regex_constants::ECMAScript);
+
 // Convert string to float
 void bdf_float::parse(std::string inp) {
   std::string sval = ::bdf::string::string(inp).trim().upper();
@@ -65,8 +67,13 @@ void bdf_float::parse(std::string inp) {
 
     smatch m;
 
-    if (regex_search (sval, m, float_exp_re))
+    if (regex_search(sval, m, float_exp_re))
       sval = m[1].str() + "E" + m[2].str();
+
+    if (regex_match(sval, float_lead_dot)) {
+        size_t pos = sval.find('.');
+        sval.insert(pos, 1, '0');
+    }
 
     value = ::std::stod(sval);
   }
