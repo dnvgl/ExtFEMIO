@@ -25,7 +25,9 @@ test_bdf_int_SOURCES=test_bdf_int.cpp
 test_bdf_float_SOURCES=test_bdf_float.cpp
 test_bdf_string_SOURCES=test_bdf_string.cpp
 test_bdf_list_SOURCES=test_bdf_list.cpp
-test_cards_SOURCES=test_cards.cpp test_cards_grid.cpp
+test_cards_SOURCES=test_cards.cpp
+test_cards_SOURCES+=test_cards_grid.cpp
+test_cards_SOURCES+=test_cards_mat1.cpp
 
 test_MISC=
 test_bdf_LDADD=../src/libbdfreadpp.la -lboost_regex

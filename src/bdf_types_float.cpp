@@ -45,16 +45,20 @@ bdf_float::bdf_float(::std::string name) :
 bdf_float::bdf_float(::std::string name, num<double> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
-const regex bdf_float::float_exp_re("([\\+-]?[.[:digit:]]+)([+-][[:digit:]]+)");
+const regex bdf_float::float_exp_re(
+  "([\\+-]?[.[:digit:]]+)([+-][[:digit:]]+)");
 
 const regex bdf_float::float_re(
-  "([\\+-]?((0|([1-9][[:digit:]]*))?[.][[:digit:]]*)|[.][[:digit:]]+)(((E[+-]?)|[+-])[[:digit:]]+)?",
+  "([\\+-]?((0|([1-9][[:digit:]]*))?[.][[:digit:]]*)|"
+  "[.][[:digit:]]+)(((E[+-]?)|[+-])[[:digit:]]+)?",
   regex_constants::ECMAScript);
 
-const regex bdf_float::float_lead_dot("^[\\+-]?[.][[:digit:]]+", regex_constants::ECMAScript);
+const regex bdf_float::float_lead_dot(
+  "^[\\+-]?[.][[:digit:]]+", regex_constants::ECMAScript);
 
 // Convert string to float
-void bdf_float::parse(std::string inp) {
+double bdf_float::parse(std::string inp) {
+  double value;
   std::string sval = ::bdf::string::string(inp).trim().upper();
 
   if (sval.length() == 0) {
@@ -79,6 +83,7 @@ void bdf_float::parse(std::string inp) {
   }
   if (!this->bounds.in_bounds(value))
     throw  "** BDF INP ERROR **: boundary condition violated";
+  return value;
 }
 
 /*
@@ -87,7 +92,7 @@ void bdf_float::parse(std::string inp) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check"
+  compile-command: "make -C .. check -j 8"
   coding: utf-8
   End:
 */

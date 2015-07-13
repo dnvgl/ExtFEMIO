@@ -36,23 +36,19 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   bdf_float probe("dummy", num<double>(NULL, NULL, new double(0.)));
 
   SECTION("'   1.   '") {
-    probe.parse("   1.   ");
-    CHECK(probe() == 1.);
+    CHECK(probe.parse("   1.   ") == 1.);
   }
 
   SECTION("'  .1    '") {
-    probe.parse("  .1    ");
-    CHECK(probe() == .1);
+    CHECK(probe.parse("  .1    ") == .1);
   }
 
   SECTION("'  -1.   '") {
-    probe.parse("  -1.   ");
-    CHECK(probe() == -1.);
+    CHECK(probe.parse("  -1.   ") == -1.);
   }
 
   SECTION("'  -.1   '") {
-    probe.parse("  -.1   ");
-    CHECK(probe() == -.1);
+    CHECK(probe.parse("  -.1   ") == -.1);
   }
 
   SECTION("'  -1.   ', min 0.") {
@@ -62,26 +58,26 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
   SECTION("Quick Reference") {
     ::std::vector<string> samples;
-    probe.parse("   7.0  ");    CHECK(probe() == 7.);
-    probe.parse("   7.   ");    CHECK(probe() == 7.);
-    probe.parse("   .7"   );    CHECK(probe() == .7);
-    probe.parse("   .7E1 ");    CHECK(probe() == 7.);
-    probe.parse("   .7e1 ");    CHECK(probe() == 7.);
-    probe.parse("   0.7+1");    CHECK(probe() == 7.);
-    probe.parse("   .70+1");    CHECK(probe() == 7.);
-    probe.parse("   7.E+0");    CHECK(probe() == 7.);
-    probe.parse("   7.e+0");    CHECK(probe() == 7.);
-    probe.parse("   70.-1");    CHECK(probe() == 7.);
-    probe.parse("  -7.0  ");    CHECK(probe() == -7.);
-    probe.parse("  -7.   ");    CHECK(probe() == -7.);
-    probe.parse("  -.7"   );    CHECK(probe() == -.7);
-    probe.parse("  -.7E1 ");    CHECK(probe() == -7.);
-    probe.parse("  -.7e1 ");    CHECK(probe() == -7.);
-    probe.parse("  -0.7+1");    CHECK(probe() == -7.);
-    probe.parse("  -.70+1");    CHECK(probe() == -7.);
-    probe.parse("  -7.E+0");    CHECK(probe() == -7.);
-    probe.parse("  -7.e+0");    CHECK(probe() == -7.);
-    probe.parse("  -70.-1");    CHECK(probe() == -7.);
+    CHECK(probe.parse("   7.0  ") == 7.);
+    CHECK(probe.parse("   7.   ") == 7.);
+    CHECK(probe.parse("   .7"   ) == .7);
+    CHECK(probe.parse("   .7E1 ") == 7.);
+    CHECK(probe.parse("   .7e1 ") == 7.);
+    CHECK(probe.parse("   0.7+1") == 7.);
+    CHECK(probe.parse("   .70+1") == 7.);
+    CHECK(probe.parse("   7.E+0") == 7.);
+    CHECK(probe.parse("   7.e+0") == 7.);
+    CHECK(probe.parse("   70.-1") == 7.);
+    CHECK(probe.parse("  -7.0  ") == -7.);
+    CHECK(probe.parse("  -7.   ") == -7.);
+    CHECK(probe.parse("  -.7"   ) == -.7);
+    CHECK(probe.parse("  -.7E1 ") == -7.);
+    CHECK(probe.parse("  -.7e1 ") == -7.);
+    CHECK(probe.parse("  -0.7+1") == -7.);
+    CHECK(probe.parse("  -.70+1") == -7.);
+    CHECK(probe.parse("  -7.E+0") == -7.);
+    CHECK(probe.parse("  -7.e+0") == -7.);
+    CHECK(probe.parse("  -70.-1") == -7.);
   }
 
   SECTION("Invalid values") {
@@ -96,8 +92,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'        '") {
-    probe.parse("        ");
-    CHECK(probe() == 0.);
+    CHECK(probe.parse("        ") == 0.);
   }
 
   SECTION("'        ', no default") {
@@ -106,47 +101,39 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'   123.  '") {
-    probe.parse("   123.  ");
-    CHECK(probe() == 123.);
+    CHECK(probe.parse("   123.  ") == 123.);
   }
 
   SECTION("'   .123  '") {
-    probe.parse("   .123  ");
-    CHECK(probe() == .123);
+    CHECK(probe.parse("   .123  ") == .123);
   }
 
   SECTION("'   .123+3  '") {
-    probe.parse("   .123+3  ");
-    CHECK(probe() == 123.);
+    CHECK(probe.parse("   .123+3  ") == 123.);
   }
 
   SECTION("'  123.+3        '") {
-    probe.parse("  123.+3        ");
-    CHECK(probe() == 123000.);
+    CHECK(probe.parse("  123.+3        ") == 123000.);
   }
 
   SECTION("' +123.+3        '") {
-    probe.parse(" +123.+3        ");
-    CHECK(probe() == 123000.);
+    CHECK(probe.parse(" +123.+3        ") == 123000.);
   }
 
   SECTION("' -123.+3        '") {
-    probe.parse(" -123.+3        ");
-    CHECK(probe() == -123000.);
+    CHECK(probe.parse(" -123.+3        ") == -123000.);
   }
 
   SECTION("' +123.-3        '") {
-    probe.parse(" +123.-3        ");
-    CHECK(probe() == .123);
+    CHECK(probe.parse(" +123.-3        ") == 0.123);
   }
-  
+
   SECTION("' -123.-3        '") {
-    probe.parse(" -123.-3        ");
-    CHECK(probe() == -.123);
+    CHECK(probe.parse(" -123.-3        ") == -0.123);
   }
+
   SECTION("' .736831        '") {
-    probe.parse(" .736831        ");
-    CHECK(probe() ==  .736831);
+    CHECK(probe.parse(" .736831        ") ==  0.736831);
   }
 }
 
@@ -157,7 +144,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check"
+  compile-command: "make -C .. check -j 8"
   coding: utf-8
   End:
 */

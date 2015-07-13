@@ -47,13 +47,14 @@ bdf_int::bdf_int(::std::string name, num<long> _bounds) :
 
 const regex bdf_int::int_re("[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
-void bdf_int::parse(std::string inp) {
+long bdf_int::parse(const std::string inp) {
   std::string sval = bdf::string::string(inp).trim();
+  long value;
   if (sval.length() == 0) {
     if (!this->bounds.has_default())
       throw "** BDF INP ERROR ** int: empty entry without default";
     value = this->bounds.get_default();
-    return;
+    return value;
   } else {
     if (! regex_match(inp, int_re)) {
       std::string msg("illegal input (""");
@@ -72,6 +73,7 @@ void bdf_int::parse(std::string inp) {
     msg += """)\n";
     throw  msg;
   }
+  return value;
 }
 
 /*

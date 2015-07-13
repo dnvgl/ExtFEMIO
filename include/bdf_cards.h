@@ -22,7 +22,7 @@
 #include "bdf_types.h"
 
 #ifdef _MSC_VER
-#define DllExport   __declspec( dllexport ) 
+#define DllExport   __declspec( dllexport )
 #else
 #define DllExport
 #endif
@@ -33,7 +33,7 @@ namespace bdf {
 
   namespace cards {
 
-    typedef enum {UNKNOWN, ENDDATA, GRID} types;
+    typedef enum {UNKNOWN, ENDDATA, GRID, MID1} types;
 
     class bdf_card {
 
@@ -45,7 +45,8 @@ namespace bdf {
 
     public:
 
-      DllExport static ::std::deque<::std::string> card_split(::std::deque<::std::string>);
+      DllExport static ::std::deque<::std::string>
+      card_split(::std::deque<::std::string>);
 
       DllExport bdf_card ();
 
@@ -57,7 +58,8 @@ namespace bdf {
 
     public:
 
-      DllExport unknown(::std::deque<::std::string> inp) : content(inp) {};
+      DllExport unknown(::std::deque<::std::string> inp) :
+        content(inp) {};
 
       DllExport ::bdf::cards::types card(void) { return UNKNOWN; }
 
@@ -122,14 +124,23 @@ Description:
 
     public:
 
-      bdf_int ID;
-      bdf_int CP;
-      bdf_float X1;
-      bdf_float X2;
-      bdf_float X3;
-      bdf_int CD;
-      bdf_list<int> PS;
-      bdf_int SEID;
+      static bdf_int _ID;
+      static bdf_int _CP;
+      static bdf_float _X1;
+      static bdf_float _X2;
+      static bdf_float _X3;
+      static bdf_int _CD;
+      static bdf_list<int> _PS;
+      static bdf_int _SEID;
+
+      long ID;
+      long CP;
+      double X1;
+      double X2;
+      double X3;
+      long CD;
+      ::std::deque<int>* PS;
+      long SEID;
 
       DllExport grid(::std::deque<::std::string>);
 
@@ -137,9 +148,96 @@ Description:
 
     };
 
+/*
+Handle Nastran Bulk MAT1 entries.
+
+Isotropic Material Property Definition
+
+Defines the material properties for linear isotropic materials.
+
+Format:
+.......
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| MAT1  | MID   | E     | G     | NU    | RHO   | A     | TREF  | GE    |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | ST    | SC    | SS    | MCSID |       |       |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``MID``
+  Material identification number. (Integer > 0)
+``E``
+  Youn g’s modulus. (Real > 0.0 or blank)
+``G``
+  Shear modulus. (Real > 0.0 or blank)
+``NU``
+  Poisson’s ratio. (-1.0 < Real < 0.5 or blank)
+``RHO``
+  Mass density. See Remark 5. (Real)
+``A``
+  Thermal expansion coefficient. (Real)
+``TREF``
+  Reference temperature for the calculation of thermal loads, or a
+  temperature-dependent thermal expansion coefficient. (Real; Default
+  = 0.0 if A is specified.)
+``GE``
+  Structural element damping coefficient. (Real)
+``ST``, ``SC``, ``SS``
+  Stress limits for tension, compression, and shear are optionally
+  supplied, used only to compute margins of safety in certain
+  elements; and have no effect on the computational procedures. (Real
+  > 0.0 or blank)
+``MCSID``
+  Material coordinate system identification number. Used only for
+  ``PARAM,CURV`` processing.  (Integer > 0 or blank)
+*/
+
+    class mat1 : public bdf_card {
+      // NASTRAN ``BDF`` ``MAT1`` representation.
+
+    public:
+
+      static bdf_int _MID;
+      static bdf_float _E;
+      static bdf_float _G;
+      static bdf_float _NU;
+      static bdf_float _RHO;
+      static bdf_float _A;
+      static bdf_float _TREF;
+      static bdf_float _GE;
+      static bdf_float _ST;
+      static bdf_float _SC;
+      static bdf_float _SS;
+      static bdf_int _MCSID;
+
+      long MID;
+      double E;
+      double G;
+      double NU;
+      double RHO;
+      double A;
+      double TREF;
+      double GE;
+      double ST;
+      double SC;
+      double  SS;
+      long MCSID;
+
+      DllExport mat1(::std::deque<::std::string>);
+
+      DllExport ::bdf::cards::types card(void) { return MID1; };
+
+    };
+
     DllExport bdf_card *dispatch(::std::deque<::std::string>);
 
   }
+
 }
 
 #endif // _BERHOL20150630_BDF_CARDS
@@ -149,6 +247,6 @@ Description:
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 7"
+// compile-command: "make -C .. check -j 8"
 // coding: utf-8
 // End:

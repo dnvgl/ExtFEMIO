@@ -32,6 +32,7 @@ using namespace boost;
 using namespace std;
 #endif
 
+#include "bdf_errors.h"
 #include "bdf_string.h"
 
 
@@ -82,9 +83,7 @@ namespace bdf {
 
       ~num() {};
 
-      num() {};
-
-      num(const T* _min, const T* _max=NULL, const T* _default=NULL) {
+      num(const T* _min=NULL, const T* _max=NULL, const T* _default=NULL) {
         if (_min != NULL)
           set_min(*_min);
         if (_max != NULL)
@@ -110,7 +109,7 @@ namespace bdf {
 
       T get_default() const {
         if (!has_default())
-          throw "** ERROR **: No default value avaliable.";
+          throw bdf_types_error("** ERROR **: No default value avaliable.");
         return this->default_val;
       };
 
@@ -139,8 +138,6 @@ namespace bdf {
       bdf_type_base(::std::string);
 
       ~bdf_type_base() {};
-
-      virtual void parse(std::string) = 0;
 
       virtual bdf_types type() const = 0;
 
@@ -177,8 +174,6 @@ namespace bdf {
 
     private:
 
-      long value;
-
       num<long> bounds;
       static const regex int_re;
 
@@ -192,11 +187,9 @@ namespace bdf {
 
       bdf_int(::std::string, num<long>);
 
-      void parse(std::string);
+      long parse(std::string);
 
-      long operator() (void) {return value;};
-
-      bdf_types type() const {return _type;};
+      bdf_types type() const { return _type; };
     };
 
 //     def __init__(self, name, minval=None, maxval=None, default=False):
@@ -277,8 +270,6 @@ namespace bdf {
 
     private:
 
-      double value;
-
       num<double> bounds;
       static const regex float_exp_re;
       static const regex float_re;
@@ -294,9 +285,7 @@ namespace bdf {
 
       bdf_float(::std::string, num<double>);
 
-      void parse(::std::string);
-
-      double operator() (void) {return value;}
+      double parse(::std::string);
 
       bdf_types type() const {return _type;};
     };
@@ -389,8 +378,6 @@ namespace bdf {
 
     private:
 
-      ::std::deque<T> value;
-
       static const regex int_re;
 
     protected:
@@ -402,9 +389,7 @@ namespace bdf {
       bdf_list(::std::string name) :
         bdf_type_base(name) {};
 
-      inline void parse (::std::string inp);
-
-      inline ::std::deque<T> operator() (void) {return value;};
+      inline ::std::deque<T>* parse (::std::string inp);
 
       inline bdf_types type() const {return _type;};
 
@@ -413,17 +398,18 @@ namespace bdf {
     template <class T>
     const regex bdf_list<T>::int_re("[[:digit:]]*");
 
-    template <> inline void bdf_list<int>::parse (std::string inp) {
+    template <> inline ::std::deque<int>* bdf_list<int>::parse (std::string inp) {
+      ::std::deque<int> *value =  new ::std::deque<int>();
       std::string sval = ::bdf::string::string(inp).trim();
       if (! regex_match(sval, int_re)) {
         std::string msg("illegal input (""");
         msg += sval;
         msg += """), no integer in list\n";
-        throw msg;
+        throw bdf_types_error(msg);
       }
-      value.empty();
       for (::std::string::iterator pos = sval.begin(); pos != sval.end(); ++pos)
-        value.push_back(*pos - '0');
+        value->push_back(*pos - '0');
+      return value;
     }
 
 
@@ -511,7 +497,7 @@ namespace bdf {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -j 7"
+  compile-command: "make -C .. check -j 8"
   coding:u tf-8
   End:
 */
