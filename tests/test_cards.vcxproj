@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="test_cards.cpp" />
     <ClCompile Include="test_cards_grid.cpp" />
+    <ClCompile Include="test_cards_mat1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\bdf_cards.h" />

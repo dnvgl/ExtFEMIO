@@ -7,6 +7,9 @@
     <ClCompile Include="test_cards_grid.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="test_cards_mat1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

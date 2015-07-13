@@ -155,16 +155,21 @@
     <ClCompile Include="..\src\bdf_types.cpp" />
     <ClCompile Include="bdf_cards.cpp" />
     <ClCompile Include="bdf_cards_grid.cpp" />
+    <ClCompile Include="bdf_cards_mat1.cpp" />
+    <ClCompile Include="bdf_errors.cpp" />
     <ClCompile Include="bdf_file.cpp" />
     <ClCompile Include="bdf_string.cpp" />
     <ClCompile Include="bdf_types_float.cpp" />
     <ClCompile Include="bdf_types_int.cpp" />
+    <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\bdf_cards.h" />
+    <ClInclude Include="..\include\bdf_errors.h" />
     <ClInclude Include="..\include\bdf_file.h" />
     <ClInclude Include="..\include\bdf_string.h" />
     <ClInclude Include="..\include\bdf_types.h" />
+    <ClInclude Include="..\include\catch.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>

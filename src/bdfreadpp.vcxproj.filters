@@ -22,6 +22,15 @@
     <ClCompile Include="bdf_types_int.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="bdf_cards_mat1.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_errors.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />
@@ -58,5 +67,9 @@
     <ClInclude Include="..\include\bdf_types.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\bdf_errors.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\catch.hpp" />
   </ItemGroup>
 </Project>
