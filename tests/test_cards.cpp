@@ -493,28 +493,28 @@ TEST_CASE("BDF_Dispatch", "[bdf_cards]") {
   CAPTURE( l[0] )
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::GRID);
-  CHECK(static_cast<grid*>(current)->ID == 1);
-  CHECK(static_cast<grid*>(current)->X1 == 111525.);
-  CHECK(static_cast<grid*>(current)->X2 == 18000.);
-  CHECK(static_cast<grid*>(current)->X3 == 21000.);
+  CHECK(*static_cast<grid*>(current)->ID == 1);
+  CHECK(*static_cast<grid*>(current)->X1 == 111525.);
+  CHECK(*static_cast<grid*>(current)->X2 == 18000.);
+  CHECK(*static_cast<grid*>(current)->X3 == 21000.);
 
   l = probe.get();
   CAPTURE( l[0] )
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::GRID);
-  CHECK(static_cast<grid*>(current)->ID == 76);
-  CHECK(static_cast<grid*>(current)->X1 == 111522.);
-  CHECK(static_cast<grid*>(current)->X2 == 18002.);
-  CHECK(static_cast<grid*>(current)->X3 == 21002.);
+  CHECK(*static_cast<grid*>(current)->ID == 76);
+  CHECK(*static_cast<grid*>(current)->X1 == 111522.);
+  CHECK(*static_cast<grid*>(current)->X2 == 18002.);
+  CHECK(*static_cast<grid*>(current)->X3 == 21002.);
 
   l = probe.get();
   CAPTURE( l[0] )
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
   CHECK(current->card() == ::bdf::cards::GRID);
-  CHECK(static_cast<grid*>(current)->ID == 153);
-  CHECK(static_cast<grid*>(current)->X1 == 111522.);
-  CHECK(static_cast<grid*>(current)->X2 == 18001.);
-  CHECK(static_cast<grid*>(current)->X3 == 21002.);
+  CHECK(*static_cast<grid*>(current)->ID == 153);
+  CHECK(*static_cast<grid*>(current)->X1 == 111522.);
+  CHECK(*static_cast<grid*>(current)->X2 == 18001.);
+  CHECK(*static_cast<grid*>(current)->X3 == 21002.);
 
 }
 
@@ -523,6 +523,6 @@ TEST_CASE("BDF_Dispatch", "[bdf_cards]") {
 // ispell-local-dictionary: "english"
 // c-file-style: "gl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 7"
+// compile-command: "make -C .. check -j 8"
 // coding: utf-8
 // End:

@@ -28,6 +28,8 @@ libbdfreadpp_la_SOURCES+=bdf_string.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_grid.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_mat1.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_ctria3.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_cquad4.cpp
 
 # Local Variables:
 # mode: makefile

@@ -39,16 +39,16 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)", "[bdf_grid]" ) {
   grid probe(lines);
 
   SECTION("first grid") {
-    CHECK(probe.ID == 1);
-    CHECK(probe.CP == 22);
-    CHECK(probe.X1 == 111525.);
-    CHECK(probe.X2 == 18000.);
-    CHECK(probe.X3 == 21000.);
-    CHECK(probe.CD == 11);
+    CHECK(*probe.ID == 1);
+    CHECK(*probe.CP == 22);
+    CHECK(*probe.X1 == 111525.);
+    CHECK(*probe.X2 == 18000.);
+    CHECK(*probe.X3 == 21000.);
+    CHECK(*probe.CD == 11);
     deque<int> ps_ref;
     ps_ref.push_back(6);
     CHECK(*probe.PS == ps_ref);
-    CHECK(probe.SEID == 2);
+    CHECK(*probe.SEID == 2);
   }
 }
 
@@ -63,16 +63,16 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)", "[bdf_grid]" ) {
   grid probe(lines);
 
   SECTION("first grid") {
-    CHECK(probe.ID == 1);
-    CHECK(probe.CP == 22);
-    CHECK(probe.X1 == 111525.);
-    CHECK(probe.X2 == 18000.);
-    CHECK(probe.X3 == 21000.);
-    CHECK(probe.CD == 11);
+    CHECK(*probe.ID == 1);
+    CHECK(*probe.CP == 22);
+    CHECK(*probe.X1 == 111525.);
+    CHECK(*probe.X2 == 18000.);
+    CHECK(*probe.X3 == 21000.);
+    CHECK(*probe.CD == 11);
     deque<int> ps_ref;
     ps_ref.push_back(6);
     CHECK(*probe.PS == ps_ref);
-    CHECK(probe.SEID == 2);
+    CHECK(*probe.SEID == 2);
   }
 }
 
@@ -87,37 +87,37 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)", "[bdf_grid]" ) {
     lines.pop_front();
     grid probe(lines);
 
-    CHECK(probe.ID == 1);
-    CHECK(probe.CP == 22);
-    CHECK(probe.X1 == 111525.);
-    CHECK(probe.X2 == 18000.);
-    CHECK(probe.X3 == 21000.);
-    CHECK(probe.CD == 11);
+    CHECK(*probe.ID == 1);
+    CHECK(*probe.CP == 22);
+    CHECK(*probe.X1 == 111525.);
+    CHECK(*probe.X2 == 18000.);
+    CHECK(*probe.X3 == 21000.);
+    CHECK(*probe.CD == 11);
     deque<int> ps_ref;
     ps_ref.push_back(6);
     CHECK(*probe.PS == ps_ref);
-    CHECK(probe.SEID == 2);
+    CHECK(*probe.SEID == 2);
   }
 
   SECTION("first grid (cont)") {
     data.empty();
-    data.push_back("GRID,1,22,111525.,");
+    data.push_back("GRID,1,22,111525.,\n");
     data.push_back(",18000.,21000.,11,6,2\n");
 
     ::std::deque<string> lines = bdf_card::card_split(data);
     lines.pop_front();
     grid probe(lines);
 
-    CHECK(probe.ID == 1);
-    CHECK(probe.CP == 22);
-    CHECK(probe.X1 == 111525.);
-    CHECK(probe.X2 == 18000.);
-    CHECK(probe.X3 == 21000.);
-    CHECK(probe.CD == 11);
+    CHECK(*probe.ID == 1);
+    CHECK(*probe.CP == 22);
+    CHECK(*probe.X1 == 111525.);
+    CHECK(*probe.X2 == 18000.);
+    CHECK(*probe.X3 == 21000.);
+    CHECK(*probe.CD == 11);
     deque<int> ps_ref;
     ps_ref.push_back(6);
     CHECK(*probe.PS == ps_ref);
-    CHECK(probe.SEID == 2);
+    CHECK(*probe.SEID == 2);
   }
 
   SECTION("first grid (cont+)") {
@@ -129,16 +129,16 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)", "[bdf_grid]" ) {
     lines.pop_front();
     grid probe(lines);
 
-    CHECK(probe.ID == 1);
-    CHECK(probe.CP == 22);
-    CHECK(probe.X1 == 111525.);
-    CHECK(probe.X2 == 18000.);
-    CHECK(probe.X3 == 21000.);
-    CHECK(probe.CD == 11);
+    CHECK(*probe.ID == 1);
+    CHECK(*probe.CP == 22);
+    CHECK(*probe.X1 == 111525.);
+    CHECK(*probe.X2 == 18000.);
+    CHECK(*probe.X3 == 21000.);
+    CHECK(*probe.CD == 11);
     deque<int> ps_ref;
     ps_ref.push_back(6);
     CHECK(*probe.PS == ps_ref);
-    CHECK(probe.SEID == 2);
+    CHECK(*probe.SEID == 2);
   }
 
   SECTION("first grid (cont named +)") {
@@ -150,16 +150,16 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)", "[bdf_grid]" ) {
     lines.pop_front();
     grid probe(lines);
 
-    CHECK(probe.ID == 1);
-    CHECK(probe.CP == 22);
-    CHECK(probe.X1 == 111525.);
-    CHECK(probe.X2 == 18000.);
-    CHECK(probe.X3 == 21000.);
-    CHECK(probe.CD == 11);
+    CHECK(*probe.ID == 1);
+    CHECK(*probe.CP == 22);
+    CHECK(*probe.X1 == 111525.);
+    CHECK(*probe.X2 == 18000.);
+    CHECK(*probe.X3 == 21000.);
+    CHECK(*probe.CD == 11);
     deque<int> ps_ref;
     ps_ref.push_back(6);
     CHECK(*probe.PS == ps_ref);
-    CHECK(probe.SEID == 2);
+    CHECK(*probe.SEID == 2);
   }
 }
 

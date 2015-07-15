@@ -30,6 +30,7 @@ namespace {
 #endif
 #include "bdf_types.h"
 #include "bdf_string.h"
+#include "bdf_errors.h"
 
 using namespace std;
 using namespace bdf::types;
@@ -57,16 +58,16 @@ const regex bdf_float::float_lead_dot(
   "^[\\+-]?[.][[:digit:]]+", regex_constants::ECMAScript);
 
 // Convert string to float
-double bdf_float::parse(std::string inp) {
-  double value;
+double *bdf_float::operator() (std::string inp) {
+  double *value = new double();
   std::string sval = ::bdf::string::string(inp).trim().upper();
 
   if (sval.length() == 0) {
-    value = this->bounds.get_default();
+    *value = this->bounds.get_default();
   } else {
     if (! regex_match(sval, float_re)) {
       std::string msg("illegal input, no float");
-      throw msg + "; !" + sval + "!\n";
+      throw bdf_float_error(msg + "; !" + sval + "!\n");
     }
 
     smatch m;
@@ -79,7 +80,7 @@ double bdf_float::parse(std::string inp) {
         sval.insert(pos, 1, '0');
     }
 
-    value = ::std::stod(sval);
+    *value = ::std::stod(sval);
   }
   if (!this->bounds.in_bounds(value))
     throw  "** BDF INP ERROR **: boundary condition violated";

@@ -40,18 +40,18 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
     lines.pop_front();
     mat1 probe(lines);
 
-    CHECK(probe.MID == 1);
-    CHECK(probe.E == 2.);
-    CHECK(probe.G == 3.);
-    CHECK(probe.NU == .4);
-    CHECK(probe.RHO == 5.);
-    CHECK(probe.A == 6.);
-    CHECK(probe.TREF == 7.);
-    CHECK(probe.GE == 8.);
-    CHECK(probe.ST == 9.);
-    CHECK(probe.SC == 10.);
-    CHECK(probe.SS == 11.);
-    CHECK(probe.MCSID == 12);
+    CHECK(*probe.MID == 1);
+    CHECK(*probe.E == 2.);
+    CHECK(*probe.G == 3.);
+    CHECK(*probe.NU == .4);
+    CHECK(*probe.RHO == 5.);
+    CHECK(*probe.A == 6.);
+    CHECK(*probe.TREF == 7.);
+    CHECK(*probe.GE == 8.);
+    CHECK(*probe.ST == 9.);
+    CHECK(*probe.SC == 10.);
+    CHECK(*probe.SS == 11.);
+    CHECK(*probe.MCSID == 12);
   }
 }
 

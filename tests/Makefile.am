@@ -28,6 +28,8 @@ test_bdf_list_SOURCES=test_bdf_list.cpp
 test_cards_SOURCES=test_cards.cpp
 test_cards_SOURCES+=test_cards_grid.cpp
 test_cards_SOURCES+=test_cards_mat1.cpp
+test_cards_SOURCES+=test_cards_ctria3.cpp
+test_cards_SOURCES+=test_cards_cquad4.cpp
 
 test_MISC=
 test_bdf_LDADD=../src/libbdfreadpp.la -lboost_regex

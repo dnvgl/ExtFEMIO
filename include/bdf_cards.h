@@ -18,7 +18,12 @@
 #include <set>
 #include <map>
 #include <utility>
+#include <memory>
 
+#ifndef _MSC_VER
+#include <config.h>
+#include <my_c++14.h>
+#endif
 #include "bdf_types.h"
 
 #ifdef _MSC_VER
@@ -33,7 +38,12 @@ namespace bdf {
 
   namespace cards {
 
-    typedef enum {UNKNOWN, ENDDATA, GRID, MID1} types;
+    typedef enum {
+      UNKNOWN,
+      ENDDATA,
+      GRID, MAT1,
+      CTRIA3, CQUAD4
+    } types;
 
     class bdf_card {
 
@@ -122,7 +132,7 @@ Description:
   Superelement identification number. (Integer > 0; Default = 0)
       */
 
-    public:
+    private:
 
       static bdf_int _ID;
       static bdf_int _CP;
@@ -133,14 +143,16 @@ Description:
       static bdf_list<int> _PS;
       static bdf_int _SEID;
 
-      long ID;
-      long CP;
-      double X1;
-      double X2;
-      double X3;
-      long CD;
-      ::std::deque<int>* PS;
-      long SEID;
+    public:
+
+      ::std::unique_ptr<long> ID;
+      ::std::unique_ptr<long> CP;
+      ::std::unique_ptr<double> X1;
+      ::std::unique_ptr<double> X2;
+      ::std::unique_ptr<double> X3;
+      ::std::unique_ptr<long> CD;
+      ::std::unique_ptr<::std::deque<int>> PS;
+      ::std::unique_ptr<long> SEID;
 
       DllExport grid(::std::deque<::std::string>);
 
@@ -200,7 +212,7 @@ Description:
     class mat1 : public bdf_card {
       // NASTRAN ``BDF`` ``MAT1`` representation.
 
-    public:
+    private:
 
       static bdf_int _MID;
       static bdf_float _E;
@@ -215,29 +227,40 @@ Description:
       static bdf_float _SS;
       static bdf_int _MCSID;
 
-      long MID;
-      double E;
-      double G;
-      double NU;
-      double RHO;
-      double A;
-      double TREF;
-      double GE;
-      double ST;
-      double SC;
-      double  SS;
-      long MCSID;
+    public:
+
+      ::std::unique_ptr<long> MID;
+      ::std::unique_ptr<double> E;
+      ::std::unique_ptr<double> G;
+      ::std::unique_ptr<double> NU;
+      ::std::unique_ptr<double> RHO;
+      ::std::unique_ptr<double> A;
+      ::std::unique_ptr<double> TREF;
+      ::std::unique_ptr<double> GE;
+      ::std::unique_ptr<double> ST;
+      ::std::unique_ptr<double> SC;
+      ::std::unique_ptr<double> SS;
+      ::std::unique_ptr<long> MCSID;
 
       DllExport mat1(::std::deque<::std::string>);
 
-      DllExport ::bdf::cards::types card(void) { return MID1; };
+      DllExport ::bdf::cards::types card(void) { return MAT1; };
 
     };
 
-    DllExport bdf_card *dispatch(::std::deque<::std::string>);
-
   }
 
+}
+
+#include "bdf_cards_elements.h"
+
+namespace bdf {
+  namespace cards {
+
+    DllExport bdf_card *dispatch(
+      ::std::deque<::std::string>);
+
+  }
 }
 
 #endif // _BERHOL20150630_BDF_CARDS

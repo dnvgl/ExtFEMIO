@@ -45,7 +45,7 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
     ref.push_back(2);
     ref.push_back(3);
     ref.push_back(4);
-    CHECK(*probe.parse("  1234  ") == ref);
+    CHECK(*probe("  1234  ") == ref);
   }
 
   SECTION("' 1236   '") {
@@ -54,11 +54,11 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
     ref.push_back(2);
     ref.push_back(3);
     ref.push_back(6);
-    CHECK(*probe.parse(" 1236   ") == ref);
+    CHECK(*probe(" 1236   ") == ref);
   }
 
   SECTION("' 1a3b   '") {
-    CHECK_THROWS(probe.parse(" 1a3b   "));
+    CHECK_THROWS(probe(" 1a3b   "));
   }
 }
 

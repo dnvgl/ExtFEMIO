@@ -21,6 +21,8 @@
 #include <iostream>
 #include <typeinfo>
 #include <limits>
+#include <memory>
+
 #ifdef __GNUC__
 #include <boost/regex.hpp>
 #else
@@ -32,6 +34,10 @@ using namespace boost;
 using namespace std;
 #endif
 
+#ifndef _MSC_VER
+#include <config.h>
+#include <my_c++14.h>
+#endif
 #include "bdf_errors.h"
 #include "bdf_string.h"
 
@@ -78,12 +84,17 @@ namespace bdf {
       T min_val;
       T max_val;
       T default_val;
+      bool allow_empty;
 
     public:
 
       ~num() {};
 
-      num(const T* _min=NULL, const T* _max=NULL, const T* _default=NULL) {
+      num(const T *_min=nullptr,
+          const T *_max=nullptr,
+          const T *_default=nullptr,
+          const bool &allow_empty=false) :
+        allow_empty(allow_empty) {
         if (_min != NULL)
           set_min(*_min);
         if (_max != NULL)
@@ -92,39 +103,44 @@ namespace bdf {
           set_default(*_default);
       };
 
-      void set_min(const T inp) {
+      void set_min(const T &inp) {
         this->min_val = inp;
         got_min();
       };
 
-      void set_max(const T inp) {
+      void set_max(const T &inp) {
         this->max_val = inp;
         got_max();
       };
 
-      void set_default(const T inp) {
+      void set_default(const T &inp) {
         this->default_val = inp;
         got_default();
       };
 
-      T get_default() const {
+      T get_default(void) const {
         if (!has_default())
           throw bdf_types_error("** ERROR **: No default value avaliable.");
         return this->default_val;
       };
 
-      bool in_bounds(T val) const {
-        return ((!has_min() || val >= this->min_val) &&
-                (!has_max() || val <= this->max_val));
+      bool in_bounds(const T *val) const {
+        return ((!has_min() || *val >= this->min_val) &&
+                (!has_max() || *val <= this->max_val));
       };
-    };
+
+      bool does_allow_empty(void) const {
+        return allow_empty;
+      };
+};
   };
 
   namespace types {
 
     using namespace ::bdf::type_bounds;
 
-    typedef enum {None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
+    typedef enum {
+      None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
 
     class bdf_type_base {
 
@@ -142,21 +158,23 @@ namespace bdf {
       virtual bdf_types type() const = 0;
 
       template <class T1, class T2>
-      friend inline bool operator> (const T1& one, const T2& other) {
+      friend inline bool operator> (const T1 &one, const T2 &other) {
         return other < one;
       };
 
       template <class T1, class T2>
-      friend inline bool operator!= (const T1& one, const T2& other) {
+      friend inline bool operator!= (const T1 &one, const T2 &other) {
         return !(other == one);
       };
     };
 
-    inline bool operator== (const bdf_type_base& one, const bdf_type_base& other) {
+    inline bool operator== (const bdf_type_base& one,
+                            const bdf_type_base& other) {
       return (one.type() == other.type());
     }
 
-    inline bool operator< (const bdf_type_base& one, const bdf_type_base& other) {
+    inline bool operator< (const bdf_type_base& one,
+                           const bdf_type_base& other) {
       return (one.type() < other.type());
     }
 
@@ -187,7 +205,7 @@ namespace bdf {
 
       bdf_int(::std::string, num<long>);
 
-      long parse(std::string);
+      long *operator() (std::string);
 
       bdf_types type() const { return _type; };
     };
@@ -285,7 +303,7 @@ namespace bdf {
 
       bdf_float(::std::string, num<double>);
 
-      double parse(::std::string);
+      double *operator() (::std::string);
 
       bdf_types type() const {return _type;};
     };
@@ -389,7 +407,7 @@ namespace bdf {
       bdf_list(::std::string name) :
         bdf_type_base(name) {};
 
-      inline ::std::deque<T>* parse (::std::string inp);
+      inline ::std::deque<T>* operator() (::std::string inp);
 
       inline bdf_types type() const {return _type;};
 
@@ -398,7 +416,8 @@ namespace bdf {
     template <class T>
     const regex bdf_list<T>::int_re("[[:digit:]]*");
 
-    template <> inline ::std::deque<int>* bdf_list<int>::parse (std::string inp) {
+    template <> inline ::std::deque<int>*
+    bdf_list<int>::operator() (std::string inp) {
       ::std::deque<int> *value =  new ::std::deque<int>();
       std::string sval = ::bdf::string::string(inp).trim();
       if (! regex_match(sval, int_re)) {
@@ -407,7 +426,8 @@ namespace bdf {
         msg += """), no integer in list\n";
         throw bdf_types_error(msg);
       }
-      for (::std::string::iterator pos = sval.begin(); pos != sval.end(); ++pos)
+      for (::std::string::iterator pos = sval.begin();
+           pos != sval.end(); ++pos)
         value->push_back(*pos - '0');
       return value;
     }
@@ -459,7 +479,6 @@ namespace bdf {
 //             raise ValueError("invalid literal for %s: '%s'" %
 //                              (','.join([a.name for a in self.args]), inp))
 
-
 // class Cross(_bdfTypeBase):
 
 //     "Cross reference for default values."
@@ -473,17 +492,6 @@ namespace bdf {
 
 //     def __call__(self, dummy):
 //         raise ValueError("Element `Cross` no yet supported")
-
-
-// class Blank(_bdfTypeBase):
-
-//     "Empty entry."
-
-//     _rank = 999
-
-//     def __init__(self):
-//         _bdfTypeBase.__init__(self, 'Blank')
-
 
   };
 }

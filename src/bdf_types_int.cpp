@@ -19,6 +19,7 @@ namespace {
 #include <limits>
 #include <algorithm>
 #include <string>
+#include <memory>
 #ifdef __GNUC__
 #include <boost/regex.hpp>
 #else
@@ -40,20 +41,21 @@ using namespace boost;
 #endif
 
 bdf_int::bdf_int(::std::string name) :
-  bdf_type_base(name), bounds(num<long>()) {};
+  bdf_type_base(name), bounds(*(::std::make_unique< num<long> >())) {};
 
 bdf_int::bdf_int(::std::string name, num<long> _bounds) :
   bdf_type_base(name), bounds(_bounds) {};
 
-const regex bdf_int::int_re("[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
+const regex bdf_int::int_re(
+  "[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
-long bdf_int::parse(const std::string inp) {
+long *bdf_int::operator() (const std::string inp) {
   std::string sval = bdf::string::string(inp).trim();
-  long value;
+  long *value = new long();
   if (sval.length() == 0) {
     if (!this->bounds.has_default())
       throw "** BDF INP ERROR ** int: empty entry without default";
-    value = this->bounds.get_default();
+    *value = this->bounds.get_default();
     return value;
   } else {
     if (! regex_match(inp, int_re)) {
@@ -63,7 +65,7 @@ long bdf_int::parse(const std::string inp) {
       throw msg;
     }
     istringstream buffer(sval);
-    buffer >> value;
+    buffer >> *value;
   }
   if (!this->bounds.in_bounds(value)) {
     ::std::string msg("** BDF INP ERROR ** int: boundary condition violated (");
