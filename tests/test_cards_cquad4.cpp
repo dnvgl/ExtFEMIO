@@ -45,7 +45,7 @@ TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]" ) {
     CHECK(*probe.G3 == 141);
     CHECK(*probe.G4 == 17);
     CHECK(probe.choose_mcid_theta == cquad4::has_THETA);
-    CHECK(probe.MCID == nullptr);
+    CHECK_FALSE(probe.MCID);
     CHECK(*probe.THETA == 0.0);
   }
 }
@@ -67,6 +67,8 @@ TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]" ) {
     CHECK(*probe.G2 == 200);
     CHECK(*probe.G3 == 141);
     CHECK(*probe.G4 == 17);
+    CHECK_FALSE(probe.MCID);
+    CHECK(*probe.THETA == 0.0);
   }
 }
 

@@ -31,6 +31,12 @@
     <ClCompile Include="StdAfx.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="bdf_cards_cquad4.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_ctria3.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />
@@ -71,5 +77,11 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="..\include\catch.hpp" />
+    <ClInclude Include="..\include\bdf_cards_elements.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\my_c++14.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

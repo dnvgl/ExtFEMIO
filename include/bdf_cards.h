@@ -20,9 +20,10 @@
 #include <utility>
 #include <memory>
 
+#include <my_c++14.h>
+
 #ifndef _MSC_VER
 #include <config.h>
-#include <my_c++14.h>
 #endif
 #include "bdf_types.h"
 

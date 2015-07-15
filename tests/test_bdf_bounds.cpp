@@ -37,18 +37,18 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
   ::std::unique_ptr< num< long > > probe =
     make_unique<num<long> >();
   ::std::unique_ptr< num< long > > probe_min =
-      make_unique<num<long> >(make_unique<long>(-12).get(), nullptr, nullptr);
+      make_unique<num<long> >(make_unique<long>(-12).get(), (long*)NULL, (long*)NULL);
   ::std::unique_ptr< num< long > > probe_max =
-      make_unique<num<long>>(nullptr, make_unique<long>(12).get(), nullptr);
+      make_unique<num<long>>((long*)NULL, make_unique<long>(12).get(), (long*)NULL);
   ::std::unique_ptr< num< long > > probe_mm =
       make_unique<num<long> >(make_unique<long>(-12).get(),
-                              make_unique<long>(12).get(), nullptr);
+                              make_unique<long>(12).get(), (long*)NULL);
   ::std::unique_ptr< num< long > > probe_mmd =
       make_unique<num<long> >(make_unique<long>(-12).get(),
                               make_unique<long>(12).get(),
                               make_unique<long>(6).get());
   ::std::unique_ptr< num< long > > probe_def =
-      make_unique<num<long> >(nullptr, nullptr,
+      make_unique<num<long> >((long*)NULL, (long*)NULL,
                               make_unique<long>(1).get());
 
   SECTION("<nothing>") {

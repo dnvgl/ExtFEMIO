@@ -34,9 +34,10 @@ using namespace boost;
 using namespace std;
 #endif
 
+#include <my_c++14.h>
+
 #ifndef _MSC_VER
 #include <config.h>
-#include <my_c++14.h>
 #endif
 #include "bdf_errors.h"
 #include "bdf_string.h"

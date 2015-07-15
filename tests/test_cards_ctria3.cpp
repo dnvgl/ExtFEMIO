@@ -45,7 +45,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)", "[bdf_ctria3]" ) {
     CHECK(*probe.G2 == 200);
     CHECK(*probe.G3 == 141);
     CHECK(probe.choose_mcid_theta == ctria3::has_THETA);
-    CHECK(probe.MCID == nullptr);
+    CHECK_FALSE(probe.MCID);
     CHECK(*probe.THETA == 0.0);
   }
 }
@@ -67,6 +67,8 @@ TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)", "[bdf_ctria3]" ) {
     CHECK(*probe.G1 == 16);
     CHECK(*probe.G2 == 200);
     CHECK(*probe.G3 == 141);
+    CHECK_FALSE(probe.MCID);
+    CHECK(*probe.THETA == 0.0);
   }
 }
 
