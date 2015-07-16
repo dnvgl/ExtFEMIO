@@ -37,6 +37,9 @@
     <ClCompile Include="bdf_cards_ctria3.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="bdf_cards_shell.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />

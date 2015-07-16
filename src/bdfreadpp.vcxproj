@@ -158,6 +158,7 @@
     <ClCompile Include="bdf_cards_ctria3.cpp" />
     <ClCompile Include="bdf_cards_grid.cpp" />
     <ClCompile Include="bdf_cards_mat1.cpp" />
+    <ClCompile Include="bdf_cards_shell.cpp" />
     <ClCompile Include="bdf_errors.cpp" />
     <ClCompile Include="bdf_file.cpp" />
     <ClCompile Include="bdf_string.cpp" />
