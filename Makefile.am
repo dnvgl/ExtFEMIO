@@ -11,7 +11,7 @@ ACLOCAL_AMFLAGS=-Im4
 AM_CPPFLAGS=-Iinclude -Wall -std=c++11
 
 top="$(CURDIR)"/
-ede_FILES=Project.ede Makefile.am
+ede_FILES=Makefile.am
 
 SUBDIRS= src tests include
 EXTRA_DIST=

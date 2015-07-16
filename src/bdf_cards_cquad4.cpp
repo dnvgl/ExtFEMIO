@@ -24,36 +24,12 @@ using namespace ::bdf;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-bdf_int cquad4::_EID(
-  bdf_int("EID", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int cquad4::_PID(
-  bdf_int("PID",
-          type_bounds::num<long>(make_unique<long>(1).get(), nullptr, nullptr, true)));
-bdf_int cquad4::_G1(bdf_int("G1", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int cquad4::_G2(bdf_int("G2", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int cquad4::_G3(bdf_int("G3", type_bounds::num<long>(make_unique<long>(1).get())));
 bdf_int cquad4::_G4(bdf_int("G4", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int cquad4::_MCID(bdf_int("MCID", type_bounds::num<long>(make_unique<long>(0).get())));
-bdf_float cquad4::_THETA(
-  bdf_float("MCID", type_bounds::num<double>(nullptr, nullptr, make_unique<double>(0.0).get())));
-bdf_float cquad4::_ZOFS(bdf_float("ZOFS", type_bounds::num<double>(nullptr, nullptr, make_unique<double>(0.0).get())));
-bdf_int cquad4::_TFLAG(
-  bdf_int("TFLAG",
-          type_bounds::num<long>(make_unique<long>(1).get(), make_unique<long>(2).get(), nullptr, true)));
-bdf_float cquad4::_T1(
-  bdf_float("T1", type_bounds::num<double>(
-              make_unique<double>(0.).get(), nullptr, nullptr, true)));
-bdf_float cquad4::_T2(
-  bdf_float("T2", type_bounds::num<double>(
-              make_unique<double>(0.).get(), nullptr, nullptr, true)));
-bdf_float cquad4::_T3(
-  bdf_float("T3", type_bounds::num<double>(
-              make_unique<double>(0.).get(), nullptr, nullptr, true)));
 bdf_float cquad4::_T4(
   bdf_float("T4", type_bounds::num<double>(
               make_unique<double>(0.).get(), nullptr, nullptr, true)));
 
-cquad4::cquad4(deque<::std::string> inp) : bdf_card() {
+cquad4::cquad4(deque<::std::string> inp) : bdf_shell() {
   switch (inp.size()) {
   case 16:
     inp.pop_back();
@@ -77,7 +53,7 @@ cquad4::cquad4(deque<::std::string> inp) : bdf_card() {
   case 9:
     inp.pop_back();
   case 8:
-    ZOFS = make_unique<double>(*_ZOFS(inp.back()));
+    ZOFFS = make_unique<double>(*_ZOFFS(inp.back()));
     inp.pop_back();
   case 7:
     try {

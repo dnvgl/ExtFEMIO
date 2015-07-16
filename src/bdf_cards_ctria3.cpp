@@ -24,32 +24,8 @@ using namespace ::bdf;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-bdf_int ctria3::_EID(
-  bdf_int("EID", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int ctria3::_PID(
-  bdf_int("PID",
-          type_bounds::num<long>(make_unique<long>(1).get(), nullptr, nullptr, true)));
-bdf_int ctria3::_G1(bdf_int("G1", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int ctria3::_G2(bdf_int("G2", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int ctria3::_G3(bdf_int("G3", type_bounds::num<long>(make_unique<long>(1).get())));
-bdf_int ctria3::_MCID(bdf_int("MCID", type_bounds::num<long>(make_unique<long>(0).get())));
-bdf_float ctria3::_THETA(
-  bdf_float("MCID", type_bounds::num<double>(nullptr, nullptr, make_unique<double>(0.0).get())));
-bdf_float ctria3::_ZOFS(bdf_float("ZOFS", type_bounds::num<double>(nullptr, nullptr, make_unique<double>(0.0).get())));
-bdf_int ctria3::_TFLAG(
-  bdf_int("TFLAG",
-          type_bounds::num<long>(make_unique<long>(1).get(), make_unique<long>(2).get(), nullptr, true)));
-bdf_float ctria3::_T1(
-  bdf_float("T1", type_bounds::num<double>(
-              make_unique<double>(0.).get(), nullptr, nullptr, true)));
-bdf_float ctria3::_T2(
-  bdf_float("T2", type_bounds::num<double>(
-              make_unique<double>(0.).get(), nullptr, nullptr, true)));
-bdf_float ctria3::_T3(
-  bdf_float("T3", type_bounds::num<double>(
-              make_unique<double>(0.).get(), nullptr, nullptr, true)));
 
-ctria3::ctria3(deque<::std::string> inp) : bdf_card() {
+ctria3::ctria3(deque<::std::string> inp) : bdf_shell() {
   switch (inp.size()) {
   case 16:
     inp.pop_back();
@@ -74,7 +50,7 @@ ctria3::ctria3(deque<::std::string> inp) : bdf_card() {
   case 8:
     inp.pop_back();
   case 7:
-    ZOFS = make_unique<double>(*_ZOFS(inp.back()));
+    ZOFFS = make_unique<double>(*_ZOFFS(inp.back()));
     inp.pop_back();
   case 6:
     try {

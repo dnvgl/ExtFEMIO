@@ -17,7 +17,7 @@ AM_CPPFLAGS=-I../include -Wall -std=c++11
 top=../
 
 SUBDIRS=
-EXTRA_DIST=Project.ede
+EXTRA_DIST=
 lib_LTLIBRARIES=libbdfreadpp.la
 libbdfreadpp_la_SOURCES=bdf_errors.cpp
 libbdfreadpp_la_SOURCES+=bdf_file.cpp
@@ -28,6 +28,7 @@ libbdfreadpp_la_SOURCES+=bdf_string.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_grid.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_mat1.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_shell.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_ctria3.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_cquad4.cpp
 

@@ -17,6 +17,44 @@ namespace bdf {
 
   namespace cards {
 
+    // Base class for `ctria3' and `cquad4'.
+    class bdf_shell : public bdf_card {
+
+    protected:
+
+      static bdf_int _EID;
+      static bdf_int _PID;
+      static bdf_int _G1;
+      static bdf_int _G2;
+      static bdf_int _G3;
+      static bdf_int _MCID;
+      static bdf_float _THETA;
+      static bdf_float _ZOFFS;
+      static bdf_int _TFLAG;
+      static bdf_float _T1;
+      static bdf_float _T2;
+      static bdf_float _T3;
+
+    public:
+
+      typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
+
+      CHOOSE_MCID_THETA choose_mcid_theta;
+
+      ::std::unique_ptr<long> EID;
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> G1;
+      ::std::unique_ptr<long> G2;
+      ::std::unique_ptr<long> G3;
+      ::std::unique_ptr<long> MCID;
+      ::std::unique_ptr<double> THETA;
+      ::std::unique_ptr<double> ZOFFS;
+      ::std::unique_ptr<long> TFLAG;
+      ::std::unique_ptr<double> T1;
+      ::std::unique_ptr<double> T2;
+      ::std::unique_ptr<double> T3;
+    };
+
 /*
 Handle Nastran Bulk CTRIA3 entries.
 
@@ -27,8 +65,8 @@ Format:
 | 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
 | CTRIA3| EID   | PID   | G1    | G2    | G3    | THETA | ZOFFS |       |    |
-|       |       |       |       |       |       |       | or    |       |    |
-|       |       |       |       |       |       |       | MCID  |       |    |
+|       |       |       |       |       |       | or    |       |       |    |
+|       |       |       |       |       |       | MCID  |       |       |    |
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
 |       |       | TFLAG | T1    | T2    | T3    |       |       |       |    |
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
@@ -70,42 +108,10 @@ Description:
   ``Ti`` are ignored for hyperelastic elements.
  */
 
-    class ctria3 : public bdf_card {
+    class ctria3 : public bdf_shell {
       // NASTRAN ``BDF`` ``CTRIA3`` representation.
 
-    private:
-
-      static bdf_int _EID;
-      static bdf_int _PID;
-      static bdf_int _G1;
-      static bdf_int _G2;
-      static bdf_int _G3;
-      static bdf_int _MCID;
-      static bdf_float _THETA;
-      static bdf_float _ZOFS;
-      static bdf_int _TFLAG;
-      static bdf_float _T1;
-      static bdf_float _T2;
-      static bdf_float _T3;
-
     public:
-
-      typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
-
-      CHOOSE_MCID_THETA choose_mcid_theta;
-
-      ::std::unique_ptr<long> EID;
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> G1;
-      ::std::unique_ptr<long> G2;
-      ::std::unique_ptr<long> G3;
-      ::std::unique_ptr<long> MCID;
-      ::std::unique_ptr<double> THETA;
-      ::std::unique_ptr<double> ZOFS;
-      ::std::unique_ptr<long> TFLAG;
-      ::std::unique_ptr<double> T1;
-      ::std::unique_ptr<double> T2;
-      ::std::unique_ptr<double> T3;
 
       DllExport ctria3(::std::deque<::std::string>);
 
@@ -166,45 +172,17 @@ Description:
   zero. Default = 1.0) ``Ti`` are ignored for hyperelastic elements.
  */
 
-    class cquad4 : public bdf_card {
+    class cquad4 : public bdf_shell {
       // NASTRAN ``BDF`` ``CQUAD4`` representation.
 
     private:
 
-      static bdf_int _EID;
-      static bdf_int _PID;
-      static bdf_int _G1;
-      static bdf_int _G2;
-      static bdf_int _G3;
       static bdf_int _G4;
-      static bdf_int _MCID;
-      static bdf_float _THETA;
-      static bdf_float _ZOFS;
-      static bdf_int _TFLAG;
-      static bdf_float _T1;
-      static bdf_float _T2;
-      static bdf_float _T3;
       static bdf_float _T4;
 
     public:
 
-      typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
-
-      CHOOSE_MCID_THETA choose_mcid_theta;
-
-      ::std::unique_ptr<long> EID;
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> G1;
-      ::std::unique_ptr<long> G2;
-      ::std::unique_ptr<long> G3;
       ::std::unique_ptr<long> G4;
-      ::std::unique_ptr<long> MCID;
-      ::std::unique_ptr<double> THETA;
-      ::std::unique_ptr<double> ZOFS;
-      ::std::unique_ptr<long> TFLAG;
-      ::std::unique_ptr<double> T1;
-      ::std::unique_ptr<double> T2;
-      ::std::unique_ptr<double> T3;
       ::std::unique_ptr<double> T4;
 
       DllExport cquad4(::std::deque<::std::string>);
