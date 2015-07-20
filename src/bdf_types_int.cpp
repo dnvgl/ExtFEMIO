@@ -53,8 +53,10 @@ long *bdf_int::operator() (const std::string inp) {
   std::string sval = bdf::string::string(inp).trim();
   long *value = new long();
   if (sval.length() == 0) {
+    if (this->bounds.does_allow_empty())
+      return nullptr;
     if (!this->bounds.has_default())
-      throw "** BDF INP ERROR ** int: empty entry without default";
+      throw "** BDF INP ERROR ** int: '" + name + "'empty entry without default";
     *value = this->bounds.get_default();
     return value;
   } else {

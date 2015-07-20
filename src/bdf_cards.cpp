@@ -56,7 +56,7 @@ deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
         tail = tmp.substr(tmp.rfind(',')+1);
       }
       while (tmp.find(',') != ::std::string::npos) {
-        res.push_back(tmp.substr(0, tmp.find(',')));
+        res.push_back(string::string(tmp.substr(0, tmp.find(','))).trim(" \n\t"));
         tmp = tmp.substr(tmp.find(',')+1);
       }
       res.push_back(tmp);
@@ -72,7 +72,7 @@ deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
         tmp += string::string((++pos)->substr(8)).trim("\t\n");
         tmp.resize(128, ' ');
         for (int i=0; i<8; ++i) {
-          res.push_back(tmp.substr(i*16, 16));
+          res.push_back(string::string(tmp.substr(i*16, 16)).trim(" \t\n"));
         }
       // Short Field Format
       } else {
@@ -80,7 +80,7 @@ deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
         tmp.resize(80, ' ');
         tmp = tmp.substr(8);
         for (int i=0; i<8; ++i) {
-          res.push_back(tmp.substr(i*8, 8));
+          res.push_back(string::string(tmp.substr(i*8, 8)).trim(" \t\n"));
         }
       }
       first = false;

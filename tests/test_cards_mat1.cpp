@@ -32,6 +32,7 @@ using namespace bdf::cards;
 TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
 
   ::std::deque<string> data;
+
   SECTION("first mat1") {
     data.empty();
     data.push_back("MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n");
@@ -53,7 +54,32 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
     CHECK(*probe.SS == 11.);
     CHECK(*probe.MCSID == 12);
   }
+
+  SECTION("mat1 with missing entries") {
+    data.empty();
+    data.push_back(
+      "MAT1    1       2.070+5 80000.0 0.3     7.850-6\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    lines.pop_front();
+    mat1 probe(lines);
+
+    CHECK(*probe.MID == 1);
+    CHECK(*probe.E == 2.070e5);
+    CHECK(*probe.G == 8e4);
+    CHECK(*probe.NU == .3);
+    CHECK(*probe.RHO == 7.85e-6);
+    CHECK(probe.A == nullptr);
+    CHECK(probe.TREF == nullptr);
+    CHECK(probe.GE == nullptr);
+    CHECK(probe.ST == nullptr);
+    CHECK(probe.SC == nullptr);
+    CHECK(probe.SS == nullptr);
+    CHECK(probe.MCSID == nullptr);
+  }
+
 }
+
+
 
 // Local Variables:
 // mode: c++

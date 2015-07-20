@@ -1,1 +1,510 @@
+2015-07-16 08:38  berhol
+
+	* src/bdf_errors.cpp: Added missing include.
+
+2015-07-15 14:43  berhol
+
+	* include/bdf_cards.h, include/bdf_types.h, include/my_c++14.h,
+	  src/bdfreadpp.vcxproj, src/bdfreadpp.vcxproj.filters,
+	  tests/test_bdf_bounds.cpp, tests/test_cards.vcxproj,
+	  tests/test_cards.vcxproj.filters, tests/test_cards_cquad4.cpp,
+	  tests/test_cards_ctria3.cpp: Fixed VS build.
+
+2015-07-15 14:25  berhol
+
+	* include/bdf_cards_elements.h, include/bdf_errors.h,
+	  include/bdf_file.h, include/my_c++14.h, src/StdAfx.cpp,
+	  src/bdf_cards_cquad4.cpp, src/bdf_cards_ctria3.cpp,
+	  src/bdf_cards_mat1.cpp, src/bdf_errors.cpp, src/bdf_file.cpp,
+	  tests/test_cards_cquad4.cpp, tests/test_cards_ctria3.cpp,
+	  tests/test_cards_mat1.cpp: Summary: Fixed SVN properties.
+
+2015-07-15 14:17  berhol
+
+	* include/bdf_cards.h, include/bdf_cards_elements.h,
+	  include/bdf_types.h, include/my_c++14.h, src/Makefile.am,
+	  src/bdf_cards_cquad4.cpp, src/bdf_cards_ctria3.cpp,
+	  src/bdf_cards_grid.cpp, src/bdf_cards_mat1.cpp,
+	  src/bdf_types_float.cpp, src/bdf_types_int.cpp,
+	  tests/Makefile.am, tests/test_bdf_bounds.cpp,
+	  tests/test_bdf_float.cpp, tests/test_bdf_int.cpp,
+	  tests/test_bdf_list.cpp, tests/test_cards.cpp,
+	  tests/test_cards_cquad4.cpp, tests/test_cards_ctria3.cpp,
+	  tests/test_cards_grid.cpp, tests/test_cards_mat1.cpp: Summary:
+	  Added more cards.
+	  
+	  
+	  Added support vor MAT1, CQUAD4, and CTRIA3 cards.
+	  
+	  Reorganized code.
+
+2015-07-13 15:48  berhol
+
+	* src/bdfreadpp.vcxproj, src/bdfreadpp.vcxproj.filters,
+	  tests/test_cards.vcxproj, tests/test_cards.vcxproj.filters: Fixed
+	  VS project settings.
+
+2015-07-13 15:44  berhol
+
+	* Makefile.am, include/Makefile.am, include/bdf_cards.h,
+	  include/bdf_errors.h, include/bdf_types.h, src/Makefile.am,
+	  src/bdf_cards_grid.cpp, src/bdf_cards_mat1.cpp,
+	  src/bdf_errors.cpp, src/bdf_types_float.cpp,
+	  src/bdf_types_int.cpp, tests/Makefile.am,
+	  tests/test_bdf_float.cpp, tests/test_bdf_int.cpp,
+	  tests/test_bdf_list.cpp, tests/test_cards.cpp,
+	  tests/test_cards_grid.cpp, tests/test_cards_mat1.cpp: Summary:
+	  More additions
+	  
+	  
+	  * Added MAT1 card
+	  
+	  * Started error handling classes
+
+2015-07-13 14:00  berhol
+
+	* include/bdf_types.h, src/bdf_types_float.cpp: Fixed handling of
+	  floats with leading dots.
+
+2015-07-10 14:08  berhol
+
+	* ., src: Ignore more Poseidon files.
+
+2015-07-10 14:06  berhol
+
+	* ., src/bdf_file.cpp, src/bdf_types_float.cpp,
+	  tests/test_bdf_float.cpp: Improved error handling.
+
+2015-07-10 14:04  berhol
+
+	* src/bdfreadpp.vcxproj.filters,
+	  tests/test_bdf_bounds.vcxproj.filters: Fixed filters for
+	  .vcxproj.filters files.
+
+2015-07-10 14:04  berhol
+
+	* tests/test_bdf_float.vcxproj.filters,
+	  tests/test_bdf_int.vcxproj.filters,
+	  tests/test_bdf_list.vcxproj.filters,
+	  tests/test_bdf_string.vcxproj.filters,
+	  tests/test_bdf_types.vcxproj.filters,
+	  tests/test_cards.vcxproj.filters: Fixed filters for
+	  .vcxproj.filters files.
+
+2015-07-09 14:52  berhol
+
+	* src/bdf_cards.cpp: Fixing ENDDATA entry
+
+2015-07-09 14:21  berhol
+
+	* include/bdf_file.h, src/bdf_file.cpp, tests/test_cards.cpp:
+	  Summary: Fix reading of input files.
+
+2015-07-09 06:25  berhol
+
+	* include/stdafx.h, tests/stdafx.h: Moved `stdafx.h´ for Linux
+	  compiler to find it.
+
+2015-07-08 15:34  berhol
+
+	* ., src/StdAfx.cpp: Ignore Build directories
+
+2015-07-08 15:33  berhol
+
+	* include/bdf_cards.h, include/bdf_file.h, include/bdf_string.h,
+	  include/bdf_types.h, src/Stdafx.h, src/bdf_cards.cpp,
+	  src/bdf_cards_grid.cpp, src/bdf_file.cpp, src/bdf_string.cpp,
+	  src/bdf_types.cpp, src/bdf_types_float.cpp,
+	  src/bdf_types_int.cpp: Extending for Poseidon build.
+
+2015-07-08 12:59  berhol
+
+	* src/bdf_cards.cpp, tests/test_cards.cpp: Summary: Added more
+	  tests for reading card data.
+
+2015-07-08 08:51  berhol
+
+	* src/bdf_cards_grid.cpp: Summary: Disallow certain input field
+	  combinations.
+
+2015-07-08 08:50  berhol
+
+	* tests/Makefile.am: Summary: Cleanup of Makefile template
+
+2015-07-08 08:37  berhol
+
+	* BDFRead++.sln, src/bdf_cards.cpp, tests/test_bdf_bounds.vcxproj,
+	  tests/test_bdf_bounds.vcxproj.filters,
+	  tests/test_bdf_float.vcxproj,
+	  tests/test_bdf_float.vcxproj.filters, tests/test_bdf_int.vcxproj,
+	  tests/test_bdf_int.vcxproj.filters, tests/test_bdf_list.vcxproj,
+	  tests/test_bdf_list.vcxproj.filters,
+	  tests/test_bdf_string.vcxproj,
+	  tests/test_bdf_string.vcxproj.filters,
+	  tests/test_bdf_types.vcxproj,
+	  tests/test_bdf_types.vcxproj.filters, tests/test_cards.cpp,
+	  tests/test_cards.vcxproj, tests/test_cards.vcxproj.filters,
+	  tests/testing.vcxproj: Fixed tests for Windows.
+
+2015-07-07 08:48  berhol
+
+	* include/bdf_file.h, src/bdf_file.cpp: Summary: Setting property
+	  `svn:eol-style' to `native'
+
+2015-07-06 15:53  berhol
+
+	* include/bdf_cards.h, include/bdf_file.h, include/bdf_types.h,
+	  src/bdf_cards.cpp, src/bdf_cards_grid.cpp, src/bdf_file.cpp,
+	  src/bdf_types.cpp, src/bdf_types_float.cpp,
+	  src/bdf_types_int.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_list.cpp,
+	  tests/test_bdf_types.cpp, tests/test_cards.cpp,
+	  tests/test_cards_grid.cpp: Summary: Added dispatcher
+	  
+	  The dispatcher will return the BDF card class according to the
+	  card type
+
+2015-07-06 10:21  berhol
+
+	* tests/test_bdf_bounds.cpp: Summary: Ensure unique section names
+	  for unit tests
+
+2015-07-06 10:19  berhol
+
+	* include/bdf_types.h, src/bdfreadpp.vcxproj,
+	  src/bdfreadpp.vcxproj.filters,
+	  tests/test_bdf_bounds.vcxproj.filters,
+	  tests/test_bdf_float.vcxproj.filters,
+	  tests/test_bdf_int.vcxproj.filters,
+	  tests/test_bdf_list.vcxproj.filters,
+	  tests/test_bdf_string.vcxproj.filters,
+	  tests/test_bdf_types.vcxproj.filters, tests/test_cards.vcxproj,
+	  tests/test_cards.vcxproj.filters:
+
+2015-07-06 08:50  berhol
+
+	* ., BDFRead++.sln, tests/test_cards.vcxproj,
+	  tests/testing.vcxproj: Generate JUnit report files for Windows
+	  also.
+
+2015-07-06 08:42  berhol
+
+	* tests/test_cards.vcxproj: Summary: Added vcxproj for test_cards
+
+2015-07-06 08:40  berhol
+
+	* tests/base_test.ju, tests/testing.vcxproj: Summary: Added
+	  generation of junit test reports to Windows tests
+
+2015-07-06 08:26  berhol
+
+	* tests, tests/Makefile.am, tests/base_test.ju: Summary: Generate
+	  junit like result files from unit tests.
+
+2015-07-06 08:25  berhol
+
+	* include/catch.hpp: Summary: New version of catch.hpp
+
+2015-07-03 13:15  berhol
+
+	* BDFRead++.sln: Added file handling code for Windows.
+
+2015-07-03 12:57  berhol
+
+	* src/bdfreadpp.vcxproj: Added `bdf_file.[cpp|h]'
+
+2015-07-03 12:54  berhol
+
+	* BDFRead++.v11.suo: Removed VS temporary file fro repository.
+
+2015-07-03 12:52  berhol
+
+	* include/bdf_file.h, src/Makefile.am, src/bdf_cards.cpp,
+	  src/bdf_file.cpp, tests/test_cards.cpp: Summary: Started code for
+	  reading from file.
+
+2015-07-01 13:46  berhol
+
+	* include/Project.ede, include/bdf_cards.h, include/bdf_string.h,
+	  src/Stdafx.h, src/bdf_cards.cpp, src/bdf_cards_grid.cpp,
+	  src/bdf_string.cpp, src/resource.h, tests/stdafx.h,
+	  tests/test_bdf_list.cpp, tests/test_bdf_string.cpp,
+	  tests/test_cards.cpp, tests/test_cards_grid.cpp: Summary: Added
+	  support for process Free Field Format cards.
+
+2015-07-01 12:36  berhol
+
+	* src/bdf_cards.cpp, tests/test_cards_grid.cpp: Summary: Added
+	  handling of "Large Field Format"
+
+2015-07-01 12:03  berhol
+
+	* include/Makefile.am, include/bdf_cards.h, src/Makefile.am,
+	  src/bdf_cards.cpp, src/bdf_cards_grid.cpp, tests/Makefile.am,
+	  tests/test_bdf_bounds.cpp, tests/test_bdf_int.cpp,
+	  tests/test_cards_grid.cpp: Summary: Check for different card
+	  formats in input.
+
+2015-07-01 10:33  berhol
+
+	* include/Makefile.am, include/bdf_cards.h, include/bdf_types.h,
+	  src/Makefile.am, src/bdf_cards.cpp, src/bdf_cards_grid.cpp,
+	  src/bdf_types.cpp, src/bdf_types_float.cpp,
+	  src/bdf_types_int.cpp, tests, tests/Makefile.am,
+	  tests/test_bdf_bounds.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_list.cpp,
+	  tests/test_bdf_types.cpp, tests/test_cards.cpp,
+	  tests/test_cards_grid.cpp: Summary: First successful test for
+	  GRID entry with hardcoded input data.
+
+2015-07-01 08:41  berhol
+
+	* include/bdf_types.h, src/bdf_types_float.cpp,
+	  src/bdf_types_int.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_list.cpp: Summary:
+	  Redesigned code for defining card entries.
+
+2015-07-01 07:14  berhol
+
+	* BDFRead++.sln, BDFRead++.v11.suo, include/bdf_types.h,
+	  src/bdf_types_float.cpp, src/bdf_types_int.cpp,
+	  src/bdfreadpp.vcxproj, tests, tests/test_bdf_list.vcxproj,
+	  tests/testing.vcxproj: Fixed test for Windows.
+
+2015-06-30 07:11  berhol
+
+	* src/Makefile.am, src/bdf_types.cpp, src/bdf_types_float.cpp,
+	  src/bdf_types_int.cpp: Summary: Code clenup.
+	  
+	  
+	  Finished splitting of bdf_types into several files.
+
+2015-06-30 07:01  berhol
+
+	* src/bdf_types_float.cpp, src/bdf_types_int.cpp: Summary: Split
+	  BDF types definitions to seperate files.
+
+2015-06-29 14:39  berhol
+
+	* include/bdf_types.h, src/bdf_types.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_list.cpp, tests/test_bdf_types.cpp: Summary: Added
+	  handling of integer lists.
+
+2015-06-19 12:51  berhol
+
+	* include/bdf_types.h, src/bdf_types.cpp, tests, tests/Makefile.am,
+	  tests/test_bdf_float.cpp, tests/test_bdf_int.cpp,
+	  tests/test_bdf_list.cpp, tests/test_bdf_types.cpp: Summary:
+	  Implemented next iteration for float type.
+
+2015-06-18 10:26  berhol
+
+	* include/bdf_string.h, src/bdf_string.cpp, src/bdf_types.cpp,
+	  tests/test_bdf_string.cpp: Summary: Namespace cleanup.
+
+2015-06-18 10:17  berhol
+
+	* ., include/bdf_string.h, src/bdf_string.cpp, src/bdf_types.cpp,
+	  tests/test_bdf_string.cpp: Summary: Reorganized bdf_string.
+
+2015-06-18 09:27  berhol
+
+	* BDFRead++.sln, BDFRead++.v11.suo, src/bdfreadpp.vcxproj,
+	  tests/test_bdf_string.vcxproj, tests/testing.vcxproj: Added
+	  bmf_string to VS build and test.
+
+2015-06-18 09:22  berhol
+
+	* tests/test_bdf_string.vcxproj: Summary: Added VS project file for
+	  test_bdf_string
+
+2015-06-18 09:19  berhol
+
+	* include/bdf_string.h, include/bdf_types.h, src/Makefile.am,
+	  src/bdf_string.cpp, src/bdf_types.cpp, tests, tests/Makefile.am,
+	  tests/test_bdf_string.cpp, tests/test_bdf_types.cpp: Summary:
+	  Added module for string handling
+
+2015-06-17 13:22  berhol
+
+	* BDFRead++.sln, BDFRead++.v11.suo, tests/test_bdf_bounds.vcxproj,
+	  tests/test_bdf_float.vcxproj, tests/test_bdf_int.vcxproj,
+	  tests/test_bdf_types.vcxproj, tests/testing.vcxproj: Another
+	  attempt to fix Windows build.
+
+2015-06-17 12:20  berhol
+
+	* tests/testing.vcxproj: Added missing project file.
+
+2015-06-17 12:18  berhol
+
+	* BDFRead++.sln, BDFRead++.v11.suo, tests/test_bdf_bounds.vcxproj,
+	  tests/test_bdf_float.vcxproj, tests/test_bdf_int.vcxproj,
+	  tests/test_bdf_types.vcxproj: Fixed tests under windows.
+
+2015-06-17 09:23  berhol
+
+	* src/bdf_types.cpp, tests/test_bdf_float.cpp: Fixing Windows
+	  build.
+
+2015-06-17 08:52  berhol
+
+	* src/bdf_types.cpp, tests/Makefile.am, tests/test_bdf_float.cpp:
+	  Summary: Use regex for float handling.
+
+2015-06-17 07:47  berhol
+
+	* tests/test_bdf_float.cpp: VS does not understand C++ 11 brace
+	  initialization.
+
+2015-06-17 07:46  berhol
+
+	* ., BDFRead++.v11.suo: Ignore ".suo"
+
+2015-06-16 15:13  berhol
+
+	* .projectile, src/bdf_types.cpp, tests/test_bdf_float.cpp:
+	  Summary: Fixed float value parser.
+
+2015-04-28 16:24  hoel
+
+	* BDFRead++.v11.suo: Added solution options in an attempt to force
+	  building of all test programs.
+
+2015-04-28 16:07  hoel
+
+	* tests/test_bdf_float.cpp: Temporary bug fix for test_bdf_float.
+
+2015-04-28 16:06  hoel
+
+	* ., BDFRead++.sln, tests/test_bdf_bounds.cpp,
+	  tests/test_bdf_bounds.vcxproj, tests/test_bdf_float.vcxproj,
+	  tests/test_bdf_int.vcxproj: Fixed Windows build.
+
+2015-04-28 15:06  hoel
+
+	* Project.ede, configure.ac, include/bdf_types.h, src,
+	  src/bdf_types.cpp, tests, tests/Makefile.am,
+	  tests/test_bdf_bounds.cpp, tests/test_bdf_bounds.vcxproj,
+	  tests/test_bdf_float.cpp, tests/test_bdf_float.vcxproj,
+	  tests/test_bdf_int.cpp, tests/test_bdf_int.vcxproj,
+	  tests/test_bdf_types.cpp, tests/test_bdf_types.vcxproj: * Added
+	  handling of numeric defaults and boundaries.
+	  
+	  * Refined tests.
+
+2015-04-21 06:52  hoel
+
+	* include/bdf_types.h, src/bdf_types.cpp,
+	  tests/test_bdf_bounds.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_types.cpp: Reorganized
+	  namespaces.
+
+2015-04-21 06:39  hoel
+
+	* configure.ac: Use `check.hpp' from checked in include directory.
+
+2015-04-21 06:36  hoel
+
+	* Makefile.am: Use `check.hpp' from checked in include directory.
+
+2015-04-20 13:47  hoel
+
+	* tests/test_bdf_int.cpp: Temporary fixing Windows test.
+
+2015-04-20 13:38  hoel
+
+	* tests/test_bdf_types.vcxproj: Added missing project file.
+
+2015-04-20 13:36  hoel
+
+	* src/app.ico: Added missing resource file.
+
+2015-04-20 13:35  hoel
+
+	* src/resource.h: Added missing resource file.
+
+2015-04-20 13:35  hoel
+
+	* src/app.rc: Added missing resource file.
+
+2015-04-20 13:32  hoel
+
+	* src/bdf_types.cpp, src/bdfreadpp.vcxproj,
+	  tests/test_bdf_bounds.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_types.cpp: Don't use
+	  precompiled header.
+
+2015-04-20 13:24  hoel
+
+	* tests/stdafx.h: Added missing header file.
+
+2015-04-20 13:22  hoel
+
+	* ., src/Stdafx.h, src/bdf_types.cpp: Added missing header file.
+
+2015-04-20 13:08  hoel
+
+	* include/catch.hpp: Added missing Header for Catch
+
+2015-04-20 13:04  hoel
+
+	* ., BDFRead++.sln, include/bdf_types.h, src, src/bdf_types.cpp,
+	  src/bdfreadpp.vcxproj, src/libbdfread_stat.vcxproj, tests,
+	  tests/test_bdf_bounds.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_types.cpp: Initial
+	  verssion for compiling on Windows (most likely incomplete)
+
+2015-04-20 11:50  hoel
+
+	* AUTHORS, COPYING, ChangeLog, INSTALL, Makefile.am, NEWS,
+	  Project.ede, README, configure.ac, include/Makefile.am,
+	  include/Project.ede, src/Makefile.am, src/Project.ede,
+	  tests/Makefile.am, tests/Project.ede, tests/test_bdf_bounds.cpp,
+	  tests/test_bdf_float.cpp, tests/test_bdf_int.cpp: Fixed SVN
+	  properties.
+
+2015-04-20 10:06  hoel
+
+	* ., include, src, tests: Ignore more auto generated files.
+
+2015-04-20 10:05  hoel
+
+	* ., Makefile.am, Makefile.in, Project.ede, configure,
+	  configure.ac, include/Makefile.am, include/Makefile.in,
+	  include/Project.ede, include/bdf_types.h,
+	  include/test_bdf_float.h, include/test_bdf_int.h,
+	  src/Makefile.am, src/Makefile.in, src/bdf_types.cpp, tests,
+	  tests/Makefile.am, tests/Makefile.in, tests/Project.ede,
+	  tests/test_bdf_bounds.cpp, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_types.cpp: * Cleaned up
+	  auto* file setup in repository.
+	  
+	  * Started to add "*bounds*" classes.
+
+2015-04-13 16:18  hoel
+
+	* ., AUTHORS, COPYING, ChangeLog, INSTALL, Makefile, Makefile.am,
+	  Makefile.in, NEWS, Project.ede, README, configure, configure.ac,
+	  include, include/Makefile.am, include/Makefile.in,
+	  include/bdf_types.h, include/test_bdf_float.h,
+	  include/test_bdf_int.h, src, src/Makefile.am, src/Makefile.in,
+	  src/Project.ede, src/bdf_types.h, tests, tests/Makefile.am,
+	  tests/Makefile.in, tests/Project.ede, tests/test_bdf_float.cpp,
+	  tests/test_bdf_int.cpp, tests/test_bdf_types.cpp: First version
+	  using EDE.
+
+2015-04-13 14:31  hoel
+
+	* src/bdf_types.h: Reorganized code.
+
+2015-04-08 07:24  hoel
+
+	* ., Makefile, src, src/bdf_types.cpp, src/bdf_types.h, tests,
+	  tests/test_bdf_types.cpp: First code for reading BDF entries is
+	  written.
+
+2015-04-07 13:15  svnadm
+
+	* .: create initial directory structure
 

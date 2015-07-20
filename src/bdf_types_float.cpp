@@ -63,6 +63,10 @@ double *bdf_float::operator() (std::string inp) {
   std::string sval = ::bdf::string::string(inp).trim().upper();
 
   if (sval.length() == 0) {
+    if (this->bounds.does_allow_empty())
+      return nullptr;
+    if (!this->bounds.has_default())
+      throw "** BDF INP ERROR ** float: '" + name + "' empty entry without default";
     *value = this->bounds.get_default();
   } else {
     if (! regex_match(sval, float_re)) {

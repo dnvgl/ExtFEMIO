@@ -40,11 +40,21 @@ bdf_float mat1::_NU(
   bdf_float("NU",
             type_bounds::num<double>(make_unique<double>(-1.).get(),
                                      make_unique<double>(.5).get())));
-bdf_float mat1::_RHO(bdf_float("RHO"));
-bdf_float mat1::_A(bdf_float("A"));
-bdf_float mat1::_TREF(bdf_float("TREF"));
-bdf_float mat1::_GE(bdf_float("GE"));
-bdf_float mat1::_ST(bdf_float("ST"));
+bdf_float mat1::_RHO(
+  bdf_float("RHO",
+            type_bounds::num<double>(nullptr, nullptr, nullptr, true)));
+bdf_float mat1::_A(
+  bdf_float("A",
+            type_bounds::num<double>(nullptr, nullptr, nullptr, true)));
+bdf_float mat1::_TREF(
+  bdf_float("TREF",
+            type_bounds::num<double>(nullptr, nullptr, nullptr, true)));
+bdf_float mat1::_GE(
+  bdf_float("GE",
+            type_bounds::num<double>(nullptr, nullptr, nullptr, true)));
+bdf_float mat1::_ST(
+  bdf_float("ST",
+            type_bounds::num<double>(nullptr, nullptr, nullptr, true)));
 bdf_float mat1::_SC(
   bdf_float("SC",
             type_bounds::num<double>(make_unique<double>(0.).get())));
@@ -57,6 +67,9 @@ bdf_int mat1::_MCSID(
 
 mat1::mat1(deque<::std::string> inp) :
   bdf_card() {
+  long *l_ptr;
+  double *d_ptr;
+
   switch (inp.size()) {
   case 16:
     inp.pop_back();
@@ -67,28 +80,36 @@ mat1::mat1(deque<::std::string> inp) :
   case 13:
     inp.pop_back();
   case 12:
-    MCSID = make_unique<long>(*_MCSID(inp.back()));
+    l_ptr = _MCSID(inp.back());
+    MCSID = (l_ptr == nullptr) ? nullptr : make_unique<long>(*l_ptr);
     inp.pop_back();
   case 11:
-    SS = make_unique<double>(*_SS(inp.back()));
+    d_ptr = _SS(inp.back());
+    SS = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     inp.pop_back();
   case 10:
-    SC = make_unique<double>(*_SC(inp.back()));
+    d_ptr = _SC(inp.back());
+    SC = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     inp.pop_back();
   case 9:
-    ST = make_unique<double>(*_ST(inp.back()));
+    d_ptr = _ST(inp.back());
+    ST = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     inp.pop_back();
   case 8:
-    GE = make_unique<double>(*_GE(inp.back()));
+    d_ptr = _GE(inp.back());
+    GE = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     inp.pop_back();
   case 7:
-    TREF = make_unique<double>(*_TREF(inp.back()));
+    d_ptr = _TREF(inp.back());
+    TREF = (d_ptr == nullptr) ? nullptr :  make_unique<double>(*d_ptr);
     inp.pop_back();
   case 6:
-    A = make_unique<double>(*_A(inp.back()));
+    d_ptr = _A(inp.back());
+    A = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     inp.pop_back();
   case 5:
-    RHO = make_unique<double>(*_RHO(inp.back()));
+    d_ptr = _RHO(inp.back());
+    RHO = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     inp.pop_back();
   case 4:
     NU = make_unique<double>(*_NU(inp.back()));
