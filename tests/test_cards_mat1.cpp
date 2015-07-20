@@ -68,13 +68,13 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
     CHECK(*probe.G == 8e4);
     CHECK(*probe.NU == .3);
     CHECK(*probe.RHO == 7.85e-6);
-    CHECK(probe.A == nullptr);
-    CHECK(probe.TREF == nullptr);
-    CHECK(probe.GE == nullptr);
-    CHECK(probe.ST == nullptr);
-    CHECK(probe.SC == nullptr);
-    CHECK(probe.SS == nullptr);
-    CHECK(probe.MCSID == nullptr);
+    CHECK_FALSE(probe.A);
+    CHECK_FALSE(probe.TREF);
+    CHECK_FALSE(probe.GE);
+    CHECK_FALSE(probe.ST);
+    CHECK_FALSE(probe.SC);
+    CHECK_FALSE(probe.SS);
+    CHECK_FALSE(probe.MCSID);
   }
 
 }
