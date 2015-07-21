@@ -50,5 +50,5 @@ deque<::std::string>& bdf_file::get() {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 7"
+// compile-command: "make -C .. check -j 8"
 // End:

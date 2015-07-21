@@ -34,7 +34,6 @@ TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]" ) {
   ::std::deque<string> data;
   data.push_back("CQUAD4  1       1       16      200     141     17\n");
   ::std::deque<string> lines = bdf_card::card_split(data);
-  lines.pop_front();
   cquad4 probe(lines);
 
   SECTION("first cquad4") {
@@ -57,7 +56,6 @@ TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]" ) {
   data.push_back("CQUAD4* 2               1               16              200             *\n");
   data.push_back("*       141             17\n");
   ::std::deque<string> lines = bdf_card::card_split(data);
-  lines.pop_front();
   cquad4 probe(lines);
 
   SECTION("first cquad4") {

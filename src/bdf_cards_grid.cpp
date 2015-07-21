@@ -26,61 +26,62 @@ using namespace ::std;
 using namespace ::bdf;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
+using namespace ::bdf::type_bounds;
 
 bdf_int grid::_ID(
-  bdf_int("ID",
-          type_bounds::num<long>(
-            make_unique<long>(1).get(),
-            make_unique<long>(100000000).get())));
+  "ID",
+  num<long>(make_unique<long>(1).get(),
+            make_unique<long>(100000000).get()));
 bdf_int grid::_CP(
-  bdf_int("CP",
-          type_bounds::num<long>(make_unique<long>(1).get(),
-                                 nullptr,
-                                 make_unique<long>(-1).get())));
+  "CP", num<long>(make_unique<long>(1).get(),
+                               nullptr,
+                               make_unique<long>(-1).get()));
 bdf_float grid::_X1(
-  bdf_float("X1",
-            type_bounds::num<double>(nullptr, nullptr,
-                                     make_unique<double>(0.).get())));
+  "X1",
+  num<double>(nullptr, nullptr, make_unique<double>(0.).get()));
 bdf_float grid::_X2(
-  bdf_float("X2",
-            type_bounds::num<double>(nullptr, nullptr,
-                                     make_unique<double>(0.).get())));
+  "X2",
+  num<double>(nullptr, nullptr,
+              make_unique<double>(0.).get()));
 bdf_float grid::_X3(
-  bdf_float("X3",
-            type_bounds::num<double>(nullptr, nullptr,
-                                     make_unique<double>(0.).get())));
+  "X3",
+  num<double>(nullptr, nullptr,
+              make_unique<double>(0.).get()));
 bdf_int grid::_CD(
-  bdf_int("CD",
-          type_bounds::num<long>(make_unique<long>(-1).get(), nullptr,
-                                 make_unique<long>(-2).get())));
-bdf_list<int> grid::_PS(bdf_list<int>("PS"));
+  "CD",
+  num<long>(make_unique<long>(-1).get(), nullptr,
+            make_unique<long>(-2).get()));
+bdf_list<int> grid::_PS("PS");
 bdf_int grid::_SEID(
-  bdf_int("SEID",
-          type_bounds::num<long>(make_unique<long>(-1).get(), nullptr,
-                                 make_unique<long>(0).get())));
+  "SEID",
+  num<long>(make_unique<long>(-1).get(), nullptr,
+            make_unique<long>(0).get()));
 
 
-grid::grid(deque<::std::string> inp) : bdf_card() {
-  switch (inp.size()) {
+grid::grid(const deque<::std::string> &inp) : bdf_card(inp) {
+
+  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+
+  switch (inp.size()-1) {
   case 8:
-    SEID = make_unique<long>(*_SEID(inp.back()));
-    inp.pop_back();
+    SEID = make_unique<long>(*_SEID(*pos));
+    ++pos;
   case 7:
-    PS = make_unique<deque<int> >(*_PS(inp.back()));
-    inp.pop_back();
+    PS = make_unique<deque<int> >(*_PS(*pos));
+    ++pos;
   case 6:
-    CD = make_unique<long>(*_CD(inp.back()));
-    inp.pop_back();
+    CD = make_unique<long>(*_CD(*pos));
+    ++pos;
   case 5:
-    X3 = make_unique<double>(*_X3(inp.back()));
-    inp.pop_back();
-    X2 = make_unique<double>(*_X2(inp.back()));
-    inp.pop_back();
-    X1 = make_unique<double>(*_X1(inp.back()));
-    inp.pop_back();
-    CP = make_unique<long>(*_CP(inp.back()));
-    inp.pop_back();
-    ID = make_unique<long>(*_ID(inp.back()));
+    X3 = make_unique<double>(*_X3(*pos));
+    ++pos;
+    X2 = make_unique<double>(*_X2(*pos));
+    ++pos;
+    X1 = make_unique<double>(*_X1(*pos));
+    ++pos;
+    CP = make_unique<long>(*_CP(*pos));
+    ++pos;
+    ID = make_unique<long>(*_ID(*pos));
     break;
   default:
     throw "Illegal number of entries for GRID\n";

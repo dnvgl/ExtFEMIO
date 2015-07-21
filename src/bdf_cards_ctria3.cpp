@@ -25,42 +25,45 @@ using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
 
-ctria3::ctria3(deque<::std::string> inp) : bdf_shell() {
-  switch (inp.size()) {
+ctria3::ctria3(const deque<::std::string> &inp) : bdf_shell(inp) {
+
+  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+
+  switch (inp.size()-1) {
   case 16:
-    inp.pop_back();
+    ++pos;
   case 15:
-    inp.pop_back();
+    ++pos;
   case 14:
-    inp.pop_back();
+    ++pos;
   case 13:
-    T3 = make_unique<double>(*_T3(inp.back()));
-    inp.pop_back();
+    T3 = make_unique<double>(*_T3(*pos));
+    ++pos;
   case 12:
-    T2 = make_unique<double>(*_T2(inp.back()));
-    inp.pop_back();
+    T2 = make_unique<double>(*_T2(*pos));
+    ++pos;
   case 11:
-    T1 = make_unique<double>(*_T1(inp.back()));
-    inp.pop_back();
+    T1 = make_unique<double>(*_T1(*pos));
+    ++pos;
   case 10:
-    TFLAG = make_unique<long>(*_TFLAG(inp.back()));
-    inp.pop_back();
+    TFLAG = make_unique<long>(*_TFLAG(*pos));
+    ++pos;
   case 9:
-    inp.pop_back();
+    ++pos;
   case 8:
-    inp.pop_back();
+    ++pos;
   case 7:
-    ZOFFS = make_unique<double>(*_ZOFFS(inp.back()));
-    inp.pop_back();
+    ZOFFS = make_unique<double>(*_ZOFFS(*pos));
+    ++pos;
   case 6:
     try {
-      THETA = make_unique<double>(*_THETA(inp.back()));
+      THETA = make_unique<double>(*_THETA(*pos));
       MCID = nullptr;
       choose_mcid_theta = has_THETA;
     }
     catch (bdf_float_error) {
       try {
-        MCID = make_unique<long>(*_MCID(inp.back()));
+        MCID = make_unique<long>(*_MCID(*pos));
         THETA = nullptr;
         choose_mcid_theta = has_MCID;
       }
@@ -70,21 +73,21 @@ ctria3::ctria3(deque<::std::string> inp) : bdf_shell() {
         choose_mcid_theta = has_THETA;
       }
     }
-    inp.pop_back();
+    ++pos;
   case 5:
-    G3 = make_unique<long>(*_G3(inp.back()));
-    inp.pop_back();
+    G3 = make_unique<long>(*_G3(*pos));
+    ++pos;
   case 4:
-    G2 = make_unique<long>(*_G2(inp.back()));
-    inp.pop_back();
+    G2 = make_unique<long>(*_G2(*pos));
+    ++pos;
   case 3:
-    G1 = make_unique<long>(*_G1(inp.back()));
-    inp.pop_back();
+    G1 = make_unique<long>(*_G1(*pos));
+    ++pos;
   case 2:
-    PID = make_unique<long>(*_PID(inp.back()));
-    inp.pop_back();
+    PID = make_unique<long>(*_PID(*pos));
+    ++pos;
   case 1:
-    EID = make_unique<long>(*_EID(inp.back()));
+    EID = make_unique<long>(*_EID(*pos));
     break;
   default:
     throw "Illegal number of entries for CTRIA3\n";

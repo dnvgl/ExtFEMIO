@@ -23,47 +23,54 @@ using namespace ::std;
 using namespace ::bdf;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
+using namespace ::bdf::type_bounds;
 
-bdf_int cquad4::_G4(bdf_int("G4", type_bounds::num<long>(make_unique<long>(1).get())));
+bdf_int cquad4::_G4(
+  "G4", num<long>(make_unique<long>(1).get()));
 bdf_float cquad4::_T4(
-  bdf_float("T4", type_bounds::num<double>(
-              make_unique<double>(0.).get(), nullptr, nullptr, true)));
+  "T4",
+  num<double>(make_unique<double>(0.).get(),
+              nullptr, nullptr, true));
 
-cquad4::cquad4(deque<::std::string> inp) : bdf_shell() {
-  switch (inp.size()) {
+cquad4::cquad4(const deque<::std::string> &inp) : bdf_shell(inp) {
+
+  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+
+
+  switch (inp.size()-1) {
   case 16:
-    inp.pop_back();
+    ++pos;
   case 15:
-    inp.pop_back();
+    ++pos;
   case 14:
-    T4 = make_unique<double>(*_T4(inp.back()));
-    inp.pop_back();
+    T4 = make_unique<double>(*_T4(*pos));
+    ++pos;
   case 13:
-    T3 = make_unique<double>(*_T3(inp.back()));
-    inp.pop_back();
+    T3 = make_unique<double>(*_T3(*pos));
+    ++pos;
   case 12:
-    T2 = make_unique<double>(*_T2(inp.back()));
-    inp.pop_back();
+    T2 = make_unique<double>(*_T2(*pos));
+    ++pos;
   case 11:
-    T1 = make_unique<double>(*_T1(inp.back()));
-    inp.pop_back();
+    T1 = make_unique<double>(*_T1(*pos));
+    ++pos;
   case 10:
-    TFLAG = make_unique<long>(*_TFLAG(inp.back()));
-    inp.pop_back();
+    TFLAG = make_unique<long>(*_TFLAG(*pos));
+    ++pos;
   case 9:
-    inp.pop_back();
+    ++pos;
   case 8:
-    ZOFFS = make_unique<double>(*_ZOFFS(inp.back()));
-    inp.pop_back();
+    ZOFFS = make_unique<double>(*_ZOFFS(*pos));
+    ++pos;
   case 7:
     try {
-      THETA = make_unique<double>(*_THETA(inp.back()));
+      THETA = make_unique<double>(*_THETA(*pos));
       MCID = nullptr;
       choose_mcid_theta = has_THETA;
     }
     catch (bdf_float_error) {
       try {
-        MCID = make_unique<long>(*_MCID(inp.back()));
+        MCID = make_unique<long>(*_MCID(*pos));
         THETA = nullptr;
         choose_mcid_theta = has_MCID;
       }
@@ -73,24 +80,19 @@ cquad4::cquad4(deque<::std::string> inp) : bdf_shell() {
         choose_mcid_theta = has_THETA;
       }
     }
-    inp.pop_back();
+    ++pos;
   case 6:
-    G4 = make_unique<long>(*_G4(inp.back()));
-    inp.pop_back();
-  case 5:
-    G3 = make_unique<long>(*_G3(inp.back()));
-    inp.pop_back();
-  case 4:
-    G2 = make_unique<long>(*_G2(inp.back()));
-    inp.pop_back();
-  case 3:
-    G1 = make_unique<long>(*_G1(inp.back()));
-    inp.pop_back();
-  case 2:
-    PID = make_unique<long>(*_PID(inp.back()));
-    inp.pop_back();
-  case 1:
-    EID = make_unique<long>(*_EID(inp.back()));
+    G4 = make_unique<long>(*_G4(*pos));
+    ++pos;
+    G3 = make_unique<long>(*_G3(*pos));
+    ++pos;
+    G2 = make_unique<long>(*_G2(*pos));
+    ++pos;
+    G1 = make_unique<long>(*_G1(*pos));
+    ++pos;
+    PID = make_unique<long>(*_PID(*pos));
+    ++pos;
+    EID = make_unique<long>(*_EID(*pos));
     break;
   default:
     throw "Illegal number of entries for CQUAD4\n";

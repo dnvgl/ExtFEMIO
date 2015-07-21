@@ -43,23 +43,25 @@ namespace bdf {
       UNKNOWN,
       ENDDATA,
       GRID, MAT1,
-      CTRIA3, CQUAD4
+      CTRIA3, CQUAD4,
+      PSHELL
     } types;
 
     class bdf_card {
 
     private:
 
-// two character strings for continuation lines in Free Form
+      // two character strings for continuation lines in Free Form
       // Format cards.
       static const ::std::set<char> free_form_cont;
 
     public:
 
       DllExport static ::std::deque<::std::string>
-      card_split(::std::deque<::std::string>);
+      card_split(::std::deque<::std::string> const &);
 
-      DllExport bdf_card ();
+      DllExport bdf_card () = delete;
+      DllExport bdf_card (const ::std::deque<::std::string> &);
 
       virtual ::bdf::cards::types card(void) = 0;
 
@@ -69,8 +71,8 @@ namespace bdf {
 
     public:
 
-      DllExport unknown(::std::deque<::std::string> inp) :
-        content(inp) {};
+      DllExport unknown(const ::std::deque<::std::string> &inp) :
+        bdf_card(inp), content(inp) {};
 
       DllExport ::bdf::cards::types card(void) { return UNKNOWN; }
 
@@ -86,7 +88,8 @@ namespace bdf {
 
     public:
 
-      DllExport enddata(::std::deque<::std::string>) {};
+      DllExport enddata(const ::std::deque<::std::string> &inp) :
+        bdf_card(inp) {};
 
       DllExport ::bdf::cards::types card(void) { return ENDDATA; };
 
@@ -155,7 +158,7 @@ Description:
       ::std::unique_ptr<::std::deque<int>> PS;
       ::std::unique_ptr<long> SEID;
 
-      DllExport grid(::std::deque<::std::string>);
+      DllExport grid(const ::std::deque<::std::string> &);
 
       DllExport ::bdf::cards::types card(void) { return GRID; };
 
@@ -243,7 +246,7 @@ Description:
       ::std::unique_ptr<double> SS;
       ::std::unique_ptr<long> MCSID;
 
-      DllExport mat1(::std::deque<::std::string>);
+      DllExport mat1(const ::std::deque<::std::string> &);
 
       DllExport ::bdf::cards::types card(void) { return MAT1; };
 
@@ -254,12 +257,13 @@ Description:
 }
 
 #include "bdf_cards_elements.h"
+#include "bdf_cards_properties.h"
 
 namespace bdf {
   namespace cards {
 
     DllExport bdf_card *dispatch(
-      ::std::deque<::std::string>);
+      const ::std::deque<::std::string> &);
 
   }
 }

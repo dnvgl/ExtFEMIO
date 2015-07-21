@@ -35,6 +35,9 @@ namespace bdf {
       static bdf_float _T2;
       static bdf_float _T3;
 
+      DllExport bdf_shell(const ::std::deque<::std::string> &inp) :
+        bdf_card(inp) {};
+
     public:
 
       typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
@@ -113,7 +116,7 @@ Description:
 
     public:
 
-      DllExport ctria3(::std::deque<::std::string>);
+      DllExport ctria3(const ::std::deque<::std::string> &);
 
       DllExport ::bdf::cards::types card(void) { return CTRIA3; };
 
@@ -185,7 +188,7 @@ Description:
       ::std::unique_ptr<long> G4;
       ::std::unique_ptr<double> T4;
 
-      DllExport cquad4(::std::deque<::std::string>);
+      DllExport cquad4(const ::std::deque<::std::string> &);
 
       DllExport ::bdf::cards::types card(void) { return CQUAD4; };
 

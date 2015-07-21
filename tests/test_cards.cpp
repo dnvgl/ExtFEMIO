@@ -487,7 +487,16 @@ TEST_CASE("BDF_Dispatch", "[bdf_cards]") {
   l = probe.get();
   CAPTURE( l[0] )
   current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::UNKNOWN);
+//   1234567|1234567|1234567|1234567|1234567|1234567|1234567|
+//           PID     MID1    T       MID2    12I/T**3 MID3
+//  "PSHELL  1       4         23.00 4               4\n"
+  CHECK(current->card() == ::bdf::cards::PSHELL);
+  CHECK(*static_cast<pshell*>(current)->PID == 1);
+  CHECK(*static_cast<pshell*>(current)->MID1 == 4);
+  CHECK(*static_cast<pshell*>(current)->T == 23.);
+  CHECK(*static_cast<pshell*>(current)->MID2 == 4);
+  CHECK(*static_cast<pshell*>(current)->x12I_T__3 == 1.);
+  CHECK(*static_cast<pshell*>(current)->MID3 == 4);
 
   l = probe.get();
   CAPTURE( l[0] )

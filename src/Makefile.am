@@ -31,6 +31,7 @@ libbdfreadpp_la_SOURCES+=bdf_cards_mat1.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_shell.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_ctria3.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_cquad4.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_pshell.cpp
 
 # Local Variables:
 # mode: makefile

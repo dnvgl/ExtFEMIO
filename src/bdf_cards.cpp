@@ -22,21 +22,21 @@ using namespace std;
 using namespace bdf;
 using namespace bdf::cards;
 
-bdf_card::bdf_card() {}
-
 namespace {
   const char initVals[3] = { '+', '*', ',' };
 }
 
+bdf_card::bdf_card(const ::std::deque<::std::string> &inp) {}
+
 const ::std::set<char> bdf_card::free_form_cont(initVals, initVals + 3);
 
-deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
+deque<::std::string> bdf_card::card_split(deque<::std::string> const &inp) {
   deque<::std::string> res;
   ::std::string head;
 
   bool first = true;
 
-  for (deque<::std::string>::iterator pos=inp.begin(); pos<inp.end(); ++pos) {
+  for (deque<::std::string>::const_iterator pos=inp.begin(); pos<inp.end(); ++pos) {
     head = string::string(pos->substr(0, 8)).trim();
     // Free Field Format
     if (head.find(',') != ::std::string::npos) {
@@ -89,14 +89,19 @@ deque<::std::string> bdf_card::card_split(deque<::std::string> inp) {
   return res;
 }
 
-bdf_card *::bdf::cards::dispatch(deque<::std::string> inp) {
+bdf_card *::bdf::cards::dispatch(const deque<::std::string> &inp) {
   ::std::string key(inp[0]);
-  inp.pop_front();
 
   if (key == "GRID")
     return new ::bdf::cards::grid(inp);
   else if (key == "ENDDATA")
     return new ::bdf::cards::enddata(inp);
+  else if (key == "CTRIA3")
+    return new ::bdf::cards::ctria3(inp);
+  else if (key == "CQUAD4")
+    return new ::bdf::cards::cquad4(inp);
+  else if (key == "PSHELL")
+    return new ::bdf::cards::pshell(inp);
   else
     return new ::bdf::cards::unknown(inp);
   return NULL;
@@ -109,5 +114,5 @@ bdf_card *::bdf::cards::dispatch(deque<::std::string> inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 7"
+// compile-command: "make -C .. check -j 8"
 // End:

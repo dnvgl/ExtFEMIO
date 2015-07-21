@@ -38,7 +38,6 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
     data.push_back("MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n");
 
     ::std::deque<string> lines = bdf_card::card_split(data);
-    lines.pop_front();
     mat1 probe(lines);
 
     CHECK(*probe.MID == 1);
@@ -60,7 +59,6 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
     data.push_back(
       "MAT1    1       2.070+5 80000.0 0.3     7.850-6\n");
     ::std::deque<string> lines = bdf_card::card_split(data);
-    lines.pop_front();
     mat1 probe(lines);
 
     CHECK(*probe.MID == 1);
@@ -76,10 +74,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
     CHECK_FALSE(probe.SS);
     CHECK_FALSE(probe.MCSID);
   }
-
 }
-
-
 
 // Local Variables:
 // mode: c++
