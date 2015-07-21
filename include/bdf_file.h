@@ -30,33 +30,32 @@
 namespace bdf {
 
   namespace input {
-
-    class bdf_file {
-
-    private:
-
-      static const ::std::set<char> cont_chars;
-      ::std::string cur_line;
-      ::std::istream &data;
-
       struct line_reader : ::std::ctype<char> {
-        line_reader() : ctype(make_table()) { }
+          line_reader() : ctype(make_table()) { }
       private:
-        static mask* make_table() {
-          const mask* classic = classic_table();
-          static ::std::vector<mask> v(classic, classic + table_size);
-          v[' '] &= ~space;
-          return &v[0];
-        }
+          static mask* make_table() {
+              const mask* classic = classic_table();
+              static ::std::vector<mask> v(classic, classic + table_size);
+              v[' '] &= ~space;
+              return &v[0];
+          }
       };
+      
+      class bdf_file {
 
-    public:
+      private:
+          
+          static const ::std::set<char> cont_chars;
+          ::std::string cur_line;
+          ::std::istream &data;
+          
+      public:
+          
+          DllExport bdf_file(::std::istream&);
 
-      DllExport bdf_file(::std::istream&);
-
-      DllExport ::std::deque<::std::string>& get();
-
-    };
+          DllExport ::std::deque<::std::string>& get();
+      
+      };
   }
 
 }

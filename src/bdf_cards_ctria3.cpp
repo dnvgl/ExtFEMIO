@@ -28,6 +28,15 @@ using namespace ::bdf::types;
 ctria3::ctria3(const deque<::std::string> &inp) : bdf_shell(inp) {
 
   deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  
+  THETA = nullptr;
+  MCID = nullptr;
+  ZOFFS = nullptr;
+  TFLAG = nullptr;
+  T1 = nullptr;
+  T2 = nullptr;
+  T3 = nullptr;
+  T4 = nullptr;
 
   switch (inp.size()-1) {
   case 16:
@@ -38,6 +47,7 @@ ctria3::ctria3(const deque<::std::string> &inp) : bdf_shell(inp) {
     ++pos;
   case 13:
     T3 = make_unique<double>(*_T3(*pos));
+    T4 = make_unique<double>(*_T4(*pos));
     ++pos;
   case 12:
     T2 = make_unique<double>(*_T2(*pos));
@@ -76,17 +86,14 @@ ctria3::ctria3(const deque<::std::string> &inp) : bdf_shell(inp) {
     ++pos;
   case 5:
     G3 = make_unique<long>(*_G3(*pos));
+    G4 = make_unique<long>(*_G4(*pos));
     ++pos;
-  case 4:
     G2 = make_unique<long>(*_G2(*pos));
     ++pos;
-  case 3:
     G1 = make_unique<long>(*_G1(*pos));
     ++pos;
-  case 2:
     PID = make_unique<long>(*_PID(*pos));
     ++pos;
-  case 1:
     EID = make_unique<long>(*_EID(*pos));
     break;
   default:

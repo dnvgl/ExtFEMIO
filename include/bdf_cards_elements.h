@@ -27,6 +27,7 @@ namespace bdf {
       static bdf_int _G1;
       static bdf_int _G2;
       static bdf_int _G3;
+      static bdf_int _G4;
       static bdf_int _MCID;
       static bdf_float _THETA;
       static bdf_float _ZOFFS;
@@ -34,6 +35,7 @@ namespace bdf {
       static bdf_float _T1;
       static bdf_float _T2;
       static bdf_float _T3;
+      static bdf_float _T4;
 
       DllExport bdf_shell(const ::std::deque<::std::string> &inp) :
         bdf_card(inp) {};
@@ -49,6 +51,7 @@ namespace bdf {
       ::std::unique_ptr<long> G1;
       ::std::unique_ptr<long> G2;
       ::std::unique_ptr<long> G3;
+      ::std::unique_ptr<long> G4;
       ::std::unique_ptr<long> MCID;
       ::std::unique_ptr<double> THETA;
       ::std::unique_ptr<double> ZOFFS;
@@ -56,6 +59,7 @@ namespace bdf {
       ::std::unique_ptr<double> T1;
       ::std::unique_ptr<double> T2;
       ::std::unique_ptr<double> T3;
+      ::std::unique_ptr<double> T4;
     };
 
 /*
@@ -178,15 +182,7 @@ Description:
     class cquad4 : public bdf_shell {
       // NASTRAN ``BDF`` ``CQUAD4`` representation.
 
-    private:
-
-      static bdf_int _G4;
-      static bdf_float _T4;
-
     public:
-
-      ::std::unique_ptr<long> G4;
-      ::std::unique_ptr<double> T4;
 
       DllExport cquad4(const ::std::deque<::std::string> &);
 

@@ -29,6 +29,7 @@ bdf_int bdf_shell::_PID(
 bdf_int bdf_shell::_G1("G1", num<long>(make_unique<long>(1).get()));
 bdf_int bdf_shell::_G2("G2", num<long>(make_unique<long>(1).get()));
 bdf_int bdf_shell::_G3("G3", num<long>(make_unique<long>(1).get()));
+bdf_int bdf_shell::_G4("G4", num<long>(make_unique<long>(1).get()));
 bdf_int bdf_shell::_MCID("MCID", num<long>(make_unique<long>(0).get()));
 bdf_float bdf_shell::_THETA(
   "MCID", num<double>(nullptr, nullptr, make_unique<double>(0.0).get()));
@@ -36,13 +37,17 @@ bdf_float bdf_shell::_ZOFFS(
   "ZOFFS", num<double>(nullptr, nullptr, make_unique<double>(0.0).get()));
 bdf_int bdf_shell::_TFLAG(
   "TFLAG",
-  num<long>(make_unique<long>(1).get(), make_unique<long>(2).get(), nullptr, true));
+  num<long>(make_unique<long>(0).get(), make_unique<long>(1).get(), 
+            make_unique<long>(0).get()));
 bdf_float bdf_shell::_T1(
   "T1", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 bdf_float bdf_shell::_T2(
   "T2", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 bdf_float bdf_shell::_T3(
   "T3", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+bdf_float bdf_shell::_T4(
+  "T4", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+
 
 
 // Local Variables:

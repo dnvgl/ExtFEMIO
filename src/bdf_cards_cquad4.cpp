@@ -25,17 +25,18 @@ using namespace ::bdf::cards;
 using namespace ::bdf::types;
 using namespace ::bdf::type_bounds;
 
-bdf_int cquad4::_G4(
-  "G4", num<long>(make_unique<long>(1).get()));
-bdf_float cquad4::_T4(
-  "T4",
-  num<double>(make_unique<double>(0.).get(),
-              nullptr, nullptr, true));
-
 cquad4::cquad4(const deque<::std::string> &inp) : bdf_shell(inp) {
 
   deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
 
+  THETA = nullptr;
+  MCID = nullptr;
+  ZOFFS = nullptr;
+  TFLAG = nullptr;
+  T1 = nullptr;
+  T2 = nullptr;
+  T3 = nullptr;
+  T4 = nullptr;
 
   switch (inp.size()-1) {
   case 16:

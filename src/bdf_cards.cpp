@@ -96,6 +96,8 @@ bdf_card *::bdf::cards::dispatch(const deque<::std::string> &inp) {
     return new ::bdf::cards::grid(inp);
   else if (key == "ENDDATA")
     return new ::bdf::cards::enddata(inp);
+  else if (key == "MAT1")
+    return new ::bdf::cards::mat1(inp);
   else if (key == "CTRIA3")
     return new ::bdf::cards::ctria3(inp);
   else if (key == "CQUAD4")
@@ -104,7 +106,7 @@ bdf_card *::bdf::cards::dispatch(const deque<::std::string> &inp) {
     return new ::bdf::cards::pshell(inp);
   else
     return new ::bdf::cards::unknown(inp);
-  return NULL;
+  return nullptr;
 }
 
 
