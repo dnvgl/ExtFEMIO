@@ -40,6 +40,9 @@
     <ClCompile Include="bdf_cards_shell.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="bdf_cards_pshell.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />
@@ -84,6 +87,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="..\include\my_c++14.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf_cards_properties.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

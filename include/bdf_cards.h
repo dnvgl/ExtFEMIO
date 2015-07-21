@@ -60,7 +60,9 @@ namespace bdf {
       DllExport static ::std::deque<::std::string>
       card_split(::std::deque<::std::string> const &);
 
+#ifndef _MSC_VER
       DllExport bdf_card () = delete;
+#endif
       DllExport bdf_card (const ::std::deque<::std::string> &);
 
       virtual ::bdf::cards::types card(void) = 0;
