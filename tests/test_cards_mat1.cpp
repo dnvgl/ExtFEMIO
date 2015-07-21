@@ -57,7 +57,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
   SECTION("mat1 with missing entries") {
     data.empty();
     data.push_back(
-      "MAT1    1       2.070+5 80000.0 0.3     7.850-6\n");
+      "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n");
     ::std::deque<string> lines = bdf_card::card_split(data);
     mat1 probe(lines);
 
@@ -66,6 +66,68 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
     CHECK(*probe.G == 8e4);
     CHECK(*probe.NU == .3);
     CHECK(*probe.RHO == 7.85e-6);
+    CHECK_FALSE(probe.A);
+    CHECK_FALSE(probe.TREF);
+    CHECK_FALSE(probe.GE);
+    CHECK_FALSE(probe.ST);
+    CHECK_FALSE(probe.SC);
+    CHECK_FALSE(probe.SS);
+    CHECK_FALSE(probe.MCSID);
+  }
+
+  SECTION("mat1 default values 1") {
+    data.empty();
+    data.push_back(
+      "MAT1,1,2.070+5\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    mat1 probe(lines);
+
+    CHECK(*probe.MID == 1);
+    CHECK(*probe.E == 2.070e5);
+    CHECK(*probe.G == 0.);
+    CHECK(*probe.NU == 0.);
+    CHECK_FALSE(probe.RHO);
+    CHECK_FALSE(probe.A);
+    CHECK_FALSE(probe.TREF);
+    CHECK_FALSE(probe.GE);
+    CHECK_FALSE(probe.ST);
+    CHECK_FALSE(probe.SC);
+    CHECK_FALSE(probe.SS);
+    CHECK_FALSE(probe.MCSID);
+  }
+
+  SECTION("mat1 default values 2") {
+    data.empty();
+    data.push_back(
+      "MAT1    1       2.070+5 80000.0\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    mat1 probe(lines);
+
+    CHECK(*probe.MID == 1);
+    CHECK(*probe.E == 2.070e5);
+    CHECK(*probe.G == 8e4);
+    CHECK(*probe.NU == Approx(0.29375));
+    CHECK_FALSE(probe.RHO);
+    CHECK_FALSE(probe.A);
+    CHECK_FALSE(probe.TREF);
+    CHECK_FALSE(probe.GE);
+    CHECK_FALSE(probe.ST);
+    CHECK_FALSE(probe.SC);
+    CHECK_FALSE(probe.SS);
+    CHECK_FALSE(probe.MCSID);
+  }
+
+  SECTION("mat1 default values 3") {
+    data.empty();
+    data.push_back("MAT1,1,2.070+5,,.3\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    mat1 probe(lines);
+
+    CHECK(*probe.MID == 1);
+    CHECK(*probe.E == 2.070e5);
+    CHECK(*probe.G == Approx(79615.));
+    CHECK(*probe.NU == 0.3);
+    CHECK_FALSE(probe.RHO);
     CHECK_FALSE(probe.A);
     CHECK_FALSE(probe.TREF);
     CHECK_FALSE(probe.GE);

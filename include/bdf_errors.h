@@ -39,7 +39,8 @@ class bdf_float_error : public bdf_error {
 
 public:
 
-  bdf_float_error(const ::std::string &msg=::std::string("")) : bdf_error(msg) {};
+  bdf_float_error(const ::std::string &msg=::std::string("")) :
+    bdf_error(msg) {};
 
 };
 
@@ -47,7 +48,8 @@ class bdf_int_error : public bdf_error {
 
 public:
 
-  bdf_int_error(const ::std::string &msg=::std::string("")) : bdf_error(msg) {};
+  bdf_int_error(const ::std::string &msg=::std::string("")) :
+    bdf_error(msg) {};
 
 };
 
@@ -55,7 +57,8 @@ class bdf_list_error : public bdf_error {
 
 public:
 
-  bdf_list_error(const ::std::string &msg=::std::string("")) : bdf_error(msg) {};
+  bdf_list_error(const ::std::string &msg=::std::string("")) :
+    bdf_error(msg) {};
 
 };
 
@@ -63,7 +66,17 @@ class bdf_string_error : public bdf_error {
 
 public:
 
-  bdf_string_error(const ::std::string &msg=::std::string("")) : bdf_error(msg) {};
+  bdf_string_error(const ::std::string &msg=::std::string("")) :
+    bdf_error(msg) {};
+
+};
+
+class bdf_parse_error : public bdf_error {
+
+public:
+
+  bdf_parse_error(const ::std::string &msg=::std::string("")) :
+    bdf_error(msg) {};
 
 };
 

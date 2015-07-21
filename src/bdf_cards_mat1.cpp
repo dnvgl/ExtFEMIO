@@ -31,12 +31,14 @@ using namespace ::bdf::type_bounds;
 bdf_int mat1::_MID(
   "MID", num<long>(make_unique<long>(1).get()));
 bdf_float mat1::_E(
-  "E", num<double>(make_unique<double>(0.).get()));
+  "E", num<double>(
+    make_unique<double>(0.).get(), nullptr, nullptr, true));
 bdf_float mat1::_G(
-  "G", num<double>(make_unique<double>(0.).get()));
+  "G", num<double>(
+    make_unique<double>(0.).get(), nullptr, nullptr, true));
 bdf_float mat1::_NU(
   "NU", num<double>(make_unique<double>(-1.).get(),
-                    make_unique<double>(.5).get()));
+                    make_unique<double>(.5).get(), nullptr, true));
 bdf_float mat1::_RHO(
   "RHO", num<double>(nullptr, nullptr, nullptr, true));
 bdf_float mat1::_A(
@@ -46,17 +48,32 @@ bdf_float mat1::_TREF(
 bdf_float mat1::_GE(
   "GE", num<double>(nullptr, nullptr, nullptr, true));
 bdf_float mat1::_ST(
-  "ST", num<double>(nullptr, nullptr, nullptr, true));
+  "ST",
+  num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 bdf_float mat1::_SC(
-  "SC", num<double>(make_unique<double>(0.).get()));
+  "SC",
+  num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 bdf_float mat1::_SS(
-  "SS", num<double>(make_unique<double>(0.).get()));
+  "SS",
+  num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 bdf_int mat1::_MCSID(
-  "MCSID", num<long>(make_unique<long>(0).get()));
+  "MCSID",
+  num<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
 
 mat1::mat1(const deque<::std::string> &inp) : bdf_card(inp) {
   long *l_ptr;
   double *d_ptr;
+
+  MCSID = nullptr;
+  SS = nullptr;
+  SC = nullptr;
+  ST = nullptr;
+  GE = nullptr;
+  TREF = nullptr;
+  A = nullptr;
+  RHO = nullptr;
+  NU = nullptr;
+  G = nullptr;
 
   deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
 
@@ -102,20 +119,39 @@ mat1::mat1(const deque<::std::string> &inp) : bdf_card(inp) {
     RHO = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     ++pos;
   case 4:
-    NU = make_unique<double>(*_NU(*pos));
+    d_ptr = _NU(*pos);
+    NU = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     ++pos;
   case 3:
-    G = make_unique<double>(*_G(*pos));
+    d_ptr = _G(*pos);
+    G = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     ++pos;
   case 2:
-    E = make_unique<double>(*_E(*pos));
+    d_ptr = _E(*pos);
+    E = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
     ++pos;
-  case 1:
     MID = make_unique<long>(*_MID(*pos));
     break;
   default:
     throw "Illegal number of entries for MID1\n";
   }
+
+  // remark 2
+  if (!E && !G)
+    throw bdf_parse_error("Either G or E has to be given in MAT1.");
+  if (!NU) {
+    if (!E) {
+      NU = make_unique<double>(0.);
+      E = make_unique<double>(0.);
+    } else if (!G) {
+      NU = make_unique<double>(0.);
+      G = make_unique<double>(0.);
+    } else
+      NU = make_unique<double>((*E / 2. / *G) - 1.);
+  } else if (!E)
+    E = make_unique<double>((2. * (1 + *NU) * *G));
+  else if (!G)
+    G = make_unique<double>(*E / (2. * (1 + *NU)));
 }
 
 // Local Variables:
