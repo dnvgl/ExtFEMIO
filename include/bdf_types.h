@@ -169,13 +169,13 @@ namespace bdf {
       };
     };
 
-    inline bool operator== (const bdf_type_base& one,
-                            const bdf_type_base& other) {
+    inline bool operator== (const bdf_type_base &one,
+                            const bdf_type_base &other) {
       return (one.type() == other.type());
     }
 
-    inline bool operator< (const bdf_type_base& one,
-                           const bdf_type_base& other) {
+    inline bool operator< (const bdf_type_base &one,
+                           const bdf_type_base &other) {
       return (one.type() < other.type());
     }
 
