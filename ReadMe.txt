@@ -1,41 +1,61 @@
+# -*- mode: org -*-
+#+LATEX_CLASS: dnvglartcl
+#+LATEX_HEADER: \usepackage{tabu,booktabs}
+#+OPTIONS: toc:nil
+#+TITLE: Reding Nastran Bulk Data files for C++.
 
-Reding Nastran Bulk Data files for C++.
+* DYNAMIC LINK LIBRARY : ExtFEMRead Project Overview
 
-========================================================================
-    DYNAMIC LINK LIBRARY : ExtFEMRead Project Overview
-========================================================================
+** AppWizard has created this ExtFEMRead DLL for you.  
 
-AppWizard has created this ExtFEMRead DLL for you.  
+This file contains a summary of what you will find in each of the
+files that make up your ExtFEMRead application.
 
-This file contains a summary of what you will find in each of the files that
-make up your ExtFEMRead application.
+  - =ExtFEMRead.vcxproj= :: This is the main project file for VC++
+       projects generated using an Application Wizard. It contains
+       information about the version of Visual C++ that generated the
+       file, and information about the platforms, configurations, and
+       project features selected with the Application Wizard.
 
-ExtFEMRead.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard. 
-    It contains information about the version of Visual C++ that generated the file, and 
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+  - =ExtFEMRead.vcxproj.filters= :: This is the filters file for VC++
+       projects generated using an Application Wizard. It contains
+       information about the association between the files in your
+       project and the filters. This association is used in the IDE to
+       show grouping of files with similar extensions under a specific
+       node (for e.g. ".cpp" files are associated with the "Source
+       Files" filter).
 
-ExtFEMRead.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+  - =ExtFEMRead.cpp= :: This is the main DLL source file.
 
-ExtFEMRead.cpp
-    This is the main DLL source file.
+  - =ExtFEMRead.h= :: This file contains a class declaration.
 
-ExtFEMRead.h
-    This file contains a class declaration.
+  - =AssemblyInfo.cpp= :: Contains custom attributes for modifying
+       assembly metadata.
 
-AssemblyInfo.cpp
-	Contains custom attributes for modifying assembly metadata.
-
-/////////////////////////////////////////////////////////////////////////////
 Other notes:
 
 AppWizard uses "TODO:" to indicate parts of the source code you
 should add to or customize.
 
-/////////////////////////////////////////////////////////////////////////////
+* BDF Cards supported
+
+|          | *Name*     | *Description*                                   | *Supported* |
+|----------+------------+-------------------------------------------------+-------------|
+| General  |            |                                                 |             |
+|          | =MAT1=     | Material definition                             | \check      |
+|          | =GRID=     | Grid nodes                                      | \check      |
+| Elements |            |                                                 |             |
+|          | =CTRIA3=   | 3 node shaped shell elements                    | \check      |
+|          | =CQUAD4=   | 4 node shaped shell elements                    | \check      |
+|          | =CBEAM=    | Complex beams                                   |             |
+|          | =CBAR=     | Simple beams                                    |             |
+|          | =CROD=     | Trusses                                         |             |
+| Element  | properties |                                                 |             |
+|          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check      |
+|          | =PBEAM=    | Integral properties for =CBEAM=                 |             |
+|          | =PBEAML=   | Properties for =CBEAM= describing cross section |             |
+|          | =PBAR=     | Integral properties for =CBAR=                  |             |
+|          | =PBARL=    | Properties for =CBAR= describing cross section  |             |
+|          | =PROD=     | Properties for =CROD=                           |             |
+| Misc     |            |                                                 |             |
+|          | =ENDDATA=  | Marker for end of input file                    | \check      |
