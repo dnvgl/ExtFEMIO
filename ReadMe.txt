@@ -2,60 +2,49 @@
 #+LATEX_CLASS: dnvglartcl
 #+LATEX_HEADER: \usepackage{tabu,booktabs}
 #+OPTIONS: toc:nil
-#+TITLE: Reding Nastran Bulk Data files for C++.
-
-* DYNAMIC LINK LIBRARY : ExtFEMRead Project Overview
-
-** AppWizard has created this ExtFEMRead DLL for you.  
-
-This file contains a summary of what you will find in each of the
-files that make up your ExtFEMRead application.
-
-  - =ExtFEMRead.vcxproj= :: This is the main project file for VC++
-       projects generated using an Application Wizard. It contains
-       information about the version of Visual C++ that generated the
-       file, and information about the platforms, configurations, and
-       project features selected with the Application Wizard.
-
-  - =ExtFEMRead.vcxproj.filters= :: This is the filters file for VC++
-       projects generated using an Application Wizard. It contains
-       information about the association between the files in your
-       project and the filters. This association is used in the IDE to
-       show grouping of files with similar extensions under a specific
-       node (for e.g. ".cpp" files are associated with the "Source
-       Files" filter).
-
-  - =ExtFEMRead.cpp= :: This is the main DLL source file.
-
-  - =ExtFEMRead.h= :: This file contains a class declaration.
-
-  - =AssemblyInfo.cpp= :: Contains custom attributes for modifying
-       assembly metadata.
-
-Other notes:
-
-AppWizard uses "TODO:" to indicate parts of the source code you
-should add to or customize.
+#+TITLE: Nastran Bulk Data Import for Poseidon
 
 * BDF Cards supported
 
-|          | *Name*     | *Description*                                   | *Supported* |
-|----------+------------+-------------------------------------------------+-------------|
-| General  |            |                                                 |             |
-|          | =MAT1=     | Material definition                             | \check      |
-|          | =GRID=     | Grid nodes                                      | \check      |
-| Elements |            |                                                 |             |
-|          | =CTRIA3=   | 3 node shaped shell elements                    | \check      |
-|          | =CQUAD4=   | 4 node shaped shell elements                    | \check      |
-|          | =CBEAM=    | Complex beams                                   |             |
-|          | =CBAR=     | Simple beams                                    |             |
-|          | =CROD=     | Trusses                                         |             |
-| Element  | properties |                                                 |             |
-|          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check      |
-|          | =PBEAM=    | Integral properties for =CBEAM=                 |             |
-|          | =PBEAML=   | Properties for =CBEAM= describing cross section |             |
-|          | =PBAR=     | Integral properties for =CBAR=                  |             |
-|          | =PBARL=    | Properties for =CBAR= describing cross section  |             |
-|          | =PROD=     | Properties for =CROD=                           |             |
-| Misc     |            |                                                 |             |
-|          | =ENDDATA=  | Marker for end of input file                    | \check      |
+  #+ATTR_LATEX: :booktabs :environment tabu :align @{}lp{5em}Xc@{} :width \textwidth :float nil
+  |          | *Name*     | *Description*                                   | *Done* |
+  |----------+------------+-------------------------------------------------+--------|
+  | General  |            |                                                 |        |
+  |          | =MAT1=     | Material definition                             | \check |
+  |          | =GRID=     | Grid nodes                                      | \check |
+  | Elements |            |                                                 |        |
+  |          | =CTRIA3=   | 3 node shaped shell elements                    | \check |
+  |          | =CQUAD4=   | 4 node shaped shell elements                    | \check |
+  |          | =CBEAM=    | Complex beams                                   |        |
+  |          | =CBAR=     | Simple beams                                    |        |
+  |          | =CROD=     | Trusses                                         |        |
+  | Element  | properties |                                                 |        |
+  |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |
+  |          | =PBEAM=    | Integral properties for =CBEAM=                 |        |
+  |          | =PBEAML=   | Properties for =CBEAM= describing cross section |        |
+  |          | =PBAR=     | Integral properties for =CBAR=                  |        |
+  |          | =PBARL=    | Properties for =CBAR= describing cross section  |        |
+  |          | =PROD=     | Properties for =CROD=                           |        |
+  | Misc     |            |                                                 |        |
+  |          | =ENDDATA=  | Marker for end of input file                    | \check |
+  |          |            |                                                 |        |
+
+* Writing support for Poseidon
+
+  #+ATTR_LATEX: :booktabs :environment tabu :align @{}lp{5em}Xc@{} :width \textwidth :float nil
+  |             | *Entry*             | *Description*                            | *Done* |
+  |-------------+---------------------+------------------------------------------+--------|
+  |             |                     | <40>                                     | <c6>   |
+  | Properties  |                     |                                          |        |
+  |             | beam properties     | This is probably quite tricky, because in general the beam cross section information in =BDF= files is given as description of the cross section geometry which probably has to be converted to integral values. |        |
+  |             | group information   |                                          | \check |
+  | Elements    |                     |                                          |        |
+  |             | Shell               |                                          | \check |
+  |             | PSE                 |                                          |        |
+  |             | Truss               |                                          |        |
+  |             | Beam                |                                          |        |
+  |             | Boundary Elements   |                                          |        |
+  | Group Info. |                     |                                          |        |
+  |             | NAPA CSV file       | contains also yield stress informaton    | \check |
+  |             | Patran session file | does not contain yield stress information |        |
+

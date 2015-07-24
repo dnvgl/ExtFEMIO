@@ -4,8 +4,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Reding Nastran Bulk Data files for C++.</title>
-<!-- 2015-07-23 Do 16:28 -->
+<title>Nastran Bulk Data Import for Poseidon</title>
+<!-- 2015-07-24 Fr 14:14 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Berthold Höllmann" />
@@ -138,62 +138,11 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Reding Nastran Bulk Data files for C++.</h1>
+<h1 class="title">Nastran Bulk Data Import for Poseidon</h1>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> DYNAMIC LINK LIBRARY : ExtFEMRead Project Overview</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> BDF Cards supported</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> AppWizard has created this ExtFEMRead DLL for you.</h3>
-<div class="outline-text-3" id="text-1-1">
-<p>
-This file contains a summary of what you will find in each of the
-files that make up your ExtFEMRead application.
-</p>
-
-<dl class="org-dl">
-<dt> <code>ExtFEMRead.vcxproj</code> </dt><dd>This is the main project file for VC++
-projects generated using an Application Wizard. It contains
-information about the version of Visual C++ that generated the
-file, and information about the platforms, configurations, and
-project features selected with the Application Wizard.
-</dd>
-
-<dt> <code>ExtFEMRead.vcxproj.filters</code> </dt><dd>This is the filters file for VC++
-projects generated using an Application Wizard. It contains
-information about the association between the files in your
-project and the filters. This association is used in the IDE to
-show grouping of files with similar extensions under a specific
-node (for e.g. ".cpp" files are associated with the "Source
-Files" filter).
-</dd>
-
-<dt> <code>ExtFEMRead.cpp</code> </dt><dd>This is the main DLL source file.
-</dd>
-
-<dt> <code>ExtFEMRead.h</code> </dt><dd>This file contains a class declaration.
-</dd>
-
-<dt> <code>AssemblyInfo.cpp</code> </dt><dd>Contains custom attributes for modifying
-assembly metadata.
-</dd>
-</dl>
-
-<p>
-Other notes:
-</p>
-
-<p>
-AppWizard uses "TODO:" to indicate parts of the source code you
-should add to or customize.
-</p>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> BDF Cards supported</h2>
-<div class="outline-text-2" id="text-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -211,7 +160,7 @@ should add to or customize.
 <th scope="col" class="left">&#xa0;</th>
 <th scope="col" class="left"><b>Name</b></th>
 <th scope="col" class="left"><b>Description</b></th>
-<th scope="col" class="left"><b>Supported</b></th>
+<th scope="col" class="left"><b>Done</b></th>
 </tr>
 </thead>
 <tbody>
@@ -340,6 +289,125 @@ should add to or customize.
 <td class="left">Marker for end of input file</td>
 <td class="left">&checkmark;</td>
 </tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Writing support for Poseidon</h2>
+<div class="outline-text-2" id="text-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="center" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left"><b>Entry</b></th>
+<th scope="col" class="left"><b>Description</b></th>
+<th scope="col" class="center"><b>Done</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Properties</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">beam properties</td>
+<td class="left">This is probably quite tricky, because in general the beam cross section information in <code>BDF</code> files is given as description of the cross section geometry which probably has to be converted to integral values.</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">group information</td>
+<td class="left">&#xa0;</td>
+<td class="center">&checkmark;</td>
+</tr>
+
+<tr>
+<td class="left">Elements</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Shell</td>
+<td class="left">&#xa0;</td>
+<td class="center">&checkmark;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">PSE</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Truss</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Beam</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Boundary Elements</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">Group Info.</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="center">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">NAPA CSV file</td>
+<td class="left">contains also yield stress informaton</td>
+<td class="center">&checkmark;</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Patran session file</td>
+<td class="left">does not contain yield stress information</td>
+<td class="center">&#xa0;</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -347,7 +415,7 @@ should add to or customize.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2015-07-23 Do 16:28</p>
+<p class="date">Created: 2015-07-24 Fr 14:14</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
