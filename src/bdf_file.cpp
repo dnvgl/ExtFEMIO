@@ -31,7 +31,7 @@ namespace {
 const set<char> bdf_file::cont_chars(initVals, initVals + 3);
 
 bdf_file::bdf_file(istream &inp) : data(inp) {
-  data.imbue(locale(locale(), new line_reader()));
+  data.imbue(locale(locale("C"), new line_reader()));
   data >> cur_line;
 }
 

@@ -84,7 +84,9 @@ double *bdf_float::operator() (std::string inp) {
         sval.insert(pos, 1, '0');
     }
 
-    *value = ::std::stod(sval);
+    istringstream conv(sval);
+    conv.imbue(locale("C"));
+    conv >> *value;
   }
   if (!this->bounds.in_bounds(value))
     throw  "** BDF INP ERROR **: boundary condition violated";

@@ -16,14 +16,20 @@
 #include <string>
 #include <algorithm>
 
+#ifdef _MSC_VER
+#define DllExport   __declspec( dllexport )
+#else
+#define DllExport
+#endif
+
 namespace bdf {
 
   namespace string {
 
     class string : public std::string {
     public:
-      string(const std::string& in) : std::string(in) {};
-      string trim(const std::string& = " \t");
+      DllExport string(const std::string& in) : std::string(in) {};
+      DllExport string trim(const std::string& = " \t");
       string upper();
       string lower();
     };
