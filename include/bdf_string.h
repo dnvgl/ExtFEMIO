@@ -43,6 +43,6 @@ namespace bdf {
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check"
+// compile-command: "make -C .. check -j 8"
 // coding: utf-8
 // End:
