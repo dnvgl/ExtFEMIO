@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_cards.cpp" />
+    <ClCompile Include="test_cards_cbeam.cpp" />
     <ClCompile Include="test_cards_cquad4.cpp" />
     <ClCompile Include="test_cards_ctria3.cpp" />
     <ClCompile Include="test_cards_grid.cpp" />

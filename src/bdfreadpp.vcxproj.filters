@@ -43,6 +43,12 @@
     <ClCompile Include="bdf_cards_pshell.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="bdf_cards_cbeam.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_types_str.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />

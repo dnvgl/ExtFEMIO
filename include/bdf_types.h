@@ -18,6 +18,7 @@
 
 #include <string>
 #include <deque>
+#include <set>
 #include <iostream>
 #include <typeinfo>
 #include <limits>

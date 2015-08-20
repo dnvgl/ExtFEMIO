@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\bdf_types.cpp" />
     <ClCompile Include="bdf_cards.cpp" />
+    <ClCompile Include="bdf_cards_cbeam.cpp" />
     <ClCompile Include="bdf_cards_cquad4.cpp" />
     <ClCompile Include="bdf_cards_ctria3.cpp" />
     <ClCompile Include="bdf_cards_grid.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="bdf_string.cpp" />
     <ClCompile Include="bdf_types_float.cpp" />
     <ClCompile Include="bdf_types_int.cpp" />
+    <ClCompile Include="bdf_types_str.cpp" />
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>

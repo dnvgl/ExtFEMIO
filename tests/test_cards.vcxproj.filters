@@ -16,6 +16,9 @@
     <ClCompile Include="test_cards_ctria3.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="test_cards_cbeam.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
