@@ -190,6 +190,140 @@ Description:
 
     };
 
+    /*
+Handle Nastran Bulk CBEAM entries.
+
+Format:
+.......
+
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+| CBEAM | EID   | PID   | GA    | GB    | X1    | X2    | X3    |OFFT/BIT|    |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+|       |PA     | PB    | W1A   | W2A   | W3A   | W1B   | W2B   | W3B    |    |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+|       |SA     | SB    |       |       |       |       |       |        |    |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+
+Alternate Format:
+.................
+
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+| CBEAM | EID   | PID   | GA    | GB    | G0    |       |       |OFFT/BIT|    |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+|       |PA     | PB    | W1A   | W2A   | W3A   | W1B   | W2B   | W3B    |    |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+|       |SA     | SB    |       |       |       |       |       |        |    |
++-------+-------+-------+-------+-------+-------+-------+-------+--------+----+
+
+Description:
+............
+
+``EID``
+  Unique element identification number. (0 < Integer < 100,000,000)
+``PID``
+  Property identification number of ``PBEAM``, ``PBCOMP`` or
+  ``PBEAML`` entry. (Integer > 0; Default = ``EID``)
+``GA``, ``GB``
+  Grid point identification numbers of connection points. (Integer > 0)
+``X1``, ``X2``, ``X3``
+  Components of orientation vector , from ``GA``, in the displacement
+  coordinate system at ``GA`` (default), or in the basic coordinate
+  system. (Real)
+``G0``
+  Alternate method to supply the orientation vector using grid point
+  ``G0``. Direction of is from ``GA`` to G0. is then transferred to
+  End ``A``. (Integer > 0; or ``GB``)
+``OFFT``
+  Offset vector interpretation flag. (Character or blank)
+``BIT``
+  Built-in twist of the cross-sectional axes about the beam axis at
+  end ``B`` relative to end ``A``. For beam p-elements only. (Real;
+  Default = 0.0)
+``PA``, ``PB``
+  Pin flags for beam ends ``A`` and ``B``, respectively; used to
+  remove connections between the grid point and selected
+  degrees-offreedom of the beam. The degrees-of-freedom are defined in
+  the element’s coordinate system and the pin flags are applied at the
+  offset ends of the beam. The beam must have stiffness associated
+  with the ``PA`` and ``PB`` degrees-of-freedom to be released by the
+  pin flags. For example, if ``PA`` = 4, the ``PBEAM`` entry must have
+  a nonzero value for ``J``, the torsional stiffness. (Up to five of
+  the unique Integers 1 through 6 with no embedded blanks.)  Pin flags
+  are not allowed for beam p-elements.
+``W1A``, ``W2A``, ``W3A``, ``W1B``, ``W2B``, ``W3B``
+  Components of offset vectors from the grid points to the end points
+  of the axis of the shear center. (Real; Default = 0.0)
+``SA``, ``SB``
+  Scalar or grid point identification numbers for the ends ``A`` and
+  ``B``, respectively. The degrees-of-freedom at these points are the
+  warping variables . ``SA`` and ``SB`` cannot be specified for beam
+  p-elements. (Integers > 0 or blank)
+*/
+
+    class cbeam : public bdf_card {
+
+    private:
+
+      static bdf_int _EID;
+      static bdf_int _PID;
+      static bdf_int _GA;
+      static bdf_int _GB;
+      static bdf_float _X1;
+      static bdf_int _G0;
+      static bdf_float _X2;
+      static bdf_float _X3;
+      static bdf_float _BIT;
+      static bdf_str _OFFT;
+      static bdf_list<int> _PA;
+      static bdf_list<int> _PB;
+      static bdf_float _W1A;
+      static bdf_float _W2A;
+      static bdf_float _W3A;
+      static bdf_float _W1B;
+      static bdf_float _W2B;
+      static bdf_float _W3B;
+      static bdf_int _SA;
+      static bdf_int _SB;
+
+    public:
+
+      DllExport cbeam(const ::std::deque<::std::string> &inp);
+
+      DllExport ::bdf::cards::types card(void) { return CBEAM; };
+
+      typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
+      CHOOSE_DIR_CODE choose_dir_code;
+
+      typedef enum {has_OFFT, has_BIT} CHOOSE_OFFT_BIT;
+      CHOOSE_OFFT_BIT choose_offt_bit;
+
+      ::std::unique_ptr<long> EID;
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> GA;
+      ::std::unique_ptr<long> GB;
+      ::std::unique_ptr<double> X1;
+      ::std::unique_ptr<long> G0;
+      ::std::unique_ptr<double> X2;
+      ::std::unique_ptr<double> X3;
+      ::std::unique_ptr<double> BIT;
+      ::std::unique_ptr<::std::string> OFFT;
+      ::std::unique_ptr<::std::deque<int>> PA;
+      ::std::unique_ptr<::std::deque<int>> PB;
+      ::std::unique_ptr<double> W1A;
+      ::std::unique_ptr<double> W2A;
+      ::std::unique_ptr<double> W3A;
+      ::std::unique_ptr<double> W1B;
+      ::std::unique_ptr<double> W2B;
+      ::std::unique_ptr<double> W3B;
+      ::std::unique_ptr<long> SA;
+      ::std::unique_ptr<long> SB;
+
+    };
+
   }
 }
 

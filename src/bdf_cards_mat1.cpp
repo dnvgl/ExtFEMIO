@@ -133,12 +133,13 @@ mat1::mat1(const deque<::std::string> &inp) : bdf_card(inp) {
     MID = make_unique<long>(*_MID(*pos));
     break;
   default:
-    throw "Illegal number of entries for MID1\n";
+    throw bdf_parse_error("MAT1", "Illegal number of entries.");
   }
 
   // remark 2
   if (!E && !G)
-    throw bdf_parse_error("Either G or E has to be given in MAT1.");
+    throw bdf_parse_error(
+      "MAT1", "Either G or E has to be given.");
   if (!NU) {
     if (!E) {
       NU = make_unique<double>(0.);

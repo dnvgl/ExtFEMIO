@@ -27,6 +27,10 @@ namespace {
 #endif
 #include "bdf_types.h"
 
+CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+  return Catch::toString( ex() );
+}
+
 using namespace std;
 using namespace bdf::types;
 using namespace bdf::type_bounds;
@@ -134,6 +138,12 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
   SECTION("' .736831        '") {
     CHECK(*probe(" .736831        ") ==  0.736831);
+  }
+
+  SECTION("'        '") {
+    bdf_float probe(
+      "probe", num<double>(nullptr, nullptr, nullptr, true));
+    CHECK_FALSE(probe("        "));
   }
 }
 

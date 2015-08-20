@@ -24,6 +24,7 @@ libbdfreadpp_la_SOURCES+=bdf_file.cpp
 libbdfreadpp_la_SOURCES+=bdf_types.cpp
 libbdfreadpp_la_SOURCES+=bdf_types_int.cpp
 libbdfreadpp_la_SOURCES+=bdf_types_float.cpp
+libbdfreadpp_la_SOURCES+=bdf_types_str.cpp
 libbdfreadpp_la_SOURCES+=bdf_string.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_grid.cpp
@@ -32,6 +33,7 @@ libbdfreadpp_la_SOURCES+=bdf_cards_shell.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_ctria3.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_cquad4.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pshell.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_cbeam.cpp
 
 # Local Variables:
 # mode: makefile

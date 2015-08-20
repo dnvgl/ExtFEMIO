@@ -16,8 +16,10 @@
 #include <string>
 #include <algorithm>
 
+#include "bdf_errors.h"
+
 #ifdef _MSC_VER
-#define DllExport   __declspec( dllexport )
+#define DllExport __declspec( dllexport )
 #else
 #define DllExport
 #endif

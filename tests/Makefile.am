@@ -18,11 +18,19 @@ top=../
 
 SUBDIRS=
 EXTRA_DIST=base_test.ju
-check_PROGRAMS=test_bdf_types test_bdf_bounds test_bdf_int test_bdf_float test_bdf_string test_bdf_list test_cards
+check_PROGRAMS=test_bdf_types
+check_PROGRAMS+=test_bdf_bounds
+check_PROGRAMS+=test_bdf_int
+check_PROGRAMS+=test_bdf_float
+check_PROGRAMS+=test_bdf_str
+check_PROGRAMS+=test_bdf_string
+check_PROGRAMS+=test_bdf_list
+check_PROGRAMS+=test_cards
 test_bdf_types_SOURCES=test_bdf_types.cpp
 test_bdf_bounds_SOURCES=test_bdf_bounds.cpp
 test_bdf_int_SOURCES=test_bdf_int.cpp
 test_bdf_float_SOURCES=test_bdf_float.cpp
+test_bdf_str_SOURCES=test_bdf_str.cpp
 test_bdf_string_SOURCES=test_bdf_string.cpp
 test_bdf_list_SOURCES=test_bdf_list.cpp
 test_cards_SOURCES=test_cards.cpp
@@ -30,6 +38,7 @@ test_cards_SOURCES+=test_cards_grid.cpp
 test_cards_SOURCES+=test_cards_mat1.cpp
 test_cards_SOURCES+=test_cards_ctria3.cpp
 test_cards_SOURCES+=test_cards_cquad4.cpp
+test_cards_SOURCES+=test_cards_cbeam.cpp
 
 test_MISC=
 test_bdf_LDADD=../src/libbdfreadpp.la -lboost_regex
@@ -37,6 +46,7 @@ test_bdf_types_LDADD=$(test_bdf_LDADD)
 test_bdf_bounds_LDADD=$(test_bdf_LDADD)
 test_bdf_int_LDADD=$(test_bdf_LDADD)
 test_bdf_float_LDADD=$(test_bdf_LDADD)
+test_bdf_str_LDADD=$(test_bdf_LDADD)
 test_bdf_string_LDADD=$(test_bdf_LDADD)
 test_bdf_list_LDADD=$(test_bdf_LDADD)
 test_cards_LDADD=$(test_bdf_LDADD)
@@ -45,6 +55,7 @@ TESTS=test_bdf_types.ju
 TESTS+=test_bdf_bounds.ju
 TESTS+=test_bdf_int.ju
 TESTS+=test_bdf_float.ju
+TESTS+=test_bdf_str.ju
 TESTS+=test_bdf_string.ju
 TESTS+=test_bdf_list.ju
 TESTS+=test_cards.ju
@@ -55,7 +66,7 @@ test_%.ju: base_test.ju
 # Local Variables:
 # mode: makefile-automake
 # ispell-local-dictionary: "english"
-# compile-command: "make -C .. check -j 7"
+# compile-command: "make -C .. check -j 8"
 # End:
 
 # End of Makefile.am

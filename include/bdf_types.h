@@ -133,7 +133,40 @@ namespace bdf {
       bool does_allow_empty(void) const {
         return allow_empty;
       };
-};
+    };
+
+    class str : public bdf_type_bounds {
+
+    private:
+
+      ::std::set<::std::string> allowed;
+      ::std::string default_val;
+
+    public:
+
+      str() {};
+      str(::std::set<::std::string> allowed) :
+        bdf_type_bounds(),
+        allowed(allowed) {};
+      str(::std::set<::std::string> allowed, ::std::string default_val) :
+        bdf_type_bounds(),
+        allowed(allowed), default_val(default_val) {
+        got_default();
+      };
+
+      bool is_allowed(::std::string probe) {
+        if (allowed.size() == 0)
+          return true;
+        return !(allowed.find(probe) == allowed.end());
+      }
+
+      ::std::string get_default(void) const {
+        if (!has_default())
+          throw bdf_types_error("** ERROR **: No default value avaliable.");
+        return this->default_val;
+      };
+
+    };
   };
 
   namespace types {
@@ -333,6 +366,8 @@ namespace bdf {
 //             return self.default
 
 
+    class bdf_str : public bdf_type_base {
+
 // class Str(_bdfTypeBase):
 
 //     """Real value.
@@ -376,6 +411,25 @@ namespace bdf {
 //                 res, ','.join(self.allowed)))
 //         return res
 
+    private:
+
+      str bounds;
+
+    protected:
+
+      static const bdf_types _type = Str;
+
+    public:
+
+      bdf_str(::std::string);
+
+      bdf_str(::std::string, str);
+
+      ::std::string *operator() (::std::string);
+
+      bdf_types type() const {return _type;};
+
+    };
 
     template <class T> class bdf_list : public bdf_type_base {
 

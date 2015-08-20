@@ -25,6 +25,10 @@ namespace {
 #endif
 #include "bdf_string.h"
 
+CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+  return Catch::toString( ex() );
+}
+
 TEST_CASE("Checking extra string functions", "[bdf_string]") {
 
   SECTION("checking trim functionality") {

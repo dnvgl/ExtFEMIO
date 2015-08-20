@@ -41,10 +41,13 @@ namespace bdf {
 
     typedef enum {
       UNKNOWN,
-      ENDDATA,
-      GRID, MAT1,
-      CTRIA3, CQUAD4,
-      PSHELL
+      GRID,
+      MAT1,
+      CTRIA3, CQUAD4, PSHELL,
+      CBEAM, PBEAM, PBEAML,
+      CBAR, PBAR, PBARL,
+      CROD, PROD,
+      ENDDATA
     } types;
 
     class bdf_card {

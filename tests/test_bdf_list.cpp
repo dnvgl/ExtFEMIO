@@ -27,6 +27,10 @@ namespace {
 #endif
 #include "bdf_types.h"
 
+CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+  return Catch::toString( ex() );
+}
+
 using namespace std;
 using namespace bdf::types;
 using namespace bdf::type_bounds;

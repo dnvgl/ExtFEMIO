@@ -29,6 +29,10 @@ namespace {
 
 #include <memory>
 
+CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+  return Catch::toString( ex() );
+}
+
 using namespace std;
 using namespace bdf::type_bounds;
 

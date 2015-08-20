@@ -43,8 +43,8 @@ using namespace boost;
 bdf_float::bdf_float(::std::string name) :
   bdf_type_base(name), bounds(num<double>()) {};
 
-bdf_float::bdf_float(::std::string name, num<double> _bounds) :
-  bdf_type_base(name), bounds(_bounds) {};
+bdf_float::bdf_float(::std::string name, num<double> bounds) :
+  bdf_type_base(name), bounds(bounds) {};
 
 const regex bdf_float::float_exp_re(
   "([\\+-]?[.[:digit:]]+)([+-][[:digit:]]+)");
@@ -66,12 +66,12 @@ double *bdf_float::operator() (std::string inp) {
     if (this->bounds.does_allow_empty())
       return nullptr;
     if (!this->bounds.has_default())
-      throw "** BDF INP ERROR ** float: '" + name + "' empty entry without default";
+      throw bdf_float_error(name, "empty entry without default");
     *value = this->bounds.get_default();
   } else {
     if (! regex_match(sval, float_re)) {
       std::string msg("illegal input, no float");
-      throw bdf_float_error(msg + "; !" + sval + "!\n");
+      throw bdf_float_error(name, msg + "; !" + sval + "!\n");
     }
 
     smatch m;
@@ -89,7 +89,7 @@ double *bdf_float::operator() (std::string inp) {
     conv >> *value;
   }
   if (!this->bounds.in_bounds(value))
-    throw  "** BDF INP ERROR **: boundary condition violated";
+    throw bdf_float_error(name, "boundary condition violated");
   return value;
 }
 

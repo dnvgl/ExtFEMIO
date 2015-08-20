@@ -31,6 +31,10 @@ namespace {
 #include "bdf_cards.h"
 #include "bdf_file.h"
 
+CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+  return Catch::toString( ex() );
+}
+
 using namespace std;
 using namespace bdf::cards;
 using namespace bdf::input;

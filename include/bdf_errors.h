@@ -16,14 +16,22 @@ class bdf_error {
 protected:
 
   ::std::string msg;
+  ::std::string name;
+  ::std::string err_class;
 
-  ::std::string get_msg(void) { return msg; };
+  ::std::string get_msg(void) const;
 
 public:
 
-  bdf_error(const ::std::string &msg=::std::string("")) : msg(msg) {};
+  bdf_error(
+    const ::std::string &msg,
+    const ::std::string &err_class="bdf_error");
 
-  ::std::string operator() (void) { return this->get_msg(); };
+  bdf_error(
+    const ::std::string&, const ::std::string &msg,
+    const ::std::string &err_class="bdf_error");
+
+  ::std::string operator() (void) const;
 
 };
 
@@ -31,7 +39,7 @@ class bdf_types_error : public bdf_error {
 
 public:
 
-  bdf_types_error(const ::std::string &msg=::std::string("")) : bdf_error(msg) {};
+  bdf_types_error(const ::std::string &msg);
 
 };
 
@@ -39,8 +47,7 @@ class bdf_float_error : public bdf_error {
 
 public:
 
-  bdf_float_error(const ::std::string &msg=::std::string("")) :
-    bdf_error(msg) {};
+  bdf_float_error(const ::std::string&, const ::std::string&);
 
 };
 
@@ -48,8 +55,7 @@ class bdf_int_error : public bdf_error {
 
 public:
 
-  bdf_int_error(const ::std::string &msg=::std::string("")) :
-    bdf_error(msg) {};
+  bdf_int_error(const ::std::string&, const ::std::string&);
 
 };
 
@@ -57,8 +63,15 @@ class bdf_list_error : public bdf_error {
 
 public:
 
-  bdf_list_error(const ::std::string &msg=::std::string("")) :
-    bdf_error(msg) {};
+  bdf_list_error(const ::std::string&, const ::std::string &);
+
+};
+
+class bdf_str_error : public bdf_error {
+
+public:
+
+  bdf_str_error(const ::std::string&, const ::std::string &);
 
 };
 
@@ -66,8 +79,7 @@ class bdf_string_error : public bdf_error {
 
 public:
 
-  bdf_string_error(const ::std::string &msg=::std::string("")) :
-    bdf_error(msg) {};
+  bdf_string_error(const ::std::string&, const ::std::string &);
 
 };
 
@@ -75,8 +87,7 @@ class bdf_parse_error : public bdf_error {
 
 public:
 
-  bdf_parse_error(const ::std::string &msg=::std::string("")) :
-    bdf_error(msg) {};
+  bdf_parse_error(const ::std::string&, const ::std::string &);
 
 };
 

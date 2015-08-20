@@ -56,26 +56,26 @@ long *bdf_int::operator() (const std::string inp) {
     if (this->bounds.does_allow_empty())
       return nullptr;
     if (!this->bounds.has_default())
-      throw "** BDF INP ERROR ** int: '" + name + "'empty entry without default";
+      throw bdf_int_error(name, "empty entry without default");
     *value = this->bounds.get_default();
     return value;
   } else {
     if (! regex_match(inp, int_re)) {
       std::string msg("illegal input (""");
       msg += inp;
-      msg += """), no integer\n";
-      throw msg;
+      msg += """), no integer";
+      throw bdf_int_error(name, msg);
     }
     istringstream buffer(sval);
     buffer >> *value;
   }
   if (!this->bounds.in_bounds(value)) {
-    ::std::string msg("** BDF INP ERROR ** int: boundary condition violated (");
+    ::std::string msg("boundary condition violated (");
     msg += name;
     msg += ")\n(""";
     msg += inp;
-    msg += """)\n";
-    throw  msg;
+    msg += """)";
+    throw bdf_int_error(name, msg);
   }
   return value;
 }

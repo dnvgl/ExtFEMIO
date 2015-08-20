@@ -25,6 +25,10 @@ namespace {
 #endif
 #include "bdf_types.h"
 
+CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+  return Catch::toString( ex() );
+}
+
 using namespace bdf;
 using namespace bdf::types;
 
@@ -77,7 +81,7 @@ TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -j 7"
+  compile-command: "make -C .. check -j 8"
   coding: utf-8
   End:
 */
