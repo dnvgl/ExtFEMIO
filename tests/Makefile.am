@@ -40,6 +40,7 @@ test_cards_SOURCES+=test_cards_ctria3.cpp
 test_cards_SOURCES+=test_cards_cquad4.cpp
 test_cards_SOURCES+=test_cards_cbeam.cpp
 test_cards_SOURCES+=test_cards_cbar.cpp
+test_cards_SOURCES+=test_cards_crod.cpp
 
 test_MISC=
 test_bdf_LDADD=../src/libbdfreadpp.la -lboost_regex

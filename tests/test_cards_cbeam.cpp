@@ -1,6 +1,6 @@
 // Copyright © 2015 by DNV GL SE
 
-// Purpose: Testing the BDF CBEAM cards classes.
+// Purpose: Testing the BDF CBEAM card class.
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 

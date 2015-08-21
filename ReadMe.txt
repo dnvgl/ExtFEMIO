@@ -17,7 +17,7 @@
   |          | =CQUAD4=   | 4 node shaped shell elements                    | \check |
   |          | =CBEAM=    | Complex beams                                   | \check |
   |          | =CBAR=     | Simple beams                                    | \check |
-  |          | =CROD=     | Trusses                                         |        |
+  |          | =CROD=     | Trusses                                         | \check |
   | Element  | properties |                                                 |        |
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |
   |          | =PBEAM=    | Integral properties for =CBEAM=                 |        |

@@ -14,8 +14,6 @@ namespace {
 }
 
 #include "bdf_cards.h"
-
-#include "bdf_cards.h"
 #include "bdf_types.h"
 #include "bdf_errors.h"
 
@@ -171,14 +169,4 @@ cbar::cbar(const ::std::deque<::std::string> &inp) :
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C .. check -j 8"
-// End:
-
-
-// Local Variables:
-// mode: c++
-// ispell-local-dictionary: "english"
-// coding: utf-8
-// c-file-style: "dnvgl"
-// indent-tabs-mode: nil
-// compile-command: "make test"
 // End:

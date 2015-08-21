@@ -1,6 +1,6 @@
 // Copyright © 2015 by DNV GL SE
 
-// Purpose: Testing the BDF CBAR cards class.
+// Purpose: Testing the BDF CBAR card class.
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
@@ -12,8 +12,6 @@ namespace {
 #endif
     = "@(#) $Id$";
 }
-
-#include "bdf_cards.h"
 
 #define NOMINMAX // To avoid problems with "numdric_limits"
 

@@ -440,6 +440,56 @@ Description:
 
     };
 
+/*
+Handle Nastran Bulk CROD entries.
+
+Format:
+.......
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| CROD  | EID   | PID   | G1    | G2    |       |       |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``EID``
+  Element identification number. (Integer > 0)
+``PID``
+  Property identification number of a ``PROD`` entry. (Integer > 0;
+  Default = ``EID``)
+``G1``, ``G2``
+  Grid point identification numbers of connection points. (Integer >
+  0; ``G1`` ≠ ``G2``)
+*/
+
+    class crod : public bdf_card {
+
+    private:
+
+      static bdf_int _EID;
+      static bdf_int _PID;
+      static bdf_int _G1;
+      static bdf_int _G2;
+
+    public:
+
+      DllExport crod(const ::std::deque<::std::string> &inp);
+
+      DllExport ::bdf::cards::types card(void) { return CROD; };
+
+      typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
+      CHOOSE_DIR_CODE choose_dir_code;
+
+      ::std::unique_ptr<long> EID;
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> G1;
+      ::std::unique_ptr<long> G2;
+
+    };
+
   }
 }
 
