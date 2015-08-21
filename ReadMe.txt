@@ -15,8 +15,8 @@
   | Elements |            |                                                 |        |
   |          | =CTRIA3=   | 3 node shaped shell elements                    | \check |
   |          | =CQUAD4=   | 4 node shaped shell elements                    | \check |
-  |          | =CBEAM=    | Complex beams                                   |        |
-  |          | =CBAR=     | Simple beams                                    |        |
+  |          | =CBEAM=    | Complex beams                                   | \check |
+  |          | =CBAR=     | Simple beams                                    | \check |
   |          | =CROD=     | Trusses                                         |        |
   | Element  | properties |                                                 |        |
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |
@@ -47,4 +47,5 @@
   | Group Info. |                     |                                          |        |
   |             | NAPA CSV file       | contains also yield stress informaton    | \check |
   |             | Patran session file | does not contain yield stress information |        |
+
 
