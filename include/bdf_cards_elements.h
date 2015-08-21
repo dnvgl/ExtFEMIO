@@ -323,6 +323,122 @@ Description:
       ::std::unique_ptr<long> SB;
 
     };
+/*
+Handle Nastran Bulk CBAR entries.
+
+Format:
+.......
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| CBAR  | EID   | PID   | GA    | GB    | X1    | X2    | X3    | OFFT  |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | PA    | PB    | W1A   | W2A   | W3A   | W1B   | W2B   | W3B   |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Alternate Format:
+.................
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| CBAR  | EID   | PID   | GA    | GB    | G0    |       |       | OFFT  |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | PA    | PB    | W1A   | W2A   | W3A   | W1B   | W2B   | W3B   |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``EID``
+  Unique element identification number. (0 < Integer < 100,000,000)
+``PID``
+  Property identification number of a PBAR or PBARL entry. (Integer >
+  0 or blank*; Default = EID unless BAROR entry has nonzero entry in
+  field 3.)
+``GA``, ``GB``
+  Grid point identification numbers of connection points. (Integer >
+  0; GA ≠ GB )
+``X1``, ``X2``, ``X3``
+  Components of orientation vector v , from GA, in the displacement
+  coordinate system at GA (default), or in the basic coordinate
+  system. See Remark 8. (Real)
+``G0``
+  Alternate method to supply the orientation vector v using grid point
+  G0. The direction of v is from GA to G0. v is then translated to End
+  A. (Integer > 0; G0 ≠ GA or GB)
+
+``OFFT``
+  Offset vector interpretation flag. (character or blank) See Remark
+  8.
+``PA``, ``PB``
+  Pin flags for bar ends A and B, respectively. Used to remove
+  connections between the grid point and selected degrees-of- freedom
+  of the bar. The degrees-of-freedom are defined in the element’s
+  coordinate system (see Figure 8-8). The bar must have stiffness
+  associated with the PA and PB degrees-of-freedom to be released by
+  the pin flags. For example, if PA = 4 is specified, the PBAR entry
+  must have a value for J, the torsional stiffness. (Up to 5 of the
+  unique Integers 1 through 6 anywhere in the field with no embedded
+  blanks; Integer > 0.)
+``W1A``, ``W2A``, ``W3A``, ``W1B``, ``W2B``, ``W3B``
+  Components of offset vectors w_a and w_b , respectively (see Figure
+  8-8) in displacement coordinate systems (or in element system
+  depending upon the content of the OFFT field), at points GA and GB,
+  respectively. See Remark 7. and 8. (Real; Default = 0.0)
+*/
+
+    class cbar : public bdf_card {
+
+    private:
+
+      static bdf_int _EID;
+      static bdf_int _PID;
+      static bdf_int _GA;
+      static bdf_int _GB;
+      static bdf_float _X1;
+      static bdf_int _G0;
+      static bdf_float _X2;
+      static bdf_float _X3;
+      static bdf_str _OFFT;
+      static bdf_list<int> _PA;
+      static bdf_list<int> _PB;
+      static bdf_float _W1A;
+      static bdf_float _W2A;
+      static bdf_float _W3A;
+      static bdf_float _W1B;
+      static bdf_float _W2B;
+      static bdf_float _W3B;
+
+    public:
+
+      DllExport cbar(const ::std::deque<::std::string> &inp);
+
+      DllExport ::bdf::cards::types card(void) { return CBAR; };
+
+      typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
+      CHOOSE_DIR_CODE choose_dir_code;
+
+      ::std::unique_ptr<long> EID;
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> GA;
+      ::std::unique_ptr<long> GB;
+      ::std::unique_ptr<double> X1;
+      ::std::unique_ptr<long> G0;
+      ::std::unique_ptr<double> X2;
+      ::std::unique_ptr<double> X3;
+      ::std::unique_ptr<::std::string> OFFT;
+      ::std::unique_ptr<::std::deque<int>> PA;
+      ::std::unique_ptr<::std::deque<int>> PB;
+      ::std::unique_ptr<double> W1A;
+      ::std::unique_ptr<double> W2A;
+      ::std::unique_ptr<double> W3A;
+      ::std::unique_ptr<double> W1B;
+      ::std::unique_ptr<double> W2B;
+      ::std::unique_ptr<double> W3B;
+
+    };
 
   }
 }
