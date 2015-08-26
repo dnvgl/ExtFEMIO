@@ -11,6 +11,10 @@
 
 #include <memory>
 
+#ifdef _C2
+#undef _C2
+#endif
+
 namespace bdf {
 
   using namespace types;

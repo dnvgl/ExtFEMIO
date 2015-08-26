@@ -152,7 +152,6 @@
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\bdf_types.cpp" />
     <ClCompile Include="bdf_cards.cpp" />
     <ClCompile Include="bdf_cards_cbar.cpp" />
     <ClCompile Include="bdf_cards_cbeam.cpp" />
