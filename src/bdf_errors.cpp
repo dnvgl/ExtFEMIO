@@ -29,8 +29,8 @@ bdf_error::bdf_error(
 
 ::std::string bdf_error::get_msg(void) const {
   if (name.length())
-    return err_class + ";" + name + ":" + msg;
-  return err_class + ";" + ":" + msg;
+    return err_class + ":" + name + ":" + msg;
+  return err_class + ":" + msg;
 }
 
 ::std::string bdf_error::operator() (void) const {

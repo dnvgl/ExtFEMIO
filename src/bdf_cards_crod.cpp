@@ -18,23 +18,17 @@ namespace {
 #include "bdf_errors.h"
 
 using namespace ::std;
-using namespace ::bdf;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
-using namespace ::bdf::type_bounds;
 
-bdf_int crod::_EID("EID",
-                    num<long>(make_unique<long>(1).get()));
-bdf_int crod::_PID("PID");
-bdf_int crod::_G1("G1");
-bdf_int crod::_G2("G2");
+entry_type<long> crod::_EID("EID",
+                    ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<long> crod::_PID("PID");
+entry_type<long> crod::_G1("G1");
+entry_type<long> crod::_G2("G2");
 
 crod::crod(const ::std::deque<::std::string> &inp) :
   bdf_card(inp) {
-/*
-  typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
-  CHOOSE_DIR_CODE choose_dir_code;
-*/
 
   deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
 
@@ -48,13 +42,10 @@ crod::crod(const ::std::deque<::std::string> &inp) :
   case 5:
     ++pos;
   case 4:
-    G2 = make_unique<long>(*_G2(*pos));
-    ++pos;
-    G1 = make_unique<long>(*_G1(*pos));
-    ++pos;
-    PID = make_unique<long>(*_PID(*pos));
-    ++pos;
-    EID = make_unique<long>(*_EID(*pos));
+    G2 = get_val<long>(_G2, *(pos++));
+    G1 = get_val<long>(_G1, *(pos++));
+    PID = get_val<long>(_PID, *(pos++));
+    EID = get_val<long>(_EID, *pos);
     break;
   default:
     throw bdf_parse_error(

@@ -20,20 +20,21 @@ using namespace bdf::types;
 using namespace bdf::type_bounds;
 using namespace bdf::string;
 
-bdf_str::bdf_str(::std::string name) :
-  bdf_type_base(name), bounds(str()) {}
+entry_type<::std::string>::entry_type(::std::string name) :
+  ::bdf::types::base(name), bounds(::bdf::type_bounds::bound<::std::string>()) {}
 
-bdf_str::bdf_str(::std::string name, str bounds) :
-  bdf_type_base(name), bounds(bounds) {}
+entry_type<::std::string>::entry_type(::std::string name, ::bdf::type_bounds::bound<::std::string> bounds) :
+  ::bdf::types::base(name), bounds(bounds) {}
 
-::std::string *bdf_str::operator() (::std::string inp) {
+::std::string
+*entry_type<::std::string>::operator() (const ::std::string &inp) const {
   std::string sval = bdf::string::string(inp).trim();
 
   if (sval.length() == 0)
     sval = bounds.get_default();
 
   if (!bounds.is_allowed(sval))
-    throw bdf_str_error(name, "Value not in list of allowed values.");
+    throw bdf_str_error(name, "!" + sval + "! Value not in list of allowed values.");
 
   return new ::std::string(sval);
 }

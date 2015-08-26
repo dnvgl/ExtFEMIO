@@ -23,32 +23,49 @@ using namespace ::bdf::cards;
 using namespace ::bdf::types;
 using namespace ::bdf::type_bounds;
 
-bdf_int bdf_shell::_EID("EID", num<long>(make_unique<long>(1).get()));
-bdf_int bdf_shell::_PID(
-  "PID", num<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
-bdf_int bdf_shell::_G1("G1", num<long>(make_unique<long>(1).get()));
-bdf_int bdf_shell::_G2("G2", num<long>(make_unique<long>(1).get()));
-bdf_int bdf_shell::_G3("G3", num<long>(make_unique<long>(1).get()));
-bdf_int bdf_shell::_G4("G4", num<long>(make_unique<long>(1).get()));
-bdf_int bdf_shell::_MCID("MCID", num<long>(make_unique<long>(0).get()));
-bdf_float bdf_shell::_THETA(
-  "MCID", num<double>(nullptr, nullptr, make_unique<double>(0.0).get()));
-bdf_float bdf_shell::_ZOFFS(
-  "ZOFFS", num<double>(nullptr, nullptr, make_unique<double>(0.0).get()));
-bdf_int bdf_shell::_TFLAG(
+entry_type<long> bdf_shell::_EID(
+  "EID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<long> bdf_shell::_PID(
+  "PID",
+  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
+                                  nullptr, nullptr, true));
+entry_type<long> bdf_shell::_G1(
+  "G1", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<long> bdf_shell::_G2(
+  "G2", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<long> bdf_shell::_G3(
+  "G3", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<long> bdf_shell::_G4(
+  "G4", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<long> bdf_shell::_MCID(
+  "MCID", ::bdf::type_bounds::bound<long>(make_unique<long>(0).get()));
+entry_type<double> bdf_shell::_THETA(
+  "MCID", ::bdf::type_bounds::bound<double>(
+    nullptr, nullptr, make_unique<double>(0.0).get()));
+entry_type<double> bdf_shell::_ZOFFS(
+  "ZOFFS", ::bdf::type_bounds::bound<double>(
+    nullptr, nullptr, make_unique<double>(0.0).get()));
+entry_type<long> bdf_shell::_TFLAG(
   "TFLAG",
-  num<long>(make_unique<long>(0).get(), make_unique<long>(1).get(), 
-            make_unique<long>(0).get()));
-bdf_float bdf_shell::_T1(
-  "T1", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_float bdf_shell::_T2(
-  "T2", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_float bdf_shell::_T3(
-  "T3", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_float bdf_shell::_T4(
-  "T4", num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-
-
+  ::bdf::type_bounds::bound<long>(
+    make_unique<long>(0).get(), make_unique<long>(1).get(), 
+    make_unique<long>(0).get()));
+entry_type<double> bdf_shell::_T1(
+  "T1",
+  ::bdf::type_bounds::bound<double>(
+    make_unique<double>(0.).get(), nullptr, nullptr, true));
+entry_type<double> bdf_shell::_T2(
+  "T2",
+  ::bdf::type_bounds::bound<double>(
+    make_unique<double>(0.).get(), nullptr, nullptr, true));
+entry_type<double> bdf_shell::_T3(
+  "T3",
+  ::bdf::type_bounds::bound<double>(
+    make_unique<double>(0.).get(), nullptr, nullptr, true));
+entry_type<double> bdf_shell::_T4(
+  "T4",
+  ::bdf::type_bounds::bound<double>(
+    make_unique<double>(0.).get(), nullptr, nullptr, true));
 
 // Local Variables:
 // mode: c++

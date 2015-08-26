@@ -40,16 +40,16 @@ using namespace bdf::string;
 using namespace boost;
 #endif
 
-bdf_int::bdf_int(::std::string name) :
-  bdf_type_base(name), bounds(*(::std::make_unique< num<long> >())) {};
+entry_type<long>::entry_type(::std::string name) :
+  ::bdf::types::base(name), bounds(*(::std::make_unique< ::bdf::type_bounds::bound<long> >())) {};
 
-bdf_int::bdf_int(::std::string name, num<long> _bounds) :
-  bdf_type_base(name), bounds(_bounds) {};
+entry_type<long>::entry_type(::std::string name, ::bdf::type_bounds::bound<long> _bounds) :
+  ::bdf::types::base(name), bounds(_bounds) {};
 
-const regex bdf_int::int_re(
+const regex entry_type<long>::int_re(
   "[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
-long *bdf_int::operator() (const std::string inp) {
+long *entry_type<long>::operator() (const std::string &inp) const {
   std::string sval = bdf::string::string(inp).trim();
   long *value = new long();
   if (sval.length() == 0) {
@@ -86,7 +86,7 @@ long *bdf_int::operator() (const std::string inp) {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check"
+  compile-command: "make -C .. check -j8"
   coding: utf-8
   End:
 */

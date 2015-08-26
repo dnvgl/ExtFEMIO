@@ -42,142 +42,17 @@ using namespace std;
 #endif
 #include "bdf_errors.h"
 #include "bdf_string.h"
+#include "bdf_type_bounds.h"
 
 
 namespace bdf {
 
-  namespace type_bounds {
-
-    class bdf_type_bounds {
-
-    private:
-
-      bool _has_min;
-      bool _has_max;
-      bool _has_default;
-
-    protected:
-
-      ~bdf_type_bounds () {};
-
-      bool has_min() const {return _has_min;};
-
-      void got_min() {_has_min = true;};
-
-      bool has_max() const {return _has_max;};
-
-      void got_max() {_has_max = true;};
-
-      void got_default() {_has_default = true;};
-
-    public:
-
-      bdf_type_bounds() : _has_min(false), _has_max(false), _has_default(false) {};
-
-      bool has_default() const {
-        return _has_default;
-      };
-    };
-
-    template <class T> class num : public bdf_type_bounds {
-
-    protected:
-
-      T min_val;
-      T max_val;
-      T default_val;
-      bool allow_empty;
-
-    public:
-
-      ~num() {};
-
-      num(const T *_min=nullptr,
-          const T *_max=nullptr,
-          const T *_default=nullptr,
-          const bool &allow_empty=false) :
-        allow_empty(allow_empty) {
-        if (_min != NULL)
-          set_min(*_min);
-        if (_max != NULL)
-          set_max(*_max);
-        if (_default != NULL)
-          set_default(*_default);
-      };
-
-      void set_min(const T &inp) {
-        this->min_val = inp;
-        got_min();
-      };
-
-      void set_max(const T &inp) {
-        this->max_val = inp;
-        got_max();
-      };
-
-      void set_default(const T &inp) {
-        this->default_val = inp;
-        got_default();
-      };
-
-      T get_default(void) const {
-        if (!has_default())
-          throw bdf_types_error("** ERROR **: No default value avaliable.");
-        return this->default_val;
-      };
-
-      bool in_bounds(const T *val) const {
-        return ((!has_min() || *val >= this->min_val) &&
-                (!has_max() || *val <= this->max_val));
-      };
-
-      bool does_allow_empty(void) const {
-        return allow_empty;
-      };
-    };
-
-    class str : public bdf_type_bounds {
-
-    private:
-
-      ::std::set<::std::string> allowed;
-      ::std::string default_val;
-
-    public:
-
-      str() {};
-      str(::std::set<::std::string> allowed) :
-        bdf_type_bounds(),
-        allowed(allowed) {};
-      str(::std::set<::std::string> allowed, ::std::string default_val) :
-        bdf_type_bounds(),
-        allowed(allowed), default_val(default_val) {
-        got_default();
-      };
-
-      bool is_allowed(::std::string probe) {
-        if (allowed.size() == 0)
-          return true;
-        return !(allowed.find(probe) == allowed.end());
-      }
-
-      ::std::string get_default(void) const {
-        if (!has_default())
-          throw bdf_types_error("** ERROR **: No default value avaliable.");
-        return this->default_val;
-      };
-
-    };
-  };
-
   namespace types {
-
-    using namespace ::bdf::type_bounds;
 
     typedef enum {
       None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
 
-    class bdf_type_base {
+    class base {
 
     protected:
 
@@ -186,9 +61,9 @@ namespace bdf {
 
     public:
 
-      bdf_type_base(::std::string);
+      base(::std::string);
 
-      ~bdf_type_base() {};
+      ~base() {};
 
       virtual bdf_types type() const = 0;
 
@@ -203,31 +78,27 @@ namespace bdf {
       };
     };
 
-    inline bool operator== (const bdf_type_base &one,
-                            const bdf_type_base &other) {
+    inline bool operator== (const base &one,
+                            const base &other) {
       return (one.type() == other.type());
     }
 
-    inline bool operator< (const bdf_type_base &one,
-                           const bdf_type_base &other) {
+    inline bool operator< (const base &one,
+                           const base &other) {
       return (one.type() < other.type());
     }
 
-    class bdf_int : public bdf_type_base {
+    template <class T>
+    class entry_type : public base {};
 
-// Integer value.
+    template <>
+    class entry_type<long> : public base {
 
-// :ivar `minval`: minimum allowed for value
-// :type minval: int
-// :ivar `maxval`: maximum allowed for value
-// :type maxval: int
-// :ivar `default`: default value if input is empty.
-//     `default` == `False` is set for value required.
-// :type default: int
+      // Integer value.
 
     private:
 
-      num<long> bounds;
+      ::bdf::type_bounds::bound<long> bounds;
       static const regex int_re;
 
     protected:
@@ -236,94 +107,24 @@ namespace bdf {
 
     public:
 
-      bdf_int(::std::string);
+      entry_type<long>(::std::string);
 
-      bdf_int(::std::string, num<long>);
+      entry_type<long>(::std::string, ::bdf::type_bounds::bound<long>);
 
-      long *operator() (std::string);
+      long *operator() (const std::string&) const;
 
       bdf_types type() const { return _type; };
     };
 
-//     def __init__(self, name, minval=None, maxval=None, default=False):
-//         """
-// :param `name`: Value for setting the instance variables.
-// :type name: str
-// :param `minval`: Value for setting the instance variables.
-// :type minval: int
-// :param `maxval`: Value for setting the instance variables.
-// :type maxval: int
-// :param `default`: Value for setting the instance variables.
-// :type default: int, None, or False
-// """
-//         _bdfTypeBase.__init__(self, name)
-//         self.minval = minval
-//         self.maxval = maxval
-//         self.default = default
 
-//     def __call__(self, inp):
-//         """Convert string `inp` to integer.
+    template <>
+    class entry_type<double> : public base {
 
-// >>> f = Int('dummy')
-// >>> assert f('123') == 123
-// >>> f('123.')
-// Traceback (most recent call last):
-// ValueError: invalid literal for int() with base 10: '123.'
-// >>> f('123+3')
-// Traceback (most recent call last):
-// ValueError: invalid literal for int() with base 10: '123+3'
-
-// :param `inp`: string to convert to integer value.
-// :type inp: str
-
-// :return: `int` value from `inp` or `default`.
-// :rtype: int or default
-// """
-//         try:
-//             return int(inp, base=10)
-//         except ValueError:
-//             if inp.strip() or self.default is False:
-//                 raise
-//             else:
-//                 return self.default
-
-
-    class bdf_float : public bdf_type_base {
-
-// Real value.
-
-// :ivar `minval`: minimum allowed for value
-// :type minval: float
-// :ivar `maxval`: maximum allowed for value
-// :type maxval: float
-// :ivar `default`: default value if input is empty.
-//     `default` == `False` is set for value required.
-// :type default: float
-// """
-
-//     _rank = 2
-
-//     def __init__(self, name, minval=None, maxval=None, default=False):
-//         """
-
-// :param `name`: Value for setting the instance variables.
-// :type name: str
-// :param `minval`: Value for setting the instance variables.
-// :type minval: float
-// :param `maxval`: Value for setting the instance variables.
-// :type maxval: float
-// :param `default`: Value for setting the instance variables.
-// :type default: float, None, or False
-// """
-//         _bdfTypeBase.__init__(self, name)
-//         self.minval = minval
-//         self.maxval = maxval
-//         self.default = default
-
+      // Real value.
 
     private:
 
-      num<double> bounds;
+      ::bdf::type_bounds::bound<double> bounds;
       static const regex float_exp_re;
       static const regex float_re;
       static const regex float_lead_dot;
@@ -334,87 +135,23 @@ namespace bdf {
 
     public:
 
-      bdf_float(::std::string);
+      entry_type<double>(::std::string);
 
-      bdf_float(::std::string, num<double>);
+      entry_type<double>(::std::string, ::bdf::type_bounds::bound<double>);
 
-      double *operator() (::std::string);
+      double *operator() (const ::std::string&) const;
 
       bdf_types type() const {return _type;};
     };
 
-//     def __call__(self, inp):
-//         """Convert string to float
+    template <>
+    class entry_type<::std::string> : public base {
 
-// >>> f = Float('dummy')
-// >>> assert f('123.') == 123.0
-// >>> assert f('123+3') == 123000.0
-
-// :param `inp`: string to convert to float value.
-// :type inp: str
-
-// :return: float value from `inp` or `default`.
-// :rtype: float, None, False
-// """
-//         _INP = inp.strip()
-//         if _INP or inp is False:
-//             is_exp = FLOAT_MASSAGE.search(_INP, 1)
-//             if is_exp:
-//                 _INP = "%se%c%s" % (_INP[:is_exp.start()], is_exp.groups()[0],
-//                                     _INP[is_exp.end():])
-//             return float(_INP)
-//         else:
-//             return self.default
-
-
-    class bdf_str : public bdf_type_base {
-
-// class Str(_bdfTypeBase):
-
-//     """Real value.
-
-// :ivar `allowed`: If not `None` a list of allowed values.
-// :type allowed: tuple(str) or None
-// :ivar `default`: default value if input is empty. `default` == False
-//     is set for value required.
-// :type default: str
-// """
-
-//     _rank = 3
-
-//     def __init__(self, name, default=None, allowed=None):
-//         """
-// :param    `default`: Value for setting the instance variables.
-// :type default: `str`, ``None``, or ``False``
-// :param `allowed`: Value for setting the instance variables.
-// :type allowed: tuple(str) or None
-// """
-//         _bdfTypeBase.__init__(self, name)
-//         self.default = default
-//         self.allowed = allowed
-
-//     def __call__(self, inp):
-//         """Return the requested string value.
-
-// :param `inp`: string to be returned.
-// :type inp: str
-// :return: str value from `inp` or `default`.
-// :rtype: str, None, or False
-// """
-//         res = inp.strip()
-//         if not res:
-//             if self.default is False:
-//                 raise ValueError
-//             else:
-//                 res = self.default.strip()
-//         if self.allowed is not None and res not in self.allowed:
-//             raise ValueError("'{}' not list of allowed values: '{}'".format(
-//                 res, ','.join(self.allowed)))
-//         return res
+      // String value.
 
     private:
 
-      str bounds;
+      ::bdf::type_bounds::bound<::std::string> bounds;
 
     protected:
 
@@ -422,33 +159,20 @@ namespace bdf {
 
     public:
 
-      bdf_str(::std::string);
+      entry_type<::std::string>(::std::string);
 
-      bdf_str(::std::string, str);
+      entry_type<::std::string>(::std::string, ::bdf::type_bounds::bound<::std::string>);
 
-      ::std::string *operator() (::std::string);
+      ::std::string *operator() (const ::std::string &) const;
 
       bdf_types type() const {return _type;};
 
     };
 
-    template <class T> class bdf_list : public bdf_type_base {
+    template <>
+    class entry_type<::std::deque<int>> : public base {
 
-// class List(_bdfTypeBase):
-
-//     """List of integers.
-// """
-
-//     def __init__(self, name, maxelem=None, minval=None, maxval=None,
-//                  uniq=None):
-//         _bdfTypeBase.__init__(self, name)
-//         self.maxelem = maxelem
-//         self.minval = minval
-//         self.maxval = maxval
-//         self.uniq = uniq
-
-//     def __call__(self, inp):
-//         return tuple([int(i) for i in inp.strip()])
+      // List of integers.
 
     private:
 
@@ -460,98 +184,26 @@ namespace bdf {
 
     public:
 
-      bdf_list(::std::string name) :
-        bdf_type_base(name) {};
+      entry_type<::std::deque<int>>(::std::string name) :
+        base(name) {};
 
-      inline ::std::deque<T>* operator() (::std::string inp);
+      ::std::deque<int>* operator() (const ::std::string&) const;
 
       inline bdf_types type() const {return _type;};
 
     };
-
-    template <class T>
-    const regex bdf_list<T>::int_re("[[:digit:]]*");
-
-    template <> inline ::std::deque<int>*
-    bdf_list<int>::operator() (std::string inp) {
-      ::std::deque<int> *value =  new ::std::deque<int>();
-      std::string sval = ::bdf::string::string(inp).trim();
-      if (! regex_match(sval, int_re)) {
-        std::string msg("illegal input (""");
-        msg += sval;
-        msg += """), no integer in list\n";
-        throw bdf_types_error(msg);
-      }
-      for (::std::string::iterator pos = sval.begin();
-           pos != sval.end(); ++pos)
-        value->push_back(*pos - '0');
-      return value;
-    }
-
-
-// class Choose(_bdfTypeBase):
-
-//     "Choose between multiple entries"
-
-//     def __init__(self, *args):
-//         """
-// :param `args`: args to choose from.
-// :type args: list(_bdfTypeBase)
-// """
-//         self.args = tuple(sorted(args))
-//         _bdfTypeBase.__init__(self, '_'.join(
-//             [i.name for i in self.args
-//              if not isinstance(i, Blank)]))
-
-//     def __call__(self, inp):
-//         """Convert string `inp` first fitting type.
-
-// >>> f = Choose(Float('doggy'), Int('dummy'))
-// >>> assert f('123') == 123
-// >>> assert f('123.') == 123.0
-// >>> assert f('123+3') == 123000.0
-// >>> f('invalid') # doctest: +IGNORE_EXCEPTION_DETAIL
-// Traceback (most recent call last):
-// ValueError: invalid literal for dummy, doggy: 'invalid'
-
-// :param `inp`: string to convert to integer value.
-// :type inp: str
-
-// :return: `int` value from `inp` or `default`.
-// :rtype: int or default
-// """
-//         for i in self.args:
-//             if not inp.strip():
-//                 if isinstance(i, Blank):
-//                     return i
-//             else:
-//                 try:
-//                     return i(inp)
-//                 except ValueError:
-//                     pass
-//         try:
-//             return i(inp)
-//         except ValueError:
-//             raise ValueError("invalid literal for %s: '%s'" %
-//                              (','.join([a.name for a in self.args]), inp))
-
-// class Cross(_bdfTypeBase):
-
-//     "Cross reference for default values."
-
-//     def __init__(self, name):
-//         """
-// :param `name`: name of cross referenced entry.
-// :type name: str
-// """
-//         _bdfTypeBase.__init__(self, name)
-
-//     def __call__(self, dummy):
-//         raise ValueError("Element `Cross` no yet supported")
-
   };
 }
 
+template <class T> inline
+::std::unique_ptr<T>
+get_val(const ::bdf::types::entry_type<T> &t, const ::std::string &inp) {
+  T *dummy = t(inp);
+  if (!dummy)
+    return nullptr;
+  else
+    return ::std::make_unique<T>(*dummy);
+}
 
 #endif // _BERHOL20150407_BDF_TYPES
 

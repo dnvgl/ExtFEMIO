@@ -25,41 +25,36 @@ using namespace ::bdf::cards;
 using namespace ::bdf::types;
 using namespace ::bdf::type_bounds;
 
-bdf_int pshell::_PID("PID", num<long>(make_unique<long>(1).get()));
-bdf_int pshell::_MID1(
+entry_type<long> pshell::_PID("PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<long> pshell::_MID1(
   "MID1",
-  num<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
-bdf_float pshell::_T(
-  "T", num<double>(nullptr, nullptr, nullptr, true));
-bdf_int pshell::_MID2(
+  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
+entry_type<double> pshell::_T(
+  "T", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<long> pshell::_MID2(
   "MID2",
-  num<long>(make_unique<long>(-1).get(), nullptr, nullptr, true));
-bdf_float pshell::_12I_T__3(
+  ::bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr, nullptr, true));
+entry_type<double> pshell::_12I_T__3(
   "12I/T**3",
-  num<double>(make_unique<double>(0.).get(), nullptr,
+  ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr,
               make_unique<double>(1.).get()));
-bdf_int pshell::_MID3(
+entry_type<long> pshell::_MID3(
   "MID3",
-  num<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
-bdf_float pshell::_TS_T(
-  "TS/T", num<double>(make_unique<double>(0.).get(), nullptr,
+  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
+entry_type<double> pshell::_TS_T(
+  "TS/T", ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr,
                       make_unique<double>(.833333).get()));
-bdf_float pshell::_NSM(
-  "NSM", num<double>(nullptr, nullptr, nullptr, true));
-bdf_float pshell::_Z1(
-  "Z1", num<double>(nullptr, nullptr, nullptr, true));
-bdf_float pshell::_Z2(
-  "Z2", num<double>(nullptr, nullptr, nullptr, true));
-bdf_int pshell::_MID4(
-  "MID4", num<long>(make_unique<long>(1).get(),
+entry_type<double> pshell::_NSM(
+  "NSM", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<double> pshell::_Z1(
+  "Z1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<double> pshell::_Z2(
+  "Z2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<long> pshell::_MID4(
+  "MID4", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
                       nullptr, nullptr, true));
 
-
-
 pshell::pshell(const deque<::std::string> &inp) : bdf_card(inp) {
-
-  long *l_ptr;
-  double *d_ptr;
 
   deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
 
@@ -75,41 +70,23 @@ pshell::pshell(const deque<::std::string> &inp) : bdf_card(inp) {
   case 12:
     ++pos;
   case 11:
-    l_ptr = _MID4(*pos);
-    MID4 = (l_ptr == nullptr) ? nullptr : make_unique<long>(*l_ptr);
-    ++pos;
+    MID4 = get_val<long>(_MID4, *(pos++));
   case 10:
-    d_ptr = _Z2(*pos);
-    Z2 = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    Z2 = get_val<double>(_Z2, *(pos++));
   case 9:
-    d_ptr = _Z1(*pos);
-    Z1 = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    Z1 = get_val<double>(_Z1, *(pos++));
   case 8:
-    d_ptr = _NSM(*pos);
-    NSM = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
-    d_ptr = _TS_T(*pos);
-    TS_T = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
-    l_ptr = _MID3(*pos);
-    MID3 = (l_ptr == nullptr) ? nullptr : make_unique<long>(*l_ptr);
-    ++pos;
-    d_ptr = _12I_T__3(*pos);
-    x12I_T__3 = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
-    l_ptr = _MID2(*pos);
-    MID2 = (l_ptr == nullptr) ? nullptr : make_unique<long>(*l_ptr);
-    ++pos;
-    d_ptr = _T(*pos);
-    T = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
-    l_ptr = _MID1(*pos);
-    MID1 = (l_ptr == nullptr) ? nullptr : make_unique<long>(*l_ptr);
-    ++pos;
-    l_ptr = _PID(*pos);
-    PID = (l_ptr == nullptr) ? nullptr : make_unique<long>(*l_ptr);
+    NSM = get_val<double>(_NSM, *(pos++));
+  case 7:
+    TS_T = get_val<double>(_TS_T, *(pos++));
+  case 6:
+    MID3 = get_val<long>(_MID3, *(pos++));
+  case 5:
+    x12I_T__3 = get_val<double>(_12I_T__3, *(pos++));
+    MID2 = get_val<long>(_MID2, *(pos++));
+    T = get_val<double>(_T, *(pos++));
+    MID1 = get_val<long>(_MID1, *(pos++));
+    PID = get_val<long>(_PID, *pos);
     break;
   default:
     throw "Illegal number of entries for PSHELL\n";

@@ -35,41 +35,41 @@ using namespace bdf::types;
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-  bdf_type_base* obj_int = new bdf_int("dummy1");
-  bdf_type_base* obj_float = new bdf_float("dummy2");
-  bdf_type_base* obj_list = new bdf_list<int>("dummy 3");
+  ::bdf::types::base* obj_int = new entry_type<long>("dummy1");
+  ::bdf::types::base* obj_float = new entry_type<double>("dummy2");
+  ::bdf::types::base* obj_list = new entry_type<::std::deque<int>>("dummy 3");
 
-  SECTION("Checking 'bdf_int.type' against 'Int'") {
-    CHECK(bdf_int("dummy idiot").type() == Int);
+  SECTION("Checking 'entry_type<long>.type' against 'Int'") {
+    CHECK(entry_type<long>("dummy idiot").type() == Int);
   }
 
-  SECTION("Checking 'bdf_int->type' against 'Int'") {
+  SECTION("Checking 'entry_type<long>->type' against 'Int'") {
     CHECK(obj_int->type() == Int);
   }
 
-  SECTION("Checking 'bdf_float.type' against 'Float'") {
-    CHECK(bdf_float("dummy float").type() == Float);
+  SECTION("Checking 'entry_type<double>.type' against 'Float'") {
+    CHECK(entry_type<double>("dummy float").type() == Float);
   }
 
-  SECTION("Checking 'bdf_float->type' against 'Float'") {
+  SECTION("Checking 'entry_type<double>->type' against 'Float'") {
     CHECK(obj_float->type() == Float);
   }
 
   SECTION("Checking 'bdf_list.type' against 'List'") {
-    CHECK(bdf_list<int>("dummy").type() == List);
+    CHECK(entry_type<::std::deque<int>>("dummy").type() == List);
   }
 
   SECTION("Checking 'bdf_list->type' against 'List'") {
     CHECK(obj_list->type() == List);
   }
 
-  SECTION("Comparing 'bdf_int' with 'bdf_float'") {
-    CHECK(bdf_int("dummy int") < bdf_float("dummy float"));
-    CHECK(bdf_float("dummy float") > bdf_int("dummy int"));
-    CHECK(bdf_int("dummy int") != bdf_float("dummy float"));
+  SECTION("Comparing 'entry_type<long>' with 'entry_type<double>'") {
+    CHECK(entry_type<long>("dummy int") < entry_type<double>("dummy float"));
+    CHECK(entry_type<double>("dummy float") > entry_type<long>("dummy int"));
+    CHECK(entry_type<long>("dummy int") != entry_type<double>("dummy float"));
   }
 
-  SECTION("Comparing '*bdf_int' with '*bdf_float'") {
+  SECTION("Comparing '*entry_type<long>' with '*entry_type<double>'") {
     CHECK(*obj_int < *obj_float);
   }
 }

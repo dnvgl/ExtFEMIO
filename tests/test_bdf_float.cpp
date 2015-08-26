@@ -37,7 +37,7 @@ using namespace bdf::type_bounds;
 
 TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
-  bdf_float probe("dummy", num<double>(NULL, NULL, make_unique<double>(0.).get()));
+  entry_type<double> probe("dummy", ::bdf::type_bounds::bound<double>(NULL, NULL, make_unique<double>(0.).get()));
 
   SECTION("'   1.   '") {
     CHECK(*probe("   1.   ") == 1.);
@@ -56,7 +56,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'  -1.   ', min 0.") {
-    bdf_float probe("dummy", num<double>(new double(0.), NULL, new double(0.)));
+    entry_type<double> probe("dummy", ::bdf::type_bounds::bound<double>(new double(0.), NULL, new double(0.)));
     CHECK_THROWS(*probe("  -1.   "));
   }
 
@@ -100,7 +100,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'        ', no default") {
-    bdf_float probe("dummy", num<double>(NULL, NULL, NULL));
+    entry_type<double> probe("dummy", ::bdf::type_bounds::bound<double>(NULL, NULL, NULL));
     CHECK_THROWS(*probe("        "));
   }
 
@@ -141,8 +141,8 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'        '") {
-    bdf_float probe(
-      "probe", num<double>(nullptr, nullptr, nullptr, true));
+    entry_type<double> probe(
+      "probe", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
     CHECK_FALSE(probe("        "));
   }
 }

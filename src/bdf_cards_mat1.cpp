@@ -28,41 +28,39 @@ using namespace ::bdf::cards;
 using namespace ::bdf::types;
 using namespace ::bdf::type_bounds;
 
-bdf_int mat1::_MID(
-  "MID", num<long>(make_unique<long>(1).get()));
-bdf_float mat1::_E(
-  "E", num<double>(
+entry_type<long> mat1::_MID(
+  "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+entry_type<double> mat1::_E(
+  "E", ::bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_float mat1::_G(
-  "G", num<double>(
+entry_type<double> mat1::_G(
+  "G", ::bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_float mat1::_NU(
-  "NU", num<double>(make_unique<double>(-1.).get(),
+entry_type<double> mat1::_NU(
+  "NU", ::bdf::type_bounds::bound<double>(make_unique<double>(-1.).get(),
                     make_unique<double>(.5).get(), nullptr, true));
-bdf_float mat1::_RHO(
-  "RHO", num<double>(nullptr, nullptr, nullptr, true));
-bdf_float mat1::_A(
-  "A", num<double>(nullptr, nullptr, nullptr, true));
-bdf_float mat1::_TREF(
-  "TREF", num<double>(nullptr, nullptr, nullptr, true));
-bdf_float mat1::_GE(
-  "GE", num<double>(nullptr, nullptr, nullptr, true));
-bdf_float mat1::_ST(
+entry_type<double> mat1::_RHO(
+  "RHO", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<double> mat1::_A(
+  "A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<double> mat1::_TREF(
+  "TREF", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<double> mat1::_GE(
+  "GE", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+entry_type<double> mat1::_ST(
   "ST",
-  num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_float mat1::_SC(
+  ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+entry_type<double> mat1::_SC(
   "SC",
-  num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_float mat1::_SS(
+  ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+entry_type<double> mat1::_SS(
   "SS",
-  num<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-bdf_int mat1::_MCSID(
+  ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+entry_type<long> mat1::_MCSID(
   "MCSID",
-  num<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
+  ::bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
 
 mat1::mat1(const deque<::std::string> &inp) : bdf_card(inp) {
-  long *l_ptr;
-  double *d_ptr;
 
   MCSID = nullptr;
   SS = nullptr;
@@ -87,50 +85,28 @@ mat1::mat1(const deque<::std::string> &inp) : bdf_card(inp) {
   case 13:
     ++pos;
   case 12:
-    l_ptr = _MCSID(*pos);
-    MCSID = (l_ptr == nullptr) ? nullptr : make_unique<long>(*l_ptr);
-    ++pos;
+    MCSID = get_val<long>(_MCSID, *(pos++));
   case 11:
-    d_ptr = _SS(*pos);
-    SS = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    SS = get_val<double>(_SS, *(pos++));
   case 10:
-    d_ptr = _SC(*pos);
-    SC = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    SC = get_val<double>(_SC, *(pos++));
   case 9:
-    d_ptr = _ST(*pos);
-    ST = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    ST = get_val<double>(_ST, *(pos++));
   case 8:
-    d_ptr = _GE(*pos);
-    GE = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    GE = get_val<double>(_GE, *(pos++));
   case 7:
-    d_ptr = _TREF(*pos);
-    TREF = (d_ptr == nullptr) ? nullptr :  make_unique<double>(*d_ptr);
-    ++pos;
+    TREF = get_val<double>(_TREF, *(pos++));
   case 6:
-    d_ptr = _A(*pos);
-    A = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    A = get_val<double>(_A, *(pos++));
   case 5:
-    d_ptr = _RHO(*pos);
-    RHO = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    RHO = get_val<double>(_RHO, *(pos++));
   case 4:
-    d_ptr = _NU(*pos);
-    NU = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    NU = get_val<double>(_NU, *(pos++));
   case 3:
-    d_ptr = _G(*pos);
-    G = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
+    G = get_val<double>(_G, *(pos++));
   case 2:
-    d_ptr = _E(*pos);
-    E = (d_ptr == nullptr) ? nullptr : make_unique<double>(*d_ptr);
-    ++pos;
-    MID = make_unique<long>(*_MID(*pos));
+    E = get_val<double>(_E, *(pos++));
+    MID = get_val<long>(_MID, *(pos));
     break;
   default:
     throw bdf_parse_error("MAT1", "Illegal number of entries.");

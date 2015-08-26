@@ -157,16 +157,20 @@
     <ClCompile Include="bdf_cards_cbar.cpp" />
     <ClCompile Include="bdf_cards_cbeam.cpp" />
     <ClCompile Include="bdf_cards_cquad4.cpp" />
+    <ClCompile Include="bdf_cards_crod.cpp" />
     <ClCompile Include="bdf_cards_ctria3.cpp" />
     <ClCompile Include="bdf_cards_grid.cpp" />
     <ClCompile Include="bdf_cards_mat1.cpp" />
+    <ClCompile Include="bdf_cards_pbeam.cpp" />
     <ClCompile Include="bdf_cards_pshell.cpp" />
     <ClCompile Include="bdf_cards_shell.cpp" />
     <ClCompile Include="bdf_errors.cpp" />
     <ClCompile Include="bdf_file.cpp" />
     <ClCompile Include="bdf_string.cpp" />
+    <ClCompile Include="bdf_types.cpp" />
     <ClCompile Include="bdf_types_float.cpp" />
     <ClCompile Include="bdf_types_int.cpp" />
+    <ClCompile Include="bdf_types_list_int.cpp" />
     <ClCompile Include="bdf_types_str.cpp" />
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
@@ -178,6 +182,7 @@
     <ClInclude Include="..\include\bdf_file.h" />
     <ClInclude Include="..\include\bdf_string.h" />
     <ClInclude Include="..\include\bdf_types.h" />
+    <ClInclude Include="..\include\bdf_type_bounds.h" />
     <ClInclude Include="..\include\catch.hpp" />
     <ClInclude Include="..\include\my_c++14.h" />
     <ClInclude Include="resource.h" />

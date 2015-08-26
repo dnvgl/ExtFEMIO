@@ -38,21 +38,21 @@ using namespace bdf::type_bounds;
 
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
-  ::std::unique_ptr< num< long > > probe =
-    make_unique<num<long> >();
-  ::std::unique_ptr< num< long > > probe_min =
-      make_unique<num<long> >(make_unique<long>(-12).get(), (long*)NULL, (long*)NULL);
-  ::std::unique_ptr< num< long > > probe_max =
-      make_unique<num<long>>((long*)NULL, make_unique<long>(12).get(), (long*)NULL);
-  ::std::unique_ptr< num< long > > probe_mm =
-      make_unique<num<long> >(make_unique<long>(-12).get(),
+  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe =
+    make_unique<::bdf::type_bounds::bound<long> >();
+  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_min =
+      make_unique<::bdf::type_bounds::bound<long> >(make_unique<long>(-12).get(), (long*)NULL, (long*)NULL);
+  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_max =
+      make_unique<::bdf::type_bounds::bound<long>>((long*)NULL, make_unique<long>(12).get(), (long*)NULL);
+  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_mm =
+      make_unique<::bdf::type_bounds::bound<long> >(make_unique<long>(-12).get(),
                               make_unique<long>(12).get(), (long*)NULL);
-  ::std::unique_ptr< num< long > > probe_mmd =
-      make_unique<num<long> >(make_unique<long>(-12).get(),
+  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_mmd =
+      make_unique<::bdf::type_bounds::bound<long> >(make_unique<long>(-12).get(),
                               make_unique<long>(12).get(),
                               make_unique<long>(6).get());
-  ::std::unique_ptr< num< long > > probe_def =
-      make_unique<num<long> >((long*)NULL, (long*)NULL,
+  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_def =
+      make_unique<::bdf::type_bounds::bound<long> >((long*)NULL, (long*)NULL,
                               make_unique<long>(1).get());
 
   SECTION("<nothing>") {
@@ -151,8 +151,8 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
 TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
 
-  num<double> *probe = new num<double>();
-  num<double> *probe_def = new num<double>(nullptr, nullptr, new double(1.));
+  ::bdf::type_bounds::bound<double> *probe = new ::bdf::type_bounds::bound<double>();
+  ::bdf::type_bounds::bound<double> *probe_def = new ::bdf::type_bounds::bound<double>(nullptr, nullptr, new double(1.));
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());

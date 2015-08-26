@@ -40,25 +40,25 @@ using namespace bdf::string;
 using namespace boost;
 #endif
 
-bdf_float::bdf_float(::std::string name) :
-  bdf_type_base(name), bounds(num<double>()) {};
+entry_type<double>::entry_type(::std::string name) :
+  ::bdf::types::base(name), bounds(::bdf::type_bounds::bound<double>()) {};
 
-bdf_float::bdf_float(::std::string name, num<double> bounds) :
-  bdf_type_base(name), bounds(bounds) {};
+entry_type<double>::entry_type(::std::string name, ::bdf::type_bounds::bound<double> bounds) :
+  ::bdf::types::base(name), bounds(bounds) {};
 
-const regex bdf_float::float_exp_re(
+const regex entry_type<double>::float_exp_re(
   "([\\+-]?[.[:digit:]]+)([+-][[:digit:]]+)");
 
-const regex bdf_float::float_re(
+const regex entry_type<double>::float_re(
   "([\\+-]?((0|([1-9][[:digit:]]*))?[.][[:digit:]]*)|"
   "[.][[:digit:]]+)(((E[+-]?)|[+-])[[:digit:]]+)?",
   regex_constants::ECMAScript);
 
-const regex bdf_float::float_lead_dot(
+const regex entry_type<double>::float_lead_dot(
   "^[\\+-]?[.][[:digit:]]+", regex_constants::ECMAScript);
 
 // Convert string to float
-double *bdf_float::operator() (std::string inp) {
+double *entry_type<double>::operator() (const std::string &inp) const {
   double *value = new double();
   std::string sval = ::bdf::string::string(inp).trim().upper();
 

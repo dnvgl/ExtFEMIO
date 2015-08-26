@@ -20,10 +20,8 @@ namespace {
 #include <memory>
 
 using namespace ::std;
-using namespace ::bdf;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
-using namespace ::bdf::type_bounds;
 
 cquad4::cquad4(const deque<::std::string> &inp) : bdf_shell(inp) {
 
@@ -44,34 +42,28 @@ cquad4::cquad4(const deque<::std::string> &inp) : bdf_shell(inp) {
   case 15:
     ++pos;
   case 14:
-    T4 = make_unique<double>(*_T4(*pos));
-    ++pos;
+    T4 = get_val<double>(_T4, *(pos++));
   case 13:
-    T3 = make_unique<double>(*_T3(*pos));
-    ++pos;
+    T3 = get_val<double>(_T3, *(pos++));
   case 12:
-    T2 = make_unique<double>(*_T2(*pos));
-    ++pos;
+    T2 = get_val<double>(_T2, *(pos++));
   case 11:
-    T1 = make_unique<double>(*_T1(*pos));
-    ++pos;
+    T1 = get_val<double>(_T1, *(pos++));
   case 10:
-    TFLAG = make_unique<long>(*_TFLAG(*pos));
-    ++pos;
+    TFLAG = get_val<long>(_TFLAG, *(pos++));
   case 9:
     ++pos;
   case 8:
-    ZOFFS = make_unique<double>(*_ZOFFS(*pos));
-    ++pos;
+    ZOFFS = get_val<double>(_ZOFFS, *(pos++));
   case 7:
     try {
-      THETA = make_unique<double>(*_THETA(*pos));
+      THETA = get_val<double>(_THETA, *pos);
       MCID = nullptr;
       choose_mcid_theta = has_THETA;
     }
     catch (bdf_float_error) {
       try {
-        MCID = make_unique<long>(*_MCID(*pos));
+        MCID = get_val<long>(_MCID, *pos);
         THETA = nullptr;
         choose_mcid_theta = has_MCID;
       }
@@ -83,17 +75,12 @@ cquad4::cquad4(const deque<::std::string> &inp) : bdf_shell(inp) {
     }
     ++pos;
   case 6:
-    G4 = make_unique<long>(*_G4(*pos));
-    ++pos;
-    G3 = make_unique<long>(*_G3(*pos));
-    ++pos;
-    G2 = make_unique<long>(*_G2(*pos));
-    ++pos;
-    G1 = make_unique<long>(*_G1(*pos));
-    ++pos;
-    PID = make_unique<long>(*_PID(*pos));
-    ++pos;
-    EID = make_unique<long>(*_EID(*pos));
+    G4 = get_val<long>(_G4, *(pos++));
+    G3 = get_val<long>(_G3, *(pos++));
+    G2 = get_val<long>(_G2, *(pos++));
+    G1 = get_val<long>(_G1, *(pos++));
+    PID = get_val<long>(_PID, *(pos++));
+    EID = get_val<long>(_EID, *pos);
     break;
   default:
     throw "Illegal number of entries for CQUAD4\n";

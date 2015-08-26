@@ -20,7 +20,7 @@
   |          | =CROD=     | Trusses                                         | \check |
   | Element  | properties |                                                 |        |
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |
-  |          | =PBEAM=    | Integral properties for =CBEAM=                 |        |
+  |          | =PBEAM=    | Integral properties for =CBEAM=                 | \check |
   |          | =PBEAML=   | Properties for =CBEAM= describing cross section |        |
   |          | =PBAR=     | Integral properties for =CBAR=                  |        |
   |          | =PBARL=    | Properties for =CBAR= describing cross section  |        |
@@ -47,5 +47,3 @@
   | Group Info. |                     |                                          |        |
   |             | NAPA CSV file       | contains also yield stress informaton    | \check |
   |             | Patran session file | does not contain yield stress information |        |
-
-

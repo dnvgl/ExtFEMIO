@@ -38,31 +38,31 @@ TEST_CASE("BDF str types parsing.", "[bdf_types]" ) {
 
   const char* _allowed[3] = { "ONE", "TWO", "THREE" };
   const ::std::set<::std::string> allowed(_allowed, _allowed+3);
-  str str_allowed(allowed);
-  str str_allowed_default(allowed, "ONE");
+  ::bdf::type_bounds::bound<::std::string> str_allowed(allowed);
+  ::bdf::type_bounds::bound<::std::string> str_allowed_default(allowed, "ONE");
 
   SECTION("'TEST    '") {
-    bdf_str obj("dummy");
+    entry_type<::std::string> obj("dummy");
     CHECK(*obj("TEST    ") == ::std::string("TEST"));
   }
 
   SECTION("'ONE     '") {
-    bdf_str obj("dummy", str_allowed);
+    entry_type<::std::string> obj("dummy", str_allowed);
     CHECK(*obj("ONE     ") == "ONE");
   }
 
   SECTION("'FOUR        '") {
-    bdf_str obj("dummy", str_allowed);
+    entry_type<::std::string> obj("dummy", str_allowed);
     CHECK_THROWS(*obj("FOUR    "));
   }
 
   SECTION("'            '") {
-    bdf_str obj("dummy", str_allowed);
+    entry_type<::std::string> obj("dummy", str_allowed);
     CHECK_THROWS(*obj("        "));
   }
 
   SECTION("'            ', 1") {
-    bdf_str obj("dummy", str_allowed_default);
+    entry_type<::std::string> obj("dummy", str_allowed_default);
     CHECK(*obj("        ") == "ONE");
   }
 }

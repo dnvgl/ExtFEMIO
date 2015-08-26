@@ -75,17 +75,17 @@ Description:
 
     private:
 
-      static bdf_int _PID;
-      static bdf_int _MID1;
-      static bdf_float _T;
-      static bdf_int _MID2;
-      static bdf_float _12I_T__3; // 12 I / T**3
-      static bdf_int _MID3;
-      static bdf_float _TS_T; // TS / T
-      static bdf_float _NSM;
-      static bdf_float _Z1;
-      static bdf_float _Z2;
-      static bdf_int _MID4;
+      static entry_type<long> _PID;
+      static entry_type<long> _MID1;
+      static entry_type<double> _T;
+      static entry_type<long> _MID2;
+      static entry_type<double> _12I_T__3; // 12 I / T**3
+      static entry_type<long> _MID3;
+      static entry_type<double> _TS_T; // TS / T
+      static entry_type<double> _NSM;
+      static entry_type<double> _Z1;
+      static entry_type<double> _Z2;
+      static entry_type<long> _MID4;
 
     public:
 
@@ -106,7 +106,202 @@ Description:
       DllExport ::bdf::cards::types card(void) { return PSHELL; };
 
     };
+
+/*
+Handle Nastran Bulk PBEAM entries.
+
+Format:
+.......
+
+(Note: n = number of dimensions and m = number of intermediate stations)
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| PBEAM | PID   | MID   | A(A)  | I1(A) | I2(A) |I12(A) | J(A)  |NSM(A) |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | C1(A) | C2(A) | D1(A) | D2(A) | E1(A) | E2(A) | F1(A) | F2(A) |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+The next two continuations are repeated for each intermediate station
+as described in Remark 5. and ``SO`` and ``X/XB`` must be specified.
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | SO    | X/XB  | A     | I1    | I2    | I12   | J     | NSM   |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | C1    | C2    | D1    | D2    | E1    | E2    | F1    | F2    |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+The last two continuations are:
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | K1    | K2    | S1    | S2    |NSI(A) |NSI(B) | CW(A) | CW(B) |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | M1(A) | M2(A) | M1(B) | M2(B) | N1(A) | N2(A) | N1(B) | N2(B) |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``PID``
+  Property identification number. (Integer > 0)
+``MID``
+  Material identification number. (Integer > 0)
+``A(A)``
+  Area of the beam cross section at end ``A``. (Real > 0.0)
+``I1(A)``
+  Area moment of inertia at end ``A`` for bending in plane 1 about the
+  neutral axis. (Real > 0.0)
+``I2(A)``
+  Area moment of inertia at end ``A`` for bending in plane 2 about the
+  neutral axis. (Real > 0.0)
+``I12(A)``
+  Area product of inertia at end ``A``. (Real)
+``J(A)``
+  Torsional stiffness parameter at end ``A``. (Real >= 0.0 but > 0.0 if
+  warping is present)
+``NSM(A)``
+  Nonstructural mass per unit length at end ``A``. (Real, Default=0.0)
+``Ci(A)``, ``Di(A)``, ``Ei(A)``, ``Fi(A)``
+  The *y* and *z* locations (*i* = 1 corresponds to y and *i* = 2
+  corresponds to *z*) in element coordinates relative to the shear
+  center at end ``A`` for stress data recovery. (Real, Default: y = z
+  = 0.0)
+``SO``
+  Stress output request option. (Character)
+
+  ``YES``
+    Stresses recovered at points ``Ci``, ``Di``, ``Ei``,
+    and ``Fi`` on the next continuation.
+  ``YESA``
+    Stresses recovered at points with the same *y* and *z* location as
+    end ``A``.
+  ``NO``
+    No stresses or forces are recovered.
+
+``X/XB``
+  Distance from end ``A`` in the element coordinate system divided by
+  the length of the element. (Real > 0.0)
+``A``, ``I1``, ``I2``, ``I12``, ``J``, ``NSM``
+  Area, moments of inertia, torsional stiffness parameter, and
+  nonstructural mass for the cross section located at *x*. (Real; J >
+  0.0 if warping is present.)
+``Ci``, ``Di``, ``Ei``, ``Fi``
+  The *y* and *z* locations (*i = 1* corresponds to *y* and *i = 2*
+  corresponds to z) in element coordinates relative to the shear
+  center for the cross section located at ``X/XB``. The values are
+  fiber locations for stress data recovery. Ignored for beam
+  p-elements. (Real)
+``K1``, ``K2``
+  Shear stiffness factor *K* in *K*A*G* for plane 1 and plane
+  2. (Real, Default = 1.0)
+``S1``, ``S2``
+  Shear relief coefficient due to taper for plane 1 and plane
+  2. Ignored for beam p-elements.  (Real, Default = 0.0)
+``NSI(A)``, ``NSI(B)``
+  Nonstructural mass moment of inertia per unit length about
+  nonstructural mass center of gravity at end ``A`` and end
+  ``B``. (Real, Default = 0.0, same as end A)
+``CW(A)``, ``CW(B)``
+  Warping coefficient for end ``A`` and end ``B``. Ignored for beam
+  p-elements. (Real, Default = 0.0, same as end ``A``)
+``M1(A)``, ``M2(A)``, ``M1(B)``, ``M2(B)``
+  *(y,z)* coordinates of center of gravity of nonstructural mass for
+  end ``A`` and end ``B``. (Real, Default = 0.0 (no offset from shear
+  center), same values as end ``A``)
+``N1(A)``, ``N2(A)``, ``N1(B)``, ``N2(B)``
+  *(y,z)* coordinates of neutral axis for end ``A`` and end
+  ``B``. (Real)
+ */
+
+    class pbeam : public bdf_card {
+      // Handle Nastran Bulk PBEAM entries.
+
+    private:
+
+      static entry_type<long> _PID;
+      static entry_type<long> _MID;
+      static entry_type<double> _A;
+      static entry_type<double> _I1;
+      static entry_type<double> _I2;
+      static entry_type<double> _I12;
+      static entry_type<double> _J;
+      static entry_type<double> _NSM;
+      static entry_type<double> _C1;
+      static entry_type<double> _C2;
+      static entry_type<double> _D1;
+      static entry_type<double> _D2;
+      static entry_type<double> _E1;
+      static entry_type<double> _E2;
+      static entry_type<double> _F1;
+      static entry_type<double> _F2;
+      // fields that might appear more than once
+      static entry_type<::std::string> _SO;
+      static entry_type<double> _X_XB;
+      // fields_finish
+      static entry_type<double> _K1;
+      static entry_type<double> _K2;
+      static entry_type<double> _S1;
+      static entry_type<double> _S2;
+      static entry_type<double> _NSI_A;
+      static entry_type<double> _NSI_B;
+      static entry_type<double> _CW_A;
+      static entry_type<double> _CW_B;
+      static entry_type<double> _M1_A;
+      static entry_type<double> _M2_A;
+      static entry_type<double> _M1_B;
+      static entry_type<double> _M2_B;
+      static entry_type<double> _N1_A;
+      static entry_type<double> _N2_A;
+      static entry_type<double> _N1_B;
+      static entry_type<double> _N2_B;
+
+    public:
+
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> MID;
+      // fields that might appear more than once
+      ::std::deque<::std::unique_ptr<double>> A;
+      ::std::deque<::std::unique_ptr<double>> I1;
+      ::std::deque<::std::unique_ptr<double>> I2;
+      ::std::deque<::std::unique_ptr<double>> I12;
+      ::std::deque<::std::unique_ptr<double>> J;
+      ::std::deque<::std::unique_ptr<double>> NSM;
+      ::std::deque<::std::unique_ptr<double>> C1;
+      ::std::deque<::std::unique_ptr<double>> C2;
+      ::std::deque<::std::unique_ptr<double>> D1;
+      ::std::deque<::std::unique_ptr<double>> D2;
+      ::std::deque<::std::unique_ptr<double>> E1;
+      ::std::deque<::std::unique_ptr<double>> E2;
+      ::std::deque<::std::unique_ptr<double>> F1;
+      ::std::deque<::std::unique_ptr<double>> F2;
+      ::std::deque<::std::unique_ptr<::std::string>> SO;
+      ::std::deque<::std::unique_ptr<double>> X_XB;
+      // fields_finish
+      ::std::unique_ptr<double> K1;
+      ::std::unique_ptr<double> K2;
+      ::std::unique_ptr<double> S1;
+      ::std::unique_ptr<double> S2;
+      ::std::unique_ptr<double> NSI_A;
+      ::std::unique_ptr<double> NSI_B;
+      ::std::unique_ptr<double> CW_A;
+      ::std::unique_ptr<double> CW_B;
+      ::std::unique_ptr<double> M1_A;
+      ::std::unique_ptr<double> M2_A;
+      ::std::unique_ptr<double> M1_B;
+      ::std::unique_ptr<double> M2_B;
+      ::std::unique_ptr<double> N1_A;
+      ::std::unique_ptr<double> N2_A;
+      ::std::unique_ptr<double> N1_B;
+      ::std::unique_ptr<double> N2_B;
+
+      DllExport pbeam(const ::std::deque<::std::string> &);
+
+      DllExport ::bdf::cards::types card(void) { return PBEAM; };
+
+    };
   }
+
 }
 
 #endif // _BERHOL20150721_BDF_CARDS_PROPERTIES
