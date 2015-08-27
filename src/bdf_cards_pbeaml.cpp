@@ -18,6 +18,10 @@ namespace {
 #include <cstdlib>
 #include <memory>
 
+#ifdef _TYPE
+#undef _TYPE
+#endif
+
 using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
