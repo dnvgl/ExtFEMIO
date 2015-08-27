@@ -19,10 +19,8 @@ namespace {
 #include <memory>
 
 using namespace ::std;
-using namespace ::bdf;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
-using namespace ::bdf::type_bounds;
 
 entry_type<long> pbeam::_PID("PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 entry_type<long> pbeam::_MID(
@@ -55,8 +53,9 @@ entry_type<double> pbeam::_F2(
   "F2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
 // fields that might appear more than once
 namespace {
-  const char* SOinit[3] = { "YES", "YESA", "NO" };
-  const ::std::set<::std::string> SO_set(SOinit, SOinit + 3);
+  static const size_t SO_len = 3;
+  const char* SO_init[SO_len] = { "YES", "YESA", "NO" };
+  const ::std::set<::std::string> SO_set(SO_init, SO_init + SO_len);
 }
 entry_type<::std::string> pbeam::_SO("SO", ::bdf::type_bounds::bound<::std::string>(SO_set));
 entry_type<double> pbeam::_X_XB(
@@ -237,7 +236,7 @@ pbeam::pbeam(const deque<::std::string> &inp) : bdf_card(inp) {
     PID = get_val<long>(_PID, *(pos));
     break;
   default:
-    throw "Illegal number of entries for PBEAM\n";
+    throw bdf_parse_error("PBEAM", "Illegal number of entries.");
   }
 }
 

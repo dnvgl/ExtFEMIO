@@ -89,7 +89,7 @@ pshell::pshell(const deque<::std::string> &inp) : bdf_card(inp) {
     PID = get_val<long>(_PID, *pos);
     break;
   default:
-    throw "Illegal number of entries for PSHELL\n";
+    throw bdf_parse_error("PSHELL", "Illegal number of entries.");
   }
 }
 

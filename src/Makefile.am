@@ -36,6 +36,7 @@ libbdfreadpp_la_SOURCES+=bdf_cards_ctria3.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_grid.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_mat1.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pbeam.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_pbeaml.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pshell.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_shell.cpp
 

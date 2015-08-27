@@ -75,7 +75,7 @@ grid::grid(const deque<::std::string> &inp) : bdf_card(inp) {
     ID = get_val<long>(_ID, *pos);
     break;
   default:
-    throw "Illegal number of entries for GRID\n";
+    throw bdf_parse_error("GRID", "Illegal number of entries.");
   }
 }
 

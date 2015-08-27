@@ -88,7 +88,7 @@ ctria3::ctria3(const deque<::std::string> &inp) : bdf_shell(inp) {
     EID = get_val<long>(_EID, *pos);
     break;
   default:
-    throw "Illegal number of entries for CTRIA3\n";
+    throw bdf_parse_error("CTRIA3", "Illegal number of entries.");
   }
 }
 

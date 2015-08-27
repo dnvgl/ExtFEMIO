@@ -18,13 +18,13 @@ top=../
 
 SUBDIRS=
 EXTRA_DIST=base_test.ju
-check_PROGRAMS=test_bdf_types
-check_PROGRAMS+=test_bdf_bounds
-check_PROGRAMS+=test_bdf_int
+check_PROGRAMS=test_bdf_bounds
 check_PROGRAMS+=test_bdf_float
+check_PROGRAMS+=test_bdf_int
+check_PROGRAMS+=test_bdf_list
 check_PROGRAMS+=test_bdf_str
 check_PROGRAMS+=test_bdf_string
-check_PROGRAMS+=test_bdf_list
+check_PROGRAMS+=test_bdf_types
 check_PROGRAMS+=test_cards
 test_bdf_types_SOURCES=test_bdf_types.cpp
 test_bdf_bounds_SOURCES=test_bdf_bounds.cpp
@@ -42,6 +42,7 @@ test_cards_SOURCES+=test_cards_ctria3.cpp
 test_cards_SOURCES+=test_cards_grid.cpp
 test_cards_SOURCES+=test_cards_mat1.cpp
 test_cards_SOURCES+=test_cards_pbeam.cpp
+test_cards_SOURCES+=test_cards_pbeaml.cpp
 test_cards_SOURCES+=test_cards_pshell.cpp
 
 test_MISC=

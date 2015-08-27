@@ -119,6 +119,11 @@ namespace bdf {
         allowed(allowed), default_val(default_val) {
         got_default();
       };
+      bound(::std::string default_val) :
+        base(),
+        default_val(default_val) {
+        got_default();
+      };
 
       bool is_allowed(const ::std::string probe) const {
         if (allowed.size() == 0)

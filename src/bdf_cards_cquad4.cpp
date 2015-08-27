@@ -83,7 +83,7 @@ cquad4::cquad4(const deque<::std::string> &inp) : bdf_shell(inp) {
     EID = get_val<long>(_EID, *pos);
     break;
   default:
-    throw "Illegal number of entries for CQUAD4\n";
+    throw bdf_parse_error("CQUAD4", "Illegal number of entries.");
   }
 }
 

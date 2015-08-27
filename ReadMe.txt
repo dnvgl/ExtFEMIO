@@ -21,7 +21,7 @@
   | Element  | properties |                                                 |        |
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |
   |          | =PBEAM=    | Integral properties for =CBEAM=                 | \check |
-  |          | =PBEAML=   | Properties for =CBEAM= describing cross section |        |
+  |          | =PBEAML=   | Properties for =CBEAM= describing cross section | \check |
   |          | =PBAR=     | Integral properties for =CBAR=                  |        |
   |          | =PBARL=    | Properties for =CBAR= describing cross section  |        |
   |          | =PROD=     | Properties for =CROD=                           |        |

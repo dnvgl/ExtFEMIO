@@ -239,10 +239,8 @@ Description:
       static entry_type<double> _E2;
       static entry_type<double> _F1;
       static entry_type<double> _F2;
-      // fields that might appear more than once
       static entry_type<::std::string> _SO;
       static entry_type<double> _X_XB;
-      // fields_finish
       static entry_type<double> _K1;
       static entry_type<double> _K2;
       static entry_type<double> _S1;
@@ -302,6 +300,106 @@ Description:
       DllExport pbeam(const ::std::deque<::std::string> &);
 
       DllExport ::bdf::cards::types card(void) { return PBEAM; };
+
+    };
+
+/*
+Handle Nastran Bulk PBEAML entries.
+
+Format:
+.......
+
+(Note: n = number of dimensions and m = number of intermediate stations)
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| PBEAML| PID   | MID   | GROUP | TYPE  |       |       |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       |DIM1(A)|DIM2(A)| -etc.-|DIMn(A)| NSM(A)| SO(1) |X(1)/XB|DIM1(1)|    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       |DIM2(1)|-etc.- |DIMn(1)| NSM(1)| SO(2) |X(2)/XB|DIM1(2)|DIM2(2)|    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | -etc.-|DIMn(2)| NSM(m)| -etc.-| SO(m) |X(m)/XB|DIM1(m)| -etc.-|    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       |DIMn(m)| NSM(m)| SO(B) | 1.0   |DIM1(B)|DIM2(B)| -etc.-|DIMn(B)|    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       |       | NSM(B)|       |       |       |       |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``PID``
+  Property identification number. (Integer > 0)
+``MID``
+  Material identification number. (Integer > 0)
+``GROUP``
+  Cross-section group. (Character; Default = ``MSCBML0``)
+``TYPE``
+  Cross-section shape. (Character: ``ROD``, ``TUBE``, ``L``, ``I``,
+  ``CHAN``, ``T``, ``BOX``, ``BAR``, ``CROSS``, ``H``, ``T1``, ``I1``,
+  ``CHAN1``, ``Z``, ``CHAN2``, ``T2``, ``BOX1``, ``HEXA``, ``HAT``,
+  ``HAT1``, ``DBOX`` for GROUP = ``MSCBML0``)
+``DIMi(j)``
+  Cross-section dimensions at end ``A``, intermediate station *j* and
+  end ``B``.  (Real > 0.0 for ``GROUP`` = ``MSCBML0``)
+``NSM(j)``
+  Nonstructural mass per unit length. (Default = 0.0)
+``SO(j)``, ``SO(B)``
+  Stress output request option for intermediate station j and end B.
+  (Character; Default = ``YES``):
+
+  ``YES``
+    Stresses recovered at all points on next continuation and shown in
+    Figure 8-116 as ``C``, ``D``, ``E``, and ``F``.
+  ``NO``
+    No stresses or forces are recovered.
+
+``X(j)/XB``
+  Distance from end ``A`` to intermediate station *j* in the element
+  coordinate system divided by the length of the element. (Real>0.0;
+  Default = 1.0)
+ */
+
+    class pbeaml : public bdf_card {
+      // Handle Nastran Bulk PBEAML entries.
+
+    private:
+
+      static entry_type<long> _PID;
+      static entry_type<long> _MID;
+      static entry_type<::std::string> _GROUP;
+      static entry_type<::std::string> _TYPE;
+      static entry_type<double> _DIM;
+      static entry_type<double> _NSM;
+      static entry_type<::std::string> _SO;
+      static entry_type<double> _X_XB;
+
+      static const ::std::set<::std::string> dimnum1;
+      static const ::std::set<::std::string> dimnum2;
+      static const ::std::set<::std::string> dimnum3;
+      static const ::std::set<::std::string> dimnum4;
+      static const ::std::set<::std::string> dimnum5;
+      static const ::std::set<::std::string> dimnum6;
+      static const ::std::set<::std::string> dimnum10;
+
+
+    public:
+
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> MID;
+      ::std::unique_ptr<::std::string> GROUP;
+      ::std::unique_ptr<::std::string> TYPE;
+      // fields that might appear more than once
+      ::std::deque<::std::deque<::std::unique_ptr<double>>*> DIM;
+      ::std::deque<::std::unique_ptr<double>> NSM;
+      ::std::deque<::std::unique_ptr<::std::string>> SO;
+      ::std::deque<::std::unique_ptr<double>> X_XB;
+
+      DllExport pbeaml(const ::std::deque<::std::string> &);
+
+      DllExport ::bdf::cards::types card(void) { return PBEAML; };
 
     };
   }
