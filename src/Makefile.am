@@ -40,6 +40,7 @@ libbdfreadpp_la_SOURCES+=bdf_cards_pbar.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pbarl.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pbeam.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pbeaml.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_prod.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pshell.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_shell.cpp
 

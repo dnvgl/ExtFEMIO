@@ -1,0 +1,117 @@
+// Copyright © 2015 by DNV GL SE
+
+// Purpose: Testing the BDF PROD card class.
+
+// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+
+// ID:
+namespace {
+  const char  cID[]
+#ifdef __GNUC__
+  __attribute__ ((__unused__))
+#endif
+    = "@(#) $Id$";
+}
+
+#define NOMINMAX // To avoid problems with "numdric_limits"
+
+#include <limits>
+
+#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
+
+#include <catch.hpp>
+
+#ifndef _MSC_VER
+#include <config.h>
+#endif
+#include "bdf_cards.h"
+
+CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+  return ex();
+}
+
+CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+  return ex;
+}
+
+using namespace std;
+using namespace bdf::cards;
+
+TEST_CASE("BDF PROD definitions.",
+          "[bdf_PROD]") {
+
+  SECTION("Free Field Format 1") {
+
+    ::std::deque<string> data;
+    data.push_back(
+      "PROD,1,2,3.,4.,5.,6.\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    prod probe(lines);
+
+    CHECK(*probe.PID == 1);
+    CHECK(*probe.MID == 2);
+    CHECK(*probe.A == 3.);
+    CHECK(*probe.J == 4.);
+    CHECK(*probe.C == 5.);
+    CHECK(*probe.NSM == 6.);
+  }
+
+  SECTION("Free Field Format 2") {
+
+    ::std::deque<string> data;
+    data.push_back(
+      "PROD,1,2,3.,4.,5.\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    prod probe(lines);
+
+    CHECK(*probe.PID == 1);
+    CHECK(*probe.MID == 2);
+    CHECK(*probe.A == 3.);
+    CHECK(*probe.J == 4.);
+    CHECK(*probe.C == 5.);
+    CHECK(*probe.NSM == 0.);
+  }
+
+  SECTION("Free Field Format 3") {
+
+    ::std::deque<string> data;
+    data.push_back(
+      "PROD,1,2,3.,4.\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    prod probe(lines);
+
+    CHECK(*probe.PID == 1);
+    CHECK(*probe.MID == 2);
+    CHECK(*probe.A == 3.);
+    CHECK(*probe.J == 4.);
+    CHECK(*probe.C == 0.);
+    CHECK(*probe.NSM == 0.);
+  }
+
+
+  SECTION("Small Field Format (BAR)") {
+
+    ::std::deque<string> data;
+    data.push_back(
+//     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+      "PROD          17      23    42.6   17.92  4.2356     0.5                        \n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    prod probe(lines);
+
+    CHECK(*probe.PID == 17);
+    CHECK(*probe.MID == 23);
+    CHECK(*probe.A == 42.6);
+    CHECK(*probe.J == 17.92);
+    CHECK(*probe.C == 4.2356);
+    CHECK(*probe.NSM == 0.5);
+  }
+}
+
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C .. check -j 8"
+// End:

@@ -45,6 +45,7 @@ test_cards_SOURCES+=test_cards_pbar.cpp
 test_cards_SOURCES+=test_cards_pbarl.cpp
 test_cards_SOURCES+=test_cards_pbeam.cpp
 test_cards_SOURCES+=test_cards_pbeaml.cpp
+test_cards_SOURCES+=test_cards_prod.cpp
 test_cards_SOURCES+=test_cards_pshell.cpp
 
 test_MISC=

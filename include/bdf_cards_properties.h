@@ -560,6 +560,65 @@ Description:
 
       DllExport ::bdf::cards::types card(void) { return PBARL; };
     };
+
+/*
+Handle Nastran Bulk PROD entries.
+
+Rod Property
+
+Defines the properties of a rod element (`CROD` entry).
+
+Format:
+.......
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| PROD  | PID   | MID   | A     | J     | C     | NSM   |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``PID``
+  Property identification number. (Integer > 0)
+``MID``
+  Material identification number. See Remarks 2. and 3. (Integer > 0)
+``A``
+  Area of the rod. (Real)
+``J``
+  Torsional constant. (Real)
+``C``
+  Coefficient to determine torsional stress. (Real; Default = 0.0)
+``NSM``
+  Nonstructural mass per unit length. (Real)
+ */
+
+    class prod : public bdf_card {
+      // Handle Nastran Bulk PROD entries.
+
+    private:
+
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID;
+      static const entry_type<double> _A;
+      static const entry_type<double> _J;
+      static const entry_type<double> _C;
+      static const entry_type<double> _NSM;
+
+    public:
+
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> MID;
+      ::std::unique_ptr<double> A;
+      ::std::unique_ptr<double> J;
+      ::std::unique_ptr<double> C;
+      ::std::unique_ptr<double> NSM;
+
+      DllExport prod(const ::std::deque<::std::string> &);
+
+      DllExport ::bdf::cards::types card(void) { return PROD; };
+    };
   }
 }
 

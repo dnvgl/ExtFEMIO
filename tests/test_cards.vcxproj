@@ -170,6 +170,7 @@
     <ClCompile Include="test_cards_pbarl.cpp" />
     <ClCompile Include="test_cards_pbeam.cpp" />
     <ClCompile Include="test_cards_pbeaml.cpp" />
+    <ClCompile Include="test_cards_prod.cpp" />
     <ClCompile Include="test_cards_pshell.cpp" />
   </ItemGroup>
   <ItemGroup>

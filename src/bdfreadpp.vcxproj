@@ -165,6 +165,7 @@
     <ClCompile Include="bdf_cards_pbarl.cpp" />
     <ClCompile Include="bdf_cards_pbeam.cpp" />
     <ClCompile Include="bdf_cards_pbeaml.cpp" />
+    <ClCompile Include="bdf_cards_prod.cpp" />
     <ClCompile Include="bdf_cards_pshell.cpp" />
     <ClCompile Include="bdf_cards_shell.cpp" />
     <ClCompile Include="bdf_errors.cpp" />
