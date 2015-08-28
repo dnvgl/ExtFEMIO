@@ -22,7 +22,7 @@
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |
   |          | =PBEAM=    | Integral properties for =CBEAM=                 | \check |
   |          | =PBEAML=   | Properties for =CBEAM= describing cross section | \check |
-  |          | =PBAR=     | Integral properties for =CBAR=                  |        |
+  |          | =PBAR=     | Integral properties for =CBAR=                  | \check |
   |          | =PBARL=    | Properties for =CBAR= describing cross section  |        |
   |          | =PROD=     | Properties for =CROD=                           |        |
   | Misc     |            |                                                 |        |
