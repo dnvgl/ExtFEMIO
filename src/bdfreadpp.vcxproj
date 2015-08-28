@@ -152,6 +152,7 @@
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bdf_l_geom.cpp" />
     <ClCompile Include="bdf_cards.cpp" />
     <ClCompile Include="bdf_cards_cbar.cpp" />
     <ClCompile Include="bdf_cards_cbeam.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="bdf_cards_grid.cpp" />
     <ClCompile Include="bdf_cards_mat1.cpp" />
     <ClCompile Include="bdf_cards_pbar.cpp" />
+    <ClCompile Include="bdf_cards_pbarl.cpp" />
     <ClCompile Include="bdf_cards_pbeam.cpp" />
     <ClCompile Include="bdf_cards_pbeaml.cpp" />
     <ClCompile Include="bdf_cards_pshell.cpp" />

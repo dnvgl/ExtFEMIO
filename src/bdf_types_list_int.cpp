@@ -59,5 +59,5 @@ entry_type<::std::deque<int>>::operator() (const std::string &inp) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C .. check -j 8"
 // End:

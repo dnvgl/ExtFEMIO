@@ -109,5 +109,5 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C .. check -j 8"
 // End:

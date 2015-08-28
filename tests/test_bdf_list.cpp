@@ -73,5 +73,5 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check"
+// compile-command: "make -C .. check -j 8"
 // End:

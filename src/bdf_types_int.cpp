@@ -86,7 +86,7 @@ long *entry_type<long>::operator() (const std::string &inp) const {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -j8"
+  compile-command: "make -C .. check -j 8"
   coding: utf-8
   End:
 */

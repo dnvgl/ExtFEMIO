@@ -74,74 +74,13 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
   }
 }
 
-// class TestChoose1(object):
-
-    //     @pytest.fixture(scope='class')
-    //     def probe(self):
-    //         return bdf_types.Choose(bdf_types.Float('doggy'),
-    //                                 bdf_types.Int('dummy'))
-
-    //     def test_int(self, probe):
-    //         assert probe("1236") == 1236
-
-    //     def test_float1(self, probe):
-    //         assert probe("1236.") == 1236.
-
-    //     def test_float2(self, probe):
-    //         assert probe("1.236+3") == 1236.
-
-    // class Test_Choose2(object):
-
-    //     @pytest.fixture(scope='class')
-    //     def probe(self):
-    //         return bdf_types.Choose(bdf_types.Float('BIT'),
-    //                                 bdf_types.Str('OFFT',
-    //                                               allowed=('GGG', 'BGG', 'GGO',
-    //                                                        'BGO', 'GOG', 'BOG',
-    //                                                        'GOO', 'BOO', ''),
-    //                                               default='GGG'))
-
-    //     def test_float(self, probe):
-    //         assert probe("1.") == 1.
-
-    //     def test_str_1(self, probe):
-    //         assert probe("BGO") == 'BGO'
-
-    //     def test_str_2(self, probe):
-    //         assert probe("GGO     ") == 'GGO'
-
-    //     def test_str_3(self, probe):
-    //         assert probe("") == 'GGG'
-
-    //     def test_str_4(self, probe):
-    //         assert probe("        ") == 'GGG'
-
-    //     def test_raise(self, probe):
-    //         with pytest.raises(ValueError):
-    //             probe("XXX     ")
-
-    // def test_Str1(self):
-    //     obj = bdf_types.Str('dummy')
-    //     assert obj('GOO   ') == 'GOO'
-
-    // def test_Str2(self):
-    //     obj = bdf_types.Str('dummy', default=False)
-    //     with pytest.raises(ValueError):
-    //         obj('')
-
-    // def test_Cross(self):
-    //     obj = bdf_types.Cross('dummy')
-    //     with pytest.raises(ValueError):
-    //         obj("")
-
-
 /*
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C ../ check"
+  compile-command: "make -C ../ check -j 8"
   coding: utf-8
   End:
 */

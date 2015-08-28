@@ -303,6 +303,20 @@ Description:
 
     };
 
+    class l_geom {
+
+    protected:
+
+      l_geom () {};
+
+      static const ::std::set<::std::string> dimnum1;
+      static const ::std::set<::std::string> dimnum2;
+      static const ::std::set<::std::string> dimnum3;
+      static const ::std::set<::std::string> dimnum4;
+      static const ::std::set<::std::string> dimnum5;
+      static const ::std::set<::std::string> dimnum6;
+      static const ::std::set<::std::string> dimnum10;
+    };
 /*
 Handle Nastran Bulk PBEAML entries.
 
@@ -362,7 +376,7 @@ Description:
   Default = 1.0)
  */
 
-    class pbeaml : public bdf_card {
+    class pbeaml : public bdf_card, private l_geom {
       // Handle Nastran Bulk PBEAML entries.
 
     private:
@@ -375,15 +389,6 @@ Description:
       static const entry_type<double> _NSM;
       static const entry_type<::std::string> _SO;
       static const entry_type<double> _X_XB;
-
-      static const ::std::set<::std::string> dimnum1;
-      static const ::std::set<::std::string> dimnum2;
-      static const ::std::set<::std::string> dimnum3;
-      static const ::std::set<::std::string> dimnum4;
-      static const ::std::set<::std::string> dimnum5;
-      static const ::std::set<::std::string> dimnum6;
-      static const ::std::set<::std::string> dimnum10;
-
 
     public:
 
@@ -489,6 +494,71 @@ Description:
       DllExport pbar(const ::std::deque<::std::string> &);
 
       DllExport ::bdf::cards::types card(void) { return PBAR; };
+    };
+
+/*
+Handle Nastran Bulk PBARL entries.
+
+Format:
+.......
+
+(Note: n = number of dimensions and m = number of intermediate stations)
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| PBARL | PID   | MID   | GROUP | TYPE  |       |       |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | DIM1  | DIM2  | DIM3  | DIM4  | DIM5  | DIM6  | DIM7  | DIM8  |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | DIM9  |-etc.- | NSM  )|       |       |       |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``PID``
+  Property identification number. (Integer > 0)
+``MID``
+  Material identification number. (Integer > 0)
+``GROUP``
+  Cross-section group. (Character; Default = ``MSCBML0``)
+``TYPE``
+  Cross-section shape. (Character: ``ROD``, ``TUBE``, ``L``, ``I``,
+  ``CHAN``, ``T``, ``BOX``, ``BAR``, ``CROSS``, ``H``, ``T1``, ``I1``,
+  ``CHAN1``, ``Z``, ``CHAN2``, ``T2``, ``BOX1``, ``HEXA``, ``HAT``,
+  ``HAT1``, ``DBOX`` for GROUP = ``MSCBML0``)
+``DIMi``
+  Cross-section dimensions.  (Real > 0.0 for ``GROUP`` = ``MSCBML0``)
+``NSM``
+  Nonstructural mass per unit length. ``NSM`` is specified after the
+  last ``DIMi``. (Default = 0.0)
+ */
+
+    class pbarl : public bdf_card, private l_geom {
+      // Handle Nastran Bulk PBARL entries.
+
+    private:
+
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID;
+      static const entry_type<::std::string> _GROUP;
+      static const entry_type<::std::string> _TYPE;
+      static const entry_type<double> _DIM;
+      static const entry_type<double> _NSM;
+
+    public:
+
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> MID;
+      ::std::unique_ptr<::std::string> GROUP;
+      ::std::unique_ptr<::std::string> TYPE;
+      ::std::deque<::std::unique_ptr<double>> DIM;
+      ::std::unique_ptr<double> NSM;
+
+      DllExport pbarl(const ::std::deque<::std::string> &);
+
+      DllExport ::bdf::cards::types card(void) { return PBARL; };
     };
   }
 }

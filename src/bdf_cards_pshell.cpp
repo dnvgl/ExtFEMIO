@@ -99,5 +99,5 @@ pshell::pshell(const deque<::std::string> &inp) : bdf_card(inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C .. check -j 8"
 // End:

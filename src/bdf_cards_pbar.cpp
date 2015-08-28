@@ -158,5 +158,5 @@ pbar::pbar(const deque<::std::string> &inp) : bdf_card(inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C .. check -j 8"
 // End:

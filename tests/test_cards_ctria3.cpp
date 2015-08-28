@@ -80,5 +80,5 @@ TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)", "[bdf_ctria3]" ) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C .. check -j 8"
 // End:
