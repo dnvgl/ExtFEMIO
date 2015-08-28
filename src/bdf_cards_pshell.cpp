@@ -25,32 +25,32 @@ using namespace ::bdf::cards;
 using namespace ::bdf::types;
 using namespace ::bdf::type_bounds;
 
-entry_type<long> pshell::_PID("PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<long> pshell::_MID1(
+const entry_type<long> pshell::_PID("PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<long> pshell::_MID1(
   "MID1",
   ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
-entry_type<double> pshell::_T(
+const entry_type<double> pshell::_T(
   "T", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<long> pshell::_MID2(
+const entry_type<long> pshell::_MID2(
   "MID2",
   ::bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr, nullptr, true));
-entry_type<double> pshell::_12I_T__3(
+const entry_type<double> pshell::_12I_T__3(
   "12I/T**3",
   ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr,
               make_unique<double>(1.).get()));
-entry_type<long> pshell::_MID3(
+const entry_type<long> pshell::_MID3(
   "MID3",
   ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
-entry_type<double> pshell::_TS_T(
+const entry_type<double> pshell::_TS_T(
   "TS/T", ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr,
                       make_unique<double>(.833333).get()));
-entry_type<double> pshell::_NSM(
+const entry_type<double> pshell::_NSM(
   "NSM", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pshell::_Z1(
+const entry_type<double> pshell::_Z1(
   "Z1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pshell::_Z2(
+const entry_type<double> pshell::_Z2(
   "Z2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<long> pshell::_MID4(
+const entry_type<long> pshell::_MID4(
   "MID4", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
                       nullptr, nullptr, true));
 

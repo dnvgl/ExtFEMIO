@@ -41,6 +41,7 @@ test_cards_SOURCES+=test_cards_crod.cpp
 test_cards_SOURCES+=test_cards_ctria3.cpp
 test_cards_SOURCES+=test_cards_grid.cpp
 test_cards_SOURCES+=test_cards_mat1.cpp
+test_cards_SOURCES+=test_cards_pbar.cpp
 test_cards_SOURCES+=test_cards_pbeam.cpp
 test_cards_SOURCES+=test_cards_pbeaml.cpp
 test_cards_SOURCES+=test_cards_pshell.cpp

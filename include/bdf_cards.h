@@ -143,14 +143,14 @@ Description:
 
     private:
 
-      static entry_type<long> _ID;
-      static entry_type<long> _CP;
-      static entry_type<double> _X1;
-      static entry_type<double> _X2;
-      static entry_type<double> _X3;
-      static entry_type<long> _CD;
-      static entry_type<::std::deque<int>> _PS;
-      static entry_type<long> _SEID;
+      static const entry_type<long> _ID;
+      static const entry_type<long> _CP;
+      static const entry_type<double> _X1;
+      static const entry_type<double> _X2;
+      static const entry_type<double> _X3;
+      static const entry_type<long> _CD;
+      static const entry_type<::std::deque<int>> _PS;
+      static const entry_type<long> _SEID;
 
     public:
 
@@ -223,18 +223,18 @@ Description:
 
     private:
 
-      static entry_type<long> _MID;
-      static entry_type<double> _E;
-      static entry_type<double> _G;
-      static entry_type<double> _NU;
-      static entry_type<double> _RHO;
-      static entry_type<double> _A;
-      static entry_type<double> _TREF;
-      static entry_type<double> _GE;
-      static entry_type<double> _ST;
-      static entry_type<double> _SC;
-      static entry_type<double> _SS;
-      static entry_type<long> _MCSID;
+      static const entry_type<long> _MID;
+      static const entry_type<double> _E;
+      static const entry_type<double> _G;
+      static const entry_type<double> _NU;
+      static const entry_type<double> _RHO;
+      static const entry_type<double> _A;
+      static const entry_type<double> _TREF;
+      static const entry_type<double> _GE;
+      static const entry_type<double> _ST;
+      static const entry_type<double> _SC;
+      static const entry_type<double> _SS;
+      static const entry_type<long> _MCSID;
 
     public:
 

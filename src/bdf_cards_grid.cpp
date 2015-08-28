@@ -26,31 +26,31 @@ using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-entry_type<long> grid::_ID(
+const entry_type<long> grid::_ID(
   "ID",
   ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
             make_unique<long>(100000000).get()));
-entry_type<long> grid::_CP(
+const entry_type<long> grid::_CP(
   "CP", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
                                nullptr,
                                make_unique<long>(-1).get()));
-entry_type<double> grid::_X1(
+const entry_type<double> grid::_X1(
   "X1",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> grid::_X2(
+const entry_type<double> grid::_X2(
   "X2",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr,
               make_unique<double>(0.).get()));
-entry_type<double> grid::_X3(
+const entry_type<double> grid::_X3(
   "X3",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr,
               make_unique<double>(0.).get()));
-entry_type<long> grid::_CD(
+const entry_type<long> grid::_CD(
   "CD",
   ::bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
             make_unique<long>(-2).get()));
-entry_type<::std::deque<int>> grid::_PS("PS");
-entry_type<long> grid::_SEID(
+const entry_type<::std::deque<int>> grid::_PS("PS");
+const entry_type<long> grid::_SEID(
   "SEID",
   ::bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
             make_unique<long>(0).get()));

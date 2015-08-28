@@ -79,17 +79,17 @@ Description:
 
     private:
 
-      static entry_type<long> _PID;
-      static entry_type<long> _MID1;
-      static entry_type<double> _T;
-      static entry_type<long> _MID2;
-      static entry_type<double> _12I_T__3; // 12 I / T**3
-      static entry_type<long> _MID3;
-      static entry_type<double> _TS_T; // TS / T
-      static entry_type<double> _NSM;
-      static entry_type<double> _Z1;
-      static entry_type<double> _Z2;
-      static entry_type<long> _MID4;
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID1;
+      static const entry_type<double> _T;
+      static const entry_type<long> _MID2;
+      static const entry_type<double> _12I_T__3; // 12 I / T**3
+      static const entry_type<long> _MID3;
+      static const entry_type<double> _TS_T; // TS / T
+      static const entry_type<double> _NSM;
+      static const entry_type<double> _Z1;
+      static const entry_type<double> _Z2;
+      static const entry_type<long> _MID4;
 
     public:
 
@@ -223,40 +223,40 @@ Description:
 
     private:
 
-      static entry_type<long> _PID;
-      static entry_type<long> _MID;
-      static entry_type<double> _A;
-      static entry_type<double> _I1;
-      static entry_type<double> _I2;
-      static entry_type<double> _I12;
-      static entry_type<double> _J;
-      static entry_type<double> _NSM;
-      static entry_type<double> _C1;
-      static entry_type<double> _C2;
-      static entry_type<double> _D1;
-      static entry_type<double> _D2;
-      static entry_type<double> _E1;
-      static entry_type<double> _E2;
-      static entry_type<double> _F1;
-      static entry_type<double> _F2;
-      static entry_type<::std::string> _SO;
-      static entry_type<double> _X_XB;
-      static entry_type<double> _K1;
-      static entry_type<double> _K2;
-      static entry_type<double> _S1;
-      static entry_type<double> _S2;
-      static entry_type<double> _NSI_A;
-      static entry_type<double> _NSI_B;
-      static entry_type<double> _CW_A;
-      static entry_type<double> _CW_B;
-      static entry_type<double> _M1_A;
-      static entry_type<double> _M2_A;
-      static entry_type<double> _M1_B;
-      static entry_type<double> _M2_B;
-      static entry_type<double> _N1_A;
-      static entry_type<double> _N2_A;
-      static entry_type<double> _N1_B;
-      static entry_type<double> _N2_B;
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID;
+      static const entry_type<double> _A;
+      static const entry_type<double> _I1;
+      static const entry_type<double> _I2;
+      static const entry_type<double> _I12;
+      static const entry_type<double> _J;
+      static const entry_type<double> _NSM;
+      static const entry_type<double> _C1;
+      static const entry_type<double> _C2;
+      static const entry_type<double> _D1;
+      static const entry_type<double> _D2;
+      static const entry_type<double> _E1;
+      static const entry_type<double> _E2;
+      static const entry_type<double> _F1;
+      static const entry_type<double> _F2;
+      static const entry_type<::std::string> _SO;
+      static const entry_type<double> _X_XB;
+      static const entry_type<double> _K1;
+      static const entry_type<double> _K2;
+      static const entry_type<double> _S1;
+      static const entry_type<double> _S2;
+      static const entry_type<double> _NSI_A;
+      static const entry_type<double> _NSI_B;
+      static const entry_type<double> _CW_A;
+      static const entry_type<double> _CW_B;
+      static const entry_type<double> _M1_A;
+      static const entry_type<double> _M2_A;
+      static const entry_type<double> _M1_B;
+      static const entry_type<double> _M2_B;
+      static const entry_type<double> _N1_A;
+      static const entry_type<double> _N2_A;
+      static const entry_type<double> _N1_B;
+      static const entry_type<double> _N2_B;
 
     public:
 
@@ -367,14 +367,14 @@ Description:
 
     private:
 
-      static entry_type<long> _PID;
-      static entry_type<long> _MID;
-      static entry_type<::std::string> _GROUP;
-      static entry_type<::std::string> _TYPE;
-      static entry_type<double> _DIM;
-      static entry_type<double> _NSM;
-      static entry_type<::std::string> _SO;
-      static entry_type<double> _X_XB;
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID;
+      static const entry_type<::std::string> _GROUP;
+      static const entry_type<::std::string> _TYPE;
+      static const entry_type<double> _DIM;
+      static const entry_type<double> _NSM;
+      static const entry_type<::std::string> _SO;
+      static const entry_type<double> _X_XB;
 
       static const ::std::set<::std::string> dimnum1;
       static const ::std::set<::std::string> dimnum2;
@@ -402,8 +402,95 @@ Description:
       DllExport ::bdf::cards::types card(void) { return PBEAML; };
 
     };
-  }
 
+/*
+Handle Nastran Bulk PBAR entries.
+
+Format:
+.......
+
+(Note: n = number of dimensions and m = number of intermediate stations)
+
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| PBAR  | PID   | MID   | A     | I1    | I2    | J     |NSM(A) |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | C1    | C2    | D1    | D2    | E1    | E2    | F1    | F2    |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+|       | K1    | K2    | I12   |       |       |       |       |       |    |
++-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+
+Description:
+............
+
+``PID``
+  Property identification number. (Integer > 0)
+``MID``
+  Material identification number. (Integer > 0)
+``A``
+  Area of bar coss section. (Real; Default = 0.0)
+``I1``, ``I2``, ``I12``
+  Area moments of inertia. (Real; I1 >= 0, I2 >= 0, I1*I2 > I12^2; Default=0.0)
+``J``
+  Torsional constant. (Real)
+``NSM``
+  Nonstructural mass per unit length. (Real, Default=0.0)
+``Ci``, ``Di``, ``Ei``, ``Fi``
+  Stress recovery coefficients. (Real; Default=0.0)
+``K1``, ``K2``
+  Area factor for shear. (Real or böank)
+ */
+
+    class pbar : public bdf_card {
+
+    private:
+
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID;
+      static const entry_type<double> _A;
+      static const entry_type<double> _I1;
+      static const entry_type<double> _I2;
+      static const entry_type<double> _J;
+      static const entry_type<double> _NSM;
+      static const entry_type<double> _C1;
+      static const entry_type<double> _C2;
+      static const entry_type<double> _D1;
+      static const entry_type<double> _D2;
+      static const entry_type<double> _E1;
+      static const entry_type<double> _E2;
+      static const entry_type<double> _F1;
+      static const entry_type<double> _F2;
+      static const entry_type<double> _K1;
+      static const entry_type<double> _K2;
+      static const entry_type<double> _I12;
+
+    public:
+
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> MID;
+      ::std::unique_ptr<double> A;
+      ::std::unique_ptr<double> I1;
+      ::std::unique_ptr<double> I2;
+      ::std::unique_ptr<double> J;
+      ::std::unique_ptr<double> NSM;
+      ::std::unique_ptr<double> C1;
+      ::std::unique_ptr<double> C2;
+      ::std::unique_ptr<double> D1;
+      ::std::unique_ptr<double> D2;
+      ::std::unique_ptr<double> E1;
+      ::std::unique_ptr<double> E2;
+      ::std::unique_ptr<double> F1;
+      ::std::unique_ptr<double> F2;
+      ::std::unique_ptr<double> K1;
+      ::std::unique_ptr<double> K2;
+      ::std::unique_ptr<double> I12;
+
+      DllExport pbar(const ::std::deque<::std::string> &);
+
+      DllExport ::bdf::cards::types card(void) { return PBAR; };
+    };
+  }
 }
 
 #endif // _BERHOL20150721_BDF_CARDS_PROPERTIES

@@ -21,50 +21,50 @@ using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-entry_type<long> cbeam::_EID("EID",
+const entry_type<long> cbeam::_EID("EID",
                     ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<long> cbeam::_PID("PID");
-entry_type<long> cbeam::_GA("GA");
-entry_type<long> cbeam::_GB("GB");
-entry_type<double> cbeam::_X1("X1");
-entry_type<long> cbeam::_G0(
+const entry_type<long> cbeam::_PID("PID");
+const entry_type<long> cbeam::_GA("GA");
+const entry_type<long> cbeam::_GB("GB");
+const entry_type<double> cbeam::_X1("X1");
+const entry_type<long> cbeam::_G0(
   "G0", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<double> cbeam::_X2(
+const entry_type<double> cbeam::_X2(
   "X2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> cbeam::_X3(
+const entry_type<double> cbeam::_X3(
   "X3", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> cbeam::_BIT("BIT");
+const entry_type<double> cbeam::_BIT("BIT");
 namespace {
   const char* OFFTinit[8] = {
     "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
   const ::std::set<::std::string> OFFT_set(OFFTinit, OFFTinit + 8);
 }
-entry_type<::std::string> cbeam::_OFFT("OFFT", ::bdf::type_bounds::bound<::std::string>(OFFT_set, "GGG"));
+const entry_type<::std::string> cbeam::_OFFT("OFFT", ::bdf::type_bounds::bound<::std::string>(OFFT_set, "GGG"));
 
-entry_type<::std::deque<int>> cbeam::_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
-entry_type<::std::deque<int>> cbeam::_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
-entry_type<double> cbeam::_W1A(
+const entry_type<::std::deque<int>> cbeam::_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<::std::deque<int>> cbeam::_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<double> cbeam::_W1A(
   "W1A",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-entry_type<double> cbeam::_W2A(
+const entry_type<double> cbeam::_W2A(
   "W2A",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-entry_type<double> cbeam::_W3A(
+const entry_type<double> cbeam::_W3A(
   "W3A",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-entry_type<double> cbeam::_W1B(
+const entry_type<double> cbeam::_W1B(
   "W1B",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-entry_type<double> cbeam::_W2B(
+const entry_type<double> cbeam::_W2B(
   "W2B",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-entry_type<double> cbeam::_W3B(
+const entry_type<double> cbeam::_W3B(
   "W3B",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-entry_type<long> cbeam::_SA(
+const entry_type<long> cbeam::_SA(
   "SA",
   ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
-entry_type<long> cbeam::_SB(
+const entry_type<long> cbeam::_SB(
   "SB",
   ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
 

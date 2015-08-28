@@ -22,20 +22,20 @@ namespace bdf {
 
     protected:
 
-      static entry_type<long> _EID;
-      static entry_type<long> _PID;
-      static entry_type<long> _G1;
-      static entry_type<long> _G2;
-      static entry_type<long> _G3;
-      static entry_type<long> _G4;
-      static entry_type<long> _MCID;
-      static entry_type<double> _THETA;
-      static entry_type<double> _ZOFFS;
-      static entry_type<long> _TFLAG;
-      static entry_type<double> _T1;
-      static entry_type<double> _T2;
-      static entry_type<double> _T3;
-      static entry_type<double> _T4;
+      static const entry_type<long> _EID;
+      static const entry_type<long> _PID;
+      static const entry_type<long> _G1;
+      static const entry_type<long> _G2;
+      static const entry_type<long> _G3;
+      static const entry_type<long> _G4;
+      static const entry_type<long> _MCID;
+      static const entry_type<double> _THETA;
+      static const entry_type<double> _ZOFFS;
+      static const entry_type<long> _TFLAG;
+      static const entry_type<double> _T1;
+      static const entry_type<double> _T2;
+      static const entry_type<double> _T3;
+      static const entry_type<double> _T4;
 
       DllExport bdf_shell(const ::std::deque<::std::string> &inp) :
         bdf_card(inp) {};
@@ -268,26 +268,26 @@ Description:
 
     private:
 
-      static entry_type<long> _EID;
-      static entry_type<long> _PID;
-      static entry_type<long> _GA;
-      static entry_type<long> _GB;
-      static entry_type<double> _X1;
-      static entry_type<long> _G0;
-      static entry_type<double> _X2;
-      static entry_type<double> _X3;
-      static entry_type<double> _BIT;
-      static entry_type<::std::string> _OFFT;
-      static entry_type<::std::deque<int>> _PA;
-      static entry_type<::std::deque<int>> _PB;
-      static entry_type<double> _W1A;
-      static entry_type<double> _W2A;
-      static entry_type<double> _W3A;
-      static entry_type<double> _W1B;
-      static entry_type<double> _W2B;
-      static entry_type<double> _W3B;
-      static entry_type<long> _SA;
-      static entry_type<long> _SB;
+      static const entry_type<long> _EID;
+      static const entry_type<long> _PID;
+      static const entry_type<long> _GA;
+      static const entry_type<long> _GB;
+      static const entry_type<double> _X1;
+      static const entry_type<long> _G0;
+      static const entry_type<double> _X2;
+      static const entry_type<double> _X3;
+      static const entry_type<double> _BIT;
+      static const entry_type<::std::string> _OFFT;
+      static const entry_type<::std::deque<int>> _PA;
+      static const entry_type<::std::deque<int>> _PB;
+      static const entry_type<double> _W1A;
+      static const entry_type<double> _W2A;
+      static const entry_type<double> _W3A;
+      static const entry_type<double> _W1B;
+      static const entry_type<double> _W2B;
+      static const entry_type<double> _W3B;
+      static const entry_type<long> _SA;
+      static const entry_type<long> _SB;
 
     public:
 
@@ -393,23 +393,23 @@ Description:
 
     private:
 
-      static entry_type<long> _EID;
-      static entry_type<long> _PID;
-      static entry_type<long> _GA;
-      static entry_type<long> _GB;
-      static entry_type<double> _X1;
-      static entry_type<long> _G0;
-      static entry_type<double> _X2;
-      static entry_type<double> _X3;
-      static entry_type<::std::string> _OFFT;
-      static entry_type<::std::deque<int>> _PA;
-      static entry_type<::std::deque<int>> _PB;
-      static entry_type<double> _W1A;
-      static entry_type<double> _W2A;
-      static entry_type<double> _W3A;
-      static entry_type<double> _W1B;
-      static entry_type<double> _W2B;
-      static entry_type<double> _W3B;
+      static const entry_type<long> _EID;
+      static const entry_type<long> _PID;
+      static const entry_type<long> _GA;
+      static const entry_type<long> _GB;
+      static const entry_type<double> _X1;
+      static const entry_type<long> _G0;
+      static const entry_type<double> _X2;
+      static const entry_type<double> _X3;
+      static const entry_type<::std::string> _OFFT;
+      static const entry_type<::std::deque<int>> _PA;
+      static const entry_type<::std::deque<int>> _PB;
+      static const entry_type<double> _W1A;
+      static const entry_type<double> _W2A;
+      static const entry_type<double> _W3A;
+      static const entry_type<double> _W1B;
+      static const entry_type<double> _W2B;
+      static const entry_type<double> _W3B;
 
     public:
 
@@ -469,10 +469,10 @@ Description:
 
     private:
 
-      static entry_type<long> _EID;
-      static entry_type<long> _PID;
-      static entry_type<long> _G1;
-      static entry_type<long> _G2;
+      static const entry_type<long> _EID;
+      static const entry_type<long> _PID;
+      static const entry_type<long> _G1;
+      static const entry_type<long> _G2;
 
     public:
 

@@ -21,19 +21,19 @@ using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-entry_type<long> cbar::_EID(
+const entry_type<long> cbar::_EID(
   "EID",
   ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<long> cbar::_PID("PID");
-entry_type<long> cbar::_GA("GA");
-entry_type<long> cbar::_GB("GB");
-entry_type<double> cbar::_X1("X1");
-entry_type<long> cbar::_G0(
+const entry_type<long> cbar::_PID("PID");
+const entry_type<long> cbar::_GA("GA");
+const entry_type<long> cbar::_GB("GB");
+const entry_type<double> cbar::_X1("X1");
+const entry_type<long> cbar::_G0(
   "G0", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<double> cbar::_X2(
+const entry_type<double> cbar::_X2(
   "X2",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> cbar::_X3(
+const entry_type<double> cbar::_X3(
   "X3",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 namespace {
@@ -41,32 +41,32 @@ namespace {
     "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
   const ::std::set<::std::string> OFFT_set(initVals, initVals + 8);
 }
-entry_type<::std::string> cbar::_OFFT(
+const entry_type<::std::string> cbar::_OFFT(
   "OFFT", ::bdf::type_bounds::bound<::std::string>(OFFT_set, "GGG"));
 
-entry_type<::std::deque<int>> cbar::_PA("PA");
-entry_type<::std::deque<int>> cbar::_PB("PB");
-entry_type<double> cbar::_W1A(
+const entry_type<::std::deque<int>> cbar::_PA("PA");
+const entry_type<::std::deque<int>> cbar::_PB("PB");
+const entry_type<double> cbar::_W1A(
   "W1A",
   ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> cbar::_W2A(
+const entry_type<double> cbar::_W2A(
   "W2A",
   ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> cbar::_W3A(
+const entry_type<double> cbar::_W3A(
   "W3A",
   ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> cbar::_W1B(
+const entry_type<double> cbar::_W1B(
   "W1B",
   ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> cbar::_W2B(
+const entry_type<double> cbar::_W2B(
   "W2B",
   ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> cbar::_W3B(
+const entry_type<double> cbar::_W3B(
   "W3B",
   ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
@@ -132,7 +132,7 @@ cbar::cbar(const ::std::deque<::std::string> &inp) :
     break;
   default:
     throw bdf_parse_error(
-      "CBAR", "Illegal number of entries for CBAR");
+      "CBAR", "Illegal number of entries.");
   }
 };
 

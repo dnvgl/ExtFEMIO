@@ -22,34 +22,36 @@ using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-entry_type<long> pbeam::_PID("PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<long> pbeam::_MID(
+const entry_type<long> pbeam::_PID(
+  "PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<long> pbeam::_MID(
   "MID",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
-entry_type<double> pbeam::_A("A");
-entry_type<double> pbeam::_I1("I1");
-entry_type<double> pbeam::_I2("I2");
-entry_type<double> pbeam::_I12(
+  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
+                                  nullptr, true));
+const entry_type<double> pbeam::_A("A");
+const entry_type<double> pbeam::_I1("I1");
+const entry_type<double> pbeam::_I2("I2");
+const entry_type<double> pbeam::_I12(
   "I12", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_J(
+const entry_type<double> pbeam::_J(
   "J", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_NSM(
+const entry_type<double> pbeam::_NSM(
   "NSM", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_C1(
+const entry_type<double> pbeam::_C1(
   "C1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_C2(
+const entry_type<double> pbeam::_C2(
   "C1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_D1(
+const entry_type<double> pbeam::_D1(
   "D1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_D2(
+const entry_type<double> pbeam::_D2(
   "D2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_E1(
+const entry_type<double> pbeam::_E1(
   "E1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_E2(
+const entry_type<double> pbeam::_E2(
   "E2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_F1(
+const entry_type<double> pbeam::_F1(
   "F1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_F2(
+const entry_type<double> pbeam::_F2(
   "F2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
 // fields that might appear more than once
 namespace {
@@ -57,42 +59,42 @@ namespace {
   const char* SO_init[SO_len] = { "YES", "YESA", "NO" };
   const ::std::set<::std::string> SO_set(SO_init, SO_init + SO_len);
 }
-entry_type<::std::string> pbeam::_SO("SO", ::bdf::type_bounds::bound<::std::string>(SO_set));
-entry_type<double> pbeam::_X_XB(
+const entry_type<::std::string> pbeam::_SO("SO", ::bdf::type_bounds::bound<::std::string>(SO_set));
+const entry_type<double> pbeam::_X_XB(
   "X/XB",
   ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
 // fields_finish
-entry_type<double> pbeam::_K1(
+const entry_type<double> pbeam::_K1(
   "K1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(1.).get()));
-entry_type<double> pbeam::_K2(
+const entry_type<double> pbeam::_K2(
   "K2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(1.).get()));
-entry_type<double> pbeam::_S1(
+const entry_type<double> pbeam::_S1(
   "S1", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_S2(
+const entry_type<double> pbeam::_S2(
   "S2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_NSI_A(
+const entry_type<double> pbeam::_NSI_A(
   "NSI_A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_NSI_B(
+const entry_type<double> pbeam::_NSI_B(
   "NSI_B", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_CW_A(
+const entry_type<double> pbeam::_CW_A(
   "CW_A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_CW_B(
+const entry_type<double> pbeam::_CW_B(
   "CW_B", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_M1_A(
+const entry_type<double> pbeam::_M1_A(
   "M1_A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_M2_A(
+const entry_type<double> pbeam::_M2_A(
   "M2_A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_M1_B(
+const entry_type<double> pbeam::_M1_B(
   "M1_B", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_M2_B(
+const entry_type<double> pbeam::_M2_B(
   "M2_B", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_N1_A(
+const entry_type<double> pbeam::_N1_A(
   "N1_A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_N2_A(
+const entry_type<double> pbeam::_N2_A(
   "N2_A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-entry_type<double> pbeam::_N1_B(
+const entry_type<double> pbeam::_N1_B(
   "N1_B", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> pbeam::_N2_B(
+const entry_type<double> pbeam::_N2_B(
   "N2_B", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
 pbeam::pbeam(const deque<::std::string> &inp) : bdf_card(inp) {

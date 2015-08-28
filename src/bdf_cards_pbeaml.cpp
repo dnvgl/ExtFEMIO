@@ -61,12 +61,12 @@ const ::std::set<::std::string> pbeaml::dimnum5(dimnum5_set);
 const ::std::set<::std::string> pbeaml::dimnum6(dimnum6_set);
 const ::std::set<::std::string> pbeaml::dimnum10(dimnum10_set);
 
-entry_type<long> pbeaml::_PID(
+const entry_type<long> pbeaml::_PID(
   "PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<long> pbeaml::_MID(
+const entry_type<long> pbeaml::_MID(
   "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 
-entry_type<::std::string> pbeaml::_GROUP(
+const entry_type<::std::string> pbeaml::_GROUP(
   "GROUP", ::bdf::type_bounds::bound<::std::string>("MSCBML0"));
 namespace {
   static const size_t TYPE_len = 22;
@@ -76,12 +76,12 @@ namespace {
     "HAT", "HAT1", "DBOX"};
   const ::std::set<::std::string> TYPE_set(TYPEinit, TYPEinit + TYPE_len);
 }
-entry_type<::std::string> pbeaml::_TYPE(
+const entry_type<::std::string> pbeaml::_TYPE(
   "TYPE", ::bdf::type_bounds::bound<::std::string>(TYPE_set));
-entry_type<double> pbeaml::_DIM(
+const entry_type<double> pbeaml::_DIM(
   "DIM", ::bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get()));
-entry_type<double> pbeaml::_NSM(
+const entry_type<double> pbeaml::_NSM(
   "NSM", ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 namespace {
@@ -89,9 +89,9 @@ namespace {
   const char* SO_init[SO_len] = { "YES", "NO" };
   const ::std::set<::std::string> SO_set(SO_init, SO_init + SO_len);
 }
-entry_type<::std::string> pbeaml::_SO(
+const entry_type<::std::string> pbeaml::_SO(
   "SO", ::bdf::type_bounds::bound<::std::string>(SO_set, "YES"));
-entry_type<double> pbeaml::_X_XB(
+const entry_type<double> pbeaml::_X_XB(
   "X/XB", ::bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr,
     make_unique<double>(1.).get()));

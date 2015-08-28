@@ -28,35 +28,35 @@ using namespace ::bdf::cards;
 using namespace ::bdf::types;
 using namespace ::bdf::type_bounds;
 
-entry_type<long> mat1::_MID(
+const entry_type<long> mat1::_MID(
   "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-entry_type<double> mat1::_E(
+const entry_type<double> mat1::_E(
   "E", ::bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr, nullptr, true));
-entry_type<double> mat1::_G(
+const entry_type<double> mat1::_G(
   "G", ::bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr, nullptr, true));
-entry_type<double> mat1::_NU(
+const entry_type<double> mat1::_NU(
   "NU", ::bdf::type_bounds::bound<double>(make_unique<double>(-1.).get(),
                     make_unique<double>(.5).get(), nullptr, true));
-entry_type<double> mat1::_RHO(
+const entry_type<double> mat1::_RHO(
   "RHO", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> mat1::_A(
+const entry_type<double> mat1::_A(
   "A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> mat1::_TREF(
+const entry_type<double> mat1::_TREF(
   "TREF", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> mat1::_GE(
+const entry_type<double> mat1::_GE(
   "GE", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> mat1::_ST(
+const entry_type<double> mat1::_ST(
   "ST",
   ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-entry_type<double> mat1::_SC(
+const entry_type<double> mat1::_SC(
   "SC",
   ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-entry_type<double> mat1::_SS(
+const entry_type<double> mat1::_SS(
   "SS",
   ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-entry_type<long> mat1::_MCSID(
+const entry_type<long> mat1::_MCSID(
   "MCSID",
   ::bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
 
