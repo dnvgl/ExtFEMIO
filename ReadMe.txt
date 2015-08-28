@@ -24,7 +24,7 @@
   |          | =PBEAML=   | Properties for =CBEAM= describing cross section | \check |
   |          | =PBAR=     | Integral properties for =CBAR=                  | \check |
   |          | =PBARL=    | Properties for =CBAR= describing cross section  | \check |
-  |          | =PROD=     | Properties for =CROD=                           |        |
+  |          | =PROD=     | Properties for =CROD=                           | \check |
   | Misc     |            |                                                 |        |
   |          | =ENDDATA=  | Marker for end of input file                    | \check |
   |          |            |                                                 |        |
