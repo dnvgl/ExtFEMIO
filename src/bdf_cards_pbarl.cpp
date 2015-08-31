@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -26,11 +28,6 @@ using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-const entry_type<long> pbarl::_PID(
-  "PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<long> pbarl::_MID(
-  "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-
 const entry_type<::std::string> pbarl::_GROUP(
   "GROUP", ::bdf::type_bounds::bound<::std::string>("MSCBML0"));
 namespace {
@@ -50,7 +47,7 @@ const entry_type<double> pbarl::_NSM(
   "NSM", ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
-pbarl::pbarl(const deque<::std::string> &inp) : bdf_card(inp) {
+pbarl::pbarl(const deque<::std::string> &inp) : bdf_bar_prop(inp) {
 
   size_t dim_num = 0;
   size_t i = 0;
@@ -108,8 +105,6 @@ pbarl::pbarl(const deque<::std::string> &inp) : bdf_card(inp) {
   throw bdf_parse_error("PBARL", "Illegal number of entries.");
  end: ;
 }
-
-
 
 // Local Variables:
 // mode: c++

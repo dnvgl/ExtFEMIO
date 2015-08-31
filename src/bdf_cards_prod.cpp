@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -62,7 +64,6 @@ prod::prod(const deque<::std::string> &inp) : bdf_card(inp) {
       "CBAR.", "Illegal number of entries.");
   }
 }
-
 
 // Local Variables:
 // mode: c++

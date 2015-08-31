@@ -94,16 +94,32 @@ bdf_card *::bdf::cards::dispatch(const deque<::std::string> &inp) {
 
   if (key == "GRID")
     return new ::bdf::cards::grid(inp);
-  else if (key == "ENDDATA")
-    return new ::bdf::cards::enddata(inp);
-  else if (key == "MAT1")
-    return new ::bdf::cards::mat1(inp);
   else if (key == "CTRIA3")
     return new ::bdf::cards::ctria3(inp);
   else if (key == "CQUAD4")
     return new ::bdf::cards::cquad4(inp);
+  else if (key == "CBEAM")
+    return new ::bdf::cards::cbeam(inp);
+  else if (key == "CBAR")
+    return new ::bdf::cards::cbar(inp);
+  else if (key == "CROD")
+    return new ::bdf::cards::crod(inp);
   else if (key == "PSHELL")
     return new ::bdf::cards::pshell(inp);
+  else if (key == "PBEAM")
+    return new ::bdf::cards::pbeam(inp);
+  else if (key == "PBEAML")
+    return new ::bdf::cards::pbeaml(inp);
+  else if (key == "PBAR")
+    return new ::bdf::cards::pbar(inp);
+  else if (key == "PBARL")
+    return new ::bdf::cards::pbarl(inp);
+  else if (key == "PROD")
+    return new ::bdf::cards::prod(inp);
+  else if (key == "MAT1")
+    return new ::bdf::cards::mat1(inp);
+  else if (key == "ENDDATA")
+    return new ::bdf::cards::enddata(inp);
   else
     return new ::bdf::cards::unknown(inp);
   return nullptr;

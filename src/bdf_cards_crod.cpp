@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -52,7 +54,6 @@ crod::crod(const ::std::deque<::std::string> &inp) :
       "CROD", "Illegal number of entries for CROD");
   }
 };
-
 
 // Local Variables:
 // mode: c++

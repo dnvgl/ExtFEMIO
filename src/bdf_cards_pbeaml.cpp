@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -25,11 +27,6 @@ namespace {
 using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
-
-const entry_type<long> pbeaml::_PID(
-  "PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<long> pbeaml::_MID(
-  "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 
 const entry_type<::std::string> pbeaml::_GROUP(
   "GROUP", ::bdf::type_bounds::bound<::std::string>("MSCBML0"));
@@ -61,7 +58,7 @@ const entry_type<double> pbeaml::_X_XB(
     make_unique<double>(0.).get(), nullptr,
     make_unique<double>(1.).get()));
 
-pbeaml::pbeaml(const deque<::std::string> &inp) : bdf_card(inp) {
+pbeaml::pbeaml(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
 
   size_t dim_num = 0;
   size_t i, j = 0;

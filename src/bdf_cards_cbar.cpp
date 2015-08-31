@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -135,7 +137,6 @@ cbar::cbar(const ::std::deque<::std::string> &inp) :
       "CBAR", "Illegal number of entries.");
   }
 };
-
 
 // Local Variables:
 // mode: c++

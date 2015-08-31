@@ -40,7 +40,7 @@
   |             | group information   |                                          | \check |
   | Elements    |                     |                                          |        |
   |             | Shell               |                                          | \check |
-  |             | PSE                 |                                          |        |
+  |             | PSE                 |                                          | \check |
   |             | Truss               |                                          |        |
   |             | Beam                |                                          |        |
   |             | Boundary Elements   |                                          |        |

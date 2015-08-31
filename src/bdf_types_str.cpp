@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -38,7 +40,6 @@ entry_type<::std::string>::entry_type(::std::string name, ::bdf::type_bounds::bo
 
   return new ::std::string(sval);
 }
-
 
 // Local Variables:
 // mode: c++

@@ -111,6 +111,21 @@ Description:
 
     };
 
+    class bdf_beam_prop : public bdf_card {
+    // base class for beam property classes.
+    protected:
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID;
+
+      DllExport bdf_beam_prop(const ::std::deque<::std::string> &inp) :
+        bdf_card(inp) {};
+
+    public:
+
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> MID;
+    };
+
 /*
 Handle Nastran Bulk PBEAM entries.
 
@@ -218,13 +233,11 @@ Description:
   ``B``. (Real)
  */
 
-    class pbeam : public bdf_card {
+    class pbeam : public bdf_beam_prop {
       // Handle Nastran Bulk PBEAM entries.
 
     private:
 
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID;
       static const entry_type<double> _A;
       static const entry_type<double> _I1;
       static const entry_type<double> _I2;
@@ -260,8 +273,6 @@ Description:
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID;
       // fields that might appear more than once
       ::std::deque<::std::unique_ptr<double>> A;
       ::std::deque<::std::unique_ptr<double>> I1;
@@ -376,13 +387,11 @@ Description:
   Default = 1.0)
  */
 
-    class pbeaml : public bdf_card, private l_geom {
+    class pbeaml : public bdf_beam_prop, private l_geom {
       // Handle Nastran Bulk PBEAML entries.
 
     private:
 
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID;
       static const entry_type<::std::string> _GROUP;
       static const entry_type<::std::string> _TYPE;
       static const entry_type<double> _DIM;
@@ -392,8 +401,6 @@ Description:
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID;
       ::std::unique_ptr<::std::string> GROUP;
       ::std::unique_ptr<::std::string> TYPE;
       // fields that might appear more than once
@@ -406,6 +413,21 @@ Description:
 
       DllExport ::bdf::cards::types card(void) { return PBEAML; };
 
+    };
+
+    class bdf_bar_prop : public bdf_card {
+    // base class for beam property classes.
+    protected:
+      static const entry_type<long> _PID;
+      static const entry_type<long> _MID;
+
+      DllExport bdf_bar_prop(const ::std::deque<::std::string> &inp) :
+        bdf_card(inp) {};
+
+    public:
+
+      ::std::unique_ptr<long> PID;
+      ::std::unique_ptr<long> MID;
     };
 
 /*
@@ -447,12 +469,10 @@ Description:
   Area factor for shear. (Real or böank)
  */
 
-    class pbar : public bdf_card {
+    class pbar : public bdf_bar_prop {
 
     private:
 
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID;
       static const entry_type<double> _A;
       static const entry_type<double> _I1;
       static const entry_type<double> _I2;
@@ -535,13 +555,11 @@ Description:
   last ``DIMi``. (Default = 0.0)
  */
 
-    class pbarl : public bdf_card, private l_geom {
+    class pbarl : public bdf_bar_prop, private l_geom {
       // Handle Nastran Bulk PBARL entries.
 
     private:
 
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID;
       static const entry_type<::std::string> _GROUP;
       static const entry_type<::std::string> _TYPE;
       static const entry_type<double> _DIM;

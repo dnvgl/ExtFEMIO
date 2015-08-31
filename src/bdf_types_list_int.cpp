@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -51,7 +53,6 @@ entry_type<::std::deque<int>>::operator() (const std::string &inp) const {
     value->push_back(*pos - '0');
   return value;
 }
-
 
 // Local Variables:
 // mode: c++

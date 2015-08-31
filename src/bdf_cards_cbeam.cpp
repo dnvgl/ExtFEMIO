@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -161,7 +163,6 @@ cbeam::cbeam(const ::std::deque<::std::string> &inp) :
       "CBEAM", "Illegal number of entries for CBEAM");
   }
 };
-
 
 // Local Variables:
 // mode: c++

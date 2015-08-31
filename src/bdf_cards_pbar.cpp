@@ -4,6 +4,8 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+#include "stdafx.h"
+
 // ID:
 namespace {
   const char  cID[]
@@ -22,11 +24,6 @@ using namespace ::std;
 using namespace ::bdf::cards;
 using namespace ::bdf::types;
 
-const entry_type<long> pbar::_PID(
-  "PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<long> pbar::_MID(
-  "MID", ::bdf::type_bounds::bound<long>(
-    make_unique<long>(1).get(), nullptr, nullptr, true));
 const entry_type<double> pbar::_A(
   "A", ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
@@ -76,7 +73,7 @@ const entry_type<double> pbar::_I12(
   "I12", ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
-pbar::pbar(const deque<::std::string> &inp) : bdf_card(inp) {
+pbar::pbar(const deque<::std::string> &inp) : bdf_bar_prop(inp) {
 
   deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
 
