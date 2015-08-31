@@ -29,20 +29,23 @@ const entry_type<long> prod::_PID(
 const entry_type<long> prod::_MID(
   "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<double> prod::_A("A");
-const entry_type<double> prod::_J("J");
+const entry_type<double> prod::_J(
+  "J",
+  ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> prod::_C(
   "C", ::bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> prod::_NSM(
-  "NSM", ::bdf::type_bounds::bound<double>(
-    nullptr, nullptr, make_unique<double>(0.).get()));
+  "J",
+  ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
 prod::prod(const deque<::std::string> &inp) : bdf_card(inp) {
 
   deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
 
+  J = nullptr;
   C = make_unique<double>(0.);
-  NSM = make_unique<double>(0.);
+  NSM = nullptr;
 
   switch (inp.size()-1) {
   case 8:
@@ -55,6 +58,7 @@ prod::prod(const deque<::std::string> &inp) : bdf_card(inp) {
     C = get_val<double>(_C, *(pos++));
   case 4:
     J = get_val<double>(_J, *(pos++));
+  case 3:
     A = get_val<double>(_A, *(pos++));
     MID = get_val<long>(_MID, *(pos++));
     PID = get_val<long>(_PID, *(pos));

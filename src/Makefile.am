@@ -20,15 +20,9 @@ SUBDIRS=
 EXTRA_DIST=
 lib_LTLIBRARIES=libbdfreadpp.la
 libbdfreadpp_la_SOURCES=bdf_errors.cpp
-libbdfreadpp_la_SOURCES+=bdf_file.cpp
-libbdfreadpp_la_SOURCES+=bdf_types.cpp
-libbdfreadpp_la_SOURCES+=bdf_types_int.cpp
-libbdfreadpp_la_SOURCES+=bdf_types_float.cpp
-libbdfreadpp_la_SOURCES+=bdf_types_str.cpp
-libbdfreadpp_la_SOURCES+=bdf_types_list_int.cpp
-libbdfreadpp_la_SOURCES+=bdf_string.cpp
-libbdfreadpp_la_SOURCES+=bdf_l_geom.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_bar_prop.cpp
+libbdfreadpp_la_SOURCES+=bdf_cards_beam_prop.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_cbar.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_cbeam.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_cquad4.cpp
@@ -43,6 +37,14 @@ libbdfreadpp_la_SOURCES+=bdf_cards_pbeaml.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_prod.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_pshell.cpp
 libbdfreadpp_la_SOURCES+=bdf_cards_shell.cpp
+libbdfreadpp_la_SOURCES+=bdf_file.cpp
+libbdfreadpp_la_SOURCES+=bdf_l_geom.cpp
+libbdfreadpp_la_SOURCES+=bdf_string.cpp
+libbdfreadpp_la_SOURCES+=bdf_types.cpp
+libbdfreadpp_la_SOURCES+=bdf_types_float.cpp
+libbdfreadpp_la_SOURCES+=bdf_types_int.cpp
+libbdfreadpp_la_SOURCES+=bdf_types_list_int.cpp
+libbdfreadpp_la_SOURCES+=bdf_types_str.cpp
 
 # Local Variables:
 # mode: makefile

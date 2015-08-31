@@ -17,8 +17,6 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
-
 #include <catch.hpp>
 
 #ifndef _MSC_VER
@@ -37,19 +35,19 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 using namespace std;
 using namespace bdf::cards;
 
-TEST_CASE("BDF PBEAM definitions.",
-          "[bdf_PBEAM]") {
+TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
   SECTION("Small Field Format") {
 
     ::std::deque<string> data;
     data.push_back(
-//     1234567A1234567B1234567C1234567D1234567E1234567F
-      "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6"
-//     1234567G1234567H1234567I
-      " 6.856+6 1.316+6        \n");
+//             PID     MID     A       I1      I2      I12     J
+//     1234567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+      "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n");
     ::std::deque<string> lines = bdf_card::card_split(data);
     pbeam probe(lines);
+
+    CAPTURE(data[0]);
 
     CHECK(*probe.PID == 4000001);
     CHECK(*probe.MID == 3);
@@ -61,6 +59,34 @@ TEST_CASE("BDF PBEAM definitions.",
     CHECK(*probe.I2[0] == 1694000.);
     CHECK(probe.I12.size() == 1);
     CHECK(*probe.I12[0] == 6.856e6);
+    CHECK(probe.J.size() == 1);
+    CHECK(*probe.J[0] == 1.316e6);
+  }
+
+  SECTION("Small Field Format2") {
+
+    ::std::deque<string> data;
+    data.push_back(
+//             PID     MID     A       I1      I2      I12     J
+//     1234567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+      "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+    pbeam probe(lines);
+
+    CAPTURE(data[0]);
+
+    CHECK(*probe.PID == 4000001);
+    CHECK(*probe.MID == 3);
+    CHECK(probe.A.size() == 1);
+    CHECK(*probe.A[0] == 10460.);
+    CHECK(probe.I1.size() == 1);
+    CHECK(*probe.I1[0] == 93690000.);
+    CHECK(probe.I2.size() == 1);
+    CHECK(*probe.I2[0] == 1694000.);
+    CHECK(probe.I12.size() == 1);
+    CHECK(*probe.I12[0] == 6.856e6);
+    CHECK(probe.J.size() == 1);
+    CHECK(*probe.J[0] == 1.316e6);
   }
 
   SECTION("Free Field Format 1") {
@@ -70,6 +96,8 @@ TEST_CASE("BDF PBEAM definitions.",
       "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.\n");
     ::std::deque<string> lines = bdf_card::card_split(data);
     pbeam probe(lines);
+
+    CAPTURE(data[0]);
 
     CHECK(*probe.PID == 1);
     CHECK(*probe.MID == 2);
@@ -117,13 +145,9 @@ TEST_CASE("BDF PBEAM definitions.",
     ::std::deque<string> lines = bdf_card::card_split(data);
 
     CHECK(lines.size() == 65);
-
-    // ::std::cerr << "lines\n";
-    // copy(lines.begin(), lines.end(),
-    //      ostream_iterator<::std::string>(::std::cerr, "!"));
-    // ::std::cerr << "\n" << lines.size() << ::std::endl;
-
     pbeam probe(lines);
+
+    CAPTURE(data[0]);
 
     CHECK(*probe.PID == 1);
     CHECK(*probe.MID == 2);
@@ -219,6 +243,8 @@ TEST_CASE("BDF PBEAM definitions.",
       ",65.\n");
     ::std::deque<string> lines = bdf_card::card_split(data);
 
+    CAPTURE(data[0]);
+
     CHECK(lines.size() == 66);
 
     // ::std::cerr << "lines\n";
@@ -265,6 +291,8 @@ TEST_CASE("BDF PBEAM definitions.",
       "             0.0        \n");
     ::std::deque<string> lines = bdf_card::card_split(data);
     pbeam probe(lines);
+
+    CAPTURE(data[0]);
 
     CHECK(*probe.PID == 39);
     CHECK(*probe.MID == 6);

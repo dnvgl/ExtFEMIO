@@ -44,9 +44,7 @@ entry_type<::std::deque<int>>::operator() (const std::string &inp) const {
   std::string sval = ::bdf::string::string(inp).trim();
   if (! regex_match(sval, int_re)) {
     std::string msg(name + ":illegal input (""");
-    msg += sval;
-    msg += """), no integer in list\n";
-    throw bdf_types_error(msg);
+    throw bdf_types_error(msg + sval + """), no integer in list");
   }
   for (::std::string::iterator pos = sval.begin();
        pos != sval.end(); ++pos)

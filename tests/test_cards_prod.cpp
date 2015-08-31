@@ -17,8 +17,6 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
-
 #include <catch.hpp>
 
 #ifndef _MSC_VER
@@ -46,6 +44,9 @@ TEST_CASE("BDF PROD definitions.",
     data.push_back(
       "PROD,1,2,3.,4.,5.,6.\n");
     ::std::deque<string> lines = bdf_card::card_split(data);
+
+    CAPTURE( data[0] );
+
     prod probe(lines);
 
     CHECK(*probe.PID == 1);
@@ -62,6 +63,9 @@ TEST_CASE("BDF PROD definitions.",
     data.push_back(
       "PROD,1,2,3.,4.,5.\n");
     ::std::deque<string> lines = bdf_card::card_split(data);
+
+    CAPTURE( data[0] );
+
     prod probe(lines);
 
     CHECK(*probe.PID == 1);
@@ -69,7 +73,7 @@ TEST_CASE("BDF PROD definitions.",
     CHECK(*probe.A == 3.);
     CHECK(*probe.J == 4.);
     CHECK(*probe.C == 5.);
-    CHECK(*probe.NSM == 0.);
+    CHECK_FALSE(probe.NSM);
   }
 
   SECTION("Free Field Format 3") {
@@ -78,6 +82,9 @@ TEST_CASE("BDF PROD definitions.",
     data.push_back(
       "PROD,1,2,3.,4.\n");
     ::std::deque<string> lines = bdf_card::card_split(data);
+
+    CAPTURE( data[0] );
+
     prod probe(lines);
 
     CHECK(*probe.PID == 1);
@@ -85,17 +92,19 @@ TEST_CASE("BDF PROD definitions.",
     CHECK(*probe.A == 3.);
     CHECK(*probe.J == 4.);
     CHECK(*probe.C == 0.);
-    CHECK(*probe.NSM == 0.);
+    CHECK_FALSE(probe.NSM);
   }
 
-
-  SECTION("Small Field Format (BAR)") {
+  SECTION("Small Field Format") {
 
     ::std::deque<string> data;
     data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
       "PROD          17      23    42.6   17.92  4.2356     0.5                        \n");
     ::std::deque<string> lines = bdf_card::card_split(data);
+
+    CAPTURE( data[0] );
+
     prod probe(lines);
 
     CHECK(*probe.PID == 17);
@@ -104,6 +113,26 @@ TEST_CASE("BDF PROD definitions.",
     CHECK(*probe.J == 17.92);
     CHECK(*probe.C == 4.2356);
     CHECK(*probe.NSM == 0.5);
+  }
+
+  SECTION("Small Field Format 2") {
+
+    ::std::deque<string> data;
+    data.push_back(
+//     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+      "PROD    6000001 1       3000.00\n");
+    ::std::deque<string> lines = bdf_card::card_split(data);
+
+    CAPTURE( data[0] );
+
+    prod probe(lines);
+
+    CHECK(*probe.PID == 6000001);
+    CHECK(*probe.MID == 1);
+    CHECK(*probe.A == 3000);
+    CHECK_FALSE(probe.J);
+    CHECK(*probe.C == 0.);
+    CHECK_FALSE(probe.NSM);
   }
 }
 

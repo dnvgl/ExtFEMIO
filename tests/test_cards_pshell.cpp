@@ -17,8 +17,6 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
-
 #include <catch.hpp>
 
 #ifndef _MSC_VER

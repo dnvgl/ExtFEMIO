@@ -17,7 +17,6 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
 
 #include <catch.hpp>
 
@@ -33,7 +32,8 @@ CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
 using namespace std;
 using namespace bdf::cards;
 
-TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)", "[bdf_ctria3]" ) {
+TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
+          "[bdf_ctria3]" ) {
 
   ::std::deque<string> data;
   //              1234567|1234567|1234567|1234567|1234567|1234567|
@@ -54,7 +54,8 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)", "[bdf_ctria3]" ) {
 }
 
 
-TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)", "[bdf_ctria3]" ) {
+TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
+          "[bdf_ctria3]" ) {
 
   ::std::deque<string> data;
   //              1234567|123456781234567|123456781234567|123456781234567|123456781234567|

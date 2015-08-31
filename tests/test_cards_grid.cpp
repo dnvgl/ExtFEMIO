@@ -17,8 +17,6 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
-
 #include <catch.hpp>
 
 #ifndef _MSC_VER
@@ -33,10 +31,12 @@ CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
 using namespace std;
 using namespace bdf::cards;
 
-TEST_CASE("BDF GRID definitions. (Small Field Format)", "[bdf_grid]" ) {
+TEST_CASE("BDF GRID definitions. (Small Field Format)",
+          "[bdf_grid]" ) {
 
   ::std::deque<string> data;
-  data.push_back("GRID           1      22111525. 18000.  21000.        11       6       2\n");
+  data.push_back(
+    "GRID           1      22111525. 18000.  21000.        11       6       2\n");
 
   ::std::deque<string> lines = bdf_card::card_split(data);
   grid probe(lines);
@@ -55,11 +55,14 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)", "[bdf_grid]" ) {
   }
 }
 
-TEST_CASE("BDF GRID definitions. (Large Field Format)", "[bdf_grid]" ) {
+TEST_CASE("BDF GRID definitions. (Large Field Format)",
+          "[bdf_grid]" ) {
 
   ::std::deque<string> data;
-  data.push_back("GRID*                  1              22         111525.          18000.\n");
-  data.push_back("                  21000.              11               6               2\n");
+  data.push_back(
+    "GRID*                  1              22         111525.          18000.\n");
+  data.push_back(
+    "                  21000.              11               6               2\n");
 
   ::std::deque<string> lines = bdf_card::card_split(data);
   grid probe(lines);
@@ -78,7 +81,8 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)", "[bdf_grid]" ) {
   }
 }
 
-TEST_CASE("BDF GRID definitions. (Free Field Format)", "[bdf_grid]" ) {
+TEST_CASE("BDF GRID definitions. (Free Field Format)",
+          "[bdf_grid]" ) {
 
   ::std::deque<string> data;
   SECTION("first grid") {

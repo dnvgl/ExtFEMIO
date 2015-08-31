@@ -71,7 +71,7 @@ double *entry_type<double>::operator() (const std::string &inp) const {
   } else {
     if (! regex_match(sval, float_re)) {
       std::string msg("illegal input, no float");
-      throw bdf_float_error(name, msg + "; !" + sval + "!\n");
+      throw bdf_float_error(name, msg + "; !" + sval + "!");
     }
 
     smatch m;

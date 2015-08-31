@@ -17,8 +17,8 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp fil
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
+// This tells Catch to provide a main() - only do this in one cpp file
+#define CATCH_CONFIG_MAIN
 
 #include <iostream>
 #include <deque>
@@ -56,26 +56,26 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
   ref.push_back("MAT1    1       2.305+6 80000.0 0.3     7.850-6");
   l = probe.get();
-  CAPTURE( l[0] )
+  CAPTURE( l[0] );
   CHECK(l == ref);
 
   ref.clear();
   ref.push_back("MAT1    4       2.305+6 80000.0 0.3     7.850-6");
   l = probe.get();
-  CAPTURE( l[0] )
+  CAPTURE( l[0] );
   CHECK(l == ref);
 
   ref.clear();
   ref.push_back("PBEAML  104010  4               L     ");
   ref.push_back("           63.0   340.0    35.0    14.0");
   l = probe.get();
-  CAPTURE( l[0] )
+  CAPTURE( l[0] );
   CHECK(l == ref);
 
   ref.clear();
   ref.push_back("PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6");
   l = probe.get();
-  CAPTURE( l[0] )
+  CAPTURE( l[0] );
   CHECK(l == ref);
 }
 
@@ -463,102 +463,140 @@ TEST_CASE("BDF_Dispatch", "[bdf_cards]") {
 
   bdf_card *current;
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::MAT1);
-  // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-  //         MID     E       G       NU      RHO
-  // MAT1    1       2.305+6 80000.0 0.3     7.850-6
-  CHECK(*static_cast<mat1*>(current)->MID == 1);
-  CHECK(*static_cast<mat1*>(current)->E == 2.305e6);
-  CHECK(*static_cast<mat1*>(current)->G == 8e4);
-  CHECK(*static_cast<mat1*>(current)->NU == .3);
-  CHECK(*static_cast<mat1*>(current)->RHO == 7.85e-6);
-  CHECK_FALSE(static_cast<mat1*>(current)->A);
-  CHECK_FALSE(static_cast<mat1*>(current)->TREF);
-  CHECK_FALSE(static_cast<mat1*>(current)->GE);
-  CHECK_FALSE(static_cast<mat1*>(current)->ST);
-  CHECK_FALSE(static_cast<mat1*>(current)->SC);
-  CHECK_FALSE(static_cast<mat1*>(current)->SS);
-  CHECK_FALSE(static_cast<mat1*>(current)->MCSID);
+  SECTION("Processing several cards.") {
+    l = probe.get();
+    CAPTURE( l[0] );
+    INFO( "The line is " << l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    CHECK(current->card() == ::bdf::cards::MAT1);
+    // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+    //         MID     E       G       NU      RHO
+    // MAT1    1       2.305+6 80000.0 0.3     7.850-6
+    CHECK(*static_cast<mat1*>(current)->MID == 1);
+    CHECK(*static_cast<mat1*>(current)->E == 2.305e6);
+    CHECK(*static_cast<mat1*>(current)->G == 8e4);
+    CHECK(*static_cast<mat1*>(current)->NU == .3);
+    CHECK(*static_cast<mat1*>(current)->RHO == 7.85e-6);
+    CHECK_FALSE(static_cast<mat1*>(current)->A);
+    CHECK_FALSE(static_cast<mat1*>(current)->TREF);
+    CHECK_FALSE(static_cast<mat1*>(current)->GE);
+    CHECK_FALSE(static_cast<mat1*>(current)->ST);
+    CHECK_FALSE(static_cast<mat1*>(current)->SC);
+    CHECK_FALSE(static_cast<mat1*>(current)->SS);
+    CHECK_FALSE(static_cast<mat1*>(current)->MCSID);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::MAT1);
-  // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-  //         MID     E       G       NU      RHO
-  // MAT1    4       2.305+6 80000.0 0.3     7.850-6
-  CHECK(*static_cast<mat1*>(current)->MID == 4);
-  CHECK(*static_cast<mat1*>(current)->E == 2.305e6);
-  CHECK(*static_cast<mat1*>(current)->G == 8e4);
-  CHECK(*static_cast<mat1*>(current)->NU == .3);
-  CHECK(*static_cast<mat1*>(current)->RHO == 7.85e-6);
-  CHECK_FALSE(static_cast<mat1*>(current)->A);
-  CHECK_FALSE(static_cast<mat1*>(current)->TREF);
-  CHECK_FALSE(static_cast<mat1*>(current)->GE);
-  CHECK_FALSE(static_cast<mat1*>(current)->ST);
-  CHECK_FALSE(static_cast<mat1*>(current)->SC);
-  CHECK_FALSE(static_cast<mat1*>(current)->SS);
-  CHECK_FALSE(static_cast<mat1*>(current)->MCSID);
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    CHECK(current->card() == ::bdf::cards::MAT1);
+    // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+    //         MID     E       G       NU      RHO
+    // MAT1    4       2.305+6 80000.0 0.3     7.850-6
+    CHECK(*static_cast<mat1*>(current)->MID == 4);
+    CHECK(*static_cast<mat1*>(current)->E == 2.305e6);
+    CHECK(*static_cast<mat1*>(current)->G == 8e4);
+    CHECK(*static_cast<mat1*>(current)->NU == .3);
+    CHECK(*static_cast<mat1*>(current)->RHO == 7.85e-6);
+    CHECK_FALSE(static_cast<mat1*>(current)->A);
+    CHECK_FALSE(static_cast<mat1*>(current)->TREF);
+    CHECK_FALSE(static_cast<mat1*>(current)->GE);
+    CHECK_FALSE(static_cast<mat1*>(current)->ST);
+    CHECK_FALSE(static_cast<mat1*>(current)->SC);
+    CHECK_FALSE(static_cast<mat1*>(current)->SS);
+    CHECK_FALSE(static_cast<mat1*>(current)->MCSID);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::UNKNOWN);
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    // PBEAML  104010  4               L
+    //           63.0   340.0    35.0    14.0
+    CHECK(current->card() == ::bdf::cards::PBEAML);
+    CHECK(*static_cast<pbeaml*>(current)->PID == 104010);
+    CHECK(*static_cast<pbeaml*>(current)->MID == 4);
+    CHECK(*static_cast<pbeaml*>(current)->GROUP == "MSCBML0");
+    CHECK(*static_cast<pbeaml*>(current)->TYPE == "L");
+    CHECK(static_cast<pbeaml*>(current)->DIM.size() == 1);
+    CHECK(static_cast<pbeaml*>(current)->DIM[0]->size() == 4);
+    CHECK(*(*static_cast<pbeaml*>(current)->DIM[0])[0] == 63.);
+    CHECK(*(*static_cast<pbeaml*>(current)->DIM[0])[1] == 340.);
+    CHECK(*(*static_cast<pbeaml*>(current)->DIM[0])[2] == 35.);
+    CHECK(*(*static_cast<pbeaml*>(current)->DIM[0])[3] == 14.);
+    CHECK(static_cast<pbeaml*>(current)->NSM.size() == 1);
+    CHECK(*static_cast<pbeaml*>(current)->NSM[0] == 0.);
+    CHECK(static_cast<pbeaml*>(current)->SO.size() == 0);
+    CHECK(static_cast<pbeaml*>(current)->X_XB.size() == 0);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::UNKNOWN);
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    // PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6
+    CHECK(current->card() == ::bdf::cards::PBEAM);
+    CHECK(*static_cast<pbeam*>(current)->PID == 4000001);
+    CHECK(*static_cast<pbeam*>(current)->MID == 3);
+    CHECK(static_cast<pbeam*>(current)->A.size() == 1);
+    CHECK(*static_cast<pbeam*>(current)->A[0] == 10460.);
+    CHECK(static_cast<pbeam*>(current)->I1.size() == 1);
+    CHECK(*static_cast<pbeam*>(current)->I1[0] == 93690000.);
+    CHECK(static_cast<pbeam*>(current)->I2.size() == 1);
+    CHECK(*static_cast<pbeam*>(current)->I2[0] == 1694000.);
+    CHECK(static_cast<pbeam*>(current)->I12.size() == 1);
+    CHECK(*static_cast<pbeam*>(current)->I12[0] == 6.856e6);
+    CHECK(static_cast<pbeam*>(current)->J.size() == 1);
+    CHECK(*static_cast<pbeam*>(current)->J[0] == 1.316e6);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::UNKNOWN);
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    // PROD    6000001 1       3000.00\n"
+    CHECK(current->card() == ::bdf::cards::PROD);
+    CHECK(*static_cast<prod*>(current)->PID == 6000001);
+    CHECK(*static_cast<prod*>(current)->MID == 1);
+    CHECK(*static_cast<prod*>(current)->A == 3000);
+    CHECK_FALSE(static_cast<prod*>(current)->J);
+    CHECK(*static_cast<prod*>(current)->C == 0.);
+    CHECK_FALSE(static_cast<prod*>(current)->NSM);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::PSHELL);
-  // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-  //         PID     MID1    T       MID2    12I/T**3 MID3
-  // PSHELL  1       4         23.00 4               4
-  CHECK(*static_cast<pshell*>(current)->PID == 1);
-  CHECK(*static_cast<pshell*>(current)->MID1 == 4);
-  CHECK(*static_cast<pshell*>(current)->T == 23.);
-  CHECK(*static_cast<pshell*>(current)->MID2 == 4);
-  CHECK(*static_cast<pshell*>(current)->x12I_T__3 == 1.);
-  CHECK(*static_cast<pshell*>(current)->MID3 == 4);
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    CHECK(current->card() == ::bdf::cards::PSHELL);
+    // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+    //         PID     MID1    T       MID2    12I/T**3 MID3
+    // PSHELL  1       4         23.00 4               4
+    CHECK(*static_cast<pshell*>(current)->PID == 1);
+    CHECK(*static_cast<pshell*>(current)->MID1 == 4);
+    CHECK(*static_cast<pshell*>(current)->T == 23.);
+    CHECK(*static_cast<pshell*>(current)->MID2 == 4);
+    CHECK(*static_cast<pshell*>(current)->x12I_T__3 == 1.);
+    CHECK(*static_cast<pshell*>(current)->MID3 == 4);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::GRID);
-  CHECK(*static_cast<grid*>(current)->ID == 1);
-  CHECK(*static_cast<grid*>(current)->X1 == 111525.);
-  CHECK(*static_cast<grid*>(current)->X2 == 18000.);
-  CHECK(*static_cast<grid*>(current)->X3 == 21000.);
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    CHECK(current->card() == ::bdf::cards::GRID);
+    CHECK(*static_cast<grid*>(current)->ID == 1);
+    CHECK(*static_cast<grid*>(current)->X1 == 111525.);
+    CHECK(*static_cast<grid*>(current)->X2 == 18000.);
+    CHECK(*static_cast<grid*>(current)->X3 == 21000.);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::GRID);
-  CHECK(*static_cast<grid*>(current)->ID == 76);
-  CHECK(*static_cast<grid*>(current)->X1 == 111522.);
-  CHECK(*static_cast<grid*>(current)->X2 == 18002.);
-  CHECK(*static_cast<grid*>(current)->X3 == 21002.);
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    CHECK(current->card() == ::bdf::cards::GRID);
+    CHECK(*static_cast<grid*>(current)->ID == 76);
+    CHECK(*static_cast<grid*>(current)->X1 == 111522.);
+    CHECK(*static_cast<grid*>(current)->X2 == 18002.);
+    CHECK(*static_cast<grid*>(current)->X3 == 21002.);
 
-  l = probe.get();
-  CAPTURE( l[0] )
-  current = ::bdf::cards::dispatch(bdf_card::card_split(l));
-  CHECK(current->card() == ::bdf::cards::GRID);
-  CHECK(*static_cast<grid*>(current)->ID == 153);
-  CHECK(*static_cast<grid*>(current)->X1 == 111522.);
-  CHECK(*static_cast<grid*>(current)->X2 == 18001.);
-  CHECK(*static_cast<grid*>(current)->X3 == 21002.);
-
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = ::bdf::cards::dispatch(bdf_card::card_split(l));
+    CHECK(current->card() == ::bdf::cards::GRID);
+    CHECK(*static_cast<grid*>(current)->ID == 153);
+    CHECK(*static_cast<grid*>(current)->X1 == 111522.);
+    CHECK(*static_cast<grid*>(current)->X2 == 18001.);
+    CHECK(*static_cast<grid*>(current)->X3 == 21002.);
+  }
 }
 
 // Local Variables:

@@ -17,8 +17,6 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
-
 #include <catch.hpp>
 
 #ifndef _MSC_VER
@@ -37,8 +35,7 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 using namespace std;
 using namespace bdf::cards;
 
-TEST_CASE("BDF PBARL definitions.",
-          "[bdf_PBARL]") {
+TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
   SECTION("Small Field Format (BAR)") {
 

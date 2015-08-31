@@ -104,10 +104,6 @@ pbeam::pbeam(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
   long block_cnt = div_val.quot;
   long block_rem = div_val.rem;
 
-  // ::std::cerr << "*** !*!*!*!*! inp.size(): " << inp.size() << ::std::endl;
-  // ::std::cerr << "*** !*!*!*!*! block_cnt:  " << block_cnt << ::std::endl;
-  // ::std::cerr << "*** !*!*!*!*! block_rem:  " << block_rem << ::std::endl;
-
   K1 = nullptr;
   S1 = nullptr;
   S2 = nullptr;
@@ -186,19 +182,12 @@ pbeam::pbeam(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
       C1.push_front(get_val<double>(_C1, *(pos++)));
     case 8:
       NSM.push_front(get_val<double>(_NSM, *(pos++)));
-    case 7:
       J.push_front(get_val<double>(_J, *(pos++)));
-    case 6:
       I12.push_front(get_val<double>(_I12, *(pos++)));
-    case 5:
       I2.push_front(get_val<double>(_I2, *(pos++)));
-    case 4:
       I1.push_front(get_val<double>(_I1, *(pos++)));
-    case 3:
       A.push_front(get_val<double>(_A, *(pos++)));
-    case 2:
       X_XB.push_front(get_val<double>(_X_XB, *(pos++)));
-    case 1:
       SO.push_front(get_val<::std::string>(_SO, *(pos++)));
     }
   }
@@ -236,6 +225,8 @@ pbeam::pbeam(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
   default:
     throw bdf_parse_error("PBEAM", "Illegal number of entries.");
   }
+  if (J.size() == 0)
+    J.push_front(nullptr);
 }
 
 // Local Variables:

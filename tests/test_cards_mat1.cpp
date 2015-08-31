@@ -17,8 +17,6 @@ namespace {
 
 #include <limits>
 
-#define CATCH_CONFIG_COLOUR_NONE    // completely disables all text colouring
-
 #include <catch.hpp>
 
 #ifndef _MSC_VER
@@ -33,7 +31,8 @@ CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
 using namespace std;
 using namespace bdf::cards;
 
-TEST_CASE("BDF MAT1 definitions. (Free Field Format)", "[bdf_mat1]" ) {
+TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
+          "[bdf_mat1]" ) {
 
   ::std::deque<string> data;
 

@@ -71,11 +71,7 @@ long *entry_type<long>::operator() (const std::string &inp) const {
   }
   if (!this->bounds.in_bounds(value)) {
     ::std::string msg("boundary condition violated (");
-    msg += name;
-    msg += ")\n(""";
-    msg += inp;
-    msg += """)";
-    throw bdf_int_error(name, msg);
+    throw bdf_int_error(name, msg + name + ")\n(""" + inp + """)");
   }
   return value;
 }
