@@ -13,9 +13,6 @@
     <ClCompile Include="bdf_string.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\bdf_types.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="bdf_types_float.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -47,6 +44,42 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf_types_str.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_l_geom.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_cbar.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_crod.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_pbar.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_pbarl.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_pbeam.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_pbeaml.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_prod.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_types.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_types_list_int.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_bar_prop.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf_cards_beam_prop.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -96,6 +129,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bdf_cards_properties.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf_type_bounds.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

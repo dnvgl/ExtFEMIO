@@ -226,7 +226,7 @@ pbeam::pbeam(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
     throw bdf_parse_error("PBEAM", "Illegal number of entries.");
   }
   if (J.size() == 0)
-    J.push_front(nullptr);
+    J.push_front(NULL);
 }
 
 // Local Variables:
