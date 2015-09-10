@@ -31,7 +31,7 @@
 
 * Writing support for Poseidon
 
-  #+ATTR_LATEX: :booktabs :environment tabu :align @{}lp{5em}Xc@{} :width \textwidth :float nil
+  #+ATTR_LATEX: :booktabs :environment tabu :align @{}llXc@{} :width \textwidth :float nil
   |             | *Entry*             | *Description*                            | *Done* |
   |-------------+---------------------+------------------------------------------+--------|
   |             |                     | <40>                                     | <c6>   |
