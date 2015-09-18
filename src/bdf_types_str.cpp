@@ -17,20 +17,17 @@ namespace {
 
 #include "bdf_types.h"
 
-using namespace std;
-using namespace bdf::types;
-using namespace bdf::type_bounds;
-using namespace bdf::string;
+using bdf::types::entry_type;
 
-entry_type<::std::string>::entry_type(::std::string name) :
-  ::bdf::types::base(name), bounds(::bdf::type_bounds::bound<::std::string>()) {}
+entry_type<std::string>::entry_type(std::string name) :
+  bdf::types::base(name), bounds(bdf::type_bounds::bound<std::string>()) {}
 
-entry_type<::std::string>::entry_type(::std::string name, ::bdf::type_bounds::bound<::std::string> bounds) :
-  ::bdf::types::base(name), bounds(bounds) {}
+entry_type<std::string>::entry_type(std::string name, bdf::type_bounds::bound<std::string> bounds) :
+  bdf::types::base(name), bounds(bounds) {}
 
-::std::string
-*entry_type<::std::string>::operator() (const ::std::string &inp) const {
-  std::string sval = bdf::string::string(inp).trim();
+std::string
+*entry_type<std::string>::operator() (const std::string &inp) const {
+  auto sval = bdf::string::string(inp).trim();
 
   if (sval.length() == 0)
     sval = bounds.get_default();
@@ -38,7 +35,7 @@ entry_type<::std::string>::entry_type(::std::string name, ::bdf::type_bounds::bo
   if (!bounds.is_allowed(sval))
     throw bdf_str_error(name, "!" + sval + "! Value not in list of allowed values.");
 
-  return new ::std::string(sval);
+  return new std::string(sval);
 }
 
 // Local Variables:

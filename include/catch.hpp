@@ -2376,29 +2376,29 @@ namespace Matchers {
         return Impl::Generic::AnyOf<ExpressionT>().add( m1 ).add( m2 ).add( m3 );
     }
 
-    inline Impl::StdString::Equals      Equals( std::string const& str ) {
-        return Impl::StdString::Equals( str );
+    inline ImplstdString::Equals      Equals( std::string const& str ) {
+        return ImplstdString::Equals( str );
     }
-    inline Impl::StdString::Equals      Equals( const char* str ) {
-        return Impl::StdString::Equals( Impl::StdString::makeString( str ) );
+    inline ImplstdString::Equals      Equals( const char* str ) {
+        return ImplstdString::Equals( ImplstdString::makeString( str ) );
     }
-    inline Impl::StdString::Contains    Contains( std::string const& substr ) {
-        return Impl::StdString::Contains( substr );
+    inline ImplstdString::Contains    Contains( std::string const& substr ) {
+        return ImplstdString::Contains( substr );
     }
-    inline Impl::StdString::Contains    Contains( const char* substr ) {
-        return Impl::StdString::Contains( Impl::StdString::makeString( substr ) );
+    inline ImplstdString::Contains    Contains( const char* substr ) {
+        return ImplstdString::Contains( ImplstdString::makeString( substr ) );
     }
-    inline Impl::StdString::StartsWith  StartsWith( std::string const& substr ) {
-        return Impl::StdString::StartsWith( substr );
+    inline ImplstdString::StartsWith  StartsWith( std::string const& substr ) {
+        return ImplstdString::StartsWith( substr );
     }
-    inline Impl::StdString::StartsWith  StartsWith( const char* substr ) {
-        return Impl::StdString::StartsWith( Impl::StdString::makeString( substr ) );
+    inline ImplstdString::StartsWith  StartsWith( const char* substr ) {
+        return ImplstdString::StartsWith( ImplstdString::makeString( substr ) );
     }
-    inline Impl::StdString::EndsWith    EndsWith( std::string const& substr ) {
-        return Impl::StdString::EndsWith( substr );
+    inline ImplstdString::EndsWith    EndsWith( std::string const& substr ) {
+        return ImplstdString::EndsWith( substr );
     }
-    inline Impl::StdString::EndsWith    EndsWith( const char* substr ) {
-        return Impl::StdString::EndsWith( Impl::StdString::makeString( substr ) );
+    inline ImplstdString::EndsWith    EndsWith( const char* substr ) {
+        return ImplstdString::EndsWith( ImplstdString::makeString( substr ) );
     }
 
 } // namespace Matchers
@@ -9209,10 +9209,10 @@ namespace Catch {
     TestSpec::TagPattern::~TagPattern() {}
     TestSpec::ExcludedPattern::~ExcludedPattern() {}
 
-    Matchers::Impl::StdString::Equals::~Equals() {}
-    Matchers::Impl::StdString::Contains::~Contains() {}
-    Matchers::Impl::StdString::StartsWith::~StartsWith() {}
-    Matchers::Impl::StdString::EndsWith::~EndsWith() {}
+    Matchers::ImplstdString::Equals::~Equals() {}
+    Matchers::ImplstdString::Contains::~Contains() {}
+    Matchers::ImplstdString::StartsWith::~StartsWith() {}
+    Matchers::ImplstdString::EndsWith::~EndsWith() {}
 
     void Config::dummy() {}
 }

@@ -22,45 +22,43 @@ namespace {
 #include "bdf_cards.h"
 #include "bdf_types.h"
 
-using namespace ::std;
-using namespace ::bdf;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
-using namespace ::bdf::type_bounds;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 const entry_type<long> mat1::_MID(
-  "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  "MID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<double> mat1::_E(
-  "E", ::bdf::type_bounds::bound<double>(
+  "E", bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr, nullptr, true));
 const entry_type<double> mat1::_G(
-  "G", ::bdf::type_bounds::bound<double>(
+  "G", bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr, nullptr, true));
 const entry_type<double> mat1::_NU(
-  "NU", ::bdf::type_bounds::bound<double>(make_unique<double>(-1.).get(),
+  "NU", bdf::type_bounds::bound<double>(make_unique<double>(-1.).get(),
                     make_unique<double>(.5).get(), nullptr, true));
 const entry_type<double> mat1::_RHO(
-  "RHO", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  "RHO", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::_A(
-  "A", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  "A", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::_TREF(
-  "TREF", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  "TREF", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::_GE(
-  "GE", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  "GE", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::_ST(
   "ST",
-  ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+  bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 const entry_type<double> mat1::_SC(
   "SC",
-  ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+  bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 const entry_type<double> mat1::_SS(
   "SS",
-  ::bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+  bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
 const entry_type<long> mat1::_MCSID(
   "MCSID",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
+  bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
 
-mat1::mat1(const deque<::std::string> &inp) : bdf_card(inp) {
+mat1::mat1(const deque<std::string> &inp) : bdf_card(inp) {
 
   MCSID = nullptr;
   SS = nullptr;
@@ -73,7 +71,7 @@ mat1::mat1(const deque<::std::string> &inp) : bdf_card(inp) {
   NU = nullptr;
   G = nullptr;
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   switch (inp.size()-1) {
   case 16:

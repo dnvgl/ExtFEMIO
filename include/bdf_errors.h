@@ -15,23 +15,23 @@ class bdf_error {
 
 protected:
 
-  ::std::string msg;
-  ::std::string name;
-  ::std::string err_class;
+  std::string msg;
+  std::string name;
+  std::string err_class;
 
-  ::std::string get_msg(void) const;
+  std::string get_msg(void) const;
 
 public:
 
   bdf_error(
-    const ::std::string &msg,
-    const ::std::string &err_class="bdf_error");
+    const std::string &msg,
+    const std::string &err_class="bdf_error");
 
   bdf_error(
-    const ::std::string&, const ::std::string &msg,
-    const ::std::string &err_class="bdf_error");
+    const std::string&, const std::string &msg,
+    const std::string &err_class="bdf_error");
 
-  ::std::string operator() (void) const;
+  std::string operator() (void) const;
 
 };
 
@@ -39,7 +39,7 @@ class bdf_types_error : public bdf_error {
 
 public:
 
-  bdf_types_error(const ::std::string &msg);
+  bdf_types_error(const std::string &msg);
 
 };
 
@@ -47,7 +47,7 @@ class bdf_float_error : public bdf_error {
 
 public:
 
-  bdf_float_error(const ::std::string&, const ::std::string&);
+  bdf_float_error(const std::string&, const std::string&);
 
 };
 
@@ -55,7 +55,7 @@ class bdf_int_error : public bdf_error {
 
 public:
 
-  bdf_int_error(const ::std::string&, const ::std::string&);
+  bdf_int_error(const std::string&, const std::string&);
 
 };
 
@@ -63,7 +63,7 @@ class bdf_list_error : public bdf_error {
 
 public:
 
-  bdf_list_error(const ::std::string&, const ::std::string &);
+  bdf_list_error(const std::string&, const std::string &);
 
 };
 
@@ -71,7 +71,7 @@ class bdf_str_error : public bdf_error {
 
 public:
 
-  bdf_str_error(const ::std::string&, const ::std::string &);
+  bdf_str_error(const std::string&, const std::string &);
 
 };
 
@@ -79,7 +79,7 @@ class bdf_string_error : public bdf_error {
 
 public:
 
-  bdf_string_error(const ::std::string&, const ::std::string &);
+  bdf_string_error(const std::string&, const std::string &);
 
 };
 
@@ -87,7 +87,7 @@ class bdf_parse_error : public bdf_error {
 
 public:
 
-  bdf_parse_error(const ::std::string&, const ::std::string &);
+  bdf_parse_error(const std::string&, const std::string &);
 
 };
 

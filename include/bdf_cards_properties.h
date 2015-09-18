@@ -17,8 +17,6 @@
 
 namespace bdf {
 
-  using namespace types;
-
   namespace cards {
 
     /*
@@ -79,51 +77,52 @@ Description:
 
     private:
 
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID1;
-      static const entry_type<double> _T;
-      static const entry_type<long> _MID2;
-      static const entry_type<double> _12I_T__3; // 12 I / T**3
-      static const entry_type<long> _MID3;
-      static const entry_type<double> _TS_T; // TS / T
-      static const entry_type<double> _NSM;
-      static const entry_type<double> _Z1;
-      static const entry_type<double> _Z2;
-      static const entry_type<long> _MID4;
+      static const bdf::types::entry_type<long> _PID;
+      static const bdf::types::entry_type<long> _MID1;
+      static const bdf::types::entry_type<double> _T;
+      static const bdf::types::entry_type<long> _MID2;
+      static const bdf::types::entry_type<double> _12I_T__3; // 12 I / T**3
+      static const bdf::types::entry_type<long> _MID3;
+      static const bdf::types::entry_type<double> _TS_T; // TS / T
+      static const bdf::types::entry_type<double> _NSM;
+      static const bdf::types::entry_type<double> _Z1;
+      static const bdf::types::entry_type<double> _Z2;
+      static const bdf::types::entry_type<long> _MID4;
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID1;
-      ::std::unique_ptr<double> T;
-      ::std::unique_ptr<long> MID2;
-      ::std::unique_ptr<double> x12I_T__3; // 12 I / T**3
-      ::std::unique_ptr<long> MID3;
-      ::std::unique_ptr<double> TS_T; // TS / T
-      ::std::unique_ptr<double> NSM;
-      ::std::unique_ptr<double> Z1;
-      ::std::unique_ptr<double> Z2;
-      ::std::unique_ptr<long> MID4;
+      std::unique_ptr<long> PID;
+      std::unique_ptr<long> MID1;
+      std::unique_ptr<double> T;
+      std::unique_ptr<long> MID2;
+      std::unique_ptr<double> x12I_T__3; // 12 I / T**3
+      std::unique_ptr<long> MID3;
+      std::unique_ptr<double> TS_T; // TS / T
+      std::unique_ptr<double> NSM;
+      std::unique_ptr<double> Z1;
+      std::unique_ptr<double> Z2;
+      std::unique_ptr<long> MID4;
 
-      DllExport pshell(const ::std::deque<::std::string> &);
+      DllExport pshell(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return PSHELL; };
-
+      DllExport bdf::cards::types card(void) { return PSHELL; };
     };
 
     class bdf_beam_prop : public bdf_card {
     // base class for beam property classes.
     protected:
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID;
+      static const bdf::types::entry_type<long> _PID;
+      static const bdf::types::entry_type<long> _MID;
 
-      DllExport bdf_beam_prop(const ::std::deque<::std::string> &inp) :
+      DllExport bdf_beam_prop(const std::deque<std::string> &inp) :
         bdf_card(inp) {};
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID;
+      std::unique_ptr<long> PID;
+      std::unique_ptr<long> MID;
+
+      DllExport bdf::cards::types card(void) { return BEAM_PROP; };
     };
 
 /*
@@ -238,79 +237,79 @@ Description:
 
     private:
 
-      static const entry_type<double> _A;
-      static const entry_type<double> _I1;
-      static const entry_type<double> _I2;
-      static const entry_type<double> _I12;
-      static const entry_type<double> _J;
-      static const entry_type<double> _NSM;
-      static const entry_type<double> _C1;
-      static const entry_type<double> _C2;
-      static const entry_type<double> _D1;
-      static const entry_type<double> _D2;
-      static const entry_type<double> _E1;
-      static const entry_type<double> _E2;
-      static const entry_type<double> _F1;
-      static const entry_type<double> _F2;
-      static const entry_type<::std::string> _SO;
-      static const entry_type<double> _X_XB;
-      static const entry_type<double> _K1;
-      static const entry_type<double> _K2;
-      static const entry_type<double> _S1;
-      static const entry_type<double> _S2;
-      static const entry_type<double> _NSI_A;
-      static const entry_type<double> _NSI_B;
-      static const entry_type<double> _CW_A;
-      static const entry_type<double> _CW_B;
-      static const entry_type<double> _M1_A;
-      static const entry_type<double> _M2_A;
-      static const entry_type<double> _M1_B;
-      static const entry_type<double> _M2_B;
-      static const entry_type<double> _N1_A;
-      static const entry_type<double> _N2_A;
-      static const entry_type<double> _N1_B;
-      static const entry_type<double> _N2_B;
+      static const bdf::types::entry_type<double> _A;
+      static const bdf::types::entry_type<double> _I1;
+      static const bdf::types::entry_type<double> _I2;
+      static const bdf::types::entry_type<double> _I12;
+      static const bdf::types::entry_type<double> _J;
+      static const bdf::types::entry_type<double> _NSM;
+      static const bdf::types::entry_type<double> _C1;
+      static const bdf::types::entry_type<double> _C2;
+      static const bdf::types::entry_type<double> _D1;
+      static const bdf::types::entry_type<double> _D2;
+      static const bdf::types::entry_type<double> _E1;
+      static const bdf::types::entry_type<double> _E2;
+      static const bdf::types::entry_type<double> _F1;
+      static const bdf::types::entry_type<double> _F2;
+      static const bdf::types::entry_type<std::string> _SO;
+      static const bdf::types::entry_type<double> _X_XB;
+      static const bdf::types::entry_type<double> _K1;
+      static const bdf::types::entry_type<double> _K2;
+      static const bdf::types::entry_type<double> _S1;
+      static const bdf::types::entry_type<double> _S2;
+      static const bdf::types::entry_type<double> _NSI_A;
+      static const bdf::types::entry_type<double> _NSI_B;
+      static const bdf::types::entry_type<double> _CW_A;
+      static const bdf::types::entry_type<double> _CW_B;
+      static const bdf::types::entry_type<double> _M1_A;
+      static const bdf::types::entry_type<double> _M2_A;
+      static const bdf::types::entry_type<double> _M1_B;
+      static const bdf::types::entry_type<double> _M2_B;
+      static const bdf::types::entry_type<double> _N1_A;
+      static const bdf::types::entry_type<double> _N2_A;
+      static const bdf::types::entry_type<double> _N1_B;
+      static const bdf::types::entry_type<double> _N2_B;
 
     public:
 
       // fields that might appear more than once
-      ::std::deque<::std::unique_ptr<double>> A;
-      ::std::deque<::std::unique_ptr<double>> I1;
-      ::std::deque<::std::unique_ptr<double>> I2;
-      ::std::deque<::std::unique_ptr<double>> I12;
-      ::std::deque<::std::unique_ptr<double>> J;
-      ::std::deque<::std::unique_ptr<double>> NSM;
-      ::std::deque<::std::unique_ptr<double>> C1;
-      ::std::deque<::std::unique_ptr<double>> C2;
-      ::std::deque<::std::unique_ptr<double>> D1;
-      ::std::deque<::std::unique_ptr<double>> D2;
-      ::std::deque<::std::unique_ptr<double>> E1;
-      ::std::deque<::std::unique_ptr<double>> E2;
-      ::std::deque<::std::unique_ptr<double>> F1;
-      ::std::deque<::std::unique_ptr<double>> F2;
-      ::std::deque<::std::unique_ptr<::std::string>> SO;
-      ::std::deque<::std::unique_ptr<double>> X_XB;
+      std::deque<std::unique_ptr<double>> A;
+      std::deque<std::unique_ptr<double>> I1;
+      std::deque<std::unique_ptr<double>> I2;
+      std::deque<std::unique_ptr<double>> I12;
+      std::deque<std::unique_ptr<double>> J;
+      std::deque<std::unique_ptr<double>> NSM;
+      std::deque<std::unique_ptr<double>> C1;
+      std::deque<std::unique_ptr<double>> C2;
+      std::deque<std::unique_ptr<double>> D1;
+      std::deque<std::unique_ptr<double>> D2;
+      std::deque<std::unique_ptr<double>> E1;
+      std::deque<std::unique_ptr<double>> E2;
+      std::deque<std::unique_ptr<double>> F1;
+      std::deque<std::unique_ptr<double>> F2;
+      std::deque<std::unique_ptr<std::string>> SO;
+      std::deque<std::unique_ptr<double>> X_XB;
       // fields_finish
-      ::std::unique_ptr<double> K1;
-      ::std::unique_ptr<double> K2;
-      ::std::unique_ptr<double> S1;
-      ::std::unique_ptr<double> S2;
-      ::std::unique_ptr<double> NSI_A;
-      ::std::unique_ptr<double> NSI_B;
-      ::std::unique_ptr<double> CW_A;
-      ::std::unique_ptr<double> CW_B;
-      ::std::unique_ptr<double> M1_A;
-      ::std::unique_ptr<double> M2_A;
-      ::std::unique_ptr<double> M1_B;
-      ::std::unique_ptr<double> M2_B;
-      ::std::unique_ptr<double> N1_A;
-      ::std::unique_ptr<double> N2_A;
-      ::std::unique_ptr<double> N1_B;
-      ::std::unique_ptr<double> N2_B;
+      std::unique_ptr<double> K1;
+      std::unique_ptr<double> K2;
+      std::unique_ptr<double> S1;
+      std::unique_ptr<double> S2;
+      std::unique_ptr<double> NSI_A;
+      std::unique_ptr<double> NSI_B;
+      std::unique_ptr<double> CW_A;
+      std::unique_ptr<double> CW_B;
+      std::unique_ptr<double> M1_A;
+      std::unique_ptr<double> M2_A;
+      std::unique_ptr<double> M1_B;
+      std::unique_ptr<double> M2_B;
+      std::unique_ptr<double> N1_A;
+      std::unique_ptr<double> N2_A;
+      std::unique_ptr<double> N1_B;
+      std::unique_ptr<double> N2_B;
 
-      DllExport pbeam(const ::std::deque<::std::string> &);
+      DllExport pbeam(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return PBEAM; };
+      DllExport bdf::cards::types card(void) { return PBEAM; };
 
     };
 
@@ -320,13 +319,13 @@ Description:
 
       l_geom () {};
 
-      static const ::std::set<::std::string> dimnum1;
-      static const ::std::set<::std::string> dimnum2;
-      static const ::std::set<::std::string> dimnum3;
-      static const ::std::set<::std::string> dimnum4;
-      static const ::std::set<::std::string> dimnum5;
-      static const ::std::set<::std::string> dimnum6;
-      static const ::std::set<::std::string> dimnum10;
+      static const std::set<std::string> dimnum1;
+      static const std::set<std::string> dimnum2;
+      static const std::set<std::string> dimnum3;
+      static const std::set<std::string> dimnum4;
+      static const std::set<std::string> dimnum5;
+      static const std::set<std::string> dimnum6;
+      static const std::set<std::string> dimnum10;
     };
 /*
 Handle Nastran Bulk PBEAML entries.
@@ -392,42 +391,44 @@ Description:
 
     private:
 
-      static const entry_type<::std::string> _GROUP;
-      static const entry_type<::std::string> _TYPE;
-      static const entry_type<double> _DIM;
-      static const entry_type<double> _NSM;
-      static const entry_type<::std::string> _SO;
-      static const entry_type<double> _X_XB;
+      static const bdf::types::entry_type<std::string> _GROUP;
+      static const bdf::types::entry_type<std::string> _TYPE;
+      static const bdf::types::entry_type<double> _DIM;
+      static const bdf::types::entry_type<double> _NSM;
+      static const bdf::types::entry_type<std::string> _SO;
+      static const bdf::types::entry_type<double> _X_XB;
 
     public:
 
-      ::std::unique_ptr<::std::string> GROUP;
-      ::std::unique_ptr<::std::string> TYPE;
+      std::unique_ptr<std::string> GROUP;
+      std::unique_ptr<std::string> TYPE;
       // fields that might appear more than once
-      ::std::deque<::std::deque<::std::unique_ptr<double>>*> DIM;
-      ::std::deque<::std::unique_ptr<double>> NSM;
-      ::std::deque<::std::unique_ptr<::std::string>> SO;
-      ::std::deque<::std::unique_ptr<double>> X_XB;
+      std::deque<std::deque<std::unique_ptr<double>>*> DIM;
+      std::deque<std::unique_ptr<double>> NSM;
+      std::deque<std::unique_ptr<std::string>> SO;
+      std::deque<std::unique_ptr<double>> X_XB;
 
-      DllExport pbeaml(const ::std::deque<::std::string> &);
+      DllExport pbeaml(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return PBEAML; };
+      DllExport bdf::cards::types card(void) { return PBEAML; };
 
     };
 
     class bdf_bar_prop : public bdf_card {
     // base class for beam property classes.
     protected:
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID;
+      static const bdf::types::entry_type<long> _PID;
+      static const bdf::types::entry_type<long> _MID;
 
-      DllExport bdf_bar_prop(const ::std::deque<::std::string> &inp) :
+      DllExport bdf_bar_prop(const std::deque<std::string> &inp) :
         bdf_card(inp) {};
+
+      DllExport bdf::cards::types card(void) { return BAR_PROP; };
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID;
+      std::unique_ptr<long> PID;
+      std::unique_ptr<long> MID;
     };
 
 /*
@@ -473,47 +474,47 @@ Description:
 
     private:
 
-      static const entry_type<double> _A;
-      static const entry_type<double> _I1;
-      static const entry_type<double> _I2;
-      static const entry_type<double> _J;
-      static const entry_type<double> _NSM;
-      static const entry_type<double> _C1;
-      static const entry_type<double> _C2;
-      static const entry_type<double> _D1;
-      static const entry_type<double> _D2;
-      static const entry_type<double> _E1;
-      static const entry_type<double> _E2;
-      static const entry_type<double> _F1;
-      static const entry_type<double> _F2;
-      static const entry_type<double> _K1;
-      static const entry_type<double> _K2;
-      static const entry_type<double> _I12;
+      static const bdf::types::entry_type<double> _A;
+      static const bdf::types::entry_type<double> _I1;
+      static const bdf::types::entry_type<double> _I2;
+      static const bdf::types::entry_type<double> _J;
+      static const bdf::types::entry_type<double> _NSM;
+      static const bdf::types::entry_type<double> _C1;
+      static const bdf::types::entry_type<double> _C2;
+      static const bdf::types::entry_type<double> _D1;
+      static const bdf::types::entry_type<double> _D2;
+      static const bdf::types::entry_type<double> _E1;
+      static const bdf::types::entry_type<double> _E2;
+      static const bdf::types::entry_type<double> _F1;
+      static const bdf::types::entry_type<double> _F2;
+      static const bdf::types::entry_type<double> _K1;
+      static const bdf::types::entry_type<double> _K2;
+      static const bdf::types::entry_type<double> _I12;
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID;
-      ::std::unique_ptr<double> A;
-      ::std::unique_ptr<double> I1;
-      ::std::unique_ptr<double> I2;
-      ::std::unique_ptr<double> J;
-      ::std::unique_ptr<double> NSM;
-      ::std::unique_ptr<double> C1;
-      ::std::unique_ptr<double> C2;
-      ::std::unique_ptr<double> D1;
-      ::std::unique_ptr<double> D2;
-      ::std::unique_ptr<double> E1;
-      ::std::unique_ptr<double> E2;
-      ::std::unique_ptr<double> F1;
-      ::std::unique_ptr<double> F2;
-      ::std::unique_ptr<double> K1;
-      ::std::unique_ptr<double> K2;
-      ::std::unique_ptr<double> I12;
+      std::unique_ptr<long> PID;
+      std::unique_ptr<long> MID;
+      std::unique_ptr<double> A;
+      std::unique_ptr<double> I1;
+      std::unique_ptr<double> I2;
+      std::unique_ptr<double> J;
+      std::unique_ptr<double> NSM;
+      std::unique_ptr<double> C1;
+      std::unique_ptr<double> C2;
+      std::unique_ptr<double> D1;
+      std::unique_ptr<double> D2;
+      std::unique_ptr<double> E1;
+      std::unique_ptr<double> E2;
+      std::unique_ptr<double> F1;
+      std::unique_ptr<double> F2;
+      std::unique_ptr<double> K1;
+      std::unique_ptr<double> K2;
+      std::unique_ptr<double> I12;
 
-      DllExport pbar(const ::std::deque<::std::string> &);
+      DllExport pbar(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return PBAR; };
+      DllExport bdf::cards::types card(void) { return PBAR; };
     };
 
 /*
@@ -560,23 +561,23 @@ Description:
 
     private:
 
-      static const entry_type<::std::string> _GROUP;
-      static const entry_type<::std::string> _TYPE;
-      static const entry_type<double> _DIM;
-      static const entry_type<double> _NSM;
+      static const bdf::types::entry_type<std::string> _GROUP;
+      static const bdf::types::entry_type<std::string> _TYPE;
+      static const bdf::types::entry_type<double> _DIM;
+      static const bdf::types::entry_type<double> _NSM;
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID;
-      ::std::unique_ptr<::std::string> GROUP;
-      ::std::unique_ptr<::std::string> TYPE;
-      ::std::deque<::std::unique_ptr<double>> DIM;
-      ::std::unique_ptr<double> NSM;
+      std::unique_ptr<long> PID;
+      std::unique_ptr<long> MID;
+      std::unique_ptr<std::string> GROUP;
+      std::unique_ptr<std::string> TYPE;
+      std::deque<std::unique_ptr<double>> DIM;
+      std::unique_ptr<double> NSM;
 
-      DllExport pbarl(const ::std::deque<::std::string> &);
+      DllExport pbarl(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return PBARL; };
+      DllExport bdf::cards::types card(void) { return PBARL; };
     };
 
 /*
@@ -617,25 +618,25 @@ Description:
 
     private:
 
-      static const entry_type<long> _PID;
-      static const entry_type<long> _MID;
-      static const entry_type<double> _A;
-      static const entry_type<double> _J;
-      static const entry_type<double> _C;
-      static const entry_type<double> _NSM;
+      static const bdf::types::entry_type<long> _PID;
+      static const bdf::types::entry_type<long> _MID;
+      static const bdf::types::entry_type<double> _A;
+      static const bdf::types::entry_type<double> _J;
+      static const bdf::types::entry_type<double> _C;
+      static const bdf::types::entry_type<double> _NSM;
 
     public:
 
-      ::std::unique_ptr<long> PID;
-      ::std::unique_ptr<long> MID;
-      ::std::unique_ptr<double> A;
-      ::std::unique_ptr<double> J;
-      ::std::unique_ptr<double> C;
-      ::std::unique_ptr<double> NSM;
+      std::unique_ptr<long> PID;
+      std::unique_ptr<long> MID;
+      std::unique_ptr<double> A;
+      std::unique_ptr<double> J;
+      std::unique_ptr<double> C;
+      std::unique_ptr<double> NSM;
 
-      DllExport prod(const ::std::deque<::std::string> &);
+      DllExport prod(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return PROD; };
+      DllExport bdf::cards::types card(void) { return PROD; };
     };
   }
 }

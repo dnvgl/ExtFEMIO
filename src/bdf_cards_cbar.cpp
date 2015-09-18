@@ -19,64 +19,64 @@ namespace {
 #include "bdf_types.h"
 #include "bdf_errors.h"
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 const entry_type<long> cbar::_EID(
   "EID",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<long> cbar::_PID("PID");
 const entry_type<long> cbar::_GA("GA");
 const entry_type<long> cbar::_GB("GB");
 const entry_type<double> cbar::_X1("X1");
 const entry_type<long> cbar::_G0(
-  "G0", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  "G0", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<double> cbar::_X2(
   "X2",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> cbar::_X3(
   "X3",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 namespace {
   const char* initVals[8] = {
     "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
-  const ::std::set<::std::string> OFFT_set(initVals, initVals + 8);
+  const set<std::string> OFFT_set(initVals, initVals + 8);
 }
-const entry_type<::std::string> cbar::_OFFT(
-  "OFFT", ::bdf::type_bounds::bound<::std::string>(OFFT_set, "GGG"));
+const entry_type<std::string> cbar::_OFFT(
+  "OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
 
-const entry_type<::std::deque<int>> cbar::_PA("PA");
-const entry_type<::std::deque<int>> cbar::_PB("PB");
+const entry_type<deque<int>> cbar::_PA("PA");
+const entry_type<deque<int>> cbar::_PB("PB");
 const entry_type<double> cbar::_W1A(
   "W1A",
-  ::bdf::type_bounds::bound<double>(
+  bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> cbar::_W2A(
   "W2A",
-  ::bdf::type_bounds::bound<double>(
+  bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> cbar::_W3A(
   "W3A",
-  ::bdf::type_bounds::bound<double>(
+  bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> cbar::_W1B(
   "W1B",
-  ::bdf::type_bounds::bound<double>(
+  bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> cbar::_W2B(
   "W2B",
-  ::bdf::type_bounds::bound<double>(
+  bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> cbar::_W3B(
   "W3B",
-  ::bdf::type_bounds::bound<double>(
+  bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
-cbar::cbar(const ::std::deque<::std::string> &inp) :
+cbar::cbar(const deque<std::string> &inp) :
   bdf_card(inp) {
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   W3B = nullptr;
   W2B = nullptr;
@@ -106,7 +106,7 @@ cbar::cbar(const ::std::deque<::std::string> &inp) :
   case 9:
     PA = get_val<deque<int>>(_PA, *(pos++));
   case 8:
-    OFFT = get_val<::std::string>(_OFFT, *(pos++));
+    OFFT = get_val<std::string>(_OFFT, *(pos++));
   case 7:
     X3 = get_val<double>(_X3, *(pos++));
   case 6:

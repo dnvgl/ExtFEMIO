@@ -16,35 +16,24 @@ namespace {
 }
 
 #include <sstream>
-#include <limits>
-#include <algorithm>
-#include <string>
+
 #ifdef __GNUC__
 #include <boost/regex.hpp>
 #else
 #include <regex>
 #endif
 
-#ifndef _MSC_VER
-#include <config.h>
-#endif
 #include "bdf_types.h"
-#include "bdf_string.h"
-#include "bdf_errors.h"
 
 using namespace std;
+
 using namespace bdf::types;
-using namespace bdf::type_bounds;
-using namespace bdf::string;
-#ifdef __GNUC__
-using namespace boost;
-#endif
 
-entry_type<double>::entry_type(::std::string name) :
-  ::bdf::types::base(name), bounds(::bdf::type_bounds::bound<double>()) {};
+entry_type<double>::entry_type(std::string name) :
+  bdf::types::base(name), bounds(bdf::type_bounds::bound<double>()) {};
 
-entry_type<double>::entry_type(::std::string name, ::bdf::type_bounds::bound<double> bounds) :
-  ::bdf::types::base(name), bounds(bounds) {};
+entry_type<double>::entry_type(std::string name, bdf::type_bounds::bound<double> bounds) :
+  bdf::types::base(name), bounds(bounds) {};
 
 const regex entry_type<double>::float_exp_re(
   "([\\+-]?[.[:digit:]]+)([+-][[:digit:]]+)");
@@ -59,8 +48,8 @@ const regex entry_type<double>::float_lead_dot(
 
 // Convert string to float
 double *entry_type<double>::operator() (const std::string &inp) const {
-  double *value = new double();
-  std::string sval = ::bdf::string::string(inp).trim().upper();
+  auto *value = new double();
+  auto sval = bdf::string::string(inp).trim().upper();
 
   if (sval.length() == 0) {
     if (this->bounds.does_allow_empty())
@@ -80,7 +69,7 @@ double *entry_type<double>::operator() (const std::string &inp) const {
       sval = m[1].str() + "E" + m[2].str();
 
     if (regex_match(sval, float_lead_dot)) {
-        size_t pos = sval.find('.');
+        auto pos = sval.find('.');
         sval.insert(pos, 1, '0');
     }
 

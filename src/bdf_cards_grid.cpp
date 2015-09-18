@@ -22,49 +22,49 @@ namespace {
 #include "bdf_cards.h"
 #include "bdf_types.h"
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 const entry_type<long> grid::_ID(
   "ID",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
+  bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
             make_unique<long>(100000000).get()));
 const entry_type<long> grid::_CP(
-  "CP", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
+  "CP", bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
                                nullptr,
                                make_unique<long>(-1).get()));
 const entry_type<double> grid::_X1(
   "X1",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> grid::_X2(
   "X2",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr,
+  bdf::type_bounds::bound<double>(nullptr, nullptr,
               make_unique<double>(0.).get()));
 const entry_type<double> grid::_X3(
   "X3",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr,
+  bdf::type_bounds::bound<double>(nullptr, nullptr,
               make_unique<double>(0.).get()));
 const entry_type<long> grid::_CD(
   "CD",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
+  bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
             make_unique<long>(-2).get()));
-const entry_type<::std::deque<int>> grid::_PS("PS");
+const entry_type<std::deque<int>> grid::_PS("PS");
 const entry_type<long> grid::_SEID(
   "SEID",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
+  bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
             make_unique<long>(0).get()));
 
 
-grid::grid(const deque<::std::string> &inp) : bdf_card(inp) {
+grid::grid(const deque<std::string> &inp) : bdf_card(inp) {
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   switch (inp.size()-1) {
   case 8:
     SEID = get_val<long>(_SEID, *(pos++));
   case 7:
-    PS = get_val<::std::deque<int> >(_PS, *(pos++));
+    PS = get_val<std::deque<int> >(_PS, *(pos++));
   case 6:
     CD = get_val<long>(_CD, *(pos++));
   case 5:

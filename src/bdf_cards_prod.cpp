@@ -20,28 +20,28 @@ namespace {
 #include <cstdlib>
 #include <memory>
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 const entry_type<long> prod::_PID(
-  "PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<long> prod::_MID(
-  "MID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  "MID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<double> prod::_A("A");
 const entry_type<double> prod::_J(
   "J",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> prod::_C(
-  "C", ::bdf::type_bounds::bound<double>(
+  "C", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> prod::_NSM(
   "J",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-prod::prod(const deque<::std::string> &inp) : bdf_card(inp) {
+prod::prod(const deque<std::string> &inp) : bdf_card(inp) {
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   J = nullptr;
   C = make_unique<double>(0.);

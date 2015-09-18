@@ -20,33 +20,27 @@ namespace {
 #else
 #include <regex>
 #endif
-#ifdef __GNUC__
-using namespace boost;
-#else
-using namespace std;
-#endif
 
 #include "bdf_types.h"
 
-using namespace std;
-using namespace bdf::types;
-using namespace bdf::type_bounds;
-using namespace bdf::string;
 #ifdef __GNUC__
-using namespace boost;
+using boost::regex;
+#else
+using std::regex;
 #endif
+using bdf::types::entry_type;
 
-const regex entry_type<::std::deque<int>>::int_re("[[:digit:]]*");
+const regex entry_type<std::deque<int>>::int_re("[[:digit:]]*");
 
-::std::deque<int>*
-entry_type<::std::deque<int>>::operator() (const std::string &inp) const {
-  ::std::deque<int> *value =  new ::std::deque<int>();
-  std::string sval = ::bdf::string::string(inp).trim();
+std::deque<int>*
+entry_type<std::deque<int>>::operator() (const std::string &inp) const {
+  auto *value =  new std::deque<int>();
+  auto sval = bdf::string::string(inp).trim();
   if (! regex_match(sval, int_re)) {
     std::string msg(name + ":illegal input (""");
     throw bdf_types_error(msg + sval + """), no integer in list");
   }
-  for (::std::string::iterator pos = sval.begin();
+  for (auto pos = sval.begin();
        pos != sval.end(); ++pos)
     value->push_back(*pos - '0');
   return value;

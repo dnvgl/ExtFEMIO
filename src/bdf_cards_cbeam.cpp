@@ -19,61 +19,61 @@ namespace {
 #include "bdf_types.h"
 #include "bdf_errors.h"
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 const entry_type<long> cbeam::_EID("EID",
-                    ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+                    bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<long> cbeam::_PID("PID");
 const entry_type<long> cbeam::_GA("GA");
 const entry_type<long> cbeam::_GB("GB");
 const entry_type<double> cbeam::_X1("X1");
 const entry_type<long> cbeam::_G0(
-  "G0", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  "G0", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<double> cbeam::_X2(
-  "X2", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  "X2", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> cbeam::_X3(
-  "X3", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+  "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> cbeam::_BIT("BIT");
 namespace {
   const char* OFFTinit[8] = {
     "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
-  const ::std::set<::std::string> OFFT_set(OFFTinit, OFFTinit + 8);
+  const std::set<std::string> OFFT_set(OFFTinit, OFFTinit + 8);
 }
-const entry_type<::std::string> cbeam::_OFFT("OFFT", ::bdf::type_bounds::bound<::std::string>(OFFT_set, "GGG"));
+const entry_type<std::string> cbeam::_OFFT("OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
 
-const entry_type<::std::deque<int>> cbeam::_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<::std::deque<int>> cbeam::_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<deque<int>> cbeam::_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<deque<int>> cbeam::_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
 const entry_type<double> cbeam::_W1A(
   "W1A",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
 const entry_type<double> cbeam::_W2A(
   "W2A",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
 const entry_type<double> cbeam::_W3A(
   "W3A",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
 const entry_type<double> cbeam::_W1B(
   "W1B",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
 const entry_type<double> cbeam::_W2B(
   "W2B",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
 const entry_type<double> cbeam::_W3B(
   "W3B",
-  ::bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
 const entry_type<long> cbeam::_SA(
   "SA",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
+  bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
 const entry_type<long> cbeam::_SB(
   "SB",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
+  bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
 
-cbeam::cbeam(const ::std::deque<::std::string> &inp) :
+cbeam::cbeam(const deque<std::string> &inp) :
   bdf_card(inp) {
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   SB = nullptr;
   SA = nullptr;
@@ -128,7 +128,7 @@ cbeam::cbeam(const ::std::deque<::std::string> &inp) :
       choose_offt_bit = has_BIT;
     }
     catch (bdf_float_error) {
-      OFFT = get_val<::std::string>(_OFFT, *pos);
+      OFFT = get_val<std::string>(_OFFT, *pos);
       BIT = nullptr;
       choose_offt_bit = has_OFFT;
     }

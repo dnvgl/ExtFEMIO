@@ -19,20 +19,20 @@ namespace {
 #include "bdf_types.h"
 #include "bdf_errors.h"
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 const entry_type<long> crod::_EID(
-  "EID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  "EID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<long> crod::_PID("PID");
 const entry_type<long> crod::_G1("G1");
 const entry_type<long> crod::_G2("G2");
 
-crod::crod(const ::std::deque<::std::string> &inp) :
+crod::crod(const deque<std::string> &inp) :
   bdf_card(inp) {
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   switch (inp.size()-1) {
   case 8:

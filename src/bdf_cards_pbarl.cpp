@@ -24,35 +24,35 @@ namespace {
 #undef _TYPE
 #endif
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
-const entry_type<::std::string> pbarl::_GROUP(
-  "GROUP", ::bdf::type_bounds::bound<::std::string>("MSCBML0"));
+const entry_type<std::string> pbarl::_GROUP(
+  "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
 namespace {
   static const size_t TYPE_len = 22;
   const char* TYPEinit[TYPE_len] = {
     "T", "TW", "I", "L", "ROD", "TUBE", "CHAN", "BOX", "BAR", "CROSS",
     "H", "T1", "I1", "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA",
     "HAT", "HAT1", "DBOX"};
-  const ::std::set<::std::string> TYPE_set(TYPEinit, TYPEinit + TYPE_len);
+  const std::set<std::string> TYPE_set(TYPEinit, TYPEinit + TYPE_len);
 }
-const entry_type<::std::string> pbarl::_TYPE(
-  "TYPE", ::bdf::type_bounds::bound<::std::string>(TYPE_set));
+const entry_type<std::string> pbarl::_TYPE(
+  "TYPE", bdf::type_bounds::bound<std::string>(TYPE_set));
 const entry_type<double> pbarl::_DIM(
-  "DIM", ::bdf::type_bounds::bound<double>(
+  "DIM", bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get()));
 const entry_type<double> pbarl::_NSM(
-  "NSM", ::bdf::type_bounds::bound<double>(
+  "NSM", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
-pbarl::pbarl(const deque<::std::string> &inp) : bdf_bar_prop(inp) {
+pbarl::pbarl(const deque<std::string> &inp) : bdf_bar_prop(inp) {
 
   size_t dim_num = 0;
   size_t i = 0;
 
-  deque<::std::string>::const_iterator pos = inp.begin();
+  auto pos = inp.begin();
 
   if (pos == inp.end()) goto invalid;
   ++pos;
@@ -61,12 +61,12 @@ pbarl::pbarl(const deque<::std::string> &inp) : bdf_bar_prop(inp) {
   if (pos == inp.end()) goto invalid;
   MID = get_val<long>(_MID, *(pos++));
   if (pos == inp.end()) goto invalid;
-  GROUP = get_val<::std::string>(_GROUP, *(pos++));
+  GROUP = get_val<std::string>(_GROUP, *(pos++));
   if (*GROUP != "MSCBML0")
     throw bdf_parse_error(
       "PBARL", "Currently only GROUP==MSCBML0 is supported.");
   if (pos == inp.end()) goto invalid;
-  TYPE = get_val<::std::string>(_TYPE, *(pos++));
+  TYPE = get_val<std::string>(_TYPE, *(pos++));
   if (pos == inp.end()) goto invalid;
   if (dimnum1.find(*TYPE) != dimnum1.end())
     dim_num = 1;

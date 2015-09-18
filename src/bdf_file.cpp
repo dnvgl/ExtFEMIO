@@ -35,8 +35,8 @@ bdf_file::bdf_file(istream &inp) : data(inp) {
   data >> cur_line;
 }
 
-deque<::std::string>& bdf_file::get() {
-  deque<::std::string> *res = new(deque<::std::string>);
+deque<std::string>& bdf_file::get() {
+  deque<std::string> *res = new(deque<std::string>);
   do {
     if (cur_line.length() > 0 && cur_line[0] != '$') res->push_back(cur_line);
     data >> cur_line;

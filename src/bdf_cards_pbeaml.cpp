@@ -24,46 +24,46 @@ namespace {
 #undef _TYPE
 #endif
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
-const entry_type<::std::string> pbeaml::_GROUP(
-  "GROUP", ::bdf::type_bounds::bound<::std::string>("MSCBML0"));
+const entry_type<std::string> pbeaml::_GROUP(
+  "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
 namespace {
   static const size_t TYPE_len = 22;
   const char* TYPEinit[TYPE_len] = {
     "T", "TW", "I", "L", "ROD", "TUBE", "CHAN", "BOX", "BAR", "CROSS",
     "H", "T1", "I1", "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA",
     "HAT", "HAT1", "DBOX"};
-  const ::std::set<::std::string> TYPE_set(TYPEinit, TYPEinit + TYPE_len);
+  const set<std::string> TYPE_set(TYPEinit, TYPEinit + TYPE_len);
 }
-const entry_type<::std::string> pbeaml::_TYPE(
-  "TYPE", ::bdf::type_bounds::bound<::std::string>(TYPE_set));
+const entry_type<std::string> pbeaml::_TYPE(
+  "TYPE", bdf::type_bounds::bound<std::string>(TYPE_set));
 const entry_type<double> pbeaml::_DIM(
-  "DIM", ::bdf::type_bounds::bound<double>(
+  "DIM", bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get()));
 const entry_type<double> pbeaml::_NSM(
-  "NSM", ::bdf::type_bounds::bound<double>(
+  "NSM", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 namespace {
   static const size_t SO_len = 2;
   const char* SO_init[SO_len] = { "YES", "NO" };
-  const ::std::set<::std::string> SO_set(SO_init, SO_init + SO_len);
+  const set<std::string> SO_set(SO_init, SO_init + SO_len);
 }
-const entry_type<::std::string> pbeaml::_SO(
-  "SO", ::bdf::type_bounds::bound<::std::string>(SO_set, "YES"));
+const entry_type<std::string> pbeaml::_SO(
+  "SO", bdf::type_bounds::bound<std::string>(SO_set, "YES"));
 const entry_type<double> pbeaml::_X_XB(
-  "X/XB", ::bdf::type_bounds::bound<double>(
+  "X/XB", bdf::type_bounds::bound<double>(
     make_unique<double>(0.).get(), nullptr,
     make_unique<double>(1.).get()));
 
-pbeaml::pbeaml(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
+pbeaml::pbeaml(const deque<std::string> &inp) : bdf_beam_prop(inp) {
 
   size_t dim_num = 0;
   size_t i, j = 0;
 
-  deque<::std::string>::const_iterator pos = inp.begin();
+  auto pos = inp.begin();
 
   if (pos == inp.end()) goto invalid;
   ++pos;
@@ -72,12 +72,12 @@ pbeaml::pbeaml(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
   if (pos == inp.end()) goto invalid;
   MID = get_val<long>(_MID, *(pos++));
   if (pos == inp.end()) goto invalid;
-  GROUP = get_val<::std::string>(_GROUP, *(pos++));
+  GROUP = get_val<std::string>(_GROUP, *(pos++));
   if (*GROUP != "MSCBML0")
     throw bdf_parse_error(
       "PBEAML", "Currently only GROUP==MSCBML0 is supported.");
   if (pos == inp.end()) goto invalid;
-  TYPE = get_val<::std::string>(_TYPE, *(pos++));
+  TYPE = get_val<std::string>(_TYPE, *(pos++));
   if (pos == inp.end()) goto invalid;
   if (dimnum1.find(*TYPE) != dimnum1.end())
     dim_num = 1;
@@ -103,7 +103,7 @@ pbeaml::pbeaml(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
     ++pos;
   }
 
-  DIM.push_back(new ::std::deque<::std::unique_ptr<double>>);
+  DIM.push_back(new deque<std::unique_ptr<double>>);
   for (i=0; i < dim_num; i++) {
     if (pos == inp.end()) goto invalid;
     (*DIM[0]).push_back(get_val<double>(_DIM, *(pos++)));
@@ -123,9 +123,9 @@ pbeaml::pbeaml(const deque<::std::string> &inp) : bdf_beam_prop(inp) {
   while (pos != inp.end()) {
     if (pos == inp.end()) goto end;
     j++;
-    DIM.push_back(new ::std::deque<::std::unique_ptr<double>>);
+    DIM.push_back(new deque<unique_ptr<double>>);
     try {
-      SO.push_back(get_val<::std::string>(_SO, *(pos++)));
+      SO.push_back(get_val<std::string>(_SO, *(pos++)));
     } catch (bdf_error) {
       goto clean_SO;
     };

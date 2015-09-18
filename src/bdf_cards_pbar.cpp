@@ -20,62 +20,62 @@ namespace {
 #include <cstdlib>
 #include <memory>
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;;
 
 const entry_type<double> pbar::_A(
-  "A", ::bdf::type_bounds::bound<double>(
+  "A", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_I1(
-  "I1", ::bdf::type_bounds::bound<double>(
+  "I1", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_I2(
-  "I2", ::bdf::type_bounds::bound<double>(
+  "I2", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_J(
-  "J", ::bdf::type_bounds::bound<double>(
+  "J", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_NSM(
-  "NSM", ::bdf::type_bounds::bound<double>(
+  "NSM", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_C1(
-  "C1", ::bdf::type_bounds::bound<double>(
+  "C1", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_C2(
-  "C2", ::bdf::type_bounds::bound<double>(
+  "C2", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_D1(
-  "D1", ::bdf::type_bounds::bound<double>(
+  "D1", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_D2(
-  "D2", ::bdf::type_bounds::bound<double>(
+  "D2", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_E1(
-  "E1", ::bdf::type_bounds::bound<double>(
+  "E1", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_E2(
-  "E2", ::bdf::type_bounds::bound<double>(
+  "E2", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_F1(
-  "F1", ::bdf::type_bounds::bound<double>(
+  "F1", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_F2(
-  "F2", ::bdf::type_bounds::bound<double>(
+  "F2", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 const entry_type<double> pbar::_K1(
-  "K1", ::bdf::type_bounds::bound<double>(
+  "K1", bdf::type_bounds::bound<double>(
     nullptr, nullptr, nullptr, true));
 const entry_type<double> pbar::_K2(
-  "K2", ::bdf::type_bounds::bound<double>(
+  "K2", bdf::type_bounds::bound<double>(
     nullptr, nullptr, nullptr, true));
 const entry_type<double> pbar::_I12(
-  "I12", ::bdf::type_bounds::bound<double>(
+  "I12", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
-pbar::pbar(const deque<::std::string> &inp) : bdf_bar_prop(inp) {
+pbar::pbar(const deque<std::string> &inp) : bdf_bar_prop(inp) {
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   A = make_unique<double>(0.);
   I1 = make_unique<double>(0.);

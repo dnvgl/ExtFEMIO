@@ -15,31 +15,13 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include <sstream>
-#include <limits>
-#include <algorithm>
-#include <string>
-#ifdef __GNUC__
-#include <boost/regex.hpp>
-#else
-#include <regex>
-#endif
-
 #ifndef _MSC_VER
 #include <config.h>
 #endif
 #include "bdf_types.h"
 #include "bdf_string.h"
 
-using namespace std;
-using namespace bdf::types;
-using namespace bdf::type_bounds;
-using namespace bdf::string;
-#ifdef __GNUC__
-using namespace boost;
-#endif
-
-::bdf::types::base::base(::std::string name) : name(name) {};
+bdf::types::base::base(std::string name) : name(name) {};
 
 /*
   Local Variables:

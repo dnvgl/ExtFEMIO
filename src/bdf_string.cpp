@@ -20,7 +20,7 @@ namespace {
 // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
 bdf::string::string bdf::string::string::trim(const std::string &whitespace) {
   const auto strBegin = this->find_first_not_of(whitespace);
-  if (strBegin == ::std::string::npos)
+  if (strBegin == std::string::npos)
     return bdf::string::string(""); // no content
 
   const auto strEnd = this->find_last_not_of(whitespace);

@@ -30,9 +30,9 @@
 #include <regex>
 #endif
 #ifdef __GNUC__
-using namespace boost;
+using boost::regex;
 #else
-using namespace std;
+using std::regex;
 #endif
 
 #include <my_c++14.h>
@@ -57,11 +57,11 @@ namespace bdf {
     protected:
 
       static const bdf_types _type;
-      ::std::string name;
+      std::string name;
 
     public:
 
-      base(::std::string);
+      base(std::string);
 
       ~base() {};
 
@@ -98,7 +98,7 @@ namespace bdf {
 
     private:
 
-      ::bdf::type_bounds::bound<long> bounds;
+      bdf::type_bounds::bound<long> bounds;
       static const regex int_re;
 
     protected:
@@ -107,9 +107,9 @@ namespace bdf {
 
     public:
 
-      entry_type<long>(::std::string);
+      entry_type<long>(std::string);
 
-      entry_type<long>(::std::string, ::bdf::type_bounds::bound<long>);
+      entry_type<long>(std::string, bdf::type_bounds::bound<long>);
 
       long *operator() (const std::string&) const;
 
@@ -124,7 +124,7 @@ namespace bdf {
 
     private:
 
-      ::bdf::type_bounds::bound<double> bounds;
+      bdf::type_bounds::bound<double> bounds;
       static const regex float_exp_re;
       static const regex float_re;
       static const regex float_lead_dot;
@@ -135,23 +135,23 @@ namespace bdf {
 
     public:
 
-      entry_type<double>(::std::string);
+      entry_type<double>(std::string);
 
-      entry_type<double>(::std::string, ::bdf::type_bounds::bound<double>);
+      entry_type<double>(std::string, bdf::type_bounds::bound<double>);
 
-      double *operator() (const ::std::string&) const;
+      double *operator() (const std::string&) const;
 
       bdf_types type() const {return _type;};
     };
 
     template <>
-    class entry_type<::std::string> : public base {
+    class entry_type<std::string> : public base {
 
       // String value.
 
     private:
 
-      ::bdf::type_bounds::bound<::std::string> bounds;
+      bdf::type_bounds::bound<std::string> bounds;
 
     protected:
 
@@ -159,18 +159,18 @@ namespace bdf {
 
     public:
 
-      entry_type<::std::string>(::std::string);
+      entry_type<std::string>(std::string);
 
-      entry_type<::std::string>(::std::string, ::bdf::type_bounds::bound<::std::string>);
+      entry_type<std::string>(std::string, bdf::type_bounds::bound<std::string>);
 
-      ::std::string *operator() (const ::std::string &) const;
+      std::string *operator() (const std::string &) const;
 
       bdf_types type() const {return _type;};
 
     };
 
     template <>
-    class entry_type<::std::deque<int>> : public base {
+    class entry_type<std::deque<int>> : public base {
 
       // List of integers.
 
@@ -184,10 +184,10 @@ namespace bdf {
 
     public:
 
-      entry_type<::std::deque<int>>(::std::string name) :
+      entry_type<std::deque<int>>(std::string name) :
         base(name) {};
 
-      ::std::deque<int>* operator() (const ::std::string&) const;
+      std::deque<int>* operator() (const std::string&) const;
 
       inline bdf_types type() const {return _type;};
 
@@ -196,13 +196,13 @@ namespace bdf {
 }
 
 template <class T> inline
-::std::unique_ptr<T>
-get_val(const ::bdf::types::entry_type<T> &t, const ::std::string &inp) {
+std::unique_ptr<T>
+get_val(const bdf::types::entry_type<T> &t, const std::string &inp) {
   T *dummy = t(inp);
   if (!dummy)
     return nullptr;
   else
-    return ::std::make_unique<T>(*dummy);
+    return std::make_unique<T>(*dummy);
 }
 
 #endif // _BERHOL20150407_BDF_TYPES

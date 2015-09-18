@@ -35,8 +35,6 @@
 
 namespace bdf {
 
-  using namespace types;
-
   namespace cards {
 
     typedef enum {
@@ -44,8 +42,8 @@ namespace bdf {
       GRID,
       MAT1,
       CTRIA3, CQUAD4, PSHELL,
-      CBEAM, PBEAM, PBEAML,
-      CBAR, PBAR, PBARL,
+      CBEAM, PBEAM, PBEAML, BEAM_PROP,
+      CBAR, PBAR, PBARL, BAR_PROP,
       CROD, PROD,
       ENDDATA
     } types;
@@ -56,19 +54,20 @@ namespace bdf {
 
       // two character strings for continuation lines in Free Form
       // Format cards.
-      static const ::std::set<char> free_form_cont;
+      static const std::set<char> free_form_cont;
 
     public:
 
-      DllExport static ::std::deque<::std::string>
-      card_split(::std::deque<::std::string> const &);
+      DllExport static std::deque<std::string>
+      card_split(std::deque<std::string> const &);
 
 #ifndef _MSC_VER
       DllExport bdf_card () = delete;
 #endif
-      DllExport bdf_card (const ::std::deque<::std::string> &);
+      DllExport bdf_card (const std::deque<std::string> &);
+      DllExport bdf_card (const bdf_card &);
 
-      virtual ::bdf::cards::types card(void) = 0;
+      virtual bdf::cards::types card(void) = 0;
 
     };
 
@@ -76,12 +75,12 @@ namespace bdf {
 
     public:
 
-      DllExport unknown(const ::std::deque<::std::string> &inp) :
+      DllExport unknown(const std::deque<std::string> &inp) :
         bdf_card(inp), content(inp) {};
 
-      DllExport ::bdf::cards::types card(void) { return UNKNOWN; }
+      DllExport bdf::cards::types card(void) { return UNKNOWN; }
 
-      ::std::deque<::std::string> content;
+      std::deque<std::string> content;
 
     };
 
@@ -93,10 +92,10 @@ namespace bdf {
 
     public:
 
-      DllExport enddata(const ::std::deque<::std::string> &inp) :
+      DllExport enddata(const std::deque<std::string> &inp) :
         bdf_card(inp) {};
 
-      DllExport ::bdf::cards::types card(void) { return ENDDATA; };
+      DllExport bdf::cards::types card(void) { return ENDDATA; };
 
     };
 
@@ -143,29 +142,29 @@ Description:
 
     private:
 
-      static const entry_type<long> _ID;
-      static const entry_type<long> _CP;
-      static const entry_type<double> _X1;
-      static const entry_type<double> _X2;
-      static const entry_type<double> _X3;
-      static const entry_type<long> _CD;
-      static const entry_type<::std::deque<int>> _PS;
-      static const entry_type<long> _SEID;
+      static const bdf::types::entry_type<long> _ID;
+      static const bdf::types::entry_type<long> _CP;
+      static const bdf::types::entry_type<double> _X1;
+      static const bdf::types::entry_type<double> _X2;
+      static const bdf::types::entry_type<double> _X3;
+      static const bdf::types::entry_type<long> _CD;
+      static const bdf::types::entry_type<std::deque<int>> _PS;
+      static const bdf::types::entry_type<long> _SEID;
 
     public:
 
-      ::std::unique_ptr<long> ID;
-      ::std::unique_ptr<long> CP;
-      ::std::unique_ptr<double> X1;
-      ::std::unique_ptr<double> X2;
-      ::std::unique_ptr<double> X3;
-      ::std::unique_ptr<long> CD;
-      ::std::unique_ptr<::std::deque<int>> PS;
-      ::std::unique_ptr<long> SEID;
+      std::unique_ptr<long> ID;
+      std::unique_ptr<long> CP;
+      std::unique_ptr<double> X1;
+      std::unique_ptr<double> X2;
+      std::unique_ptr<double> X3;
+      std::unique_ptr<long> CD;
+      std::unique_ptr<std::deque<int>> PS;
+      std::unique_ptr<long> SEID;
 
-      DllExport grid(const ::std::deque<::std::string> &);
+      DllExport grid(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return GRID; };
+      DllExport bdf::cards::types card(void) { return GRID; };
 
     };
 
@@ -223,37 +222,37 @@ Description:
 
     private:
 
-      static const entry_type<long> _MID;
-      static const entry_type<double> _E;
-      static const entry_type<double> _G;
-      static const entry_type<double> _NU;
-      static const entry_type<double> _RHO;
-      static const entry_type<double> _A;
-      static const entry_type<double> _TREF;
-      static const entry_type<double> _GE;
-      static const entry_type<double> _ST;
-      static const entry_type<double> _SC;
-      static const entry_type<double> _SS;
-      static const entry_type<long> _MCSID;
+      static const bdf::types::entry_type<long> _MID;
+      static const bdf::types::entry_type<double> _E;
+      static const bdf::types::entry_type<double> _G;
+      static const bdf::types::entry_type<double> _NU;
+      static const bdf::types::entry_type<double> _RHO;
+      static const bdf::types::entry_type<double> _A;
+      static const bdf::types::entry_type<double> _TREF;
+      static const bdf::types::entry_type<double> _GE;
+      static const bdf::types::entry_type<double> _ST;
+      static const bdf::types::entry_type<double> _SC;
+      static const bdf::types::entry_type<double> _SS;
+      static const bdf::types::entry_type<long> _MCSID;
 
     public:
 
-      ::std::unique_ptr<long> MID;
-      ::std::unique_ptr<double> E;
-      ::std::unique_ptr<double> G;
-      ::std::unique_ptr<double> NU;
-      ::std::unique_ptr<double> RHO;
-      ::std::unique_ptr<double> A;
-      ::std::unique_ptr<double> TREF;
-      ::std::unique_ptr<double> GE;
-      ::std::unique_ptr<double> ST;
-      ::std::unique_ptr<double> SC;
-      ::std::unique_ptr<double> SS;
-      ::std::unique_ptr<long> MCSID;
+      std::unique_ptr<long> MID;
+      std::unique_ptr<double> E;
+      std::unique_ptr<double> G;
+      std::unique_ptr<double> NU;
+      std::unique_ptr<double> RHO;
+      std::unique_ptr<double> A;
+      std::unique_ptr<double> TREF;
+      std::unique_ptr<double> GE;
+      std::unique_ptr<double> ST;
+      std::unique_ptr<double> SC;
+      std::unique_ptr<double> SS;
+      std::unique_ptr<long> MCSID;
 
-      DllExport mat1(const ::std::deque<::std::string> &);
+      DllExport mat1(const std::deque<std::string> &);
 
-      DllExport ::bdf::cards::types card(void) { return MAT1; };
+      DllExport bdf::cards::types card(void) { return MAT1; };
 
     };
 
@@ -268,7 +267,7 @@ namespace bdf {
   namespace cards {
 
     DllExport bdf_card *dispatch(
-      const ::std::deque<::std::string> &);
+      const std::deque<std::string> &);
 
   }
 }

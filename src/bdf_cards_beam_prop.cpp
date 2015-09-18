@@ -20,15 +20,15 @@ namespace {
 #include <cstdlib>
 #include <memory>
 
-using namespace ::std;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 const entry_type<long> bdf_beam_prop::_PID(
-  "PID", ::bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+  "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
 const entry_type<long> bdf_beam_prop::_MID(
   "MID",
-  ::bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
+  bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
                                   nullptr, true));
 
 // Local Variables:

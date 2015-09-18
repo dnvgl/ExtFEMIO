@@ -19,15 +19,14 @@ namespace {
 
 #include <memory>
 
-using namespace ::std;
-using namespace ::bdf;
-using namespace ::bdf::cards;
-using namespace ::bdf::types;
+using namespace std;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 
-ctria3::ctria3(const deque<::std::string> &inp) : bdf_shell(inp) {
+ctria3::ctria3(const deque<std::string> &inp) : bdf_shell(inp) {
 
-  deque<::std::string>::const_reverse_iterator pos = inp.rbegin();
+  auto pos = inp.rbegin();
 
   THETA = nullptr;
   MCID = nullptr;
