@@ -19,8 +19,14 @@ namespace {
 
 #ifdef __GNUC__
 #include <boost/regex.hpp>
+using boost::regex;
+using boost::smatch;
+using boost::regex_constants::ECMAScript;
 #else
 #include <regex>
+using std::regex;
+using std::smatch;
+using std::regex_constants::ECMAScript;
 #endif
 
 #include "bdf_types.h"
@@ -41,10 +47,10 @@ const regex entry_type<double>::float_exp_re(
 const regex entry_type<double>::float_re(
   "([\\+-]?((0|([1-9][[:digit:]]*))?[.][[:digit:]]*)|"
   "[.][[:digit:]]+)(((E[+-]?)|[+-])[[:digit:]]+)?",
-  regex_constants::ECMAScript);
+  ECMAScript);
 
 const regex entry_type<double>::float_lead_dot(
-  "^[\\+-]?[.][[:digit:]]+", regex_constants::ECMAScript);
+  "^[\\+-]?[.][[:digit:]]+", ECMAScript);
 
 // Convert string to float
 double *entry_type<double>::operator() (const std::string &inp) const {
