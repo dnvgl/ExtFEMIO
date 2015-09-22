@@ -16,7 +16,7 @@ namespace bdf {
   namespace cards {
 
     // Base class for `ctria3' and `cquad4'.
-    class bdf_shell : public bdf_card {
+    class base_shell : public bdf_card {
 
     protected:
 
@@ -35,7 +35,7 @@ namespace bdf {
       static const bdf::types::entry_type<double> _T3;
       static const bdf::types::entry_type<double> _T4;
 
-      DllExport bdf_shell(const std::deque<std::string> &inp) :
+      DllExport base_shell(const std::deque<std::string> &inp) :
         bdf_card(inp) {};
 
     public:
@@ -113,14 +113,14 @@ Description:
   ``Ti`` are ignored for hyperelastic elements.
  */
 
-    class ctria3 : public bdf_shell {
+    class ctria3 : public base_shell {
       // NASTRAN ``BDF`` ``CTRIA3`` representation.
 
     public:
 
       DllExport ctria3(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return CTRIA3; };
+      DllExport const bdf::cards::types card(void) const { return CTRIA3; };
 
     };
 
@@ -177,14 +177,14 @@ Description:
   zero. Default = 1.0) ``Ti`` are ignored for hyperelastic elements.
  */
 
-    class cquad4 : public bdf_shell {
+    class cquad4 : public base_shell {
       // NASTRAN ``BDF`` ``CQUAD4`` representation.
 
     public:
 
       DllExport cquad4(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return CQUAD4; };
+      DllExport const bdf::cards::types card(void) const { return CQUAD4; };
 
     };
 
@@ -291,7 +291,7 @@ Description:
 
       DllExport cbeam(const std::deque<std::string> &inp);
 
-      DllExport bdf::cards::types card(void) { return CBEAM; };
+      DllExport const bdf::cards::types card(void) const { return CBEAM; };
 
       typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
       CHOOSE_DIR_CODE choose_dir_code;
@@ -413,7 +413,7 @@ Description:
 
       DllExport cbar(const std::deque<std::string> &inp);
 
-      DllExport bdf::cards::types card(void) { return CBAR; };
+      DllExport const bdf::cards::types card(void) const { return CBAR; };
 
       typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
       CHOOSE_DIR_CODE choose_dir_code;
@@ -476,7 +476,7 @@ Description:
 
       DllExport crod(const std::deque<std::string> &inp);
 
-      DllExport bdf::cards::types card(void) { return CROD; };
+      DllExport const bdf::cards::types card(void) const { return CROD; };
 
       typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
       CHOOSE_DIR_CODE choose_dir_code;

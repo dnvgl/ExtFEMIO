@@ -93,7 +93,7 @@ const entry_type<double> pbeam::_N1_B(
 const entry_type<double> pbeam::_N2_B(
   "N2_B", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-pbeam::pbeam(const deque<std::string> &inp) : bdf_beam_prop(inp) {
+pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
 
   auto pos = inp.rbegin();
 

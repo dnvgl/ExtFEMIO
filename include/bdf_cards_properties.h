@@ -105,16 +105,17 @@ Description:
 
       DllExport pshell(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return PSHELL; };
+      DllExport const bdf::cards::types card(void) const { return PSHELL; };
     };
 
-    class bdf_beam_prop : public bdf_card {
-    // base class for beam property classes.
+    class beam_base : public bdf_card {
+      
     protected:
+
       static const bdf::types::entry_type<long> _PID;
       static const bdf::types::entry_type<long> _MID;
 
-      DllExport bdf_beam_prop(const std::deque<std::string> &inp) :
+      DllExport beam_base(const std::deque<std::string> &inp) :
         bdf_card(inp) {};
 
     public:
@@ -122,7 +123,20 @@ Description:
       std::unique_ptr<long> PID;
       std::unique_ptr<long> MID;
 
-      DllExport bdf::cards::types card(void) { return BEAM_PROP; };
+      DllExport const bdf::cards::types card(void) const { return BEAM_BASE; };
+
+    };
+
+    class beam_prop : public beam_base {
+    // base class for beam property classes.
+    protected:
+
+      DllExport beam_prop(const std::deque<std::string> &inp) :
+        beam_base(inp) {};
+
+    public:
+
+      DllExport const bdf::cards::types card(void) const { return BEAM_PROP; };
     };
 
 /*
@@ -232,7 +246,7 @@ Description:
   ``B``. (Real)
  */
 
-    class pbeam : public bdf_beam_prop {
+    class pbeam : public beam_prop {
       // Handle Nastran Bulk PBEAM entries.
 
     private:
@@ -309,7 +323,7 @@ Description:
 
       DllExport pbeam(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return PBEAM; };
+      DllExport const bdf::cards::types card(void) const { return PBEAM; };
 
     };
 
@@ -386,7 +400,7 @@ Description:
   Default = 1.0)
  */
 
-    class pbeaml : public bdf_beam_prop, private l_geom {
+    class pbeaml : public beam_prop, private l_geom {
       // Handle Nastran Bulk PBEAML entries.
 
     private:
@@ -410,20 +424,20 @@ Description:
 
       DllExport pbeaml(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return PBEAML; };
+      DllExport const bdf::cards::types card(void) const { return PBEAML; };
 
     };
 
-    class bdf_bar_prop : public bdf_card {
+    class bar_prop : public bdf_card {
     // base class for beam property classes.
     protected:
       static const bdf::types::entry_type<long> _PID;
       static const bdf::types::entry_type<long> _MID;
 
-      DllExport bdf_bar_prop(const std::deque<std::string> &inp) :
+      DllExport bar_prop(const std::deque<std::string> &inp) :
         bdf_card(inp) {};
 
-      DllExport bdf::cards::types card(void) { return BAR_PROP; };
+      DllExport const bdf::cards::types card(void) const { return BAR_PROP; };
 
     public:
 
@@ -470,7 +484,7 @@ Description:
   Area factor for shear. (Real or böank)
  */
 
-    class pbar : public bdf_bar_prop {
+    class pbar : public bar_prop {
 
     private:
 
@@ -514,7 +528,7 @@ Description:
 
       DllExport pbar(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return PBAR; };
+      DllExport const bdf::cards::types card(void) const { return PBAR; };
     };
 
 /*
@@ -556,7 +570,7 @@ Description:
   last ``DIMi``. (Default = 0.0)
  */
 
-    class pbarl : public bdf_bar_prop, private l_geom {
+    class pbarl : public bar_prop, private l_geom {
       // Handle Nastran Bulk PBARL entries.
 
     private:
@@ -577,7 +591,7 @@ Description:
 
       DllExport pbarl(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return PBARL; };
+      DllExport const bdf::cards::types card(void) const { return PBARL; };
     };
 
 /*
@@ -636,7 +650,7 @@ Description:
 
       DllExport prod(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return PROD; };
+      DllExport const bdf::cards::types card(void) const { return PROD; };
     };
   }
 }

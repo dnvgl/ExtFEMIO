@@ -24,9 +24,9 @@ using namespace std;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
-const entry_type<long> bdf_bar_prop::_PID(
+const entry_type<long> bar_prop::_PID(
   "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<long> bdf_bar_prop::_MID(
+const entry_type<long> bar_prop::_MID(
   "MID",
   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
                                 nullptr, true));

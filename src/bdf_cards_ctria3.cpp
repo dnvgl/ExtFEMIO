@@ -24,7 +24,7 @@ using namespace bdf::cards;
 using bdf::types::entry_type;
 
 
-ctria3::ctria3(const deque<std::string> &inp) : bdf_shell(inp) {
+ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
 
   auto pos = inp.rbegin();
 

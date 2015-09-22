@@ -47,7 +47,7 @@ const entry_type<double> pbarl::_NSM(
   "NSM", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
-pbarl::pbarl(const deque<std::string> &inp) : bdf_bar_prop(inp) {
+pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
 
   size_t dim_num = 0;
   size_t i = 0;

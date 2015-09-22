@@ -73,7 +73,7 @@ const entry_type<double> pbar::_I12(
   "I12", bdf::type_bounds::bound<double>(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
-pbar::pbar(const deque<std::string> &inp) : bdf_bar_prop(inp) {
+pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
 
   auto pos = inp.rbegin();
 

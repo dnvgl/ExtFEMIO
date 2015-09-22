@@ -42,7 +42,7 @@ namespace bdf {
       GRID,
       MAT1,
       CTRIA3, CQUAD4, PSHELL,
-      CBEAM, PBEAM, PBEAML, BEAM_PROP,
+      CBEAM, PBEAM, PBEAML, BEAM_PROP, BEAM_BASE,
       CBAR, PBAR, PBARL, BAR_PROP,
       CROD, PROD,
       ENDDATA
@@ -67,7 +67,7 @@ namespace bdf {
       DllExport bdf_card (const std::deque<std::string> &);
       DllExport bdf_card (const bdf_card &);
 
-      virtual bdf::cards::types card(void) = 0;
+      virtual const bdf::cards::types card(void) const = 0;
 
     };
 
@@ -78,7 +78,7 @@ namespace bdf {
       DllExport unknown(const std::deque<std::string> &inp) :
         bdf_card(inp), content(inp) {};
 
-      DllExport bdf::cards::types card(void) { return UNKNOWN; }
+      DllExport const bdf::cards::types card(void) const { return UNKNOWN; }
 
       std::deque<std::string> content;
 
@@ -95,7 +95,7 @@ namespace bdf {
       DllExport enddata(const std::deque<std::string> &inp) :
         bdf_card(inp) {};
 
-      DllExport bdf::cards::types card(void) { return ENDDATA; };
+      DllExport const bdf::cards::types card(void) const { return ENDDATA; };
 
     };
 
@@ -164,7 +164,7 @@ Description:
 
       DllExport grid(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return GRID; };
+      DllExport const bdf::cards::types card(void) const { return GRID; };
 
     };
 
@@ -252,7 +252,7 @@ Description:
 
       DllExport mat1(const std::deque<std::string> &);
 
-      DllExport bdf::cards::types card(void) { return MAT1; };
+      DllExport const bdf::cards::types card(void) const { return MAT1; };
 
     };
 

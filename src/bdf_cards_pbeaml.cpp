@@ -58,7 +58,7 @@ const entry_type<double> pbeaml::_X_XB(
     make_unique<double>(0.).get(), nullptr,
     make_unique<double>(1.).get()));
 
-pbeaml::pbeaml(const deque<std::string> &inp) : bdf_beam_prop(inp) {
+pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
 
   size_t dim_num = 0;
   size_t i, j = 0;
