@@ -38,7 +38,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
   ::std::deque<string> data;
   //              1234567|1234567|1234567|1234567|1234567|1234567|
   data.push_back("CTRIA3  1       1       16      200     141\n");
-  ::std::deque<string> lines = bdf_card::card_split(data);
+  ::std::deque<string> lines = card::card_split(data);
   ctria3 probe(lines);
 
   SECTION("first ctria3") {
@@ -61,7 +61,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
   //              1234567|123456781234567|123456781234567|123456781234567|123456781234567|
   data.push_back("CTRIA3* 2               1               16              200             *\n");
   data.push_back("*       141\n");
-  ::std::deque<string> lines = bdf_card::card_split(data);
+  ::std::deque<string> lines = card::card_split(data);
   ctria3 probe(lines);
 
   SECTION("first ctria3") {

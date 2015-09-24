@@ -44,7 +44,7 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 //             PID     MID     A       I1      I2      I12     J
 //     1234567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
       "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeam probe(lines);
 
     CAPTURE(data[0]);
@@ -70,7 +70,7 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 //             PID     MID     A       I1      I2      I12     J
 //     1234567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
       "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeam probe(lines);
 
     CAPTURE(data[0]);
@@ -94,7 +94,7 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
     ::std::deque<string> data;
     data.push_back(
       "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeam probe(lines);
 
     CAPTURE(data[0]);
@@ -142,7 +142,7 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
       ",NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,\n");
     data.push_back(
       ",49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64.\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
 
     CHECK(lines.size() == 65);
     pbeam probe(lines);
@@ -241,7 +241,7 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
       "NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,"
       "49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64."
       ",65.\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
 
     CAPTURE(data[0]);
 
@@ -289,7 +289,7 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
       "                                             0.5"
 //     1234567G1234567H1234567I
       "             0.0        \n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeam probe(lines);
 
     CAPTURE(data[0]);

@@ -39,7 +39,7 @@ const entry_type<double> prod::_NSM(
   "J",
   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-prod::prod(const deque<std::string> &inp) : bdf_card(inp) {
+prod::prod(const deque<std::string> &inp) : card(inp) {
 
   auto pos = inp.rbegin();
 

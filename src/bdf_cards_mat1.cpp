@@ -58,7 +58,7 @@ const entry_type<long> mat1::_MCSID(
   "MCSID",
   bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
 
-mat1::mat1(const deque<std::string> &inp) : bdf_card(inp) {
+mat1::mat1(const deque<std::string> &inp) : card(inp) {
 
   MCSID = nullptr;
   SS = nullptr;

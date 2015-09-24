@@ -40,7 +40,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
   ::std::deque<string> data;
   data.push_back("CBEAM   7869    104010  76      153     0.0     66.5206 997.785  2.\n");
   data.push_back("                        0.0     -22.617 -339.25 0.0     -22.617 \n");
-  ::std::deque<string> lines = bdf_card::card_split(data);
+  ::std::deque<string> lines = card::card_split(data);
   cbeam probe(lines);
 
   SECTION("first cbeam") {
@@ -76,7 +76,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
   ::std::deque<string> data;
   data.push_back("CBEAM   7869    104010  76      153      13                     GOO     \n");
   data.push_back("                        0.0     -22.617 -339.25 0.0     22.617 ");
-  ::std::deque<string> lines = bdf_card::card_split(data);
+  ::std::deque<string> lines = card::card_split(data);
   cbeam probe(lines);
 
   SECTION("dir code cbeam") {

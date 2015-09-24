@@ -45,7 +45,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       "PBARL   104018  4               BAR\n");
     data.push_back(
       "           25.0   600.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
     CHECK(*probe.PID == 104018);
@@ -68,7 +68,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
       "            55.0   500.0");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
     CHECK(*probe.PID == 134);
@@ -89,7 +89,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       "PBARL   104010  4               L\n");
     data.push_back(
       "           63.0   340.0    35.0    14.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
     CHECK(*probe.PID == 104010);
@@ -112,7 +112,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       "PBARL   101031  1               T\n");
     data.push_back(
       "          150.0   400.0    12.0    10.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
     CHECK(*probe.PID == 101031);
@@ -136,7 +136,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
       "           600.0   200.0   200.0    12.0    10.0    10.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
     CHECK(*probe.PID == 104018);
@@ -162,7 +162,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
       "             14.      6.      .5      .5      .5      .5\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
     CHECK(*probe.PID == 39);
@@ -188,7 +188,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
       "           600.0   500.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
     CHECK(*probe.PID == 104019);

@@ -30,7 +30,7 @@ const entry_type<long> crod::_G1("G1");
 const entry_type<long> crod::_G2("G2");
 
 crod::crod(const deque<std::string> &inp) :
-  bdf_card(inp) {
+  card(inp) {
 
   auto pos = inp.rbegin();
 

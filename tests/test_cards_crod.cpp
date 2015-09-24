@@ -39,7 +39,7 @@ TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]" ) {
 
   ::std::deque<string> data;
   data.push_back("CROD,222,13,14,15\n");
-  ::std::deque<string> lines = bdf_card::card_split(data);
+  ::std::deque<string> lines = card::card_split(data);
   crod probe(lines);
 
    SECTION("first crod") {

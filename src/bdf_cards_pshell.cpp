@@ -53,7 +53,7 @@ const entry_type<long> pshell::_MID4(
   "MID4", bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
                       nullptr, nullptr, true));
 
-pshell::pshell(const deque<std::string> &inp) : bdf_card(inp) {
+pshell::pshell(const deque<std::string> &inp) : card(inp) {
 
   auto pos = inp.rbegin();
 

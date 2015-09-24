@@ -72,7 +72,7 @@ Description:
 
 */
 
-    class pshell : public bdf_card {
+    class pshell : public card {
       // Handle Nastran Bulk PSHELL entries.
 
     private:
@@ -105,10 +105,10 @@ Description:
 
       DllExport pshell(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return PSHELL; };
+      DllExport const bdf::cards::types card_type(void) const { return PSHELL; };
     };
 
-    class beam_base : public bdf_card {
+    class beam_base : public card {
       
     protected:
 
@@ -116,14 +116,14 @@ Description:
       static const bdf::types::entry_type<long> _MID;
 
       DllExport beam_base(const std::deque<std::string> &inp) :
-        bdf_card(inp) {};
+        card(inp) {};
 
     public:
 
       std::unique_ptr<long> PID;
       std::unique_ptr<long> MID;
 
-      DllExport const bdf::cards::types card(void) const { return BEAM_BASE; };
+      DllExport const bdf::cards::types card_type(void) const { return BEAM_BASE; };
 
     };
 
@@ -136,7 +136,7 @@ Description:
 
     public:
 
-      DllExport const bdf::cards::types card(void) const { return BEAM_PROP; };
+      DllExport const bdf::cards::types card_type(void) const { return BEAM_PROP; };
     };
 
 /*
@@ -323,7 +323,7 @@ Description:
 
       DllExport pbeam(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return PBEAM; };
+      DllExport const bdf::cards::types card_type(void) const { return PBEAM; };
 
     };
 
@@ -424,22 +424,22 @@ Description:
 
       DllExport pbeaml(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return PBEAML; };
+      DllExport const bdf::cards::types card_type(void) const { return PBEAML; };
 
     };
 
-    class bar_prop : public bdf_card {
+    class bar_prop : public card {
     // base class for beam property classes.
     protected:
       static const bdf::types::entry_type<long> _PID;
       static const bdf::types::entry_type<long> _MID;
 
-      DllExport bar_prop(const std::deque<std::string> &inp) :
-        bdf_card(inp) {};
-
-      DllExport const bdf::cards::types card(void) const { return BAR_PROP; };
-
     public:
+
+      DllExport const bdf::cards::types card_type(void) const { return BAR_PROP; };
+
+      DllExport bar_prop(const std::deque<std::string> &inp) :
+        card(inp) {};
 
       std::unique_ptr<long> PID;
       std::unique_ptr<long> MID;
@@ -528,7 +528,7 @@ Description:
 
       DllExport pbar(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return PBAR; };
+      DllExport const bdf::cards::types card_type(void) const { return PBAR; };
     };
 
 /*
@@ -591,7 +591,7 @@ Description:
 
       DllExport pbarl(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return PBARL; };
+      DllExport const bdf::cards::types card_type(void) const { return PBARL; };
     };
 
 /*
@@ -627,7 +627,7 @@ Description:
   Nonstructural mass per unit length. (Real)
  */
 
-    class prod : public bdf_card {
+    class prod : public card {
       // Handle Nastran Bulk PROD entries.
 
     private:
@@ -650,7 +650,7 @@ Description:
 
       DllExport prod(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return PROD; };
+      DllExport const bdf::cards::types card_type(void) const { return PROD; };
     };
   }
 }

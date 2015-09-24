@@ -43,7 +43,7 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
     data.push_back(
       "PBAR,1,2,3.,4.,5.,6.,7.,,9.,10.,11.,12.,13.,14.,15.,16.,17.,"
       "18.,19.\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbar probe(lines);
 
     CHECK(*probe.PID ==  1);
@@ -73,7 +73,7 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
       "PBAR    4000001 3       1.046+4 9.369+7 1.694+6 1.316+6\n");
     data.push_back(
       "                        6.856+6\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbar probe(lines);
 
     CHECK(*probe.PID == 4000001);
@@ -104,7 +104,7 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
       "PBAR          29       6     2.9            5.97                                \n");
     data.push_back(
       "                             2.0     4.0                                        \n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbar probe(lines);
 
     CHECK(*probe.PID == 29);

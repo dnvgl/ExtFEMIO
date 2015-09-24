@@ -34,7 +34,6 @@
 #endif
 
 namespace bdf {
-
   namespace cards {
 
     typedef enum {
@@ -42,13 +41,13 @@ namespace bdf {
       GRID,
       MAT1,
       CTRIA3, CQUAD4, PSHELL,
-      CBEAM, PBEAM, PBEAML, BEAM_PROP, BEAM_BASE,
-      CBAR, PBAR, PBARL, BAR_PROP,
+      CBEAM, PBEAM, PBEAML, BEAM_PROP,
+      CBAR, PBAR, PBARL, BAR_PROP, BEAM_BASE,
       CROD, PROD,
       ENDDATA
     } types;
 
-    class bdf_card {
+    class card {
 
     private:
 
@@ -62,29 +61,29 @@ namespace bdf {
       card_split(std::deque<std::string> const &);
 
 #ifndef _MSC_VER
-      DllExport bdf_card () = delete;
+      DllExport card () = delete;
 #endif
-      DllExport bdf_card (const std::deque<std::string> &);
-      DllExport bdf_card (const bdf_card &);
+      DllExport card (const std::deque<std::string> &);
+      DllExport card (const card &);
 
-      virtual const bdf::cards::types card(void) const = 0;
+      virtual const bdf::cards::types card_type(void) const = 0;
 
     };
 
-    class unknown : public bdf_card {
+    class unknown : public card {
 
     public:
 
       DllExport unknown(const std::deque<std::string> &inp) :
-        bdf_card(inp), content(inp) {};
+        card(inp), content(inp) {};
 
-      DllExport const bdf::cards::types card(void) const { return UNKNOWN; }
+      DllExport const bdf::cards::types card_type(void) const { return UNKNOWN; }
 
       std::deque<std::string> content;
 
     };
 
-    class enddata : public bdf_card {
+    class enddata : public card {
 
       /*
       NASTRAN ``BDF`` ``ENDDATA`` representation.
@@ -93,13 +92,13 @@ namespace bdf {
     public:
 
       DllExport enddata(const std::deque<std::string> &inp) :
-        bdf_card(inp) {};
+        card(inp) {};
 
-      DllExport const bdf::cards::types card(void) const { return ENDDATA; };
+      DllExport const bdf::cards::types card_type(void) const { return ENDDATA; };
 
     };
 
-    class grid : public bdf_card {
+    class grid : public card {
 
       /*
 Handle Nastran Bulk GRID entries.
@@ -164,7 +163,7 @@ Description:
 
       DllExport grid(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return GRID; };
+      DllExport const bdf::cards::types card_type(void) const { return GRID; };
 
     };
 
@@ -217,7 +216,7 @@ Description:
   ``PARAM,CURV`` processing.  (Integer > 0 or blank)
 */
 
-    class mat1 : public bdf_card {
+    class mat1 : public card {
       // NASTRAN ``BDF`` ``MAT1`` representation.
 
     private:
@@ -252,7 +251,7 @@ Description:
 
       DllExport mat1(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return MAT1; };
+      DllExport const bdf::cards::types card_type(void) const { return MAT1; };
 
     };
 
@@ -266,8 +265,7 @@ Description:
 namespace bdf {
   namespace cards {
 
-    DllExport bdf_card *dispatch(
-      const std::deque<std::string> &);
+      DllExport std::unique_ptr<card> dispatch(const std::deque<std::string> &);
 
   }
 }

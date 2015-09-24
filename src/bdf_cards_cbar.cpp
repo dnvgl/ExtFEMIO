@@ -74,7 +74,7 @@ const entry_type<double> cbar::_W3B(
     nullptr, nullptr, make_unique<double>(0.).get()));
 
 cbar::cbar(const deque<std::string> &inp) :
-  bdf_card(inp) {
+  card(inp) {
 
   auto pos = inp.rbegin();
 

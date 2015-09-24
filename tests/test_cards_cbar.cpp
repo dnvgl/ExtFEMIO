@@ -40,7 +40,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
   ::std::deque<string> data;
   data.push_back("CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n");
   data.push_back("                        0.0     -22.617 -339.25 0.0     -22.617 \n");
-  ::std::deque<string> lines = bdf_card::card_split(data);
+  ::std::deque<string> lines = card::card_split(data);
   cbar probe(lines);
 
   SECTION("first cbar") {
@@ -74,7 +74,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
                  "               GOO     \n");
   data.push_back("                        0.0     -22.617 -339.25 "
                  "0.0     -22.617 ");
-  ::std::deque<string> lines = bdf_card::card_split(data);
+  ::std::deque<string> lines = card::card_split(data);
   cbar probe(lines);
 
   SECTION("dir code cbar") {

@@ -16,7 +16,7 @@ namespace bdf {
   namespace cards {
 
     // Base class for `ctria3' and `cquad4'.
-    class base_shell : public bdf_card {
+    class base_shell : public card {
 
     protected:
 
@@ -36,7 +36,7 @@ namespace bdf {
       static const bdf::types::entry_type<double> _T4;
 
       DllExport base_shell(const std::deque<std::string> &inp) :
-        bdf_card(inp) {};
+        card(inp) {};
 
     public:
 
@@ -120,7 +120,7 @@ Description:
 
       DllExport ctria3(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return CTRIA3; };
+      DllExport const bdf::cards::types card_type(void) const { return CTRIA3; };
 
     };
 
@@ -184,7 +184,7 @@ Description:
 
       DllExport cquad4(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card(void) const { return CQUAD4; };
+      DllExport const bdf::cards::types card_type(void) const { return CQUAD4; };
 
     };
 
@@ -262,7 +262,7 @@ Description:
   p-elements. (Integers > 0 or blank)
 */
 
-    class cbeam : public bdf_card {
+    class cbeam : public card {
 
     private:
 
@@ -291,7 +291,7 @@ Description:
 
       DllExport cbeam(const std::deque<std::string> &inp);
 
-      DllExport const bdf::cards::types card(void) const { return CBEAM; };
+      DllExport const bdf::cards::types card_type(void) const { return CBEAM; };
 
       typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
       CHOOSE_DIR_CODE choose_dir_code;
@@ -387,7 +387,7 @@ Description:
   respectively. See Remark 7. and 8. (Real; Default = 0.0)
 */
 
-    class cbar : public bdf_card {
+    class cbar : public card {
 
     private:
 
@@ -413,7 +413,7 @@ Description:
 
       DllExport cbar(const std::deque<std::string> &inp);
 
-      DllExport const bdf::cards::types card(void) const { return CBAR; };
+      DllExport const bdf::cards::types card_type(void) const { return CBAR; };
 
       typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
       CHOOSE_DIR_CODE choose_dir_code;
@@ -463,7 +463,7 @@ Description:
   0; ``G1`` ≠ ``G2``)
 */
 
-    class crod : public bdf_card {
+    class crod : public card {
 
     private:
 
@@ -476,7 +476,7 @@ Description:
 
       DllExport crod(const std::deque<std::string> &inp);
 
-      DllExport const bdf::cards::types card(void) const { return CROD; };
+      DllExport const bdf::cards::types card_type(void) const { return CROD; };
 
       typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
       CHOOSE_DIR_CODE choose_dir_code;

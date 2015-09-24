@@ -47,7 +47,7 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       "PBEAML  104018  4               BAR\n");
     data.push_back(
       "           25.0   600.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeaml probe(lines);
 
     CHECK(*probe.PID == 104018);
@@ -71,7 +71,7 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       "PBEAML       134       8            BAR\n");
     data.push_back(
       "            55.0   500.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeaml probe(lines);
 
     CHECK(*probe.PID == 134);
@@ -95,7 +95,7 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       "PBEAML  104010  4               L\n");
     data.push_back(
       "           63.0   340.0    35.0    14.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeaml probe(lines);
 
     CHECK(*probe.PID == 104010);
@@ -121,7 +121,7 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       "PBEAML  101031  1               T\n");
     data.push_back(
       "          150.0   400.0    12.0    10.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeaml probe(lines);
 
     CHECK(*probe.PID == 101031);
@@ -147,7 +147,7 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       "PBEAML  104018  4               I\n");
     data.push_back(
       "           600.0   200.0   200.0    12.0    10.0    10.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeaml probe(lines);
 
     CHECK(*probe.PID == 104018);
@@ -175,7 +175,7 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       "PBEAML  104019  5               TUBE\n");
     data.push_back(
       "           600.0   500.0");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeaml probe(lines);
 
     CHECK(*probe.PID == 104019);
@@ -203,7 +203,7 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       "              7.     1.2     2.6             YES     0.6      6.     7.8        \n");
     data.push_back(
       "             5.6     2.3             YES                                        \n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pbeaml probe(lines);
 
     CHECK(*probe.PID == 99);

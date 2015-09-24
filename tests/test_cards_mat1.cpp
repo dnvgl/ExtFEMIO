@@ -40,7 +40,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
     data.empty();
     data.push_back("MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n");
 
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     mat1 probe(lines);
 
     CHECK(*probe.MID == 1);
@@ -61,7 +61,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
     data.empty();
     data.push_back(
       "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     mat1 probe(lines);
 
     CHECK(*probe.MID == 1);
@@ -82,7 +82,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
     data.empty();
     data.push_back(
       "MAT1,1,2.070+5\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     mat1 probe(lines);
 
     CHECK(*probe.MID == 1);
@@ -103,7 +103,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
     data.empty();
     data.push_back(
       "MAT1    1       2.070+5 80000.0\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     mat1 probe(lines);
 
     CHECK(*probe.MID == 1);
@@ -123,7 +123,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
   SECTION("mat1 default values 3") {
     data.empty();
     data.push_back("MAT1,1,2.070+5,,.3\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     mat1 probe(lines);
 
     CHECK(*probe.MID == 1);

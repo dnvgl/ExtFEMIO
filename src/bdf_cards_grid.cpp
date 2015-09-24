@@ -56,7 +56,7 @@ const entry_type<long> grid::_SEID(
             make_unique<long>(0).get()));
 
 
-grid::grid(const deque<std::string> &inp) : bdf_card(inp) {
+grid::grid(const deque<std::string> &inp) : card(inp) {
 
   auto pos = inp.rbegin();
 

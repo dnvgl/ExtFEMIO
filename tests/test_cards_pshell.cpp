@@ -43,7 +43,7 @@ TEST_CASE("BDF PSHELL definitions.",
     ::std::deque<string> data;
     data.push_back(
       "PSHELL  1       4         23.00 4               4\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pshell probe(lines);
 
     CHECK(*probe.PID == 1);
@@ -63,7 +63,7 @@ TEST_CASE("BDF PSHELL definitions.",
     data.push_back(
       "*                       4  \n");
 
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pshell probe(lines);
 
     CHECK(*probe.PID == 1);
@@ -78,7 +78,7 @@ TEST_CASE("BDF PSHELL definitions.",
 
     ::std::deque<string> data;
     data.push_back("PSHELL,1,4,23.00,4,,4\n");
-    ::std::deque<string> lines = bdf_card::card_split(data);
+    ::std::deque<string> lines = card::card_split(data);
     pshell probe(lines);
 
     CHECK(*probe.PID == 1);

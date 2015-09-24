@@ -71,7 +71,7 @@ const entry_type<long> cbeam::_SB(
   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
 
 cbeam::cbeam(const deque<std::string> &inp) :
-  bdf_card(inp) {
+  card(inp) {
 
   auto pos = inp.rbegin();
 
