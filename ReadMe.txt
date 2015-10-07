@@ -36,13 +36,13 @@
   |-------------+---------------------+------------------------------------------+--------|
   |             |                     | <40>                                     | <c6>   |
   | Properties  |                     |                                          |        |
-  |             | beam properties     | This is probably quite tricky, because in general the beam cross section information in =BDF= files is given as description of the cross section geometry which probably has to be converted to integral values. |        |
+  |             | beam properties     | This is probably quite tricky, because in general the beam cross section information in =BDF= files is given as description of the cross section geometry which probably has to be converted to integral values. | \check |
   |             | group information   |                                          | \check |
   | Elements    |                     |                                          |        |
   |             | Shell               |                                          | \check |
   |             | PSE                 |                                          | \check |
-  |             | Truss               |                                          |        |
-  |             | Beam                |                                          |        |
+  |             | Truss               |                                          | \check |
+  |             | Beam                |                                          | \check |
   |             | Boundary Elements   |                                          |        |
   | Group Info. |                     |                                          |        |
   |             | NAPA CSV file       | contains also yield stress informaton    | \check |
