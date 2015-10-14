@@ -33,20 +33,20 @@ const set<char> card::free_form_cont(initVals, initVals + 3);
 
 namespace {
   const pair<std::string, types> map_pairs[] = {
-    {"GRID", GRID},
-    {"MAT1", MAT1},
-    {"CTRIA3", CTRIA3},
-    {"CQUAD4", CQUAD4},
-    {"PSHELL", PSHELL},
-    {"CBEAM", CBEAM},
-    {"PBEAM", PBEAM},
-    {"PBEAML", PBEAML},
-    {"CBAR", CBAR},
-    {"PBAR", PBAR},
-    {"PBARL", PBARL},
-    {"CROD", CROD},
-    {"PROD", PROD},
-    {"ENDDATA", ENDDATA}};
+    pair<std::string, types>("GRID", GRID),
+    pair<std::string, types>("MAT1", MAT1),
+    pair<std::string, types>("CTRIA3", CTRIA3),
+    pair<std::string, types>("CQUAD4", CQUAD4),
+    pair<std::string, types>("PSHELL", PSHELL),
+    pair<std::string, types>("CBEAM", CBEAM),
+    pair<std::string, types>("PBEAM", PBEAM),
+    pair<std::string, types>("PBEAML", PBEAML),
+    pair<std::string, types>("CBAR", CBAR),
+    pair<std::string, types>("PBAR", PBAR),
+    pair<std::string, types>("PBARL", PBARL),
+    pair<std::string, types>("CROD", CROD),
+    pair<std::string, types>("PROD", PROD),
+    pair<std::string, types>("ENDDATA", ENDDATA)};
 }
 
 const map<std::string, types> cardtype_map(map_pairs, map_pairs + 14);
@@ -151,7 +151,7 @@ std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> 
     case BEAM_BASE:
       return nullptr;
     }
-  } catch (out_of_range &e) {
+  } catch (out_of_range) {
     return std::make_unique<bdf::cards::unknown>(inp);
   }
   return nullptr;
