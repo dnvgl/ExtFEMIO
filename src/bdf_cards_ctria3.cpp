@@ -89,6 +89,16 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
   default:
     throw bdf_parse_error("CTRIA3", "Illegal number of entries.");
   }
+
+  if (!THETA && !MCID)
+    THETA = get_val<double>(_THETA, "");
+  if (TFLAG) {
+    if (!T1) T1 = get_val<double>(_T1, "");
+    if (!T2) T2 = get_val<double>(_T2, "");
+    if (!T3) T3 = get_val<double>(_T3, "");
+    if (!T4) T4 = get_val<double>(_T4, "");
+  }
+
 }
 
 // Local Variables:

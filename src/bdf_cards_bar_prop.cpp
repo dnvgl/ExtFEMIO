@@ -1,8 +1,8 @@
-// Copyright © 2015 by DNV GL SE
+// Copyright Â© 2015 by DNV GL SE
 
 // Purpose: Common definitions for Nastran BDF PBAR and PBARL cards.
 
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+// Author Berthold HÃ¶llmann <berthold.hoellmann@dnvgl.com>
 
 #include "stdafx.h"
 

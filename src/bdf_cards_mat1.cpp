@@ -110,6 +110,8 @@ mat1::mat1(const deque<std::string> &inp) : card(inp) {
     throw bdf_parse_error("MAT1", "Illegal number of entries.");
   }
 
+  if (A && !TREF) TREF = get_val<double>(_TREF, "");
+
   // remark 2
   if (!E && !G)
     throw bdf_parse_error(
@@ -127,6 +129,7 @@ mat1::mat1(const deque<std::string> &inp) : card(inp) {
     E = make_unique<double>((2. * (1 + *NU) * *G));
   else if (!G)
     G = make_unique<double>(*E / (2. * (1 + *NU)));
+
 }
 
 // Local Variables:

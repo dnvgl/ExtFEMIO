@@ -55,14 +55,14 @@ namespace bdf {
       // Format cards.
       static const std::set<char> free_form_cont;
 
+      static const std::map<std::string, types> cardtype_map;
+
+
     public:
 
       DllExport static std::deque<std::string>
       card_split(std::deque<std::string> const &);
 
-#ifndef _MSC_VER
-      DllExport card () = delete;
-#endif
       DllExport card (const std::deque<std::string> &);
       DllExport card ();
 

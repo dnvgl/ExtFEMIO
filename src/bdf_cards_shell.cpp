@@ -47,24 +47,28 @@ const entry_type<double> base_shell::_ZOFFS(
 const entry_type<long> base_shell::_TFLAG(
   "TFLAG",
   bdf::type_bounds::bound<long>(
-    make_unique<long>(0).get(), make_unique<long>(1).get(), 
+    make_unique<long>(0).get(), make_unique<long>(1).get(),
     make_unique<long>(0).get()));
 const entry_type<double> base_shell::_T1(
   "T1",
   bdf::type_bounds::bound<double>(
-    make_unique<double>(0.).get(), nullptr, nullptr, true));
+    make_unique<double>(0.).get(), nullptr,
+    make_unique<double>(0.0).get(), true));
 const entry_type<double> base_shell::_T2(
   "T2",
   bdf::type_bounds::bound<double>(
-    make_unique<double>(0.).get(), nullptr, nullptr, true));
+    make_unique<double>(0.).get(), nullptr,
+    make_unique<double>(0.0).get(), true));
 const entry_type<double> base_shell::_T3(
   "T3",
   bdf::type_bounds::bound<double>(
-    make_unique<double>(0.).get(), nullptr, nullptr, true));
+    make_unique<double>(0.).get(), nullptr,
+    make_unique<double>(0.0).get(), true));
 const entry_type<double> base_shell::_T4(
   "T4",
   bdf::type_bounds::bound<double>(
-    make_unique<double>(0.).get(), nullptr, nullptr, true));
+    make_unique<double>(0.).get(), nullptr,
+    make_unique<double>(0.0).get(), true));
 
 // Local Variables:
 // mode: c++

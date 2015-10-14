@@ -1,8 +1,8 @@
-// Copyright © 2015 by DNV GL SE
+// Copyright Â© 2015 by DNV GL SE
 
 // Purpose: Common definitions for Nastran BDF PBEAM and PBEAML cards.
 
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+// Author Berthold HÃ¶llmann <berthold.hoellmann@dnvgl.com>
 
 #include "stdafx.h"
 
@@ -29,7 +29,7 @@ const entry_type<long> beam_base::_PID(
 const entry_type<long> beam_base::_MID(
   "MID",
   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
-                                  nullptr, true));
+                                nullptr, true));
 
 // Local Variables:
 // mode: c++

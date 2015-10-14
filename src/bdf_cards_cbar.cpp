@@ -78,12 +78,13 @@ cbar::cbar(const deque<std::string> &inp) :
 
   auto pos = inp.rbegin();
 
-  W3B = get_val<double>(_W3B, "");
-  W2B = get_val<double>(_W2B, "");
-  W1B = get_val<double>(_W1B, "");
-  W3A = get_val<double>(_W3A, "");
-  W2A = get_val<double>(_W2A, "");
-  W1A = get_val<double>(_W1A, "");
+  W1A = nullptr;
+  W3B = nullptr;
+  W2B = nullptr;
+  W1B = nullptr;
+  W3A = nullptr;
+  W2A = nullptr;
+  W1A = nullptr;
   PB = nullptr;
   PA = nullptr;
   OFFT = nullptr;
@@ -136,6 +137,16 @@ cbar::cbar(const deque<std::string> &inp) :
     throw bdf_parse_error(
       "CBAR", "Illegal number of entries.");
   }
+
+  if (!W3B) W3B = get_val<double>(_W3B, "");
+  if (!W2B) W2B = get_val<double>(_W2B, "");
+  if (!W1B) W1B = get_val<double>(_W1B, "");
+  if (!W3A) W3A = get_val<double>(_W3A, "");
+  if (!W2A) W2A = get_val<double>(_W2A, "");
+  if (!W1A) W1A = get_val<double>(_W2A, "");
+  if (!PB) PB = get_val<deque<int>>(_PB, "");
+  if (!PA) PA = get_val<deque<int>>(_PA, "");
+  if (!OFFT) OFFT = get_val<std::string>(_OFFT, "");
 };
 
 // Local Variables:

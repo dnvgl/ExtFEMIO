@@ -44,7 +44,7 @@ prod::prod(const deque<std::string> &inp) : card(inp) {
   auto pos = inp.rbegin();
 
   J = nullptr;
-  C = make_unique<double>(0.);
+  C = nullptr;
   NSM = nullptr;
 
   switch (inp.size()-1) {
@@ -67,6 +67,8 @@ prod::prod(const deque<std::string> &inp) : card(inp) {
     throw bdf_parse_error(
       "CBAR.", "Illegal number of entries.");
   }
+
+  if (!C) C = get_val<double>(_C, "");
 }
 
 // Local Variables:

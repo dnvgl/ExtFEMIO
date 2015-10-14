@@ -60,6 +60,11 @@ grid::grid(const deque<std::string> &inp) : card(inp) {
 
   auto pos = inp.rbegin();
 
+
+  SEID = nullptr;
+  PS = nullptr;
+  CD = nullptr;
+
   switch (inp.size()-1) {
   case 8:
     SEID = get_val<long>(_SEID, *(pos++));
@@ -77,6 +82,8 @@ grid::grid(const deque<std::string> &inp) : card(inp) {
   default:
     throw bdf_parse_error("GRID", "Illegal number of entries.");
   }
+
+  if (!SEID) SEID = get_val<long>(_SEID, "");
 }
 
 grid::grid(long &_ID, long &_CP, double &_X1, double &_X2, double &_X3) : card() {
@@ -86,8 +93,9 @@ grid::grid(long &_ID, long &_CP, double &_X1, double &_X2, double &_X3) : card()
   X2 = make_unique<double>(_X2);
   X3 = make_unique<double>(_X3);
   CD = nullptr;
+  PS = nullptr;
   SEID = nullptr;
-}
+  }
 
 // Local Variables:
 // mode: c++

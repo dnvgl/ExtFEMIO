@@ -57,6 +57,13 @@ pshell::pshell(const deque<std::string> &inp) : card(inp) {
 
   auto pos = inp.rbegin();
 
+  MID4 = nullptr;
+  Z2 = nullptr;
+  Z1 = nullptr;
+  NSM = nullptr;
+  TS_T = nullptr;
+  MID3 = nullptr;
+
   switch (inp.size()-1) {
   case 16:
     ++pos;
@@ -90,6 +97,8 @@ pshell::pshell(const deque<std::string> &inp) : card(inp) {
   default:
     throw bdf_parse_error("PSHELL", "Illegal number of entries.");
   }
+
+  TS_T = get_val<double>(_TS_T, "");
 }
 
 // Local Variables:

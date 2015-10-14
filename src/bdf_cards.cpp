@@ -21,15 +21,35 @@ namespace {
 using namespace std;
 using namespace bdf::cards;
 
-namespace {
-  const char initVals[3] = { '+', '*', ',' };
-}
-
 card::card(const deque<std::string> &inp) {}
 
 card::card() {}
 
+namespace {
+  const char initVals[3] = { '+', '*', ',' };
+}
+
 const set<char> card::free_form_cont(initVals, initVals + 3);
+
+namespace {
+  const pair<std::string, types> map_pairs[] = {
+    {"GRID", GRID},
+    {"MAT1", MAT1},
+    {"CTRIA3", CTRIA3},
+    {"CQUAD4", CQUAD4},
+    {"PSHELL", PSHELL},
+    {"CBEAM", CBEAM},
+    {"PBEAM", PBEAM},
+    {"PBEAML", PBEAML},
+    {"CBAR", CBAR},
+    {"PBAR", PBAR},
+    {"PBARL", PBARL},
+    {"CROD", CROD},
+    {"PROD", PROD},
+    {"ENDDATA", ENDDATA}};
+}
+
+const map<std::string, types> cardtype_map(map_pairs, map_pairs + 14);
 
 deque<std::string> card::card_split(deque<std::string> const &inp) {
   deque<std::string> res;
@@ -92,41 +112,50 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
 }
 
 std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> &inp) {
-  std::string key(inp[0]);
 
-  if (key == "GRID")
+  try {
+    std::string key(inp.at(0));
+    switch (cardtype_map.at(key)) {
+    case GRID:
       return std::make_unique<bdf::cards::grid>(inp);
-  else if (key == "CTRIA3")
+    case CTRIA3:
       return std::make_unique<bdf::cards::ctria3>(inp);
-  else if (key == "CQUAD4")
+    case CQUAD4:
       return std::make_unique<bdf::cards::cquad4>(inp);
-  else if (key == "CBEAM")
+    case CBEAM:
       return std::make_unique<bdf::cards::cbeam>(inp);
-  else if (key == "CBAR")
-    return std::make_unique<bdf::cards::cbar>(inp);
-  else if (key == "CROD")
-    return std::make_unique<bdf::cards::crod>(inp);
-  else if (key == "PSHELL")
-    return std::make_unique<bdf::cards::pshell>(inp);
-  else if (key == "PBEAM")
-    return std::make_unique<bdf::cards::pbeam>(inp);
-  else if (key == "PBEAML")
-    return std::make_unique<bdf::cards::pbeaml>(inp);
-  else if (key == "PBAR")
-    return std::make_unique<bdf::cards::pbar>(inp);
-  else if (key == "PBARL")
-    return std::make_unique<bdf::cards::pbarl>(inp);
-  else if (key == "PROD")
-    return std::make_unique<bdf::cards::prod>(inp);
-  else if (key == "MAT1")
-    return std::make_unique<bdf::cards::mat1>(inp);
-  else if (key == "ENDDATA")
-    return std::make_unique<bdf::cards::enddata>(inp);
-  else
+    case CBAR:
+      return std::make_unique<bdf::cards::cbar>(inp);
+    case CROD:
+      return std::make_unique<bdf::cards::crod>(inp);
+    case PSHELL:
+      return std::make_unique<bdf::cards::pshell>(inp);
+    case PBEAM:
+      return std::make_unique<bdf::cards::pbeam>(inp);
+    case PBEAML:
+      return std::make_unique<bdf::cards::pbeaml>(inp);
+    case PBAR:
+      return std::make_unique<bdf::cards::pbar>(inp);
+    case PBARL:
+      return std::make_unique<bdf::cards::pbarl>(inp);
+    case PROD:
+      return std::make_unique<bdf::cards::prod>(inp);
+    case MAT1:
+      return std::make_unique<bdf::cards::mat1>(inp);
+    case ENDDATA:
+      return std::make_unique<bdf::cards::enddata>(inp);
+    // These are not real card types, they can't be returned
+    case UNKNOWN:
+    case BEAM_PROP:
+    case BAR_PROP:
+    case BEAM_BASE:
+      return nullptr;
+    }
+  } catch (out_of_range &e) {
     return std::make_unique<bdf::cards::unknown>(inp);
+  }
   return nullptr;
 }
-
 
 // Local Variables:
 // mode: c++

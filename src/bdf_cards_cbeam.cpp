@@ -162,6 +162,16 @@ cbeam::cbeam(const deque<std::string> &inp) :
     throw bdf_parse_error(
       "CBEAM", "Illegal number of entries for CBEAM");
   }
+
+  if (!W3B) W3B = get_val<double>(_W3B, "");
+  if (!W2B) W2B = get_val<double>(_W2B, "");
+  if (!W1B) W1B = get_val<double>(_W1B, "");
+  if (!W3A) W3A = get_val<double>(_W3A, "");
+  if (!W2A) W2A = get_val<double>(_W2A, "");
+  if (!W1A) W1A = get_val<double>(_W1A, "");
+  if (!PB) PB = get_val<deque<int>>(_PB, "");
+  if (!PA) PA = get_val<deque<int>>(_PA, "");
+  if (!BIT && !OFFT) OFFT = get_val<std::string>(_OFFT, "");
 };
 
 // Local Variables:

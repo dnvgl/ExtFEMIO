@@ -77,22 +77,22 @@ pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
 
   auto pos = inp.rbegin();
 
-  A = make_unique<double>(0.);
-  I1 = make_unique<double>(0.);
-  I2 = make_unique<double>(0.);
-  J = make_unique<double>(0.);
-  NSM = make_unique<double>(0.);
-  C1 = make_unique<double>(0.);
-  C2 = make_unique<double>(0.);
-  D1 = make_unique<double>(0.);
-  D2 = make_unique<double>(0.);
-  E1 = make_unique<double>(0.);
-  E2 = make_unique<double>(0.);
-  F1 = make_unique<double>(0.);
-  F2 = make_unique<double>(0.);
+  A = nullptr;
+  I1 = nullptr;
+  I2 = nullptr;
+  J = nullptr;
+  NSM = nullptr;
+  C1 = nullptr;
+  C2 = nullptr;
+  D1 = nullptr;
+  D2 = nullptr;
+  E1 = nullptr;
+  E2 = nullptr;
+  F1 = nullptr;
+  F2 = nullptr;
   K1 = nullptr;
   K2 = nullptr;
-  I12 = make_unique<double>(0.);
+  I12 = nullptr;
 
   switch (inp.size()-1) {
   case 24:
@@ -147,6 +147,21 @@ pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
     throw bdf_parse_error(
       "CBAR.", "Illegal number of entries.");
   }
+
+  if (!A) A = get_val<double>(_A, "");
+  if (!I1) I1 = get_val<double>(_I1, "");
+  if (!I2) I2 = get_val<double>(_I2, "");
+  if (!J) J = make_unique<double>((*I1 + *I2) / 2.);
+  if (!NSM) NSM = get_val<double>(_NSM, "");
+  if (!C1) C1 = get_val<double>(_C1, "");
+  if (!C2) C2 = get_val<double>(_C2, "");
+  if (!D1) D1 = get_val<double>(_D1, "");
+  if (!D2) D2 = get_val<double>(_D2, "");
+  if (!E1) E1 = get_val<double>(_E1, "");
+  if (!E2) E2 = get_val<double>(_E2, "");
+  if (!F1) F1 = get_val<double>(_F1, "");
+  if (!F2) F2 = get_val<double>(_F2, "");
+  if (!I12) I12 = get_val<double>(_I12, "");
 }
 
 // Local Variables:
