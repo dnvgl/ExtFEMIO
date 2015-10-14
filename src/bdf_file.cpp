@@ -30,7 +30,7 @@ namespace {
 }
 const set<char> bdf_file::cont_chars(initVals, initVals + 3);
 
-bdf_file::bdf_file(istream &inp) : data(inp) {
+bdf_file::bdf_file(istream &inp) : data(inp), eof(false) {
   data.imbue(locale(locale("C"), new line_reader()));
   data >> cur_line;
 }
@@ -39,7 +39,8 @@ deque<std::string>& bdf_file::get() {
   deque<std::string> *res = new(deque<std::string>);
   do {
     if (cur_line.length() > 0 && cur_line[0] != '$') res->push_back(cur_line);
-    data >> cur_line;
+    if (!data.eof()) data >> cur_line;
+    else eof = true;
   } while(!data.eof() && (res->size() == 0 || cont_chars.find(cur_line[0]) != cont_chars.end()));
   return *res;
 }

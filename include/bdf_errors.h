@@ -9,6 +9,12 @@
 #if !defined _BERHOL20150710_BDF_ERRORS
 #define _BERHOL20150710_BDF_ERRORS
 
+#ifdef _MSC_VER
+#define DllExport   __declspec( dllexport )
+#else
+#define DllExport
+#endif
+
 #include <string>
 
 class bdf_error {
@@ -23,15 +29,15 @@ protected:
 
 public:
 
-  bdf_error(
+  DllExport bdf_error(
     const std::string &msg,
     const std::string &err_class="bdf_error");
 
-  bdf_error(
+  DllExport bdf_error(
     const std::string&, const std::string &msg,
     const std::string &err_class="bdf_error");
 
-  std::string operator() (void) const;
+  DllExport std::string operator() (void) const;
 
 };
 

@@ -64,7 +64,7 @@ namespace bdf {
       DllExport card () = delete;
 #endif
       DllExport card (const std::deque<std::string> &);
-      DllExport card (const card &);
+      DllExport card ();
 
       virtual const bdf::cards::types card_type(void) const = 0;
 
@@ -162,6 +162,7 @@ Description:
       std::unique_ptr<long> SEID;
 
       DllExport grid(const std::deque<std::string> &);
+      DllExport grid(long &ID, long &CP, double &X1, double &X2, double &X3);
 
       DllExport const bdf::cards::types card_type(void) const { return GRID; };
 

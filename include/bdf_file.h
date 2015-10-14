@@ -50,6 +50,8 @@ namespace bdf {
           std::istream &data;
           
       public:
+
+          bool eof;
           
           DllExport bdf_file(std::istream&);
 

@@ -79,6 +79,16 @@ grid::grid(const deque<std::string> &inp) : card(inp) {
   }
 }
 
+grid::grid(long &_ID, long &_CP, double &_X1, double &_X2, double &_X3) : card() {
+  ID = make_unique<long>(_ID);
+  CP = make_unique<long>(_CP);
+  X1 = make_unique<double>(_X1);
+  X2 = make_unique<double>(_X2);
+  X3 = make_unique<double>(_X3);
+  CD = nullptr;
+  SEID = nullptr;
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

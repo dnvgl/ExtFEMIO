@@ -77,12 +77,12 @@ cbeam::cbeam(const deque<std::string> &inp) :
 
   SB = nullptr;
   SA = nullptr;
-  W3B = nullptr;
-  W2B = nullptr;
-  W1B = nullptr;
-  W3A = nullptr;
-  W2A = nullptr;
-  W1A = nullptr;
+  W3B = get_val<double>(_W3B, "");
+  W2B = get_val<double>(_W2B, "");
+  W1B = get_val<double>(_W1B, "");
+  W3A = get_val<double>(_W3A, "");
+  W2A = get_val<double>(_W2A, "");
+  W1A = get_val<double>(_W1A, "");
   PB = nullptr;
   PA = nullptr;
   OFFT = nullptr;

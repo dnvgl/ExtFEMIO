@@ -34,7 +34,7 @@ std::string bdf_error::get_msg(void) const {
 }
 
 std::string bdf_error::operator() (void) const {
-  return this->get_msg();
+  return this->get_msg() + "\n";
 }
 
 bdf_types_error::bdf_types_error(const std::string &msg) :

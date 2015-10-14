@@ -507,8 +507,6 @@ Description:
 
     public:
 
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> MID;
       std::unique_ptr<double> A;
       std::unique_ptr<double> I1;
       std::unique_ptr<double> I2;
@@ -582,8 +580,6 @@ Description:
 
     public:
 
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> MID;
       std::unique_ptr<std::string> GROUP;
       std::unique_ptr<std::string> TYPE;
       std::deque<std::unique_ptr<double>> DIM;

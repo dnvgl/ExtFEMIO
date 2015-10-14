@@ -27,6 +27,8 @@ namespace {
 
 card::card(const deque<std::string> &inp) {}
 
+card::card() {}
+
 const set<char> card::free_form_cont(initVals, initVals + 3);
 
 deque<std::string> card::card_split(deque<std::string> const &inp) {
@@ -68,7 +70,8 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
       if (head.length() > 0 && head.back() == '*') {
         std::string tmp(pos->substr(8));
         tmp.resize(64, ' ');
-        tmp += string::string((++pos)->substr(8)).trim("\t\n");
+        if ((++pos)->length() > 8)
+            tmp += string::string((pos)->substr(8)).trim("\t\n");
         tmp.resize(128, ' ');
         for (int i=0; i<8; ++i) {
           res.push_back(string::string(tmp.substr(i*16, 16)).trim(" \t\n"));
