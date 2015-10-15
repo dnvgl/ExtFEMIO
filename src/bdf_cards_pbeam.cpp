@@ -97,7 +97,7 @@ pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
 
   auto pos = inp.rbegin();
 
-  auto div_val = ldiv(inp.size()-1, 16);
+  auto div_val = ldiv(static_cast<long>(inp.size())-1, 16);
 
   auto block_cnt = div_val.quot;
   auto block_rem = div_val.rem;
@@ -224,7 +224,7 @@ pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
     throw bdf_parse_error("PBEAM", "Illegal number of entries.");
   }
   if (J.size() == 0)
-    J.push_front(nullptr);
+    J.push_front(NULL);
 }
 
 // Local Variables:
