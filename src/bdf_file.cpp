@@ -45,6 +45,11 @@ deque<std::string>& bdf_file::get() {
   return *res;
 }
 
+long bdf_file::pos()
+{
+   return (long) data.tellg();
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

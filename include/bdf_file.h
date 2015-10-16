@@ -56,7 +56,8 @@ namespace bdf {
           DllExport bdf_file(std::istream&);
 
           DllExport std::deque<std::string>& get();
-      
+          // actual byte position (hopefully no bdf > 2Gybte will be readin....) 
+          DllExport long pos();      
       };
   }
 
