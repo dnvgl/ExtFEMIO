@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -174,14 +174,15 @@
     <ClCompile Include="test_cards_pshell.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\bdf_cards.h" />
-    <ClInclude Include="..\include\bdf_file.h" />
-    <ClInclude Include="..\include\bdf_string.h" />
-    <ClInclude Include="..\include\bdf_types.h" />
-    <ClInclude Include="..\include\bdf_cards_elements.h" />
-    <ClInclude Include="..\include\bdf_cards_properties.h" />
-    <ClInclude Include="..\include\bdf_errors.h" />
-    <ClInclude Include="..\include\bdf_type_bounds.h" />
+    <ClInclude Include="..\include\bdf\cards.h" />
+    <ClInclude Include="..\include\bdf\cards_elements.h" />
+    <ClInclude Include="..\include\bdf\cards_loads.h" />
+    <ClInclude Include="..\include\bdf\cards_properties.h" />
+    <ClInclude Include="..\include\bdf\errors.h" />
+    <ClInclude Include="..\include\bdf\file.h" />
+    <ClInclude Include="..\include\bdf\string.h" />
+    <ClInclude Include="..\include\bdf\types.h" />
+    <ClInclude Include="..\include\bdf\type_bounds.h" />
     <ClInclude Include="..\include\my_c++14.h" />
     <ClInclude Include="..\include\stdafx.h" />
     <ClInclude Include="..\include\catch.hpp" />
