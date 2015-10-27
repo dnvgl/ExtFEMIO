@@ -12,7 +12,7 @@
 # For use with: automake
 # Relative File Name: src/Makefile.am
 
-AM_CPPFLAGS=-I../include -Wall -std=c++11
+AM_CPPFLAGS=-I../include -Wall $(BOOST_CPPFLAGS)
 
 top=../
 

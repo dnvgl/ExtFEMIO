@@ -18,15 +18,13 @@ namespace {
 #include <sstream>
 
 #ifdef __GNUC__
+#include "config.h"
+#endif
+
+#ifdef HAVE_BOOST_REGEX_HPP
 #include <boost/regex.hpp>
-using boost::regex;
-using boost::smatch;
-using boost::regex_constants::ECMAScript;
 #else
 #include <regex>
-using std::regex;
-using std::smatch;
-using std::regex_constants::ECMAScript;
 #endif
 
 #include "bdf/types.h"
@@ -41,16 +39,48 @@ entry_type<double>::entry_type(std::string name) :
 entry_type<double>::entry_type(std::string name, bdf::type_bounds::bound<double> bounds) :
   bdf::types::base(name), bounds(bounds) {};
 
-const regex entry_type<double>::float_exp_re(
-  "([\\+-]?[.[:digit:]]+)([+-][[:digit:]]+)");
+const
+#ifdef HAVE_BOOST_REGEX_HPP
+boost::regex
+#else
+std::regex
+#endif
+entry_type<double>::float_exp_re(
+  "([\\+-]?[.0-9]+)([+-][0-9]+)",
+#ifdef HAVE_BOOST_REGEX_HPP
+  boost::regex_constants::ECMAScript);
+#else
+  std::regex_constants::ECMAScript);
+#endif
 
-const regex entry_type<double>::float_re(
-  "([\\+-]?((0|([1-9][[:digit:]]*))?[.][[:digit:]]*)|"
-  "[.][[:digit:]]+)(((E[+-]?)|[+-])[[:digit:]]+)?",
-  ECMAScript);
+const
+#ifdef HAVE_BOOST_REGEX_HPP
+boost::regex
+#else
+std::regex
+#endif
+entry_type<double>::float_re(
+  "([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
+  "[.][0-9]+)(((E[+-]?)|[+-])[0-9]+)?",
+#ifdef HAVE_BOOST_REGEX_HPP
+  boost::regex_constants::ECMAScript);
+#else
+  std::regex_constants::ECMAScript);
+#endif
 
-const regex entry_type<double>::float_lead_dot(
-  "^[\\+-]?[.][[:digit:]]+", ECMAScript);
+const
+#ifdef HAVE_BOOST_REGEX_HPP
+boost::regex
+#else
+std::regex
+#endif
+entry_type<double>::float_lead_dot(
+  "^[\\+-]?[.][0-9]+",
+#ifdef HAVE_BOOST_REGEX_HPP
+  boost::regex_constants::ECMAScript);
+#else
+  std::regex_constants::ECMAScript);
+#endif
 
 // Convert string to float
 double *entry_type<double>::operator() (const std::string &inp) const {
@@ -69,7 +99,11 @@ double *entry_type<double>::operator() (const std::string &inp) const {
       throw bdf_float_error(name, msg + "; !" + sval + "!");
     }
 
-    smatch m;
+#ifdef HAVE_BOOST_REGEX_HPP
+    boost::smatch m;
+#else
+    std::smatch m;
+#endif
 
     if (regex_search(sval, m, float_exp_re))
       sval = m[1].str() + "E" + m[2].str();

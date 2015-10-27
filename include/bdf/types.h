@@ -25,14 +25,13 @@
 #include <memory>
 
 #ifdef __GNUC__
+#include "config.h"
+#endif
+
+#ifdef HAVE_BOOST_REGEX_HPP
 #include <boost/regex.hpp>
 #else
 #include <regex>
-#endif
-#ifdef __GNUC__
-using boost::regex;
-#else
-using std::regex;
 #endif
 
 #include <my_c++14.h>
@@ -99,7 +98,13 @@ namespace bdf {
     private:
 
       bdf::type_bounds::bound<long> bounds;
-      static const regex int_re;
+      static const
+#ifdef HAVE_BOOST_REGEX_HPP
+      boost::regex
+#else
+      std::regex
+#endif
+      int_re;
 
     protected:
 
@@ -125,9 +130,27 @@ namespace bdf {
     private:
 
       bdf::type_bounds::bound<double> bounds;
-      static const regex float_exp_re;
-      static const regex float_re;
-      static const regex float_lead_dot;
+      static const
+#ifdef HAVE_BOOST_REGEX_HPP
+      boost::regex
+#else
+      std::regex
+#endif
+      float_exp_re;
+      static const
+#ifdef HAVE_BOOST_REGEX_HPP
+      boost::regex
+#else
+      std::regex
+#endif
+      float_re;
+      static const
+#ifdef HAVE_BOOST_REGEX_HPP
+      boost::regex
+#else
+      std::regex
+#endif
+      float_lead_dot;
 
     protected:
 
@@ -176,7 +199,13 @@ namespace bdf {
 
     private:
 
-      static const regex int_re;
+      static const
+#ifdef HAVE_BOOST_REGEX_HPP
+        boost::regex
+#else
+        std::regex
+#endif
+        int_re;
 
     protected:
 

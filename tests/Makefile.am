@@ -12,8 +12,9 @@
 # For use with: automake
 # Relative File Name: tests/Makefile.am
 
-AM_CPPFLAGS=-I../include -Wall -std=c++11
-
+AM_CPPFLAGS=-I../include -Wall $(BOOST_CPPFLAGS)
+AM_LDFLAGS = $(BOOST_REGEX_LDFLAGS)
+LDADD = $(BOOST_REGEX_LIBS)
 top=../
 
 SUBDIRS=
@@ -48,8 +49,10 @@ test_cards_SOURCES+=test_cards_pbeaml.cpp
 test_cards_SOURCES+=test_cards_prod.cpp
 test_cards_SOURCES+=test_cards_pshell.cpp
 
+
 test_MISC=
 test_bdf_LDADD=../bdf/libbdfreadpp.la -lboost_regex
+test_bdf_=../bdf/libbdfreadpp.la -lboost_regex
 test_bdf_types_LDADD=$(test_bdf_LDADD)
 test_bdf_bounds_LDADD=$(test_bdf_LDADD)
 test_bdf_int_LDADD=$(test_bdf_LDADD)

@@ -15,7 +15,11 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include <sstream>
+#include "stdafx.h"
+
+#ifdef __GNUC__
+#include "config.h"
+#endif
 
 #include "bdf/types.h"
 
@@ -28,7 +32,13 @@ entry_type<long>::entry_type(std::string name) :
 entry_type<long>::entry_type(std::string name, bdf::type_bounds::bound<long> _bounds) :
   bdf::types::base(name), bounds(_bounds) {};
 
-const regex entry_type<long>::int_re(
+const
+#if HAVE_BOOST_REGEX_HPP
+boost::regex
+#else
+std::regex
+#endif
+entry_type<long>::int_re(
   "[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
 long *entry_type<long>::operator() (const std::string &inp) const {
