@@ -21,6 +21,8 @@ namespace {
 #include "config.h"
 #endif
 
+#include <sstream>
+
 #include "bdf/types.h"
 
 using namespace std;
