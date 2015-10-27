@@ -23,7 +23,7 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf_types.h"
+#include "bdf/types.h"
 
 CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
   return Catch::toString( ex() );

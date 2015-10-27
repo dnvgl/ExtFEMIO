@@ -25,7 +25,7 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf_types.h"
+#include "bdf/types.h"
 
 #include <memory>
 

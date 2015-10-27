@@ -10,7 +10,7 @@
 # Process this file with autoconf to produce a configure script
 
 AC_INIT([BDFRead++], [1.0])
-AC_CONFIG_SRCDIR([src/bdf_types.cpp])
+AC_CONFIG_SRCDIR([bdf/bdf_types.cpp])
 AM_INIT_AUTOMAKE([foreign])
 AM_CONFIG_HEADER(config.h)
 AC_PROG_CXX
@@ -26,4 +26,4 @@ AC_LANG([C++])
 # catch is provided in local inlude directory
 
 # End the configure script.
-AC_OUTPUT(Makefile tests/Makefile src/Makefile include/Makefile, [date > stamp-h] )
+AC_OUTPUT(Makefile tests/Makefile bdf/Makefile include/Makefile, [date > stamp-h] )

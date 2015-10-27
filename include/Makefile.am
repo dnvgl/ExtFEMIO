@@ -14,13 +14,13 @@
 
 top=../
 
-EXTRA_DIST=bdf_cards.h
-EXTRA_DIST+=bdf_cards_elements.h
-EXTRA_DIST+=bdf_cards_properties.h
-EXTRA_DIST+=bdf_errors.h
-EXTRA_DIST+=bdf_file.h
-EXTRA_DIST+=bdf_string.h
-EXTRA_DIST+=bdf_types.h
+EXTRA_DIST=bdf/cards.h
+EXTRA_DIST+=bdf/cards_elements.h
+EXTRA_DIST+=bdf/cards_properties.h
+EXTRA_DIST+=bdf/errors.h
+EXTRA_DIST+=bdf/file.h
+EXTRA_DIST+=bdf/string.h
+EXTRA_DIST+=bdf/types.h
 EXTRA_DIST+=catch.hpp
 EXTRA_DIST+=my_c++14.h
 EXTRA_DIST+=stdafx.h

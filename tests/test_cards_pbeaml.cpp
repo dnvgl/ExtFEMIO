@@ -13,8 +13,6 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "bdf_cards.h"
-
 #define NOMINMAX // To avoid problems with "numdric_limits"
 
 #include <limits>
@@ -24,7 +22,7 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf_cards.h"
+#include "bdf/cards.h"
 
 CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
   return ex();

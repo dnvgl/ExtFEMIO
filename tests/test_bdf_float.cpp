@@ -25,7 +25,7 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf_types.h"
+#include "bdf/types.h"
 
 CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
   return Catch::toString( ex() );
@@ -37,7 +37,7 @@ using namespace bdf::type_bounds;
 
 TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
-  entry_type<double> probe("dummy", ::bdf::type_bounds::bound<double>(NULL, NULL, make_unique<double>(0.).get()));
+  entry_type<double> probe("dummy", bound<double>(NULL, NULL, make_unique<double>(0.).get()));
 
   SECTION("'   1.   '") {
     CHECK(*probe("   1.   ") == 1.);
@@ -56,7 +56,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'  -1.   ', min 0.") {
-    entry_type<double> probe("dummy", ::bdf::type_bounds::bound<double>(new double(0.), NULL, new double(0.)));
+    entry_type<double> probe("dummy", bound<double>(new double(0.), NULL, new double(0.)));
     CHECK_THROWS(*probe("  -1.   "));
   }
 
@@ -64,7 +64,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     ::std::vector<string> samples;
     CHECK(*probe("   7.0  ") == 7.);
     CHECK(*probe("   7.   ") == 7.);
-    CHECK(*probe("   .7"   ) == .7);
+    CHECK(*probe("   .7   ") == .7);
     CHECK(*probe("   .7E1 ") == 7.);
     CHECK(*probe("   .7e1 ") == 7.);
     CHECK(*probe("   0.7+1") == 7.);
@@ -74,7 +74,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
     CHECK(*probe("   70.-1") == 7.);
     CHECK(*probe("  -7.0  ") == -7.);
     CHECK(*probe("  -7.   ") == -7.);
-    CHECK(*probe("  -.7"   ) == -.7);
+    CHECK(*probe("  -.7   ") == -.7);
     CHECK(*probe("  -.7E1 ") == -7.);
     CHECK(*probe("  -.7e1 ") == -7.);
     CHECK(*probe("  -0.7+1") == -7.);
@@ -100,7 +100,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 
   SECTION("'        ', no default") {
-    entry_type<double> probe("dummy", ::bdf::type_bounds::bound<double>(NULL, NULL, NULL));
+    entry_type<double> probe("dummy", bound<double>(NULL, NULL, NULL));
     CHECK_THROWS(*probe("        "));
   }
 
@@ -142,7 +142,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
   SECTION("'        '") {
     entry_type<double> probe(
-      "probe", ::bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+      "probe", bound<double>(nullptr, nullptr, nullptr, true));
     CHECK_FALSE(probe("        "));
   }
 }

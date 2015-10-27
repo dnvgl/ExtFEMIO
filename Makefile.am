@@ -13,7 +13,7 @@ AM_CPPFLAGS=-Iinclude -Wall -std=c++11
 top="$(CURDIR)"/
 ede_FILES=Makefile.am
 
-SUBDIRS= src tests include
+SUBDIRS= bdf tests include
 EXTRA_DIST=
 test_MISC=configure
 

@@ -28,8 +28,8 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf_cards.h"
-#include "bdf_file.h"
+#include "bdf/cards.h"
+#include "bdf/file.h"
 
 CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
   return Catch::toString( ex() );
