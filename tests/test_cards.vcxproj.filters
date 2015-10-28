@@ -1,46 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="test_cards.cpp">
+    <ClCompile Include="test_bdf_cards.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_grid.cpp">
+    <ClCompile Include="test_bdf_cards_cbar.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_mat1.cpp">
+    <ClCompile Include="test_bdf_cards_cbeam.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_cquad4.cpp">
+    <ClCompile Include="test_bdf_cards_cquad4.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_ctria3.cpp">
+    <ClCompile Include="test_bdf_cards_crod.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_cbeam.cpp">
+    <ClCompile Include="test_bdf_cards_ctria3.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_cbar.cpp">
+    <ClCompile Include="test_bdf_cards_force.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_crod.cpp">
+    <ClCompile Include="test_bdf_cards_grid.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_pbar.cpp">
+    <ClCompile Include="test_bdf_cards_load.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_pbarl.cpp">
+    <ClCompile Include="test_bdf_cards_mat1.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_pbeam.cpp">
+    <ClCompile Include="test_bdf_cards_moment.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_pbeaml.cpp">
+    <ClCompile Include="test_bdf_cards_pbar.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_prod.cpp">
+    <ClCompile Include="test_bdf_cards_pbarl.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="test_cards_pshell.cpp">
+    <ClCompile Include="test_bdf_cards_pbeam.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_pbeaml.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_prod.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_pshell.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

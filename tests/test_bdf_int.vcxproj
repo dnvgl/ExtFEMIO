@@ -161,10 +161,10 @@
     <ClCompile Include="test_bdf_int.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\bdf_cards.h" />
-    <ClInclude Include="..\include\bdf_file.h" />
-    <ClInclude Include="..\include\bdf_string.h" />
-    <ClInclude Include="..\include\bdf_types.h" />
+    <ClInclude Include="..\include\bdf\cards.h" />
+    <ClInclude Include="..\include\bdf\file.h" />
+    <ClInclude Include="..\include\bdf\string.h" />
+    <ClInclude Include="..\include\bdf\types.h" />
     <ClInclude Include="..\include\catch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

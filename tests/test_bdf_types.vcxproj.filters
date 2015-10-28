@@ -16,19 +16,34 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\bdf_cards.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf_file.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf_string.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf_types.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\catch.hpp">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\cards.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\cards_elements.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\cards_loads.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\cards_properties.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\errors.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\file.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\string.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\type_bounds.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\types.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

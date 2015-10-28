@@ -158,20 +158,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test_cards.cpp" />
-    <ClCompile Include="test_cards_cbar.cpp" />
-    <ClCompile Include="test_cards_cbeam.cpp" />
-    <ClCompile Include="test_cards_cquad4.cpp" />
-    <ClCompile Include="test_cards_crod.cpp" />
-    <ClCompile Include="test_cards_ctria3.cpp" />
-    <ClCompile Include="test_cards_grid.cpp" />
-    <ClCompile Include="test_cards_mat1.cpp" />
-    <ClCompile Include="test_cards_pbar.cpp" />
-    <ClCompile Include="test_cards_pbarl.cpp" />
-    <ClCompile Include="test_cards_pbeam.cpp" />
-    <ClCompile Include="test_cards_pbeaml.cpp" />
-    <ClCompile Include="test_cards_prod.cpp" />
-    <ClCompile Include="test_cards_pshell.cpp" />
+    <ClCompile Include="test_bdf_cards.cpp" />
+    <ClCompile Include="test_bdf_cards_cbar.cpp" />
+    <ClCompile Include="test_bdf_cards_cbeam.cpp" />
+    <ClCompile Include="test_bdf_cards_cquad4.cpp" />
+    <ClCompile Include="test_bdf_cards_crod.cpp" />
+    <ClCompile Include="test_bdf_cards_ctria3.cpp" />
+    <ClCompile Include="test_bdf_cards_force.cpp" />
+    <ClCompile Include="test_bdf_cards_grid.cpp" />
+    <ClCompile Include="test_bdf_cards_load.cpp" />
+    <ClCompile Include="test_bdf_cards_mat1.cpp" />
+    <ClCompile Include="test_bdf_cards_moment.cpp" />
+    <ClCompile Include="test_bdf_cards_pbar.cpp" />
+    <ClCompile Include="test_bdf_cards_pbarl.cpp" />
+    <ClCompile Include="test_bdf_cards_pbeam.cpp" />
+    <ClCompile Include="test_bdf_cards_pbeaml.cpp" />
+    <ClCompile Include="test_bdf_cards_prod.cpp" />
+    <ClCompile Include="test_bdf_cards_pshell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\bdf\cards.h" />
