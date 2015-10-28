@@ -4,7 +4,7 @@ AM_CPPFLAGS=-Iinclude -Wall -std=c++11
 
 top="$(CURDIR)"/
 
-SUBDIRS= bdf tests include
+SUBDIRS= src tests include
 EXTRA_DIST=
 test_MISC=configure
 

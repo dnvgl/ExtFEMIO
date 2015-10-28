@@ -5,8 +5,8 @@ AC_CONFIG_MACRO_DIR([m4])
 m4_include(m4/ax_cxx_compile_stdcxx_11.m4)
 m4_include(m4/boost.m4)
 
-AC_INIT([BDFRead++], [1.0])
-AC_CONFIG_SRCDIR([bdf/bdf_types.cpp])
+AC_INIT([ExtFEMRead++], [1.0])
+AC_CONFIG_SRCDIR([src/Makefile.am])
 AM_INIT_AUTOMAKE([foreign])
 AM_CONFIG_HEADER(config.h)
 AC_PROG_CXX
@@ -31,7 +31,7 @@ BOOST_REGEX
 # catch is provided in local inlude directory
 
 # End the configure script.
-AC_OUTPUT(Makefile tests/Makefile bdf/Makefile include/Makefile, [date > stamp-h] )
+AC_OUTPUT(Makefile tests/Makefile src/Makefile include/Makefile, [date > stamp-h] )
 
 # Local Variables:
 # mode: m4

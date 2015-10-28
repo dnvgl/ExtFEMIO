@@ -44,6 +44,7 @@ namespace bdf {
       CBEAM, PBEAM, PBEAML, BEAM_PROP,
       CBAR, PBAR, PBARL, BAR_PROP, BEAM_BASE,
       CROD, PROD,
+      FORCE, MOMENT, LOAD,
       ENDDATA
     } types;
 

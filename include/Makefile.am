@@ -2,7 +2,7 @@
 
 # Copyright © 2015 by DNV GL SE
 
-# Makefile definitions for libBDFRead++.
+# Makefile definitions for libExtFEMRead++.
 
 # ID: $Id$
 # $Date$

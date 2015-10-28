@@ -144,6 +144,12 @@ std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> 
       return std::make_unique<bdf::cards::mat1>(inp);
     case ENDDATA:
       return std::make_unique<bdf::cards::enddata>(inp);
+    case FORCE:
+      return std::make_unique<bdf::cards::force>(inp);
+    case MOMENT:
+      return std::make_unique<bdf::cards::moment>(inp);
+    case LOAD:
+      return std::make_unique<bdf::cards::load>(inp);
     // These are not real card types, they can't be returned
     case UNKNOWN:
     case BEAM_PROP:
