@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS=-Im4
 
-AM_CPPFLAGS=-Iinclude -Wall -std=c++11
+AM_CPPFLAGS=-Iinclude -Wall -Werror -std=c++11
 
 top="$(CURDIR)"/
 

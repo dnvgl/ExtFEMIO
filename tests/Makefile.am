@@ -12,7 +12,7 @@
 # For use with: automake
 # Relative File Name: tests/Makefile.am
 
-AM_CPPFLAGS=-I../include -Wall $(BOOST_CPPFLAGS)
+AM_CPPFLAGS=-I../include -Wall -Werror $(BOOST_CPPFLAGS)
 AM_LDFLAGS = $(BOOST_REGEX_LDFLAGS)
 LDADD = $(BOOST_REGEX_LIBS)
 top=../
