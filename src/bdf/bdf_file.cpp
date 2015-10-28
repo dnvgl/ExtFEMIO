@@ -30,7 +30,9 @@ namespace {
 }
 const set<char> bdf_file::cont_chars(initVals, initVals + 3);
 
-bdf_file::bdf_file(istream &inp) : data(inp), eof(false) {
+
+bdf_file::bdf_file(istream &inp) :
+  data(inp), last_comment(""), eof(false) {
   data.imbue(locale(locale("C"), new line_reader()));
   data >> cur_line;
 }
@@ -38,10 +40,15 @@ bdf_file::bdf_file(istream &inp) : data(inp), eof(false) {
 deque<std::string>& bdf_file::get() {
   deque<std::string> *res = new(deque<std::string>);
   do {
-    if (cur_line.length() > 0 && cur_line[0] != '$') res->push_back(cur_line);
+    if (cur_line.length() > 0 && cur_line[0] != '$')
+      res->push_back(cur_line);
+    else if (cur_line.length() > 0 && cur_line[0] == '$')
+      last_comment = cur_line;
     if (!data.eof()) data >> cur_line;
     else eof = true;
-  } while(!data.eof() && (res->size() == 0 || cont_chars.find(cur_line[0]) != cont_chars.end()));
+  } while(!data.eof() &&
+          (res->size() == 0 ||
+           cont_chars.find(cur_line[0]) != cont_chars.end()));
   return *res;
 }
 
@@ -56,5 +63,5 @@ long bdf_file::pos()
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

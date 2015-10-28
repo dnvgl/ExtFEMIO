@@ -22,7 +22,7 @@
 #include <sstream>
 
 #ifdef _MSC_VER
-#define DllExport   __declspec( dllexport ) 
+#define DllExport   __declspec( dllexport )
 #else
 #define DllExport
 #endif
@@ -30,37 +30,39 @@
 namespace bdf {
 
   namespace input {
-      struct line_reader : std::ctype<char> {
-          line_reader() : ctype(make_table()) { }
-      private:
-          static mask* make_table() {
-              const mask* classic = classic_table();
-              static std::vector<mask> v(classic, classic + table_size);
-              v[' '] &= ~space;
-              return &v[0];
-          }
-      };
-      
-      class bdf_file {
+    struct line_reader : std::ctype<char> {
+      line_reader() : ctype(make_table()) { }
+    private:
+      static mask* make_table() {
+        const mask* classic = classic_table();
+        static std::vector<mask> v(classic, classic + table_size);
+        v[' '] &= ~space;
+        return &v[0];
+      }
+    };
 
-      private:
-          
-          static const std::set<char> cont_chars;
-          std::string cur_line;
-          std::istream &data;
-          
-      public:
+    class bdf_file {
 
-          bool eof;
-          
-          DllExport bdf_file(std::istream&);
+    private:
 
-          DllExport std::deque<std::string>& get();
-          // actual byte position (hopefully no bdf > 2Gybte will be readin....) 
-          DllExport long pos();      
-      };
+      static const std::set<char> cont_chars;
+      std::string cur_line;
+      std::istream &data;
+
+    public:
+
+      std::string last_comment;
+
+      bool eof;
+
+      DllExport bdf_file(std::istream&);
+
+      DllExport std::deque<std::string>& get();
+
+      // actual byte position (hopefully no bdf > 2Gybte will be readin....)
+      DllExport long pos();
+    };
   }
-
 }
 
 #endif // _BERHOL20150703_BDF_FILE

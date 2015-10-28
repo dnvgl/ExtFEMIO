@@ -194,11 +194,23 @@ Description:
  */
     class load : public card {
 
+    private:
+
+      static const bdf::types::entry_type<long> _SID;
+      static const bdf::types::entry_type<double> _S;
+      static const bdf::types::entry_type<double> _Si;
+      static const bdf::types::entry_type<long> _Li;
+
     public:
+
+      std::unique_ptr<long> SID;
+      std::unique_ptr<double> S;
+      std::unique_ptr<std::deque<double>> Si;
+      std::unique_ptr<std::deque<long>> Li;
 
       DllExport load(const std::deque<std::string> &inp);
 
-      DllExport load(long &SID, long &S,
+      DllExport load(long &SID, double &S,
                      std::deque<double> &Si, std::deque<long> &Li);
 
       DllExport const bdf::cards::types card_type(void) const {

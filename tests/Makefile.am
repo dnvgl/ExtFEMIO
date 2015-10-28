@@ -50,6 +50,7 @@ test_bdf_cards_SOURCES+=test_bdf_cards_prod.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_pshell.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_force.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_moment.cpp
+test_bdf_cards_SOURCES+=test_bdf_cards_load.cpp
 
 test_MISC=
 test_bdf_LDADD=../src/libextfemread.la -lboost_regex
