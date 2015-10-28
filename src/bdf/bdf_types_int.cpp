@@ -4,7 +4,7 @@
 
 // Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
-#include "stdafx.h"
+#include "StdAfx.h"
 
 // ID:
 namespace {
@@ -14,8 +14,6 @@ namespace {
 #endif
     = "@(#) $Id$";
 }
-
-#include "stdafx.h"
 
 #ifdef __GNUC__
 #include "config.h"
@@ -76,7 +74,7 @@ long *entry_type<long>::operator() (const std::string &inp) const {
   ispell-local-dictionary: "english"
   c-file-style: "gl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -j 8"
+  compile-command: "make -C ../.. check -j 8"
   coding: utf-8
   End:
 */

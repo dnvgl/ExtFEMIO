@@ -5,7 +5,7 @@
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
-#include "stdafx.h"
+#include "StdAfx.h"
 
 // ID:
 namespace {
