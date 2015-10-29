@@ -68,16 +68,16 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
   if (pos == inp.end()) goto invalid;
   ++pos;
   if (pos == inp.end()) goto invalid;
-  PID = get_val<long>(_PID, *(pos++));
+  PID = bdf::types::get_val<long>(_PID, *(pos++));
   if (pos == inp.end()) goto invalid;
-  MID = get_val<long>(_MID, *(pos++));
+  MID = bdf::types::get_val<long>(_MID, *(pos++));
   if (pos == inp.end()) goto invalid;
-  GROUP = get_val<std::string>(_GROUP, *(pos++));
+  GROUP = bdf::types::get_val<std::string>(_GROUP, *(pos++));
   if (*GROUP != "MSCBML0")
     throw bdf_parse_error(
       "PBEAML", "Currently only GROUP==MSCBML0 is supported.");
   if (pos == inp.end()) goto invalid;
-  TYPE = get_val<std::string>(_TYPE, *(pos++));
+  TYPE = bdf::types::get_val<std::string>(_TYPE, *(pos++));
   if (pos == inp.end()) goto invalid;
   if (dimnum1.find(*TYPE) != dimnum1.end())
     dim_num = 1;
@@ -106,10 +106,10 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
   DIM.push_back(new deque<std::unique_ptr<double>>);
   for (i=0; i < dim_num; i++) {
     if (pos == inp.end()) goto invalid;
-    (*DIM[0]).push_back(get_val<double>(_DIM, *(pos++)));
+    (*DIM[0]).push_back(bdf::types::get_val<double>(_DIM, *(pos++)));
   }
   if (pos == inp.end()) goto end;
-  NSM.push_back(get_val<double>(_NSM, *(pos++)));
+  NSM.push_back(bdf::types::get_val<double>(_NSM, *(pos++)));
 
   // Read further cross section definitions for tapered beams. The
   // 'goto's are used because SO, and X/XB have default values. This
@@ -125,28 +125,28 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
     j++;
     DIM.push_back(new deque<unique_ptr<double>>);
     try {
-      SO.push_back(get_val<std::string>(_SO, *(pos++)));
+      SO.push_back(bdf::types::get_val<std::string>(_SO, *(pos++)));
     } catch (bdf_error) {
       goto clean_SO;
     };
     if (pos == inp.end()) goto clean_X_XB;
     try {
-      X_XB.push_back(get_val<double>(_X_XB, *(pos++)));
+      X_XB.push_back(bdf::types::get_val<double>(_X_XB, *(pos++)));
     } catch (bdf_error) {
       goto clean_X_XB;
     }
     if (pos == inp.end()) goto clean;
     try {
-      (*DIM[j]).push_back(get_val<double>(_DIM, *(pos++)));
+      (*DIM[j]).push_back(bdf::types::get_val<double>(_DIM, *(pos++)));
     } catch (bdf_error) {
       goto clean;
     }
     for (i=1; i < dim_num; i++) {
       if (pos == inp.end()) goto invalid;
-      (*DIM[j]).push_back(get_val<double>(_DIM, *(pos++)));
+      (*DIM[j]).push_back(bdf::types::get_val<double>(_DIM, *(pos++)));
     }
     if (pos == inp.end()) goto end;
-    NSM.push_back(get_val<double>(_NSM, *(pos++)));
+    NSM.push_back(bdf::types::get_val<double>(_NSM, *(pos++)));
   }
 
   goto end;

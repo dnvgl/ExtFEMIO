@@ -67,23 +67,23 @@ grid::grid(const deque<std::string> &inp) : card(inp) {
 
   switch (inp.size()-1) {
   case 8:
-    SEID = get_val<long>(_SEID, *(pos++));
+    SEID = bdf::types::get_val<long>(_SEID, *(pos++));
   case 7:
-    PS = get_val<std::deque<int> >(_PS, *(pos++));
+    PS = bdf::types::get_val<std::deque<int> >(_PS, *(pos++));
   case 6:
-    CD = get_val<long>(_CD, *(pos++));
+    CD = bdf::types::get_val<long>(_CD, *(pos++));
   case 5:
-    X3 = get_val<double>(_X3, *(pos++));
-    X2 = get_val<double>(_X2, *(pos++));
-    X1 = get_val<double>(_X1, *(pos++));
-    CP = get_val<long>(_CP, *(pos++));
-    ID = get_val<long>(_ID, *pos);
+    X3 = bdf::types::get_val<double>(_X3, *(pos++));
+    X2 = bdf::types::get_val<double>(_X2, *(pos++));
+    X1 = bdf::types::get_val<double>(_X1, *(pos++));
+    CP = bdf::types::get_val<long>(_CP, *(pos++));
+    ID = bdf::types::get_val<long>(_ID, *pos);
     break;
   default:
     throw bdf_parse_error("GRID", "Illegal number of entries.");
   }
 
-  if (!SEID) SEID = get_val<long>(_SEID, "");
+  if (!SEID) SEID = bdf::types::get_val<long>(_SEID, "");
 }
 
 grid::grid(long &_ID, long &_CP, double &_X1, double &_X2, double &_X3) : card() {

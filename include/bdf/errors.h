@@ -38,7 +38,6 @@ public:
     const std::string &err_class="bdf_error");
 
   DllExport std::string operator() (void) const;
-
 };
 
 class bdf_types_error : public bdf_error {
@@ -46,7 +45,6 @@ class bdf_types_error : public bdf_error {
 public:
 
   bdf_types_error(const std::string &msg);
-
 };
 
 class bdf_float_error : public bdf_error {
@@ -54,7 +52,6 @@ class bdf_float_error : public bdf_error {
 public:
 
   bdf_float_error(const std::string&, const std::string&);
-
 };
 
 class bdf_int_error : public bdf_error {
@@ -62,7 +59,13 @@ class bdf_int_error : public bdf_error {
 public:
 
   bdf_int_error(const std::string&, const std::string&);
+};
 
+class bdf_output_error : public bdf_error {
+
+public:
+
+  bdf_output_error(const std::string&, const std::string&);
 };
 
 class bdf_list_error : public bdf_error {
@@ -70,7 +73,6 @@ class bdf_list_error : public bdf_error {
 public:
 
   bdf_list_error(const std::string&, const std::string &);
-
 };
 
 class bdf_str_error : public bdf_error {
@@ -78,7 +80,6 @@ class bdf_str_error : public bdf_error {
 public:
 
   bdf_str_error(const std::string&, const std::string &);
-
 };
 
 class bdf_string_error : public bdf_error {
@@ -86,7 +87,6 @@ class bdf_string_error : public bdf_error {
 public:
 
   bdf_string_error(const std::string&, const std::string &);
-
 };
 
 class bdf_parse_error : public bdf_error {
@@ -94,7 +94,6 @@ class bdf_parse_error : public bdf_error {
 public:
 
   bdf_parse_error(const std::string&, const std::string &);
-
 };
 
 #endif // _BERHOL20150710_BDF_ERRORS

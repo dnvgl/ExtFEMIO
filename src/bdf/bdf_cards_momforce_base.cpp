@@ -60,19 +60,19 @@ momforce_base::momforce_base(const std::deque<std::string> &inp) :
   case 8:
     ++pos;
   case 7:
-    N3 = get_val<double>(_N3, *(pos++));
+    N3 = bdf::types::get_val<double>(_N3, *(pos++));
   case 6:
-    N2 = get_val<double>(_N2, *(pos++));
+    N2 = bdf::types::get_val<double>(_N2, *(pos++));
   case 5:
-    N1 = get_val<double>(_N1, *(pos++));
+    N1 = bdf::types::get_val<double>(_N1, *(pos++));
     if (*N1 == 0. && *N2 == 0. && *N3 == 0.) {
       throw bdf_parse_error(
         "FORCE", "At least one of N1, N2, and N3 has to be != 0..");
     }
-    F = get_val<double>(_F, *(pos++));
-    CID = get_val<long>(_CID, *(pos++));
-    G = get_val<long>(_G, *(pos++));
-    SID = get_val<long>(_SID, *(pos++));
+    F = bdf::types::get_val<double>(_F, *(pos++));
+    CID = bdf::types::get_val<long>(_CID, *(pos++));
+    G = bdf::types::get_val<long>(_G, *(pos++));
+    SID = bdf::types::get_val<long>(_SID, *(pos++));
     break;
   default:
     throw bdf_parse_error("FORCE", "Illegal number of entries.");

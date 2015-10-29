@@ -83,34 +83,34 @@ mat1::mat1(const deque<std::string> &inp) : card(inp) {
   case 13:
     ++pos;
   case 12:
-    MCSID = get_val<long>(_MCSID, *(pos++));
+    MCSID = bdf::types::get_val<long>(_MCSID, *(pos++));
   case 11:
-    SS = get_val<double>(_SS, *(pos++));
+    SS = bdf::types::get_val<double>(_SS, *(pos++));
   case 10:
-    SC = get_val<double>(_SC, *(pos++));
+    SC = bdf::types::get_val<double>(_SC, *(pos++));
   case 9:
-    ST = get_val<double>(_ST, *(pos++));
+    ST = bdf::types::get_val<double>(_ST, *(pos++));
   case 8:
-    GE = get_val<double>(_GE, *(pos++));
+    GE = bdf::types::get_val<double>(_GE, *(pos++));
   case 7:
-    TREF = get_val<double>(_TREF, *(pos++));
+    TREF = bdf::types::get_val<double>(_TREF, *(pos++));
   case 6:
-    A = get_val<double>(_A, *(pos++));
+    A = bdf::types::get_val<double>(_A, *(pos++));
   case 5:
-    RHO = get_val<double>(_RHO, *(pos++));
+    RHO = bdf::types::get_val<double>(_RHO, *(pos++));
   case 4:
-    NU = get_val<double>(_NU, *(pos++));
+    NU = bdf::types::get_val<double>(_NU, *(pos++));
   case 3:
-    G = get_val<double>(_G, *(pos++));
+    G = bdf::types::get_val<double>(_G, *(pos++));
   case 2:
-    E = get_val<double>(_E, *(pos++));
-    MID = get_val<long>(_MID, *(pos));
+    E = bdf::types::get_val<double>(_E, *(pos++));
+    MID = bdf::types::get_val<long>(_MID, *(pos));
     break;
   default:
     throw bdf_parse_error("MAT1", "Illegal number of entries.");
   }
 
-  if (A && !TREF) TREF = get_val<double>(_TREF, "");
+  if (A && !TREF) TREF = bdf::types::get_val<double>(_TREF, "");
 
   // remark 2
   if (!E && !G)

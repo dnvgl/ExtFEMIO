@@ -20,6 +20,8 @@ namespace {
 
 #include <catch.hpp>
 
+#include <sstream>
+
 #ifndef _MSC_VER
 #include <config.h>
 #endif
@@ -75,11 +77,44 @@ TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
   }
 }
 
+TEST_CASE("BDF int types output.", "[bdf_types]" ) {
+
+  entry_type<long> obj("dummy");
+
+  long lval = 1;
+
+  SECTION("SHORT") {
+    bdf::types::base::out_form = SHORT;
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "       1");
+  }
+
+  SECTION("SHORT (too long)") {
+    bdf::types::base::out_form = SHORT;
+    lval = 123456789;
+    CHECK_THROWS(obj.format(lval));
+  }
+
+  SECTION("LONG") {
+    bdf::types::base::out_form = LONG;
+    std::string res(obj.format(lval));
+    CHECK(obj.format(lval).size() == 16);
+    CHECK(obj.format(lval) == "               1");
+  }
+
+  SECTION("FREE") {
+    bdf::types::base::out_form = FREE;
+    std::string res(obj.format(lval));
+    CHECK(obj.format(lval) == "1");
+  }
+}
+
+
 /*
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
   compile-command: "make -C .. check -j 8"
   coding: utf-8

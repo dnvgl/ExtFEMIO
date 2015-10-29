@@ -68,11 +68,38 @@ long *entry_type<long>::operator() (const std::string &inp) const {
   return value;
 }
 
+std::string entry_type<long>::format(const long &inp) const {
+  std::ostringstream res;
+  switch (out_form) {
+  case LONG:
+    res.setf(ios_base::right, ios_base::adjustfield);
+    res.fill(' ');
+    break;
+  case SHORT:
+    res.setf(ios_base::right, ios_base::adjustfield);
+    res.fill(' ');
+    break;
+  case FREE:
+    break;
+  }
+  res.width(out_form);
+
+  res << inp;
+  std::string out(res.str());
+  if (out.size() != out_form && out_form > 0) {
+    std::ostringstream msg("output string for value ", std::ostringstream::ate);
+    msg << inp << " of incorrect size, got length of " << out.size()
+        << " instead of allowed length of " << out_form << ".";
+    throw bdf_int_error(name, msg.str());
+  }
+  return out;
+}
+
 /*
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
   compile-command: "make -C ../.. check -j 8"
   coding: utf-8

@@ -78,7 +78,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
   compile-command: "make -C ../ check -j 8"
   coding: utf-8

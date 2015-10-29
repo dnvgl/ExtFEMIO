@@ -40,7 +40,7 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
   // def test_List1(self):
     //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
     //     assert obj("1236") == (1, 2, 3, 6)
-  entry_type<::std::deque<int>> probe("dummy");
+  entry_type<std::deque<int>> probe("dummy");
 
   SECTION("' 1234   '") {
 
@@ -66,6 +66,48 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
   }
 }
 
+TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
+
+  entry_type<std::deque<int>> obj("dummy");
+
+  deque<int> lval;
+  lval.push_back(1);
+  lval.push_back(2);
+  lval.push_back(3);
+  lval.push_back(4);
+
+  std::ostringstream stream(std::ostringstream::ate);
+
+  SECTION("SHORT") {
+    bdf::types::base::out_form = SHORT;
+    stream << obj.format(lval);
+    CHECK(stream.str().size() == 8);
+    CHECK(stream.str() == "    1234");
+  }
+
+  SECTION("SHORT (too long)") {
+    bdf::types::base::out_form = SHORT;
+    lval.push_back(1);
+    lval.push_back(2);
+    lval.push_back(3);
+    lval.push_back(4);
+    lval.push_back(4);
+    CHECK_THROWS(obj.format(lval));
+  }
+
+  SECTION("LONG") {
+    bdf::types::base::out_form = LONG;
+    stream << obj.format(lval);
+    CHECK(stream.str().size() == 16);
+    CHECK(stream.str() == "            1234");
+  }
+
+  SECTION("FREE") {
+    bdf::types::base::out_form = FREE;
+    stream << obj.format(lval);
+    CHECK(stream.str() == "1234");
+  }
+}
 
 // Local Variables:
 // mode: c++

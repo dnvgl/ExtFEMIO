@@ -147,12 +147,36 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 }
 
+TEST_CASE("BDF double types output.", "[bdf_types]" ) {
+
+  entry_type<double> obj("dummy");
+
+  double lval = 1.;
+
+  SECTION("SHORT") {
+    bdf::types::base::out_form = SHORT;
+    std::string res(obj.format(lval));
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "1.000+00");
+  }
+
+  SECTION("LONG") {
+    bdf::types::base::out_form = LONG;
+    CHECK(obj.format(lval).size() == 16);
+    CHECK(obj.format(lval) == "1.00000000000+00");
+  }
+
+  SECTION("FREE") {
+    bdf::types::base::out_form = FREE;
+    CHECK(obj.format(lval) == "1.000000+00");
+  }
+}
 
 /*
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
   compile-command: "make -C .. check -j 8"
   coding: utf-8

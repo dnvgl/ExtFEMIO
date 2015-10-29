@@ -76,29 +76,29 @@ pshell::pshell(const deque<std::string> &inp) : card(inp) {
   case 12:
     ++pos;
   case 11:
-    MID4 = get_val<long>(_MID4, *(pos++));
+    MID4 = bdf::types::get_val<long>(_MID4, *(pos++));
   case 10:
-    Z2 = get_val<double>(_Z2, *(pos++));
+    Z2 = bdf::types::get_val<double>(_Z2, *(pos++));
   case 9:
-    Z1 = get_val<double>(_Z1, *(pos++));
+    Z1 = bdf::types::get_val<double>(_Z1, *(pos++));
   case 8:
-    NSM = get_val<double>(_NSM, *(pos++));
+    NSM = bdf::types::get_val<double>(_NSM, *(pos++));
   case 7:
-    TS_T = get_val<double>(_TS_T, *(pos++));
+    TS_T = bdf::types::get_val<double>(_TS_T, *(pos++));
   case 6:
-    MID3 = get_val<long>(_MID3, *(pos++));
+    MID3 = bdf::types::get_val<long>(_MID3, *(pos++));
   case 5:
-    x12I_T__3 = get_val<double>(_12I_T__3, *(pos++));
-    MID2 = get_val<long>(_MID2, *(pos++));
-    T = get_val<double>(_T, *(pos++));
-    MID1 = get_val<long>(_MID1, *(pos++));
-    PID = get_val<long>(_PID, *pos);
+    x12I_T__3 = bdf::types::get_val<double>(_12I_T__3, *(pos++));
+    MID2 = bdf::types::get_val<long>(_MID2, *(pos++));
+    T = bdf::types::get_val<double>(_T, *(pos++));
+    MID1 = bdf::types::get_val<long>(_MID1, *(pos++));
+    PID = bdf::types::get_val<long>(_PID, *pos);
     break;
   default:
     throw bdf_parse_error("PSHELL", "Illegal number of entries.");
   }
 
-  TS_T = get_val<double>(_TS_T, "");
+  TS_T = bdf::types::get_val<double>(_TS_T, "");
 }
 
 const std::ostream& pshell::operator << (std::ostream& os) const {

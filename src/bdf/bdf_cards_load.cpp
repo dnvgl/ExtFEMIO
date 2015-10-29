@@ -40,9 +40,9 @@ load::load(const std::deque<std::string> &inp) :
   if (pos == inp.end()) goto invalid;
   ++pos;
   if (pos == inp.end()) goto invalid;
-  SID = get_val<long>(_SID, *(pos++));
+  SID = bdf::types::get_val<long>(_SID, *(pos++));
   if (pos == inp.end()) goto invalid;
-  S = get_val<double>(_S, *(pos++));
+  S = bdf::types::get_val<double>(_S, *(pos++));
   if (pos == inp.end()) goto invalid;
   while (pos != inp.end() && bdf::string::string(*pos) != "") {
     Si->push_back(*_Si(*(pos++)));

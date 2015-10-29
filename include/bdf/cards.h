@@ -48,7 +48,6 @@ namespace bdf {
       ENDDATA
     } types;
 
-    typedef enum {LONG, SHORT, FREE} out_form_type;
 
     class card {
 
@@ -70,10 +69,7 @@ namespace bdf {
       DllExport card ();
 
       virtual const bdf::cards::types card_type(void) const = 0;
-      virtual const std::ostream& operator << (std::ostream& os) const = 0;
-
-      static out_form_type out_form;
-
+      virtual const std::ostream& operator<<(std::ostream& os) const = 0;
     };
 
     class unknown : public card {

@@ -106,62 +106,62 @@ pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
   case 20:
     ++pos;
   case 19:
-    I12 = get_val<double>(_I12, *(pos++));
+    I12 = bdf::types::get_val<double>(_I12, *(pos++));
   case 18:
-    K2 = get_val<double>(_K2, *(pos++));
+    K2 = bdf::types::get_val<double>(_K2, *(pos++));
   case 17:
-    K1 = get_val<double>(_K1, *(pos++));
+    K1 = bdf::types::get_val<double>(_K1, *(pos++));
   case 16:
-    F2 = get_val<double>(_F2, *(pos++));
+    F2 = bdf::types::get_val<double>(_F2, *(pos++));
   case 15:
-    F1 = get_val<double>(_F1, *(pos++));
+    F1 = bdf::types::get_val<double>(_F1, *(pos++));
   case 14:
-    E2 = get_val<double>(_E2, *(pos++));
+    E2 = bdf::types::get_val<double>(_E2, *(pos++));
   case 13:
-    E1 = get_val<double>(_E1, *(pos++));
+    E1 = bdf::types::get_val<double>(_E1, *(pos++));
   case 12:
-    D2 = get_val<double>(_D2, *(pos++));
+    D2 = bdf::types::get_val<double>(_D2, *(pos++));
   case 11:
-    D1 = get_val<double>(_D1, *(pos++));
+    D1 = bdf::types::get_val<double>(_D1, *(pos++));
   case 10:
-    C2 = get_val<double>(_C2, *(pos++));
+    C2 = bdf::types::get_val<double>(_C2, *(pos++));
   case 9:
-    C1 = get_val<double>(_C1, *(pos++));
+    C1 = bdf::types::get_val<double>(_C1, *(pos++));
   case 8:
     ++pos;
   case 7:
-    NSM = get_val<double>(_NSM, *(pos++));
+    NSM = bdf::types::get_val<double>(_NSM, *(pos++));
   case 6:
-    J = get_val<double>(_J, *(pos++));
+    J = bdf::types::get_val<double>(_J, *(pos++));
   case 5:
-    I2 = get_val<double>(_I2, *(pos++));
+    I2 = bdf::types::get_val<double>(_I2, *(pos++));
   case 4:
-    I1 = get_val<double>(_I1, *(pos++));
+    I1 = bdf::types::get_val<double>(_I1, *(pos++));
   case 3:
-    A = get_val<double>(_A, *(pos++));
+    A = bdf::types::get_val<double>(_A, *(pos++));
   case 2:
-    MID = get_val<long>(_MID, *(pos++));
-    PID = get_val<long>(_PID, *(pos));
+    MID = bdf::types::get_val<long>(_MID, *(pos++));
+    PID = bdf::types::get_val<long>(_PID, *(pos));
     break;
   default:
     throw bdf_parse_error(
       "CBAR.", "Illegal number of entries.");
   }
 
-  if (!A) A = get_val<double>(_A, "");
-  if (!I1) I1 = get_val<double>(_I1, "");
-  if (!I2) I2 = get_val<double>(_I2, "");
+  if (!A) A = bdf::types::get_val<double>(_A, "");
+  if (!I1) I1 = bdf::types::get_val<double>(_I1, "");
+  if (!I2) I2 = bdf::types::get_val<double>(_I2, "");
   if (!J) J = make_unique<double>((*I1 + *I2) / 2.);
-  if (!NSM) NSM = get_val<double>(_NSM, "");
-  if (!C1) C1 = get_val<double>(_C1, "");
-  if (!C2) C2 = get_val<double>(_C2, "");
-  if (!D1) D1 = get_val<double>(_D1, "");
-  if (!D2) D2 = get_val<double>(_D2, "");
-  if (!E1) E1 = get_val<double>(_E1, "");
-  if (!E2) E2 = get_val<double>(_E2, "");
-  if (!F1) F1 = get_val<double>(_F1, "");
-  if (!F2) F2 = get_val<double>(_F2, "");
-  if (!I12) I12 = get_val<double>(_I12, "");
+  if (!NSM) NSM = bdf::types::get_val<double>(_NSM, "");
+  if (!C1) C1 = bdf::types::get_val<double>(_C1, "");
+  if (!C2) C2 = bdf::types::get_val<double>(_C2, "");
+  if (!D1) D1 = bdf::types::get_val<double>(_D1, "");
+  if (!D2) D2 = bdf::types::get_val<double>(_D2, "");
+  if (!E1) E1 = bdf::types::get_val<double>(_E1, "");
+  if (!E2) E2 = bdf::types::get_val<double>(_E2, "");
+  if (!F1) F1 = bdf::types::get_val<double>(_F1, "");
+  if (!F2) F2 = bdf::types::get_val<double>(_F2, "");
+  if (!I12) I12 = bdf::types::get_val<double>(_I12, "");
 }
 
 const std::ostream& pbar::operator << (std::ostream& os) const {

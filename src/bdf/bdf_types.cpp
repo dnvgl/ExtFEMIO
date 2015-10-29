@@ -23,13 +23,15 @@ namespace {
 
 bdf::types::base::base(std::string name) : name(name) {};
 
+bdf::types::out_form_type bdf::types::base::out_form = SHORT;
+
 /*
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -j 8"
+  compile-command: "make -C ../.. check -j 8"
   coding: utf-8
   End:
 */

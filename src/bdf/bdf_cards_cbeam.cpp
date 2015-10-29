@@ -77,12 +77,12 @@ cbeam::cbeam(const deque<std::string> &inp) :
 
   SB = nullptr;
   SA = nullptr;
-  W3B = get_val<double>(_W3B, "");
-  W2B = get_val<double>(_W2B, "");
-  W1B = get_val<double>(_W1B, "");
-  W3A = get_val<double>(_W3A, "");
-  W2A = get_val<double>(_W2A, "");
-  W1A = get_val<double>(_W1A, "");
+  W3B = bdf::types::get_val<double>(_W3B, "");
+  W2B = bdf::types::get_val<double>(_W2B, "");
+  W1B = bdf::types::get_val<double>(_W1B, "");
+  W3A = bdf::types::get_val<double>(_W3A, "");
+  W2A = bdf::types::get_val<double>(_W2A, "");
+  W1A = bdf::types::get_val<double>(_W1A, "");
   PB = nullptr;
   PA = nullptr;
   OFFT = nullptr;
@@ -102,44 +102,44 @@ cbeam::cbeam(const deque<std::string> &inp) :
   case 19:
     pos++;
   case 18:
-    SB = get_val<long>(_SB, *(pos++));
+    SB = bdf::types::get_val<long>(_SB, *(pos++));
   case 17:
-    SA = get_val<long>(_SA, *(pos++));
+    SA = bdf::types::get_val<long>(_SA, *(pos++));
   case 16:
-    W3B = get_val<double>(_W3B, *(pos++));
+    W3B = bdf::types::get_val<double>(_W3B, *(pos++));
   case 15:
-    W2B = get_val<double>(_W2B, *(pos++));
+    W2B = bdf::types::get_val<double>(_W2B, *(pos++));
   case 14:
-    W1B = get_val<double>(_W1B, *(pos++));
+    W1B = bdf::types::get_val<double>(_W1B, *(pos++));
   case 13:
-    W3A = get_val<double>(_W3A, *(pos++));
+    W3A = bdf::types::get_val<double>(_W3A, *(pos++));
   case 12:
-    W2A = get_val<double>(_W2A, *(pos++));
+    W2A = bdf::types::get_val<double>(_W2A, *(pos++));
   case 11:
-    W1A = get_val<double>(_W1A, *(pos++));
+    W1A = bdf::types::get_val<double>(_W1A, *(pos++));
   case 10:
-    PB = get_val<deque<int>>(_PB, *(pos++));
+    PB = bdf::types::get_val<deque<int>>(_PB, *(pos++));
   case 9:
-    PA = get_val<deque<int>>(_PA, *(pos++));
+    PA = bdf::types::get_val<deque<int>>(_PA, *(pos++));
   case 8:
     try {
-      BIT = get_val<double>(_BIT, *(pos));
+      BIT = bdf::types::get_val<double>(_BIT, *(pos));
       OFFT = nullptr;
       choose_offt_bit = has_BIT;
     }
     catch (bdf_float_error) {
-      OFFT = get_val<std::string>(_OFFT, *pos);
+      OFFT = bdf::types::get_val<std::string>(_OFFT, *pos);
       BIT = nullptr;
       choose_offt_bit = has_OFFT;
     }
     ++pos;
   case 7:
-    X3 = get_val<double>(_X3, *(pos++));
+    X3 = bdf::types::get_val<double>(_X3, *(pos++));
   case 6:
-    X2 = get_val<double>(_X2, *(pos++));
+    X2 = bdf::types::get_val<double>(_X2, *(pos++));
   case 5:
     try {
-      X1 = get_val<double>(_X1, *(pos));
+      X1 = bdf::types::get_val<double>(_X1, *(pos));
       if (!X2 || !X3) {
         throw bdf_parse_error(
           "CBEAM", "Incomplete direction vector.");
@@ -148,30 +148,30 @@ cbeam::cbeam(const deque<std::string> &inp) :
       choose_dir_code = has_DVEC;
     }
     catch (bdf_float_error) {
-      G0 = get_val<long>(_G0, *pos);
+      G0 = bdf::types::get_val<long>(_G0, *pos);
       X1 = nullptr;
       choose_dir_code = has_DCODE;
     }
     ++pos;
-    GB = get_val<long>(_GB, *(pos++));
-    GA = get_val<long>(_GA, *(pos++));
-    PID = get_val<long>(_PID, *(pos++));
-    EID = get_val<long>(_EID, *(pos++));
+    GB = bdf::types::get_val<long>(_GB, *(pos++));
+    GA = bdf::types::get_val<long>(_GA, *(pos++));
+    PID = bdf::types::get_val<long>(_PID, *(pos++));
+    EID = bdf::types::get_val<long>(_EID, *(pos++));
     break;
   default:
     throw bdf_parse_error(
       "CBEAM", "Illegal number of entries for CBEAM");
   }
 
-  if (!W3B) W3B = get_val<double>(_W3B, "");
-  if (!W2B) W2B = get_val<double>(_W2B, "");
-  if (!W1B) W1B = get_val<double>(_W1B, "");
-  if (!W3A) W3A = get_val<double>(_W3A, "");
-  if (!W2A) W2A = get_val<double>(_W2A, "");
-  if (!W1A) W1A = get_val<double>(_W1A, "");
-  if (!PB) PB = get_val<deque<int>>(_PB, "");
-  if (!PA) PA = get_val<deque<int>>(_PA, "");
-  if (!BIT && !OFFT) OFFT = get_val<std::string>(_OFFT, "");
+  if (!W3B) W3B = bdf::types::get_val<double>(_W3B, "");
+  if (!W2B) W2B = bdf::types::get_val<double>(_W2B, "");
+  if (!W1B) W1B = bdf::types::get_val<double>(_W1B, "");
+  if (!W3A) W3A = bdf::types::get_val<double>(_W3A, "");
+  if (!W2A) W2A = bdf::types::get_val<double>(_W2A, "");
+  if (!W1A) W1A = bdf::types::get_val<double>(_W1A, "");
+  if (!PB) PB = bdf::types::get_val<deque<int>>(_PB, "");
+  if (!PA) PA = bdf::types::get_val<deque<int>>(_PA, "");
+  if (!BIT && !OFFT) OFFT = bdf::types::get_val<std::string>(_OFFT, "");
 };
 
 const std::ostream& cbeam::operator << (std::ostream& os) const {

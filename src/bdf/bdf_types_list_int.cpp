@@ -21,7 +21,11 @@ namespace {
 #include <regex>
 #endif
 
+#include <sstream>
+
 #include "bdf/types.h"
+
+using namespace std;
 
 #ifdef __GNUC__
 using boost::regex;
@@ -46,11 +50,44 @@ entry_type<std::deque<int>>::operator() (const std::string &inp) const {
   return value;
 }
 
+std::string entry_type<std::deque<int>>::format(const std::deque<int>& inp) const {
+  std::ostringstream res1, res2;
+
+  for (auto &p : inp) res1 << p;
+
+  std::string inp_proc(res1.str());
+
+  switch (out_form) {
+  case LONG:
+    res2.setf(ios_base::right, ios_base::adjustfield);
+    res2.fill(' ');
+    break;
+  case SHORT:
+    res2.setf(ios_base::right, ios_base::adjustfield);
+    res2.fill(' ');
+    break;
+  case FREE:
+    break;
+  }
+
+  res2.width(out_form);
+
+  res2 << inp_proc;
+  std::string out(res2.str());
+  if (out.size() != out_form && out_form > 0) {
+    std::ostringstream msg("output string for value ", std::ostringstream::ate);
+    msg << inp_proc << " of incorrect size, got length of " << out.size()
+        << " instead of allowed length of " << out_form << ".";
+    throw bdf_output_error(name, msg.str());
+  }
+  return out;
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

@@ -53,22 +53,22 @@ prod::prod(const deque<std::string> &inp) : card(inp) {
   case 7:
     ++pos;
   case 6:
-    NSM = get_val<double>(_NSM, *(pos++));
+    NSM = bdf::types::get_val<double>(_NSM, *(pos++));
   case 5:
-    C = get_val<double>(_C, *(pos++));
+    C = bdf::types::get_val<double>(_C, *(pos++));
   case 4:
-    J = get_val<double>(_J, *(pos++));
+    J = bdf::types::get_val<double>(_J, *(pos++));
   case 3:
-    A = get_val<double>(_A, *(pos++));
-    MID = get_val<long>(_MID, *(pos++));
-    PID = get_val<long>(_PID, *(pos));
+    A = bdf::types::get_val<double>(_A, *(pos++));
+    MID = bdf::types::get_val<long>(_MID, *(pos++));
+    PID = bdf::types::get_val<long>(_PID, *(pos));
     break;
   default:
     throw bdf_parse_error(
       "CBAR.", "Illegal number of entries.");
   }
 
-  if (!C) C = get_val<double>(_C, "");
+  if (!C) C = bdf::types::get_val<double>(_C, "");
 }
 
 const std::ostream& prod::operator << (std::ostream& os) const {

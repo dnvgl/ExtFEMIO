@@ -599,11 +599,13 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
   }
 }
 
-// Local Variables:
-// mode: c++
-// ispell-local-dictionary: "english"
-// c-file-style: "gl"
-// indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
-// coding: utf-8
-// End:
+/*
+  Local Variables:
+  mode: c++
+  ispell-local-dictionary: "english"
+  c-file-style: "dnvgl"
+  indent-tabs-mode: nil
+  compile-command: "make -C .. check -j 8"
+  coding: utf-8
+  End:
+*/

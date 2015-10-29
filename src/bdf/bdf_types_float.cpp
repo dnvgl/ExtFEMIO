@@ -122,13 +122,47 @@ double *entry_type<double>::operator() (const std::string &inp) const {
   return value;
 }
 
+std::string entry_type<double>::format(const double& inp) const {
+  std::ostringstream res;
+
+  res.setf(ios_base::scientific, ios::floatfield);
+  res.fill(' ');
+
+  switch (out_form) {
+  case LONG:
+    res.setf(ios_base::right, ios_base::adjustfield);
+    res.precision(11);
+    break;
+  case SHORT:
+    res.setf(ios_base::right, ios_base::adjustfield);
+    res.precision(3);
+    res.width(9);
+    res.fill(' ');
+    break;
+  case FREE:
+    break;
+  }
+  res.width(out_form+1);
+
+  res << inp;
+  std::string out(res.str());
+  out.erase(out.find('e'), 1);
+  if (out.size() != out_form && out_form > 0) {
+    std::ostringstream msg("output string for value ", std::ostringstream::ate);
+    msg << inp << " of incorrect size, got length of " << out.size()
+        << " instead of allowed length of " << out_form << ".";
+    throw bdf_output_error(name, msg.str());
+  }
+  return out;
+}
+
 /*
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make -C .. check -j 8"
+  compile-command: "make -C ../.. check -j 8"
   coding: utf-8
   End:
 */

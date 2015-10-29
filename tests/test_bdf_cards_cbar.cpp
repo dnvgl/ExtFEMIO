@@ -100,6 +100,30 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
   }
 }
 
+TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
+
+  std::ostringstream test;
+
+  SECTION("dir code") {
+    long EID(1), PID(2), GA(3), GB(4), G0(5);
+
+    cbar probe(&EID, &PID, &GA, &GB, &G0);
+    test << probe;
+    CHECK(test.str() == "CBAR           1       2       3       4       5\n");
+  }
+
+  SECTION("dir code large") {
+    long EID(1), PID(2), GA(3), GB(4), G0(5);
+
+    cbar probe(&EID, &PID, &GA, &GB, &G0);
+    probe.W3B = std::make_unique<double>(2.);
+    test << probe;
+    CHECK(test.str() ==
+          "CBAR           1       2       3       4       5                \n"
+          "                                                                2.000+00\n");
+  }
+}
+
 
 // Local Variables:
 // mode: c++

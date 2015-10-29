@@ -169,7 +169,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
   compile-command: "make -C .. check -j 8"
   coding: utf-8

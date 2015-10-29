@@ -57,16 +57,16 @@ pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
   if (pos == inp.end()) goto invalid;
   ++pos;
   if (pos == inp.end()) goto invalid;
-  PID = get_val<long>(_PID, *(pos++));
+  PID = bdf::types::get_val<long>(_PID, *(pos++));
   if (pos == inp.end()) goto invalid;
-  MID = get_val<long>(_MID, *(pos++));
+  MID = bdf::types::get_val<long>(_MID, *(pos++));
   if (pos == inp.end()) goto invalid;
-  GROUP = get_val<std::string>(_GROUP, *(pos++));
+  GROUP = bdf::types::get_val<std::string>(_GROUP, *(pos++));
   if (*GROUP != "MSCBML0")
     throw bdf_parse_error(
       "PBARL", "Currently only GROUP==MSCBML0 is supported.");
   if (pos == inp.end()) goto invalid;
-  TYPE = get_val<std::string>(_TYPE, *(pos++));
+  TYPE = bdf::types::get_val<std::string>(_TYPE, *(pos++));
   if (pos == inp.end()) goto invalid;
   if (dimnum1.find(*TYPE) != dimnum1.end())
     dim_num = 1;
@@ -94,10 +94,10 @@ pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
 
   for (i=0; i < dim_num; i++) {
     if (pos == inp.end()) goto invalid;
-    DIM.push_back(get_val<double>(_DIM, *(pos++)));
+    DIM.push_back(bdf::types::get_val<double>(_DIM, *(pos++)));
   }
   if (pos == inp.end()) goto end;
-  NSM = get_val<double>(_NSM, *(pos));
+  NSM = bdf::types::get_val<double>(_NSM, *(pos));
 
   goto end;
 

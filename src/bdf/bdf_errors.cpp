@@ -45,8 +45,12 @@ bdf_float_error::bdf_float_error(
   bdf_error(name, msg, "bdf_float_error") {}
 
 bdf_int_error::bdf_int_error(
-  const std::string &name, const std::string&msg) :
+  const std::string &name, const std::string &msg) :
   bdf_error(name, msg, "bdf_int_error") {}
+
+bdf_output_error::bdf_output_error(
+  const std::string &name, const std::string &msg) :
+  bdf_error(name, msg, "bdf_output_error") {}
 
 bdf_list_error::bdf_list_error(
   const std::string &name, const std::string &msg) :
@@ -70,5 +74,5 @@ bdf_parse_error::bdf_parse_error(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

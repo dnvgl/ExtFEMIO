@@ -44,10 +44,10 @@ crod::crod(const deque<std::string> &inp) :
   case 5:
     ++pos;
   case 4:
-    G2 = get_val<long>(_G2, *(pos++));
-    G1 = get_val<long>(_G1, *(pos++));
-    PID = get_val<long>(_PID, *(pos++));
-    EID = get_val<long>(_EID, *pos);
+    G2 = bdf::types::get_val<long>(_G2, *(pos++));
+    G1 = bdf::types::get_val<long>(_G1, *(pos++));
+    PID = bdf::types::get_val<long>(_PID, *(pos++));
+    EID = bdf::types::get_val<long>(_EID, *pos);
     break;
   default:
     throw bdf_parse_error(

@@ -42,28 +42,28 @@ cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
   case 15:
     ++pos;
   case 14:
-    T4 = get_val<double>(_T4, *(pos++));
+    T4 = bdf::types::get_val<double>(_T4, *(pos++));
   case 13:
-    T3 = get_val<double>(_T3, *(pos++));
+    T3 = bdf::types::get_val<double>(_T3, *(pos++));
   case 12:
-    T2 = get_val<double>(_T2, *(pos++));
+    T2 = bdf::types::get_val<double>(_T2, *(pos++));
   case 11:
-    T1 = get_val<double>(_T1, *(pos++));
+    T1 = bdf::types::get_val<double>(_T1, *(pos++));
   case 10:
-    TFLAG = get_val<long>(_TFLAG, *(pos++));
+    TFLAG = bdf::types::get_val<long>(_TFLAG, *(pos++));
   case 9:
     ++pos;
   case 8:
-    ZOFFS = get_val<double>(_ZOFFS, *(pos++));
+    ZOFFS = bdf::types::get_val<double>(_ZOFFS, *(pos++));
   case 7:
     try {
-      THETA = get_val<double>(_THETA, *pos);
+      THETA = bdf::types::get_val<double>(_THETA, *pos);
       MCID = nullptr;
       choose_mcid_theta = has_THETA;
     }
     catch (bdf_float_error) {
       try {
-        MCID = get_val<long>(_MCID, *pos);
+        MCID = bdf::types::get_val<long>(_MCID, *pos);
         THETA = nullptr;
         choose_mcid_theta = has_MCID;
       }
@@ -75,24 +75,24 @@ cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
     }
     ++pos;
   case 6:
-    G4 = get_val<long>(_G4, *(pos++));
-    G3 = get_val<long>(_G3, *(pos++));
-    G2 = get_val<long>(_G2, *(pos++));
-    G1 = get_val<long>(_G1, *(pos++));
-    PID = get_val<long>(_PID, *(pos++));
-    EID = get_val<long>(_EID, *pos);
+    G4 = bdf::types::get_val<long>(_G4, *(pos++));
+    G3 = bdf::types::get_val<long>(_G3, *(pos++));
+    G2 = bdf::types::get_val<long>(_G2, *(pos++));
+    G1 = bdf::types::get_val<long>(_G1, *(pos++));
+    PID = bdf::types::get_val<long>(_PID, *(pos++));
+    EID = bdf::types::get_val<long>(_EID, *pos);
     break;
   default:
     throw bdf_parse_error("CQUAD4", "Illegal number of entries.");
   }
 
   if (!THETA && !MCID)
-    THETA = get_val<double>(_THETA, "");
+    THETA = bdf::types::get_val<double>(_THETA, "");
   if (TFLAG) {
-    if (!T1) T1 = get_val<double>(_T1, "");
-    if (!T2) T2 = get_val<double>(_T2, "");
-    if (!T3) T3 = get_val<double>(_T3, "");
-    if (!T4) T4 = get_val<double>(_T4, "");
+    if (!T1) T1 = bdf::types::get_val<double>(_T1, "");
+    if (!T2) T2 = bdf::types::get_val<double>(_T2, "");
+    if (!T3) T3 = bdf::types::get_val<double>(_T3, "");
+    if (!T4) T4 = bdf::types::get_val<double>(_T4, "");
   }
 }
 

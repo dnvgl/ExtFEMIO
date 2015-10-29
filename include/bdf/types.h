@@ -23,6 +23,7 @@
 #include <typeinfo>
 #include <limits>
 #include <memory>
+#include <sstream>
 
 #ifdef __GNUC__
 #include "config.h"
@@ -51,6 +52,8 @@ namespace bdf {
     typedef enum {
       None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
 
+    typedef enum {LONG=16, SHORT=8, FREE=-1} out_form_type;
+
     class base {
 
     protected:
@@ -59,6 +62,8 @@ namespace bdf {
       std::string name;
 
     public:
+
+      static out_form_type out_form;
 
       base(std::string);
 
@@ -75,6 +80,45 @@ namespace bdf {
       friend inline bool operator!= (const T1 &one, const T2 &other) {
         return !(other == one);
       };
+
+    };
+
+    class format : base {
+    public:
+      static inline std::string card(const std::string& name) {
+        std::ostringstream res;
+        switch (out_form) {
+        case LONG:
+          res.setf(std::ios_base::left, std::ios_base::adjustfield);
+          res.fill(' ');
+          break;
+        case SHORT:
+          res.setf(std::ios_base::left, std::ios_base::adjustfield);
+          res.fill(' ');
+          break;
+        case FREE:
+          break;
+        }
+        res.width(out_form);
+        res << name;
+        return res.str();
+      }
+      static inline std::string empty(void) {
+        std::ostringstream res;
+        switch (out_form) {
+        case LONG:
+          res.fill(' ');
+          break;
+        case SHORT:
+          res.fill(' ');
+          break;
+        case FREE:
+          break;
+        }
+        res.width(out_form);
+        res << "";
+      return res.str();
+      }
     };
 
     inline bool operator== (const base &one,
@@ -88,7 +132,8 @@ namespace bdf {
     }
 
     template <class T>
-    class entry_type : public base {};
+    class entry_type : public base {
+    };
 
     template <>
     class entry_type<long> : public base {
@@ -119,6 +164,8 @@ namespace bdf {
       long *operator() (const std::string&) const;
 
       bdf_types type() const { return _type; };
+
+      std::string format(const long&) const;
     };
 
 
@@ -165,6 +212,8 @@ namespace bdf {
       double *operator() (const std::string&) const;
 
       bdf_types type() const {return _type;};
+
+      std::string format(const double&) const;
     };
 
     template <>
@@ -188,8 +237,11 @@ namespace bdf {
 
       std::string *operator() (const std::string &) const;
 
-      bdf_types type() const {return _type;};
+      bdf_types type() const {
+        return _type;
+      }
 
+      std::string format(const std::string&) const;
     };
 
     template <>
@@ -220,18 +272,29 @@ namespace bdf {
 
       inline bdf_types type() const {return _type;};
 
+      std::string format(const std::deque<int>&) const;
     };
-  };
-}
 
-template <class T> inline
-std::unique_ptr<T>
-get_val(const bdf::types::entry_type<T> &t, const std::string &inp) {
-  T *dummy = t(inp);
-  if (!dummy)
-    return nullptr;
-  else
-    return std::make_unique<T>(*dummy);
+    template <class T> inline
+    std::unique_ptr<T>
+    get_val(const bdf::types::entry_type<T> &t, const std::string &inp) {
+      T *dummy = t(inp);
+      if (!dummy)
+        return nullptr;
+      else
+        return std::make_unique<T>(*dummy);
+    }
+
+    template <class T> inline
+    std::unique_ptr<T>
+    get_val(const T *inp) {
+      if (!inp)
+        return nullptr;
+      else
+        return std::make_unique<T>(*inp);
+    }
+
+  };
 }
 
 #endif // _BERHOL20150407_BDF_TYPES
@@ -240,7 +303,7 @@ get_val(const bdf::types::entry_type<T> &t, const std::string &inp) {
   Local Variables:
   mode: c++
   ispell-local-dictionary: "english"
-  c-file-style: "gl"
+  c-file-style: "dnvgl"
   indent-tabs-mode: nil
   compile-command: "make -C ../.. check -j 8"
   coding:u tf-8

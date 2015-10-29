@@ -125,37 +125,37 @@ pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
   if (block_cnt > 1) {
     switch (block_rem) {
     case 16:
-      N2_B = get_val<double>(_N2_B, *(pos++));
+      N2_B = bdf::types::get_val<double>(_N2_B, *(pos++));
     case 15:
-      N1_B = get_val<double>(_N1_B, *(pos++));
+      N1_B = bdf::types::get_val<double>(_N1_B, *(pos++));
     case 14:
-      N2_A = get_val<double>(_N2_A, *(pos++));
+      N2_A = bdf::types::get_val<double>(_N2_A, *(pos++));
     case 13:
-      N1_A = get_val<double>(_N1_A, *(pos++));
+      N1_A = bdf::types::get_val<double>(_N1_A, *(pos++));
     case 12:
-      M2_B = get_val<double>(_M2_B, *(pos++));
+      M2_B = bdf::types::get_val<double>(_M2_B, *(pos++));
     case 11:
-      M1_B = get_val<double>(_M1_B, *(pos++));
+      M1_B = bdf::types::get_val<double>(_M1_B, *(pos++));
     case 10:
-      M2_A = get_val<double>(_M2_A, *(pos++));
+      M2_A = bdf::types::get_val<double>(_M2_A, *(pos++));
     case 9:
-      M1_A = get_val<double>(_M1_A, *(pos++));
+      M1_A = bdf::types::get_val<double>(_M1_A, *(pos++));
     case 8:
-      CW_B = get_val<double>(_CW_B, *(pos++));
+      CW_B = bdf::types::get_val<double>(_CW_B, *(pos++));
     case 7:
-      CW_A = get_val<double>(_CW_A, *(pos++));
+      CW_A = bdf::types::get_val<double>(_CW_A, *(pos++));
     case 6:
-      NSI_B = get_val<double>(_NSI_B, *(pos++));
+      NSI_B = bdf::types::get_val<double>(_NSI_B, *(pos++));
     case 5:
-      NSI_A = get_val<double>(_NSI_A, *(pos++));
+      NSI_A = bdf::types::get_val<double>(_NSI_A, *(pos++));
     case 4:
-      S2 = get_val<double>(_S2, *(pos++));
+      S2 = bdf::types::get_val<double>(_S2, *(pos++));
     case 3:
-      S1 = get_val<double>(_S1, *(pos++));
+      S1 = bdf::types::get_val<double>(_S1, *(pos++));
     case 2:
-      K2 = get_val<double>(_K2, *(pos++));
+      K2 = bdf::types::get_val<double>(_K2, *(pos++));
     case 1:
-      K1 = get_val<double>(_K1, *(pos++));
+      K1 = bdf::types::get_val<double>(_K1, *(pos++));
     }
     block_rem = 16;
   }
@@ -163,62 +163,62 @@ pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
   for (size_t i = block_cnt; i > 2; --i ) {
     switch (block_rem) {
     case 16:
-      F2.push_front(get_val<double>(_F2, *(pos++)));
+      F2.push_front(bdf::types::get_val<double>(_F2, *(pos++)));
     case 15:
-      F1.push_front(get_val<double>(_F1, *(pos++)));
+      F1.push_front(bdf::types::get_val<double>(_F1, *(pos++)));
     case 14:
-      E2.push_front(get_val<double>(_E2, *(pos++)));
+      E2.push_front(bdf::types::get_val<double>(_E2, *(pos++)));
     case 13:
-      E1.push_front(get_val<double>(_E1, *(pos++)));
+      E1.push_front(bdf::types::get_val<double>(_E1, *(pos++)));
     case 12:
-      D2.push_front(get_val<double>(_D2, *(pos++)));
+      D2.push_front(bdf::types::get_val<double>(_D2, *(pos++)));
     case 11:
-      D1.push_front(get_val<double>(_D1, *(pos++)));
+      D1.push_front(bdf::types::get_val<double>(_D1, *(pos++)));
     case 10:
-      C2.push_front(get_val<double>(_C2, *(pos++)));
+      C2.push_front(bdf::types::get_val<double>(_C2, *(pos++)));
     case 9:
-      C1.push_front(get_val<double>(_C1, *(pos++)));
+      C1.push_front(bdf::types::get_val<double>(_C1, *(pos++)));
     case 8:
-      NSM.push_front(get_val<double>(_NSM, *(pos++)));
-      J.push_front(get_val<double>(_J, *(pos++)));
-      I12.push_front(get_val<double>(_I12, *(pos++)));
-      I2.push_front(get_val<double>(_I2, *(pos++)));
-      I1.push_front(get_val<double>(_I1, *(pos++)));
-      A.push_front(get_val<double>(_A, *(pos++)));
-      X_XB.push_front(get_val<double>(_X_XB, *(pos++)));
-      SO.push_front(get_val<std::string>(_SO, *(pos++)));
+      NSM.push_front(bdf::types::get_val<double>(_NSM, *(pos++)));
+      J.push_front(bdf::types::get_val<double>(_J, *(pos++)));
+      I12.push_front(bdf::types::get_val<double>(_I12, *(pos++)));
+      I2.push_front(bdf::types::get_val<double>(_I2, *(pos++)));
+      I1.push_front(bdf::types::get_val<double>(_I1, *(pos++)));
+      A.push_front(bdf::types::get_val<double>(_A, *(pos++)));
+      X_XB.push_front(bdf::types::get_val<double>(_X_XB, *(pos++)));
+      SO.push_front(bdf::types::get_val<std::string>(_SO, *(pos++)));
     }
   }
 
   switch (block_rem) {
   case 16:
-    F2.push_front(get_val<double>(_F2, *(pos++)));
+    F2.push_front(bdf::types::get_val<double>(_F2, *(pos++)));
   case 15:
-    F1.push_front(get_val<double>(_F1, *(pos++)));
+    F1.push_front(bdf::types::get_val<double>(_F1, *(pos++)));
   case 14:
-    E2.push_front(get_val<double>(_E2, *(pos++)));
+    E2.push_front(bdf::types::get_val<double>(_E2, *(pos++)));
   case 13:
-    E1.push_front(get_val<double>(_E1, *(pos++)));
+    E1.push_front(bdf::types::get_val<double>(_E1, *(pos++)));
   case 12:
-    D2.push_front(get_val<double>(_D2, *(pos++)));
+    D2.push_front(bdf::types::get_val<double>(_D2, *(pos++)));
   case 11:
-    D1.push_front(get_val<double>(_D1, *(pos++)));
+    D1.push_front(bdf::types::get_val<double>(_D1, *(pos++)));
   case 10:
-    C2.push_front(get_val<double>(_C2, *(pos++)));
+    C2.push_front(bdf::types::get_val<double>(_C2, *(pos++)));
   case 9:
-    C1.push_front(get_val<double>(_C1, *(pos++)));
+    C1.push_front(bdf::types::get_val<double>(_C1, *(pos++)));
   case 8:
-    NSM.push_front(get_val<double>(_NSM, *(pos++)));
+    NSM.push_front(bdf::types::get_val<double>(_NSM, *(pos++)));
   case 7:
-    J.push_front(get_val<double>(_J, *(pos++)));
+    J.push_front(bdf::types::get_val<double>(_J, *(pos++)));
   case 6:
-    I12.push_front(get_val<double>(_I12, *(pos++)));
+    I12.push_front(bdf::types::get_val<double>(_I12, *(pos++)));
   case 5:
-    I2.push_front(get_val<double>(_I2, *(pos++)));
-    I1.push_front(get_val<double>(_I1, *(pos++)));
-    A.push_front(get_val<double>(_A, *(pos++)));
-    MID = get_val<long>(_MID, *(pos++));
-    PID = get_val<long>(_PID, *(pos));
+    I2.push_front(bdf::types::get_val<double>(_I2, *(pos++)));
+    I1.push_front(bdf::types::get_val<double>(_I1, *(pos++)));
+    A.push_front(bdf::types::get_val<double>(_A, *(pos++)));
+    MID = bdf::types::get_val<long>(_MID, *(pos++));
+    PID = bdf::types::get_val<long>(_PID, *(pos));
     break;
   default:
     throw bdf_parse_error("PBEAM", "Illegal number of entries.");
