@@ -154,20 +154,20 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
   double lval = 1.;
 
   SECTION("SHORT") {
-    bdf::types::base::out_form = SHORT;
+    bdf::types::base::out_form = bdf::types::SHORT;
     std::string res(obj.format(lval));
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "1.000+00");
   }
 
   SECTION("LONG") {
-    bdf::types::base::out_form = LONG;
+    bdf::types::base::out_form = bdf::types::LONG;
     CHECK(obj.format(lval).size() == 16);
     CHECK(obj.format(lval) == "1.00000000000+00");
   }
 
   SECTION("FREE") {
-    bdf::types::base::out_form = FREE;
+    bdf::types::base::out_form = bdf::types::FREE;
     CHECK(obj.format(lval) == "1.000000+00");
   }
 }

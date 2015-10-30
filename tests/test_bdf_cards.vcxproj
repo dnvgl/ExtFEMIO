@@ -22,7 +22,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
-    <ProjectName>test_cards</ProjectName>
+    <ProjectName>test_bdf_cards</ProjectName>
     <ProjectGuid>{FBEF6AC1-116A-4B1F-8E3F-162224B8F1DE}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_cards\</IntDir>
+    <IntDir>$(Configuration)\test_bdf_cards\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\test_cards\</IntDir>
+    <IntDir>$(Platform)\$(Configuration)\test_bdf_cards\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_cards\</IntDir>
+    <IntDir>$(Configuration)\test_bdf_cards\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\test_cards\</IntDir>
+    <IntDir>$(Platform)\$(Configuration)\test_bdf_cards\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

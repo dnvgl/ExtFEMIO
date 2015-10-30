@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -97,6 +97,35 @@
 "$(OutputPath)test_bdf_types.exe"</Command>
       <Message>Testing the module</Message>
     </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit.xml
+echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit.xml
+echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit.xml
+echo ==================== test_bdf_float ====================
+$(OutputPath)test_bdf_float.exe
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
+echo ==================== test_bdf_str ====================
+$(OutputPath)test_bdf_str.exe
+$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
+echo ==================== test_bdf_string ====================
+$(OutputPath)test_bdf_string.exe
+$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_bdf_list ====================
+$(OutputPath)test_bdf_list.exe
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
+echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit.xml
+</Command>
+      <Message>Testing the module</Message>
+      <Outputs>__dummy__</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -135,9 +164,10 @@ $(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
 $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
-echo ==================== test_cards ====================
-$(OutputPath)test_cards.exe
-$(OutputPath)test_cards.exe --reporter junit &gt; test_cards_junit.xml</Command>
+echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit.xml
+</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Testing the module</Message>
@@ -160,6 +190,35 @@ $(OutputPath)test_cards.exe --reporter junit &gt; test_cards_junit.xml</Command>
 "$(OutputPath)test_bdf_types.exe"</Command>
       <Message>Testing the module</Message>
     </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit.xml
+echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit.xml
+echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit.xml
+echo ==================== test_bdf_float ====================
+$(OutputPath)test_bdf_float.exe
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
+echo ==================== test_bdf_str ====================
+$(OutputPath)test_bdf_str.exe
+$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
+echo ==================== test_bdf_string ====================
+$(OutputPath)test_bdf_string.exe
+$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_bdf_list ====================
+$(OutputPath)test_bdf_list.exe
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
+echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit.xml
+</Command>
+      <Message>Testing the module</Message>
+      <Outputs>__dummy__</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -176,6 +235,35 @@ $(OutputPath)test_cards.exe --reporter junit &gt; test_cards_junit.xml</Command>
 "$(OutputPath)test_bdf_types.exe"</Command>
       <Message>Testing the module</Message>
     </PostBuildEvent>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit.xml
+echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit.xml
+echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit.xml
+echo ==================== test_bdf_float ====================
+$(OutputPath)test_bdf_float.exe
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
+echo ==================== test_bdf_str ====================
+$(OutputPath)test_bdf_str.exe
+$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
+echo ==================== test_bdf_string ====================
+$(OutputPath)test_bdf_string.exe
+$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_bdf_list ====================
+$(OutputPath)test_bdf_list.exe
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
+echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit.xml
+</Command>
+      <Message>Testing the module</Message>
+      <Outputs>__dummy__</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
   </ItemGroup>

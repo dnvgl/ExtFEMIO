@@ -88,15 +88,15 @@ namespace bdf {
       static inline std::string card(const std::string& name) {
         std::ostringstream res;
         switch (out_form) {
-        case LONG:
+        case bdf::types::LONG:
           res.setf(std::ios_base::left, std::ios_base::adjustfield);
           res.fill(' ');
           break;
-        case SHORT:
+        case bdf::types::SHORT:
           res.setf(std::ios_base::left, std::ios_base::adjustfield);
           res.fill(' ');
           break;
-        case FREE:
+        case bdf::types::FREE:
           break;
         }
         res.width(out_form);
@@ -106,13 +106,11 @@ namespace bdf {
       static inline std::string empty(void) {
         std::ostringstream res;
         switch (out_form) {
-        case LONG:
+        case bdf::types::LONG:
+        case bdf::types::SHORT:
           res.fill(' ');
           break;
-        case SHORT:
-          res.fill(' ');
-          break;
-        case FREE:
+        case bdf::types::FREE:
           break;
         }
         res.width(out_form);

@@ -21,6 +21,10 @@ namespace {
 #include "config.h"
 #endif
 
+#ifdef _MSC_VER
+#include <stdio.h>
+#endif
+
 #ifdef HAVE_BOOST_REGEX_HPP
 #include <boost/regex.hpp>
 #else
@@ -128,6 +132,11 @@ std::string entry_type<double>::format(const double& inp) const {
   res.setf(ios_base::scientific, ios::floatfield);
   res.fill(' ');
 
+#ifdef _MSC_VER
+  // Set output to two digit exponetial format.
+  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+#endif
+
   switch (out_form) {
   case LONG:
     res.setf(ios_base::right, ios_base::adjustfield);
@@ -153,6 +162,12 @@ std::string entry_type<double>::format(const double& inp) const {
         << " instead of allowed length of " << out_form << ".";
     throw bdf_output_error(name, msg.str());
   }
+
+#ifdef _MSC_VER
+  // Reset exponetial format to former settings.
+  _set_output_format(ext_exp_format);
+#endif
+
   return out;
 }
 

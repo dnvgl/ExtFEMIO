@@ -74,25 +74,25 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
   std::string lval("abcd");
 
   SECTION("SHORT") {
-    bdf::types::base::out_form = SHORT;
+    bdf::types::base::out_form = bdf::types::SHORT;
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "abcd    ");
   }
 
   SECTION("SHORT (too long)") {
-    bdf::types::base::out_form = SHORT;
+    bdf::types::base::out_form = bdf::types::SHORT;
     lval = "abcdefghi";
     CHECK_THROWS(obj.format(lval));
   }
 
   SECTION("LONG") {
-    bdf::types::base::out_form = LONG;
+    bdf::types::base::out_form = bdf::types::LONG;
     CHECK(obj.format(lval).size() == 16);
     CHECK(obj.format(lval) == "abcd            ");
   }
 
   SECTION("FREE") {
-    bdf::types::base::out_form = FREE;
+    bdf::types::base::out_form = bdf::types::FREE;
     CHECK(obj.format(lval) == "abcd");
   }
 }

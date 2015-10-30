@@ -79,14 +79,14 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
   std::ostringstream stream(std::ostringstream::ate);
 
   SECTION("SHORT") {
-    bdf::types::base::out_form = SHORT;
+    bdf::types::base::out_form = bdf::types::SHORT;
     stream << obj.format(lval);
     CHECK(stream.str().size() == 8);
     CHECK(stream.str() == "    1234");
   }
 
   SECTION("SHORT (too long)") {
-    bdf::types::base::out_form = SHORT;
+    bdf::types::base::out_form = bdf::types::SHORT;
     lval.push_back(1);
     lval.push_back(2);
     lval.push_back(3);
@@ -96,14 +96,14 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
   }
 
   SECTION("LONG") {
-    bdf::types::base::out_form = LONG;
+    bdf::types::base::out_form = bdf::types::LONG;
     stream << obj.format(lval);
     CHECK(stream.str().size() == 16);
     CHECK(stream.str() == "            1234");
   }
 
   SECTION("FREE") {
-    bdf::types::base::out_form = FREE;
+    bdf::types::base::out_form = bdf::types::FREE;
     stream << obj.format(lval);
     CHECK(stream.str() == "1234");
   }

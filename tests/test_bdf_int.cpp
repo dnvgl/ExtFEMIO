@@ -84,26 +84,26 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
   long lval = 1;
 
   SECTION("SHORT") {
-    bdf::types::base::out_form = SHORT;
+      bdf::types::base::out_form = bdf::types::SHORT;
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "       1");
   }
 
   SECTION("SHORT (too long)") {
-    bdf::types::base::out_form = SHORT;
+    bdf::types::base::out_form = bdf::types::SHORT;
     lval = 123456789;
     CHECK_THROWS(obj.format(lval));
   }
 
   SECTION("LONG") {
-    bdf::types::base::out_form = LONG;
+    bdf::types::base::out_form = bdf::types::LONG;
     std::string res(obj.format(lval));
     CHECK(obj.format(lval).size() == 16);
     CHECK(obj.format(lval) == "               1");
   }
 
   SECTION("FREE") {
-    bdf::types::base::out_form = FREE;
+    bdf::types::base::out_form = bdf::types::FREE;
     std::string res(obj.format(lval));
     CHECK(obj.format(lval) == "1");
   }
