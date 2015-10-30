@@ -494,7 +494,7 @@ Description:
         W3B = bdf::types::get_val<double>(iW3B);
       };
 
-      DllExport friend std::ostream& bdf::cards::operator<<(std::ostream&, const cbar&);
+      DllExport friend std::ostream& operator<<(std::ostream&, const cbar&);
       DllExport const std::ostream& operator<<(std::ostream& os) const;
     };
 
