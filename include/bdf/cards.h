@@ -75,13 +75,7 @@ namespace bdf {
       template <class T> friend
       std::unique_ptr<format_entry>
       form_or_empty(const bdf::types::entry_type<T> &formatter,
-                    const std::unique_ptr<T> &val) {
-        if (!val)
-          return std::make_unique<format_entry>(card::empty.get(), nullptr);
-        else
-          return std::make_unique<format_entry>((bdf::types::base*)&formatter,
-                                                (void*)val.get());
-      };
+                    const std::unique_ptr<T> &val);
 
       DllExport static std::deque<std::string>
       card_split(std::deque<std::string> const &);
@@ -91,6 +85,17 @@ namespace bdf {
 
       virtual const bdf::cards::types card_type(void) const = 0;
       virtual const std::ostream& operator<<(std::ostream&) const = 0;
+    };
+
+    template <class T>
+    std::unique_ptr<format_entry>
+        form_or_empty(const bdf::types::entry_type<T> &formatter,
+        const std::unique_ptr<T> &val) {
+            if (!val)
+                return std::make_unique<format_entry>(card::empty.get(), (void*)NULL);
+            else
+                return std::make_unique<format_entry>((bdf::types::base*)&formatter,
+                (void*)val.get());
     };
 
     class unknown : public card {

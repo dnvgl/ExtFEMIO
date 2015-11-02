@@ -49,7 +49,7 @@ std::string card::format_outlist(
       }
       res << p->first->format(p->second);
     }
-  } catch (bdf_int_error &e) {
+  } catch (bdf_int_error) {
     res.seekp(0);
     i = 0;
     bdf::types::base::out_form = bdf::types::LONG;

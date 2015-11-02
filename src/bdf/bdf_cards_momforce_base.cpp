@@ -150,7 +150,7 @@ namespace bdf {
 
       std::deque<std::unique_ptr<format_entry>> entries;
 
-      entries.push_back(make_unique<format_entry>(force::head.get(), nullptr));
+      entries.push_back(make_unique<format_entry>(force::head.get(), (void*)NULL));
 
       card.add_collect(entries, card);
 
@@ -163,7 +163,7 @@ namespace bdf {
 
       std::deque<std::unique_ptr<format_entry>> entries;
 
-      entries.push_back(make_unique<format_entry>(moment::head.get(), nullptr));
+      entries.push_back(make_unique<format_entry>(moment::head.get(), (void*)NULL));
 
       card.add_collect(entries, card);
 

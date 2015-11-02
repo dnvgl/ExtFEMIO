@@ -166,7 +166,7 @@ namespace bdf {
 
       std::deque<std::unique_ptr<format_entry>> entries;
 
-      entries.push_back(make_unique<format_entry>(cbar::head.get(), nullptr));
+      entries.push_back(make_unique<format_entry>(cbar::head.get(), (void*)NULL));
 
       entries.push_back(
         make_unique<format_entry>(
@@ -187,9 +187,9 @@ namespace bdf {
         if (card.OFFT || card.PA || card.PB || card.W1A || card.W2A ||
             card.W3A || card.W1B || card.W2B || card.W3B) {
           entries.push_back(
-            make_unique<format_entry>(cbar::empty.get(), nullptr));
+            make_unique<format_entry>(cbar::empty.get(), (void*)NULL));
           entries.push_back(
-            make_unique<format_entry>(cbar::empty.get(), nullptr));;
+            make_unique<format_entry>(cbar::empty.get(), (void*)NULL));;
         }
       } else {
         entries.push_back(
