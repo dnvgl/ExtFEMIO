@@ -49,6 +49,8 @@ namespace bdf {
     } types;
 
 
+    typedef std::pair<bdf::types::base*, void*> format_entry;
+
     class card {
 
     private:
@@ -59,8 +61,27 @@ namespace bdf {
 
       static const std::map<std::string, types> cardtype_map;
 
+    protected:
+
+      static std::unique_ptr<bdf::types::empty> empty;
+
+      static std::unique_ptr<bdf::types::base> head;
+
+      std::string format_outlist(
+        const std::deque<std::unique_ptr<format_entry>>&) const;
 
     public:
+
+      template <class T> friend
+      std::unique_ptr<format_entry>
+      form_or_empty(const bdf::types::entry_type<T> &formatter,
+                    const std::unique_ptr<T> &val) {
+        if (!val)
+          return std::make_unique<format_entry>(card::empty.get(), nullptr);
+        else
+          return std::make_unique<format_entry>((bdf::types::base*)&formatter,
+                                                (void*)val.get());
+      };
 
       DllExport static std::deque<std::string>
       card_split(std::deque<std::string> const &);
@@ -69,7 +90,7 @@ namespace bdf {
       DllExport card ();
 
       virtual const bdf::cards::types card_type(void) const = 0;
-      virtual const std::ostream& operator<<(std::ostream& os) const = 0;
+      virtual const std::ostream& operator<<(std::ostream&) const = 0;
     };
 
     class unknown : public card {
@@ -150,6 +171,8 @@ Description:
       */
 
     private:
+
+      static std::unique_ptr<bdf::types::base> head(void);
 
       static const bdf::types::entry_type<long> _ID;
       static const bdf::types::entry_type<long> _CP;
@@ -232,6 +255,8 @@ Description:
       // NASTRAN ``BDF`` ``MAT1`` representation.
 
     private:
+
+      static std::unique_ptr<bdf::types::base> head(void);
 
       static const bdf::types::entry_type<long> _MID;
       static const bdf::types::entry_type<double> _E;

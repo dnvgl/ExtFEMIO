@@ -45,10 +45,14 @@ namespace bdf {
 
     protected:
 
+      void add_collect(std::deque<std::unique_ptr<format_entry>>&,
+                       const momforce_base&) const;
+
       DllExport momforce_base(const std::deque<std::string> &inp);
-      DllExport momforce_base(long &SID, long &G, long &CID,
-                              double &F,
-                              double &N1, double &N2, double &N3);
+      DllExport momforce_base(
+        const long *SID, const long *G, const long *CID,
+        const double *F,
+        const double *N1, const double *N2, const double *N3);
 
       DllExport const std::ostream& operator << (std::ostream& os) const;
     };
@@ -89,20 +93,26 @@ Description:
     class force : public momforce_base {
       // Handle Nastran Bulk FORCE entries.
 
+    private:
+
+      static std::unique_ptr<bdf::types::base> head;
+
     public:
 
       DllExport force(const std::deque<std::string> &inp) :
         momforce_base(inp) {};
 
-      DllExport force(long &SID, long &G, long &CID,
-                      double &F,
-                      double &N1, double &N2, double &N3) :
+      DllExport force(
+        const long *SID, const long *G, const long *CID,
+        const double *F,
+        const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
         momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
       DllExport const bdf::cards::types card_type(void) const {
         return FORCE;
       };
 
+      DllExport friend std::ostream& operator<<(std::ostream&, const force&);
       DllExport const std::ostream& operator << (std::ostream& os) const;
     };
 
@@ -142,19 +152,25 @@ Description:
     class moment : public momforce_base {
       // Handle Nastran Bulk MOMENT entries.
 
+    private:
+
+      static std::unique_ptr<bdf::types::base> head;
+
     public:
 
       DllExport moment(const std::deque<std::string> &inp) :
         momforce_base(inp) {};
-      DllExport moment(long &SID, long &G, long &CID,
-                      double &F,
-                      double &N1, double &N2, double &N3) :
+      DllExport moment(
+        const long *SID, const long *G, const long *CID,
+        const double *F,
+        const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
         momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
       DllExport const bdf::cards::types card_type(void) const {
         return MOMENT;
       };
 
+      DllExport friend std::ostream& operator<<(std::ostream&, const moment&);
       DllExport const std::ostream& operator << (std::ostream& os) const;
     };
 

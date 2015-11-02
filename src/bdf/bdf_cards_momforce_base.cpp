@@ -67,7 +67,7 @@ momforce_base::momforce_base(const std::deque<std::string> &inp) :
     N1 = bdf::types::get_val<double>(_N1, *(pos++));
     if (*N1 == 0. && *N2 == 0. && *N3 == 0.) {
       throw bdf_parse_error(
-        "FORCE", "At least one of N1, N2, and N3 has to be != 0..");
+        "FORCE/MOMENT", "At least one of N1, N2, and N3 has to be != 0..");
     }
     F = bdf::types::get_val<double>(_F, *(pos++));
     CID = bdf::types::get_val<long>(_CID, *(pos++));
@@ -75,25 +75,105 @@ momforce_base::momforce_base(const std::deque<std::string> &inp) :
     SID = bdf::types::get_val<long>(_SID, *(pos++));
     break;
   default:
-    throw bdf_parse_error("FORCE", "Illegal number of entries.");
+    throw bdf_parse_error("FORCE/MOMENT", "Illegal number of entries.");
   }
 }
 
-momforce_base::momforce_base(long &SID, long &G, long &CID,
-                             double &F,
-                             double &N1, double &N2, double &N3) {};
+momforce_base::momforce_base(
+  const long *iSID, const long *iG, const long *iCID,
+  const double *iF,
+  const double *iN1, const double *iN2, const double *iN3) {
+  SID = std::make_unique<long>(*iSID);
+  G = std::make_unique<long>(*iG);
+  CID = std::make_unique<long>(*iCID);
+  F = std::make_unique<double>(*iF);
+  if (iN1)
+    N1 = std::make_unique<double>(*iN1);
+  else
+    N1 = nullptr;
+  if (iN2)
+    N2 = std::make_unique<double>(*iN2);
+  else
+    N2 = nullptr;
+  if (iN3)
+    N3 = std::make_unique<double>(*iN3);
+  else
+    N3 = nullptr;
+};
 
-const std::ostream& momforce_base::operator << (std::ostream& os) const {
+void momforce_base::add_collect(
+  std::deque<std::unique_ptr<format_entry>> &res,
+  const momforce_base &card) const {
+  res.push_back(
+    make_unique<format_entry>(
+      (bdf::types::base*)&card._SID, (void*)card.SID.get()));
+  res.push_back(
+    make_unique<format_entry>(
+      (bdf::types::base*)&card._G, (void*)card.G.get()));
+  res.push_back(
+    make_unique<format_entry>(
+      (bdf::types::base*)&card._CID, (void*)card.CID.get()));
+  res.push_back(
+    make_unique<format_entry>(
+      (bdf::types::base*)&card._F, (void*)card.F.get()));
+  res.push_back(form_or_empty<double>(card._N1, card.N1));
+  if (N2 || N3)
+    res.push_back(form_or_empty<double>(card._N2, card.N2));
+  if (N3)
+    res.push_back(
+      make_unique<format_entry>(
+        (bdf::types::base*)&card._N3, (void*)card.N3.get()));
+
+}
+
+const std::ostream& momforce_base::operator<<(std::ostream& os) const {
+  os << this;
   return os;
 }
+
+std::unique_ptr<bdf::types::base> force::head = std::make_unique<bdf::types::card>("FORCE");
 
 const std::ostream& force::operator << (std::ostream& os) const {
   return os;
 }
 
+std::unique_ptr<bdf::types::base> moment::head = std::make_unique<bdf::types::card>("MOMENT");
+
 const std::ostream& moment::operator << (std::ostream& os) const {
   return os;
 }
+
+namespace bdf {
+  namespace cards {
+
+    std::ostream& operator<<(std::ostream &os, const force &card) {
+
+      std::deque<std::unique_ptr<format_entry>> entries;
+
+      entries.push_back(make_unique<format_entry>(force::head.get(), nullptr));
+
+      card.add_collect(entries, card);
+
+      os << card.format_outlist(entries) << std::endl;
+
+      return os;
+    }
+
+    std::ostream& operator<<(std::ostream &os, const moment &card) {
+
+      std::deque<std::unique_ptr<format_entry>> entries;
+
+      entries.push_back(make_unique<format_entry>(moment::head.get(), nullptr));
+
+      card.add_collect(entries, card);
+
+      os << card.format_outlist(entries) << std::endl;
+
+      return os;
+    }
+  }
+}
+
 
 // Local Variables:
 // mode: c++

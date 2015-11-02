@@ -71,7 +71,7 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
 
   entry_type<std::string> obj("dummy");
 
-  std::string lval("abcd");
+  std::unique_ptr<std::string> lval = std::make_unique<std::string>("abcd");
 
   SECTION("SHORT") {
     bdf::types::base::out_form = bdf::types::SHORT;
@@ -79,9 +79,29 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
     CHECK(obj.format(lval) == "abcd    ");
   }
 
+  SECTION("SHORT (nullptr)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format((std::unique_ptr<std::string>)nullptr).size() == 8);
+    CHECK(obj.format((std::unique_ptr<std::string>)nullptr) == "        ");
+  }
+
+  SECTION("SHORT (void)") {
+    std::string *lval = new std::string("abcd");
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "abcd    ");
+    delete lval;
+  }
+
+  SECTION("SHORT (nullptr, void)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format(nullptr).size() == 8);
+    CHECK(obj.format(nullptr) == "        ");
+  }
+
   SECTION("SHORT (too long)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    lval = "abcdefghi";
+    lval = std::make_unique<std::string>("abcdefghi");
     CHECK_THROWS(obj.format(lval));
   }
 

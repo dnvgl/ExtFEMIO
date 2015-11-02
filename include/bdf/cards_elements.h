@@ -394,6 +394,8 @@ Description:
 
     private:
 
+      static std::unique_ptr<bdf::types::base> head;
+
       static const bdf::types::entry_type<long> _EID;
       static const bdf::types::entry_type<long> _PID;
       static const bdf::types::entry_type<long> _GA;
@@ -441,33 +443,33 @@ Description:
 
       DllExport cbar(const std::deque<std::string> &inp);
 
-      // DllExport cbar(
-      //   const long *iEID, const long *iPID,
-      //   const long *iGA, const long *iGB,
-      //   const double *iX1, const double *iX2, const double *iX3,
-      //   const std::string *iOFFT = nullptr,
-      //   const std::deque<int> *iPA = nullptr, const std::deque<int> *iPB = nullptr,
-      //   const double *iW1A = nullptr, const double *iW2A = nullptr,
-      //   const double *iW3A = nullptr, const double *iW1B = nullptr,
-      //   const double *iW2B = nullptr, const double *iW3B = nullptr) {
-      //   choose_dir_code = has_DVEC;
-      //   EID = std::make_unique<long>(*iEID);
-      //   PID = std::make_unique<long>(*iPID);
-      //   GA = std::make_unique<long>(*iGA);
-      //   GB = std::make_unique<long>(*iGB);
-      //   X1 = std::make_unique<double>(*iX1);
-      //   X2 = std::make_unique<double>(*iX2);
-      //   X3 = std::make_unique<double>(*iX3);
-      //   OFFT = bdf::types::get_val<std::string>(iOFFT);
-      //   PA = bdf::types::get_val<std::deque<int>>(iPA);
-      //   PB = bdf::types::get_val<std::deque<int>>(iPB);
-      //   W1A = bdf::types::get_val<double>(iW1A);
-      //   W2A = bdf::types::get_val<double>(iW2A);
-      //   W3A = bdf::types::get_val<double>(iW3A);
-      //   W1B = bdf::types::get_val<double>(iW1B);
-      //   W2B = bdf::types::get_val<double>(iW2B);
-      //   W3B = bdf::types::get_val<double>(iW3B);
-      // };
+      DllExport cbar(
+        const long *iEID, const long *iPID,
+        const long *iGA, const long *iGB,
+        const double *iX1, const double *iX2, const double *iX3,
+        const std::string *iOFFT = nullptr,
+        const std::deque<int> *iPA = nullptr, const std::deque<int> *iPB = nullptr,
+        const double *iW1A = nullptr, const double *iW2A = nullptr,
+        const double *iW3A = nullptr, const double *iW1B = nullptr,
+        const double *iW2B = nullptr, const double *iW3B = nullptr) {
+        choose_dir_code = has_DVEC;
+        EID = std::make_unique<long>(*iEID);
+        PID = std::make_unique<long>(*iPID);
+        GA = std::make_unique<long>(*iGA);
+        GB = std::make_unique<long>(*iGB);
+        X1 = std::make_unique<double>(*iX1);
+        X2 = std::make_unique<double>(*iX2);
+        X3 = std::make_unique<double>(*iX3);
+        OFFT = bdf::types::get_val<std::string>(iOFFT);
+        PA = bdf::types::get_val<std::deque<int>>(iPA);
+        PB = bdf::types::get_val<std::deque<int>>(iPB);
+        W1A = bdf::types::get_val<double>(iW1A);
+        W2A = bdf::types::get_val<double>(iW2A);
+        W3A = bdf::types::get_val<double>(iW3A);
+        W1B = bdf::types::get_val<double>(iW1B);
+        W2B = bdf::types::get_val<double>(iW2B);
+        W3B = bdf::types::get_val<double>(iW3B);
+      };
 
       DllExport cbar(
         const long *iEID, const long *iPID,

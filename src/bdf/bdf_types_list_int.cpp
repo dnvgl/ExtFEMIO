@@ -50,10 +50,14 @@ entry_type<std::deque<int>>::operator() (const std::string &inp) const {
   return value;
 }
 
-std::string entry_type<std::deque<int>>::format(const std::deque<int>& inp) const {
+std::string entry_type<std::deque<int>>::format(const std::unique_ptr<std::deque<int>> &inp) const {
+
+  if (!inp)
+    return bdf::types::empty().format(nullptr);
+
   std::ostringstream res1, res2;
 
-  for (auto &p : inp) res1 << p;
+  for (auto &p : *inp) res1 << p;
 
   std::string inp_proc(res1.str());
 
@@ -74,7 +78,7 @@ std::string entry_type<std::deque<int>>::format(const std::deque<int>& inp) cons
 
   res2 << inp_proc;
   std::string out(res2.str());
-  if (out.size() != out_form && out_form > 0) {
+  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
     msg << inp_proc << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";

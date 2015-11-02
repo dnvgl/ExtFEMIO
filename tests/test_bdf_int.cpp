@@ -81,7 +81,7 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
 
   entry_type<long> obj("dummy");
 
-  long lval = 1;
+  std::unique_ptr<long> lval = std::make_unique<long>(1);
 
   SECTION("SHORT") {
       bdf::types::base::out_form = bdf::types::SHORT;
@@ -91,8 +91,29 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
 
   SECTION("SHORT (too long)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    lval = 123456789;
+    lval = std::make_unique<long>(123456789);
     CHECK_THROWS(obj.format(lval));
+  }
+
+  SECTION("SHORT (nullptr)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format((std::unique_ptr<long>)nullptr).size() == 8);
+    CHECK(obj.format((std::unique_ptr<long>)nullptr) == "        ");
+  }
+
+  SECTION("SHORT (void)") {
+    long *lval = new long(1);
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(*lval == 1);
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "       1");
+    delete lval;
+  }
+
+  SECTION("SHORT (nullptr, void)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format(nullptr).size() == 8);
+    CHECK(obj.format(nullptr) == "        ");
   }
 
   SECTION("LONG") {

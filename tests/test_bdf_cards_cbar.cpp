@@ -112,15 +112,46 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
     CHECK(test.str() == "CBAR           1       2       3       4       5\n");
   }
 
-  SECTION("dir code large") {
+  SECTION("QRG sample 1") {
+    long EID(2), PID(39), GA(7), GB(3);
+    double X1(.6), X2(18), X3(26);
+    std::string OFFT("EEG");
+
+    cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
+    std::deque<int> PB;
+    PB.push_back(5);
+    PB.push_back(1);
+    PB.push_back(3);
+    probe.PB = std::make_unique<std::deque<int>>(PB);
+    test << probe;
+    CHECK(test.str() ==
+          "CBAR           2      39       7       36.000-011.800+012.600+01EEG     \n"
+          "                     513\n");
+  }
+
+  SECTION("dir code all elements") {
     long EID(1), PID(2), GA(3), GB(4), G0(5);
 
     cbar probe(&EID, &PID, &GA, &GB, &G0);
     probe.W3B = std::make_unique<double>(2.);
     test << probe;
     CHECK(test.str() ==
-          "CBAR           1       2       3       4       5                \n"
+          "CBAR           1       2       3       4       5                        \n"
           "                                                                2.000+00\n");
+  }
+
+  SECTION("dir code all large") {
+    long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+
+    cbar probe(&EID, &PID, &GA, &GB, &G0);
+    probe.W3B = std::make_unique<double>(2.);
+    test << probe;
+    CHECK(test.str() ==
+          //234567!123456789012345!123456789012345!123456789012345!123456789012345!
+          "CBAR*          123456789               2               3               4\n"
+          "*                      5                                                \n"
+          "*                                                                       \n"
+          "*                                                       2.00000000000+00\n");
   }
 }
 

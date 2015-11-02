@@ -126,7 +126,11 @@ double *entry_type<double>::operator() (const std::string &inp) const {
   return value;
 }
 
-std::string entry_type<double>::format(const double& inp) const {
+std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const {
+
+  if (!inp)
+    return bdf::types::empty().format(nullptr);
+
   std::ostringstream res;
 
   res.setf(ios_base::scientific, ios::floatfield);
@@ -153,12 +157,12 @@ std::string entry_type<double>::format(const double& inp) const {
   }
   res.width(out_form+1);
 
-  res << inp;
+  res << *inp;
   std::string out(res.str());
   out.erase(out.find('e'), 1);
-  if (out.size() != out_form && out_form > 0) {
+  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
-    msg << inp << " of incorrect size, got length of " << out.size()
+    msg << *inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";
     throw bdf_output_error(name, msg.str());
   }

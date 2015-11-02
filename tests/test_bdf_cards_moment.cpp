@@ -57,6 +57,37 @@ TEST_CASE("BDF MOMENT definitions. (Small Field Format)", "[bdf_moment]" ) {
   }
 }
 
+TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]" ) {
+
+  std::ostringstream test;
+
+  SECTION("reverse") {
+    long SID(2), G(5), CID(6);
+    double F(2.9), N1(0.), N2(1.9), N3(0.);
+    moment probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+    test << probe;
+    CHECK(test.str() ==
+          "MOMENT         2       5       62.900+000.000+001.900+000.000+00\n");
+  }
+
+  SECTION("reverse part") {
+    long SID(2), G(5), CID(6);
+    double F(2.9), N1(0.), N2(1.9);
+    moment probe(&SID, &G, &CID, &F, &N1, &N2);
+    test << probe;
+    CHECK(test.str() ==
+          "MOMENT         2       5       62.900+000.000+001.900+00\n");
+  }
+
+  SECTION("reverse part (2)") {
+    long SID(2), G(5), CID(6);
+    double F(2.9), N1(1.9);
+    moment probe(&SID, &G, &CID, &F, &N1);
+    test << probe;
+    CHECK(test.str() ==
+          "MOMENT         2       5       62.900+001.900+00\n");
+  }
+}
 
 // Local Variables:
 // mode: c++

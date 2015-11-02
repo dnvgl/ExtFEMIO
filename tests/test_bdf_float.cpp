@@ -151,13 +151,34 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
 
   entry_type<double> obj("dummy");
 
-  double lval = 1.;
+  std::unique_ptr<double> lval = std::make_unique<double>(1.);
 
   SECTION("SHORT") {
     bdf::types::base::out_form = bdf::types::SHORT;
     std::string res(obj.format(lval));
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "1.000+00");
+  }
+
+  SECTION("SHORT (nullptr)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format((unique_ptr<double>)nullptr).size() == 8);
+    CHECK(obj.format((unique_ptr<double>)nullptr) == "        ");
+  }
+
+  SECTION("SHORT (void)") {
+    double *lval = new double(1.);
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(*lval == 1.);
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "1.000+00");
+    delete lval;
+  }
+
+  SECTION("SHORT (nullptr, void)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format(nullptr).size() == 8);
+    CHECK(obj.format(nullptr) == "        ");
   }
 
   SECTION("LONG") {

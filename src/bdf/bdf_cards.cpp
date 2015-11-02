@@ -29,7 +29,45 @@ namespace {
   const char initVals[3] = { '+', '*', ',' };
 }
 
+std::unique_ptr<bdf::types::empty> card::empty = std::make_unique<bdf::types::empty>();
+
+std::unique_ptr<bdf::types::base> card::head = nullptr;
+
 const set<char> card::free_form_cont(initVals, initVals + 3);
+
+std::string card::format_outlist(
+  const std::deque<std::unique_ptr<format_entry>> &en) const {
+
+  int i = 0;
+  std::ostringstream res("");
+
+  try {
+    for (auto &p : en) {
+      if (++i > 9) {
+        i = 2;
+        res << std::endl << bdf::types::card("").format(nullptr);
+      }
+      res << p->first->format(p->second);
+    }
+  } catch (bdf_int_error &e) {
+    res.seekp(0);
+    i = 0;
+    bdf::types::base::out_form = bdf::types::LONG;
+    for (auto &p : en) {
+      if (++i > 5) {
+        i = 2;
+        res << std::endl << bdf::types::card("").format(nullptr);
+      }
+      res << p->first->format(p->second);
+    }
+    bdf::types::base::out_form = bdf::types::SHORT;
+  }
+
+  return res.str();
+}
+
+
+
 
 namespace {
   const pair<std::string, types> map_pairs[] = {
@@ -169,5 +207,5 @@ std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> 
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

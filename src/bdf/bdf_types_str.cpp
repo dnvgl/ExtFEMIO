@@ -41,8 +41,13 @@ std::string
   return new std::string(sval);
 }
 
-std::string entry_type<std::string>::format(const std::string &inp) const {
+std::string entry_type<std::string>::format(const std::unique_ptr<std::string> &inp) const {
+
+  if (!inp)
+    return bdf::types::empty().format(nullptr);
+
   std::ostringstream res;
+
   switch (out_form) {
   case LONG:
     res.setf(ios_base::left, ios_base::adjustfield);
@@ -57,11 +62,11 @@ std::string entry_type<std::string>::format(const std::string &inp) const {
   }
   res.width(out_form);
 
-  res << inp;
+  res << *inp;
   std::string out(res.str());
-  if (out.size() != out_form && out_form > 0) {
+  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
-    msg << inp << " of incorrect size, got length of " << out.size()
+    msg << *inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";
     throw bdf_int_error(name, msg.str());
   }

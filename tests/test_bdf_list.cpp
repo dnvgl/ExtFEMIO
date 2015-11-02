@@ -70,11 +70,11 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
 
   entry_type<std::deque<int>> obj("dummy");
 
-  deque<int> lval;
-  lval.push_back(1);
-  lval.push_back(2);
-  lval.push_back(3);
-  lval.push_back(4);
+  unique_ptr<std::deque<int>> lval = std::make_unique<std::deque<int>>();
+  lval->push_back(1);
+  lval->push_back(2);
+  lval->push_back(3);
+  lval->push_back(4);
 
   std::ostringstream stream(std::ostringstream::ate);
 
@@ -85,13 +85,34 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
     CHECK(stream.str() == "    1234");
   }
 
+  SECTION("SHORT (nullptr)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format((unique_ptr<std::deque<int>>)nullptr).size() == 8);
+    CHECK(obj.format((unique_ptr<std::deque<int>>)nullptr) == "        ");
+  }
+
+  SECTION("SHORT (void)") {
+    std::deque<int> *llval = new std::deque<int>(
+      lval->begin(), lval->end());
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format(llval).size() == 8);
+    CHECK(obj.format(llval) == "    1234");
+    delete llval;
+  }
+
+  SECTION("SHORT (nullptr)") {
+    bdf::types::base::out_form = bdf::types::SHORT;
+    CHECK(obj.format(nullptr).size() == 8);
+    CHECK(obj.format(nullptr) == "        ");
+  }
+
   SECTION("SHORT (too long)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    lval.push_back(1);
-    lval.push_back(2);
-    lval.push_back(3);
-    lval.push_back(4);
-    lval.push_back(4);
+    lval->push_back(1);
+    lval->push_back(2);
+    lval->push_back(3);
+    lval->push_back(4);
+    lval->push_back(4);
     CHECK_THROWS(obj.format(lval));
   }
 

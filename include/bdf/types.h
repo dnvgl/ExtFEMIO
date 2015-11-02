@@ -65,7 +65,7 @@ namespace bdf {
 
       static out_form_type out_form;
 
-      base(std::string);
+      base(const std::string &name);
 
       ~base() {};
 
@@ -81,42 +81,29 @@ namespace bdf {
         return !(other == one);
       };
 
+      virtual std::string format(const void*) const = 0;
+
     };
 
-    class format : base {
+    class card : public base {
     public:
-      static inline std::string card(const std::string& name) {
-        std::ostringstream res;
-        switch (out_form) {
-        case bdf::types::LONG:
-          res.setf(std::ios_base::left, std::ios_base::adjustfield);
-          res.fill(' ');
-          break;
-        case bdf::types::SHORT:
-          res.setf(std::ios_base::left, std::ios_base::adjustfield);
-          res.fill(' ');
-          break;
-        case bdf::types::FREE:
-          break;
-        }
-        res.width(out_form);
-        res << name;
-        return res.str();
-      }
-      static inline std::string empty(void) {
-        std::ostringstream res;
-        switch (out_form) {
-        case bdf::types::LONG:
-        case bdf::types::SHORT:
-          res.fill(' ');
-          break;
-        case bdf::types::FREE:
-          break;
-        }
-        res.width(out_form);
-        res << "";
-      return res.str();
-      }
+
+      card(const std::string &name) : base(name) {};
+
+      bdf_types type(void) const {return None;};
+
+      std::string format(const void* d) const;
+    };
+
+    class empty : public base {
+
+    public:
+
+      empty(void) : base("") {};
+
+      bdf_types type(void) const {return None;};
+
+      std::string format(const void* d) const;
     };
 
     inline bool operator== (const base &one,
@@ -163,7 +150,17 @@ namespace bdf {
 
       bdf_types type() const { return _type; };
 
-      std::string format(const long&) const;
+      std::string format(const std::unique_ptr<long>&) const;
+      std::string format(const void *v) const {
+        if (!v)
+          return bdf::types::empty().format(nullptr);
+        else {
+          long val(*((long*)v));
+          std::unique_ptr<long> vp;
+          vp = std::make_unique<long>(val);
+          return this->format(vp);
+        }
+      };
     };
 
 
@@ -211,7 +208,17 @@ namespace bdf {
 
       bdf_types type() const {return _type;};
 
-      std::string format(const double&) const;
+      std::string format(const std::unique_ptr<double>&) const;
+      std::string format(const void *v) const {
+        if (!v)
+          return bdf::types::empty().format(nullptr);
+        else {
+          double val(*((double*)v));
+          std::unique_ptr<double> vp;
+          vp = std::make_unique<double>(val);
+          return this->format(vp);
+        }
+      };
     };
 
     template <>
@@ -239,7 +246,17 @@ namespace bdf {
         return _type;
       }
 
-      std::string format(const std::string&) const;
+      std::string format(const std::unique_ptr<std::string>&) const;
+      std::string format(const void *v) const {
+        if (!v)
+          return bdf::types::empty().format(nullptr);
+        else {
+          std::string val(*((std::string*)v));
+          std::unique_ptr<std::string> vp;
+          vp = std::make_unique<std::string>(val);
+          return this->format(vp);
+        }
+      };
     };
 
     template <>
@@ -263,14 +280,24 @@ namespace bdf {
 
     public:
 
-      entry_type<std::deque<int>>(std::string name) :
+      entry_type<std::deque<int>>(const std::string &name) :
         base(name) {};
 
       std::deque<int>* operator() (const std::string&) const;
 
       inline bdf_types type() const {return _type;};
 
-      std::string format(const std::deque<int>&) const;
+      std::string format(const std::unique_ptr<std::deque<int>>&) const;
+      std::string format(const void *v) const {
+        if (!v)
+          return bdf::types::empty().format(nullptr);
+        else {
+          std::deque<int> val(((std::deque<int>*)v)->begin(), ((std::deque<int>*)v)->end());
+          std::unique_ptr<std::deque<int>> vp;
+          vp = std::make_unique<std::deque<int>>(val);
+          return this->format(vp);
+        }
+      };
     };
 
     template <class T> inline

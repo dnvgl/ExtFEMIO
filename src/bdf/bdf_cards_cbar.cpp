@@ -16,6 +16,7 @@ namespace {
 }
 
 #include <sstream>
+#include <functional>
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
@@ -24,6 +25,8 @@ namespace {
 using namespace std;
 using namespace bdf::cards;
 using bdf::types::entry_type;
+
+std::unique_ptr<bdf::types::base> cbar::head = std::make_unique<bdf::types::card>("CBAR");
 
 const entry_type<long> cbar::_EID(
   "EID",
@@ -152,6 +155,7 @@ cbar::cbar(const deque<std::string> &inp) :
 };
 
 const std::ostream& cbar::operator<<(std::ostream& os) const {
+  os << this;
   return os;
 }
 
@@ -159,60 +163,86 @@ namespace bdf {
   namespace cards {
 
     std::ostream& operator<<(std::ostream &os, const cbar &card) {
-      os << bdf::types::format::card("CBAR")
-         << card._EID.format(*card.EID) << card._PID.format(*card.PID)
-         << card._GA.format(*card.GA) << card._GB.format(*card.GB);
+
+      std::deque<std::unique_ptr<format_entry>> entries;
+
+      entries.push_back(make_unique<format_entry>(cbar::head.get(), nullptr));
+
+      entries.push_back(
+        make_unique<format_entry>(
+          (bdf::types::base*)&card._EID, (void*)card.EID.get()));
+      entries.push_back(
+        make_unique<format_entry>(
+          (bdf::types::base*)&card._PID, (void*)card.PID.get()));
+      entries.push_back(
+        make_unique<format_entry>(
+          (bdf::types::base*)&card._GA, (void*)card.GA.get()));
+      entries.push_back(
+        make_unique<format_entry>(
+          (bdf::types::base*)&card._GB, (void*)card.GB.get()));
       if (card.choose_dir_code == card.has_DCODE) {
-        os << card._G0.format(*card.G0);
+        entries.push_back(
+          make_unique<format_entry>(
+            (bdf::types::base*)&card._G0, (void*)card.G0.get()));
         if (card.OFFT || card.PA || card.PB || card.W1A || card.W2A ||
-            card.W3A || card.W1B || card.W2B || card.W3B)
-          os << bdf::types::format::empty()
-             << bdf::types::format::empty();
-      } else
-        os << card._X1.format(*card.X1) << card._X2.format(*card.X2)
-           << card._X3.format(*card.X3);
+            card.W3A || card.W1B || card.W2B || card.W3B) {
+          entries.push_back(
+            make_unique<format_entry>(cbar::empty.get(), nullptr));
+          entries.push_back(
+            make_unique<format_entry>(cbar::empty.get(), nullptr));;
+        }
+      } else {
+        entries.push_back(
+          make_unique<format_entry>(
+            (bdf::types::base*)&card._X1, (void*)card.X1.get()));
+        entries.push_back(
+          make_unique<format_entry>(
+            (bdf::types::base*)&card._X2, (void*)card.X2.get()));
+        entries.push_back(
+          make_unique<format_entry>(
+            (bdf::types::base*)&card._X3, (void*)card.X3.get()));
+      }
+
       if (card.OFFT || card.PA || card.PB || card.W1A || card.W2A ||
           card.W3A || card.W1B || card.W2B || card.W3B)
-        if (card.OFFT)
-          os << card._OFFT.format(*card.OFFT);
-        else
-          os << std::endl << bdf::types::format::card("");
+        entries.push_back(form_or_empty<std::string>(
+                            card._OFFT, card.OFFT));
       else goto cont;
+
       if (card.PA || card.PB || card.W1A || card.W2A || card.W3A ||
           card.W1B || card.W2B || card.W3B)
-        os << (card.PA ? card._PA.format(*card.PA) :
-               bdf::types::format::empty());
+        entries.push_back(form_or_empty<std::deque<int>>(
+                            card._PA, card.PA));
       else goto cont;
       if (card.PB || card.W1A || card.W2A || card.W3A || card.W1B ||
           card.W2B || card.W3B)
-        os << (card.PB ? card._PB.format(*card.PB) :
-               bdf::types::format::empty());
+        entries.push_back(form_or_empty<std::deque<int>>(
+                            card._PB, card.PB));
       else goto cont;
       if (card.W1A || card.W2A || card.W3A || card.W1B || card.W2B ||
           card.W3B)
-        os << (card.W1A ? card._W1A.format(*card.W1A) :
-               bdf::types::format::empty());
+        entries.push_back(form_or_empty<double>(card._W1A, card.W1A));
       else goto cont;
       if (card.W2A || card.W3A || card.W1B || card.W2B || card.W3B)
-        os << (card.W2A ? card._W2A.format(*card.W2A) :
-               bdf::types::format::empty());
+        entries.push_back(form_or_empty<double>(card._W2A, card.W2A));
       else goto cont;
       if (card.W3A || card.W1B || card.W2B || card.W3B)
-        os << (card.W3A ? card._W3A.format(*card.W3A) :
-               bdf::types::format::empty());
+        entries.push_back(form_or_empty<double>(card._W3A, card.W3A));
       else goto cont;
       if (card.W1B || card.W2B || card.W3B)
-        os << (card.W1B ? card._W1B.format(*card.W1B) :
-               bdf::types::format::empty());
+        entries.push_back(form_or_empty<double>(card._W1B, card.W1B));
       else goto cont;
       if (card.W2B || card.W3B)
-        os << (card.W2B ? card._W2B.format(*card.W2B) :
-               bdf::types::format::empty());
-      os << (card.W3B ? card._W3B.format(* card.W3B) : "");
+        entries.push_back(form_or_empty<double>(card._W2B, card.W2B));
+      else goto cont;
+      if (card.W3B)
+        entries.push_back(
+          make_unique<format_entry>((bdf::types::base*)&card._W3B,
+                                    (void*)card.W3B.get()));
 
     cont:
 
-      os << std::endl;
+      os << card.format_outlist(entries) << std::endl;
 
       return os;
     }
