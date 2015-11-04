@@ -21,7 +21,7 @@
 #include "bdf/cards_properties.h"
 #include "bdf/errors.h"
 #include "bdf/file.h"
-#include "bdf/string.h"
+#include "extfem_string.h"
 #include "bdf/type_bounds.h"
 #include "bdf/types.h"
 

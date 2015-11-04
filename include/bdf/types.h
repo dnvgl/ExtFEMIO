@@ -41,7 +41,7 @@
 #include <config.h>
 #endif
 #include "bdf/errors.h"
-#include "bdf/string.h"
+#include "extfem_string.h"
 #include "bdf/type_bounds.h"
 
 

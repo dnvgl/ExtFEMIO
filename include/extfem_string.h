@@ -24,7 +24,7 @@
 #define DllExport
 #endif
 
-namespace bdf {
+namespace extfem {
 
   namespace string {
 

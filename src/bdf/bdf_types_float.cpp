@@ -89,7 +89,7 @@ entry_type<double>::float_lead_dot(
 // Convert string to float
 double *entry_type<double>::operator() (const std::string &inp) const {
   auto *value = new double();
-  auto sval = bdf::string::string(inp).trim().upper();
+  auto sval = extfem::string::string(inp).trim().upper();
 
   if (sval.length() == 0) {
     if (this->bounds.does_allow_empty())

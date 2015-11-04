@@ -19,7 +19,7 @@ namespace {
 #include <config.h>
 #endif
 #include "bdf/types.h"
-#include "bdf/string.h"
+#include "extfem_string.h"
 
 bdf::types::base::base(const std::string &name) : name(name) {};
 

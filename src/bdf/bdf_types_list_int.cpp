@@ -39,7 +39,7 @@ const regex entry_type<std::deque<int>>::int_re("[[:digit:]]*");
 std::deque<int>*
 entry_type<std::deque<int>>::operator() (const std::string &inp) const {
   auto *value =  new std::deque<int>();
-  auto sval = bdf::string::string(inp).trim();
+  auto sval = extfem::string::string(inp).trim();
   if (! regex_match(sval, int_re)) {
     std::string msg(name + ":illegal input (""");
     throw bdf_types_error(msg + sval + """), no integer in list");

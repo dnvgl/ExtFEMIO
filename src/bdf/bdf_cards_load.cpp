@@ -44,7 +44,7 @@ load::load(const std::deque<std::string> &inp) :
   if (pos == inp.end()) goto invalid;
   S = bdf::types::get_val<double>(_S, *(pos++));
   if (pos == inp.end()) goto invalid;
-  while (pos != inp.end() && bdf::string::string(*pos) != "") {
+  while (pos != inp.end() && extfem::string::string(*pos) != "") {
     Si->push_back(*_Si(*(pos++)));
     if (pos == inp.end()) goto invalid;
     Li->push_back(*_Li(*(pos++)));

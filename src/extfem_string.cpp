@@ -15,13 +15,13 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "bdf/string.h"
+#include "extfem_string.h"
 
 // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-bdf::string::string bdf::string::string::trim(const std::string &whitespace) {
+extfem::string::string extfem::string::string::trim(const std::string &whitespace) {
   const auto strBegin = this->find_first_not_of(whitespace);
   if (strBegin == std::string::npos)
-    return bdf::string::string(""); // no content
+    return extfem::string::string(""); // no content
 
   const auto strEnd = this->find_last_not_of(whitespace);
   const auto strRange = strEnd - strBegin + 1;
@@ -29,12 +29,12 @@ bdf::string::string bdf::string::string::trim(const std::string &whitespace) {
   return this->substr(strBegin, strRange);
 }
 
-bdf::string::string bdf::string::string::upper() {
+extfem::string::string extfem::string::string::upper() {
   transform(this->begin(), this->end(), this->begin(), ::toupper);
   return *this;
 }
 
-bdf::string::string bdf::string::string::lower() {
+extfem::string::string extfem::string::string::lower() {
   transform(this->begin(), this->end(), this->begin(), ::tolower);
   return *this;
 }

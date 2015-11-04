@@ -16,7 +16,7 @@ namespace {
 }
 
 #include "bdf/cards.h"
-#include "bdf/string.h"
+#include "extfem_string.h"
 
 using namespace std;
 using namespace bdf::cards;
@@ -96,13 +96,13 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
   bool first = true;
 
   for (auto pos=inp.begin(); pos<inp.end(); ++pos) {
-    head = string::string(pos->substr(0, 8)).trim();
+    head = extfem::string::string(pos->substr(0, 8)).trim();
     // Free Field Format
     if (head.find(',') != std::string::npos) {
       if (first) {
-        res.push_back(bdf::string::string(head.substr(0, head.find(','))).trim("*"));
+        res.push_back(extfem::string::string(head.substr(0, head.find(','))).trim("*"));
       }
-      auto tmp(string::string(*pos).trim(" \t\n"));
+      auto tmp(extfem::string::string(*pos).trim(" \t\n"));
       tmp = tmp.substr(tmp.find(',')+1);
 
       auto tail(tmp.substr(tmp.rfind(',')+1));
@@ -111,11 +111,11 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
         if (tail.length() != 0)
           tmp = tmp.substr(0, tmp.rfind(',')+1);
         ++pos;
-        tmp.append(string::string(pos->substr(pos->find(',')+1)).trim(" \t\n"));
+        tmp.append(extfem::string::string(pos->substr(pos->find(',')+1)).trim(" \t\n"));
         tail = tmp.substr(tmp.rfind(',')+1);
       }
       while (tmp.find(',') != std::string::npos) {
-        res.push_back(string::string(tmp.substr(0, tmp.find(','))).trim(" \n\t"));
+        res.push_back(extfem::string::string(tmp.substr(0, tmp.find(','))).trim(" \n\t"));
         tmp = tmp.substr(tmp.find(',')+1);
       }
       res.push_back(tmp);
@@ -123,16 +123,16 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
     // Long Field Format
     } else {
       if (first) {
-        res.push_back(bdf::string::string(head).trim("\t\n*"));
+        res.push_back(extfem::string::string(head).trim("\t\n*"));
       }
       if (head.length() > 0 && head.back() == '*') {
         std::string tmp(pos->substr(8));
         tmp.resize(64, ' ');
         if ((++pos)->length() > 8)
-            tmp += string::string((pos)->substr(8)).trim("\t\n");
+            tmp += extfem::string::string((pos)->substr(8)).trim("\t\n");
         tmp.resize(128, ' ');
         for (int i=0; i<8; ++i) {
-          res.push_back(string::string(tmp.substr(i*16, 16)).trim(" \t\n"));
+          res.push_back(extfem::string::string(tmp.substr(i*16, 16)).trim(" \t\n"));
         }
       // Short Field Format
       } else {
@@ -140,7 +140,7 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
         tmp.resize(80, ' ');
         tmp = tmp.substr(8);
         for (int i=0; i<8; ++i) {
-          res.push_back(string::string(tmp.substr(i*8, 8)).trim(" \t\n"));
+          res.push_back(extfem::string::string(tmp.substr(i*8, 8)).trim(" \t\n"));
         }
       }
       first = false;

@@ -30,7 +30,7 @@ entry_type<std::string>::entry_type(std::string name, bdf::type_bounds::bound<st
 
 std::string
 *entry_type<std::string>::operator() (const std::string &inp) const {
-  auto sval = bdf::string::string(inp).trim();
+  auto sval = extfem::string::string(inp).trim();
 
   if (sval.length() == 0)
     sval = bounds.get_default();

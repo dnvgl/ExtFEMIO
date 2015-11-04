@@ -70,9 +70,6 @@
     <ClCompile Include="bdf\bdf_l_geom.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="bdf\bdf_string.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="bdf\bdf_types.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -86,6 +83,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types_str.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="extfem_string.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,13 +128,13 @@
     <ClInclude Include="..\include\bdf\file.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdf\string.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\bdf\type_bounds.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bdf\types.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\extfem_string.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

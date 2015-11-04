@@ -23,7 +23,7 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf/string.h"
+#include "extfem_string.h"
 
 CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
   return Catch::toString( ex() );
@@ -32,30 +32,30 @@ CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
 TEST_CASE("Checking extra string functions", "[bdf_string]") {
 
   SECTION("checking trim functionality") {
-    CHECK(::bdf::string::string("   2    ").trim() == "2");
-    CHECK(::bdf::string::string("        ").trim() == "");
-    CHECK(::bdf::string::string(" \t      ").trim() == "");
-    CHECK(::bdf::string::string(" \txxx\t ").trim() == "xxx");
-    CHECK(::bdf::string::string(" \tXXX\t ").trim() == "XXX");
-    CHECK(::bdf::string::string("ABCDabcd").trim() == "ABCDabcd");
+    CHECK(::extfem::string::string("   2    ").trim() == "2");
+    CHECK(::extfem::string::string("        ").trim() == "");
+    CHECK(::extfem::string::string(" \t      ").trim() == "");
+    CHECK(::extfem::string::string(" \txxx\t ").trim() == "xxx");
+    CHECK(::extfem::string::string(" \tXXX\t ").trim() == "XXX");
+    CHECK(::extfem::string::string("ABCDabcd").trim() == "ABCDabcd");
   }
 
   SECTION("checking lower functionality") {
-    CHECK(::bdf::string::string("   2     ").lower() == "   2     ");
-    CHECK(::bdf::string::string("         ").lower() == "         ");
-    CHECK(::bdf::string::string(" \t      ").lower() == " \t      ");
-    CHECK(::bdf::string::string(" \txxx\t ").lower() == " \txxx\t ");
-    CHECK(::bdf::string::string(" \tXXX\t ").lower() == " \txxx\t ");
-    CHECK(::bdf::string::string("ABCDabcd ").lower() == "abcdabcd ");
+    CHECK(::extfem::string::string("   2     ").lower() == "   2     ");
+    CHECK(::extfem::string::string("         ").lower() == "         ");
+    CHECK(::extfem::string::string(" \t      ").lower() == " \t      ");
+    CHECK(::extfem::string::string(" \txxx\t ").lower() == " \txxx\t ");
+    CHECK(::extfem::string::string(" \tXXX\t ").lower() == " \txxx\t ");
+    CHECK(::extfem::string::string("ABCDabcd ").lower() == "abcdabcd ");
   }
 
   SECTION("checking upper functionality") {
-    CHECK(::bdf::string::string("   2     ").upper() == "   2     ");
-    CHECK(::bdf::string::string("         ").upper() == "         ");
-    CHECK(::bdf::string::string(" \t      ").upper() == " \t      ");
-    CHECK(::bdf::string::string(" \txxx\t ").upper() == " \tXXX\t ");
-    CHECK(::bdf::string::string(" \tXXX\t ").upper() == " \tXXX\t ");
-    CHECK(::bdf::string::string("ABCDabcd ").upper() == "ABCDABCD ");
+    CHECK(::extfem::string::string("   2     ").upper() == "   2     ");
+    CHECK(::extfem::string::string("         ").upper() == "         ");
+    CHECK(::extfem::string::string(" \t      ").upper() == " \t      ");
+    CHECK(::extfem::string::string(" \txxx\t ").upper() == " \tXXX\t ");
+    CHECK(::extfem::string::string(" \tXXX\t ").upper() == " \tXXX\t ");
+    CHECK(::extfem::string::string("ABCDabcd ").upper() == "ABCDABCD ");
   }
 
 }

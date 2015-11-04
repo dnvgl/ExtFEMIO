@@ -168,12 +168,12 @@
     <ClCompile Include="bdf\bdf_errors.cpp" />
     <ClCompile Include="bdf\bdf_file.cpp" />
     <ClCompile Include="bdf\bdf_l_geom.cpp" />
-    <ClCompile Include="bdf\bdf_string.cpp" />
     <ClCompile Include="bdf\bdf_types.cpp" />
     <ClCompile Include="bdf\bdf_types_float.cpp" />
     <ClCompile Include="bdf\bdf_types_int.cpp" />
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
     <ClCompile Include="bdf\bdf_types_str.cpp" />
+    <ClCompile Include="extfem_string.cpp" />
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,10 +183,10 @@
     <ClInclude Include="..\include\bdf\cards_properties.h" />
     <ClInclude Include="..\include\bdf\errors.h" />
     <ClInclude Include="..\include\bdf\file.h" />
-    <ClInclude Include="..\include\bdf\string.h" />
     <ClInclude Include="..\include\bdf\types.h" />
     <ClInclude Include="..\include\bdf\type_bounds.h" />
     <ClInclude Include="..\include\catch.hpp" />
+    <ClInclude Include="..\include\extfem_string.h" />
     <ClInclude Include="..\include\my_c++14.h" />
     <ClInclude Include="..\include\resource.h" />
     <ClInclude Include="..\include\StdAfx.h" />

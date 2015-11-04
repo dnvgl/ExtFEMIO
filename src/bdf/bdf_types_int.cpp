@@ -42,7 +42,7 @@ entry_type<long>::int_re(
   "[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
 long *entry_type<long>::operator() (const std::string &inp) const {
-  auto sval = bdf::string::string(inp).trim();
+  auto sval = extfem::string::string(inp).trim();
   auto *value = new long();
   if (sval.length() == 0) {
     if (this->bounds.does_allow_empty())
