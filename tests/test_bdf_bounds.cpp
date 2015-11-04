@@ -20,39 +20,41 @@ namespace {
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
+#include <memory>
+
 #include <catch.hpp>
 
 #ifndef _MSC_VER
 #include <config.h>
 #endif
+
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
-#include <memory>
+using namespace ::std;
+using namespace ::dnvgl::extfem::bdf;
 
-CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return Catch::toString( ex() );
 }
 
-using namespace std;
-using namespace bdf::type_bounds;
-
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
-  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe =
-    make_unique<::bdf::type_bounds::bound<long> >();
-  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_min =
-      make_unique<::bdf::type_bounds::bound<long> >(make_unique<long>(-12).get(), (long*)NULL, (long*)NULL);
-  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_max =
-      make_unique<::bdf::type_bounds::bound<long>>((long*)NULL, make_unique<long>(12).get(), (long*)NULL);
-  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_mm =
-      make_unique<::bdf::type_bounds::bound<long> >(make_unique<long>(-12).get(),
+  ::std::unique_ptr< type_bounds::bound< long > > probe =
+    make_unique<type_bounds::bound<long> >();
+  ::std::unique_ptr< type_bounds::bound< long > > probe_min =
+      make_unique<type_bounds::bound<long> >(make_unique<long>(-12).get(), (long*)NULL, (long*)NULL);
+  ::std::unique_ptr< type_bounds::bound< long > > probe_max =
+      make_unique<type_bounds::bound<long>>((long*)NULL, make_unique<long>(12).get(), (long*)NULL);
+  ::std::unique_ptr< type_bounds::bound< long > > probe_mm =
+      make_unique<type_bounds::bound<long> >(make_unique<long>(-12).get(),
                               make_unique<long>(12).get(), (long*)NULL);
-  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_mmd =
-      make_unique<::bdf::type_bounds::bound<long> >(make_unique<long>(-12).get(),
+  ::std::unique_ptr< type_bounds::bound< long > > probe_mmd =
+      make_unique<type_bounds::bound<long> >(make_unique<long>(-12).get(),
                               make_unique<long>(12).get(),
                               make_unique<long>(6).get());
-  ::std::unique_ptr< ::bdf::type_bounds::bound< long > > probe_def =
-      make_unique<::bdf::type_bounds::bound<long> >((long*)NULL, (long*)NULL,
+  ::std::unique_ptr< type_bounds::bound< long > > probe_def =
+      make_unique<type_bounds::bound<long> >((long*)NULL, (long*)NULL,
                               make_unique<long>(1).get());
 
   SECTION("<nothing>") {
@@ -151,8 +153,8 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
 TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]" ) {
 
-  ::bdf::type_bounds::bound<double> *probe = new ::bdf::type_bounds::bound<double>();
-  ::bdf::type_bounds::bound<double> *probe_def = new ::bdf::type_bounds::bound<double>(nullptr, nullptr, new double(1.));
+  type_bounds::bound<double> *probe = new type_bounds::bound<double>();
+  type_bounds::bound<double> *probe_def = new type_bounds::bound<double>(nullptr, nullptr, new double(1.));
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());

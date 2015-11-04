@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -173,6 +173,7 @@
     <ClCompile Include="bdf\bdf_types_int.cpp" />
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
     <ClCompile Include="bdf\bdf_types_str.cpp" />
+    <ClCompile Include="fem\fem_errors.cpp" />
     <ClCompile Include="extfem_string.cpp" />
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
@@ -185,7 +186,11 @@
     <ClInclude Include="..\include\bdf\file.h" />
     <ClInclude Include="..\include\bdf\types.h" />
     <ClInclude Include="..\include\bdf\type_bounds.h" />
+    <ClInclude Include="..\include\fem\errors.h" />
+    <ClInclude Include="..\include\fem\type_bounds.h" />
+    <ClInclude Include="..\include\fem\types.h" />
     <ClInclude Include="..\include\catch.hpp" />
+    <ClInclude Include="..\include\extfem_misc.h" />
     <ClInclude Include="..\include\extfem_string.h" />
     <ClInclude Include="..\include\my_c++14.h" />
     <ClInclude Include="..\include\resource.h" />

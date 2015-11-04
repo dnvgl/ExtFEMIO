@@ -1,21 +1,22 @@
-// Copyright © 2015 by DNV GL SE
+/* Copyright © 2015 by DNV GL SE */
 
-// Purpose: Error handling for processing BDF data.
+/*
+  Purpose: Define errors for handling FEM files.
 
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+ */
 
-// ID: $Id$
+/* ID: $Id$
+ */
 
-#if !defined _BERHOL20150710_BDF_ERRORS
-#define _BERHOL20150710_BDF_ERRORS
-
-#include <string>
+#if !defined _BERHOL20151104_ERRORS
+#define _BERHOL20151104_ERRORS
 
 #include "extfem_misc.h"
 
 namespace dnvgl {
   namespace extfem {
-    namespace bdf {
+    namespace fem {
       namespace errors {
 
         class error {
@@ -32,11 +33,11 @@ namespace dnvgl {
 
           DllExport error(
             const std::string &msg,
-            const std::string &err_class="bdf_error");
+            const std::string &err_class="fem_error");
 
           DllExport error(
             const std::string&, const std::string &msg,
-            const std::string &err_class="bdf_error");
+            const std::string &err_class="fem_error");
 
           DllExport std::string operator() (void) const;
         };
@@ -101,13 +102,15 @@ namespace dnvgl {
   }
 }
 
-#endif // _BERHOL20150710_BDF_ERRORS
+#endif // _BERHOL20151104_ERRORS
 
-// Local Variables:
-// mode: c++
-// ispell-local-dictionary: "english"
-// c-file-style: "dnvgl"
-// indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
-// coding: utf-8
-// End:
+/*
+  Local Variables:
+  mode: c++
+  ispell-local-dictionary: "english"
+  c-file-style: "dnvgl"
+  indent-tabs-mode: nil
+  compile-command: "make -C ../.. check -j8"
+  coding: utf-8
+  End:
+ */

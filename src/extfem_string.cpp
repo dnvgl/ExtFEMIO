@@ -17,6 +17,8 @@ namespace {
 
 #include "extfem_string.h"
 
+using namespace dnvgl;
+
 // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
 extfem::string::string extfem::string::string::trim(const std::string &whitespace) {
   const auto strBegin = this->find_first_not_of(whitespace);

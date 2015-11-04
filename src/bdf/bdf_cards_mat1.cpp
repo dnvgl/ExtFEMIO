@@ -21,9 +21,11 @@ namespace {
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
 using namespace std;
-using namespace bdf::cards;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 const entry_type<long> mat1::_MID(
@@ -107,14 +109,14 @@ mat1::mat1(const deque<std::string> &inp) : card(inp) {
     MID = bdf::types::get_val<long>(_MID, *(pos));
     break;
   default:
-    throw bdf_parse_error("MAT1", "Illegal number of entries.");
+    throw errors::parse_error("MAT1", "Illegal number of entries.");
   }
 
   if (A && !TREF) TREF = bdf::types::get_val<double>(_TREF, "");
 
   // remark 2
   if (!E && !G)
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "MAT1", "Either G or E has to be given.");
   if (!NU) {
     if (!E) {
@@ -133,7 +135,7 @@ mat1::mat1(const deque<std::string> &inp) : card(inp) {
 }
 
 const std::ostream& mat1::operator << (std::ostream& os) const {
-  throw bdf_error("can't write MAT1.");
+  throw errors::error("can't write MAT1.");
   return os;
 }
 

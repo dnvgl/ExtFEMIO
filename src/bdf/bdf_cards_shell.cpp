@@ -17,10 +17,10 @@ namespace {
 
 #include "bdf/cards.h"
 
-using namespace std;
-using namespace ::bdf;
-using namespace bdf::cards;
-using bdf::types::entry_type;
+using namespace ::std;
+using namespace ::dnvgl::extfem::bdf;
+using namespace ::dnvgl::extfem::bdf::cards;
+using ::dnvgl::extfem::bdf::types::entry_type;
 
 const entry_type<long> base_shell::_EID(
   "EID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));

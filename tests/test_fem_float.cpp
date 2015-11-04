@@ -1,6 +1,6 @@
 // Copyright © 2015 by DNV GL SE
 
-// Task      Tests for BDF float types.
+// Task      Tests for FEM float types.
 
 // Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
@@ -26,21 +26,23 @@ namespace {
 #include <config.h>
 #endif
 
-#include "bdf/types.h"
-#include "bdf/errors.h"
+#include "extfem_misc.h"
+#include "fem/types.h"
+#include "fem/errors.h"
 
 using namespace ::std;
 using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf;
-using namespace ::dnvgl::extfem::bdf::types;
-using namespace ::dnvgl::extfem::bdf::type_bounds;
+using namespace ::dnvgl::extfem::fem;
+using namespace ::dnvgl::extfem::fem::types;
+using namespace ::dnvgl::extfem::fem::type_bounds;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return Catch::toString( ex() );
 }
 
-TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
+TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
 
+  /*
   entry_type<double> probe("dummy", bound<double>(NULL, NULL, make_unique<double>(0.).get()));
 
   SECTION("'   1.   '") {
@@ -66,26 +68,21 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
 
   SECTION("Quick Reference") {
     ::std::vector<::std::string> samples;
-    CHECK(*probe("   7.0  ") == 7.);
-    CHECK(*probe("   7.   ") == 7.);
-    CHECK(*probe("   .7   ") == .7);
-    CHECK(*probe("   .7E1 ") == 7.);
-    CHECK(*probe("   .7e1 ") == 7.);
-    CHECK(*probe("   0.7+1") == 7.);
-    CHECK(*probe("   .70+1") == 7.);
-    CHECK(*probe("   7.E+0") == 7.);
-    CHECK(*probe("   7.e+0") == 7.);
-    CHECK(*probe("   70.-1") == 7.);
-    CHECK(*probe("  -7.0  ") == -7.);
-    CHECK(*probe("  -7.   ") == -7.);
-    CHECK(*probe("  -.7   ") == -.7);
-    CHECK(*probe("  -.7E1 ") == -7.);
-    CHECK(*probe("  -.7e1 ") == -7.);
-    CHECK(*probe("  -0.7+1") == -7.);
-    CHECK(*probe("  -.70+1") == -7.);
-    CHECK(*probe("  -7.E+0") == -7.);
-    CHECK(*probe("  -7.e+0") == -7.);
-    CHECK(*probe("  -70.-1") == -7.);
+    CHECK(*probe("           7.0  ") == 7.);
+    CHECK(*probe("           7.   ") == 7.);
+    CHECK(*probe("           .7   ") == .7);
+    CHECK(*probe("           .7E1 ") == 7.);
+    CHECK(*probe("           .7e1 ") == 7.);
+    CHECK(*probe("           7.E+0") == 7.);
+    CHECK(*probe("           7.e+0") == 7.);
+    CHECK(*probe("           70.-1") == 7.);
+    CHECK(*probe("          -7.0  ") == -7.);
+    CHECK(*probe("          -7.   ") == -7.);
+    CHECK(*probe("          -.7   ") == -.7);
+    CHECK(*probe("          -.7E1 ") == -7.);
+    CHECK(*probe("          -.7e1 ") == -7.);
+    CHECK(*probe("          -7.E+0") == -7.);
+    CHECK(*probe("          -7.e+0") == -7.);
   }
 
   SECTION("Invalid values") {
@@ -151,50 +148,36 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   }
 }
 
-TEST_CASE("BDF double types output.", "[bdf_types]" ) {
+TEST_CASE("FEM double types output.", "[fem_types]" ) {
 
   entry_type<double> obj("dummy");
 
   std::unique_ptr<double> lval = std::make_unique<double>(1.);
 
-  SECTION("SHORT") {
-    bdf::types::base::out_form = bdf::types::SHORT;
+  SECTION("Output") {
     std::string res(obj.format(lval));
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "1.000+00");
   }
 
-  SECTION("SHORT (nullptr)") {
-    bdf::types::base::out_form = bdf::types::SHORT;
+  SECTION("Outout (nullptr)") {
     CHECK(obj.format((unique_ptr<double>)nullptr).size() == 8);
     CHECK(obj.format((unique_ptr<double>)nullptr) == "        ");
   }
 
-  SECTION("SHORT (void)") {
+  SECTION("Output (void)") {
     double *lval = new double(1.);
-    bdf::types::base::out_form = bdf::types::SHORT;
     CHECK(*lval == 1.);
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "1.000+00");
     delete lval;
   }
 
-  SECTION("SHORT (nullptr, void)") {
-    bdf::types::base::out_form = bdf::types::SHORT;
+  SECTION("Output (nullptr, void)") {
     CHECK(obj.format(nullptr).size() == 8);
     CHECK(obj.format(nullptr) == "        ");
   }
-
-  SECTION("LONG") {
-    bdf::types::base::out_form = bdf::types::LONG;
-    CHECK(obj.format(lval).size() == 16);
-    CHECK(obj.format(lval) == "1.00000000000+00");
-  }
-
-  SECTION("FREE") {
-    bdf::types::base::out_form = bdf::types::FREE;
-    CHECK(obj.format(lval) == "1.000000+00");
-  }
+  */
 }
 
 /*

@@ -16,12 +16,14 @@ namespace {
 }
 
 #include "bdf/cards.h"
+#include "bdf/errors.h"
 
 #include <memory>
 
-using namespace std;
-using namespace ::bdf;
-using namespace bdf::cards;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf;
+using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 const entry_type<long> pshell::_PID("PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
@@ -95,14 +97,14 @@ pshell::pshell(const deque<std::string> &inp) : card(inp) {
     PID = bdf::types::get_val<long>(_PID, *pos);
     break;
   default:
-    throw bdf_parse_error("PSHELL", "Illegal number of entries.");
+    throw errors::parse_error("PSHELL", "Illegal number of entries.");
   }
 
   TS_T = bdf::types::get_val<double>(_TS_T, "");
 }
 
 const std::ostream& pshell::operator << (std::ostream& os) const {
-  throw bdf_error("can't write cbeam.");
+  throw errors::error("can't write cbeam.");
   return os;
 }
 

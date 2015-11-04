@@ -16,6 +16,7 @@ namespace {
 }
 
 #include "bdf/cards.h"
+#include "bdf/errors.h"
 
 #include <cstdlib>
 #include <memory>
@@ -24,8 +25,9 @@ namespace {
 #undef _TYPE
 #endif
 
-using namespace std;
-using namespace bdf::cards;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 const entry_type<std::string> pbarl::_GROUP(
@@ -63,7 +65,7 @@ pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
   if (pos == inp.end()) goto invalid;
   GROUP = bdf::types::get_val<std::string>(_GROUP, *(pos++));
   if (*GROUP != "MSCBML0")
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "PBARL", "Currently only GROUP==MSCBML0 is supported.");
   if (pos == inp.end()) goto invalid;
   TYPE = bdf::types::get_val<std::string>(_TYPE, *(pos++));
@@ -83,7 +85,7 @@ pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
   else if (dimnum10.find(*TYPE) != dimnum10.end())
     dim_num = 10;
   else
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "PBARL", "Unknown beam type " + *TYPE + ".");
 
   ++pos;
@@ -102,12 +104,12 @@ pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
   goto end;
 
  invalid:
-  throw bdf_parse_error("PBARL", "Illegal number of entries.");
+  throw errors::parse_error("PBARL", "Illegal number of entries.");
  end: ;
 }
 
 const std::ostream& pbarl::operator << (std::ostream& os) const {
-  throw bdf_error("can't write PBARL.");
+  throw errors::error("can't write PBARL.");
   return os;
 }
 

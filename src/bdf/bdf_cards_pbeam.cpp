@@ -15,12 +15,16 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "bdf/cards.h"
-
 #include <cstdlib>
 #include <memory>
 
-using namespace std;
+#include "bdf/cards.h"
+#include "bdf/types.h"
+#include "bdf/type_bounds.h"
+#include "bdf/errors.h"
+
+using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -221,14 +225,14 @@ pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
     PID = bdf::types::get_val<long>(_PID, *(pos));
     break;
   default:
-    throw bdf_parse_error("PBEAM", "Illegal number of entries.");
+    throw errors::parse_error("PBEAM", "Illegal number of entries.");
   }
   if (J.size() == 0)
     J.push_front(NULL);
 }
 
 const std::ostream& pbeam::operator << (std::ostream& os) const {
-  throw bdf_error("can't write PBEAM.");
+  throw errors::error("can't write PBEAM.");
   return os;
 }
 

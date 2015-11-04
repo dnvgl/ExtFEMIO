@@ -22,8 +22,8 @@ namespace {
 #include <deque>
 #include <algorithm>
 
-using namespace std;
-using namespace bdf::input;
+using namespace ::std;
+using namespace ::dnvgl::extfem::bdf::input;
 
 namespace {
   const char initVals[3] = { '+', '*', ' ' };

@@ -15,16 +15,18 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "bdf/cards.h"
-
 #include <cstdlib>
 #include <memory>
+
+#include "bdf/cards.h"
+#include "bdf/errors.h"
 
 #ifdef _TYPE
 #undef _TYPE
 #endif
 
-using namespace std;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -74,7 +76,7 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
   if (pos == inp.end()) goto invalid;
   GROUP = bdf::types::get_val<std::string>(_GROUP, *(pos++));
   if (*GROUP != "MSCBML0")
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "PBEAML", "Currently only GROUP==MSCBML0 is supported.");
   if (pos == inp.end()) goto invalid;
   TYPE = bdf::types::get_val<std::string>(_TYPE, *(pos++));
@@ -94,7 +96,7 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
   else if (dimnum10.find(*TYPE) != dimnum10.end())
     dim_num = 10;
   else
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "PBEAML", "Unknown beam type " + *TYPE + ".");
 
   ++pos;
@@ -126,19 +128,19 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
     DIM.push_back(new deque<unique_ptr<double>>);
     try {
       SO.push_back(bdf::types::get_val<std::string>(_SO, *(pos++)));
-    } catch (bdf_error) {
+    } catch (errors::error) {
       goto clean_SO;
     };
     if (pos == inp.end()) goto clean_X_XB;
     try {
       X_XB.push_back(bdf::types::get_val<double>(_X_XB, *(pos++)));
-    } catch (bdf_error) {
+    } catch (errors::error) {
       goto clean_X_XB;
     }
     if (pos == inp.end()) goto clean;
     try {
       (*DIM[j]).push_back(bdf::types::get_val<double>(_DIM, *(pos++)));
-    } catch (bdf_error) {
+    } catch (errors::error) {
       goto clean;
     }
     for (i=1; i < dim_num; i++) {
@@ -152,7 +154,7 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
   goto end;
 
  invalid:
-  throw bdf_parse_error("PBEAML", "Illegal number of entries.");
+  throw errors::parse_error("PBEAML", "Illegal number of entries.");
  clean:
   X_XB.pop_back();
  clean_X_XB:
@@ -163,7 +165,7 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
 }
 
 const std::ostream& pbeaml::operator << (std::ostream& os) const {
-  throw bdf_error("can't write PBEAML.");
+  throw errors::error("can't write PBEAML.");
   return os;
 }
 

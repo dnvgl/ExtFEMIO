@@ -11,54 +11,55 @@
 
 #include <memory>
 
-namespace bdf {
+namespace dnvgl {
+  namespace extfem {
+    namespace bdf {
+      namespace cards {
 
-  namespace cards {
+        //   Base class for `ctria3' and `cquad4'.
+        class base_shell : public card {
 
-    // Base class for `ctria3' and `cquad4'.
-    class base_shell : public card {
+        protected:
 
-    protected:
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _EID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G3;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G4;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MCID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _THETA;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _ZOFFS;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _TFLAG;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _T1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _T2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _T3;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _T4;
 
-      static const bdf::types::entry_type<long> _EID;
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _G1;
-      static const bdf::types::entry_type<long> _G2;
-      static const bdf::types::entry_type<long> _G3;
-      static const bdf::types::entry_type<long> _G4;
-      static const bdf::types::entry_type<long> _MCID;
-      static const bdf::types::entry_type<double> _THETA;
-      static const bdf::types::entry_type<double> _ZOFFS;
-      static const bdf::types::entry_type<long> _TFLAG;
-      static const bdf::types::entry_type<double> _T1;
-      static const bdf::types::entry_type<double> _T2;
-      static const bdf::types::entry_type<double> _T3;
-      static const bdf::types::entry_type<double> _T4;
+          DllExport base_shell(const std::deque<std::string> &inp) :
+            card(inp) {};
 
-      DllExport base_shell(const std::deque<std::string> &inp) :
-        card(inp) {};
+        public:
 
-    public:
+          typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
 
-      typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
+          CHOOSE_MCID_THETA choose_mcid_theta;
 
-      CHOOSE_MCID_THETA choose_mcid_theta;
-
-      std::unique_ptr<long> EID;
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> G1;
-      std::unique_ptr<long> G2;
-      std::unique_ptr<long> G3;
-      std::unique_ptr<long> G4;
-      std::unique_ptr<long> MCID;
-      std::unique_ptr<double> THETA;
-      std::unique_ptr<double> ZOFFS;
-      std::unique_ptr<long> TFLAG;
-      std::unique_ptr<double> T1;
-      std::unique_ptr<double> T2;
-      std::unique_ptr<double> T3;
-      std::unique_ptr<double> T4;
-    };
+          std::unique_ptr<long> EID;
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> G1;
+          std::unique_ptr<long> G2;
+          std::unique_ptr<long> G3;
+          std::unique_ptr<long> G4;
+          std::unique_ptr<long> MCID;
+          std::unique_ptr<double> THETA;
+          std::unique_ptr<double> ZOFFS;
+          std::unique_ptr<long> TFLAG;
+          std::unique_ptr<double> T1;
+          std::unique_ptr<double> T2;
+          std::unique_ptr<double> T3;
+          std::unique_ptr<double> T4;
+        };
 
 /*
 Handle Nastran Bulk CTRIA3 entries.
@@ -113,17 +114,17 @@ Description:
   ``Ti`` are ignored for hyperelastic elements.
  */
 
-    class ctria3 : public base_shell {
-      // NASTRAN ``BDF`` ``CTRIA3`` representation.
+        class ctria3 : public base_shell {
+          // NASTRAN ``BDF`` ``CTRIA3`` representation.
 
-    public:
+        public:
 
-      DllExport ctria3(const std::deque<std::string> &);
+          DllExport ctria3(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return CTRIA3; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return CTRIA3; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
 /*
 Handle Nastran Bulk CQUAD4 entries.
@@ -178,17 +179,17 @@ Description:
   zero. Default = 1.0) ``Ti`` are ignored for hyperelastic elements.
  */
 
-    class cquad4 : public base_shell {
-      // NASTRAN ``BDF`` ``CQUAD4`` representation.
+        class cquad4 : public base_shell {
+          // NASTRAN ``BDF`` ``CQUAD4`` representation.
 
-    public:
+        public:
 
-      DllExport cquad4(const std::deque<std::string> &);
+          DllExport cquad4(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return CQUAD4; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return CQUAD4; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
     /*
 Handle Nastran Bulk CBEAM entries.
@@ -264,66 +265,66 @@ Description:
   p-elements. (Integers > 0 or blank)
 */
 
-    class cbeam : public card {
+        class cbeam : public card {
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<long> _EID;
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _GA;
-      static const bdf::types::entry_type<long> _GB;
-      static const bdf::types::entry_type<double> _X1;
-      static const bdf::types::entry_type<long> _G0;
-      static const bdf::types::entry_type<double> _X2;
-      static const bdf::types::entry_type<double> _X3;
-      static const bdf::types::entry_type<double> _BIT;
-      static const bdf::types::entry_type<std::string> _OFFT;
-      static const bdf::types::entry_type<std::deque<int>> _PA;
-      static const bdf::types::entry_type<std::deque<int>> _PB;
-      static const bdf::types::entry_type<double> _W1A;
-      static const bdf::types::entry_type<double> _W2A;
-      static const bdf::types::entry_type<double> _W3A;
-      static const bdf::types::entry_type<double> _W1B;
-      static const bdf::types::entry_type<double> _W2B;
-      static const bdf::types::entry_type<double> _W3B;
-      static const bdf::types::entry_type<long> _SA;
-      static const bdf::types::entry_type<long> _SB;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _EID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _GA;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _GB;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G0;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X3;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _BIT;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _OFFT;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> _PA;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> _PB;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W1A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W2A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W3A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W1B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W2B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W3B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _SA;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _SB;
 
-    public:
+        public:
 
-      DllExport cbeam(const std::deque<std::string> &inp);
+          DllExport cbeam(const std::deque<std::string> &inp);
 
-      DllExport const bdf::cards::types card_type(void) const { return CBEAM; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return CBEAM; };
 
-      typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
-      CHOOSE_DIR_CODE choose_dir_code;
+          typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
+          CHOOSE_DIR_CODE choose_dir_code;
 
-      typedef enum {has_OFFT, has_BIT} CHOOSE_OFFT_BIT;
-      CHOOSE_OFFT_BIT choose_offt_bit;
+          typedef enum {has_OFFT, has_BIT} CHOOSE_OFFT_BIT;
+          CHOOSE_OFFT_BIT choose_offt_bit;
 
-      std::unique_ptr<long> EID;
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> GA;
-      std::unique_ptr<long> GB;
-      std::unique_ptr<double> X1;
-      std::unique_ptr<long> G0;
-      std::unique_ptr<double> X2;
-      std::unique_ptr<double> X3;
-      std::unique_ptr<double> BIT;
-      std::unique_ptr<std::string> OFFT;
-      std::unique_ptr<std::deque<int>> PA;
-      std::unique_ptr<std::deque<int>> PB;
-      std::unique_ptr<double> W1A;
-      std::unique_ptr<double> W2A;
-      std::unique_ptr<double> W3A;
-      std::unique_ptr<double> W1B;
-      std::unique_ptr<double> W2B;
-      std::unique_ptr<double> W3B;
-      std::unique_ptr<long> SA;
-      std::unique_ptr<long> SB;
+          std::unique_ptr<long> EID;
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> GA;
+          std::unique_ptr<long> GB;
+          std::unique_ptr<double> X1;
+          std::unique_ptr<long> G0;
+          std::unique_ptr<double> X2;
+          std::unique_ptr<double> X3;
+          std::unique_ptr<double> BIT;
+          std::unique_ptr<std::string> OFFT;
+          std::unique_ptr<std::deque<int>> PA;
+          std::unique_ptr<std::deque<int>> PB;
+          std::unique_ptr<double> W1A;
+          std::unique_ptr<double> W2A;
+          std::unique_ptr<double> W3A;
+          std::unique_ptr<double> W1B;
+          std::unique_ptr<double> W2B;
+          std::unique_ptr<double> W3B;
+          std::unique_ptr<long> SA;
+          std::unique_ptr<long> SB;
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 /*
 Handle Nastran Bulk CBAR entries.
 
@@ -390,115 +391,115 @@ Description:
   respectively. See Remark 7. and 8. (Real; Default = 0.0)
 */
 
-    class cbar : public card {
+        class cbar : public card {
 
-    private:
+        private:
 
-      static std::unique_ptr<bdf::types::base> head;
+          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head;
 
-      static const bdf::types::entry_type<long> _EID;
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _GA;
-      static const bdf::types::entry_type<long> _GB;
-      static const bdf::types::entry_type<double> _X1;
-      static const bdf::types::entry_type<long> _G0;
-      static const bdf::types::entry_type<double> _X2;
-      static const bdf::types::entry_type<double> _X3;
-      static const bdf::types::entry_type<std::string> _OFFT;
-      static const bdf::types::entry_type<std::deque<int>> _PA;
-      static const bdf::types::entry_type<std::deque<int>> _PB;
-      static const bdf::types::entry_type<double> _W1A;
-      static const bdf::types::entry_type<double> _W2A;
-      static const bdf::types::entry_type<double> _W3A;
-      static const bdf::types::entry_type<double> _W1B;
-      static const bdf::types::entry_type<double> _W2B;
-      static const bdf::types::entry_type<double> _W3B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _EID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _GA;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _GB;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G0;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X3;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _OFFT;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> _PA;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> _PB;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W1A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W2A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W3A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W1B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W2B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _W3B;
 
-    public:
+        public:
 
-      DllExport const bdf::cards::types card_type(void) const {
-        return CBAR;
-      };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+            return CBAR;
+          };
 
-      typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
-      CHOOSE_DIR_CODE choose_dir_code;
+          typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
+          CHOOSE_DIR_CODE choose_dir_code;
 
-      std::unique_ptr<long> EID;
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> GA;
-      std::unique_ptr<long> GB;
-      std::unique_ptr<double> X1;
-      std::unique_ptr<long> G0;
-      std::unique_ptr<double> X2;
-      std::unique_ptr<double> X3;
-      std::unique_ptr<std::string> OFFT;
-      std::unique_ptr<std::deque<int>> PA;
-      std::unique_ptr<std::deque<int>> PB;
-      std::unique_ptr<double> W1A;
-      std::unique_ptr<double> W2A;
-      std::unique_ptr<double> W3A;
-      std::unique_ptr<double> W1B;
-      std::unique_ptr<double> W2B;
-      std::unique_ptr<double> W3B;
+          std::unique_ptr<long> EID;
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> GA;
+          std::unique_ptr<long> GB;
+          std::unique_ptr<double> X1;
+          std::unique_ptr<long> G0;
+          std::unique_ptr<double> X2;
+          std::unique_ptr<double> X3;
+          std::unique_ptr<std::string> OFFT;
+          std::unique_ptr<std::deque<int>> PA;
+          std::unique_ptr<std::deque<int>> PB;
+          std::unique_ptr<double> W1A;
+          std::unique_ptr<double> W2A;
+          std::unique_ptr<double> W3A;
+          std::unique_ptr<double> W1B;
+          std::unique_ptr<double> W2B;
+          std::unique_ptr<double> W3B;
 
-      DllExport cbar(const std::deque<std::string> &inp);
+          DllExport cbar(const std::deque<std::string> &inp);
 
-      DllExport cbar(
-        const long *iEID, const long *iPID,
-        const long *iGA, const long *iGB,
-        const double *iX1, const double *iX2, const double *iX3,
-        const std::string *iOFFT = nullptr,
-        const std::deque<int> *iPA = nullptr, const std::deque<int> *iPB = nullptr,
-        const double *iW1A = nullptr, const double *iW2A = nullptr,
-        const double *iW3A = nullptr, const double *iW1B = nullptr,
-        const double *iW2B = nullptr, const double *iW3B = nullptr) {
-        choose_dir_code = has_DVEC;
-        EID = std::make_unique<long>(*iEID);
-        PID = std::make_unique<long>(*iPID);
-        GA = std::make_unique<long>(*iGA);
-        GB = std::make_unique<long>(*iGB);
-        X1 = std::make_unique<double>(*iX1);
-        X2 = std::make_unique<double>(*iX2);
-        X3 = std::make_unique<double>(*iX3);
-        OFFT = bdf::types::get_val<std::string>(iOFFT);
-        PA = bdf::types::get_val<std::deque<int>>(iPA);
-        PB = bdf::types::get_val<std::deque<int>>(iPB);
-        W1A = bdf::types::get_val<double>(iW1A);
-        W2A = bdf::types::get_val<double>(iW2A);
-        W3A = bdf::types::get_val<double>(iW3A);
-        W1B = bdf::types::get_val<double>(iW1B);
-        W2B = bdf::types::get_val<double>(iW2B);
-        W3B = bdf::types::get_val<double>(iW3B);
-      };
+          DllExport cbar(
+            const long *iEID, const long *iPID,
+            const long *iGA, const long *iGB,
+            const double *iX1, const double *iX2, const double *iX3,
+            const std::string *iOFFT = nullptr,
+            const std::deque<int> *iPA = nullptr, const std::deque<int> *iPB = nullptr,
+            const double *iW1A = nullptr, const double *iW2A = nullptr,
+            const double *iW3A = nullptr, const double *iW1B = nullptr,
+            const double *iW2B = nullptr, const double *iW3B = nullptr) {
+            choose_dir_code = has_DVEC;
+            EID = std::make_unique<long>(*iEID);
+            PID = std::make_unique<long>(*iPID);
+            GA = std::make_unique<long>(*iGA);
+            GB = std::make_unique<long>(*iGB);
+            X1 = std::make_unique<double>(*iX1);
+            X2 = std::make_unique<double>(*iX2);
+            X3 = std::make_unique<double>(*iX3);
+            OFFT = ::dnvgl::extfem::bdf::types::get_val<std::string>(iOFFT);
+            PA = ::dnvgl::extfem::bdf::types::get_val<std::deque<int>>(iPA);
+            PB = ::dnvgl::extfem::bdf::types::get_val<std::deque<int>>(iPB);
+            W1A = ::dnvgl::extfem::bdf::types::get_val<double>(iW1A);
+            W2A = ::dnvgl::extfem::bdf::types::get_val<double>(iW2A);
+            W3A = ::dnvgl::extfem::bdf::types::get_val<double>(iW3A);
+            W1B = ::dnvgl::extfem::bdf::types::get_val<double>(iW1B);
+            W2B = ::dnvgl::extfem::bdf::types::get_val<double>(iW2B);
+            W3B = ::dnvgl::extfem::bdf::types::get_val<double>(iW3B);
+          };
 
-      DllExport cbar(
-        const long *iEID, const long *iPID,
-        const long *iGA, const long *iGB, const long *iG0,
-        const std::string *iOFFT = nullptr,
-        const std::deque<int> *iPA = nullptr, const std::deque<int> *iPB = nullptr,
-        const double *iW1A = nullptr, const double *iW2A = nullptr,
-        const double *iW3A = nullptr, const double *iW1B = nullptr,
-        const double *iW2B = nullptr, const double *iW3B = nullptr) {
-        choose_dir_code = has_DCODE;
-        EID = std::make_unique<long>(*iEID);
-        PID = std::make_unique<long>(*iPID);
-        GA = std::make_unique<long>(*iGA);
-        GB = std::make_unique<long>(*iGB);
-        G0 = std::make_unique<long>(*iG0);
-        OFFT = bdf::types::get_val<std::string>(iOFFT);
-        PA = bdf::types::get_val<std::deque<int>>(iPA);
-        PB = bdf::types::get_val<std::deque<int>>(iPB);
-        W1A = bdf::types::get_val<double>(iW1A);
-        W2A = bdf::types::get_val<double>(iW2A);
-        W3A = bdf::types::get_val<double>(iW3A);
-        W1B = bdf::types::get_val<double>(iW1B);
-        W2B = bdf::types::get_val<double>(iW2B);
-        W3B = bdf::types::get_val<double>(iW3B);
-      };
+          DllExport cbar(
+            const long *iEID, const long *iPID,
+            const long *iGA, const long *iGB, const long *iG0,
+            const std::string *iOFFT = nullptr,
+            const std::deque<int> *iPA = nullptr, const std::deque<int> *iPB = nullptr,
+            const double *iW1A = nullptr, const double *iW2A = nullptr,
+            const double *iW3A = nullptr, const double *iW1B = nullptr,
+            const double *iW2B = nullptr, const double *iW3B = nullptr) {
+            choose_dir_code = has_DCODE;
+            EID = std::make_unique<long>(*iEID);
+            PID = std::make_unique<long>(*iPID);
+            GA = std::make_unique<long>(*iGA);
+            GB = std::make_unique<long>(*iGB);
+            G0 = std::make_unique<long>(*iG0);
+            OFFT = ::dnvgl::extfem::bdf::types::get_val<std::string>(iOFFT);
+            PA = ::dnvgl::extfem::bdf::types::get_val<std::deque<int>>(iPA);
+            PB = ::dnvgl::extfem::bdf::types::get_val<std::deque<int>>(iPB);
+            W1A = ::dnvgl::extfem::bdf::types::get_val<double>(iW1A);
+            W2A = ::dnvgl::extfem::bdf::types::get_val<double>(iW2A);
+            W3A = ::dnvgl::extfem::bdf::types::get_val<double>(iW3A);
+            W1B = ::dnvgl::extfem::bdf::types::get_val<double>(iW1B);
+            W2B = ::dnvgl::extfem::bdf::types::get_val<double>(iW2B);
+            W3B = ::dnvgl::extfem::bdf::types::get_val<double>(iW3B);
+          };
 
-      DllExport friend std::ostream& operator<<(std::ostream&, const cbar&);
-      DllExport const std::ostream& operator<<(std::ostream& os) const;
-    };
+          DllExport friend std::ostream& operator<<(std::ostream&, const cbar&);
+          DllExport const std::ostream& operator<<(std::ostream& os) const;
+        };
 
 /*
 Handle Nastran Bulk CROD entries.
@@ -525,31 +526,33 @@ Description:
   0; ``G1`` ≠ ``G2``)
 */
 
-    class crod : public card {
+        class crod : public card {
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<long> _EID;
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _G1;
-      static const bdf::types::entry_type<long> _G2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _EID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G2;
 
-    public:
+        public:
 
-      DllExport crod(const std::deque<std::string> &inp);
+          DllExport crod(const std::deque<std::string> &inp);
 
-      DllExport const bdf::cards::types card_type(void) const { return CROD; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return CROD; };
 
-      typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
-      CHOOSE_DIR_CODE choose_dir_code;
+          typedef enum {has_DVEC, has_DCODE} CHOOSE_DIR_CODE;
+          CHOOSE_DIR_CODE choose_dir_code;
 
-      std::unique_ptr<long> EID;
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> G1;
-      std::unique_ptr<long> G2;
+          std::unique_ptr<long> EID;
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> G1;
+          std::unique_ptr<long> G2;
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
+      }
+    }
   }
 }
 

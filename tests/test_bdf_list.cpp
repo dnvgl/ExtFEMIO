@@ -25,15 +25,19 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf/types.h"
 
-CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+#include "bdf/types.h"
+#include "bdf/errors.h"
+
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf;
+using namespace ::dnvgl::extfem::bdf::types;
+using namespace ::dnvgl::extfem::bdf::type_bounds;
+
+CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return Catch::toString( ex() );
 }
-
-using namespace std;
-using namespace bdf::types;
-using namespace bdf::type_bounds;
 
 TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 

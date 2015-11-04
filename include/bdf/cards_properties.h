@@ -15,11 +15,12 @@
 #undef _C2
 #endif
 
-namespace bdf {
+namespace dnvgl {
+  namespace extfem {
+    namespace bdf {
+      namespace cards {
 
-  namespace cards {
-
-    /*
+/*
 Handle Nastran Bulk PSHELL entries.
 
 Shell Element Property
@@ -72,74 +73,73 @@ Description:
 
 */
 
-    class pshell : public card {
-      // Handle Nastran Bulk PSHELL entries.
+        class pshell : public card {
+          // Handle Nastran Bulk PSHELL entries.
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _MID1;
-      static const bdf::types::entry_type<double> _T;
-      static const bdf::types::entry_type<long> _MID2;
-      static const bdf::types::entry_type<double> _12I_T__3; // 12 I / T**3
-      static const bdf::types::entry_type<long> _MID3;
-      static const bdf::types::entry_type<double> _TS_T; // TS / T
-      static const bdf::types::entry_type<double> _NSM;
-      static const bdf::types::entry_type<double> _Z1;
-      static const bdf::types::entry_type<double> _Z2;
-      static const bdf::types::entry_type<long> _MID4;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _T;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _12I_T__3; // 12 I / T**3
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID3;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _TS_T; // TS / T
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _Z1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _Z2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID4;
 
-    public:
+        public:
 
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> MID1;
-      std::unique_ptr<double> T;
-      std::unique_ptr<long> MID2;
-      std::unique_ptr<double> x12I_T__3; // 12 I / T**3
-      std::unique_ptr<long> MID3;
-      std::unique_ptr<double> TS_T; // TS / T
-      std::unique_ptr<double> NSM;
-      std::unique_ptr<double> Z1;
-      std::unique_ptr<double> Z2;
-      std::unique_ptr<long> MID4;
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> MID1;
+          std::unique_ptr<double> T;
+          std::unique_ptr<long> MID2;
+          std::unique_ptr<double> x12I_T__3; // 12 I / T**3
+          std::unique_ptr<long> MID3;
+          std::unique_ptr<double> TS_T; // TS / T
+          std::unique_ptr<double> NSM;
+          std::unique_ptr<double> Z1;
+          std::unique_ptr<double> Z2;
+          std::unique_ptr<long> MID4;
 
-      DllExport pshell(const std::deque<std::string> &);
+          DllExport pshell(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return PSHELL; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PSHELL; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
-    class beam_base : public card {
-      
-    protected:
+        class beam_base : public card {
 
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _MID;
+        protected:
 
-      DllExport beam_base(const std::deque<std::string> &inp) :
-        card(inp) {};
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
 
-    public:
+          DllExport beam_base(const std::deque<std::string> &inp) :
+            card(inp) {};
 
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> MID;
+        public:
 
-      DllExport const bdf::cards::types card_type(void) const { return BEAM_BASE; };
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> MID;
 
-    };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_BASE; };
+        };
 
-    class beam_prop : public beam_base {
-    // base class for beam property classes.
-    protected:
+        class beam_prop : public beam_base {
+          // base class for beam property classes.
+        protected:
 
-      DllExport beam_prop(const std::deque<std::string> &inp) :
-        beam_base(inp) {};
+          DllExport beam_prop(const std::deque<std::string> &inp) :
+            beam_base(inp) {};
 
-    public:
+        public:
 
-      DllExport const bdf::cards::types card_type(void) const { return BEAM_PROP; };
-    };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
+        };
 
 /*
 Handle Nastran Bulk PBEAM entries.
@@ -248,102 +248,102 @@ Description:
   ``B``. (Real)
  */
 
-    class pbeam : public beam_prop {
-      // Handle Nastran Bulk PBEAM entries.
+        class pbeam : public beam_prop {
+          // Handle Nastran Bulk PBEAM entries.
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<double> _A;
-      static const bdf::types::entry_type<double> _I1;
-      static const bdf::types::entry_type<double> _I2;
-      static const bdf::types::entry_type<double> _I12;
-      static const bdf::types::entry_type<double> _J;
-      static const bdf::types::entry_type<double> _NSM;
-      static const bdf::types::entry_type<double> _C1;
-      static const bdf::types::entry_type<double> _C2;
-      static const bdf::types::entry_type<double> _D1;
-      static const bdf::types::entry_type<double> _D2;
-      static const bdf::types::entry_type<double> _E1;
-      static const bdf::types::entry_type<double> _E2;
-      static const bdf::types::entry_type<double> _F1;
-      static const bdf::types::entry_type<double> _F2;
-      static const bdf::types::entry_type<std::string> _SO;
-      static const bdf::types::entry_type<double> _X_XB;
-      static const bdf::types::entry_type<double> _K1;
-      static const bdf::types::entry_type<double> _K2;
-      static const bdf::types::entry_type<double> _S1;
-      static const bdf::types::entry_type<double> _S2;
-      static const bdf::types::entry_type<double> _NSI_A;
-      static const bdf::types::entry_type<double> _NSI_B;
-      static const bdf::types::entry_type<double> _CW_A;
-      static const bdf::types::entry_type<double> _CW_B;
-      static const bdf::types::entry_type<double> _M1_A;
-      static const bdf::types::entry_type<double> _M2_A;
-      static const bdf::types::entry_type<double> _M1_B;
-      static const bdf::types::entry_type<double> _M2_B;
-      static const bdf::types::entry_type<double> _N1_A;
-      static const bdf::types::entry_type<double> _N2_A;
-      static const bdf::types::entry_type<double> _N1_B;
-      static const bdf::types::entry_type<double> _N2_B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I12;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _J;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _SO;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X_XB;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _S1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _S2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSI_A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSI_B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _CW_A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _CW_B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M1_A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M2_A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M1_B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M2_B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N1_A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N2_A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N1_B;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N2_B;
 
-    public:
+        public:
 
-      // fields that might appear more than once
-      std::deque<std::unique_ptr<double>> A;
-      std::deque<std::unique_ptr<double>> I1;
-      std::deque<std::unique_ptr<double>> I2;
-      std::deque<std::unique_ptr<double>> I12;
-      std::deque<std::unique_ptr<double>> J;
-      std::deque<std::unique_ptr<double>> NSM;
-      std::deque<std::unique_ptr<double>> C1;
-      std::deque<std::unique_ptr<double>> C2;
-      std::deque<std::unique_ptr<double>> D1;
-      std::deque<std::unique_ptr<double>> D2;
-      std::deque<std::unique_ptr<double>> E1;
-      std::deque<std::unique_ptr<double>> E2;
-      std::deque<std::unique_ptr<double>> F1;
-      std::deque<std::unique_ptr<double>> F2;
-      std::deque<std::unique_ptr<std::string>> SO;
-      std::deque<std::unique_ptr<double>> X_XB;
-      // fields_finish
-      std::unique_ptr<double> K1;
-      std::unique_ptr<double> K2;
-      std::unique_ptr<double> S1;
-      std::unique_ptr<double> S2;
-      std::unique_ptr<double> NSI_A;
-      std::unique_ptr<double> NSI_B;
-      std::unique_ptr<double> CW_A;
-      std::unique_ptr<double> CW_B;
-      std::unique_ptr<double> M1_A;
-      std::unique_ptr<double> M2_A;
-      std::unique_ptr<double> M1_B;
-      std::unique_ptr<double> M2_B;
-      std::unique_ptr<double> N1_A;
-      std::unique_ptr<double> N2_A;
-      std::unique_ptr<double> N1_B;
-      std::unique_ptr<double> N2_B;
+          // fields that might appear more than once
+          std::deque<std::unique_ptr<double>> A;
+          std::deque<std::unique_ptr<double>> I1;
+          std::deque<std::unique_ptr<double>> I2;
+          std::deque<std::unique_ptr<double>> I12;
+          std::deque<std::unique_ptr<double>> J;
+          std::deque<std::unique_ptr<double>> NSM;
+          std::deque<std::unique_ptr<double>> C1;
+          std::deque<std::unique_ptr<double>> C2;
+          std::deque<std::unique_ptr<double>> D1;
+          std::deque<std::unique_ptr<double>> D2;
+          std::deque<std::unique_ptr<double>> E1;
+          std::deque<std::unique_ptr<double>> E2;
+          std::deque<std::unique_ptr<double>> F1;
+          std::deque<std::unique_ptr<double>> F2;
+          std::deque<std::unique_ptr<std::string>> SO;
+          std::deque<std::unique_ptr<double>> X_XB;
+          // fields_finish
+          std::unique_ptr<double> K1;
+          std::unique_ptr<double> K2;
+          std::unique_ptr<double> S1;
+          std::unique_ptr<double> S2;
+          std::unique_ptr<double> NSI_A;
+          std::unique_ptr<double> NSI_B;
+          std::unique_ptr<double> CW_A;
+          std::unique_ptr<double> CW_B;
+          std::unique_ptr<double> M1_A;
+          std::unique_ptr<double> M2_A;
+          std::unique_ptr<double> M1_B;
+          std::unique_ptr<double> M2_B;
+          std::unique_ptr<double> N1_A;
+          std::unique_ptr<double> N2_A;
+          std::unique_ptr<double> N1_B;
+          std::unique_ptr<double> N2_B;
 
-      DllExport pbeam(const std::deque<std::string> &);
+          DllExport pbeam(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return PBEAM; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBEAM; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
-    class l_geom {
+        class l_geom {
 
-    protected:
+        protected:
 
-      l_geom () {};
+          l_geom () {};
 
-      static const std::set<std::string> dimnum1;
-      static const std::set<std::string> dimnum2;
-      static const std::set<std::string> dimnum3;
-      static const std::set<std::string> dimnum4;
-      static const std::set<std::string> dimnum5;
-      static const std::set<std::string> dimnum6;
-      static const std::set<std::string> dimnum10;
-    };
+          static const std::set<std::string> dimnum1;
+          static const std::set<std::string> dimnum2;
+          static const std::set<std::string> dimnum3;
+          static const std::set<std::string> dimnum4;
+          static const std::set<std::string> dimnum5;
+          static const std::set<std::string> dimnum6;
+          static const std::set<std::string> dimnum10;
+        };
 /*
 Handle Nastran Bulk PBEAML entries.
 
@@ -403,51 +403,51 @@ Description:
   Default = 1.0)
  */
 
-    class pbeaml : public beam_prop, private l_geom {
-      // Handle Nastran Bulk PBEAML entries.
+        class pbeaml : public beam_prop, private l_geom {
+          // Handle Nastran Bulk PBEAML entries.
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<std::string> _GROUP;
-      static const bdf::types::entry_type<std::string> _TYPE;
-      static const bdf::types::entry_type<double> _DIM;
-      static const bdf::types::entry_type<double> _NSM;
-      static const bdf::types::entry_type<std::string> _SO;
-      static const bdf::types::entry_type<double> _X_XB;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _GROUP;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _TYPE;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _DIM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _SO;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X_XB;
 
-    public:
+        public:
 
-      std::unique_ptr<std::string> GROUP;
-      std::unique_ptr<std::string> TYPE;
-      // fields that might appear more than once
-      std::deque<std::deque<std::unique_ptr<double>>*> DIM;
-      std::deque<std::unique_ptr<double>> NSM;
-      std::deque<std::unique_ptr<std::string>> SO;
-      std::deque<std::unique_ptr<double>> X_XB;
+          std::unique_ptr<std::string> GROUP;
+          std::unique_ptr<std::string> TYPE;
+          // fields that might appear more than once
+          std::deque<std::deque<std::unique_ptr<double>>*> DIM;
+          std::deque<std::unique_ptr<double>> NSM;
+          std::deque<std::unique_ptr<std::string>> SO;
+          std::deque<std::unique_ptr<double>> X_XB;
 
-      DllExport pbeaml(const std::deque<std::string> &);
+          DllExport pbeaml(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return PBEAML; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBEAML; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
-    class bar_prop : public card {
-    // base class for beam property classes.
-    protected:
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _MID;
+        class bar_prop : public card {
+          // base class for beam property classes.
+        protected:
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
 
-    public:
+        public:
 
-      DllExport const bdf::cards::types card_type(void) const { return BAR_PROP; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BAR_PROP; };
 
-      DllExport bar_prop(const std::deque<std::string> &inp) :
-        card(inp) {};
+          DllExport bar_prop(const std::deque<std::string> &inp) :
+            card(inp) {};
 
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> MID;
-    };
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> MID;
+        };
 
 /*
 Handle Nastran Bulk PBAR entries.
@@ -488,51 +488,51 @@ Description:
   Area factor for shear. (Real or böank)
  */
 
-    class pbar : public bar_prop {
+        class pbar : public bar_prop {
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<double> _A;
-      static const bdf::types::entry_type<double> _I1;
-      static const bdf::types::entry_type<double> _I2;
-      static const bdf::types::entry_type<double> _J;
-      static const bdf::types::entry_type<double> _NSM;
-      static const bdf::types::entry_type<double> _C1;
-      static const bdf::types::entry_type<double> _C2;
-      static const bdf::types::entry_type<double> _D1;
-      static const bdf::types::entry_type<double> _D2;
-      static const bdf::types::entry_type<double> _E1;
-      static const bdf::types::entry_type<double> _E2;
-      static const bdf::types::entry_type<double> _F1;
-      static const bdf::types::entry_type<double> _F2;
-      static const bdf::types::entry_type<double> _K1;
-      static const bdf::types::entry_type<double> _K2;
-      static const bdf::types::entry_type<double> _I12;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _J;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I12;
 
-    public:
+        public:
 
-      std::unique_ptr<double> A;
-      std::unique_ptr<double> I1;
-      std::unique_ptr<double> I2;
-      std::unique_ptr<double> J;
-      std::unique_ptr<double> NSM;
-      std::unique_ptr<double> C1;
-      std::unique_ptr<double> C2;
-      std::unique_ptr<double> D1;
-      std::unique_ptr<double> D2;
-      std::unique_ptr<double> E1;
-      std::unique_ptr<double> E2;
-      std::unique_ptr<double> F1;
-      std::unique_ptr<double> F2;
-      std::unique_ptr<double> K1;
-      std::unique_ptr<double> K2;
-      std::unique_ptr<double> I12;
+          std::unique_ptr<double> A;
+          std::unique_ptr<double> I1;
+          std::unique_ptr<double> I2;
+          std::unique_ptr<double> J;
+          std::unique_ptr<double> NSM;
+          std::unique_ptr<double> C1;
+          std::unique_ptr<double> C2;
+          std::unique_ptr<double> D1;
+          std::unique_ptr<double> D2;
+          std::unique_ptr<double> E1;
+          std::unique_ptr<double> E2;
+          std::unique_ptr<double> F1;
+          std::unique_ptr<double> F2;
+          std::unique_ptr<double> K1;
+          std::unique_ptr<double> K2;
+          std::unique_ptr<double> I12;
 
-      DllExport pbar(const std::deque<std::string> &);
+          DllExport pbar(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return PBAR; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBAR; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const std::ostream& operator << (std::ostream& os) const;
     };
 
 /*
@@ -574,29 +574,29 @@ Description:
   last ``DIMi``. (Default = 0.0)
  */
 
-    class pbarl : public bar_prop, private l_geom {
-      // Handle Nastran Bulk PBARL entries.
+        class pbarl : public bar_prop, private l_geom {
+          // Handle Nastran Bulk PBARL entries.
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<std::string> _GROUP;
-      static const bdf::types::entry_type<std::string> _TYPE;
-      static const bdf::types::entry_type<double> _DIM;
-      static const bdf::types::entry_type<double> _NSM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _GROUP;
+          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _TYPE;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _DIM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
 
-    public:
+        public:
 
-      std::unique_ptr<std::string> GROUP;
-      std::unique_ptr<std::string> TYPE;
-      std::deque<std::unique_ptr<double>> DIM;
-      std::unique_ptr<double> NSM;
+          std::unique_ptr<std::string> GROUP;
+          std::unique_ptr<std::string> TYPE;
+          std::deque<std::unique_ptr<double>> DIM;
+          std::unique_ptr<double> NSM;
 
-      DllExport pbarl(const std::deque<std::string> &);
+          DllExport pbarl(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return PBARL; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBARL; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
 /*
 Handle Nastran Bulk PROD entries.
@@ -631,33 +631,35 @@ Description:
   Nonstructural mass per unit length. (Real)
  */
 
-    class prod : public card {
-      // Handle Nastran Bulk PROD entries.
+        class prod : public card {
+          // Handle Nastran Bulk PROD entries.
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<long> _PID;
-      static const bdf::types::entry_type<long> _MID;
-      static const bdf::types::entry_type<double> _A;
-      static const bdf::types::entry_type<double> _J;
-      static const bdf::types::entry_type<double> _C;
-      static const bdf::types::entry_type<double> _NSM;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _A;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _J;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
 
-    public:
+        public:
 
-      std::unique_ptr<long> PID;
-      std::unique_ptr<long> MID;
-      std::unique_ptr<double> A;
-      std::unique_ptr<double> J;
-      std::unique_ptr<double> C;
-      std::unique_ptr<double> NSM;
+          std::unique_ptr<long> PID;
+          std::unique_ptr<long> MID;
+          std::unique_ptr<double> A;
+          std::unique_ptr<double> J;
+          std::unique_ptr<double> C;
+          std::unique_ptr<double> NSM;
 
-      DllExport prod(const std::deque<std::string> &);
+          DllExport prod(const std::deque<std::string> &);
 
-      DllExport const bdf::cards::types card_type(void) const { return PROD; };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PROD; };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
+      }
+    }
   }
 }
 

@@ -19,7 +19,8 @@ namespace {
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
-using namespace std;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -50,13 +51,13 @@ crod::crod(const deque<std::string> &inp) :
     EID = bdf::types::get_val<long>(_EID, *pos);
     break;
   default:
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "CROD", "Illegal number of entries for CROD");
   }
 };
 
 const std::ostream& crod::operator << (std::ostream& os) const {
-  throw bdf_error("can't write CROD.");
+  throw errors::error("can't write CROD.");
   return os;
 }
 

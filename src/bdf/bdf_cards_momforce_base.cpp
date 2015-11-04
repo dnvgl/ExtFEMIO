@@ -17,9 +17,11 @@ namespace {
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
-using namespace std;
-using namespace bdf::cards;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 const entry_type<long> momforce_base::_SID(
@@ -66,7 +68,7 @@ momforce_base::momforce_base(const std::deque<std::string> &inp) :
   case 5:
     N1 = bdf::types::get_val<double>(_N1, *(pos++));
     if (*N1 == 0. && *N2 == 0. && *N3 == 0.) {
-      throw bdf_parse_error(
+      throw errors::parse_error(
         "FORCE/MOMENT", "At least one of N1, N2, and N3 has to be != 0..");
     }
     F = bdf::types::get_val<double>(_F, *(pos++));
@@ -75,7 +77,7 @@ momforce_base::momforce_base(const std::deque<std::string> &inp) :
     SID = bdf::types::get_val<long>(_SID, *(pos++));
     break;
   default:
-    throw bdf_parse_error("FORCE/MOMENT", "Illegal number of entries.");
+    throw errors::parse_error("FORCE/MOMENT", "Illegal number of entries.");
   }
 }
 
@@ -116,9 +118,9 @@ void momforce_base::add_collect(
   res.push_back(
     make_unique<format_entry>(
       (bdf::types::base*)&card._F, (void*)card.F.get()));
-  res.push_back(form_or_empty<double>(card._N1, card.N1));
+  res.push_back(format<double>(card._N1, card.N1));
   if (N2 || N3)
-    res.push_back(form_or_empty<double>(card._N2, card.N2));
+    res.push_back(format<double>(card._N2, card.N2));
   if (N3)
     res.push_back(
       make_unique<format_entry>(
@@ -131,49 +133,52 @@ const std::ostream& momforce_base::operator<<(std::ostream& os) const {
   return os;
 }
 
-std::unique_ptr<bdf::types::base> force::head = std::make_unique<bdf::types::card>("FORCE");
+namespace dnvgl {
+  namespace extfem {
+    namespace bdf{
+      namespace cards{
+        std::unique_ptr<bdf::types::base>
+        force::head = std::make_unique<bdf::types::card>("FORCE");
 
-const std::ostream& force::operator << (std::ostream& os) const {
-  return os;
-}
+        const std::ostream& force::operator<< (std::ostream& os) const {
+          return os;
+        }
 
-std::unique_ptr<bdf::types::base> moment::head = std::make_unique<bdf::types::card>("MOMENT");
+        std::unique_ptr<bdf::types::base> moment::head = std::make_unique<bdf::types::card>("MOMENT");
 
-const std::ostream& moment::operator << (std::ostream& os) const {
-  return os;
-}
+        const std::ostream& moment::operator<< (std::ostream& os) const {
+          return os;
+        }
 
-namespace bdf {
-  namespace cards {
+        std::ostream& operator<<(std::ostream &os, const force &card) {
 
-    std::ostream& operator<<(std::ostream &os, const force &card) {
+          std::deque<std::unique_ptr<format_entry>> entries;
 
-      std::deque<std::unique_ptr<format_entry>> entries;
+          entries.push_back(make_unique<format_entry>(force::head.get(), (void*)NULL));
 
-      entries.push_back(make_unique<format_entry>(force::head.get(), (void*)NULL));
+          card.add_collect(entries, card);
 
-      card.add_collect(entries, card);
+          os << card.format_outlist(entries) << std::endl;
 
-      os << card.format_outlist(entries) << std::endl;
+          return os;
+        }
 
-      return os;
-    }
+        std::ostream& operator<<(std::ostream &os, const moment &card) {
 
-    std::ostream& operator<<(std::ostream &os, const moment &card) {
+          std::deque<std::unique_ptr<format_entry>> entries;
 
-      std::deque<std::unique_ptr<format_entry>> entries;
+          entries.push_back(make_unique<format_entry>(moment::head.get(), (void*)NULL));
 
-      entries.push_back(make_unique<format_entry>(moment::head.get(), (void*)NULL));
+          card.add_collect(entries, card);
 
-      card.add_collect(entries, card);
+          os << card.format_outlist(entries) << std::endl;
 
-      os << card.format_outlist(entries) << std::endl;
-
-      return os;
+          return os;
+        }
+      }
     }
   }
 }
-
 
 // Local Variables:
 // mode: c++

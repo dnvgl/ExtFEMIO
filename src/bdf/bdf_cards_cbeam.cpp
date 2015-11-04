@@ -19,7 +19,8 @@ namespace {
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
-using namespace std;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -127,7 +128,7 @@ cbeam::cbeam(const deque<std::string> &inp) :
       OFFT = nullptr;
       choose_offt_bit = has_BIT;
     }
-    catch (bdf_float_error) {
+    catch (errors::float_error) {
       OFFT = bdf::types::get_val<std::string>(_OFFT, *pos);
       BIT = nullptr;
       choose_offt_bit = has_OFFT;
@@ -141,13 +142,13 @@ cbeam::cbeam(const deque<std::string> &inp) :
     try {
       X1 = bdf::types::get_val<double>(_X1, *(pos));
       if (!X2 || !X3) {
-        throw bdf_parse_error(
+        throw errors::parse_error(
           "CBEAM", "Incomplete direction vector.");
       }
       G0 = nullptr;
       choose_dir_code = has_DVEC;
     }
-    catch (bdf_float_error) {
+    catch (errors::float_error) {
       G0 = bdf::types::get_val<long>(_G0, *pos);
       X1 = nullptr;
       choose_dir_code = has_DCODE;
@@ -159,7 +160,7 @@ cbeam::cbeam(const deque<std::string> &inp) :
     EID = bdf::types::get_val<long>(_EID, *(pos++));
     break;
   default:
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "CBEAM", "Illegal number of entries for CBEAM");
   }
 
@@ -175,7 +176,7 @@ cbeam::cbeam(const deque<std::string> &inp) :
 };
 
 const std::ostream& cbeam::operator << (std::ostream& os) const {
-  throw bdf_error("can't write CBEAM.");
+  throw errors::error("can't write CBEAM.");
   return os;
 }
 

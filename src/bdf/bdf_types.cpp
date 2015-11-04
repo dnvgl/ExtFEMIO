@@ -21,6 +21,8 @@ namespace {
 #include "bdf/types.h"
 #include "extfem_string.h"
 
+using namespace ::dnvgl::extfem;
+
 bdf::types::base::base(const std::string &name) : name(name) {};
 
 bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;

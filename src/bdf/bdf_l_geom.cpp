@@ -25,7 +25,7 @@ namespace {
 #undef _TYPE
 #endif
 
-using namespace bdf::cards;
+using namespace ::dnvgl::extfem::bdf::cards;
 
 namespace {
   static const size_t dimnum1_len = 1;

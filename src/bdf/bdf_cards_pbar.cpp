@@ -15,14 +15,16 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "bdf/cards.h"
-
 #include <cstdlib>
 #include <memory>
 
-using namespace std;
-using namespace bdf::cards;
-using bdf::types::entry_type;;
+#include "bdf/cards.h"
+#include "bdf/errors.h"
+
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
+using ::dnvgl::extfem::bdf::types::entry_type;;
 
 const entry_type<double> pbar::_A(
   "A", bdf::type_bounds::bound<double>(
@@ -144,7 +146,7 @@ pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
     PID = bdf::types::get_val<long>(_PID, *(pos));
     break;
   default:
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "CBAR.", "Illegal number of entries.");
   }
 
@@ -165,7 +167,7 @@ pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
 }
 
 const std::ostream& pbar::operator << (std::ostream& os) const {
-  throw bdf_error("can't write PBAR.");
+  throw errors::error("can't write PBAR.");
   return os;
 }
 

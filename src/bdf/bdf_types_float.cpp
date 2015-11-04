@@ -32,10 +32,10 @@ namespace {
 #endif
 
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
-using namespace std;
-
-using namespace bdf::types;
+using namespace ::std;
+using namespace ::dnvgl::extfem::bdf::types;
 
 entry_type<double>::entry_type(std::string name) :
   bdf::types::base(name), bounds(bdf::type_bounds::bound<double>()) {};
@@ -95,12 +95,12 @@ double *entry_type<double>::operator() (const std::string &inp) const {
     if (this->bounds.does_allow_empty())
       return nullptr;
     if (!this->bounds.has_default())
-      throw bdf_float_error(name, "empty entry without default");
+      throw errors::float_error(name, "empty entry without default");
     *value = this->bounds.get_default();
   } else {
     if (! regex_match(sval, float_re)) {
       std::string msg("illegal input, no float");
-      throw bdf_float_error(name, msg + "; !" + sval + "!");
+      throw errors::float_error(name, msg + "; !" + sval + "!");
     }
 
 #ifdef HAVE_BOOST_REGEX_HPP
@@ -122,7 +122,7 @@ double *entry_type<double>::operator() (const std::string &inp) const {
     conv >> *value;
   }
   if (!this->bounds.in_bounds(value))
-    throw bdf_float_error(name, "boundary condition violated");
+    throw errors::float_error(name, "boundary condition violated");
   return value;
 }
 
@@ -164,7 +164,7 @@ std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
     msg << *inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";
-    throw bdf_output_error(name, msg.str());
+    throw errors::output_error(name, msg.str());
   }
 
 #ifdef _MSC_VER

@@ -15,49 +15,49 @@
 
 #include <memory>
 
-namespace bdf {
+namespace dnvgl {
+  namespace extfem {
+    namespace bdf {
+      namespace cards {
 
-  namespace cards {
+        class momforce_base : public card {
+          // Base class for handling forces and moments.
 
+        private:
 
-    class momforce_base : public card {
-      // Base class for handling forces and moments.
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _SID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _CID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N1;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N2;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N3;
 
-    private:
+        public:
 
-      static const bdf::types::entry_type<long> _SID;
-      static const bdf::types::entry_type<long> _G;
-      static const bdf::types::entry_type<long> _CID;
-      static const bdf::types::entry_type<double> _F;
-      static const bdf::types::entry_type<double> _N1;
-      static const bdf::types::entry_type<double> _N2;
-      static const bdf::types::entry_type<double> _N3;
+          std::unique_ptr<long> SID;
+          std::unique_ptr<long> G;
+          std::unique_ptr<long> CID;
+          std::unique_ptr<double> F;
+          std::unique_ptr<double> N1;
+          std::unique_ptr<double> N2;
+          std::unique_ptr<double> N3;
 
-    public:
+        protected:
 
-      std::unique_ptr<long> SID;
-      std::unique_ptr<long> G;
-      std::unique_ptr<long> CID;
-      std::unique_ptr<double> F;
-      std::unique_ptr<double> N1;
-      std::unique_ptr<double> N2;
-      std::unique_ptr<double> N3;
+          void add_collect(std::deque<std::unique_ptr<format_entry>>&,
+                           const momforce_base&) const;
 
-    protected:
+          DllExport momforce_base(const std::deque<std::string> &inp);
+          DllExport momforce_base(
+            const long *SID, const long *G, const long *CID,
+            const double *F,
+            const double *N1, const double *N2, const double *N3);
 
-      void add_collect(std::deque<std::unique_ptr<format_entry>>&,
-                       const momforce_base&) const;
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
-      DllExport momforce_base(const std::deque<std::string> &inp);
-      DllExport momforce_base(
-        const long *SID, const long *G, const long *CID,
-        const double *F,
-        const double *N1, const double *N2, const double *N3);
-
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
-
-    /*
+/*
 Handle Nastran Bulk FORCE entries.
 
 Static Force
@@ -88,35 +88,35 @@ Description:
 ``Ni``
   Components of a vector measured in coordinate system defined by CID.
   (Real; at least one Ni ≠ 0.0.)
-     */
+*/
 
-    class force : public momforce_base {
-      // Handle Nastran Bulk FORCE entries.
+        class force : public momforce_base {
+          // Handle Nastran Bulk FORCE entries.
 
-    private:
+        private:
 
-      static std::unique_ptr<bdf::types::base> head;
+          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head;
 
-    public:
+        public:
 
-      DllExport force(const std::deque<std::string> &inp) :
-        momforce_base(inp) {};
+          DllExport force(const std::deque<std::string> &inp) :
+            momforce_base(inp) {};
 
-      DllExport force(
-        const long *SID, const long *G, const long *CID,
-        const double *F,
-        const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-        momforce_base(SID, G, CID, F, N1, N2, N3) {};
+          DllExport force(
+            const long *SID, const long *G, const long *CID,
+            const double *F,
+            const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
+            momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-      DllExport const bdf::cards::types card_type(void) const {
-        return FORCE;
-      };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+            return FORCE;
+          };
 
-      DllExport friend std::ostream& operator<<(std::ostream&, const force&);
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport friend std::ostream& operator<<(std::ostream&, const force&);
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
-    /*
+/*
 Handle Nastran Bulk MOMENT entries.
 
 Static Force
@@ -149,30 +149,30 @@ Description:
   (Real; at least one Ni ≠ 0.0.)
      */
 
-    class moment : public momforce_base {
-      // Handle Nastran Bulk MOMENT entries.
+        class moment : public momforce_base {
+          // Handle Nastran Bulk MOMENT entries.
 
-    private:
+        private:
 
-      static std::unique_ptr<bdf::types::base> head;
+          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head;
 
-    public:
+        public:
 
-      DllExport moment(const std::deque<std::string> &inp) :
-        momforce_base(inp) {};
-      DllExport moment(
-        const long *SID, const long *G, const long *CID,
-        const double *F,
-        const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-        momforce_base(SID, G, CID, F, N1, N2, N3) {};
+          DllExport moment(const std::deque<std::string> &inp) :
+            momforce_base(inp) {};
+          DllExport moment(
+            const long *SID, const long *G, const long *CID,
+            const double *F,
+            const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
+            momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-      DllExport const bdf::cards::types card_type(void) const {
-        return MOMENT;
-      };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+            return MOMENT;
+          };
 
-      DllExport friend std::ostream& operator<<(std::ostream&, const moment&);
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport friend std::ostream& operator<<(std::ostream&, const moment&);
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
 
 /*
 Handle Nastran Bulk LOAD entries.
@@ -208,33 +208,35 @@ Description:
   Load set identification numbers defined on entry types listed above.
   (Integer > 0)
  */
-    class load : public card {
+        class load : public card {
 
-    private:
+        private:
 
-      static const bdf::types::entry_type<long> _SID;
-      static const bdf::types::entry_type<double> _S;
-      static const bdf::types::entry_type<double> _Si;
-      static const bdf::types::entry_type<long> _Li;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _SID;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _S;
+          static const ::dnvgl::extfem::bdf::types::entry_type<double> _Si;
+          static const ::dnvgl::extfem::bdf::types::entry_type<long> _Li;
 
-    public:
+        public:
 
-      std::unique_ptr<long> SID;
-      std::unique_ptr<double> S;
-      std::unique_ptr<std::deque<double>> Si;
-      std::unique_ptr<std::deque<long>> Li;
+          std::unique_ptr<long> SID;
+          std::unique_ptr<double> S;
+          std::unique_ptr<std::deque<double>> Si;
+          std::unique_ptr<std::deque<long>> Li;
 
-      DllExport load(const std::deque<std::string> &inp);
+          DllExport load(const std::deque<std::string> &inp);
 
-      DllExport load(long &SID, double &S,
-                     std::deque<double> &Si, std::deque<long> &Li);
+          DllExport load(long &SID, double &S,
+                         std::deque<double> &Si, std::deque<long> &Li);
 
-      DllExport const bdf::cards::types card_type(void) const {
-        return LOAD;
-      };
+          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+            return LOAD;
+          };
 
-      DllExport const std::ostream& operator << (std::ostream& os) const;
-    };
+          DllExport const std::ostream& operator << (std::ostream& os) const;
+        };
+      }
+    }
   }
 }
 

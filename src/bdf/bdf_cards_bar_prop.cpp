@@ -20,8 +20,9 @@ namespace {
 #include <cstdlib>
 #include <memory>
 
-using namespace std;
-using namespace bdf::cards;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 const entry_type<long> bar_prop::_PID(

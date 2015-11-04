@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="StdAfx.cpp">
@@ -70,7 +70,10 @@
     <ClCompile Include="bdf\bdf_l_geom.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="bdf\bdf_types.cpp">
+     <ClCompile Include="bdf\bdf_types.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+     <ClCompile Include="fem\fem_errors.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types_float.cpp">
@@ -101,6 +104,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\catch.hpp" />
+    <ClInclude Include="..\include\extfem_misc.h" />
+    <ClInclude Include="..\include\fem\errors.h" />
+    <ClInclude Include="..\include\fem\type_bounds.h" />
+    <ClInclude Include="..\include\fem\types.h" />
     <ClInclude Include="..\include\my_c++14.h">
       <Filter>Header</Filter>
     </ClInclude>

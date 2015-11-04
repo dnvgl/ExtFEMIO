@@ -18,8 +18,10 @@ namespace {
 #include <sstream>
 
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
-using namespace std;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
 using bdf::types::entry_type;
 
 entry_type<std::string>::entry_type(std::string name) :
@@ -36,7 +38,7 @@ std::string
     sval = bounds.get_default();
 
   if (!bounds.is_allowed(sval))
-    throw bdf_str_error(name, "!" + sval + "! Value not in list of allowed values.");
+    throw errors::str_error(name, "!" + sval + "! Value not in list of allowed values.");
 
   return new std::string(sval);
 }
@@ -68,7 +70,7 @@ std::string entry_type<std::string>::format(const std::unique_ptr<std::string> &
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
     msg << *inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";
-    throw bdf_int_error(name, msg.str());
+    throw errors::int_error(name, msg.str());
   }
   return out;
 }

@@ -16,9 +16,12 @@ namespace {
 }
 
 #include "bdf/cards.h"
+#include "bdf/errors.h"
 #include "extfem_string.h"
 
 using namespace std;
+using namespace dnvgl;
+using namespace extfem;
 using namespace bdf::cards;
 
 card::card(const deque<std::string> &inp) {}
@@ -49,7 +52,7 @@ std::string card::format_outlist(
       }
       res << p->first->format(p->second);
     }
-  } catch (bdf_int_error) {
+  } catch (errors::int_error) {
     res.seekp(0);
     i = 0;
     bdf::types::base::out_form = bdf::types::LONG;

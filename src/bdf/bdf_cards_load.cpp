@@ -17,9 +17,11 @@ namespace {
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
-using namespace std;
-using namespace bdf::cards;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 const entry_type<long> load::_SID(
@@ -52,7 +54,7 @@ load::load(const std::deque<std::string> &inp) :
   goto end;
 
  invalid:
-  throw bdf_parse_error("LOAD", "Illegal number of entries.");
+  throw errors::parse_error("LOAD", "Illegal number of entries.");
  end: ;
 }
 

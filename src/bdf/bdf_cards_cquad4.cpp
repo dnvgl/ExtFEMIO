@@ -16,10 +16,12 @@ namespace {
 }
 
 #include "bdf/cards.h"
+#include "bdf/errors.h"
 
 #include <memory>
 
-using namespace std;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -61,13 +63,13 @@ cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
       MCID = nullptr;
       choose_mcid_theta = has_THETA;
     }
-    catch (bdf_float_error) {
+    catch (errors::float_error) {
       try {
         MCID = bdf::types::get_val<long>(_MCID, *pos);
         THETA = nullptr;
         choose_mcid_theta = has_MCID;
       }
-      catch (bdf_int_error) {
+      catch (errors::int_error) {
         THETA = make_unique<double>(0.0);
         MCID = nullptr;
         choose_mcid_theta = has_THETA;
@@ -83,7 +85,7 @@ cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
     EID = bdf::types::get_val<long>(_EID, *pos);
     break;
   default:
-    throw bdf_parse_error("CQUAD4", "Illegal number of entries.");
+    throw errors::parse_error("CQUAD4", "Illegal number of entries.");
   }
 
   if (!THETA && !MCID)
@@ -97,7 +99,7 @@ cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
 }
 
 const std::ostream& cquad4::operator << (std::ostream& os) const {
-  throw bdf_error("can't write CQUAD4.");
+  throw errors::error("can't write CQUAD4.");
   return os;
 }
 

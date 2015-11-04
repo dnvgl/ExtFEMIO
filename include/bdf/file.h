@@ -21,47 +21,51 @@
 #include <locale>
 #include <sstream>
 
-#ifdef _MSC_VER
-#define DllExport   __declspec( dllexport )
-#else
-#define DllExport
-#endif
+#include "extfem_misc.h"
 
-namespace bdf {
+namespace dnvgl {
+  namespace extfem {
+    namespace bdf {
+      namespace input {
 
-  namespace input {
-    struct line_reader : std::ctype<char> {
-      line_reader() : ctype(make_table()) { }
-    private:
-      static mask* make_table() {
-        const mask* classic = classic_table();
-        static std::vector<mask> v(classic, classic + table_size);
-        v[' '] &= ~space;
-        return &v[0];
+        struct line_reader : std::ctype<char> {
+
+          line_reader() : ctype(make_table()) { }
+
+        private:
+
+          static mask* make_table() {
+            const mask* classic = classic_table();
+            static std::vector<mask> v(classic, classic + table_size);
+            v[' '] &= ~space;
+            return &v[0];
+          }
+        };
+
+        class bdf_file {
+
+        private:
+
+          static const std::set<char> cont_chars;
+          std::string cur_line;
+          std::istream &data;
+
+        public:
+
+          std::string last_comment;
+
+          bool eof;
+
+          DllExport bdf_file(std::istream&);
+
+          DllExport std::deque<std::string>& get();
+
+          // actual byte position (hopefully no bdf > 2Gybte will be
+          // readin....)
+          DllExport long pos();
+        };
       }
-    };
-
-    class bdf_file {
-
-    private:
-
-      static const std::set<char> cont_chars;
-      std::string cur_line;
-      std::istream &data;
-
-    public:
-
-      std::string last_comment;
-
-      bool eof;
-
-      DllExport bdf_file(std::istream&);
-
-      DllExport std::deque<std::string>& get();
-
-      // actual byte position (hopefully no bdf > 2Gybte will be readin....)
-      DllExport long pos();
-    };
+    }
   }
 }
 

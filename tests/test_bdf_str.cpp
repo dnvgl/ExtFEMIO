@@ -27,19 +27,20 @@ namespace {
 #endif
 #include "bdf/types.h"
 
-CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf;
+using namespace ::dnvgl::extfem::bdf::types;
+
+CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return Catch::toString( ex() );
 }
-
-using namespace bdf;
-using namespace bdf::types;
 
 TEST_CASE("BDF str types parsing.", "[bdf_types]" ) {
 
   const char* _allowed[3] = { "ONE", "TWO", "THREE" };
   const ::std::set<::std::string> allowed(_allowed, _allowed+3);
-  ::bdf::type_bounds::bound<::std::string> str_allowed(allowed);
-  ::bdf::type_bounds::bound<::std::string> str_allowed_default(allowed, "ONE");
+  type_bounds::bound<::std::string> str_allowed(allowed);
+  type_bounds::bound<::std::string> str_allowed_default(allowed, "ONE");
 
   SECTION("'TEST    '") {
     entry_type<::std::string> obj("dummy");

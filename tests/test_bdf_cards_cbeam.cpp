@@ -24,7 +24,11 @@ namespace {
 #endif
 #include "bdf/cards.h"
 
-CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+using namespace ::std;
+using namespace ::dnvgl::extfem::bdf;
+using namespace ::dnvgl::extfem::bdf::cards;
+
+CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return ex();
 }
 
@@ -32,8 +36,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
   return ex;
 }
 
-using namespace std;
-using namespace bdf::cards;
+using namespace ::std;
+using namespace ::dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
 

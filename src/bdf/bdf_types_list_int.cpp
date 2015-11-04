@@ -24,8 +24,11 @@ namespace {
 #include <sstream>
 
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
-using namespace std;
+using namespace ::std;
+using namespace ::dnvgl;
+using namespace extfem;
 
 #ifdef __GNUC__
 using boost::regex;
@@ -42,7 +45,7 @@ entry_type<std::deque<int>>::operator() (const std::string &inp) const {
   auto sval = extfem::string::string(inp).trim();
   if (! regex_match(sval, int_re)) {
     std::string msg(name + ":illegal input (""");
-    throw bdf_types_error(msg + sval + """), no integer in list");
+    throw errors::types_error(msg + sval + """), no integer in list");
   }
   for (auto pos = sval.begin();
        pos != sval.end(); ++pos)
@@ -82,7 +85,7 @@ std::string entry_type<std::deque<int>>::format(const std::unique_ptr<std::deque
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
     msg << inp_proc << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";
-    throw bdf_output_error(name, msg.str());
+    throw errors::output_error(name, msg.str());
   }
   return out;
 }

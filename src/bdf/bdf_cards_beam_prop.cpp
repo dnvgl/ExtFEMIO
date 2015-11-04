@@ -21,6 +21,7 @@ namespace {
 #include <memory>
 
 using namespace std;
+using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 

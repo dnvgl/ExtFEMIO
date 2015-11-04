@@ -27,7 +27,9 @@ namespace {
 #endif
 #include "bdf/types.h"
 
-CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+using namespace ::dnvgl::extfem;
+
+CATCH_TRANSLATE_EXCEPTION( bdf::errors::error& ex ) {
   return Catch::toString( ex() );
 }
 
@@ -35,9 +37,9 @@ using namespace bdf::types;
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-  ::bdf::types::base* obj_int = new entry_type<long>("dummy1");
-  ::bdf::types::base* obj_float = new entry_type<double>("dummy2");
-  ::bdf::types::base* obj_list = new entry_type<::std::deque<int>>("dummy 3");
+  bdf::types::base* obj_int = new entry_type<long>("dummy1");
+  bdf::types::base* obj_float = new entry_type<double>("dummy2");
+  bdf::types::base* obj_list = new entry_type<::std::deque<int>>("dummy 3");
 
   SECTION("Checking 'entry_type<long>.type' against 'Int'") {
     CHECK(entry_type<long>("dummy idiot").type() == Int);

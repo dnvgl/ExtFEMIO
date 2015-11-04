@@ -1,11 +1,11 @@
-/* Copyright (C) 2015 by DNV GL SE */
+/* Copyright © 2015 by DNV GL SE */
 
 /*
-   Definitions for Nastran Bulk data entry types.
+  Purpose: Definitions for entry types for DNV GL FEM file records.
 
-   Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+ */
 
-*/
 /* ID: $Id$
  */
 
@@ -13,8 +13,8 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20150407_BDF_TYPES
-#define _BERHOL20150407_BDF_TYPES
+#if !defined _BERHOL20151102_TYPES
+#define _BERHOL20151102_TYPES
 
 #include <string>
 #include <deque>
@@ -35,60 +35,35 @@
 #include <regex>
 #endif
 
-#include <my_c++14.h>
+#include "my_c++14.h"
 
-#include "bdf/errors.h"
 #include "extfem_string.h"
-#include "bdf/type_bounds.h"
+#include "fem/type_bounds.h"
+#include "fem/errors.h"
 
 namespace dnvgl {
   namespace extfem {
-    namespace bdf {
+    namespace fem {
       namespace types {
 
-        typedef enum {
-          None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
-
-        typedef enum {LONG=16, SHORT=8, FREE=-1} out_form_type;
+        typedef enum { None, Comment, Int, Float, Str, List, Blank } fem_types;
 
         class base {
 
         protected:
 
-          static const bdf_types _type;
+          static const fem_types _type;
           std::string name;
 
         public:
-
-          static out_form_type out_form;
 
           base(const std::string &name);
 
           ~base() {};
 
-          virtual bdf_types type() const = 0;
-
-          template <class T1, class T2>
-          friend inline bool operator> (const T1 &one, const T2 &other) {
-            return other < one;
-          };
-
-          template <class T1, class T2>
-          friend inline bool operator!= (const T1 &one, const T2 &other) {
-            return !(other == one);
-          };
+          virtual fem_types type() const = 0;
 
           virtual std::string format(const void*) const = 0;
-        };
-
-        class card : public base {
-        public:
-
-          card(const std::string &name) : base(name) {};
-
-          bdf_types type(void) const {return None;};
-
-          std::string format(const void* d) const;
         };
 
         class empty : public base {
@@ -97,20 +72,10 @@ namespace dnvgl {
 
           empty(void) : base("") {};
 
-          bdf_types type(void) const {return None;};
+          fem_types type(void) const {return None;};
 
           std::string format(const void* d) const;
         };
-
-        inline bool operator== (const base &one,
-                                const base &other) {
-          return (one.type() == other.type());
-        }
-
-        inline bool operator< (const base &one,
-                               const base &other) {
-          return (one.type() < other.type());
-        }
 
         template <class T>
         class entry_type : public base {
@@ -123,7 +88,7 @@ namespace dnvgl {
 
         private:
 
-          ::dnvgl::extfem::bdf::type_bounds::bound<long> bounds;
+          ::dnvgl::extfem::fem::type_bounds::bound<long> bounds;
           static const
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex
@@ -134,22 +99,22 @@ namespace dnvgl {
 
         protected:
 
-          static const bdf_types _type = Int;
+          static const fem_types _type = Int;
 
         public:
 
           entry_type<long>(std::string);
 
-          entry_type<long>(std::string, ::dnvgl::extfem::bdf::type_bounds::bound<long>);
+          entry_type<long>(std::string, ::dnvgl::extfem::fem::type_bounds::bound<long>);
 
           long *operator() (const std::string&) const;
 
-          bdf_types type() const { return _type; };
+          fem_types type() const { return _type; };
 
           std::string format(const std::unique_ptr<long>&) const;
           std::string format(const void *v) const {
             if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+              return empty().format(nullptr);
             else {
               long val(*((long*)v));
               std::unique_ptr<long> vp;
@@ -166,7 +131,7 @@ namespace dnvgl {
 
         private:
 
-          ::dnvgl::extfem::bdf::type_bounds::bound<double> bounds;
+          ::dnvgl::extfem::fem::type_bounds::bound<double> bounds;
           static const
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex
@@ -191,22 +156,22 @@ namespace dnvgl {
 
         protected:
 
-          static const bdf_types _type = Float;
+          static const fem_types _type = Float;
 
         public:
 
           entry_type<double>(std::string);
 
-          entry_type<double>(std::string, ::dnvgl::extfem::bdf::type_bounds::bound<double>);
+          entry_type<double>(std::string, ::dnvgl::extfem::fem::type_bounds::bound<double>);
 
           double *operator() (const std::string&) const;
 
-          bdf_types type() const {return _type;};
+          fem_types type() const {return _type;};
 
           std::string format(const std::unique_ptr<double>&) const;
           std::string format(const void *v) const {
             if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+              return empty().format(nullptr);
             else {
               double val(*((double*)v));
               std::unique_ptr<double> vp;
@@ -223,28 +188,28 @@ namespace dnvgl {
 
         private:
 
-          ::dnvgl::extfem::bdf::type_bounds::bound<std::string> bounds;
+          ::dnvgl::extfem::fem::type_bounds::bound<std::string> bounds;
 
-    protected:
+        protected:
 
-          static const bdf_types _type = Str;
+          static const fem_types _type = Str;
 
         public:
 
           entry_type<std::string>(std::string);
 
-          entry_type<std::string>(std::string, ::dnvgl::extfem::bdf::type_bounds::bound<std::string>);
+          entry_type<std::string>(std::string, ::dnvgl::extfem::fem::type_bounds::bound<std::string>);
 
           std::string *operator() (const std::string &) const;
 
-          bdf_types type() const {
+          fem_types type() const {
             return _type;
           }
 
           std::string format(const std::unique_ptr<std::string>&) const;
           std::string format(const void *v) const {
             if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+              return empty().format(nullptr);
             else {
               std::string val(*((std::string*)v));
               std::unique_ptr<std::string> vp;
@@ -261,17 +226,17 @@ namespace dnvgl {
 
         private:
 
-          static const
+        static const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+          boost::regex
 #else
-            std::regex
+          std::regex
 #endif
-            int_re;
+          int_re;
 
         protected:
 
-          static const bdf_types _type = List;
+          static const fem_types _type = List;
 
         public:
 
@@ -280,12 +245,12 @@ namespace dnvgl {
 
           std::deque<int>* operator() (const std::string&) const;
 
-          inline bdf_types type() const {return _type;};
+          inline fem_types type() const {return _type;};
 
           std::string format(const std::unique_ptr<std::deque<int>>&) const;
           std::string format(const void *v) const {
             if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+              return empty().format(nullptr);
             else {
               std::deque<int> val(((std::deque<int>*)v)->begin(), ((std::deque<int>*)v)->end());
               std::unique_ptr<std::deque<int>> vp;
@@ -297,7 +262,7 @@ namespace dnvgl {
 
         template <class T> inline
         std::unique_ptr<T>
-        get_val(const ::dnvgl::extfem::bdf::types::entry_type<T> &t, const std::string &inp) {
+        get_val(const entry_type<T> &t, const std::string &inp) {
           T *dummy = t(inp);
           if (!dummy)
             return nullptr;
@@ -313,20 +278,20 @@ namespace dnvgl {
           else
             return std::make_unique<T>(*inp);
         }
-      };
+      }
     }
   }
 }
 
-#endif // _BERHOL20150407_BDF_TYPES
+#endif // _BERHOL20151102_TYPES
 
 /*
   Local Variables:
-  mode: c++
+  mode: C++
   ispell-local-dictionary: "english"
   c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make -C ../.. check -j 8"
-  coding:u tf-8
+  compile-command: "make -C ../.. check -j8"
+  coding: utf-8
   End:
-*/
+ */

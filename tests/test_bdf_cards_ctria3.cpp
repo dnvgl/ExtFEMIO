@@ -23,14 +23,17 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf/cards.h"
 
-CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+#include "bdf/cards.h"
+#include "bdf/errors.h"
+
+using namespace ::std;
+using namespace ::dnvgl::extfem::bdf;
+using namespace ::dnvgl::extfem::bdf::cards;
+
+CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return Catch::toString( ex() );
 }
-
-using namespace std;
-using namespace bdf::cards;
 
 TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
           "[bdf_ctria3]" ) {

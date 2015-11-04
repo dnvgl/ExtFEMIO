@@ -22,9 +22,11 @@ namespace {
 #include <sstream>
 
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
 using namespace std;
-using bdf::types::entry_type;
+using namespace ::dnvgl;
+using extfem::bdf::types::entry_type;
 
 entry_type<long>::entry_type(std::string name) :
   bdf::types::base(name), bounds(*(std::make_unique< bdf::type_bounds::bound<long> >())) {};
@@ -48,7 +50,7 @@ long *entry_type<long>::operator() (const std::string &inp) const {
     if (this->bounds.does_allow_empty())
       return nullptr;
     if (!this->bounds.has_default())
-      throw bdf_int_error(name, "empty entry without default");
+      throw errors::int_error(name, "empty entry without default");
     *value = this->bounds.get_default();
     return value;
   } else {
@@ -56,14 +58,14 @@ long *entry_type<long>::operator() (const std::string &inp) const {
       std::string msg("illegal input (""");
       msg += inp;
       msg += """), no integer";
-      throw bdf_int_error(name, msg);
+      throw errors::int_error(name, msg);
     }
     istringstream buffer(sval);
     buffer >> *value;
   }
   if (!this->bounds.in_bounds(value)) {
     std::string msg("boundary condition violated (");
-    throw bdf_int_error(name, msg + name + ")\n(""" + inp + """)");
+    throw errors::int_error(name, msg + name + ")\n(""" + inp + """)");
   }
   return value;
 }
@@ -94,7 +96,7 @@ std::string entry_type<long>::format(const std::unique_ptr<long> &inp) const {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
     msg << *inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";
-    throw bdf_int_error(name, msg.str());
+    throw errors::int_error(name, msg.str());
   }
   return out;
 }

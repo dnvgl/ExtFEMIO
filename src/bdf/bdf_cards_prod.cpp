@@ -16,13 +16,15 @@ namespace {
 }
 
 #include "bdf/cards.h"
+#include "bdf/errors.h"
 
 #include <cstdlib>
 #include <memory>
 
 using namespace std;
-using namespace bdf::cards;
-using bdf::types::entry_type;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
+using ::dnvgl::extfem::bdf::types::entry_type;
 
 const entry_type<long> prod::_PID(
   "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
@@ -64,7 +66,7 @@ prod::prod(const deque<std::string> &inp) : card(inp) {
     PID = bdf::types::get_val<long>(_PID, *(pos));
     break;
   default:
-    throw bdf_parse_error(
+    throw errors::parse_error(
       "CBAR.", "Illegal number of entries.");
   }
 
@@ -72,7 +74,7 @@ prod::prod(const deque<std::string> &inp) : card(inp) {
 }
 
 const std::ostream& prod::operator << (std::ostream& os) const {
-  throw bdf_error("can't write PROD.");
+  throw errors::error("can't write PROD.");
   return os;
 }
 

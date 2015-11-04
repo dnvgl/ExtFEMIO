@@ -1,10 +1,8 @@
 // Copyright © 2015 by DNV GL SE
 
-// Purpose: Error handling for processing BDF data.
+// Purpose: Error Handling for processing FEM data.
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-
-#include "StdAfx.h"
 
 // ID:
 namespace {
@@ -15,9 +13,11 @@ namespace {
     = "@(#) $Id$";
 }
 
-#include "bdf/errors.h"
+#include <string>
 
-using namespace ::dnvgl::extfem::bdf::errors;
+#include "fem/errors.h"
+
+using namespace ::dnvgl::extfem::fem::errors;
 
 error::error(
   const std::string &msg, const std::string &err_class) :
@@ -76,5 +76,5 @@ parse_error::parse_error(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

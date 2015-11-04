@@ -22,7 +22,8 @@ namespace {
 #include "bdf/cards.h"
 #include "bdf/types.h"
 
-using namespace std;
+using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -80,7 +81,7 @@ grid::grid(const deque<std::string> &inp) : card(inp) {
     ID = bdf::types::get_val<long>(_ID, *pos);
     break;
   default:
-    throw bdf_parse_error("GRID", "Illegal number of entries.");
+    throw errors::parse_error("GRID", "Illegal number of entries.");
   }
 
   if (!SEID) SEID = bdf::types::get_val<long>(_SEID, "");
@@ -98,7 +99,7 @@ grid::grid(long &_ID, long &_CP, double &_X1, double &_X2, double &_X3) : card()
 }
 
 const std::ostream& grid::operator << (std::ostream& os) const {
-  throw bdf_error("can't write GRID.");
+  throw errors::error("can't write GRID.");
   return os;
 }
 

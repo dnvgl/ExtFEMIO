@@ -16,11 +16,13 @@ namespace {
 }
 
 #include "bdf/cards.h"
+#include "bdf/errors.h"
 
 #include <memory>
 
 using namespace std;
-using namespace bdf::cards;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 
@@ -65,13 +67,13 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
       MCID = nullptr;
       choose_mcid_theta = has_THETA;
     }
-    catch (bdf_float_error) {
+    catch (errors::float_error) {
       try {
         MCID = bdf::types::get_val<long>(_MCID, *pos);
         THETA = nullptr;
         choose_mcid_theta = has_MCID;
       }
-      catch (bdf_int_error) {
+      catch (errors::int_error) {
         THETA = make_unique<double>(0.0);
         MCID = nullptr;
         choose_mcid_theta = has_THETA;
@@ -87,7 +89,7 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
     EID = bdf::types::get_val<long>(_EID, *pos);
     break;
   default:
-    throw bdf_parse_error("CTRIA3", "Illegal number of entries.");
+    throw errors::parse_error("CTRIA3", "Illegal number of entries.");
   }
 
   if (!THETA && !MCID)
@@ -102,7 +104,7 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
 }
 
 const std::ostream& ctria3::operator << (std::ostream& os) const {
-  throw bdf_error("can't write cbeam.");
+  throw errors::error("can't write cbeam.");
   return os;
 }
 

@@ -25,44 +25,47 @@ namespace {
 #ifndef _MSC_VER
 #include <config.h>
 #endif
-#include "bdf/types.h"
 
-CATCH_TRANSLATE_EXCEPTION( bdf_error& ex ) {
+#include "bdf/types.h"
+#include "bdf/errors.h"
+
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::bdf;
+using namespace ::dnvgl::extfem::bdf::types;
+
+CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return Catch::toString( ex() );
 }
-
-using namespace bdf;
-using namespace bdf::types;
 
 TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
 
   SECTION("'   2    '") {
-    entry_type<long> obj("dummy", ::bdf::type_bounds::bound<long>(new long(1)));
+    entry_type<long> obj("dummy", type_bounds::bound<long>(new long(1)));
     CHECK(*obj("   2    ") == 2);
   }
 
   SECTION("'       2'") {
-    entry_type<long> obj("dummy", ::bdf::type_bounds::bound<long>(new long(0)));
+    entry_type<long> obj("dummy", type_bounds::bound<long>(new long(0)));
     CHECK(*obj("       2") == 2);
   }
 
   SECTION("'2       '") {
-    entry_type<long> obj("dummy", ::bdf::type_bounds::bound<long>(new long(0), NULL, new long(0)));
+    entry_type<long> obj("dummy", type_bounds::bound<long>(new long(0), NULL, new long(0)));
     CHECK(*obj("2       ") == 2);
   }
 
   SECTION("'    -1  '") {
-    entry_type<long> obj("dummy", ::bdf::type_bounds::bound<long>(new long(-1), NULL, new long(0)));
+    entry_type<long> obj("dummy", type_bounds::bound<long>(new long(-1), NULL, new long(0)));
     CHECK(*obj("    -1  ") == -1);
   }
 
   SECTION("default 1") {
-    entry_type<long> obj("dummy", ::bdf::type_bounds::bound<long>(new long(-1), NULL, new long(0)));
+    entry_type<long> obj("dummy", type_bounds::bound<long>(new long(-1), NULL, new long(0)));
     CHECK(*obj("        ") == 0);
   }
 
   SECTION("default 2") {
-    entry_type<long> obj("dummy", ::bdf::type_bounds::bound<long>(new long(-1), NULL, new long(100)));
+    entry_type<long> obj("dummy", type_bounds::bound<long>(new long(-1), NULL, new long(100)));
     CHECK(*obj("        ") == 100);
   }
 
