@@ -19,11 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
+    <ProjectGuid>{44003FB4-D082-4A15-AAF5-9A8A3BE1C596}</ProjectGuid>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>ConsoleApplication1</RootNamespace>
-    <ProjectName>test_bdf_cards</ProjectName>
-    <ProjectGuid>{FBEF6AC1-116A-4B1F-8E3F-162224B8F1DE}</ProjectGuid>
+    <RootNamespace>test_bdf_cards</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,17 +77,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
     <IntDir>$(Platform)\$(Configuration)\test_bdf_cards\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_bdf_cards\</IntDir>
+    <IntDir>$(Configuration)\test_bdf_cards</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\test_bdf_cards\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\\test_bdf_cards</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -101,7 +108,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>bdfreadpp.lib</AdditionalDependencies>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
@@ -117,7 +124,23 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>bdfreadpp.lib</AdditionalDependencies>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
@@ -132,7 +155,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>bdfreadpp.lib</AdditionalDependencies>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
@@ -147,7 +170,22 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>bdfreadpp.lib</AdditionalDependencies>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
@@ -156,6 +194,13 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_bdf_cards.cpp" />
@@ -178,16 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\bdf\cards.h" />
-    <ClInclude Include="..\include\bdf\cards_elements.h" />
-    <ClInclude Include="..\include\bdf\cards_loads.h" />
-    <ClInclude Include="..\include\bdf\cards_properties.h" />
-    <ClInclude Include="..\include\bdf\errors.h" />
     <ClInclude Include="..\include\bdf\file.h" />
     <ClInclude Include="..\include\bdf\string.h" />
     <ClInclude Include="..\include\bdf\types.h" />
-    <ClInclude Include="..\include\bdf\type_bounds.h" />
-    <ClInclude Include="..\include\my_c++14.h" />
-    <ClInclude Include="..\include\stdafx.h" />
     <ClInclude Include="..\include\catch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

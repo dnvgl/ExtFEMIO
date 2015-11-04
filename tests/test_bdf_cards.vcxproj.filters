@@ -1,104 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="test_bdf_cards.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_cbar.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_cbeam.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_cquad4.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_crod.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_ctria3.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_force.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_grid.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_load.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_mat1.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_moment.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_pbar.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_pbarl.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_pbeam.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_pbeaml.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_prod.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="test_bdf_cards_pshell.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{ccb728eb-ed84-4eb4-97ed-f90bfaf7ab24}</UniqueIdentifier>
-      <Extensions>cpp</Extensions>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header">
-      <UniqueIdentifier>{a64d1afb-34c8-409e-b8b4-b9a5302e4ea6}</UniqueIdentifier>
-      <Extensions>h</Extensions>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\catch.hpp">
-      <Filter>Header</Filter>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\my_c++14.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\stdafx.h">
-      <Filter>Header</Filter>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bdf\cards.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\cards_elements.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\cards_loads.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\cards_properties.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\errors.h">
-      <Filter>Header</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bdf\file.h">
-      <Filter>Header</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bdf\string.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\type_bounds.h">
-      <Filter>Header</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bdf\types.h">
-      <Filter>Header</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\catch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test_bdf_cards.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_cbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_cbeam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_cquad4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_crod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_ctria3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_force.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_grid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_load.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_mat1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_moment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_pbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_pbarl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_pbeam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_pbeaml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_prod.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_bdf_cards_pshell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -18,6 +18,7 @@ namespace {
 #include "bdf/cards.h"
 
 using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 using ::dnvgl::extfem::bdf::types::entry_type;

@@ -26,7 +26,8 @@ namespace {
 
 using namespace std;
 using namespace ::dnvgl;
-using extfem::bdf::types::entry_type;
+using namespace extfem;
+using bdf::types::entry_type;
 
 entry_type<long>::entry_type(std::string name) :
   bdf::types::base(name), bounds(*(std::make_unique< bdf::type_bounds::bound<long> >())) {};

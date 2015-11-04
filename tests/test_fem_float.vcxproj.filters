@@ -1,27 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{6d213d14-8a72-4c95-a4e5-f7116a78c010}</UniqueIdentifier>
-      <Extensions>cpp</Extensions>
-    </Filter>
+    <ClInclude Include="..\include\fem\cards.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\catch.hpp">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\file.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\string.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\types.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <Filter Include="Header">
-      <UniqueIdentifier>{36a387ea-a300-4bc4-aa27-2e80da0098c9}</UniqueIdentifier>
-      <Extensions>h</Extensions>
+      <UniqueIdentifier>{545a4618-7c27-43f7-84ae-0d67a1b7cd67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4563dfd8-d625-4fe5-889b-c6df610817a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_fem_float.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    </ClInclude>
-    <ClInclude Include="..\include\extfem_string.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\fem\types.h">
-      <Filter>Header</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

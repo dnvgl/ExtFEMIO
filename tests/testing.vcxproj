@@ -167,6 +167,9 @@ $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
 echo ==================== test_bdf_cards ====================
 $(OutputPath)test_bdf_cards.exe
 $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit.xml
+echo ==================== test_bdf_cards ====================
+$(OutputPath)test_fem_float.exe
+$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_junit.xml
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>

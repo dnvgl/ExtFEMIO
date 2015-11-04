@@ -1,147 +1,175 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="StdAfx.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="bdf\bdf_cards.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_bar_prop.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_beam_prop.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_cbar.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_cbeam.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_cquad4.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_crod.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_ctria3.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_grid.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_load.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_mat1.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_momforce_base.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_pbar.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_pbarl.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_pbeam.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_pbeaml.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_prod.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_pshell.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_cards_shell.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_errors.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_file.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_l_geom.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
-     <ClCompile Include="bdf\bdf_types.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-     <ClCompile Include="fem\fem_errors.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="bdf\bdf_types.cpp">
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types_float.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types_int.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types_list_int.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types_str.cpp">
-      <Filter>Source</Filter>
+      <Filter>BDF\Source</Filter>
     </ClCompile>
     <ClCompile Include="extfem_string.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_errors.cpp">
+      <Filter>FEM\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header">
+    <Filter Include="BDF">
+      <UniqueIdentifier>{7450dca1-5a64-424e-af18-d63f5dcfee0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BDF\Header">
       <UniqueIdentifier>{1faadb87-3964-4127-9e75-c97d96b97788}</UniqueIdentifier>
       <Extensions>h</Extensions>
     </Filter>
-    <Filter Include="Source">
+    <Filter Include="BDF\Source">
       <UniqueIdentifier>{36474784-e91c-44e3-bbb0-5163c21a87bd}</UniqueIdentifier>
       <Extensions>cpp</Extensions>
     </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{7b858452-1df7-45e6-8a19-e097a4bd867a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{d4c8d886-9794-4f4b-914b-2ba7cc665749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FEM">
+      <UniqueIdentifier>{7470f512-a0bf-471c-90ca-8a0eedc55135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FEM\Header">
+      <UniqueIdentifier>{b9b26207-6f69-40f8-837b-30919625b3d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FEM\Source">
+      <UniqueIdentifier>{146dbfef-81c9-4ad7-bdd1-0f36c41b7c8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\catch.hpp" />
-    <ClInclude Include="..\include\extfem_misc.h" />
-    <ClInclude Include="..\include\fem\errors.h" />
-    <ClInclude Include="..\include\fem\type_bounds.h" />
-    <ClInclude Include="..\include\fem\types.h" />
+    <ClInclude Include="..\include\bdf\cards.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\cards_elements.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\cards_loads.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\cards_properties.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\errors.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\file.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\type_bounds.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\types.h">
+      <Filter>BDF\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\catch.hpp">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\errors.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\extfem_misc.h">
+      <Filter>Header</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\my_c++14.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\resource.h">
-      <Filter>Header</Filter>
+    <ClInclude Include="..\include\fem\types.h">
+      <Filter>FEM\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\type_bounds.h">
+      <Filter>FEM\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\include\StdAfx.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdf\cards.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\cards_elements.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\cards_loads.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\cards_properties.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\errors.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\file.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\type_bounds.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\bdf\types.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\extfem_string.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\resource.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

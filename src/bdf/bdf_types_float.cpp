@@ -35,6 +35,7 @@ namespace {
 #include "bdf/errors.h"
 
 using namespace ::std;
+using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::types;
 
 entry_type<double>::entry_type(std::string name) :
