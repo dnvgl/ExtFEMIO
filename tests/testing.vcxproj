@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -113,9 +113,9 @@ $(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
 $(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
-echo ==================== test_bdf_string ====================
-$(OutputPath)test_bdf_string.exe
-$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit.xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
 $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
@@ -158,9 +158,9 @@ $(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
 $(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
-echo ==================== test_bdf_string ====================
-$(OutputPath)test_bdf_string.exe
-$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit.xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
 $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
@@ -209,9 +209,9 @@ $(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
 $(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
-echo ==================== test_bdf_string ====================
-$(OutputPath)test_bdf_string.exe
-$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit.xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
 $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
@@ -254,9 +254,9 @@ $(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
 $(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
-echo ==================== test_bdf_string ====================
-$(OutputPath)test_bdf_string.exe
-$(OutputPath)test_bdf_string.exe --reporter junit &gt; test_bdf_string_junit.xml
+echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit.xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
 $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
