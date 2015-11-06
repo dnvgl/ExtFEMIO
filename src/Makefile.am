@@ -50,6 +50,8 @@ libextfemread_la_SOURCES += bdf/bdf_cards_momforce_base.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_load.cpp
 
 libextfemread_la_SOURCES += fem/fem_errors.cpp
+libextfemread_la_SOURCES += fem/fem_types.cpp
+libextfemread_la_SOURCES += fem/fem_types_float.cpp
 
 # Local Variables:
 # mode: makefile

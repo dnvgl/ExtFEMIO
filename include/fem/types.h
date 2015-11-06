@@ -66,6 +66,16 @@ namespace dnvgl {
           virtual std::string format(const void*) const = 0;
         };
 
+        class card : public base {
+        public:
+
+          card(const std::string &name) : base(name) {};
+
+          fem_types type(void) const {return None;};
+
+          std::string format(const void* d) const;
+        };
+
         class empty : public base {
 
         public:
@@ -132,13 +142,7 @@ namespace dnvgl {
         private:
 
           ::dnvgl::extfem::fem::type_bounds::bound<double> bounds;
-          static const
-#ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
-#else
-          std::regex
-#endif
-          float_exp_re;
+
           static const
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex
@@ -146,6 +150,7 @@ namespace dnvgl {
           std::regex
 #endif
           float_re;
+
           static const
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex

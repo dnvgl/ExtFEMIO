@@ -1,0 +1,158 @@
+// Copyright © 2015 by DNV GL SE
+
+// Definitions for SESAM FEM entry types.
+
+// Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+
+#include "StdAfx.h"
+
+// ID:
+namespace {
+  const char  cID[]
+#ifdef __GNUC__
+  __attribute__ ((__unused__))
+#endif
+    = "@(#) $Id$";
+}
+
+#include <sstream>
+
+#ifdef __GNUC__
+#include "config.h"
+#endif
+
+#ifdef _MSC_VER
+#include <stdio.h>
+#endif
+
+#ifdef HAVE_BOOST_REGEX_HPP
+#include <boost/regex.hpp>
+#else
+#include <regex>
+#endif
+
+#include "fem/types.h"
+#include "fem/errors.h"
+
+using namespace ::std;
+using namespace ::dnvgl::extfem;
+using namespace ::dnvgl::extfem::fem::types;
+
+entry_type<double>::entry_type(std::string name) :
+  fem::types::base(name), bounds(fem::type_bounds::bound<double>()) {};
+
+entry_type<double>::entry_type(std::string name, fem::type_bounds::bound<double> bounds) :
+  fem::types::base(name), bounds(bounds) {};
+
+const
+#ifdef HAVE_BOOST_REGEX_HPP
+boost::regex
+#else
+std::regex
+#endif
+entry_type<double>::float_re(
+  "([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
+  "[.][0-9]+)(([Ee][+-]?)[0-9]+)?",
+#ifdef HAVE_BOOST_REGEX_HPP
+  boost::regex_constants::ECMAScript);
+#else
+  std::regex_constants::ECMAScript);
+#endif
+
+const
+#ifdef HAVE_BOOST_REGEX_HPP
+boost::regex
+#else
+std::regex
+#endif
+entry_type<double>::float_lead_dot(
+  "^[\\+-]?[.][0-9]+",
+#ifdef HAVE_BOOST_REGEX_HPP
+  boost::regex_constants::ECMAScript);
+#else
+  std::regex_constants::ECMAScript);
+#endif
+
+// Convert string to float
+double *entry_type<double>::operator() (const std::string &inp) const {
+  auto *value = new double();
+  auto sval = extfem::string::string(inp).trim().upper();
+
+  if (sval.length() == 0) {
+    if (this->bounds.does_allow_empty())
+      return nullptr;
+    if (!this->bounds.has_default())
+      throw errors::float_error(name, "empty entry without default");
+    *value = this->bounds.get_default();
+  } else {
+    if (! regex_match(sval, float_re)) {
+      std::string msg("illegal input, no float");
+      throw errors::float_error(name, msg + "; !" + sval + "!");
+    }
+
+#ifdef HAVE_BOOST_REGEX_HPP
+    boost::smatch m;
+#else
+    std::smatch m;
+#endif
+
+    if (regex_match(sval, float_lead_dot)) {
+        auto pos = sval.find('.');
+        sval.insert(pos, 1, '0');
+    }
+
+    istringstream conv(sval);
+    conv.imbue(locale("C"));
+    conv >> *value;
+  }
+  if (!this->bounds.in_bounds(value))
+    throw errors::float_error(name, "boundary condition violated");
+  return value;
+}
+
+std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const {
+
+  if (!inp)
+    return fem::types::empty().format(nullptr);
+
+  std::ostringstream res;
+
+  res.setf(ios_base::scientific, ios::floatfield);
+  res.fill(' ');
+
+#ifdef _MSC_VER
+  // Set output to two digit exponetial format.
+  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+#endif
+
+  res.setf(ios_base::right, ios_base::adjustfield);
+  res.precision(10);
+  res.width(16);
+
+  res << *inp;
+  std::string out(res.str());
+  if (out.size() != 16) {
+    std::ostringstream msg("output string for value ", std::ostringstream::ate);
+    msg << *inp << " of incorrect size, got length of " << out.size()
+        << " instead of allowed length of 16.";
+    throw errors::output_error(name, msg.str());
+  }
+
+#ifdef _MSC_VER
+  // Reset exponetial format to former settings.
+  _set_output_format(ext_exp_format);
+#endif
+
+  return out;
+}
+
+/*
+  Local Variables:
+  mode: c++
+  ispell-local-dictionary: "english"
+  c-file-style: "dnvgl"
+  indent-tabs-mode: nil
+  compile-command: "make -C ../.. check -j 8"
+  coding: utf-8
+  End:
+*/

@@ -42,28 +42,27 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
 
-  /*
   entry_type<double> probe("dummy", bound<double>(NULL, NULL, make_unique<double>(0.).get()));
 
-  SECTION("'   1.   '") {
-    CHECK(*probe("   1.   ") == 1.);
+  SECTION("'       1.       '") {
+    CHECK(*probe("       1.       ") == 1.);
   }
 
-  SECTION("'  .1    '") {
-    CHECK(*probe("  .1    ") == .1);
+  SECTION("'      .1        '") {
+    CHECK(*probe("      .1        ") == .1);
   }
 
-  SECTION("'  -1.   '") {
-    CHECK(*probe("  -1.   ") == -1.);
+  SECTION("'      -1.       '") {
+    CHECK(*probe("      -1.       ") == -1.);
   }
 
-  SECTION("'  -.1   '") {
-    CHECK(*probe("  -.1   ") == -.1);
+  SECTION("'      -.1       '") {
+    CHECK(*probe("      -.1       ") == -.1);
   }
 
-  SECTION("'  -1.   ', min 0.") {
+  SECTION("'      -1.       ', min 0.") {
     entry_type<double> probe("dummy", bound<double>(new double(0.), NULL, new double(0.)));
-    CHECK_THROWS(*probe("  -1.   "));
+    CHECK_THROWS(*probe("      -1.       "));
   }
 
   SECTION("Quick Reference") {
@@ -75,7 +74,6 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
     CHECK(*probe("           .7e1 ") == 7.);
     CHECK(*probe("           7.E+0") == 7.);
     CHECK(*probe("           7.e+0") == 7.);
-    CHECK(*probe("           70.-1") == 7.);
     CHECK(*probe("          -7.0  ") == -7.);
     CHECK(*probe("          -7.   ") == -7.);
     CHECK(*probe("          -.7   ") == -.7);
@@ -96,45 +94,21 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
     CHECK_THROWS(*probe("   70-1 "));
   }
 
-  SECTION("'        '") {
-    CHECK(*probe("        ") == 0.);
+  SECTION("'                '") {
+    CHECK(*probe("                ") == 0.);
   }
 
-  SECTION("'        ', no default") {
+  SECTION("'                ', no default") {
     entry_type<double> probe("dummy", bound<double>(NULL, NULL, NULL));
-    CHECK_THROWS(*probe("        "));
+    CHECK_THROWS(*probe("                "));
   }
 
   SECTION("'   123.  '") {
     CHECK(*probe("   123.  ") == 123.);
   }
 
-  SECTION("'   .123  '") {
-    CHECK(*probe("   .123  ") == .123);
-  }
-
-  SECTION("'   .123+3  '") {
-    CHECK(*probe("   .123+3  ") == 123.);
-  }
-
-  SECTION("'  123.+3        '") {
-    CHECK(*probe("  123.+3        ") == 123000.);
-  }
-
-  SECTION("' +123.+3        '") {
-    CHECK(*probe(" +123.+3        ") == 123000.);
-  }
-
-  SECTION("' -123.+3        '") {
-    CHECK(*probe(" -123.+3        ") == -123000.);
-  }
-
-  SECTION("' +123.-3        '") {
-    CHECK(*probe(" +123.-3        ") == 0.123);
-  }
-
-  SECTION("' -123.-3        '") {
-    CHECK(*probe(" -123.-3        ") == -0.123);
+  SECTION("'       .123      '") {
+    CHECK(*probe("       .123      ") == .123);
   }
 
   SECTION("' .736831        '") {
@@ -156,28 +130,27 @@ TEST_CASE("FEM double types output.", "[fem_types]" ) {
 
   SECTION("Output") {
     std::string res(obj.format(lval));
-    CHECK(obj.format(lval).size() == 8);
-    CHECK(obj.format(lval) == "1.000+00");
+    CHECK(obj.format(lval).size() == 16);
+    CHECK(obj.format(lval) == "1.0000000000e+00");
   }
 
   SECTION("Outout (nullptr)") {
-    CHECK(obj.format((unique_ptr<double>)nullptr).size() == 8);
-    CHECK(obj.format((unique_ptr<double>)nullptr) == "        ");
+    CHECK(obj.format((unique_ptr<double>)nullptr).size() == 16);
+    CHECK(obj.format((unique_ptr<double>)nullptr) == "                ");
   }
 
   SECTION("Output (void)") {
     double *lval = new double(1.);
     CHECK(*lval == 1.);
-    CHECK(obj.format(lval).size() == 8);
-    CHECK(obj.format(lval) == "1.000+00");
+    CHECK(obj.format(lval).size() == 16);
+    CHECK(obj.format(lval) == "1.0000000000e+00");
     delete lval;
   }
 
   SECTION("Output (nullptr, void)") {
-    CHECK(obj.format(nullptr).size() == 8);
-    CHECK(obj.format(nullptr) == "        ");
+    CHECK(obj.format(nullptr).size() == 16);
+    CHECK(obj.format(nullptr) == "                ");
   }
-  */
 }
 
 /*
