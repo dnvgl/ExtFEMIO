@@ -176,6 +176,7 @@
     <ClCompile Include="fem\fem_errors.cpp" />
     <ClCompile Include="fem\fem_types.cpp" />
     <ClCompile Include="fem\fem_types_float.cpp" />
+    <ClCompile Include="fem\fem_types_int.cpp" />
     <ClCompile Include="extfem_string.cpp" />
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>

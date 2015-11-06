@@ -51,8 +51,8 @@ boost::regex
 std::regex
 #endif
 entry_type<double>::float_re(
-  "([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
-  "[.][0-9]+)(([Ee][+-]?)[0-9]+)?",
+  "([\\+-]?((0|([1-9][0-9]*))?[.]?[0-9]*)|"
+  "[.]?[0-9]+)(([Ee][+-]?)[0-9]+)?",
 #ifdef HAVE_BOOST_REGEX_HPP
   boost::regex_constants::ECMAScript);
 #else

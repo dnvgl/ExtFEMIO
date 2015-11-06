@@ -52,7 +52,7 @@ libextfemread_la_SOURCES += bdf/bdf_cards_load.cpp
 libextfemread_la_SOURCES += fem/fem_errors.cpp
 libextfemread_la_SOURCES += fem/fem_types.cpp
 libextfemread_la_SOURCES += fem/fem_types_float.cpp
-
+libextfemread_la_SOURCES += fem/fem_types_int.cpp
 # Local Variables:
 # mode: makefile
 # ispell-local-dictionary: "english"

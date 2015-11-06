@@ -102,6 +102,11 @@ namespace dnvgl {
                     (!has_max() || *val <= this->max_val));
           };
 
+          bool in_bounds(const T &val) const {
+            return ((!has_min() || val >= this->min_val) &&
+                    (!has_max() || val <= this->max_val));
+          };
+
           bool does_allow_empty(void) const {
             return allow_empty;
           };

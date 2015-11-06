@@ -81,17 +81,13 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
     CHECK(*probe("          -.7e1 ") == -7.);
     CHECK(*probe("          -7.E+0") == -7.);
     CHECK(*probe("          -7.e+0") == -7.);
-  }
-
-  SECTION("Invalid values") {
-    CHECK_THROWS(*probe("   7    "));
-    CHECK_THROWS(*probe("   7E1  "));
-    CHECK_THROWS(*probe("   7e1  "));
-    CHECK_THROWS(*probe("   7E0  "));
-    CHECK_THROWS(*probe("   7e0  "));
-    CHECK_THROWS(*probe("   7E+0 "));
-    CHECK_THROWS(*probe("   7e+0 "));
-    CHECK_THROWS(*probe("   70-1 "));
+    CHECK(*probe("           7    ") == 7.);
+    CHECK(*probe("           7E1  ") == 70.);
+    CHECK(*probe("           7e1  ") == 70.);
+    CHECK(*probe("           7E0  ") == 7.);
+    CHECK(*probe("           7e0  ") == 7.);
+    CHECK(*probe("           7E+0 ") == 7.);
+    CHECK(*probe("           7e+0 ") == 7.);
   }
 
   SECTION("'                '") {

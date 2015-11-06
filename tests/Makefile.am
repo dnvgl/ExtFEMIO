@@ -86,6 +86,11 @@ test_fem_float_SOURCES=test_fem_float.cpp
 test_fem_float_LDADD=$(test_extfem_LDADD)
 TESTS+=test_fem_float.ju
 
+check_PROGRAMS+=test_fem_int
+test_fem_int_SOURCES=test_fem_int.cpp
+test_fem_int_LDADD=$(test_extfem_LDADD)
+TESTS+=test_fem_int.ju
+
 test_MISC=
 
 
