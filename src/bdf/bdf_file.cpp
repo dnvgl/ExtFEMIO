@@ -37,24 +37,45 @@ bdf_file::bdf_file(istream &inp) :
   data >> cur_line;
 }
 
+// Return all input file lines belonging to next BDF card.
 deque<std::string>& bdf_file::get() {
   deque<std::string> *res = new(deque<std::string>);
   do {
+    // if line not empty and not comment line add line to result set.
     if (cur_line.length() > 0 && cur_line[0] != '$')
       res->push_back(cur_line);
+    // If line is comment save content to special member
     else if (cur_line.length() > 0 && cur_line[0] == '$')
       last_comment = cur_line;
+    // if not EOF, read next line
     if (!data.eof()) data >> cur_line;
     else eof = true;
-  } while(!data.eof() &&
-          (res->size() == 0 ||
-           cont_chars.find(cur_line[0]) != cont_chars.end()));
+  // loop while no next card starts and file has still content.
+  } while (!data.eof() &&
+           (res->size() == 0 ||
+            cont_chars.find(cur_line[0]) != cont_chars.end()));
   return *res;
 }
 
-long bdf_file::pos()
-{
-   return (long) data.tellg();
+// Return size of input BDF file.
+std::streampos bdf_file::size(void) {
+  // save current position in file
+  auto cur_pos = data.tellg();
+
+  // jump to end of file
+  data.seekg(0, ios::end);
+  // determine position if file as file size
+  auto fileSize = data.tellg();
+
+  // jump back to original position if file
+  data.seekg(cur_pos);
+
+  return fileSize;
+}
+
+// Return position in input BDF file.
+streampos bdf_file::pos(void) {
+  return data.tellg();
 }
 
 // Local Variables:

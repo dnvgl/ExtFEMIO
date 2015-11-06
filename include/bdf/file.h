@@ -62,7 +62,11 @@ namespace dnvgl {
 
           // actual byte position (hopefully no bdf > 2Gybte will be
           // readin....)
-          DllExport long pos();
+          DllExport std::streampos size(void);
+
+          // actual byte position (hopefully no bdf > 2Gybte will be
+          // readin....)
+          DllExport std::streampos pos(void);
         };
       }
     }
