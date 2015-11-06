@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -143,7 +143,10 @@ $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit.xml
       </Command>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_bdf_bounds ====================
+      <Command>echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit.xml
+echo ==================== test_bdf_bounds ====================
 $(OutputPath)test_bdf_bounds.exe
 $(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit.xml
 echo ==================== test_bdf_types ====================
@@ -158,18 +161,18 @@ $(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit.xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
 $(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit.xml
-echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit.xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
 $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit.xml
 echo ==================== test_bdf_cards ====================
 $(OutputPath)test_bdf_cards.exe
 $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit.xml
-echo ==================== test_bdf_cards ====================
+echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
 $(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_junit.xml
+echo ==================== test_fem_int ====================
+$(OutputPath)test_fem_int.exe
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_bdf_int_junit.xml
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
