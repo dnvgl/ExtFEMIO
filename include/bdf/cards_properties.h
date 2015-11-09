@@ -92,23 +92,23 @@ Description:
 
         public:
 
-          std::unique_ptr<long> PID;
-          std::unique_ptr<long> MID1;
-          std::unique_ptr<double> T;
-          std::unique_ptr<long> MID2;
-          std::unique_ptr<double> x12I_T__3; // 12 I / T**3
-          std::unique_ptr<long> MID3;
-          std::unique_ptr<double> TS_T; // TS / T
-          std::unique_ptr<double> NSM;
-          std::unique_ptr<double> Z1;
-          std::unique_ptr<double> Z2;
-          std::unique_ptr<long> MID4;
+          ::std::unique_ptr<long> PID;
+          ::std::unique_ptr<long> MID1;
+          ::std::unique_ptr<double> T;
+          ::std::unique_ptr<long> MID2;
+          ::std::unique_ptr<double> x12I_T__3; // 12 I / T**3
+          ::std::unique_ptr<long> MID3;
+          ::std::unique_ptr<double> TS_T; // TS / T
+          ::std::unique_ptr<double> NSM;
+          ::std::unique_ptr<double> Z1;
+          ::std::unique_ptr<double> Z2;
+          ::std::unique_ptr<long> MID4;
 
-          DllExport pshell(const std::deque<std::string> &);
+          DllExport pshell(const ::std::deque<::std::string> &);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PSHELL; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
         class beam_base : public card {
@@ -118,13 +118,13 @@ Description:
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
 
-          DllExport beam_base(const std::deque<std::string> &inp) :
+          DllExport beam_base(const ::std::deque<::std::string> &inp) :
             card(inp) {};
 
         public:
 
-          std::unique_ptr<long> PID;
-          std::unique_ptr<long> MID;
+          ::std::unique_ptr<long> PID;
+          ::std::unique_ptr<long> MID;
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_BASE; };
         };
@@ -133,7 +133,7 @@ Description:
           // base class for beam property classes.
         protected:
 
-          DllExport beam_prop(const std::deque<std::string> &inp) :
+          DllExport beam_prop(const ::std::deque<::std::string> &inp) :
             beam_base(inp) {};
 
         public:
@@ -267,7 +267,7 @@ Description:
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _E2;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _F1;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _F2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _SO;
+          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _SO;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _X_XB;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _K1;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _K2;
@@ -289,45 +289,45 @@ Description:
         public:
 
           // fields that might appear more than once
-          std::deque<std::unique_ptr<double>> A;
-          std::deque<std::unique_ptr<double>> I1;
-          std::deque<std::unique_ptr<double>> I2;
-          std::deque<std::unique_ptr<double>> I12;
-          std::deque<std::unique_ptr<double>> J;
-          std::deque<std::unique_ptr<double>> NSM;
-          std::deque<std::unique_ptr<double>> C1;
-          std::deque<std::unique_ptr<double>> C2;
-          std::deque<std::unique_ptr<double>> D1;
-          std::deque<std::unique_ptr<double>> D2;
-          std::deque<std::unique_ptr<double>> E1;
-          std::deque<std::unique_ptr<double>> E2;
-          std::deque<std::unique_ptr<double>> F1;
-          std::deque<std::unique_ptr<double>> F2;
-          std::deque<std::unique_ptr<std::string>> SO;
-          std::deque<std::unique_ptr<double>> X_XB;
+          ::std::deque<::std::unique_ptr<double>> A;
+          ::std::deque<::std::unique_ptr<double>> I1;
+          ::std::deque<::std::unique_ptr<double>> I2;
+          ::std::deque<::std::unique_ptr<double>> I12;
+          ::std::deque<::std::unique_ptr<double>> J;
+          ::std::deque<::std::unique_ptr<double>> NSM;
+          ::std::deque<::std::unique_ptr<double>> C1;
+          ::std::deque<::std::unique_ptr<double>> C2;
+          ::std::deque<::std::unique_ptr<double>> D1;
+          ::std::deque<::std::unique_ptr<double>> D2;
+          ::std::deque<::std::unique_ptr<double>> E1;
+          ::std::deque<::std::unique_ptr<double>> E2;
+          ::std::deque<::std::unique_ptr<double>> F1;
+          ::std::deque<::std::unique_ptr<double>> F2;
+          ::std::deque<::std::unique_ptr<::std::string>> SO;
+          ::std::deque<::std::unique_ptr<double>> X_XB;
           // fields_finish
-          std::unique_ptr<double> K1;
-          std::unique_ptr<double> K2;
-          std::unique_ptr<double> S1;
-          std::unique_ptr<double> S2;
-          std::unique_ptr<double> NSI_A;
-          std::unique_ptr<double> NSI_B;
-          std::unique_ptr<double> CW_A;
-          std::unique_ptr<double> CW_B;
-          std::unique_ptr<double> M1_A;
-          std::unique_ptr<double> M2_A;
-          std::unique_ptr<double> M1_B;
-          std::unique_ptr<double> M2_B;
-          std::unique_ptr<double> N1_A;
-          std::unique_ptr<double> N2_A;
-          std::unique_ptr<double> N1_B;
-          std::unique_ptr<double> N2_B;
+          ::std::unique_ptr<double> K1;
+          ::std::unique_ptr<double> K2;
+          ::std::unique_ptr<double> S1;
+          ::std::unique_ptr<double> S2;
+          ::std::unique_ptr<double> NSI_A;
+          ::std::unique_ptr<double> NSI_B;
+          ::std::unique_ptr<double> CW_A;
+          ::std::unique_ptr<double> CW_B;
+          ::std::unique_ptr<double> M1_A;
+          ::std::unique_ptr<double> M2_A;
+          ::std::unique_ptr<double> M1_B;
+          ::std::unique_ptr<double> M2_B;
+          ::std::unique_ptr<double> N1_A;
+          ::std::unique_ptr<double> N2_A;
+          ::std::unique_ptr<double> N1_B;
+          ::std::unique_ptr<double> N2_B;
 
-          DllExport pbeam(const std::deque<std::string> &);
+          DllExport pbeam(const ::std::deque<::std::string> &);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBEAM; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
         class l_geom {
@@ -336,13 +336,13 @@ Description:
 
           l_geom () {};
 
-          static const std::set<std::string> dimnum1;
-          static const std::set<std::string> dimnum2;
-          static const std::set<std::string> dimnum3;
-          static const std::set<std::string> dimnum4;
-          static const std::set<std::string> dimnum5;
-          static const std::set<std::string> dimnum6;
-          static const std::set<std::string> dimnum10;
+          static const ::std::set<::std::string> dimnum1;
+          static const ::std::set<::std::string> dimnum2;
+          static const ::std::set<::std::string> dimnum3;
+          static const ::std::set<::std::string> dimnum4;
+          static const ::std::set<::std::string> dimnum5;
+          static const ::std::set<::std::string> dimnum6;
+          static const ::std::set<::std::string> dimnum10;
         };
 /*
 Handle Nastran Bulk PBEAML entries.
@@ -408,28 +408,28 @@ Description:
 
         private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _GROUP;
-          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _TYPE;
+          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _GROUP;
+          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _TYPE;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _DIM;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
-          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _SO;
+          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _SO;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _X_XB;
 
         public:
 
-          std::unique_ptr<std::string> GROUP;
-          std::unique_ptr<std::string> TYPE;
+          ::std::unique_ptr<::std::string> GROUP;
+          ::std::unique_ptr<::std::string> TYPE;
           // fields that might appear more than once
-          std::deque<std::deque<std::unique_ptr<double>>*> DIM;
-          std::deque<std::unique_ptr<double>> NSM;
-          std::deque<std::unique_ptr<std::string>> SO;
-          std::deque<std::unique_ptr<double>> X_XB;
+          ::std::deque<::std::deque<::std::unique_ptr<double>>*> DIM;
+          ::std::deque<::std::unique_ptr<double>> NSM;
+          ::std::deque<::std::unique_ptr<::std::string>> SO;
+          ::std::deque<::std::unique_ptr<double>> X_XB;
 
-          DllExport pbeaml(const std::deque<std::string> &);
+          DllExport pbeaml(const ::std::deque<::std::string> &);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBEAML; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
         class bar_prop : public card {
@@ -442,11 +442,11 @@ Description:
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BAR_PROP; };
 
-          DllExport bar_prop(const std::deque<std::string> &inp) :
+          DllExport bar_prop(const ::std::deque<::std::string> &inp) :
             card(inp) {};
 
-          std::unique_ptr<long> PID;
-          std::unique_ptr<long> MID;
+          ::std::unique_ptr<long> PID;
+          ::std::unique_ptr<long> MID;
         };
 
 /*
@@ -511,28 +511,28 @@ Description:
 
         public:
 
-          std::unique_ptr<double> A;
-          std::unique_ptr<double> I1;
-          std::unique_ptr<double> I2;
-          std::unique_ptr<double> J;
-          std::unique_ptr<double> NSM;
-          std::unique_ptr<double> C1;
-          std::unique_ptr<double> C2;
-          std::unique_ptr<double> D1;
-          std::unique_ptr<double> D2;
-          std::unique_ptr<double> E1;
-          std::unique_ptr<double> E2;
-          std::unique_ptr<double> F1;
-          std::unique_ptr<double> F2;
-          std::unique_ptr<double> K1;
-          std::unique_ptr<double> K2;
-          std::unique_ptr<double> I12;
+          ::std::unique_ptr<double> A;
+          ::std::unique_ptr<double> I1;
+          ::std::unique_ptr<double> I2;
+          ::std::unique_ptr<double> J;
+          ::std::unique_ptr<double> NSM;
+          ::std::unique_ptr<double> C1;
+          ::std::unique_ptr<double> C2;
+          ::std::unique_ptr<double> D1;
+          ::std::unique_ptr<double> D2;
+          ::std::unique_ptr<double> E1;
+          ::std::unique_ptr<double> E2;
+          ::std::unique_ptr<double> F1;
+          ::std::unique_ptr<double> F2;
+          ::std::unique_ptr<double> K1;
+          ::std::unique_ptr<double> K2;
+          ::std::unique_ptr<double> I12;
 
-          DllExport pbar(const std::deque<std::string> &);
+          DllExport pbar(const ::std::deque<::std::string> &);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBAR; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
     };
 
 /*
@@ -579,23 +579,23 @@ Description:
 
         private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _GROUP;
-          static const ::dnvgl::extfem::bdf::types::entry_type<std::string> _TYPE;
+          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _GROUP;
+          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _TYPE;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _DIM;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
 
         public:
 
-          std::unique_ptr<std::string> GROUP;
-          std::unique_ptr<std::string> TYPE;
-          std::deque<std::unique_ptr<double>> DIM;
-          std::unique_ptr<double> NSM;
+          ::std::unique_ptr<::std::string> GROUP;
+          ::std::unique_ptr<::std::string> TYPE;
+          ::std::deque<::std::unique_ptr<double>> DIM;
+          ::std::unique_ptr<double> NSM;
 
-          DllExport pbarl(const std::deque<std::string> &);
+          DllExport pbarl(const ::std::deque<::std::string> &);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBARL; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
 /*
@@ -645,18 +645,18 @@ Description:
 
         public:
 
-          std::unique_ptr<long> PID;
-          std::unique_ptr<long> MID;
-          std::unique_ptr<double> A;
-          std::unique_ptr<double> J;
-          std::unique_ptr<double> C;
-          std::unique_ptr<double> NSM;
+          ::std::unique_ptr<long> PID;
+          ::std::unique_ptr<long> MID;
+          ::std::unique_ptr<double> A;
+          ::std::unique_ptr<double> J;
+          ::std::unique_ptr<double> C;
+          ::std::unique_ptr<double> NSM;
 
-          DllExport prod(const std::deque<std::string> &);
+          DllExport prod(const ::std::deque<::std::string> &);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PROD; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
       }
     }

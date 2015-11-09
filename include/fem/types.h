@@ -53,27 +53,27 @@ namespace dnvgl {
         protected:
 
           static const fem_types _type;
-          std::string name;
+          ::std::string name;
 
         public:
 
-          base(const std::string &name);
+          base(const ::std::string &name);
 
           ~base() {};
 
           virtual fem_types type() const = 0;
 
-          virtual std::string format(const void*) const = 0;
+          virtual ::std::string format(const void*) const = 0;
         };
 
         class card : public base {
         public:
 
-          card(const std::string &name) : base(name) {};
+          card(const ::std::string &name) : base(name) {};
 
           fem_types type(void) const {return None;};
 
-          std::string format(const void* d) const;
+          ::std::string format(const void* d) const;
         };
 
         class empty : public base {
@@ -84,7 +84,7 @@ namespace dnvgl {
 
           fem_types type(void) const {return None;};
 
-          std::string format(const void* d) const;
+          ::std::string format(const void* d) const;
         };
 
         template <class T>
@@ -103,7 +103,7 @@ namespace dnvgl {
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex
 #else
-          std::regex
+          ::std::regex
 #endif
           int_re;
 
@@ -113,22 +113,22 @@ namespace dnvgl {
 
         public:
 
-          entry_type<long>(std::string);
+          entry_type<long>(::std::string);
 
-          entry_type<long>(std::string, ::dnvgl::extfem::fem::type_bounds::bound<long>);
+          entry_type<long>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<long>);
 
-          long *operator() (const std::string&) const;
+          long *operator() (const ::std::string&) const;
 
           fem_types type() const { return _type; };
 
-          std::string format(const std::unique_ptr<long>&) const;
-          std::string format(const void *v) const {
+          ::std::string format(const ::std::unique_ptr<long>&) const;
+          ::std::string format(const void *v) const {
             if (!v)
               return empty().format(nullptr);
             else {
               long val(*((long*)v));
-              std::unique_ptr<long> vp;
-              vp = std::make_unique<long>(val);
+              ::std::unique_ptr<long> vp;
+              vp = ::std::make_unique<long>(val);
               return this->format(vp);
             }
           };
@@ -147,7 +147,7 @@ namespace dnvgl {
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex
 #else
-          std::regex
+          ::std::regex
 #endif
           float_re;
 
@@ -155,7 +155,7 @@ namespace dnvgl {
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex
 #else
-          std::regex
+          ::std::regex
 #endif
           float_lead_dot;
 
@@ -165,35 +165,35 @@ namespace dnvgl {
 
         public:
 
-          entry_type<double>(std::string);
+          entry_type<double>(::std::string);
 
-          entry_type<double>(std::string, ::dnvgl::extfem::fem::type_bounds::bound<double>);
+          entry_type<double>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<double>);
 
-          double *operator() (const std::string&) const;
+          double *operator() (const ::std::string&) const;
 
           fem_types type() const {return _type;};
 
-          std::string format(const std::unique_ptr<double>&) const;
-          std::string format(const void *v) const {
+          ::std::string format(const ::std::unique_ptr<double>&) const;
+          ::std::string format(const void *v) const {
             if (!v)
               return empty().format(nullptr);
             else {
               double val(*((double*)v));
-              std::unique_ptr<double> vp;
-              vp = std::make_unique<double>(val);
+              ::std::unique_ptr<double> vp;
+              vp = ::std::make_unique<double>(val);
               return this->format(vp);
             }
           };
         };
 
         template <>
-        class entry_type<std::string> : public base {
+        class entry_type<::std::string> : public base {
 
           // String value.
 
         private:
 
-          ::dnvgl::extfem::fem::type_bounds::bound<std::string> bounds;
+          ::dnvgl::extfem::fem::type_bounds::bound<::std::string> bounds;
 
         protected:
 
@@ -201,31 +201,31 @@ namespace dnvgl {
 
         public:
 
-          entry_type<std::string>(std::string);
+          entry_type<::std::string>(::std::string);
 
-          entry_type<std::string>(std::string, ::dnvgl::extfem::fem::type_bounds::bound<std::string>);
+          entry_type<::std::string>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<::std::string>);
 
-          std::string *operator() (const std::string &) const;
+          ::std::string *operator() (const ::std::string &) const;
 
           fem_types type() const {
             return _type;
           }
 
-          std::string format(const std::unique_ptr<std::string>&) const;
-          std::string format(const void *v) const {
+          ::std::string format(const ::std::unique_ptr<::std::string>&) const;
+          ::std::string format(const void *v) const {
             if (!v)
               return empty().format(nullptr);
             else {
-              std::string val(*((std::string*)v));
-              std::unique_ptr<std::string> vp;
-              vp = std::make_unique<std::string>(val);
+              ::std::string val(*((::std::string*)v));
+              ::std::unique_ptr<::std::string> vp;
+              vp = ::std::make_unique<::std::string>(val);
               return this->format(vp);
             }
           };
         };
 
         template <>
-        class entry_type<std::deque<int>> : public base {
+        class entry_type<::std::deque<int>> : public base {
 
           // List of integers.
 
@@ -235,7 +235,7 @@ namespace dnvgl {
 #ifdef HAVE_BOOST_REGEX_HPP
           boost::regex
 #else
-          std::regex
+          ::std::regex
 #endif
           int_re;
 
@@ -245,43 +245,43 @@ namespace dnvgl {
 
         public:
 
-          entry_type<std::deque<int>>(const std::string &name) :
+          entry_type<::std::deque<int>>(const ::std::string &name) :
             base(name) {};
 
-          std::deque<int>* operator() (const std::string&) const;
+          ::std::deque<int>* operator() (const ::std::string&) const;
 
           inline fem_types type() const {return _type;};
 
-          std::string format(const std::unique_ptr<std::deque<int>>&) const;
-          std::string format(const void *v) const {
+          ::std::string format(const ::std::unique_ptr<::std::deque<int>>&) const;
+          ::std::string format(const void *v) const {
             if (!v)
               return empty().format(nullptr);
             else {
-              std::deque<int> val(((std::deque<int>*)v)->begin(), ((std::deque<int>*)v)->end());
-              std::unique_ptr<std::deque<int>> vp;
-              vp = std::make_unique<std::deque<int>>(val);
+              ::std::deque<int> val(((::std::deque<int>*)v)->begin(), ((::std::deque<int>*)v)->end());
+              ::std::unique_ptr<::std::deque<int>> vp;
+              vp = ::std::make_unique<::std::deque<int>>(val);
               return this->format(vp);
             }
           };
         };
 
         template <class T> inline
-        std::unique_ptr<T>
-        get_val(const entry_type<T> &t, const std::string &inp) {
+        ::std::unique_ptr<T>
+        get_val(const entry_type<T> &t, const ::std::string &inp) {
           T *dummy = t(inp);
           if (!dummy)
             return nullptr;
           else
-            return std::make_unique<T>(*dummy);
+            return ::std::make_unique<T>(*dummy);
         }
 
         template <class T> inline
-        std::unique_ptr<T>
+        ::std::unique_ptr<T>
         get_val(const T *inp) {
           if (!inp)
             return nullptr;
           else
-            return std::make_unique<T>(*inp);
+            return ::std::make_unique<T>(*inp);
         }
       }
     }

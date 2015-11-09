@@ -19,8 +19,8 @@ namespace {
 #include "bdf/errors.h"
 #include "extfem_string.h"
 
-using namespace std;
-using namespace dnvgl;
+using namespace ::std;
+using namespace ::dnvgl;
 using namespace extfem;
 using namespace bdf::cards;
 
@@ -32,37 +32,42 @@ namespace {
   const char initVals[3] = { '+', '*', ',' };
 }
 
-std::unique_ptr<bdf::types::empty> card::empty = std::make_unique<bdf::types::empty>();
+bdf::types::empty card::empty = bdf::types::empty();
 
-std::unique_ptr<bdf::types::base> card::head = nullptr;
+bdf::types::card card::head = bdf::types::card("<DUMMY>");
 
 const set<char> card::free_form_cont(initVals, initVals + 3);
 
 std::string card::format_outlist(
-  const std::deque<std::unique_ptr<format_entry>> &en) const {
+  const ::std::deque<std::unique_ptr<format_entry>> &en) const {
 
-  int i = 0;
-  std::ostringstream res("");
+  unsigned long i = 0;
+  ::std::ostringstream res("");
 
   try {
     for (auto &p : en) {
       if (++i > 9) {
         i = 2;
-        res << std::endl << bdf::types::card("").format(nullptr);
+        res << ::std::endl << bdf::types::card("").format(nullptr);
       }
+
       res << p->first->format(p->second);
     }
-  } catch (errors::int_error) {
+  } catch (errors::form_error) {
+    unsigned long lines = 0;
     res.seekp(0);
     i = 0;
     bdf::types::base::out_form = bdf::types::LONG;
     for (auto &p : en) {
       if (++i > 5) {
+        lines += 1;
         i = 2;
-        res << std::endl << bdf::types::card("").format(nullptr);
+        res << ::std::endl << bdf::types::card("").format(nullptr);
       }
       res << p->first->format(p->second);
     }
+    if (!(lines%2))
+      res << ::std::endl << bdf::types::card("").format(nullptr);
     bdf::types::base::out_form = bdf::types::SHORT;
   }
 
@@ -94,14 +99,14 @@ const map<std::string, types> cardtype_map(map_pairs, map_pairs + 14);
 
 deque<std::string> card::card_split(deque<std::string> const &inp) {
   deque<std::string> res;
-  std::string head;
+  ::std::string head;
 
   bool first = true;
 
   for (auto pos=inp.begin(); pos<inp.end(); ++pos) {
     head = extfem::string::string(pos->substr(0, 8)).trim();
     // Free Field Format
-    if (head.find(',') != std::string::npos) {
+    if (head.find(',') != ::std::string::npos) {
       if (first) {
         res.push_back(extfem::string::string(head.substr(0, head.find(','))).trim("*"));
       }
@@ -117,7 +122,7 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
         tmp.append(extfem::string::string(pos->substr(pos->find(',')+1)).trim(" \t\n"));
         tail = tmp.substr(tmp.rfind(',')+1);
       }
-      while (tmp.find(',') != std::string::npos) {
+      while (tmp.find(',') != ::std::string::npos) {
         res.push_back(extfem::string::string(tmp.substr(0, tmp.find(','))).trim(" \n\t"));
         tmp = tmp.substr(tmp.find(',')+1);
       }
@@ -129,7 +134,7 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
         res.push_back(extfem::string::string(head).trim("\t\n*"));
       }
       if (head.length() > 0 && head.back() == '*') {
-        std::string tmp(pos->substr(8));
+        ::std::string tmp(pos->substr(8));
         tmp.resize(64, ' ');
         if ((++pos)->length() > 8)
             tmp += extfem::string::string((pos)->substr(8)).trim("\t\n");
@@ -155,42 +160,42 @@ deque<std::string> card::card_split(deque<std::string> const &inp) {
 std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> &inp) {
 
   try {
-    std::string key(inp.at(0));
+    ::std::string key(inp.at(0));
     switch (cardtype_map.at(key)) {
     case GRID:
-      return std::make_unique<bdf::cards::grid>(inp);
+      return ::std::make_unique<bdf::cards::grid>(inp);
     case CTRIA3:
-      return std::make_unique<bdf::cards::ctria3>(inp);
+      return ::std::make_unique<bdf::cards::ctria3>(inp);
     case CQUAD4:
-      return std::make_unique<bdf::cards::cquad4>(inp);
+      return ::std::make_unique<bdf::cards::cquad4>(inp);
     case CBEAM:
-      return std::make_unique<bdf::cards::cbeam>(inp);
+      return ::std::make_unique<bdf::cards::cbeam>(inp);
     case CBAR:
-      return std::make_unique<bdf::cards::cbar>(inp);
+      return ::std::make_unique<bdf::cards::cbar>(inp);
     case CROD:
-      return std::make_unique<bdf::cards::crod>(inp);
+      return ::std::make_unique<bdf::cards::crod>(inp);
     case PSHELL:
-      return std::make_unique<bdf::cards::pshell>(inp);
+      return ::std::make_unique<bdf::cards::pshell>(inp);
     case PBEAM:
-      return std::make_unique<bdf::cards::pbeam>(inp);
+      return ::std::make_unique<bdf::cards::pbeam>(inp);
     case PBEAML:
-      return std::make_unique<bdf::cards::pbeaml>(inp);
+      return ::std::make_unique<bdf::cards::pbeaml>(inp);
     case PBAR:
-      return std::make_unique<bdf::cards::pbar>(inp);
+      return ::std::make_unique<bdf::cards::pbar>(inp);
     case PBARL:
-      return std::make_unique<bdf::cards::pbarl>(inp);
+      return ::std::make_unique<bdf::cards::pbarl>(inp);
     case PROD:
-      return std::make_unique<bdf::cards::prod>(inp);
+      return ::std::make_unique<bdf::cards::prod>(inp);
     case MAT1:
-      return std::make_unique<bdf::cards::mat1>(inp);
+      return ::std::make_unique<bdf::cards::mat1>(inp);
     case ENDDATA:
-      return std::make_unique<bdf::cards::enddata>(inp);
+      return ::std::make_unique<bdf::cards::enddata>(inp);
     case FORCE:
-      return std::make_unique<bdf::cards::force>(inp);
+      return ::std::make_unique<bdf::cards::force>(inp);
     case MOMENT:
-      return std::make_unique<bdf::cards::moment>(inp);
+      return ::std::make_unique<bdf::cards::moment>(inp);
     case LOAD:
-      return std::make_unique<bdf::cards::load>(inp);
+      return ::std::make_unique<bdf::cards::load>(inp);
     // These are not real card types, they can't be returned
     case UNKNOWN:
     case BEAM_PROP:
@@ -199,7 +204,7 @@ std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> 
       return nullptr;
     }
   } catch (out_of_range) {
-    return std::make_unique<bdf::cards::unknown>(inp);
+    return ::std::make_unique<bdf::cards::unknown>(inp);
   }
   return nullptr;
 }

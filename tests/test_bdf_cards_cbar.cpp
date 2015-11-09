@@ -130,6 +130,25 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
           "                     513\n");
   }
 
+  SECTION("QRG sample 1 (long)") {
+    long EID(2), PID(39), GA(7), GB(3);
+    double X1(.6), X2(18), X3(1234.5);
+    std::string OFFT("EEG");
+
+    cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
+    std::deque<int> PB;
+    PB.push_back(5);
+    PB.push_back(1);
+    PB.push_back(3);
+    probe.PB = std::make_unique<std::deque<int>>(PB);
+    test << probe;
+    CHECK(test.str() ==
+          "CBAR*                  2              39               7               3\n"
+          "*       6.00000000000-011.80000000000+011.23450000000+03EEG             \n"
+          "*                                    513\n"
+          "*       \n");
+  }
+
   SECTION("dir code all elements") {
     long EID(1), PID(2), GA(3), GB(4), G0(5);
 

@@ -176,6 +176,12 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
     CHECK(*lval == 1.);
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "1.000+00");
+    *lval = 2.9;
+    CHECK(obj.format(lval) == "2.900+00");
+    *lval = 1.9;
+    CHECK(obj.format(lval) == "1.900+00");
+    *lval = 0.;
+    CHECK(obj.format(lval) == "0.000+00");
     delete lval;
   }
 
@@ -183,6 +189,34 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
     bdf::types::base::out_form = bdf::types::SHORT;
     CHECK(obj.format(nullptr).size() == 8);
     CHECK(obj.format(nullptr) == "        ");
+  }
+
+  SECTION("SHORT (inexact)") {
+    double* lval = new double(1234.5);
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.05;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.005;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.0005;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.00005;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.000005;
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "1.234+03");
+    *lval = 1233.9;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1233.99;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1233.999;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1233.9999;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1233.99999;
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "1.234+03");
+    delete lval;
   }
 
   SECTION("LONG") {

@@ -23,10 +23,10 @@ namespace dnvgl {
 
     namespace string {
 
-      class string : public std::string {
+      class string : public ::std::string {
       public:
-        DllExport string(const std::string& in) : std::string(in) {};
-        DllExport string trim(const std::string& = " \t");
+        DllExport string(const ::std::string& in) : ::std::string(in) {};
+        DllExport string trim(const ::std::string& = " \t");
         string upper();
         string lower();
       };

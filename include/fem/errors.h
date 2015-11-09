@@ -23,79 +23,79 @@ namespace dnvgl {
 
         protected:
 
-          std::string msg;
-          std::string name;
-          std::string err_class;
+          ::std::string msg;
+          ::std::string name;
+          ::std::string err_class;
 
-          std::string get_msg(void) const;
+          ::std::string get_msg(void) const;
 
         public:
 
           DllExport error(
-            const std::string &msg,
-            const std::string &err_class="fem_error");
+            const ::std::string &msg,
+            const ::std::string &err_class="fem_error");
 
           DllExport error(
-            const std::string&, const std::string &msg,
-            const std::string &err_class="fem_error");
+            const ::std::string&, const ::std::string &msg,
+            const ::std::string &err_class="fem_error");
 
-          DllExport std::string operator() (void) const;
+          DllExport ::std::string operator() (void) const;
         };
 
         class types_error : public error {
 
         public:
 
-          types_error(const std::string &msg);
+          types_error(const ::std::string &msg);
         };
 
         class float_error : public error {
 
         public:
 
-          float_error(const std::string&, const std::string&);
+          float_error(const ::std::string&, const ::std::string&);
         };
 
         class int_error : public error {
 
         public:
 
-          int_error(const std::string&, const std::string&);
+          int_error(const ::std::string&, const ::std::string&);
         };
 
         class output_error : public error {
 
         public:
 
-          output_error(const std::string&, const std::string&);
+          output_error(const ::std::string&, const ::std::string&);
         };
 
         class list_error : public error {
 
         public:
 
-          list_error(const std::string&, const std::string &);
+          list_error(const ::std::string&, const ::std::string &);
         };
 
         class str_error : public error {
 
         public:
 
-          str_error(const std::string&, const std::string &);
+          str_error(const ::std::string&, const ::std::string &);
         };
 
         class string_error : public error {
 
         public:
 
-          string_error(const std::string&, const std::string &);
+          string_error(const ::std::string&, const ::std::string &);
         };
 
         class parse_error : public error {
 
         public:
 
-          parse_error(const std::string&, const std::string &);
+          parse_error(const ::std::string&, const ::std::string &);
         };
       }
     }

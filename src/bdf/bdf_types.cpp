@@ -23,21 +23,21 @@ namespace {
 
 using namespace ::dnvgl::extfem;
 
-bdf::types::base::base(const std::string &name) : name(name) {};
+bdf::types::base::base(const ::std::string &name) : name(name) {};
 
 bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
 
-std::string bdf::types::card::format(const void* d) const {
-  std::ostringstream res;
+::std::string bdf::types::card::format(const void* d) const {
+  ::std::ostringstream res;
   switch (out_form) {
   case bdf::types::LONG:
-    res.setf(std::ios_base::left, std::ios_base::adjustfield);
+    res.setf(::std::ios_base::left, ::std::ios_base::adjustfield);
     res.fill(' ');
     res.width(bdf::types::SHORT);
     res << (name + "*");
     break;
   case bdf::types::SHORT:
-    res.setf(std::ios_base::left, std::ios_base::adjustfield);
+    res.setf(::std::ios_base::left, ::std::ios_base::adjustfield);
     res.fill(' ');
     res.width(bdf::types::SHORT);
     res << name;
@@ -49,8 +49,8 @@ std::string bdf::types::card::format(const void* d) const {
   return res.str();
 }
 
-std::string bdf::types::empty::format(const void* d) const {
-  std::ostringstream res;
+::std::string bdf::types::empty::format(const void* d) const {
+  ::std::ostringstream res;
   switch (out_form) {
   case bdf::types::LONG:
   case bdf::types::SHORT:

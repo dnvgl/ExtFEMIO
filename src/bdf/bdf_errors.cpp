@@ -44,11 +44,11 @@ types_error::types_error(const std::string &msg) :
 
 float_error::float_error(
   const std::string &name, const std::string &msg) :
-  error(name, msg, "float_error") {}
+  form_error(name, msg, "float_error") {}
 
 int_error::int_error(
   const std::string &name, const std::string &msg) :
-  error(name, msg, "int_error") {}
+  form_error(name, msg, "int_error") {}
 
 output_error::output_error(
   const std::string &name, const std::string &msg) :

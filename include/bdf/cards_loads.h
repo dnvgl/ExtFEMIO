@@ -35,26 +35,26 @@ namespace dnvgl {
 
         public:
 
-          std::unique_ptr<long> SID;
-          std::unique_ptr<long> G;
-          std::unique_ptr<long> CID;
-          std::unique_ptr<double> F;
-          std::unique_ptr<double> N1;
-          std::unique_ptr<double> N2;
-          std::unique_ptr<double> N3;
+          ::std::unique_ptr<long> SID;
+          ::std::unique_ptr<long> G;
+          ::std::unique_ptr<long> CID;
+          ::std::unique_ptr<double> F;
+          ::std::unique_ptr<double> N1;
+          ::std::unique_ptr<double> N2;
+          ::std::unique_ptr<double> N3;
 
         protected:
 
-          void add_collect(std::deque<std::unique_ptr<format_entry>>&,
+          void add_collect(::std::deque<::std::unique_ptr<format_entry>>&,
                            const momforce_base&) const;
 
-          DllExport momforce_base(const std::deque<std::string> &inp);
+          DllExport momforce_base(const ::std::deque<::std::string> &inp);
           DllExport momforce_base(
             const long *SID, const long *G, const long *CID,
             const double *F,
             const double *N1, const double *N2, const double *N3);
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
 /*
@@ -95,11 +95,11 @@ Description:
 
         private:
 
-          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head;
+          static ::dnvgl::extfem::bdf::types::card head;
 
         public:
 
-          DllExport force(const std::deque<std::string> &inp) :
+          DllExport force(const ::std::deque<::std::string> &inp) :
             momforce_base(inp) {};
 
           DllExport force(
@@ -112,8 +112,8 @@ Description:
             return FORCE;
           };
 
-          DllExport friend std::ostream& operator<<(std::ostream&, const force&);
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport friend ::std::ostream& operator<<(::std::ostream&, const force&);
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
 /*
@@ -154,11 +154,11 @@ Description:
 
         private:
 
-          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head;
+          static ::dnvgl::extfem::bdf::types::card head;
 
         public:
 
-          DllExport moment(const std::deque<std::string> &inp) :
+          DllExport moment(const ::std::deque<::std::string> &inp) :
             momforce_base(inp) {};
           DllExport moment(
             const long *SID, const long *G, const long *CID,
@@ -170,8 +170,8 @@ Description:
             return MOMENT;
           };
 
-          DllExport friend std::ostream& operator<<(std::ostream&, const moment&);
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport friend ::std::ostream& operator<<(::std::ostream&, const moment&);
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
 /*
@@ -219,21 +219,21 @@ Description:
 
         public:
 
-          std::unique_ptr<long> SID;
-          std::unique_ptr<double> S;
-          std::unique_ptr<std::deque<double>> Si;
-          std::unique_ptr<std::deque<long>> Li;
+          ::std::unique_ptr<long> SID;
+          ::std::unique_ptr<double> S;
+          ::std::unique_ptr<::std::deque<double>> Si;
+          ::std::unique_ptr<::std::deque<long>> Li;
 
-          DllExport load(const std::deque<std::string> &inp);
+          DllExport load(const ::std::deque<::std::string> &inp);
 
           DllExport load(long &SID, double &S,
-                         std::deque<double> &Si, std::deque<long> &Li);
+                         ::std::deque<double> &Si, ::std::deque<long> &Li);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
             return LOAD;
           };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
       }
     }

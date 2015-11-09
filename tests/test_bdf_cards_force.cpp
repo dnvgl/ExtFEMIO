@@ -90,6 +90,16 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
     CHECK(test.str() ==
           "FORCE          2       5       62.900+001.900+00\n");
   }
+
+  SECTION("reverse part (2)") {
+    long SID(2), G(5), CID(6);
+    double F(2.9), N1(1234.5);
+    force probe(&SID, &G, &CID, &F, &N1);
+    test << probe;
+    CHECK(test.str() ==
+          "FORCE*                 2               5               62.90000000000+00\n"
+          "*       1.23450000000+03\n");
+  }
 }
 
 // Local Variables:

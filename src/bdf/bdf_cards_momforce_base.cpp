@@ -106,25 +106,15 @@ momforce_base::momforce_base(
 void momforce_base::add_collect(
   std::deque<std::unique_ptr<format_entry>> &res,
   const momforce_base &card) const {
-  res.push_back(
-    make_unique<format_entry>(
-      (bdf::types::base*)&card._SID, (void*)card.SID.get()));
-  res.push_back(
-    make_unique<format_entry>(
-      (bdf::types::base*)&card._G, (void*)card.G.get()));
-  res.push_back(
-    make_unique<format_entry>(
-      (bdf::types::base*)&card._CID, (void*)card.CID.get()));
-  res.push_back(
-    make_unique<format_entry>(
-      (bdf::types::base*)&card._F, (void*)card.F.get()));
+  res.push_back(format<long>(card._SID, card.SID));
+  res.push_back(format<long>(card._G, card.G));
+  res.push_back(format<long>(card._CID, card.CID));
+  res.push_back(format<double>(card._F, card.F));
   res.push_back(format<double>(card._N1, card.N1));
   if (N2 || N3)
     res.push_back(format<double>(card._N2, card.N2));
   if (N3)
-    res.push_back(
-      make_unique<format_entry>(
-        (bdf::types::base*)&card._N3, (void*)card.N3.get()));
+    res.push_back(format<double>(card._N3, card.N3));
 
 }
 
@@ -137,24 +127,24 @@ namespace dnvgl {
   namespace extfem {
     namespace bdf{
       namespace cards{
-        std::unique_ptr<bdf::types::base>
-        force::head = std::make_unique<bdf::types::card>("FORCE");
+
+        bdf::types::card force::head = bdf::types::card("FORCE");
 
         const std::ostream& force::operator<< (std::ostream& os) const {
-          return os;
+          return os << *this;
         }
 
-        std::unique_ptr<bdf::types::base> moment::head = std::make_unique<bdf::types::card>("MOMENT");
+        bdf::types::card moment::head = bdf::types::card("MOMENT");
 
         const std::ostream& moment::operator<< (std::ostream& os) const {
-          return os;
+          return os << *this;
         }
 
         std::ostream& operator<<(std::ostream &os, const force &card) {
 
           std::deque<std::unique_ptr<format_entry>> entries;
 
-          entries.push_back(make_unique<format_entry>(force::head.get(), (void*)NULL));
+          entries.push_back(format(force::head));
 
           card.add_collect(entries, card);
 
@@ -167,7 +157,7 @@ namespace dnvgl {
 
           std::deque<std::unique_ptr<format_entry>> entries;
 
-          entries.push_back(make_unique<format_entry>(moment::head.get(), (void*)NULL));
+          entries.push_back(format(moment::head));
 
           card.add_collect(entries, card);
 

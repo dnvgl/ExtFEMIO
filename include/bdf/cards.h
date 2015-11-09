@@ -46,7 +46,7 @@ namespace dnvgl {
           ENDDATA
         } types;
 
-        typedef std::pair<::dnvgl::extfem::bdf::types::base*, void*> format_entry;
+        typedef ::std::pair<::dnvgl::extfem::bdf::types::base*, void*> format_entry;
 
         class card {
 
@@ -54,41 +54,61 @@ namespace dnvgl {
 
           // two character strings for continuation lines in Free Form
           // Format cards.
-          static const std::set<char> free_form_cont;
+          static const ::std::set<char> free_form_cont;
 
-          static const std::map<std::string, types> cardtype_map;
+          static const ::std::map<::std::string, types> cardtype_map;
 
         protected:
 
-          static std::unique_ptr<::dnvgl::extfem::bdf::types::empty> empty;
+          static ::dnvgl::extfem::bdf::types::empty empty;
 
-          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head;
+          static ::dnvgl::extfem::bdf::types::card head;
 
-          std::string format_outlist(
-            const std::deque<std::unique_ptr<format_entry>>&) const;
+          ::std::string format_outlist(
+            const ::std::deque<::std::unique_ptr<format_entry>>&) const;
 
         public:
 
+          friend
+          ::std::unique_ptr<format_entry>
+          format(const ::std::unique_ptr<::dnvgl::extfem::bdf::types::card> &formatter);
+
+          friend
+          ::std::unique_ptr<format_entry>
+          format(const ::std::unique_ptr<::dnvgl::extfem::bdf::types::empty> &formatter);
+
           template <class T> friend
-          std::unique_ptr<format_entry>
+          ::std::unique_ptr<format_entry>
           format(const ::dnvgl::extfem::bdf::types::entry_type<T> &formatter,
-                 const std::unique_ptr<T> &val);
+                 const ::std::unique_ptr<T> &val);
 
-          DllExport static std::deque<std::string>
-          card_split(std::deque<std::string> const &);
+          DllExport static ::std::deque<::std::string>
+          card_split(::std::deque<::std::string> const &);
 
-          DllExport card (const std::deque<std::string> &);
+          DllExport card (const ::std::deque<::std::string> &);
           DllExport card ();
 
           virtual const ::dnvgl::extfem::bdf::cards::types card_type(void) const = 0;
-          virtual const std::ostream& operator<<(std::ostream&) const = 0;
+          virtual const ::std::ostream& operator<<(::std::ostream&) const = 0;
+        };
+
+        inline ::std::unique_ptr<format_entry>
+        format(const ::dnvgl::extfem::bdf::types::card &formatter) {
+          return ::std::make_unique<format_entry>(
+            (::dnvgl::extfem::bdf::types::card*)&formatter, (void*)NULL);
+        };
+
+        inline ::std::unique_ptr<format_entry>
+        format(const ::dnvgl::extfem::bdf::types::empty &formatter) {
+          return ::std::make_unique<format_entry>(
+            (::dnvgl::extfem::bdf::types::base*)&formatter, (void*)NULL);
         };
 
         template <class T>
-        inline std::unique_ptr<format_entry>
+        inline ::std::unique_ptr<format_entry>
         format(const ::dnvgl::extfem::bdf::types::entry_type<T> &formatter,
-                      const std::unique_ptr<T> &val) {
-          return std::make_unique<format_entry>(
+               const ::std::unique_ptr<T> &val) {
+          return ::std::make_unique<format_entry>(
             (::dnvgl::extfem::bdf::types::base*)&formatter,
             (void*)val.get());
         };
@@ -97,14 +117,14 @@ namespace dnvgl {
 
         public:
 
-          DllExport unknown(const std::deque<std::string> &inp) :
+          DllExport unknown(const ::std::deque<::std::string> &inp) :
             card(inp), content(inp) {};
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return UNKNOWN; }
 
-          std::deque<std::string> content;
+          ::std::deque<::std::string> content;
 
-          DllExport const std::ostream& operator << (std::ostream& os) const {
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const {
             throw errors::error("can't write UNKNOWN.");
             return os;
           };
@@ -118,13 +138,13 @@ namespace dnvgl {
 
         public:
 
-          DllExport enddata(const std::deque<std::string> &inp) :
+          DllExport enddata(const ::std::deque<::std::string> &inp) :
             card(inp) {};
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return ENDDATA; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const {
-            os << "ENDDATA" << std::endl;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const {
+            os << "ENDDATA" << ::std::endl;
             return os;
           };
         };
@@ -172,7 +192,7 @@ Description:
 
         private:
 
-          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head(void);
+          static ::std::unique_ptr<::dnvgl::extfem::bdf::types::base> head(void);
 
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _ID;
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _CP;
@@ -180,26 +200,26 @@ Description:
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _X2;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _X3;
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _CD;
-          static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> _PS;
+          static const ::dnvgl::extfem::bdf::types::entry_type<::std::deque<int>> _PS;
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _SEID;
 
         public:
 
-          std::unique_ptr<long> ID;
-          std::unique_ptr<long> CP;
-          std::unique_ptr<double> X1;
-          std::unique_ptr<double> X2;
-          std::unique_ptr<double> X3;
-          std::unique_ptr<long> CD;
-          std::unique_ptr<std::deque<int>> PS;
-          std::unique_ptr<long> SEID;
+          ::std::unique_ptr<long> ID;
+          ::std::unique_ptr<long> CP;
+          ::std::unique_ptr<double> X1;
+          ::std::unique_ptr<double> X2;
+          ::std::unique_ptr<double> X3;
+          ::std::unique_ptr<long> CD;
+          ::std::unique_ptr<::std::deque<int>> PS;
+          ::std::unique_ptr<long> SEID;
 
-          DllExport grid(const std::deque<std::string> &);
+          DllExport grid(const ::std::deque<::std::string> &);
           DllExport grid(long &ID, long &CP, double &X1, double &X2, double &X3);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return GRID; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
 /*
@@ -256,7 +276,7 @@ Description:
 
         private:
 
-          static std::unique_ptr<::dnvgl::extfem::bdf::types::base> head(void);
+          static ::std::unique_ptr<::dnvgl::extfem::bdf::types::base> head(void);
 
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _E;
@@ -273,24 +293,24 @@ Description:
 
         public:
 
-          std::unique_ptr<long> MID;
-          std::unique_ptr<double> E;
-          std::unique_ptr<double> G;
-          std::unique_ptr<double> NU;
-          std::unique_ptr<double> RHO;
-          std::unique_ptr<double> A;
-          std::unique_ptr<double> TREF;
-          std::unique_ptr<double> GE;
-          std::unique_ptr<double> ST;
-          std::unique_ptr<double> SC;
-          std::unique_ptr<double> SS;
-          std::unique_ptr<long> MCSID;
+          ::std::unique_ptr<long> MID;
+          ::std::unique_ptr<double> E;
+          ::std::unique_ptr<double> G;
+          ::std::unique_ptr<double> NU;
+          ::std::unique_ptr<double> RHO;
+          ::std::unique_ptr<double> A;
+          ::std::unique_ptr<double> TREF;
+          ::std::unique_ptr<double> GE;
+          ::std::unique_ptr<double> ST;
+          ::std::unique_ptr<double> SC;
+          ::std::unique_ptr<double> SS;
+          ::std::unique_ptr<long> MCSID;
 
-          DllExport mat1(const std::deque<std::string> &);
+          DllExport mat1(const ::std::deque<::std::string> &);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return MAT1; };
 
-          DllExport const std::ostream& operator << (std::ostream& os) const;
+          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
       }
     }
@@ -305,7 +325,7 @@ namespace dnvgl {
   namespace extfem {
     namespace bdf {
       namespace cards {
-        DllExport std::unique_ptr<card> dispatch(const std::deque<std::string> &);
+        DllExport ::std::unique_ptr<card> dispatch(const ::std::deque<::std::string> &);
       }
     }
   }

@@ -16,6 +16,7 @@ namespace {
 }
 
 #include <sstream>
+#include <cmath>
 
 #ifdef __GNUC__
 #include "config.h"
@@ -38,57 +39,57 @@ using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::types;
 
-entry_type<double>::entry_type(std::string name) :
+entry_type<double>::entry_type(::std::string name) :
   bdf::types::base(name), bounds(bdf::type_bounds::bound<double>()) {};
 
-entry_type<double>::entry_type(std::string name, bdf::type_bounds::bound<double> bounds) :
+entry_type<double>::entry_type(::std::string name, bdf::type_bounds::bound<double> bounds) :
   bdf::types::base(name), bounds(bounds) {};
 
 const
 #ifdef HAVE_BOOST_REGEX_HPP
-boost::regex
+::boost::regex
 #else
-std::regex
+::std::regex
 #endif
 entry_type<double>::float_exp_re(
   "([\\+-]?[.0-9]+)([+-][0-9]+)",
 #ifdef HAVE_BOOST_REGEX_HPP
-  boost::regex_constants::ECMAScript);
+  ::boost::regex_constants::ECMAScript);
 #else
-  std::regex_constants::ECMAScript);
+  ::std::regex_constants::ECMAScript);
 #endif
 
 const
 #ifdef HAVE_BOOST_REGEX_HPP
-boost::regex
+::boost::regex
 #else
-std::regex
+::std::regex
 #endif
 entry_type<double>::float_re(
   "([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
   "[.][0-9]+)(((E[+-]?)|[+-])[0-9]+)?",
 #ifdef HAVE_BOOST_REGEX_HPP
-  boost::regex_constants::ECMAScript);
+  ::boost::regex_constants::ECMAScript);
 #else
-  std::regex_constants::ECMAScript);
+  ::std::regex_constants::ECMAScript);
 #endif
 
 const
 #ifdef HAVE_BOOST_REGEX_HPP
-boost::regex
+::boost::regex
 #else
-std::regex
+::std::regex
 #endif
 entry_type<double>::float_lead_dot(
   "^[\\+-]?[.][0-9]+",
 #ifdef HAVE_BOOST_REGEX_HPP
-  boost::regex_constants::ECMAScript);
+  ::boost::regex_constants::ECMAScript);
 #else
-  std::regex_constants::ECMAScript);
+  ::std::regex_constants::ECMAScript);
 #endif
 
 // Convert string to float
-double *entry_type<double>::operator() (const std::string &inp) const {
+double *entry_type<double>::operator() (const ::std::string &inp) const {
   auto *value = new double();
   auto sval = extfem::string::string(inp).trim().upper();
 
@@ -100,14 +101,14 @@ double *entry_type<double>::operator() (const std::string &inp) const {
     *value = this->bounds.get_default();
   } else {
     if (! regex_match(sval, float_re)) {
-      std::string msg("illegal input, no float");
+      ::std::string msg("illegal input, no float");
       throw errors::float_error(name, msg + "; !" + sval + "!");
     }
 
 #ifdef HAVE_BOOST_REGEX_HPP
-    boost::smatch m;
+    ::boost::smatch m;
 #else
-    std::smatch m;
+    ::std::smatch m;
 #endif
 
     if (regex_search(sval, m, float_exp_re))
@@ -127,12 +128,12 @@ double *entry_type<double>::operator() (const std::string &inp) const {
   return value;
 }
 
-std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const {
+::std::string entry_type<double>::format(const ::std::unique_ptr<double> &inp) const {
 
   if (!inp)
     return bdf::types::empty().format(nullptr);
 
-  std::ostringstream res;
+  ::std::ostringstream res;
 
   res.setf(ios_base::scientific, ios::floatfield);
   res.fill(' ');
@@ -148,6 +149,17 @@ std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const
     res.precision(11);
     break;
   case SHORT:
+    {
+      double order(pow(10., -floor(::std::log10(fabs(*inp)))+3.));
+      if (fabs(fabs(round(*inp*order)/(*inp*order)) - 1.) > 1e-8) {
+        ::std::ostringstream msg("output string for value ",
+                               ::std::ostringstream::ate);
+        msg << *inp
+            << " looses too much precision of being crammed into string of "
+            << out_form << " characters.";
+        throw errors::float_error(name, msg.str());
+      }
+    }
     res.setf(ios_base::right, ios_base::adjustfield);
     res.precision(3);
     res.width(9);
@@ -159,10 +171,10 @@ std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const
   res.width(out_form+1);
 
   res << *inp;
-  std::string out(res.str());
+  ::std::string out(res.str());
   out.erase(out.find('e'), 1);
   if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
-    std::ostringstream msg("output string for value ", std::ostringstream::ate);
+    ::std::ostringstream msg("output string for value ", ::std::ostringstream::ate);
     msg << *inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of " << out_form << ".";
     throw errors::output_error(name, msg.str());
