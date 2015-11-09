@@ -15,6 +15,8 @@ namespace std {
 
 #ifdef _MSC_VER
 
+double round(double number);
+
 #define MAKE_UNIQUE(TEMPLATE_LIST, PADDING_LIST, LIST, COMMA, X1, X2, X3, X4)   \
     template<class T COMMA LIST(_CLASS_TYPE)>  \
     inline ::std::unique_ptr<T> make_unique(LIST(_TYPE_REFREF_ARG))  \
