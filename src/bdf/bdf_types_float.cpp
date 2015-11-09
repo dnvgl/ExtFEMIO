@@ -149,7 +149,9 @@ double *entry_type<double>::operator() (const ::std::string &inp) const {
     res.precision(11);
     break;
   case SHORT:
-    {
+    { // Check on how much precision is lost when using SHORT format.
+      // If too much precision is list raise exception which causes
+      // calling routine to switch to LONG format.
       double order(pow(10., -floor(::std::log10(fabs(*inp)))+3.));
       if (fabs(fabs(round(*inp*order)/(*inp*order)) - 1.) > 1e-8) {
         ::std::ostringstream msg("output string for value ",
