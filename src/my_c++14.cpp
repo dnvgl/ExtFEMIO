@@ -19,7 +19,7 @@ namespace {
 #include "config.h"
 #endif
 
-#ifdef _MSC_VER
+#if _MSC_VER <= 1700
 
 #include <cmath>
 

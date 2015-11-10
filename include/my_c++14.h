@@ -13,7 +13,7 @@
 
 namespace std {
 
-#ifdef _MSC_VER
+#if _MSC_VER <= 1700
 
 double round(double number);
 
@@ -23,7 +23,7 @@ double round(double number);
     {  \
     return ::std::unique_ptr<T>(new T(LIST(_FORWARD_ARG)));  \
 }
-    _VARIADIC_EXPAND_0X(MAKE_UNIQUE, , , , )
+_VARIADIC_EXPAND_0X(MAKE_UNIQUE, , , , )
 #undef MAKE_UNIQUE
 
 #else
