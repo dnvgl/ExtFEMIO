@@ -205,6 +205,15 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
     *lval = 1234.000005;
     CHECK(obj.format(lval).size() == 8);
     CHECK(obj.format(lval) == "1.234+03");
+    *lval = 1234.01;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.001;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.0001;
+    CHECK_THROWS(obj.format(lval));
+    *lval = 1234.00001;
+    CHECK(obj.format(lval).size() == 8);
+    CHECK(obj.format(lval) == "1.234+03");
     *lval = 1233.9;
     CHECK_THROWS(obj.format(lval));
     *lval = 1233.99;
