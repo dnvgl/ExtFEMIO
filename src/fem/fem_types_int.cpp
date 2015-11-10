@@ -74,7 +74,7 @@ long *entry_type<long>::operator() (const std::string &inp) const {
     std::string msg("boundary condition violated (");
     throw errors::int_error(name, msg + name + ")\n(""" + inp + """)");
   }
-  return new long(value);
+  return new long(static_cast<long>(value));
 }
 
 std::string entry_type<long>::format(const std::unique_ptr<long> &inp) const {
