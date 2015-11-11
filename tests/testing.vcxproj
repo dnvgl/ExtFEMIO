@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -100,34 +100,34 @@
     <CustomBuildStep>
       <Command>echo ==================== test_extfem_string ====================
 $(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; $(OutDir)test_extfem_string_junit_$(Platform).xml
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit_$(Platform).xml
 echo ==================== test_bdf_bounds ====================
 $(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; $(OutDir)test_bdf_bounds_junit_$(Platform).xml
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit_$(Platform).xml
 echo ==================== test_bdf_types ====================
 $(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; $(OutDir)test_bdf_types_junit_$(Platform).xml
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit_$(Platform).xml
 echo ==================== test_bdf_int ====================
 $(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; $(OutDir)test_bdf_int_junit_$(Platform).xml
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit_$(Platform).xml
 echo ==================== test_bdf_float ====================
 $(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; $(OutDir)test_bdf_float_junit_$(Platform).xml
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit_$(Platform).xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; $(OutDir)test_bdf_str_junit_$(Platform).xml
+$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit_$(Platform).xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; $(OutDir)test_bdf_list_junit_$(Platform).xml
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit_$(Platform).xml
 echo ==================== test_bdf_cards ====================
 $(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; $(OutDir)test_bdf_cards_junit_$(Platform).xml
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit_$(Platform).xml
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; $(OutDir)test_fem_float_junit_$(Platform).xml
+$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_junit_$(Platform).xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; $(OutDir)test_fem_int_junit_$(Platform).xml
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_junit_$(Platform).xml
 </Command>
       <Message>Testing the module</Message>
       <Outputs>__dummy__</Outputs>
@@ -151,34 +151,34 @@ $(OutputPath)test_fem_int.exe --reporter junit &gt; $(OutDir)test_fem_int_junit_
     <CustomBuildStep>
       <Command>echo ==================== test_extfem_string ====================
 $(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; $(OutDir)test_extfem_string_junit_$(Platform).xml
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit_$(Platform).xml
 echo ==================== test_bdf_bounds ====================
 $(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; $(OutDir)test_bdf_bounds_junit_$(Platform).xml
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit_$(Platform).xml
 echo ==================== test_bdf_types ====================
 $(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; $(OutDir)test_bdf_types_junit_$(Platform).xml
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit_$(Platform).xml
 echo ==================== test_bdf_int ====================
 $(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; $(OutDir)test_bdf_int_junit_$(Platform).xml
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit_$(Platform).xml
 echo ==================== test_bdf_float ====================
 $(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; $(OutDir)test_bdf_float_junit_$(Platform).xml
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit_$(Platform).xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; $(OutDir)test_bdf_str_junit_$(Platform).xml
+$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit_$(Platform).xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; $(OutDir)test_bdf_list_junit_$(Platform).xml
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit_$(Platform).xml
 echo ==================== test_bdf_cards ====================
 $(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; $(OutDir)test_bdf_cards_junit_$(Platform).xml
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit_$(Platform).xml
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; $(OutDir)test_fem_float_junit_$(Platform).xml
+$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_junit_$(Platform).xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; $(OutDir)test_fem_int_junit_$(Platform).xml
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_junit_$(Platform).xml
 </Command>
     </CustomBuildStep>
     <CustomBuildStep>
@@ -205,34 +205,34 @@ $(OutputPath)test_fem_int.exe --reporter junit &gt; $(OutDir)test_fem_int_junit_
     <CustomBuildStep>
       <Command>echo ==================== test_extfem_string ====================
 $(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; $(OutDir)test_extfem_string_junit_$(Platform).xml
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit_$(Platform).xml
 echo ==================== test_bdf_bounds ====================
 $(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; $(OutDir)test_bdf_bounds_junit_$(Platform).xml
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit_$(Platform).xml
 echo ==================== test_bdf_types ====================
 $(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; $(OutDir)test_bdf_types_junit_$(Platform).xml
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit_$(Platform).xml
 echo ==================== test_bdf_int ====================
 $(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; $(OutDir)test_bdf_int_junit_$(Platform).xml
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit_$(Platform).xml
 echo ==================== test_bdf_float ====================
 $(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; $(OutDir)test_bdf_float_junit_$(Platform).xml
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit_$(Platform).xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; $(OutDir)test_bdf_str_junit_$(Platform).xml
+$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit_$(Platform).xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; $(OutDir)test_bdf_list_junit_$(Platform).xml
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit_$(Platform).xml
 echo ==================== test_bdf_cards ====================
 $(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; $(OutDir)test_bdf_cards_junit_$(Platform).xml
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit_$(Platform).xml
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; $(OutDir)test_fem_float_junit_$(Platform).xml
+$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_junit_$(Platform).xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; $(OutDir)test_fem_int_junit_$(Platform).xml
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_junit_$(Platform).xml
 </Command>
       <Message>Testing the module</Message>
       <Outputs>__dummy__</Outputs>
@@ -256,34 +256,34 @@ $(OutputPath)test_fem_int.exe --reporter junit &gt; $(OutDir)test_fem_int_junit_
     <CustomBuildStep>
       <Command>echo ==================== test_extfem_string ====================
 $(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; $(OutDir)test_extfem_string_junit_$(Platform).xml
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_junit_$(Platform).xml
 echo ==================== test_bdf_bounds ====================
 $(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; $(OutDir)test_bdf_bounds_junit_$(Platform).xml
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_junit_$(Platform).xml
 echo ==================== test_bdf_types ====================
 $(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; $(OutDir)test_bdf_types_junit_$(Platform).xml
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_junit_$(Platform).xml
 echo ==================== test_bdf_int ====================
 $(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; $(OutDir)test_bdf_int_junit_$(Platform).xml
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_junit_$(Platform).xml
 echo ==================== test_bdf_float ====================
 $(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; $(OutDir)test_bdf_float_junit_$(Platform).xml
+$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_junit_$(Platform).xml
 echo ==================== test_bdf_str ====================
 $(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; $(OutDir)test_bdf_str_junit_$(Platform).xml
+$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_junit_$(Platform).xml
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; $(OutDir)test_bdf_list_junit_$(Platform).xml
+$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_junit_$(Platform).xml
 echo ==================== test_bdf_cards ====================
 $(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; $(OutDir)test_bdf_cards_junit_$(Platform).xml
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_junit_$(Platform).xml
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; $(OutDir)test_fem_float_junit_$(Platform).xml
+$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_junit_$(Platform).xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; $(OutDir)test_fem_int_junit_$(Platform).xml
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_junit_$(Platform).xml
 </Command>
       <Message>Testing the module</Message>
       <Outputs>__dummy__</Outputs>
