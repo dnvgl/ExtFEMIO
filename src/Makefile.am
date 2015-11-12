@@ -49,7 +49,10 @@ libextfemread_la_SOURCES += bdf/bdf_types_str.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_momforce_base.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_load.cpp
 
+libextfemread_la_SOURCES += fem/fem_cards.cpp
+libextfemread_la_SOURCES += fem/fem_cards_ident.cpp
 libextfemread_la_SOURCES += fem/fem_errors.cpp
+libextfemread_la_SOURCES += fem/fem_file.cpp
 libextfemread_la_SOURCES += fem/fem_types.cpp
 libextfemread_la_SOURCES += fem/fem_types_float.cpp
 libextfemread_la_SOURCES += fem/fem_types_int.cpp

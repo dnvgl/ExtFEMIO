@@ -51,62 +51,39 @@ boost::regex
 std::regex
 #endif
 entry_type<double>::float_re(
-  "([\\+-]?((0|([1-9][0-9]*))?[.]?[0-9]*)|"
-  "[.]?[0-9]+)(([Ee][+-]?)[0-9]+)?",
+  "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
+//  "[[:space:]\\+-][0-9][.][0-9]{8}[eE][\\+-][0-9]{2}",
 #ifdef HAVE_BOOST_REGEX_HPP
   boost::regex_constants::ECMAScript);
 #else
   std::regex_constants::ECMAScript);
 #endif
 
-const
-#ifdef HAVE_BOOST_REGEX_HPP
-boost::regex
-#else
-std::regex
-#endif
-entry_type<double>::float_lead_dot(
-  "^[\\+-]?[.][0-9]+",
-#ifdef HAVE_BOOST_REGEX_HPP
-  boost::regex_constants::ECMAScript);
-#else
-  std::regex_constants::ECMAScript);
-#endif
-
-// Convert string to float
+// Convert string to double
 double *entry_type<double>::operator() (const std::string &inp) const {
   auto *value = new double();
-  auto sval = extfem::string::string(inp).trim().upper();
 
-  if (sval.length() == 0) {
+  if (inp.length() == 0) {
     if (this->bounds.does_allow_empty())
       return nullptr;
     if (!this->bounds.has_default())
       throw errors::float_error(name, "empty entry without default");
     *value = this->bounds.get_default();
   } else {
-    if (! regex_match(sval, float_re)) {
-      std::string msg("illegal input, no float");
-      throw errors::float_error(name, msg + "; !" + sval + "!");
+    if (! regex_match(inp, float_re)) {
+      std::string msg("illegal input, (""");
+      throw errors::float_error(name, msg + inp + """), no float!");
     }
 
-#ifdef HAVE_BOOST_REGEX_HPP
-    boost::smatch m;
-#else
-    std::smatch m;
-#endif
-
-    if (regex_match(sval, float_lead_dot)) {
-        auto pos = sval.find('.');
-        sval.insert(pos, 1, '0');
-    }
-
-    istringstream conv(sval);
+    istringstream conv(inp);
     conv.imbue(locale("C"));
     conv >> *value;
   }
-  if (!this->bounds.in_bounds(value))
-    throw errors::float_error(name, "boundary condition violated");
+  if (!this->bounds.in_bounds(value)) {
+    std::string msg("boundary condition violated (");
+    throw errors::float_error(
+      name, msg + name + ")\n(""" + inp + """)");
+  }
   return value;
 }
 
@@ -117,17 +94,18 @@ std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const
 
   std::ostringstream res;
 
-  res.setf(ios_base::scientific, ios::floatfield);
-  res.fill(' ');
-
 #ifdef _MSC_VER
   // Set output to two digit exponetial format.
   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-  res.setf(ios_base::right, ios_base::adjustfield);
-  res.precision(10);
+  res.setf(ios_base::showpos);
+  res.setf(ios_base::scientific, ios::floatfield);
+  res.setf(ios_base::adjustfield, ios::left);
+
+  res.precision(8);
   res.width(16);
+  res.fill(' ');
 
   res << *inp;
   std::string out(res.str());

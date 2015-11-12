@@ -40,69 +40,56 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("FEM int types parsing.", "[fem_types]" ) {
 
-  entry_type<long> probe("dummy", bound<long>(NULL, NULL, new long(0)));
+  entry_type<long> probe("dummy", bound<long>(NULL, NULL));
 
-  SECTION("'   2    '") {
+  //        12345678901e3456
+  SECTION("' 0.00000000E+000'") {
+    CHECK(*probe(" 0.00000000E+000") == 0);
+  }
+
+  //        12345678901e3456
+  SECTION("' 2.00000000E+000'") {
     entry_type<long> obj("dummy", bound<long>(new long(1)));
-    CHECK(*obj("   2    ") == 2);
+    CHECK(*obj(" 2.00000000E+000") == 2);
   }
 
-  SECTION("'       2'") {
-    entry_type<long> obj("dummy", bound<long>(new long(0)));
-    CHECK(*obj("       2") == 2);
+  //        12345678901e3456
+  SECTION("' 2.00000000E+00 '") {
+    entry_type<long> obj("dummy", bound<long>(new long(1)));
+    CHECK(*obj(" 2.00000000E+00 ") == 2);
   }
 
-  SECTION("'2       '") {
-    entry_type<long> obj("dummy", bound<long>(new long(0), NULL, new long(0)));
-    CHECK(*obj("2       ") == 2);
+  //        12345678901e3456
+  SECTION("'+2.00000000E+00 '") {
+    entry_type<long> obj("dummy", bound<long>(new long(1)));
+    CHECK(*obj("+2.00000000E+00 ") == 2);
   }
 
-  SECTION("'    -1  '") {
+  //        12345678901e3456
+  SECTION("'+2.00000000E+000'") {
+    entry_type<long> obj("dummy", bound<long>(new long(1)));
+    CHECK(*obj("+2.00000000E+000") == 2);
+  }
+
+  //        12345678901e3456
+  SECTION("'-1.00000000E+00 '") {
     entry_type<long> obj("dummy", bound<long>(new long(-1), NULL, new long(0)));
-    CHECK(*obj("    -1  ") == -1);
+    CHECK(*obj("-1.00000000E+00 ") == -1);
   }
 
-  SECTION("default 1") {
-    entry_type<long> obj("dummy", bound<long>(new long(-1), NULL, new long(0)));
-    CHECK(*obj("        ") == 0);
-  }
-
-  SECTION("default 2") {
-    entry_type<long> obj("dummy", bound<long>(new long(-1), NULL, new long(100)));
-    CHECK(*obj("        ") == 100);
-  }
-
-  SECTION("123") {
+  //        12345678901e3456
+  SECTION("'+1.23000000E+02 '") {
     entry_type<long> obj("dummy");
-    CHECK(*obj("123") == 123);
+    CHECK(*obj("+1.23000000E+02 ") == 123);
   }
 
-  SECTION("123.") {
-    entry_type<long> obj("dummy");
-    CHECK(*obj("123.") == 123);
-  }
-
-  SECTION("Quick Reference") {
+  SECTION("Misc Num") {
     ::std::vector<::std::string> samples;
-    CHECK(*probe("           7.0  ") == 7);
-    CHECK(*probe("           7.   ") == 7);
-    CHECK(*probe("           .7E1 ") == 7);
-    CHECK(*probe("           .7e1 ") == 7);
-    CHECK(*probe("           7.E+0") == 7);
-    CHECK(*probe("           7.e+0") == 7);
-    CHECK(*probe("          -7.0  ") == -7);
-    CHECK(*probe("          -7.   ") == -7);
-    CHECK(*probe("          -.7E1 ") == -7);
-    CHECK(*probe("          -.7e1 ") == -7);
-    CHECK(*probe("          -7.E+0") == -7);
-    CHECK(*probe("          -7.e+0") == -7);
-    CHECK(*probe("           7    ") == 7);
-    CHECK(*probe("           7E1  ") == 70);
-    CHECK(*probe("           7e1  ") == 70);
-    CHECK(*probe("           7E0  ") == 7);
-    CHECK(*probe("           7e0  ") == 7);
-    CHECK(*probe("           7E+0 ") == 7);
-    CHECK(*probe("           7e+0 ") == 7);
+    //            12345678901e3456
+    CHECK(*probe("+7.00000000e+00 ") == 7);
+    CHECK(*probe("+7.00000000E+00 ") == 7);
+    CHECK(*probe("-7.00000000e+00 ") == -7);
+    CHECK(*probe("-7.00000000E+00 ") == -7);
   }
 }
 
@@ -112,27 +99,28 @@ TEST_CASE("FEM int types output.", "[fem_types]" ) {
 
   std::unique_ptr<long> lval = std::make_unique<long>(1);
 
-  SECTION("SHORT") {
+  SECTION("Output") {
     CHECK(obj.format(lval).size() == 16);
-    CHECK(obj.format(lval) == "1.0000000000e+00");
+    CHECK(obj.format(lval) == "+1.00000000e+00 ");
   }
 
-  SECTION("SHORT (nullptr)") {
-    CHECK(obj.format((std::unique_ptr<long>)nullptr).size() == 16);
-    CHECK(obj.format((std::unique_ptr<long>)nullptr) == "                ");
+  SECTION("Output (neg. val)") {
+  std::unique_ptr<long> lval = std::make_unique<long>(-1);
+    CHECK(obj.format(lval).size() == 16);
+    CHECK(obj.format(lval) == "-1.00000000e+00 ");
   }
 
-  SECTION("SHORT (void)") {
+  SECTION("Output (void)") {
     long *lval = new long(1);
     CHECK(*lval == 1);
     CHECK(obj.format(lval).size() == 16);
-    CHECK(obj.format(lval) == "1.0000000000e+00");
+    CHECK(obj.format(lval) == "+1.00000000e+00 ");
     delete lval;
   }
 
-  SECTION("SHORT (nullptr, void)") {
+  SECTION("Output (nullptr, void)") {
     CHECK(obj.format(nullptr).size() == 16);
-    CHECK(obj.format(nullptr) == "                ");
+    CHECK(obj.format(nullptr) == "+0.00000000e+00 ");
   }
 }
 

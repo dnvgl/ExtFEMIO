@@ -43,18 +43,18 @@ std::regex
 #endif
 entry_type<long>::int_re(
 //  "[[:space:]]*[\\+-]?[1-9][0-9]*[[:space:]]*",
-  "[[:space:]]*([\\+-]?(([1-9][0-9]*)?([.][0-9]*)?)|"
-  "[.]?[0-9]+)(([Ee][+-]?)[0-9]+)?[[:space:]]*",
+  "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
 #ifdef HAVE_BOOST_REGEX_HPP
   boost::regex_constants::ECMAScript);
 #else
   std::regex_constants::ECMAScript);
 #endif
 
+// Convert string to long
 long *entry_type<long>::operator() (const std::string &inp) const {
-  auto sval = extfem::string::string(inp).trim();
   double value;
-  if (sval.length() == 0) {
+
+  if (inp.length() == 0) {
     if (this->bounds.does_allow_empty())
       return nullptr;
     if (!this->bounds.has_default())
@@ -63,16 +63,17 @@ long *entry_type<long>::operator() (const std::string &inp) const {
   } else {
     if (! regex_match(inp, int_re)) {
       std::string msg("illegal input (""");
-      msg += inp;
-      msg += """), no integer";
-      throw errors::int_error(name, msg);
+      throw errors::int_error(name, msg + inp + """), no integer!");
     }
-    istringstream buffer(sval);
-    buffer >> value;
+
+    istringstream conv(inp);
+    conv.imbue(locale("C"));
+    conv >> value;
   }
   if (!this->bounds.in_bounds(long(value))) {
     std::string msg("boundary condition violated (");
-    throw errors::int_error(name, msg + name + ")\n(""" + inp + """)");
+    throw errors::int_error(
+      name, msg + name + ")\n(""" + inp + """)");
   }
   return new long(static_cast<long>(value));
 }
@@ -84,24 +85,25 @@ std::string entry_type<long>::format(const std::unique_ptr<long> &inp) const {
 
   std::ostringstream res;
 
-  res.setf(ios_base::scientific, ios::floatfield);
-  res.fill(' ');
-
 #ifdef _MSC_VER
   // Set output to two digit exponetial format.
   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-  res.setf(ios_base::right, ios_base::adjustfield);
-  res.precision(10);
+  res.setf(ios_base::showpos);
+  res.setf(ios_base::scientific, ios_base::floatfield);
+  res.setf(ios_base::adjustfield, ios::left);
+
+  res.precision(8);
   res.width(16);
+  res.fill(' ');
 
   res << double(*inp);
   std::string out(res.str());
   if (out.size() != 16) {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
     msg << double(*inp) << " of incorrect size, got length of " << out.size()
-        << " instead of allowed length of 16.";
+        << " instead of allowed length of 16." << out;
     throw errors::int_error(name, msg.str());
   }
 

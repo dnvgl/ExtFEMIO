@@ -151,14 +151,6 @@ namespace dnvgl {
 #endif
           float_re;
 
-          static const
-#ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
-#else
-          ::std::regex
-#endif
-          float_lead_dot;
-
         protected:
 
           static const fem_types _type = Float;
@@ -252,12 +244,15 @@ namespace dnvgl {
 
           inline fem_types type() const {return _type;};
 
-          ::std::string format(const ::std::unique_ptr<::std::deque<int>>&) const;
+          ::std::string
+              format(const ::std::unique_ptr<::std::deque<int>>&) const;
           ::std::string format(const void *v) const {
             if (!v)
-              return empty().format(nullptr);
+              return ::dnvgl::extfem::fem::types::empty().format(nullptr);
             else {
-              ::std::deque<int> val(((::std::deque<int>*)v)->begin(), ((::std::deque<int>*)v)->end());
+              ::std::deque<int>
+                val(((::std::deque<int>*)v)->begin(),
+                    ((::std::deque<int>*)v)->end());
               ::std::unique_ptr<::std::deque<int>> vp;
               vp = ::std::make_unique<::std::deque<int>>(val);
               return this->format(vp);

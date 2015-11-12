@@ -74,11 +74,9 @@ std::string card::format_outlist(
   return res.str();
 }
 
-
-
-
 namespace {
-  const pair<std::string, types> map_pairs[] = {
+  const size_t map_pairs_num = 14;
+  const pair<std::string, types> map_pairs[map_pairs_num] = {
     pair<std::string, types>("GRID", GRID),
     pair<std::string, types>("MAT1", MAT1),
     pair<std::string, types>("CTRIA3", CTRIA3),
@@ -95,7 +93,8 @@ namespace {
     pair<std::string, types>("ENDDATA", ENDDATA)};
 }
 
-const map<std::string, types> cardtype_map(map_pairs, map_pairs + 14);
+const map<std::string, types> cardtype_map(
+  map_pairs, map_pairs + map_pairs_num);
 
 deque<std::string> card::card_split(deque<std::string> const &inp) {
   deque<std::string> res;
