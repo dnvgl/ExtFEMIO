@@ -175,7 +175,10 @@
     <ClCompile Include="bdf\bdf_types_int.cpp" />
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
     <ClCompile Include="bdf\bdf_types_str.cpp" />
+    <ClCompile Include="fem\fem_cards.cpp" />
+    <ClCompile Include="fem\fem_cards_ident.cpp" />
     <ClCompile Include="fem\fem_errors.cpp" />
+    <ClCompile Include="fem\fem_file.cpp" />
     <ClCompile Include="fem\fem_types.cpp" />
     <ClCompile Include="fem\fem_types_float.cpp" />
     <ClCompile Include="fem\fem_types_int.cpp" />
@@ -192,7 +195,12 @@
     <ClInclude Include="..\include\bdf\file.h" />
     <ClInclude Include="..\include\bdf\types.h" />
     <ClInclude Include="..\include\bdf\type_bounds.h" />
+    <ClInclude Include="..\include\fem\cards.h" />
+    <ClInclude Include="..\include\fem\cards_elements.h" />
+    <ClInclude Include="..\include\fem\cards_loads.h" />
+    <ClInclude Include="..\include\fem\cards_properties.h" />
     <ClInclude Include="..\include\fem\errors.h" />
+    <ClInclude Include="..\include\fem\file.h" />
     <ClInclude Include="..\include\fem\type_bounds.h" />
     <ClInclude Include="..\include\fem\types.h" />
     <ClInclude Include="..\include\catch.hpp" />

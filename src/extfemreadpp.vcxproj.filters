@@ -103,6 +103,15 @@
     <ClCompile Include="my_c++14.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_ident.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_file.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BDF">
@@ -183,6 +192,21 @@
     </ClInclude>
     <ClInclude Include="..\include\resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\cards.h">
+      <Filter>FEM\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\cards_elements.h">
+      <Filter>FEM\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\cards_loads.h">
+      <Filter>FEM\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\cards_properties.h">
+      <Filter>FEM\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\file.h">
+      <Filter>FEM\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

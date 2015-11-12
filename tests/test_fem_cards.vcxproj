@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -82,7 +82,7 @@
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
     <IntDir>$(Platform)\$(Configuration)\test_bdf_cards\</IntDir>
- </PropertyGroup>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
@@ -200,15 +200,15 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test_bdf_cards.cpp" />
-    <ClCompile Include="test_bdf_cards_ident.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\include\fem\cards.h" />
     <ClInclude Include="..\include\fem\file.h" />
     <ClInclude Include="..\include\extfem_string.h" />
     <ClInclude Include="..\include\fem\types.h" />
     <ClInclude Include="..\include\catch.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test_fem_cards.cpp" />
+    <ClCompile Include="test_fem_cards_ident.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
