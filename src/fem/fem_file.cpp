@@ -23,12 +23,6 @@ namespace {
 using namespace ::std;
 using namespace ::dnvgl::extfem::fem::input;
 
-namespace {
-  const char initVals[3] = { '+', '*', ' ' };
-}
-const set<char> fem_file::cont_chars(initVals, initVals + 3);
-
-
 fem_file::fem_file(istream &inp) :
   data(inp), last_comment(""), eof(false) {
   data.imbue(locale(locale("C"), new line_reader()));
@@ -45,10 +39,9 @@ deque<std::string>& fem_file::get() {
     // if not EOF, read next line
     if (!data.eof()) data >> cur_line;
     else eof = true;
-  // loop while no next card starts and file has still content.
+// loop while no next card starts and file has still content.
   } while (!data.eof() &&
-           (res->size() == 0 ||
-            cont_chars.find(cur_line[0]) != cont_chars.end()));
+           (res->size() == 0 || cur_line[0] == ' '));
   return *res;
 }
 
@@ -79,5 +72,5 @@ streampos fem_file::pos(void) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../.. check -j8"
 // End:

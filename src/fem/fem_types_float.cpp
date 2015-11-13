@@ -60,15 +60,13 @@ entry_type<double>::float_re(
 #endif
 
 // Convert string to double
-double *entry_type<double>::operator() (const std::string &inp) const {
-  auto *value = new double();
+double entry_type<double>::operator() (const std::string &inp) const {
+  double value;
 
   if (inp.length() == 0) {
-    if (this->bounds.does_allow_empty())
-      return nullptr;
     if (!this->bounds.has_default())
       throw errors::float_error(name, "empty entry without default");
-    *value = this->bounds.get_default();
+    value = this->bounds.get_default();
   } else {
     if (! regex_match(inp, float_re)) {
       std::string msg("illegal input, (""");
@@ -77,7 +75,7 @@ double *entry_type<double>::operator() (const std::string &inp) const {
 
     istringstream conv(inp);
     conv.imbue(locale("C"));
-    conv >> *value;
+    conv >> value;
   }
   if (!this->bounds.in_bounds(value)) {
     std::string msg("boundary condition violated (");
@@ -87,10 +85,7 @@ double *entry_type<double>::operator() (const std::string &inp) const {
   return value;
 }
 
-std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const {
-
-  if (!inp)
-    return fem::types::empty().format(nullptr);
+std::string entry_type<double>::format(const double &inp) const {
 
   std::ostringstream res;
 
@@ -107,11 +102,11 @@ std::string entry_type<double>::format(const std::unique_ptr<double> &inp) const
   res.width(16);
   res.fill(' ');
 
-  res << *inp;
+  res << inp;
   std::string out(res.str());
   if (out.size() != 16) {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
-    msg << *inp << " of incorrect size, got length of " << out.size()
+    msg << inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of 16.";
     throw errors::output_error(name, msg.str());
   }

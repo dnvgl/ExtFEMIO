@@ -34,27 +34,11 @@ fem::types::empty card::empty = fem::types::empty();
 
 fem::types::card card::head = fem::types::card("<DUMMY>");
 
-::std::string card::format_outlist(
-  const ::std::deque<::std::unique_ptr<format_entry>> &en) const {
-
-  unsigned long i = 0;
-  ::std::ostringstream res("");
-
-  for (auto &p : en) {
-    if (++i > 9) {
-      i = 2;
-      res << ::std::endl << fem::types::card("").format(nullptr);
-    }
-
-    res << p->first->format(p->second);
-  }
-  return res.str();
-}
-
 namespace {
-  const size_t map_pair_entries = 1;
+  const size_t map_pair_entries = 2;
   const pair<::std::string, types> map_pairs[map_pair_entries] = {
     pair<::std::string, types>("IDENT", IDENT),
+    pair<::std::string, types>("TEXT", TEXT),
   };
 }
 
@@ -68,21 +52,18 @@ card::card_split(deque<::std::string> const &inp) {
 
   bool first = true;
 
-  for (auto pos=inp.begin(); pos<inp.end(); ++pos) {
-    head = extfem::string::string(pos->substr(0, 8)).trim();
+  for (auto &pos : inp) {
+    head = extfem::string::string(pos.substr(0, 8)).trim();
     if (first) {
-      res.push_back(extfem::string::string(head).trim("\t\n*"));
+      res.push_back(extfem::string::string(head).trim("\t\n"));
     }
-    if (head.length() > 0) {
-      ::std::string tmp(pos->substr(8));
-      tmp.resize(64, ' ');
-      if (pos->length() > 8)
-        tmp += (pos)->substr(8);
-      tmp.resize(128, ' ');
-      for (int i=0; i<4; ++i)
-        res.push_back(tmp.substr(i*16, 16));
-      first = false;
+    auto tmp(pos);
+    tmp.resize(80, ' ');
+    tmp = tmp.substr(8);
+    for (int i=0; i<4; ++i) {
+      res.push_back(tmp.substr(i*16, 16));
     }
+    first = false;
   }
   return res;
 }
@@ -95,6 +76,8 @@ fem::cards::dispatch(const deque<::std::string> &inp) {
     switch (cardtype_map.at(key)) {
     case IDENT:
       return ::std::make_unique<fem::cards::ident>(inp);
+    case TEXT:
+      return ::std::make_unique<fem::cards::text>(inp);
     // These are not real card types, they can't be returned
     case UNKNOWN:
       return nullptr;

@@ -250,11 +250,6 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
     CHECK(lines.size() == 66);
 
-    // ::std::cerr << "lines\n";
-    // copy(lines.begin(), lines.end(),
-    //      ostream_iterator<::std::string>(::std::cerr, "!"));
-    // ::std::cerr << "\n" << lines.size() << ::std::endl;
-
     CHECK_THROWS(pbeam probe(lines));
 
   }

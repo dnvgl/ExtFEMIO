@@ -44,52 +44,52 @@ TEST_CASE("FEM int types parsing.", "[fem_types]" ) {
 
   //        12345678901e3456
   SECTION("' 0.00000000E+000'") {
-    CHECK(*probe(" 0.00000000E+000") == 0);
+    CHECK(probe(" 0.00000000E+000") == 0);
   }
 
   //        12345678901e3456
   SECTION("' 2.00000000E+000'") {
     entry_type<long> obj("dummy", bound<long>(new long(1)));
-    CHECK(*obj(" 2.00000000E+000") == 2);
+    CHECK(obj(" 2.00000000E+000") == 2);
   }
 
   //        12345678901e3456
   SECTION("' 2.00000000E+00 '") {
     entry_type<long> obj("dummy", bound<long>(new long(1)));
-    CHECK(*obj(" 2.00000000E+00 ") == 2);
+    CHECK(obj(" 2.00000000E+00 ") == 2);
   }
 
   //        12345678901e3456
   SECTION("'+2.00000000E+00 '") {
     entry_type<long> obj("dummy", bound<long>(new long(1)));
-    CHECK(*obj("+2.00000000E+00 ") == 2);
+    CHECK(obj("+2.00000000E+00 ") == 2);
   }
 
   //        12345678901e3456
   SECTION("'+2.00000000E+000'") {
     entry_type<long> obj("dummy", bound<long>(new long(1)));
-    CHECK(*obj("+2.00000000E+000") == 2);
+    CHECK(obj("+2.00000000E+000") == 2);
   }
 
   //        12345678901e3456
   SECTION("'-1.00000000E+00 '") {
     entry_type<long> obj("dummy", bound<long>(new long(-1), NULL, new long(0)));
-    CHECK(*obj("-1.00000000E+00 ") == -1);
+    CHECK(obj("-1.00000000E+00 ") == -1);
   }
 
   //        12345678901e3456
   SECTION("'+1.23000000E+02 '") {
     entry_type<long> obj("dummy");
-    CHECK(*obj("+1.23000000E+02 ") == 123);
+    CHECK(obj("+1.23000000E+02 ") == 123);
   }
 
   SECTION("Misc Num") {
     ::std::vector<::std::string> samples;
     //            12345678901e3456
-    CHECK(*probe("+7.00000000e+00 ") == 7);
-    CHECK(*probe("+7.00000000E+00 ") == 7);
-    CHECK(*probe("-7.00000000e+00 ") == -7);
-    CHECK(*probe("-7.00000000E+00 ") == -7);
+    CHECK(probe("+7.00000000e+00 ") == 7);
+    CHECK(probe("+7.00000000E+00 ") == 7);
+    CHECK(probe("-7.00000000e+00 ") == -7);
+    CHECK(probe("-7.00000000E+00 ") == -7);
   }
 }
 
@@ -97,7 +97,7 @@ TEST_CASE("FEM int types output.", "[fem_types]" ) {
 
   entry_type<long> obj("dummy");
 
-  std::unique_ptr<long> lval = std::make_unique<long>(1);
+  long lval(1);
 
   SECTION("Output") {
     CHECK(obj.format(lval).size() == 16);
@@ -105,25 +105,18 @@ TEST_CASE("FEM int types output.", "[fem_types]" ) {
   }
 
   SECTION("Output (neg. val)") {
-  std::unique_ptr<long> lval = std::make_unique<long>(-1);
+  long lval(-1);
     CHECK(obj.format(lval).size() == 16);
     CHECK(obj.format(lval) == "-1.00000000e+00 ");
   }
 
   SECTION("Output (void)") {
-    long *lval = new long(1);
-    CHECK(*lval == 1);
+    long lval(1);
+    CHECK(lval == 1);
     CHECK(obj.format(lval).size() == 16);
     CHECK(obj.format(lval) == "+1.00000000e+00 ");
-    delete lval;
-  }
-
-  SECTION("Output (nullptr, void)") {
-    CHECK(obj.format(nullptr).size() == 16);
-    CHECK(obj.format(nullptr) == "+0.00000000e+00 ");
   }
 }
-
 
 /*
   Local Variables:

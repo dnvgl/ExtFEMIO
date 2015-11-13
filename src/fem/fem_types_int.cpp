@@ -51,15 +51,13 @@ entry_type<long>::int_re(
 #endif
 
 // Convert string to long
-long *entry_type<long>::operator() (const std::string &inp) const {
+long entry_type<long>::operator() (const std::string &inp) const {
   double value;
 
   if (inp.length() == 0) {
-    if (this->bounds.does_allow_empty())
-      return nullptr;
     if (!this->bounds.has_default())
       throw errors::int_error(name, "empty entry without default");
-    return new long(this->bounds.get_default());
+    return this->bounds.get_default();
   } else {
     if (! regex_match(inp, int_re)) {
       std::string msg("illegal input (""");
@@ -75,13 +73,10 @@ long *entry_type<long>::operator() (const std::string &inp) const {
     throw errors::int_error(
       name, msg + name + ")\n(""" + inp + """)");
   }
-  return new long(static_cast<long>(value));
+  return long(value);
 }
 
-std::string entry_type<long>::format(const std::unique_ptr<long> &inp) const {
-
-  if (!inp)
-    return fem::types::empty().format(nullptr);
+std::string entry_type<long>::format(const long &inp) const {
 
   std::ostringstream res;
 
@@ -98,11 +93,11 @@ std::string entry_type<long>::format(const std::unique_ptr<long> &inp) const {
   res.width(16);
   res.fill(' ');
 
-  res << double(*inp);
+  res << double(inp);
   std::string out(res.str());
   if (out.size() != 16) {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
-    msg << double(*inp) << " of incorrect size, got length of " << out.size()
+    msg << double(inp) << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of 16." << out;
     throw errors::int_error(name, msg.str());
   }

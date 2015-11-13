@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="bdf\bdf_cards.cpp">
@@ -100,6 +100,9 @@
     <ClCompile Include="fem\fem_types_int.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_types_str.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="my_c++14.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -107,6 +110,9 @@
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_cards_ident.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_text.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_file.cpp">

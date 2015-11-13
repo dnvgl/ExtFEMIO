@@ -39,28 +39,25 @@ namespace dnvgl {
           auto pos = inp.begin();
 
           ++pos;
-          SLEVEL = fem::types::get_val<long>(_SLEVEL, *(pos++));
-          SELTYP = fem::types::get_val<long>(_SELTYP, *(pos++));
-          SELMOD = fem::types::get_val<long>(_SELMOD, *(pos++));
+          SLEVEL = _SLEVEL(*(pos++));
+          SELTYP = _SELTYP(*(pos++));
+          SELMOD = _SELMOD(*(pos++));
         }
 
-        const ::std::ostream& ident::operator<<(::std::ostream& os) const {
+        const ::std::ostream&
+        ident::operator<<(::std::ostream& os) const {
           os << this;
           return os;
         }
 
-        ::std::ostream& operator<<(::std::ostream &os, const ident &card) {
+        ::std::ostream&
+        operator<<(::std::ostream &os, const ident &card) {
 
-          ::std::deque<::std::unique_ptr<format_entry>> entries;
-
-          entries.push_back(format(ident::head));
-
-          entries.push_back(format<long>(card._SLEVEL, card.SLEVEL));
-          entries.push_back(format<long>(card._SELTYP, card.SELTYP));
-          entries.push_back(format<long>(card._SELMOD, card.SELMOD));
-          entries.push_back(format(ident::empty));
-
-          os << card.format_outlist(entries) << ::std::endl;
+          os << ident::head.format()
+             << card._SLEVEL.format(card.SLEVEL)
+             << card._SELTYP.format(card.SELTYP)
+             << card._SELMOD.format(card.SELMOD)
+             << ident::empty.format() << ::std::endl;
 
           return os;
         }
@@ -75,5 +72,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../.. check -j8"
 // End:

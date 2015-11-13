@@ -52,8 +52,8 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001\n"
     "        CONVERSION DETAILS:\n"
     "        Msc Nastran File Format -> Sesam Interface File.\n"
-    "        Input  : \test_01.bdf\n"
-    "        Log    : \test_01.txt\n"
+    "        Input  : \\test_01.bdf\n"
+    "        Log    : \\test_01.txt\n"
     "DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001\n"
     "        DATE TIME:  11/03/2015 09:46:08\n"
     "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013\n"
@@ -80,20 +80,33 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     CHECK(current->card_type() == cards::IDENT);
     // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
     // IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000
-    CHECK(*static_cast<ident*>(current.get())->SLEVEL == 1);
-    CHECK(*static_cast<ident*>(current.get())->SELTYP == 1);
-    CHECK(*static_cast<ident*>(current.get())->SELMOD == 3);
+    CHECK(static_cast<ident*>(current.get())->SLEVEL == 1);
+    CHECK(static_cast<ident*>(current.get())->SELTYP == 1);
+    CHECK(static_cast<ident*>(current.get())->SELMOD == 3);
 
     l = probe.get();
     CAPTURE( l[0] );
     current = cards::dispatch(card::card_split(l));
-    // CHECK(current->card_type() == cards::TEXT);
+    CHECK(current->card_type() == cards::TEXT);
     // 12345678|234567890123456|234567890123456|234567890123456|234567890123456|2
     // TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
     //         CONVERSION DETAILS:
     //         Msc Nastran File Format -> Sesam Interface File.
     //         Input  : \test_01.bdt
     //         Log    : \test_01.txt
+    CHECK(static_cast<text*>(current.get())->TYPE == 0);
+    CHECK(static_cast<text*>(current.get())->SUBTYPE == 0);
+    CHECK(static_cast<text*>(current.get())->NRECS == 4);
+    CHECK(static_cast<text*>(current.get())->NBYTE == 72);
+    CHECK(static_cast<text*>(current.get())->CONT.size() == 4);
+    CHECK(static_cast<text*>(current.get())->CONT[0] ==
+          "CONVERSION DETAILS:                                             ");
+    CHECK(static_cast<text*>(current.get())->CONT[1] ==
+          "Msc Nastran File Format -> Sesam Interface File.                ");
+    CHECK(static_cast<text*>(current.get())->CONT[2] ==
+          "Input  : \\test_01.bdf                                           ");
+    CHECK(static_cast<text*>(current.get())->CONT[3] ==
+          "Log    : \\test_01.txt                                           ");
 
     l = probe.get();
     CAPTURE( l[0] );

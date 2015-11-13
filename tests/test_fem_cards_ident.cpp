@@ -49,9 +49,9 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
     ::std::deque<string> lines = card::card_split(data);
     ident probe(lines);
 
-    CHECK(*probe.SLEVEL == 1);
-    CHECK(*probe.SELTYP == 1);
-    CHECK(*probe.SELMOD == 3);
+    CHECK(probe.SLEVEL == 1);
+    CHECK(probe.SELTYP == 1);
+    CHECK(probe.SELMOD == 3);
   }
 
   SECTION("IDENT (2)") {
@@ -60,9 +60,9 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
     ::std::deque<string> lines = card::card_split(data);
     ident probe(lines);
 
-    CHECK(*probe.SLEVEL == 1);
-    CHECK(*probe.SELTYP == 1);
-    CHECK(*probe.SELMOD == 3);
+    CHECK(probe.SLEVEL == 1);
+    CHECK(probe.SELTYP == 1);
+    CHECK(probe.SELMOD == 3);
   }
 }
 
