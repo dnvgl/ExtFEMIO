@@ -175,7 +175,6 @@
     <ClCompile Include="bdf\bdf_types_int.cpp" />
     <ClCompile Include="bdf\bdf_types_str.cpp" />
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
-    <ClCompile Include="bdf\bdf_types_str.cpp" />
     <ClCompile Include="fem\fem_cards.cpp" />
     <ClCompile Include="fem\fem_cards_ident.cpp" />
     <ClCompile Include="fem\fem_cards_text.cpp" />
@@ -184,6 +183,7 @@
     <ClCompile Include="fem\fem_types.cpp" />
     <ClCompile Include="fem\fem_types_float.cpp" />
     <ClCompile Include="fem\fem_types_int.cpp" />
+    <ClCompile Include="fem\fem_types_str.cpp" />
     <ClCompile Include="extfem_string.cpp" />
     <ClCompile Include="my_c++14.cpp" />
     <ClCompile Include="StdAfx.cpp" />
