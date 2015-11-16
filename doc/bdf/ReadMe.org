@@ -1,0 +1,34 @@
+# -*- mode: org -*-
+#+LATEX_CLASS: dnvglartcl
+#+LATEX_HEADER: \usepackage{tabu,booktabs}
+#+OPTIONS: toc:nil
+#+TITLE: Nastran Bulk Data (BDF) IO support for C++
+
+* BDF Cards supported
+
+  #+ATTR_LATEX: :booktabs :environment tabu :align @{}lp{5em}Xcc@{} :width \textwidth :float nil
+  |          | *Name*     | *Description*                                   | *Read* | *Write* |
+  |----------+------------+-------------------------------------------------+--------+---------|
+  | General  |            |                                                 |        |         |
+  |          | =MAT1=     | Material definition                             | \check |         |
+  |          | =GRID=     | Grid nodes                                      | \check |         |
+  | Elements |            |                                                 |        |         |
+  |          | =CTRIA3=   | 3 node shaped shell elements                    | \check |         |
+  |          | =CQUAD4=   | 4 node shaped shell elements                    | \check |         |
+  |          | =CBEAM=    | Complex beams                                   | \check |         |
+  |          | =CBAR=     | Simple beams                                    | \check | \check  |
+  |          | =CROD=     | Trusses                                         | \check |         |
+  | Element  | properties |                                                 |        |         |
+  |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |         |
+  |          | =PBEAM=    | Integral properties for =CBEAM=                 | \check |         |
+  |          | =PBEAML=   | Properties for =CBEAM= describing cross section | \check |         |
+  |          | =PBAR=     | Integral properties for =CBAR=                  | \check |         |
+  |          | =PBARL=    | Properties for =CBAR= describing cross section  | \check |         |
+  |          | =PROD=     | Properties for =CROD=                           | \check |         |
+  | Load     |            |                                                 |        |         |
+  |          | =LOAD=     | Load case combination                           | \check |         |
+  |          | =FORCE=    | Forces on Nodes                                 | \check | \check  |
+  |          | =MOMENT=   | Moments on Nodes                                | \check | \check  |
+  | Misc     |            |                                                 |        |         |
+  |          | =ENDDATA=  | Marker for end of input file                    | \check |         |
+  |          |            |                                                 |        |         |

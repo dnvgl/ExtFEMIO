@@ -10,7 +10,7 @@ namespace {
 #ifdef __GNUC__
   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id: test_fem_cards.cpp 155 2015-11-04 14:46:34Z berhol $";
+    = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numdric_limits"
@@ -59,8 +59,6 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013\n"
     "        COMPUTER: HAML130185\n"
     "        USER: berhol\n"
-    "TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000\n"
-    "        SubCase\n"
     "GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005\n"
     "GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004\n"
     "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
@@ -100,6 +98,8 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     CHECK(static_cast<text*>(current.get())->NBYTE == 72);
     CHECK(static_cast<text*>(current.get())->CONT.size() == 4);
     CHECK(static_cast<text*>(current.get())->CONT[0] ==
+          //        1         2         3         4         5         6
+          //234567890123456789012345678901234567890123456789012345678901234
           "CONVERSION DETAILS:                                             ");
     CHECK(static_cast<text*>(current.get())->CONT[1] ==
           "Msc Nastran File Format -> Sesam Interface File.                ");
@@ -111,13 +111,27 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     l = probe.get();
     CAPTURE( l[0] );
     current = cards::dispatch(card::card_split(l));
-    // CHECK(current->card_type() == cards::DATE);
+    CHECK(current->card_type() == cards::DATE);
     // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
     // DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
     //         DATE TIME:  11/03/2015 09:46:08
     //         PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013
     //         COMPUTER: HAML130185
     //         USER: berhol
+    CHECK(static_cast<date*>(current.get())->TYPE == 0);
+    CHECK(static_cast<date*>(current.get())->SUBTYPE == 0);
+    CHECK(static_cast<date*>(current.get())->NRECS == 4);
+    CHECK(static_cast<date*>(current.get())->NBYTE == 72);
+    CHECK(static_cast<text*>(current.get())->CONT[0] ==
+          //        1         2         3         4         5         6
+          //234567890123456789012345678901234567890123456789012345678901234
+          "DATE TIME:  11/03/2015 09:46:08                                 ");
+    CHECK(static_cast<text*>(current.get())->CONT[1] ==
+          "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            ");
+    CHECK(static_cast<text*>(current.get())->CONT[2] ==
+          "COMPUTER: HAML130185                                            ");
+    CHECK(static_cast<text*>(current.get())->CONT[3] ==
+          "USER: berhol                                                    ");
 
     l = probe.get();
     CAPTURE( l[0] );

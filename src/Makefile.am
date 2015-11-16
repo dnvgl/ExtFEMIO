@@ -50,6 +50,7 @@ libextfemread_la_SOURCES += bdf/bdf_cards_momforce_base.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_load.cpp
 
 libextfemread_la_SOURCES += fem/fem_cards.cpp
+libextfemread_la_SOURCES += fem/fem_cards_date.cpp
 libextfemread_la_SOURCES += fem/fem_cards_ident.cpp
 libextfemread_la_SOURCES += fem/fem_cards_text.cpp
 libextfemread_la_SOURCES += fem/fem_errors.cpp

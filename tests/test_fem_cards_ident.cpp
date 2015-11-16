@@ -38,11 +38,6 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
-  ::std::deque<string> data;
-  data.push_back("IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n");
-  ::std::deque<string> lines = card::card_split(data);
-  ident probe(lines);
-
   SECTION("IDENT (1)") {
     ::std::deque<string> data;
     data.push_back("IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n");
@@ -55,6 +50,17 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
   }
 
   SECTION("IDENT (2)") {
+    ::std::deque<string> data;
+    data.push_back("IDENT   +1.00000000e+000+1.00000000e+000+3.00000000e+000+0.00000000e+000\n");
+    ::std::deque<string> lines = card::card_split(data);
+    ident probe(lines);
+
+    CHECK(probe.SLEVEL == 1);
+    CHECK(probe.SELTYP == 1);
+    CHECK(probe.SELMOD == 3);
+  }
+
+  SECTION("IDENT (3)") {
     ::std::deque<string> data;
     data.push_back("IDENT    1.00000000e+00  1.00000000e+00  3.00000000e+00  0.00000000e+00 \n");
     ::std::deque<string> lines = card::card_split(data);

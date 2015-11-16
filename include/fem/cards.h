@@ -1,4 +1,4 @@
-// Copyright © 2015 by DNV GL SE
+// Copyright © 2015 by DNV GL SE#
 
 // Classes for the differen Sesame FEM cards.
 
@@ -36,8 +36,35 @@ namespace dnvgl {
 
         typedef enum {
           UNKNOWN,
-          IDENT,
-          TEXT
+          DATE,      // Date and Program Information
+          // GNODE,     // Correspondence between External and Internal
+          //            // Node Numbering, and Number of Degrees of
+          //            // Freedom of Each Node
+          // GCOORD,    // Nodal Coordinates
+          IDENT,     // Identification of Superelements
+          // GELMNT1,   // Element Data Definition
+          // GELREF1,   // Reference to Element Data
+          // GBARM,     // Cross Section Type Massive Bar
+          // GBEAMG,    // General Beam Element Data
+          // GECCEN,    // Eccentricities
+          // GELTH,     // Thickness of Two-dimensional Elements
+          // GIORH,     // Cross Section Type I or H Beam
+          // GLSEC,     // Cross Section Type L-Section
+          // GPIPE,     // Cross Section Type Tube
+          // BLDEP,     // Nodes with Linear Dependence
+          // BNBCD,     // Nodes with Boundary Conditions
+          // BNDISPL,   // Nodes with Prescribed Displacements and
+          //            // Accelerations
+          // BNLOAD,    // Nodes with Loads
+          // MGSPRNG,   // Element to Ground
+          // IEND,      // End of a Superelement
+          // GSETMEMB,  // Set (group) of Nodes or Elements (Members)
+          // GUNIVEC,   // Specification of Local Element Coordinate
+          //            // System
+          // MISOSEL,   // Isotropy, Linear Elastic Structural Analysis
+          // TDSETNAM,  // Name and Description of a Set (group)
+          TEXT,      // User supplied Text
+          // TDLOAD,    // *not documented*
         } types;
 
         class card {
@@ -231,6 +258,105 @@ Description:
 
           DllExport friend ::std::ostream&
           operator<< (::std::ostream&, const text&);
+          DllExport const ::std::ostream&
+          operator<< (::std::ostream& os) const;
+        };
+
+/*
+DATE: Date and Program Information
+..................................
+
++-------+---------------+---------------+---------------+---------------+
+| DATE  | TYPE          | SUBTYPE       | NRECS         | NBYTE         |
++-------+---------------+---------------+---------------+---------------+
+|       | <text lines>                                                  |
++-------+---------------+---------------+---------------+---------------+
+|       | <text lines>                                                  |
++-------+---------------+---------------+---------------+---------------+
+
+The identifier is used to transfer date and program information on the
+Interface File.
+
+The following NRECS records must be read in A format, 72 characters
+per record.
+
+Description:
+............
+
+``TYPE``
+  Value giving information on how to use this text.
+    = 1 Text concerning current superelement.
+    = 2 Text concerning children of current superelement (not
+        implemented).
+``SUBTYPE``
+  = 0 If current superelement (TYPE = 1).
+  > 0 Subelement no. referring to the current superelement (only if
+      TYPE = 2).
+``NRECS``
+  Number of records to be read in A-format, NRECS ≥ 1.
+``NBYTE``
+  Number of significant bytes on the text records, 1 ≤ NBYTE ≤ 72.
+
+  The eight first bytes on the text records shall be filled with
+  blanks.
+
+Example of format of "DATE" record as used in SESAM:
+
+DATE      0.10000000E+01  0.00000000E+00  0.40000000E+01  0.72000000E+02
+        DATE:     23-MAY-86           TIME:         13:53:03
+        PROGRAM:  SESAM WALOCO        VERSION:      5.1-0 15-MAY-86
+        COMPUTER: VAX VMS V4.3        INSTALLATION: VERITEC
+        USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
+
+------------------------------------------------------------------------
+123456789.123456789.123456789.123456789.123456789.123456789.123456789.12
+         1         2         3         4         5         6         7
+------------------------------------------------------------------------
+ */
+        class date : public card {
+
+        private:
+
+          static const ::dnvgl::extfem::fem::types::card head;
+
+          static const ::dnvgl::extfem::fem::types::entry_type<long> _TYPE;
+          static const ::dnvgl::extfem::fem::types::entry_type<long> _SUBTYPE;
+          static const ::dnvgl::extfem::fem::types::entry_type<long> _NRECS;
+          static const ::dnvgl::extfem::fem::types::entry_type<long> _NBYTE;
+          static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _CONT;
+
+        public:
+
+          long TYPE;
+          long SUBTYPE;
+          long NRECS;
+          long NBYTE;
+          ::std::deque<::std::string> CONT;
+
+          DllExport date(const ::std::deque<::std::string>&);
+
+          DllExport date(
+            const long *TYPE, const long *SUBTYPE,
+            const long *NRECS, const long *NBYTE,
+            const ::std::deque<::std::string> *CONT) :
+            TYPE(*TYPE), SUBTYPE(*SUBTYPE), NRECS(*NRECS),
+            NBYTE(*NBYTE), CONT(*CONT) {};
+
+          DllExport date(
+            const long *TYPE, const long *SUBTYPE,
+            const ::std::deque<::std::string> *CONT) :
+            TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
+            NRECS = CONT->size();
+            NBYTE = 0;
+            for (auto &p : *CONT)
+              NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
+          };
+
+          DllExport const ::dnvgl::extfem::fem::cards::types
+          card_type(void) const;
+
+          DllExport friend ::std::ostream&
+          operator<< (::std::ostream&, const date&);
           DllExport const ::std::ostream&
           operator<< (::std::ostream& os) const;
         };

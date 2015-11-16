@@ -43,17 +43,17 @@ entry_type<std::string>::operator() (const std::string &inp) const {
   return sval;
 }
 
-std::string entry_type<std::string>::format(const std::string &inp) const {
+std::string entry_type<std::string>::format(const std::string &inp, const size_t &len) const {
 
   std::ostringstream res;
 
   res.setf(ios_base::left, ios_base::adjustfield);
   res.fill(' ');
-  res.width(72);
+  res.width(len-8);
 
   res << inp;
   std::string out(res.str());
-  if (out.size() != 72) {
+  if (out.size() != len-8) {
     std::ostringstream msg("output string for value ", std::ostringstream::ate);
     msg << inp << " of incorrect size, got length of " << out.size()
         << " instead of allowed length of 72.";

@@ -77,7 +77,7 @@ namespace dnvgl {
              << card._NBYTE.format(card.NBYTE) << std::endl;
 
           for (auto p : card.CONT)
-            os << card._CONT.format(p) << std::endl;
+            os << "        " << card._CONT.format(p, card.NBYTE) << std::endl;
 
           return os;
         }

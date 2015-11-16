@@ -109,6 +109,9 @@
     <ClCompile Include="fem\fem_cards.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards_date.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fem\fem_cards_ident.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>

@@ -185,7 +185,7 @@ namespace dnvgl {
             return _type;
           }
 
-          ::std::string format(const ::std::string&) const;
+          ::std::string format(const ::std::string&, const size_t &len=72) const;
         };
 
         template <>
