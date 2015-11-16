@@ -12,7 +12,7 @@
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    |          |            | <60>                                                         |        |         |   <5> |
    | General  |            |                                                              |        |         |       |
-   |          | =DATE=     | Date and Program Information                                 |        |         |   4-2 |
+   |          | =DATE=     | Date and Program Information                                 | \check | \check  |   4-2 |
    |          | =GNODE=    | Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node |        |         |  6-80 |
    |          | =GCOORD=   | Nodal Coordinates                                            |        |         |  6-56 |
    |          | =IDENT=    | Identification of Superelements                              | \check | \check  |   4-3 |

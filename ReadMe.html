@@ -4,10 +4,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-09-01 Di 14:58 -->
+<!-- 2015-11-16 Mo 18:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>Nastran Bulk Data Import for Poseidon</title>
+<title>C++ IO support for various FEM exchange file formats Nastran Bulk Data (BDF) IO support for C++ DNV GL Seasam Input Interface File (FEM) IO support for C++</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Berthold Höllmann" />
 <style type="text/css">
@@ -144,15 +144,37 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Nastran Bulk Data Import for Poseidon</h1>
+<h1 class="title">C++ IO support for various FEM exchange file formats Nastran Bulk Data (BDF) IO support for C++ DNV GL Seasam Input Interface File (FEM) IO support for C++</h1>
 
-<div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> BDF Cards supported</h2>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">1</span> Supported FEM file formats</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+Not all functionality defined for the exchange file formats is
+supported. The supported subset is currently mainly defined by the
+functionality supported in GLFrame rspt. the BMF file format.
+</p>
+
+<p>
+More detailed information on supported functionality can be found in
+the according directories in the doc dubdirectory.
+</p>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">1.1</span> NASTRAN Bulk Data Format (BDF)</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> BDF Cards supported</h4>
+<div class="outline-text-4" id="text-1-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
+<col  class="org-left" />
+
 <col  class="org-left" />
 
 <col  class="org-left" />
@@ -166,12 +188,14 @@ for the JavaScript code in this tag.
 <th scope="col" class="org-left">&#xa0;</th>
 <th scope="col" class="org-left"><b>Name</b></th>
 <th scope="col" class="org-left"><b>Description</b></th>
-<th scope="col" class="org-left"><b>Done</b></th>
+<th scope="col" class="org-left"><b>Read</b></th>
+<th scope="col" class="org-left"><b>Write</b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="org-left">General</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -182,6 +206,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>MAT1</code></td>
 <td class="org-left">Material definition</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -189,10 +214,12 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>GRID</code></td>
 <td class="org-left">Grid nodes</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">Elements</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -203,6 +230,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>CTRIA3</code></td>
 <td class="org-left">3 node shaped shell elements</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -210,6 +238,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>CQUAD4</code></td>
 <td class="org-left">4 node shaped shell elements</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -217,12 +246,14 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>CBEAM</code></td>
 <td class="org-left">Complex beams</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CBAR</code></td>
 <td class="org-left">Simple beams</td>
+<td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
 </tr>
 
@@ -231,11 +262,13 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>CROD</code></td>
 <td class="org-left">Trusses</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">Element</td>
 <td class="org-left">properties</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -245,6 +278,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>PSHELL</code></td>
 <td class="org-left">Properties for <code>CTRIA3</code>, and <code>CQUAD4</code></td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -252,6 +286,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>PBEAM</code></td>
 <td class="org-left">Integral properties for <code>CBEAM</code></td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -259,6 +294,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>PBEAML</code></td>
 <td class="org-left">Properties for <code>CBEAM</code> describing cross section</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -266,6 +302,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>PBAR</code></td>
 <td class="org-left">Integral properties for <code>CBAR</code></td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -273,6 +310,7 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>PBARL</code></td>
 <td class="org-left">Properties for <code>CBAR</code> describing cross section</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
@@ -280,10 +318,44 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>PROD</code></td>
 <td class="org-left">Properties for <code>CROD</code></td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Load</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>LOAD</code></td>
+<td class="org-left">Load case combination</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>FORCE</code></td>
+<td class="org-left">Forces on Nodes</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>MOMENT</code></td>
+<td class="org-left">Moments on Nodes</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
 </tr>
 
 <tr>
 <td class="org-left">Misc</td>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -294,9 +366,11 @@ for the JavaScript code in this tag.
 <td class="org-left"><code>ENDDATA</code></td>
 <td class="org-left">Marker for end of input file</td>
 <td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
+<td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -306,10 +380,16 @@ for the JavaScript code in this tag.
 </table>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orgheadline2" class="outline-2">
-<h2 id="orgheadline2"><span class="section-number-2">2</span> Writing support for Poseidon</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">1.2.1</span> FEM Cards supported</h4>
+<div class="outline-text-4" id="text-1-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -320,108 +400,314 @@ for the JavaScript code in this tag.
 
 <col  class="org-left" />
 
-<col  class="org-center" />
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
 </colgroup>
 <thead>
 <tr>
 <th scope="col" class="org-left">&#xa0;</th>
-<th scope="col" class="org-left"><b>Entry</b></th>
+<th scope="col" class="org-left"><b>Name</b></th>
 <th scope="col" class="org-left"><b>Description</b></th>
-<th scope="col" class="org-center"><b>Done</b></th>
+<th scope="col" class="org-left"><b>Read</b></th>
+<th scope="col" class="org-left"><b>Write</b></th>
+<th scope="col" class="org-right"><b>Page<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></b></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">Properties</td>
+<td class="org-left">General</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">beam properties</td>
-<td class="org-left">This is probably quite tricky, because in general the beam cross section information in <code>BDF</code> files is given as description of the cross section geometry which probably has to be converted to integral values.</td>
-<td class="org-center">&#xa0;</td>
+<td class="org-left"><code>DATE</code></td>
+<td class="org-left">Date and Program Information</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">4-2</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">group information</td>
+<td class="org-left"><code>GNODE</code></td>
+<td class="org-left">Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-80</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>GCOORD</code></td>
+<td class="org-left">Nodal Coordinates</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-56</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>IDENT</code></td>
+<td class="org-left">Identification of Superelements</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">4-3</td>
 </tr>
 
 <tr>
 <td class="org-left">Elements</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">Shell</td>
+<td class="org-left"><code>GELMNT1</code></td>
+<td class="org-left">Element Data Definition</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-65</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">PSE</td>
+<td class="org-left"><code>GELREF1</code></td>
+<td class="org-left">Reference to Element Data</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-66</td>
+</tr>
+
+<tr>
+<td class="org-left">Element</td>
+<td class="org-left">properties</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">Truss</td>
+<td class="org-left"><code>GBARM</code></td>
+<td class="org-left">Cross Section Type Massive Bar</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-48</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">Beam</td>
+<td class="org-left"><code>GBEAMG</code></td>
+<td class="org-left">General Beam Element Data</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-49</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">Boundary Elements</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-center">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">Group Info.</td>
+<td class="org-left"><code>GECCEN</code></td>
+<td class="org-left">Eccentricities</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-center">&#xa0;</td>
+<td class="org-right">6-61</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">NAPA CSV file</td>
-<td class="org-left">contains also yield stress informaton</td>
-<td class="org-center">&checkmark;</td>
+<td class="org-left"><code>GELTH</code></td>
+<td class="org-left">Thickness of Two-dimensional Elements</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-70</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">Patran session file</td>
-<td class="org-left">does not contain yield stress information</td>
-<td class="org-center">&#xa0;</td>
+<td class="org-left"><code>GIORH</code></td>
+<td class="org-left">Cross Section Type I or H Beam</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-71</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>GLSEC</code></td>
+<td class="org-left">Cross Section Type L-Section</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-76</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>GPIPE</code></td>
+<td class="org-left">Cross Section Type Tube</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-81</td>
+</tr>
+
+<tr>
+<td class="org-left">Load</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>BLDEP</code></td>
+<td class="org-left">Nodes with Linear Dependence</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-27</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>BNBCD</code></td>
+<td class="org-left">Nodes with Boundary Conditions</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-30</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>BNDISPL</code></td>
+<td class="org-left">Nodes with Prescribed Displacements and Accelerations</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-31</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>BNLOAD</code></td>
+<td class="org-left">Nodes with Loads</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-35</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>MGSPRNG</code></td>
+<td class="org-left">Element to Ground</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-103</td>
+</tr>
+
+<tr>
+<td class="org-left">Misc</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>IEND</code></td>
+<td class="org-left">End of a Superelement</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">4-4</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>GSETMEMB</code></td>
+<td class="org-left">Set (group) of Nodes or Elements (Members)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-84</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>GUNIVEC</code></td>
+<td class="org-left">Specification of Local Element Coordinate System</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-92</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>MISOSEL</code></td>
+<td class="org-left">Isotropy, Linear Elastic Structural Analysis</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6-115</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>TDSETNAM</code></td>
+<td class="org-left">Name and Description of a Set (group)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">4-7</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>TEXT</code></td>
+<td class="org-left">User supplied Text</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">4-10</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>TDLOAD</code></td>
+<td class="org-left"><b>not documented</b></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+  References page in "Technical Reoprt: Sesam Input Interface File,
+File Description", Document id: 89-7012, Revision Number 9 / 01
+November 1996
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2015-09-01 Di 14:58</p>
+<p class="date">Created: 2015-11-16 Mo 18:29</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
