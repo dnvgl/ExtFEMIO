@@ -86,7 +86,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_bdf_cards</IntDir>
+    <IntDir>$(Configuration)\test_bdf_cards\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -95,7 +95,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\\test_bdf_cards</IntDir>
+    <IntDir>$(Platform)\$(Configuration)\test_bdf_cards\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
