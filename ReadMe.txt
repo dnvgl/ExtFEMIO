@@ -15,8 +15,8 @@ the according directories in the doc dubdirectory.
 
 ** NASTRAN Bulk Data Format (BDF)
 
-#+INCLUDE: "doc/bdf/ReadMe.org" :minlevel 3
+#+INCLUDE: "docs/bdf/ReadMe.org" :minlevel 3
 
 ** DNV GL Seasam Input Interface File (FEM)
 
-#+INCLUDE: "doc/fem/ReadMe.org" :minlevel 3
+#+INCLUDE: "docs/fem/ReadMe.org" :minlevel 3
