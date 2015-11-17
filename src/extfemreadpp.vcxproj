@@ -156,6 +156,7 @@
     <ClCompile Include="bdf\bdf_cards_cquad4.cpp" />
     <ClCompile Include="bdf\bdf_cards_crod.cpp" />
     <ClCompile Include="bdf\bdf_cards_ctria3.cpp" />
+    <ClCompile Include="bdf\bdf_cards_enddata.cpp" />
     <ClCompile Include="bdf\bdf_cards_grid.cpp" />
     <ClCompile Include="bdf\bdf_cards_load.cpp" />
     <ClCompile Include="bdf\bdf_cards_mat1.cpp" />

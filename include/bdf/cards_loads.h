@@ -57,37 +57,32 @@ namespace dnvgl {
           DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
-/*
-Handle Nastran Bulk FORCE entries.
-
+        /// # Handle Nastran Bulk `FORCE` entries.
+/**
 Static Force
 
 Defines a static concentrated force at a grid point by specifying a
 vector.
 
-Format:
-.......
+## Format
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| FORCE | SID   | G     | CID   | F     | N1    | N2    | N3    |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2   | 3 | 4   | 5 | 6  | 7  | 8  | 9 | 10 |
+| ----- | --- | - | --- | - | -- | -- | -- | - | -- |
+| FORCE | SID | G | CID | F | N1 | N2 | N3 |   |    |
 
-Description:
-............
+## Description
 
-``SID``
-  Load set identification number. (Integer > 0)
-``G``
-  Grid point identification number. (Integer > 0)
-``CID``
-  Coordinate system identification number. (Integer > 0; Default = 0)
-``F``
-  Scale factor. (Real)
-``Ni``
-  Components of a vector measured in coordinate system defined by CID.
-  (Real; at least one Ni ≠ 0.0.)
+- `SID` : Load set identification number. (Integer > 0)
+
+- `G` : Grid point identification number. (Integer > 0)
+
+- `CID` : Coordinate system identification number. (Integer > 0;
+  Default = 0)
+
+- `F` : Scale factor. (Real)
+
+- `Ni` : Components of a vector measured in coordinate system defined
+  by CID. (Real; at least one Ni ≠ 0.0.)
 */
 
         class force : public momforce_base {
@@ -116,39 +111,33 @@ Description:
           DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
-/*
-Handle Nastran Bulk MOMENT entries.
-
+        /// # Handle Nastran Bulk `MOMENT` entries.
+/**
 Static Force
 
 Defines a static concentrated force at a grid point by specifying a
 vector.
 
-Format:
-.......
+## Format
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|MOMENT | SID   | G     | CID   | F     | N1    | N2    | N3    |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1      | 2   | 3 | 4   | 5 | 6  | 7  | 8  | 9 | 10 |
+| ------ | --- | - | --- | - | -- | -- | -- | - | -- |
+| MOMENT | SID | G | CID | F | N1 | N2 | N3 |   |    |
 
-Description:
-............
+## Description
 
-``SID``
-  Load set identification number. (Integer > 0)
-``G``
-  Grid point identification number. (Integer > 0)
-``CID``
-  Coordinate system identification number. (Integer > 0; Default = 0)
-``F``
-  Scale factor. (Real)
-``Ni``
-  Components of a vector measured in coordinate system defined by CID.
-  (Real; at least one Ni ≠ 0.0.)
-     */
+- `SID` : Load set identification number. (Integer > 0)
 
+- `G` : Grid point identification number. (Integer > 0)
+
+- `CID` : Coordinate system identification number. (Integer > 0;
+  Default = 0)
+
+- `F` : Scale factor. (Real)
+
+- `Ni` : Components of a vector measured in coordinate system defined
+  by CID. (Real; at least one Ni ≠ 0.0.)
+*/
         class moment : public momforce_base {
           // Handle Nastran Bulk MOMENT entries.
 
@@ -170,44 +159,37 @@ Description:
             return MOMENT;
           };
 
-          DllExport friend ::std::ostream& operator<<(::std::ostream&, const moment&);
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
+          DllExport friend ::std::ostream& operator<< (::std::ostream&, const moment&);
+          DllExport const ::std::ostream& operator<< (::std::ostream& os) const;
         };
 
-/*
-Handle Nastran Bulk LOAD entries.
-
+        /// # Handle Nastran Bulk `LOAD` entries.
+/**
 Static Load Combination (Superposition)
 
 Defines a static load as a linear combination of load sets defined via
-FORCE, MOMENT, FORCE1, MOMENT1, FORCE2, MOMENT2, DAREA (if these
-entries have been converted), PLOAD, PLOAD1, PLOAD2, PLOAD4, PLOADX1,
-SLOAD, RFORCE, and GRAV entries.
+`FORCE`, `MOMENT`, `FORCE1`, `MOMENT1`, `FORCE2`, `MOMENT2`, `DAREA`
+(if these entries have been converted), `PLOAD`, `PLOAD1`, `PLOAD2`,
+`PLOAD4`, `PLOADX1`, `SLOAD`, `RFORCE`, and `GRAV` entries.
 
-Format:
-.......
+## Format
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| LOAD  | SID   | S     | S1    | L1    | S2    | L2    | S3    | L3    |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | S4    | L4    | -etc.-|       |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1    | 2   | 3  | 4      | 5  | 6  | 7  | 8  | 9  | 10 |
+| ---- | --- | -- | ------ | -- | -- | -- | -- | -- | -- |
+| LOAD | SID | S  | S1     | L1 | S2 | L2 | S3 | L3 |    |
+|      | S4  | L4 | -etc.- |    |    |    |    |    |    |
 
-Description:
-............
+## Description
 
-``SID``
-  Load set identification number. (Integer > 0)
-``S``
-  Overall scale factor. (Real)
-``Si``
-  Scale factor on Li. (Real)
-``Li``
-  Load set identification numbers defined on entry types listed above.
-  (Integer > 0)
- */
+- `SID` : Load set identification number. (Integer > 0)
+
+- `S` : Overall scale factor. (Real)
+
+- `Si` : Scale factor on Li. (Real)
+
+- `Li` : Load set identification numbers defined on entry types listed
+  above. (Integer > 0)
+*/
         class load : public card {
 
         private:
@@ -247,6 +229,6 @@ Description:
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. doxyfile.stamp check -j 8"
 // coding: utf-8
 // End:

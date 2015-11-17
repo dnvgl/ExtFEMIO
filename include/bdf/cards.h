@@ -35,15 +35,48 @@ namespace dnvgl {
       namespace cards {
 
         typedef enum {
+          /// undknown card
           UNKNOWN,
+          /// Grid Point
           GRID,
+          /// Isotropic Material Property Definition
           MAT1,
-          CTRIA3, CQUAD4, PSHELL,
-          CBEAM, PBEAM, PBEAML, BEAM_PROP,
-          CBAR, PBAR, PBARL, BAR_PROP, BEAM_BASE,
-          CROD, PROD,
-          FORCE, MOMENT, LOAD,
-          ENDDATA
+          /// Triangular Plate Element Connection
+          CTRIA3,
+          /// Fully Nonlinear Axisymmetric Element
+          CQUAD4,
+          /// Shell Element Property
+          PSHELL,
+          /// Beam Element Connection
+          CBEAM,
+          /// Beam Property
+          PBEAM,
+          /// Beam Cross-Section Property
+          PBEAML,
+          /// Simple Beam Element Connection
+          CBAR,
+          /// Simple Beam Property
+          PBAR,
+          /// Simple Beam Cross-Section Property
+          PBARL,
+          /// Rod Element Connection
+          CROD,
+          /// Rod Property
+          PROD,
+          /// Element Force Output or Particle Velocity Request
+          FORCE,
+          /// Static Moment
+          MOMENT,
+          /// External Static Load Set Selection
+          LOAD,
+          /// Bulk Data Delimiter
+          ENDDATA,
+          /// base class for beam/bar property description
+          BEAM_BASE,
+          /// base class for bar property description
+          BAR_PROP,
+          /// base class for beam property description
+          BEAM_PROP,
         } types;
 
         typedef ::std::pair<::dnvgl::extfem::bdf::types::base*, void*> format_entry;
@@ -130,65 +163,84 @@ namespace dnvgl {
           };
         };
 
+        /// # Handle Nastran Bulk `ENDDATA` entries.
+/**
+Bulk Data Delimiter
+
+Designates the end of the Bulk Data Section.
+
+## Format
+
+| 1        | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| -------- | - | - | - | - | - | - | - | - | -- |
+| ENDDATA  |   |   |   |   |   |   |   |   |    |
+*/
         class enddata : public card {
 
-          /*
-                    NASTRAN ``BDF`` ``ENDDATA`` representation.
-          */
+        private:
+
+          static ::dnvgl::extfem::bdf::types::card head;
 
         public:
 
           DllExport enddata(const ::std::deque<::std::string> &inp) :
             card(inp) {};
 
+          DllExport enddata() : card() {};
+
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return ENDDATA; };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const {
-            os << "ENDDATA" << ::std::endl;
+          DllExport const ::std::ostream& operator<< (::std::ostream& os) const {
+            os << this;
             return os;
           };
+          DllExport friend ::std::ostream& operator<<(::std::ostream &os, const enddata &card) {
+
+            std::deque<std::unique_ptr<format_entry>> entries;
+
+            entries.push_back(format(enddata::head));
+
+            os << card.format_outlist(entries) << std::endl;
+
+            return os;
+          }
         };
 
-        class grid : public card {
-
-          /*
-Handle Nastran Bulk GRID entries.
-
+        /// # Handle Nastran Bulk `GRID` entries.
+/**
 Grid Point
 
 Defines the location of a geometric grid point, the directions of its
 displacement, and its permanent single-point constraints.
 
-Format:
-.......
+## Format
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| GRID  | ID    | CP    | X1    | X2    | X3    | CD    | PS    | SEID  |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9    | 10 |
+| ----- | -- | -- | -- | -- | -- | -- | -- | ---- | -- |
+| GRID  | ID | CP | X1 | X2 | X3 | CD | PS | SEID |    |
 
-Description:
-............
+## Description
 
-``ID``
-  Grid point identification number. (0 < Integer < 100000000)
-``CP``
-  Identification number of coordinate system in which the location of
-  the grid point is defined. (Integer > 0 or blank)
-``X1``, ``X2``, ``X3``
-  Location of the grid point in coordinate system CP. (Real; Default = 0.0)
-``CD``
-  Identification number of coordinate system in which the
+- `ID` : Grid point identification number. (0 < Integer < 100000000)
+
+- `CP` : Identification number of coordinate system in which the
+  location of the grid point is defined. (Integer > 0 or blank)
+
+- `X1`, `X2`, `X3` : Location of the grid point in coordinate system
+  CP. (Real; Default = 0.0)
+
+- `CD` : Identification number of coordinate system in which the
   displacements, degrees-of-freedom, constraints, and solution deques
   are defined at the grid point. (Integer > -1 or blank)
-``PS``
-  Permanent single-point constraints associated with the grid
+
+- `PS` : Permanent single-point constraints associated with the grid
   point. (Any of the Integers 1 through 6 with no embedded blanks, or
   blank.)
-``SEID``
-  Superelement identification number. (Integer > 0; Default = 0)
-          */
+
+- `SEID` : Superelement identification number. (Integer > 0; Default =
+  0)
+*/
+        class grid : public card {
 
         private:
 
@@ -222,57 +274,50 @@ Description:
           DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
-/*
-Handle Nastran Bulk MAT1 entries.
-
+        /// # Handle Nastran Bulk `MAT1` entries.
+/**
 Isotropic Material Property Definition
 
 Defines the material properties for linear isotropic materials.
 
-Format:
-.......
+## Format
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| MAT1  | MID   | E     | G     | NU    | RHO   | A     | TREF  | GE    |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | ST    | SC    | SS    | MCSID |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1    | 2   | 3  | 4  | 5     | 6   | 7 | 8    | 9  | 10 |
+| ---- | --- | -- | -- | ----- | --- | - | ---- | -- | -- |
+| MAT1 | MID | E  | G  | NU    | RHO | A | TREF | GE |    |
+|      | ST  | SC | SS | MCSID |     |   |      |    |    |
 
-Description:
-............
+## Description
 
-``MID``
-  Material identification number. (Integer > 0)
-``E``
-  Youn g’s modulus. (Real > 0.0 or blank)
-``G``
-  Shear modulus. (Real > 0.0 or blank)
-``NU``
-  Poisson’s ratio. (-1.0 < Real < 0.5 or blank)
-``RHO``
-  Mass density. See Remark 5. (Real)
-``A``
-  Thermal expansion coefficient. (Real)
-``TREF``
-  Reference temperature for the calculation of thermal loads, or a
-  temperature-dependent thermal expansion coefficient. (Real; Default
-  = 0.0 if A is specified.)
-``GE``
-  Structural element damping coefficient. (Real)
-``ST``, ``SC``, ``SS``
-  Stress limits for tension, compression, and shear are optionally
-  supplied, used only to compute margins of safety in certain
-  elements; and have no effect on the computational procedures. (Real
-  > 0.0 or blank)
-``MCSID``
-  Material coordinate system identification number. Used only for
-  ``PARAM,CURV`` processing.  (Integer > 0 or blank)
+- `MID` : Material identification number. (Integer > 0)
+
+- `E` : Young’s modulus. (Real > 0.0 or blank)
+
+- `G` : Shear modulus. (Real > 0.0 or blank)
+
+- `NU` : Poisson’s ratio. (-1.0 < Real < 0.5 or blank)
+
+- `RHO` : Mass density. See Remark 5. (Real)
+
+- `A` : Thermal expansion coefficient. (Real)
+
+- `TREF` : Reference temperature for the calculation of thermal loads,
+  or a temperature-dependent thermal expansion coefficient. (Real;
+  Default = 0.0 if A is specified.)
+
+- `GE` : Structural element damping coefficient. (Real)
+
+- `ST`, `SC`, `SS` : Stress limits for tension, compression, and shear
+  are optionally supplied, used only to compute margins of safety in
+  certain elements; and have no effect on the computational
+  procedures. (Real > 0.0 or blank)
+
+- `MCSID` : Material coordinate system identification number. Used
+  only for `PARAM,CURV` processing. (Integer > 0 or blank)
 */
 
         class mat1 : public card {
-          // NASTRAN ``BDF`` ``MAT1`` representation.
+          // NASTRAN `BDF` `MAT1` representation.
 
         private:
 
@@ -338,6 +383,6 @@ namespace dnvgl {
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. doxyfile.stamp check -j 8"
 // coding: utf-8
 // End:

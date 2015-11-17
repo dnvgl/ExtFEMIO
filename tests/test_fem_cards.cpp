@@ -147,6 +147,10 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     // CHECK(current->card_type() == cards::GNODE);
     // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
     // GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005
+    // CHECK(static_cast<gnode*>(current.get())->NODEX == 1);
+    // CHECK(static_cast<gnode*>(current.get())->NODENO == 1);
+    // CHECK(static_cast<gnode*>(current.get())->NDOF == 6);
+    // CHECK(static_cast<gnode*>(current.get())->ODOF == 123456);
 
     l = probe.get();
     CAPTURE( l[0] );

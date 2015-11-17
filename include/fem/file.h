@@ -60,12 +60,12 @@ namespace dnvgl {
 
           DllExport ::std::deque<::std::string>& get();
 
-          // actual byte position (hopefully no fem > 2Gybte will be
-          // readin....)
+          /// actual byte position (hopefully no fem > 2Gybte will be
+          /// readin ...)
           DllExport ::std::streampos size(void);
 
-          // actual byte position (hopefully no fem > 2Gybte will be
-          // readin....)
+          /// actual byte position (hopefully no fem > 2Gybte will be
+          /// readin ...)
           DllExport ::std::streampos pos(void);
         };
       }

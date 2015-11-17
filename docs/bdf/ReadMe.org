@@ -30,5 +30,4 @@
   |          | =FORCE=    | Forces on Nodes                                 | \check | \check  |
   |          | =MOMENT=   | Moments on Nodes                                | \check | \check  |
   | Misc     |            |                                                 |        |         |
-  |          | =ENDDATA=  | Marker for end of input file                    | \check |         |
-  |          |            |                                                 |        |         |
+  |          | =ENDDATA=  | Marker for end of input file                    | \check | \ckeck  |

@@ -67,6 +67,7 @@ test_bdf_cards_SOURCES+=test_bdf_cards_cbeam.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_cquad4.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_crod.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_ctria3.cpp
+test_bdf_cards_SOURCES+=test_bdf_cards_enddata.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_grid.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_mat1.cpp
 test_bdf_cards_SOURCES+=test_bdf_cards_pbar.cpp

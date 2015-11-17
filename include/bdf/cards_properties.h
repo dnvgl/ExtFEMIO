@@ -20,59 +20,49 @@ namespace dnvgl {
     namespace bdf {
       namespace cards {
 
-/*
-Handle Nastran Bulk PSHELL entries.
-
+        /// # Handle Nastran Bulk `PSHELL` entries.
+/**
 Shell Element Property
 
 Defines the membrane, bending, transverse shear, and coupling
 properties of thin shell elements.
 
-Format:
-.......
+## Format
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| PSHELL| PID   | MID1  | T     | MID2  | 12I/  | MID3  | TS/T  | NSM   |    |
-|       |       |       |       |       | T**3  |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | Z1    | Z2    | MID4  |       |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2   | 3    | 4    | 5    | 6        | 7    | 8    | 9   | 10 |
+| ----- | --- | ---- | ---- | ---- | -------- | ---- | ---- | --- | -- |
+| PSHELL| PID | MID1 | T    | MID2 | 12I/T**3 | MID3 | TS/T | NSM |    |
+|       | Z1  | Z2   | MID4 |      |          |      |      |     |    |
 
+## Description:
 
-Description:
-............
+- `PID` : Property identification number. (Integer > 0)
 
-``PID``
-  Property identification number. (Integer > 0)
-``MID1``
-  Material identification number for the membrane. (Integer > 0 or blank)
-``T``
-  Default membrane thickness for ``Ti`` on the connection entry. If
-  ``T`` is blank then the thickness must be specified for ``Ti`` on
-  the ``CQUAD4``, ``CTRIA3``, ``CQUAD8``, and ``CTRIA6``
-  entries. (Real or blank)
-``MID2``
-  Material identification number for bending. (Integer > -1 or blank)
-``12I/T**3``
-  Bending moment of inertia ratio, 12I/T³. Ratio of the actual bending
-  moment inertia of the shell, I, to the bending moment of inertia of
-  a homogeneous shell, T³/12. The default value is for a homogeneous
-  shell.  (Real > 0.0; Default = 1.0)
-``MID3``
-  Material identification number for transverse shear. (Integer > 0 or
-  blank; unless ``MID2`` > 0, must be blank.)
-``TS/T``
-  Transverse shear thickness ratio, T_S/T. Ratio of the shear
-  thickness, (T_S), to the membrane thickness of the shell, T. The
-  default value is for a homogeneous shell. (Real > 0.0; Default =
-  .833333)
-``NSM``
-  Nonstructural mass per unit area. (Real)
+- `MID1` : Material identification number for the membrane. (Integer >
+  0 or blank)
 
+- `T` : Default membrane thickness for `Ti` on the connection entry.
+  If `T` is blank then the thickness must be specified for `Ti` on the
+  `CQUAD4`, `CTRIA3`, `CQUAD8`, and `CTRIA6` entries. (Real or blank)
+
+- `MID2` : Material identification number for bending. (Integer > -1
+  or blank)
+
+- `12I/T**3` : Bending moment of inertia ratio, 12`I`/`T`³. Ratio of
+  the actual bending moment inertia of the shell, `I`, to the bending
+  moment of inertia of a homogeneous shell, `T`³/12. The default value
+  is for a homogeneous shell. (Real > 0.0; Default = 1.0)
+
+- `MID3` : Material identification number for transverse shear.
+  (Integer > 0 or blank; unless `MID2` > 0, must be blank.)
+
+- `TS/T` : Transverse shear thickness ratio, `T_S`/`T`. Ratio of the
+  shear thickness, (`T_S`), to the membrane thickness of the shell,
+  `T`. The default value is for a homogeneous shell. (Real > 0.0;
+  Default = .833333)
+
+- `NSM` : Nonstructural mass per unit area. (Real)
 */
-
         class pshell : public card {
           // Handle Nastran Bulk PSHELL entries.
 
@@ -141,112 +131,104 @@ Description:
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
         };
 
-/*
-Handle Nastran Bulk PBEAM entries.
-
-Format:
-.......
+        /// # Handle Nastran Bulk `PBEAM` entries.
+/**
+   ## Format
 
 (Note: n = number of dimensions and m = number of intermediate stations)
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| PBEAM | PID   | MID   | A(A)  | I1(A) | I2(A) |I12(A) | J(A)  |NSM(A) |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | C1(A) | C2(A) | D1(A) | D2(A) | E1(A) | E2(A) | F1(A) | F2(A) |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
+| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
+| PBEAM | PID   | MID   | A(A)  | I1(A) | I2(A) |I12(A) | J(A)  | NSM(A) |    |
+|       | C1(A) | C2(A) | D1(A) | D2(A) | E1(A) | E2(A) | F1(A) | F2(A)  |    |
 
 The next two continuations are repeated for each intermediate station
-as described in Remark 5. and ``SO`` and ``X/XB`` must be specified.
+as described in Remark 5. and `SO` and `X/XB` must be specified.
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | SO    | X/XB  | A     | I1    | I2    | I12   | J     | NSM   |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | C1    | C2    | D1    | D2    | E1    | E2    | F1    | F2    |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
+| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
+|       | SO    | X/XB  | A     | I1    | I2    | I12   | J     | NSM    |    |
+|       | C1    | C2    | D1    | D2    | E1    | E2    | F1    | F2     |    |
 
 The last two continuations are:
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | K1    | K2    | S1    | S2    |NSI(A) |NSI(B) | CW(A) | CW(B) |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | M1(A) | M2(A) | M1(B) | M2(B) | N1(A) | N2(A) | N1(B) | N2(B) |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
+| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
+|       | K1    | K2    | S1    | S2    |NSI(A) |NSI(B) | CW(A) | CW(B)  |    |
+|       | M1(A) | M2(A) | M1(B) | M2(B) | N1(A) | N2(A) | N1(B) | N2(B)  |    |
 
-Description:
-............
+## Description
 
-``PID``
-  Property identification number. (Integer > 0)
-``MID``
-  Material identification number. (Integer > 0)
-``A(A)``
-  Area of the beam cross section at end ``A``. (Real > 0.0)
-``I1(A)``
-  Area moment of inertia at end ``A`` for bending in plane 1 about the
-  neutral axis. (Real > 0.0)
-``I2(A)``
-  Area moment of inertia at end ``A`` for bending in plane 2 about the
-  neutral axis. (Real > 0.0)
-``I12(A)``
-  Area product of inertia at end ``A``. (Real)
-``J(A)``
-  Torsional stiffness parameter at end ``A``. (Real >= 0.0 but > 0.0 if
-  warping is present)
-``NSM(A)``
-  Nonstructural mass per unit length at end ``A``. (Real, Default=0.0)
-``Ci(A)``, ``Di(A)``, ``Ei(A)``, ``Fi(A)``
-  The *y* and *z* locations (*i* = 1 corresponds to y and *i* = 2
-  corresponds to *z*) in element coordinates relative to the shear
-  center at end ``A`` for stress data recovery. (Real, Default: y = z
-  = 0.0)
-``SO``
-  Stress output request option. (Character)
 
-  ``YES``
-    Stresses recovered at points ``Ci``, ``Di``, ``Ei``,
-    and ``Fi`` on the next continuation.
-  ``YESA``
-    Stresses recovered at points with the same *y* and *z* location as
-    end ``A``.
-  ``NO``
-    No stresses or forces are recovered.
+- `PID` : Property identification number. (Integer > 0)
 
-``X/XB``
-  Distance from end ``A`` in the element coordinate system divided by
-  the length of the element. (Real > 0.0)
-``A``, ``I1``, ``I2``, ``I12``, ``J``, ``NSM``
-  Area, moments of inertia, torsional stiffness parameter, and
-  nonstructural mass for the cross section located at *x*. (Real; J >
-  0.0 if warping is present.)
-``Ci``, ``Di``, ``Ei``, ``Fi``
-  The *y* and *z* locations (*i = 1* corresponds to *y* and *i = 2*
-  corresponds to z) in element coordinates relative to the shear
-  center for the cross section located at ``X/XB``. The values are
-  fiber locations for stress data recovery. Ignored for beam
-  p-elements. (Real)
-``K1``, ``K2``
-  Shear stiffness factor *K* in *K*A*G* for plane 1 and plane
-  2. (Real, Default = 1.0)
-``S1``, ``S2``
-  Shear relief coefficient due to taper for plane 1 and plane
-  2. Ignored for beam p-elements.  (Real, Default = 0.0)
-``NSI(A)``, ``NSI(B)``
-  Nonstructural mass moment of inertia per unit length about
-  nonstructural mass center of gravity at end ``A`` and end
-  ``B``. (Real, Default = 0.0, same as end A)
-``CW(A)``, ``CW(B)``
-  Warping coefficient for end ``A`` and end ``B``. Ignored for beam
-  p-elements. (Real, Default = 0.0, same as end ``A``)
-``M1(A)``, ``M2(A)``, ``M1(B)``, ``M2(B)``
-  *(y,z)* coordinates of center of gravity of nonstructural mass for
-  end ``A`` and end ``B``. (Real, Default = 0.0 (no offset from shear
-  center), same values as end ``A``)
-``N1(A)``, ``N2(A)``, ``N1(B)``, ``N2(B)``
-  *(y,z)* coordinates of neutral axis for end ``A`` and end
-  ``B``. (Real)
- */
+- `MID` : Material identification number. (Integer > 0)
+
+- `A(A)` : Area of the beam cross section at end `A`. (Real > 0.0)
+
+- `I1(A)` : Area moment of inertia at end `A` for bending in plane 1
+  about the neutral axis. (Real > 0.0)
+
+- `I2(A)` : Area moment of inertia at end `A` for bending in plane 2
+  about the neutral axis. (Real > 0.0)
+
+- `I12(A)` : Area product of inertia at end `A`. (Real)
+
+- `J(A)` : Torsional stiffness parameter at end `A`. (Real >= 0.0
+   but > 0.0 if warping is present)
+
+- `NSM(A)` : Nonstructural mass per unit length at end `A`. (Real,
+  Default=0.0)
+
+- `Ci(A)` : , `Di(A)`, `Ei(A)`, `Fi(A)` The *y* and *z* locations
+  (*i* = 1 corresponds to y and *i* = 2 corresponds to *z*) in element
+  coordinates relative to the shear center at end `A` for stress data
+  recovery. (Real, Default: y = z = 0.0)
+
+- `SO` : Stress output request option. (Character)
+
+  - `YES` --- Stresses recovered at points `Ci`, `Di`, `Ei`, and `Fi`
+    on the next continuation.
+
+  - `YESA` --- Stresses recovered at points with the same *y* and *z*
+    location as end `A`.
+
+  - `NO` --- No stresses or forces are recovered.
+
+
+- `X/XB` : Distance from end `A` in the element coordinate system
+  divided by the length of the element. (Real > 0.0)
+
+- `A`, `I1`, `I2`, `I12`, `J`, `NSM` : Area, moments of inertia,
+  torsional stiffness parameter, and nonstructural mass for the cross
+  section located at *x*. (Real; J > 0.0 if warping is present.)
+
+- `Ci`, `Di`, `Ei`, `Fi` : The *y* and *z* locations (*i = 1*
+  corresponds to *y* and *i = 2* corresponds to z) in element
+  coordinates relative to the shear center for the cross section
+  located at `X/XB`. The values are fiber locations for stress data
+  recovery. Ignored for beam p-elements. (Real)
+
+- `K1`, `K2` : Shear stiffness factor *K* in *K*A*G* for plane 1 and
+  plane 2. (Real, Default = 1.0)
+
+- `S1`, `S2` : Shear relief coefficient due to taper for plane 1 and
+  plane 2. Ignored for beam p-elements. (Real, Default = 0.0)
+
+- `NSI(A)`, `NSI(B)` : Nonstructural mass moment of inertia per unit
+  length about nonstructural mass center of gravity at end `A` and end
+  `B`. (Real, Default = 0.0, same as end A)
+
+- `CW(A)`, `CW(B)` : Warping coefficient for end `A` and end `B`.
+  Ignored for beam p-elements. (Real, Default = 0.0, same as end `A`)
+
+- `M1(A)`, `M2(A)`, `M1(B)`, `M2(B)` : *(y,z)* coordinates of center
+  of gravity of nonstructural mass for end `A` and end `B`. (Real,
+  Default = 0.0 (no offset from shear center), same values as end `A`)
+
+- `N1(A)`, `N2(A)`, `N1(B)`, `N2(B)` : *(y,z)* coordinates of neutral
+   axis for end `A` and end `B`. (Real)
+*/
 
         class pbeam : public beam_prop {
           // Handle Nastran Bulk PBEAM entries.
@@ -344,63 +326,50 @@ Description:
           static const ::std::set<::std::string> dimnum6;
           static const ::std::set<::std::string> dimnum10;
         };
-/*
-Handle Nastran Bulk PBEAML entries.
-
-Format:
-.......
+        /// # Handle Nastran Bulk `PBEAML` entries.
+/**
+## Format
 
 (Note: n = number of dimensions and m = number of intermediate stations)
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| PBEAML| PID   | MID   | GROUP | TYPE  |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       |DIM1(A)|DIM2(A)| -etc.-|DIMn(A)| NSM(A)| SO(1) |X(1)/XB|DIM1(1)|    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       |DIM2(1)|-etc.- |DIMn(1)| NSM(1)| SO(2) |X(2)/XB|DIM1(2)|DIM2(2)|    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | -etc.-|DIMn(2)| NSM(m)| -etc.-| SO(m) |X(m)/XB|DIM1(m)| -etc.-|    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       |DIMn(m)| NSM(m)| SO(B) | 1.0   |DIM1(B)|DIM2(B)| -etc.-|DIMn(B)|    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       |       | NSM(B)|       |       |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2       | 3       | 4      | 5       | 6       | 7       | 8       | 9       | 10 |
+| ----- | ------- | ------- | ------ | ------- | ------- | ------- | ------- | ------- | -- |
+| PBEAML| PID     | MID     | GROUP  | TYPE    |         |         |         |         |    |
+|       | DIM1(A) | DIM2(A) | -etc.- | DIMn(A) | NSM(A)  | SO(1)   | X(1)/XB | DIM1(1) |    |
+|       | DIM2(1) | -etc.-  | DIMn(1)| NSM(1)  | SO(2)   | X(2)/XB | DIM1(2) | DIM2(2) |    |
+|       | -etc.-  | DIMn(2) | NSM(m) | -etc.-  | SO(m)   | X(m)/XB | DIM1(m) | -etc.-  |    |
+|       | DIMn(m) | NSM(m)  | SO(B)  | 1.0     | DIM1(B) | DIM2(B) | -etc.-  | DIMn(B) |    |
+|       |         | NSM(B)  |        |         |         |         |         |         |    |
 
-Description:
-............
+## Description
 
-``PID``
-  Property identification number. (Integer > 0)
-``MID``
-  Material identification number. (Integer > 0)
-``GROUP``
-  Cross-section group. (Character; Default = ``MSCBML0``)
-``TYPE``
-  Cross-section shape. (Character: ``ROD``, ``TUBE``, ``L``, ``I``,
-  ``CHAN``, ``T``, ``BOX``, ``BAR``, ``CROSS``, ``H``, ``T1``, ``I1``,
-  ``CHAN1``, ``Z``, ``CHAN2``, ``T2``, ``BOX1``, ``HEXA``, ``HAT``,
-  ``HAT1``, ``DBOX`` for GROUP = ``MSCBML0``)
-``DIMi(j)``
-  Cross-section dimensions at end ``A``, intermediate station *j* and
-  end ``B``.  (Real > 0.0 for ``GROUP`` = ``MSCBML0``)
-``NSM(j)``
-  Nonstructural mass per unit length. (Default = 0.0)
-``SO(j)``, ``SO(B)``
-  Stress output request option for intermediate station j and end B.
-  (Character; Default = ``YES``):
+- `PID` : Property identification number. (Integer > 0)
 
-  ``YES``
-    Stresses recovered at all points on next continuation and shown in
-    Figure 8-116 as ``C``, ``D``, ``E``, and ``F``.
-  ``NO``
-    No stresses or forces are recovered.
+- `MID` : Material identification number. (Integer > 0)
 
-``X(j)/XB``
-  Distance from end ``A`` to intermediate station *j* in the element
-  coordinate system divided by the length of the element. (Real>0.0;
-  Default = 1.0)
+- `GROUP` : Cross-section group. (Character; Default = `MSCBML0`)
+
+- `TYPE` : Cross-section shape. (Character: `ROD`, `TUBE`, `L`, `I`,
+  `CHAN`, `T`, `BOX`, `BAR`, `CROSS`, `H`, `T1`, `I1`, `CHAN1`, `Z`,
+  `CHAN2`, `T2`, `BOX1`, `HEXA`, `HAT`, `HAT1`, `DBOX` for GROUP =
+  `MSCBML0`)
+
+- `DIMi(j)` : Cross-section dimensions at end `A`, intermediate
+  station *j* and end `B`. (Real > 0.0 for `GROUP` = `MSCBML0`)
+
+- `NSM(j)` : Nonstructural mass per unit length. (Default = 0.0)
+
+- `SO(j)`, `SO(B)` : Stress output request option for intermediate
+  station j and end B. (Character; Default = `YES`):
+
+  - `YES` --- Stresses recovered at all points on next continuation
+    and shown in Figure 8-116 as `C`, `D`, `E`, and `F`.
+
+  - `NO` --- No stresses or forces are recovered.
+
+- `X(j)/XB` : Distance from end `A` to intermediate station *j* in the
+  element coordinate system divided by the length of the element.
+  (Real>0.0; Default = 1.0)
  */
 
         class pbeaml : public beam_prop, private l_geom {
@@ -449,44 +418,38 @@ Description:
           ::std::unique_ptr<long> MID;
         };
 
-/*
-Handle Nastran Bulk PBAR entries.
-
-Format:
-.......
+        /// # Handle Nastran Bulk `PBAR` entries.
+/**
+## Format
 
 (Note: n = number of dimensions and m = number of intermediate stations)
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| PBAR  | PID   | MID   | A     | I1    | I2    | J     |NSM(A) |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | C1    | C2    | D1    | D2    | E1    | E2    | F1    | F2    |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | K1    | K2    | I12   |       |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1    | 2   | 3   | 4   | 5  | 6  | 7  | 8      | 9  | 10 |
+| ---- | --- | --- | --- | -- | -- | -- | ------ | -- | -- |
+| PBAR | PID | MID | A   | I1 | I2 | J  | NSM(A) |    |    |
+|      | C1  | C2  | D1  | D2 | E1 | E2 | F1     | F2 |    |
+|      | K1  | K2  | I12 |    |    |    |        |    |    |
 
-Description:
-............
+## Description
 
-``PID``
-  Property identification number. (Integer > 0)
-``MID``
-  Material identification number. (Integer > 0)
-``A``
-  Area of bar coss section. (Real; Default = 0.0)
-``I1``, ``I2``, ``I12``
-  Area moments of inertia. (Real; I1 >= 0, I2 >= 0, I1*I2 > I12^2; Default=0.0)
-``J``
-  Torsional constant. (Real)
-``NSM``
-  Nonstructural mass per unit length. (Real, Default=0.0)
-``Ci``, ``Di``, ``Ei``, ``Fi``
-  Stress recovery coefficients. (Real; Default=0.0)
-``K1``, ``K2``
-  Area factor for shear. (Real or böank)
- */
+- `PID` : Property identification number. (Integer > 0)
+
+- `MID` : Material identification number. (Integer > 0)
+
+- `A` : Area of bar coss section. (Real; Default = 0.0)
+
+- `I1`, `I2`, `I12` : Area moments of inertia. (Real; `I1` >= 0,
+ `I2` >= 0, `I1`*`I2` > `I12`²; Default=0.0)
+
+- `J` : Torsional constant. (Real)
+
+- `NSM` : Nonstructural mass per unit length. (Real, Default=0.0)
+
+- `Ci`, `Di`, `Ei`, `Fi` : Stress recovery coefficients. (Real;
+  Default=0.0)
+
+- `K1`, `K2` : Area factor for shear. (Real or blank)
+*/
 
         class pbar : public bar_prop {
 
@@ -535,44 +498,37 @@ Description:
           DllExport const ::std::ostream& operator << (::std::ostream& os) const;
     };
 
-/*
-Handle Nastran Bulk PBARL entries.
-
-Format:
-.......
+        /// # Handle Nastran Bulk PBARL entries.
+/**
+## Format
 
 (Note: n = number of dimensions and m = number of intermediate stations)
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| PBARL | PID   | MID   | GROUP | TYPE  |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | DIM1  | DIM2  | DIM3  | DIM4  | DIM5  | DIM6  | DIM7  | DIM8  |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-|       | DIM9  |-etc.- | NSM  )|       |       |       |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2    | 3      | 4     | 5    | 6    | 7    | 8    | 9    | 10 |
+| ----- | ---- | ------ | ----- | ---- | ---- | ---- | ---- | ---- | -- |
+| PBARL | PID  | MID    | GROUP | TYPE |      |      |      |      |    |
+|       | DIM1 | DIM2   | DIM3  | DIM4 | DIM5 | DIM6 | DIM7 | DIM8 |    |
+|       | DIM9 | -etc.- | NSM   |      |      |      |      |      |    |
 
-Description:
-............
+## Description
 
-``PID``
-  Property identification number. (Integer > 0)
-``MID``
-  Material identification number. (Integer > 0)
-``GROUP``
-  Cross-section group. (Character; Default = ``MSCBML0``)
-``TYPE``
-  Cross-section shape. (Character: ``ROD``, ``TUBE``, ``L``, ``I``,
-  ``CHAN``, ``T``, ``BOX``, ``BAR``, ``CROSS``, ``H``, ``T1``, ``I1``,
-  ``CHAN1``, ``Z``, ``CHAN2``, ``T2``, ``BOX1``, ``HEXA``, ``HAT``,
-  ``HAT1``, ``DBOX`` for GROUP = ``MSCBML0``)
-``DIMi``
-  Cross-section dimensions.  (Real > 0.0 for ``GROUP`` = ``MSCBML0``)
-``NSM``
-  Nonstructural mass per unit length. ``NSM`` is specified after the
-  last ``DIMi``. (Default = 0.0)
- */
+- `PID` : Property identification number. (Integer > 0)
+
+- `MID` : Material identification number. (Integer > 0)
+
+- `GROUP` : Cross-section group. (Character; Default = `MSCBML0`)
+
+- `TYPE` : Cross-section shape. (Character: `ROD`, `TUBE`, `L`, `I`,
+  `CHAN`, `T`, `BOX`, `BAR`, `CROSS`, `H`, `T1`, `I1`, `CHAN1`, `Z`,
+  `CHAN2`, `T2`, `BOX1`, `HEXA`, `HAT`, `HAT1`, `DBOX` for GROUP =
+  `MSCBML0`)
+
+- `DIMi` : Cross-section dimensions. (Real > 0.0 for `GROUP` =
+  `MSCBML0`)
+
+- `NSM` : Nonstructural mass per unit length. `NSM` is specified after
+  the last `DIMi`. (Default = 0.0)
+*/
 
         class pbarl : public bar_prop, private l_geom {
           // Handle Nastran Bulk PBARL entries.
@@ -598,37 +554,33 @@ Description:
           DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
-/*
-Handle Nastran Bulk PROD entries.
-
+        /// # Handle Nastran Bulk PROD entries.
+/**
 Rod Property
 
 Defines the properties of a rod element (`CROD` entry).
 
-Format:
-.......
+## Format .......
 
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
-| PROD  | PID   | MID   | A     | J     | C     | NSM   |       |       |    |
-+-------+-------+-------+-------+-------+-------+-------+-------+-------+----+
+| 1     | 2   | 3   | 4 | 5 | 6 | 7   | 8 | 9 | 10 |
+| ----- | --- | --- | - | - | - | --- | - | - | -- |
+| PROD  | PID | MID | A | J | C | NSM |   |   |    |
 
-Description:
-............
+## Description
 
-``PID``
-  Property identification number. (Integer > 0)
-``MID``
-  Material identification number. See Remarks 2. and 3. (Integer > 0)
-``A``
-  Area of the rod. (Real)
-``J``
-  Torsional constant. (Real)
-``C``
-  Coefficient to determine torsional stress. (Real; Default = 0.0)
-``NSM``
-  Nonstructural mass per unit length. (Real)
+- `PID` : Property identification number. (Integer > 0)
+
+- `MID` : Material identification number. See Remarks 2. and 3.
+  (Integer > 0)
+
+- `A` : Area of the rod. (Real)
+
+- `J` : Torsional constant. (Real)
+
+- `C` : Coefficient to determine torsional stress. (Real; Default =
+  0.0)
+
+- `NSM` : Nonstructural mass per unit length. (Real)
  */
 
         class prod : public card {
@@ -670,6 +622,6 @@ Description:
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. doxyfile.stamp check -j 8"
 // coding: utf-8
 // End:

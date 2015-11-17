@@ -599,6 +599,52 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     CHECK(*static_cast<grid*>(current.get())->X1 == 111522.);
     CHECK(*static_cast<grid*>(current.get())->X2 == 18001.);
     CHECK(*static_cast<grid*>(current.get())->X3 == 21002.);
+
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = cards::dispatch(card::card_split(l));
+    CHECK(current->card_type() == cards::CQUAD4);
+    // "CQUAD4  1       1       16      200     141     17\n"
+
+
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = cards::dispatch(card::card_split(l));
+    CHECK(current->card_type() == cards::CQUAD4);
+    //  45678|234567890123456|234567890123456|234567890123456|234567890123456|2
+    // "CQUAD4* 2               1               16              200             "
+    // "+\n"
+    // "+       140             15\n"
+
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = cards::dispatch(card::card_split(l));
+    CHECK(current->card_type() == cards::CTRIA3);
+    // "CTRIA3  2606    1       1066    1065    1133\n"
+
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = cards::dispatch(card::card_split(l));
+    CHECK(current->card_type() == cards::CBEAM);
+    // "CBEAM   7869    104010  76      153     0.0     66.5206 997.785\n"
+    // "                        0.0     -22.617 -339.25 0.0     -22.617 -339.25\n"
+
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = cards::dispatch(card::card_split(l));
+    CHECK(current->card_type() == cards::CROD);
+    // "CROD    11316   6000001 1028    2139\n"
+
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = cards::dispatch(card::card_split(l));
+    CHECK(current->card_type() == cards::CBEAM);
+    //"CBEAM    465144 104010  76      153     1.       0.      0.\n"
+
+    l = probe.get();
+    CAPTURE( l[0] );
+    current = cards::dispatch(card::card_split(l));
+    CHECK(current->card_type() == cards::ENDDATA);
   }
 }
 

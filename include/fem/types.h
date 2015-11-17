@@ -46,7 +46,22 @@ namespace dnvgl {
     namespace fem {
       namespace types {
 
-        typedef enum { None, Comment, Int, Float, Str, List, Blank } fem_types;
+        typedef enum {
+          /// Indicates class not suitable for end use.
+          None,
+          // /// comment cell
+          // Comment,
+          /// Integer value cell
+          Int,
+          /// Floating point value cell
+          Float,
+          /// Character string cell
+          Str,
+          /// empty cell
+          Blank,
+          /// list of integers
+          List
+        } fem_types;
 
         class base {
 
@@ -231,7 +246,7 @@ namespace dnvgl {
   ispell-local-dictionary: "english"
   c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make -C ../.. check -j8"
+  compile-command: "make -C ../.. check doxyfile.stamp -j8"
   coding: utf-8
   End:
  */

@@ -30,6 +30,7 @@ libextfemread_la_SOURCES += bdf/bdf_cards_cbeam.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_cquad4.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_crod.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_ctria3.cpp
+libextfemread_la_SOURCES += bdf/bdf_cards_enddata.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_grid.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_mat1.cpp
 libextfemread_la_SOURCES += bdf/bdf_cards_pbar.cpp
@@ -51,6 +52,7 @@ libextfemread_la_SOURCES += bdf/bdf_cards_load.cpp
 
 libextfemread_la_SOURCES += fem/fem_cards.cpp
 libextfemread_la_SOURCES += fem/fem_cards_date.cpp
+libextfemread_la_SOURCES += fem/fem_cards_gnode.cpp
 libextfemread_la_SOURCES += fem/fem_cards_ident.cpp
 libextfemread_la_SOURCES += fem/fem_cards_text.cpp
 libextfemread_la_SOURCES += fem/fem_errors.cpp
