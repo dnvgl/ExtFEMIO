@@ -247,7 +247,7 @@ Description:
             const long *TYPE, const long *SUBTYPE,
             const ::std::deque<::std::string> *CONT) :
             TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
-            NRECS = CONT->size();
+            NRECS = static_cast<long>(CONT->size());
             NBYTE = 0;
             for (auto &p : *CONT)
               NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
@@ -346,7 +346,7 @@ DATE      0.10000000E+01  0.00000000E+00  0.40000000E+01  0.72000000E+02
             const long *TYPE, const long *SUBTYPE,
             const ::std::deque<::std::string> *CONT) :
             TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
-            NRECS = CONT->size();
+            NRECS = static_cast<long>(CONT->size());
             NBYTE = 0;
             for (auto &p : *CONT)
               NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
