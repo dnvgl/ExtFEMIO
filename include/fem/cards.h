@@ -142,7 +142,7 @@ namespace dnvgl {
           operator<< (::std::ostream&, const unknown&);
         };
 
-        /// # `DATE`: Date and Program Information
+        /// `DATE`: Date and Program Information
 /**
 ## Format
 
@@ -245,7 +245,7 @@ DATE      0.10000000E+01  0.00000000E+00  0.40000000E+01  0.72000000E+02
           operator<< (::std::ostream& os) const;
         };
 
-        /// # `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
+        /// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
 /**
 ## Format
 
@@ -322,7 +322,7 @@ number, `NODENO`.
           operator<< (::std::ostream& os) const;
         };
 
-        /// # IDENT: Identification of Superelements
+        /// `IDENT`: Identification of Superelements
 /**
 ## Format
 
@@ -382,9 +382,9 @@ number, `NODENO`.
           operator<< (::std::ostream& os) const;
         };
 
-        /// # `TEXT`: User supplied Text
+        /// `TEXT`: User supplied Text
 /**
-## Format
+# Format
 
 |       |               |               |               |               |
 | ----- | ------------- | ------------- | ------------- | ------------- |
@@ -395,7 +395,7 @@ The identifier is used to transfer text-strings on the interface file.
 The following NRECS records must be read in A-format, 72 characters
 per ecord.
 
-## Description
+# Description
 
 - `TYPE` : Value giving information of how to use this text
 

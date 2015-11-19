@@ -1,6 +1,6 @@
 // Copyright © 2015 by DNV GL SE
 
-// Purpose: Processing BDF files.
+/// Processing BDF files.
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
@@ -60,12 +60,14 @@ namespace dnvgl {
 
           DllExport ::std::deque<::std::string>& get();
 
-          // actual byte position (hopefully no bdf > 2Gybte will be
-          // readin....)
+          /** actual byte position (hopefully no bdf > 2Gybte will be
+              readin....)
+          */
           DllExport ::std::streampos size(void);
 
-          // actual byte position (hopefully no bdf > 2Gybte will be
-          // readin....)
+          /** actual byte position (hopefully no bdf > 2Gybte will be
+              readin....)
+          */
           DllExport ::std::streampos pos(void);
         };
       }

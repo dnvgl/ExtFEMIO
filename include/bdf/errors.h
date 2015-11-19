@@ -1,6 +1,6 @@
 // Copyright © 2015 by DNV GL SE
 
-// Purpose: Error handling for processing BDF data.
+/// Error handling for processing BDF data.
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 

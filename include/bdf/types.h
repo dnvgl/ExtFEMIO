@@ -1,13 +1,10 @@
-/* Copyright (C) 2015 by DNV GL SE */
+// Copyright (C) 2015 by DNV GL SE
 
-/*
-   Definitions for Nastran Bulk data entry types.
+/// Definitions for Nastran Bulk data entry types.
 
-   Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+// Author: Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
-*/
-/* ID: $Id$
- */
+// ID: $Id$
 
 #if _MSC_VER >= 1000
 #pragma once
@@ -45,11 +42,29 @@ namespace dnvgl {
   namespace extfem {
     namespace bdf {
       namespace types {
-
+        /// Indicators for different BDF card entries.
         typedef enum {
-          None, Int, Float, Str, List, Choose, Cross, Blank} bdf_types;
+          /// Undefined entry, used for abstract base types
+          None,
+          /// Integer value
+          Int,
+          /// Floating point number
+          Float,
+          /// String value
+          Str,
+          /// List of Integers
+          List,
+          /// Empty cell (Placeholder)
+          Blank} bdf_types;
 
-        typedef enum {LONG=16, SHORT=8, FREE=-1} out_form_type;
+        /// Indicator for BDF card output format
+        typedef enum {
+          /// Cards are written in Large Field Format
+          LONG=16,
+          /// Cards are written in Short Field Format
+          SHORT=8,
+          /// Cards are written in Free Field Format
+          FREE=-1} out_form_type;
 
         class base {
 
@@ -117,10 +132,9 @@ namespace dnvgl {
         class entry_type : public base {
         };
 
+        /// Integer value.
         template <>
         class entry_type<long> : public base {
-
-          // Integer value.
 
         private:
 
@@ -160,10 +174,9 @@ namespace dnvgl {
           };
         };
 
+        /// Real value.
         template <>
         class entry_type<double> : public base {
-
-          // Real value.
 
         private:
 
@@ -217,10 +230,9 @@ namespace dnvgl {
           };
         };
 
+        /// String value.
         template <>
         class entry_type<::std::string> : public base {
-
-          // String value.
 
         private:
 
@@ -255,10 +267,9 @@ namespace dnvgl {
           };
         };
 
+        /// List of integers.
         template <>
         class entry_type<::std::deque<int>> : public base {
-
-          // List of integers.
 
         private:
 
@@ -321,13 +332,11 @@ namespace dnvgl {
 
 #endif // _BERHOL20150407_BDF_TYPES
 
-/*
-  Local Variables:
-  mode: c++
-  ispell-local-dictionary: "english"
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C ../.. check -j 8"
-  coding:u tf-8
-  End:
-*/
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../.. check -j 8"
+// coding:utf-8
+// End:

@@ -214,5 +214,5 @@ std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> 
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. doxyfile.stamp check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

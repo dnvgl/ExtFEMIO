@@ -1,6 +1,6 @@
 // Copyright © 2015 by DNV GL SE
 
-// Classes for the different Nastran BDF cards dealing with loads.
+/// Classes for the different Nastran BDF cards dealing with loads.
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
@@ -35,12 +35,30 @@ namespace dnvgl {
 
         public:
 
+          /** Load set identification number. (Integer > 0)
+           */
           ::std::unique_ptr<long> SID;
+          /** Grid point identification number. (Integer > 0)
+           */
           ::std::unique_ptr<long> G;
+          /** Coordinate system identification number. (Integer > 0;
+              Default = 0)
+          */
           ::std::unique_ptr<long> CID;
+          /** Scale factor. (Real)
+           */
           ::std::unique_ptr<double> F;
+          /** *x* components of a vector measured in coordinate system
+              defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+          */
           ::std::unique_ptr<double> N1;
+          /** *y* components of a vector measured in coordinate system
+              defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+          */
           ::std::unique_ptr<double> N2;
+          /** *z* components of a vector measured in coordinate system
+              defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+          */
           ::std::unique_ptr<double> N3;
 
         protected:
@@ -57,34 +75,18 @@ namespace dnvgl {
           DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
-        /// # Handle Nastran Bulk `FORCE` entries.
-/**
-Static Force
+        /// Handle Nastran Bulk `FORCE` entries.
+/** # Static Force
 
 Defines a static concentrated force at a grid point by specifying a
 vector.
 
-## Format
+# Format
 
-| 1     | 2   | 3 | 4   | 5 | 6  | 7  | 8  | 9 | 10 |
-| ----- | --- | - | --- | - | -- | -- | -- | - | -- |
-| FORCE | SID | G | CID | F | N1 | N2 | N3 |   |    |
-
-## Description
-
-- `SID` : Load set identification number. (Integer > 0)
-
-- `G` : Grid point identification number. (Integer > 0)
-
-- `CID` : Coordinate system identification number. (Integer > 0;
-  Default = 0)
-
-- `F` : Scale factor. (Real)
-
-- `Ni` : Components of a vector measured in coordinate system defined
-  by CID. (Real; at least one Ni ≠ 0.0.)
+| 1       | 2     | 3   | 4     | 5   | 6    | 7    | 8    | 9 | 10 |
+| ------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
+| `FORCE` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-
         class force : public momforce_base {
           // Handle Nastran Bulk FORCE entries.
 
@@ -111,32 +113,17 @@ vector.
           DllExport const ::std::ostream& operator << (::std::ostream& os) const;
         };
 
-        /// # Handle Nastran Bulk `MOMENT` entries.
-/**
-Static Force
+        /// Handle Nastran Bulk `MOMENT` entries.
+/** # Static Force
 
 Defines a static concentrated force at a grid point by specifying a
 vector.
 
 ## Format
 
-| 1      | 2   | 3 | 4   | 5 | 6  | 7  | 8  | 9 | 10 |
-| ------ | --- | - | --- | - | -- | -- | -- | - | -- |
-| MOMENT | SID | G | CID | F | N1 | N2 | N3 |   |    |
-
-## Description
-
-- `SID` : Load set identification number. (Integer > 0)
-
-- `G` : Grid point identification number. (Integer > 0)
-
-- `CID` : Coordinate system identification number. (Integer > 0;
-  Default = 0)
-
-- `F` : Scale factor. (Real)
-
-- `Ni` : Components of a vector measured in coordinate system defined
-  by CID. (Real; at least one Ni ≠ 0.0.)
+| 1        | 2     | 3   | 4     | 5   | 6    | 7    | 8    | 9 | 10 |
+| -------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
+| `MOMENT` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
         class moment : public momforce_base {
           // Handle Nastran Bulk MOMENT entries.
@@ -163,32 +150,20 @@ vector.
           DllExport const ::std::ostream& operator<< (::std::ostream& os) const;
         };
 
-        /// # Handle Nastran Bulk `LOAD` entries.
-/**
-Static Load Combination (Superposition)
+        /// Handle Nastran Bulk `LOAD` entries.
+/** # Static Load Combination (Superposition)
 
 Defines a static load as a linear combination of load sets defined via
 `FORCE`, `MOMENT`, `FORCE1`, `MOMENT1`, `FORCE2`, `MOMENT2`, `DAREA`
 (if these entries have been converted), `PLOAD`, `PLOAD1`, `PLOAD2`,
 `PLOAD4`, `PLOADX1`, `SLOAD`, `RFORCE`, and `GRAV` entries.
 
-## Format
+# Format
 
-| 1    | 2   | 3  | 4      | 5  | 6  | 7  | 8  | 9  | 10 |
-| ---- | --- | -- | ------ | -- | -- | -- | -- | -- | -- |
-| LOAD | SID | S  | S1     | L1 | S2 | L2 | S3 | L3 |    |
-|      | S4  | L4 | -etc.- |    |    |    |    |    |    |
-
-## Description
-
-- `SID` : Load set identification number. (Integer > 0)
-
-- `S` : Overall scale factor. (Real)
-
-- `Si` : Scale factor on Li. (Real)
-
-- `Li` : Load set identification numbers defined on entry types listed
-  above. (Integer > 0)
+| 1      | 2     | 3    | 4      | 5    | 6    | 7    | 8    | 9    | 10 |
+| ------ | ----- | ---- | ------ | ---- | ---- | ---- | ---- | ---- | -- |
+| `LOAD` | `SID` | `S`  | `S1`   | `L1` | `S2` | `L2` | `S3` | `L3` |    |
+|        | `S4`  | `L4` | *etc.* |      |      |      |      |      |    |
 */
         class load : public card {
 
@@ -201,9 +176,18 @@ Defines a static load as a linear combination of load sets defined via
 
         public:
 
+          /** Load set identification number. (Integer > 0)
+           */
           ::std::unique_ptr<long> SID;
+          /* Overall scale factor. (Real)
+           */
           ::std::unique_ptr<double> S;
+          /** Scale factor on `Li`. (Real)
+           */
           ::std::unique_ptr<::std::deque<double>> Si;
+          /** Load set identification numbers defined on entry types
+              listed above. (Integer > 0)
+          */
           ::std::unique_ptr<::std::deque<long>> Li;
 
           DllExport load(const ::std::deque<::std::string> &inp);

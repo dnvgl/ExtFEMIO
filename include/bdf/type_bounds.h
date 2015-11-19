@@ -1,6 +1,6 @@
 // Copyright © 2015 by DNV GL SE
 
-// Purpose: Define boundaries for BDF types.
+/// Define boundaries for BDF types.
 
 // Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 

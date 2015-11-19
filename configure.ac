@@ -34,7 +34,7 @@ if test -z "$DOXYGEN";
 fi
 
 AM_CONDITIONAL([HAVE_DOXYGEN], [ test -n "$DOXYGEN" ])
-AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([docs/Doxyfile])])
+AM_COND_IF([HAVE_DOXYGEN], [AC_CONFIG_FILES([docs/Doxyfile docs/header.tex])])
 
 # Checking for catch.
 # AC_CHECK_HEADER([catch.hpp], [], [AC_MSG_ERROR([Could not find catch.hpp. Please download and install it from http://builds.catch-lib.net])])

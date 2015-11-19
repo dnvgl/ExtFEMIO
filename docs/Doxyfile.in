@@ -1470,7 +1470,7 @@ FORMULA_TRANSPARENT    = YES
 # The default value is: NO.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-USE_MATHJAX            = NO
+USE_MATHJAX            = YES
 
 # When MathJax is enabled you can set the default output format to be used for
 # the MathJax output. See the MathJax site (see:
@@ -1671,7 +1671,7 @@ EXTRA_PACKAGES         =
 # PROJECT_NAME), or the project number (see PROJECT_NUMBER).
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-LATEX_HEADER           = 
+LATEX_HEADER           = docs/header.tex
 
 # The LATEX_FOOTER tag can be used to specify a personal LaTeX footer for the
 # generated LaTeX document. The footer should contain everything after the last
@@ -1688,7 +1688,7 @@ LATEX_FOOTER           =
 # markers available.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
 
-LATEX_EXTRA_FILES      = 
+LATEX_EXTRA_FILES      = docs/mydoxygen.sty
 
 # If the PDF_HYPERLINKS tag is set to YES, the LaTeX that is generated is
 # prepared for conversion to PDF (using ps2pdf or pdflatex). The PDF file will
@@ -2361,7 +2361,6 @@ GENERATE_LEGEND        = YES
 # This tag requires that the tag HAVE_DOT is set to YES.
 
 DOT_CLEANUP            = YES
-
 
 ##! Local Variables:
 ##! ispell-local-dictionary: "english"
