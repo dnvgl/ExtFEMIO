@@ -1,8 +1,10 @@
-// Copyright © 2015 by DNV GL SE
+/*!
+   @file bdf/type_bounds.h
+   @author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   @copyright © 2015 by DNV GL SE
 
-/// Define boundaries for BDF types.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   @brief Define boundaries for BDF types.
+*/
 
 // ID: $Id$
 
@@ -14,6 +16,10 @@
 namespace dnvgl {
   namespace extfem {
     namespace bdf {
+      /*!
+        \brief Boundary definitions for BDF card entries.
+
+      */
       namespace type_bounds {
 
         class base {

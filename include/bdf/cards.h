@@ -1,8 +1,11 @@
-// Copyright © 2015 by DNV GL SE
+/**
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2015 by DNV GL SE
+  \brief Classes for the different Nastran BDF cards.
 
-/// Classes for the different Nastran BDF cards.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Eventually each BDF card that has to be written or read is provided
+  with its own C++ class.
+*/
 
 // ID: $Id$
 
@@ -10,8 +13,8 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20150630_BDF_CARDS
-#define _BERHOL20150630_BDF_CARDS
+#if !defined _BDF_CARDS_H_
+#define _BDF_CARDS_H_
 
 #include <deque>
 #include <string>
@@ -34,6 +37,12 @@ namespace dnvgl {
     namespace bdf {
       namespace cards {
 
+/**
+   \brief Unique identifier for each class representing a BDF card.
+
+   These are used to identify the classes that are returned from
+   `dispatch` as `card` superclass.
+*/
         typedef enum {
           /// undknown card
           UNKNOWN,
@@ -81,13 +90,17 @@ namespace dnvgl {
 
         typedef ::std::pair<::dnvgl::extfem::bdf::types::base*, void*> format_entry;
 
+/**
+   \brief Base class for all classes representing BDF cards.
+*/
         class card {
 
         private:
 
-          /** two character strings for continuation lines in Free
-              Form Format cards.
-          */
+/**
+   \brief Two character strings for continuation lines in Free Form
+          Format cards.
+*/
           static const ::std::set<char> free_form_cont;
 
           static const ::std::map<::std::string, types> cardtype_map;
@@ -164,7 +177,7 @@ namespace dnvgl {
           };
         };
 
-        /// Handle Nastran Bulk `ENDDATA` entries.
+/// Handle Nastran Bulk `ENDDATA` entries.
 /** # Bulk Data Delimiter
 
 Designates the end of the Bulk Data Section.
@@ -208,7 +221,7 @@ Designates the end of the Bulk Data Section.
           }
         };
 
-        /// Handle Nastran Bulk `GRID` entries.
+/// Handle Nastran Bulk `GRID` entries.
 /** # Grid Point
 
 Defines the location of a geometric grid point, the directions of its
@@ -285,7 +298,7 @@ displacement, and its permanent single-point constraints.
           operator<< (::std::ostream& os) const;
         };
 
-        /// Handle Nastran Bulk `MAT1` entries.
+/// Handle Nastran Bulk `MAT1` entries.
 /** # Isotropic Material Property Definition
 
 Defines the material properties for linear isotropic materials.
@@ -398,7 +411,7 @@ namespace dnvgl {
   }
 }
 
-#endif // _BERHOL20150630_BDF_CARDS
+#endif // _BDF_CARDS_H_
 
 // Local Variables:
 // mode: c++
