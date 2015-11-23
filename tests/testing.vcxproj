@@ -296,6 +296,9 @@ $(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
 $(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
+echo ==================== test_fem_list ====================
+$(OutputPath)test_fem_int.exe
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
 echo ==================== test_fem_cards ====================
 $(OutputPath)test_fem_cards.exe
 $(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
