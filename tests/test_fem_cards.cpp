@@ -52,7 +52,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001\n"
     "        CONVERSION DETAILS:\n"
     "        Msc Nastran File Format -> Sesam Interface File.\n"
-    "        Input  : \\test_01.bdf\n"
+    "        Input  : \\test_01.fem\n"
     "        Log    : \\test_01.txt\n"
     "DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001\n"
     "        DATE TIME:  11/03/2015 09:46:08\n"
@@ -106,7 +106,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     CHECK(static_cast<text*>(current.get())->CONT[1] ==
           "Msc Nastran File Format -> Sesam Interface File.                ");
     CHECK(static_cast<text*>(current.get())->CONT[2] ==
-          "Input  : \\test_01.bdf                                           ");
+          "Input  : \\test_01.fem                                           ");
     CHECK(static_cast<text*>(current.get())->CONT[3] ==
           "Log    : \\test_01.txt                                           ");
 

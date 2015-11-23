@@ -22,7 +22,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
-    <ProjectName>test_bdf_list</ProjectName>
+    <ProjectName>test_fem_list</ProjectName>
     <ProjectGuid>{24B91E51-D24F-4A50-B29A-6A1DC67DB485}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_bdf_list\</IntDir>
+    <IntDir>$(Configuration)\test_fem_list\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\test_bdf_list\</IntDir>
+    <IntDir>$(Platform)\$(Configuration)\test_fem_list\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_bdf_list\</IntDir>
+    <IntDir>$(Configuration)\test_fem_list\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\test_bdf_list\</IntDir>
+    <IntDir>$(Platform)\$(Configuration)\test_fem_list\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -158,13 +158,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test_bdf_list.cpp" />
+    <ClCompile Include="test_fem_list.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\bdf\cards.h" />
-    <ClInclude Include="..\include\bdf\file.h" />
+    <ClInclude Include="..\include\fem\cards.h" />
+    <ClInclude Include="..\include\fem\file.h" />
     <ClInclude Include="..\include\extfem_string.h" />
-    <ClInclude Include="..\include\bdf\types.h" />
+    <ClInclude Include="..\include\fem\types.h" />
     <ClInclude Include="..\include\catch.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
