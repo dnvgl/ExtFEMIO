@@ -92,9 +92,15 @@ test_fem_int_SOURCES=test_fem_int.cpp
 test_fem_int_LDADD=$(test_extfem_LDADD)
 TESTS+=test_fem_int.ju
 
+check_PROGRAMS+=test_fem_list
+test_fem_list_SOURCES=test_fem_list.cpp
+test_fem_list_LDADD=$(test_extfem_LDADD)
+TESTS+=test_fem_list.ju
+
 check_PROGRAMS+=test_fem_cards
 test_fem_cards_SOURCES =test_fem_cards.cpp
 test_fem_cards_SOURCES+=test_fem_cards_date.cpp
+test_fem_cards_SOURCES+=test_fem_cards_gnode.cpp
 test_fem_cards_SOURCES+=test_fem_cards_ident.cpp
 test_fem_cards_SOURCES+=test_fem_cards_text.cpp
 test_fem_cards_LDADD=$(test_extfem_LDADD)

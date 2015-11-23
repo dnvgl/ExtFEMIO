@@ -162,7 +162,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\bdf\cards.h" />
     <ClInclude Include="..\include\bdf\file.h" />
-    <ClInclude Include="..\include\bdf\string.h" />
+    <ClInclude Include="..\include\extfem_string.h" />
     <ClInclude Include="..\include\bdf\types.h" />
     <ClInclude Include="..\include\catch.hpp" />
   </ItemGroup>

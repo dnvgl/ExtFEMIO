@@ -24,7 +24,7 @@ namespace {
 #include "fem/types.h"
 #include "fem/errors.h"
 
-using namespace std;
+using namespace ::std;
 using namespace ::dnvgl;
 using namespace extfem;
 using fem::types::entry_type;

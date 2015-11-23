@@ -163,7 +163,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\fem\cards.h" />
     <ClInclude Include="..\include\fem\file.h" />
-    <ClInclude Include="..\include\fem\string.h" />
+    <ClInclude Include="..\include\extfem_string.h" />
     <ClInclude Include="..\include\fem\types.h" />
     <ClInclude Include="..\include\catch.hpp" />
   </ItemGroup>

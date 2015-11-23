@@ -40,6 +40,9 @@
     <ClCompile Include="test_fem_cards_date.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_gnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_ident.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

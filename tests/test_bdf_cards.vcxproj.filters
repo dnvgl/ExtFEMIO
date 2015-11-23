@@ -23,7 +23,7 @@
     <ClInclude Include="..\include\bdf\file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdf\string.h">
+    <ClInclude Include="..\include\extfem_string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\bdf\types.h">

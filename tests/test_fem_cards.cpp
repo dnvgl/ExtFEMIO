@@ -59,6 +59,8 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013\n"
     "        COMPUTER: HAML130185\n"
     "        USER: berhol\n"
+    "TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000\n"
+    "        SubCase\n"
     "GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005\n"
     "GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004\n"
     "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
@@ -144,13 +146,19 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     l = probe.get();
     CAPTURE( l[0] );
     current = cards::dispatch(card::card_split(l));
-    // CHECK(current->card_type() == cards::GNODE);
+    CHECK(current->card_type() == cards::GNODE);
     // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
     // GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005
-    // CHECK(static_cast<gnode*>(current.get())->NODEX == 1);
-    // CHECK(static_cast<gnode*>(current.get())->NODENO == 1);
-    // CHECK(static_cast<gnode*>(current.get())->NDOF == 6);
-    // CHECK(static_cast<gnode*>(current.get())->ODOF == 123456);
+    CHECK(static_cast<gnode*>(current.get())->NODEX == 1);
+    CHECK(static_cast<gnode*>(current.get())->NODENO == 1);
+    CHECK(static_cast<gnode*>(current.get())->NDOF == 6);
+    CHECK(static_cast<gnode*>(current.get())->ODOF.size() == 6);
+    CHECK(static_cast<gnode*>(current.get())->ODOF[0] == 1);
+    CHECK(static_cast<gnode*>(current.get())->ODOF[1] == 2);
+    CHECK(static_cast<gnode*>(current.get())->ODOF[2] == 3);
+    CHECK(static_cast<gnode*>(current.get())->ODOF[3] == 4);
+    CHECK(static_cast<gnode*>(current.get())->ODOF[4] == 5);
+    CHECK(static_cast<gnode*>(current.get())->ODOF[5] == 6);
 
     l = probe.get();
     CAPTURE( l[0] );

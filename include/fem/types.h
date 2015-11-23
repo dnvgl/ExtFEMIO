@@ -227,7 +227,7 @@ namespace dnvgl {
           entry_type<::std::deque<int>>(const ::std::string &name) :
             base(name) {};
 
-          ::std::deque<int> operator() (const ::std::string&) const;
+          ::std::deque<int>* operator() (const ::std::string&) const;
 
           inline fem_types type() const {return _type;};
 

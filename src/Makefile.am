@@ -60,6 +60,7 @@ libextfemread_la_SOURCES += fem/fem_file.cpp
 libextfemread_la_SOURCES += fem/fem_types.cpp
 libextfemread_la_SOURCES += fem/fem_types_float.cpp
 libextfemread_la_SOURCES += fem/fem_types_int.cpp
+libextfemread_la_SOURCES += fem/fem_types_list_int.cpp
 libextfemread_la_SOURCES += fem/fem_types_str.cpp
 
 # Local Variables:
