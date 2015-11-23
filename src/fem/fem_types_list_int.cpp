@@ -23,6 +23,7 @@ namespace {
 #include <regex>
 #endif
 
+#include <list>
 #include <sstream>
 #include <algorithm>
 

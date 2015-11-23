@@ -65,7 +65,7 @@ namespace dnvgl {
           const ::std::deque<int> *ODOF) :
           NODEX(*NODEX), NODENO(*NODENO),
           ODOF(ODOF->begin(), ODOF->end()) {
-          NDOF = ODOF->size();
+          NDOF = static_cast<long>(ODOF->size());
           ::std::sort(this->ODOF.begin(), this->ODOF.end());
         };
 

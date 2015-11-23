@@ -186,6 +186,7 @@
     <ClCompile Include="fem\fem_types.cpp" />
     <ClCompile Include="fem\fem_types_float.cpp" />
     <ClCompile Include="fem\fem_types_int.cpp" />
+    <ClCompile Include="fem\fem_types_list_int.cpp" />
     <ClCompile Include="fem\fem_types_str.cpp" />
     <ClCompile Include="extfem_string.cpp" />
     <ClCompile Include="my_c++14.cpp" />
