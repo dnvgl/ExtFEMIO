@@ -41,12 +41,12 @@ namespace dnvgl {
           UNKNOWN,
           /// Date and Program Information
           DATE,
+          /// Nodal Coordinates
+          GCOORD,
           /// Correspondence between External and Internal
           /// Node Numbering, and Number of Degrees of
           /// Freedom of Each Node
           GNODE,
-          // /// Nodal Coordinates
-          // GCOORD,
           /// Identification of Superelements
           IDENT,
           // /// Element Data Definition
@@ -247,6 +247,59 @@ DATE      0.10000000E+01  0.00000000E+00  0.40000000E+01  0.72000000E+02
           operator<< (::std::ostream& os) const;
         };
 
+        /// `GCOORD`: Nodal Coordinates
+/**
+# Format
+
+|          |          |          |         |          |
+| -------- | -------- | -------- | ------- | -------- |
+| `GCOORD` | `NODENO` | `XCOORD` | `YCOORD`| `ZCOORD` |
+*/
+        class gcoord : public card {
+
+        private:
+
+          static const ::dnvgl::extfem::fem::types::card head;
+
+          static const
+          ::dnvgl::extfem::fem::types::entry_type<long> _NODENO;
+          static const
+          ::dnvgl::extfem::fem::types::entry_type<double> _XCOORD;
+          static const
+          ::dnvgl::extfem::fem::types::entry_type<double> _YCOORD;
+          static const
+          ::dnvgl::extfem::fem::types::entry_type<double> _ZCOORD;
+
+        public:
+
+          /** Program defined (internal) node number
+           */
+          long NODENO;
+          /** Cartesian *X*-coordinates of node `NODENO`.
+           */
+          double XCOORD;
+          /** Cartesian *Y*-coordinates of node `NODENO`.
+           */
+          double YCOORD;
+          /** Cartesian `Z`-coordinates of node `NODENO`.
+           */
+          double ZCOORD;
+
+
+          DllExport gcoord(const ::std::deque<::std::string>&);
+
+          DllExport gcoord(
+            const long *NODENO,
+            const double *XCOORD, const double *YCOORD, const double *ZCOORD);
+
+          DllExport const ::dnvgl::extfem::fem::cards::types
+          card_type(void) const;
+
+          DllExport friend ::std::ostream&
+          operator<< (::std::ostream&, const gcoord&);
+          DllExport const ::std::ostream&
+          operator<< (::std::ostream& os) const;
+        };
         /// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
 /**
 ## Format

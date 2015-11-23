@@ -52,6 +52,7 @@ libextfemread_la_SOURCES += bdf/bdf_cards_load.cpp
 
 libextfemread_la_SOURCES += fem/fem_cards.cpp
 libextfemread_la_SOURCES += fem/fem_cards_date.cpp
+libextfemread_la_SOURCES += fem/fem_cards_gcoord.cpp
 libextfemread_la_SOURCES += fem/fem_cards_gnode.cpp
 libextfemread_la_SOURCES += fem/fem_cards_ident.cpp
 libextfemread_la_SOURCES += fem/fem_cards_text.cpp

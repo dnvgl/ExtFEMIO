@@ -35,9 +35,10 @@ fem::types::empty card::empty = fem::types::empty();
 fem::types::card card::head = fem::types::card("<DUMMY>");
 
 namespace {
-  const size_t map_pair_entries = 4;
+  const size_t map_pair_entries = 5;
   const pair<::std::string, types> map_pairs[map_pair_entries] = {
     pair<::std::string, types>("DATE", DATE),
+    pair<::std::string, types>("GCOORD", GCOORD),
     pair<::std::string, types>("GNODE", GNODE),
     pair<::std::string, types>("IDENT", IDENT),
     pair<::std::string, types>("TEXT", TEXT),
@@ -78,6 +79,8 @@ fem::cards::dispatch(const deque<::std::string> &inp) {
     switch (cardtype_map.at(key)) {
     case DATE:
       return ::std::make_unique<fem::cards::date>(inp);
+    case GCOORD:
+      return ::std::make_unique<fem::cards::gcoord>(inp);
     case GNODE:
       return ::std::make_unique<fem::cards::gnode>(inp);
     case IDENT:

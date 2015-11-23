@@ -20,10 +20,6 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
-#ifdef _TYPE
-#undef _TYPE
-#endif
-
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;

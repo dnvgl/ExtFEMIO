@@ -100,6 +100,7 @@ TESTS+=test_fem_list.ju
 check_PROGRAMS+=test_fem_cards
 test_fem_cards_SOURCES =test_fem_cards.cpp
 test_fem_cards_SOURCES+=test_fem_cards_date.cpp
+test_fem_cards_SOURCES+=test_fem_cards_gcoord.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gnode.cpp
 test_fem_cards_SOURCES+=test_fem_cards_ident.cpp
 test_fem_cards_SOURCES+=test_fem_cards_text.cpp

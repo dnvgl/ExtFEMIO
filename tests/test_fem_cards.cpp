@@ -163,9 +163,13 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     l = probe.get();
     CAPTURE( l[0] );
     current = cards::dispatch(card::card_split(l));
-    // CHECK(current->card_type() == cards::GCOORD);
+    CHECK(current->card_type() == cards::GCOORD);
     // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
     // GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004
+    CHECK(static_cast<gcoord*>(current.get())->NODENO == 1);
+    CHECK(static_cast<gcoord*>(current.get())->XCOORD == 111525.);
+    CHECK(static_cast<gcoord*>(current.get())->YCOORD == 18000.);
+    CHECK(static_cast<gcoord*>(current.get())->ZCOORD == 21000.);
 
     l = probe.get();
     CAPTURE( l[0] );
