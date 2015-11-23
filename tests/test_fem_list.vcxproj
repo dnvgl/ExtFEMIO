@@ -23,7 +23,7 @@
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>ConsoleApplication1</RootNamespace>
     <ProjectName>test_fem_list</ProjectName>
-    <ProjectGuid>{24B91E51-D24F-4A50-B29A-6A1DC67DB485}</ProjectGuid>
+    <ProjectGuid>{24B91E51-D24F-4A50-B29A-6A1DC67DB488}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
