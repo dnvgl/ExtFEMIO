@@ -169,6 +169,8 @@ Defines a static load as a linear combination of load sets defined via
 
         private:
 
+          static ::dnvgl::extfem::bdf::types::card head;
+
           static const ::dnvgl::extfem::bdf::types::entry_type<long> _SID;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _S;
           static const ::dnvgl::extfem::bdf::types::entry_type<double> _Si;
@@ -192,14 +194,18 @@ Defines a static load as a linear combination of load sets defined via
 
           DllExport load(const ::std::deque<::std::string> &inp);
 
-          DllExport load(long &SID, double &S,
-                         ::std::deque<double> &Si, ::std::deque<long> &Li);
+          DllExport load(const long *SID, const double *S,
+                         const ::std::deque<double> *Si,
+                         const ::std::deque<long> *Li);
 
           DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
             return LOAD;
           };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
+          DllExport friend ::std::ostream&
+          operator<<(::std::ostream&, const load&);
+          DllExport const ::std::ostream&
+          operator << (::std::ostream& os) const;
         };
       }
     }
@@ -213,6 +219,6 @@ Defines a static load as a linear combination of load sets defined via
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. doxyfile.stamp check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // coding: utf-8
 // End:

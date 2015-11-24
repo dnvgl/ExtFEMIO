@@ -160,6 +160,15 @@ namespace dnvgl {
             (void*)val.get());
         };
 
+        template <class T>
+        inline ::std::unique_ptr<format_entry>
+        format(const ::dnvgl::extfem::bdf::types::entry_type<T> &formatter,
+               const T &val) {
+          return ::std::make_unique<format_entry>(
+            (::dnvgl::extfem::bdf::types::base*)&formatter,
+            (void*)&val);
+        };
+
         class unknown : public card {
 
         public:

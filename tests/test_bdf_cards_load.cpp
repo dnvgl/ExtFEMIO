@@ -61,6 +61,48 @@ TEST_CASE("BDF LOAD definitions. (Small Field Format)", "[bdf_load]" ) {
   }
 }
 
+TEST_CASE("BDF LOAD types output.", "[bdf_load,out]" ) {
+
+  std::ostringstream test;
+
+  long SID(2);
+  double S(2.9);
+  ::std::deque<double> Si;
+  ::std::deque<long> Li;
+
+  SECTION("write (1)") {
+    Si.push_back(3.);
+    Si.push_back(1.7);
+    Li.push_back(3);
+    Li.push_back(4);
+    load probe(&SID, &S, &Si, &Li);
+    test << probe;
+    CHECK(test.str() ==
+          "LOAD           22.900+003.000+00       31.700+00       4\n");
+  }
+
+  SECTION("write (2)") {
+    Si.push_back(3.);
+    Li.push_back(3);
+    load probe(&SID, &S, &Si, &Li);
+    test << probe;
+    CHECK(test.str() ==
+          "LOAD           22.900+003.000+00       3\n");
+  }
+
+  SECTION("write (3)") {
+    for (long i=0; i<10; ++i) {
+      Li.push_back(i+4);
+      Si.push_back(static_cast<double>(i));
+    }
+    load probe(&SID, &S, &Si, &Li);
+    test << probe;
+    CHECK(test.str() ==
+         "LOAD           22.900+000.000+00       41.000+00       52.000+00       6\n"
+         "        3.000+00       74.000+00       85.000+00       96.000+00      10\n"
+         "        7.000+00      118.000+00      129.000+00      13\n");
+  }
+}
 
 // Local Variables:
 // mode: c++

@@ -23,7 +23,7 @@
   |          | =PBARL=    | Properties for =CBAR= describing cross section  | \check | \sad    |
   |          | =PROD=     | Properties for =CROD=                           | \check | \sad    |
   | Load     |            |                                                 |        |         |
-  |          | =LOAD=     | Load case combination                           | \check | \sad    |
+  |          | =LOAD=     | Load case combination                           | \check | \check  |
   |          | =FORCE=    | Forces on Nodes                                 | \check | \check  |
   |          | =MOMENT=   | Moments on Nodes                                | \check | \check  |
   | Misc     |            |                                                 |        |         |

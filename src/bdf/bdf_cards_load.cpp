@@ -58,13 +58,56 @@ load::load(const std::deque<std::string> &inp) :
  end: ;
 }
 
-load::load(long &SID, double &S,
-           std::deque<double> &Si, std::deque<long> &Li) :
-  SID(&SID), S(&S), Si(&Si), Li(&Li) {}
-
-const std::ostream& load::operator << (std::ostream& os) const {
-  return os;
+load::load(const long *iSID, const double *iS,
+           const std::deque<double> *iSi, const std::deque<long> *iLi) {
+  SID = ::std::make_unique<long>(*iSID);
+  S = ::std::make_unique<double>(*iS);
+  Si = ::std::make_unique<::std::deque<double>>();
+  for (auto &p : *iSi)
+    Si->push_back(p);
+  Li = ::std::make_unique<::std::deque<long>>();
+  for (auto &p : *iLi)
+    Li->push_back(p);
 }
+
+namespace dnvgl {
+  namespace extfem {
+    namespace bdf {
+      namespace cards {
+
+        bdf::types::card load::head = bdf::types::card("LOAD");
+
+        const std::ostream&
+        load::operator<< (std::ostream& os) const {
+          return os << *this;
+        }
+
+        ::std::ostream&
+        operator<<(::std::ostream &os, const load &card) {
+
+          std::deque<std::unique_ptr<format_entry>> entries;
+
+          entries.push_back(format(load::head));
+
+          entries.push_back(format<long>(card._SID, card.SID));
+          entries.push_back(format<double>(card._S, card.S));
+
+          assert(card.Si->size() == card.Li->size());
+
+          for (size_t i=0; i<card.Si->size(); i++) {
+            entries.push_back(format<double>(card._Si, card.Si->at(i)));
+            entries.push_back(format<long>(card._Li, card.Li->at(i)));
+          }
+
+          os << card.format_outlist(entries) << std::endl;
+
+          return os;
+        }
+      }
+    }
+  }
+}
+
 
 // Local Variables:
 // mode: c++
