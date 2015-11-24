@@ -7,24 +7,24 @@
   |          | *Name*     | *Description*                                   | *Read* | *Write* |
   |----------+------------+-------------------------------------------------+--------+---------|
   | General  |            |                                                 |        |         |
-  |          | =MAT1=     | Material definition                             | \check |         |
-  |          | =GRID=     | Grid nodes                                      | \check |         |
+  |          | =MAT1=     | Material definition                             | \check | \sad    |
+  |          | =GRID=     | Grid nodes                                      | \check | \sad    |
   | Elements |            |                                                 |        |         |
-  |          | =CTRIA3=   | 3 node shaped shell elements                    | \check |         |
-  |          | =CQUAD4=   | 4 node shaped shell elements                    | \check |         |
-  |          | =CBEAM=    | Complex beams                                   | \check |         |
+  |          | =CTRIA3=   | 3 node shaped shell elements                    | \check | \sad    |
+  |          | =CQUAD4=   | 4 node shaped shell elements                    | \check | \sad    |
+  |          | =CBEAM=    | Complex beams                                   | \check | \sad    |
   |          | =CBAR=     | Simple beams                                    | \check | \check  |
-  |          | =CROD=     | Trusses                                         | \check |         |
+  |          | =CROD=     | Trusses                                         | \check | \sad    |
   | Element  | properties |                                                 |        |         |
-  |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check |         |
-  |          | =PBEAM=    | Integral properties for =CBEAM=                 | \check |         |
-  |          | =PBEAML=   | Properties for =CBEAM= describing cross section | \check |         |
-  |          | =PBAR=     | Integral properties for =CBAR=                  | \check |         |
-  |          | =PBARL=    | Properties for =CBAR= describing cross section  | \check |         |
-  |          | =PROD=     | Properties for =CROD=                           | \check |         |
+  |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check | \sad    |
+  |          | =PBEAM=    | Integral properties for =CBEAM=                 | \check | \sad    |
+  |          | =PBEAML=   | Properties for =CBEAM= describing cross section | \check | \sad    |
+  |          | =PBAR=     | Integral properties for =CBAR=                  | \check | \sad    |
+  |          | =PBARL=    | Properties for =CBAR= describing cross section  | \check | \sad    |
+  |          | =PROD=     | Properties for =CROD=                           | \check | \sad    |
   | Load     |            |                                                 |        |         |
-  |          | =LOAD=     | Load case combination                           | \check |         |
+  |          | =LOAD=     | Load case combination                           | \check | \sad    |
   |          | =FORCE=    | Forces on Nodes                                 | \check | \check  |
   |          | =MOMENT=   | Moments on Nodes                                | \check | \check  |
   | Misc     |            |                                                 |        |         |
-  |          | =ENDDATA=  | Marker for end of input file                    | \check | \check |
+  |          | =ENDDATA=  | Marker for end of input file                    | \check | \check  |

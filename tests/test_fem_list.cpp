@@ -83,7 +83,7 @@ TEST_CASE("FEM list of int types output.", "[fem_types]" ) {
 
   std::ostringstream stream(std::ostringstream::ate);
 
-  SECTION("Outout") {
+  SECTION("Output") {
     std::string res(obj.format(lval));
     CHECK(res.size() == 16);
     CHECK(res == " 1.23400000e+03 ");
