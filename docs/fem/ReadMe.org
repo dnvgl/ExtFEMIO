@@ -12,7 +12,7 @@
    |          | =GCOORD=   | Nodal Coordinates                                            | \check | \check  |  6-56 |
    |          | =GNODE=    | Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node | \check | \check  |  6-80 |
    |          | =IDENT=    | Identification of Superelements                              | \check | \check  |   4-3 |
-   |          | =IEND=     | End of a Superelement                                        |        |         |   4-4 |
+   |          | =IEND=     | End of a Superelement                                        | \check | \check  |   4-4 |
    | Elements |            |                                                              |        |         |       |
    |          | =GELMNT1=  | Element Data Definition                                      |        |         |  6-65 |
    |          | =GELREF1=  | Reference to Element Data                                    |        |         |  6-66 |
