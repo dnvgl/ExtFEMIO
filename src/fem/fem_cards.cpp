@@ -35,12 +35,13 @@ fem::types::empty card::empty = fem::types::empty();
 fem::types::card card::head = fem::types::card("<DUMMY>");
 
 namespace {
-  const size_t map_pair_entries = 5;
+  const size_t map_pair_entries = 6;
   const pair<::std::string, types> map_pairs[map_pair_entries] = {
     pair<::std::string, types>("DATE", DATE),
     pair<::std::string, types>("GCOORD", GCOORD),
     pair<::std::string, types>("GNODE", GNODE),
     pair<::std::string, types>("IDENT", IDENT),
+    pair<::std::string, types>("IEND", IEND),
     pair<::std::string, types>("TEXT", TEXT),
   };
 }
@@ -85,6 +86,8 @@ fem::cards::dispatch(const deque<::std::string> &inp) {
       return ::std::make_unique<fem::cards::gnode>(inp);
     case IDENT:
       return ::std::make_unique<fem::cards::ident>(inp);
+    case IEND:
+      return ::std::make_unique<fem::cards::iend>(inp);
     case TEXT:
       return ::std::make_unique<fem::cards::text>(inp);
     // These are not real card types, they can't be returned

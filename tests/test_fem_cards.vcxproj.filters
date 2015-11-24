@@ -49,6 +49,9 @@
     <ClCompile Include="test_fem_cards_ident.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_iend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

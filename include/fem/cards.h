@@ -78,8 +78,8 @@ namespace dnvgl {
           // BNLOAD,
           // /// Element to Ground
           // MGSPRNG,
-          // /// End of a Superelement
-          // IEND,
+          /// End of a Superelement
+          IEND,
           // /// Set (group) of Nodes or Elements (Members)
           // GSETMEMB,
           // /// Specification of Local Element Coordinate
@@ -417,6 +417,53 @@ system, unless a local nodal coordinate system is specified (see the
 
           DllExport friend ::std::ostream&
           operator<< (::std::ostream&, const ident&);
+          DllExport const ::std::ostream&
+          operator<< (::std::ostream& os) const;
+        };
+
+        /// `IEND`: End of a Superelement
+/**
+## Format
+
+|         |        |   |   |   |
+| ------- | ------ | - | - | - |
+| `IEND`  | `CONT` |   |   |   |
+
+Defines end of a superelement.
+*/
+        class iend : public card {
+
+        private:
+
+          static const ::dnvgl::extfem::fem::types::card head;
+
+          static const ::dnvgl::extfem::fem::types::entry_type<long> _CONT;
+
+        public:
+
+          /** Superelement level.
+
+              - = 0 (Default). This is also end of the file.
+
+              - = 1 The superelements are concatenated on one file.
+                    More superelements follows.
+
+              - = 2 Last superelement in a structure for a
+                    concatenated file.
+          */
+          long CONT;
+
+          DllExport iend(const ::std::deque<::std::string>&);
+
+          DllExport iend(
+            const long *CONT) : CONT(*CONT) { };
+
+
+          DllExport const ::dnvgl::extfem::fem::cards::types
+          card_type(void) const { return IEND; };
+
+          DllExport friend ::std::ostream&
+          operator<< (::std::ostream&, const iend&);
           DllExport const ::std::ostream&
           operator<< (::std::ostream& os) const;
         };

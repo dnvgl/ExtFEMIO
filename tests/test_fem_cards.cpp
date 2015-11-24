@@ -174,9 +174,10 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
     l = probe.get();
     CAPTURE( l[0] );
     current = cards::dispatch(card::card_split(l));
-    // CHECK(current->card_type() == cards::IEND);
+    CHECK(current->card_type() == cards::IEND);
     // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
     // IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+    CHECK(static_cast<iend*>(current.get())->CONT == 0);
 
   }
 }
