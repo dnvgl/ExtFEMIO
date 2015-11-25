@@ -1,8 +1,10 @@
-// Copyright © 2015 by DNV GL SE
+/**
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2015 by DNV GL SE
+  \brief Processing Sesam FEM TEXT cards.
 
-// Purpose: Processing Sesam FEM TEXT cards.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Detailed description
+*/
 
 // ID:
 namespace {
@@ -58,6 +60,22 @@ namespace dnvgl {
           }
         }
 
+        text::text(const long *TYPE, const long *SUBTYPE,
+                   const long *NRECS, const long *NBYTE,
+                   const ::std::deque<::std::string> *CONT) :
+          TYPE(*TYPE), SUBTYPE(*SUBTYPE), NRECS(*NRECS),
+          NBYTE(*NBYTE), CONT(*CONT) {}
+
+        text::text(const long *TYPE, const long *SUBTYPE,
+                   const ::std::deque<::std::string> *CONT) :
+          card(),
+          TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
+          NRECS = static_cast<long>(CONT->size());
+          NBYTE = 0;
+          for (auto &p : *CONT)
+            NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
+          }
+
         const ::dnvgl::extfem::fem::cards::types
         text::card_type(void) const { return TEXT; };
 
@@ -75,7 +93,6 @@ namespace dnvgl {
              << card._SUBTYPE.format(card.SUBTYPE)
              << card._NRECS.format(card.NRECS)
              << card._NBYTE.format(card.NBYTE) << std::endl;
-
           for (auto p : card.CONT)
             os << "        " << card._CONT.format(p, card.NBYTE) << std::endl;
 
