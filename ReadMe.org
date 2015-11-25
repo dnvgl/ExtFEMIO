@@ -2,6 +2,7 @@
 #+LATEX_CLASS: dnvglartcl
 #+LATEX_HEADER: \usepackage{tabu,booktabs}
 #+OPTIONS: toc:nil
+#+ATTR_LATEX: :booktabs t
 #+TITLE: C++ IO support for various FEM exchange file formats
 
 * Supported FEM file formats

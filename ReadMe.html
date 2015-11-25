@@ -4,10 +4,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-11-17 Di 17:11 -->
+<!-- 2015-11-25 Mi 15:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>C++ IO support for various FEM exchange file formats Nastran Bulk Data (BDF) IO support for C++ DNV GL Seasam Input Interface File (FEM) IO support for C++</title>
+<title>C++ IO support for various FEM exchange file formats</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Berthold Höllmann" />
 <style type="text/css">
@@ -144,10 +144,10 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">C++ IO support for various FEM exchange file formats Nastran Bulk Data (BDF) IO support for C++ DNV GL Seasam Input Interface File (FEM) IO support for C++</h1>
+<h1 class="title">C++ IO support for various FEM exchange file formats</h1>
 
-<div id="outline-container-orgheadline5" class="outline-2">
-<h2 id="orgheadline5"><span class="section-number-2">1</span> Supported FEM file formats</h2>
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6"><span class="section-number-2">1</span> Supported FEM file formats</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Not all functionality defined for the exchange file formats is
@@ -206,7 +206,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>MAT1</code></td>
 <td class="org-left">Material definition</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -214,9 +214,10 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>GRID</code></td>
 <td class="org-left">Grid nodes</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Elements</td>
 <td class="org-left">&#xa0;</td>
@@ -230,7 +231,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>CTRIA3</code></td>
 <td class="org-left">3 node shaped shell elements</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -238,7 +239,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>CQUAD4</code></td>
 <td class="org-left">4 node shaped shell elements</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -246,7 +247,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>CBEAM</code></td>
 <td class="org-left">Complex beams</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -262,9 +263,10 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>CROD</code></td>
 <td class="org-left">Trusses</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Element</td>
 <td class="org-left">properties</td>
@@ -278,7 +280,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>PSHELL</code></td>
 <td class="org-left">Properties for <code>CTRIA3</code>, and <code>CQUAD4</code></td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -286,7 +288,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>PBEAM</code></td>
 <td class="org-left">Integral properties for <code>CBEAM</code></td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -294,7 +296,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>PBEAML</code></td>
 <td class="org-left">Properties for <code>CBEAM</code> describing cross section</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -302,7 +304,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>PBAR</code></td>
 <td class="org-left">Integral properties for <code>CBAR</code></td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -310,7 +312,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>PBARL</code></td>
 <td class="org-left">Properties for <code>CBAR</code> describing cross section</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
 
 <tr>
@@ -318,9 +320,10 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>PROD</code></td>
 <td class="org-left">Properties for <code>CROD</code></td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Load</td>
 <td class="org-left">&#xa0;</td>
@@ -334,7 +337,7 @@ the according directories in the doc dubdirectory.
 <td class="org-left"><code>LOAD</code></td>
 <td class="org-left">Load case combination</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
 </tr>
 
 <tr>
@@ -352,7 +355,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Misc</td>
 <td class="org-left">&#xa0;</td>
@@ -374,8 +378,8 @@ the according directories in the doc dubdirectory.
 </div>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
 
@@ -391,11 +395,15 @@ the according directories in the doc dubdirectory.
 <col  class="org-left" />
 
 <col  class="org-left" />
+</colgroup>
 
+<colgroup>
 <col  class="org-left" />
 
 <col  class="org-left" />
+</colgroup>
 
+<colgroup>
 <col  class="org-right" />
 </colgroup>
 <thead>
@@ -429,20 +437,20 @@ the according directories in the doc dubdirectory.
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left"><code>GNODE</code></td>
-<td class="org-left">Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">6-80</td>
+<td class="org-left"><code>GCOORD</code></td>
+<td class="org-left">Nodal Coordinates</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">6-56</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left"><code>GCOORD</code></td>
-<td class="org-left">Nodal Coordinates</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">6-56</td>
+<td class="org-left"><code>GNODE</code></td>
+<td class="org-left">Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">6-80</td>
 </tr>
 
 <tr>
@@ -454,6 +462,16 @@ the according directories in the doc dubdirectory.
 <td class="org-right">4-3</td>
 </tr>
 
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>IEND</code></td>
+<td class="org-left">End of a Superelement</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">4-4</td>
+</tr>
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Elements</td>
 <td class="org-left">&#xa0;</td>
@@ -467,8 +485,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GELMNT1</code></td>
 <td class="org-left">Element Data Definition</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-65</td>
 </tr>
 
@@ -476,11 +494,12 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GELREF1</code></td>
 <td class="org-left">Reference to Element Data</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-66</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Element</td>
 <td class="org-left">properties</td>
@@ -494,8 +513,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GBARM</code></td>
 <td class="org-left">Cross Section Type Massive Bar</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-48</td>
 </tr>
 
@@ -503,8 +522,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GBEAMG</code></td>
 <td class="org-left">General Beam Element Data</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-49</td>
 </tr>
 
@@ -512,8 +531,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GECCEN</code></td>
 <td class="org-left">Eccentricities</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-61</td>
 </tr>
 
@@ -521,8 +540,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GELTH</code></td>
 <td class="org-left">Thickness of Two-dimensional Elements</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-70</td>
 </tr>
 
@@ -530,8 +549,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GIORH</code></td>
 <td class="org-left">Cross Section Type I or H Beam</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-71</td>
 </tr>
 
@@ -539,8 +558,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GLSEC</code></td>
 <td class="org-left">Cross Section Type L-Section</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-76</td>
 </tr>
 
@@ -548,11 +567,12 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GPIPE</code></td>
 <td class="org-left">Cross Section Type Tube</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-81</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Load</td>
 <td class="org-left">&#xa0;</td>
@@ -566,8 +586,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BLDEP</code></td>
 <td class="org-left">Nodes with Linear Dependence</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-27</td>
 </tr>
 
@@ -575,8 +595,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BNBCD</code></td>
 <td class="org-left">Nodes with Boundary Conditions</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-30</td>
 </tr>
 
@@ -584,8 +604,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BNDISPL</code></td>
 <td class="org-left">Nodes with Prescribed Displacements and Accelerations</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-31</td>
 </tr>
 
@@ -593,8 +613,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BNLOAD</code></td>
 <td class="org-left">Nodes with Loads</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-35</td>
 </tr>
 
@@ -602,11 +622,12 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MGSPRNG</code></td>
 <td class="org-left">Element to Ground</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-103</td>
 </tr>
-
+</tbody>
+<tbody>
 <tr>
 <td class="org-left">Misc</td>
 <td class="org-left">&#xa0;</td>
@@ -618,19 +639,10 @@ the according directories in the doc dubdirectory.
 
 <tr>
 <td class="org-left">&#xa0;</td>
-<td class="org-left"><code>IEND</code></td>
-<td class="org-left">End of a Superelement</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">4-4</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GSETMEMB</code></td>
 <td class="org-left">Set (group) of Nodes or Elements (Members)</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-84</td>
 </tr>
 
@@ -638,8 +650,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GUNIVEC</code></td>
 <td class="org-left">Specification of Local Element Coordinate System</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-92</td>
 </tr>
 
@@ -647,8 +659,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MISOSEL</code></td>
 <td class="org-left">Isotropy, Linear Elastic Structural Analysis</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">6-115</td>
 </tr>
 
@@ -656,8 +668,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>TDSETNAM</code></td>
 <td class="org-left">Name and Description of a Set (group)</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#9785;</td>
 <td class="org-right">4-7</td>
 </tr>
 
@@ -682,6 +694,1147 @@ the according directories in the doc dubdirectory.
 </table>
 </div>
 </div>
+
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Conventions for use of the interface file for the elements in SESAM
+are defined here. Other element types may be introduced for use in
+other programs.
+</p>
+
+<p>
+The table below contains element type numbers already reserved. (Not
+all of them are included in SESAM).
+</p>
+
+<p>
+For ADVANCE, the element types listed are those available from the
+SESAM preprocessors. In addition to that ADVANCE has a lot of other
+element types.
+</p>
+
+
+<table id="orgtable1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> List of existing Element Types</caption>
+
+<colgroup>
+<col  class="org-right" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right"><b>Typ<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></b></th>
+<th scope="col" class="org-left"><b>Name</b></th>
+<th scope="col" class="org-right"><b>N.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup></b></th>
+<th scope="col" class="org-left"><b>Description of Element</b></th>
+<th scope="col" class="org-left"><b>Ref.</b></th>
+<th scope="col" class="org-left"><b><sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></b></th>
+<th scope="col" class="org-left"><b><sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></b></th>
+<th scope="col" class="org-left"><b><sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup></b></th>
+<th scope="col" class="org-left"><b><sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup></b></th>
+<th scope="col" class="org-left"><b><sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></b></th>
+<th scope="col" class="org-left"><b>Other<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup></b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left"><code>BEPS</code></td>
+<td class="org-right">2</td>
+<td class="org-left">2-D, 2 Node Beam</td>
+<td class="org-left">3, 5</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left"><code>CSTA</code></td>
+<td class="org-right">3</td>
+<td class="org-left">Plane Constant Strain Triangle</td>
+<td class="org-left">2, 4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">3</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left"><code>RPBQ</code></td>
+<td class="org-right">4</td>
+<td class="org-left">Rect. Plate. Bending Modes</td>
+<td class="org-left">3</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left"><code>ILST</code></td>
+<td class="org-right">6</td>
+<td class="org-left">Plane Lin. Strain Triangle</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left"><code>IQQE</code></td>
+<td class="org-right">8</td>
+<td class="org-left">Plane Quadrilateral Membrane Element</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-left"><code>LQUA</code></td>
+<td class="org-right">4</td>
+<td class="org-left">Plane Quadrilateral Membrane Element</td>
+<td class="org-left">2, 4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left"><code>TESS</code></td>
+<td class="org-right">2</td>
+<td class="org-left">Truss Element</td>
+<td class="org-left">2, 4</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-left"><code>GMAS</code></td>
+<td class="org-right">1</td>
+<td class="org-left">1-Noded Mass-Matrix</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-left"><code>GLMA</code></td>
+<td class="org-right">2</td>
+<td class="org-left">2-Noded Mass-Matrix</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">13</td>
+<td class="org-left"><code>GLDA</code></td>
+<td class="org-right">2</td>
+<td class="org-left">2-Noded Damping-Matrix</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">14</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">15</td>
+<td class="org-left"><code>BEAS</code></td>
+<td class="org-right">2</td>
+<td class="org-left">3-D, 2 Node Beam</td>
+<td class="org-left">2, 4</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">FR, LA, PL, PR, WA</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">16</td>
+<td class="org-left"><code>AXIS</code></td>
+<td class="org-right">2</td>
+<td class="org-left">Axial Spring</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;<sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup></td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">FR</td>
+</tr>
+
+<tr>
+<td class="org-right">17</td>
+<td class="org-left"><code>AXDA</code></td>
+<td class="org-right">2</td>
+<td class="org-left">Axial Damper</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">18</td>
+<td class="org-left"><code>GSPR</code></td>
+<td class="org-right">1</td>
+<td class="org-left">Spring to Ground</td>
+<td class="org-left">4</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">FR</td>
+</tr>
+
+<tr>
+<td class="org-right">19</td>
+<td class="org-left"><code>GDAM</code></td>
+<td class="org-right">1</td>
+<td class="org-left">Damper to Ground</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">20</td>
+<td class="org-left"><code>IHEX</code></td>
+<td class="org-right">20</td>
+<td class="org-left">Isoparametric Hexahedron</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">FR</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">21</td>
+<td class="org-left"><code>LHEX</code></td>
+<td class="org-right">8</td>
+<td class="org-left">Linear Hexahedron</td>
+<td class="org-left">2, 4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">FR</td>
+</tr>
+
+<tr>
+<td class="org-right">22</td>
+<td class="org-left"><code>SECB</code></td>
+<td class="org-right">3</td>
+<td class="org-left">Subparametric Curved Beam</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">23</td>
+<td class="org-left"><code>BTSS</code></td>
+<td class="org-right">3</td>
+<td class="org-left">General Curved Beam</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PL, PR</td>
+</tr>
+
+<tr>
+<td class="org-right">24</td>
+<td class="org-left"><code>FQUS</code></td>
+<td class="org-right">4</td>
+<td class="org-left">Flat Quadrilateral Thin Shell</td>
+<td class="org-left">4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PL, PR</td>
+</tr>
+
+<tr>
+<td class="org-right">24</td>
+<td class="org-left"><code>FFQ</code></td>
+<td class="org-right">4</td>
+<td class="org-left">Free Formulation Quadrilateral Shell</td>
+<td class="org-left">5</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">25</td>
+<td class="org-left"><code>FTRS</code></td>
+<td class="org-right">3</td>
+<td class="org-left">Flat Triangular Thin Shell</td>
+<td class="org-left">4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PL</td>
+</tr>
+
+<tr>
+<td class="org-right">25</td>
+<td class="org-left"><code>FFTR</code></td>
+<td class="org-right">3</td>
+<td class="org-left">Free Formulation Triangular Shell</td>
+<td class="org-left">5</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">26</td>
+<td class="org-left"><code>SCTS</code></td>
+<td class="org-right">6</td>
+<td class="org-left">Subparametric Curved Triangular Thick Shell</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PL</td>
+</tr>
+
+<tr>
+<td class="org-right">27</td>
+<td class="org-left"><code>MCTS</code></td>
+<td class="org-right">6</td>
+<td class="org-left">Subparam. Curved Triang. Thick Sandwich Elem.</td>
+<td class="org-left">2<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">28</td>
+<td class="org-left"><code>SCQS</code></td>
+<td class="org-right">8</td>
+<td class="org-left">Subparametric Curved Quadrilateral Thick Shell</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PL, PR</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">29</td>
+<td class="org-left"><code>MCQS</code></td>
+<td class="org-right">8</td>
+<td class="org-left">Subparam. Curved Quadr. Thick Sandwich Elem.</td>
+<td class="org-left">2<sup><a id="fnr.11.100" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">30</td>
+<td class="org-left"><code>IPRI</code></td>
+<td class="org-right">15</td>
+<td class="org-left">Isoparametric Triangular Prism</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">31</td>
+<td class="org-left"><code>ITET</code></td>
+<td class="org-right">10</td>
+<td class="org-left">Isoparametric Tetrahedron</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">32</td>
+<td class="org-left"><code>TPRI</code></td>
+<td class="org-right">6</td>
+<td class="org-left">Triangular Prism</td>
+<td class="org-left">2, 4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">33</td>
+<td class="org-left"><code>TETR</code></td>
+<td class="org-right">4</td>
+<td class="org-left">Tetrahedron</td>
+<td class="org-left">2</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">34</td>
+<td class="org-left"><code>LCTS</code></td>
+<td class="org-right">6</td>
+<td class="org-left">Subparam. Layered Curved Triangular Thick Shell</td>
+<td class="org-left">2<sup><a id="fnr.11.100" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">35</td>
+<td class="org-left"><code>LCQS</code></td>
+<td class="org-right">8</td>
+<td class="org-left">Subparam. Layered Curved Quadrilat. Thick Shell</td>
+<td class="org-left">2<sup><a id="fnr.11.100" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">36</td>
+<td class="org-left"><code>TRS1</code></td>
+<td class="org-right">18</td>
+<td class="org-left">2nd Order Hexahed. Transition Elem., Solid / Shell</td>
+<td class="org-left">6</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PR</td>
+</tr>
+
+<tr>
+<td class="org-right">37</td>
+<td class="org-left"><code>TRS2</code></td>
+<td class="org-right">15</td>
+<td class="org-left">2nd Order Hexahed. Transition Elem., Solid / Shell</td>
+<td class="org-left">6</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PR</td>
+</tr>
+
+<tr>
+<td class="org-right">38</td>
+<td class="org-left"><code>TRS3</code></td>
+<td class="org-right">12</td>
+<td class="org-left">2nd Order Hexahed. Transition Elem., Solid / Shell</td>
+<td class="org-left">6</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PR</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">39</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">40</td>
+<td class="org-left"><code>GLSH</code></td>
+<td class="org-right">2</td>
+<td class="org-left">General Spring / Shim Element</td>
+<td class="org-left"><sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup></td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#9785;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">41</td>
+<td class="org-left"><code>AXCS</code></td>
+<td class="org-right">3</td>
+<td class="org-left">Axisymmetric Constant Strain Triangle</td>
+<td class="org-left">7, 5</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">42</td>
+<td class="org-left"><code>AXLQ</code></td>
+<td class="org-right">4</td>
+<td class="org-left">Axisymmetric Quadrilateral</td>
+<td class="org-left">7, 5</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">43</td>
+<td class="org-left"><code>AXLS</code></td>
+<td class="org-right">6</td>
+<td class="org-left">Axisymmetric Linear Strain Triangle</td>
+<td class="org-left">7</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">44</td>
+<td class="org-left"><code>AXQQ</code></td>
+<td class="org-right">8</td>
+<td class="org-left">Axisymmetric Linear Strain Quadrilateral</td>
+<td class="org-left">7</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">45</td>
+<td class="org-left"><code>PILS</code></td>
+<td class="org-right">1</td>
+<td class="org-left">Pile / Soil</td>
+<td class="org-left">4</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">46</td>
+<td class="org-left"><code>PCAB</code></td>
+<td class="org-right">2</td>
+<td class="org-left">Plane Cable-Bar Element</td>
+<td class="org-left">4</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">47</td>
+<td class="org-left"><code>PSPR</code></td>
+<td class="org-right">1</td>
+<td class="org-left">Plane Spring Element</td>
+<td class="org-left">4</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">48</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">4</td>
+<td class="org-left">4-node Contact Element with triangular Shape</td>
+<td class="org-left">4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">49</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">2</td>
+<td class="org-left">2-Noded Link Element</td>
+<td class="org-left">4</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">50</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">51</td>
+<td class="org-left"><code>CTCP</code></td>
+<td class="org-right">2</td>
+<td class="org-left">2-Noded Contact Element</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">52</td>
+<td class="org-left"><code>CTCL</code></td>
+<td class="org-right">4</td>
+<td class="org-left">4-Noded Contact Element</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">53</td>
+<td class="org-left"><code>CTAL</code></td>
+<td class="org-right">4</td>
+<td class="org-left">4-Noded Axisymmetric Contact Element</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">54</td>
+<td class="org-left"><code>CTCC</code></td>
+<td class="org-right">6</td>
+<td class="org-left">6-Noded Contact Element</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">55</td>
+<td class="org-left"><code>CTAQ</code></td>
+<td class="org-right">6</td>
+<td class="org-left">6-Noded (3+3) Axisymmetric Contact Element</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">56</td>
+<td class="org-left"><code>CTLQ</code></td>
+<td class="org-right">8</td>
+<td class="org-left">8-Noded (4+4) Contact Element</td>
+<td class="org-left">8, 9</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PR</td>
+</tr>
+
+<tr>
+<td class="org-right">57</td>
+<td class="org-left"><code>CTCQ</code></td>
+<td class="org-right">16</td>
+<td class="org-left">16-Noded (8+8) Contact Element</td>
+<td class="org-left">8, 9</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PR</td>
+</tr>
+
+<tr>
+<td class="org-right">58</td>
+<td class="org-left"><code>CTMQ</code></td>
+<td class="org-right">18</td>
+<td class="org-left">18-Noded (9+9) Contact Element</td>
+<td class="org-left">8, 9</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PR</td>
+</tr>
+
+<tr>
+<td class="org-right">59</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">60</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">61</td>
+<td class="org-left"><code>HCQS</code></td>
+<td class="org-right">9</td>
+<td class="org-left">9-Noded Shell Element</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">PR</td>
+</tr>
+
+<tr>
+<td class="org-right">62</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">63</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">64</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">65</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">66</td>
+<td class="org-left"><code>SLQS</code></td>
+<td class="org-right">8</td>
+<td class="org-left">Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">67</td>
+<td class="org-left"><code>SLTS</code></td>
+<td class="org-right">6</td>
+<td class="org-left">Semiloof Triangular Curved Thin Shell (24 d.o.fs)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">68</td>
+<td class="org-left"><code>SLCB</code></td>
+<td class="org-right">3</td>
+<td class="org-left">Semiloof Curved Beam (11 d.o.fs)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">69</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left"><i>Not</i> <i>yet</i> <i>defined</i></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">70</td>
+<td class="org-left"><code>MATR</code></td>
+<td class="org-right"><i>n</i></td>
+<td class="org-left">General Matrix Element with arbitrary no. of nodes (<i>n</i>)</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">SP</td>
+</tr>
+
+<tr>
+<td class="org-right">&hellip;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">100</td>
+<td class="org-left"><code>GHEX</code></td>
+<td class="org-right">21</td>
+<td class="org-left">General Hexahedron</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">&hellip;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">163</td>
+<td class="org-left"><code>GHEX</code></td>
+<td class="org-right">27</td>
+<td class="org-left">General Hexahedron</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="footnotes">
@@ -689,9 +1842,61 @@ the according directories in the doc dubdirectory.
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-  References page in "Technical Reoprt: Sesam Input Interface File,
+  References page in "Technical Report: Sesam Input Interface File,
 File Description", Document id: 89-7012, Revision Number 9 / 01
 November 1996
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<code>ELTYP</code>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+Number of nodes
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+Indcluded in program <code>PREFRAME</code>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+Included in program <code>PREFEM</code>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
+Included in program <code>SESTRA</code>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
+Included in program <code>ADVANCE</code>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
+Included in program <code>Poseidon</code>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara"><p class="footpara">
+<b>FR</b> = FRAMEWORK, <b>LA</b> = LAUNCH, <b>PL</b> = PLATEWORK, <b>PR</b> =
+PRETUBE, <b>SP</b> = SPLICE, <b>WD</b> = WADAM, <b>WJ</b> = WAJAC
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10">10</a></sup> <div class="footpara"><p class="footpara">
+Temporarily <code>ADVANCE</code> interprets Axisl Spring as link
+element, ignoring the material reference. The 6 matrix numbers are
+given in direct input to <code>ADVANCE</code>.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.11" class="footnum" href="#fnr.11">11</a></sup> <div class="footpara"><p class="footpara">
+The element subroutines are the same as for the
+subparametric curved thick shells (<code>SCQS</code> and <code>SCTS</code>).
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.12" class="footnum" href="#fnr.12">12</a></sup> <div class="footpara"><p class="footpara">
+As General Spring it is just a 2-noded spring (12x12
+matrix) which may be in a local coordinate system. As a shim element
+the preprocessor(s) will only insert stiffness in the local x- and
+y-direction. In the analysis program(s), shim members and general
+springs are treated exactly in the same manner.
 </p></div></div>
 
 
@@ -699,7 +1904,7 @@ November 1996
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2015-11-17 Di 17:11</p>
+<p class="date">Created: 2015-11-25 Mi 15:55</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
