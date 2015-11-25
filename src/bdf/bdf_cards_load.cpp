@@ -15,6 +15,8 @@ namespace {
     = "@(#) $Id$";
 }
 
+#include <cassert>
+
 #include "bdf/cards.h"
 #include "bdf/types.h"
 #include "bdf/errors.h"

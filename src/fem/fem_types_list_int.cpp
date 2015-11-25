@@ -49,7 +49,6 @@ boost::regex
 std::regex
 #endif
 entry_type<::std::deque<int>>::int_re(
-//  "[[:space:]]*[\\+-]?[1-9][0-9]*[[:space:]]*",
   "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
 #ifdef HAVE_BOOST_REGEX_HPP
   boost::regex_constants::ECMAScript);
