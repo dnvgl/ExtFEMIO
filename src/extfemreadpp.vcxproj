@@ -182,7 +182,9 @@
     <ClCompile Include="fem\fem_cards_gnode.cpp" />
     <ClCompile Include="fem\fem_cards_ident.cpp" />
     <ClCompile Include="fem\fem_cards_iend.cpp" />
+    <ClCompile Include="fem\fem_cards_gelmnt1.cpp" />
     <ClCompile Include="fem\fem_cards_text.cpp" />
+    <ClCompile Include="fem\fem_elements.cpp" />
     <ClCompile Include="fem\fem_errors.cpp" />
     <ClCompile Include="fem\fem_file.cpp" />
     <ClCompile Include="fem\fem_types.cpp" />
@@ -204,7 +206,7 @@
     <ClInclude Include="..\include\bdf\types.h" />
     <ClInclude Include="..\include\bdf\type_bounds.h" />
     <ClInclude Include="..\include\fem\cards.h" />
-    <ClInclude Include="..\include\fem\cards_elements.h" />
+    <ClInclude Include="..\include\fem\elements.h" />
     <ClInclude Include="..\include\fem\cards_loads.h" />
     <ClInclude Include="..\include\fem\cards_properties.h" />
     <ClInclude Include="..\include\fem\errors.h" />
