@@ -16,7 +16,7 @@
    |          | =IEND=     | End of a Superelement                                        | \check | \check  |   4-4 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Elements |            |                                                              |        |         |       |
-   |          | =GELMNT1=  | Element Data Definition                                      | \sad   | \sad    |  6-65 |
+   |          | =GELMNT1=  | Element Data Definition                                      | \check | \check  |  6-65 |
    |          | =GELREF1=  | Reference to Element Data                                    | \sad   | \sad    |  6-66 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Element  | properties |                                                              |        |         |       |
