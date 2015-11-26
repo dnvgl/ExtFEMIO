@@ -85,6 +85,8 @@ namespace dnvgl {
 
           card(const ::std::string &name) : base(name) {};
 
+          card(void) : base("") {};
+
           fem_types type(void) const {return None;};
 
           ::std::string format() const;
@@ -246,7 +248,7 @@ namespace dnvgl {
   ispell-local-dictionary: "english"
   c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make -C ../.. check doxyfile.stamp -j8"
+  compile-command: "make -C ../.. check -j8"
   coding: utf-8
   End:
  */

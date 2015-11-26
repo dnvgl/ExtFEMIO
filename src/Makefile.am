@@ -57,6 +57,7 @@ libextfemread_la_SOURCES += fem/fem_cards_gnode.cpp
 libextfemread_la_SOURCES += fem/fem_cards_ident.cpp
 libextfemread_la_SOURCES += fem/fem_cards_iend.cpp
 libextfemread_la_SOURCES += fem/fem_cards_gelmnt1.cpp
+libextfemread_la_SOURCES += fem/fem_cards_gelref1.cpp
 libextfemread_la_SOURCES += fem/fem_cards_text.cpp
 libextfemread_la_SOURCES += fem/fem_elements.cpp
 libextfemread_la_SOURCES += fem/fem_errors.cpp

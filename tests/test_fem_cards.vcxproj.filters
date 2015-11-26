@@ -55,6 +55,9 @@
     <ClCompile Include="test_fem_cards_gelmnt1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_gelref1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

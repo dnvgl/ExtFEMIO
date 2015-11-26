@@ -17,7 +17,7 @@
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Elements |            |                                                              |        |         |       |
    |          | =GELMNT1=  | Element Data Definition                                      | \check | \check  |  6-65 |
-   |          | =GELREF1=  | Reference to Element Data                                    | \sad   | \sad    |  6-66 |
+   |          | =GELREF1=  | Reference to Element Data                                    | \check | \check  |  6-66 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Element  | properties |                                                              |        |         |       |
    |          | =GBARM=    | Cross Section Type Massive Bar                               | \sad   | \sad    |  6-48 |

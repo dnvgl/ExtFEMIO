@@ -83,7 +83,7 @@ namespace dnvgl {
           for (auto p : card.NODIN) {
             if (i++ >= 4) {
               i = 1;
-              os << std::endl << "        ";
+              os << std::endl << ::dnvgl::extfem::fem::types::card().format();
             }
             os << card._NODIN.format(p);
           }

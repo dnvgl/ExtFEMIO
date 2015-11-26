@@ -183,6 +183,7 @@
     <ClCompile Include="fem\fem_cards_ident.cpp" />
     <ClCompile Include="fem\fem_cards_iend.cpp" />
     <ClCompile Include="fem\fem_cards_gelmnt1.cpp" />
+    <ClCompile Include="fem\fem_cards_gelref1.cpp" />
     <ClCompile Include="fem\fem_cards_text.cpp" />
     <ClCompile Include="fem\fem_elements.cpp" />
     <ClCompile Include="fem\fem_errors.cpp" />

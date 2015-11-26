@@ -35,15 +35,34 @@ fem::types::empty card::empty = fem::types::empty();
 fem::types::card card::head = fem::types::card("<DUMMY>");
 
 namespace {
-  const size_t map_pair_entries = 7;
+  const size_t map_pair_entries = 8;
   const pair<::std::string, types> map_pairs[map_pair_entries] = {
+    // UNKNOWN,
     pair<::std::string, types>("DATE", DATE),
     pair<::std::string, types>("GCOORD", GCOORD),
     pair<::std::string, types>("GNODE", GNODE),
     pair<::std::string, types>("IDENT", IDENT),
     pair<::std::string, types>("IEND", IEND),
     pair<::std::string, types>("GELMNT1", GELMNT1),
+    pair<::std::string, types>("GELREF1", GELREF1),
+    // pair<::std::string, types>("GBARM", GBARM),
+    // pair<::std::string, types>("GBEAMG", GBEAMG),
+    // pair<::std::string, types>("GECCEN", GECCEN),
+    // pair<::std::string, types>("GELTH", GELTH),
+    // pair<::std::string, types>("GIORH", GIORH),
+    // pair<::std::string, types>("GLSEC", GLSEC),
+    // pair<::std::string, types>("GPIPE", GPIPE),
+    // pair<::std::string, types>("BLDEP", BLDEP),
+    // pair<::std::string, types>("BNBCD", BNBCD),
+    // pair<::std::string, types>("BNDISPL", BNDISPL),
+    // pair<::std::string, types>("BNLOAD", BNLOAD),
+    // pair<::std::string, types>("MGSPRNG", MGSPRNG),
+    // pair<::std::string, types>("GSETMEMB", GSETMEMB),
+    // pair<::std::string, types>("GUNIVEC", GUNIVEC),
+    // pair<::std::string, types>("MISOSEL", MISOSEL),
+    // pair<::std::string, types>("TDSETNAM", TDSETNAM),
     pair<::std::string, types>("TEXT", TEXT),
+    // pair<::std::string, types>("TDLOAD", TDLOAD),
   };
 }
 
@@ -91,6 +110,8 @@ fem::cards::dispatch(const deque<::std::string> &inp) {
       return ::std::make_unique<fem::cards::iend>(inp);
     case GELMNT1:
       return ::std::make_unique<fem::cards::gelmnt1>(inp);
+    case GELREF1:
+      return ::std::make_unique<fem::cards::gelref1>(inp);
     case TEXT:
       return ::std::make_unique<fem::cards::text>(inp);
     // These are not real card types, they can't be returned

@@ -70,6 +70,10 @@ parse_error::parse_error(
   const std::string &name, const std::string &msg) :
   error(name, msg, "parse_error") {}
 
+usage_error::usage_error(
+  const std::string &name, const std::string &msg) :
+  error(name, msg, "usage_error") {}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"
