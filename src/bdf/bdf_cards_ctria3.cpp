@@ -37,14 +37,14 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
 
    auto pos = inp.rbegin();
 
-   THETA.set_value(THETA, "");
-   MCID.set_value(MCID, "");
-   ZOFFS.set_value(ZOFFS, "");
-   TFLAG.set_value(TFLAG, "");
-   T1.set_value(T1, "");
-   T2.set_value(T2, "");
-   T3.set_value(T3, "");
-   T4.set_value(T4, "");
+   form_THETA.set_value(THETA, "");
+   form_MCID.set_value(MCID, "");
+   form_ZOFFS.set_value(ZOFFS, "");
+   form_TFLAG.set_value(TFLAG, "");
+   form_T1.set_value(T1, "");
+   form_T2.set_value(T2, "");
+   form_T3.set_value(T3, "");
+   form_T4.set_value(T4, "");
 
    switch (inp.size()-1) {
    case 16:
@@ -71,19 +71,19 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
    case 6:
       try {
          form_THETA.set_value(THETA, *pos);
-         MCID.set_value(MCID, "");
+         form_MCID.set_value(MCID, "");
          choose_mcid_theta = has_THETA;
       }
       catch (errors::float_error) {
          try {
             form_MCID.set_value(MCID, *pos);
-            THETA.set_value(THETA, "");
+            form_THETA.set_value(THETA, "");
             choose_mcid_theta = has_MCID;
          }
          catch (errors::int_error) {
             THETA.is_value = true;
             THETA.value = 0.;
-            MCID.set_value(MCID, "");
+            form_MCID.set_value(MCID, "");
             choose_mcid_theta = has_THETA;
          }
       }

@@ -41,7 +41,8 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)",
   data.push_back(
     "GRID           1      22111525. 18000.  21000.        11       6       2\n");
 
-  ::std::deque<string> lines = card::card_split(data);
+  ::std::deque<string> lines;
+  card::card_split(data, lines);
   grid probe(lines);
 
   SECTION("first grid") {
@@ -67,7 +68,8 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)",
   data.push_back(
     "                  21000.              11               6               2\n");
 
-  ::std::deque<string> lines = card::card_split(data);
+  ::std::deque<string> lines;
+  card::card_split(data, lines);
   grid probe(lines);
 
   SECTION("first grid") {
@@ -92,7 +94,8 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
     data.empty();
     data.push_back("GRID,1,22,111525.,18000.,21000.,11,6,2\n");
 
-    ::std::deque<string> lines = card::card_split(data);
+    ::std::deque<string> lines;
+    card::card_split(data, lines);
     grid probe(lines);
 
     CHECK((long)probe.ID == 1);
@@ -112,7 +115,8 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
     data.push_back("GRID,1,22,111525.,\n");
     data.push_back(",18000.,21000.,11,6,2\n");
 
-    ::std::deque<string> lines = card::card_split(data);
+    ::std::deque<string> lines;
+    card::card_split(data, lines);
     grid probe(lines);
 
     CHECK((long)probe.ID == 1);
@@ -132,7 +136,8 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
     data.push_back("GRID,1,22,111525.,+");
     data.push_back("+,18000.,21000.,11,6,2\n");
 
-    ::std::deque<string> lines = card::card_split(data);
+    ::std::deque<string> lines;
+    card::card_split(data, lines);
     grid probe(lines);
 
     CHECK((long)probe.ID == 1);
@@ -152,7 +157,8 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
     data.push_back("GRID,1,22,111525.,+G001\n");
     data.push_back("+G001,18000.,21000.,11,6,2\n");
 
-    ::std::deque<string> lines = card::card_split(data);
+    ::std::deque<string> lines;
+    card::card_split(data, lines);
     grid probe(lines);
 
     CHECK((long)probe.ID == 1);

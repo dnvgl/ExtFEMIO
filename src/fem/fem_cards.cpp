@@ -43,7 +43,7 @@ namespace {
    const size_t map_pair_entries = 8;
    const pair<::std::string, types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
-      pair<::std::string, types>("DATE", DATE),
+      pair<::std::string, types>("DATE", fem::cards::DATE),
       pair<::std::string, types>("GCOORD", GCOORD),
       pair<::std::string, types>("GNODE", GNODE),
       pair<::std::string, types>("IDENT", IDENT),

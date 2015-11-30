@@ -46,7 +46,8 @@ TEST_CASE("BDF FORCE definitions. (Small Field Format)", "[bdf_force]" ) {
   data.push_back(
   // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
     "FORCE   2       5       6       2.9     0.0     1.9     0.0               \n");
-  ::std::deque<string> lines = card::card_split(data);
+  ::std::deque<string> lines;
+  card::card_split(data, lines);
   force probe(lines);
 
   SECTION("first force") {

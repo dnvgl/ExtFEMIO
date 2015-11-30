@@ -42,7 +42,8 @@ TEST_CASE("BDF ENDDATA definitions. (Small Field Format)",
     data.push_back(
       "ENDDAT                                                                  \n");
 
-    ::std::deque<string> lines = card::card_split(data);
+    ::std::deque<string> lines;
+    card::card_split(data, lines);
     enddata probe(lines);
   }
 }

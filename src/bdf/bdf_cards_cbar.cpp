@@ -31,6 +31,10 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#ifdef W2A
+#undef W2A
+#endif
+
 using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;

@@ -6,12 +6,16 @@
 
 #pragma once
 
+#define _AFXDLL
+
+#ifndef EXTFEM_IGNORE_STINGRAY
 #include "NDStingrayVersions.h"
 #if  _StingrayVersion >= 1000
    #define NO_TARGETING
 #endif
 #include "CRT4VS2005.h"
 #undef NO_TARGETING
+#endif // EXTFEM_IGNORE_STINGRAY
 
 #define VC_EXTRALEAN    // Exclude rarely-used stuff from Windows headers
 
