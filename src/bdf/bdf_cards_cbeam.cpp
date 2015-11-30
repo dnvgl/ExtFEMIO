@@ -156,12 +156,12 @@ cbeam::cbeam(const deque<std::string> &inp) :
             throw errors::parse_error(
                "CBEAM", "Incomplete direction vector.");
          }
-         form_G0.set_value(G0, ""); ;
+         G0.is_value = false;
          choose_dir_code = has_DVEC;
       }
       catch (errors::float_error) {
          form_G0.set_value(G0, *pos);
-         form_X1.set_value(X1, ""); ;
+         X1.is_value = false;
          choose_dir_code = has_DCODE;
       }
       ++pos;
