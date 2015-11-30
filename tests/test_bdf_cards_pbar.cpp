@@ -49,24 +49,24 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
     ::std::deque<string> lines = card::card_split(data);
     pbar probe(lines);
 
-    CHECK(*probe.PID ==  1);
-    CHECK(*probe.MID ==  2);
-    CHECK(*probe.A ==   3.);
-    CHECK(*probe.I1 ==  4.);
-    CHECK(*probe.I2 ==  5.);
-    CHECK(*probe.J ==   6.);
-    CHECK(*probe.NSM == 7.);
-    CHECK(*probe.C1 ==  9.);
-    CHECK(*probe.C2 == 10.);
-    CHECK(*probe.D1 == 11.);
-    CHECK(*probe.D2 == 12.);
-    CHECK(*probe.E1 == 13.);
-    CHECK(*probe.E2 == 14.);
-    CHECK(*probe.F1 == 15.);
-    CHECK(*probe.F2 == 16.);
-    CHECK(*probe.K1 == 17.);
-    CHECK(*probe.K2 == 18.);
-    CHECK(*probe.I12 == 19.);
+    CHECK((long)probe.PID ==  1);
+    CHECK((long)probe.MID ==  2);
+    CHECK((double)probe.A ==   3.);
+    CHECK((double)probe.I1 ==  4.);
+    CHECK((double)probe.I2 ==  5.);
+    CHECK((double)probe.J ==   6.);
+    CHECK((double)probe.NSM == 7.);
+    CHECK((double)probe.C1 ==  9.);
+    CHECK((double)probe.C2 == 10.);
+    CHECK((double)probe.D1 == 11.);
+    CHECK((double)probe.D2 == 12.);
+    CHECK((double)probe.E1 == 13.);
+    CHECK((double)probe.E2 == 14.);
+    CHECK((double)probe.F1 == 15.);
+    CHECK((double)probe.F2 == 16.);
+    CHECK((double)probe.K1 == 17.);
+    CHECK((double)probe.K2 == 18.);
+    CHECK((double)probe.I12 == 19.);
   }
 
   SECTION("Small Field Format 1") {
@@ -79,24 +79,24 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
     ::std::deque<string> lines = card::card_split(data);
     pbar probe(lines);
 
-    CHECK(*probe.PID == 4000001);
-    CHECK(*probe.MID == 3);
-    CHECK(*probe.A == 10460.);
-    CHECK(*probe.I1 == 93690000.);
-    CHECK(*probe.I2 == 1694000.);
-    CHECK(*probe.J == 1316000.);
-    CHECK(*probe.NSM == 0.);
-    CHECK(*probe.C1 == 0.);
-    CHECK(*probe.C2 == 0.);
-    CHECK(*probe.D1 == 6.856e6);
-    CHECK(*probe.D2 == 0.);
-    CHECK(*probe.E1 == 0.);
-    CHECK(*probe.E2 == 0.);
-    CHECK(*probe.F1 == 0.);
-    CHECK(*probe.F2 == 0.);
+    CHECK((long)probe.PID == 4000001);
+    CHECK((long)probe.MID == 3);
+    CHECK((double)probe.A == 10460.);
+    CHECK((double)probe.I1 == 93690000.);
+    CHECK((double)probe.I2 == 1694000.);
+    CHECK((double)probe.J == 1316000.);
+    CHECK((double)probe.NSM == 0.);
+    CHECK((double)probe.C1 == 0.);
+    CHECK((double)probe.C2 == 0.);
+    CHECK((double)probe.D1 == 6.856e6);
+    CHECK((double)probe.D2 == 0.);
+    CHECK((double)probe.E1 == 0.);
+    CHECK((double)probe.E2 == 0.);
+    CHECK((double)probe.F1 == 0.);
+    CHECK((double)probe.F2 == 0.);
     CHECK_FALSE(probe.K1);
     CHECK_FALSE(probe.K2);
-    CHECK(*probe.I12 == 0.);
+    CHECK((double)probe.I12 == 0.);
   }
 
   SECTION("Small Field Format 2") {
@@ -110,24 +110,24 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
     ::std::deque<string> lines = card::card_split(data);
     pbar probe(lines);
 
-    CHECK(*probe.PID == 29);
-    CHECK(*probe.MID == 6);
-    CHECK(*probe.A == 2.9);
-    CHECK(*probe.I1 == 0.);
-    CHECK(*probe.I2 == 5.97);
-    CHECK(*probe.J == 0.);
-    CHECK(*probe.NSM == 0.);
-    CHECK(*probe.C1 == 0.);
-    CHECK(*probe.C2 == 0.);
-    CHECK(*probe.D1 == 2.);
-    CHECK(*probe.D2 == 4.);
-    CHECK(*probe.E1 == 0.);
-    CHECK(*probe.E2 == 0.);
-    CHECK(*probe.F1 == 0.);
-    CHECK(*probe.F2 == 0.);
+    CHECK((long)probe.PID == 29);
+    CHECK((long)probe.MID == 6);
+    CHECK((double)probe.A == 2.9);
+    CHECK((double)probe.I1 == 0.);
+    CHECK((double)probe.I2 == 5.97);
+    CHECK((double)probe.J == 0.);
+    CHECK((double)probe.NSM == 0.);
+    CHECK((double)probe.C1 == 0.);
+    CHECK((double)probe.C2 == 0.);
+    CHECK((double)probe.D1 == 2.);
+    CHECK((double)probe.D2 == 4.);
+    CHECK((double)probe.E1 == 0.);
+    CHECK((double)probe.E2 == 0.);
+    CHECK((double)probe.F1 == 0.);
+    CHECK((double)probe.F2 == 0.);
     CHECK_FALSE(probe.K1);
     CHECK_FALSE(probe.K2);
-    CHECK(*probe.I12 == 0.);
+    CHECK((double)probe.I12 == 0.);
   }
 }
 

@@ -1,17 +1,19 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file fem/file.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Processing Sesam FEM files.
 
-// Purpose: Processing Sesam FEM files.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-
+   Detailed description
+*/
 // ID: $Id$
 
 #if _MSC_VER >= 1000
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20151111_FILE
-#define _BERHOL20151111_FILE
+#if !defined _FEM_FILE_H_
+#define _FEM_FILE_H_
 
 #include <deque>
 #include <set>
@@ -24,57 +26,56 @@
 #include "extfem_misc.h"
 
 namespace dnvgl {
-  namespace extfem {
-    namespace fem {
-      namespace input {
+   namespace extfem {
+      namespace fem {
+         namespace input {
 
-        struct line_reader : ::std::ctype<char> {
+            struct line_reader : ::std::ctype<char> {
 
-          line_reader() : ctype(make_table()) { }
+               line_reader() : ctype(make_table()) { }
 
-        private:
+            private:
 
-          static mask* make_table() {
-            const mask* classic = classic_table();
-            static ::std::vector<mask> v(classic, classic + table_size);
-            v[' '] &= ~space;
-            return &v[0];
-          }
-        };
+               static mask* make_table() {
+                  const mask* classic = classic_table();
+                  static ::std::vector<mask> v(classic, classic + table_size);
+                  v[' '] &= ~space;
+                  return &v[0];
+               }
+            };
 
-        class fem_file {
+            class fem_file {
 
-        private:
+            private:
 
-          static const ::std::set<char> cont_chars;
-          ::std::string cur_line;
-          ::std::istream &data;
+               static const ::std::set<char> cont_chars;
+               ::std::string cur_line;
+               ::std::istream &data;
 
-        public:
+            public:
 
-          ::std::string last_comment;
+               ::std::string last_comment;
 
-          bool eof;
+               bool eof;
 
-          DllExport fem_file(::std::istream&);
+               DllExport fem_file(::std::istream&);
 
-          DllExport ::std::deque<::std::string>& get();
+               DllExport ::std::deque<::std::string>& get();
 
-          /// actual byte position (hopefully no fem > 2Gybte will be
-          /// readin ...)
-          DllExport ::std::streampos size(void);
+               /// actual byte position (hopefully no fem > 2Gybte will be
+               /// readin ...)
+               DllExport ::std::streampos size(void);
 
-          /// actual byte position (hopefully no fem > 2Gybte will be
-          /// readin ...)
-          DllExport ::std::streampos pos(void);
-        };
+               /// actual byte position (hopefully no fem > 2Gybte will be
+               /// readin ...)
+               DllExport ::std::streampos pos(void);
+            };
+         }
       }
-    }
-  }
+   }
 }
 
-
-#endif // _BERHOL20151111_FILE
+#endif // _FEM_FILE_H_
 
 // Local Variables:
 // mode: c++

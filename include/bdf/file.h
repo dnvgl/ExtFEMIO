@@ -1,8 +1,11 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/file.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Processing BDF files.
 
-/// Processing BDF files.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID: $Id$
 
@@ -10,8 +13,8 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20150703_BDF_FILE
-#define _BERHOL20150703_BDF_FILE
+#if !defined _BDF_FILE_H_
+#define _BDF_FILE_H_
 
 #include <deque>
 #include <set>
@@ -24,58 +27,58 @@
 #include "extfem_misc.h"
 
 namespace dnvgl {
-  namespace extfem {
-    namespace bdf {
-      namespace input {
+   namespace extfem {
+      namespace bdf {
+         namespace input {
 
-        struct line_reader : ::std::ctype<char> {
+            struct line_reader : ::std::ctype<char> {
 
-          line_reader() : ctype(make_table()) { }
+               line_reader() : ctype(make_table()) { }
 
-        private:
+            private:
 
-          static mask* make_table() {
-            const mask* classic = classic_table();
-            static ::std::vector<mask> v(classic, classic + table_size);
-            v[' '] &= ~space;
-            return &v[0];
-          }
-        };
+               static mask* make_table() {
+                  const mask* classic = classic_table();
+                  static ::std::vector<mask> v(classic, classic + table_size);
+                  v[' '] &= ~space;
+                  return &v[0];
+               }
+            };
 
-        class bdf_file {
+            class bdf_file {
 
-        private:
+            private:
 
-          static const ::std::set<char> cont_chars;
-          ::std::string cur_line;
-          ::std::istream &data;
+               static const ::std::set<char> cont_chars;
+               ::std::string cur_line;
+               ::std::istream &data;
 
-        public:
+            public:
 
-          ::std::string last_comment;
+               ::std::string last_comment;
 
-          bool eof;
+               bool eof;
 
-          DllExport bdf_file(::std::istream&);
+               DllExport bdf_file(::std::istream&);
 
-          DllExport ::std::deque<::std::string>& get();
+               DllExport void get(std::deque<std::string>& oContent);
 
-          /** actual byte position (hopefully no bdf > 2Gybte will be
-              readin....)
-          */
-          DllExport ::std::streampos size(void);
+               /** actual byte position (hopefully no bdf > 2Gybte will be
+                   readin....)
+               */
+               DllExport ::std::streampos size(void);
 
-          /** actual byte position (hopefully no bdf > 2Gybte will be
-              readin....)
-          */
-          DllExport ::std::streampos pos(void);
-        };
+               /** actual byte position (hopefully no bdf > 2Gybte will be
+                   readin....)
+               */
+               DllExport ::std::streampos pos(void);
+            };
+         }
       }
-    }
-  }
+   }
 }
 
-#endif // _BERHOL20150703_BDF_FILE
+#endif // _BDF_FILE_H_
 
 // Local Variables:
 // mode: c++

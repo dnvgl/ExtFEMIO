@@ -1,18 +1,20 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/bdf_cards_grid.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Definitions for Nastran BDF GRID cards.
 
-// Purpose: Definitions for Nastran BDF GRID cards.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-
+   Detailed description
+*/
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <deque>
@@ -22,85 +24,83 @@ namespace {
 #include "bdf/cards.h"
 #include "bdf/types.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
-const entry_type<long> grid::_ID(
-  "ID",
-  bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
-            make_unique<long>(100000000).get()));
-const entry_type<long> grid::_CP(
-  "CP", bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
-                               nullptr,
-                               make_unique<long>(-1).get()));
-const entry_type<double> grid::_X1(
-  "X1",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
-const entry_type<double> grid::_X2(
-  "X2",
-  bdf::type_bounds::bound<double>(nullptr, nullptr,
-              make_unique<double>(0.).get()));
-const entry_type<double> grid::_X3(
-  "X3",
-  bdf::type_bounds::bound<double>(nullptr, nullptr,
-              make_unique<double>(0.).get()));
-const entry_type<long> grid::_CD(
-  "CD",
-  bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
-            make_unique<long>(-2).get()));
-const entry_type<std::deque<int>> grid::_PS("PS");
-const entry_type<long> grid::_SEID(
-  "SEID",
-  bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
-            make_unique<long>(0).get()));
+const entry_type<long> grid::form_ID(
+   "ID",
+   bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
+                                 make_unique<long>(100000000).get()));
+const entry_type<long> grid::form_CP(
+   "CP", bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
+                                       nullptr,
+                                       make_unique<long>(-1).get()));
+const entry_type<double> grid::form_X1(
+   "X1",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+const entry_type<double> grid::form_X2(
+   "X2",
+   bdf::type_bounds::bound<double>(nullptr, nullptr,
+                                   make_unique<double>(0.).get()));
+const entry_type<double> grid::form_X3(
+   "X3",
+   bdf::type_bounds::bound<double>(nullptr, nullptr,
+                                   make_unique<double>(0.).get()));
+const entry_type<long> grid::form_CD(
+   "CD",
+   bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
+                                 make_unique<long>(-2).get()));
+const entry_type<std::deque<int>> grid::form_PS("PS");
+const entry_type<long> grid::form_SEID(
+   "SEID",
+   bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
+                                 make_unique<long>(0).get()));
 
 
 grid::grid(const deque<std::string> &inp) : card(inp) {
 
-  auto pos = inp.rbegin();
+   auto pos = inp.rbegin();
 
 
-  SEID = nullptr;
-  PS = nullptr;
-  CD = nullptr;
+   form_SEID.set_value(SEID, "");
+   form_PS.set_value(PS, "");
+   form_CD.set_value(CD, "");
 
-  switch (inp.size()-1) {
-  case 8:
-    SEID = bdf::types::get_val<long>(_SEID, *(pos++));
-  case 7:
-    PS = bdf::types::get_val<std::deque<int> >(_PS, *(pos++));
-  case 6:
-    CD = bdf::types::get_val<long>(_CD, *(pos++));
-  case 5:
-    X3 = bdf::types::get_val<double>(_X3, *(pos++));
-    X2 = bdf::types::get_val<double>(_X2, *(pos++));
-    X1 = bdf::types::get_val<double>(_X1, *(pos++));
-    CP = bdf::types::get_val<long>(_CP, *(pos++));
-    ID = bdf::types::get_val<long>(_ID, *pos);
-    break;
-  default:
-    throw errors::parse_error("GRID", "Illegal number of entries.");
-  }
-
-  if (!SEID) SEID = bdf::types::get_val<long>(_SEID, "");
+   switch (inp.size()-1) {
+   case 8:
+      form_SEID.set_value(SEID, *(pos++));
+   case 7:
+      form_PS.set_value(PS, *(pos++));
+   case 6:
+      form_CD.set_value(CD, *(pos++));
+   case 5:
+      form_X3.set_value(X3, *(pos++));
+      form_X2.set_value(X2, *(pos++));
+      form_X1.set_value(X1, *(pos++));
+      form_CP.set_value(CP, *(pos++));
+      form_ID.set_value(ID, *pos);
+      break;
+   default:
+      throw errors::parse_error("GRID", "Illegal number of entries.");
+   }
 }
 
-grid::grid(long &_ID, long &_CP, double &_X1, double &_X2, double &_X3) : card() {
-  ID = make_unique<long>(_ID);
-  CP = make_unique<long>(_CP);
-  X1 = make_unique<double>(_X1);
-  X2 = make_unique<double>(_X2);
-  X3 = make_unique<double>(_X3);
-  CD = nullptr;
-  PS = nullptr;
-  SEID = nullptr;
-}
+grid::grid(long &ID, long &CP, double &X1, double &X2, double &X3) :
+   card(),
+   ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
+   CD(), PS(), SEID() {}
 
 const std::ostream& grid::operator << (std::ostream& os) const {
-  throw errors::error("can't write GRID.");
-  return os;
+   throw errors::error("can't write GRID.");
+   return os;
 }
 
 // Local Variables:
@@ -109,5 +109,5 @@ const std::ostream& grid::operator << (std::ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

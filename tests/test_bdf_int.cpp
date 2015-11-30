@@ -41,42 +41,42 @@ TEST_CASE("BDF int types parsing.", "[bdf_types]" ) {
 
   SECTION("'   2    '") {
     entry_type<long> obj("dummy", type_bounds::bound<long>(new long(1)));
-    CHECK(*obj("   2    ") == 2);
+    CHECK(obj("   2    ").value == 2);
   }
 
   SECTION("'       2'") {
     entry_type<long> obj("dummy", type_bounds::bound<long>(new long(0)));
-    CHECK(*obj("       2") == 2);
+    CHECK(obj("       2").value == 2);
   }
 
   SECTION("'2       '") {
     entry_type<long> obj("dummy", type_bounds::bound<long>(new long(0), NULL, new long(0)));
-    CHECK(*obj("2       ") == 2);
+    CHECK(obj("2       ").value == 2);
   }
 
   SECTION("'    -1  '") {
     entry_type<long> obj("dummy", type_bounds::bound<long>(new long(-1), NULL, new long(0)));
-    CHECK(*obj("    -1  ") == -1);
+    CHECK(obj("    -1  ").value == -1);
   }
 
   SECTION("default 1") {
     entry_type<long> obj("dummy", type_bounds::bound<long>(new long(-1), NULL, new long(0)));
-    CHECK(*obj("        ") == 0);
+    CHECK(obj("        ").value == 0);
   }
 
   SECTION("default 2") {
     entry_type<long> obj("dummy", type_bounds::bound<long>(new long(-1), NULL, new long(100)));
-    CHECK(*obj("        ") == 100);
+    CHECK(obj("        ").value == 100);
   }
 
   SECTION("123") {
     entry_type<long> obj("dummy");
-    CHECK(*obj("123") == 123);
+    CHECK(obj("123").value == 123);
   }
 
   SECTION("123.") {
     entry_type<long> obj("dummy");
-    CHECK_THROWS(*obj("123."));
+    CHECK_THROWS(obj("123."));
   }
 }
 
@@ -84,7 +84,7 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
 
   entry_type<long> obj("dummy");
 
-  std::unique_ptr<long> lval = std::make_unique<long>(1);
+  long lval(1);
 
   SECTION("SHORT") {
       bdf::types::base::out_form = bdf::types::SHORT;
@@ -94,14 +94,14 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
 
   SECTION("SHORT (too long)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    lval = std::make_unique<long>(123456789);
+    lval = 123456789;
     CHECK_THROWS(obj.format(lval));
   }
 
   SECTION("SHORT (nullptr)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    CHECK(obj.format((std::unique_ptr<long>)nullptr).size() == 8);
-    CHECK(obj.format((std::unique_ptr<long>)nullptr) == "        ");
+    CHECK(obj.format(nullptr).size() == 8);
+    CHECK(obj.format(nullptr) == "        ");
   }
 
   SECTION("SHORT (void)") {

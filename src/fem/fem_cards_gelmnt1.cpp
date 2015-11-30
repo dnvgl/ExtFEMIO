@@ -1,18 +1,21 @@
 /**
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2015 by DNV GL SE
-  \brief Processing Sesam FEM GELMNT1 cards.
+   \file fem/fem_cards_gelmnt1.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Processing Sesam FEM GELMNT1 cards.
 
-  Detailed description
+   Detailed description
 */
+
+#include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <memory>
@@ -29,78 +32,78 @@ using namespace fem;
 using namespace types;
 
 namespace dnvgl {
-  namespace extfem {
-    namespace fem {
-      namespace cards {
+   namespace extfem {
+      namespace fem {
+         namespace cards {
 
-        const fem::types::card gelmnt1::head("GELMNT1");
+            const fem::types::card gelmnt1::head("GELMNT1");
 
-        const entry_type<long> gelmnt1::_ELNOX("ELNOX");
-        const entry_type<long> gelmnt1::_ELNO("ELNO");
-        const entry_type<long> gelmnt1::_ELTYP("ELTYP");
-        const entry_type<long> gelmnt1::_ELTYAD("ELTYAD");
-        const entry_type<long> gelmnt1::_NODIN("NODIN");
+            const entry_type<long> gelmnt1::_ELNOX("ELNOX");
+            const entry_type<long> gelmnt1::_ELNO("ELNO");
+            const entry_type<long> gelmnt1::_ELTYP("ELTYP");
+            const entry_type<long> gelmnt1::_ELTYAD("ELTYAD");
+            const entry_type<long> gelmnt1::_NODIN("NODIN");
 
-        gelmnt1::gelmnt1(const ::std::deque<::std::string> &inp) :
-          card(inp) {
+            gelmnt1::gelmnt1(const ::std::deque<::std::string> &inp) :
+               card(inp) {
 
-          auto pos = inp.begin();
+               auto pos = inp.begin();
 
-          long tmp;
+               long tmp;
 
-          ++pos;
-          ELNOX = _ELNOX(*(pos++));
-          ELNO = _ELNO(*(pos++));
-          ELTYP = _ELTYP(*(pos++));
-          ELTYAD = _ELTYAD(*(pos++));
-          while (pos != inp.end()) {
-            tmp = _NODIN(*(pos++));
-            if (tmp == 0) break;
-            NODIN.push_back(tmp);
-          }
-        }
-
-        gelmnt1::gelmnt1(
-            const long *ELNOX, const long *ELNO,
-            const long *ELTYP, const long *ELTYAD,
-            const ::std::deque<long> *NODIN) :
-          card(),
-          ELNOX(*ELNOX), ELNO(*ELNO), ELTYP(*ELTYP), ELTYAD(*ELTYAD),
-          NODIN(*NODIN) {}
-
-        const ::dnvgl::extfem::fem::cards::types
-        gelmnt1::card_type(void) const { return GELMNT1; }
-
-        ::std::ostream&
-        operator<< (::std::ostream &os, const gelmnt1 &card) {
-
-          os << gelmnt1::head.format()
-             << card._ELNOX.format(card.ELNOX)
-             << card._ELNO.format(card.ELNO)
-             << card._ELTYP.format(card.ELTYP)
-             << card._ELTYAD.format(card.ELTYAD);
-          size_t i = 5;
-          for (auto p : card.NODIN) {
-            if (i++ >= 4) {
-              i = 1;
-              os << std::endl << ::dnvgl::extfem::fem::types::card().format();
+               ++pos;
+               ELNOX = _ELNOX(*(pos++));
+               ELNO = _ELNO(*(pos++));
+               ELTYP = _ELTYP(*(pos++));
+               ELTYAD = _ELTYAD(*(pos++));
+               while (pos != inp.end()) {
+                  tmp = _NODIN(*(pos++));
+                  if (tmp == 0) break;
+                  NODIN.push_back(tmp);
+               }
             }
-            os << card._NODIN.format(p);
-          }
-          while (i++ < 4)
-            os << card._NODIN.format(0);
-          os << std::endl;
-          return os;
-        }
 
-        const ::std::ostream&
-        gelmnt1::operator<< (::std::ostream& os) const {
-          os << this;
-          return os;
-        }
+            gelmnt1::gelmnt1(
+               const long *ELNOX, const long *ELNO,
+               const long *ELTYP, const long *ELTYAD,
+               const ::std::deque<long> *NODIN) :
+               card(),
+               ELNOX(*ELNOX), ELNO(*ELNO), ELTYP(*ELTYP), ELTYAD(*ELTYAD),
+               NODIN(*NODIN) {}
+
+            const ::dnvgl::extfem::fem::cards::types
+            gelmnt1::card_type(void) const { return GELMNT1; }
+
+            ::std::ostream&
+            operator<< (::std::ostream &os, const gelmnt1 &card) {
+
+               os << gelmnt1::head.format()
+                  << card._ELNOX.format(card.ELNOX)
+                  << card._ELNO.format(card.ELNO)
+                  << card._ELTYP.format(card.ELTYP)
+                  << card._ELTYAD.format(card.ELTYAD);
+               size_t i = 5;
+               for (auto p : card.NODIN) {
+                  if (i++ >= 4) {
+                     i = 1;
+                     os << std::endl << ::dnvgl::extfem::fem::types::card().format();
+                  }
+                  os << card._NODIN.format(p);
+               }
+               while (i++ < 4)
+                  os << card._NODIN.format(0);
+               os << std::endl;
+               return os;
+            }
+
+            const ::std::ostream&
+            gelmnt1::operator<< (::std::ostream& os) const {
+               os << this;
+               return os;
+            }
+         }
       }
-    }
-  }
+   }
 }
 
 // Local Variables:

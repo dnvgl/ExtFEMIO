@@ -1,18 +1,20 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/bdf_cards_beam_prop.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Common definitions for Nastran BDF PBEAM and PBEAML cards.
 
-// Purpose: Common definitions for Nastran BDF PBEAM and PBEAML cards.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-
+   Detailed description
+*/
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
@@ -20,17 +22,23 @@ namespace {
 #include <cstdlib>
 #include <memory>
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace std;
 using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
-const entry_type<long> beam_base::_PID(
-  "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<long> beam_base::_MID(
-  "MID",
-  bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
-                                nullptr, true));
+const entry_type<long> beam_base::form_PID(
+   "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<long> beam_base::form_MID(
+   "MID",
+   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
+                                 nullptr, true));
 
 // Local Variables:
 // mode: c++
@@ -38,5 +46,5 @@ const entry_type<long> beam_base::_MID(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

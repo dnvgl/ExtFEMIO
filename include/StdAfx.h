@@ -6,6 +6,17 @@
 
 #pragma once
 
+#include "NDStingrayVersions.h"
+#if  _StingrayVersion >= 1000
+   #define NO_TARGETING
+#endif
+#include "CRT4VS2005.h"
+#undef NO_TARGETING
+
+#define VC_EXTRALEAN    // Exclude rarely-used stuff from Windows headers
+
+#include <afx.h>
+
 #include <deque>
 #include <string>
 #include <set>

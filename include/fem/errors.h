@@ -1,115 +1,115 @@
-/* Copyright © 2015 by DNV GL SE */
+/**
+   \file fem/errors.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Define errors for handling FEM files.
 
-/*
-  Purpose: Define errors for handling FEM files.
+   Detailed description
+*/
 
-  Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
- */
+// ID: $Id$
 
-/* ID: $Id$
- */
-
-#if !defined _BERHOL20151104_ERRORS
-#define _BERHOL20151104_ERRORS
+#if !defined _FEM_ERRORS_H_
+#define _FEM_ERRORS_H_
 
 #include "extfem_misc.h"
 
 namespace dnvgl {
-  namespace extfem {
-    namespace fem {
-      namespace errors {
+   namespace extfem {
+      namespace fem {
+         namespace errors {
 
-        class error {
+            class error {
 
-        protected:
+            protected:
 
-          ::std::string msg;
-          ::std::string name;
-          ::std::string err_class;
+               ::std::string msg;
+               ::std::string name;
+               ::std::string err_class;
 
-          ::std::string get_msg(void) const;
+               ::std::string get_msg(void) const;
 
-        public:
+            public:
 
-          DllExport error(
-            const ::std::string &msg,
-            const ::std::string &err_class="fem_error");
+               DllExport error(
+                  const ::std::string &msg,
+                  const ::std::string &err_class="fem_error");
 
-          DllExport error(
-            const ::std::string&, const ::std::string &msg,
-            const ::std::string &err_class="fem_error");
+               DllExport error(
+                  const ::std::string&, const ::std::string &msg,
+                  const ::std::string &err_class="fem_error");
 
-          DllExport ::std::string operator() (void) const;
-        };
+               DllExport ::std::string operator() (void) const;
+            };
 
-        class types_error : public error {
+            class types_error : public error {
 
-        public:
+            public:
 
-          types_error(const ::std::string &msg);
-        };
+               types_error(const ::std::string &msg);
+            };
 
-        class float_error : public error {
+            class float_error : public error {
 
-        public:
+            public:
 
-          float_error(const ::std::string&, const ::std::string&);
-        };
+               float_error(const ::std::string&, const ::std::string&);
+            };
 
-        class int_error : public error {
+            class int_error : public error {
 
-        public:
+            public:
 
-          int_error(const ::std::string&, const ::std::string&);
-        };
+               int_error(const ::std::string&, const ::std::string&);
+            };
 
-        class output_error : public error {
+            class output_error : public error {
 
-        public:
+            public:
 
-          output_error(const ::std::string&, const ::std::string&);
-        };
+               output_error(const ::std::string&, const ::std::string&);
+            };
 
-        class list_error : public error {
+            class list_error : public error {
 
-        public:
+            public:
 
-          list_error(const ::std::string&, const ::std::string &);
-        };
+               list_error(const ::std::string&, const ::std::string &);
+            };
 
-        class str_error : public error {
+            class str_error : public error {
 
-        public:
+            public:
 
-          str_error(const ::std::string&, const ::std::string &);
-        };
+               str_error(const ::std::string&, const ::std::string &);
+            };
 
-        class string_error : public error {
+            class string_error : public error {
 
-        public:
+            public:
 
-          string_error(const ::std::string&, const ::std::string &);
-        };
+               string_error(const ::std::string&, const ::std::string &);
+            };
 
-        class parse_error : public error {
+            class parse_error : public error {
 
-        public:
+            public:
 
-          parse_error(const ::std::string&, const ::std::string &);
-        };
+               parse_error(const ::std::string&, const ::std::string &);
+            };
 
-        class usage_error : public error {
+            class usage_error : public error {
 
-        public:
+            public:
 
-          usage_error(const ::std::string&, const ::std::string &);
-        };
+               usage_error(const ::std::string&, const ::std::string &);
+            };
+         }
       }
-    }
-  }
+   }
 }
 
-#endif // _BERHOL20151104_ERRORS
+#endif // _FEM_ERRORS_H_
 
 /*
   Local Variables:
@@ -120,4 +120,4 @@ namespace dnvgl {
   compile-command: "make -C ../.. check -j8"
   coding: utf-8
   End:
- */
+*/

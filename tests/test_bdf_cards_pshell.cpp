@@ -49,12 +49,12 @@ TEST_CASE("BDF PSHELL definitions.",
     ::std::deque<string> lines = card::card_split(data);
     pshell probe(lines);
 
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.MID1 == 4);
-    CHECK(*probe.T == 23.);
-    CHECK(*probe.MID2 == 4);
-    CHECK(*probe.x12I_T__3 == 1.);
-    CHECK(*probe.MID3 == 4);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.MID1 == 4);
+    CHECK((double)probe.T == 23.);
+    CHECK((long)probe.MID2 == 4);
+    CHECK((double)probe.x12I_T__3 == 1.);
+    CHECK((long)probe.MID3 == 4);
   }
 
   SECTION("Large Field Format") {
@@ -69,12 +69,12 @@ TEST_CASE("BDF PSHELL definitions.",
     ::std::deque<string> lines = card::card_split(data);
     pshell probe(lines);
 
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.MID1 == 4);
-    CHECK(*probe.T == 23.);
-    CHECK(*probe.MID2 == 4);
-    CHECK(*probe.x12I_T__3 == 1.);
-    CHECK(*probe.MID3 == 4);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.MID1 == 4);
+    CHECK((double)probe.T == 23.);
+    CHECK((long)probe.MID2 == 4);
+    CHECK((double)probe.x12I_T__3 == 1.);
+    CHECK((long)probe.MID3 == 4);
   }
 
   SECTION("Comma Field Format") {
@@ -84,12 +84,12 @@ TEST_CASE("BDF PSHELL definitions.",
     ::std::deque<string> lines = card::card_split(data);
     pshell probe(lines);
 
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.MID1 == 4);
-    CHECK(*probe.T == 23.);
-    CHECK(*probe.MID2 == 4);
-    CHECK(*probe.x12I_T__3 == 1.);
-    CHECK(*probe.MID3 == 4);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.MID1 == 4);
+    CHECK((double)probe.T == 23.);
+    CHECK((long)probe.MID2 == 4);
+    CHECK((double)probe.x12I_T__3 == 1.);
+    CHECK((long)probe.MID3 == 4);
   }
 
 }

@@ -1,15 +1,15 @@
-/*!
-   @file bdf/type_bounds.h
-   @author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   @copyright © 2015 by DNV GL SE
+/**
+   \file bdf/type_bounds.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright © 2015 by DNV GL SE
 
-   @brief Define boundaries for BDF types.
+   \brief Define boundaries for BDF types.
 */
 
 // ID: $Id$
 
-#if !defined _BERHOL20150826_BDF_TYPE_BOUNDS
-#define _BERHOL20150826_BDF_TYPE_BOUNDS
+#if !defined _BDF_TYPE_BOUNDS_H_
+#define _BDF_TYPE_BOUNDS_H_
 
 #include "bdf/errors.h"
 
@@ -53,22 +53,22 @@ namespace dnvgl {
           };
         };
 
-        template <class T> class bound : public base {
+        template <class _Ty> class bound : public base {
 
         protected:
 
-          T min_val;
-          T max_val;
-          T default_val;
+          _Ty min_val;
+          _Ty max_val;
+          _Ty default_val;
           bool allow_empty;
 
         public:
 
           ~bound() {};
 
-          bound(const T *_min=nullptr,
-                const T *_max=nullptr,
-                const T *_default=nullptr,
+          bound(const _Ty *_min=nullptr,
+                const _Ty *_max=nullptr,
+                const _Ty *_default=nullptr,
                 const bool &allow_empty=false) :
             allow_empty(allow_empty) {
             if (_min)
@@ -79,30 +79,30 @@ namespace dnvgl {
               set_default(*_default);
           };
 
-          void set_min(const T &inp) {
+          void set_min(const _Ty &inp) {
             this->min_val = inp;
             got_min();
           };
 
-          void set_max(const T &inp) {
+          void set_max(const _Ty &inp) {
             this->max_val = inp;
             got_max();
           };
 
-          void set_default(const T &inp) {
+          void set_default(const _Ty &inp) {
             this->default_val = inp;
             got_default();
           };
 
-          T get_default(void) const {
+          _Ty get_default(void) const {
             if (!has_default())
               throw errors::types_error("** ERROR **: No default value avaliable.");
             return this->default_val;
           };
 
-          bool in_bounds(const T *val) const {
-            return ((!has_min() || *val >= this->min_val) &&
-                    (!has_max() || *val <= this->max_val));
+          bool in_bounds(const _Ty &val) const {
+            return ((!has_min() || val >= this->min_val) &&
+                    (!has_max() || val <= this->max_val));
           };
 
           bool does_allow_empty(void) const {
@@ -151,7 +151,7 @@ namespace dnvgl {
   }
 };
 
-#endif // _BERHOL20150826_BDF_TYPE_BOUNDS
+#endif // _BDF_TYPE_BOUNDS_H_
 
 // Local Variables:
 // mode: c++

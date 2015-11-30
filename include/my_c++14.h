@@ -1,13 +1,15 @@
-// Copyright © 2015 by DNV GL SE
+/**
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2015 by DNV GL SE
+  \brief Backporting of some C++-14 functionality.
 
-// Purpose: Backporting of some C++-14 functionality.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Detailed description
+*/
 
 // ID: $Id$
 
-#if !defined _BERHOL20150715_MY_CPP14
-#define _BERHOL20150715_MY_CPP14
+#if !defined _MY_CPP14_H_
+#define _MY_CPP14_H_
 
 #include <memory> // brings in TEMPLATE macros.
 
@@ -15,9 +17,9 @@ namespace std {
 
 #if __GNUC__ && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 9))
 
-  template<typename T, typename... Args>
-  ::std::unique_ptr<T> make_unique(Args&&... args) {
-    return ::std::unique_ptr<T>(new T(::std::forward<Args>(args)...));
+  template<typename _Ty, typename... Args>
+  ::std::unique_ptr<_Ty> make_unique(Args&&... args) {
+    return ::std::unique_ptr<_Ty>(new _Ty(::std::forward<Args>(args)...));
   }
 
 #endif
@@ -28,10 +30,10 @@ namespace std {
   double round(double number);
 
 #define MAKE_UNIQUE(TEMPLATE_LIST, PADDING_LIST, LIST, COMMA, X1, X2, X3, X4) \
-  template<class T COMMA LIST(_CLASS_TYPE)>                             \
-  inline ::std::unique_ptr<T> make_unique(LIST(_TYPE_REFREF_ARG))       \
+  template<class _Ty COMMA LIST(_CLASS_TYPE)>                             \
+  inline ::std::unique_ptr<_Ty> make_unique(LIST(_TYPE_REFREF_ARG))       \
   {                                                                     \
-    return ::std::unique_ptr<T>(new T(LIST(_FORWARD_ARG)));             \
+    return ::std::unique_ptr<_Ty>(new _Ty(LIST(_FORWARD_ARG)));             \
   }
   _VARIADIC_EXPAND_0X(MAKE_UNIQUE, , , , )
 
@@ -40,7 +42,7 @@ namespace std {
 #endif
 }
 
-#endif // _BERHOL20150715_MY_CPP14
+#endif // _MY_CPP14_H_
 
 // Local Variables:
 // mode: c++

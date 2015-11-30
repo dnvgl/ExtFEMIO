@@ -51,14 +51,14 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
-    CHECK(*probe.PID == 104018);
-    CHECK(*probe.MID == 4);
-    CHECK(*probe.GROUP == "MSCBML0");
-    CHECK(*probe.TYPE == "BAR");
+    CHECK((long)probe.PID == 104018);
+    CHECK((long)probe.MID == 4);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "BAR");
     CHECK(probe.DIM.size() == 2);
-    CHECK(*probe.DIM[0] == 25.);
-    CHECK(*probe.DIM[1] == 600.);
-    CHECK(*probe.NSM == 0.);
+    CHECK(probe.DIM[0] == 25.);
+    CHECK(probe.DIM[1] == 600.);
+    CHECK((double)probe.NSM == 0.);
   }
 
 
@@ -74,14 +74,14 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
-    CHECK(*probe.PID == 134);
-    CHECK(*probe.MID == 8);
-    CHECK(*probe.GROUP == "MSCBML0");
-    CHECK(*probe.TYPE == "BAR");
+    CHECK((long)probe.PID == 134);
+    CHECK((long)probe.MID == 8);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "BAR");
     CHECK(probe.DIM.size() == 2);
-    CHECK(*probe.DIM[0] == 55.);
-    CHECK(*probe.DIM[1] == 500.);
-    CHECK(*probe.NSM == 0.);
+    CHECK(probe.DIM[0] == 55.);
+    CHECK(probe.DIM[1] == 500.);
+    CHECK((double)probe.NSM == 0.);
   }
 
   SECTION("Small Field Format (L)") {
@@ -95,16 +95,16 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
-    CHECK(*probe.PID == 104010);
-    CHECK(*probe.MID == 4);
-    CHECK(*probe.GROUP == "MSCBML0");
-    CHECK(*probe.TYPE == "L");
+    CHECK((long)probe.PID == 104010);
+    CHECK((long)probe.MID == 4);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "L");
     CHECK(probe.DIM.size() == 4);
-    CHECK(*probe.DIM[0] == 63.);
-    CHECK(*probe.DIM[1] == 340.);
-    CHECK(*probe.DIM[2] == 35.);
-    CHECK(*probe.DIM[3] == 14.);
-    CHECK(*probe.NSM == 0.);
+    CHECK(probe.DIM[0] == 63.);
+    CHECK(probe.DIM[1] == 340.);
+    CHECK((double)probe.DIM[2] == 35.);
+    CHECK((double)probe.DIM[3] == 14.);
+    CHECK((double)probe.NSM == 0.);
   }
 
   SECTION("Small Field Format (T)") {
@@ -118,16 +118,16 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
-    CHECK(*probe.PID == 101031);
-    CHECK(*probe.MID == 1);
-    CHECK(*probe.GROUP == "MSCBML0");
-    CHECK(*probe.TYPE == "T");
+    CHECK((long)probe.PID == 101031);
+    CHECK((long)probe.MID == 1);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "T");
     CHECK(probe.DIM.size() == 4);
-    CHECK(*probe.DIM[0] == 150.);
-    CHECK(*probe.DIM[1] == 400.);
-    CHECK(*probe.DIM[2] == 12.);
-    CHECK(*probe.DIM[3] == 10.);
-    CHECK(*probe.NSM == 0.);
+    CHECK(probe.DIM[0] == 150.);
+    CHECK(probe.DIM[1] == 400.);
+    CHECK(probe.DIM[2] == 12.);
+    CHECK(probe.DIM[3] == 10.);
+    CHECK((double)probe.NSM == 0.);
   }
 
   SECTION("Small Field Format (I)") {
@@ -142,18 +142,18 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
-    CHECK(*probe.PID == 104018);
-    CHECK(*probe.MID == 4);
-    CHECK(*probe.GROUP == "MSCBML0");
-    CHECK(*probe.TYPE == "I");
+    CHECK((long)probe.PID == 104018);
+    CHECK((long)probe.MID == 4);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "I");
     CHECK(probe.DIM.size() == 6);
-    CHECK(*probe.DIM[0] == 600.);
-    CHECK(*probe.DIM[1] == 200.);
-    CHECK(*probe.DIM[2] == 200.);
-    CHECK(*probe.DIM[3] == 12.);
-    CHECK(*probe.DIM[4] == 10.);
-    CHECK(*probe.DIM[5] == 10.);
-    CHECK(*probe.NSM == 0.);
+    CHECK(probe.DIM[0] == 600.);
+    CHECK(probe.DIM[1] == 200.);
+    CHECK(probe.DIM[2] == 200.);
+    CHECK(probe.DIM[3] == 12.);
+    CHECK(probe.DIM[4] == 10.);
+    CHECK(probe.DIM[5] == 10.);
+    CHECK((double)probe.NSM == 0.);
   }
 
   SECTION("Small Field Format (I) (alt)") {
@@ -168,18 +168,18 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
-    CHECK(*probe.PID == 39);
-    CHECK(*probe.MID == 6);
-    CHECK(*probe.GROUP == "MSCBML0");
-    CHECK(*probe.TYPE == "I");
+    CHECK((long)probe.PID == 39);
+    CHECK((long)probe.MID == 6);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "I");
     CHECK(probe.DIM.size() == 6);
-    CHECK(*probe.DIM[0] == 14.);
-    CHECK(*probe.DIM[1] == 6.);
-    CHECK(*probe.DIM[2] == .5);
-    CHECK(*probe.DIM[3] == .5);
-    CHECK(*probe.DIM[4] == .5);
-    CHECK(*probe.DIM[5] == .5);
-    CHECK(*probe.NSM == 0.);
+    CHECK(probe.DIM[0] == 14.);
+    CHECK(probe.DIM[1] == 6.);
+    CHECK(probe.DIM[2] == .5);
+    CHECK(probe.DIM[3] == .5);
+    CHECK(probe.DIM[4] == .5);
+    CHECK(probe.DIM[5] == .5);
+    CHECK((double)probe.NSM == 0.);
   }
 
   SECTION("Small Field Format (TUBE)") {
@@ -194,14 +194,14 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
     ::std::deque<string> lines = card::card_split(data);
     pbarl probe(lines);
 
-    CHECK(*probe.PID == 104019);
-    CHECK(*probe.MID == 5);
-    CHECK(*probe.GROUP == "MSCBML0");
-    CHECK(*probe.TYPE == "TUBE");
+    CHECK((long)probe.PID == 104019);
+    CHECK((long)probe.MID == 5);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "TUBE");
     CHECK(probe.DIM.size() == 2);
-    CHECK(*probe.DIM[0] == 600.);
-    CHECK(*probe.DIM[1] == 500.);
-    CHECK(*probe.NSM == 0.);
+    CHECK(probe.DIM[0] == 600.);
+    CHECK(probe.DIM[1] == 500.);
+    CHECK((double)probe.NSM == 0.);
   }
 }
 

@@ -33,6 +33,8 @@ namespace {
 
 using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
+using types::entry_value;
+
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
   return Catch::toString( ex() );
@@ -59,90 +61,90 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]" ) {
 
   SECTION("<nothing>") {
     CHECK_FALSE(probe->has_default());
-    unique_ptr< long > val(new long(numeric_limits<long>::min()));
-    CHECK(probe->in_bounds(val.get()));
-    val = make_unique<long>(0);
-    CHECK(probe->in_bounds(val.get()));
-    val = make_unique<long>(numeric_limits<long>::max());
-    CHECK(probe->in_bounds(val.get()));
+    entry_value<long> val(numeric_limits<long>::min());
+    CHECK(probe->in_bounds(val));
+    val = entry_value<long>((long)0);
+    CHECK(probe->in_bounds(val));
+    val = entry_value<long>(numeric_limits<long>::max());
+    CHECK(probe->in_bounds(val));
   }
 
   SECTION("min") {
     CHECK_FALSE(probe_min->has_default());
-    unique_ptr<long> val(new long(numeric_limits<long>::min()));
-    CHECK_FALSE(probe_min->in_bounds(val.get()));
-    val = make_unique<long>(-12);
-    CHECK(probe_min->in_bounds(val.get()));
-    val = make_unique<long>(0);
-    CHECK(probe_min->in_bounds(val.get()));
-    val = make_unique<long>(numeric_limits<long>::max());
-    CHECK(probe_min->in_bounds(val.get()));
+    entry_value<long> val(new long(numeric_limits<long>::min()));
+    CHECK_FALSE(probe_min->in_bounds(val));
+    val = entry_value<long>(-12);
+    CHECK(probe_min->in_bounds(val));
+    val = entry_value<long>((long)0);
+    CHECK(probe_min->in_bounds(val));
+    val = entry_value<long>(numeric_limits<long>::max());
+    CHECK(probe_min->in_bounds(val));
   }
 
   SECTION("min class") {
     CHECK_FALSE(probe_min->has_default());
-    unique_ptr<long> val(new long(numeric_limits<long>::min()));
-    CHECK_FALSE(probe_min->in_bounds(val.get()));
-    val = make_unique<long>(-12);
-    CHECK(probe_min->in_bounds(val.get()));
-    val = make_unique<long>(0);
-    CHECK(probe_min->in_bounds(val.get()));
-    val = make_unique<long>(numeric_limits<long>::max());
-    CHECK(probe_min->in_bounds(val.get()));
+    entry_value<long> val(new long(numeric_limits<long>::min()));
+    CHECK_FALSE(probe_min->in_bounds(val));
+    val = entry_value<long>(-12);
+    CHECK(probe_min->in_bounds(val));
+    val = entry_value<long>((long)0);
+    CHECK(probe_min->in_bounds(val));
+    val = entry_value<long>(numeric_limits<long>::max());
+    CHECK(probe_min->in_bounds(val));
   }
 
   SECTION("max") {
     CHECK_FALSE(probe_max->has_default());
-    unique_ptr<long> val(new long(numeric_limits<long>::max()));
-    CHECK_FALSE(probe_max->in_bounds(val.get()));
-    val = make_unique<long>(12);
-    CHECK(probe_max->in_bounds(val.get()));
-    val = make_unique<long>(0);
-    CHECK(probe_max->in_bounds(val.get()));
-    val = make_unique<long>(numeric_limits<long>::min());
-    CHECK(probe_max->in_bounds(val.get()));
+    entry_value<long> val(new long(numeric_limits<long>::max()));
+    CHECK_FALSE(probe_max->in_bounds(val));
+    val = entry_value<long>(12);
+    CHECK(probe_max->in_bounds(val));
+    val = entry_value<long>((long)0);
+    CHECK(probe_max->in_bounds(val));
+    val = entry_value<long>(numeric_limits<long>::min());
+    CHECK(probe_max->in_bounds(val));
   }
 
   SECTION("max class") {
     CHECK_FALSE(probe_max->has_default());
-    unique_ptr<long> val(new long(numeric_limits<long>::max()));
-    CHECK_FALSE(probe_max->in_bounds(val.get()));
-    val = make_unique<long>(12);
-    CHECK(probe_max->in_bounds(val.get()));
-    val = make_unique<long>(0);
-    CHECK(probe_max->in_bounds(val.get()));
-    val = make_unique<long>(numeric_limits<long>::min());
-    CHECK(probe_max->in_bounds(val.get()));
+    entry_value<long> val(new long(numeric_limits<long>::max()));
+    CHECK_FALSE(probe_max->in_bounds(val));
+    val = entry_value<long>(12);
+    CHECK(probe_max->in_bounds(val));
+    val = entry_value<long>((long)0);
+    CHECK(probe_max->in_bounds(val));
+    val = entry_value<long>(numeric_limits<long>::min());
+    CHECK(probe_max->in_bounds(val));
   }
 
   SECTION("min_max 1") {
     CHECK_FALSE(probe_mm->has_default());
-    unique_ptr<long> val = make_unique<long>(
+    entry_value<long> val = entry_value<long>(
       numeric_limits<long>::min());
-    CHECK_FALSE(probe_mm->in_bounds(val.get()));
-    val = make_unique<long>(-12);
-    CHECK(probe_mm->in_bounds(val.get()));
-    val = make_unique<long>(0);
-    CHECK(probe_mm->in_bounds(val.get()));
-    val = make_unique<long>(12);
-    CHECK(probe_mm->in_bounds(val.get()));
-    val = make_unique<long>(numeric_limits<long>::max());
-    CHECK_FALSE(probe_mm->in_bounds(val.get()));
+    CHECK_FALSE(probe_mm->in_bounds(val));
+    val = entry_value<long>(-12);
+    CHECK(probe_mm->in_bounds(val));
+    val = entry_value<long>((long)0);
+    CHECK(probe_mm->in_bounds(val));
+    val = entry_value<long>(12);
+    CHECK(probe_mm->in_bounds(val));
+    val = entry_value<long>(numeric_limits<long>::max());
+    CHECK_FALSE(probe_mm->in_bounds(val));
   }
 
   SECTION("min_max 2") {
     CHECK(probe_mmd->has_default());
     CHECK(probe_mmd->get_default() == 6);
-    unique_ptr<long> val(new long(numeric_limits<long>::min()));
-    CHECK_FALSE(probe_mmd->in_bounds(val.get()));
-    val = make_unique<long>(-12);
-    CHECK(probe_mm->in_bounds(val.get()));
-    val = make_unique<long>(0);
-    CHECK(probe_mmd->in_bounds(val.get()));
-    val = make_unique<long>(12);
-    CHECK(probe_mm->in_bounds(val.get()));
-    val = make_unique<long>(numeric_limits<long>::max());
-    CHECK_FALSE(probe_mmd->in_bounds(val.get()));
+    entry_value<long> val(new long(numeric_limits<long>::min()));
+    CHECK_FALSE(probe_mmd->in_bounds(val));
+    val = entry_value<long>(-12);
+    CHECK(probe_mm->in_bounds(val));
+    val = entry_value<long>((long)0);
+    CHECK(probe_mmd->in_bounds(val));
+    val = entry_value<long>(12);
+    CHECK(probe_mm->in_bounds(val));
+    val = entry_value<long>(numeric_limits<long>::max());
+    CHECK_FALSE(probe_mmd->in_bounds(val));
   }
 
   SECTION("<nothing> (with default)") {

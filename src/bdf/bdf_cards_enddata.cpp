@@ -1,16 +1,21 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/bdf_cards_enddata.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Implementation fro handling Nastran BDF ENDDATA cards.
 
-// Purpose: Purpose
+   Detailed description
+*/
 
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+#include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
@@ -30,5 +35,5 @@ bdf::types::card enddata::head = bdf::types::card("ENDDATA");
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. doxyfile.stamp check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

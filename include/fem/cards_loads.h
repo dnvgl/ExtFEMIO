@@ -1,17 +1,20 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file fem/cards_loads.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Load desribing cards for Sesam FEM files.
 
-// Purpose: Load desribing cards for Sesam FEM files.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID: $Id$
 
-#if !defined _BERHOL20151111_CARDS_LOADS
-#define _BERHOL20151111_CARDS_LOADS
+#if !defined _FEM_CARDS_LOADS_H_
+#define _FEM_CARDS_LOADS_H_
 
 
 
-#endif // _BERHOL20151111_CARDS_LOADS
+#endif // _FEM_CARDS_LOADS_H_
 
 // Local Variables:
 // mode: c++

@@ -1,18 +1,20 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/bdf_cards_mat1.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Definitions for Nastran BDF MAT1 cards.
 
-// Purpose: Definitions for Nastran BDF MAT1 cards.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-
+   Detailed description
+*/
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <deque>
@@ -28,115 +30,123 @@ using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
-const entry_type<long> mat1::_MID(
-  "MID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<double> mat1::_E(
-  "E", bdf::type_bounds::bound<double>(
-    make_unique<double>(0.).get(), nullptr, nullptr, true));
-const entry_type<double> mat1::_G(
-  "G", bdf::type_bounds::bound<double>(
-    make_unique<double>(0.).get(), nullptr, nullptr, true));
-const entry_type<double> mat1::_NU(
-  "NU", bdf::type_bounds::bound<double>(make_unique<double>(-1.).get(),
-                    make_unique<double>(.5).get(), nullptr, true));
-const entry_type<double> mat1::_RHO(
-  "RHO", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat1::_A(
-  "A", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat1::_TREF(
-  "TREF", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat1::_GE(
-  "GE", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat1::_ST(
-  "ST",
-  bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-const entry_type<double> mat1::_SC(
-  "SC",
-  bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-const entry_type<double> mat1::_SS(
-  "SS",
-  bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
-const entry_type<long> mat1::_MCSID(
-  "MCSID",
-  bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
+const entry_type<long> mat1::form_MID(
+   "MID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<double> mat1::form_E(
+   "E", bdf::type_bounds::bound<double>(
+      make_unique<double>(0.).get(), nullptr, nullptr, true));
+const entry_type<double> mat1::form_G(
+   "G", bdf::type_bounds::bound<double>(
+      make_unique<double>(0.).get(), nullptr, nullptr, true));
+const entry_type<double> mat1::form_NU(
+   "NU", bdf::type_bounds::bound<double>(make_unique<double>(-1.).get(),
+                                         make_unique<double>(.5).get(), nullptr, true));
+const entry_type<double> mat1::form_RHO(
+   "RHO", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<double> mat1::form_A(
+   "A", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<double> mat1::form_TREF(
+   "TREF", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<double> mat1::form_GE(
+   "GE", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<double> mat1::form_ST(
+   "ST",
+   bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+const entry_type<double> mat1::form_SC(
+   "SC",
+   bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+const entry_type<double> mat1::form_SS(
+   "SS",
+   bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+const entry_type<long> mat1::form_MCSID(
+   "MCSID",
+   bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
 
 mat1::mat1(const deque<std::string> &inp) : card(inp) {
 
-  MCSID = nullptr;
-  SS = nullptr;
-  SC = nullptr;
-  ST = nullptr;
-  GE = nullptr;
-  TREF = nullptr;
-  A = nullptr;
-  RHO = nullptr;
-  NU = nullptr;
-  G = nullptr;
+   form_MCSID.set_value(MCSID, "");
+   form_SS.set_value(SS, "");
+   form_SC.set_value(SC, "");
+   form_ST.set_value(ST, "");
+   form_GE.set_value(GE, "");
+   form_TREF.set_value(TREF, "");
+   form_A.set_value(A, "");
+   form_RHO.set_value(RHO, "");
+   form_NU.set_value(NU, "");
+   form_G.set_value(G, "");
 
-  auto pos = inp.rbegin();
+   auto pos = inp.rbegin();
 
-  switch (inp.size()-1) {
-  case 16:
-    ++pos;
-  case 15:
-    ++pos;
-  case 14:
-    ++pos;
-  case 13:
-    ++pos;
-  case 12:
-    MCSID = bdf::types::get_val<long>(_MCSID, *(pos++));
-  case 11:
-    SS = bdf::types::get_val<double>(_SS, *(pos++));
-  case 10:
-    SC = bdf::types::get_val<double>(_SC, *(pos++));
-  case 9:
-    ST = bdf::types::get_val<double>(_ST, *(pos++));
-  case 8:
-    GE = bdf::types::get_val<double>(_GE, *(pos++));
-  case 7:
-    TREF = bdf::types::get_val<double>(_TREF, *(pos++));
-  case 6:
-    A = bdf::types::get_val<double>(_A, *(pos++));
-  case 5:
-    RHO = bdf::types::get_val<double>(_RHO, *(pos++));
-  case 4:
-    NU = bdf::types::get_val<double>(_NU, *(pos++));
-  case 3:
-    G = bdf::types::get_val<double>(_G, *(pos++));
-  case 2:
-    E = bdf::types::get_val<double>(_E, *(pos++));
-    MID = bdf::types::get_val<long>(_MID, *(pos));
-    break;
-  default:
-    throw errors::parse_error("MAT1", "Illegal number of entries.");
-  }
+   switch (inp.size()-1) {
+   case 16:
+      ++pos;
+   case 15:
+      ++pos;
+   case 14:
+      ++pos;
+   case 13:
+      ++pos;
+   case 12:
+      form_MCSID.set_value(MCSID, *(pos++));
+   case 11:
+      form_SS.set_value(SS, *(pos++));
+   case 10:
+      form_SC.set_value(SC, *(pos++));
+   case 9:
+      form_ST.set_value(ST, *(pos++));
+   case 8:
+      form_GE.set_value(GE, *(pos++));
+   case 7:
+      form_TREF.set_value(TREF, *(pos++));
+   case 6:
+      form_A.set_value(A, *(pos++));
+   case 5:
+      form_RHO.set_value(RHO, *(pos++));
+   case 4:
+      form_NU.set_value(NU, *(pos++));
+   case 3:
+      form_G.set_value(G, *(pos++));
+   case 2:
+      form_E.set_value(E, *(pos++));
+      form_MID.set_value(MID, *(pos));
+      break;
+   default:
+      throw errors::parse_error("MAT1", "Illegal number of entries.");
+   }
 
-  if (A && !TREF) TREF = bdf::types::get_val<double>(_TREF, "");
+   if ((bool)A && !(bool)TREF) form_TREF.set_value(TREF, "");
 
-  // remark 2
-  if (!E && !G)
-    throw errors::parse_error(
-      "MAT1", "Either G or E has to be given.");
-  if (!NU) {
-    if (!E) {
-      NU = make_unique<double>(0.);
-      E = make_unique<double>(0.);
-    } else if (!G) {
-      NU = make_unique<double>(0.);
-      G = make_unique<double>(0.);
-    } else
-      NU = make_unique<double>((*E / 2. / *G) - 1.);
-  } else if (!E)
-    E = make_unique<double>((2. * (1 + *NU) * *G));
-  else if (!G)
-    G = make_unique<double>(*E / (2. * (1 + *NU)));
-
+   // remark 2
+   if (!((bool)E || (bool)G))
+      throw errors::parse_error(
+         "MAT1", "Either G or E has to be given.");
+   if (!(bool)NU) {
+      if (!(bool)E) {
+         NU.value = 0.;
+         NU.is_value = true;
+         E.value = 0.;
+         E.is_value = true;
+      } else if (!(bool)G) {
+         NU.value = 0.;
+         NU.is_value = true;
+         G.value = 0.;
+         G.is_value = true;
+      } else {
+         NU.value = ((double)E / 2. / (double)G) - 1.;
+         NU.is_value = true;
+      }
+   } else if (!(bool)E) {
+      E.value = 2. * (1 + (double)NU) * (double)G;
+      E.is_value = true;
+   } else if (!(bool)G) {
+      G.value = (double)E / (2. * (1 + (double)NU));
+      G.is_value = true;
+   }
 }
 
 const std::ostream& mat1::operator << (std::ostream& os) const {
-  throw errors::error("can't write MAT1.");
-  return os;
+   throw errors::error("can't write MAT1.");
+   return os;
 }
 
 // Local Variables:
@@ -145,5 +155,5 @@ const std::ostream& mat1::operator << (std::ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

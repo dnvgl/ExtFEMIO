@@ -1,183 +1,194 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/bdf_cards_cbeam.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Defintions for Patran CBEAM cards.
 
-// Purpose: Defintions for Patran CBEAM cards.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
-const entry_type<long> cbeam::_EID("EID",
-                    bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<long> cbeam::_PID("PID");
-const entry_type<long> cbeam::_GA("GA");
-const entry_type<long> cbeam::_GB("GB");
-const entry_type<double> cbeam::_X1("X1");
-const entry_type<long> cbeam::_G0(
-  "G0", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<double> cbeam::_X2(
-  "X2", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> cbeam::_X3(
-  "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> cbeam::_BIT("BIT");
+const entry_type<long> cbeam::form_EID("EID",
+                                   bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<long> cbeam::form_PID("PID");
+const entry_type<long> cbeam::form_GA("GA");
+const entry_type<long> cbeam::form_GB("GB");
+const entry_type<double> cbeam::form_X1("X1");
+const entry_type<long> cbeam::form_G0(
+   "G0", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<double> cbeam::form_X2(
+   "X2", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<double> cbeam::form_X3(
+   "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<double> cbeam::form_BIT(
+   "BIT",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
 namespace {
-  const char* OFFTinit[8] = {
-    "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
-  const std::set<std::string> OFFT_set(OFFTinit, OFFTinit + 8);
+   const char* OFFTinit[8] = {
+      "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
+   const std::set<std::string> OFFT_set(OFFTinit, OFFTinit + 8);
 }
-const entry_type<std::string> cbeam::_OFFT("OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
+const entry_type<std::string> cbeam::form_OFFT("OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
 
-const entry_type<deque<int>> cbeam::_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<deque<int>> cbeam::_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<double> cbeam::_W1A(
-  "W1A",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-const entry_type<double> cbeam::_W2A(
-  "W2A",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-const entry_type<double> cbeam::_W3A(
-  "W3A",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-const entry_type<double> cbeam::_W1B(
-  "W1B",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-const entry_type<double> cbeam::_W2B(
-  "W2B",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-const entry_type<double> cbeam::_W3B(
-  "W3B",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
-const entry_type<long> cbeam::_SA(
-  "SA",
-  bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
-const entry_type<long> cbeam::_SB(
-  "SB",
-  bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
+const entry_type<deque<int>> cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<deque<int>> cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<double> cbeam::form_W1A(
+   "W1A",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+const entry_type<double> cbeam::form_W2A(
+   "W2A",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+const entry_type<double> cbeam::form_W3A(
+   "W3A",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+const entry_type<double> cbeam::form_W1B(
+   "W1B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+const entry_type<double> cbeam::form_W2B(
+   "W2B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+const entry_type<double> cbeam::form_W3B(
+   "W3B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+const entry_type<long> cbeam::form_SA(
+   "SA",
+   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
+const entry_type<long> cbeam::form_SB(
+   "SB",
+   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
 
 cbeam::cbeam(const deque<std::string> &inp) :
-  card(inp) {
+   card(inp) {
 
-  auto pos = inp.rbegin();
+   auto pos = inp.rbegin();
 
-  SB = nullptr;
-  SA = nullptr;
-  W3B = bdf::types::get_val<double>(_W3B, "");
-  W2B = bdf::types::get_val<double>(_W2B, "");
-  W1B = bdf::types::get_val<double>(_W1B, "");
-  W3A = bdf::types::get_val<double>(_W3A, "");
-  W2A = bdf::types::get_val<double>(_W2A, "");
-  W1A = bdf::types::get_val<double>(_W1A, "");
-  PB = nullptr;
-  PA = nullptr;
-  OFFT = nullptr;
-  BIT = nullptr;
+   form_SB.set_value(SB, "");
+   form_SA.set_value(SA, "");
+   form_W3B.set_value(W3B, "");
+   form_W2B.set_value(W2B, "");
+   form_W1B.set_value(W1B, "");
+   form_W3A.set_value(W3A, "");
+   form_W2A.set_value(W2A, "");
+   form_W1A.set_value(W1A, "");
+   form_PB.set_value(PB, "");
+   form_PA.set_value(PA, "");
+   form_OFFT.set_value(OFFT, "");
+   form_BIT.set_value(BIT, "");
 
-  switch (inp.size()-1) {
-  case 24:
-    pos++;
-  case 23:
-    pos++;
-  case 22:
-    pos++;
-  case 21:
-    pos++;
-  case 20:
-    pos++;
-  case 19:
-    pos++;
-  case 18:
-    SB = bdf::types::get_val<long>(_SB, *(pos++));
-  case 17:
-    SA = bdf::types::get_val<long>(_SA, *(pos++));
-  case 16:
-    W3B = bdf::types::get_val<double>(_W3B, *(pos++));
-  case 15:
-    W2B = bdf::types::get_val<double>(_W2B, *(pos++));
-  case 14:
-    W1B = bdf::types::get_val<double>(_W1B, *(pos++));
-  case 13:
-    W3A = bdf::types::get_val<double>(_W3A, *(pos++));
-  case 12:
-    W2A = bdf::types::get_val<double>(_W2A, *(pos++));
-  case 11:
-    W1A = bdf::types::get_val<double>(_W1A, *(pos++));
-  case 10:
-    PB = bdf::types::get_val<deque<int>>(_PB, *(pos++));
-  case 9:
-    PA = bdf::types::get_val<deque<int>>(_PA, *(pos++));
-  case 8:
-    try {
-      BIT = bdf::types::get_val<double>(_BIT, *(pos));
-      OFFT = nullptr;
-      choose_offt_bit = has_BIT;
-    }
-    catch (errors::float_error) {
-      OFFT = bdf::types::get_val<std::string>(_OFFT, *pos);
-      BIT = nullptr;
-      choose_offt_bit = has_OFFT;
-    }
-    ++pos;
-  case 7:
-    X3 = bdf::types::get_val<double>(_X3, *(pos++));
-  case 6:
-    X2 = bdf::types::get_val<double>(_X2, *(pos++));
-  case 5:
-    try {
-      X1 = bdf::types::get_val<double>(_X1, *(pos));
-      if (!X2 || !X3) {
-        throw errors::parse_error(
-          "CBEAM", "Incomplete direction vector.");
+   switch (inp.size()-1) {
+   case 24:
+      pos++;
+   case 23:
+      pos++;
+   case 22:
+      pos++;
+   case 21:
+      pos++;
+   case 20:
+      pos++;
+   case 19:
+      pos++;
+   case 18:
+      form_SB.set_value(SB, *(pos++));
+   case 17:
+      form_SA.set_value(SA, *(pos++));
+   case 16:
+      form_W3B.set_value(W3B, *(pos++));
+   case 15:
+      form_W2B.set_value(W2B, *(pos++));
+   case 14:
+      form_W1B.set_value(W1B, *(pos++));
+   case 13:
+      form_W3A.set_value(W3A, *(pos++));
+   case 12:
+      form_W2A.set_value(W2A, *(pos++));
+   case 11:
+      form_W1A.set_value(W1A, *(pos++));
+   case 10:
+      form_PB.set_value(PB, *(pos++));
+   case 9:
+      form_PA.set_value(PA, *(pos++));
+   case 8:
+      try {
+         form_BIT.set_value(BIT, *(pos));
+         OFFT = nullptr;
+         choose_offt_bit = has_BIT;
       }
-      G0 = nullptr;
-      choose_dir_code = has_DVEC;
-    }
-    catch (errors::float_error) {
-      G0 = bdf::types::get_val<long>(_G0, *pos);
-      X1 = nullptr;
-      choose_dir_code = has_DCODE;
-    }
-    ++pos;
-    GB = bdf::types::get_val<long>(_GB, *(pos++));
-    GA = bdf::types::get_val<long>(_GA, *(pos++));
-    PID = bdf::types::get_val<long>(_PID, *(pos++));
-    EID = bdf::types::get_val<long>(_EID, *(pos++));
-    break;
-  default:
-    throw errors::parse_error(
-      "CBEAM", "Illegal number of entries for CBEAM");
-  }
+      catch (errors::float_error) {
+         form_OFFT.set_value(OFFT, *pos);
+         BIT = nullptr;
+         choose_offt_bit = has_OFFT;
+      }
+      ++pos;
+   case 7:
+      form_X3.set_value(X3, *(pos++));
+   case 6:
+      form_X2.set_value(X2, *(pos++));
+   case 5:
+      try {
+         form_X1.set_value(X1, *(pos));
+         if (!X2.is_value || !X3.is_value) {
+            throw errors::parse_error(
+               "CBEAM", "Incomplete direction vector.");
+         }
+         G0 = nullptr;
+         choose_dir_code = has_DVEC;
+      }
+      catch (errors::float_error) {
+         form_G0.set_value(G0, *pos);
+         X1 = nullptr;
+         choose_dir_code = has_DCODE;
+      }
+      ++pos;
+      form_GB.set_value(GB, *(pos++));
+      form_GA.set_value(GA, *(pos++));
+      form_PID.set_value(PID, *(pos++));
+      form_EID.set_value(EID, *(pos++));
+      break;
+   default:
+      throw errors::parse_error(
+         "CBEAM", "Illegal number of entries for CBEAM");
+   }
 
-  if (!W3B) W3B = bdf::types::get_val<double>(_W3B, "");
-  if (!W2B) W2B = bdf::types::get_val<double>(_W2B, "");
-  if (!W1B) W1B = bdf::types::get_val<double>(_W1B, "");
-  if (!W3A) W3A = bdf::types::get_val<double>(_W3A, "");
-  if (!W2A) W2A = bdf::types::get_val<double>(_W2A, "");
-  if (!W1A) W1A = bdf::types::get_val<double>(_W1A, "");
-  if (!PB) PB = bdf::types::get_val<deque<int>>(_PB, "");
-  if (!PA) PA = bdf::types::get_val<deque<int>>(_PA, "");
-  if (!BIT && !OFFT) OFFT = bdf::types::get_val<std::string>(_OFFT, "");
+   if (!W3B.is_value) form_W3B.set_value(W3B, "");
+   if (!W2B.is_value) form_W2B.set_value(W2B, "");
+   if (!W1B.is_value) form_W1B.set_value(W1B, "");
+   if (!W3A.is_value) form_W3A.set_value(W3A, "");
+   if (!W2A.is_value) form_W2A.set_value(W2A, "");
+   if (!W1A.is_value) form_W1A.set_value(W1A, "");
+   if (!PB.is_value) form_PB.set_value(PB, "");
+   if (!PA.is_value) form_PA.set_value(PA, "");
+   if (!BIT.is_value && !OFFT.is_value) form_OFFT.set_value(OFFT, "");
 };
 
 const std::ostream& cbeam::operator << (std::ostream& os) const {
-  throw errors::error("can't write CBEAM.");
-  return os;
+   throw errors::error("can't write CBEAM.");
+   return os;
 }
 
 // Local Variables:
@@ -186,5 +197,5 @@ const std::ostream& cbeam::operator << (std::ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

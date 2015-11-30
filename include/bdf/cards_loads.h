@@ -1,8 +1,11 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/cards_loads.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Classes for the different Nastran BDF cards dealing with loads.
 
-/// Classes for the different Nastran BDF cards dealing with loads.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID: $Id$
 
@@ -10,72 +13,72 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20151016_BDF_CARDS_LOADS
-#define _BERHOL20151016_BDF_CARDS_LOADS
+#if !defined _BDF_CARDS_LOADS_H_
+#define _BDF_CARDS_LOADS_H_
 
 #include <memory>
 
 namespace dnvgl {
-  namespace extfem {
-    namespace bdf {
-      namespace cards {
+   namespace extfem {
+      namespace bdf {
+         namespace cards {
 
-        class momforce_base : public card {
-          // Base class for handling forces and moments.
+/// Base class for handling forces and moments.
+            class momforce_base : public card {
 
-        private:
+            private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _SID;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _G;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _CID;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N3;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_SID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_G;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_CID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_F;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_N1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_N2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_N3;
 
-        public:
+            public:
 
-          /** Load set identification number. (Integer > 0)
-           */
-          ::std::unique_ptr<long> SID;
-          /** Grid point identification number. (Integer > 0)
-           */
-          ::std::unique_ptr<long> G;
-          /** Coordinate system identification number. (Integer > 0;
-              Default = 0)
-          */
-          ::std::unique_ptr<long> CID;
-          /** Scale factor. (Real)
-           */
-          ::std::unique_ptr<double> F;
-          /** *x* components of a vector measured in coordinate system
-              defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-          */
-          ::std::unique_ptr<double> N1;
-          /** *y* components of a vector measured in coordinate system
-              defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-          */
-          ::std::unique_ptr<double> N2;
-          /** *z* components of a vector measured in coordinate system
-              defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-          */
-          ::std::unique_ptr<double> N3;
+               /** Load set identification number. (Integer > 0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<long> SID;
+               /** Grid point identification number. (Integer > 0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<long> G;
+               /** Coordinate system identification number. (Integer > 0;
+                   Default = 0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> CID;
+               /** Scale factor. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> F;
+               /** *x* components of a vector measured in coordinate system
+                   defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> N1;
+               /** *y* components of a vector measured in coordinate system
+                   defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> N2;
+               /** *z* components of a vector measured in coordinate system
+                   defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> N3;
 
-        protected:
+            protected:
 
-          void add_collect(::std::deque<::std::unique_ptr<format_entry>>&,
-                           const momforce_base&) const;
+               void add_collect(::std::deque<::std::unique_ptr<format_entry>>&,
+                                const momforce_base&) const;
 
-          DllExport momforce_base(const ::std::deque<::std::string> &inp);
-          DllExport momforce_base(
-            const long *SID, const long *G, const long *CID,
-            const double *F,
-            const double *N1, const double *N2, const double *N3);
+               DllExport momforce_base(const ::std::deque<::std::string> &inp);
+               DllExport momforce_base(
+                  const long *SID, const long *G, const long *CID,
+                  const double *F,
+                  const double *N1, const double *N2, const double *N3);
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-        };
+               DllExport const ::std::ostream& operator << (::std::ostream& os) const;
+            };
 
-        /// Handle Nastran Bulk `FORCE` entries.
+/// Handle Nastran Bulk `FORCE` entries.
 /** # Static Force
 
 Defines a static concentrated force at a grid point by specifying a
@@ -87,33 +90,33 @@ vector.
 | ------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `FORCE` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-        class force : public momforce_base {
-          // Handle Nastran Bulk FORCE entries.
+            class force : public momforce_base {
+               // Handle Nastran Bulk FORCE entries.
 
-        private:
+            private:
 
-          static ::dnvgl::extfem::bdf::types::card head;
+               static ::dnvgl::extfem::bdf::types::card head;
 
-        public:
+            public:
 
-          DllExport force(const ::std::deque<::std::string> &inp) :
-            momforce_base(inp) {};
+               DllExport force(const ::std::deque<::std::string> &inp) :
+                  momforce_base(inp) {};
 
-          DllExport force(
-            const long *SID, const long *G, const long *CID,
-            const double *F,
-            const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-            momforce_base(SID, G, CID, F, N1, N2, N3) {};
+               DllExport force(
+                  const long *SID, const long *G, const long *CID,
+                  const double *F,
+                  const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
+                  momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
-            return FORCE;
-          };
+               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+                  return FORCE;
+               };
 
-          DllExport friend ::std::ostream& operator<<(::std::ostream&, const force&);
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-        };
+               DllExport friend ::std::ostream& operator<<(::std::ostream&, const force&);
+               DllExport const ::std::ostream& operator << (::std::ostream& os) const;
+            };
 
-        /// Handle Nastran Bulk `MOMENT` entries.
+/// Handle Nastran Bulk `MOMENT` entries.
 /** # Static Force
 
 Defines a static concentrated force at a grid point by specifying a
@@ -125,32 +128,32 @@ vector.
 | -------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `MOMENT` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-        class moment : public momforce_base {
-          // Handle Nastran Bulk MOMENT entries.
+            class moment : public momforce_base {
+               // Handle Nastran Bulk MOMENT entries.
 
-        private:
+            private:
 
-          static ::dnvgl::extfem::bdf::types::card head;
+               static ::dnvgl::extfem::bdf::types::card head;
 
-        public:
+            public:
 
-          DllExport moment(const ::std::deque<::std::string> &inp) :
-            momforce_base(inp) {};
-          DllExport moment(
-            const long *SID, const long *G, const long *CID,
-            const double *F,
-            const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-            momforce_base(SID, G, CID, F, N1, N2, N3) {};
+               DllExport moment(const ::std::deque<::std::string> &inp) :
+                  momforce_base(inp) {};
+               DllExport moment(
+                  const long *SID, const long *G, const long *CID,
+                  const double *F,
+                  const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
+                  momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
-            return MOMENT;
-          };
+               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+                  return MOMENT;
+               };
 
-          DllExport friend ::std::ostream& operator<< (::std::ostream&, const moment&);
-          DllExport const ::std::ostream& operator<< (::std::ostream& os) const;
-        };
+               DllExport friend ::std::ostream& operator<< (::std::ostream&, const moment&);
+               DllExport const ::std::ostream& operator<< (::std::ostream& os) const;
+            };
 
-        /// Handle Nastran Bulk `LOAD` entries.
+/// Handle Nastran Bulk `LOAD` entries.
 /** # Static Load Combination (Superposition)
 
 Defines a static load as a linear combination of load sets defined via
@@ -165,54 +168,54 @@ Defines a static load as a linear combination of load sets defined via
 | `LOAD` | `SID` | `S`  | `S1`   | `L1` | `S2` | `L2` | `S3` | `L3` |    |
 |        | `S4`  | `L4` | *etc.* |      |      |      |      |      |    |
 */
-        class load : public card {
+            class load : public card {
 
-        private:
+            private:
 
-          static ::dnvgl::extfem::bdf::types::card head;
+               static ::dnvgl::extfem::bdf::types::card head;
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _SID;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _S;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _Si;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _Li;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_SID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_S;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_Si;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_Li;
 
-        public:
+            public:
 
-          /** Load set identification number. (Integer > 0)
-           */
-          ::std::unique_ptr<long> SID;
-          /* Overall scale factor. (Real)
-           */
-          ::std::unique_ptr<double> S;
-          /** Scale factor on `Li`. (Real)
-           */
-          ::std::unique_ptr<::std::deque<double>> Si;
-          /** Load set identification numbers defined on entry types
-              listed above. (Integer > 0)
-          */
-          ::std::unique_ptr<::std::deque<long>> Li;
+               /** Load set identification number. (Integer > 0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<long> SID;
+               /* Overall scale factor. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> S;
+               /** Scale factor on `Li`. (Real)
+                */
+               ::std::deque<double> Si;
+               /** Load set identification numbers defined on entry types
+                   listed above. (Integer > 0)
+               */
+               ::std::deque<long> Li;
 
-          DllExport load(const ::std::deque<::std::string> &inp);
+               DllExport load(const ::std::deque<::std::string> &inp);
 
-          DllExport load(const long *SID, const double *S,
-                         const ::std::deque<double> *Si,
-                         const ::std::deque<long> *Li);
+               DllExport load(const long *SID, const double *S,
+                              const ::std::deque<double> *Si,
+                              const ::std::deque<long> *Li);
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
-            return LOAD;
-          };
+               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+                  return LOAD;
+               };
 
-          DllExport friend ::std::ostream&
-          operator<<(::std::ostream&, const load&);
-          DllExport const ::std::ostream&
-          operator << (::std::ostream& os) const;
-        };
+               DllExport friend ::std::ostream&
+               operator<<(::std::ostream&, const load&);
+               DllExport const ::std::ostream&
+               operator << (::std::ostream& os) const;
+            };
+         }
       }
-    }
-  }
+   }
 }
 
-#endif // _BERHOL20151016_BDF_CARDS_LOADS
+#endif // _BDF_CARDS_LOADS_H_
 
 // Local Variables:
 // mode: c++

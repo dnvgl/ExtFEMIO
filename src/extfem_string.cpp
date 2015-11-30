@@ -1,8 +1,10 @@
-// Copyright © 2015 by DNV GL SE
+/**
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2015 by DNV GL SE
+  \brief String helper functions.
 
-// Purpose: String helper functions.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Detailed description
+*/
 
 #include "StdAfx.h"
 
@@ -16,6 +18,12 @@ namespace {
 }
 
 #include "extfem_string.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace dnvgl;
 

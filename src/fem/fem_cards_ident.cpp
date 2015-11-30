@@ -1,16 +1,21 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file fem/fem_cards_ident.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Processing Sesam FEM IDENT cards.
 
-// Purpose: Processing Sesam FEM IDENT cards.
+   Detailed description
+*/
 
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+#include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <memory>
@@ -23,47 +28,47 @@ using namespace fem;
 using namespace types;
 
 namespace dnvgl {
-  namespace extfem {
-    namespace fem {
-      namespace cards {
+   namespace extfem {
+      namespace fem {
+         namespace cards {
 
-        const fem::types::card ident::head("IDENT");
+            const fem::types::card ident::head("IDENT");
 
-        const entry_type<long> ident::_SLEVEL("SLEVEL");
-        const entry_type<long> ident::_SELTYP("SELTYP");
-        const entry_type<long> ident::_SELMOD("SELMOD");
+            const entry_type<long> ident::_SLEVEL("SLEVEL");
+            const entry_type<long> ident::_SELTYP("SELTYP");
+            const entry_type<long> ident::_SELMOD("SELMOD");
 
-        ident::ident(const ::std::deque<::std::string> &inp) :
-          card(inp) {
+            ident::ident(const ::std::deque<::std::string> &inp) :
+               card(inp) {
 
-          auto pos = inp.begin();
+               auto pos = inp.begin();
 
-          ++pos;
-          SLEVEL = _SLEVEL(*(pos++));
-          SELTYP = _SELTYP(*(pos++));
-          SELMOD = _SELMOD(*(pos++));
-        }
+               ++pos;
+               SLEVEL = _SLEVEL(*(pos++));
+               SELTYP = _SELTYP(*(pos++));
+               SELMOD = _SELMOD(*(pos++));
+            }
 
-        const ::std::ostream&
-        ident::operator<<(::std::ostream& os) const {
-          os << this;
-          return os;
-        }
+            const ::std::ostream&
+            ident::operator<<(::std::ostream& os) const {
+               os << this;
+               return os;
+            }
+            #
+            ::std::ostream&
+            operator<<(::std::ostream &os, const ident &card) {
 
-        ::std::ostream&
-        operator<<(::std::ostream &os, const ident &card) {
+               os << ident::head.format()
+                  << card._SLEVEL.format(card.SLEVEL)
+                  << card._SELTYP.format(card.SELTYP)
+                  << card._SELMOD.format(card.SELMOD)
+                  << ident::empty.format() << ::std::endl;
 
-          os << ident::head.format()
-             << card._SLEVEL.format(card.SLEVEL)
-             << card._SELTYP.format(card.SELTYP)
-             << card._SELMOD.format(card.SELMOD)
-             << ident::empty.format() << ::std::endl;
-
-          return os;
-        }
+               return os;
+            }
+         }
       }
-    }
-  }
+   }
 }
 
 // Local Variables:

@@ -1,18 +1,20 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/bdf_cards_prod.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Definitions for Nastran BDF PROD cards.
 
-// Purpose: Definitions for Nastran BDF PROD cards.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-
+   Detailed description
+*/
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
@@ -21,61 +23,67 @@ namespace {
 #include <cstdlib>
 #include <memory>
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using ::dnvgl::extfem::bdf::types::entry_type;
 
-const entry_type<long> prod::_PID(
-  "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<long> prod::_MID(
-  "MID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
-const entry_type<double> prod::_A("A");
-const entry_type<double> prod::_J(
-  "J",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> prod::_C(
-  "C", bdf::type_bounds::bound<double>(
-    nullptr, nullptr, make_unique<double>(0.).get()));
-const entry_type<double> prod::_NSM(
-  "J",
-  bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<long> prod::form_PID(
+   "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<long> prod::form_MID(
+   "MID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+const entry_type<double> prod::form_A("A");
+const entry_type<double> prod::form_J(
+   "J",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+const entry_type<double> prod::form_C(
+   "C", bdf::type_bounds::bound<double>(
+      nullptr, nullptr, make_unique<double>(0.).get()));
+const entry_type<double> prod::form_NSM(
+   "J",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
 prod::prod(const deque<std::string> &inp) : card(inp) {
 
-  auto pos = inp.rbegin();
+   auto pos = inp.rbegin();
 
-  J = nullptr;
-  C = nullptr;
-  NSM = nullptr;
+   form_J.set_value(J, "");
+   form_C.set_value(C, "");
+   form_NSM.set_value(NSM, "");
 
-  switch (inp.size()-1) {
-  case 8:
-    ++pos;
-  case 7:
-    ++pos;
-  case 6:
-    NSM = bdf::types::get_val<double>(_NSM, *(pos++));
-  case 5:
-    C = bdf::types::get_val<double>(_C, *(pos++));
-  case 4:
-    J = bdf::types::get_val<double>(_J, *(pos++));
-  case 3:
-    A = bdf::types::get_val<double>(_A, *(pos++));
-    MID = bdf::types::get_val<long>(_MID, *(pos++));
-    PID = bdf::types::get_val<long>(_PID, *(pos));
-    break;
-  default:
-    throw errors::parse_error(
-      "CBAR.", "Illegal number of entries.");
-  }
+   switch (inp.size()-1) {
+   case 8:
+      ++pos;
+   case 7:
+      ++pos;
+   case 6:
+      form_NSM.set_value(NSM, *(pos++));
+   case 5:
+      form_C.set_value(C, *(pos++));
+   case 4:
+      form_J.set_value(J, *(pos++));
+   case 3:
+      form_A.set_value(A, *(pos++));
+      form_MID.set_value(MID, *(pos++));
+      form_PID.set_value(PID, *(pos));
+      break;
+   default:
+      throw errors::parse_error(
+         "CBAR.", "Illegal number of entries.");
+   }
 
-  if (!C) C = bdf::types::get_val<double>(_C, "");
+   if (!C.is_value) form_C.set_value(C, "");
 }
 
 const std::ostream& prod::operator << (std::ostream& os) const {
-  throw errors::error("can't write PROD.");
-  return os;
+   throw errors::error("can't write PROD.");
+   return os;
 }
 
 // Local Variables:
@@ -84,5 +92,5 @@ const std::ostream& prod::operator << (std::ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // End:

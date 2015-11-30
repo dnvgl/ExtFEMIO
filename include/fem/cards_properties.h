@@ -1,18 +1,20 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file fem/cards_properties.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Representation of property describing cards for Sesam FEM files.
 
-// Purpose: Representation of property describing cards for Sesam FEM
-//          files.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID: $Id$
 
-#if !defined _BERHOL20151111_CARDS_PROPERTIES
-#define _BERHOL20151111_CARDS_PROPERTIES
+#if !defined _FEM_CARDS_PROPERTIES_H_
+#define _FEM_CARDS_PROPERTIES_H_
 
 
 
-#endif // _BERHOL20151111_CARDS_PROPERTIES
+#endif // _FEM_CARDS_PROPERTIES_H_
 
 // Local Variables:
 // mode: c++

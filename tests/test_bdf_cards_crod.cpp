@@ -46,13 +46,10 @@ TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]" ) {
   crod probe(lines);
 
    SECTION("first crod") {
-
-
-     CHECK(*probe.EID == 222);
-     CHECK(*probe.PID == 13);
-     CHECK(*probe.G1 == 14);
-     CHECK(*probe.G2 == 15);
-
+     CHECK(probe.EID.value == 222);
+     CHECK(probe.PID.value == 13);
+     CHECK(probe.G1.value == 14);
+     CHECK(probe.G2.value == 15);
   }
 }
 

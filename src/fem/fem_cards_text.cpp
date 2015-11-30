@@ -1,18 +1,21 @@
 /**
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2015 by DNV GL SE
-  \brief Processing Sesam FEM TEXT cards.
+   \file fem/fem_cards_text.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Processing Sesam FEM TEXT cards.
 
-  Detailed description
+   Detailed description
 */
+
+#include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <memory>
@@ -29,78 +32,79 @@ using namespace fem;
 using namespace types;
 
 namespace dnvgl {
-  namespace extfem {
-    namespace fem {
-      namespace cards {
+   namespace extfem {
+      namespace fem {
+         namespace cards {
 
-        const fem::types::card text::head("TEXT");
+            const fem::types::card text::head("TEXT");
 
-        const entry_type<long> text::_TYPE("TYPE");
-        const entry_type<long> text::_SUBTYPE("SUBTYPE");
-        const entry_type<long> text::_NRECS("NRECS");
-        const entry_type<long> text::_NBYTE("NBYTE");
-        const entry_type<::std::string> text::_CONT("CONT");
+            const entry_type<long> text::_TYPE("TYPE");
+            const entry_type<long> text::_SUBTYPE("SUBTYPE");
+            const entry_type<long> text::_NRECS("NRECS");
+            const entry_type<long> text::_NBYTE("NBYTE");
+            const entry_type<::std::string> text::_CONT("CONT");
 
-        text::text(const ::std::deque<::std::string> &inp) :
-          card(inp) {
+            text::text(const ::std::deque<::std::string> &inp) :
+               card(inp) {
 
-          auto pos = inp.begin();
+               auto pos = inp.begin();
 
-          ++pos;
-          TYPE = _TYPE(*(pos++));
-          SUBTYPE = _SUBTYPE(*(pos++));
-          NRECS = _NRECS(*(pos++));
-          NBYTE = _NBYTE(*(pos++));
+               ++pos;
+               TYPE = _TYPE(*(pos++));
+               SUBTYPE = _SUBTYPE(*(pos++));
+               NRECS = _NRECS(*(pos++));
+               NBYTE = _NBYTE(*(pos++));
 
-          while (pos != inp.end()) {
-            ::std::string res("");
-            for (int i=0; i < 4 && pos != inp.end(); i++)
-              res += *(pos++);
-            CONT.push_back(res);
-          }
-        }
+               while (pos != inp.end()) {
+                  ::std::string res("");
+                  for (int i=0; i < 4 && pos != inp.end(); i++)
+                     res += *(pos++);
+                  CONT.push_back(res);
+               }
+            }
 
-        text::text(const long *TYPE, const long *SUBTYPE,
-                   const long *NRECS, const long *NBYTE,
-                   const ::std::deque<::std::string> *CONT) :
-          TYPE(*TYPE), SUBTYPE(*SUBTYPE), NRECS(*NRECS),
-          NBYTE(*NBYTE), CONT(*CONT) {}
+            text::text(const long *TYPE, const long *SUBTYPE,
+                       const long *NRECS, const long *NBYTE,
+                       const ::std::deque<::std::string> *CONT) :
+               TYPE(*TYPE), SUBTYPE(*SUBTYPE), NRECS(*NRECS),
+               NBYTE(*NBYTE), CONT(*CONT) {}
 
-        text::text(const long *TYPE, const long *SUBTYPE,
-                   const ::std::deque<::std::string> *CONT) :
-          card(),
-          TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
-          NRECS = static_cast<long>(CONT->size());
-          NBYTE = 0;
-          for (auto &p : *CONT)
-            NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
-          }
+            text::text(const long *TYPE, const long *SUBTYPE,
+                       const ::std::deque<::std::string> *CONT) :
+               card(),
+               TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
+               NRECS = static_cast<long>(CONT->size());
+               NBYTE = 0;
+               for (auto &p : *CONT)
+                  NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
+            }
 
-        const ::dnvgl::extfem::fem::cards::types
-        text::card_type(void) const { return TEXT; };
+            const ::dnvgl::extfem::fem::cards::types
+            text::card_type(void) const { return TEXT; };
 
-        const ::std::ostream&
-        text::operator<< (::std::ostream& os) const {
-          os << this;
-          return os;
-        }
+            const ::std::ostream&
+            text::operator<< (::std::ostream& os) const {
+               os << this;
+               return os;
+            }
 
-        ::std::ostream&
-        operator<< (::std::ostream &os, const text &card) {
+            ::std::ostream&
+            operator<< (::std::ostream &os, const text &card) {
 
-          os << text::head.format()
-             << card._TYPE.format(card.TYPE)
-             << card._SUBTYPE.format(card.SUBTYPE)
-             << card._NRECS.format(card.NRECS)
-             << card._NBYTE.format(card.NBYTE) << std::endl;
-          for (auto p : card.CONT)
-            os << "        " << card._CONT.format(p, card.NBYTE) << std::endl;
+               os << text::head.format()
+                  << card._TYPE.format(card.TYPE)
+                  << card._SUBTYPE.format(card.SUBTYPE)
+                  << card._NRECS.format(card.NRECS)
+                  << card._NBYTE.format(card.NBYTE) << std::endl;
+               for (auto p : card.CONT)
+                  os << ::dnvgl::extfem::fem::types::card().format()
+                     << card._CONT.format(p, card.NBYTE) << std::endl;
 
-          return os;
-        }
+               return os;
+            }
+         }
       }
-    }
-  }
+   }
 }
 
 // Local Variables:

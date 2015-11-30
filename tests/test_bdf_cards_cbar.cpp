@@ -45,25 +45,25 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
   cbar probe(lines);
 
   SECTION("first cbar") {
-    CHECK(*probe.EID == 7869);
-    CHECK(*probe.PID == 104010);
-    CHECK(*probe.GA == 76);
-    CHECK(*probe.GB == 153);
-    CHECK(*probe.X1 == 0.);
-    CHECK(*probe.X2 == 66.5206);
-    CHECK(*probe.X3 == 997.785);
+    CHECK(probe.EID.value == 7869);
+    CHECK(probe.PID.value == 104010);
+    CHECK(probe.GA.value == 76);
+    CHECK(probe.GB.value == 153);
+    CHECK((double)probe.X1 == 0.);
+    CHECK((double)probe.X2 == 66.5206);
+    CHECK((double)probe.X3 == 997.785);
     CHECK_FALSE(probe.G0);
     CHECK(probe.choose_dir_code == cbar::has_DVEC);
-    CHECK(*probe.OFFT == "GGG");
+    CHECK(probe.OFFT == "GGG");
     deque<int> p_ref;
-    CHECK(*probe.PA == p_ref);
-    CHECK(*probe.PB == p_ref);
-    CHECK(*probe.W1A == 0.);
-    CHECK(*probe.W2A == -22.617);
-    CHECK(*probe.W3A == -339.25);
-    CHECK(*probe.W1B == 0.);
-    CHECK(*probe.W2B == -22.617);
-    CHECK(*probe.W3B == 0.);
+    CHECK(probe.PA == p_ref);
+    CHECK(probe.PB == p_ref);
+    CHECK((double)probe.W1A == 0.);
+    CHECK((double)probe.W2A == -22.617);
+    CHECK((double)probe.W3A == -339.25);
+    CHECK((double)probe.W1B == 0.);
+    CHECK((double)probe.W2B == -22.617);
+    CHECK((double)probe.W3B == 0.);
   }
 }
 
@@ -79,25 +79,25 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
   cbar probe(lines);
 
   SECTION("dir code cbar") {
-    CHECK(*probe.EID == 7869);
-    CHECK(*probe.PID == 104010);
-    CHECK(*probe.GA == 76);
-    CHECK(*probe.GB == 153);
-    CHECK(*probe.G0 == 13);
+    CHECK((long)probe.EID == 7869);
+    CHECK((long)probe.PID == 104010);
+    CHECK(probe.GA.value == 76);
+    CHECK(probe.GB.value == 153);
+    CHECK(probe.G0.value == 13);
     CHECK_FALSE(probe.X1);
     CHECK_FALSE(probe.X2);
     CHECK_FALSE(probe.X3);
     CHECK(probe.choose_dir_code == cbar::has_DCODE);
-    CHECK(*probe.OFFT == "GOO");
+    CHECK(probe.OFFT == "GOO");
     deque<int> p_ref;
-    CHECK(*probe.PA == p_ref);
-    CHECK(*probe.PB == p_ref);
-    CHECK(*probe.W1A == 0.);
-    CHECK(*probe.W2A == -22.617);
-    CHECK(*probe.W3A == -339.25);
-    CHECK(*probe.W1B == 0.);
-    CHECK(*probe.W2B == -22.617);
-    CHECK(*probe.W3B == 0.);
+    CHECK(probe.PA.value == p_ref);
+    CHECK(probe.PB.value == p_ref);
+    CHECK(probe.W1A.value == 0.);
+    CHECK(probe.W2A.value == -22.617);
+    CHECK(probe.W3A.value == -339.25);
+    CHECK(probe.W1B.value == 0.);
+    CHECK(probe.W2B.value == -22.617);
+    CHECK(probe.W3B.value == 0.);
   }
 }
 
@@ -119,11 +119,10 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
     std::string OFFT("EEG");
 
     cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
-    std::deque<int> PB;
-    PB.push_back(5);
-    PB.push_back(1);
-    PB.push_back(3);
-    probe.PB = std::make_unique<std::deque<int>>(PB);
+    probe.PB.is_value = true;
+    probe.PB.value.push_back(5);
+    probe.PB.value.push_back(1);
+    probe.PB.value.push_back(3);
     test << probe;
     CHECK(test.str() ==
           "CBAR           2      39       7       36.000-011.800+012.600+01EEG     \n"
@@ -136,11 +135,10 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
     std::string OFFT("EEG");
 
     cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
-    std::deque<int> PB;
-    PB.push_back(5);
-    PB.push_back(1);
-    PB.push_back(3);
-    probe.PB = std::make_unique<std::deque<int>>(PB);
+    probe.PB.is_value = true;
+    probe.PB.value.push_back(5);
+    probe.PB.value.push_back(1);
+    probe.PB.value.push_back(3);
     test << probe;
     CHECK(test.str() ==
           "CBAR*                  2              39               7               3\n"
@@ -153,25 +151,25 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
     long EID(1), PID(2), GA(3), GB(4), G0(5);
 
     cbar probe(&EID, &PID, &GA, &GB, &G0);
-    probe.W3B = std::make_unique<double>(2.);
+    probe.W3B = 2.;
     test << probe;
     CHECK(test.str() ==
           "CBAR           1       2       3       4       5                        \n"
-          "                                                                2.000+00\n");
+          "                        0.000+000.000+000.000+000.000+000.000+002.000+00\n");
   }
 
   SECTION("dir code all large") {
     long EID(123456789), PID(2), GA(3), GB(4), G0(5);
 
     cbar probe(&EID, &PID, &GA, &GB, &G0);
-    probe.W3B = std::make_unique<double>(2.);
+    probe.W3B = 2.;
     test << probe;
     CHECK(test.str() ==
           //234567!123456789012345!123456789012345!123456789012345!123456789012345!
           "CBAR*          123456789               2               3               4\n"
           "*                      5                                                \n"
-          "*                                                                       \n"
-          "*                                                       2.00000000000+00\n");
+          "*                                       0.00000000000+000.00000000000+00\n"
+          "*       0.00000000000+000.00000000000+000.00000000000+002.00000000000+00\n");
   }
 }
 

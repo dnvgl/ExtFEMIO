@@ -31,117 +31,117 @@ using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-  return Catch::toString( ex() );
+   return Catch::toString( ex() );
 }
 
 TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
           "[bdf_mat1]" ) {
 
-  ::std::deque<string> data;
+   ::std::deque<string> data;
 
-  SECTION("first mat1") {
-    data.empty();
-    data.push_back("MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n");
+   SECTION("first mat1") {
+      data.empty();
+      data.push_back("MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n");
 
-    ::std::deque<string> lines = card::card_split(data);
-    mat1 probe(lines);
+      ::std::deque<string> lines = card::card_split(data);
+      mat1 probe(lines);
 
-    CHECK(*probe.MID == 1);
-    CHECK(*probe.E == 2.);
-    CHECK(*probe.G == 3.);
-    CHECK(*probe.NU == .4);
-    CHECK(*probe.RHO == 5.);
-    CHECK(*probe.A == 6.);
-    CHECK(*probe.TREF == 7.);
-    CHECK(*probe.GE == 8.);
-    CHECK(*probe.ST == 9.);
-    CHECK(*probe.SC == 10.);
-    CHECK(*probe.SS == 11.);
-    CHECK(*probe.MCSID == 12);
-  }
+      CHECK((long)probe.MID == 1);
+      CHECK((double)probe.E == 2.);
+      CHECK((double)probe.G == 3.);
+      CHECK((double)probe.NU == .4);
+      CHECK((double)probe.RHO == 5.);
+      CHECK((double)probe.A == 6.);
+      CHECK((double)probe.TREF == 7.);
+      CHECK((double)probe.GE == 8.);
+      CHECK((double)probe.ST == 9.);
+      CHECK((double)probe.SC == 10.);
+      CHECK((double)probe.SS == 11.);
+      CHECK((long)probe.MCSID == 12);
+   }
 
-  SECTION("mat1 with missing entries") {
-    data.empty();
-    data.push_back(
-      "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n");
-    ::std::deque<string> lines = card::card_split(data);
-    mat1 probe(lines);
+   SECTION("mat1 with missing entries") {
+      data.empty();
+      data.push_back(
+         "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n");
+      ::std::deque<string> lines = card::card_split(data);
+      mat1 probe(lines);
 
-    CHECK(*probe.MID == 1);
-    CHECK(*probe.E == 2.070e5);
-    CHECK(*probe.G == 8e4);
-    CHECK(*probe.NU == .3);
-    CHECK(*probe.RHO == 7.85e-6);
-    CHECK_FALSE(probe.A);
-    CHECK_FALSE(probe.TREF);
-    CHECK_FALSE(probe.GE);
-    CHECK_FALSE(probe.ST);
-    CHECK_FALSE(probe.SC);
-    CHECK_FALSE(probe.SS);
-    CHECK_FALSE(probe.MCSID);
-  }
+      CHECK((long)probe.MID == 1);
+      CHECK((double)probe.E == 2.070e5);
+      CHECK((double)probe.G == 8e4);
+      CHECK((double)probe.NU == .3);
+      CHECK((double)probe.RHO == 7.85e-6);
+      CHECK_FALSE(probe.A);
+      CHECK_FALSE(probe.TREF);
+      CHECK_FALSE(probe.GE);
+      CHECK_FALSE(probe.ST);
+      CHECK_FALSE(probe.SC);
+      CHECK_FALSE(probe.SS);
+      CHECK_FALSE(probe.MCSID);
+   }
 
-  SECTION("mat1 default values 1") {
-    data.empty();
-    data.push_back(
-      "MAT1,1,2.070+5\n");
-    ::std::deque<string> lines = card::card_split(data);
-    mat1 probe(lines);
+   SECTION("mat1 default values 1") {
+      data.empty();
+      data.push_back(
+         "MAT1,1,2.070+5\n");
+      ::std::deque<string> lines = card::card_split(data);
+      mat1 probe(lines);
 
-    CHECK(*probe.MID == 1);
-    CHECK(*probe.E == 2.070e5);
-    CHECK(*probe.G == 0.);
-    CHECK(*probe.NU == 0.);
-    CHECK_FALSE(probe.RHO);
-    CHECK_FALSE(probe.A);
-    CHECK_FALSE(probe.TREF);
-    CHECK_FALSE(probe.GE);
-    CHECK_FALSE(probe.ST);
-    CHECK_FALSE(probe.SC);
-    CHECK_FALSE(probe.SS);
-    CHECK_FALSE(probe.MCSID);
-  }
+      CHECK((long)probe.MID == 1);
+      CHECK((double)probe.E == 2.070e5);
+      CHECK((double)probe.G == 0.);
+      CHECK((double)probe.NU == 0.);
+      CHECK_FALSE(probe.RHO);
+      CHECK_FALSE(probe.A);
+      CHECK_FALSE(probe.TREF);
+      CHECK_FALSE(probe.GE);
+      CHECK_FALSE(probe.ST);
+      CHECK_FALSE(probe.SC);
+      CHECK_FALSE(probe.SS);
+      CHECK_FALSE(probe.MCSID);
+   }
 
-  SECTION("mat1 default values 2") {
-    data.empty();
-    data.push_back(
-      "MAT1    1       2.070+5 80000.0\n");
-    ::std::deque<string> lines = card::card_split(data);
-    mat1 probe(lines);
+   SECTION("mat1 default values 2") {
+      data.empty();
+      data.push_back(
+         "MAT1    1       2.070+5 80000.0\n");
+      ::std::deque<string> lines = card::card_split(data);
+      mat1 probe(lines);
 
-    CHECK(*probe.MID == 1);
-    CHECK(*probe.E == 2.070e5);
-    CHECK(*probe.G == 8e4);
-    CHECK(*probe.NU == Approx(0.29375));
-    CHECK_FALSE(probe.RHO);
-    CHECK_FALSE(probe.A);
-    CHECK_FALSE(probe.TREF);
-    CHECK_FALSE(probe.GE);
-    CHECK_FALSE(probe.ST);
-    CHECK_FALSE(probe.SC);
-    CHECK_FALSE(probe.SS);
-    CHECK_FALSE(probe.MCSID);
-  }
+      CHECK((long)probe.MID == 1);
+      CHECK((double)probe.E == 2.070e5);
+      CHECK((double)probe.G == 8e4);
+      CHECK((double)probe.NU == Approx(0.29375));
+      CHECK_FALSE(probe.RHO);
+      CHECK_FALSE(probe.A);
+      CHECK_FALSE(probe.TREF);
+      CHECK_FALSE(probe.GE);
+      CHECK_FALSE(probe.ST);
+      CHECK_FALSE(probe.SC);
+      CHECK_FALSE(probe.SS);
+      CHECK_FALSE(probe.MCSID);
+   }
 
-  SECTION("mat1 default values 3") {
-    data.empty();
-    data.push_back("MAT1,1,2.070+5,,.3\n");
-    ::std::deque<string> lines = card::card_split(data);
-    mat1 probe(lines);
+   SECTION("mat1 default values 3") {
+      data.empty();
+      data.push_back("MAT1,1,2.070+5,,.3\n");
+      ::std::deque<string> lines = card::card_split(data);
+      mat1 probe(lines);
 
-    CHECK(*probe.MID == 1);
-    CHECK(*probe.E == 2.070e5);
-    CHECK(*probe.G == Approx(79615.));
-    CHECK(*probe.NU == 0.3);
-    CHECK_FALSE(probe.RHO);
-    CHECK_FALSE(probe.A);
-    CHECK_FALSE(probe.TREF);
-    CHECK_FALSE(probe.GE);
-    CHECK_FALSE(probe.ST);
-    CHECK_FALSE(probe.SC);
-    CHECK_FALSE(probe.SS);
-    CHECK_FALSE(probe.MCSID);
-  }
+      CHECK((long)probe.MID == 1);
+      CHECK((double)probe.E == 2.070e5);
+      CHECK((double)probe.G == Approx(79615.));
+      CHECK((double)probe.NU == 0.3);
+      CHECK_FALSE(probe.RHO);
+      CHECK_FALSE(probe.A);
+      CHECK_FALSE(probe.TREF);
+      CHECK_FALSE(probe.GE);
+      CHECK_FALSE(probe.ST);
+      CHECK_FALSE(probe.SC);
+      CHECK_FALSE(probe.SS);
+      CHECK_FALSE(probe.MCSID);
+   }
 }
 
 // Local Variables:

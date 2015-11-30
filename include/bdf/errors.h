@@ -1,117 +1,120 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/errors.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Error handling for processing BDF data.
 
-/// Error handling for processing BDF data.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID: $Id$
 
-#if !defined _BERHOL20150710_BDF_ERRORS
-#define _BERHOL20150710_BDF_ERRORS
+#if !defined _BDF_ERRORS_H_
+#define _BDF_ERRORS_H_
 
 #include <string>
 
 #include "extfem_misc.h"
 
 namespace dnvgl {
-  namespace extfem {
-    namespace bdf {
-      namespace errors {
+   namespace extfem {
+      namespace bdf {
+         namespace errors {
 
-        class error {
+            class error {
 
-        protected:
+            protected:
 
-          ::std::string msg;
-          ::std::string name;
-          ::std::string err_class;
+               ::std::string msg;
+               ::std::string name;
+               ::std::string err_class;
 
-          ::std::string get_msg(void) const;
+               ::std::string get_msg(void) const;
 
-        public:
+            public:
 
-          DllExport error(
-            const ::std::string &msg,
-            const ::std::string &err_class="bdf_error");
+               DllExport error(
+                  const ::std::string &msg,
+                  const ::std::string &err_class="bdf_error");
 
-          DllExport error(
-            const ::std::string&, const ::std::string &msg,
-            const ::std::string &err_class="bdf_error");
+               DllExport error(
+                  const ::std::string&, const ::std::string &msg,
+                  const ::std::string &err_class="bdf_error");
 
-          DllExport ::std::string operator() (void) const;
-        };
+               DllExport ::std::string operator() (void) const;
+            };
 
-        class types_error : public error {
+            class types_error : public error {
 
-        public:
+            public:
 
-          types_error(const ::std::string &msg);
-        };
+               types_error(const ::std::string &msg);
+            };
 
-        class form_error : public error {
+            class form_error : public error {
 
-        protected:
+            protected:
 
-          form_error(
-            const ::std::string &name, const ::std::string &msg,
-            const ::std::string &cls) :
-            error(name, msg, cls) {};
-        };
+               form_error(
+                  const ::std::string &name, const ::std::string &msg,
+                  const ::std::string &cls) :
+                  error(name, msg, cls) {};
+            };
 
-        class float_error : public form_error {
+            class float_error : public form_error {
 
-        public:
+            public:
 
-          float_error(const ::std::string&, const ::std::string&);
-        };
+               float_error(const ::std::string&, const ::std::string&);
+            };
 
-        class int_error : public form_error {
+            class int_error : public form_error {
 
-        public:
+            public:
 
-          int_error(const ::std::string&, const ::std::string&);
-        };
+               int_error(const ::std::string&, const ::std::string&);
+            };
 
-        class output_error : public error {
+            class output_error : public error {
 
-        public:
+            public:
 
-          output_error(const ::std::string&, const ::std::string&);
-        };
+               output_error(const ::std::string&, const ::std::string&);
+            };
 
-        class list_error : public error {
+            class list_error : public error {
 
-        public:
+            public:
 
-          list_error(const ::std::string&, const ::std::string &);
-        };
+               list_error(const ::std::string&, const ::std::string &);
+            };
 
-        class str_error : public error {
+            class str_error : public error {
 
-        public:
+            public:
 
-          str_error(const ::std::string&, const ::std::string &);
-        };
+               str_error(const ::std::string&, const ::std::string &);
+            };
 
-        class string_error : public error {
+            class string_error : public error {
 
-        public:
+            public:
 
-          string_error(const ::std::string&, const ::std::string &);
-        };
+               string_error(const ::std::string&, const ::std::string &);
+            };
 
-        class parse_error : public error {
+            class parse_error : public error {
 
-        public:
+            public:
 
-          parse_error(const ::std::string&, const ::std::string &);
-        };
+               parse_error(const ::std::string&, const ::std::string &);
+            };
+         }
       }
-    }
-  }
+   }
 }
 
-#endif // _BERHOL20150710_BDF_ERRORS
+#endif // _BDF_ERRORS_H_
 
 // Local Variables:
 // mode: c++

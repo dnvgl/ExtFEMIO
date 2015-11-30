@@ -52,12 +52,12 @@ TEST_CASE("BDF PROD definitions.",
 
     prod probe(lines);
 
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.MID == 2);
-    CHECK(*probe.A == 3.);
-    CHECK(*probe.J == 4.);
-    CHECK(*probe.C == 5.);
-    CHECK(*probe.NSM == 6.);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.MID == 2);
+    CHECK((double)probe.A == 3.);
+    CHECK((double)probe.J == 4.);
+    CHECK((double)probe.C == 5.);
+    CHECK((double)probe.NSM == 6.);
   }
 
   SECTION("Free Field Format 2") {
@@ -71,11 +71,11 @@ TEST_CASE("BDF PROD definitions.",
 
     prod probe(lines);
 
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.MID == 2);
-    CHECK(*probe.A == 3.);
-    CHECK(*probe.J == 4.);
-    CHECK(*probe.C == 5.);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.MID == 2);
+    CHECK((double)probe.A == 3.);
+    CHECK((double)probe.J == 4.);
+    CHECK((double)probe.C == 5.);
     CHECK_FALSE(probe.NSM);
   }
 
@@ -90,11 +90,11 @@ TEST_CASE("BDF PROD definitions.",
 
     prod probe(lines);
 
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.MID == 2);
-    CHECK(*probe.A == 3.);
-    CHECK(*probe.J == 4.);
-    CHECK(*probe.C == 0.);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.MID == 2);
+    CHECK((double)probe.A == 3.);
+    CHECK((double)probe.J == 4.);
+    CHECK((double)probe.C == 0.);
     CHECK_FALSE(probe.NSM);
   }
 
@@ -110,12 +110,12 @@ TEST_CASE("BDF PROD definitions.",
 
     prod probe(lines);
 
-    CHECK(*probe.PID == 17);
-    CHECK(*probe.MID == 23);
-    CHECK(*probe.A == 42.6);
-    CHECK(*probe.J == 17.92);
-    CHECK(*probe.C == 4.2356);
-    CHECK(*probe.NSM == 0.5);
+    CHECK((long)probe.PID == 17);
+    CHECK((long)probe.MID == 23);
+    CHECK((double)probe.A == 42.6);
+    CHECK((double)probe.J == 17.92);
+    CHECK((double)probe.C == 4.2356);
+    CHECK((double)probe.NSM == 0.5);
   }
 
   SECTION("Small Field Format 2") {
@@ -130,11 +130,11 @@ TEST_CASE("BDF PROD definitions.",
 
     prod probe(lines);
 
-    CHECK(*probe.PID == 6000001);
-    CHECK(*probe.MID == 1);
-    CHECK(*probe.A == 3000);
+    CHECK((long)probe.PID == 6000001);
+    CHECK((long)probe.MID == 1);
+    CHECK((double)probe.A == 3000);
     CHECK_FALSE(probe.J);
-    CHECK(*probe.C == 0.);
+    CHECK((double)probe.C == 0.);
     CHECK_FALSE(probe.NSM);
   }
 }

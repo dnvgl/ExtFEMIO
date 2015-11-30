@@ -1,8 +1,11 @@
-// Copyright © 2015 by DNV GL SE
+/**
+  \file test_fem_float.cpp
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2015 by DNV GL SE
+  \brief Tests for FEM float types.
 
-// Task      Tests for FEM float types.
-
-// Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Detailed description
+*/
 
 // ID:
 namespace {

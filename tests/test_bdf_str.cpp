@@ -44,27 +44,27 @@ TEST_CASE("BDF str types parsing.", "[bdf_types]" ) {
 
   SECTION("'TEST    '") {
     entry_type<::std::string> obj("dummy");
-    CHECK(*obj("TEST    ") == ::std::string("TEST"));
+    CHECK(obj(entry_value<::std::string>("TEST    ")) == ::std::string("TEST"));
   }
 
   SECTION("'ONE     '") {
     entry_type<::std::string> obj("dummy", str_allowed);
-    CHECK(*obj("ONE     ") == "ONE");
+    CHECK(obj("ONE     ") == "ONE");
   }
 
   SECTION("'FOUR        '") {
     entry_type<::std::string> obj("dummy", str_allowed);
-    CHECK_THROWS(*obj("FOUR    "));
+    CHECK_THROWS(obj("FOUR    "));
   }
 
   SECTION("'            '") {
     entry_type<::std::string> obj("dummy", str_allowed);
-    CHECK_THROWS(*obj("        "));
+    CHECK_THROWS(obj("        "));
   }
 
   SECTION("'            ', 1") {
     entry_type<::std::string> obj("dummy", str_allowed_default);
-    CHECK(*obj("        ") == "ONE");
+    CHECK(obj("        ") == "ONE");
   }
 }
 
@@ -72,7 +72,7 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
 
   entry_type<std::string> obj("dummy");
 
-  std::unique_ptr<std::string> lval = std::make_unique<std::string>("abcd");
+  entry_value<std::string> lval("abcd");
 
   SECTION("SHORT") {
     bdf::types::base::out_form = bdf::types::SHORT;
@@ -82,8 +82,8 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
 
   SECTION("SHORT (nullptr)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    CHECK(obj.format((std::unique_ptr<std::string>)nullptr).size() == 8);
-    CHECK(obj.format((std::unique_ptr<std::string>)nullptr) == "        ");
+    CHECK(obj.format(nullptr).size() == 8);
+    CHECK(obj.format(nullptr) == "        ");
   }
 
   SECTION("SHORT (void)") {
@@ -102,7 +102,7 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
 
   SECTION("SHORT (too long)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    lval = std::make_unique<std::string>("abcdefghi");
+    lval = entry_value<::std::string>("abcdefghi");
     CHECK_THROWS(obj.format(lval));
   }
 

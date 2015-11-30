@@ -44,104 +44,104 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
   entry_type<double> probe("dummy", bound<double>(NULL, NULL, make_unique<double>(0.).get()));
 
   SECTION("'   1.   '") {
-    CHECK(*probe("   1.   ") == 1.);
+    CHECK(probe("   1.   ").value == 1.);
   }
 
   SECTION("'  .1    '") {
-    CHECK(*probe("  .1    ") == .1);
+    CHECK(probe("  .1    ").value == .1);
   }
 
   SECTION("'  -1.   '") {
-    CHECK(*probe("  -1.   ") == -1.);
+    CHECK(probe("  -1.   ").value == -1.);
   }
 
   SECTION("'  -.1   '") {
-    CHECK(*probe("  -.1   ") == -.1);
+    CHECK(probe("  -.1   ").value == -.1);
   }
 
   SECTION("'  -1.   ', min 0.") {
     entry_type<double> probe("dummy", bound<double>(new double(0.), NULL, new double(0.)));
-    CHECK_THROWS(*probe("  -1.   "));
+    CHECK_THROWS(probe("  -1.   "));
   }
 
   SECTION("Quick Reference") {
     ::std::vector<::std::string> samples;
-    CHECK(*probe("   7.0  ") == 7.);
-    CHECK(*probe("   7.   ") == 7.);
-    CHECK(*probe("   .7   ") == .7);
-    CHECK(*probe("   .7E1 ") == 7.);
-    CHECK(*probe("   .7e1 ") == 7.);
-    CHECK(*probe("   0.7+1") == 7.);
-    CHECK(*probe("   .70+1") == 7.);
-    CHECK(*probe("   7.E+0") == 7.);
-    CHECK(*probe("   7.e+0") == 7.);
-    CHECK(*probe("   70.-1") == 7.);
-    CHECK(*probe("  -7.0  ") == -7.);
-    CHECK(*probe("  -7.   ") == -7.);
-    CHECK(*probe("  -.7   ") == -.7);
-    CHECK(*probe("  -.7E1 ") == -7.);
-    CHECK(*probe("  -.7e1 ") == -7.);
-    CHECK(*probe("  -0.7+1") == -7.);
-    CHECK(*probe("  -.70+1") == -7.);
-    CHECK(*probe("  -7.E+0") == -7.);
-    CHECK(*probe("  -7.e+0") == -7.);
-    CHECK(*probe("  -70.-1") == -7.);
+    CHECK(probe("   7.0  ").value == 7.);
+    CHECK(probe("   7.   ").value == 7.);
+    CHECK(probe("   .7   ").value == .7);
+    CHECK(probe("   .7E1 ").value == 7.);
+    CHECK(probe("   .7e1 ").value == 7.);
+    CHECK(probe("   0.7+1").value == 7.);
+    CHECK(probe("   .70+1").value == 7.);
+    CHECK(probe("   7.E+0").value == 7.);
+    CHECK(probe("   7.e+0").value == 7.);
+    CHECK(probe("   70.-1").value == 7.);
+    CHECK(probe("  -7.0  ").value == -7.);
+    CHECK(probe("  -7.   ").value == -7.);
+    CHECK(probe("  -.7   ").value == -.7);
+    CHECK(probe("  -.7E1 ").value == -7.);
+    CHECK(probe("  -.7e1 ").value == -7.);
+    CHECK(probe("  -0.7+1").value == -7.);
+    CHECK(probe("  -.70+1").value == -7.);
+    CHECK(probe("  -7.E+0").value == -7.);
+    CHECK(probe("  -7.e+0").value == -7.);
+    CHECK(probe("  -70.-1").value == -7.);
   }
 
   SECTION("Invalid values") {
-    CHECK_THROWS(*probe("   7    "));
-    CHECK_THROWS(*probe("   7E1  "));
-    CHECK_THROWS(*probe("   7e1  "));
-    CHECK_THROWS(*probe("   7E0  "));
-    CHECK_THROWS(*probe("   7e0  "));
-    CHECK_THROWS(*probe("   7E+0 "));
-    CHECK_THROWS(*probe("   7e+0 "));
-    CHECK_THROWS(*probe("   70-1 "));
+    CHECK_THROWS(probe("   7    "));
+    CHECK_THROWS(probe("   7E1  "));
+    CHECK_THROWS(probe("   7e1  "));
+    CHECK_THROWS(probe("   7E0  "));
+    CHECK_THROWS(probe("   7e0  "));
+    CHECK_THROWS(probe("   7E+0 "));
+    CHECK_THROWS(probe("   7e+0 "));
+    CHECK_THROWS(probe("   70-1 "));
   }
 
   SECTION("'        '") {
-    CHECK(*probe("        ") == 0.);
+    CHECK(probe("        ").value == 0.);
   }
 
   SECTION("'        ', no default") {
     entry_type<double> probe("dummy", bound<double>(NULL, NULL, NULL));
-    CHECK_THROWS(*probe("        "));
+    CHECK_THROWS(probe("        "));
   }
 
   SECTION("'   123.  '") {
-    CHECK(*probe("   123.  ") == 123.);
+    CHECK(probe("   123.  ").value == 123.);
   }
 
   SECTION("'   .123  '") {
-    CHECK(*probe("   .123  ") == .123);
+    CHECK(probe("   .123  ").value == .123);
   }
 
   SECTION("'   .123+3  '") {
-    CHECK(*probe("   .123+3  ") == 123.);
+    CHECK(probe("   .123+3  ").value == 123.);
   }
 
   SECTION("'  123.+3        '") {
-    CHECK(*probe("  123.+3        ") == 123000.);
+    CHECK(probe("  123.+3        ").value == 123000.);
   }
 
   SECTION("' +123.+3        '") {
-    CHECK(*probe(" +123.+3        ") == 123000.);
+    CHECK(probe(" +123.+3        ").value == 123000.);
   }
 
   SECTION("' -123.+3        '") {
-    CHECK(*probe(" -123.+3        ") == -123000.);
+    CHECK(probe(" -123.+3        ").value == -123000.);
   }
 
   SECTION("' +123.-3        '") {
-    CHECK(*probe(" +123.-3        ") == 0.123);
+    CHECK(probe(" +123.-3        ").value == 0.123);
   }
 
   SECTION("' -123.-3        '") {
-    CHECK(*probe(" -123.-3        ") == -0.123);
+    CHECK(probe(" -123.-3        ").value == -0.123);
   }
 
   SECTION("' .736831        '") {
-    CHECK(*probe(" .736831        ") ==  0.736831);
+    CHECK(probe(" .736831        ").value ==  0.736831);
   }
 
   SECTION("'        '") {
@@ -155,7 +155,7 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
 
   entry_type<double> obj("dummy");
 
-  std::unique_ptr<double> lval = std::make_unique<double>(1.);
+  entry_value<double> lval(1.);
 
   SECTION("SHORT") {
     bdf::types::base::out_form = bdf::types::SHORT;
@@ -166,8 +166,8 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
 
   SECTION("SHORT (nullptr)") {
     bdf::types::base::out_form = bdf::types::SHORT;
-    CHECK(obj.format((unique_ptr<double>)nullptr).size() == 8);
-    CHECK(obj.format((unique_ptr<double>)nullptr) == "        ");
+    CHECK(obj.format(nullptr).size() == 8);
+    CHECK(obj.format(nullptr) == "        ");
   }
 
   SECTION("SHORT (void)") {

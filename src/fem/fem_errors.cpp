@@ -1,16 +1,21 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file fem/fem_errors.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Error Handling for processing FEM data.
 
-// Purpose: Error Handling for processing FEM data.
+   Detailed description
+*/
 
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+#include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <string>
@@ -20,59 +25,59 @@ namespace {
 using namespace ::dnvgl::extfem::fem::errors;
 
 error::error(
-  const std::string &msg, const std::string &err_class) :
-  msg(msg), name(""), err_class(err_class) {}
+   const std::string &msg, const std::string &err_class) :
+   msg(msg), name(""), err_class(err_class) {}
 
 
 error::error(
-  const std::string &name, const std::string &msg,
-  const std::string &err_class) :
-  msg(msg), name(name), err_class(err_class) {};
+   const std::string &name, const std::string &msg,
+   const std::string &err_class) :
+   msg(msg), name(name), err_class(err_class) {};
 
 std::string error::get_msg(void) const {
-  if (name.length())
-    return err_class + ":" + name + ":" + msg;
-  return err_class + ":" + msg;
+   if (name.length())
+      return err_class + ":" + name + ":" + msg;
+   return err_class + ":" + msg;
 }
 
 std::string error::operator() (void) const {
-  return this->get_msg() + "\n";
+   return this->get_msg() + "\n";
 }
 
 types_error::types_error(const std::string &msg) :
-  error("", msg, "types_error") {}
+   error("", msg, "types_error") {}
 
 float_error::float_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "float_error") {}
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "float_error") {}
 
 int_error::int_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "int_error") {}
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "int_error") {}
 
 output_error::output_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "output_error") {}
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "output_error") {}
 
 list_error::list_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "list_error") {}
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "list_error") {}
 
 str_error::str_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "str_error") {};
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "str_error") {};
 
 string_error::string_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "string_error") {};
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "string_error") {};
 
 parse_error::parse_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "parse_error") {}
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "parse_error") {}
 
 usage_error::usage_error(
-  const std::string &name, const std::string &msg) :
-  error(name, msg, "usage_error") {}
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "usage_error") {}
 
 // Local Variables:
 // mode: c++

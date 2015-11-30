@@ -45,14 +45,14 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
   ctria3 probe(lines);
 
   SECTION("first ctria3") {
-    CHECK(*probe.EID == 1);
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.G1 == 16);
-    CHECK(*probe.G2 == 200);
-    CHECK(*probe.G3 == 141);
+    CHECK((long)probe.EID == 1);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.G1 == 16);
+    CHECK((long)probe.G2 == 200);
+    CHECK((long)probe.G3 == 141);
     CHECK(probe.choose_mcid_theta == ctria3::has_THETA);
     CHECK_FALSE(probe.MCID);
-    CHECK(*probe.THETA == 0.0);
+    CHECK((double)probe.THETA == 0.0);
   }
 }
 
@@ -68,13 +68,13 @@ TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
   ctria3 probe(lines);
 
   SECTION("first ctria3") {
-    CHECK(*probe.EID == 2);
-    CHECK(*probe.PID == 1);
-    CHECK(*probe.G1 == 16);
-    CHECK(*probe.G2 == 200);
-    CHECK(*probe.G3 == 141);
+    CHECK((long)probe.EID == 2);
+    CHECK((long)probe.PID == 1);
+    CHECK((long)probe.G1 == 16);
+    CHECK((long)probe.G2 == 200);
+    CHECK((long)probe.G3 == 141);
     CHECK_FALSE(probe.MCID);
-    CHECK(*probe.THETA == 0.0);
+    CHECK((double)probe.THETA == 0.0);
   }
 }
 

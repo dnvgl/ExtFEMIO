@@ -1,20 +1,20 @@
-/* Copyright © 2015 by DNV GL SE */
+/**
+   \file fem/types.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Definitions for entry types for DNV GL FEM file records.
 
-/*
-  Purpose: Definitions for entry types for DNV GL FEM file records.
+   Detailed description
+*/
 
-  Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
- */
-
-/* ID: $Id$
- */
+// ID: $Id$
 
 #if _MSC_VER >= 1000
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20151102_TYPES
-#define _BERHOL20151102_TYPES
+#if !defined _FEM_TYPES_H_
+#define _FEM_TYPES_H_
 
 #include <string>
 #include <deque>
@@ -42,213 +42,211 @@
 #include "fem/errors.h"
 
 namespace dnvgl {
-  namespace extfem {
-    namespace fem {
-      namespace types {
+   namespace extfem {
+      namespace fem {
+         namespace types {
 
-        typedef enum {
-          /// Indicates class not suitable for end use.
-          None,
-          // /// comment cell
-          // Comment,
-          /// Integer value cell
-          Int,
-          /// Floating point value cell
-          Float,
-          /// Character string cell
-          Str,
-          /// empty cell
-          Blank,
-          /// list of integers
-          List
-        } fem_types;
+            typedef enum {
+               /// Indicates class not suitable for end use.
+               None,
+               // /// comment cell
+               // Comment,
+               /// Integer value cell
+               Int,
+               /// Floating point value cell
+               Float,
+               /// Character string cell
+               Str,
+               /// empty cell
+               Blank,
+               /// list of integers
+               List
+            } fem_types;
 
-        class base {
+            class base {
 
-        protected:
+            protected:
 
-          static const fem_types _type;
-          ::std::string name;
+               static const fem_types _type;
+               ::std::string name;
 
-        public:
+            public:
 
-          base(const ::std::string &name);
+               base(const ::std::string &name);
 
-          ~base() {};
+               ~base() {};
 
-          virtual fem_types type() const = 0;
+               virtual fem_types type() const = 0;
 
-        };
+            };
 
-        class card : public base {
-        public:
+            class card : public base {
+            public:
 
-          card(const ::std::string &name) : base(name) {};
+               card(const ::std::string &name) : base(name) {};
 
-          card(void) : base("") {};
+               card(void) : base("") {};
 
-          fem_types type(void) const {return None;};
+               fem_types type(void) const {return None;};
 
-          ::std::string format() const;
-        };
+               ::std::string format() const;
+            };
 
-        class empty : public base {
+            class empty : public base {
 
-        public:
+            public:
 
-          empty(void) : base("") {};
+               empty(void) : base("") {};
 
-          fem_types type(void) const {return None;};
+               fem_types type(void) const {return None;};
 
-          ::std::string format() const;
-        };
+               ::std::string format() const;
+            };
 
-        template <class T>
-        class entry_type : public base {
+            template <class _Ty>
+            class entry_type : public base {
 
-        public:
-          virtual ::std::string format(const T &d) const = 0;
-        };
+            public:
+               virtual ::std::string format(const _Ty &d) const = 0;
+            };
 
-        template <>
-        class entry_type<long> : public base {
+            template <>
+            class entry_type<long> : public base {
 
-          // Integer value.
+               // Integer value.
 
-        private:
+            private:
 
-          ::dnvgl::extfem::fem::type_bounds::bound<long> bounds;
-          static const
+               ::dnvgl::extfem::fem::type_bounds::bound<long> bounds;
+               static const
 #ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
+               boost::regex
 #else
-          ::std::regex
+               ::std::regex
 #endif
-          int_re;
+               int_re;
 
-        protected:
+            protected:
 
-          static const fem_types _type = Int;
+               static const fem_types _type = Int;
 
-        public:
+            public:
 
-          entry_type<long>(::std::string);
+               entry_type<long>(::std::string);
 
-          entry_type<long>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<long>);
+               entry_type<long>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<long>);
 
-          long operator() (const ::std::string&) const;
+               long operator() (const ::std::string&) const;
 
-          fem_types type() const { return _type; };
+               fem_types type() const { return _type; };
 
-          ::std::string format(const long&) const;
-        };
+               ::std::string format(const long&) const;
+            };
 
-        template <>
-        class entry_type<double> : public base {
+            template <>
+            class entry_type<double> : public base {
 
-          // Real value.
+               // Real value.
 
-        private:
+            private:
 
-          ::dnvgl::extfem::fem::type_bounds::bound<double> bounds;
+               ::dnvgl::extfem::fem::type_bounds::bound<double> bounds;
 
-          static const
+               static const
 #ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
+               boost::regex
 #else
-          ::std::regex
+               ::std::regex
 #endif
-          float_re;
+               float_re;
 
-        protected:
+            protected:
 
-          static const fem_types _type = Float;
+               static const fem_types _type = Float;
 
-        public:
+            public:
 
-          entry_type<double>(::std::string);
+               entry_type<double>(::std::string);
 
-          entry_type<double>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<double>);
+               entry_type<double>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<double>);
 
-          double operator() (const ::std::string&) const;
+               double operator() (const ::std::string&) const;
 
-          fem_types type() const {return _type;};
+               fem_types type() const {return _type;};
 
-          ::std::string format(const double&) const;
-        };
+               ::std::string format(const double&) const;
+            };
 
-        template <>
-        class entry_type<::std::string> : public base {
+            template <>
+            class entry_type<::std::string> : public base {
 
-          // String value.
+               // String value.
 
-        private:
+            private:
 
-          ::dnvgl::extfem::fem::type_bounds::bound<::std::string> bounds;
+               ::dnvgl::extfem::fem::type_bounds::bound<::std::string> bounds;
 
-        protected:
+            protected:
 
-          static const fem_types _type = Str;
+               static const fem_types _type = Str;
 
-        public:
+            public:
 
-          entry_type<::std::string>(::std::string);
+               entry_type<::std::string>(::std::string);
 
-          entry_type<::std::string>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<::std::string>);
+               entry_type<::std::string>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<::std::string>);
 
-          ::std::string operator() (const ::std::string &) const;
+               ::std::string operator() (const ::std::string &) const;
 
-          fem_types type() const {
-            return _type;
-          }
+               fem_types type() const {
+                  return _type;
+               }
 
-          ::std::string format(const ::std::string&, const size_t &len=72) const;
-        };
+               ::std::string format(const ::std::string&, const size_t &len=72) const;
+            };
 
-        template <>
-        class entry_type<::std::deque<int>> : public base {
+            template <>
+            class entry_type<::std::deque<int>> : public base {
 
-          // List of integers.
+               // List of integers.
 
-        private:
+            private:
 
-        static const
+               static const
 #ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
+                  boost::regex
 #else
-          ::std::regex
+                  ::std::regex
 #endif
-          int_re;
+                  int_re;
 
-        protected:
+            protected:
 
-          static const fem_types _type = List;
+               static const fem_types _type = List;
 
-        public:
+            public:
 
-          entry_type<::std::deque<int>>(const ::std::string &name) :
-            base(name) {};
+               entry_type<::std::deque<int>>(const ::std::string &name) :
+                  base(name) {};
 
-          ::std::deque<int>* operator() (const ::std::string&) const;
+               ::std::deque<int>* operator() (const ::std::string&) const;
 
-          inline fem_types type() const {return _type;};
+               inline fem_types type() const {return _type;};
 
-          ::std::string format(const ::std::deque<int>&) const;
-        };
+               ::std::string format(const ::std::deque<int>&) const;
+            };
+         }
       }
-    }
-  }
+   }
 }
 
-#endif // _BERHOL20151102_TYPES
+#endif // _FEM_TYPES_H_
 
-/*
-  Local Variables:
-  mode: C++
-  ispell-local-dictionary: "english"
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C ../.. check -j8"
-  coding: utf-8
-  End:
- */
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../.. check -j8"
+// End:

@@ -1,26 +1,26 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file bdf/cards_properties.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Definitions for BDF element property cards.
 
-/// Definitions for BDF element property cards.
+   Detailed description
+*/
 
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
 // ID: $Id$
 
-#if !defined _BERHOL20150721_BDF_CARDS_PROPERTIES
-#define _BERHOL20150721_BDF_CARDS_PROPERTIES
+#if !defined _BDF_CARDS_PROPERTIES_H_
+#define _BDF_CARDS_PROPERTIES_H_
 
 #include <memory>
 
-#ifdef _C2
-#undef _C2
-#endif
-
 namespace dnvgl {
-  namespace extfem {
-    namespace bdf {
-      namespace cards {
+   namespace extfem {
+      namespace bdf {
+         namespace cards {
 
-        /// Handle Nastran Bulk `PSHELL` entries.
+/// Handle Nastran Bulk `PSHELL` entries.
 /** # Shell Element Property
 
 Defines the membrane, bending, transverse shear, and coupling
@@ -28,127 +28,137 @@ properties of thin shell elements.
 
 # Format
 
-| 1     | 2   | 3    | 4    | 5    | 6        | 7    | 8    | 9   | 10 |
-| ----- | --- | ---- | ---- | ---- | -------- | ---- | ---- | --- | -- |
-| PSHELL| PID | MID1 | T    | MID2 | 12I/T**3 | MID3 | TS/T | NSM |    |
-|       | Z1  | Z2   | MID4 |      |          |      |      |     |    |
+| 1        | 2     | 3      | 4      | 5      | 6          | 7      | 8      | 9     | 10 |
+| -------- | ----- | ------ | ------ | ------ | ---------- | ------ | ------ | ----- | -- |
+| `PSHELL` | `PID` | `MID1` | `T`    | `MID2` | `12I/T**3` | `MID3` | `TS/T` | `NSM` |    |
+|          | `Z1`  | `Z2`   | `MID4` |        |            |        |        |       |    |
 */
-        class pshell : public card {
-          // Handle Nastran Bulk PSHELL entries.
+            class pshell : public card {
+               // Handle Nastran Bulk PSHELL entries.
 
-        private:
+            private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _T;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _12I_T__3; // 12 I / T**3
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID3;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _TS_T; // TS / T
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _Z1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _Z2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID4;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_T;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_12I_T__3; // 12 I / T**3
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID3;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TS_T; // TS / T
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_Z1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_Z2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID4;
 
-        public:
+            public:
 
-          /** Property identification number. (Integer > 0)
-           */
-          ::std::unique_ptr<long> PID;
-          /** Material identification number for the membrane.
-              (Integer > 0 or blank)
-          */
-          ::std::unique_ptr<long> MID1;
-          /** Default membrane thickness for `Ti` on the connection
-              entry. If `T` is blank then the thickness must be
-              specified for `Ti` on the `CQUAD4`, `CTRIA3`, `CQUAD8`,
-              and `CTRIA6` entries. (Real or blank)
-          */
-          ::std::unique_ptr<double> T;
-          /** Material identification number for bending.
-              (Integer > -1 or blank)
-          */
-          ::std::unique_ptr<long> MID2;
-          /** 12 `I`/ `T`³ : Bending moment of inertia ratio, 12 `I` /
-              `T`³. Ratio of the actual bending moment inertia of the
-              shell, `I`, to the bending moment of inertia of a
-              homogeneous shell, `T`³/12. The default value is for a
-              homogeneous shell. (Real > 0.0; Default = 1.0)
-          */
-          ::std::unique_ptr<double> x12I_T__3;
-          /** Material identification number for transverse shear.
-              (Integer > 0 or blank; unless `MID2` > 0, must be
-              blank.)
-          */
-          ::std::unique_ptr<long> MID3;
-          /** Transverse shear thickness ratio, `T_S`/`T`. Ratio of
-              the shear thickness, (`T_S`), to the membrane thickness
-              of the shell, `T`. The default value is for a
-              homogeneous shell. (Real > 0.0; Default = .833333)
-          */
-          ::std::unique_ptr<double> TS_T; // TS / T
-          /** Nonstructural mass per unit area. (Real)
-          */
-          ::std::unique_ptr<double> NSM;
-          /** Fiber distances for stress calculations. The positive
-              direction is determined by the right-hand rule, and the
-              order in which the grid points are listed on the
-              connection entry. See Remark 11. for defaults. (Real or
-              blank)
-          */
-          ::std::unique_ptr<double> Z1;
-          /** Fiber distances for stress calculations. The positive
-              direction is determined by the right-hand rule, and the
-              order in which the grid points are listed on the
-              connection entry. See Remark 11. for defaults. (Real or
-              blank)
-          */
-          ::std::unique_ptr<double> Z2;
-          /** Material identification number for membrane-bending
-              coupling. See Remarks 6. and 13. (Integer > 0 or blank,
-              must be blank unless `MID1` > 0 and `MID2` > 0, may not
-              equal `MID1` or `MID2`.)
-          */
-          ::std::unique_ptr<long> MID4;
+               /** Property identification number. (Integer > 0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<long> PID;
+               /** Material identification number for the membrane.
+                   (Integer > 0 or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID1;
+               /** Default membrane thickness for `Ti` on the
+                   connection entry. If `T` is blank then the
+                   thickness must be specified for `Ti` on the
+                   `CQUAD4`, `CTRIA3`, `CQUAD8`, and `CTRIA6` entries.
+                   (Real or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> T;
+               /** Material identification number for bending.
+                   (Integer > -1 or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID2;
+               /** 12 `I`/ `T`³ : Bending moment of inertia ratio, 12
+                   `I` / `T`³. Ratio of the actual bending moment inertia
+                   of the shell, `I`, to the bending moment of inertia of a
+                   homogeneous shell, `T`³/12. The default value is for a
+                   homogeneous shell. (Real > 0.0; Default = 1.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> x12I_T__3;
+               /** Material identification number for transverse
+                   shear. (Integer > 0 or blank; unless `MID2` > 0,
+                   must be blank.)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID3;
+               /** Transverse shear thickness ratio, `T_S`/`T`. Ratio
+                   of the shear thickness, (`T_S`), to the membrane
+                   thickness of the shell, `T`. The default value is
+                   for a homogeneous shell. (Real > 0.0; Default =
+                   .833333)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> TS_T; // TS / T
+               /** Nonstructural mass per unit area. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
+               /** Fiber distances for stress calculations. The
+                   positive direction is determined by the right-hand
+                   rule, and the order in which the grid points are
+                   listed on the connection entry. See Remark 11. for
+                   defaults. (Real or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> Z1;
+               /** Fiber distances for stress calculations. The
+                   positive direction is determined by the right-hand
+                   rule, and the order in which the grid points are
+                   listed on the connection entry. See Remark 11. for
+                   defaults. (Real or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> Z2;
+               /** Material identification number for membrane-bending
+                   coupling. See Remarks 6. and 13. (Integer > 0 or
+                   blank, must be blank unless `MID1` > 0 and `MID2` >
+                   0, may not equal `MID1` or `MID2`.)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID4;
 
-          DllExport pshell(const ::std::deque<::std::string> &);
+               DllExport
+               pshell(const ::std::deque<::std::string> &);
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PSHELL; };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return PSHELL; };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-        };
+               DllExport
+               const ::std::ostream&
+               operator << (::std::ostream& os) const;
+            };
 
-        class beam_base : public card {
+            class beam_base : public card {
 
-        protected:
+            protected:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
 
-          DllExport beam_base(const ::std::deque<::std::string> &inp) :
-            card(inp) {};
+               DllExport
+               beam_base(const ::std::deque<::std::string> &inp) :
+                  card(inp) {};
 
-        public:
+            public:
 
-          ::std::unique_ptr<long> PID;
-          ::std::unique_ptr<long> MID;
+               ::dnvgl::extfem::bdf::types::entry_value<long> PID;
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_BASE; };
-        };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return BEAM_BASE; };
+            };
 
-        class beam_prop : public beam_base {
-          // base class for beam property classes.
-        protected:
+            class beam_prop : public beam_base {
+               // base class for beam property classes.
+            protected:
 
-          DllExport beam_prop(const ::std::deque<::std::string> &inp) :
-            beam_base(inp) {};
+               DllExport beam_prop(const ::std::deque<::std::string> &inp) :
+                  beam_base(inp) {};
 
-        public:
+            public:
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
-        };
+               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
+            };
 
-        /// Handle Nastran Bulk `PBEAM` entries.
+/// Handle Nastran Bulk `PBEAM` entries.
 /** # Beam Property
 
 Defines the properties of a beam element (`CBEAM` entry). This element
@@ -158,229 +168,247 @@ may be used to model tapered beams.
 
 (Note: n = number of dimensions and m = number of intermediate stations)
 
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
-| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
-| PBEAM | PID   | MID   | A(A)  | I1(A) | I2(A) |I12(A) | J(A)  | NSM(A) |    |
-|       | C1(A) | C2(A) | D1(A) | D2(A) | E1(A) | E2(A) | F1(A) | F2(A)  |    |
+| 1       | 2       | 3       | 4       | 5       | 6       | 7        | 8       | 9        | 10 |
+| ------- | ------- | ------- | ------- | ------- | ------- | -------- | ------- | -------- | -- |
+| `PBEAM` | `PID`   | `MID`   | `A(A)`  | `I1(A)` | `I2(A)` | `I12(A)` | `J(A)`  | `NSM(A)` |    |
+|         | `C1(A)` | `C2(A)` | `D1(A)` | `D2(A)` | `E1(A)` | `E2(A)`  | `F1(A)` | `F2(A)`  |    |
 
 The next two continuations are repeated for each intermediate station
 as described in Remark 5. and `SO` and `X/XB` must be specified.
 
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
-| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
-|       | SO    | X/XB  | A     | I1    | I2    | I12   | J     | NSM    |    |
-|       | C1    | C2    | D1    | D2    | E1    | E2    | F1    | F2     |    |
+| 1 | 2    | 3      | 4    | 5    | 6    | 7     | 8    | 9     | 10 |
+| - | ---- | ------ | ---- | ---- | ---- | ----- | ---- | ----- | -- |
+|   | `SO` | `X/XB` | `A`  | `I1` | `I2` | `I12` | `J`  | `NSM` |    |
+|   | `C1` | `C2`   | `D1` | `D2` | `E1` | `E2`  | `F1` | `F2`  |    |
 
 The last two continuations are:
 
-| 1     | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
-| ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
-|       | K1    | K2    | S1    | S2    |NSI(A) |NSI(B) | CW(A) | CW(B)  |    |
-|       | M1(A) | M2(A) | M1(B) | M2(B) | N1(A) | N2(A) | N1(B) | N2(B)  |    |
+| 1 | 2       | 3       | 4       | 5       | 6        | 7        | 8       | 9        | 10 |
+| - | ------- | ------- | ------- | ------- | -------- | -------- | ------- | -------- | -- |
+|   | `K1`    | `K2`    | `S1`    | `S2`    | `NSI(A)` | `NSI(B)` | `CW(A)` | `CW(B)`  |    |
+|   | `M1(A)` | `M2(A)` | `M1(B)` | `M2(B)` | `N1(A)`  | `N2(A)`  | `N1(B)` | `N2(B)`  |    |
 */
-        class pbeam : public beam_prop {
-          // Handle Nastran Bulk PBEAM entries.
+            class pbeam : public beam_prop {
+               // Handle Nastran Bulk PBEAM entries.
 
-        private:
+            private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I12;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _J;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _SO;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X_XB;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _S1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _S2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSI_A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSI_B;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _CW_A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _CW_B;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M1_A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M2_A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M1_B;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _M2_B;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N1_A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N2_A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N1_B;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _N2_B;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_I1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_I2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_I12;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_J;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_C1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_C2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_D1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_D2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_E1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_E2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_F1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_F2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_SO;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X_XB;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_K1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_K2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_S1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_S2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSI_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSI_B;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_CW_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_CW_B;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_M1_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_M2_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_M1_B;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_M2_B;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_N1_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_N2_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_N1_B;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_N2_B;
 
-        public:
+            public:
 
-          // fields that might appear more than once
+               // fields that might appear more than once
 
-          /** Area of the beam cross section at the various stations.
-              (Real > 0.0)
-          */
-          ::std::deque<::std::unique_ptr<double>> A;
-          /** Area moment of inertia at the various stations for
-              bending in plane 1 about the neutral axis. (Real > 0.0)
-          */
-          ::std::deque<::std::unique_ptr<double>> I1;
-          /** Area moment of inertia at the various stations for
-              bending in plane 2 about the neutral axis. (Real > 0.0)
-          */
-          ::std::deque<::std::unique_ptr<double>> I2;
-          /** Area product of inertia at the various stations. (Real)
-          */
-          ::std::deque<::std::unique_ptr<double>> I12;
-          /** Torsional stiffness parameter at the various stations.
-              (Real >= 0.0 but > 0.0 if warping is present)
-          */
-          ::std::deque<::std::unique_ptr<double>> J;
-          /** Nonstructural mass per unit length at the various
-              stations. (Real, Default=0.0 )
-          */
-          ::std::deque<::std::unique_ptr<double>> NSM;
-          /** *y* coordinate for location of first stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> C1;
-          /** *z* coordinate for location of first stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> C2;
-          /** *y* coordinate for location of second stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> D1;
-          /** *z* coordinate for location of second stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> D2;
-          /** *y* coordinate for location of third stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> E1;
-          /** *z* coordinate for location of third stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> E2;
-          /** *y* coordinate for location of fourth stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> F1;
-          /** *z* coordinate for location of fourth stress recovery
-              point at the various stations. (Real; Default: 0)
-          */
-          ::std::deque<::std::unique_ptr<double>> F2;
-          /** Stress output request option at the various stations.
-              (Character)
+               /** Area of the beam cross section at the various
+                   stations. (Real > 0.0)
+               */
+               ::std::deque<double> A;
+               /** Area moment of inertia at the various stations for
+                   bending in plane 1 about the neutral axis. (Real >
+                   0.0)
+               */
+               ::std::deque<double> I1;
+               /** Area moment of inertia at the various stations for
+                   bending in plane 2 about the neutral axis. (Real >
+                   0.0)
+               */
+               ::std::deque<double> I2;
+               /** Area product of inertia at the various stations. (Real)
+                */
+               ::std::deque<double> I12;
+               /** Torsional stiffness parameter at the various
+                   stations. (Real >= 0.0 but > 0.0 if warping is
+                   present)
+               */
+               ::std::deque<double> J;
+               /** Nonstructural mass per unit length at the various
+                   stations. (Real, Default=0.0)
+               */
+               ::std::deque<double> NSM;
+               /** *y* coordinate for location of first stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> C1;
+               /** *z* coordinate for location of first stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> C2;
+               /** *y* coordinate for location of second stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> D1;
+               /** *z* coordinate for location of second stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> D2;
+               /** *y* coordinate for location of third stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> E1;
+               /** *z* coordinate for location of third stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> E2;
+               /** *y* coordinate for location of fourth stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> F1;
+               /** *z* coordinate for location of fourth stress
+                   recovery point at the various stations. (Real;
+                   Default: 0)
+               */
+               ::std::deque<double> F2;
+               /** Stress output request option at the various
+                   stations. (Character)
 
-               - `YES` --- Stresses recovered at points `Ci`, `Di`,
-                 `Ei`, and `Fi` on the next continuation.
+                   - `YES` --- Stresses recovered at points `Ci`,
+                   `Di`, `Ei`, and `Fi` on the next continuation.
 
-               - `YESA` --- Stresses recovered at points with the
-                 same *y* and *z* location as end `A`.
+                   - `YESA` --- Stresses recovered at points with the
+                   same *y* and *z* location as end `A`.
 
-               - `NO` --- No stresses or forces are recovered.
-          */
-          ::std::deque<::std::unique_ptr<::std::string>> SO;
-          /** `X/XB` : Distance from end `A` in the element coordinate
-              system divided by the length of the element. (Real >
-              0.0)
-          */
-          ::std::deque<::std::unique_ptr<double>> X_XB;
-          /** Shear stiffness factor *K* in *KxAxG* for plane 1.
-              (Real, Default = 1.0)
-          */
-          ::std::unique_ptr<double> K1;
-          /** Shear stiffness factor *K* in *K*A*G* for plane 2.
-              (Real, Default = 1.0)
-          */
-          ::std::unique_ptr<double> K2;
-          /** Shear relief coefficient due to taper for plane 1.
-              Ignored for beam p-elements. (Real, Default = 0.0)
-          */
-          ::std::unique_ptr<double> S1;
-          /** Shear relief coefficient due to taper for plane 2.
-              Ignored for beam p-elements. (Real, Default = 0.0)
-          */
-          ::std::unique_ptr<double> S2;
-          /** Nonstructural mass moment of inertia per unit length
-              about nonstructural mass center of gravity at end `A`.
-              (Real, Default = 0.0)
-          */
-          ::std::unique_ptr<double> NSI_A;
-          /** Nonstructural mass moment of inertia per unit length
-              about nonstructural mass center of gravity at end `B`.
-              (Real, Default = 0.0, same as end `A`)
-          */
-          ::std::unique_ptr<double> NSI_B;
-          /** Warping coefficient for end `A`. Ignored for beam
-              p-elements. (Real, Default = 0.0)
-          */
-          ::std::unique_ptr<double> CW_A;
-          /** Warping coefficient for end `B`. Ignored for beam
-              p-elements. (Real, Default = 0.0, same as end `A`)
-          */
-          ::std::unique_ptr<double> CW_B;
-          /** *y* coordinates of center of gravity of nonstructural mass
-           for end `A`. (Real, Default = 0.0 (no offset from shear
-           center))
-          */
-          ::std::unique_ptr<double> M1_A;
-          /** *z* coordinates of center of gravity of nonstructural mass
-           for end `A`. (Real, Default = 0.0 (no offset from shear
-           center))
-          */
-          ::std::unique_ptr<double> M2_A;
-          /** *y* coordinates of center of gravity of nonstructural mass
-           for end `B`. (Real, Default = 0.0 (no offset from shear
-           center), same values as end `A`)
-          */
-          ::std::unique_ptr<double> M1_B;
-          /** *z* coordinates of center of gravity of nonstructural mass
-           for end `B`. (Real, Default = 0.0 (no offset from shear
-           center), same values as end `A`)
-          */
-          ::std::unique_ptr<double> M2_B;
-          /** *y* coordinates of neutral axis for end `A`. (Real)
-           */
-          ::std::unique_ptr<double> N1_A;
-          /** *z* coordinates of neutral axis for end `A`. (Real)
-           */
-          ::std::unique_ptr<double> N2_A;
-          /** *y* coordinates of neutral axis for end `B`. (Real)
-           */
-          ::std::unique_ptr<double> N1_B;
-          /** *z* coordinates of neutral axis for end `B`. (Real)
-           */
-          ::std::unique_ptr<double> N2_B;
+                   - `NO` --- No stresses or forces are recovered.
+               */
+               ::std::deque<::dnvgl::extfem::bdf::types::entry_value<::std::string>> SO;
+               /** `X/XB` : Distance from end `A` in the element
+                   coordinate system divided by the length of the
+                   element. (Real > 0.0)
+               */
+               ::std::deque<double> X_XB;
+               /** Shear stiffness factor *K* in *KxAxG* for plane 1.
+                   (Real, Default = 1.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> K1;
+               /** Shear stiffness factor *K* in *K*A*G* for plane 2.
+                   (Real, Default = 1.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> K2;
+               /** Shear relief coefficient due to taper for plane 1.
+                   Ignored for beam p-elements. (Real, Default = 0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> S1;
+               /** Shear relief coefficient due to taper for plane 2.
+                   Ignored for beam p-elements. (Real, Default = 0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> S2;
+               /** Nonstructural mass moment of inertia per unit
+                   length about nonstructural mass center of gravity
+                   at end `A`. (Real, Default = 0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> NSI_A;
+               /** Nonstructural mass moment of inertia per unit length
+                   about nonstructural mass center of gravity at end `B`.
+                   (Real, Default = 0.0, same as end `A`)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> NSI_B;
+               /** Warping coefficient for end `A`. Ignored for beam
+                   p-elements. (Real, Default = 0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> CW_A;
+               /** Warping coefficient for end `B`. Ignored for beam
+                   p-elements. (Real, Default = 0.0, same as end `A`)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> CW_B;
+               /** *y* coordinates of center of gravity of
+                   nonstructural mass for end `A`. (Real, Default =
+                   0.0 (no offset from shear center))
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> M1_A;
+               /** *z* coordinates of center of gravity of
+                   nonstructural mass for end `A`. (Real, Default =
+                   0.0 (no offset from shear center))
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> M2_A;
+               /** *y* coordinates of center of gravity of
+                   nonstructural mass for end `B`. (Real, Default =
+                   0.0 (no offset from shear center), same values as
+                   end `A`)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> M1_B;
+               /** *z* coordinates of center of gravity of
+                   nonstructural mass for end `B`. (Real, Default =
+                   0.0 (no offset from shear center), same values as
+                   end `A`)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> M2_B;
+               /** *y* coordinates of neutral axis for end `A`. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> N1_A;
+               /** *z* coordinates of neutral axis for end `A`. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> N2_A;
+               /** *y* coordinates of neutral axis for end `B`. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> N1_B;
+               /** *z* coordinates of neutral axis for end `B`. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> N2_B;
 
-          DllExport pbeam(const ::std::deque<::std::string> &);
+               DllExport
+               pbeam(const ::std::deque<::std::string> &);
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBEAM; };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return PBEAM; };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-        };
+               DllExport
+               const ::std::ostream&
+               operator << (::std::ostream& os) const;
+            };
 
-        class l_geom {
+            class l_geom {
 
-        protected:
+            protected:
 
-          l_geom () {};
+               l_geom () {};
 
-          static const ::std::set<::std::string> dimnum1;
-          static const ::std::set<::std::string> dimnum2;
-          static const ::std::set<::std::string> dimnum3;
-          static const ::std::set<::std::string> dimnum4;
-          static const ::std::set<::std::string> dimnum5;
-          static const ::std::set<::std::string> dimnum6;
-          static const ::std::set<::std::string> dimnum10;
-        };
-        /// Handle Nastran Bulk `PBEAML` entries.
+               static const ::std::set<::std::string> dimnum1;
+               static const ::std::set<::std::string> dimnum2;
+               static const ::std::set<::std::string> dimnum3;
+               static const ::std::set<::std::string> dimnum4;
+               static const ::std::set<::std::string> dimnum5;
+               static const ::std::set<::std::string> dimnum6;
+               static const ::std::set<::std::string> dimnum10;
+            };
+/// Handle Nastran Bulk `PBEAML` entries.
 /** # Beam Cross-Section Property
 
 Defines the properties of a beam element by cross-sectional
@@ -399,80 +427,93 @@ dimensions.
 |         | `DIMn(m)` | `NSM(m)`  | `SO(B)`  | 1.0       | `DIM1(B)` | `DIM2(B)` | *etc.*    | `DIMn(B)` |    |
 |         |           | `NSM(B)`  |          |           |           |           |           |           |    |
 */
-        class pbeaml : public beam_prop, private l_geom {
-          // Handle Nastran Bulk PBEAML entries.
+            class pbeaml : public beam_prop, private l_geom {
+               // Handle Nastran Bulk PBEAML entries.
 
-        private:
+            private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _GROUP;
-          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _TYPE;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _DIM;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
-          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _SO;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _X_XB;
+               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_GROUP;
+               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_TYPE;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_DIM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_SO;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X_XB;
 
-        public:
-          /** Cross-section group. (Character; Default = `MSCBML0`)
-          */
-          ::std::unique_ptr<::std::string> GROUP;
-          /** Cross-section shape. (Character: `ROD`, `TUBE`, `L`,
-              `I`, `CHAN`, `T`, `BOX`, `BAR`, `CROSS`, `H`, `T1`,
-              `I1`, `CHAN1`, `Z`, `CHAN2`, `T2`, `BOX1`, `HEXA`,
-              `HAT`, `HAT1`, `DBOX` for GROUP = `MSCBML0`)
-          */
-          ::std::unique_ptr<::std::string> TYPE;
-          /** Cross-section dimensions at end `A`, intermediate
-              station *j* and end `B`. (Real > 0.0 for `GROUP` =
-              `MSCBML0`)
-          */
-          ::std::deque<::std::deque<::std::unique_ptr<double>>*> DIM;
-          /** Nonstructural mass per unit length. (Default = 0.0)
-           */
-          ::std::deque<::std::unique_ptr<double>> NSM;
-          /** Stress output request option for intermediate
-              station *j* and end `B`. (Character; Default = `YES`):
+            public:
+               /** Cross-section group. (Character; Default =
+                * `MSCBML0`)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<::std::string> GROUP;
+               /** Cross-section shape. (Character: `ROD`, `TUBE`,
+                   `L`, `I`, `CHAN`, `T`, `BOX`, `BAR`, `CROSS`, `H`,
+                   `T1`, `I1`, `CHAN1`, `Z`, `CHAN2`, `T2`, `BOX1`,
+                   `HEXA`, `HAT`, `HAT1`, `DBOX` for GROUP =
+                   `MSCBML0`)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<::std::string> TYPE;
+               /** Cross-section dimensions at end `A`, intermediate
+                   station *j* and end `B`. (Real > 0.0 for `GROUP` =
+                   `MSCBML0`)
+               */
+               ::std::deque<::std::unique_ptr<::std::deque<double>>> DIM;
+               /** Nonstructural mass per unit length. (Default = 0.0)
+                */
+               ::std::deque<double> NSM;
+               /** Stress output request option for intermediate
+                   station *j* and end `B`. (Character; Default =
+                   `YES`):
 
-                - `YES` --- Stresses recovered at all points on next
-                    continuation and shown in Figure 8-116 as `C`,
-                    `D`, `E`, and `F`.
+                   - `YES` --- Stresses recovered at all points on
+                   next continuation and shown in Figure 8-116 as
+                   `C`, `D`, `E`, and `F`.
 
-                - `NO` --- No stresses or forces are recovered.
-          */
-          ::std::deque<::std::unique_ptr<::std::string>> SO;
-          /** `X(j)/XB` : Distance from end `A` to intermediate
-              station *j* in the element coordinate system divided by
-              the length of the element. (Real>0.0; Default = 1.0)
-          */
-          ::std::deque<::std::unique_ptr<double>> X_XB;
+                   - `NO` --- No stresses or forces are recovered.
+               */
+               ::std::deque<::std::string> SO;
+               /** `X(j)/XB` : Distance from end `A` to intermediate
+                   station *j* in the element coordinate system
+                   divided by the length of the element. (Real>0.0;
+                   Default = 1.0)
+               */
+               ::std::deque<double> X_XB;
 
-          DllExport pbeaml(const ::std::deque<::std::string> &);
+               DllExport pbeaml(const ::std::deque<::std::string> &);
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBEAML; };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return PBEAML; };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-        };
+               DllExport
+               const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
 
-        /// Base class for `pbar` and `pbarl`.
-        class bar_prop : public card {
-          // base class for beam property classes.
-        protected:
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
-          /// `MID` : Material identification number. (Integer > 0)
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
+/// Base class for `pbar` and `pbarl`.
+            class bar_prop : public card {
 
-        public:
+            protected:
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
 
-          /// `PID` : Property identification number. (Integer > 0)
-          ::std::unique_ptr<long> PID;
-          ::std::unique_ptr<long> MID;
+            public:
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BAR_PROP; };
+               /// `PID` : Property identification number. (Integer >
+               /// 0)
+               ::dnvgl::extfem::bdf::types::entry_value<long> PID;
+               /// `MID` : Material identification number. (Integer >
+               /// 0)
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-          DllExport bar_prop(const ::std::deque<::std::string> &inp) :
-            card(inp) {};
-        };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return BAR_PROP; };
 
-        /// Handle Nastran Bulk `PBAR` entries.
+               DllExport
+               bar_prop(const ::std::deque<::std::string> &inp) :
+                  card(inp) {};
+            };
+
+/// Handle Nastran Bulk `PBAR` entries.
 /** # Simple Beam Property
 
 Defines the properties of a simple beam element (`CBAR` entry).
@@ -489,87 +530,94 @@ stations)
 |        | `K1`  | `K2`  | `I12` |      |      |      |          |      |    |
 */
 
-        class pbar : public bar_prop {
+            class pbar : public bar_prop {
 
-        private:
+            private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _J;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _D2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _E2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _F2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K1;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _K2;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _I12;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_I1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_I2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_J;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_C1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_C2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_D1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_D2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_E1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_E2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_F1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_F2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_K1;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_K2;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_I12;
 
-        public:
+            public:
 
-          /** Area of bar coss section. (Real; Default = 0.0)
-          */
-          ::std::unique_ptr<double> A;
-          /** Area moments of inertia. (Real; `I1` >= 0; Default=0.0)
-          */
-          ::std::unique_ptr<double> I1;
-          /** Area moments of inertia. (Real; `I2` >= 0; Default=0.0)
-           */
-          ::std::unique_ptr<double> I2;
-          /** Torsional constant. (Real)
-           */
-          ::std::unique_ptr<double> J;
-          /** Nonstructural mass per unit length. (Real, Default=0.0)
-           */
-          ::std::unique_ptr<double> NSM;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> C1;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> C2;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> D1;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> D2;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> E1;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> E2;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> F1;
-          /** Stress recovery coefficient. (Real; Default=0.0)
-           */
-          ::std::unique_ptr<double> F2;
-          /** Area factor for shear. (Real or blank)
-           */
-          ::std::unique_ptr<double> K1;
-          /** Area factor for shear. (Real or blank)
-           */
-          ::std::unique_ptr<double> K2;
-          /** Area moments of inertia. (Real; `I1`*`I2` > `I12`²;
-              Default=0.0)
-          */
-          ::std::unique_ptr<double> I12;
+               /** Area of bar coss section. (Real; Default = 0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> A;
+               /** Area moments of inertia. (Real; `I1` >= 0;
+                   Default=0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> I1;
+               /** Area moments of inertia. (Real; `I2` >= 0;
+                   Default=0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> I2;
+               /** Torsional constant. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> J;
+               /** Nonstructural mass per unit length. (Real,
+                   Default=0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> C1;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> C2;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> D1;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> D2;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> E1;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> E2;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> F1;
+               /** Stress recovery coefficient. (Real; Default=0.0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> F2;
+               /** Area factor for shear. (Real or blank)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> K1;
+               /** Area factor for shear. (Real or blank)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> K2;
+               /** Area moments of inertia. (Real; `I1`*`I2` > `I12`²;
+                   Default=0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> I12;
 
-          DllExport pbar(const ::std::deque<::std::string> &);
+               DllExport pbar(const ::std::deque<::std::string> &);
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBAR; };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return PBAR; };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-    };
+               DllExport
+               const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
 
-        /// Handle Nastran Bulk `PBARL` entries.
+/// Handle Nastran Bulk `PBARL` entries.
 /** # Simple Beam Cross-Section Property
 
 Defines the properties of a simple beam element (`CBAR` entry) by
@@ -585,44 +633,49 @@ cross-sectional dimensions.
 |         | `DIM1` | `DIM2`   | `DIM3`  | `DIM4` | `DIM5` | `DIM6` | `DIM7` | `DIM8` |    |
 |         | `DIM9` | *etc.*   | `NSM`   |        |        |        |        |        |    |
 */
-        class pbarl : public bar_prop, private l_geom {
-          // Handle Nastran Bulk PBARL entries.
+            class pbarl : public bar_prop, private l_geom {
 
-        private:
+            private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _GROUP;
-          static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> _TYPE;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _DIM;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_GROUP;
+               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_TYPE;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_DIM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
 
-        public:
+            public:
 
-          /** Cross-section group. (Character; Default = `MSCBML0`)
-           */
-          ::std::unique_ptr<::std::string> GROUP;
-          /** Cross-section shape. (Character: `ROD`, `TUBE`, `L`,
-              `I`, `CHAN`, `T`, `BOX`, `BAR`, `CROSS`, `H`, `T1`,
-              `I1`, `CHAN1`, `Z`, `CHAN2`, `T2`, `BOX1`, `HEXA`,
-              `HAT`, `HAT1`, `DBOX` for GROUP = `MSCBML0`)
-          */
-          ::std::unique_ptr<::std::string> TYPE;
-          /** Cross-section dimensions. (Real > 0.0 for `GROUP` =
-              `MSCBML0`)
-          */
-          ::std::deque<::std::unique_ptr<double>> DIM;
-          /** Nonstructural mass per unit length. `NSM` is specified
-              after the last `DIMi`. (Default = 0.0)
-          */
-          ::std::unique_ptr<double> NSM;
+               /** Cross-section group. (Character; Default =
+                   `MSCBML0`)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<::std::string> GROUP;
+               /** Cross-section shape. (Character: `ROD`, `TUBE`,
+                   `L`, `I`, `CHAN`, `T`, `BOX`, `BAR`, `CROSS`, `H`,
+                   `T1`, `I1`, `CHAN1`, `Z`, `CHAN2`, `T2`, `BOX1`,
+                   `HEXA`, `HAT`, `HAT1`, `DBOX` for GROUP =
+                   `MSCBML0`)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<::std::string> TYPE;
+               /** Cross-section dimensions. (Real > 0.0 for `GROUP` =
+                   `MSCBML0`)
+               */
+               ::std::deque<double> DIM;
+               /** Nonstructural mass per unit length. `NSM` is
+                   specified after the last `DIMi`. (Default = 0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-          DllExport pbarl(const ::std::deque<::std::string> &);
+               DllExport pbarl(const ::std::deque<::std::string> &);
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PBARL; };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return PBARL; };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-        };
+               DllExport
+               const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
 
-        /// Handle Nastran Bulk `PROD` entries.
+/// Handle Nastran Bulk `PROD` entries.
 /** # Rod Property
 
 Defines the properties of a rod element (`CROD` entry).
@@ -633,59 +686,62 @@ Defines the properties of a rod element (`CROD` entry).
 | ------- | ----- | ----- | --- | --- | --- | ----- | - | - | -- |
 | `PROD`  | `PID` | `MID` | `A` | `J` | `C` | `NSM` |   |   |    |
 */
-        class prod : public card {
-          // Handle Nastran Bulk PROD entries.
+            class prod : public card {
 
-        private:
+            private:
 
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _PID;
-          static const ::dnvgl::extfem::bdf::types::entry_type<long> _MID;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _A;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _J;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _C;
-          static const ::dnvgl::extfem::bdf::types::entry_type<double> _NSM;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_J;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_C;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
 
-        public:
+            public:
 
-        /** Property identification number. (Integer > 0)
-         */
-          ::std::unique_ptr<long> PID;
-          /** Material identification number. See Remarks 2. and 3.
-              (Integer > 0)
-          */
-          ::std::unique_ptr<long> MID;
-          /** Area of the rod. (Real)
-           */
-          ::std::unique_ptr<double> A;
-          /** Torsional constant. (Real)
-           */
-          ::std::unique_ptr<double> J;
-          /** Coefficient to determine torsional stress. (Real;
-              Default = 0.0)
-          */
-          ::std::unique_ptr<double> C;
-          /** Nonstructural mass per unit length. (Real)
-           */
-          ::std::unique_ptr<double> NSM;
+               /** Property identification number. (Integer > 0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<long> PID;
+               /** Material identification number. See Remarks 2.
+                   and 3. (Integer > 0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
+               /** Area of the rod. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> A;
+               /** Torsional constant. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> J;
+               /** Coefficient to determine torsional stress. (Real;
+                   Default = 0.0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> C;
+               /** Nonstructural mass per unit length. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-          DllExport prod(const ::std::deque<::std::string> &);
+               DllExport prod(const ::std::deque<::std::string> &);
 
-          DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return PROD; };
+               DllExport
+               const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return PROD; };
 
-          DllExport const ::std::ostream& operator << (::std::ostream& os) const;
-        };
+               DllExport
+               const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+         }
       }
-    }
-  }
+   }
 }
 
-#endif // _BERHOL20150721_BDF_CARDS_PROPERTIES
+#endif // _BDF_CARDS_PROPERTIES_H_
 
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. doxyfile.stamp check -j 8"
+// compile-command: "make -C ../.. check -j 8"
 // coding: utf-8
 // End:

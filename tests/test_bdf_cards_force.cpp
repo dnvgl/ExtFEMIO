@@ -50,13 +50,13 @@ TEST_CASE("BDF FORCE definitions. (Small Field Format)", "[bdf_force]" ) {
   force probe(lines);
 
   SECTION("first force") {
-    CHECK(*probe.SID == 2);
-    CHECK(*probe.G == 5);
-    CHECK(*probe.CID == 6);
-    CHECK(*probe.F == 2.9);
-    CHECK(*probe.N1 == 0.);
-    CHECK(*probe.N2 == 1.9);
-    CHECK(*probe.N3 == 0.);
+    CHECK((long)probe.SID == 2);
+    CHECK((long)probe.G == 5);
+    CHECK((long)probe.CID == 6);
+    CHECK((double)probe.F == 2.9);
+    CHECK((double)probe.N1 == 0.);
+    CHECK((double)probe.N2 == 1.9);
+    CHECK((double)probe.N3 == 0.);
   }
 }
 

@@ -1,8 +1,11 @@
-// Copyright © 2015 by DNV GL SE
+/**
+  \file test_fem_cards.cpp
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2015 by DNV GL SE
+  \brief Testing the FEM cards classes.
 
-// Task      Testing the FEM cards classes.
-
-// Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Detailed description
+*/
 
 // ID:
 namespace {
@@ -182,13 +185,11 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
   }
 }
 
-/*
-  Local Variables:
-  mode: c++
-  ispell-local-dictionary: "english"
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C .. check -j 8"
-  coding: utf-8
-  End:
-*/
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C .. check -j 8"
+// End:

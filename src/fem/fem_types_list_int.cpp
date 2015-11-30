@@ -1,20 +1,21 @@
 /**
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2015 by DNV GL SE
-  \brief Definitions for Sesam FEM data entry types.
+   \file fem/fem_types_list_int.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Definitions for Sesam FEM data entry types.
 
-  Detailed description
+   Detailed description
 */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #ifdef __GNUC__
@@ -49,84 +50,84 @@ boost::regex
 std::regex
 #endif
 entry_type<::std::deque<int>>::int_re(
-  "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
+   "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
 #ifdef HAVE_BOOST_REGEX_HPP
-  boost::regex_constants::ECMAScript);
+   boost::regex_constants::ECMAScript);
 #else
-  std::regex_constants::ECMAScript);
+std::regex_constants::ECMAScript);
 #endif
 
 ::std::deque<int>*
 entry_type<std::deque<int>>::operator() (const std::string &inp) const {
-  auto *value =  new std::deque<int>();
+   auto *value =  new std::deque<int>();
 
-  double tmp_d;
-  ::std::list<int> tmp_l;
-  long tmp;
+   double tmp_d;
+   ::std::list<int> tmp_l;
+   long tmp;
 
-  if (! regex_match(inp, int_re)) {
-    std::string msg("illegal input (""");
-    throw errors::int_error(name, msg + inp + """), no integer!");
+   if (! regex_match(inp, int_re)) {
+      std::string msg("illegal input (""");
+      throw errors::int_error(name, msg + inp + """), no integer!");
+   }
+
+   istringstream conv(inp);
+   conv.imbue(locale("C"));
+   conv >> tmp_d;
+   tmp = (long)tmp_d;
+
+   while (tmp) {
+      ldiv_t divmod = div(tmp, (long)10);
+      value->push_back(divmod.rem);
+      tmp /= 10;
+   }
+   ::std::sort(value->begin(), value->end());
+
+   return value;
   }
-
-  istringstream conv(inp);
-  conv.imbue(locale("C"));
-  conv >> tmp_d;
-  tmp = (long)tmp_d;
-
-  while (tmp) {
-    ldiv_t divmod = div(tmp, (long)10);
-    value->push_back(divmod.rem);
-    tmp /= 10;
-  }
-  ::std::sort(value->begin(), value->end());
-
-  return value;
-}
 
 std::string
 entry_type<std::deque<int>>::format(
-  const std::deque<int> &inp) const {
+   const std::deque<int> &inp) const {
 
-  std::ostringstream res, res2;
+   std::ostringstream res, res2;
 
-  double value = 0;
-  for (auto &p : inp) {
-    value *= 10.;
-    value += p;
-  }
-
-#ifdef _MSC_VER
-  // Set output to two digit exponetial format.
-  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
-#endif
-
-  res << " ";
-  res.setf(ios_base::scientific, ios::floatfield);
-  res.setf(ios_base::adjustfield, ios::left);
-
-  res.precision(8);
-  res.width(15);
-  res.fill(' ');
-
-  res << value;
-  std::string out(res.str());
-  if (out.size() != 16) {
-    ::std::ostringstream msg("output string for value ",
-                           ::std::ostringstream::ate);
-    ::std::copy(inp.begin(), inp.end(),
-                ostream_iterator<int>(msg, ", "));
-    msg << " of incorrect size, got length of " << out.size()
-        << " instead of allowed length of 16.";
-    throw errors::output_error(name, msg.str());
-  }
+   double value = 0;
+   for (auto &p : inp) {
+      value *= 10.;
+      value += p;
+   }
 
 #ifdef _MSC_VER
-  // Reset exponetial format to former settings.
-  _set_output_format(ext_exp_format);
+   // Set output to two digit exponetial format.
+   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-  return out;
+   res << " ";
+   res.setf(ios_base::scientific, ios::floatfield);
+   res.setf(ios_base::adjustfield, ios::left);
+
+   res.precision(8);
+   res.width(15);
+   res.fill(' ');
+
+   res << value;
+   std::string out(res.str());
+   if (out.size() != 16) {
+      ::std::ostringstream msg("output string for value ",
+                               ::std::ostringstream::ate);
+      ::std::copy(inp.begin(), inp.end(),
+                  ostream_iterator<int>(msg, ", "));
+      msg << " of incorrect size, got length of " << out.size()
+          << " instead of allowed length of 16.";
+      throw errors::output_error(name, msg.str());
+   }
+
+#ifdef _MSC_VER
+   // Reset exponetial format to former settings.
+   _set_output_format(ext_exp_format);
+#endif
+
+   return out;
 }
 
 // Local Variables:

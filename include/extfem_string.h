@@ -1,8 +1,10 @@
-// Copyright © 2015 by DNV GL SE
+/**
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2015 by DNV GL SE
+  \brief Helper functions for string manipulation.
 
-// Helper functions for string manipulation.
-
-// Author: Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  Detailed description
+*/
 
 // ID: $Id$
 
@@ -10,8 +12,8 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20150618_EXTFEM_STRING
-#define _BERHOL20150618_EXTFEM_STRING
+#if !defined _EXTFEM_STRING_H_
+#define _EXTFEM_STRING_H_
 
 #include <string>
 #include <algorithm>
@@ -34,7 +36,7 @@ namespace dnvgl {
   }
 }
 
-#endif // _BERHOL20150618_EXTFEM_STRING
+#endif // _EXTFEM_STRING_H_
 
 // Local Variables:
 // mode: c++

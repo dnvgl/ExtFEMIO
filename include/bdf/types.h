@@ -1,8 +1,11 @@
-// Copyright (C) 2015 by DNV GL SE
+/**
+   \file types.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Definitions for Nastran Bulk data entry types.
 
-/// Definitions for Nastran Bulk data entry types.
-
-// Author: Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID: $Id$
 
@@ -10,8 +13,8 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#if !defined _BERHOL20150407_BDF_TYPES
-#define _BERHOL20150407_BDF_TYPES
+#if !defined _BDF_TYPES_H_
+#define _BDF_TYPES_H_
 
 #include <string>
 #include <deque>
@@ -39,298 +42,314 @@
 #include "bdf/type_bounds.h"
 
 namespace dnvgl {
-  namespace extfem {
-    namespace bdf {
-      namespace types {
-        /// Indicators for different BDF card entries.
-        typedef enum {
-          /// Undefined entry, used for abstract base types
-          None,
-          /// Integer value
-          Int,
-          /// Floating point number
-          Float,
-          /// String value
-          Str,
-          /// List of Integers
-          List,
-          /// Empty cell (Placeholder)
-          Blank} bdf_types;
+   namespace extfem {
+      namespace bdf {
+         namespace types {
+            /// Indicators for different BDF card entries.
+            typedef enum {
+               /// Undefined entry, used for abstract base types
+               None,
+               /// Integer value
+               Int,
+               /// Floating point number
+               Float,
+               /// String value
+               Str,
+               /// List of Integers
+               List,
+               /// Empty cell (Placeholder)
+               Blank} bdf_types;
 
-        /// Indicator for BDF card output format
-        typedef enum {
-          /// Cards are written in Large Field Format
-          LONG=16,
-          /// Cards are written in Short Field Format
-          SHORT=8,
-          /// Cards are written in Free Field Format
-          FREE=-1} out_form_type;
+            /// Indicator for BDF card output format
+            typedef enum {
+               /// Cards are written in Large Field Format
+               LONG=16,
+               /// Cards are written in Short Field Format
+               SHORT=8,
+               /// Cards are written in Free Field Format
+               FREE=-1} out_form_type;
 
-        class base {
+            class base {
 
-        protected:
+            protected:
 
-          static const bdf_types _type;
+               static const bdf_types _type;
 
-        public:
+            public:
 
-          ::std::string name;
+               ::std::string name;
 
-          static out_form_type out_form;
+               static out_form_type out_form;
 
-          base(const ::std::string&);
+               base(const ::std::string&);
 
-          ~base() {};
+               ~base() {};
 
-          virtual bdf_types type() const = 0;
+               virtual bdf_types type(void) const = 0;
 
-          template <class T1, class T2>
-          friend inline bool operator> (const T1 &one, const T2 &other) {
-            return other < one;
-          };
+               template <class _Ty1, class _Ty2>
+               friend inline bool operator> (const _Ty1 &one, const _Ty2 &other) {
+                  return other < one;
+               };
 
-          template <class T1, class T2>
-          friend inline bool operator!= (const T1 &one, const T2 &other) {
-            return !(other == one);
-          };
+               template <class _Ty1, class _Ty2>
+               friend inline bool operator!= (const _Ty1 &one, const _Ty2 &other) {
+                  return !(other == one);
+               };
 
-          virtual ::std::string format(const void*) const = 0;
-        };
+               virtual ::std::string format(const void*) const = 0;
+            };
 
-        class card : public base {
-        public:
+            class card : public base {
+            public:
 
-          card(const ::std::string &name) : base(name) {};
+               card(const ::std::string &name) : base(name) {};
 
-          bdf_types type(void) const {return None;};
+               bdf_types type(void) const {return None;};
 
-          ::std::string format(const void*) const;
-        };
+               ::std::string format(const void*) const;
+               ::std::string format() const;
+            };
 
-        class empty : public base {
+            class empty : public base {
 
-        public:
+            public:
 
-          empty(void) : base("<empty>") {};
+               empty(void) : base("<empty>") {};
 
-          bdf_types type(void) const {return None;};
+               bdf_types type(void) const {return None;};
 
-          ::std::string format(const void*) const;
-        };
+               ::std::string format(const void*) const;
+               ::std::string format() const;
+            };
 
-        inline bool operator== (const base &one,
-                                const base &other) {
-          return (one.type() == other.type());
-        }
-
-        inline bool operator< (const base &one,
-                               const base &other) {
-          return (one.type() < other.type());
-        }
-
-        template <class T>
-        class entry_type : public base {
-        };
-
-        /// Integer value.
-        template <>
-        class entry_type<long> : public base {
-
-        private:
-
-          ::dnvgl::extfem::bdf::type_bounds::bound<long> bounds;
-          static const
-#ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
-#else
-          ::std::regex
-#endif
-          int_re;
-
-        protected:
-
-          static const bdf_types _type = Int;
-
-        public:
-
-          entry_type<long>(::std::string);
-
-          entry_type<long>(::std::string, ::dnvgl::extfem::bdf::type_bounds::bound<long>);
-
-          long *operator() (const ::std::string&) const;
-
-          bdf_types type() const { return _type; };
-
-          ::std::string format(const ::std::unique_ptr<long>&) const;
-          ::std::string format(const void *v) const {
-            if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
-            else {
-              long val(*((long*)v));
-              ::std::unique_ptr<long> vp;
-              vp = ::std::make_unique<long>(val);
-              return this->format(vp);
+            inline bool operator== (const base &one,
+                                    const base &other) {
+               return (one.type() == other.type());
             }
-          };
-        };
 
-        /// Real value.
-        template <>
-        class entry_type<double> : public base {
-
-        private:
-
-          ::dnvgl::extfem::bdf::type_bounds::bound<double> bounds;
-          static const
-#ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
-#else
-          ::std::regex
-#endif
-          float_exp_re;
-          static const
-#ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
-#else
-          ::std::regex
-#endif
-          float_re;
-          static const
-#ifdef HAVE_BOOST_REGEX_HPP
-          boost::regex
-#else
-          ::std::regex
-#endif
-          float_lead_dot;
-
-        protected:
-
-          static const bdf_types _type = Float;
-
-        public:
-
-          entry_type<double>(::std::string);
-
-          entry_type<double>(::std::string, ::dnvgl::extfem::bdf::type_bounds::bound<double>);
-
-          double *operator() (const ::std::string&) const;
-
-          bdf_types type() const {return _type;};
-
-          ::std::string format(const ::std::unique_ptr<double>&) const;
-          ::std::string format(const void *v) const {
-            if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
-            else {
-              double val(*((double*)v));
-              ::std::unique_ptr<double> vp;
-              vp = ::std::make_unique<double>(val);
-              return this->format(vp);
+            inline bool operator< (const base &one,
+                                   const base &other) {
+               return (one.type() < other.type());
             }
-          };
-        };
 
-        /// String value.
-        template <>
-        class entry_type<::std::string> : public base {
+            template <class _Ty>
+            class entry_value {
+            public:
 
-        private:
+               _Ty value;
+               bool is_value;
 
-          ::dnvgl::extfem::bdf::type_bounds::bound<::std::string> bounds;
+               entry_value(const _Ty &value, const bool &is_value=true) :
+                  value(value), is_value(is_value) {};
 
-    protected:
+               entry_value(const _Ty *value) {
+                  if (!value) {
+                     is_value = false;
+                     this->value = _Ty();
+                  } else {
+                     is_value = true;
+                     this->value = *value;
+                  }
+               };
 
-          static const bdf_types _type = Str;
+               entry_value() : value(_Ty()), is_value(false) {};
 
-        public:
+               entry_value(const entry_value<_Ty> &val) :
+                  value(val.value), is_value(val.is_value) {};
 
-          entry_type<::std::string>(::std::string);
 
-          entry_type<::std::string>(::std::string, ::dnvgl::extfem::bdf::type_bounds::bound<::std::string>);
+               inline bool operator== (const _Ty &other) const {
+                  return is_value && value == other;
+               }
 
-          ::std::string *operator() (const ::std::string &) const;
+               inline bool operator< (const _Ty &other) const {
+                  return is_value && value < other;
+               }
 
-          bdf_types type() const {
-            return _type;
-          }
+               inline bool operator|| (const entry_value<_Ty> &other) const {
+                  return is_value || other.is_value;
+               }
 
-          ::std::string format(const ::std::unique_ptr<::std::string>&) const;
-          ::std::string format(const void *v) const {
-            if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
-            else {
-              ::std::string val(*((::std::string*)v));
-              ::std::unique_ptr<::std::string> vp;
-              vp = ::std::make_unique<::std::string>(val);
-              return this->format(vp);
-            }
-          };
-        };
+               inline operator bool() const {
+                  return is_value;
+               }
 
-        /// List of integers.
-        template <>
-        class entry_type<::std::deque<int>> : public base {
+               inline operator _Ty() const {
+                  return value;
+               }
 
-        private:
+               void push_back(const long&);
+            };
 
-          static const
+            template <class _Ty>
+            class entry_type : public base { };
+
+/// Integer value.
+            template <>
+            class entry_type<long> : public base {
+
+            private:
+
+               ::dnvgl::extfem::bdf::type_bounds::bound<long> bounds;
+               static const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+               boost::regex
 #else
-            ::std::regex
+               ::std::regex
 #endif
-            int_re;
+               int_re;
 
-        protected:
+            protected:
 
-          static const bdf_types _type = List;
+               static const bdf_types _type = Int;
 
-        public:
+            public:
 
-          entry_type<::std::deque<int>>(const ::std::string &name) :
-            base(name) {};
+               entry_type<long>(const ::std::string&);
 
-          ::std::deque<int>* operator() (const ::std::string&) const;
+               entry_type<long>(
+                  const ::std::string&,
+                  const ::dnvgl::extfem::bdf::type_bounds::bound<long>&);
 
-          inline bdf_types type() const {return _type;};
+               entry_value<long> operator() (const ::std::string&) const;
 
-          ::std::string format(const ::std::unique_ptr<::std::deque<int>>&) const;
-          ::std::string format(const void *v) const {
-            if (!v)
-              return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
-            else {
-              ::std::deque<int> val(((::std::deque<int>*)v)->begin(), ((::std::deque<int>*)v)->end());
-              ::std::unique_ptr<::std::deque<int>> vp;
-              vp = ::std::make_unique<::std::deque<int>>(val);
-              return this->format(vp);
-            }
-          };
-        };
+               bdf_types type() const { return _type; };
 
-        template <class T> inline
-        ::std::unique_ptr<T>
-        get_val(const ::dnvgl::extfem::bdf::types::entry_type<T> &t, const ::std::string &inp) {
-          T *dummy = t(inp);
-          if (!dummy)
-            return nullptr;
-          else
-            return ::std::make_unique<T>(*dummy);
-        }
+               void set_value(entry_value<long>&, const ::std::string&) const;
 
-        template <class T> inline
-        ::std::unique_ptr<T>
-        get_val(const T *inp) {
-          if (!inp)
-            return nullptr;
-          else
-            return ::std::make_unique<T>(*inp);
-        }
-      };
-    }
-  }
+               ::std::string format(const void*) const;
+               ::std::string format(const entry_value<long> &v) const;
+               ::std::string format(const long&) const;
+            };
+
+/// Real value.
+            template <>
+            class entry_type<double> : public base {
+
+            private:
+
+               ::dnvgl::extfem::bdf::type_bounds::bound<double> bounds;
+               static const
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex
+#else
+               ::std::regex
+#endif
+               float_exp_re;
+               static const
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex
+#else
+               ::std::regex
+#endif
+               float_re;
+               static const
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex
+#else
+               ::std::regex
+#endif
+               float_lead_dot;
+
+            protected:
+
+               static const bdf_types _type = Float;
+
+            public:
+
+               entry_type<double>(const ::std::string&);
+
+               entry_type<double>(
+                  const ::std::string&,
+                  const ::dnvgl::extfem::bdf::type_bounds::bound<double>&);
+
+               entry_value<double> operator() (const ::std::string&) const;
+
+               bdf_types type() const {return _type;};
+
+               void set_value(entry_value<double> &, const ::std::string &i) const;
+
+               ::std::string format(const void *) const;
+               ::std::string format(const entry_value<double>&) const;
+               ::std::string format(const double&) const;
+            };
+
+            /// String value.
+            template <>
+            class entry_type<::std::string> : public base {
+
+            private:
+
+               ::dnvgl::extfem::bdf::type_bounds::bound<::std::string> bounds;
+
+            protected:
+
+               static const bdf_types _type = Str;
+
+            public:
+
+               entry_type<::std::string>(const ::std::string&);
+
+               entry_type<::std::string>(
+                  const ::std::string&,
+                  const ::dnvgl::extfem::bdf::type_bounds::bound<::std::string>&);
+
+               entry_value<::std::string>
+                  operator() (const ::std::string &) const;
+
+               bdf_types type() const {
+                  return _type;
+               }
+
+               void set_value(entry_value<::std::string> &, const ::std::string &i) const;
+               void set_value(entry_value<::std::string> &, const ::std::string *inp) const ;
+
+               ::std::string format(const void *) const;
+               ::std::string format(const entry_value<::std::string>&) const;
+               ::std::string format(const ::std::string&) const;
+            };
+
+            /// List of integers.
+            template <>
+            class entry_type<::std::deque<int>> : public base {
+
+            private:
+
+               static const
+#ifdef HAVE_BOOST_REGEX_HPP
+                  boost::regex
+#else
+                  ::std::regex
+#endif
+                  int_re;
+
+            protected:
+
+               static const bdf_types _type = List;
+
+            public:
+
+               entry_type<::std::deque<int>>(const ::std::string &name) :
+                  base(name) {};
+
+               entry_value<::std::deque<int>>
+                  operator() (const ::std::string&) const;
+
+               inline bdf_types type() const {return _type;};
+
+               void set_value(
+                  entry_value<::std::deque<int>>&, const ::std::string) const;
+
+               ::std::string format(const void *v) const;
+               ::std::string format(const entry_value<::std::deque<int>>&) const;
+            };
+         }
+      }
+   }
 }
 
-#endif // _BERHOL20150407_BDF_TYPES
+#endif // _BDF_TYPES_H_
 
 // Local Variables:
 // mode: c++
