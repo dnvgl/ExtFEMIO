@@ -1,18 +1,21 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file my_c++14.cpp
+   \author Berthold HÃ¶llmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright Â© 2015 by DNV GL SE
+   \brief Definitions for helper functions.
 
-// Definitions for helper functions.
-
-// Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #ifdef __GNUC__
@@ -24,18 +27,16 @@ namespace {
 #include <cmath>
 
 double ::std::round(double number) {
-    return number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5);
+   return number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5);
 }
 
 #endif
 
-/*
-  Local Variables:
-  mode: c++
-  ispell-local-dictionary: "english"
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C ../.. check -j 8"
-  coding: utf-8
-  End:
-*/
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make test"
+// End:

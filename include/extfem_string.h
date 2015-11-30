@@ -1,9 +1,10 @@
 /**
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2015 by DNV GL SE
-  \brief Helper functions for string manipulation.
+   \file extfem_string.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Helper functions for string manipulation.
 
-  Detailed description
+   Detailed description
 */
 
 // ID: $Id$
@@ -21,19 +22,19 @@
 #include "extfem_misc.h"
 
 namespace dnvgl {
-  namespace extfem {
+   namespace extfem {
 
-    namespace string {
+      namespace string {
 
-      class string : public ::std::string {
-      public:
-        DllExport string(const ::std::string& in) : ::std::string(in) {};
-        DllExport string trim(const ::std::string& = " \t");
-        string upper();
-        string lower();
-      };
-    }
-  }
+         class string : public ::std::string {
+         public:
+            DllExport string(const ::std::string& in) : ::std::string(in) {};
+            DllExport string trim(const ::std::string& = " \t");
+            string upper();
+            string lower();
+         };
+      }
+   }
 }
 
 #endif // _EXTFEM_STRING_H_

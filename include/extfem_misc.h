@@ -1,9 +1,10 @@
 /**
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2015 by DNV GL SE
-  \brief Misc. definitions for the extfem library.
+   \file extfem_misc.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Misc. definitions for the extfem library.
 
-  Detailed description
+   Detailed description
 */
 
 // ID: $Id$

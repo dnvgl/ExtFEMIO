@@ -1,3 +1,13 @@
+/**
+   \file StdAfx.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Precompiled header definitions.
+
+   Detailed description
+*/
+
+
 // StdAfx.h : include file for standard system include files,
 // or project specific include files that are used frequently,
 // but are changed infrequently
@@ -6,7 +16,8 @@
 
 #pragma once
 
-#define _AFXDLL
+#
+define _AFXDLL
 
 #ifndef EXTFEM_IGNORE_STINGRAY
 #include "NDStingrayVersions.h"
@@ -41,3 +52,12 @@
 #include "bdf/types.h"
 
 #endif
+
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make test"
+// End:
