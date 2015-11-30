@@ -136,12 +136,12 @@ cbeam::cbeam(const deque<std::string> &inp) :
    case 8:
       try {
          form_BIT.set_value(BIT, *(pos));
-         OFFT = nullptr;
+         form_OFFT.set_value(OFFT, "");
          choose_offt_bit = has_BIT;
       }
       catch (errors::float_error) {
          form_OFFT.set_value(OFFT, *pos);
-         BIT = nullptr;
+         form_BIT.set_value(BIT, "");
          choose_offt_bit = has_OFFT;
       }
       ++pos;
@@ -156,12 +156,12 @@ cbeam::cbeam(const deque<std::string> &inp) :
             throw errors::parse_error(
                "CBEAM", "Incomplete direction vector.");
          }
-         G0 = nullptr;
+         form_G0.set_value(G0, ""); ;
          choose_dir_code = has_DVEC;
       }
       catch (errors::float_error) {
          form_G0.set_value(G0, *pos);
-         X1 = nullptr;
+         form_X1.set_value(X1, ""); ;
          choose_dir_code = has_DCODE;
       }
       ++pos;

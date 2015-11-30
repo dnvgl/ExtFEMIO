@@ -37,14 +37,14 @@ cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
 
    auto pos = inp.rbegin();
 
-   THETA = nullptr;
-   MCID = nullptr;
-   ZOFFS = nullptr;
-   TFLAG = nullptr;
-   T1 = nullptr;
-   T2 = nullptr;
-   T3 = nullptr;
-   T4 = nullptr;
+   form_THETA.set_value(THETA, "");
+   form_MCID.set_value(MCID, "");
+   form_ZOFFS.set_value(ZOFFS, "");
+   form_TFLAG.set_value(TFLAG, "");
+   form_T1.set_value(T1, "");
+   form_T2.set_value(T2, "");
+   form_T3.set_value(T3, "");
+   form_T4.set_value(T4, "");
 
    switch (inp.size()-1) {
    case 16:
@@ -68,19 +68,19 @@ cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
    case 7:
       try {
          form_THETA.set_value(THETA, *pos);
-         MCID = nullptr;
+         form_MCID.set_value(MCID, "");
          choose_mcid_theta = has_THETA;
       }
       catch (errors::float_error) {
          try {
             form_MCID.set_value(MCID, *pos);
-            THETA = nullptr;
+            form_THETA.set_value(THETA, "");
             choose_mcid_theta = has_MCID;
          }
          catch (errors::int_error) {
             THETA.is_value = true;
             THETA.value = 0.;
-            MCID = nullptr;
+            form_MCID.set_value(MCID, "");
             choose_mcid_theta = has_THETA;
          }
       }

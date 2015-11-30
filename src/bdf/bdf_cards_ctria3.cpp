@@ -37,14 +37,14 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
 
    auto pos = inp.rbegin();
 
-   THETA.is_value = false;
-   MCID = nullptr;
-   ZOFFS = nullptr;
-   TFLAG = nullptr;
-   T1 = nullptr;
-   T2 = nullptr;
-   T3 = nullptr;
-   T4 = nullptr;
+   THETA.set_value(THETA, "");
+   MCID.set_value(MCID, "");
+   ZOFFS.set_value(ZOFFS, "");
+   TFLAG.set_value(TFLAG, "");
+   T1.set_value(T1, "");
+   T2.set_value(T2, "");
+   T3.set_value(T3, "");
+   T4.set_value(T4, "");
 
    switch (inp.size()-1) {
    case 16:
@@ -71,19 +71,19 @@ ctria3::ctria3(const deque<std::string> &inp) : base_shell(inp) {
    case 6:
       try {
          form_THETA.set_value(THETA, *pos);
-         MCID = nullptr;
+         MCID.set_value(MCID, "");
          choose_mcid_theta = has_THETA;
       }
       catch (errors::float_error) {
          try {
             form_MCID.set_value(MCID, *pos);
-            THETA = nullptr;
+            THETA.set_value(THETA, "");
             choose_mcid_theta = has_MCID;
          }
          catch (errors::int_error) {
             THETA.is_value = true;
             THETA.value = 0.;
-            MCID = nullptr;
+            MCID.set_value(MCID, "");
             choose_mcid_theta = has_THETA;
          }
       }
