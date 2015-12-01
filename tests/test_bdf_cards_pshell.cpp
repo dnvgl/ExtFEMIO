@@ -1,19 +1,22 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file tests/test_bdf_cards_pshell.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Testing the BDF `PSHELL` card class.
 
-// Purpose: Testing the BDF PSHELL card class.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
-#define NOMINMAX // To avoid problems with "numdric_limits"
+#define NOMINMAX // To avoid problems with "numeric_limits"
 
 #include <limits>
 
@@ -31,69 +34,69 @@ using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-  return ex();
+   return ex();
 }
 
 CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
-  return ex;
+   return ex;
 }
 
 TEST_CASE("BDF PSHELL definitions.",
           "[bdf_PSHELL]") {
 
-  SECTION("Small Field Format") {
+   SECTION("Small Field Format") {
 
-    ::std::deque<string> data;
-    data.push_back(
-      "PSHELL  1       4         23.00 4               4\n");
-    ::std::deque<string> lines;
-    card::card_split(data, lines);
-    pshell probe(lines);
+      ::std::deque<string> data;
+      data.push_back(
+         "PSHELL  1       4         23.00 4               4\n");
+      ::std::deque<string> lines;
+      card::card_split(data, lines);
+      pshell probe(lines);
 
-    CHECK((long)probe.PID == 1);
-    CHECK((long)probe.MID1 == 4);
-    CHECK((double)probe.T == 23.);
-    CHECK((long)probe.MID2 == 4);
-    CHECK((double)probe.x12I_T__3 == 1.);
-    CHECK((long)probe.MID3 == 4);
-  }
+      CHECK((long)probe.PID == 1);
+      CHECK((long)probe.MID1 == 4);
+      CHECK((double)probe.T == 23.);
+      CHECK((long)probe.MID2 == 4);
+      CHECK((double)probe.x12I_T__3 == 1.);
+      CHECK((long)probe.MID3 == 4);
+   }
 
-  SECTION("Large Field Format") {
+   SECTION("Large Field Format") {
 
-    ::std::deque<string> data;
-    data.push_back(
-      "PSHELL* 1               4                 23.00         4  "
-      "             \n");
-    data.push_back(
-      "*                       4  \n");
+      ::std::deque<string> data;
+      data.push_back(
+         "PSHELL* 1               4                 23.00         4  "
+         "             \n");
+      data.push_back(
+         "*                       4  \n");
 
-    ::std::deque<string> lines;
-card::card_split(data, lines);
-    pshell probe(lines);
+      ::std::deque<string> lines;
+      card::card_split(data, lines);
+      pshell probe(lines);
 
-    CHECK((long)probe.PID == 1);
-    CHECK((long)probe.MID1 == 4);
-    CHECK((double)probe.T == 23.);
-    CHECK((long)probe.MID2 == 4);
-    CHECK((double)probe.x12I_T__3 == 1.);
-    CHECK((long)probe.MID3 == 4);
-  }
+      CHECK((long)probe.PID == 1);
+      CHECK((long)probe.MID1 == 4);
+      CHECK((double)probe.T == 23.);
+      CHECK((long)probe.MID2 == 4);
+      CHECK((double)probe.x12I_T__3 == 1.);
+      CHECK((long)probe.MID3 == 4);
+   }
 
-  SECTION("Comma Field Format") {
+   SECTION("Comma Field Format") {
 
-    ::std::deque<string> data;
-    data.push_back("PSHELL,1,4,23.00,4,,4\n");
-    ::std::deque<string> lines;
-card::card_split(data, lines);
-    pshell probe(lines);
+      ::std::deque<string> data;
+      data.push_back("PSHELL,1,4,23.00,4,,4\n");
+      ::std::deque<string> lines;
+      card::card_split(data, lines);
+      pshell probe(lines);
 
-    CHECK((long)probe.PID == 1);
-    CHECK((long)probe.MID1 == 4);
-    CHECK((double)probe.T == 23.);
-    CHECK((long)probe.MID2 == 4);
-    CHECK((double)probe.x12I_T__3 == 1.);
-    CHECK((long)probe.MID3 == 4);
-  }
+      CHECK((long)probe.PID == 1);
+      CHECK((long)probe.MID1 == 4);
+      CHECK((double)probe.T == 23.);
+      CHECK((long)probe.MID2 == 4);
+      CHECK((double)probe.x12I_T__3 == 1.);
+      CHECK((long)probe.MID3 == 4);
+   }
 
 }
 

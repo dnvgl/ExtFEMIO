@@ -5,7 +5,7 @@ AC_CONFIG_MACRO_DIR([m4])
 m4_include(m4/ax_cxx_compile_stdcxx_11.m4)
 m4_include(m4/boost.m4)
 
-AC_INIT([ExtFEMIO], [0.1])
+AC_INIT([ExtFEMIO], [0.2])
 AC_CONFIG_SRCDIR([src/Makefile.am])
 AM_INIT_AUTOMAKE([foreign])
 AM_CONFIG_HEADER(config.h)

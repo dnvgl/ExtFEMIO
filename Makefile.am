@@ -23,7 +23,7 @@ refman: doxyfile.stamp docs/doxy/latex/.latexmkrc
 docs/doxy/latex/.latexmkrc: docs/.latexmkrc
 	$(CP) $< $@
 
-doxyfile.stamp: $(shell find docs -name \*.md) $(shell find src -name \*.cpp) $(shell find include -name \*.h)
+doxyfile.stamp: $(shell find src include tests \( -name \*.cpp -o -name \*.h \) )
 	$(DOXYGEN) docs/Doxyfile
 	echo Timestamp > doxyfile.stamp
 

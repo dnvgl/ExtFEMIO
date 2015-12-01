@@ -834,7 +834,9 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
-            DllExport ::std::unique_ptr<card> dispatch(const ::std::deque<::std::string> &);
+            DllExport void
+            dispatch(const ::std::deque<::std::string>&,
+                     ::std::unique_ptr<card>&);
          }
       }
    }

@@ -1,21 +1,24 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file tests/test_bdf_cards_load.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Testing the BDF `LOAD` class.
 
-// Purpose: Testing the BDF MOMENT LOAD class.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
 
-#define NOMINMAX // To avoid problems with "numdric_limits"
+#define NOMINMAX // To avoid problems with "numeric_limits"
 
 #include <limits>
 
@@ -44,7 +47,7 @@ TEST_CASE("BDF LOAD definitions. (Small Field Format)", "[bdf_load]" ) {
 
    ::std::deque<string> data;
    data.push_back(
-      // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+      // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "LOAD    101     -0.5    1.0     3       6.2     4                         \n");
    ::std::deque<string> lines;
    card::card_split(data, lines);

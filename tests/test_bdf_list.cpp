@@ -1,16 +1,19 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file tests/test_bdf_list.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Testing the BDF list class.
 
-// Purpose: Testing the bdf_list class.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <limits>
@@ -41,13 +44,9 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 
-   // def test_List1(self):
-   //     obj = bdf_types.List('dummy', maxelem=6, minval=1, maxval=6, uniq=True)
-   //     assert obj("1236") == (1, 2, 3, 6)
    entry_type<std::deque<int>> probe("dummy");
 
    SECTION("' 1234   '") {
-
       deque<int> ref;
       ref.push_back(1);
       ref.push_back(2);
@@ -97,12 +96,10 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
    }
 
    SECTION("SHORT (void)") {
-      std::deque<int> *llval = new std::deque<int>(
-         lval.value);
+      std::deque<int> llval(lval.value);
       bdf::types::base::out_form = bdf::types::SHORT;
-      CHECK(obj.format(llval).size() == 8);
-      CHECK(obj.format(llval) == "    1234");
-      delete llval;
+      CHECK(obj.format(&llval).size() == 8);
+      CHECK(obj.format(&llval) == "    1234");
    }
 
    SECTION("SHORT (nullptr)") {

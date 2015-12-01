@@ -16,7 +16,7 @@ namespace {
       = "@(#) $Id$";
 }
 
-#define NOMINMAX // To avoid problems with "numdric_limits"
+#define NOMINMAX // To avoid problems with "numeric_limits"
 
 #include <limits>
 
@@ -48,7 +48,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
    ::std::string s(
-      //  45678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+      // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "$Only a comment\n"
       "MAT1    1       2.305+6 80000.0 0.3     7.850-6\n"
       "MAT1    4       2.305+6 80000.0 0.3     7.850-6\n"
@@ -398,8 +398,9 @@ TEST_CASE("Split Small Field Cards", "[cards]") {
 
    SECTION("Sample 1") {
       data.empty();
-      //              12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678
-      data.push_back("GRID           2             1.0    -2.0     3.0             136");
+      data.push_back(
+         // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678
+         "GRID           2             1.0    -2.0     3.0             136");
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -427,9 +428,11 @@ TEST_CASE("Split Large Field Cards", "[cards]") {
 
    SECTION("Sample 1") {
       data.empty();
-      //              12345678|234567812345678|234567812345678|234567812345678|234567812345678|2345678
-      data.push_back("GRID*                  2                             1.0            -2.0 *GRID10\n");
-      data.push_back("*GRID10              3.0                             136\n");
+      data.push_back(
+         // 345678|234567812345678|234567812345678|234567812345678|234567812345678|2345678
+         "GRID*                  2                             1.0            -2.0 *GRID10\n");
+      data.push_back(
+         "*GRID10              3.0                             136\n");
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -452,7 +455,7 @@ TEST_CASE("Split Large Field Cards", "[cards]") {
 TEST_CASE("BDF_Dispatch", "[cards]") {
 
    ::std::string s(
-      //  45678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+      // 35678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "MAT1    1       2.305+6 80000.0 0.3     7.850-6\n"
       "MAT1    4       2.305+6 80000.0 0.3     7.850-6\n"
       "PBEAML  104010  4               L     \n"
@@ -464,7 +467,7 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
       "GRID          76        111522. 18002.  21002.\n"
       "GRID         153        111522. 18001.  21002.\n"
       "CQUAD4  1       1       16      200     141     17\n"
-      //  45678|234567890123456|234567890123456|234567890123456|234567890123456|2
+      // 35678|234567890123456|234567890123456|234567890123456|234567890123456|2
       "CQUAD4* 2               1               16              200             "
       "+\n"
       "+       140             15\n"

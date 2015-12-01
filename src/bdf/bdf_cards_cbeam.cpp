@@ -33,54 +33,62 @@ using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const long lc1 = 1;
+   static const double dc0 = 0.;
+}
+
 const entry_type<long> cbeam::form_EID("EID",
-                                   bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+                                   bdf::type_bounds::bound<long>(&lc1));
 const entry_type<long> cbeam::form_PID("PID");
 const entry_type<long> cbeam::form_GA("GA");
 const entry_type<long> cbeam::form_GB("GB");
 const entry_type<double> cbeam::form_X1("X1");
 const entry_type<long> cbeam::form_G0(
-   "G0", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "G0", bdf::type_bounds::bound<long>(&lc1));
 const entry_type<double> cbeam::form_X2(
-   "X2", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "X2",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> cbeam::form_X3(
-   "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "X3",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> cbeam::form_BIT(
    "BIT",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0));
 namespace {
    const char* OFFTinit[8] = {
       "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
    const std::set<std::string> OFFT_set(OFFTinit, OFFTinit + 8);
 }
-const entry_type<std::string> cbeam::form_OFFT("OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
+const entry_type<std::string> cbeam::form_OFFT(
+   "OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
 
 const entry_type<deque<int>> cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
 const entry_type<deque<int>> cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
 const entry_type<double> cbeam::form_W1A(
    "W1A",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<double> cbeam::form_W2A(
    "W2A",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<double> cbeam::form_W3A(
    "W3A",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<double> cbeam::form_W1B(
    "W1B",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<double> cbeam::form_W2B(
    "W2B",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<double> cbeam::form_W3B(
    "W3B",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get())); // default=0.),
+   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<long> cbeam::form_SA(
    "SA",
-   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
+   bdf::type_bounds::bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 const entry_type<long> cbeam::form_SB(
    "SB",
-   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true)); // minval=1, default=None)
+   bdf::type_bounds::bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
 cbeam::cbeam(const deque<std::string> &inp) :
    card(inp) {
@@ -97,8 +105,8 @@ cbeam::cbeam(const deque<std::string> &inp) :
    form_W1A.set_value(W1A, "");
    form_PB.set_value(PB, "");
    form_PA.set_value(PA, "");
-   form_OFFT.set_value(OFFT, "");
-   form_BIT.set_value(BIT, "");
+   OFFT.is_value = false;
+   BIT.is_value = false;
 
    switch (inp.size()-1) {
    case 24:
@@ -136,12 +144,12 @@ cbeam::cbeam(const deque<std::string> &inp) :
    case 8:
       try {
          form_BIT.set_value(BIT, *(pos));
-         form_OFFT.set_value(OFFT, "");
+         OFFT.is_value = false;
          choose_offt_bit = has_BIT;
       }
       catch (errors::float_error) {
          form_OFFT.set_value(OFFT, *pos);
-         form_BIT.set_value(BIT, "");
+         BIT.is_value = false;
          choose_offt_bit = has_OFFT;
       }
       ++pos;

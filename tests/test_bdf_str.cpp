@@ -1,16 +1,19 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file tests/test_bdf_str.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Tests for BDF str types.
 
-// Purpose: Tests for BDF str types.
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <limits>
@@ -32,91 +35,91 @@ using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::types;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-  return Catch::toString( ex() );
+   return Catch::toString( ex() );
 }
 
 TEST_CASE("BDF str types parsing.", "[bdf_types]" ) {
 
-  const char* _allowed[3] = { "ONE", "TWO", "THREE" };
-  const ::std::set<::std::string> allowed(_allowed, _allowed+3);
-  type_bounds::bound<::std::string> str_allowed(allowed);
-  type_bounds::bound<::std::string> str_allowed_default(allowed, "ONE");
+   const char* _allowed[3] = { "ONE", "TWO", "THREE" };
+   const ::std::set<::std::string> allowed(_allowed, _allowed+3);
+   type_bounds::bound<::std::string> str_allowed(allowed);
+   type_bounds::bound<::std::string> str_allowed_default(allowed, "ONE");
 
-  SECTION("'TEST    '") {
-    entry_type<::std::string> obj("dummy");
-    CHECK(obj(entry_value<::std::string>("TEST    ")) == ::std::string("TEST"));
-  }
+   SECTION("'TEST    '") {
+      entry_type<::std::string> obj("dummy");
+      CHECK(obj(entry_value<::std::string>("TEST    ")) == ::std::string("TEST"));
+   }
 
-  SECTION("'ONE     '") {
-    entry_type<::std::string> obj("dummy", str_allowed);
-    CHECK(obj("ONE     ") == "ONE");
-  }
+   SECTION("'ONE     '") {
+      entry_type<::std::string> obj("dummy", str_allowed);
+      CHECK(obj("ONE     ") == "ONE");
+   }
 
-  SECTION("'FOUR        '") {
-    entry_type<::std::string> obj("dummy", str_allowed);
-    CHECK_THROWS(obj("FOUR    "));
-  }
+   SECTION("'FOUR        '") {
+      entry_type<::std::string> obj("dummy", str_allowed);
+      CHECK_THROWS(obj("FOUR    "));
+   }
 
-  SECTION("'            '") {
-    entry_type<::std::string> obj("dummy", str_allowed);
-    CHECK_THROWS(obj("        "));
-  }
+   SECTION("'            '") {
+      entry_type<::std::string> obj("dummy", str_allowed);
+      CHECK_THROWS(obj("        "));
+   }
 
-  SECTION("'            ', 1") {
-    entry_type<::std::string> obj("dummy", str_allowed_default);
-    CHECK(obj("        ") == "ONE");
-  }
+   SECTION("'            ', 1") {
+      entry_type<::std::string> obj("dummy", str_allowed_default);
+      CHECK(obj("        ") == "ONE");
+   }
 }
 
 TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
 
-  entry_type<std::string> obj("dummy");
+   entry_type<std::string> obj("dummy");
 
-  entry_value<std::string> lval("abcd");
+   entry_value<std::string> lval("abcd");
 
-  SECTION("SHORT") {
-    bdf::types::base::out_form = bdf::types::SHORT;
-    CHECK(obj.format(lval).size() == 8);
-    CHECK(obj.format(lval) == "abcd    ");
-  }
+   SECTION("SHORT") {
+      bdf::types::base::out_form = bdf::types::SHORT;
+      CHECK(obj.format(lval).size() == 8);
+      CHECK(obj.format(lval) == "abcd    ");
+   }
 
-  SECTION("SHORT (nullptr)") {
-    bdf::types::base::out_form = bdf::types::SHORT;
-    CHECK(obj.format(nullptr).size() == 8);
-    CHECK(obj.format(nullptr) == "        ");
-  }
+   SECTION("SHORT (nullptr)") {
+      bdf::types::base::out_form = bdf::types::SHORT;
+      CHECK(obj.format(nullptr).size() == 8);
+      CHECK(obj.format(nullptr) == "        ");
+   }
 
-  SECTION("SHORT (void)") {
-    std::string *lval = new std::string("abcd");
-    bdf::types::base::out_form = bdf::types::SHORT;
-    CHECK(obj.format(lval).size() == 8);
-    CHECK(obj.format(lval) == "abcd    ");
-    delete lval;
-  }
+   SECTION("SHORT (void)") {
+      std::string lval("abcd");
+      bdf::types::base::out_form = bdf::types::SHORT;
+      CHECK(obj.format(&lval).size() == 8);
+      CHECK(obj.format(&lval) == "abcd    ");
+   }
 
-  SECTION("SHORT (nullptr, void)") {
-    bdf::types::base::out_form = bdf::types::SHORT;
-    CHECK(obj.format(nullptr).size() == 8);
-    CHECK(obj.format(nullptr) == "        ");
-  }
+   SECTION("SHORT (nullptr, void)") {
+      bdf::types::base::out_form = bdf::types::SHORT;
+      CHECK(obj.format(nullptr).size() == 8);
+      CHECK(obj.format(nullptr) == "        ");
+   }
 
-  SECTION("SHORT (too long)") {
-    bdf::types::base::out_form = bdf::types::SHORT;
-    lval = entry_value<::std::string>("abcdefghi");
-    CHECK_THROWS(obj.format(lval));
-  }
+   SECTION("SHORT (too long)") {
+      bdf::types::base::out_form = bdf::types::SHORT;
+      lval = entry_value<::std::string>("abcdefghi");
+      CHECK_THROWS(obj.format(lval));
+   }
 
-  SECTION("LONG") {
-    bdf::types::base::out_form = bdf::types::LONG;
-    CHECK(obj.format(lval).size() == 16);
-    CHECK(obj.format(lval) == "abcd            ");
-  }
+   SECTION("LONG") {
+      bdf::types::base::out_form = bdf::types::LONG;
+      CHECK(obj.format(lval).size() == 16);
+      CHECK(obj.format(lval) == "abcd            ");
+   }
 
-  SECTION("FREE") {
-    bdf::types::base::out_form = bdf::types::FREE;
-    CHECK(obj.format(lval) == "abcd");
-  }
+   SECTION("FREE") {
+      bdf::types::base::out_form = bdf::types::FREE;
+      CHECK(obj.format(lval) == "abcd");
+   }
 }
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

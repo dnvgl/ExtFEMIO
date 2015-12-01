@@ -97,36 +97,44 @@ card::card_split(deque<::std::string> const &inp) {
    return res;
 }
 
-::std::unique_ptr<fem::cards::card>
-fem::cards::dispatch(const deque<::std::string> &inp) {
+void
+fem::cards::dispatch(const deque<::std::string> &inp,
+                     ::std::unique_ptr<fem::cards::card> &res) {
 
    try {
       ::std::string key(inp.at(0));
       switch (cardtype_map.at(key)) {
       case DATE:
-         return ::std::make_unique<fem::cards::date>(inp);
+         res = ::std::make_unique<fem::cards::date>(inp);
+         break;
       case GCOORD:
-         return ::std::make_unique<fem::cards::gcoord>(inp);
+         res = ::std::make_unique<fem::cards::gcoord>(inp);
+         break;
       case GNODE:
-         return ::std::make_unique<fem::cards::gnode>(inp);
+         res = ::std::make_unique<fem::cards::gnode>(inp);
+         break;
       case IDENT:
-         return ::std::make_unique<fem::cards::ident>(inp);
+         res = ::std::make_unique<fem::cards::ident>(inp);
+         break;
       case IEND:
-         return ::std::make_unique<fem::cards::iend>(inp);
+         res = ::std::make_unique<fem::cards::iend>(inp);
+         break;
       case GELMNT1:
-         return ::std::make_unique<fem::cards::gelmnt1>(inp);
+         res = ::std::make_unique<fem::cards::gelmnt1>(inp);
+         break;
       case GELREF1:
-         return ::std::make_unique<fem::cards::gelref1>(inp);
+         res = ::std::make_unique<fem::cards::gelref1>(inp);
+         break;
       case TEXT:
-         return ::std::make_unique<fem::cards::text>(inp);
+         res = ::std::make_unique<fem::cards::text>(inp);
+         break;
          // These are not real card types, they can't be returned
       case UNKNOWN:
-         return nullptr;
+         res = nullptr;
       }
    } catch (out_of_range) {
-      return ::std::make_unique<fem::cards::unknown>(inp);
+      res = ::std::make_unique<fem::cards::unknown>(inp);
    }
-   return nullptr;
 }
 
 

@@ -1,16 +1,19 @@
-// Copyright © 2015 by DNV GL SE
+/**
+   \file tests/test_bdf_types.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Testing of definitions for Nastran Bulk data entry types.
 
-// Testing of definitions for Nastran Bulk data entry types.
-
-// Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   Detailed description
+*/
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #define NOMINMAX
@@ -28,25 +31,28 @@ namespace {
 #include "bdf/types.h"
 
 using namespace ::dnvgl::extfem;
+using namespace bdf::types;
 
 CATCH_TRANSLATE_EXCEPTION( bdf::errors::error& ex ) {
    return Catch::toString( ex() );
 }
 
-using namespace bdf::types;
+namespace {
+   static const long cl1 = 1;
+}
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-   bdf::types::base* obj_int = new entry_type<long>("dummy1");
-   bdf::types::base* obj_float = new entry_type<double>("dummy2");
-   bdf::types::base* obj_list = new entry_type<::std::deque<int>>("dummy 3");
+   entry_type<long> obj_int("dummy1");
+   entry_type<double> obj_float("dummy2");
+   entry_type<::std::deque<int>> obj_list("dummy3");
 
    SECTION("Checking 'entry_type<long>.type' against 'Int'") {
       CHECK(entry_type<long>("dummy idiot").type() == Int);
    }
 
    SECTION("Checking 'entry_type<long>->type' against 'Int'") {
-      CHECK(obj_int->type() == Int);
+      CHECK(obj_int.type() == Int);
    }
 
    SECTION("Checking 'entry_type<double>.type' against 'Float'") {
@@ -54,7 +60,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
    }
 
    SECTION("Checking 'entry_type<double>->type' against 'Float'") {
-      CHECK(obj_float->type() == Float);
+      CHECK(obj_float.type() == Float);
    }
 
    SECTION("Checking 'bdf_list.type' against 'List'") {
@@ -62,7 +68,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
    }
 
    SECTION("Checking 'bdf_list->type' against 'List'") {
-      CHECK(obj_list->type() == List);
+      CHECK(obj_list.type() == List);
    }
 
    SECTION("Comparing 'entry_type<long>' with 'entry_type<double>'") {
@@ -72,7 +78,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
    }
 
    SECTION("Comparing '*entry_type<long>' with '*entry_type<double>'") {
-      CHECK(*obj_int < *obj_float);
+      CHECK(obj_int < obj_float);
    }
 }
 
@@ -91,24 +97,20 @@ TEST_CASE("Testing bdf entry values.", "[bdf_types]" ) {
       CHECK((long)val_int == 3);
    }
 
-
    SECTION("Simple integer value with default") {
       entry_type<long> obj_int(
          "dummy1",
-         bdf::type_bounds::bound<long>(nullptr, nullptr, ::std::make_unique<long>(1).get()));
+         bdf::type_bounds::bound<long>(nullptr, nullptr, &cl1));
       obj_int.set_value(val_int, "");
       CHECK((long)val_int == 1);
    }
-
-
 }
-/*
-  Local Variables:
-  mode: c++
-  ispell-local-dictionary: "english"
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C ../ check -j 8"
-  coding: utf-8
-  End:
-*/
+
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../ check -j 8"
+// coding: utf-8
+// End:

@@ -2,7 +2,7 @@
    \file tests/test_bdf_cards_moment.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
-   \brief Testing the BDF MOMENT card class.
+   \brief Testing the BDF `MOMENT` card class.
 
    Detailed description
 */
@@ -18,7 +18,7 @@ namespace {
 
 #include "bdf/cards.h"
 
-#define NOMINMAX // To avoid problems with "numdric_limits"
+#define NOMINMAX // To avoid problems with "numeric_limits"
 
 #include <limits>
 
@@ -47,7 +47,7 @@ TEST_CASE("BDF MOMENT definitions. (Small Field Format)", "[bdf_moment]" ) {
 
    ::std::deque<string> data;
    data.push_back(
-      // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+      // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "MOMENT  2       5       6       2.9     0.0     1.9     0.0               \n");
    ::std::deque<string> lines;
    card::card_split(data, lines);
