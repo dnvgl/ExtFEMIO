@@ -16,8 +16,9 @@
 
 #pragma once
 
-#
-define _AFXDLL
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT _WIN32_WINNT_MAXVER
+#endif
 
 #ifndef EXTFEM_IGNORE_STINGRAY
 #include "NDStingrayVersions.h"
