@@ -32,8 +32,12 @@ using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const long cl1 = 1;
+}
+
 const entry_type<long> crod::form_EID(
-   "EID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "EID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> crod::form_PID("PID");
 const entry_type<long> crod::form_G1("G1");
 const entry_type<long> crod::form_G2("G2");

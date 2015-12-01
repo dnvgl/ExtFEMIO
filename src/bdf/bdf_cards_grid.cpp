@@ -35,34 +35,27 @@ using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const long cl0 = 0, cl1 = 1, cl_1 = -1, cl_2 = -2;
+   static const long cl1e8 = 100000000;
+   static const double cd0 = 0.;
+}
+
 const entry_type<long> grid::form_ID(
-   "ID",
-   bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
-                                 make_unique<long>(100000000).get()));
+   "ID", bdf::type_bounds::bound<long>(&cl1, &cl1e8));
 const entry_type<long> grid::form_CP(
-   "CP", bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
-                                       nullptr,
-                                       make_unique<long>(-1).get()));
+   "CP", bdf::type_bounds::bound<long>(&cl1, nullptr, &cl_1));
 const entry_type<double> grid::form_X1(
-   "X1",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "X1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> grid::form_X2(
-   "X2",
-   bdf::type_bounds::bound<double>(nullptr, nullptr,
-                                   make_unique<double>(0.).get()));
+   "X2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> grid::form_X3(
-   "X3",
-   bdf::type_bounds::bound<double>(nullptr, nullptr,
-                                   make_unique<double>(0.).get()));
+   "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<long> grid::form_CD(
-   "CD",
-   bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
-                                 make_unique<long>(-2).get()));
+   "CD", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl_2));
 const entry_type<std::deque<int>> grid::form_PS("PS");
 const entry_type<long> grid::form_SEID(
-   "SEID",
-   bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr,
-                                 make_unique<long>(0).get()));
+   "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
 
 
 grid::grid(const deque<std::string> &inp) : card(inp) {

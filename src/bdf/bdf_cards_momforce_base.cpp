@@ -32,26 +32,24 @@ using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const long cl0 = 0, cl1 = 1;
+   static const double cd0 = 0.;
+}
+
 const entry_type<long> momforce_base::form_SID(
-   "SID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "SID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> momforce_base::form_G(
-   "G", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "G", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> momforce_base::form_CID(
-   "CID", bdf::type_bounds::bound<long>(
-      make_unique<long>(0).get(), nullptr, make_unique<long>(0).get()));
+   "CID", bdf::type_bounds::bound<long>(&cl0, nullptr, &cl0));
 const entry_type<double> momforce_base::form_F("F");
 const entry_type<double> momforce_base::form_N1(
-   "N1",
-   bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "N1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> momforce_base::form_N2(
-   "N2",
-   bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "N2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> momforce_base::form_N3(
-   "N3",
-   bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "N3", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 
 momforce_base::momforce_base(const std::deque<std::string> &inp) :
    card(inp) {

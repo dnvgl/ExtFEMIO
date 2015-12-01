@@ -34,45 +34,42 @@ using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using ::dnvgl::extfem::bdf::types::entry_type;;
 
+namespace {
+   static const double cd0 = 0.;
+}
+
 const entry_type<double> pbar::form_A(
-   "A", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_I1(
-   "I1", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "I1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_I2(
-   "I2", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "I2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_J(
-   "J", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "J", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_NSM(
-   "NSM", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_C1(
-   "C1", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_C2(
-   "C2", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "C2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_D1(
    "D1", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_D2(
    "D2", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_E1(
    "E1", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_E2(
    "E2", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_F1(
    "F1", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_F2(
    "F2", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 const entry_type<double> pbar::form_K1(
    "K1", bdf::type_bounds::bound<double>(
       nullptr, nullptr, nullptr, true));
@@ -81,7 +78,7 @@ const entry_type<double> pbar::form_K2(
       nullptr, nullptr, nullptr, true));
 const entry_type<double> pbar::form_I12(
    "I12", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 
 pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
 

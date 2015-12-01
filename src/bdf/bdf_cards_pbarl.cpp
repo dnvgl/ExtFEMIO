@@ -34,6 +34,10 @@ using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const double cd0 = 0;
+}
+
 const entry_type<std::string> pbarl::form_GROUP(
    "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
 namespace {
@@ -47,11 +51,9 @@ namespace {
 const entry_type<std::string> pbarl::form_TYPE(
    "TYPE", bdf::type_bounds::bound<std::string>(TYPE_set));
 const entry_type<double> pbarl::form_DIM(
-   "DIM", bdf::type_bounds::bound<double>(
-      make_unique<double>(0.).get()));
+   "DIM", bdf::type_bounds::bound<double>(&cd0));
 const entry_type<double> pbarl::form_NSM(
-   "NSM", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+   "NSM", bdf::type_bounds::bound<double>( nullptr, nullptr, &cd0));
 
 pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
 

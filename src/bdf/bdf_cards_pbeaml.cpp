@@ -34,6 +34,10 @@ using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const double cd0 = 0., cd1 = 1.;
+}
+
 const entry_type<std::string> pbeaml::form_GROUP(
    "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
 namespace {
@@ -48,10 +52,10 @@ const entry_type<std::string> pbeaml::form_TYPE(
    "TYPE", bdf::type_bounds::bound<std::string>(TYPE_set));
 const entry_type<double> pbeaml::form_DIM(
    "DIM", bdf::type_bounds::bound<double>(
-      make_unique<double>(0.).get()));
+      &cd0));
 const entry_type<double> pbeaml::form_NSM(
    "NSM", bdf::type_bounds::bound<double>(
-      nullptr, nullptr, make_unique<double>(0.).get()));
+      nullptr, nullptr, &cd0));
 namespace {
    static const size_t SO_len = 2;
    const char* SO_init[SO_len] = { "YES", "NO" };
@@ -61,8 +65,8 @@ const entry_type<std::string> pbeaml::form_SO(
    "SO", bdf::type_bounds::bound<std::string>(SO_set, "YES"));
 const entry_type<double> pbeaml::form_X_XB(
    "X/XB", bdf::type_bounds::bound<double>(
-      make_unique<double>(0.).get(), nullptr,
-      make_unique<double>(1.).get()));
+      &cd0, nullptr,
+      &cd1));
 
 pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
 

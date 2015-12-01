@@ -30,37 +30,46 @@ using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const long cl0 = 0, cl1 = 1;
+   static const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
+}
+
 const entry_type<long> mat1::form_MID(
-   "MID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "MID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<double> mat1::form_E(
-   "E", bdf::type_bounds::bound<double>(
-      make_unique<double>(0.).get(), nullptr, nullptr, true));
+   "E",
+   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
 const entry_type<double> mat1::form_G(
-   "G", bdf::type_bounds::bound<double>(
-      make_unique<double>(0.).get(), nullptr, nullptr, true));
+   "G",
+   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
 const entry_type<double> mat1::form_NU(
-   "NU", bdf::type_bounds::bound<double>(make_unique<double>(-1.).get(),
-                                         make_unique<double>(.5).get(), nullptr, true));
+   "NU",
+   bdf::type_bounds::bound<double>(&cd_1, &cd05, nullptr, true));
 const entry_type<double> mat1::form_RHO(
-   "RHO", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "RHO",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::form_A(
-   "A", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "A",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::form_TREF(
-   "TREF", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "TREF",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::form_GE(
-   "GE", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "GE",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> mat1::form_ST(
    "ST",
-   bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
 const entry_type<double> mat1::form_SC(
    "SC",
-   bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
 const entry_type<double> mat1::form_SS(
    "SS",
-   bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr, nullptr, true));
+   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
 const entry_type<long> mat1::form_MCSID(
    "MCSID",
-   bdf::type_bounds::bound<long>(make_unique<long>(0).get(), nullptr, nullptr, true));
+   bdf::type_bounds::bound<long>(&cl0, nullptr, nullptr, true));
 
 mat1::mat1(const deque<std::string> &inp) : card(inp) {
 

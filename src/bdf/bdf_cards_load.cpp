@@ -23,6 +23,10 @@ namespace {
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
+namespace {
+   static const long cl1 = 1;
+}
+
 using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
@@ -30,11 +34,11 @@ using bdf::types::entry_type;
 using bdf::types::entry_value;
 
 const entry_type<long> load::form_SID(
-   "SID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "SID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<double> load::form_S("S");
 const entry_type<double> load::form_Si("Si");
 const entry_type<long> load::form_Li(
-   "Li", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "Li", bdf::type_bounds::bound<long>(&cl1));
 
 load::load(const std::deque<std::string> &inp) :
    card(inp) {

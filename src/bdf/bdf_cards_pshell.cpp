@@ -34,34 +34,42 @@ using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
-const entry_type<long> pshell::form_PID("PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+namespace {
+   static const long cl1 = 1, cl_1 = -1;
+   static const double cd0 = 0., cd1 = 1., cd833 = .833333;
+}
+
+const entry_type<long> pshell::form_PID(
+   "PID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> pshell::form_MID1(
    "MID1",
-   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
+   bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 const entry_type<double> pshell::form_T(
-   "T", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "T",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<long> pshell::form_MID2(
    "MID2",
-   bdf::type_bounds::bound<long>(make_unique<long>(-1).get(), nullptr, nullptr, true));
+   bdf::type_bounds::bound<long>(&cl_1, nullptr, nullptr, true));
 const entry_type<double> pshell::form_12I_T__3(
    "12I/T**3",
-   bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr,
-                                   make_unique<double>(1.).get()));
+   bdf::type_bounds::bound<double>(&cd0, nullptr, &cd1));
 const entry_type<long> pshell::form_MID3(
    "MID3",
-   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr, nullptr, true));
+   bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 const entry_type<double> pshell::form_TS_T(
-   "TS/T", bdf::type_bounds::bound<double>(make_unique<double>(0.).get(), nullptr,
-                                           make_unique<double>(.833333).get()));
+   "TS/T", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd833));
 const entry_type<double> pshell::form_NSM(
-   "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "NSM",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pshell::form_Z1(
-   "Z1", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "Z1",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pshell::form_Z2(
-   "Z2", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "Z2",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<long> pshell::form_MID4(
-   "MID4", bdf::type_bounds::bound<long>(make_unique<long>(1).get(),
-                                         nullptr, nullptr, true));
+   "MID4",
+   bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 
 pshell::pshell(const deque<std::string> &inp) : card(inp) {
 

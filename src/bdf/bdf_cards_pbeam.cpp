@@ -36,6 +36,10 @@ using namespace ::dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const double cd0 = 0., cd1 = 1.;
+}
+
 const entry_type<double> pbeam::form_A("A");
 const entry_type<double> pbeam::form_I1("I1");
 const entry_type<double> pbeam::form_I2("I2");
@@ -46,64 +50,70 @@ const entry_type<double> pbeam::form_J(
 const entry_type<double> pbeam::form_NSM(
    "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pbeam::form_C1(
-   "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_C2(
-   "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_D1(
-   "D1", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "D1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_D2(
-   "D2", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "D2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_E1(
-   "E1", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "E1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_E2(
-   "E2", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "E2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_F1(
-   "F1", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "F1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_F2(
-   "F2", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "F2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 // fields that might appear more than once
 namespace {
    static const size_t SO_len = 3;
    const char* SO_init[SO_len] = { "YES", "YESA", "NO" };
    const std::set<std::string> SO_set(SO_init, SO_init + SO_len);
 }
-const entry_type<std::string> pbeam::form_SO("SO", bdf::type_bounds::bound<std::string>(SO_set));
+const entry_type<std::string> pbeam::form_SO(
+   "SO", bdf::type_bounds::bound<std::string>(SO_set));
 const entry_type<double> pbeam::form_X_XB(
-   "X/XB",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "X/XB", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 // fields_finish
 const entry_type<double> pbeam::form_K1(
-   "K1", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(1.).get()));
+   "K1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd1));
 const entry_type<double> pbeam::form_K2(
-   "K2", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(1.).get()));
+   "K2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd1));
 const entry_type<double> pbeam::form_S1(
-   "S1", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "S1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_S2(
-   "S2", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "S2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_NSI_A(
-   "NSI_A", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "NSI_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_NSI_B(
-   "NSI_B", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "NSI_B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pbeam::form_CW_A(
-   "CW_A", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "CW_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_CW_B(
-   "CW_B", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "CW_B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pbeam::form_M1_A(
-   "M1_A", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "M1_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_M2_A(
-   "M2_A", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "M2_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_M1_B(
-   "M1_B", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "M1_B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pbeam::form_M2_B(
-   "M2_B", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "M2_B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pbeam::form_N1_A(
-   "N1_A", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "N1_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_N2_A(
-   "N2_A", bdf::type_bounds::bound<double>(nullptr, nullptr, make_unique<double>(0.).get()));
+   "N2_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_N1_B(
-   "N1_B", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "N1_B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> pbeam::form_N2_B(
-   "N2_B", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+   "N2_B",
+   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
 pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
 

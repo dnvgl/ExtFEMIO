@@ -40,6 +40,11 @@ using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const long cl1 = 1;
+   static const double cd0 = 0.;
+}
+
 namespace dnvgl {
    namespace extfem {
       namespace bdf{
@@ -48,20 +53,19 @@ namespace dnvgl {
             bdf::types::card cbar::head = bdf::types::card("CBAR");
 
             const entry_type<long> cbar::form_EID(
-               "EID",
-               bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+               "EID", bdf::type_bounds::bound<long>(&cl1));
             const entry_type<long> cbar::form_PID("PID");
             const entry_type<long> cbar::form_GA("GA");
             const entry_type<long> cbar::form_GB("GB");
             const entry_type<double> cbar::form_X1("X1");
             const entry_type<long> cbar::form_G0(
-               "G0", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+               "G0", bdf::type_bounds::bound<long>(&cl1));
             const entry_type<double> cbar::form_X2(
-               "X2",
-               bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+               "X2", bdf::type_bounds::bound<double>(
+                  nullptr, nullptr, nullptr, true));
             const entry_type<double> cbar::form_X3(
-               "X3",
-               bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+               "X3", bdf::type_bounds::bound<double>(
+                  nullptr, nullptr, nullptr, true));
             namespace {
                const char* initVals[8] = {
                   "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
@@ -75,27 +79,27 @@ namespace dnvgl {
             const entry_type<double> cbar::form_W1A(
                "W1A",
                bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, make_unique<double>(0.).get()));
+                  nullptr, nullptr, &cd0));
             const entry_type<double> cbar::form_W2A(
                "W2A",
                bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, make_unique<double>(0.).get()));
+                  nullptr, nullptr, &cd0));
             const entry_type<double> cbar::form_W3A(
                "W3A",
                bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, make_unique<double>(0.).get()));
+                  nullptr, nullptr, &cd0));
             const entry_type<double> cbar::form_W1B(
                "W1B",
                bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, make_unique<double>(0.).get()));
+                  nullptr, nullptr, &cd0));
             const entry_type<double> cbar::form_W2B(
                "W2B",
                bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, make_unique<double>(0.).get()));
+                  nullptr, nullptr, &cd0));
             const entry_type<double> cbar::form_W3B(
                "W3B",
                bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, make_unique<double>(0.).get()));
+                  nullptr, nullptr, &cd0));
 
             cbar::cbar(const deque<::std::string> &inp) :
                card(inp) {

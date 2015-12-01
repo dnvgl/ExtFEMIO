@@ -33,12 +33,15 @@ using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
+namespace {
+   static const long cl1 = 1;
+}
+
 const entry_type<long> bar_prop::form_PID(
-   "PID", bdf::type_bounds::bound<long>(make_unique<long>(1).get()));
+   "PID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> bar_prop::form_MID(
    "MID",
-   bdf::type_bounds::bound<long>(make_unique<long>(1).get(), nullptr,
-                                 nullptr, true));
+   bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 
 // Local Variables:
 // mode: c++

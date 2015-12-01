@@ -39,7 +39,7 @@ using bdf::types::entry_type;
 using bdf::types::entry_value;
 
 entry_type<long>::entry_type(const std::string &name) :
-   bdf::types::base(name), bounds(*(std::make_unique< bdf::type_bounds::bound<long> >())) {};
+   bdf::types::base(name), bounds(0) {};
 
 entry_type<long>::entry_type(
    const std::string &name,
