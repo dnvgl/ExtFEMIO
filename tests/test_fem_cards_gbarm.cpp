@@ -75,8 +75,8 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
       CHECK(probe.BB == 32.);
       CHECK(probe.SFY == 1.);
       CHECK(probe.SFZ == 1.);
-      CHECK(probe.NLOBY == 0.);
-      CHECK(probe.NLOBZ == 0.);
+      CHECK(probe.NLOBY == 0);
+      CHECK(probe.NLOBZ == 0);
    }
 }
 
@@ -91,7 +91,7 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
    ODOF.push_back(3);
 
    SECTION("simple") {
-      gbarm probe(1, 2., 3., 4., 5., 6., 7., 8.);
+      gbarm probe(1, 2., 3., 4., 5., 6., 7, 8);
       test << probe;
       CHECK(test.str() ==
             "GBARM   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
