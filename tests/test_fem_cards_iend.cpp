@@ -74,8 +74,7 @@ TEST_CASE("FEM IEND types output.", "[fem_iend,out]" ) {
    std::ostringstream test;
 
    SECTION("simple") {
-      long CONT(3);
-      iend probe(&CONT);
+      iend probe(3);
       test << probe;
       CHECK(test.str() == "IEND    +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
    }

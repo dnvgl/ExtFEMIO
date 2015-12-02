@@ -49,6 +49,14 @@ namespace dnvgl {
                SELMOD = _SELMOD(*(pos++));
             }
 
+            ident::ident(
+               const long &SLEVEL, const long &SELTYP,
+               const long &SELMOD) :
+               SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
+
+            const types
+            ident::card_type(void) const { return IDENT; };
+
             const ::std::ostream&
             ident::operator<<(::std::ostream& os) const {
                os << this;

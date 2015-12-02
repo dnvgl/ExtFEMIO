@@ -74,7 +74,7 @@ TEST_CASE("FEM GCOORD types output.", "[fem_gcoord,out]" ) {
    double XCOORD(1.), YCOORD(3.), ZCOORD(134.);
 
    SECTION("simple") {
-      gcoord probe(&NODENO, &XCOORD, &YCOORD, &ZCOORD);
+      gcoord probe(NODENO, XCOORD, YCOORD, ZCOORD);
       test << probe;
       CHECK(test.str() == "GCOORD  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
    }

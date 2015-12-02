@@ -63,19 +63,19 @@ namespace dnvgl {
                }
             }
 
-            text::text(const long *TYPE, const long *SUBTYPE,
-                       const long *NRECS, const long *NBYTE,
-                       const ::std::deque<::std::string> *CONT) :
-               TYPE(*TYPE), SUBTYPE(*SUBTYPE), NRECS(*NRECS),
-               NBYTE(*NBYTE), CONT(*CONT) {}
+            text::text(const long &TYPE, const long &SUBTYPE,
+                       const long &NRECS, const long &NBYTE,
+                       const ::std::deque<::std::string> &CONT) :
+               TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
+               NBYTE(NBYTE), CONT(CONT) {}
 
-            text::text(const long *TYPE, const long *SUBTYPE,
-                       const ::std::deque<::std::string> *CONT) :
+            text::text(const long &TYPE, const long &SUBTYPE,
+                       const ::std::deque<::std::string> &CONT) :
                card(),
-               TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
-               NRECS = static_cast<long>(CONT->size());
+               TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
+               NRECS = static_cast<long>(this->CONT.size());
                NBYTE = 0;
-               for (auto &p : *CONT)
+               for (auto &p : CONT)
                   NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
             }
 

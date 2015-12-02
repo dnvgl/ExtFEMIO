@@ -89,7 +89,7 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
          "Input  : \\test_01.bdt");
       CONT.push_back(
          "Log    : \\test_01.txt");
-      text probe(&TYPE, &SUBTYPE, &NRECS, &NBYTE, &CONT);
+      text probe(TYPE, SUBTYPE, NRECS, NBYTE, CONT);
       test << probe;
       CHECK(test.str() ==
             "TEXT    +0.00000000e+00 +0.00000000e+00 +4.00000000e+00 +7.20000000e+01 \n"

@@ -1,21 +1,21 @@
 /**
-  \file fem/fem_cards_iend.cpp
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2015 by DNV GL SE
-  \brief Processing Sesam FEM IEND cards.
+   \file fem/fem_cards_iend.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Processing Sesam FEM IEND cards.
 
-  Detailed description
+   Detailed description
 */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #include <memory>
@@ -28,43 +28,48 @@ using namespace fem;
 using namespace types;
 
 namespace dnvgl {
-  namespace extfem {
-    namespace fem {
-      namespace cards {
+   namespace extfem {
+      namespace fem {
+         namespace cards {
 
-        const fem::types::card iend::head("IEND");
+            const fem::types::card iend::head("IEND");
 
-        const entry_type<long> iend::_CONT("SLEVEL");
+            const entry_type<long> iend::_CONT("SLEVEL");
 
-        iend::iend(const ::std::deque<::std::string> &inp) :
-          card(inp) {
+            iend::iend(const ::std::deque<::std::string> &inp) :
+               card(inp) {
 
-          auto pos = inp.begin();
+               auto pos = inp.begin();
 
-          ++pos;
-          CONT = _CONT(*(pos));
-        }
+               ++pos;
+               CONT = _CONT(*(pos));
+            }
 
-        const ::std::ostream&
-        iend::operator<<(::std::ostream& os) const {
-          os << this;
-          return os;
-        }
+            iend::iend(const long &CONT) : CONT(CONT) {}
 
-        ::std::ostream&
-        operator<<(::std::ostream &os, const iend &card) {
+            const types
+            iend::card_type(void) const { return IEND; };
 
-          os << iend::head.format()
-             << card._CONT.format(card.CONT)
-             << iend::empty.format()
-             << iend::empty.format()
-             << iend::empty.format() << ::std::endl;
+            const ::std::ostream&
+            iend::operator<<(::std::ostream& os) const {
+               os << this;
+               return os;
+            }
 
-          return os;
-        }
+            ::std::ostream&
+            operator<<(::std::ostream &os, const iend &card) {
+
+               os << iend::head.format()
+                  << card._CONT.format(card.CONT)
+                  << iend::empty.format()
+                  << iend::empty.format()
+                  << iend::empty.format() << ::std::endl;
+
+               return os;
+            }
+         }
       }
-    }
-  }
+   }
 }
 
 // Local Variables:

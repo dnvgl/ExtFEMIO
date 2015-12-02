@@ -64,12 +64,12 @@ namespace dnvgl {
             }
 
             gelmnt1::gelmnt1(
-               const long *ELNOX, const long *ELNO,
-               const long *ELTYP, const long *ELTYAD,
-               const ::std::deque<long> *NODIN) :
+               const long &ELNOX, const long &ELNO,
+               const long &ELTYP, const long &ELTYAD,
+               const ::std::deque<long> &NODIN) :
                card(),
-               ELNOX(*ELNOX), ELNO(*ELNO), ELTYP(*ELTYP), ELTYAD(*ELTYAD),
-               NODIN(*NODIN) {}
+               ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
+               NODIN(NODIN) {}
 
             const ::dnvgl::extfem::fem::cards::types
             gelmnt1::card_type(void) const { return GELMNT1; }

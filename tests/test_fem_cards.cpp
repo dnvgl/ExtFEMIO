@@ -66,6 +66,18 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       "        SubCase\n"
       "GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005\n"
       "GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004\n"
+      "GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000\n"
+      "         6.08000000e+002 6.18000000e+002 5.71000000e+002 5.65000000e+002\n"
+      "GELREF1  4.64000000e+002 3.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n"
+      "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008\n"
+      "         5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008\n"
+      "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"
+      "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"
+      "GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -76,7 +88,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
    ::std::unique_ptr<cards::card> current;
 
    SECTION("Processing several cards.") {
-      l = probe.get();
+      probe.get(l);
       CAPTURE( l[0] );
       INFO( "The line is " << l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -87,7 +99,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<ident*>(current.get())->SELTYP == 1);
       CHECK(static_cast<ident*>(current.get())->SELMOD == 3);
 
-      l = probe.get();
+      probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::TEXT);
@@ -113,7 +125,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<text*>(current.get())->CONT[3] ==
             "Log    : \\test_01.txt                                           ");
 
-      l = probe.get();
+      probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::DATE);
@@ -138,7 +150,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<text*>(current.get())->CONT[3] ==
             "USER: berhol                                                    ");
 
-      l = probe.get();
+      probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
       // CHECK(current->card_type() == cards::TDLOAD);
@@ -146,7 +158,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       // TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000
       //         SubCase
 
-      l = probe.get();
+      probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GNODE);
@@ -163,7 +175,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<gnode*>(current.get())->ODOF[4] == 5);
       CHECK(static_cast<gnode*>(current.get())->ODOF[5] == 6);
 
-      l = probe.get();
+      probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GCOORD);
@@ -174,14 +186,88 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<gcoord*>(current.get())->YCOORD == 18000.);
       CHECK(static_cast<gcoord*>(current.get())->ZCOORD == 21000.);
 
-      l = probe.get();
+      probe.get(l);
+      CAPTURE( l[0] );
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GELMNT1);
+      // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
+      // GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000
+      //          6.08000000e+002 6.18000000e+002 5.71000000e+002 5.65000000e+002
+      CHECK(static_cast<gelmnt1*>(current.get())->ELNOX == 339);
+      CHECK(static_cast<gelmnt1*>(current.get())->ELNO == 854);
+      CHECK(static_cast<gelmnt1*>(current.get())->ELTYP == 24);
+      CHECK(static_cast<gelmnt1*>(current.get())->ELTYAD == 0);
+      CHECK(static_cast<gelmnt1*>(current.get())->NODIN.size() == 4);
+      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[0] == 608);
+      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[1] == 618);
+      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[2] == 571);
+      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[3] == 565);
+
+      probe.get(l);
+      CAPTURE( l[0] );
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GELREF1);
+      // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
+      // GELREF1  4.64000000e+002 3.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<gelref1*>(current.get())->ELNO == 464);
+      CHECK(static_cast<gelref1*>(current.get())->MATNO          == 3);
+      CHECK(static_cast<gelref1*>(current.get())->ADDNO          == 0);
+      CHECK(static_cast<gelref1*>(current.get())->INTNO          == 0);
+      CHECK(static_cast<gelref1*>(current.get())->MINTNO         == 0);
+      CHECK(static_cast<gelref1*>(current.get())->STRANO         == 0);
+      CHECK(static_cast<gelref1*>(current.get())->STRENO         == 0);
+      CHECK(static_cast<gelref1*>(current.get())->STREPONO       == 0);
+      CHECK(static_cast<gelref1*>(current.get())->GEONO_OPT      == 1);
+      CHECK(static_cast<gelref1*>(current.get())->FIXNO_OPT      == 0);
+      CHECK(static_cast<gelref1*>(current.get())->ECCNO_OPT      == 0);
+      CHECK(static_cast<gelref1*>(current.get())->TRANSNO_OPT    == 0);
+      CHECK(static_cast<gelref1*>(current.get())->GEONO.size()   == 0);
+      CHECK(static_cast<gelref1*>(current.get())->FIXNO.size()   == 0);
+      CHECK(static_cast<gelref1*>(current.get())->ECCNO.size()   == 0);
+      CHECK(static_cast<gelref1*>(current.get())->TRANSNO.size() == 0);
+
+      probe.get(l);
+      CAPTURE( l[0] );
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GBARM);
+      // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
+      // GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001
+      //          1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<gbarm*>(current.get())->GEONO == 2);
+      CHECK(static_cast<gbarm*>(current.get())->HZ == 250.);
+      CHECK(static_cast<gbarm*>(current.get())->BT == 32.);
+      CHECK(static_cast<gbarm*>(current.get())->BB == 32.);
+      CHECK(static_cast<gbarm*>(current.get())->SFY == 1.);
+      CHECK(static_cast<gbarm*>(current.get())->SFZ == 1.);
+      CHECK(static_cast<gbarm*>(current.get())->NLOBY == 0);
+      CHECK(static_cast<gbarm*>(current.get())->NLOBZ == 0);
+
+      probe.get(l);
+      CAPTURE( l[0] );
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GBEAMG);
+      // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
+      // GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008
+      //          5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008
+      //          1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008
+      //          1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008
+
+      probe.get(l);
+      CAPTURE( l[0] );
+      cards::dispatch(card::card_split(l), current);
+      // CHECK(current->card_type() == cards::GCOORD);
+      // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
+      // GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000
+
+      probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::IEND);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<iend*>(current.get())->CONT == 0);
-
    }
 }
 

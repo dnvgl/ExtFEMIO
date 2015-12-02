@@ -84,7 +84,7 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
 
    SECTION("simple") {
       long SLEVEL(1), SELTYP(2), SELMOD(3);
-      ident probe(&SLEVEL, &SELTYP, &SELMOD);
+      ident probe(SLEVEL, SELTYP, SELMOD);
       test << probe;
       CHECK(test.str() ==
             "IDENT   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +0.00000000e+00 \n");

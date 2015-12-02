@@ -81,7 +81,7 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
       CONT.push_back("PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013");
       CONT.push_back("COMPUTER: HAML130185");
       CONT.push_back("USER: berhol");
-      date probe(&TYPE, &SUBTYPE, &NRECS, &NBYTE, &CONT);
+      date probe(TYPE, SUBTYPE, NRECS, NBYTE, CONT);
       test << probe;
       CHECK(test.str() ==
             "DATE    +0.00000000e+00 +0.00000000e+00 +4.00000000e+00 +7.20000000e+01 \n"

@@ -2,7 +2,7 @@
    \file fem/fem_cards_gnode.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
-   \brief Processing Sesam FEM GNODE cards.
+   \brief Processing Sesam FEM `GNODE` cards.
 
    Detailed description
 */
@@ -53,19 +53,19 @@ namespace dnvgl {
             }
 
             gnode::gnode(
-               const long *NODEX, const long *NODENO,
-               const long *NDOF, const ::std::deque<int> *ODOF) :
-               NODEX(*NODEX), NODENO(*NODENO), NDOF(*NDOF),
-               ODOF(ODOF->begin(), ODOF->end()) {
+               const long &NODEX, const long &NODENO,
+               const long &NDOF, const ::std::deque<int> &ODOF) :
+               NODEX(NODEX), NODENO(NODENO), NDOF(NDOF),
+               ODOF(ODOF.begin(), ODOF.end()) {
                ::std::sort(this->ODOF.begin(), this->ODOF.end());
             };
 
             gnode::gnode(
-               const long *NODEX, const long *NODENO,
-               const ::std::deque<int> *ODOF) :
-               NODEX(*NODEX), NODENO(*NODENO),
-               ODOF(ODOF->begin(), ODOF->end()) {
-               NDOF = static_cast<long>(ODOF->size());
+               const long &NODEX, const long &NODENO,
+               const ::std::deque<int> &ODOF) :
+               NODEX(NODEX), NODENO(NODENO),
+               ODOF(ODOF.begin(), ODOF.end()) {
+               NDOF = static_cast<long>(this->ODOF.size());
                ::std::sort(this->ODOF.begin(), this->ODOF.end());
             };
 

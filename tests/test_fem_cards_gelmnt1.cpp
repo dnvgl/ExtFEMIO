@@ -92,7 +92,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       NODIN.push_back(4);
       NODIN.push_back(2);
 
-      gelmnt1 probe(&ELNOX, &ELNO, &ELTYP, &ELTYAD, &NODIN);
+      gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.00000000e+00 +6.00000000e+00 +2.40000000e+01 +0.00000000e+00 \n"
@@ -109,7 +109,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       NODIN.push_back(13);
       NODIN.push_back(22);
 
-      gelmnt1 probe(&ELNOX, &ELNO, &ELTYP, &ELTYAD, &NODIN);
+      gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.20000000e+01 +3.60000000e+01 +6.00000000e+00 +0.00000000e+00 \n"
@@ -123,7 +123,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       NODIN.push_back(1);
       NODIN.push_back(6);
 
-      gelmnt1 probe(&ELNOX, &ELNO, &ELTYP, &ELTYAD, &NODIN);
+      gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.20000000e+01 +3.60000000e+01 +1.50000000e+01 +0.00000000e+00 \n"

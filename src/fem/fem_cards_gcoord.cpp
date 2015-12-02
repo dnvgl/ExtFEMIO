@@ -53,10 +53,10 @@ namespace dnvgl {
             }
 
             gcoord::gcoord(
-               const long *NODENO,
-               const double *XCOORD, const double *YCOORD, const double *ZCOORD) :
-               NODENO(*NODENO),
-               XCOORD(*XCOORD), YCOORD(*YCOORD), ZCOORD(*ZCOORD) {}
+               const long &NODENO,
+               const double &XCOORD, const double &YCOORD, const double &ZCOORD) :
+               NODENO(NODENO),
+               XCOORD(XCOORD), YCOORD(YCOORD), ZCOORD(ZCOORD) {}
 
             const ::std::ostream&
             gcoord::operator<< (::std::ostream& os) const {

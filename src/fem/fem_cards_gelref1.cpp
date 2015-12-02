@@ -121,63 +121,63 @@ namespace dnvgl {
             }
 
             gelref1::gelref1(
-               const long *ELNO, const long *MATNO,
-               const long *ADDNO, const long *INTNO,
-               const long *MINTNO, const long *STRANO,
-               const long *STRENO, const long *STREPONO,
-               const long *GEONO_OPT, const long *FIXNO_OPT,
-               const long *ECCNO_OPT, const long *TRANSNO_OPT,
-               const ::std::deque<long> *GEONO,
-               const ::std::deque<long> *FIXNO,
-               const ::std::deque<long> *ECCNO,
-               const ::std::deque<long> *TRANSNO) :
+               const long &ELNO, const long &MATNO,
+               const long &ADDNO, const long &INTNO,
+               const long &MINTNO, const long &STRANO,
+               const long &STRENO, const long &STREPONO,
+               const long &GEONO_OPT, const long &FIXNO_OPT,
+               const long &ECCNO_OPT, const long &TRANSNO_OPT,
+               const ::std::deque<long> &GEONO,
+               const ::std::deque<long> &FIXNO,
+               const ::std::deque<long> &ECCNO,
+               const ::std::deque<long> &TRANSNO) :
                card(),
-               ELNO(*ELNO), MATNO(*MATNO), ADDNO(*ADDNO), INTNO(*INTNO),
-               MINTNO(*MINTNO), STRANO(*STRANO), STRENO(*STRENO),
-               STREPONO(*STREPONO), GEONO_OPT(*GEONO_OPT),
-               FIXNO_OPT(*FIXNO_OPT), ECCNO_OPT(*ECCNO_OPT),
-               TRANSNO_OPT(*TRANSNO_OPT) {
+               ELNO(ELNO), MATNO(MATNO), ADDNO(ADDNO), INTNO(INTNO),
+               MINTNO(MINTNO), STRANO(STRANO), STRENO(STRENO),
+               STREPONO(STREPONO), GEONO_OPT(GEONO_OPT),
+               FIXNO_OPT(FIXNO_OPT), ECCNO_OPT(ECCNO_OPT),
+               TRANSNO_OPT(TRANSNO_OPT) {
 
                size_t lmax = 0, lmin = 0;
                bool min_max_set = false;
 
-               if (GEONO && GEONO->size()) {
+               if (GEONO.size()) {
                   min_max_set = true;
-                  lmin = lmax = GEONO->size();
-                  ::std::copy(GEONO->begin(), GEONO->end(),
+                  lmin = lmax = GEONO.size();
+                  ::std::copy(GEONO.begin(), GEONO.end(),
                               ::std::back_inserter(this->GEONO));
                }
-               if (FIXNO && FIXNO->size()) {
+               if (FIXNO.size()) {
                   if (min_max_set) {
-                     lmin = lmin ? FIXNO->size() > lmin : FIXNO->size();
-                     lmax = lmax ? FIXNO->size() < lmax : FIXNO->size();
+                     lmin = lmin ? FIXNO.size() > lmin : FIXNO.size();
+                     lmax = lmax ? FIXNO.size() < lmax : FIXNO.size();
                   } else {
                      min_max_set = true;
-                     lmin = lmax = FIXNO->size();
+                     lmin = lmax = FIXNO.size();
                   }
-                  ::std::copy(FIXNO->begin(), FIXNO->end(),
+                  ::std::copy(FIXNO.begin(), FIXNO.end(),
                               ::std::back_inserter(this->FIXNO));
                }
-               if (ECCNO && ECCNO->size()) {
+               if (ECCNO.size()) {
                   if (min_max_set) {
-                     lmin = lmin ? ECCNO->size() > lmin : ECCNO->size();
-                     lmax = lmax ? ECCNO->size() < lmax : ECCNO->size();
+                     lmin = lmin ? ECCNO.size() > lmin : ECCNO.size();
+                     lmax = lmax ? ECCNO.size() < lmax : ECCNO.size();
                   } else {
                      min_max_set = true;
-                     lmin = lmax = ECCNO->size();
+                     lmin = lmax = ECCNO.size();
                   }
-                  ::std::copy(ECCNO->begin(), ECCNO->end(),
+                  ::std::copy(ECCNO.begin(), ECCNO.end(),
                               ::std::back_inserter(this->ECCNO));
                }
-               if (TRANSNO && TRANSNO->size()) {
+               if (TRANSNO.size()) {
                   if (min_max_set) {
-                     lmin = lmin ? TRANSNO->size() > lmin : TRANSNO->size();
-                     lmax = lmax ? TRANSNO->size() < lmax : TRANSNO->size();
+                     lmin = lmin ? TRANSNO.size() > lmin : TRANSNO.size();
+                     lmax = lmax ? TRANSNO.size() < lmax : TRANSNO.size();
                   } else {
                      min_max_set = true;
-                     lmin = lmax = TRANSNO->size();
+                     lmin = lmax = TRANSNO.size();
                   }
-                  ::std::copy(TRANSNO->begin(), TRANSNO->end(),
+                  ::std::copy(TRANSNO.begin(), TRANSNO.end(),
                               ::std::back_inserter(this->TRANSNO));
                }
 

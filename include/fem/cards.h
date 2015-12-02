@@ -58,10 +58,10 @@ namespace dnvgl {
                GELMNT1,
                /// Reference to Element Data
                GELREF1,
-               // /// Cross Section Type Massive Bar
-               // GBARM,
-               // /// General Beam Element Data
-               // GBEAMG,
+               /// Cross Section Type Massive Bar
+               GBARM,
+               /// General Beam Element Data
+               GBEAMG,
                // /// Eccentricities
                // GECCEN,
                // /// Thickness of Two-dimensional Elements
@@ -122,33 +122,32 @@ namespace dnvgl {
                DllExport card (const ::std::deque<::std::string> &);
                DllExport card ();
 
-               virtual const ::dnvgl::extfem::fem::cards::types card_type(void) const = 0;
-               virtual const ::std::ostream& operator<<(::std::ostream&) const = 0;
+               virtual const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const = 0;
+
+               virtual const ::std::ostream&
+               operator<<(::std::ostream&) const = 0;
             };
 
             class unknown : public card {
 
             public:
 
-               DllExport unknown(const ::std::deque<::std::string> &inp) :
-                  card(inp), content(inp) {};
+               DllExport unknown(const ::std::deque<::std::string> &inp);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
-               card_type(void) const { return UNKNOWN; }
+               card_type(void) const;
 
                ::std::deque<::std::string> content;
 
                DllExport const ::std::ostream&
-               operator<< (::std::ostream& os) const {
-                  throw errors::error("can't write UNKNOWN.");
-                  return os;
-               };
+               operator<< (::std::ostream& os) const;
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const unknown&);
             };
 
-            /// `DATE`: Date and Program Information
+/// `DATE`: Date and Program Information
 /**
 # Format
 
@@ -225,21 +224,13 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                DllExport date(const ::std::deque<::std::string>&);
 
                DllExport date(
-                  const long *TYPE, const long *SUBTYPE,
-                  const long *NRECS, const long *NBYTE,
-                  const ::std::deque<::std::string> *CONT) :
-                  TYPE(*TYPE), SUBTYPE(*SUBTYPE), NRECS(*NRECS),
-                  NBYTE(*NBYTE), CONT(*CONT) {};
+                  const long &TYPE, const long &SUBTYPE,
+                  const long &NRECS, const long &NBYTE,
+                  const ::std::deque<::std::string> &CONT);
 
                DllExport date(
-                  const long *TYPE, const long *SUBTYPE,
-                  const ::std::deque<::std::string> *CONT) :
-                  TYPE(*TYPE), SUBTYPE(*SUBTYPE), CONT(*CONT) {
-                  NRECS = static_cast<long>(CONT->size());
-                  NBYTE = 0;
-                  for (auto &p : *CONT)
-                     NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
-               };
+                  const long &TYPE, const long &SUBTYPE,
+                  const ::std::deque<::std::string> &CONT);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -250,7 +241,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                operator<< (::std::ostream& os) const;
             };
 
-            /// `GCOORD`: Nodal Coordinates
+/// `GCOORD`: Nodal Coordinates
 /**
 # Format
 
@@ -292,8 +283,8 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                DllExport gcoord(const ::std::deque<::std::string>&);
 
                DllExport gcoord(
-                  const long *NODENO,
-                  const double *XCOORD, const double *YCOORD, const double *ZCOORD);
+                  const long &NODENO,
+                  const double &XCOORD, const double &YCOORD, const double &ZCOORD);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -303,7 +294,8 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
-            /// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
+
+/// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
 /**
 ## Format
 
@@ -352,12 +344,12 @@ system, unless a local nodal coordinate system is specified (see the
                DllExport gnode(const ::std::deque<::std::string>&);
 
                DllExport gnode(
-                  const long *NODEX, const long *NODENO,
-                  const long *NDOF, const ::std::deque<int> *ODOF);
+                  const long &NODEX, const long &NODENO,
+                  const long &NDOF, const ::std::deque<int> &ODOF);
 
                DllExport gnode(
-                  const long *NODEX, const long *NODENO,
-                  const ::std::deque<int> *ODOF);
+                  const long &NODEX, const long &NODENO,
+                  const ::std::deque<int> &ODOF);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -368,7 +360,7 @@ system, unless a local nodal coordinate system is specified (see the
                operator<< (::std::ostream& os) const;
             };
 
-            /// `IDENT`: Identification of Superelements
+/// `IDENT`: Identification of Superelements
 /**
    ## Format
 
@@ -410,21 +402,20 @@ system, unless a local nodal coordinate system is specified (see the
                DllExport ident(const ::std::deque<::std::string>&);
 
                DllExport ident(
-                  const long *SLEVEL, const long *SELTYP,
-                  const long *SELMOD) :
-                  SLEVEL(*SLEVEL), SELTYP(*SELTYP), SELMOD(*SELMOD) { };
-
+                  const long &SLEVEL, const long &SELTYP,
+                  const long &SELMOD);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
-               card_type(void) const { return IDENT; };
+               card_type(void) const;
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const ident&);
+
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
-            /// `IEND`: End of a Superelement
+/// `IEND`: End of a Superelement
 /**
    ## Format
 
@@ -458,12 +449,10 @@ system, unless a local nodal coordinate system is specified (see the
 
                DllExport iend(const ::std::deque<::std::string>&);
 
-               DllExport iend(
-                  const long *CONT) : CONT(*CONT) { };
-
+               DllExport iend(const long &CONT);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
-               card_type(void) const { return IEND; };
+               card_type(void) const;
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const iend&);
@@ -471,7 +460,7 @@ system, unless a local nodal coordinate system is specified (see the
                operator<< (::std::ostream& os) const;
             };
 
-            /// `GELMNT1`: Element Data Definition
+/// `GELMNT1`: Element Data Definition
 /**
    # Format
 
@@ -548,9 +537,9 @@ system, unless a local nodal coordinate system is specified (see the
                DllExport gelmnt1(const ::std::deque<::std::string>&);
 
                DllExport gelmnt1(
-                  const long *ELNOX, const long *ELNO,
-                  const long *ELTYP, const long *ELTYAD,
-                  const ::std::deque<long> *NODIN);
+                  const long &ELNOX, const long &ELNO,
+                  const long &ELTYP, const long &ELTYAD,
+                  const ::std::deque<long> &NODIN);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -721,28 +710,242 @@ system, unless a local nodal coordinate system is specified (see the
                DllExport gelref1(const ::std::deque<::std::string>&);
 
                DllExport gelref1(
-                  const long *ELNO, const long *MATNO,
-                  const long *ADDNO, const long *INTNO,
-                  const long *MINTNO, const long *STRANO,
-                  const long *STRENO, const long *STREPONO,
-                  const long *GEONO_OPT, const long *FIXNO_OPT,
-                  const long *ECCNO_OPT, const long *TRANSNO_OPT,
-                  const ::std::deque<long> *GEONO=nullptr,
-                  const ::std::deque<long> *FIXNO=nullptr,
-                  const ::std::deque<long> *ECCNO=nullptr,
-                  const ::std::deque<long> *TRANSNO=nullptr);
+                  const long &ELNO, const long &MATNO,
+                  const long &ADDNO, const long &INTNO,
+                  const long &MINTNO, const long &STRANO,
+                  const long &STRENO, const long &STREPONO,
+                  const long &GEONO_OPT, const long &FIXNO_OPT,
+                  const long &ECCNO_OPT, const long &TRANSNO_OPT,
+                  const ::std::deque<long> &GEONO={},
+                  const ::std::deque<long> &FIXNO={},
+                  const ::std::deque<long> &ECCNO={},
+                  const ::std::deque<long> &TRANSNO={});
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const gelref1&);
+
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
+/// `GBARM`: Cross Section Type Massive Bar
+/**
+   # Format
 
-            /// `TEXT`: User supplied Text
+   |         |         |       |         |         |
+   | ------- | ------- | ----- | ------- | ------- |
+   | `GBARM` | `GEONO` | `HZ`  | `BT`    | `BB`    |
+   |         | `SFY`   | `SFZ` | `NLOBY` | `NLOBZ` |
+
+~~~~~~~~~~~~~~~~~~~~~
+  |<------- BT ------->|
+  ----------------------  --
+  \         ^          /  ^
+   \    Y'  | Z'      /   |
+    \    <--X        /   HZ
+     \              /     |
+      \            /      v
+       ------------   ------
+       |<-- BB -->|
+~~~~~~~~~~~~~~~~~~~~~
+*/
+            class gbarm : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _HZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _BT;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _BB;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SFY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SFZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _NLOBY;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _NLOBZ;
+
+            public:
+
+               /** Geometry type number, i.e. reference number used
+                   for element data definition of geometry properties
+                   (Cross sectional properties) of beams.
+               */
+               long GEONO;
+               /** Height of beam.
+                */
+               double HZ;
+               /** Width of bar at top. For massive bars which are not
+                   able to have different widths at top and bottom
+                   this variable is used as the width of the beam.
+                */
+               double BT;
+               /** Width of bar at bottom.
+                */
+               double BB;
+               /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                     SHARY(MOD) = SHARY(PROG) · SFY
+                   \f]
+
+                   (The shear areas on `GBEAMG` is SHARY(MOD)).
+
+                */
+               double SFY;
+               /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                     SHARZ(MOD) = SHARZ(PROG) · SFZ
+                   \f]
+
+                   (The shear areas on `GBEAMG` is SHARZ(MOD)).
+                */
+               double SFZ;
+               /** Number of integration points in Y’ direction
+                   (optional)
+                */
+               long NLOBY;
+               /** Number of integration points in Z’ direction
+                   (optional)
+                */
+               long NLOBZ;
+
+               DllExport gbarm(const ::std::deque<::std::string>&);
+
+               DllExport gbarm(
+                  const long &GEONO,
+                  const double &HZ, const double &BT, const double &BB,
+                  const double &SFY, const double &SFZ,
+                  const long &NLOBY, const long &NLOBZ);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const gbarm&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `GBEAMG`: General Beam Element Data
+/**
+   ## Format
+
+   |          |          |          |         |         |
+   | -------- | -------- | -------- | ------- | ------- |
+   | `GBEAMG` | `GEONO`  | *void*   | `AREA`  | `IX`    |
+   |          | `IY`     | `IZ`     | `IYZ`   | `WXMIN` |
+   |          | `WYMIN`  | `WZMIN`  | `SHARY` | `SHARZ` |
+   |          | `SHCENY` | `SHCENZ` | `SY`    | `SZ`    |
+
+The succeding data concern the cross section at a specific local node.
+
+If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
+record may be on the interface.
+*/
+            class gbeamg : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _AREA;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _IX;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _IY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _IZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _IYZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _WXMIN;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _WYMIN;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _WZMIN;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHARY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHARZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHCENY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHCENZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _SZ;
+
+            public:
+
+               /** Geometry number, referenced to on `GELREF1`.
+                */
+               long GEONO;
+               /** Cross section area.
+                */
+               double AREA;
+               /** Torsional moment of inertia about the shear center.
+                */
+               double IX;
+               /** Moment of inertia about the *y* axis \f$= ∫z² dA\f$.
+                */
+               double IY;
+               /** Moment of inertia about the *z* axis \f$= ∫y² dA\f$.
+                */
+               double IZ;
+               /** Product of inertia about *y* and *z* axis \f$= ∫yz dA\f$.
+                */
+               double IYZ;
+               /** Minimum torsional section modulus about shear
+                   center (=IX/rmax for a PIPE element).
+                */
+               double WXMIN;
+               /** Minimum sectionmodulus about *y* axis \f$= IY/zmax\f$.
+                */
+               double WYMIN;
+               /** Minimum sectionmodulus about *z* axis = \f$IZ/ymax\f$.
+                */
+               double WZMIN;
+               /** Shear area in the direction of *y* axis. If zero,
+                   shear is not included.
+                */
+               double SHARY;
+               /** Shear area in the direction of *z* axis. If zero,
+                   shear is not included.
+                */
+               double SHARZ;
+               /** Shear center location *y* component.
+                */
+               double SHCENY;
+               /** Shear center location *z* component
+                */
+               double SHCENZ;
+               /** Static area moment about *y*-axis \f$= ∫z dA\f$.
+                */
+               double SY;
+               /** Static area moment about *z*-axis \f$= ∫y dA\f$
+                */
+               double SZ;
+
+               DllExport gbeamg(const ::std::deque<::std::string>&);
+
+               DllExport gbeamg(
+                  const long &GEONO,
+                  const double &AREA,
+                  const double &IX, const double &IY, const double &IZ, const double &IYZ,
+                  const double &WXMIN, const double &WYMIN, const double &WZMIN,
+                  const double &SHARY, const double &SHARZ,
+                  const double &SHCENY, const double &SHCENZ,
+                  const double &SY, const double &SZ);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const gbeamg&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `TEXT`: User supplied Text
 /**
    # Format
 
@@ -805,19 +1008,20 @@ system, unless a local nodal coordinate system is specified (see the
                DllExport text(const ::std::deque<::std::string>&);
 
                DllExport text(
-                  const long *TYPE, const long *SUBTYPE,
-                  const long *NRECS, const long *NBYTE,
-                  const ::std::deque<::std::string> *CONT);
+                  const long &TYPE, const long &SUBTYPE,
+                  const long &NRECS, const long &NBYTE,
+                  const ::std::deque<::std::string> &CONT);
 
                DllExport text(
-                  const long *TYPE, const long *SUBTYPE,
-                  const ::std::deque<::std::string> *CONT);
+                  const long &TYPE, const long &SUBTYPE,
+                  const ::std::deque<::std::string> &CONT);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const text&);
+
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };

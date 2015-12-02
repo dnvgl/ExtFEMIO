@@ -35,19 +35,18 @@ fem_file::fem_file(istream &inp) :
 }
 
 // Return all input file lines belonging to next FEM card.
-deque<std::string>& fem_file::get() {
-   deque<std::string> *res = new(deque<std::string>);
+void fem_file::get(deque<std::string> &res) {
+   res.clear();
    do {
       // if line not empty and not comment line add line to result set.
       if (cur_line.length() > 0)
-         res->push_back(cur_line);
+         res.push_back(cur_line);
       // if not EOF, read next line
       if (!data.eof()) data >> cur_line;
       else eof = true;
       // loop while no next card starts and file has still content.
    } while (!data.eof() &&
-            (res->size() == 0 || cur_line[0] == ' '));
-   return *res;
+            (res.size() == 0 || cur_line[0] == ' '));
 }
 
 // Return size of input FEM file.

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -178,6 +178,8 @@
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
     <ClCompile Include="fem\fem_cards.cpp" />
     <ClCompile Include="fem\fem_cards_date.cpp" />
+    <ClCompile Include="fem/fem_cards_gbarm.cpp" />
+    <ClCompile Include="fem/fem_cards_gbeamg.cpp" />
     <ClCompile Include="fem\fem_cards_gcoord.cpp" />
     <ClCompile Include="fem\fem_cards_gnode.cpp" />
     <ClCompile Include="fem\fem_cards_ident.cpp" />

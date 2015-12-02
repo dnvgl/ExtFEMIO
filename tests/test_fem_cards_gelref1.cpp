@@ -225,10 +225,10 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
          ECCNO_OPT(0), TRANSNO_OPT(0);
       ::std::deque<long> GEONO, FIXNO, ECCNO, TRANSNO;
 
-      gelref1 probe(&ELNO, &MATNO, &ADDNO, &INTNO, &MINTNO, &STRANO,
-                    &STRENO, &STREPONO, &GEONO_OPT, &FIXNO_OPT,
-                    &ECCNO_OPT, &TRANSNO_OPT, &GEONO, &FIXNO, &ECCNO,
-                    &TRANSNO);
+      gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
+                    STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
+                    ECCNO_OPT, TRANSNO_OPT, GEONO, FIXNO, ECCNO,
+                    TRANSNO);
       test << probe;
       CHECK(test.str() ==
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
@@ -245,9 +245,9 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       ECCNO.push_back(33);
       ECCNO.push_back(34);
 
-      gelref1 probe(&ELNO, &MATNO, &ADDNO, &INTNO, &MINTNO, &STRANO,
-                    &STRENO, &STREPONO, &GEONO_OPT, &FIXNO_OPT,
-                    &ECCNO_OPT, &TRANSNO_OPT, &GEONO, &FIXNO, &ECCNO);
+      gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
+                    STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
+                    ECCNO_OPT, TRANSNO_OPT, GEONO, FIXNO, ECCNO);
       test << probe;
       CHECK(test.str() ==
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
@@ -265,10 +265,10 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       ECCNO.push_back(33);
       ECCNO.push_back(34);
 
-      gelref1 probe(&ELNO, &MATNO, &ADDNO, &INTNO, &MINTNO, &STRANO,
-                    &STRENO, &STREPONO, &GEONO_OPT, &FIXNO_OPT,
-                    &ECCNO_OPT, &TRANSNO_OPT, &GEONO, &FIXNO, &ECCNO,
-                    &TRANSNO);
+      gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
+                    STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
+                    ECCNO_OPT, TRANSNO_OPT, GEONO, FIXNO, ECCNO,
+                    TRANSNO);
       test << probe;
       CHECK(test.str() ==
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
@@ -286,9 +286,9 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       GEONO.push_back(33);
       GEONO.push_back(34);
 
-      gelref1 probe(&ELNO, &MATNO, &ADDNO, &INTNO, &MINTNO, &STRANO,
-                    &STRENO, &STREPONO, &GEONO_OPT, &FIXNO_OPT,
-                    &ECCNO_OPT, &TRANSNO_OPT, &GEONO);
+      gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
+                    STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
+                    ECCNO_OPT, TRANSNO_OPT, GEONO);
       test << probe;
       CHECK(test.str() ==
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
@@ -306,9 +306,9 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       FIXNO.push_back(33);
       FIXNO.push_back(34);
 
-      gelref1 probe(&ELNO, &MATNO, &ADDNO, &INTNO, &MINTNO, &STRANO,
-                    &STRENO, &STREPONO, &GEONO_OPT, &FIXNO_OPT,
-                    &ECCNO_OPT, &TRANSNO_OPT, &GEONO, &FIXNO);
+      gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
+                    STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
+                    ECCNO_OPT, TRANSNO_OPT, GEONO, FIXNO);
       test << probe;
       CHECK(test.str() ==
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
@@ -325,10 +325,10 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       TRANSNO.push_back(33);
       TRANSNO.push_back(34);
 
-      gelref1 probe(&ELNO, &MATNO, &ADDNO, &INTNO, &MINTNO, &STRANO,
-                    &STRENO, &STREPONO, &GEONO_OPT, &FIXNO_OPT,
-                    &ECCNO_OPT, &TRANSNO_OPT, &GEONO, &FIXNO, &ECCNO,
-                    &TRANSNO);
+      gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
+                    STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
+                    ECCNO_OPT, TRANSNO_OPT, GEONO, FIXNO, ECCNO,
+                    TRANSNO);
       test << probe;
       CHECK(test.str() ==
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"

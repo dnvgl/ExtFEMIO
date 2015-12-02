@@ -209,6 +209,8 @@
   <ItemGroup>
     <ClCompile Include="test_fem_cards.cpp" />
     <ClCompile Include="test_fem_cards_date.cpp" />
+    <ClCompile Include="test_fem_cards_gbarm.cpp" />
+    <ClCompile Include="test_fem_cards_gbeamg.cpp" />
     <ClCompile Include="test_fem_cards_gcoord.cpp" />
     <ClCompile Include="test_fem_cards_gnode.cpp" />
     <ClCompile Include="test_fem_cards_ident.cpp" />

@@ -63,7 +63,24 @@ namespace dnvgl {
                }
             }
 
-            const ::dnvgl::extfem::fem::cards::types
+            date::date(
+               const long &TYPE, const long &SUBTYPE,
+               const long &NRECS, const long &NBYTE,
+               const ::std::deque<::std::string> &CONT) :
+               TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
+               NBYTE(NBYTE), CONT(CONT) {}
+
+            date::date(
+               const long &TYPE, const long &SUBTYPE,
+               const ::std::deque<::std::string> &CONT) :
+               TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
+               NRECS = static_cast<long>(CONT.size());
+               NBYTE = 0;
+               for (auto &p : CONT)
+                  NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
+            };
+
+            const types
             date::card_type(void) const { return DATE; };
 
             const ::std::ostream&

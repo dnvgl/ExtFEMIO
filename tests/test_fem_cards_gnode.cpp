@@ -83,13 +83,13 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
    ODOF.push_back(3);
 
    SECTION("simple") {
-      gnode probe(&NODEX, &NODENO, &NDOF, &ODOF);
+      gnode probe(NODEX, NODENO, NDOF, ODOF);
       test << probe;
       CHECK(test.str() == "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
    }
 
    SECTION("simple (2)") {
-      gnode probe(&NODEX, &NODENO, &ODOF);
+      gnode probe(NODEX, NODENO, ODOF);
       test << probe;
       CHECK(test.str() == "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
    }

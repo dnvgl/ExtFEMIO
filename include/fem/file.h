@@ -60,7 +60,7 @@ namespace dnvgl {
 
                DllExport fem_file(::std::istream&);
 
-               DllExport ::std::deque<::std::string>& get();
+               DllExport void get(::std::deque<::std::string>&);
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)
