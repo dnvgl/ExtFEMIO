@@ -178,9 +178,10 @@
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
     <ClCompile Include="fem\fem_cards.cpp" />
     <ClCompile Include="fem\fem_cards_date.cpp" />
-    <ClCompile Include="fem/fem_cards_gbarm.cpp" />
-    <ClCompile Include="fem/fem_cards_gbeamg.cpp" />
+    <ClCompile Include="fem\fem_cards_gbarm.cpp" />
+    <ClCompile Include="fem\fem_cards_gbeamg.cpp" />
     <ClCompile Include="fem\fem_cards_gcoord.cpp" />
+    <ClCompile Include="fem\fem_cards_geccen.cpp" />
     <ClCompile Include="fem\fem_cards_gnode.cpp" />
     <ClCompile Include="fem\fem_cards_ident.cpp" />
     <ClCompile Include="fem\fem_cards_iend.cpp" />

@@ -62,8 +62,8 @@ namespace dnvgl {
                GBARM,
                /// General Beam Element Data
                GBEAMG,
-               // /// Eccentricities
-               // GECCEN,
+               /// Eccentricities
+               GECCEN,
                // /// Thickness of Two-dimensional Elements
                // GELTH,
                // /// Cross Section Type I or H Beam
@@ -149,7 +149,7 @@ namespace dnvgl {
 
 /// `DATE`: Date and Program Information
 /**
-# Format
+## Format
 
 |         |        |           |         |         |
 | ------- | ------ | --------- | ------- | ------- |
@@ -243,7 +243,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 
 /// `GCOORD`: Nodal Coordinates
 /**
-# Format
+## Format
 
 |          |          |          |         |          |
 | -------- | -------- | -------- | ------- | -------- |
@@ -362,11 +362,11 @@ system, unless a local nodal coordinate system is specified (see the
 
 /// `IDENT`: Identification of Superelements
 /**
-   ## Format
+## Format
 
-   |         |          |          |          |   |
-   | ------- | -------- | -------- | -------- | - |
-   | `IDENT` | `SLEVEL` | `SELTYP` | `SELMOD` |   |
+|         |          |          |          |   |
+| ------- | -------- | -------- | -------- | - |
+| `IDENT` | `SLEVEL` | `SELTYP` | `SELMOD` |   |
 */
             class ident : public card {
 
@@ -417,13 +417,13 @@ system, unless a local nodal coordinate system is specified (see the
 
 /// `IEND`: End of a Superelement
 /**
-   ## Format
+## Format
 
-   |         |        |   |   |   |
-   | ------- | ------ | - | - | - |
-   | `IEND`  | `CONT` |   |   |   |
+|         |        |   |   |   |
+| ------- | ------ | - | - | - |
+| `IEND`  | `CONT` |   |   |   |
 
-   Defines end of a superelement.
+Defines end of a superelement.
 */
             class iend : public card {
 
@@ -462,13 +462,13 @@ system, unless a local nodal coordinate system is specified (see the
 
 /// `GELMNT1`: Element Data Definition
 /**
-   # Format
+## Format
 
-   |           |         |          |           |          |
-   | --------- | ------- | -------- | --------- | -------- |
-   | `GELMNT1` | `ELNOX` | `ELNO`   | `ELTYP`   | `ELTYAD` |
-   |           | `NODIN1`| 'NODIN2` | \dots     | \dots    |
-   |           | \dots   | \dots    | `NODIN(N) |          |
+|           |         |          |           |          |
+| --------- | ------- | -------- | --------- | -------- |
+| `GELMNT1` | `ELNOX` | `ELNO`   | `ELTYP`   | `ELTYAD` |
+|           | `NODIN1`| 'NODIN2` | \dots     | \dots    |
+|           | \dots   | \dots    | `NODIN(N) |          |
 */
             class gelmnt1 : public card {
 
@@ -552,24 +552,24 @@ system, unless a local nodal coordinate system is specified (see the
 
             /// `GELREF1`: Reference to Element Data
 /**
-   # Format
+## Format
 
-   |           |              |              |              |                |
-   | --------- | ------------ | ------------ | ------------ | -------------- |
-   | `GELREF1` | `ELNO`       | `MATNO`      | `ADDNO`      | `INTNO`        |
-   |           | `MINTNO`     | `STRANO`     | `STRENO`     | `STREPONO`     |
-   |           | `GEONO/OPT`  | `FIXNO/OPT`  | `ECCNO/OPT`  | `TRANSNO/OPT`  |
-   |           | `GEONO`(1)   | \dots        | `GEONO`(*N*) | `FIXNO`(1)     |
-   |           | \dots        | `FIXNO`(1)   | `ECCNO`(1)   | \dots          |
-   |           | `ECCNO`(*N*) | `TRANSNO`(1) | \dots        | `TRANSNO`(*N*) |
+|           |              |              |              |                |
+| --------- | ------------ | ------------ | ------------ | -------------- |
+| `GELREF1` | `ELNO`       | `MATNO`      | `ADDNO`      | `INTNO`        |
+|           | `MINTNO`     | `STRANO`     | `STRENO`     | `STREPONO`     |
+|           | `GEONO/OPT`  | `FIXNO/OPT`  | `ECCNO/OPT`  | `TRANSNO/OPT`  |
+|           | `GEONO`(1)   | \dots        | `GEONO`(*N*) | `FIXNO`(1)     |
+|           | \dots        | `FIXNO`(1)   | `ECCNO`(1)   | \dots          |
+|           | `ECCNO`(*N*) | `TRANSNO`(1) | \dots        | `TRANSNO`(*N*) |
 
-   Shortest version:
+Shortest version:
 
-   |           |              |              |              |                |
-   | --------- | ------------ | ------------ | ------------ | -------------- |
-   | `GELREF1` | `ELNO`       | `MATNO`      | `ADDNO`      | `INTNO`        |
-   |           | `MINTNO`     | `STRANO`     | `STRENO`     | `STREPONO`     |
-   |           | `GEONO/OPT`  | `FIXNO/OPT`  | `ECCNO/OPT`  | `TRANSNO/OPT`  |
+|           |              |              |              |                |
+| --------- | ------------ | ------------ | ------------ | -------------- |
+| `GELREF1` | `ELNO`       | `MATNO`      | `ADDNO`      | `INTNO`        |
+|           | `MINTNO`     | `STRANO`     | `STRENO`     | `STREPONO`     |
+|           | `GEONO/OPT`  | `FIXNO/OPT`  | `ECCNO/OPT`  | `TRANSNO/OPT`  |
 */
 
             class gelref1 : public card {
@@ -733,12 +733,12 @@ system, unless a local nodal coordinate system is specified (see the
 
 /// `GBARM`: Cross Section Type Massive Bar
 /**
-   # Format
+## Format
 
-   |         |         |       |         |         |
-   | ------- | ------- | ----- | ------- | ------- |
-   | `GBARM` | `GEONO` | `HZ`  | `BT`    | `BB`    |
-   |         | `SFY`   | `SFZ` | `NLOBY` | `NLOBZ` |
+|         |         |       |         |         |
+| ------- | ------- | ----- | ------- | ------- |
+| `GBARM` | `GEONO` | `HZ`  | `BT`    | `BB`    |
+|         | `SFY`   | `SFZ` | `NLOBY` | `NLOBZ` |
 
 ~~~~~~~~~~~~~~~~~~~~~
   |<------- BT ------->|
@@ -837,14 +837,14 @@ system, unless a local nodal coordinate system is specified (see the
 
 /// `GBEAMG`: General Beam Element Data
 /**
-   ## Format
+## Format
 
-   |          |          |          |         |         |
-   | -------- | -------- | -------- | ------- | ------- |
-   | `GBEAMG` | `GEONO`  | *void*   | `AREA`  | `IX`    |
-   |          | `IY`     | `IZ`     | `IYZ`   | `WXMIN` |
-   |          | `WYMIN`  | `WZMIN`  | `SHARY` | `SHARZ` |
-   |          | `SHCENY` | `SHCENZ` | `SY`    | `SZ`    |
+|          |          |          |         |         |
+| -------- | -------- | -------- | ------- | ------- |
+| `GBEAMG` | `GEONO`  | *void*   | `AREA`  | `IX`    |
+|          | `IY`     | `IZ`     | `IYZ`   | `WXMIN` |
+|          | `WYMIN`  | `WZMIN`  | `SHARY` | `SHARZ` |
+|          | `SHCENY` | `SHCENZ` | `SY`    | `SZ`    |
 
 The succeding data concern the cross section at a specific local node.
 
@@ -945,18 +945,77 @@ record may be on the interface.
                operator<< (::std::ostream& os) const;
             };
 
+/// `GECCEN`: Eccentricities
+/**
+## Format:
+
+|          |         |      |      |      |
+|--------- | ------- | ---- | ---- | ---- |
+| `GECCEN` | `ECCNO` | `EX` | `EY` | `EZ` |
+*/
+            class geccen : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_EX;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_EY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_EZ;
+
+            public:
+               /** Eccentricity number, referenced to on record
+                   `GELREF1`.
+               */
+               long ECCNO;
+               /** *x* component of eccentricity vector given in
+                   superelement coordinate system, the vector points
+                   from the global node towards the local element
+                   node.
+                */
+               double EX;
+               /** *y* component of eccentricity vector given in
+                   superelement coordinate system, the vector points
+                   from the global node towards the local element
+                   node.
+                */
+               double EY;
+               /** *z* component of eccentricity vector given in
+                   superelement coordinate system, the vector points
+                   from the global node towards the local element
+                   node.
+                */
+               double EZ;
+
+               DllExport geccen(const ::std::deque<::std::string>&);
+
+               DllExport geccen(
+                  const long &ECCNO,
+                  const double &EX, const double &EY, const double &EZ);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const geccen&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
 /// `TEXT`: User supplied Text
 /**
-   # Format
+## Format
 
-   |         |        |           |         |         |
-   | ------- | ------ | --------- | ------- | ------- |
-   | `TEXT`  | `TYPE` | `SUBTYPE` | `NRECS` | `NBYTE` |
-   |         | \<text lines\>                   | | | |
+|         |        |           |         |         |
+| ------- | ------ | --------- | ------- | ------- |
+| `TEXT`  | `TYPE` | `SUBTYPE` | `NRECS` | `NBYTE` |
+|         | \<text lines\>                   | | | |
 
-   The identifier is used to transfer text-strings on the interface file.
-   The following NRECS records must be read in A-format, 72 characters
-   per record.
+The identifier is used to transfer text-strings on the interface file.
+The following NRECS records must be read in A-format, 72 characters
+per record.
 */
             class text : public card {
 

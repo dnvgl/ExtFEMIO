@@ -2,7 +2,7 @@
    \file tests/test_fem_cards_iend.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
-   \brief Testing input and output for Sesam FEM IEND cards.
+   \brief Testing input and output for Sesam FEM `IEND` cards.
 
    Detailed description
 */

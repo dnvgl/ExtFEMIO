@@ -124,10 +124,10 @@
     <ClCompile Include="fem\fem_cards_iend.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fem/fem_cards_gbarm.cpp">
+    <ClCompile Include="fem\fem_cards_gbarm.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fem/fem_cards_gbeamg.cpp">
+    <ClCompile Include="fem\fem_cards_gbeamg.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_cards_gelmnt1.cpp">
@@ -143,6 +143,9 @@
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_cards_gcoord.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_geccen.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_cards_gnode.cpp">

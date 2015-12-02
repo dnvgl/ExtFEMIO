@@ -46,7 +46,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 }
 
 
-TEST_CASE("FEM_Dispatch", "[cards]") {
+TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    ::std::string s(
       //  45678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -87,7 +87,7 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
 
    ::std::unique_ptr<cards::card> current;
 
-   SECTION("Processing several cards.") {
+   SECTION("Checking dispatch [ident].") {
       probe.get(l);
       CAPTURE( l[0] );
       INFO( "The line is " << l[0] );
@@ -98,7 +98,10 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<ident*>(current.get())->SLEVEL == 1);
       CHECK(static_cast<ident*>(current.get())->SELTYP == 1);
       CHECK(static_cast<ident*>(current.get())->SELMOD == 3);
+   }
 
+   SECTION("Checking dispatch [text].") {
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -124,7 +127,11 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
             "Input  : \\test_01.fem                                           ");
       CHECK(static_cast<text*>(current.get())->CONT[3] ==
             "Log    : \\test_01.txt                                           ");
+   }
 
+   SECTION("Checking dispatch [date].") {
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -139,17 +146,22 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<date*>(current.get())->SUBTYPE == 0);
       CHECK(static_cast<date*>(current.get())->NRECS == 4);
       CHECK(static_cast<date*>(current.get())->NBYTE == 72);
-      CHECK(static_cast<text*>(current.get())->CONT[0] ==
+      CHECK(static_cast<date*>(current.get())->CONT[0] ==
             //        1         2         3         4         5         6
             //234567890123456789012345678901234567890123456789012345678901234
             "DATE TIME:  11/03/2015 09:46:08                                 ");
-      CHECK(static_cast<text*>(current.get())->CONT[1] ==
+      CHECK(static_cast<date*>(current.get())->CONT[1] ==
             "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            ");
-      CHECK(static_cast<text*>(current.get())->CONT[2] ==
+      CHECK(static_cast<date*>(current.get())->CONT[2] ==
             "COMPUTER: HAML130185                                            ");
-      CHECK(static_cast<text*>(current.get())->CONT[3] ==
+      CHECK(static_cast<date*>(current.get())->CONT[3] ==
             "USER: berhol                                                    ");
+   }
 
+   SECTION("Checking dispatch [tdload].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -157,7 +169,13 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000
       //         SubCase
+   }
 
+   SECTION("Checking dispatch [gnode].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -174,7 +192,14 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<gnode*>(current.get())->ODOF[3] == 4);
       CHECK(static_cast<gnode*>(current.get())->ODOF[4] == 5);
       CHECK(static_cast<gnode*>(current.get())->ODOF[5] == 6);
+   }
 
+   SECTION("Checking dispatch [gcoord].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -185,7 +210,15 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<gcoord*>(current.get())->XCOORD == 111525.);
       CHECK(static_cast<gcoord*>(current.get())->YCOORD == 18000.);
       CHECK(static_cast<gcoord*>(current.get())->ZCOORD == 21000.);
+   }
 
+   SECTION("Checking dispatch [gelmnt1].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -202,7 +235,16 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<gelmnt1*>(current.get())->NODIN[1] == 618);
       CHECK(static_cast<gelmnt1*>(current.get())->NODIN[2] == 571);
       CHECK(static_cast<gelmnt1*>(current.get())->NODIN[3] == 565);
+   }
 
+   SECTION("Checking dispatch [gelref1].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -227,7 +269,17 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<gelref1*>(current.get())->FIXNO.size()   == 0);
       CHECK(static_cast<gelref1*>(current.get())->ECCNO.size()   == 0);
       CHECK(static_cast<gelref1*>(current.get())->TRANSNO.size() == 0);
+   }
 
+   SECTION("Checking dispatch [gbarm].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -243,7 +295,19 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       CHECK(static_cast<gbarm*>(current.get())->SFZ == 1.);
       CHECK(static_cast<gbarm*>(current.get())->NLOBY == 0);
       CHECK(static_cast<gbarm*>(current.get())->NLOBZ == 0);
+   }
 
+   SECTION("Checking dispatch [gbeamg].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      CAPTURE( l[0] );
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
@@ -253,14 +317,58 @@ TEST_CASE("FEM_Dispatch", "[cards]") {
       //          5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008
       //          1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008
       //          1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008
+      CHECK(static_cast<gbeamg*>(current.get())->GEONO == 1685);
+      CHECK(static_cast<gbeamg*>(current.get())->AREA == 1.115e4);
+      CHECK(static_cast<gbeamg*>(current.get())->IX == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->IY == 5.93e8);
+      CHECK(static_cast<gbeamg*>(current.get())->IZ == 1.5738e7);
+      CHECK(static_cast<gbeamg*>(current.get())->IYZ == 0.);
+      CHECK(static_cast<gbeamg*>(current.get())->WXMIN == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->WYMIN == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->WZMIN == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->SHARY == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->SHARZ == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->SHCENY == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->SHCENZ == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->SY == 1e-8);
+      CHECK(static_cast<gbeamg*>(current.get())->SZ == 1e-8);
+   }
 
+   SECTION("Checking dispatch [geccen].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);
-      // CHECK(current->card_type() == cards::GCOORD);
+      CHECK(current->card_type() == cards::GECCEN);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000
+      CHECK(static_cast<geccen*>(current.get())->ECCNO == 1372);
+      CHECK(static_cast<geccen*>(current.get())->EX == 0.);
+      CHECK(static_cast<geccen*>(current.get())->EY == -2.48199365e+002);
+      CHECK(static_cast<geccen*>(current.get())->EZ == -9.05288207);
+   }
 
+   SECTION("Checking dispatch [iend].") {
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
+      probe.get(l);
       probe.get(l);
       CAPTURE( l[0] );
       cards::dispatch(card::card_split(l), current);

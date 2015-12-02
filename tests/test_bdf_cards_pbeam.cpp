@@ -2,7 +2,7 @@
    \file tests/test_bdf_cards_pbeam.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
-   \brief Testing the BDF PBEAM card class.
+   \brief Testing the BDF `PBEAM` card class.
 
    Detailed description
 */

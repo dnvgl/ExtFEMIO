@@ -103,6 +103,7 @@ test_fem_cards_SOURCES+=test_fem_cards_date.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gbarm.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gbeamg.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gcoord.cpp
+test_fem_cards_SOURCES+=test_fem_cards_geccen.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gnode.cpp
 test_fem_cards_SOURCES+=test_fem_cards_ident.cpp
 test_fem_cards_SOURCES+=test_fem_cards_iend.cpp

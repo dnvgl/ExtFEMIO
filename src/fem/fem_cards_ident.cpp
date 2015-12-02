@@ -2,7 +2,7 @@
    \file fem/fem_cards_ident.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
-   \brief Processing Sesam FEM IDENT cards.
+   \brief Processing Sesam FEM `IDENT` cards.
 
    Detailed description
 */

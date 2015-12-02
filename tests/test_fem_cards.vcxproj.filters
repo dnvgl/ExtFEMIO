@@ -49,6 +49,9 @@
     <ClCompile Include="test_fem_cards_gcoord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_geccen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_gnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
