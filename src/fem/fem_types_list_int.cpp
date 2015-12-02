@@ -31,6 +31,12 @@ namespace {
 #include "fem/types.h"
 #include "fem/errors.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::std;
 using namespace ::dnvgl;
 using namespace extfem;

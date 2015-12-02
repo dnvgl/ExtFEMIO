@@ -23,8 +23,10 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
-#ifdef _TYPE
-#undef _TYPE
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace ::dnvgl::extfem;
@@ -38,11 +40,11 @@ namespace dnvgl {
 
             const fem::types::card gelmnt1::head("GELMNT1");
 
-            const entry_type<long> gelmnt1::_ELNOX("ELNOX");
-            const entry_type<long> gelmnt1::_ELNO("ELNO");
-            const entry_type<long> gelmnt1::_ELTYP("ELTYP");
-            const entry_type<long> gelmnt1::_ELTYAD("ELTYAD");
-            const entry_type<long> gelmnt1::_NODIN("NODIN");
+            const entry_type<long> gelmnt1::_form_ELNOX("ELNOX");
+            const entry_type<long> gelmnt1::_form_ELNO("ELNO");
+            const entry_type<long> gelmnt1::_form_ELTYP("ELTYP");
+            const entry_type<long> gelmnt1::_form_ELTYAD("ELTYAD");
+            const entry_type<long> gelmnt1::_form_NODIN("NODIN");
 
             gelmnt1::gelmnt1(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -52,12 +54,12 @@ namespace dnvgl {
                long tmp;
 
                ++pos;
-               ELNOX = _ELNOX(*(pos++));
-               ELNO = _ELNO(*(pos++));
-               ELTYP = _ELTYP(*(pos++));
-               ELTYAD = _ELTYAD(*(pos++));
+               ELNOX = _form_ELNOX(*(pos++));
+               ELNO = _form_ELNO(*(pos++));
+               ELTYP = _form_ELTYP(*(pos++));
+               ELTYAD = _form_ELTYAD(*(pos++));
                while (pos != inp.end()) {
-                  tmp = _NODIN(*(pos++));
+                  tmp = _form_NODIN(*(pos++));
                   if (tmp == 0) break;
                   NODIN.push_back(tmp);
                }
@@ -78,20 +80,20 @@ namespace dnvgl {
             operator<< (::std::ostream &os, const gelmnt1 &card) {
 
                os << gelmnt1::head.format()
-                  << card._ELNOX.format(card.ELNOX)
-                  << card._ELNO.format(card.ELNO)
-                  << card._ELTYP.format(card.ELTYP)
-                  << card._ELTYAD.format(card.ELTYAD);
+                  << card._form_ELNOX.format(card.ELNOX)
+                  << card._form_ELNO.format(card.ELNO)
+                  << card._form_ELTYP.format(card.ELTYP)
+                  << card._form_ELTYAD.format(card.ELTYAD);
                size_t i = 5;
                for (auto p : card.NODIN) {
                   if (i++ >= 4) {
                      i = 1;
                      os << std::endl << ::dnvgl::extfem::fem::types::card().format();
                   }
-                  os << card._NODIN.format(p);
+                  os << card._form_NODIN.format(p);
                }
                while (i++ < 4)
-                  os << card._NODIN.format(0);
+                  os << card.empty.format();
                os << std::endl;
                return os;
             }

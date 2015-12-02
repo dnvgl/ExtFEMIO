@@ -24,6 +24,12 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -35,10 +41,10 @@ namespace dnvgl {
 
             const fem::types::card gnode::head("GNODE");
 
-            const entry_type<long> gnode::_NODEX("NODEX");
-            const entry_type<long> gnode::_NODENO("NODENO");
-            const entry_type<long> gnode::_NDOF("NDOF");
-            const entry_type<::std::deque<int>> gnode::_ODOF("ODOF");
+            const entry_type<long> gnode::_form_NODEX("NODEX");
+            const entry_type<long> gnode::_form_NODENO("NODENO");
+            const entry_type<long> gnode::_form_NDOF("NDOF");
+            const entry_type<::std::deque<int>> gnode::_form_ODOF("ODOF");
 
             gnode::gnode(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -46,10 +52,10 @@ namespace dnvgl {
                auto pos = inp.begin();
 
                ++pos;
-               NODEX = _NODEX(*(pos++));
-               NODENO = _NODENO(*(pos++));
-               NDOF = _NDOF(*(pos++));
-               ODOF = ::std::deque<int>(*_ODOF(*(pos++)));
+               NODEX = _form_NODEX(*(pos++));
+               NODENO = _form_NODENO(*(pos++));
+               NDOF = _form_NDOF(*(pos++));
+               ODOF = ::std::deque<int>(*_form_ODOF(*(pos++)));
             }
 
             gnode::gnode(
@@ -81,10 +87,10 @@ namespace dnvgl {
             ::std::ostream&
             operator<< (::std::ostream &os, const gnode &card) {
                os << gnode::head.format()
-                  << card._NODEX.format(card.NODEX)
-                  << card._NODENO.format(card.NODENO)
-                  << card._NDOF.format(card.NDOF)
-                  << card._ODOF.format(card.ODOF) << std::endl;
+                  << card._form_NODEX.format(card.NODEX)
+                  << card._form_NODENO.format(card.NODENO)
+                  << card._form_NDOF.format(card.NDOF)
+                  << card._form_ODOF.format(card.ODOF) << std::endl;
 
                return os;
             }

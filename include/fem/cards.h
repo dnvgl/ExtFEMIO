@@ -184,11 +184,11 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _TYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _SUBTYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NRECS;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NBYTE;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _CONT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TYPE;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SUBTYPE;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NRECS;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NBYTE;
+               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
 
             public:
 
@@ -256,13 +256,13 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                static const ::dnvgl::extfem::fem::types::card head;
 
                static const
-               ::dnvgl::extfem::fem::types::entry_type<long> _NODENO;
+               ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
                static const
-               ::dnvgl::extfem::fem::types::entry_type<double> _XCOORD;
+               ::dnvgl::extfem::fem::types::entry_type<double> _form_XCOORD;
                static const
-               ::dnvgl::extfem::fem::types::entry_type<double> _YCOORD;
+               ::dnvgl::extfem::fem::types::entry_type<double> _form_YCOORD;
                static const
-               ::dnvgl::extfem::fem::types::entry_type<double> _ZCOORD;
+               ::dnvgl::extfem::fem::types::entry_type<double> _form_ZCOORD;
 
             public:
 
@@ -318,10 +318,10 @@ system, unless a local nodal coordinate system is specified (see the
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NODEX;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NODENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::deque<int>> _ODOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODEX;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<::std::deque<int>> _form_ODOF;
 
             public:
 
@@ -374,9 +374,9 @@ system, unless a local nodal coordinate system is specified (see the
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _SLEVEL;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _SELTYP;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _SELMOD;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SLEVEL;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SELTYP;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SELMOD;
 
             public:
 
@@ -431,7 +431,7 @@ system, unless a local nodal coordinate system is specified (see the
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _CONT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CONT;
 
             public:
 
@@ -476,11 +476,11 @@ system, unless a local nodal coordinate system is specified (see the
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ELNOX;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ELNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ELTYP;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ELTYAD;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NODIN;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELNOX;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELTYP;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELTYAD;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODIN;
 
             public:
 
@@ -578,22 +578,22 @@ system, unless a local nodal coordinate system is specified (see the
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ELNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _MATNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ADDNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _INTNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _MINTNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _STRANO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _STRENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _STREPONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _GEONO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _FIXNO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ECCNO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _TRANSNO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _FIXNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _ECCNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _TRANSNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ADDNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_INTNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MINTNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_STRANO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_STRENO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_STREPONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO_OPT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_FIXNO_OPT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO_OPT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO_OPT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_FIXNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO;
 
             public:
 
@@ -758,14 +758,14 @@ system, unless a local nodal coordinate system is specified (see the
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _HZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _BT;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _BB;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SFY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SFZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NLOBY;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NLOBZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BT;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BB;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBY;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
 
             public:
 
@@ -857,21 +857,21 @@ record may be on the interface.
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _AREA;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _IX;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _IY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _IZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _IYZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _WXMIN;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _WYMIN;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _WZMIN;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHARY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHARZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHCENY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SHCENZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _SZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_AREA;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IX;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IYZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_WXMIN;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_WYMIN;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_WZMIN;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHARY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHARZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHCENY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHCENZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SZ;
 
             public:
 
@@ -964,11 +964,11 @@ record may be on the interface.
 
                static const ::dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _TYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _SUBTYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NRECS;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _NBYTE;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _CONT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TYPE;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SUBTYPE;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NRECS;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NBYTE;
+               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
 
             public:
 

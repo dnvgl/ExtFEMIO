@@ -23,6 +23,12 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -34,9 +40,9 @@ namespace dnvgl {
 
             const fem::types::card ident::head("IDENT");
 
-            const entry_type<long> ident::_SLEVEL("SLEVEL");
-            const entry_type<long> ident::_SELTYP("SELTYP");
-            const entry_type<long> ident::_SELMOD("SELMOD");
+            const entry_type<long> ident::_form_SLEVEL("SLEVEL");
+            const entry_type<long> ident::_form_SELTYP("SELTYP");
+            const entry_type<long> ident::_form_SELMOD("SELMOD");
 
             ident::ident(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -44,9 +50,9 @@ namespace dnvgl {
                auto pos = inp.begin();
 
                ++pos;
-               SLEVEL = _SLEVEL(*(pos++));
-               SELTYP = _SELTYP(*(pos++));
-               SELMOD = _SELMOD(*(pos++));
+               SLEVEL = _form_SLEVEL(*(pos++));
+               SELTYP = _form_SELTYP(*(pos++));
+               SELMOD = _form_SELMOD(*(pos++));
             }
 
             ident::ident(
@@ -67,9 +73,9 @@ namespace dnvgl {
             operator<<(::std::ostream &os, const ident &card) {
 
                os << ident::head.format()
-                  << card._SLEVEL.format(card.SLEVEL)
-                  << card._SELTYP.format(card.SELTYP)
-                  << card._SELMOD.format(card.SELMOD)
+                  << card._form_SLEVEL.format(card.SLEVEL)
+                  << card._form_SELTYP.format(card.SELTYP)
+                  << card._form_SELMOD.format(card.SELMOD)
                   << ident::empty.format() << ::std::endl;
 
                return os;

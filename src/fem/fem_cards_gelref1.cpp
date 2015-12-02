@@ -24,8 +24,10 @@ namespace {
 #include "fem/types.h"
 #include "fem/errors.h"
 
-#ifdef _TYPE
-#undef _TYPE
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace ::dnvgl::extfem;
@@ -39,22 +41,22 @@ namespace dnvgl {
 
             const fem::types::card gelref1::head("GELREF1");
 
-            const entry_type<long> gelref1::_ELNO("ELNO");
-            const entry_type<long> gelref1::_MATNO("MATNO");
-            const entry_type<long> gelref1::_ADDNO("ADDNO");
-            const entry_type<long> gelref1::_INTNO("INTNO");
-            const entry_type<long> gelref1::_MINTNO("MINTNO");
-            const entry_type<long> gelref1::_STRANO("STRANO");
-            const entry_type<long> gelref1::_STRENO("STRENO");
-            const entry_type<long> gelref1::_STREPONO("STREPONO");
-            const entry_type<long> gelref1::_GEONO_OPT("GEONO_OPT");
-            const entry_type<long> gelref1::_FIXNO_OPT("FIXNO_OPT");
-            const entry_type<long> gelref1::_ECCNO_OPT("ECCNO_OPT");
-            const entry_type<long> gelref1::_TRANSNO_OPT("TRANSNO_OPT");
-            const entry_type<long> gelref1::_GEONO("GEONO");
-            const entry_type<long> gelref1::_FIXNO("FIXNO");
-            const entry_type<long> gelref1::_ECCNO("ECCNO");
-            const entry_type<long> gelref1::_TRANSNO("TRANSNO");
+            const entry_type<long> gelref1::_form_ELNO("ELNO");
+            const entry_type<long> gelref1::_form_MATNO("MATNO");
+            const entry_type<long> gelref1::_form_ADDNO("ADDNO");
+            const entry_type<long> gelref1::_form_INTNO("INTNO");
+            const entry_type<long> gelref1::_form_MINTNO("MINTNO");
+            const entry_type<long> gelref1::_form_STRANO("STRANO");
+            const entry_type<long> gelref1::_form_STRENO("STRENO");
+            const entry_type<long> gelref1::_form_STREPONO("STREPONO");
+            const entry_type<long> gelref1::_form_GEONO_OPT("GEONO_OPT");
+            const entry_type<long> gelref1::_form_FIXNO_OPT("FIXNO_OPT");
+            const entry_type<long> gelref1::_form_ECCNO_OPT("ECCNO_OPT");
+            const entry_type<long> gelref1::_form_TRANSNO_OPT("TRANSNO_OPT");
+            const entry_type<long> gelref1::_form_GEONO("GEONO");
+            const entry_type<long> gelref1::_form_FIXNO("FIXNO");
+            const entry_type<long> gelref1::_form_ECCNO("ECCNO");
+            const entry_type<long> gelref1::_form_TRANSNO("TRANSNO");
 
             gelref1::gelref1(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -68,21 +70,21 @@ namespace dnvgl {
                ldiv_t divmod;
 
                ++pos;
-               ELNO = _ELNO(*(pos++));
-               MATNO = _MATNO(*(pos++));
-               ADDNO = _ADDNO(*(pos++));
-               INTNO = _INTNO(*(pos++));
-               MINTNO = _MINTNO(*(pos++));
-               STRANO = _STRANO(*(pos++));
-               STRENO = _STRENO(*(pos++));
-               STREPONO = _STREPONO(*(pos++));
-               GEONO_OPT = _GEONO_OPT(*(pos++));
+               ELNO = _form_ELNO(*(pos++));
+               MATNO = _form_MATNO(*(pos++));
+               ADDNO = _form_ADDNO(*(pos++));
+               INTNO = _form_INTNO(*(pos++));
+               MINTNO = _form_MINTNO(*(pos++));
+               STRANO = _form_STRANO(*(pos++));
+               STRENO = _form_STRENO(*(pos++));
+               STREPONO = _form_STREPONO(*(pos++));
+               GEONO_OPT = _form_GEONO_OPT(*(pos++));
                if (GEONO_OPT == -1) nvals += 1;
-               FIXNO_OPT = _FIXNO_OPT(*(pos++));
+               FIXNO_OPT = _form_FIXNO_OPT(*(pos++));
                if (FIXNO_OPT == -1) nvals += 1;
-               ECCNO_OPT = _ECCNO_OPT(*(pos++));
+               ECCNO_OPT = _form_ECCNO_OPT(*(pos++));
                if (ECCNO_OPT == -1) nvals += 1;
-               TRANSNO_OPT = _TRANSNO_OPT(*(pos++));
+               TRANSNO_OPT = _form_TRANSNO_OPT(*(pos++));
                if (TRANSNO_OPT == -1) nvals += 1;
 
                while (pos != inp.end()) {
@@ -99,22 +101,22 @@ namespace dnvgl {
 
                   if (GEONO_OPT == -1) {
                      for (long i=0; i < divmod.quot; i++)
-                        GEONO.push_back(_GEONO(node_vals[i]));
+                        GEONO.push_back(_form_GEONO(node_vals[i]));
                      ind_offset = nvals;
                   }
                   if (FIXNO_OPT == -1) {
                      for (long i=0; i < divmod.quot; i++)
-                        FIXNO.push_back(_FIXNO(node_vals[i+ind_offset]));
+                        FIXNO.push_back(_form_FIXNO(node_vals[i+ind_offset]));
                      ind_offset += nvals;
                   }
                   if (ECCNO_OPT == -1) {
                      for (long i=0; i < divmod.quot; i++)
-                        ECCNO.push_back(_ECCNO(node_vals[i+ind_offset]));
+                        ECCNO.push_back(_form_ECCNO(node_vals[i+ind_offset]));
                      ind_offset += nvals;
                   }
                   if (TRANSNO_OPT == -1) {
                      for (long i=0; i < divmod.quot; i++)
-                        TRANSNO.push_back(_TRANSNO(node_vals[i+ind_offset]));
+                        TRANSNO.push_back(_form_TRANSNO(node_vals[i+ind_offset]));
                      ind_offset += nvals;
                   }
                }
@@ -196,20 +198,20 @@ namespace dnvgl {
             operator<< (::std::ostream &os, const gelref1 &card) {
 
                os << gelref1::head.format()
-                  << card._ELNO.format(card.ELNO)
-                  << card._MATNO.format(card.MATNO)
-                  << card._ADDNO.format(card.ADDNO)
-                  << card._INTNO.format(card.INTNO) << ::std::endl
+                  << card._form_ELNO.format(card.ELNO)
+                  << card._form_MATNO.format(card.MATNO)
+                  << card._form_ADDNO.format(card.ADDNO)
+                  << card._form_INTNO.format(card.INTNO) << ::std::endl
                   << ::dnvgl::extfem::fem::types::card().format()
-                  << card._MINTNO.format(card.MINTNO)
-                  << card._STRANO.format(card.STRANO)
-                  << card._STRENO.format(card.STRENO)
-                  << card._STREPONO.format(card.STREPONO) << ::std::endl
+                  << card._form_MINTNO.format(card.MINTNO)
+                  << card._form_STRANO.format(card.STRANO)
+                  << card._form_STRENO.format(card.STRENO)
+                  << card._form_STREPONO.format(card.STREPONO) << ::std::endl
                   << ::dnvgl::extfem::fem::types::card().format()
-                  << card._GEONO_OPT.format(card.GEONO_OPT)
-                  << card._FIXNO_OPT.format(card.FIXNO_OPT)
-                  << card._ECCNO_OPT.format(card.ECCNO_OPT)
-                  << card._TRANSNO_OPT.format(card.TRANSNO_OPT);
+                  << card._form_GEONO_OPT.format(card.GEONO_OPT)
+                  << card._form_FIXNO_OPT.format(card.FIXNO_OPT)
+                  << card._form_ECCNO_OPT.format(card.ECCNO_OPT)
+                  << card._form_TRANSNO_OPT.format(card.TRANSNO_OPT);
 
                size_t i = 5;
                for (auto p : card.GEONO) {
@@ -217,32 +219,32 @@ namespace dnvgl {
                      i = 1;
                      os << std::endl << fem::types::card().format();
                   }
-                  os << card._GEONO.format(p);
+                  os << card._form_GEONO.format(p);
                }
                for (auto p : card.FIXNO) {
                   if (i++ >= 4) {
                      i = 1;
                      os << std::endl << ::fem::types::card().format();
                   }
-                  os << card._FIXNO.format(p);
+                  os << card._form_FIXNO.format(p);
                }
                for (auto p : card.ECCNO) {
                   if (i++ >= 4) {
                      i = 1;
                      os << std::endl << ::dnvgl::extfem::fem::types::card().format();
                   }
-                  os << card._ECCNO.format(p);
+                  os << card._form_ECCNO.format(p);
                }
                for (auto p : card.TRANSNO) {
                   if (i++ >= 4) {
                      i = 1;
                      os << std::endl << ::dnvgl::extfem::fem::types::card().format();
                   }
-                  os << card._TRANSNO.format(p);
+                  os << card._form_TRANSNO.format(p);
                }
 
                while (i++ < 4)
-                  os << card._ELNO.format(0);
+                  os << card.empty.format();
                os << std::endl;
                return os;
             }

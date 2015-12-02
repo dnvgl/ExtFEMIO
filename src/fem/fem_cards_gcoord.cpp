@@ -24,6 +24,12 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -35,10 +41,10 @@ namespace dnvgl {
 
             const fem::types::card gcoord::head("GCOORD");
 
-            const entry_type<long> gcoord::_NODENO("NODENO");
-            const entry_type<double> gcoord::_XCOORD("XCOORD");
-            const entry_type<double> gcoord::_YCOORD("YCOORD");
-            const entry_type<double> gcoord::_ZCOORD("ZCOORD");
+            const entry_type<long> gcoord::_form_NODENO("NODENO");
+            const entry_type<double> gcoord::_form_XCOORD("XCOORD");
+            const entry_type<double> gcoord::_form_YCOORD("YCOORD");
+            const entry_type<double> gcoord::_form_ZCOORD("ZCOORD");
 
             gcoord::gcoord(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -46,10 +52,10 @@ namespace dnvgl {
                auto pos = inp.begin();
 
                ++pos;
-               NODENO = _NODENO(*(pos++));
-               XCOORD = _XCOORD(*(pos++));
-               YCOORD = _YCOORD(*(pos++));
-               ZCOORD = _ZCOORD(*(pos++));
+               NODENO = _form_NODENO(*(pos++));
+               XCOORD = _form_XCOORD(*(pos++));
+               YCOORD = _form_YCOORD(*(pos++));
+               ZCOORD = _form_ZCOORD(*(pos++));
             }
 
             gcoord::gcoord(
@@ -70,10 +76,10 @@ namespace dnvgl {
             ::std::ostream&
             operator<< (::std::ostream &os, const gcoord &card) {
                os << gcoord::head.format()
-                  << card._NODENO.format(card.NODENO)
-                  << card._XCOORD.format(card.XCOORD)
-                  << card._YCOORD.format(card.YCOORD)
-                  << card._ZCOORD.format(card.ZCOORD) << std::endl;
+                  << card._form_NODENO.format(card.NODENO)
+                  << card._form_XCOORD.format(card.XCOORD)
+                  << card._form_YCOORD.format(card.YCOORD)
+                  << card._form_ZCOORD.format(card.ZCOORD) << std::endl;
 
                return os;
             }

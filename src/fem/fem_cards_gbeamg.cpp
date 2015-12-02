@@ -24,6 +24,12 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -35,21 +41,21 @@ namespace dnvgl {
 
             const fem::types::card gbeamg::head("GBEAMG");
 
-            const entry_type<long> gbeamg::_GEONO("GEONO");
-            const entry_type<double> gbeamg::_AREA("AREA");
-            const entry_type<double> gbeamg::_IX("IX");
-            const entry_type<double> gbeamg::_IY("IY");
-            const entry_type<double> gbeamg::_IZ("IZ");
-            const entry_type<double> gbeamg::_IYZ("IYZ");
-            const entry_type<double> gbeamg::_WXMIN("WXMIN");
-            const entry_type<double> gbeamg::_WYMIN("WYMIN");
-            const entry_type<double> gbeamg::_WZMIN("WZMIN");
-            const entry_type<double> gbeamg::_SHARY("SHARY");
-            const entry_type<double> gbeamg::_SHARZ("SHARZ");
-            const entry_type<double> gbeamg::_SHCENY("SHCENY");
-            const entry_type<double> gbeamg::_SHCENZ("SHCENZ");
-            const entry_type<double> gbeamg::_SY("SY");
-            const entry_type<double> gbeamg::_SZ("SZ");
+            const entry_type<long> gbeamg::_form_GEONO("GEONO");
+            const entry_type<double> gbeamg::_form_AREA("AREA");
+            const entry_type<double> gbeamg::_form_IX("IX");
+            const entry_type<double> gbeamg::_form_IY("IY");
+            const entry_type<double> gbeamg::_form_IZ("IZ");
+            const entry_type<double> gbeamg::_form_IYZ("IYZ");
+            const entry_type<double> gbeamg::_form_WXMIN("WXMIN");
+            const entry_type<double> gbeamg::_form_WYMIN("WYMIN");
+            const entry_type<double> gbeamg::_form_WZMIN("WZMIN");
+            const entry_type<double> gbeamg::_form_SHARY("SHARY");
+            const entry_type<double> gbeamg::_form_SHARZ("SHARZ");
+            const entry_type<double> gbeamg::_form_SHCENY("SHCENY");
+            const entry_type<double> gbeamg::_form_SHCENZ("SHCENZ");
+            const entry_type<double> gbeamg::_form_SY("SY");
+            const entry_type<double> gbeamg::_form_SZ("SZ");
 
             gbeamg::gbeamg(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -57,22 +63,22 @@ namespace dnvgl {
                auto pos = inp.begin();
 
                ++pos;
-               GEONO = _GEONO(*(pos++));
+               GEONO = _form_GEONO(*(pos++));
                ++pos;
-               AREA = _AREA(*(pos++));
-               IX = _IX(*(pos++));
-               IY = _IY(*(pos++));
-               IZ = _IZ(*(pos++));
-               IYZ = _IYZ(*(pos++));
-               WXMIN = _WXMIN(*(pos++));
-               WYMIN = _WYMIN(*(pos++));
-               WZMIN = _WZMIN(*(pos++));
-               SHARY = _SHARY(*(pos++));
-               SHARZ = _SHARZ(*(pos++));
-               SHCENY = _SHCENY(*(pos++));
-               SHCENZ = _SHCENZ(*(pos++));
-               SY = _SY(*(pos++));
-               SZ = _SZ(*(pos++));
+               AREA = _form_AREA(*(pos++));
+               IX = _form_IX(*(pos++));
+               IY = _form_IY(*(pos++));
+               IZ = _form_IZ(*(pos++));
+               IYZ = _form_IYZ(*(pos++));
+               WXMIN = _form_WXMIN(*(pos++));
+               WYMIN = _form_WYMIN(*(pos++));
+               WZMIN = _form_WZMIN(*(pos++));
+               SHARY = _form_SHARY(*(pos++));
+               SHARZ = _form_SHARZ(*(pos++));
+               SHCENY = _form_SHCENY(*(pos++));
+               SHCENZ = _form_SHCENZ(*(pos++));
+               SY = _form_SY(*(pos++));
+               SZ = _form_SZ(*(pos++));
             }
 
             gbeamg::gbeamg(
@@ -103,25 +109,25 @@ namespace dnvgl {
             ::std::ostream&
             operator<< (::std::ostream &os, const gbeamg &card) {
                os << gbeamg::head.format()
-                  << card._GEONO.format(card.GEONO)
+                  << card._form_GEONO.format(card.GEONO)
                   << card.empty.format()
-                  << card._AREA.format(card.AREA)
-                  << card._IX.format(card.IX)
+                  << card._form_AREA.format(card.AREA)
+                  << card._form_IX.format(card.IX)
                   << ::std::endl << fem::types::card("").format()
-                  << card._IY.format(card.IY)
-                  << card._IZ.format(card.IZ)
-                  << card._IYZ.format(card.IYZ)
-                  << card._WXMIN.format(card.WXMIN)
+                  << card._form_IY.format(card.IY)
+                  << card._form_IZ.format(card.IZ)
+                  << card._form_IYZ.format(card.IYZ)
+                  << card._form_WXMIN.format(card.WXMIN)
                   << ::std::endl << fem::types::card("").format()
-                  << card._WYMIN.format(card.WYMIN)
-                  << card._WZMIN.format(card.WZMIN)
-                  << card._SHARY.format(card.SHARY)
-                  << card._SHARZ.format(card.SHARZ)
+                  << card._form_WYMIN.format(card.WYMIN)
+                  << card._form_WZMIN.format(card.WZMIN)
+                  << card._form_SHARY.format(card.SHARY)
+                  << card._form_SHARZ.format(card.SHARZ)
                   << ::std::endl << fem::types::card("").format()
-                  << card._SHCENY.format(card.SHCENY)
-                  << card._SHCENZ.format(card.SHCENZ)
-                  << card._SY.format(card.SY)
-                  << card._SZ.format(card.SZ) << ::std::endl;
+                  << card._form_SHCENY.format(card.SHCENY)
+                  << card._form_SHCENZ.format(card.SHCENZ)
+                  << card._form_SY.format(card.SY)
+                  << card._form_SZ.format(card.SZ) << ::std::endl;
                return os;
             }
          }

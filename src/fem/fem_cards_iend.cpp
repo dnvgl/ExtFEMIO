@@ -23,6 +23,12 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -34,7 +40,7 @@ namespace dnvgl {
 
             const fem::types::card iend::head("IEND");
 
-            const entry_type<long> iend::_CONT("SLEVEL");
+            const entry_type<long> iend::_form_CONT("SLEVEL");
 
             iend::iend(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -42,7 +48,7 @@ namespace dnvgl {
                auto pos = inp.begin();
 
                ++pos;
-               CONT = _CONT(*(pos));
+               CONT = _form_CONT(*(pos));
             }
 
             iend::iend(const long &CONT) : CONT(CONT) {}
@@ -60,7 +66,7 @@ namespace dnvgl {
             operator<<(::std::ostream &os, const iend &card) {
 
                os << iend::head.format()
-                  << card._CONT.format(card.CONT)
+                  << card._form_CONT.format(card.CONT)
                   << iend::empty.format()
                   << iend::empty.format()
                   << iend::empty.format() << ::std::endl;

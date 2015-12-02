@@ -23,8 +23,10 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
-#ifdef _TYPE
-#undef _TYPE
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace ::dnvgl::extfem;
@@ -38,11 +40,11 @@ namespace dnvgl {
 
             const fem::types::card date::head("DATE");
 
-            const entry_type<long> date::_TYPE("TYPE");
-            const entry_type<long> date::_SUBTYPE("SUBTYPE");
-            const entry_type<long> date::_NRECS("NRECS");
-            const entry_type<long> date::_NBYTE("NBYTE");
-            const entry_type<::std::string> date::_CONT("CONT");
+            const entry_type<long> date::_form_TYPE("TYPE");
+            const entry_type<long> date::_form_SUBTYPE("SUBTYPE");
+            const entry_type<long> date::_form_NRECS("NRECS");
+            const entry_type<long> date::_form_NBYTE("NBYTE");
+            const entry_type<::std::string> date::_form_CONT("CONT");
 
             date::date(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -50,10 +52,10 @@ namespace dnvgl {
                auto pos = inp.begin();
 
                ++pos;
-               TYPE = _TYPE(*(pos++));
-               SUBTYPE = _SUBTYPE(*(pos++));
-               NRECS = _NRECS(*(pos++));
-               NBYTE = _NBYTE(*(pos++));
+               TYPE = _form_TYPE(*(pos++));
+               SUBTYPE = _form_SUBTYPE(*(pos++));
+               NRECS = _form_NRECS(*(pos++));
+               NBYTE = _form_NBYTE(*(pos++));
 
                while (pos != inp.end()) {
                   ::std::string res("");
@@ -93,14 +95,14 @@ namespace dnvgl {
             operator<< (::std::ostream &os, const date &card) {
 
                os << date::head.format()
-                  << card._TYPE.format(card.TYPE)
-                  << card._SUBTYPE.format(card.SUBTYPE)
-                  << card._NRECS.format(card.NRECS)
-                  << card._NBYTE.format(card.NBYTE) << std::endl;
+                  << card._form_TYPE.format(card.TYPE)
+                  << card._form_SUBTYPE.format(card.SUBTYPE)
+                  << card._form_NRECS.format(card.NRECS)
+                  << card._form_NBYTE.format(card.NBYTE) << std::endl;
 
                for (auto p : card.CONT)
                   os << ::dnvgl::extfem::fem::types::card().format()
-                     << card._CONT.format(p, card.NBYTE)
+                     << card._form_CONT.format(p, card.NBYTE)
                      << std::endl;
 
                return os;

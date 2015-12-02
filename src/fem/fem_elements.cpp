@@ -22,6 +22,12 @@ namespace {
 
 #include "fem/elements.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem::fem::elements;
 
 std::unique_ptr<__base> dispatch(const long &id) {

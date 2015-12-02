@@ -14,10 +14,6 @@
 
 #include <memory>
 
-#ifdef _SA
-#undef _SA
-#endif
-
 namespace dnvgl {
   namespace extfem {
     namespace bdf {

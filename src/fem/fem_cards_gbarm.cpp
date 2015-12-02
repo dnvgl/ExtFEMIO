@@ -24,6 +24,12 @@ namespace {
 #include "fem/cards.h"
 #include "fem/types.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -35,14 +41,14 @@ namespace dnvgl {
 
             const fem::types::card gbarm::head("GBARM");
 
-            const entry_type<long> gbarm::_GEONO("GEONO");
-            const entry_type<double> gbarm::_HZ("HZ");
-            const entry_type<double> gbarm::_BT("BT");
-            const entry_type<double> gbarm::_BB("BB");
-            const entry_type<double> gbarm::_SFY("SFY");
-            const entry_type<double> gbarm::_SFZ("SFZ");
-            const entry_type<long> gbarm::_NLOBY("NLOBY");
-            const entry_type<long> gbarm::_NLOBZ("NLOBZ");
+            const entry_type<long> gbarm::_form_GEONO("GEONO");
+            const entry_type<double> gbarm::_form_HZ("HZ");
+            const entry_type<double> gbarm::_form_BT("BT");
+            const entry_type<double> gbarm::_form_BB("BB");
+            const entry_type<double> gbarm::_form_SFY("SFY");
+            const entry_type<double> gbarm::_form_SFZ("SFZ");
+            const entry_type<long> gbarm::_form_NLOBY("NLOBY");
+            const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
             gbarm::gbarm(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -50,14 +56,14 @@ namespace dnvgl {
                auto pos = inp.begin();
 
                ++pos;
-               GEONO = _GEONO(*(pos++));
-               HZ = _HZ(*(pos++));
-               BT = _BT(*(pos++));
-               BB = _BB(*(pos++));
-               SFY = _SFY(*(pos++));
-               SFZ = _SFZ(*(pos++));
-               NLOBY = _NLOBY(*(pos++));
-               NLOBZ = _NLOBZ(*(pos++));
+               GEONO = _form_GEONO(*(pos++));
+               HZ = _form_HZ(*(pos++));
+               BT = _form_BT(*(pos++));
+               BB = _form_BB(*(pos++));
+               SFY = _form_SFY(*(pos++));
+               SFZ = _form_SFZ(*(pos++));
+               NLOBY = _form_NLOBY(*(pos++));
+               NLOBZ = _form_NLOBZ(*(pos++));
             }
 
             gbarm::gbarm(
@@ -80,15 +86,15 @@ namespace dnvgl {
             ::std::ostream&
             operator<< (::std::ostream &os, const gbarm &card) {
                os << gbarm::head.format()
-                  << card._GEONO.format(card.GEONO)
-                  << card._HZ.format(card.HZ)
-                  << card._BT.format(card.BT)
-                  << card._BB.format(card.BB)
+                  << card._form_GEONO.format(card.GEONO)
+                  << card._form_HZ.format(card.HZ)
+                  << card._form_BT.format(card.BT)
+                  << card._form_BB.format(card.BB)
                   << ::std::endl << fem::types::card("").format()
-                  << card._SFY.format(card.SFY)
-                  << card._SFZ.format(card.SFZ)
-                  << card._NLOBY.format(card.NLOBY)
-                  << card._NLOBZ.format(card.NLOBZ) << ::std::endl;
+                  << card._form_SFY.format(card.SFY)
+                  << card._form_SFZ.format(card.SFZ)
+                  << card._form_NLOBY.format(card.NLOBY)
+                  << card._form_NLOBZ.format(card.NLOBZ) << ::std::endl;
                return os;
             }
          }
