@@ -716,10 +716,10 @@ system, unless a local nodal coordinate system is specified (see the
                   const long &STRENO, const long &STREPONO,
                   const long &GEONO_OPT, const long &FIXNO_OPT,
                   const long &ECCNO_OPT, const long &TRANSNO_OPT,
-                  const ::std::deque<long> &GEONO={},
-                  const ::std::deque<long> &FIXNO={},
-                  const ::std::deque<long> &ECCNO={},
-                  const ::std::deque<long> &TRANSNO={});
+                  const ::std::deque<long> &GEONO=::std::deque<long>(),
+                  const ::std::deque<long> &FIXNO=::std::deque<long>(),
+                  const ::std::deque<long> &ECCNO=::std::deque<long>(),
+                  const ::std::deque<long> &TRANSNO=::std::deque<long>());
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
