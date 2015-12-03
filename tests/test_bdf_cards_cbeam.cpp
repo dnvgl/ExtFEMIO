@@ -98,12 +98,47 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
       CHECK((long)probe.GA == 76);
       CHECK((long)probe.GB == 153);
       CHECK((long)probe.G0 == 13);
-      CHECK_FALSE(probe.X1);
-      CHECK_FALSE(probe.X2);
-      CHECK_FALSE(probe.X3);
+      CHECK_FALSE((bool)probe.X1);
+      CHECK_FALSE((bool)probe.X2);
+      CHECK_FALSE((bool)probe.X3);
       CHECK(probe.choose_dir_code == cbeam::has_DCODE);
-      CHECK(probe.OFFT == "GOO");
+      CHECK((::std::string)probe.OFFT == "GOO");
       CHECK_FALSE(probe.BIT);
+      CHECK(probe.choose_offt_bit == cbeam::has_OFFT);
+      deque<int> p_ref;
+      CHECK(probe.PA == p_ref);
+      CHECK(probe.PB == p_ref);
+      CHECK((double)probe.W1A == 0.);
+      CHECK((double)probe.W2A == -22.617);
+      CHECK((double)probe.W3A == -339.25);
+      CHECK((double)probe.W1B == 0.);
+      CHECK((double)probe.W2B == 22.617);
+      CHECK((double)probe.W3B == 0.);
+      CHECK_FALSE((bool)probe.SA);
+      CHECK_FALSE((bool)probe.SB);
+   }
+
+   SECTION("OFFT default") {
+      ::std::deque<string> data;
+      data.push_back(
+      "CBEAM   7869    104010  76      153      13\n");
+      data.push_back(
+         "                        0.0     -22.617 -339.25 0.0     22.617 ");
+      ::std::deque<string> lines;
+      card::card_split(data, lines);
+      cbeam probe(lines);
+
+      CHECK((long)probe.EID == 7869);
+      CHECK((long)probe.PID == 104010);
+      CHECK((long)probe.GA == 76);
+      CHECK((long)probe.GB == 153);
+      CHECK((long)probe.G0 == 13);
+      CHECK_FALSE((bool)probe.X1);
+      CHECK_FALSE((bool)probe.X2);
+      CHECK_FALSE((bool)probe.X3);
+      CHECK(probe.choose_dir_code == cbeam::has_DCODE);
+      CHECK((::std::string)probe.OFFT == "GGG");
+      CHECK_FALSE((bool)probe.BIT);
       CHECK(probe.choose_offt_bit == cbeam::has_OFFT);
       deque<int> p_ref;
       CHECK(probe.PA == p_ref);

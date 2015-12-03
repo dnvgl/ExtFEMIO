@@ -53,8 +53,7 @@ const entry_type<double> cbeam::form_X3(
    "X3",
    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 const entry_type<double> cbeam::form_BIT(
-   "BIT",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0));
+   "BIT", bdf::type_bounds::bound<double>());
 namespace {
    const char* OFFTinit[8] = {
       "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
@@ -143,7 +142,7 @@ cbeam::cbeam(const deque<std::string> &inp) :
       form_PA.set_value(PA, *(pos++));
    case 8:
       try {
-         form_BIT.set_value(BIT, *(pos));
+         form_BIT.set_value(BIT, *pos);
          OFFT.is_value = false;
          choose_offt_bit = has_BIT;
       }
@@ -191,7 +190,10 @@ cbeam::cbeam(const deque<std::string> &inp) :
    if (!W1A.is_value) form_W1A.set_value(W1A, "");
    if (!PB.is_value) form_PB.set_value(PB, "");
    if (!PA.is_value) form_PA.set_value(PA, "");
-   if (!BIT.is_value && !OFFT.is_value) form_OFFT.set_value(OFFT, "");
+   if (!(BIT.is_value || OFFT.is_value)) {
+      choose_offt_bit = has_OFFT;
+      form_OFFT.set_value(OFFT, "");
+   }
 };
 
 const std::ostream& cbeam::operator << (std::ostream& os) const {

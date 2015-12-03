@@ -252,8 +252,6 @@ namespace dnvgl {
 #endif
                float_lead_dot;
 
-            protected:
-
                static const bdf_types _type = Float;
 
             public:
@@ -298,12 +296,12 @@ namespace dnvgl {
                entry_value<::std::string>
                   operator() (const ::std::string &) const;
 
-               bdf_types type() const {
-                  return _type;
-               }
+               bdf_types type() const { return _type; }
 
-               void set_value(entry_value<::std::string> &, const ::std::string &i) const;
-               void set_value(entry_value<::std::string> &, const ::std::string *inp) const ;
+               void set_value(
+                  entry_value<::std::string> &, const ::std::string &i) const;
+               void set_value(
+                  entry_value<::std::string> &, const ::std::string *inp) const ;
 
                ::std::string format(const void *) const;
                ::std::string format(const entry_value<::std::string>&) const;
