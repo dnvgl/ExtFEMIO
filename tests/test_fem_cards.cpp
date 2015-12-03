@@ -78,6 +78,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"
       "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"
       "GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000\n"
+      "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -89,8 +90,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [ident].") {
       probe.get(l);
-      CAPTURE( l[0] );
-      INFO( "The line is " << l[0] );
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::IDENT);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -101,9 +102,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [text].") {
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 2; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::TEXT);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456|2
@@ -130,10 +132,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [date].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 3; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::DATE);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -159,11 +161,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [tdload].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 4; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       // CHECK(current->card_type() == cards::TDLOAD);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -172,12 +173,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gnode].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 5; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GNODE);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -195,13 +194,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gcoord].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 6; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GCOORD);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -213,14 +209,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gelmnt1].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 7; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GELMNT1);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -238,15 +230,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gelref1].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 8; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GELREF1);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -272,16 +259,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gbarm].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 9; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GBARM);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -298,18 +279,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gbeamg].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 10; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GBEAMG);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -335,18 +308,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [geccen].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 11; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::GECCEN);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -357,20 +322,26 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<geccen*>(current.get())->EZ == -9.05288207);
    }
 
+   SECTION("Checking dispatch [gelth].") {
+      for (int i = 0; i < 12; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GELTH);
+      // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
+      // GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<gelth*>(current.get())->GEONO == 654394);
+      CHECK(static_cast<gelth*>(current.get())->TH == .1);
+      CHECK(static_cast<gelth*>(current.get())->NINT == 0);
+   }
+
+
    SECTION("Checking dispatch [iend].") {
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      probe.get(l);
-      CAPTURE( l[0] );
+      for (int i = 0; i < 13; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::IEND);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456

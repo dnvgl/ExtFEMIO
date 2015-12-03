@@ -64,8 +64,8 @@ namespace dnvgl {
                GBEAMG,
                /// Eccentricities
                GECCEN,
-               // /// Thickness of Two-dimensional Elements
-               // GELTH,
+               /// Thickness of Two-dimensional Elements
+               GELTH,
                // /// Cross Section Type I or H Beam
                // GIORH,
                // /// Cross Section Type L-Section
@@ -999,6 +999,45 @@ record may be on the interface.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const geccen&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `GELTH`: Eccentricities
+/**
+## Format:
+
+|         |         |      |        |   |
+| ------- | ------- | ---- | ------ | - |
+| `GELTH` | `GEONO` | `TH` | `NINT` |   |
+*/
+            class gelth : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TH;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NINT;
+
+            public:
+
+               long GEONO;
+               double TH;
+               long NINT;
+
+               DllExport gelth(const ::std::deque<::std::string>&);
+
+               DllExport gelth(
+                  const long &GEONO, const double &TH, const long &NINT);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const gelth&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

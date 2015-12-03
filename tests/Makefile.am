@@ -104,6 +104,7 @@ test_fem_cards_SOURCES+=test_fem_cards_gbarm.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gbeamg.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gcoord.cpp
 test_fem_cards_SOURCES+=test_fem_cards_geccen.cpp
+test_fem_cards_SOURCES+=test_fem_cards_gelth.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gnode.cpp
 test_fem_cards_SOURCES+=test_fem_cards_ident.cpp
 test_fem_cards_SOURCES+=test_fem_cards_iend.cpp
@@ -114,8 +115,6 @@ test_fem_cards_LDADD=$(test_extfem_LDADD)
 TESTS+=test_fem_cards.ju
 
 test_MISC=
-
-
 
 test_%.ju: base_test.ju
 	ln -sf $< $@

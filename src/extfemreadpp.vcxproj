@@ -182,6 +182,7 @@
     <ClCompile Include="fem\fem_cards_gbeamg.cpp" />
     <ClCompile Include="fem\fem_cards_gcoord.cpp" />
     <ClCompile Include="fem\fem_cards_geccen.cpp" />
+    <ClCompile Include="fem\fem_cards_gelth.cpp" />
     <ClCompile Include="fem\fem_cards_gnode.cpp" />
     <ClCompile Include="fem\fem_cards_ident.cpp" />
     <ClCompile Include="fem\fem_cards_iend.cpp" />
