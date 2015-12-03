@@ -215,6 +215,7 @@
     <ClCompile Include="test_fem_cards_geccen.cpp" />
     <ClCompile Include="test_fem_cards_gelth.cpp" />
     <ClCompile Include="test_fem_cards_giorh.cpp" />
+    <ClCompile Include="test_fem_cards_glsec.cpp" />
     <ClCompile Include="test_fem_cards_gnode.cpp" />
     <ClCompile Include="test_fem_cards_ident.cpp" />
     <ClCompile Include="test_fem_cards_iend.cpp" />

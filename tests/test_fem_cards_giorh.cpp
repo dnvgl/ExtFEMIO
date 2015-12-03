@@ -66,7 +66,7 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
       CHECK(probe.NLOBZ == 0);
    }
 
-   SECTION("GIORH (1)") {
+   SECTION("GIORH (2)") {
       ::std::deque<string> data;
       data.push_back(
          "GIORH    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n");

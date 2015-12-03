@@ -68,8 +68,8 @@ namespace dnvgl {
                GELTH,
                /// Cross Section Type I or H Beam
                GIORH,
-               // /// Cross Section Type L-Section
-               // GLSEC,
+               /// Cross Section Type L-Section
+               GLSEC,
                // /// Cross Section Type Tube
                // GPIPE,
                // /// Nodes with Linear Dependence
@@ -1139,6 +1139,115 @@ record may be on the interface.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const giorh&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `GLSEC`: Cross Section Type I or H Beam
+/**
+## Format:
+
+|         |         |          |       |      |
+| ------- | ------- | -------- | ----- | ---- |
+| `GLSEC` | `GEONO` | `HZ`     | `TY`  | `BY` |
+|         | `TZ`    | `SFY`    | `SFZ` | `K'  |
+|         | `NLOBY` | `NLOBZ`  |       |      |
+
+\image latex glsec.eps "I or H beam"
+\image html glsec.svg "I or H beam"
+*/
+            class glsec : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_K;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBY;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
+
+            public:
+
+               /** Geometry type number, i.e. reference number used
+                   for element data definition of geometry properties
+                   (Cross sectional properties) of beams.
+               */
+               long GEONO;
+               /** Height of beam at current location.
+                */
+               double HZ;
+               /** Thickness of beam web.
+                */
+               double TY;
+               /** Width of flange.
+                */
+               double BY;
+               /** Thickness of flange.
+                */
+               double TZ;
+               /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                   SHARY(MOD) = SHARY(PROG) · SFY
+                   \f]
+
+                   (The shear area on `GBEAMG` os SHARY(MOD)).
+               */
+               double SFY;
+               /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                   SHARZ(MOD) = SHARZ(PROG) · SFZ
+                   \f]
+
+                   (The shear area on `GBEAMG` os SHARZ(MOD)).
+               */
+               double SFZ;
+               /** Web orientation:
+
+                   - =0: web located in the negative local *y*-direction
+                         (and consequently flange in the
+                         positive *y*’-direction)
+                   - =1: web located in the positive local *y*-direction
+                         (and consequently flange in the
+                         negative *y*’-direction)
+                */
+               long K;
+               /** Number of integration points in beam flange
+                   (optional)
+               */
+               long NLOBY;
+               /** Number of integration points in beam web (optional)
+                */
+               long NLOBZ;
+
+               DllExport glsec(const ::std::deque<::std::string>&);
+
+               DllExport glsec(
+                const long &GEONO,
+                const double &HZ, const double &TY, const double &BY,
+                const double &TZ,
+                const double &SFY, const double &SFZ,
+                const long &K,
+                const long &NLOBY, const long &NLOBZ);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const glsec&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

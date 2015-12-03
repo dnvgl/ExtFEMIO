@@ -154,6 +154,9 @@
     <ClCompile Include="fem\fem_cards_giroh.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards_glsec.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fem\fem_cards_gnode.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>

@@ -106,6 +106,7 @@ test_fem_cards_SOURCES+=test_fem_cards_gcoord.cpp
 test_fem_cards_SOURCES+=test_fem_cards_geccen.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gelth.cpp
 test_fem_cards_SOURCES+=test_fem_cards_giorh.cpp
+test_fem_cards_SOURCES+=test_fem_cards_glsec.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gnode.cpp
 test_fem_cards_SOURCES+=test_fem_cards_ident.cpp
 test_fem_cards_SOURCES+=test_fem_cards_iend.cpp
