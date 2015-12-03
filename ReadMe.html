@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-12-02 Mi 16:40 -->
+<!-- 2015-12-03 Do 10:54 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>C++ IO support for various FEM exchange file formats</title>
@@ -245,7 +245,7 @@ the according directories in the doc dubdirectory.
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CBEAM</code></td>
-<td class="org-left">Complex beams</td>
+<td class="org-left">Complex beams <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></td>
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&#9785;</td>
 </tr>
@@ -413,7 +413,7 @@ the according directories in the doc dubdirectory.
 <th scope="col" class="org-left"><b>Description</b></th>
 <th scope="col" class="org-left"><b>Read</b></th>
 <th scope="col" class="org-left"><b>Write</b></th>
-<th scope="col" class="org-right"><b>Page<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></b></th>
+<th scope="col" class="org-right"><b>Page<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></b></th>
 </tr>
 </thead>
 <tbody>
@@ -749,17 +749,17 @@ element types.
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-right"><b>Typ<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></b></th>
+<th scope="col" class="org-right"><b>Typ<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup></b></th>
 <th scope="col" class="org-left"><b>Name</b></th>
-<th scope="col" class="org-right"><b>N.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup></b></th>
+<th scope="col" class="org-right"><b>N.<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></b></th>
 <th scope="col" class="org-left"><b>Description of Element</b></th>
 <th scope="col" class="org-left"><b>Ref.</b></th>
-<th scope="col" class="org-left"><b><sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></b></th>
 <th scope="col" class="org-left"><b><sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></b></th>
 <th scope="col" class="org-left"><b><sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup></b></th>
 <th scope="col" class="org-left"><b><sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup></b></th>
 <th scope="col" class="org-left"><b><sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></b></th>
-<th scope="col" class="org-left"><b>Other<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup></b></th>
+<th scope="col" class="org-left"><b><sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup></b></th>
+<th scope="col" class="org-left"><b>Other<sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup></b></th>
 </tr>
 </thead>
 <tbody>
@@ -983,7 +983,7 @@ element types.
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;<sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup></td>
+<td class="org-left">&checkmark;<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup></td>
 <td class="org-left">&#9785;</td>
 <td class="org-left">FR</td>
 </tr>
@@ -1162,7 +1162,7 @@ element types.
 <td class="org-left"><code>MCTS</code></td>
 <td class="org-right">6</td>
 <td class="org-left">Subparam. Curved Triang. Thick Sandwich Elem.</td>
-<td class="org-left">2<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">2<sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
@@ -1191,7 +1191,7 @@ element types.
 <td class="org-left"><code>MCQS</code></td>
 <td class="org-right">8</td>
 <td class="org-left">Subparam. Curved Quadr. Thick Sandwich Elem.</td>
-<td class="org-left">2<sup><a id="fnr.11.100" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">2<sup><a id="fnr.12.100" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
@@ -1261,7 +1261,7 @@ element types.
 <td class="org-left"><code>LCTS</code></td>
 <td class="org-right">6</td>
 <td class="org-left">Subparam. Layered Curved Triangular Thick Shell</td>
-<td class="org-left">2<sup><a id="fnr.11.100" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">2<sup><a id="fnr.12.100" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
@@ -1275,7 +1275,7 @@ element types.
 <td class="org-left"><code>LCQS</code></td>
 <td class="org-right">8</td>
 <td class="org-left">Subparam. Layered Curved Quadrilat. Thick Shell</td>
-<td class="org-left">2<sup><a id="fnr.11.100" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">2<sup><a id="fnr.12.100" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&checkmark;</td>
@@ -1347,7 +1347,7 @@ element types.
 <td class="org-left"><code>GLSH</code></td>
 <td class="org-right">2</td>
 <td class="org-left">General Spring / Shim Element</td>
-<td class="org-left"><sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup></td>
+<td class="org-left"><sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup></td>
 <td class="org-left">&checkmark;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&checkmark;</td>
@@ -1842,56 +1842,62 @@ element types.
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Twisting <code>CBEAM</code> cross section by using the <code>BIT</code> flag is
+not supported. Offset via <code>OFFT</code> is only supported for the same offset
+at <i>A</i> and <i>B</i> end of beam.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
   References page in "Technical Report: Sesam Input Interface File,
 File Description", Document id: 89-7012, Revision Number 9 / 01
 November 1996
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
 <code>ELTYP</code>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
 Number of nodes
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
 Indcluded in program <code>PREFRAME</code>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
 Included in program <code>PREFEM</code>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
 Included in program <code>SESTRA</code>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
 Included in program <code>ADVANCE</code>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara"><p class="footpara">
 Included in program <code>Poseidon</code>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10">10</a></sup> <div class="footpara"><p class="footpara">
 <b>FR</b> = FRAMEWORK, <b>LA</b> = LAUNCH, <b>PL</b> = PLATEWORK, <b>PR</b> =
 PRETUBE, <b>SP</b> = SPLICE, <b>WD</b> = WADAM, <b>WJ</b> = WAJAC
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10">10</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.11" class="footnum" href="#fnr.11">11</a></sup> <div class="footpara"><p class="footpara">
 Temporarily <code>ADVANCE</code> interprets Axisl Spring as link
 element, ignoring the material reference. The 6 matrix numbers are
 given in direct input to <code>ADVANCE</code>.
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.11" class="footnum" href="#fnr.11">11</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.12" class="footnum" href="#fnr.12">12</a></sup> <div class="footpara"><p class="footpara">
 The element subroutines are the same as for the
 subparametric curved thick shells (<code>SCQS</code> and <code>SCTS</code>).
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.12" class="footnum" href="#fnr.12">12</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.13" class="footnum" href="#fnr.13">13</a></sup> <div class="footpara"><p class="footpara">
 As General Spring it is just a 2-noded spring (12x12
 matrix) which may be in a local coordinate system. As a shim element
 the preprocessor(s) will only insert stiffness in the local x- and
@@ -1904,7 +1910,7 @@ springs are treated exactly in the same manner.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2015-12-02 Mi 16:40</p>
+<p class="date">Created: 2015-12-03 Do 10:54</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

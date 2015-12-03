@@ -13,7 +13,7 @@
   | Elements |            |                                                 |        |         |
   |          | =CTRIA3=   | 3 node shaped shell elements                    | \check | \sad    |
   |          | =CQUAD4=   | 4 node shaped shell elements                    | \check | \sad    |
-  |          | =CBEAM=    | Complex beams                                   | \check | \sad    |
+  |          | =CBEAM=    | Complex beams [fn:cbeam]                        | \check | \sad    |
   |          | =CBAR=     | Simple beams                                    | \check | \check  |
   |          | =CROD=     | Trusses                                         | \check | \sad    |
   |----------+------------+-------------------------------------------------+--------+---------|
@@ -32,3 +32,8 @@
   |----------+------------+-------------------------------------------------+--------+---------|
   | Misc     |            |                                                 |        |         |
   |          | =ENDDATA=  | Marker for end of input file                    | \check | \check  |
+
+
+[fn:cbeam] Twisting =CBEAM= cross section by using the =BIT= flag is
+not supported. Offset via =OFFT= is only supported for the same offset
+at /A/ and /B/ end of beam.
