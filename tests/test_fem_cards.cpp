@@ -82,6 +82,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n"
       "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n"
       "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001\n"
+      "         1.40000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -351,11 +354,43 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       //          1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000
       //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<giorh*>(current.get())->GEONO == 5);
-      // CHECK(static_cast<giorh*>(current.get())-> == );
+      CHECK(static_cast<giorh*>(current.get())->HZ == 466.);
+      CHECK(static_cast<giorh*>(current.get())->TY == 14.5);
+      CHECK(static_cast<giorh*>(current.get())->BT == 125);
+      CHECK(static_cast<giorh*>(current.get())->TT == 16.);
+      CHECK(static_cast<giorh*>(current.get())->BB == 14.5);
+      CHECK(static_cast<giorh*>(current.get())->TB == 16.);
+      CHECK(static_cast<giorh*>(current.get())->SFY == 1.);
+      CHECK(static_cast<giorh*>(current.get())->SFZ == 1.);
+      CHECK(static_cast<giorh*>(current.get())->NLOBYT == 0);
+      CHECK(static_cast<giorh*>(current.get())->NLOBYB == 0);
+      CHECK(static_cast<giorh*>(current.get())->NLOBZ == 0);
+   }
+
+   SECTION("Checking dispatch [glsec].") {
+      for (int i = 0; i < 14; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GLSEC);
+      // GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001
+      //          1.40000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<glsec*>(current.get())->GEONO == 19);
+      CHECK(static_cast<glsec*>(current.get())->HZ == 200.);
+      CHECK(static_cast<glsec*>(current.get())->TY == 10);
+      CHECK(static_cast<glsec*>(current.get())->BY == 90.);
+      CHECK(static_cast<glsec*>(current.get())->TZ == 14.);
+      CHECK(static_cast<glsec*>(current.get())->SFY == 1.);
+      CHECK(static_cast<glsec*>(current.get())->SFZ == 1.);
+      CHECK(static_cast<glsec*>(current.get())->K == 1);
+      CHECK(static_cast<glsec*>(current.get())->NLOBY == 0);
+      CHECK(static_cast<glsec*>(current.get())->NLOBZ == 0);
    }
 
    SECTION("Checking dispatch [iend].") {
-      for (int i = 0; i < 14; i++) probe.get(l);
+      for (int i = 0; i < 15; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
