@@ -23,7 +23,7 @@
    |          | =GBARM=    | Cross Section Type Massive Bar                               | \check | \check  |  6-48 |
    |          | =GBEAMG=   | General Beam Element Data                                    | \check | \check  |  6-49 |
    |          | =GECCEN=   | Eccentricities                                               | \check | \check  |  6-61 |
-   |          | =GELTH=    | Thickness of Two-dimensional Elements                        | \sad   | \sad    |  6-70 |
+   |          | =GELTH=    | Thickness of Two-dimensional Elements                        | \check | \check  |  6-70 |
    |          | =GIORH=    | Cross Section Type I or H Beam                               | \sad   | \sad    |  6-71 |
    |          | =GLSEC=    | Cross Section Type L-Section                                 | \sad   | \sad    |  6-76 |
    |          | =GPIPE=    | Cross Section Type Tube                                      | \sad   | \sad    |  6-81 |
