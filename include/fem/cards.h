@@ -740,18 +740,9 @@ Shortest version:
 | `GBARM` | `GEONO` | `HZ`  | `BT`    | `BB`    |
 |         | `SFY`   | `SFZ` | `NLOBY` | `NLOBZ` |
 
-~~~~~~~~~~~~~~~~~~~~~
-  |<------- BT ------->|
-  ----------------------  --
-  \         ^          /  ^
-   \    Y'  | Z'      /   |
-    \    <--X        /   HZ
-     \              /     |
-      \            /      v
-       ------------   ------
-       |<-- BB -->|
-~~~~~~~~~~~~~~~~~~~~~
-Massive bar
+
+\image latex gbarm.eps "Massive bar"
+\image html gbarm.svg "Massive bar"
 */
             class gbarm : public card {
 
@@ -1054,30 +1045,8 @@ record may be on the interface.
 |         | `TT`    | `BB`     | `TB`     | `SFY'   |
 |         | `SFZ`   | `NLOBYT` | `NLOBYB` | `NLOBZ` |
 
-~~~~~~~~~~~~~~~~~~~~~~~~~
-             BT
-       |   |<--------------->|
-      _v__ |_________________| _____________
-      TT   |                 |            ^
-      ---- --------   --------            |
-       ^          | Z'|                   |
-       |          | ^ |                   |
-                  | | |                   |
-                  | | |                   |
-         Y'       | | |                   |
-         <--------|-X |                   | HZ
-                  |   |                   |
-                  |   |                   |
-                  |   |    TY             |
-               -->|   |<-----             |
-  |               |   |                   |
- _v__ ____________|   |____________       |
- TB   |                           |       v
- ---- ----------------------------- --------
-  ^   |                           |
-  |   |<---------- BB  ---------->|
-~~~~~~~~~~~~~~~~~~~~~~~~~
-I or H beam
+\image latex giorh.eps "I or H beam"
+\image html giorh.svg "I or H beam"
 */
             class giorh : public card {
 
