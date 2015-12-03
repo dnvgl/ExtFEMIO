@@ -66,8 +66,8 @@ namespace dnvgl {
                GECCEN,
                /// Thickness of Two-dimensional Elements
                GELTH,
-               // /// Cross Section Type I or H Beam
-               // GIORH,
+               /// Cross Section Type I or H Beam
+               GIORH,
                // /// Cross Section Type L-Section
                // GLSEC,
                // /// Cross Section Type Tube
@@ -751,6 +751,7 @@ Shortest version:
        ------------   ------
        |<-- BB -->|
 ~~~~~~~~~~~~~~~~~~~~~
+Massive bar
 */
             class gbarm : public card {
 
@@ -793,7 +794,7 @@ Shortest version:
                      SHARY(MOD) = SHARY(PROG) · SFY
                    \f]
 
-                   (The shear areas on `GBEAMG` is SHARY(MOD)).
+                   (The shear area on `GBEAMG` is SHARY(MOD)).
 
                 */
                double SFY;
@@ -805,7 +806,7 @@ Shortest version:
                      SHARZ(MOD) = SHARZ(PROG) · SFZ
                    \f]
 
-                   (The shear areas on `GBEAMG` is SHARZ(MOD)).
+                   (The shear area on `GBEAMG` is SHARZ(MOD)).
                 */
                double SFZ;
                /** Number of integration points in Y’ direction
@@ -1004,7 +1005,7 @@ record may be on the interface.
                operator<< (::std::ostream& os) const;
             };
 
-/// `GELTH`: Eccentricities
+/// `GELTH`: Thickness of Two-dimensional Elements
 /**
 ## Format:
 
@@ -1038,6 +1039,137 @@ record may be on the interface.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const gelth&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `GIORH`: Cross Section Type I or H Beam
+/**
+## Format:
+
+|         |         |          |          |         |
+| ------- | ------- | -------- | -------- | ------- |
+| `GIORH` | `GEONO` | `HZ`     | `TY`     | `BT`    |
+|         | `TT`    | `BB`     | `TB`     | `SFY'   |
+|         | `SFZ`   | `NLOBYT` | `NLOBYB` | `NLOBZ` |
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+             BT
+       |   |<--------------->|
+      _v__ |_________________| _____________
+      TT   |                 |            ^
+      ---- --------   --------            |
+       ^          | Z'|                   |
+       |          | ^ |                   |
+                  | | |                   |
+                  | | |                   |
+         Y'       | | |                   |
+         <--------|-X |                   | HZ
+                  |   |                   |
+                  |   |                   |
+                  |   |    TY             |
+               -->|   |<-----             |
+  |               |   |                   |
+ _v__ ____________|   |____________       |
+ TB   |                           |       v
+ ---- ----------------------------- --------
+  ^   |                           |
+  |   |<---------- BB  ---------->|
+~~~~~~~~~~~~~~~~~~~~~~~~~
+I or H beam
+*/
+            class giorh : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BT;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TT;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BB;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TB;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYT;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYB;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
+
+            public:
+
+               /** Beam stress type number, i.e. reference number used
+                   for element data definition of cross sectional
+                   properties of beams.
+                */
+               long GEONO;
+               /** Height of beam at current location
+                */
+               double HZ;
+               /** Thickness of beam web
+                */
+               double TY;
+               /** Width of top flange
+                */
+               double BT;
+               /** Thickness of top flange
+                */
+               double TT;
+               /** Width of bottom flange
+                */
+               double BB;
+               /** Thickness of bottom flange
+                */
+               double TB;
+                /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                     SHARY(MOD) = SHARY(PROG) · SFY
+                   \f]
+
+                   (The shear areas on `GBEAMG` are SHARY(MOD)).
+                */
+               double SFY;
+                /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                     SHARZ(MOD) = SHARZ(PROG) · SFZ
+                   \f]
+
+                   (The shear areas on `GBEAMG` are SHARZ(MOD)).
+                */
+               double SFZ;
+               /** Number of integration points in top flange
+                   (optional) */
+               long NLOBYT;
+               /** Number of integration points in bottom flange
+                   (optional)
+               */
+               long NLOBYB;
+               /** Number of integration points in beam web (optional)
+                */
+               long NLOBZ;
+
+               DllExport giorh(const ::std::deque<::std::string>&);
+
+               DllExport giorh(
+                const long &GEONO,
+                const double &HZ, const double &TY, const double &BT,
+                const double &TT, const double &BB, const double &TB,
+                const double &SFY, const double &SFZ,
+                const long &NLOBYT, const long &NLOBYB, const long &NLOBZ);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const giorh&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

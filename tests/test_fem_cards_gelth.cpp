@@ -86,14 +86,3 @@ TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
 // indent-tabs-mode: nil
 // compile-command: "make -C .. check -j8"
 // End:
-
-
-
-// Local Variables:
-// mode: c++
-// ispell-local-dictionary: "english"
-// coding: utf-8
-// c-file-style: "dnvgl"
-// indent-tabs-mode: nil
-// compile-command: "make test"
-// End:

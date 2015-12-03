@@ -79,6 +79,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"
       "GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000\n"
       "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"
+      "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n"
+      "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n"
+      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -337,8 +340,22 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [giorh].") {
       for (int i = 0; i < 13; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GIORH);
+      // GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002
+      //          1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000
+      //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<giorh*>(current.get())->GEONO == 5);
+      // CHECK(static_cast<giorh*>(current.get())-> == );
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 14; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
