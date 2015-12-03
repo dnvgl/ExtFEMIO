@@ -44,7 +44,7 @@ namespace dnvgl {
                   this->is_value = false;
                   this->value = "";
                } else {
-                  is_value = true;
+                  this->is_value = true;
                   this->value = *value;
                }
             }

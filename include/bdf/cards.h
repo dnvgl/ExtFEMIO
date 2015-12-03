@@ -112,7 +112,7 @@ namespace dnvgl {
 
                static ::dnvgl::extfem::bdf::types::card head;
 
-               ::std::string format_outlist(
+               DllExport ::std::string format_outlist(
                   const ::std::deque<::std::unique_ptr<format_entry>>&) const;
 
             public:
@@ -218,17 +218,10 @@ Designates the end of the Bulk Data Section.
                   os << this;
                   return os;
                };
-               DllExport friend ::std::ostream&
-               operator<<(::std::ostream &os, const enddata &card) {
 
-                  std::deque<std::unique_ptr<format_entry>> entries;
-
-                  entries.push_back(format(enddata::head));
-
-                  os << card.format_outlist(entries) << std::endl;
-
-                  return os;
-               }
+               DllExport
+               friend ::std::ostream&
+               operator<<(::std::ostream &, const enddata&);
             };
 
 /// Handle Nastran Bulk `GRID` entries.

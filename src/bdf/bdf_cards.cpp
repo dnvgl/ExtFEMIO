@@ -43,7 +43,26 @@ namespace {
 
 bdf::types::empty card::empty = bdf::types::empty();
 
-bdf::types::card card::head = bdf::types::card("<DUMMY>");
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf{
+         namespace cards{
+             bdf::types::card card::head = bdf::types::card("<DUMMY>");
+             bdf::types::card enddata::head = bdf::types::card("ENDDATA");
+
+             ::std::ostream
+                 &operator<<(::std::ostream &os, const enddata &card){
+                     std::deque<std::unique_ptr<format_entry>> entries;
+
+                     entries.push_back(format(enddata::head));
+                     os << card.format_outlist(entries) << std::endl;
+                     return os;
+             }
+         }
+      }
+   }
+}
+
 
 const set<char> card::free_form_cont(initVals, initVals + 3);
 
@@ -165,6 +184,7 @@ card::card_split(const deque<std::string> &inp,
       }
    }
 }
+
 
 std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> &inp) {
 

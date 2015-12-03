@@ -79,6 +79,7 @@ void entry_type<long>::set_value(
       }
       istringstream buffer(sval);
       buffer >> val.value;
+      val.is_value = true;
    }
    if (!this->bounds.in_bounds(val)) {
       std::string msg("boundary condition violated (");
