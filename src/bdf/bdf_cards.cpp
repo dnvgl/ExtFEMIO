@@ -48,7 +48,6 @@ namespace dnvgl {
       namespace bdf{
          namespace cards{
              bdf::types::card card::head = bdf::types::card("<DUMMY>");
-             bdf::types::card enddata::head = bdf::types::card("ENDDATA");
 
              ::std::ostream
                  &operator<<(::std::ostream &os, const enddata &card){
