@@ -169,6 +169,9 @@
     <ClCompile Include="fem\fem_cards_gnode.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards_bldep.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fem\fem_types_list_int.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>

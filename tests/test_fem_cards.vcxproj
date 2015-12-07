@@ -218,6 +218,7 @@
     <ClCompile Include="test_fem_cards_glsec.cpp" />
     <ClCompile Include="test_fem_cards_gpipe.cpp" />
     <ClCompile Include="test_fem_cards_gnode.cpp" />
+    <ClCompile Include="test_fem_cards_bldep.cpp" />
     <ClCompile Include="test_fem_cards_ident.cpp" />
     <ClCompile Include="test_fem_cards_iend.cpp" />
     <ClCompile Include="test_fem_cards_gelmnt1.cpp" />

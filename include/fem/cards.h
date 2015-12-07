@@ -72,8 +72,8 @@ namespace dnvgl {
                GLSEC,
                /// Cross Section Type Tube
                GPIPE,
-               // /// Nodes with Linear Dependence
-               // BLDEP,
+               /// Nodes with Linear Dependence
+               BLDEP,
                // /// Nodes with Boundary Conditions
                // BNBCD,
                // /// Nodes with Prescribed Displacements and
@@ -467,8 +467,8 @@ Defines end of a superelement.
 |           |         |          |           |          |
 | --------- | ------- | -------- | --------- | -------- |
 | `GELMNT1` | `ELNOX` | `ELNO`   | `ELTYP`   | `ELTYAD` |
-|           | `NODIN1`| 'NODIN2` | \dots     | \dots    |
-|           | \dots   | \dots    | `NODIN(N) |          |
+|           | `NODIN1`| 'NODIN2` | ...       | ...      |
+|           | ...     | ...      | `NODIN(N) |          |
 */
             class gelmnt1 : public card {
 
@@ -559,9 +559,9 @@ Defines end of a superelement.
 | `GELREF1` | `ELNO`       | `MATNO`      | `ADDNO`      | `INTNO`        |
 |           | `MINTNO`     | `STRANO`     | `STRENO`     | `STREPONO`     |
 |           | `GEONO/OPT`  | `FIXNO/OPT`  | `ECCNO/OPT`  | `TRANSNO/OPT`  |
-|           | `GEONO`(1)   | \dots        | `GEONO`(*N*) | `FIXNO`(1)     |
-|           | \dots        | `FIXNO`(1)   | `ECCNO`(1)   | \dots          |
-|           | `ECCNO`(*N*) | `TRANSNO`(1) | \dots        | `TRANSNO`(*N*) |
+|           | `GEONO`(1)   | ...          | `GEONO`(*N*) | `FIXNO`(1)     |
+|           | ...          | `FIXNO`(1)   | `ECCNO`(1)   | ...            |
+|           | `ECCNO`(*N*) | `TRANSNO`(1) | ...          | `TRANSNO`(*N*) |
 
 Shortest version:
 
@@ -655,14 +655,14 @@ Shortest version:
                    sequence.
 
                    - >0: The geometry reference number (the same for all nodes in the element).
-                   `GEONO`(1), \dots, `GEONO`(*N*) will not be specified.
+                   `GEONO`(1), ..., `GEONO`(*N*) will not be specified.
 
                    - =0: No geometry data is given, i.e. neither here nor
-                   on `GEONO`(1), ¸dots, `GEONO`(*N*).
+                   on `GEONO`(1), ..., `GEONO`(*N*).
 
                    - =-1: Reference numbers to geometry data are specified
                    later in this record sequence for all nodes, i.e. all
-                   `GEONO`(1), \dots, `GEONO`(*N*) will be given.
+                   `GEONO`(1), ..., `GEONO`(*N*) will be given.
                */
                long GEONO_OPT;
                /** Fixation reference number or option for fixation
@@ -1296,7 +1296,7 @@ record may be on the interface.
                /** Thickness of tube (not necessary if DI is given).
                 */
                double T;
-/** Factor modifying the shear area calculated by the
+               /** Factor modifying the shear area calculated by the
                    preprocessor program such that the modified shear
                    area is
 
@@ -1338,6 +1338,104 @@ record may be on the interface.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const gpipe&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `BLDEP`: Nodes with Linear Dependence
+/**
+## Format:
+
+|         |                           |                             |                             |        |
+| ------- | ------------------------- | --------------------------- | --------------------------- | ------ |
+| `BLDEP` | `NODENO`                  | `CNOD`                      | `NDDOF`                     | `NDEP` |
+|         | `DEPDOF`<sub>`1`</sub>    | `INDEPDOF`<sub>`1`</sub>    | `b`<sub>`DEP1,INDEP1`</sub> |        |
+|         | `DEPDOF`<sub>`2`</sub>    | `INDEPDOF`<sub>`2`</sub>    | `b`<sub>`DEP2,INDEP2`</sub> |        |
+|         | ...                       | ...                         | ...                         |        |
+|         | `DEPDOF`<sub>`NDEP`</sub> | `INDEPDOF`<sub>`NDEP`</sub> | `b`<sub>`DEPn,INDEPn`</sub> |        |
+
+Each line specifies one dependent degree of freedom which is dependent
+on the independent node’s specified degree of freedom with the
+factor *b<sub>i,j</sub>*. The degrees of freedom must also be specified on
+`BNBCD`-records as linear dependent (3) for the dependent node, and as
+retained (4) for the independent node.
+
+A node may be dependent on many nodes. For each combination of
+`NODENO` and `CNOD` a new record, starting with the identifier
+`BLDEP`, is given.
+
+The same combination of `NODENO` and `CNOD` may occur only once.
+
+When node transformations have been specified for any of the nodes
+implied in the linear dependence, the degrees of freedom refers to the
+transformed local coordinate system.
+
+Multipoint constraints (2nd and higher order dependence) may be
+specifed through more `BLDEP` records with the same linear dependent
+node and different independent nodes. The factors *b<sub>i,j</sub>*
+may be found as Lagrange multiplicators or coefficients (Lagrange
+interpolation polynomial). For 2nd order dependence this may as well
+be specified on one BQDP record.
+*/
+            class bldep : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CNOD;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDEP;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_DEPDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_INDEPDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_b;
+
+            public:
+
+               /** Internal node number of the dependent node.
+                */
+               long NODENO;
+               /** Internal node number of an independent node.
+                */
+               long CNOD;
+               /** Number of dependent degrees of freedom of node
+                   `NODENO`. When not specified, `NDDOF` is equal to
+                   `NDEP`.
+               */
+               long NDDOF;
+               /** Number of triplets with `DEPDOF`, `INDEPDOF` and
+                   `b`<sub>*i,j*</sub>
+               */
+               long NDEP;
+               /** Dependent node’s degree of freedom.
+                */
+               ::std::deque<long> DEPDOF;
+               /** Independent node’s degree of freedom.
+                */
+               ::std::deque<long> INDEPDOF;
+               /** The contribution of the *j*’th degree of freedom of
+                   the independent node to the *i*’th degree of
+                   freedom of the dependent node.
+               */
+               ::std::deque<double> b;
+
+               DllExport bldep(const ::std::deque<::std::string>&);
+
+               DllExport bldep(const long &NODENO,
+                               const long &CNOD,
+                               const long &NDDOF,
+                               const long &NDEP,
+                               const ::std::deque<long> &DEPDOF,
+                               const ::std::deque<long> &INDEPDOF,
+                               const ::std::deque<double> &b);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const bldep&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;
