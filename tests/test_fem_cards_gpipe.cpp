@@ -51,7 +51,7 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
       ::std::deque<string> lines = card::card_split(data);
       gpipe probe(lines);
 
-      CHECK(probe.GEONO == 22);
+      CHECK(probe.GEONO == 654357);
       CHECK(probe.DI == 0.);
       CHECK(probe.DY == 5.90218891e-2);
       CHECK(probe.T == 2.95109446e-2);
@@ -71,7 +71,7 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
       ::std::deque<string> lines = card::card_split(data);
       gpipe probe(lines);
 
-      CHECK(probe.GEONO == 22);
+      CHECK(probe.GEONO == 654357);
       CHECK(probe.DI == 0.);
       CHECK(probe.DY == 5.90218891e-2);
       CHECK(probe.T == 2.95109446e-2);

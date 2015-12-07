@@ -94,7 +94,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
       CHECK((long)probe.PID == 103023);
       CHECK((long)probe.GA == 7);
       CHECK((long)probe.GB == 9);
-      CHECK_FALSE((bool)probe.G0 == 13);
+      CHECK_FALSE((bool)probe.G0);
       CHECK((double)probe.X1 == 0.);
       CHECK((double)probe.X2 == 1000.);
       CHECK((double)probe.X3 == 0.);

@@ -198,7 +198,6 @@
     <ClCompile Include="fem\fem_type_bounds.cpp" />
     <ClCompile Include="fem\fem_types_bool.cpp" />
     <ClCompile Include="fem\fem_types.cpp" />
-    <ClCompile Include="fem\fem_types_bool.cpp" />
     <ClCompile Include="fem\fem_types_float.cpp" />
     <ClCompile Include="fem\fem_types_int.cpp" />
     <ClCompile Include="fem\fem_types_list_int.cpp" />
