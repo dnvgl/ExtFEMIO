@@ -19,37 +19,36 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3E472A57-EE64-4F36-9E0F-79DF8C9E1372}</ProjectGuid>
+    <ProjectGuid>{063AC6EA-7F5C-4F15-85D0-9E6D42223D50}</ProjectGuid>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>ClassLibrary1</RootNamespace>
-    <ProjectName>extfemreadpp</ProjectName>
+    <RootNamespace>ConsoleApplication1</RootNamespace>
+    <ProjectName>test_fem_bool</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CLRSupport>true</CLRSupport>
@@ -73,73 +72,84 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(BoolDir);$(LibraryPath)</LibraryPath>
+    <BoolDir>$(Configuration)\test_fem_bool\</BoolDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(BoolDir);$(LibraryPath)</LibraryPath>
+    <BoolDir>$(Platform)\$(Configuration)\test_fem_bool\</BoolDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(BoolDir);$(LibraryPath)</LibraryPath>
+    <BoolDir>$(Configuration)\test_fem_bool\</BoolDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(BoolDir);$(LibraryPath)</LibraryPath>
+    <BoolDir>$(Platform)\$(Configuration)\test_fem_bool\</BoolDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_AFXDLL;EXTFEM_IGNORE_STINGRAY;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories>$(FrameworkPathOverride)</AdditionalUsingDirectories>
+      <ProgramDataBaseFileName>$(BoolDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies />
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
-    <Lib />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_AFXDLL;EXTFEM_IGNORE_STINGRAY;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories>$(FrameworkPathOverride)</AdditionalUsingDirectories>
+      <ProgramDataBaseFileName>$(BoolDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_AFXDLL;EXTFEM_IGNORE_STINGRAY;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories>$(FrameworkPathOverride)</AdditionalUsingDirectories>
+      <ProgramDataBaseFileName>$(BoolDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies />
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_AFXDLL;EXTFEM_IGNORE_STINGRAY;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalUsingDirectories>$(FrameworkPathOverride)</AdditionalUsingDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ProgramDataBaseFileName>$(BoolDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>extfemreadpp.lib</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -148,94 +158,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bdf\bdf_cards.cpp" />
-    <ClCompile Include="bdf\bdf_cards_bar_prop.cpp" />
-    <ClCompile Include="bdf\bdf_cards_beam_prop.cpp" />
-    <ClCompile Include="bdf\bdf_cards_cbar.cpp" />
-    <ClCompile Include="bdf\bdf_cards_cbeam.cpp" />
-    <ClCompile Include="bdf\bdf_cards_cquad4.cpp" />
-    <ClCompile Include="bdf\bdf_cards_crod.cpp" />
-    <ClCompile Include="bdf\bdf_cards_ctria3.cpp" />
-    <ClCompile Include="bdf\bdf_cards_enddata.cpp" />
-    <ClCompile Include="bdf\bdf_cards_grid.cpp" />
-    <ClCompile Include="bdf\bdf_cards_load.cpp" />
-    <ClCompile Include="bdf\bdf_cards_mat1.cpp" />
-    <ClCompile Include="bdf\bdf_cards_momforce_base.cpp" />
-    <ClCompile Include="bdf\bdf_cards_pbar.cpp" />
-    <ClCompile Include="bdf\bdf_cards_pbarl.cpp" />
-    <ClCompile Include="bdf\bdf_cards_pbeam.cpp" />
-    <ClCompile Include="bdf\bdf_cards_pbeaml.cpp" />
-    <ClCompile Include="bdf\bdf_cards_prod.cpp" />
-    <ClCompile Include="bdf\bdf_cards_pshell.cpp" />
-    <ClCompile Include="bdf\bdf_cards_shell.cpp" />
-    <ClCompile Include="bdf\bdf_errors.cpp" />
-    <ClCompile Include="bdf\bdf_file.cpp" />
-    <ClCompile Include="bdf\bdf_l_geom.cpp" />
-    <ClCompile Include="bdf\bdf_types.cpp" />
-    <ClCompile Include="bdf\bdf_types_float.cpp" />
-    <ClCompile Include="bdf\bdf_types_int.cpp" />
-    <ClCompile Include="bdf\bdf_types_str.cpp" />
-    <ClCompile Include="bdf\bdf_types_list_int.cpp" />
-    <ClCompile Include="fem\fem_cards.cpp" />
-    <ClCompile Include="fem\fem_cards_date.cpp" />
-    <ClCompile Include="fem\fem_cards_gbarm.cpp" />
-    <ClCompile Include="fem\fem_cards_gbeamg.cpp" />
-    <ClCompile Include="fem\fem_cards_gcoord.cpp" />
-    <ClCompile Include="fem\fem_cards_geccen.cpp" />
-    <ClCompile Include="fem\fem_cards_gelth.cpp" />
-    <ClCompile Include="fem\fem_cards_giorh.cpp" />
-    <ClCompile Include="fem\fem_cards_glsec.cpp" />
-    <ClCompile Include="fem\fem_cards_gpipe.cpp" />
-    <ClCompile Include="fem\fem_cards_gnode.cpp" />
-    <ClCompile Include="fem\fem_cards_ident.cpp" />
-    <ClCompile Include="fem\fem_cards_iend.cpp" />
-    <ClCompile Include="fem\fem_cards_gelmnt1.cpp" />
-    <ClCompile Include="fem\fem_cards_gelref1.cpp" />
-    <ClCompile Include="fem\fem_cards_text.cpp" />
-    <ClCompile Include="fem\fem_elements.cpp" />
-    <ClCompile Include="fem\fem_errors.cpp" />
-    <ClCompile Include="fem\fem_file.cpp" />
-    <ClCompile Include="fem\fem_type_bounds.cpp" />
-    <ClCompile Include="fem\fem_types_bool.cpp" />
-    <ClCompile Include="fem\fem_types.cpp" />
-    <ClCompile Include="fem\fem_types_bool.cpp" />
-    <ClCompile Include="fem\fem_types_float.cpp" />
-    <ClCompile Include="fem\fem_types_int.cpp" />
-    <ClCompile Include="fem\fem_types_list_int.cpp" />
-    <ClCompile Include="fem\fem_types_str.cpp" />
-    <ClCompile Include="extfem_string.cpp" />
-    <ClCompile Include="my_c++14.cpp" />
-    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="test_fem_bool.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\bdf\cards.h" />
-    <ClInclude Include="..\include\bdf\cards_elements.h" />
-    <ClInclude Include="..\include\bdf\cards_loads.h" />
-    <ClInclude Include="..\include\bdf\cards_properties.h" />
-    <ClInclude Include="..\include\bdf\errors.h" />
-    <ClInclude Include="..\include\bdf\file.h" />
-    <ClInclude Include="..\include\bdf\types.h" />
-    <ClInclude Include="..\include\bdf\type_bounds.h" />
     <ClInclude Include="..\include\fem\cards.h" />
-    <ClInclude Include="..\include\fem\elements.h" />
-    <ClInclude Include="..\include\fem\cards_loads.h" />
-    <ClInclude Include="..\include\fem\cards_properties.h" />
-    <ClInclude Include="..\include\fem\errors.h" />
     <ClInclude Include="..\include\fem\file.h" />
-    <ClInclude Include="..\include\fem\type_bounds.h" />
+    <ClInclude Include="..\include\extfem_string.h" />
     <ClInclude Include="..\include\fem\types.h" />
     <ClInclude Include="..\include\catch.hpp" />
-    <ClInclude Include="..\include\extfem_misc.h" />
-    <ClInclude Include="..\include\extfem_string.h" />
-    <ClInclude Include="..\include\my_c++14.h" />
-    <ClInclude Include="..\include\resource.h" />
-    <ClInclude Include="..\include\StdAfx.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\include\app.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\include\app.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

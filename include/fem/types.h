@@ -72,7 +72,7 @@ namespace dnvgl {
 
             public:
 
-               base(const ::std::string &name);
+               base(const ::std::string&);
 
                ~base() {};
 
@@ -132,15 +132,48 @@ namespace dnvgl {
 
             public:
 
-               entry_type<long>(::std::string);
+               entry_type<long>(const ::std::string&);
 
-               entry_type<long>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<long>);
+               entry_type<long>(
+                  const ::std::string&,
+                  const ::dnvgl::extfem::fem::type_bounds::bound<long>&);
 
                long operator() (const ::std::string&) const;
 
                fem_types type() const { return _type; };
 
                ::std::string format(const long&) const;
+            };
+
+            template <>
+            class entry_type<bool> : public base {
+
+               // Integer value.
+
+            private:
+
+               ::dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
+               static const
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex
+#else
+               ::std::regex
+#endif
+               bool_re;
+
+            protected:
+
+               static const fem_types _type = Int;
+
+            public:
+
+               entry_type<bool>(const ::std::string&);
+
+               bool operator() (const ::std::string&) const;
+
+               fem_types type() const { return _type; };
+
+               ::std::string format(const bool&) const;
             };
 
             template <>
@@ -166,9 +199,11 @@ namespace dnvgl {
 
             public:
 
-               entry_type<double>(::std::string);
+               entry_type<double>(const ::std::string&);
 
-               entry_type<double>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<double>);
+               entry_type<double>(
+                  const ::std::string&,
+                  const ::dnvgl::extfem::fem::type_bounds::bound<double>&);
 
                double operator() (const ::std::string&) const;
 
@@ -192,17 +227,20 @@ namespace dnvgl {
 
             public:
 
-               entry_type<::std::string>(::std::string);
+               entry_type<::std::string>(const ::std::string&);
 
-               entry_type<::std::string>(::std::string, ::dnvgl::extfem::fem::type_bounds::bound<::std::string>);
+               entry_type<::std::string>(
+                  const ::std::string&,
+                  const ::dnvgl::extfem::fem::type_bounds::bound<::std::string>&);
 
-               ::std::string operator() (const ::std::string &) const;
+               ::std::string operator() (const ::std::string&) const;
 
                fem_types type() const {
                   return _type;
                }
 
-               ::std::string format(const ::std::string&, const size_t &len=72) const;
+               ::std::string format(
+                  const ::std::string&, const size_t &len=72) const;
             };
 
             template <>
@@ -226,10 +264,12 @@ namespace dnvgl {
 
             public:
 
-               entry_type<::std::deque<int>>(const ::std::string &name) :
+               entry_type<::std::deque<int>>(
+                  const ::std::string &name) :
                   base(name) {};
 
-               ::std::deque<int>* operator() (const ::std::string&) const;
+               ::std::deque<int>* operator() (
+                  const ::std::string&) const;
 
                inline fem_types type() const {return _type;};
 

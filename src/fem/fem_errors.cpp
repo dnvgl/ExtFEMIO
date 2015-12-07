@@ -61,6 +61,10 @@ int_error::int_error(
    const std::string &name, const std::string &msg) :
    error(name, msg, "int_error") {}
 
+bool_error::bool_error(
+   const std::string &name, const std::string &msg) :
+   error(name, msg, "bool_error") {}
+
 output_error::output_error(
    const std::string &name, const std::string &msg) :
    error(name, msg, "output_error") {}

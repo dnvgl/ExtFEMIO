@@ -70,7 +70,13 @@
     <ClCompile Include="bdf\bdf_l_geom.cpp">
       <Filter>BDF\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bdf\bdf_type_bounds.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="bdf\bdf_types.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_types_bool.cpp">
       <Filter>BDF\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types_float.cpp">
@@ -155,6 +161,9 @@
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_cards_glsec.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_gpipe.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_cards_gnode.cpp">

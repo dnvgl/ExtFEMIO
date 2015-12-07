@@ -85,6 +85,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001\n"
       "         1.40000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "GPIPE    6.54391000e+005 0.00000000e+000 3.12094257e-001 1.56047128e-001\n"
+      "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -384,13 +386,32 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<glsec*>(current.get())->TZ == 14.);
       CHECK(static_cast<glsec*>(current.get())->SFY == 1.);
       CHECK(static_cast<glsec*>(current.get())->SFZ == 1.);
-      CHECK(static_cast<glsec*>(current.get())->K == 1);
+      CHECK(static_cast<glsec*>(current.get())->K);
       CHECK(static_cast<glsec*>(current.get())->NLOBY == 0);
       CHECK(static_cast<glsec*>(current.get())->NLOBZ == 0);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [gpipe].") {
       for (int i = 0; i < 15; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GPIPE);
+      // GPIPE    6.54391000e+005 0.00000000e+000 3.12094257e-001 1.56047128e-001
+      //          1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<gpipe*>(current.get())->GEONO == 654391);
+      CHECK(static_cast<gpipe*>(current.get())->DI == .0);
+      CHECK(static_cast<gpipe*>(current.get())->DY == .312094257);
+      CHECK(static_cast<gpipe*>(current.get())->T == .156047128);
+      CHECK(static_cast<gpipe*>(current.get())->SFY == 1.);
+      CHECK(static_cast<gpipe*>(current.get())->SFZ == 1.);
+      CHECK(static_cast<gpipe*>(current.get())->NCIR == 0);
+      CHECK(static_cast<gpipe*>(current.get())->NRAD == 0);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 16; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

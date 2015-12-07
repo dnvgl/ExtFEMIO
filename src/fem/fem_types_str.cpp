@@ -35,10 +35,12 @@ using namespace ::std;
 using namespace ::dnvgl::extfem;
 using fem::types::entry_type;
 
-entry_type<std::string>::entry_type(std::string name) :
-   fem::types::base(name), bounds(fem::type_bounds::bound<std::string>()) {}
+entry_type<std::string>::entry_type(const std::string &name) :
+   fem::types::base(name), bounds() {}
 
-entry_type<std::string>::entry_type(std::string name, fem::type_bounds::bound<std::string> bounds) :
+entry_type<std::string>::entry_type(
+   const std::string &name,
+   const fem::type_bounds::bound<std::string> &bounds) :
    fem::types::base(name), bounds(bounds) {}
 
 std::string

@@ -59,7 +59,7 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
       CHECK(probe.TZ == 12.);
       CHECK(probe.SFY == 1.);
       CHECK(probe.SFZ == 1.);
-      CHECK(probe.K == 1);
+      CHECK(probe.K);
       CHECK(probe.NLOBY == 0);
       CHECK(probe.NLOBZ == 0);
    }
@@ -82,7 +82,7 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
       CHECK(probe.TZ == 12.);
       CHECK(probe.SFY == 1.);
       CHECK(probe.SFZ == 1.);
-      CHECK(probe.K == 1);
+      CHECK(probe.K);
       CHECK(probe.NLOBY == 0);
       CHECK(probe.NLOBZ == 0);
    }
@@ -93,11 +93,11 @@ TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
    std::ostringstream test;
 
    SECTION("simple") {
-      glsec probe(1, 2., 3., 4., 5., 6., 7., 1, 9., 10);
+      glsec probe(1, 2., 3., 4., 5., 6., 7., true, 9., 10);
       test << probe;
       CHECK(test.str() ==
             "GLSEC   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
-            "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00 +1.00000000e+00 \n"
+            "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00  1.00000000e+00 \n"
             "        +9.00000000e+00 +1.00000000e+01 +0.00000000e+00 +0.00000000e+00 \n");
    }
 }

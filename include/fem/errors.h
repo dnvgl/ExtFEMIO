@@ -12,6 +12,8 @@
 #if !defined _FEM_ERRORS_H_
 #define _FEM_ERRORS_H_
 
+#include <string>
+
 #include "extfem_misc.h"
 
 namespace dnvgl {
@@ -61,6 +63,13 @@ namespace dnvgl {
             public:
 
                int_error(const ::std::string&, const ::std::string&);
+            };
+
+            class bool_error : public error {
+
+            public:
+
+               bool_error(const ::std::string&, const ::std::string&);
             };
 
             class output_error : public error {

@@ -25,8 +25,8 @@
    |          | =GECCEN=   | Eccentricities                                               | \check | \check  |  6-61 |
    |          | =GELTH=    | Thickness of Two-dimensional Elements                        | \check | \check  |  6-70 |
    |          | =GIORH=    | Cross Section Type I or H Beam                               | \check | \check  |  6-71 |
-   |          | =GLSEC=    | Cross Section Type L-Section                                 | \sad   | \sad    |  6-76 |
-   |          | =GPIPE=    | Cross Section Type Tube                                      | \sad   | \sad    |  6-81 |
+   |          | =GLSEC=    | Cross Section Type L-Section                                 | \check | \check  |  6-76 |
+   |          | =GPIPE=    | Cross Section Type Tube                                      | \check | \check  |  6-81 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Load     |            |                                                              |        |         |       |
    |          | =BLDEP=    | Nodes with Linear Dependence                                 | \sad   | \sad    |  6-27 |

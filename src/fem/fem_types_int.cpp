@@ -38,11 +38,13 @@ using namespace ::dnvgl;
 using namespace extfem;
 using fem::types::entry_type;
 
-entry_type<long>::entry_type(std::string name) :
-   fem::types::base(name), bounds(*(std::make_unique< fem::type_bounds::bound<long> >())) {};
+entry_type<long>::entry_type(const std::string &name) :
+   fem::types::base(name), bounds() {}
 
-entry_type<long>::entry_type(std::string name, fem::type_bounds::bound<long> _bounds) :
-   fem::types::base(name), bounds(_bounds) {};
+entry_type<long>::entry_type(
+   const std::string &name,
+   const fem::type_bounds::bound<long> &bounds) :
+   fem::types::base(name), bounds(bounds) {}
 
 const
 #if HAVE_BOOST_REGEX_HPP

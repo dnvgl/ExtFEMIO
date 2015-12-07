@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -125,6 +125,9 @@ $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
 $(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
+echo ==================== test_fem_bool ====================
+$(OutputPath)test_fem_bool.exe
+$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
 $(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
@@ -182,6 +185,9 @@ $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
 $(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
+echo ==================== test_fem_bool ====================
+$(OutputPath)test_fem_bool.exe
+$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
 $(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
@@ -242,6 +248,9 @@ $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
 $(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
+echo ==================== test_fem_bool ====================
+$(OutputPath)test_fem_bool.exe
+$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
 $(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
@@ -299,6 +308,9 @@ $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)
 echo ==================== test_fem_float ====================
 $(OutputPath)test_fem_float.exe
 $(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
+echo ==================== test_fem_bool ====================
+$(OutputPath)test_fem_bool.exe
+$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
 echo ==================== test_fem_int ====================
 $(OutputPath)test_fem_int.exe
 $(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml

@@ -92,6 +92,11 @@ test_fem_int_SOURCES=test_fem_int.cpp
 test_fem_int_LDADD=$(test_extfem_LDADD)
 TESTS+=test_fem_int.ju
 
+check_PROGRAMS+=test_fem_bool
+test_fem_bool_SOURCES=test_fem_bool.cpp
+test_fem_bool_LDADD=$(test_extfem_LDADD)
+TESTS+=test_fem_bool.ju
+
 check_PROGRAMS+=test_fem_list
 test_fem_list_SOURCES=test_fem_list.cpp
 test_fem_list_LDADD=$(test_extfem_LDADD)

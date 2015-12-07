@@ -32,10 +32,6 @@ using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
-namespace {
-   static long lc1=0, lc2=1;
-}
-
 namespace dnvgl {
    namespace extfem {
       namespace fem {
@@ -50,10 +46,7 @@ namespace dnvgl {
             const entry_type<double> glsec::_form_TZ("TZ");
             const entry_type<double> glsec::_form_SFY("SFY");
             const entry_type<double> glsec::_form_SFZ("SFZ");
-            const entry_type<long> glsec::_form_K(
-               "K",
-               ::dnvgl::extfem::fem::type_bounds::bound<long>(
-                  &lc1, &lc2));
+            const entry_type<bool> glsec::_form_K("K");
             const entry_type<long> glsec::_form_NLOBY("NLOBY");
             const entry_type<long> glsec::_form_NLOBZ("NLOBZ");
 
@@ -78,7 +71,7 @@ namespace dnvgl {
             glsec::glsec(const long &GEONO, const double &HZ,
                          const double &TY, const double &BY,
                          const double &TZ, const double &SFY,
-                         const double &SFZ, const long &K,
+                         const double &SFZ, const bool &K,
                          const long &NLOBY, const long &NLOBZ) :
                card(), GEONO(GEONO),
                HZ(HZ), TY(TY), BY(BY), TZ(TZ),

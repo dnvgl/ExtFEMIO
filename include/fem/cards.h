@@ -70,8 +70,8 @@ namespace dnvgl {
                GIORH,
                /// Cross Section Type L-Section
                GLSEC,
-               // /// Cross Section Type Tube
-               // GPIPE,
+               /// Cross Section Type Tube
+               GPIPE,
                // /// Nodes with Linear Dependence
                // BLDEP,
                // /// Nodes with Boundary Conditions
@@ -1170,7 +1170,7 @@ record may be on the interface.
                static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TZ;
                static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
                static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_K;
+               static const ::dnvgl::extfem::fem::types::entry_type<bool> _form_K;
                static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBY;
                static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
 
@@ -1224,7 +1224,7 @@ record may be on the interface.
                          (and consequently flange in the
                          negative *y*’-direction)
                 */
-               long K;
+               bool K;
                /** Number of integration points in beam flange
                    (optional)
                */
@@ -1240,7 +1240,7 @@ record may be on the interface.
                 const double &HZ, const double &TY, const double &BY,
                 const double &TZ,
                 const double &SFY, const double &SFZ,
-                const long &K,
+                const bool &K,
                 const long &NLOBY, const long &NLOBZ);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
@@ -1248,6 +1248,96 @@ record may be on the interface.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const glsec&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `GPIPE`: Cross Section Type Tube
+/**
+## Format:
+
+|         |         |          |        |        |
+| ------- | ------- | -------- | ------ | ------ |
+| `GPIPE` | `GEONO` | `DI`     | `DY`   | `T`    |
+|         | `SFY`   | `SFZ`    | `NDIR` | `NRAD` |
+
+\image latex gpipe.eps "Tube"
+\image html gpipe.svg "Tube"
+*/
+            class gpipe : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_DI;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_DY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_T;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NCIR;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NRAD;
+
+            public:
+
+               /** Geometry type number, i.e. reference number used
+                   for element data definition of geometry properties
+                   (Cross sectional properties) of beams.
+               */
+               long GEONO;
+               /** Inner diameter of tube.
+                */
+               double DI;
+               /** Outer diameter of tube (mandatory).
+                */
+               double DY;
+               /** Thickness of tube (not necessary if DI is given).
+                */
+               double T;
+/** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                   SHARY(MOD) = SHARY(PROG) · SFY
+                   \f]
+
+                   (The shear area on `GBEAMG` os SHARY(MOD)).
+               */
+               double SFY;
+               /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                   SHARZ(MOD) = SHARZ(PROG) · SFZ
+                   \f]
+
+                   (The shear area on `GBEAMG` os SHARZ(MOD)).
+               */
+               double SFZ;
+               /** Number of integration points in circumferential direction (optional)
+                */
+               long NCIR;
+               /** Number of integration points in radial direction (optional)
+                */
+               long NRAD;
+
+               DllExport gpipe(const ::std::deque<::std::string>&);
+
+               DllExport gpipe(
+                const long &GEONO,
+                const double &DI, const double &DY, const double &T,
+                const double &SFY, const double &SFZ,
+                const long &NDIR, const long &NRAD);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const gpipe&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

@@ -47,10 +47,12 @@ using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::fem::types;
 
-entry_type<double>::entry_type(std::string name) :
-   fem::types::base(name), bounds(fem::type_bounds::bound<double>()) {};
+entry_type<double>::entry_type(const std::string &name) :
+   fem::types::base(name), bounds() {};
 
-entry_type<double>::entry_type(std::string name, fem::type_bounds::bound<double> bounds) :
+entry_type<double>::entry_type(
+   const std::string &name,
+   const fem::type_bounds::bound<double> &bounds) :
    fem::types::base(name), bounds(bounds) {};
 
 const

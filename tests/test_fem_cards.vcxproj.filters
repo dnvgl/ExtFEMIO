@@ -61,6 +61,9 @@
     <ClCompile Include="test_fem_cards_glsec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_gpipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_gnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
