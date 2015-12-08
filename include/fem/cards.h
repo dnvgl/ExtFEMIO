@@ -74,8 +74,8 @@ namespace dnvgl {
                GPIPE,
                /// Nodes with Linear Dependence
                BLDEP,
-               // /// Nodes with Boundary Conditions
-               // BNBCD,
+               /// Nodes with Boundary Conditions
+               BNBCD,
                // /// Nodes with Prescribed Displacements and
                // /// Accelerations
                // BNDISPL,
@@ -1436,6 +1436,82 @@ be specified on one BQDP record.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const bldep&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `BNBCD`: Nodes with Boundary Conditions
+/**
+## Format:
+
+|         |          |        |                        |                     |
+| ------- | -------- | ------ | ---------------------- | ------------------- |
+| `BNBCD` | `NODENO` | `NDOF` | `FIX`<sub>`1`</sub>    | `FIX`<sub>`2`</sub> |
+|         | ...      | ...    | `FIX`<sub>`NDOF`</sub> |                     |
+
+The codes of `FIX`<sub>`1`</sub>, `FIX`<sub>`2`</sub>, ...,
+`FIX`<sub>`NDOF`</sub> are:
+
+ - =0: free to stay
+
+ - =1: fixed at zero displacement, temperature, etc.
+
+ - =2: prescribed displacement, temperature, different from zero
+
+ - =3: linearly dependent
+
+ - =4: retained degree of freedom.
+
+The code `FIX` = 2 just indicates specified condition for the relevant
+degree of freedom. Whether it is displacement, first time derivative
+of the displacement etc. is definde on the `BNDISPL` record. Degrees
+of freedom with `FIX` = 2 which are not defined on the `BNDISPL`
+record will be fixed (have zero displacement, velocity and
+acceleration).
+
+The nodes (degrees of freedom) with `FIX` = 4 are called supernodes
+(super degrees of freedom). The supernode sequence numbering is
+according to the increasing order of their internal node number.
+*/
+            class bnbcd : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_FIX;
+
+            public:
+
+               /** Internal node number of nodes with specified
+                   boundary condition.
+                */
+               long NODENO;
+               /** Number of degrees of freedom.
+                */
+               long NDOF;
+               /** Specification of boundary condition codes of
+                   relevant degrees of freedom.
+               */
+               ::std::deque<long> FIX;
+
+               DllExport bnbcd(const ::std::deque<::std::string>&);
+
+               DllExport bnbcd(const long &NODENO,
+                               const long &NDOF,
+                               const ::std::deque<long> &FIX);
+
+               DllExport bnbcd(const long &NODENO,
+                               const ::std::deque<long> &FIX);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const bnbcd&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

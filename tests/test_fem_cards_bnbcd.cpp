@@ -1,0 +1,107 @@
+/**
+   \file test_fem_cards_bnbcd.cpp
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2015 by DNV GL SE
+   \brief Testing IO for Sesam FEM `BNBCD` cards.
+
+   Detailed description
+*/
+
+// ID:
+namespace {
+   const char  cID[]
+#ifdef __GNUC__
+   __attribute__ ((__unused__))
+#endif
+      = "@(#) $Id: test_fem_cards_bnbcd.cpp 243 2015-12-07 16:24:02Z berhol $";
+}
+
+#define NOMINMAX // To avoid problems with "numeric_limits"
+
+#include <limits>
+
+#include <catch.hpp>
+
+#ifndef _MSC_VER
+#include <config.h>
+#endif
+#include "fem/cards.h"
+
+using namespace ::std;
+using namespace ::dnvgl::extfem::fem;
+using namespace ::dnvgl::extfem::fem::cards;
+
+CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
+   return ex();
+}
+
+CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+   return ex;
+}
+
+TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
+
+   SECTION("BNBCD (1)") {
+      ::std::deque<string> data;
+
+      data.push_back(
+         "BNBCD    8.31700000e+003 6.00000000e+000 1.00000000e+000 1.00000000e+000\n");
+      data.push_back(
+         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 1.00000000e+000\n");
+      ::std::deque<string> lines = card::card_split(data);
+      bnbcd probe(lines);
+
+      CHECK(probe.NODENO == 8317);
+      CHECK(probe.NDOF == 6);
+      long ref_fix[6] = {1, 1, 1, 1, 0, 1};
+      CHECK(probe.FIX == ::std::deque<long>(ref_fix, ref_fix + 6));
+   }
+
+   SECTION("BNBCD (2)") {
+      ::std::deque<string> data;
+
+      data.push_back(
+         "BNBCD    8.31700000e+03  6.00000000e+00  1.00000000e+00  1.00000000e+00 \n");
+      data.push_back(
+         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  1.00000000e+00 \n");
+      ::std::deque<string> lines = card::card_split(data);
+      bnbcd probe(lines);
+
+      CHECK(probe.NODENO == 8317);
+      CHECK(probe.NDOF == 6);
+      long ref_fix[6] = {1, 1, 1, 1, 0, 1};
+      CHECK(probe.FIX == ::std::deque<long>(ref_fix, ref_fix + 6));
+   }
+}
+
+TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
+
+   std::ostringstream test;
+
+   long inp_fix[6] = {1, 2, 3, 4, 5, 6};
+
+   SECTION("simple") {
+      bnbcd probe(1, 6, ::std::deque<long>(inp_fix, inp_fix + 6));
+      test << probe;
+      CHECK(test.str() ==
+            "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
+            "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+   }
+
+   SECTION("calc ndof") {
+      bnbcd probe(1, ::std::deque<long>(inp_fix, inp_fix + 6));
+      test << probe;
+      CHECK(test.str() ==
+            "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
+            "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+   }
+}
+
+// Local Variables:
+// mode: c++
+// ispell-local-dictionary: "english"
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C .. check -j8"
+// End:

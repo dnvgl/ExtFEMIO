@@ -16,15 +16,6 @@ namespace {
       = "@(#) $Id$";
 }
 
-/**
-   \file fem/fem_cards_gpipe.cpp
-   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   \copyright Copyright © 2015 by DNV GL SE
-   \brief Processing Sesam FEM `GPIPE` cards.
-
-   Detailed description
-*/
-
 #include <memory>
 #include <algorithm>
 
@@ -54,7 +45,7 @@ namespace dnvgl {
             const entry_type<long> bldep::_form_NDEP("NDEP");
             const entry_type<long> bldep::_form_DEPDOF("DEPDOF");
             const entry_type<long> bldep::_form_INDEPDOF("INDEPDOF");
-          const entry_type<double> bldep::_form_b("b");
+            const entry_type<double> bldep::_form_b("b");
 
             bldep::bldep(const ::std::deque<::std::string> &inp) :
                card(inp) {
@@ -77,7 +68,7 @@ namespace dnvgl {
                }
             }
 
-            DllExport bldep::bldep(
+            bldep::bldep(
                const long &NODENO,
                const long &CNOD,
                const long &NDDOF,

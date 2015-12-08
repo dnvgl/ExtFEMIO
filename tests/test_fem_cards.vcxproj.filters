@@ -70,6 +70,9 @@
     <ClCompile Include="test_fem_cards_bldep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_bnbcd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_ident.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

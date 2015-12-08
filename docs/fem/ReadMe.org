@@ -30,7 +30,7 @@
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Load     |            |                                                              |        |         |       |
    |          | =BLDEP=    | Nodes with Linear Dependence                                 | \check | \check  |  6-27 |
-   |          | =BNBCD=    | Nodes with Boundary Conditions                               | \sad   | \sad    |  6-30 |
+   |          | =BNBCD=    | Nodes with Boundary Conditions                               | \check | \check  |  6-30 |
    |          | =BNDISPL=  | Nodes with Prescribed Displacements and Accelerations        | \sad   | \sad    |  6-31 |
    |          | =BNLOAD=   | Nodes with Loads                                             | \sad   | \sad    |  6-35 |
    |          | =MGSPRNG=  | Element to Ground                                            | \sad   | \sad    | 6-103 |

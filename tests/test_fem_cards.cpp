@@ -97,6 +97,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         3.00000000e+000 3.00000000e+000 1.00000000e+000 0.00000000e+000\n"
       "         3.00000000e+000 5.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         3.00000000e+000 4.00000000e+000-2.27000996e+004 0.00000000e+000\n"
+      "BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000\n"
+      "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -442,21 +444,38 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<bldep*>(current.get())->NDDOF == 6);
       CHECK(static_cast<bldep*>(current.get())->NDEP == 9);
 
-      long c_ref_1[9] = {1, 1, 1, 2, 2, 2, 3, 3, 3};
-      long c_ref_2[9] = {1, 6, 5, 2, 4, 6, 3, 5, 4};
-      double c_ref_3[9] = {1., 2.27000996e+4, 9.07859961e+3,
+      long c_ref_depdof[9] = {1, 1, 1, 2, 2, 2, 3, 3, 3};
+      long c_ref_indepdof[9] = {1, 6, 5, 2, 4, 6, 3, 5, 4};
+      double c_ref_b[9] = {1., 2.27000996e+4, 9.07859961e+3,
                            1., -9.07859961e+3, 0.,
                            1., 0., -2.27000996e+4};
-      ::std::deque<long> ref_1(c_ref_1, c_ref_1 + 9);
-      ::std::deque<long> ref_2(c_ref_2, c_ref_2 + 9);
-      ::std::deque<double> ref_3(c_ref_3, c_ref_3 + 9);
-      CHECK(static_cast<bldep*>(current.get())->DEPDOF == ref_1);
-      CHECK(static_cast<bldep*>(current.get())->INDEPDOF == ref_2);
-      CHECK(static_cast<bldep*>(current.get())->b == ref_3);
+      ::std::deque<long> ref_depdof(c_ref_depdof, c_ref_depdof + 9);
+      ::std::deque<long> ref_indepdof(c_ref_indepdof, c_ref_indepdof + 9);
+      ::std::deque<double> ref_b(c_ref_b, c_ref_b + 9);
+      CHECK(static_cast<bldep*>(current.get())->DEPDOF == ref_depdof);
+      CHECK(static_cast<bldep*>(current.get())->INDEPDOF == ref_indepdof);
+      CHECK(static_cast<bldep*>(current.get())->b == ref_b);
+   }
+
+   SECTION("Checking dispatch [bnbcd].") {
+      for (int i = 0; i < 17; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::BNBCD);
+      // BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000
+      //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
+      CHECK(static_cast<bnbcd*>(current.get())->NODENO == 23047);
+      CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
+
+      long c_ref_fix[6] = {1, 1, 1, 1, 1, 1};
+      ::std::deque<long> ref_fix(c_ref_fix, c_ref_fix + 6);
+      CHECK(static_cast<bnbcd*>(current.get())->FIX == ref_fix);
    }
 
    SECTION("Checking dispatch [iend].") {
-      for (int i = 0; i < 17; i++) probe.get(l);
+      for (int i = 0; i < 18; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
