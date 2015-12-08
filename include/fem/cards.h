@@ -79,8 +79,8 @@ namespace dnvgl {
                /// Nodes with Prescribed Displacements and
                /// Accelerations
                BNDISPL,
-               // /// Nodes with Loads
-               // BNLOAD,
+               /// Nodes with Loads
+               BNLOAD,
                // /// Element to Ground
                // MGSPRNG,
                // /// Set (group) of Nodes or Elements (Members)
@@ -1468,7 +1468,7 @@ The codes of `FIX`<sub>`1`</sub>, `FIX`<sub>`2`</sub>, ...,
 
 The code `FIX` = 2 just indicates specified condition for the relevant
 degree of freedom. Whether it is displacement, first time derivative
-of the displacement etc. is definde on the `BNDISPL` record. Degrees
+of the displacement etc. is defined on the `BNDISPL` record. Degrees
 of freedom with `FIX` = 2 which are not defined on the `BNDISPL`
 record will be fixed (have zero displacement, velocity and
 acceleration).
@@ -1527,7 +1527,7 @@ according to the increasing order of their internal node number.
 |           |                       |                          |                       |                          |
 | --------- | --------------------- | ------------------------ | --------------------- | ------------------------ |
 | `BNDISPL` | `LLC`                 | `DTYPE`                  | `COMPLEX`             |                          |
-|           | NODENO                | NDOF                     | `RDISP`<sub>`1`</sub> | `RDISP`<sub>`2`</sub>    |
+|           | `NODENO`              | `NDOF`                   | `RDISP`<sub>`1`</sub> | `RDISP`<sub>`2`</sub>    |
 |           | ...                   | ...                      | ...                   | `RDISP`<sub>`NDOF`</sub> |
 |           | `IDISP`<sub>`1`</sub> | `IDISP`<sub>`2`</sub>    | ...                   | ...                      |
 |           | ...                   | `IDISP`<sub>`NDOF`</sub> |                       |                          |
@@ -1627,6 +1627,118 @@ If phase shift is not specified, the fields or positions
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const bndispl&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `BNLOAD`: Nodes with Loads
+/**
+## Format:
+
+|          |                          |                         |                          |                       |
+| -------- | ------------------------ | ----------------------- | ------------------------ | --------------------- |
+| `BNLOAD` | `LLC`                    | `LOTYP`                 | `COMPLEX`                |                       |
+|          | `NODENO`                 | `NDOF`                  | `RLOAD`<sub>`1`</sub>    | `RLOAD`<sub>`2`</sub> |
+|          | ...                      | ...                     | `RLOAD`<sub>`NDOF`</sub> | `ILOAD`<sub>`1`</sub> |
+|          | `ILOAD`<sub>`2`</sub>    | ...                     | ...                      | ...                   |
+|          | `ILOAD`<sub>`NDOF`</sub> |                         |                          |                       |
+
+The imaginary numbers follow immediately after the real numbers, i.e.
+there are no blank fields between the last real part and the first
+imaginary part.
+
+If phase shift is not specified, i.e. `COMPLX` == false, the fields or
+positions `ILOAD`<sub>`1`</sub>, `ILOAD`<sub>`2`</sub>, etc. are left
+out.
+*/
+            class bnload : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_LOTYP;
+               static const ::dnvgl::extfem::fem::types::entry_type<bool> _form_COMPLX;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_RLOAD;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_ILOAD;
+
+            public:
+
+               /** Local load case number (positive integer number).
+                */
+               long LLC;
+               /** Load type at node `NODENO`. Usually not of interest
+                   to linear programs.
+
+                     =0: not decided whether conservative or
+                         non-conservative load
+
+                     =1: conservative load
+
+                     =-1: non-conservative load
+               */
+               long LOTYP;
+               /** Phase shift definition.
+
+                   =false: no phase shift
+
+                   =true: phase shift
+               */
+               bool COMPLX;
+               /** Program defined node number.
+                */
+               long NODENO;
+               /** Number of degrees of freedom at the node NODENO.
+                */
+               long NDOF;
+               /** The real part of the load with respect to the rspt.
+                   degree of freedom.
+               */
+               ::std::deque<double> RLOAD;
+               /** The imaginary part of the load with respect to the
+                   rspt. degree of freedom. (Only if `COMPLX` == true).
+               */
+               ::std::deque<double> ILOAD;
+
+               DllExport bnload(const ::std::deque<::std::string>&);
+
+               DllExport bnload(const long &LLC,
+                                const long &LOTYP,
+                                const bool &COMPLX,
+                                const long &NODENO,
+                                const long &NDOF,
+                                const ::std::deque<double> &RLOAD,
+                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+
+               DllExport bnload(const long &LLC,
+                                const long &LOTYP,
+                                const bool &COMPLX,
+                                const long &NODENO,
+                                const ::std::deque<double> &RLOAD,
+                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+
+               DllExport bnload(const long &LLC,
+                                const long &LOTYP,
+                                const long &NODENO,
+                                const long &NDOF,
+                                const ::std::deque<double> &RLOAD,
+                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+
+               DllExport bnload(const long &LLC,
+                                const long &LOTYP,
+                                const long &NODENO,
+                                const ::std::deque<double> &RLOAD,
+                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const bnload&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;
