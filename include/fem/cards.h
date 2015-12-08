@@ -76,9 +76,9 @@ namespace dnvgl {
                BLDEP,
                /// Nodes with Boundary Conditions
                BNBCD,
-               // /// Nodes with Prescribed Displacements and
-               // /// Accelerations
-               // BNDISPL,
+               /// Nodes with Prescribed Displacements and
+               /// Accelerations
+               BNDISPL,
                // /// Nodes with Loads
                // BNLOAD,
                // /// Element to Ground
@@ -464,11 +464,11 @@ Defines end of a superelement.
 /**
 ## Format
 
-|           |         |          |           |          |
-| --------- | ------- | -------- | --------- | -------- |
-| `GELMNT1` | `ELNOX` | `ELNO`   | `ELTYP`   | `ELTYAD` |
-|           | `NODIN1`| 'NODIN2` | ...       | ...      |
-|           | ...     | ...      | `NODIN(N) |          |
+|           |                       |                       |                      |          |
+| --------- | --------------------- | --------------------- | -------------------- | -------- |
+| `GELMNT1` | `ELNOX`               | `ELNO`                | `ELTYP`              | `ELTYAD` |
+|           | `NODIN`<sub>`1`</sub> | `NODIN`<sub>`2`</sub> | ...                  | ...      |
+|           | ...                   | ...                   | `NODIN`<sub>`N`<sub> |          |
 */
             class gelmnt1 : public card {
 
@@ -503,19 +503,21 @@ Defines end of a superelement.
                    - For membrane elements used to specify plane stress /
                    plane strain conditions
 
-                   - =0: Plane stress
-                   - =1: Plane strain
+                     =0: Plane stress
+
+                     =1: Plane strain
 
                    - For two noded beam elements used to specify
                    structural / non-structural elements:
 
-                   - =0: Structural beam
-                   - =1: Non structural beam
+                     =0: Structural beam
+
+                     =1: Non structural beam
 
                    - For general matrix element (elem. type 70) used to
                    specify number of nodes
 
-                   - = `NNOD` Number of nodes on the matrix element
+                     = `NNOD` Number of nodes on the matrix element
                */
                long ELTYAD;
                /** Internal node numbers in the assembly, to which this
@@ -1217,10 +1219,11 @@ record may be on the interface.
                double SFZ;
                /** Web orientation:
 
-                   - =0: web located in the negative local *y*-direction
+                     =0: web located in the negative local *y*-direction
                          (and consequently flange in the
                          positive *y*’-direction)
-                   - =1: web located in the positive local *y*-direction
+
+                     =1: web located in the positive local *y*-direction
                          (and consequently flange in the
                          negative *y*’-direction)
                 */
@@ -1453,15 +1456,15 @@ be specified on one BQDP record.
 The codes of `FIX`<sub>`1`</sub>, `FIX`<sub>`2`</sub>, ...,
 `FIX`<sub>`NDOF`</sub> are:
 
- - =0: free to stay
+   =0: free to stay
 
- - =1: fixed at zero displacement, temperature, etc.
+   =1: fixed at zero displacement, temperature, etc.
 
- - =2: prescribed displacement, temperature, different from zero
+   =2: prescribed displacement, temperature, different from zero
 
- - =3: linearly dependent
+   =3: linearly dependent
 
- - =4: retained degree of freedom.
+   =4: retained degree of freedom.
 
 The code `FIX` = 2 just indicates specified condition for the relevant
 degree of freedom. Whether it is displacement, first time derivative
@@ -1512,6 +1515,118 @@ according to the increasing order of their internal node number.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const bnbcd&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `BNDISPL`: Nodes with Prescribed Displacements and Accelerations
+/**
+## Format:
+
+|           |                       |                          |                       |                          |
+| --------- | --------------------- | ------------------------ | --------------------- | ------------------------ |
+| `BNDISPL` | `LLC`                 | `DTYPE`                  | `COMPLEX`             |                          |
+|           | NODENO                | NDOF                     | `RDISP`<sub>`1`</sub> | `RDISP`<sub>`2`</sub>    |
+|           | ...                   | ...                      | ...                   | `RDISP`<sub>`NDOF`</sub> |
+|           | `IDISP`<sub>`1`</sub> | `IDISP`<sub>`2`</sub>    | ...                   | ...                      |
+|           | ...                   | `IDISP`<sub>`NDOF`</sub> |                       |                          |
+
+`RDISP` and `IDISP` refer to the transformed coordinate system if the
+node `NODENO` is transformed, else to the global coordinate system of
+the superelement.
+
+The imaginary numbers follow immediately after the real numbers, i.e.
+there are no blank fields between the last real part and the first
+imaginary part.
+
+If phase shift is not specified, the fields or positions
+`IDISP`<sub>`1`</sub>, `IDISP`<sub>`2`</sub>, etc. are left out.
+*/
+            class bndispl : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_DTYPE;
+               static const ::dnvgl::extfem::fem::types::entry_type<bool> _form_COMPLX;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_RDISP;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IDISP;
+
+            public:
+
+               /** Local load case number (positive integer number).
+                */
+               long LLC;
+               /** Type of boundary condition.
+
+                   =1: specified displacement
+
+                   =3: specified acceleration
+               */
+               long DTYPE;
+               /** Phase shift definition.
+
+                   =false: no phase shift
+
+                   =true: phase shift
+               */
+               bool COMPLX;
+               /** Program defined node number.
+                */
+               long NODENO;
+               /** Number of degrees of freedom at the node NODENO.
+                */
+               long NDOF;
+               /** The real part of the specified boundary condition
+                   with respect to the rspt. degree of freedom.
+               */
+               ::std::deque<double> RDISP;
+               /** The imagenary part of the specified boundary
+                   condition with respect to the rspt. degree of
+                   freedom.
+               */
+               ::std::deque<double> IDISP;
+
+               DllExport bndispl(const ::std::deque<::std::string>&);
+
+               DllExport bndispl(const long &LLC,
+                                 const long &DTYPE,
+                                 const bool &COMPLX,
+                                 const long &NODENO,
+                                 const long &NDOF,
+                                 const ::std::deque<double> &RDISP,
+                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+
+               DllExport bndispl(const long &LLC,
+                                 const long &DTYPE,
+                                 const bool &COMPLX,
+                                 const long &NODENO,
+                                 const ::std::deque<double> &RDISP,
+                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+
+               DllExport bndispl(const long &LLC,
+                                 const long &DTYPE,
+                                 const long &NODENO,
+                                 const long &NDOF,
+                                 const ::std::deque<double> &RDISP,
+                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+
+               DllExport bndispl(const long &LLC,
+                                 const long &DTYPE,
+                                 const long &NODENO,
+                                 const ::std::deque<double> &RDISP,
+                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const bndispl&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

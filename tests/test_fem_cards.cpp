@@ -99,6 +99,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         3.00000000e+000 4.00000000e+000-2.27000996e+004 0.00000000e+000\n"
       "BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000\n"
       "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
+      "BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         2.30460000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -474,8 +477,29 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<bnbcd*>(current.get())->FIX == ref_fix);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [bndispl].") {
       for (int i = 0; i < 18; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::BNDISPL);
+      // BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          2.30460000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<bndispl*>(current.get())->LLC == 2);
+      CHECK(static_cast<bndispl*>(current.get())->DTYPE == 1);
+      CHECK_FALSE(static_cast<bndispl*>(current.get())->COMPLX);
+      CHECK(static_cast<bndispl*>(current.get())->NODENO == 23046);
+      CHECK(static_cast<bndispl*>(current.get())->NDOF == 6);
+      double c_ref_rdisp[6] = {0., 0., 0., 0., 0., 0.};
+      CHECK(static_cast<bndispl*>(current.get())->RDISP ==
+            ::std::deque<double>(c_ref_rdisp, c_ref_rdisp + 6));
+      CHECK(static_cast<bndispl*>(current.get())->IDISP.size() == 0);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 19; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

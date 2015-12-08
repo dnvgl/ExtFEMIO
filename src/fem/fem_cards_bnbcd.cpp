@@ -13,7 +13,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: fem_cards_bnbcd.cpp 243 2015-12-07 16:24:02Z berhol $";
+      = "@(#) $Id$";
 }
 
 #include <memory>
@@ -61,12 +61,12 @@ namespace dnvgl {
                const long &NODENO,
                const long &NDOF,
                const ::std::deque<long> &FIX) :
-               NODENO(NODENO), NDOF(NDOF), FIX(FIX) {}
+               card(), NODENO(NODENO), NDOF(NDOF), FIX(FIX) {}
 
             bnbcd::bnbcd(
                const long &NODENO,
                const ::std::deque<long> &FIX) :
-               NODENO(NODENO), NDOF(FIX.size()), FIX(FIX) {}
+               card(), NODENO(NODENO), NDOF(FIX.size()), FIX(FIX) {}
 
             const ::dnvgl::extfem::fem::cards::types
             bnbcd::card_type(void) const {return BNBCD;}

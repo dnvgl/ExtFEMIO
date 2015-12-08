@@ -13,7 +13,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: test_fem_cards_bnbcd.cpp 243 2015-12-07 16:24:02Z berhol $";
+      = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
+   long ref_fix[6] = {1, 1, 1, 1, 0, 1};
+
    SECTION("BNBCD (1)") {
       ::std::deque<string> data;
 
@@ -53,7 +55,6 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
       CHECK(probe.NODENO == 8317);
       CHECK(probe.NDOF == 6);
-      long ref_fix[6] = {1, 1, 1, 1, 0, 1};
       CHECK(probe.FIX == ::std::deque<long>(ref_fix, ref_fix + 6));
    }
 
@@ -69,7 +70,6 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
       CHECK(probe.NODENO == 8317);
       CHECK(probe.NDOF == 6);
-      long ref_fix[6] = {1, 1, 1, 1, 0, 1};
       CHECK(probe.FIX == ::std::deque<long>(ref_fix, ref_fix + 6));
    }
 }
@@ -88,12 +88,28 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
             "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
    }
 
+   SECTION("simple (2)") {
+      bnbcd probe(1, 3, ::std::deque<long>(inp_fix, inp_fix + 3));
+      test << probe;
+      CHECK(test.str() ==
+            "BNBCD   +1.00000000e+00 +3.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
+            "        +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
+   }
+
    SECTION("calc ndof") {
       bnbcd probe(1, ::std::deque<long>(inp_fix, inp_fix + 6));
       test << probe;
       CHECK(test.str() ==
             "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
             "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+   }
+
+   SECTION("calc ndof (2)") {
+      bnbcd probe(1, ::std::deque<long>(inp_fix, inp_fix + 3));
+      test << probe;
+      CHECK(test.str() ==
+            "BNBCD   +1.00000000e+00 +3.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
+            "        +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
    }
 }
 
