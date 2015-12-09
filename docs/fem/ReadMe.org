@@ -36,7 +36,7 @@
    |          | =MGSPRNG=  | Element to Ground                                            | \check | \check  | 6-103 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Misc     |            |                                                              |        |         |       |
-   |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | \sad   | \sad    |  6-84 |
+   |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | \check | \check  |  6-84 |
    |          | =GUNIVEC=  | Specification of Local Element Coordinate System             | \sad   | \sad    |  6-92 |
    |          | =MISOSEL=  | Isotropy, Linear Elastic Structural Analysis                 | \sad   | \sad    | 6-115 |
    |          | =TDSETNAM= | Name and Description of a Set (group)                        | \sad   | \sad    |   4-7 |

@@ -119,6 +119,7 @@ test_fem_cards_SOURCES+=test_fem_cards_bnbcd.cpp
 test_fem_cards_SOURCES+=test_fem_cards_bndispl.cpp
 test_fem_cards_SOURCES+=test_fem_cards_bnload.cpp
 test_fem_cards_SOURCES+=test_fem_cards_mgsprng.cpp
+test_fem_cards_SOURCES+=test_fem_cards_gsetmemb.cpp
 test_fem_cards_SOURCES+=test_fem_cards_ident.cpp
 test_fem_cards_SOURCES+=test_fem_cards_iend.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gelmnt1.cpp

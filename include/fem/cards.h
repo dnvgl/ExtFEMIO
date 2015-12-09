@@ -83,8 +83,8 @@ namespace dnvgl {
                BNLOAD,
                /// Element to Ground
                MGSPRNG,
-               // /// Set (group) of Nodes or Elements (Members)
-               // GSETMEMB,
+               /// Set (group) of Nodes or Elements (Members)
+               GSETMEMB,
                // /// Specification of Local Element Coordinate
                // /// System
                // GUNIVEC,
@@ -464,11 +464,11 @@ Defines end of a superelement.
 /**
 ## Format
 
-|           |                       |                       |                      |          |
-| --------- | --------------------- | --------------------- | -------------------- | -------- |
-| `GELMNT1` | `ELNOX`               | `ELNO`                | `ELTYP`              | `ELTYAD` |
-|           | `NODIN`<sub>`1`</sub> | `NODIN`<sub>`2`</sub> | ...                  | ...      |
-|           | ...                   | ...                   | `NODIN`<sub>`N`<sub> |          |
+|           |                       |                       |                       |          |
+| --------- | --------------------- | --------------------- | --------------------- | -------- |
+| `GELMNT1` | `ELNOX`               | `ELNO`                | `ELTYP`               | `ELTYAD` |
+|           | `NODIN`<sub>`1`</sub> | `NODIN`<sub>`2`</sub> | ...                   | ...      |
+|           | ...                   | ...                   | `NODIN`<sub>`N`</sub> |          |
 */
             class gelmnt1 : public card {
 
@@ -1802,6 +1802,144 @@ the *j*’th d.o.f.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const mgsprng&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `GSETMEMB`: Set (group) of Nodes or Elements (Members)
+/**
+## Format:
+
+|            |                        |                        |                            |                        |
+| ---------- | ---------------------- | ---------------------- | -------------------------- | ---------------------- |
+| `GSETMEMB` | `NFIELD`               | `ISREF`                | `INDEX`                    | `ISTYPE`               |
+|            | `ISORIG`               | `IRMEMB`<sub>`1`</sub> | `IRMEMB`<sub>`2`</sub>     | `IRMEMB`<sub>`3`</sub> |
+|            | `IRMEMB`<sub>`4`</sub> | ...                    | `IRMEMB`<sub>`NMEMB`</sub> |                        |
+
+This record together with the name and description of a set record (TDSETNAM) constitutes the set (group)
+datatype.
+
+### Comments:
+
+The set datatype consists of one name and description of set record
+(`TDSETNAM`) and one or more set member records (`GSETMEMB`).
+
+It should be noted that a set may have its set members distributed
+over several set member records (`GSETMEMB`) all having the same set
+identification number (`ISREF`) and consequently also the same
+`TDSETNAM` record. The total number of set members will then be the
+sum of the number of set members (`NMEMB`) for each of the set
+records.
+
+### Restrictions:
+
+  - Only one set type (ISTYPE) for same set identification number
+    (`ISREF`) is allowed.
+
+  - If several records for the same set identification number
+    (`ISREF`), record numbering must be strictly sequential; 1 <
+    `INDEX` < `NINDEX`, where `NINDEX` is number of records per set.
+
+  - A set member (number) should only be included once in the list.
+*/
+            class gsetmemb : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISREF;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_INDEX;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISTYPE;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISORIG;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_IRMEMB;
+
+            public:
+
+               /** Number of data fields on this record (maximum is
+                   1024)
+               */
+               long NFIELD;
+               /** Internal set identification number as defined on
+                   the name and description of a set record
+                   (`TDSETNAM`).
+               */
+               long ISREF;
+               /** Sequential record number for current set (`ISREF`).
+                   Each set may consist of one or more `GSETMEMB`
+                   records with same set identification number
+                   (`ISREF`). `INDEX` must be strictly increasing from
+                   1 and upwards till number of `GSETMEMB` records for
+                   this set of members (nodes or elements).
+               */
+               long INDEX;
+               /** Set type
+
+                     =1: , set of nodes
+
+                     =2: , set of elements
+
+Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
+
+| `ISTYPE` | Description     | Interpretation of `IRMEMB`        |
+| -------: | --------------- | --------------------------------- |
+| 1        | Set of Nodes    | Internal Node Number (`IINOD`)    |
+| 2        | Set of Elements | Internal Element Number (`IELNO`) |
+               */
+               long ISTYPE;
+               /** Set origin type
+
+                    = 0:, undefined origin
+
+                    = 1:, point
+
+                    = 2:, line (or curve)
+
+                    = 3:, surface
+
+                    = 4:, body
+               */
+               long ISORIG;
+               /** `NMEMB` set member numbers on this record.
+
+                   `NMEMB` is number of set members on the current
+                   record. `NMEMB` = `NFIELD` - 5
+               */
+               ::std::deque<long> IRMEMB;
+
+               DllExport gsetmemb(const ::std::deque<::std::string>&);
+
+               DllExport gsetmemb(const long &NFIELD,
+                                  const long &ISREF,
+                                  const long &INDEX,
+                                  const long &ISTYPE,
+                                  const long &ISORIG,
+                                  const ::std::deque<long> &IRMEMB);
+
+               DllExport gsetmemb(const long &NFIELD,
+                                  const long &ISREF,
+                                  const long &INDEX,
+                                  const long &ISTYPE,
+                                  const long &ISORIG);
+
+               DllExport gsetmemb(const long &ISREF,
+                                  const long &INDEX,
+                                  const long &ISTYPE,
+                                  const long &ISORIG,
+                                  const ::std::deque<long> &IRMEMB);
+
+               DllExport gsetmemb(const long &ISREF,
+                                  const long &INDEX,
+                                  const long &ISTYPE,
+                                  const long &ISORIG);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const gsetmemb&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

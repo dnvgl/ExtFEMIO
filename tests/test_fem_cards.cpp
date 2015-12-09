@@ -111,6 +111,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -552,8 +554,25 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<mgsprng*>(current.get())->K == ref_K);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [gsetmemb].") {
       for (int i = 0; i < 21; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GSETMEMB);
+      // GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<gsetmemb*>(current.get())->NFIELD == 5);
+      CHECK(static_cast<gsetmemb*>(current.get())->ISREF == 174);
+      CHECK(static_cast<gsetmemb*>(current.get())->INDEX == 1);
+      CHECK(static_cast<gsetmemb*>(current.get())->ISTYPE == 2);
+      CHECK(static_cast<gsetmemb*>(current.get())->ISORIG == 0);
+      CHECK(static_cast<gsetmemb*>(current.get())->IRMEMB.size() == 0);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 22; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

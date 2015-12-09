@@ -82,6 +82,9 @@
     <ClCompile Include="test_fem_cards_mgsprng.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_gsetmemb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_ident.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
