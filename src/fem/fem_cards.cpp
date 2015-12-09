@@ -79,7 +79,7 @@ namespace dnvgl {
 namespace {
    using namespace dnvgl::extfem::fem;
 
-   const size_t map_pair_entries = 19;
+   const size_t map_pair_entries = 20;
    const pair<::std::string, cards::types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
       pair<::std::string, cards::types>("DATE", cards::DATE),
@@ -100,7 +100,7 @@ namespace {
       pair<::std::string, cards::types>("BNBCD", cards::BNBCD),
       pair<::std::string, cards::types>("BNDISPL", cards::BNDISPL),
       pair<::std::string, cards::types>("BNLOAD", cards::BNLOAD),
-      // pair<::std::string, cards::types>("MGSPRNG", cards::MGSPRNG),
+      pair<::std::string, cards::types>("MGSPRNG", cards::MGSPRNG),
       // pair<::std::string, cards::types>("GSETMEMB", cards::GSETMEMB),
       // pair<::std::string, cards::types>("GUNIVEC", cards::GUNIVEC),
       // pair<::std::string, cards::types>("MISOSEL", cards::MISOSEL),
@@ -198,6 +198,9 @@ namespace dnvgl {
                      break;
                   case BNLOAD:
                      res = ::std::make_unique<fem::cards::bnload>(inp);
+                     break;
+                  case MGSPRNG:
+                     res = ::std::make_unique<fem::cards::mgsprng>(inp);
                      break;
                   case TEXT:
                      res = ::std::make_unique<fem::cards::text>(inp);

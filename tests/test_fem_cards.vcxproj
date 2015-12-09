@@ -222,6 +222,7 @@
     <ClCompile Include="test_fem_cards_bnbcd.cpp" />
     <ClCompile Include="test_fem_cards_bndispl.cpp" />
     <ClCompile Include="test_fem_cards_bload.cpp" />
+    <ClCompile Include="test_fem_cards_mgsprng.cpp" />
     <ClCompile Include="test_fem_cards_ident.cpp" />
     <ClCompile Include="test_fem_cards_iend.cpp" />
     <ClCompile Include="test_fem_cards_gelmnt1.cpp" />

@@ -74,7 +74,7 @@ TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
       gelth probe(1, 2., 3);
       test << probe;
       CHECK(test.str() ==
-            "GELTH   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +0.00000000e+00 \n");
+            "GELTH   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00  0.00000000e+00 \n");
    }
 }
 

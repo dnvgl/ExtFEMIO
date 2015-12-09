@@ -105,6 +105,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         1.52200000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "MGSPRNG  6.90000000e+001 6.00000000e+000 1.00000000e+008 0.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -508,9 +514,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       cards::dispatch(card::card_split(l), current);
       CHECK(current->card_type() == cards::BNLOAD);
-      // BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      //          1.52200000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      //          2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      // BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          1.52200000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<bnload*>(current.get())->LLC == 1);
       CHECK(static_cast<bnload*>(current.get())->LOTYP == 0);
       CHECK_FALSE(static_cast<bnload*>(current.get())->COMPLX);
@@ -522,8 +528,32 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<bnload*>(current.get())->ILOAD.size() == 0);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [mgsprng].") {
       for (int i = 0; i < 20; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::MGSPRNG);
+      // MGSPRNG  6.90000000e+001 6.00000000e+000 1.00000000e+008 0.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<mgsprng*>(current.get())->MATNO == 69);
+      CHECK(static_cast<mgsprng*>(current.get())->NDOF == 6);
+      double c_ref_k[6] = {0., 0., 0., 0., 0., 0.};
+      ::std::deque<::std::deque<double>> ref_K;
+      for (int i = 0; i < 6; i++)
+         ref_K.push_back(::std::deque<double>(c_ref_k, c_ref_k + 6));
+      ref_K[0][0] = 1e8;
+
+      CHECK(static_cast<mgsprng*>(current.get())->K == ref_K);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 21; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

@@ -178,7 +178,10 @@
     <ClCompile Include="fem\fem_cards_bndispl.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fem\fem_cards_bload.cpp">
+    <ClCompile Include="fem\fem_cards_bnload.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_mgsprng.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fem\fem_types_list_int.cpp">

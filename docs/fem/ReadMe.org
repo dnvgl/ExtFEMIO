@@ -33,7 +33,7 @@
    |          | =BNBCD=    | Nodes with Boundary Conditions                               | \check | \check  |  6-30 |
    |          | =BNDISPL=  | Nodes with Prescribed Displacements and Accelerations        | \check | \check  |  6-31 |
    |          | =BNLOAD=   | Nodes with Loads                                             | \check | \check  |  6-35 |
-   |          | =MGSPRNG=  | Element to Ground                                            | \sad   | \sad    | 6-103 |
+   |          | =MGSPRNG=  | Element to Ground                                            | \check | \check  | 6-103 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Misc     |            |                                                              |        |         |       |
    |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | \sad   | \sad    |  6-84 |

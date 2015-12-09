@@ -81,8 +81,8 @@ namespace dnvgl {
                BNDISPL,
                /// Nodes with Loads
                BNLOAD,
-               // /// Element to Ground
-               // MGSPRNG,
+               /// Element to Ground
+               MGSPRNG,
                // /// Set (group) of Nodes or Elements (Members)
                // GSETMEMB,
                // /// Specification of Local Element Coordinate
@@ -1739,6 +1739,69 @@ out.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const bnload&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `MGSPRNG`: Element to Ground
+/**
+## Format:
+
+|           |           |        |              |                 |
+| --------- | --------- | ------ | ------------ | --------------- |
+| `MGSPRNG` | `MATNO`   | `NDOF` | `K(1, 1)`    | `K(2, 1)`       |
+|           | ...       | ...    | `K(NDOF, 1)` | `K(2, 2)`       |
+|           | `K(3, 2)` | ...    | ...          | `K(NDOF, 2)`    |
+|           | `K(3, 3)` | ...    | ...          | `K(NDOF, NDOF)` |
+
+The (*i*, *j*)’th element of the stiffness matrix corresponds to the
+force to be given in the *i*’th d.o.f. to get a unit displacement in
+the *j*’th d.o.f.
+*/
+            class mgsprng : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_K;
+
+            public:
+
+               /** Material number, i.e. reference number referenced
+                   to by the element specification.
+               */
+               long MATNO;
+               /** Number of degrees of freedom of the node.
+                */
+               long NDOF;
+               /** Elements of the stiffness matrix (only elements on
+                   and below the main diagonal are stored, i.e.
+                   symmetric stiffness matrix assumed). The elements
+                   are referred to a local coordinate system if
+                   defined (by `TRANSNO` on `GELREF1`), otherwise to
+                   the global coordinate system of the superelement.
+               */
+               ::std::deque<::std::deque<double>> K;
+
+
+               DllExport mgsprng(const ::std::deque<::std::string>&);
+
+               DllExport mgsprng(const long &MATNO,
+                                 const long &NDOR,
+                                 const ::std::deque<::std::deque<double>> &K);
+
+               DllExport mgsprng(const long &MATNO,
+                                 const ::std::deque<::std::deque<double>> &K);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const mgsprng&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

@@ -48,7 +48,7 @@ fem::types::base::base(const::std::string &name) : name(name) {};
    ::std::ostringstream res;
    res.fill(' ');
    res.width(16);
-   res << "+0.00000000e+00 ";
+   res << " 0.00000000e+00 ";
    return res.str();
 }
 
