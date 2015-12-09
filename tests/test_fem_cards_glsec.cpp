@@ -93,7 +93,7 @@ TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
    std::ostringstream test;
 
    SECTION("simple") {
-      glsec probe(1, 2., 3., 4., 5., 6., 7., true, 9., 10);
+      glsec probe(1, 2., 3., 4., 5., 6., 7., true, 9, 10);
       test << probe;
       CHECK(test.str() ==
             "GLSEC   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
