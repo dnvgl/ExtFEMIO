@@ -76,7 +76,7 @@
     <ClCompile Include="test_fem_cards_bndispl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_fem_cards_bload.cpp">
+    <ClCompile Include="test_fem_cards_bnload.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test_fem_cards_mgsprng.cpp">
