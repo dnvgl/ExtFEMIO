@@ -85,9 +85,9 @@ namespace dnvgl {
                MGSPRNG,
                /// Set (group) of Nodes or Elements (Members)
                GSETMEMB,
-               // /// Specification of Local Element Coordinate
-               // /// System
-               // GUNIVEC,
+               /// Specification of Local Element Coordinate
+               /// System
+               GUNIVEC,
                // /// Isotropy, Linear Elastic Structural Analysis
                // MISOSEL,
                // /// Name and Description of a Set (group)
@@ -1940,6 +1940,72 @@ Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const gsetmemb&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `GUNIVEC`: Specification of Local Element Coordinate System
+/**
+## Format:
+
+|           |           |        |        |        |
+| --------- | --------- | ------ | ------ | ------ |
+| `GUNIVEC` | `TRANSNO` | `UNIX` | `UNIY` | `UNIZ` |
+
+The `GUNIVEC` records are used for beam elements only, i.e. basic
+element types 2, 15 and 23. Other basic element types may refer to
+`BNTRCOS` records. No ambiguity thus exists if both a `GUNIVEC` and
+`BNTRCOS` record have same `TRANSNO`, but they should preferably have
+separate numbering (`TRANSNO`) to avoid possible program problems.
+*/
+            class gunivec : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_UNIX;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_UNIY;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_UNIZ;
+
+            public:
+
+               /** Unit vector number, referenced to on record `GELREF1`.
+                */
+               long TRANSNO;
+               /** *x* component of Unit vector given in superelement
+                   coordinate system along the local z-axis (reference
+                   axis in z-direction) of the element in the
+                   particular node.
+               */
+               double UNIX;
+               /** *y* component of Unit vector given in superelement
+                   coordinate system along the local z-axis (reference
+                   axis in z-direction) of the element in the
+                   particular node.
+               */
+               double UNIY;
+               /** *z* component of Unit vector given in superelement
+                   coordinate system along the local z-axis (reference
+                   axis in z-direction) of the element in the
+                   particular node.
+               */
+               double UNIZ;
+
+               DllExport gunivec(const ::std::deque<::std::string>&);
+
+               DllExport gunivec(const long &TRANSNO,
+                                 const double &UNIX,
+                                 const double &UNIY,
+                                 const double &UNIZ);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const gunivec&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

@@ -113,6 +113,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -571,8 +572,22 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gsetmemb*>(current.get())->IRMEMB.size() == 0);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [gunivec].") {
       for (int i = 0; i < 22; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::GUNIVEC);
+      // GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000
+      CHECK(static_cast<gunivec*>(current.get())->TRANSNO == 517);
+      CHECK(static_cast<gunivec*>(current.get())->UNIX == 0.);
+      CHECK(static_cast<gunivec*>(current.get())->UNIY == 0.);
+      CHECK(static_cast<gunivec*>(current.get())->UNIZ == -1.);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 23; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
