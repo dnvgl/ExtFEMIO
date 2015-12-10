@@ -89,7 +89,7 @@ TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
       misosel probe(1, 2., 3., 4., 5., 6.);
       test << probe;
       CHECK(test.str() ==
-            "MISOSEL +1.00000000e+00 +2.00000000e+00 +0.00000000e+00 +4.00000000e+00 \n"
+            "MISOSEL +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
             "        +5.00000000e+00 +6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
    }
 }

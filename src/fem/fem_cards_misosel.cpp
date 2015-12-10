@@ -65,8 +65,8 @@ namespace dnvgl {
                              const double &RHO,
                              const double &DAMP,
                              const double &ALPHA) :
-               card(), MATNO(MATNO), YOUNG(YOUNG), RHO(RHO),
-               DAMP(DAMP), ALPHA(ALPHA) {}
+               card(), MATNO(MATNO), YOUNG(YOUNG), POISS(POISS),
+               RHO(RHO), DAMP(DAMP), ALPHA(ALPHA) {}
 
             const ::dnvgl::extfem::fem::cards::types
             misosel::card_type(void) const {return MISOSEL;}
