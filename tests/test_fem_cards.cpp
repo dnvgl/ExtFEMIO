@@ -114,6 +114,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"
+      "MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -586,8 +588,25 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gunivec*>(current.get())->UNIZ == -1.);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [misosel].") {
       for (int i = 0; i < 23; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::MISOSEL);
+      // MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000
+      //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<misosel*>(current.get())->MATNO == 66);
+      CHECK(static_cast<misosel*>(current.get())->YOUNG == 2.06e8);
+      CHECK(static_cast<misosel*>(current.get())->POISS == 3.00036e-1);
+      CHECK(static_cast<misosel*>(current.get())->RHO == 7.8);
+      CHECK(static_cast<misosel*>(current.get())->DAMP == 0.);
+      CHECK(static_cast<misosel*>(current.get())->ALPHA == 0.);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 24; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

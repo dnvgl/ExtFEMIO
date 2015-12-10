@@ -88,9 +88,9 @@ namespace dnvgl {
                /// Specification of Local Element Coordinate
                /// System
                GUNIVEC,
-               // /// Isotropy, Linear Elastic Structural Analysis
-               // MISOSEL,
-               // /// Name and Description of a Set (group)
+               /// Isotropy, Linear Elastic Structural Analysis
+               MISOSEL,
+               /// Name and Description of a Set (group)
                // TDSETNAM,
                /// User supplied Text
                TEXT,
@@ -2006,6 +2006,69 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
                DllExport friend ::std::ostream&
                operator<< (::std::ostream&, const gunivec&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
+/**
+## Format:
+
+|           |         |         |         |       |
+| --------- | ------- | ------- | ------- | ----- |
+| `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO` |
+|           | `DAMP`  | `ALPHA` |         |       |
+*/
+            class misosel : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_YOUNG;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_POISS;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_RHO;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_DAMP;
+               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_ALPHA;
+
+            public:
+               /** Material number, i.e. reference number referenced
+                   to by the element specification.
+                */
+               long MATNO;
+               /** Young’s modulus.
+                */
+               double YOUNG;
+               /** Poisson’s ratio.
+                */
+               double POISS;
+               /** Density.
+                */
+               double RHO;
+               /** Specific damping.
+                */
+               double DAMP;
+               /** Thermal expansion coefficient.
+                */
+               double ALPHA;
+
+
+               DllExport misosel(const ::std::deque<::std::string>&);
+
+               DllExport misosel(const long &MATNO,
+                                 const double &YOUNG,
+                                 const double &POISS,
+                                 const double &RHO,
+                                 const double &DAMP,
+                                 const double &ALPHA);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const misosel&);
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

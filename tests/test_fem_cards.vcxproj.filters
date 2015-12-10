@@ -88,6 +88,9 @@
     <ClCompile Include="test_fem_cards_gunivec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_misosel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_fem_cards_ident.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

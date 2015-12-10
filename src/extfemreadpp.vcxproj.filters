@@ -187,6 +187,9 @@
     <ClCompile Include="fem\fem_cards_gunivec.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards_misosel.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fem\fem_cards_mgsprng.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
