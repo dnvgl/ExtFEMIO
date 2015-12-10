@@ -92,7 +92,7 @@ namespace dnvgl {
                                const long &INDEX,
                                const long &ISTYPE,
                                const long &ISORIG) :
-               card(), NFIELD(IRMEMB.size() + 5), ISREF(ISREF), INDEX(INDEX),
+               card(), NFIELD(5), ISREF(ISREF), INDEX(INDEX),
                ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(::std::deque<long>()) {}
 
             const ::dnvgl::extfem::fem::cards::types
