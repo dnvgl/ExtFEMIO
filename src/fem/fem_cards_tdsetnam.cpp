@@ -30,6 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -68,7 +69,7 @@ namespace dnvgl {
                CODTXT = _form_CODTXT(*(pos++));
 
                auto div_val = ldiv(CODNAM, 100);
-               nlnam = div_val.quot;
+               nlnam = div_val.quot != 0;
                ncnam = div_val.rem;
                div_val = ldiv(CODTXT, 100);
                nltxt = div_val.quot;
@@ -99,7 +100,7 @@ namespace dnvgl {
                CODNAM(CODNAM), CODTXT(CODTXT),
                SET_NAME(SET_NAME), CONT(CONT) {
                auto div_val = ldiv(CODNAM, 100);
-               nlnam = div_val.quot;
+               nlnam = div_val.quot != 0;
                ncnam = div_val.rem;
                div_val = ldiv(CODTXT, 100);
                nltxt = div_val.quot;
@@ -109,16 +110,16 @@ namespace dnvgl {
             tdsetnam::tdsetnam(const long &ISREF,
                                const ::std::string &SET_NAME,
                                const ::std::deque<::std::string> &CONT) :
-               card() , NFIELD(4), ISREF(ISREF),
-               CODTXT(0),
+               card(), NFIELD(4), ISREF(ISREF),
                SET_NAME(SET_NAME), CONT(CONT) {
 
                nlnam = true;
                ncnam = SET_NAME.size();
                CODNAM = 100 + ncnam;
                nltxt = CONT.size();
+               nctxt = 0;
                for (auto &p : CONT)
-                  nctxt = ::std::max((size_t)nctxt, p.size());
+                  nctxt = max((size_t)nctxt, p.size());
                for (auto &p : this->CONT)
                   p.resize(nctxt, ' ');
                CODTXT = (100 * nltxt) + nctxt;
@@ -132,7 +133,7 @@ namespace dnvgl {
                CODNAM(CODNAM), CODTXT(0),
                SET_NAME(SET_NAME), CONT() {
                auto div_val = ldiv(CODNAM, 100);
-               nlnam = div_val.quot;
+               nlnam = div_val.quot != 0;
                ncnam = div_val.rem;
                nltxt = 0;
                nctxt = 0;

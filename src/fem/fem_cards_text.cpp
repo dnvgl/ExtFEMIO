@@ -29,6 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
 using namespace ::dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -82,7 +83,7 @@ namespace dnvgl {
                NRECS = static_cast<long>(this->CONT.size());
                NBYTE = 0;
                for (auto &p : CONT)
-                  NBYTE = ::std::max((size_t)NBYTE, p.size());
+                  NBYTE = max((size_t)NBYTE, p.size());
                for (auto &p : this->CONT)
                   p.resize(NBYTE-8, ' ');
             }
