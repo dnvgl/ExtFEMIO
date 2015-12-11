@@ -90,8 +90,8 @@ namespace dnvgl {
                GUNIVEC,
                /// Isotropy, Linear Elastic Structural Analysis
                MISOSEL,
-               /// Name and Description of a Set (group)
-               // TDSETNAM,
+               // Name and Description of a Set (group)
+               TDSETNAM,
                /// User supplied Text
                TEXT,
                // /// *not documented*
@@ -2074,6 +2074,140 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                operator<< (::std::ostream& os) const;
             };
 
+/// `TDSETNAM`: Name and Description of a Set (group)
+/**
+## Format
+
+|            |          |         |          |         |
+| ---------- | -------- | ------- | -------- | ------- |
+| `TDSETNAM` | `NFIELD` | `IRSEF` | `CODNAM` | `NBYTE` |
+|            | \<set name\  >                    | | | |
+|            | \<text line\>                     | | | |
+|            | ...                               | | | |
+|            | \<text line\>                     | | | |
+
+This record together with the set of nodes or elements record(s)
+(`GSETMEMB`) constitutes the set (group) datatype.
+*/
+            class tdsetnam : public card {
+
+            private:
+
+               static const ::dnvgl::extfem::fem::types::card head;
+
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISREF;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
+               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
+               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_SET_NAME;
+               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
+
+               bool nlnam;
+               long ncnam;
+               long nltxt;
+               long nctxt;
+
+            public:
+
+               /** Number of numeric data fields on this record before
+                * text data (MAX = 1024).
+                */
+               long NFIELD;
+               /** Internal set identification number. Legal range [1,
+                   `NSET`], where `NSET` is number of sets which is
+                   equeal to number of "Name and Description of a Set"
+                   records (`TDSETNAM`). Two `TDSETNAM` records may
+                   not have identical set identification numbers
+                   (`ISREF`).
+               */
+               long ISREF;
+               /** Coded dimension of set name:
+
+                     \f[
+                       \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
+                     \f]
+
+                   The inverse relation will then be
+
+                     - `NLNAM` - number of physical records used for
+                       storing of set name.
+
+                       Legal range = [0,1]
+
+                         - = 0, no name defined
+
+                         - = 1, name is defined
+
+                       `NLNAM` = integer part of (`CODNAM` / 100)
+
+                     - `NCNAM` - number of characters in set name.
+
+                        Legal range = [0,64]
+
+                        `NCNAM` = remaindering of (`CODNAM` / 100)
+               */
+               long CODNAM;
+               /** Coded dimension of set description text:
+
+                     \f[
+                       \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
+                     \f]
+
+                   The inverse relation will then be:
+
+                     - `NLTXT` - number of physical records used for
+                       storing of set description text. Legal range =
+                       [0,5]
+
+                       - = 0, no description text defined
+
+                       - ≥ 1, number of physical records with
+                         description text
+
+                       `NLTXT` = integer part of (`CODTXT` / 100)
+
+
+                     - `NCTXT` - number of characters per physical set
+                       description text record. Legal range = [0,64]
+
+                       `NCTXT` = remaindering of (`CODTXT` / 100)
+               */
+               long CODTXT;
+
+               ::std::string SET_NAME;
+               ::std::deque<::std::string> CONT;
+
+               DllExport tdsetnam(const ::std::deque<::std::string>&);
+
+               DllExport tdsetnam(const long &NFIELD,
+                                  const long &ISREF,
+                                  const long &CODNAM,
+                                  const long &CODTXT,
+                                  const ::std::string &SET_NAME,
+                                  const ::std::deque<::std::string> &CONT);
+
+               DllExport tdsetnam(const long &ISREF,
+                                  const ::std::string &SET_NAME,
+                                  const ::std::deque<::std::string> &CONT);
+
+               DllExport tdsetnam(const long &NFIELD,
+                                  const long &ISREF,
+                                  const long &CODNAM,
+                                  const ::std::string &SET_NAME);
+
+               DllExport tdsetnam(const long &ISREF,
+                                  const ::std::string &SET_NAME);
+
+               DllExport const ::dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               DllExport friend ::std::ostream&
+               operator<< (::std::ostream&, const tdsetnam&);
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
 /// `TEXT`: User supplied Text
 /**
 ## Format
@@ -2154,7 +2288,7 @@ per record.
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
-         }
+}
       }
    }
 }

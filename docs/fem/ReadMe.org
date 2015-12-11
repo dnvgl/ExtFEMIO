@@ -39,7 +39,7 @@
    |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | \check | \check  |  6-84 |
    |          | =GUNIVEC=  | Specification of Local Element Coordinate System             | \check | \check  |  6-92 |
    |          | =MISOSEL=  | Isotropy, Linear Elastic Structural Analysis                 | \check | \check  | 6-115 |
-   |          | =TDSETNAM= | Name and Description of a Set (group)                        | \sad   | \sad    |   4-7 |
+   |          | =TDSETNAM= | Name and Description of a Set (group)                        | \check | \check  |   4-7 |
    |          | =TEXT=     | User supplied Text                                           | \check | \check  |  4-10 |
    |          | =TDLOAD=   | *not documented*                                             |        |         |       |
 

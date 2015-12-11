@@ -142,6 +142,9 @@
     <ClCompile Include="fem\fem_cards_gelref1.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards_tdsetnam.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fem\fem_cards_text.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>

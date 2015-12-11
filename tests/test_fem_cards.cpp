@@ -116,6 +116,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"
       "MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
+      "        KEY_HOLE_ROOF\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -158,7 +160,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<text*>(current.get())->CONT.size() == 4);
       CHECK(static_cast<text*>(current.get())->CONT[0] ==
             //        1         2         3         4         5         6
-            //234567890123456789012345678901234567890123456789012345678901234
+            // 34567890123456789012345678901234567890123456789012345678901234
             "CONVERSION DETAILS:                                             ");
       CHECK(static_cast<text*>(current.get())->CONT[1] ==
             "Msc Nastran File Format -> Sesam Interface File.                ");
@@ -605,8 +607,26 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<misosel*>(current.get())->ALPHA == 0.);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [tdsetnam].") {
       for (int i = 0; i < 24; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      cards::dispatch(card::card_split(l), current);
+      CHECK(current->card_type() == cards::TDSETNAM);
+      // TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000
+      //         KEY_HOLE_ROOF
+      CHECK(static_cast<tdsetnam*>(current.get())->NFIELD == 4);
+      CHECK(static_cast<tdsetnam*>(current.get())->ISREF == 166);
+      CHECK(static_cast<tdsetnam*>(current.get())->CODNAM == 113);
+      CHECK(static_cast<tdsetnam*>(current.get())->CODTXT == 0);
+      CHECK(static_cast<tdsetnam*>(current.get())->SET_NAME ==
+         "KEY_HOLE_ROOF");
+      CHECK(static_cast<tdsetnam*>(current.get())->CONT.size() == 0);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 25; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

@@ -24,6 +24,7 @@ namespace {
 
 #include "fem/types.h"
 #include "fem/errors.h"
+#include "extfem_string.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -44,14 +45,15 @@ entry_type<std::string>::entry_type(
    fem::types::base(name), bounds(bounds) {}
 
 std::string
-entry_type<std::string>::operator() (const std::string &inp) const {
-   std::string sval = extfem::string::string(inp).trim();
+entry_type<std::string>::operator() (
+   const std::string &inp1, const std::string &inp2,
+   const std::string &inp3, const std::string &inp4) const {
+
+   std::string sval = extfem::string::string(
+      inp1 + inp2 + inp3 + inp4).trim();
 
    if (sval.length() == 0)
       sval = bounds.get_default();
-
-   if (!bounds.is_allowed(sval))
-      throw errors::str_error(name, "!" + sval + "! Value not in list of allowed values.");
 
    return sval;
 }
@@ -66,12 +68,13 @@ std::string entry_type<std::string>::format(const std::string &inp, const size_t
 
    res << inp;
    std::string out(res.str());
-   if (out.size() != len-8) {
+   if (out.size() > len) {
       std::ostringstream msg("output string for value ", std::ostringstream::ate);
       msg << inp << " of incorrect size, got length of " << out.size()
-          << " instead of allowed length of 72.";
+          << " instead of allowed length of " << len << ".";
       throw errors::int_error(name, msg.str());
    }
+   out.resize(len, ' ');
    return out;
 }
 

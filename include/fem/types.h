@@ -233,7 +233,7 @@ namespace dnvgl {
                   const ::std::string&,
                   const ::dnvgl::extfem::fem::type_bounds::bound<::std::string>&);
 
-               ::std::string operator() (const ::std::string&) const;
+               ::std::string operator() (const ::std::string&, const ::std::string&, const ::std::string&, const ::std::string&) const;
 
                fem_types type() const {
                   return _type;

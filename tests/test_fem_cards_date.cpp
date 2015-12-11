@@ -59,7 +59,7 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
       CHECK(probe.NBYTE == 72);
       CHECK(probe.CONT[0] ==
             //        1         2         3         4         5         6
-            //234567890123456789012345678901234567890123456789012345678901234
+            // 34567890123456789012345678901234567890123456789012345678901234
             "DATE TIME:  11/03/2015 09:46:08                                 ");
       CHECK(probe.CONT[1] ==
             "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            ");
@@ -84,6 +84,8 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
       date probe(TYPE, SUBTYPE, NRECS, NBYTE, CONT);
       test << probe;
       CHECK(test.str() ==
+            //        1         2         3         4         5         6         7
+            // 3456789012345678901234567890123456789012345678901234567890123456789012
             "DATE    +0.00000000e+00 +0.00000000e+00 +4.00000000e+00 +7.20000000e+01 \n"
             "        DATE TIME:  11/03/2015 09:46:08                                 \n"
             "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            \n"

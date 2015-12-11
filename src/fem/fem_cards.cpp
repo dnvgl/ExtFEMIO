@@ -79,7 +79,7 @@ namespace dnvgl {
 namespace {
    using namespace dnvgl::extfem::fem;
 
-   const size_t map_pair_entries = 23;
+   const size_t map_pair_entries = 24;
    const pair<::std::string, cards::types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
       pair<::std::string, cards::types>("DATE", cards::DATE),
@@ -104,7 +104,7 @@ namespace {
       pair<::std::string, cards::types>("GSETMEMB", cards::GSETMEMB),
       pair<::std::string, cards::types>("GUNIVEC", cards::GUNIVEC),
       pair<::std::string, cards::types>("MISOSEL", cards::MISOSEL),
-      // pair<::std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
+      pair<::std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
       pair<::std::string, cards::types>("TEXT", cards::TEXT),
       // pair<::std::strincards::types>("TDLOAD", cards::TDLOAD),
    };
@@ -127,8 +127,8 @@ namespace dnvgl {
                for (auto &pos : inp) {
                   head = extfem::string::string(pos.substr(0, 8)).trim();
                   if (first)
-                     res.push_back(extfem::string::string(head).trim("\t\n"));
-                  auto tmp(pos);
+                     res.push_back(string::string(head).trim("\t\n"));
+                  ::std::string tmp(string::string(pos).trim("\t\n"));
                   tmp.resize(80, ' ');
                   tmp = tmp.substr(8);
                   for (int i=0; i<4; ++i)
@@ -214,7 +214,10 @@ namespace dnvgl {
                   case TEXT:
                      res = ::std::make_unique<fem::cards::text>(inp);
                      break;
-                     // These are not real card types, they can't be returned
+                  case TDSETNAM:
+                     res = ::std::make_unique<fem::cards::tdsetnam>(inp);
+                     break;
+                  // These are not real card types, they can't be returned
                   case UNKNOWN:
                      res = nullptr;
                   }

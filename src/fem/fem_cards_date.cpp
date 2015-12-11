@@ -57,11 +57,12 @@ namespace dnvgl {
                NRECS = _form_NRECS(*(pos++));
                NBYTE = _form_NBYTE(*(pos++));
 
-               while (pos != inp.end()) {
-                  ::std::string res("");
-                  for (int i=0; i < 4 && pos != inp.end(); i++)
-                     res += *(pos++);
-                  CONT.push_back(res);
+               for (int i = 0; i < NRECS; i++) {
+                  ::std::string cont = _form_CONT(
+                     *pos, *(pos+1), *(pos+2), *(pos+3));
+                  cont.resize(NBYTE-8, ' ');
+                  CONT.push_back(cont);
+                  pos += 4;
                }
             }
 
@@ -70,7 +71,10 @@ namespace dnvgl {
                const long &NRECS, const long &NBYTE,
                const ::std::deque<::std::string> &CONT) :
                TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
-               NBYTE(NBYTE), CONT(CONT) {}
+               NBYTE(NBYTE), CONT(CONT) {
+               for (auto &p : this->CONT)
+                  p.resize(NBYTE-8, ' ');
+            }
 
             date::date(
                const long &TYPE, const long &SUBTYPE,
@@ -80,6 +84,8 @@ namespace dnvgl {
                NBYTE = 0;
                for (auto &p : CONT)
                   NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
+               for (auto &p : this->CONT)
+                  p.resize(NBYTE-8, ' ');
             };
 
             const types
@@ -102,7 +108,7 @@ namespace dnvgl {
 
                for (auto p : card.CONT)
                   os << ::dnvgl::extfem::fem::types::card().format()
-                     << card._form_CONT.format(p, card.NBYTE)
+                     << card._form_CONT.format(p, card.NBYTE-8)
                      << std::endl;
 
                return os;

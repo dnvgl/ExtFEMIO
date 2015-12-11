@@ -231,6 +231,7 @@
     <ClCompile Include="test_fem_cards_gelmnt1.cpp" />
     <ClCompile Include="test_fem_cards_gelref1.cpp" />
     <ClCompile Include="test_fem_cards_text.cpp" />
+    <ClCompile Include="test_fem_cards_tdsetnam.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
