@@ -6,6 +6,7 @@
 
    Detailed description
 */
+#include "StdAfx.h"
 
 // ID:
 namespace {
@@ -118,15 +119,4 @@ namespace dnvgl {
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j 8"
-// End:
-
-
-
-// Local Variables:
-// mode: c++
-// ispell-local-dictionary: "english"
-// coding: utf-8
-// c-file-style: "dnvgl"
-// indent-tabs-mode: nil
-// compile-command: "make test"
 // End:
