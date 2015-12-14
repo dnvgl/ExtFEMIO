@@ -2,7 +2,7 @@
 
 # Copyright © 2015 by DNV GL SE
 
-# Makefile definitions for libExtFEMRead++.
+# Makefile definitions for libExtFEMIO++.
 
 # ID: $Id$
 # $Date$

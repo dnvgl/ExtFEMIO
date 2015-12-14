@@ -20,7 +20,7 @@ top=../
 SUBDIRS=
 EXTRA_DIST=base_test.ju
 
-test_extfem_LDADD=../src/libextfemread.la -lboost_regex
+test_extfem_LDADD=../src/libextfemio.la -lboost_regex
 
 TESTS=
 check_PROGRAMS=
