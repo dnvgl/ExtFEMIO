@@ -90,7 +90,7 @@ namespace dnvgl {
                GUNIVEC,
                /// Isotropy, Linear Elastic Structural Analysis
                MISOSEL,
-               // Name and Description of a Set (group)
+               /// Name and Description of a Set (group)
                TDSETNAM,
                /// User supplied Text
                TEXT,
