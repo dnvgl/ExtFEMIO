@@ -87,7 +87,7 @@ namespace dnvgl {
                              const ::std::deque<double> &RLOAD,
                              const ::std::deque<double> &ILOAD):
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
-               NODENO(NODENO), NDOF(RLOAD.size()),
+               NODENO(NODENO), NDOF((long)RLOAD.size()),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
 
             bnload::bnload(const long &LLC,
@@ -109,7 +109,7 @@ namespace dnvgl {
                              const ::std::deque<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP),
                COMPLX(ILOAD.size() > 0),
-               NODENO(NODENO), NDOF(RLOAD.size()),
+               NODENO(NODENO), NDOF((long)RLOAD.size()),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
 
             const ::dnvgl::extfem::fem::cards::types

@@ -43,6 +43,7 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
 
    double c_ref_rdisp[6] = {0., 0., 0., 0., 0., 0.};
    ::std::deque<double> ref_rdisp(c_ref_rdisp, c_ref_rdisp + 6);
+   ::std::deque<::std::string> lines;
 
    SECTION("BNDISPL (1)") {
       ::std::deque<string> data;
@@ -53,7 +54,7 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
          "         2.30470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back(
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -74,7 +75,7 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
          "         2.30470000e+04  6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
       data.push_back(
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);

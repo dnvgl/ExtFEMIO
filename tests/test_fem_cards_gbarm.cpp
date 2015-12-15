@@ -41,13 +41,15 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GBARM (1)") {
       ::std::deque<string> data;
       data.push_back(
          "GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n");
       data.push_back(
          "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gbarm probe(lines);
 
       CHECK(probe.GEONO == 2);
@@ -66,7 +68,7 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
          "GBARM    2.00000000e+00  2.50000000e+02  3.20000000e+01  3.20000000e+01 \n");
       data.push_back(
          "         1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gbarm probe(lines);
 
       CHECK(probe.GEONO == 2);

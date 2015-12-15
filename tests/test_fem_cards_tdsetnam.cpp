@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("TDSETNAM (1)") {
       ::std::deque<string> data;
       data.push_back(
@@ -49,7 +51,7 @@ TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
       data.push_back(
          "        PLAN_No6_STR(5445A/B)\n");
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       tdsetnam probe(lines);
 
       CHECK(probe.NFIELD == 4);
@@ -68,7 +70,7 @@ TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
       data.push_back(
          "        PLAN_No6_STR(5445A/B)\n");
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       tdsetnam probe(lines);
 
       CHECK(probe.NFIELD == 4);
@@ -91,7 +93,7 @@ TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
       data.push_back(
          "        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+\n");
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       tdsetnam probe(lines);
 
       CHECK(probe.NFIELD == 4);

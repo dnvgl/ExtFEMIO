@@ -69,6 +69,7 @@ namespace dnvgl {
 
                static const fem_types _type;
                ::std::string name;
+               static ::std::istringstream conv;
 
             public:
 

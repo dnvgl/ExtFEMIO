@@ -75,8 +75,8 @@ long entry_type<long>::operator() (const std::string &inp) const {
          throw errors::int_error(name, msg + inp + """), no integer!");
       }
 
-      istringstream conv(inp);
-      conv.imbue(locale("C"));
+      conv.str(inp);
+      conv.seekg(0);
       conv >> value;
    }
    if (!this->bounds.in_bounds(long(value))) {

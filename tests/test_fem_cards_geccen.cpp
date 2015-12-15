@@ -41,10 +41,12 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GECCEN (1)") {
       ::std::deque<string> data;
       data.push_back("GECCEN   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       geccen probe(lines);
 
       CHECK(probe.ECCNO == 1);
@@ -56,7 +58,7 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
    SECTION("GECCEN (2)") {
       ::std::deque<string> data;
       data.push_back("GECCEN   1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       geccen probe(lines);
 
       CHECK(probe.ECCNO == 1);

@@ -43,6 +43,7 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
    ::std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   ::std::deque<string> lines;
 
    SECTION("BNLOAD (1)") {
       ::std::deque<string> data;
@@ -53,7 +54,7 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
          "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back(
          "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -74,7 +75,7 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
          "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back(
          "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);

@@ -83,7 +83,7 @@ namespace dnvgl {
                NRECS = static_cast<long>(this->CONT.size());
                NBYTE = 0;
                for (auto &p : CONT)
-                  NBYTE = max((size_t)NBYTE, p.size());
+                  NBYTE = max(NBYTE, (long)p.size());
                for (auto &p : this->CONT)
                   p.resize(NBYTE-8, ' ');
             }

@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GLSEC (1)") {
       ::std::deque<string> data;
       data.push_back(
@@ -49,7 +51,7 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
          "         1.20000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000\n");
       data.push_back(
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       glsec probe(lines);
 
       CHECK(probe.GEONO == 22);
@@ -72,7 +74,7 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
          "         1.20000000e+01  1.00000000e+00  1.00000000e+00  1.00000000e+00 \n");
       data.push_back(
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       glsec probe(lines);
 
       CHECK(probe.GEONO == 22);

@@ -117,9 +117,8 @@ namespace dnvgl {
             const map<::std::string, types>
                cardtype_map(map_pairs, map_pairs + map_pair_entries);
 
-            deque<::std::string>
-            card::card_split(deque<::std::string> const &inp) {
-               deque<::std::string> res;
+            void
+            card::card_split(deque<::std::string> const &inp, deque<::std::string> &res) {
                ::std::string head;
 
                bool first = true;
@@ -135,12 +134,10 @@ namespace dnvgl {
                      res.push_back(tmp.substr(i*16, 16));
                   first = false;
                }
-               return res;
             }
 
             void
-            dispatch(const deque<::std::string> &inp,
-                     ::std::unique_ptr<fem::cards::card> &res) {
+            dispatch(const deque<::std::string> &inp, ::std::unique_ptr<fem::cards::card> &res) {
 
                try {
                   ::std::string key(inp.at(0));
@@ -219,10 +216,10 @@ namespace dnvgl {
                      break;
                   // These are not real card types, they can't be returned
                   case UNKNOWN:
-                     res = nullptr;
+                     res = ::std::make_unique<fem::cards::unknown>(inp);
                   }
                } catch (out_of_range) {
-                  res = ::std::make_unique<fem::cards::unknown>(inp);
+                 res = ::std::make_unique<fem::cards::unknown>(inp);
                }
             }
          }

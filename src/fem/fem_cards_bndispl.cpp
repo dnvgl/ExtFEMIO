@@ -87,7 +87,7 @@ namespace dnvgl {
                              const ::std::deque<double> &RDISP,
                              const ::std::deque<double> &IDISP):
                card(), LLC(LLC), DTYPE(DTYPE), COMPLX(COMPLX),
-               NODENO(NODENO), NDOF(RDISP.size()),
+               NODENO(NODENO), NDOF((long)RDISP.size()),
                RDISP(RDISP), IDISP(IDISP) {}
 
             bndispl::bndispl(const long &LLC,
@@ -109,7 +109,7 @@ namespace dnvgl {
                              const ::std::deque<double> &IDISP) :
                card(), LLC(LLC), DTYPE(DTYPE),
                COMPLX(IDISP.size() > 0),
-               NODENO(NODENO), NDOF(RDISP.size()),
+               NODENO(NODENO), NDOF((long)RDISP.size()),
                RDISP(RDISP), IDISP(IDISP) {}
 
             const ::dnvgl::extfem::fem::cards::types

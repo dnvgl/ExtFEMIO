@@ -132,8 +132,8 @@ void entry_type<double>::set_value(
          sval.insert(pos, 1, '0');
       }
 
-      istringstream conv(sval);
-      conv.imbue(locale("C"));
+      conv.str(sval);
+      conv.seekg(0);
       conv >> val.value;
    }
    if (!this->bounds.in_bounds(val))

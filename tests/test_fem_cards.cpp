@@ -124,6 +124,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    fem_file probe(ist);
    deque<::std::string> l;
    deque<::std::string> ref;
+   deque<::std::string> entries;
 
    ::std::unique_ptr<cards::card> current;
 
@@ -131,7 +132,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::IDENT);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000
@@ -145,7 +147,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::TEXT);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456|2
       // TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
@@ -175,7 +178,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::DATE);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
@@ -204,7 +208,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       // CHECK(current->card_type() == cards::TDLOAD);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000
@@ -216,7 +221,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GNODE);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005
@@ -237,7 +243,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GCOORD);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004
@@ -252,7 +259,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GELMNT1);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000
@@ -273,7 +281,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GELREF1);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GELREF1  4.64000000e+002 3.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -302,7 +311,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GBARM);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001
@@ -322,7 +332,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GBEAMG);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008
@@ -351,7 +362,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GECCEN);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000
@@ -366,7 +378,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GELTH);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000
@@ -381,7 +394,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GIORH);
       // GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002
       //          1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000
@@ -405,7 +419,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GLSEC);
       // GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001
       //          1.40000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000
@@ -427,7 +442,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GPIPE);
       // GPIPE    6.54391000e+005 0.00000000e+000 3.12094257e-001 1.56047128e-001
       //          1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -446,7 +462,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BLDEP);
       // BLDEP    1.11140000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000
       //          1.00000000e+000 1.00000000e+000 1.00000000e+000 0.00000000e+000
@@ -481,7 +498,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BNBCD);
       // BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000
       //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
@@ -498,7 +516,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BNDISPL);
       // BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
       //          2.30460000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -519,7 +538,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BNLOAD);
       // BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       //          1.52200000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -540,7 +560,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::MGSPRNG);
       // MGSPRNG  6.90000000e+001 6.00000000e+000 1.00000000e+008 0.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -564,7 +585,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GSETMEMB);
       // GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -581,7 +603,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GUNIVEC);
       // GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000
       CHECK(static_cast<gunivec*>(current.get())->TRANSNO == 517);
@@ -595,7 +618,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::MISOSEL);
       // MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -612,7 +636,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::TDSETNAM);
       // TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000
       //         KEY_HOLE_ROOF
@@ -630,7 +655,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
-      cards::dispatch(card::card_split(l), current);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::IEND);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000

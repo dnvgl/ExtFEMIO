@@ -407,8 +407,9 @@ namespace dnvgl {
          namespace cards {
             /** Dispatch instances of the different BDF card classes.
              */
-            DllExport ::std::unique_ptr<card> dispatch(
-               const ::std::deque<::std::string> &);
+            DllExport void
+            dispatch(
+               const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }
       }
    }

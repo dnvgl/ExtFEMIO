@@ -41,13 +41,15 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GELMNT1 (BEAS)") {
       ::std::deque<string> data;
       data.push_back("GELMNT1  1.13160000e+004 1.00000000e+000 1.50000000e+001 0.00000000e+000\n");
       data.push_back("         1.00000000e+001 1.10000000e+001 0.00000000e+000 0.00000000e+000\n");
 
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelmnt1 probe(lines);
 
       CHECK(probe.ELNOX == 11316);
@@ -65,7 +67,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
       data.push_back("         1.00000000e+000 6.00000000e+000 4.00000000e+000 2.00000000e+000\n");
 
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelmnt1 probe(lines);
 
       CHECK(probe.ELNOX == 1);

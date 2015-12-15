@@ -75,13 +75,15 @@ namespace dnvgl {
 
                static const bdf_types _type;
 
+               static ::std::istringstream conv;
+
             public:
 
                ::std::string name;
 
                static out_form_type out_form;
 
-               base(const ::std::string&);
+               DllExport base(const ::std::string&);
 
                ~base() {};
 
@@ -99,6 +101,19 @@ namespace dnvgl {
 
                virtual ::std::string format(const void*) const = 0;
             };
+
+            class imbue_helper : public base {
+            public:
+
+               imbue_helper(const ::std::locale &loc) : base("") {};
+
+               bdf_types type(void) const {return None;};
+
+               ::std::string format(const void*) const { return "";};
+               //::std::string format() const;
+            };
+
+            static imbue_helper _imbue_helper(::std::locale("C"));
 
             class card : public base {
             public:

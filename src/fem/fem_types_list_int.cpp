@@ -76,8 +76,8 @@ entry_type<std::deque<int>>::operator() (const std::string &inp) const {
       throw errors::int_error(name, msg + inp + """), no integer!");
    }
 
-   istringstream conv(inp);
-   conv.imbue(locale("C"));
+   conv.str(inp);
+   conv.seekg(0);
    conv >> tmp_d;
    tmp = (long)tmp_d;
 

@@ -57,8 +57,8 @@ namespace dnvgl {
                      throw errors::bool_error(name, msg + inp + """), no bool!");
                   }
 
-                  std::istringstream conv(inp);
-                  conv.imbue(std::locale("C"));
+                  conv.str(inp);
+                  conv.seekg(0);
                   conv >> value;
                }
                if (value == 1.) return true;

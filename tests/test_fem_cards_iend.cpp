@@ -41,10 +41,12 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("IEND (1)") {
       ::std::deque<string> data;
       data.push_back("IEND     1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 1);
@@ -53,7 +55,7 @@ TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
    SECTION("IEND (2)") {
       ::std::deque<string> data;
       data.push_back("IEND    +1.00000000e+000+0.00000000e+000+0.00000000e+000+0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 1);
@@ -62,7 +64,7 @@ TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
    SECTION("IEND (3)") {
       ::std::deque<string> data;
       data.push_back("IEND     1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 1);

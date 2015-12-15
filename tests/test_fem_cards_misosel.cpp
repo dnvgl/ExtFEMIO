@@ -43,6 +43,7 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
    ::std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   ::std::deque<::std::string> lines;
 
    SECTION("MISOSEL (1)") {
       ::std::deque<string> data;
@@ -51,7 +52,7 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
          "MISOSEL  4.10000000e+001 2.06000000e+008 3.00032000e-001 7.80000000e+000\n");
       data.push_back(
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       misosel probe(lines);
 
       CHECK(probe.MATNO == 41);
@@ -69,7 +70,7 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
          "MISOSEL  4.10000000e+01  2.06000000e+08  3.00032000e-01  7.80000000e+00 \n");
       data.push_back(
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       misosel probe(lines);
 
       CHECK(probe.MATNO == 41);

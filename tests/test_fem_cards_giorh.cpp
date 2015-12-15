@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GIORH (1)") {
       ::std::deque<string> data;
       data.push_back(
@@ -49,7 +51,7 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
          "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n");
       data.push_back(
          "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 5);
@@ -74,7 +76,7 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
          "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n");
       data.push_back(
          "         1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 5);

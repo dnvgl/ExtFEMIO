@@ -114,12 +114,12 @@ namespace dnvgl {
                SET_NAME(SET_NAME), CONT(CONT) {
 
                nlnam = true;
-               ncnam = SET_NAME.size();
+               ncnam = (long)SET_NAME.size();
                CODNAM = 100 + ncnam;
-               nltxt = CONT.size();
+               nltxt = (long)CONT.size();
                nctxt = 0;
                for (auto &p : CONT)
-                  nctxt = max((size_t)nctxt, p.size());
+                  nctxt = max(nctxt, (long)p.size());
                for (auto &p : this->CONT)
                   p.resize(nctxt, ' ');
                CODTXT = (100 * nltxt) + nctxt;
@@ -145,7 +145,7 @@ namespace dnvgl {
                CODTXT(0),
                SET_NAME(SET_NAME), CONT() {
                nlnam = true;
-               ncnam = SET_NAME.size();
+               ncnam = (long)SET_NAME.size();
                CODNAM = 100 + ncnam;
                nltxt = 0;
                nctxt = 0;

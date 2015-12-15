@@ -50,6 +50,8 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
    }
    ref_K[1][1] = 1e8;
 
+   ::std::deque<::std::string> lines;
+
    SECTION("MGSPRNG (1)") {
       ::std::deque<string> data;
 
@@ -65,7 +67,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back(
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       mgsprng probe(lines);
 
       CHECK(probe.MATNO == 70);
@@ -91,7 +93,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
       data.push_back(
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       mgsprng probe(lines);
 
       CHECK(probe.MATNO == 70);
@@ -132,7 +134,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
          "         1.50000000e+01  1.60000000e+01  1.70000000e+01  1.80000000e+01 \n");
       data.push_back(
          "         1.90000000e+01  2.00000000e+01  2.10000000e+01  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       mgsprng probe(lines);
 
       CHECK(probe.MATNO == 70);

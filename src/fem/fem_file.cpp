@@ -58,7 +58,7 @@ void fem_file::get(deque<std::string> &res) {
 }
 
 // Return size of input FEM file.
-std::streampos fem_file::size(void) {
+streampos fem_file::size(void) {
    // save current position in file
    auto cur_pos = data.tellg();
 

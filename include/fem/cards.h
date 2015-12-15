@@ -116,8 +116,8 @@ namespace dnvgl {
 
             public:
 
-               DllExport static ::std::deque<::std::string>
-               card_split(::std::deque<::std::string> const &);
+               DllExport static void
+               card_split(::std::deque<::std::string> const &, ::std::deque<::std::string>&);
 
                DllExport card (const ::std::deque<::std::string> &);
                DllExport card ();
@@ -2302,8 +2302,7 @@ namespace dnvgl {
       namespace fem {
          namespace cards {
             DllExport void
-            dispatch(const ::std::deque<::std::string>&,
-                     ::std::unique_ptr<card>&);
+            dispatch(const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }
       }
    }

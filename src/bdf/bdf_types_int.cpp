@@ -77,13 +77,16 @@ void entry_type<long>::set_value(
          msg += """), no integer";
          throw errors::int_error(name, msg);
       }
-      istringstream buffer(sval);
-      buffer >> val.value;
+      conv.str(sval);
+      conv.seekg(0);
+      conv >> val.value;
       val.is_value = true;
    }
    if (!this->bounds.in_bounds(val)) {
-      std::string msg("boundary condition violated (");
-      throw errors::int_error(name, msg + name + ")\n(""" + inp + """)");
+      std::ostringstream msg("boundary condition violated (",
+          ::std::ostringstream::ate);
+      msg << name << ")\n(""" << inp << ", " << sval << ", " << val.value << """)";
+      throw errors::int_error(name, msg.str());
    }
    return;
 }

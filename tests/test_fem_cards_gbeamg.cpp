@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GBEAMG (1)") {
       ::std::deque<string> data;
       data.push_back(
@@ -51,7 +53,7 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
          "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n");
       data.push_back(
          "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gbeamg probe(lines);
 
       CHECK(probe.GEONO == 1685);
@@ -81,7 +83,7 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
          "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n");
       data.push_back(
          "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gbeamg probe(lines);
 
       CHECK(probe.GEONO == 1685);

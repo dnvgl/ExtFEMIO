@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
 
+    ::std::deque<::std::string> lines; 
+
    SECTION("BLDEP (1)") {
       ::std::deque<string> data;
 
@@ -64,7 +66,7 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
          "         3.00000000e+000 5.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back(
          "         3.00000000e+000 4.00000000e+000-6.43000000e+003 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bldep probe(lines);
 
       CHECK(probe.NODENO == 11072);
@@ -107,7 +109,7 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
          "         3.00000000e+00  5.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
       data.push_back(
          "         3.00000000e+00  4.00000000e+00 -6.43000000e+03  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bldep probe(lines);
 
       CHECK(probe.NODENO == 11072);

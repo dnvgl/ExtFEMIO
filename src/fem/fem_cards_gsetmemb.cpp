@@ -86,7 +86,7 @@ namespace dnvgl {
                                const long &ISTYPE,
                                const long &ISORIG,
                                const ::std::deque<long> &IRMEMB) :
-               card(), NFIELD(IRMEMB.size() + 5), ISREF(ISREF), INDEX(INDEX),
+               card(), NFIELD((long)IRMEMB.size() + 5), ISREF(ISREF), INDEX(INDEX),
                ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(IRMEMB) {}
 
             gsetmemb::gsetmemb(const long &ISREF,

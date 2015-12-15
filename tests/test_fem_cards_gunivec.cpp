@@ -43,13 +43,14 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
    ::std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   ::std::deque<::std::string> lines;
 
    SECTION("GUNIVEC (1)") {
       ::std::deque<string> data;
 
       data.push_back(
          "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gunivec probe(lines);
 
       CHECK(probe.TRANSNO == 534);
@@ -63,7 +64,7 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
 
       data.push_back(
          "GUNIVEC  5.34000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gunivec probe(lines);
 
       CHECK(probe.TRANSNO == 534);

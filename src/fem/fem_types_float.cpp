@@ -84,8 +84,8 @@ double entry_type<double>::operator() (const std::string &inp) const {
          throw errors::float_error(name, msg + inp + """), no float!");
       }
 
-      istringstream conv(inp);
-      conv.imbue(locale("C"));
+      conv.str(inp);
+      conv.seekg(0);
       conv >> value;
    }
    if (!this->bounds.in_bounds(value)) {

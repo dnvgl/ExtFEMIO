@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
 
+   ::std::deque<string> lines;
+   
    SECTION("TEXT (1)") {
       ::std::deque<string> data;
       data.push_back(
@@ -55,7 +57,7 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
       data.push_back(
          "        Log    : \\test_01.txt");
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       text probe(lines);
 
       CHECK(probe.TYPE == 0);
@@ -88,7 +90,7 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
       data.push_back(
          "        Log    : \\test_01.txt");
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       text probe(lines);
 
       CHECK(probe.TYPE == 0);

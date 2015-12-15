@@ -72,7 +72,7 @@ namespace dnvgl {
 
             mgsprng::mgsprng(const long &MATNO,
                              const ::std::deque<::std::deque<double>> &K) :
-               card(), MATNO(MATNO), NDOF(K.size()), K(K) {}
+               card(), MATNO(MATNO), NDOF((long)K.size()), K(K) {}
 
             const ::dnvgl::extfem::fem::cards::types
             mgsprng::card_type(void) const {return MGSPRNG;}

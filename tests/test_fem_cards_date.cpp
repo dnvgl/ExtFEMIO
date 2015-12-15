@@ -40,7 +40,9 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 }
 
 TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
-
+    
+   ::std::deque<string> lines;
+    
    SECTION("DATE (1)") {
       ::std::deque<string> data;
       //              12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -50,7 +52,7 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
       data.push_back("        COMPUTER: HAML130185");
       data.push_back("        USER: berhol");
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       date probe(lines);
 
       CHECK(probe.TYPE == 0);

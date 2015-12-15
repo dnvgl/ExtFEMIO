@@ -33,6 +33,8 @@ using namespace ::dnvgl::extfem;
 
 bdf::types::base::base(const ::std::string &name) : name(name) {};
 
+::std::istringstream bdf::types::base::conv = ::std::istringstream();
+
 bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
 
 ::std::string bdf::types::card::format(const void* d) const {

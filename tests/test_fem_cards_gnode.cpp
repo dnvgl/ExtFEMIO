@@ -41,10 +41,12 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
 
+   ::std::deque<::std::string> lines;
+
    SECTION("GNODE (1)") {
       ::std::deque<string> data;
       data.push_back("GNODE    1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gnode probe(lines);
 
       CHECK(probe.NODEX == 1);
@@ -59,7 +61,7 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    SECTION("GNODE (2)") {
       ::std::deque<string> data;
       data.push_back("GNODE    1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gnode probe(lines);
 
       CHECK(probe.NODEX == 1);

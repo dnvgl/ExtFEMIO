@@ -41,6 +41,8 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GPIPE (1)") {
       ::std::deque<string> data;
 
@@ -48,7 +50,7 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
          "GPIPE    6.54357000e+005 0.00000000e+000 5.90218891e-002 2.95109446e-002\n");
       data.push_back(
          "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gpipe probe(lines);
 
       CHECK(probe.GEONO == 654357);
@@ -68,7 +70,7 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
          "GPIPE    6.54357000e+05  0.00000000e+00  5.90218891e-02  2.95109446e-02 \n");
       data.push_back(
          "         1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gpipe probe(lines);
 
       CHECK(probe.GEONO == 654357);

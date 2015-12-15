@@ -41,13 +41,15 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
 
+   ::std::deque<string> lines;
+
    SECTION("GELREF1 (sample 1)") {
       ::std::deque<string> data;
       data.push_back("GELREF1  1.80000000e+001 3.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back("         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back("         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelref1 probe(lines);
 
       CHECK(probe.ELNO == 18);
@@ -74,7 +76,7 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       data.push_back("         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
       data.push_back("         1.03005000e+005 0.00000000e+000-1.00000000e+000 1.70000000e+001\n");
       data.push_back("         3.30000000e+001 3.40000000e+001 0.00000000e+000 0.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelref1 probe(lines);
 
       CHECK(probe.ELNO == 17);
@@ -104,7 +106,7 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       data.push_back("        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
       data.push_back("        +1.03005000e+05 +0.00000000e+00 -1.00000000e+00 +1.70000000e+01 \n");
       data.push_back("        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelref1 probe(lines);
 
       CHECK(probe.ELNO == 18);
@@ -133,7 +135,7 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       data.push_back("        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
       data.push_back("        -1.00000000e+00 +0.00000000e+00 +1.03005000e+05 +1.70000000e+01 \n");
       data.push_back("        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelref1 probe(lines);
 
       CHECK(probe.ELNO == 18);
@@ -162,7 +164,7 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       data.push_back("        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
       data.push_back("        +1.03005000e+05 -1.00000000e+00 +1.00000000e+00 +1.70000000e+01 \n");
       data.push_back("        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelref1 probe(lines);
 
       CHECK(probe.ELNO == 18);
@@ -191,7 +193,7 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       data.push_back("        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
       data.push_back("        +1.03005000e+05 +0.00000000e+00 +1.00000000e+00 -1.00000000e+00 \n");
       data.push_back("        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       gelref1 probe(lines);
 
       CHECK(probe.ELNO == 18);

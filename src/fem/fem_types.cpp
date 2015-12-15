@@ -35,6 +35,8 @@ using namespace ::dnvgl::extfem;
 
 fem::types::base::base(const::std::string &name) : name(name) {};
 
+::std::istringstream fem::types::base::conv;
+
 ::std::string fem::types::card::format() const {
    ::std::ostringstream res;
    res.setf(std::ios_base::left, ::std::ios_base::adjustfield);

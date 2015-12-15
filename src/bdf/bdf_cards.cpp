@@ -184,57 +184,75 @@ card::card_split(const deque<std::string> &inp,
    }
 }
 
+void
+bdf::cards::dispatch(const deque<std::string> &inp, std::unique_ptr<bdf::cards::card> &res) {
 
-std::unique_ptr<bdf::cards::card> bdf::cards::dispatch(const deque<std::string> &inp) {
+   res = nullptr;
 
    try {
       ::std::string key(inp.at(0));
       switch (cardtype_map.at(key)) {
       case GRID:
-         return ::std::make_unique<bdf::cards::grid>(inp);
+         res = ::std::make_unique<bdf::cards::grid>(inp);
+         break;
       case CTRIA3:
-         return ::std::make_unique<bdf::cards::ctria3>(inp);
+         res = ::std::make_unique<bdf::cards::ctria3>(inp);
+         break;
       case CQUAD4:
-         return ::std::make_unique<bdf::cards::cquad4>(inp);
+         res = ::std::make_unique<bdf::cards::cquad4>(inp);
+         break;
       case CBEAM:
-         return ::std::make_unique<bdf::cards::cbeam>(inp);
+         res = ::std::make_unique<bdf::cards::cbeam>(inp);
+         break;
       case CBAR:
-         return ::std::make_unique<bdf::cards::cbar>(inp);
+         res = ::std::make_unique<bdf::cards::cbar>(inp);
+         break;
       case CROD:
-         return ::std::make_unique<bdf::cards::crod>(inp);
+         res = ::std::make_unique<bdf::cards::crod>(inp);
+         break;
       case PSHELL:
-         return ::std::make_unique<bdf::cards::pshell>(inp);
+         res = ::std::make_unique<bdf::cards::pshell>(inp);
+         break;
       case PBEAM:
-         return ::std::make_unique<bdf::cards::pbeam>(inp);
+         res = ::std::make_unique<bdf::cards::pbeam>(inp);
+         break;
       case PBEAML:
-         return ::std::make_unique<bdf::cards::pbeaml>(inp);
+         res = ::std::make_unique<bdf::cards::pbeaml>(inp);
+         break;
       case PBAR:
-         return ::std::make_unique<bdf::cards::pbar>(inp);
+         res = ::std::make_unique<bdf::cards::pbar>(inp);
+         break;
       case PBARL:
-         return ::std::make_unique<bdf::cards::pbarl>(inp);
+         res = ::std::make_unique<bdf::cards::pbarl>(inp);
+         break;
       case PROD:
-         return ::std::make_unique<bdf::cards::prod>(inp);
+         res = ::std::make_unique<bdf::cards::prod>(inp);
+         break;
       case MAT1:
-         return ::std::make_unique<bdf::cards::mat1>(inp);
+         res = ::std::make_unique<bdf::cards::mat1>(inp);
+         break;
       case ENDDATA:
-         return ::std::make_unique<bdf::cards::enddata>(inp);
+         res = ::std::make_unique<bdf::cards::enddata>(inp);
+         break;
       case FORCE:
-         return ::std::make_unique<bdf::cards::force>(inp);
+         res = ::std::make_unique<bdf::cards::force>(inp);
+         break;
       case MOMENT:
-         return ::std::make_unique<bdf::cards::moment>(inp);
+         res = ::std::make_unique<bdf::cards::moment>(inp);
+         break;
       case LOAD:
-         return ::std::make_unique<bdf::cards::load>(inp);
-         // These are not real card types, they can't be returned
+         res = ::std::make_unique<bdf::cards::load>(inp);
+         break;
+      // These are not real card types, they can't be returned
       case UNKNOWN:
       case BEAM_PROP:
       case BAR_PROP:
       case BEAM_BASE:
-         return nullptr;
+         res = ::std::make_unique<bdf::cards::unknown>(inp);
       }
    } catch (out_of_range) {
-      return ::std::make_unique<bdf::cards::unknown>(inp);
+      res = ::std::make_unique<bdf::cards::unknown>(inp);
    }
-   return nullptr;
 }
 
 // Local Variables:

@@ -42,6 +42,7 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
    long ref_fix[6] = {1, 1, 1, 1, 0, 1};
+   ::std::deque<string> lines;
 
    SECTION("BNBCD (1)") {
       ::std::deque<string> data;
@@ -50,7 +51,7 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
          "BNBCD    8.31700000e+003 6.00000000e+000 1.00000000e+000 1.00000000e+000\n");
       data.push_back(
          "         1.00000000e+000 1.00000000e+000 0.00000000e+000 1.00000000e+000\n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 8317);
@@ -65,7 +66,7 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
          "BNBCD    8.31700000e+03  6.00000000e+00  1.00000000e+00  1.00000000e+00 \n");
       data.push_back(
          "         1.00000000e+00  1.00000000e+00  0.00000000e+00  1.00000000e+00 \n");
-      ::std::deque<string> lines = card::card_split(data);
+      card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 8317);
