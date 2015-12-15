@@ -33,7 +33,7 @@ using namespace ::dnvgl::extfem;
 
 bdf::types::base::base(const ::std::string &name) : name(name) {};
 
-::std::istringstream bdf::types::base::conv = ::std::istringstream();
+::std::istringstream bdf::types::base::conv;
 
 bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
 
