@@ -181,7 +181,6 @@ entry_type<double>::operator() (const ::std::string &inp) const {
          res.precision(10);
       else
          res.precision(11);
-      res.width(9);
       break;
    case SHORT:
       { // Check on how much precision is lost when using SHORT format.

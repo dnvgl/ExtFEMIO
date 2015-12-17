@@ -247,8 +247,20 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
       bdf::types::base::out_form = bdf::types::FREE;
       CHECK(obj.format(lval) == "1.000000+00");
    }
+}
 
-   SECTION("Exception, mkoe 2015-12-17") {
+TEST_CASE("Exception, mkoe 2015-12-17", "[bdf_types]" ) {
+
+   entry_type<double> obj("dummy");
+
+   SECTION("SHORT") {
+      const double lval(-11.1);
+      bdf::types::base::out_form = bdf::types::SHORT;
+      CHECK(obj.format(lval).size() == 8);
+      CHECK(obj.format(lval) == "-1.11+01");
+   }
+
+   SECTION("LONG") {
       const double lval(-11.104650284500055);
       bdf::types::base::out_form = bdf::types::LONG;
       CHECK(obj.format(lval).size() == 16);
