@@ -162,13 +162,15 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
 
    entry_type<double> obj("dummy");
 
-   entry_value<double> lval(1.);
+   entry_value<double> lval(1.), mlval(-1.);
 
    SECTION("SHORT") {
       bdf::types::base::out_form = bdf::types::SHORT;
       std::string res(obj.format(lval));
       CHECK(obj.format(lval).size() == 8);
       CHECK(obj.format(lval) == "1.000+00");
+      CHECK(obj.format(mlval).size() == 8);
+      CHECK(obj.format(mlval) == "-1.00+00");
    }
 
    SECTION("SHORT (nullptr)") {
@@ -244,6 +246,13 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
    SECTION("FREE") {
       bdf::types::base::out_form = bdf::types::FREE;
       CHECK(obj.format(lval) == "1.000000+00");
+   }
+
+   SECTION("Exception, mkoe 2015-12-17") {
+      const double lval(-11.104650284500055);
+      bdf::types::base::out_form = bdf::types::LONG;
+      CHECK(obj.format(lval).size() == 16);
+      CHECK(obj.format(lval) == "-1.1104650285+01");
    }
 }
 

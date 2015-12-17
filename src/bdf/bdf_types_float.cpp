@@ -177,12 +177,16 @@ entry_type<double>::operator() (const ::std::string &inp) const {
    switch (out_form) {
    case LONG:
       res.setf(ios_base::right, ios_base::adjustfield);
-      res.precision(11);
+      if (inp.value < 0)
+         res.precision(10);
+      else
+         res.precision(11);
+      res.width(9);
       break;
    case SHORT:
       { // Check on how much precision is lost when using SHORT format.
-         // If too much precision is list raise exception which causes
-         // calling routine to switch to LONG format.
+        // If too much precision is list raise exception which causes
+        // calling routine to switch to LONG format.
          double order(pow(10., -floor(::std::log10(fabs(inp.value)))+3.));
          if (fabs(fabs(round(inp.value * order) / (inp.value * order)) - 1.) > 1e-8) {
             ::std::ostringstream msg("output string for value ",
@@ -194,8 +198,10 @@ entry_type<double>::operator() (const ::std::string &inp) const {
          }
       }
       res.setf(ios_base::right, ios_base::adjustfield);
-      res.precision(3);
-      res.width(9);
+      if (inp.value < 0)
+         res.precision(2);
+      else
+         res.precision(3);
       res.fill(' ');
       break;
    case FREE:
@@ -210,7 +216,7 @@ entry_type<double>::operator() (const ::std::string &inp) const {
       ::std::ostringstream msg("output string for value ", ::std::ostringstream::ate);
       msg << inp.value << " of incorrect size, got length of " << out.size()
           << " instead of allowed length of " << out_form << ".";
-      throw errors::output_error(name, msg.str());
+      throw errors::float_error(name, msg.str());
    }
 
 #ifdef _MSC_VER

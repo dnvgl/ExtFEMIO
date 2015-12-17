@@ -104,6 +104,19 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
             "FORCE*                 2               5               62.90000000000+00\n"
             "*       1.23450000000+03\n");
    }
+
+   SECTION("Exception, mkoe 2015-12-17") {
+      const long lg(2), nodeId(2), zero(0);
+      const double one(1.), fx(15.505163191247204),
+         fy(-11.104650284500055), fz(94.254443646696117);
+
+       std::stringstream s;
+       s << dnvgl::extfem::bdf::cards::force(&lg, &nodeId, &zero, &one, &fx, &fy, &fz);
+       CHECK(s.str() ==
+             "FORCE*                 2               2               01.00000000000+00\n"
+             "*       1.55051631912+01-1.1104650285+019.42544436467+01\n");
+
+   }
 }
 
 // Local Variables:

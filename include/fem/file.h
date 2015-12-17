@@ -8,9 +8,7 @@
 */
 // ID: $Id$
 
-#if _MSC_VER >= 1000
 #pragma once
-#endif // _MSC_VER >= 1000
 
 #if !defined _FEM_FILE_H_
 #define _FEM_FILE_H_

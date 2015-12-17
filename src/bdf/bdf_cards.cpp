@@ -96,7 +96,6 @@ std::string card::format_outlist(
          res << ::std::endl << bdf::types::card("").format(nullptr);
       bdf::types::base::out_form = bdf::types::SHORT;
    }
-
    return res.str();
 }
 

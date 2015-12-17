@@ -9,9 +9,7 @@
 
 // ID: $Id$
 
-#if _MSC_VER >= 1000
 #pragma once
-#endif // _MSC_VER >= 1000
 
 #if !defined _BDF_TYPES_H_
 #define _BDF_TYPES_H_
