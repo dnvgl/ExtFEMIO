@@ -123,6 +123,8 @@ namespace dnvgl {
 
                bool first = true;
 
+               res.clear();
+
                for (auto &pos : inp) {
                   head = extfem::string::string(pos.substr(0, 8)).trim();
                   if (first)
