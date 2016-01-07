@@ -140,6 +140,13 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
       std::string res(obj.format(lval));
       CHECK(obj.format(lval) == "1");
    }
+
+   SECTION("SHORT (>=1e3)") {
+      bdf::types::base::out_form = bdf::types::SHORT;
+      lval = 1234;
+      CHECK(obj.format(lval) == "    1234");
+   }
+
 }
 
 // Local Variables:
