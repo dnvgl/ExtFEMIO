@@ -110,11 +110,24 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
       const double one(1.), fx(15.505163191247204),
          fy(-11.104650284500055), fz(94.254443646696117);
 
-       std::stringstream s;
-       s << dnvgl::extfem::bdf::cards::force(&lg, &nodeId, &zero, &one, &fx, &fy, &fz);
-       CHECK(s.str() ==
-             "FORCE*                 2               2               01.00000000000+00\n"
-             "*       1.55051631912+01-1.1104650285+019.42544436467+01\n");
+      std::stringstream s;
+      s << dnvgl::extfem::bdf::cards::force(&lg, &nodeId, &zero, &one, &fx, &fy, &fz);
+      CHECK(s.str() ==
+            "FORCE*                 2               2               01.00000000000+00\n"
+            "*       1.55051631912+01-1.1104650285+019.42544436467+01\n");
+
+   }
+
+   SECTION("Locale, mkoe 2016-01-07 [FEMIO-1]") {
+      const long lg(2222), nodeId(22222), zero(0);
+      const double one(1.), fx(1550.5163191247204),
+         fy(-11104.650284500055), fz(942544.43646696117);
+
+      std::stringstream s;
+      s << dnvgl::extfem::bdf::cards::force(&lg, &nodeId, &zero, &one, &fx, &fy, &fz);
+      CHECK(s.str() ==
+            "FORCE*              2222           22222               01.00000000000+00\n"
+            "*       1.55051631912+03-1.1104650285+049.42544436467+05\n");
 
    }
 }
