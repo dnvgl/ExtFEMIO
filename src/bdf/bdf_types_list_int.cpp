@@ -10,11 +10,11 @@
 
 // ID:
 namespace {
-  const char  cID[]
+   const char  cID[]
 #ifdef __GNUC__
-  __attribute__ ((__unused__))
+   __attribute__ ((__unused__))
 #endif
-    = "@(#) $Id$";
+      = "@(#) $Id$";
 }
 
 #ifdef __GNUC__
@@ -24,6 +24,7 @@ namespace {
 #endif
 
 #include <sstream>
+#include <iomanip>
 
 #include "bdf/types.h"
 #include "bdf/errors.h"
@@ -119,39 +120,41 @@ entry_type<::std::deque<int>>::format(const void *inp) const  {
 ::std::string
 entry_type<::std::deque<int>>::format(const entry_value<::std::deque<int>> &inp) const {
 
-  if (!inp)
-    return bdf::types::empty().format(nullptr);
+   if (!inp)
+      return bdf::types::empty().format(nullptr);
 
-  ::std::ostringstream res1, res2;
+   ::std::ostringstream res1, res2;
 
-  for (const auto &p : inp.value) res1 << p;
+   for (const auto &p : inp.value) res1 << p;
 
-  ::std::string inp_proc(res1.str());
+   ::std::string inp_proc(res1.str());
 
-  switch (out_form) {
-  case LONG:
-    res2.setf(ios_base::right, ios_base::adjustfield);
-    res2.fill(' ');
-    break;
-  case SHORT:
-    res2.setf(ios_base::right, ios_base::adjustfield);
-    res2.fill(' ');
-    break;
-  case FREE:
-    break;
-  }
+   switch (out_form) {
+   case LONG:
+      res2 << std::setiosflags(std::ios::right)
+           << std::setfill(' ') << std::setw(16) << inp_proc;
+      // res2.setf(ios_base::right, ios_base::adjustfield);
+      // res2.fill(' ');
+      // res2 << setw(16) << inp_proc;
+      break;
+   case SHORT:
+      res2.setf(ios_base::right, ios_base::adjustfield);
+      res2.fill(' ');
+      res2 << setw(8) << inp_proc;
+      break;
+   case FREE:
+      res2 << inp_proc;
+      break;
+   }
 
-  res2.width(out_form);
-
-  res2 << inp_proc;
-  ::std::string out(res2.str());
-  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
-    ::std::ostringstream msg("output string for value ", ::std::ostringstream::ate);
-    msg << inp_proc << " of incorrect size, got length of " << out.size()
-        << " instead of allowed length of " << out_form << ".";
-    throw errors::output_error(name, msg.str());
-  }
-  return out;
+   ::std::string out(res2.str());
+   if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+      ::std::ostringstream msg("output string for value ", ::std::ostringstream::ate);
+      msg << inp_proc << " of incorrect size, got length of " << out.size()
+          << " instead of allowed length of " << out_form << ".";
+      throw errors::output_error(name, msg.str());
+   }
+   return out;
 }
 
 namespace dnvgl {

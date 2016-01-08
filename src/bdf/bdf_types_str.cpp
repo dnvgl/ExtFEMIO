@@ -18,6 +18,7 @@ namespace {
 }
 
 #include <sstream>
+#include <iomanip>
 
 #include "bdf/types.h"
 #include "bdf/errors.h"
@@ -93,30 +94,35 @@ std::string entry_type<std::string>::format(const entry_value<std::string> &inp)
    if (!inp)
       return bdf::types::empty().format(nullptr);
 
-   std::ostringstream res;
+   outp.seekp(0);
+   outp.str("");
+
+   std::ios init(NULL);
+   init.copyfmt(outp);
 
    switch (out_form) {
    case LONG:
-      res.setf(ios_base::left, ios_base::adjustfield);
-      res.fill(' ');
+      outp << std::setiosflags(ios_base::left) << std::setfill(' ')
+           << std::setw(16) << (::std::string)inp;
       break;
    case SHORT:
-      res.setf(ios_base::left, ios_base::adjustfield);
-      res.fill(' ');
+      outp << std::setiosflags(ios_base::left) << std::setfill(' ')
+           << std::setw(8) << (::std::string)inp;
       break;
    case FREE:
+      outp << (::std::string)inp;
       break;
    }
-   res.width(out_form);
-
-   res << (::std::string)inp;
-   std::string out(res.str());
+   std::string out(outp.str());
    if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
       std::ostringstream msg("output string for value ", std::ostringstream::ate);
       msg << (::std::string)inp << " of incorrect size, got length of " << out.size()
           << " instead of allowed length of " << out_form << ".";
       throw errors::int_error(name, msg.str());
    }
+
+   outp.copyfmt(init);
+
    return out;
 }
 

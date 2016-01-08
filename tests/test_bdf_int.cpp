@@ -32,6 +32,8 @@ namespace {
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
+#include <clocale>
+
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::types;
@@ -140,13 +142,18 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
       std::string res(obj.format(lval));
       CHECK(obj.format(lval) == "1");
    }
+}
 
+TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]") {
    SECTION("SHORT (>=1e3)") {
+      std::locale::global(std::locale(""));
+
+      entry_type<long> obj("dummy");
+      long lval(1234);
+
       bdf::types::base::out_form = bdf::types::SHORT;
-      lval = 1234;
       CHECK(obj.format(lval) == "    1234");
    }
-
 }
 
 // Local Variables:

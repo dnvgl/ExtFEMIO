@@ -247,6 +247,11 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
       bdf::types::base::out_form = bdf::types::FREE;
       CHECK(obj.format(lval) == "1.000000+00");
    }
+
+   SECTION("FREE 2") {
+      bdf::types::base::out_form = bdf::types::FREE;
+      CHECK(obj.format(33) == "3.300000+01");
+   }
 }
 
 TEST_CASE("Exception, mkoe 2015-12-17", "[bdf_types]" ) {

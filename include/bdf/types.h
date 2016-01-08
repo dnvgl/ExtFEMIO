@@ -1,5 +1,5 @@
 /**
-   \file bdf/types.h
+    \file bdf/types.h
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Definitions for Nastran Bulk data entry types.
@@ -74,6 +74,11 @@ namespace dnvgl {
                static const bdf_types _type;
 
                static ::std::istringstream conv;
+               static ::std::ostringstream outp;
+
+            private:
+
+               static bool first;
 
             public:
 
@@ -100,18 +105,20 @@ namespace dnvgl {
                virtual ::std::string format(const void*) const = 0;
             };
 
+            // Helper class to set outp and conv locale for all
+            // classes derived from base.
             class imbue_helper : public base {
             public:
 
-               imbue_helper(const ::std::locale &loc) : base("") {};
+               imbue_helper(const ::std::locale &loc) : base("") {
+                  outp.imbue(loc);
+                  conv.imbue(loc);
+               };
 
                bdf_types type(void) const {return None;};
 
                ::std::string format(const void*) const { return "";};
-               //::std::string format() const;
             };
-
-            static imbue_helper _imbue_helper(::std::locale("C"));
 
             class card : public base {
             public:

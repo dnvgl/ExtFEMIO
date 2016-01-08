@@ -19,6 +19,7 @@ namespace {
 
 #include <sstream>
 #include <cmath>
+#include <iomanip>
 
 #ifdef __GNUC__
 #include "config.h"
@@ -164,10 +165,13 @@ entry_type<double>::operator() (const ::std::string &inp) const {
    if (!inp)
       return bdf::types::empty().format(nullptr);
 
-   ::std::ostringstream res;
+   std::ios init(NULL);
+   init.copyfmt(outp);
 
-   res.setf(ios_base::scientific, ios::floatfield);
-   res.fill(' ');
+   outp.seekp(0);
+   outp.str("");
+
+   outp << std::setiosflags(std::ios::scientific);
 
 #ifdef _MSC_VER
    // Set output to two digit exponetial format.
@@ -176,11 +180,12 @@ entry_type<double>::operator() (const ::std::string &inp) const {
 
    switch (out_form) {
    case LONG:
-      res.setf(ios_base::right, ios_base::adjustfield);
+      outp << std::setiosflags(std::ios::right) << std::setfill(' ');
       if (inp.value < 0)
-         res.precision(10);
+         outp << std::setprecision(10);
       else
-         res.precision(11);
+         outp << std::setprecision(11);
+      outp << std::setw(17) << inp.value;
       break;
    case SHORT:
       { // Check on how much precision is lost when using SHORT format.
@@ -196,20 +201,22 @@ entry_type<double>::operator() (const ::std::string &inp) const {
             throw errors::float_error(name, msg.str());
          }
       }
-      res.setf(ios_base::right, ios_base::adjustfield);
+      outp << std::setiosflags(std::ios::right) << std::setfill(' ');
       if (inp.value < 0)
-         res.precision(2);
+         outp << std::setprecision(2);
       else
-         res.precision(3);
-      res.fill(' ');
+         outp << std::setprecision(3);
+      outp << std::setw(9) << inp.value;
       break;
    case FREE:
+      ::std::ostringstream res;
+      res << std::setiosflags(std::ios::scientific)
+          << inp.value;
+      outp << ::std::string(res.str());
       break;
    }
-   res.width(out_form+1);
 
-   res << inp.value;
-   ::std::string out(res.str());
+   ::std::string out(outp.str());
    out.erase(out.find('e'), 1);
    if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
       ::std::ostringstream msg("output string for value ", ::std::ostringstream::ate);
@@ -222,6 +229,8 @@ entry_type<double>::operator() (const ::std::string &inp) const {
    // Reset exponetial format to former settings.
    _set_output_format(ext_exp_format);
 #endif
+
+   outp.copyfmt(init);
 
    return out;
 }

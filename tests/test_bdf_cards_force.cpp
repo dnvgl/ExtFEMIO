@@ -115,7 +115,6 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
       CHECK(s.str() ==
             "FORCE*                 2               2               01.00000000000+00\n"
             "*       1.55051631912+01-1.1104650285+019.42544436467+01\n");
-
    }
 
    SECTION("Locale, mkoe 2016-01-07 [FEMIO-1]") {
@@ -128,7 +127,6 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
       CHECK(s.str() ==
             "FORCE*              2222           22222               01.00000000000+00\n"
             "*       1.55051631912+03-1.1104650285+049.42544436467+05\n");
-
    }
 }
 

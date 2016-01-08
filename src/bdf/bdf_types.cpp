@@ -17,6 +17,9 @@ namespace {
       = "@(#) $Id$";
 }
 
+#include <iomanip>
+#include <locale>
+
 #ifndef _MSC_VER
 #include <config.h>
 #endif
@@ -31,47 +34,57 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace ::dnvgl::extfem;
 
+::std::istringstream bdf::types::base::conv;
+::std::ostringstream bdf::types::base::outp;
+// bool ::bdf::types::base::first(true);
+
 bdf::types::base::base(const ::std::string &name) : name(name) {};
 
-::std::istringstream bdf::types::base::conv;
+// set input and output locale for conv and outp
+static bdf::types::imbue_helper _imbue_helper(::std::locale::classic());
 
 bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
 
 ::std::string bdf::types::card::format(const void* d) const {
-   ::std::ostringstream res;
+   outp.seekp(0);
+   outp.str("");
+
+   std::ios init(NULL);
+   init.copyfmt(outp);
+
+   outp << std::resetiosflags(std::ios::adjustfield);
    switch (out_form) {
    case bdf::types::LONG:
-      res.setf(::std::ios_base::left, ::std::ios_base::adjustfield);
-      res.fill(' ');
-      res.width(bdf::types::SHORT);
-      res << (name + "*");
+      outp << setiosflags(::std::ios::left) << std::setfill(' ')
+           << std::setw(8) << (name + "*");
       break;
    case bdf::types::SHORT:
-      res.setf(::std::ios_base::left, ::std::ios_base::adjustfield);
-      res.fill(' ');
-      res.width(bdf::types::SHORT);
-      res << name;
+      outp << setiosflags(::std::ios_base::left) << std::setfill(' ')
+           << std::setw(8) << name;
       break;
    case bdf::types::FREE:
-      res << name;
+      outp << name;
       break;
    }
-   return res.str();
+
+   outp.copyfmt(init);
+
+   return outp.str();
 }
 
 ::std::string bdf::types::empty::format(const void* d) const {
-   ::std::ostringstream res;
+   outp.seekp(0);
+   outp.str("");
+
    switch (out_form) {
    case bdf::types::LONG:
    case bdf::types::SHORT:
-      res.fill(' ');
+      outp << std::setfill(' ') << std::setw(out_form) << " ";
       break;
    case bdf::types::FREE:
       break;
    }
-   res.width(out_form);
-   res << " ";
-   return res.str();
+   return outp.str();
 }
 
 ::std::string bdf::types::empty::format() const {
