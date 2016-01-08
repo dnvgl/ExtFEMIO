@@ -35,8 +35,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace ::dnvgl::extfem;
 
 ::std::istringstream bdf::types::base::conv;
-::std::ostringstream bdf::types::base::outp;
-// bool ::bdf::types::base::first(true);
 
 bdf::types::base::base(const ::std::string &name) : name(name) {};
 
@@ -46,11 +44,7 @@ static bdf::types::imbue_helper _imbue_helper(::std::locale::classic());
 bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
 
 ::std::string bdf::types::card::format(const void* d) const {
-   outp.seekp(0);
-   outp.str("");
-
-   std::ios init(NULL);
-   init.copyfmt(outp);
+   std::ostringstream outp;
 
    outp << std::resetiosflags(std::ios::adjustfield);
    switch (out_form) {
@@ -67,14 +61,11 @@ bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
       break;
    }
 
-   outp.copyfmt(init);
-
    return outp.str();
 }
 
 ::std::string bdf::types::empty::format(const void* d) const {
-   outp.seekp(0);
-   outp.str("");
+   std::ostringstream outp;
 
    switch (out_form) {
    case bdf::types::LONG:

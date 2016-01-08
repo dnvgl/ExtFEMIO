@@ -165,11 +165,7 @@ entry_type<double>::operator() (const ::std::string &inp) const {
    if (!inp)
       return bdf::types::empty().format(nullptr);
 
-   std::ios init(NULL);
-   init.copyfmt(outp);
-
-   outp.seekp(0);
-   outp.str("");
+   std::ostringstream outp;
 
    outp << std::setiosflags(std::ios::scientific);
 
@@ -229,8 +225,6 @@ entry_type<double>::operator() (const ::std::string &inp) const {
    // Reset exponetial format to former settings.
    _set_output_format(ext_exp_format);
 #endif
-
-   outp.copyfmt(init);
 
    return out;
 }

@@ -94,11 +94,7 @@ std::string entry_type<std::string>::format(const entry_value<std::string> &inp)
    if (!inp)
       return bdf::types::empty().format(nullptr);
 
-   outp.seekp(0);
-   outp.str("");
-
-   std::ios init(NULL);
-   init.copyfmt(outp);
+   std::ostringstream outp;
 
    switch (out_form) {
    case LONG:
@@ -120,8 +116,6 @@ std::string entry_type<std::string>::format(const entry_value<std::string> &inp)
           << " instead of allowed length of " << out_form << ".";
       throw errors::int_error(name, msg.str());
    }
-
-   outp.copyfmt(init);
 
    return out;
 }
