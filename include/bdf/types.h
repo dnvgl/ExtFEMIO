@@ -74,7 +74,6 @@ namespace dnvgl {
                static const bdf_types _type;
 
                static ::std::istringstream conv;
-               static ::std::ostringstream outp;
 
             private:
 
@@ -111,7 +110,6 @@ namespace dnvgl {
             public:
 
                imbue_helper(const ::std::locale &loc) : base("") {
-                  outp.imbue(loc);
                   conv.imbue(loc);
                };
 

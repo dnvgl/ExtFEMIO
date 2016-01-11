@@ -146,10 +146,12 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
 
 TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]") {
    SECTION("SHORT (>=1e3)") {
-      std::locale::global(std::locale(""));
+      std::locale locsave(std::locale::global(std::locale("")));
 
       entry_type<long> obj("dummy");
       long lval(1234);
+
+      std::locale::global(locsave);
 
       bdf::types::base::out_form = bdf::types::SHORT;
       CHECK(obj.format(lval) == "    1234");

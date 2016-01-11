@@ -124,7 +124,7 @@ entry_type<long>::format(const entry_value<long> &inp) const {
       outp << inp.value;
       break;
    }
-   
+
    std::string out(outp.str());
 
    if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
