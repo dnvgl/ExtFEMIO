@@ -41,7 +41,6 @@
 
 #include <regex>
 
-#include "catch.hpp"
 #include "my_c++14.h"
 #include "bdf/cards.h"
 #include "bdf/cards_elements.h"
