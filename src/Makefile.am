@@ -76,6 +76,7 @@ libextfemio_la_SOURCES += fem/fem_cards_gelmnt1.cpp
 libextfemio_la_SOURCES += fem/fem_cards_gelref1.cpp
 libextfemio_la_SOURCES += fem/fem_cards_text.cpp
 libextfemio_la_SOURCES += fem/fem_cards_tdsetnam.cpp
+libextfemio_la_SOURCES += fem/fem_cards_tdsupnam.cpp
 libextfemio_la_SOURCES += fem/fem_elements.cpp
 libextfemio_la_SOURCES += fem/fem_errors.cpp
 libextfemio_la_SOURCES += fem/fem_file.cpp

@@ -118,6 +118,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
       "        KEY_HOLE_ROOF\n"
+      "TDSUPNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
+      "        KEY_HOLE_ROOF\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    istringstream ist(s);
@@ -650,8 +652,27 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdsetnam*>(current.get())->CONT.size() == 0);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [tdsupnam].") {
       for (int i = 0; i < 25; i++) probe.get(l);
+      ::std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::TDSUPNAM);
+      // TDSUPNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000
+      //         KEY_HOLE_ROOF
+      CHECK(static_cast<tdsupnam*>(current.get())->NFIELD == 4);
+      CHECK(static_cast<tdsupnam*>(current.get())->IHREF == 166);
+      CHECK(static_cast<tdsupnam*>(current.get())->CODNAM == 113);
+      CHECK(static_cast<tdsupnam*>(current.get())->CODTXT == 0);
+      CHECK(static_cast<tdsupnam*>(current.get())->SET_NAME ==
+         "KEY_HOLE_ROOF");
+      CHECK(static_cast<tdsupnam*>(current.get())->CONT.size() == 0);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 26; i++) probe.get(l);
       ::std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

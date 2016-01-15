@@ -79,7 +79,7 @@ namespace dnvgl {
 namespace {
    using namespace dnvgl::extfem::fem;
 
-   const size_t map_pair_entries = 24;
+   const size_t map_pair_entries = 25;
    const pair<::std::string, cards::types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
       pair<::std::string, cards::types>("DATE", cards::DATE),
@@ -105,6 +105,7 @@ namespace {
       pair<::std::string, cards::types>("GUNIVEC", cards::GUNIVEC),
       pair<::std::string, cards::types>("MISOSEL", cards::MISOSEL),
       pair<::std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
+      pair<::std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
       pair<::std::string, cards::types>("TEXT", cards::TEXT),
       // pair<::std::strincards::types>("TDLOAD", cards::TDLOAD),
    };
@@ -215,6 +216,9 @@ namespace dnvgl {
                      break;
                   case TDSETNAM:
                      res = ::std::make_unique<fem::cards::tdsetnam>(inp);
+                     break;
+                  case TDSUPNAM:
+                     res = ::std::make_unique<fem::cards::tdsupnam>(inp);
                      break;
                   // These are not real card types, they can't be returned
                   case UNKNOWN:

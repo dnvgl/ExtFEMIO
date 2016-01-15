@@ -128,6 +128,7 @@ test_fem_cards_SOURCES+=test_fem_cards_gelmnt1.cpp
 test_fem_cards_SOURCES+=test_fem_cards_gelref1.cpp
 test_fem_cards_SOURCES+=test_fem_cards_text.cpp
 test_fem_cards_SOURCES+=test_fem_cards_tdsetnam.cpp
+test_fem_cards_SOURCES+=test_fem_cards_tdsupnam.cpp
 test_fem_cards_LDADD=$(test_extfem_LDADD)
 TESTS+=test_fem_cards.ju
 
