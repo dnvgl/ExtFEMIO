@@ -380,6 +380,9 @@ system, unless a local nodal coordinate system is specified (see the
 
             public:
 
+               typedef enum {DIM_2D=2, DIM_3D=3} mod_type;
+
+
                /** Superelement level.
 
                    The level of a superelement is defined as the highest
@@ -397,13 +400,13 @@ system, unless a local nodal coordinate system is specified (see the
 
                    - = 0 or 3, 3-dimensional model.
                */
-               long SELMOD;
+               mod_type SELMOD;
 
                DllExport ident(const ::std::deque<::std::string>&);
 
                DllExport ident(
                   const long &SLEVEL, const long &SELTYP,
-                  const long &SELMOD);
+                  const mod_type &SELMOD);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;

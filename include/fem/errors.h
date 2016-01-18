@@ -1,10 +1,10 @@
 /**
-   \file fem/errors.h
-   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   \copyright Copyright © 2015 by DNV GL SE
-   \brief Define errors for handling FEM files.
+\file fem/errors.h
+\author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+\copyright Copyright © 2015 by DNV GL SE
+\brief Define errors for handling FEM files.
 
-   Detailed description
+Detailed description
 */
 
 // ID: $Id$
@@ -55,63 +55,63 @@ namespace dnvgl {
 
             public:
 
-               float_error(const ::std::string&, const ::std::string&);
+               float_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class int_error : public error {
 
             public:
 
-               int_error(const ::std::string&, const ::std::string&);
+               int_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class bool_error : public error {
 
             public:
 
-               bool_error(const ::std::string&, const ::std::string&);
+               bool_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class output_error : public error {
 
             public:
 
-               output_error(const ::std::string&, const ::std::string&);
+               output_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class list_error : public error {
 
             public:
 
-               list_error(const ::std::string&, const ::std::string &);
+               list_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class str_error : public error {
 
             public:
 
-               str_error(const ::std::string&, const ::std::string &);
+               str_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class string_error : public error {
 
             public:
 
-               string_error(const ::std::string&, const ::std::string &);
+               string_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class parse_error : public error {
 
             public:
 
-               parse_error(const ::std::string&, const ::std::string &);
+               parse_error(const ::std::string &name, const ::std::string &msg);
             };
 
             class usage_error : public error {
 
             public:
 
-               usage_error(const ::std::string&, const ::std::string &);
+               usage_error(const ::std::string &name, const ::std::string &msg);
             };
          }
       }
@@ -121,12 +121,12 @@ namespace dnvgl {
 #endif // _FEM_ERRORS_H_
 
 /*
-  Local Variables:
-  mode: c++
-  ispell-local-dictionary: "english"
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C ../.. check -j8"
-  coding: utf-8
-  End:
+Local Variables:
+mode: c++
+ispell-local-dictionary: "english"
+c-file-style: "dnvgl"
+indent-tabs-mode: nil
+compile-command: "make -C ../.. check -j8"
+coding: utf-8
+End:
 */

@@ -22,6 +22,7 @@ namespace {
 
 #include "fem/cards.h"
 #include "fem/types.h"
+#include "fem/errors.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -52,12 +53,22 @@ namespace dnvgl {
                ++pos;
                SLEVEL = _form_SLEVEL(*(pos++));
                SELTYP = _form_SELTYP(*(pos++));
-               SELMOD = _form_SELMOD(*(pos++));
+               switch (_form_SELMOD(*(pos++))) {
+               case 0:
+               case 3:
+                  SELMOD = DIM_3D;
+                  break;
+               case 2:
+                  SELMOD = DIM_2D;
+                  break;
+               default:
+                  throw dnvgl::extfem::fem::errors::parse_error("IDENT", "Error in selmod, value not 0, 2, or 3.");
+               }
             }
 
             ident::ident(
                const long &SLEVEL, const long &SELTYP,
-               const long &SELMOD) :
+               const ident::mod_type &SELMOD) :
                SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
 
             const types
@@ -68,7 +79,7 @@ namespace dnvgl {
                os << this;
                return os;
             }
-            #
+
             ::std::ostream&
             operator<<(::std::ostream &os, const ident &card) {
 

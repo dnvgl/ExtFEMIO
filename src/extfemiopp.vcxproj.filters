@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="bdf\bdf_cards.cpp">
@@ -68,9 +68,6 @@
       <Filter>BDF\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_l_geom.cpp">
-      <Filter>BDF\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bdf\bdf_type_bounds.cpp">
       <Filter>BDF\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="bdf\bdf_types.cpp">
@@ -160,9 +157,6 @@
     <ClCompile Include="fem\fem_cards_gelth.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fem\fem_cards_giroh.cpp">
-      <Filter>FEM\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="fem\fem_cards_glsec.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
@@ -201,6 +195,12 @@
     </ClCompile>
     <ClCompile Include="fem\fem_cards_tdsupnam.cpp">
       <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_giorh.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_type_bounds.cpp">
+      <Filter>BDF\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,9 +259,6 @@
     <ClInclude Include="..\include\catch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\fem\errors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\extfem_misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -296,6 +293,9 @@
       <Filter>FEM\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\fem\file.h">
+      <Filter>FEM\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\errors.h">
       <Filter>FEM\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
