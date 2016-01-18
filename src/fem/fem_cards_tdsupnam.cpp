@@ -46,7 +46,7 @@ namespace dnvgl {
             const entry_type<long> tdsupnam::_form_IHREF("IHREF");
             const entry_type<long> tdsupnam::_form_CODNAM("CODNAM");
             const entry_type<long> tdsupnam::_form_CODTXT("CODTXT");
-            const entry_type<::std::string> tdsupnam::_form_SET_NAME("SET_NAME");
+            const entry_type<::std::string> tdsupnam::_form_SUP_NAME("SUP_NAME");
             const entry_type<::std::string> tdsupnam::_form_CONT("CONT");
 
             tdsupnam::tdsupnam(const ::std::deque<::std::string> &inp) :
@@ -76,9 +76,9 @@ namespace dnvgl {
                nctxt = div_val.rem;
 
                if (nlnam) {
-                  SET_NAME = _form_SET_NAME(
+                  SUP_NAME = _form_SUP_NAME(
                      *pos, *(pos+1), *(pos+2), *(pos+3));
-                  SET_NAME.resize(ncnam, ' ');
+                  SUP_NAME.resize(ncnam, ' ');
                }
                pos += 4;
                for (long i=0; i < nltxt; i++) {
@@ -94,11 +94,11 @@ namespace dnvgl {
                                const long &IHREF,
                                const long &CODNAM,
                                const long &CODTXT,
-                               const ::std::string &SET_NAME,
+                               const ::std::string &SUP_NAME,
                                const ::std::deque<::std::string> &CONT) :
                card(), NFIELD(NFIELD), IHREF(IHREF),
                CODNAM(CODNAM), CODTXT(CODTXT),
-               SET_NAME(SET_NAME), CONT(CONT) {
+               SUP_NAME(SUP_NAME), CONT(CONT) {
                auto div_val = ldiv(CODNAM, 100);
                nlnam = div_val.quot != 0;
                ncnam = div_val.rem;
@@ -108,13 +108,13 @@ namespace dnvgl {
             }
 
             tdsupnam::tdsupnam(const long &IHREF,
-                               const ::std::string &SET_NAME,
+                               const ::std::string &SUP_NAME,
                                const ::std::deque<::std::string> &CONT) :
                card(), NFIELD(4), IHREF(IHREF),
-               SET_NAME(SET_NAME), CONT(CONT) {
+               SUP_NAME(SUP_NAME), CONT(CONT) {
 
                nlnam = true;
-               ncnam = (long)SET_NAME.size();
+               ncnam = (long)SUP_NAME.size();
                CODNAM = 100 + ncnam;
                nltxt = (long)CONT.size();
                nctxt = 0;
@@ -128,10 +128,10 @@ namespace dnvgl {
             tdsupnam::tdsupnam(const long &NFIELD,
                                const long &IHREF,
                                const long &CODNAM,
-                               const ::std::string &SET_NAME) :
+                               const ::std::string &SUP_NAME) :
                card() , NFIELD(NFIELD), IHREF(IHREF),
                CODNAM(CODNAM), CODTXT(0),
-               SET_NAME(SET_NAME), CONT() {
+               SUP_NAME(SUP_NAME), CONT() {
                auto div_val = ldiv(CODNAM, 100);
                nlnam = div_val.quot != 0;
                ncnam = div_val.rem;
@@ -140,12 +140,12 @@ namespace dnvgl {
             }
 
             tdsupnam::tdsupnam(const long &IHREF,
-                               const ::std::string &SET_NAME) :
+                               const ::std::string &SUP_NAME) :
                card() , NFIELD(4), IHREF(IHREF),
                CODTXT(0),
-               SET_NAME(SET_NAME), CONT() {
+               SUP_NAME(SUP_NAME), CONT() {
                nlnam = true;
-               ncnam = (long)SET_NAME.size();
+               ncnam = (long)SUP_NAME.size();
                CODNAM = 100 + ncnam;
                nltxt = 0;
                nctxt = 0;
@@ -170,7 +170,7 @@ namespace dnvgl {
                   << card._form_CODTXT.format(card.CODTXT) << std::endl;
                if (card.nlnam)
                   os << ::dnvgl::extfem::fem::types::card().format()
-                     << card._form_SET_NAME.format(card.SET_NAME, card.ncnam) << std::endl;
+                     << card._form_SUP_NAME.format(card.SUP_NAME, card.ncnam) << std::endl;
                for (auto p : card.CONT)
                   os << ::dnvgl::extfem::fem::types::card().format()
                      << card._form_CONT.format(p, card.nctxt) << std::endl;

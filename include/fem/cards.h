@@ -2233,7 +2233,7 @@ super-element hierarchy.
                static const ::dnvgl::extfem::fem::types::entry_type<long> _form_IHREF;
                static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
                static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_SET_NAME;
+               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_SUP_NAME;
                static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
 
                bool nlnam;
@@ -2311,7 +2311,7 @@ super-element hierarchy.
                */
                long CODTXT;
 
-               ::std::string SET_NAME;
+               ::std::string SUP_NAME;
                ::std::deque<::std::string> CONT;
 
                DllExport tdsupnam(const ::std::deque<::std::string>&);
@@ -2320,20 +2320,20 @@ super-element hierarchy.
                                   const long &IHREF,
                                   const long &CODNAM,
                                   const long &CODTXT,
-                                  const ::std::string &SET_NAME,
+                                  const ::std::string &SUP_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
                DllExport tdsupnam(const long &IHREF,
-                                  const ::std::string &SET_NAME,
+                                  const ::std::string &SUP_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
                DllExport tdsupnam(const long &NFIELD,
                                   const long &IHREF,
                                   const long &CODNAM,
-                                  const ::std::string &SET_NAME);
+                                  const ::std::string &SUP_NAME);
 
                DllExport tdsupnam(const long &IHREF,
-                                  const ::std::string &SET_NAME);
+                                  const ::std::string &SUP_NAME);
 
                DllExport const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;

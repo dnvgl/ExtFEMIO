@@ -58,7 +58,7 @@ TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
       CHECK(probe.IHREF == 180);
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 0);
-      CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
+      CHECK(probe.SUP_NAME == "PLAN_No6_STR(5445A/B)");
       CHECK(probe.CONT.size() == 0);
    }
 
@@ -77,7 +77,7 @@ TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
       CHECK(probe.IHREF == 180);
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 0);
-      CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
+      CHECK(probe.SUP_NAME == "PLAN_No6_STR(5445A/B)");
       CHECK(probe.CONT.size() == 0);
    }
 
@@ -100,7 +100,7 @@ TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
       CHECK(probe.IHREF == 180);
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 264);
-      CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
+      CHECK(probe.SUP_NAME == "PLAN_No6_STR(5445A/B)");
       CHECK(probe.CONT.size() == 2);
       CHECK(probe.CONT[0] == "Meaningles comment.                                             ");
       //                      1234567891123456789212345678931234567894123456789512345678961234

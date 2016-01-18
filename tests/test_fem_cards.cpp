@@ -666,7 +666,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdsupnam*>(current.get())->IHREF == 166);
       CHECK(static_cast<tdsupnam*>(current.get())->CODNAM == 113);
       CHECK(static_cast<tdsupnam*>(current.get())->CODTXT == 0);
-      CHECK(static_cast<tdsupnam*>(current.get())->SET_NAME ==
+      CHECK(static_cast<tdsupnam*>(current.get())->SUP_NAME ==
          "KEY_HOLE_ROOF");
       CHECK(static_cast<tdsupnam*>(current.get())->CONT.size() == 0);
    }
