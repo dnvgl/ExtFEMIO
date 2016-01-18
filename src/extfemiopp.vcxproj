@@ -200,6 +200,7 @@
     <ClCompile Include="fem\fem_cards_gelmnt1.cpp" />
     <ClCompile Include="fem\fem_cards_gelref1.cpp" />
     <ClCompile Include="fem\fem_cards_tdsetnam.cpp" />
+    <ClCompile Include="fem\fem_cards_tdsupnam.cpp" />
     <ClCompile Include="fem\fem_cards_text.cpp" />
     <ClCompile Include="fem\fem_elements.cpp" />
     <ClCompile Include="fem\fem_errors.cpp" />

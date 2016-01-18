@@ -109,5 +109,8 @@
     <ClCompile Include="test_fem_cards_tdsetnam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_fem_cards_tdsupnam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
