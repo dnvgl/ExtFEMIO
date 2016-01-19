@@ -14,436 +14,589 @@
 
 #include <my_c++14.h>
 
+#include <set>
+
+#include "cards.h"
+
 namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace elements {
 
+            typedef enum {BEPS = 2, CSTA = 3, RPBQ = 5, ILST = 6,
+                          IQQE = 8, LQUA = 9, TESS = 10, GMAS = 11,
+                          GLMA = 12, GLDA = 13, BEAS = 15, AXIS = 16,
+                          AXDA = 17, GSPR = 18, GDAM = 19, IHEX = 20,
+                          LHEX = 21, SECB = 22, BTSS = 23,
+                          FQUS_FFQ = 24, FTRS_FFTR = 25, SCTS = 26,
+                          MCTS = 27, SCQS = 28, MCQS = 29, IPRI = 30,
+                          ITET = 31, TPRI = 32, TETR = 33, LCTS = 34,
+                          LCQS = 35, TRS1 = 36, TRS2 = 37, TRS3 = 38,
+                          GLSH = 40, AXCS = 41, AXLQ = 42, AXLS = 43,
+                          AXQQ = 44, PILS = 45, PCAB = 46, PSPR = 47,
+                          ADVA_4 = 48, ADVA_2 = 49, CTCP = 51,
+                          CTCL = 52, CTAL = 53, CTCC = 54, CTAQ = 55,
+                          CTLQ = 56, CTCQ = 57, CTMQ = 58, HCQS = 61,
+                          SLQS = 66, SLTS = 67, SLCB = 68, MATR = 70,
+                          GHEX100 = 100, GHEX163 = 163} el_types;
+
+            typedef enum {general, Preframe, Prefem, Sestra, ADVANCE,
+                          Framework, Launch, Platework, Pretube,
+                          Splice, Wadam, Wajac,
+                          Poseidon} el_processor;
+
             /** Base class for FEM element representation.
              */
             class __base {
             public:
-               __base() {};
+               __base(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+
+               /// Element number
+               long eleno;
+               /// internal element identifier
+               long elident;
+               /// node references for element
+               ::std::deque<long> nodes;
+
+               void add(const ::dnvgl::extfem::fem::cards::gelref1&);
             };
 
-            class undef: public __base {
+            class undef : public __base {
             public:
-               static long nnodes;
+               static const long nnodes;
             };
 
             /** 2-D, 2 Node Beam
              */
-            class BEPS: public __base {
+            class beps : public __base {
             public:
-               static long nnodes;
+               beps(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Plane Constant Strain Triangle
              */
-            class CSTA: public __base {
+            class csta : public __base {
             public:
-               static long nnodes;
+               csta(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Rect. Plate. Bending Modes
              */
-            class RPBQ: public __base {
+            class rpbq : public __base {
             public:
-               static long nnodes;
+               rpbq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Plane Lin. Strain Triangle
              */
-            class ILST: public __base {
+            class ilst : public __base {
             public:
-               static long nnodes;
+               ilst(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Plane Quadrilateral Membrane Element
              */
-            class IQQE: public __base {
+            class iqqe : public __base {
             public:
-               static long nnodes;
+               iqqe(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Plane Quadrilateral Membrane Element
              */
-            class LQUA: public __base {
+            class lqua : public __base {
             public:
-               static long nnodes;
+               lqua(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Truss Element
              */
-            class TESS: public __base {
+            class tess : public __base {
             public:
-               static long nnodes;
+               tess(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 1-Noded Mass-Matrix
              */
-            class GMAS: public __base {
+            class gmas : public __base {
             public:
-               static long nnodes;
+               gmas(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 2-Noded Mass-Matrix
              */
-            class GLMA: public __base {
+            class glma : public __base {
             public:
-               static long nnodes;
+               glma(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 2-Noded Damping-Matrix
              */
-            class GLDA: public __base {
+            class glda : public __base {
             public:
-               static long nnodes;
+               glda(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 3-D, 2 Node Beam
              */
-            class BEAS: public __base {
+            class beas : public __base {
             public:
-               static long nnodes;
+               beas(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Axial Spring
              */
-            class AXIS: public __base {
+            class axis : public __base {
             public:
-               static long nnodes;
+               axis(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Axial Damper
              */
-            class AXDA: public __base {
+            class axda : public __base {
             public:
-               static long nnodes;
+               axda(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Spring to Ground
              */
-            class GSPR: public __base {
+            class gspr : public __base {
             public:
-               static long nnodes;
+               gspr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Damper to Ground
              */
-            class GDAM: public __base {
+            class gdam : public __base {
             public:
-               static long nnodes;
+               gdam(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Isoparametric Hexahedron
              */
-            class IHEX: public __base {
+            class ihex : public __base {
             public:
-               static long nnodes;
+               ihex(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Linear Hexahedron
              */
-            class LHEX: public __base {
+            class lhex : public __base {
             public:
-               static long nnodes;
+               lhex(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Subparametric Curved Beam
              */
-            class SECB: public __base {
+            class secb : public __base {
             public:
-               static long nnodes;
+               secb(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** General Curved Beam
              */
-            class BTSS: public __base {
+            class btss : public __base {
             public:
-               static long nnodes;
+               btss(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Flat Quadrilateral Thin Shell (FQUS) or Free Formulation
                 Quadrilateral Shell (FQQ)
             */
-            class FQUS_FFQ: public __base {
+            class fqus_ffq : public __base {
             public:
-               static long nnodes;
+               fqus_ffq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Flat Triangular Thin Shell (FTRS) or Free Formulation
                 Triangular Shell (FFTR)
             */
-            class FTRS_FFTR: public __base {
+            class ftrs_fftr : public __base {
             public:
-               static long nnodes;
+               ftrs_fftr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Subparametric Curved Triangular Thick Shell
              */
-            class SCTS: public __base {
+            class scts : public __base {
             public:
-               static long nnodes;
+               scts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Subparam. Curved Triang. Thick Sandwich Elem.
              */
-            class MCTS: public __base {
+            class mcts : public __base {
             public:
-               static long nnodes;
+               mcts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Subparametric Curved Quadrilateral Thick Shell
              */
-            class SCQS: public __base {
+            class scqs : public __base {
             public:
-               static long nnodes;
+               scqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Subparam. Curved Quadr. Thick Sandwich Elem.
              */
-            class MCQS: public __base {
+            class mcqs : public __base {
             public:
-               static long nnodes;
+               mcqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Isoparametric Triangular Prism
              */
-            class IPRI: public __base {
+            class ipri : public __base {
             public:
-               static long nnodes;
+               ipri(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Isoparametric Tetrahedron
              */
-            class ITET: public __base {
+            class itet : public __base {
             public:
-               static long nnodes;
+               itet(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Triangular Prism
              */
-            class TPRI: public __base {
+            class tpri : public __base {
             public:
-               static long nnodes;
+               tpri(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Tetrahedron
              */
-            class TETR: public __base {
+            class tetr : public __base {
             public:
-               static long nnodes;
+               tetr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Subparam. Layered Curved Triangular Thick Shell
              */
-            class LCTS: public __base {
+            class lcts : public __base {
             public:
-               static long nnodes;
+               lcts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Subparam. Layered Curved Quadrilat. Thick Shell
              */
-            class LCQS: public __base {
+            class lcqs : public __base {
             public:
-               static long nnodes;
+               lcqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class TRS1: public __base {
+            class trs1 : public __base {
             public:
-               static long nnodes;
+               trs1(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class TRS2: public __base {
+            class trs2 : public __base {
             public:
-               static long nnodes;
+               trs2(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class TRS3: public __base {
+            class trs3 : public __base {
             public:
-               static long nnodes;
+               trs3(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** General Spring / Shim Element
              */
-            class GLSH: public __base {
+            class glsh : public __base {
             public:
-               static long nnodes;
+               glsh(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Axisymmetric Constant Strain Triangle
              */
-            class AXCS: public __base {
+            class axcs : public __base {
             public:
-               static long nnodes;
+               axcs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Axisymmetric Quadrilateral
              */
-            class AXLQ: public __base {
+            class axlq : public __base {
             public:
-               static long nnodes;
+               axlq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Axisymmetric Linear Strain Triangle
              */
-            class AXLS: public __base {
+            class axls : public __base {
             public:
-               static long nnodes;
+               axls(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Axisymmetric Linear Strain Quadrilateral
              */
-            class AXQQ: public __base {
+            class axqq : public __base {
             public:
-               static long nnodes;
+               axqq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Pile / Soil
              */
-            class PILS: public __base {
+            class pils : public __base {
             public:
-               static long nnodes;
+               pils(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Plane Cable-Bar Element
              */
-            class PCAB: public __base {
+            class pcab : public __base {
             public:
-               static long nnodes;
+               pcab(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Plane Spring Element
              */
-            class PSPR: public __base {
+            class pspr : public __base {
             public:
-               static long nnodes;
+               pspr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
-            /** 4-node Contact Element with triangular Shape
+            /** 4-node Contact Element with triangular Shape for ADVANCE.
              */
-            class ann4: public __base {
+            class adva_4: public __base {
             public:
-               static long nnodes;
+               adva_4(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
-            /** 2-Noded Link Element
+            /** 2-Noded Link Element for ADVANCE.
              */
-            class ann2: public __base {
+            class adva_2: public __base {
             public:
-               static long nnodes;
+               adva_2(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 2-Noded Contact Element
              */
-            class CTCP: public __base {
+            class ctcp: public __base {
             public:
-               static long nnodes;
+               ctcp(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 4-Noded Contact Element
              */
-            class CTCL: public __base {
+            class ctcl: public __base {
             public:
-               static long nnodes;
+               ctcl(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 4-Noded Axisymmetric Contact Element
              */
-            class CTAL: public __base {
+            class ctal: public __base {
             public:
-               static long nnodes;
+               ctal(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 6-Noded Contact Element
              */
-            class CTCC: public __base {
+            class ctcc: public __base {
             public:
-               static long nnodes;
+               ctcc(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 6-Noded (3+3) Axisymmetric Contact Element
              */
-            class CTAQ: public __base {
+            class ctaq: public __base {
             public:
-               static long nnodes;
+               ctaq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 8-Noded (4+4) Contact Element
              */
-            class CTLQ: public __base {
+            class ctlq: public __base {
             public:
-               static long nnodes;
+               ctlq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 16-Noded (8+8) Contact Element
              */
-            class CTCQ: public __base {
+            class ctcq: public __base {
             public:
-               static long nnodes;
+               ctcq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 18-Noded (9+9) Contact Element
              */
-            class CTMQ: public __base {
+            class ctmq: public __base {
             public:
-               static long nnodes;
+               ctmq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** 9-Noded Shell Element
              */
-            class HCQS: public __base {
+            class hcqs: public __base {
             public:
-               static long nnodes;
+               hcqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
              */
-            class SLQS: public __base {
+            class slqs: public __base {
             public:
-               static long nnodes;
+               slqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
              */
-            class SLTS: public __base {
+            class slts: public __base {
             public:
-               static long nnodes;
+               slts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Semiloof Curved Beam (11 d.o.fs)
              */
-            class SLCB: public __base {
+            class slcb: public __base {
             public:
-               static long nnodes;
+               slcb(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** General Matrix Element with arbitrary no. of nodes (/n/)
              */
-            class MATR: public __base {
+            class matr: public __base {
             public:
-               static long nnodes;
+               matr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** General Hexahedron
              */
-            class GHEX100: public __base {
+            class ghex100: public __base {
             public:
-               static long nnodes;
+               ghex100(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** General Hexahedron
              */
-            class GHEX163: public __base {
+            class ghex163: public __base {
             public:
-               static long nnodes;
+               ghex163(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               static const long nnodes;
+               static const ::std::set<el_processor> processors;
             };
 
             /** Dispatch element class instance for `id`

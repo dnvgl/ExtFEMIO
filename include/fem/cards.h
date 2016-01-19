@@ -2257,8 +2257,8 @@ super-element hierarchy.
                    (IHREF) for each appearance of the differenet
                    superelements.
 
-                   \image latex gbarm.eps "Superelement hierarchy with 3 levels."
-                   \image html gbarm.svg "Superelement hierarchy with 3 levels."
+                   \image latex tdsupnam.eps "Superelement hierarchy with 3 levels."
+                   \image html tdsupnam.svg "Superelement hierarchy with 3 levels."
                */
                long IHREF;
                /** Coded dimension of set name:

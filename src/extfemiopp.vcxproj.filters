@@ -94,6 +94,183 @@
     <ClCompile Include="fem\fem_elements.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_element_beps.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_csta.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_rpbq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ilst.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_iqqe.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_lqua.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_tess.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_gmas.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_glma.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_glda.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_beas.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_axis.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_axda.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_gspr.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_gdam.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ihex.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_lhex.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_secb.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_btss.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_fqus_ffq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ftrs_fftr.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_scts.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_mcts.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_scqs.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_mcqs.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ipri.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_itet.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_tpri.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_tetr.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_lcts.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_lcqs.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_trs1.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_trs2.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_trs3.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_glsh.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_axcs.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_axlq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_axls.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_axqq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_pils.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_pcab.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_pspr.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_adva_4.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_adva_2.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctcp.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctcl.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctal.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctcc.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctaq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctlq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctcq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ctmq.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_hcqs.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_slqs.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_slts.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_slcb.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_matr.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ghex100.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_element_ghex163.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fem\fem_errors.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>

@@ -203,6 +203,73 @@
     <ClCompile Include="fem\fem_cards_tdsupnam.cpp" />
     <ClCompile Include="fem\fem_cards_text.cpp" />
     <ClCompile Include="fem\fem_elements.cpp" />
+
+
+    <ClCompile Include="fem\fem_element_beps.cpp" />
+    <ClCompile Include="fem\fem_element_csta.cpp" />
+    <ClCompile Include="fem\fem_element_rpbq.cpp" />
+    <ClCompile Include="fem\fem_element_ilst.cpp" />
+    <ClCompile Include="fem\fem_element_iqqe.cpp" />
+    <ClCompile Include="fem\fem_element_lqua.cpp" />
+    <ClCompile Include="fem\fem_element_tess.cpp" />
+    <ClCompile Include="fem\fem_element_gmas.cpp" />
+    <ClCompile Include="fem\fem_element_glma.cpp" />
+    <ClCompile Include="fem\fem_element_glda.cpp" />
+    <ClCompile Include="fem\fem_element_beas.cpp" />
+    <ClCompile Include="fem\fem_element_axis.cpp" />
+    <ClCompile Include="fem\fem_element_axda.cpp" />
+    <ClCompile Include="fem\fem_element_gspr.cpp" />
+    <ClCompile Include="fem\fem_element_gdam.cpp" />
+    <ClCompile Include="fem\fem_element_ihex.cpp" />
+    <ClCompile Include="fem\fem_element_lhex.cpp" />
+    <ClCompile Include="fem\fem_element_secb.cpp" />
+    <ClCompile Include="fem\fem_element_btss.cpp" />
+    <ClCompile Include="fem\fem_element_fqus_ffq.cpp" />
+    <ClCompile Include="fem\fem_element_ftrs_fftr.cpp" />
+    <ClCompile Include="fem\fem_element_scts.cpp" />
+    <ClCompile Include="fem\fem_element_mcts.cpp" />
+    <ClCompile Include="fem\fem_element_scqs.cpp" />
+    <ClCompile Include="fem\fem_element_mcqs.cpp" />
+    <ClCompile Include="fem\fem_element_ipri.cpp" />
+    <ClCompile Include="fem\fem_element_itet.cpp" />
+    <ClCompile Include="fem\fem_element_tpri.cpp" />
+    <ClCompile Include="fem\fem_element_tetr.cpp" />
+    <ClCompile Include="fem\fem_element_lcts.cpp" />
+    <ClCompile Include="fem\fem_element_lcqs.cpp" />
+    <ClCompile Include="fem\fem_element_trs1.cpp" />
+    <ClCompile Include="fem\fem_element_trs2.cpp" />
+    <ClCompile Include="fem\fem_element_trs3.cpp" />
+    <ClCompile Include="fem\fem_element_glsh.cpp" />
+    <ClCompile Include="fem\fem_element_axcs.cpp" />
+    <ClCompile Include="fem\fem_element_axlq.cpp" />
+    <ClCompile Include="fem\fem_element_axls.cpp" />
+    <ClCompile Include="fem\fem_element_axqq.cpp" />
+    <ClCompile Include="fem\fem_element_pils.cpp" />
+    <ClCompile Include="fem\fem_element_pcab.cpp" />
+    <ClCompile Include="fem\fem_element_pspr.cpp" />
+    <ClCompile Include="fem\fem_element_adva_4.cpp" />
+    <ClCompile Include="fem\fem_element_adva_2.cpp" />
+    <ClCompile Include="fem\fem_element_ctcp.cpp" />
+    <ClCompile Include="fem\fem_element_ctcl.cpp" />
+    <ClCompile Include="fem\fem_element_ctal.cpp" />
+    <ClCompile Include="fem\fem_element_ctcc.cpp" />
+    <ClCompile Include="fem\fem_element_ctaq.cpp" />
+    <ClCompile Include="fem\fem_element_ctlq.cpp" />
+    <ClCompile Include="fem\fem_element_ctcq.cpp" />
+    <ClCompile Include="fem\fem_element_ctmq.cpp" />
+    <ClCompile Include="fem\fem_element_hcqs.cpp" />
+    <ClCompile Include="fem\fem_element_slqs.cpp" />
+    <ClCompile Include="fem\fem_element_slts.cpp" />
+    <ClCompile Include="fem\fem_element_slcb.cpp" />
+    <ClCompile Include="fem\fem_element_matr.cpp" />
+    <ClCompile Include="fem\fem_element_ghex100.cpp" />
+    <ClCompile Include="fem\fem_element_ghex163.cpp" />
+
+
+
+
+
+
     <ClCompile Include="fem\fem_errors.cpp" />
     <ClCompile Include="fem\fem_file.cpp" />
     <ClCompile Include="fem\fem_type_bounds.cpp" />

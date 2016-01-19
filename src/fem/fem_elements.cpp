@@ -20,6 +20,8 @@ namespace {
 
 #include <memory>
 
+#include "my_c++14.h"
+#include "fem/cards.h"
 #include "fem/elements.h"
 
 #ifdef _DEBUG
@@ -30,134 +32,80 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace ::dnvgl::extfem::fem::elements;
 
-std::unique_ptr<__base> dispatch(const long &id) {
+
+void dispatch(
+   std::unique_ptr<__base>& res, const el_types &id, const ::dnvgl::extfem::fem::cards::gelmnt1 &data) {
 
    switch (id) {
-   case 2: return ::std::make_unique<BEPS>();
-   case 3: return ::std::make_unique<CSTA>();
-   case 5: return ::std::make_unique<RPBQ>();
-   case 6: return ::std::make_unique<ILST>();
-   case 8: return ::std::make_unique<IQQE>();
-   case 9: return ::std::make_unique<LQUA>();
-   case 10: return ::std::make_unique<TESS>();
-   case 11: return ::std::make_unique<GMAS>();
-   case 12: return ::std::make_unique<GLMA>();
-   case 13: return ::std::make_unique<GLDA>();
-   case 15: return ::std::make_unique<BEAS>();
-   case 16: return ::std::make_unique<AXIS>();
-   case 17: return ::std::make_unique<AXDA>();
-   case 18: return ::std::make_unique<GSPR>();
-   case 19: return ::std::make_unique<GDAM>();
-   case 20: return ::std::make_unique<IHEX>();
-   case 21: return ::std::make_unique<LHEX>();
-   case 22: return ::std::make_unique<SECB>();
-   case 23: return ::std::make_unique<BTSS>();
-   case 24: return ::std::make_unique<FQUS_FFQ>();
-   case 25: return ::std::make_unique<FTRS_FFTR>();
-   case 26: return ::std::make_unique<SCTS>();
-   case 27: return ::std::make_unique<MCTS>();
-   case 28: return ::std::make_unique<SCQS>();
-   case 29: return ::std::make_unique<MCQS>();
-   case 30: return ::std::make_unique<IPRI>();
-   case 31: return ::std::make_unique<ITET>();
-   case 32: return ::std::make_unique<TPRI>();
-   case 33: return ::std::make_unique<TETR>();
-   case 34: return ::std::make_unique<LCTS>();
-   case 35: return ::std::make_unique<LCQS>();
-   case 36: return ::std::make_unique<TRS1>();
-   case 37: return ::std::make_unique<TRS2>();
-   case 38: return ::std::make_unique<TRS3>();
-   case 40: return ::std::make_unique<GLSH>();
-   case 41: return ::std::make_unique<AXCS>();
-   case 42: return ::std::make_unique<AXLQ>();
-   case 43: return ::std::make_unique<AXLS>();
-   case 44: return ::std::make_unique<AXQQ>();
-   case 45: return ::std::make_unique<PILS>();
-   case 46: return ::std::make_unique<PCAB>();
-   case 47: return ::std::make_unique<PSPR>();
-   case 48: return ::std::make_unique<ann4>();
-   case 49: return ::std::make_unique<ann2>();
-   case 51: return ::std::make_unique<CTCP>();
-   case 52: return ::std::make_unique<CTCL>();
-   case 53: return ::std::make_unique<CTAL>();
-   case 54: return ::std::make_unique<CTCC>();
-   case 55: return ::std::make_unique<CTAQ>();
-   case 56: return ::std::make_unique<CTLQ>();
-   case 57: return ::std::make_unique<CTCQ>();
-   case 58: return ::std::make_unique<CTMQ>();
-   case 61: return ::std::make_unique<HCQS>();
-   case 66: return ::std::make_unique<SLQS>();
-   case 67: return ::std::make_unique<SLTS>();
-   case 68: return ::std::make_unique<SLCB>();
-   case 70: return ::std::make_unique<MATR>();
-   case 100: return ::std::make_unique<GHEX100>();
-   case 163: return ::std::make_unique<GHEX163>();
-   default:
-      return ::std::make_unique<undef>();
+   case BEPS: res = ::std::make_unique<beps>(data); break;
+   case CSTA: res = ::std::make_unique<csta>(data); break;
+   case RPBQ: res = ::std::make_unique<rpbq>(data); break;
+   case ILST: res = ::std::make_unique<ilst>(data); break;
+   case IQQE: res = ::std::make_unique<iqqe>(data); break;
+   case LQUA: res = ::std::make_unique<lqua>(data); break;
+   case TESS: res = ::std::make_unique<tess>(data); break;
+   case GMAS: res = ::std::make_unique<gmas>(data); break;
+   case GLMA: res = ::std::make_unique<glma>(data); break;
+   case GLDA: res = ::std::make_unique<glda>(data); break;
+   case BEAS: res = ::std::make_unique<beas>(data); break;
+   case AXIS: res = ::std::make_unique<axis>(data); break;
+   case AXDA: res = ::std::make_unique<axda>(data); break;
+   case GSPR: res = ::std::make_unique<gspr>(data); break;
+   case GDAM: res = ::std::make_unique<gdam>(data); break;
+   case IHEX: res = ::std::make_unique<ihex>(data); break;
+   case LHEX: res = ::std::make_unique<lhex>(data); break;
+   case SECB: res = ::std::make_unique<secb>(data); break;
+   case BTSS: res = ::std::make_unique<btss>(data); break;
+   case FQUS_FFQ: res = ::std::make_unique<fqus_ffq>(data); break;
+   case FTRS_FFTR: res = ::std::make_unique<ftrs_fftr>(data); break;
+   case SCTS: res = ::std::make_unique<scts>(data); break;
+   case MCTS: res = ::std::make_unique<mcts>(data); break;
+   case SCQS: res = ::std::make_unique<scqs>(data); break;
+   case MCQS: res = ::std::make_unique<mcqs>(data); break;
+   case IPRI: res = ::std::make_unique<ipri>(data); break;
+   case ITET: res = ::std::make_unique<itet>(data); break;
+   case TPRI: res = ::std::make_unique<tpri>(data); break;
+   case TETR: res = ::std::make_unique<tetr>(data); break;
+   case LCTS: res = ::std::make_unique<lcts>(data); break;
+   case LCQS: res = ::std::make_unique<lcqs>(data); break;
+   case TRS1: res = ::std::make_unique<trs1>(data); break;
+   case TRS2: res = ::std::make_unique<trs2>(data); break;
+   case TRS3: res = ::std::make_unique<trs3>(data); break;
+   case GLSH: res = ::std::make_unique<glsh>(data); break;
+   case AXCS: res = ::std::make_unique<axcs>(data); break;
+   case AXLQ: res = ::std::make_unique<axlq>(data); break;
+   case AXLS: res = ::std::make_unique<axls>(data); break;
+   case AXQQ: res = ::std::make_unique<axqq>(data); break;
+   case PILS: res = ::std::make_unique<pils>(data); break;
+   case PCAB: res = ::std::make_unique<pcab>(data); break;
+   case PSPR: res = ::std::make_unique<pspr>(data); break;
+   case ADVA_4: res = ::std::make_unique<adva_4>(data); break;
+   case ADVA_2: res = ::std::make_unique<adva_2>(data); break;
+   case CTCP: res = ::std::make_unique<ctcp>(data); break;
+   case CTCL: res = ::std::make_unique<ctcl>(data); break;
+   case CTAL: res = ::std::make_unique<ctal>(data); break;
+   case CTCC: res = ::std::make_unique<ctcc>(data); break;
+   case CTAQ: res = ::std::make_unique<ctaq>(data); break;
+   case CTLQ: res = ::std::make_unique<ctlq>(data); break;
+   case CTCQ: res = ::std::make_unique<ctcq>(data); break;
+   case CTMQ: res = ::std::make_unique<ctmq>(data); break;
+   case HCQS: res = ::std::make_unique<hcqs>(data); break;
+   case SLQS: res = ::std::make_unique<slqs>(data); break;
+   case SLTS: res = ::std::make_unique<slts>(data); break;
+   case SLCB: res = ::std::make_unique<slcb>(data); break;
+   case MATR: res = ::std::make_unique<matr>(data); break;
+   case GHEX100: res = ::std::make_unique<ghex100>(data); break;
+   case GHEX163: res = ::std::make_unique<ghex163>(data); break;
    };
 }
 
-long undef::nnodes = -1;
-long BEPS::nnodes = 2;
-long CSTA::nnodes = 3;
-long RPBQ::nnodes = 4;
-long ILST::nnodes = 6;
-long IQQE::nnodes = 8;
-long LQUA::nnodes = 4;
-long TESS::nnodes = 2;
-long GMAS::nnodes = 1;
-long GLMA::nnodes = 2;
-long GLDA::nnodes = 2;
-long BEAS::nnodes = 2;
-long AXIS::nnodes = 2;
-long AXDA::nnodes = 2;
-long GSPR::nnodes = 1;
-long GDAM::nnodes = 1;
-long IHEX::nnodes = 20;
-long LHEX::nnodes = 8;
-long SECB::nnodes = 3;
-long BTSS::nnodes = 3;
-long FQUS_FFQ::nnodes = 4;
-long FTRS_FFTR::nnodes = 3;
-long SCTS::nnodes = 6;
-long MCTS::nnodes = 6;
-long SCQS::nnodes = 8;
-long MCQS::nnodes = 8;
-long IPRI::nnodes = 15;
-long ITET::nnodes = 10;
-long TPRI::nnodes = 6;
-long TETR::nnodes = 4;
-long LCTS::nnodes = 6;
-long LCQS::nnodes = 8;
-long TRS1::nnodes = 18;
-long TRS2::nnodes = 15;
-long TRS3::nnodes = 12;
-long GLSH::nnodes = 2;
-long AXCS::nnodes = 3;
-long AXLQ::nnodes = 4;
-long AXLS::nnodes = 6;
-long AXQQ::nnodes = 8;
-long PILS::nnodes = 1;
-long PCAB::nnodes = 2;
-long PSPR::nnodes = 1;
-long ann4::nnodes = 4;
-long ann2::nnodes = 2;
-long CTCP::nnodes = 2;
-long CTCL::nnodes = 4;
-long CTAL::nnodes = 4;
-long CTCC::nnodes = 6;
-long CTAQ::nnodes = 6;
-long CTLQ::nnodes = 8;
-long CTCQ::nnodes = 16;
-long CTMQ::nnodes = 18;
-long HCQS::nnodes = 9;
-long SLQS::nnodes = 8;
-long SLTS::nnodes = 6;
-long SLCB::nnodes = 3;
-long MATR::nnodes = 0;
-long GHEX100::nnodes = 21;
-long GHEX163::nnodes = 27;
+const long undef::nnodes = -1;
 
+__base::__base(dnvgl::extfem::fem::cards::gelmnt1 const &data) {
+   this->eleno = data.ELNOX;
+   this->elident = data.ELNO;
+   ::std::copy(data.NODIN.begin(), data.NODIN.end(), this->nodes.begin());
+}
 
 // Local Variables:
 // mode: c++
@@ -165,5 +113,5 @@ long GHEX163::nnodes = 27;
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../.. check -j 8"
 // End:
