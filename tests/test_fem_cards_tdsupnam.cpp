@@ -13,7 +13,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: test_fem_cards_tdsupnam.cpp 261 2015-12-15 11:55:50Z berhol $";
+      = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"

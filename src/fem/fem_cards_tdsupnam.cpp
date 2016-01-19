@@ -15,7 +15,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: fem_cards_tdsupnam.cpp 261 2015-12-15 11:55:50Z berhol $";
+      = "@(#) $Id$";
 }
 
 #include <memory>
