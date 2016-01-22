@@ -71,12 +71,12 @@ namespace dnvgl {
             }
 
             ::std::ostream&
-            operator<< (::std::ostream &os, const gelth &card) {
+            operator<< (::std::ostream &os, const gelth &data) {
                os << gelth::head.format()
-                  << card._form_GEONO.format(card.GEONO)
-                  << card._form_TH.format(card.TH)
-                  << card._form_NINT.format(card.NINT)
-                  << card.empty.format() << ::std::endl;
+                  << data._form_GEONO.format(data.GEONO)
+                  << data._form_TH.format(data.TH)
+                  << data._form_NINT.format(data.NINT)
+                  << data.empty.format() << ::std::endl;
                return os;
             }
          }

@@ -107,27 +107,27 @@ namespace dnvgl {
             }
 
             ::std::ostream&
-            operator<< (::std::ostream &os, const gbeamg &card) {
+            operator<< (::std::ostream &os, const gbeamg &data) {
                os << gbeamg::head.format()
-                  << card._form_GEONO.format(card.GEONO)
-                  << card.empty.format()
-                  << card._form_AREA.format(card.AREA)
-                  << card._form_IX.format(card.IX)
+                  << data._form_GEONO.format(data.GEONO)
+                  << data.empty.format()
+                  << data._form_AREA.format(data.AREA)
+                  << data._form_IX.format(data.IX)
                   << ::std::endl << fem::types::card("").format()
-                  << card._form_IY.format(card.IY)
-                  << card._form_IZ.format(card.IZ)
-                  << card._form_IYZ.format(card.IYZ)
-                  << card._form_WXMIN.format(card.WXMIN)
+                  << data._form_IY.format(data.IY)
+                  << data._form_IZ.format(data.IZ)
+                  << data._form_IYZ.format(data.IYZ)
+                  << data._form_WXMIN.format(data.WXMIN)
                   << ::std::endl << fem::types::card("").format()
-                  << card._form_WYMIN.format(card.WYMIN)
-                  << card._form_WZMIN.format(card.WZMIN)
-                  << card._form_SHARY.format(card.SHARY)
-                  << card._form_SHARZ.format(card.SHARZ)
+                  << data._form_WYMIN.format(data.WYMIN)
+                  << data._form_WZMIN.format(data.WZMIN)
+                  << data._form_SHARY.format(data.SHARY)
+                  << data._form_SHARZ.format(data.SHARZ)
                   << ::std::endl << fem::types::card("").format()
-                  << card._form_SHCENY.format(card.SHCENY)
-                  << card._form_SHCENZ.format(card.SHCENZ)
-                  << card._form_SY.format(card.SY)
-                  << card._form_SZ.format(card.SZ) << ::std::endl;
+                  << data._form_SHCENY.format(data.SHCENY)
+                  << data._form_SHCENZ.format(data.SHCENZ)
+                  << data._form_SY.format(data.SY)
+                  << data._form_SZ.format(data.SZ) << ::std::endl;
                return os;
             }
          }

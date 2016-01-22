@@ -36,6 +36,9 @@ namespace dnvgl {
          namespace cards {
             class gelmnt1;
             class gelref1;
+            class gbeamg;
+            class misosel;
+            // class beiste;
          }
       }
    }

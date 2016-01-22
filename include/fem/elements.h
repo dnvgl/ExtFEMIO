@@ -73,15 +73,78 @@ namespace dnvgl {
                static const el_types type;
             public:
                __base(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               __base(const ::dnvgl::extfem::fem::cards::gelref1&);
 
-               /// Element number
+               /** Element number ->
+                   dnvgl::extfem::fem::cards::gelmnt1::ELNOX
+               */
                long eleno;
-               /// internal element identifier
+               /** internal element identifier ->
+                   dnvgl::extfem::fem::cards::gelmnt1::ELNO, ->
+                   dnvgl::extfem::fem::cards::gelref1::ELNO
+               */
                long elident;
-               /// node references for element
+               /** Additional element information ->
+                   dnvgl::extfem::fem::cards::gelmnt1::ELTYAD
+               */
+               long el_add;
+               /** node references for element ->
+                   dnvgl::extfem::fem::cards::gelmnt1::NODIN
+               */
                ::std::deque<long> nodes;
+               /** Material reference ->
+                   dnvgl::extfem::fem::cards::gelref1::MATNO
+               */
+               long matref;
+               /** additional data type number ->
+                   dnvgl::extfem::fem::cards::gelref1::ADDNO
+               */
+               long add_no;
+               /** Integration station reference for stiffness
+                   matrix-> dnvgl::extfem::fem::cards::gelref1::INTNO
+               */
+               long intno;
+               /** Integration station reference for mass and damping
+                   matrices->
+                   dnvgl::extfem::fem::cards::gelref1::INTNO
+               */
+               long mass_intno;
+               /** Reference to initial strain information (unused).
+                   -> dnvgl::extfem::fem::cards::gelref1::STRANO
+               */
+               long i_strain_ref;
+               /** Reference to initial stress information (unused).
+                   -> dnvgl::extfem::fem::cards::gelref1::STRENO
+               */
+               long i_stress_ref;
+               /** Reference to stresspoint definition ->
+                   dnvgl::extfem::fem::cards::gelref1::STREPONO
+               */
+               long strpoint_ref;
+               /** Geometry information reference for element. ->
+                   dnvgl::extfem::fem::cards::gelref1::GEONO_OPT /
+                   dnvgl::extfem::fem::cards::gelref1::GEONO
+               */
+               std::deque<long> section;
+               /** Fixation information reference for element. ->
+                   dnvgl::extfem::fem::cards::gelref1::FIXNO_OPT /
+                   dnvgl::extfem::fem::cards::gelref1::FIXNO
+               */
+               std::deque<long> fixations;
+               /** Eccentricity information reference for element. ->
+                   dnvgl::extfem::fem::cards::gelref1::ECCNO_OPT /
+                   dnvgl::extfem::fem::cards::gelref1::ECCNO
+               */
+               std::deque<long> eccentrities;
+               /** Local coordinate system information reference for
+                   element. ->
+                   dnvgl::extfem::fem::cards::gelref1::TRANSNO_OPT /
+                   dnvgl::extfem::fem::cards::gelref1::TRANSNO
+               */
+               std::deque<long> csys;
 
                void add(const ::dnvgl::extfem::fem::cards::gelref1&);
+               void add(const ::dnvgl::extfem::fem::cards::gelmnt1&);
 
                virtual el_types get_type(void) const = 0;
             };
@@ -157,6 +220,12 @@ namespace dnvgl {
             class tess : public __base {
             public:
                tess(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               tess(const ::dnvgl::extfem::fem::cards::gelref1&);
+               void add(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               void add(const ::dnvgl::extfem::fem::cards::gelref1&);
+               void add(const ::dnvgl::extfem::fem::cards::gbeamg&);
+               void add(const ::dnvgl::extfem::fem::cards::misosel&);
+               // void add(const ::dnvgl::extfem::fem::cards::beiste&);
                static const long nnodes;
                el_types get_type(void) const;
                static const ::std::set<el_processor> processors;

@@ -166,6 +166,8 @@ const long undef::nnodes = -1;
 __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const &data) :
    eleno(data.ELNOX), elident(data.ELNO), nodes(data.NODIN.begin(), data.NODIN.end()) {}
 
+__base::__base(dnvgl::extfem::fem::cards::gelref1 const &data) {}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"
