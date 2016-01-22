@@ -71,31 +71,31 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_fem_cards\</IntDir>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
+    <FEMCardsDir>$(Configuration)\test_fem_cards\</FEMCardsDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\test_fem_cards\</IntDir>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
+    <FEMCardsDir>$(Platform)\$(Configuration)\test_fem_cards\</FEMCardsDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Configuration)\test_fem_cards\</IntDir>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
+    <FEMCardsDir>$(Configuration)\test_fem_cards\</FEMCardsDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(MSBuildStartupDirectory)/$(IntDir);$(LibraryPath)</LibraryPath>
-    <IntDir>$(Platform)\$(Configuration)\test_fem_cards\</IntDir>
+    <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
+    <FEMCardsDir>$(Platform)\$(Configuration)\test_fem_cards\</FEMCardsDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,7 +104,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(FEMCardsDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(FEMCardsDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -136,7 +136,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(FEMCardsDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -151,7 +151,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(FEMCardsDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -166,7 +166,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(FEMCardsDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -181,7 +181,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>$(FEMCardsDir)vc$(PlatformToolsetVersion)$(XamlTemporaryAssemblyName).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
