@@ -210,7 +210,7 @@ namespace dnvgl {
                const ::std::deque<long> &NODIN) :
                card(),
                ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
-               NODIN(NODIN) {}
+               NODIN(NODIN.begin(), NODIN.end()) {}
 
             gelmnt1::gelmnt1(
                const long &ELNOX, const long &ELNO,
@@ -218,7 +218,7 @@ namespace dnvgl {
                const ::std::deque<long> &NODIN) :
                card(),
                ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(0),
-               NODIN(NODIN) {}
+               NODIN(NODIN.begin(), NODIN.end()) {}
 
             const ::dnvgl::extfem::fem::cards::types
             gelmnt1::card_type(void) const { return GELMNT1; }
@@ -229,7 +229,7 @@ namespace dnvgl {
                os << gelmnt1::head.format()
                   << card._form_ELNOX.format(card.ELNOX)
                   << card._form_ELNO.format(card.ELNO)
-                  << card._form_ELTYP.format((long)card.ELTYP)
+                  << card._form_ELTYP.format(static_cast<long>(card.ELTYP))
                   << card._form_ELTYAD.format(card.ELTYAD);
                size_t i = 5;
                for (auto p : card.NODIN) {

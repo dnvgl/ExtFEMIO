@@ -97,6 +97,10 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       NODIN.push_back(2);
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
+      CHECK(probe.ELNOX == 1);
+      CHECK(probe.ELNO == 6);
+      CHECK(probe.ELTYAD == 0);
+      CHECK(probe.ELTYP == elements::FQUS_FFQ);
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.00000000e+00 +6.00000000e+00 +2.40000000e+01 +0.00000000e+00 \n"
@@ -132,6 +136,20 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       NODIN.push_back(6);
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
+      test << probe;
+      CHECK(test.str() ==
+            "GELMNT1 +1.20000000e+01 +3.60000000e+01 +1.50000000e+01 +0.00000000e+00 \n"
+            "        +1.00000000e+00 +6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+   }
+
+   SECTION("GELMNT1 OUT (BEAS) (ELTYAD default)") {
+      long ELNOX(12), ELNO(36);
+      elements::el_types ELTYP(elements::BEAS);
+      ::std::deque<long> NODIN;
+      NODIN.push_back(1);
+      NODIN.push_back(6);
+
+      gelmnt1 probe(ELNOX, ELNO, ELTYP, NODIN);
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.20000000e+01 +3.60000000e+01 +1.50000000e+01 +0.00000000e+00 \n"

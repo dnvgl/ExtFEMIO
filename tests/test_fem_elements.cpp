@@ -51,11 +51,18 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
       const ::std::deque<long> &NODIN);
    */
    ::std::deque<long> nodes;
-   nodes.push_back(1);
-   nodes.push_back(2);
-   gelmnt1 data1(1, 1, TESS, 0, nodes);
+   nodes.push_back(6);
+   nodes.push_back(7);
+   gelmnt1 data1(1, 2, elements::TESS, nodes);
+   CHECK(data1.ELNOX == 1);
+   CHECK(data1.ELNO == 2);
+   CHECK(data1.ELTYP == elements::TESS);
+   CHECK(data1.NODIN.size() == 2);
+   CHECK(data1.NODIN[0] == 6);
+   CHECK(data1.NODIN[1] == 7);
+
    tess probe1(data1);
-   CHECK(probe1.get_type() == TESS);
+   CHECK(probe1.get_type() == elements::TESS);
    CHECK(probe1.nnodes == 2);
 
    ::std::unique_ptr<__base> probe2;

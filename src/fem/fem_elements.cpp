@@ -163,11 +163,8 @@ void dnvgl::extfem::fem::elements::dispatch(
 
 const long undef::nnodes = -1;
 
-__base::__base(dnvgl::extfem::fem::cards::gelmnt1 const &data) {
-   this->eleno = data.ELNOX;
-   this->elident = data.ELNO;
-   ::std::copy(data.NODIN.begin(), data.NODIN.end(), this->nodes.begin());
-}
+__base::__base(dnvgl::extfem::fem::cards::gelmnt1 const &data) :
+   eleno(data.ELNOX), elident(data.ELNO), nodes(data.NODIN.begin(), data.NODIN.end()) {}
 
 // Local Variables:
 // mode: c++
