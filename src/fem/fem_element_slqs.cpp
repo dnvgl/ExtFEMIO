@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for slqs.
 
-   Detailed description
+   Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long slqs::nnodes = 8;
+
+el_types slqs::get_type() const {return SLQS;}
 
 namespace {
    const size_t procs_len = 1;

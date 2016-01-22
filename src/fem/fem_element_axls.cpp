@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for axls.
 
-   Detailed description
+   Axisymmetric Linear Strain Triangle
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long axls::nnodes = 6;
+
+el_types axls::get_type() const {return AXLS;}
 
 namespace {
    const size_t procs_len = 3;

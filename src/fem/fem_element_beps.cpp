@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for beps.
 
-   Detailed description
+   2-D, 2 Node Beam
 */
 
 // ID:
@@ -24,9 +24,11 @@ using namespace ::dnvgl::extfem::fem::elements;
 
 const long beps::nnodes = 2;
 
+el_types beps::get_type() const {return BEPS;}
+
 namespace {
-   const size_t procs_len = 4;
-   el_processor procs[procs_len] = {general, Preframe, ADVANCE, Poseidon};
+   const size_t procs_len = 3;
+   el_processor procs[procs_len] = {general, Preframe, ADVANCE};
 }
 const ::std::set<el_processor> beps::processors(procs, procs+procs_len);
 

@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ipri.
 
-   Detailed description
+   Isoparametric Triangular Prism
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long ipri::nnodes = 15;
+
+el_types ipri::get_type() const {return IPRI;}
 
 namespace {
    const size_t procs_len = 4;

@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ctaq.
 
-   Detailed description
+   6-Noded (3+3) Axisymmetric Contact Element
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long ctaq::nnodes = 6;
+
+el_types ctaq::get_type() const {return CTAQ;}
 
 namespace {
    const size_t procs_len = 2;

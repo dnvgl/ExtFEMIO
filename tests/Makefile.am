@@ -132,6 +132,11 @@ test_fem_cards_SOURCES+=test_fem_cards_tdsupnam.cpp
 test_fem_cards_LDADD=$(test_extfem_LDADD)
 TESTS+=test_fem_cards.ju
 
+check_PROGRAMS+=test_fem_elements
+test_fem_elements_SOURCES =test_fem_elements.cpp
+test_fem_elements_LDADD=$(test_extfem_LDADD)
+TESTS+=test_fem_elements.ju
+
 test_MISC=
 
 test_%.ju: base_test.ju

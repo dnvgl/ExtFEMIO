@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for itet.
 
-   Detailed description
+   Isoparametric Tetrahedron
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long itet::nnodes = 10;
+
+el_types itet::get_type() const {return ITET;}
 
 namespace {
    const size_t procs_len = 2;

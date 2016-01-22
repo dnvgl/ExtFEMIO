@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for adva_4.
 
-   Detailed description
+   4-node Contact Element with triangular Shape
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long adva_4::nnodes = 4;
+
+el_types adva_4::get_type() const {return ADVA_4;}
 
 namespace {
    const size_t procs_len = 2;

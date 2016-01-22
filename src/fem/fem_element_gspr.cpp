@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for gspr.
 
-   Detailed description
+   Spring to Ground
 */
 
 // ID:
@@ -21,6 +21,7 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long gspr::nnodes = 1;
+el_types gspr::get_type() const {return GSPR;}
 
 namespace {
    const size_t procs_len = 7;

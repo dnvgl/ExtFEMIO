@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for csta.
 
-   Detailed description
+   Plane Constant Strain Triangle
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long csta::nnodes = 3;
+
+el_types csta::get_type() const {return CSTA;}
 
 namespace {
    const size_t procs_len = 4;

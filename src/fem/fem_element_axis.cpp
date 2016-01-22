@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for axis.
 
-   Detailed description
+   Axial Spring
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long axis::nnodes = 2;
+
+el_types axis::get_type() const {return AXIS;}
 
 namespace {
    const size_t procs_len = 7;

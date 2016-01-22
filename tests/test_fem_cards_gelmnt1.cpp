@@ -87,7 +87,9 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
    std::ostringstream test;
 
    SECTION("GELMNT1 OUT (FQUS)") {
-      long ELNOX(1), ELNO(6), ELTYP(24), ELTYAD(0);
+      long ELNOX(1), ELNO(6);
+      elements::el_types ELTYP(elements::FQUS_FFQ);
+      long ELTYAD(0);
       ::std::deque<long> NODIN;
       NODIN.push_back(1);
       NODIN.push_back(6);
@@ -102,7 +104,9 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
    }
 
    SECTION("GELMNT1 OUT (ILST)") {
-      long ELNOX(12), ELNO(36), ELTYP(6), ELTYAD(0);
+      long ELNOX(12), ELNO(36);
+      elements::el_types ELTYP(elements::ILST);
+      long ELTYAD(0);
       ::std::deque<long> NODIN;
       NODIN.push_back(1);
       NODIN.push_back(6);
@@ -120,7 +124,9 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
    }
 
    SECTION("GELMNT1 OUT (BEAS)") {
-      long ELNOX(12), ELNO(36), ELTYP(15), ELTYAD(0);
+      long ELNOX(12), ELNO(36);
+      elements::el_types ELTYP(elements::BEAS);
+      long ELTYAD(0);
       ::std::deque<long> NODIN;
       NODIN.push_back(1);
       NODIN.push_back(6);

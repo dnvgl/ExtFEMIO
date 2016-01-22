@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for axda.
 
-   Detailed description
+   Axial Damper
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long axda::nnodes = 2;
+
+el_types axda::get_type() const {return AXDA;}
 
 namespace {
    const size_t procs_len = 5;

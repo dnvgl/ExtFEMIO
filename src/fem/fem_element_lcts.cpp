@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for lcts.
 
-   Detailed description
+   Subparam. Layered Curved Triangular Thick Shell
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long lcts::nnodes = 6;
+
+el_types lcts::get_type() const {return LCTS;}
 
 namespace {
    const size_t procs_len = 3;

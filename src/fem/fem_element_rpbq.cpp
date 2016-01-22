@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for rpbq.
 
-   Detailed description
+   Rect. Plate. Bending Modes
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long rpbq::nnodes = 4;
+
+el_types rpbq::get_type() const {return RPBQ;}
 
 namespace {
    const size_t procs_len = 1;

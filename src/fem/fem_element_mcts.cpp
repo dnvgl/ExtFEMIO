@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for mcts.
 
-   Detailed description
+   Subparam. Curved Triang. Thick Sandwich Elem.
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long mcts::nnodes = 6;
+
+el_types mcts::get_type() const {return MCTS;}
 
 namespace {
    const size_t procs_len = 3;

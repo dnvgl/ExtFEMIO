@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for slcb.
 
-   Detailed description
+   Semiloof Curved Beam (11 d.o.fs)
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long slcb::nnodes = 3;
+
+el_types slcb::get_type() const {return SLCB;}
 
 namespace {
    const size_t procs_len = 1;

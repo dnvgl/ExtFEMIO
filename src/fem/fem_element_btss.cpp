@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for btss.
 
-   Detailed description
+   General Curved Beam
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long btss::nnodes = 3;
+
+el_types btss::get_type() const {return BTSS;}
 
 namespace {
    const size_t procs_len = 5;

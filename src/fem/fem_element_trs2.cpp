@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for trs2.
 
-   Detailed description
+   2nd Order Hexahed. Transition Elem., Solid / Shell
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long trs2::nnodes = 15;
+
+el_types trs2::get_type() const {return TRS2;}
 
 namespace {
    const size_t procs_len = 3;

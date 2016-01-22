@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for lqua.
 
-   Detailed description
+   Plane Quadrilateral Membrane Element
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long lqua::nnodes = 4;
+
+el_types lqua::get_type() const {return LQUA;}
 
 namespace {
    const size_t procs_len = 5;

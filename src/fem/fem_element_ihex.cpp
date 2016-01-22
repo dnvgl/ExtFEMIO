@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ihex.
 
-   Detailed description
+   Isoparametric Hexahedron
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long ihex::nnodes = 20;
+
+el_types ihex::get_type() const {return IHEX;}
 
 namespace {
    const size_t procs_len = 5;

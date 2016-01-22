@@ -71,14 +71,14 @@ element types.
    |   / | <      |    |                                                          |                | <     |       |       |       |       |                    |
    | <3> |        | <2> |                                                          |                | <5>   | <5>   | <5>   | <5>   | <5>   |                    |
    |   1 |        |    | /Not/ /yet/ /defined/                                    |                |       |       |       |       |       |                    |
-   |   2 | =BEPS= |  2 | 2-D, 2 Node Beam                                         |           3, 5 | \check |       |       | \check | \sad  |                    |
+   |   2 | =BEPS= |  2 | 2-D, 2 Node Beam                                         |           3, 5 | \check |       |       | \check |       |                    |
    |   3 | =CSTA= |  3 | Plane Constant Strain Triangle                           |           2, 4 |       | \check | \check | \check |       |                    |
    |   4 |        |    | /Not/ /yet/ /defined/                                    |              3 |       |       |       |       |       |                    |
-   |   5 | =RPBQ= |  4 | Rect. Plate. Bending Modes                               |              3 |       |       |       |       |       |                    |
+   |   5 | =RPBQ= |  4 | Rectangular Plate. Bending Modes                         |              3 |       |       |       |       |       |                    |
    |   6 | =ILST= |  6 | Plane Lin. Strain Triangle                               |              2 |       | \check | \check |       |       |                    |
    |   7 |        |    | /Not/ /yet/ /defined/                                    |                |       |       |       |       |       |                    |
    |   8 | =IQQE= |  8 | Plane Quadrilateral Membrane Element                     |              2 |       | \check | \check |       |       |                    |
-   |   9 | =LQUA= |  4 | Plane Quadrilateral Membrane Element                     |           2, 4 |       | \check | \check | \check | \sad  |                    |
+   |   9 | =LQUA= |  4 | Plane Quadrilateral Membrane Element                     |           2, 4 |       | \check | \check | \check |       |                    |
    |  10 | =TESS= |  2 | Truss Element                                            |           2, 4 | \check | \check | \check | \check | \sad  |                    |
    |  11 | =GMAS= |  1 | 1-Noded Mass-Matrix                                      |                |       | \check | \check |       | \sad  |                    |
    |  12 | =GLMA= |  2 | 2-Noded Mass-Matrix                                      |                |       |       | \check |       |       |                    |
@@ -95,12 +95,12 @@ element types.
    |  21 | =LHEX= |  8 | Linear Hexahedron                                        |           2, 4 |       | \check | \check | \check |       | FR                 |
    |  22 | =SECB= |  3 | Subparametric Curved Beam                                |              2 |       |       |       |       |       |                    |
    |  23 | =BTSS= |  3 | General Curved Beam                                      |              2 |       | \check | \check |       |       | PL, PR             |
-   |  24 | =FQUS= |  4 | Flat Quadrilateral Thin Shell                            |              4 |       | \check | \check |       |       | PL, PR             |
+   |  24 | =FQUS= |  4 | Flat Quadrilateral Thin Shell                            |              4 |       | \check | \check |       | \sad  | PL, PR             |
    |  24 | =FFQ=  |  4 | Free Formulation Quadrilateral Shell                     |              5 |       |       |       | \check |       |                    |
-   |  25 | =FTRS= |  3 | Flat Triangular Thin Shell                               |              4 |       | \check | \check |       |       | PL                 |
+   |  25 | =FTRS= |  3 | Flat Triangular Thin Shell                               |              4 |       | \check | \check |       | \sad  | PL                 |
    |  25 | =FFTR= |  3 | Free Formulation Triangular Shell                        |              5 |       |       |       | \check |       |                    |
    |  26 | =SCTS= |  6 | Subparametric Curved Triangular Thick Shell              |              2 |       | \check | \check |       |       | PL                 |
-   |  27 | =MCTS= |  6 | Subparam. Curved Triang. Thick Sandwich Elem.            | 2[fn:th_shell] |       | \check | \check |       |       |                    |
+   |  27 | =MCTS= |  6 | Subparametric Curved Triangular Thick Sandwich Element   | 2[fn:th_shell] |       | \check | \check |       |       |                    |
    |  28 | =SCQS= |  8 | Subparametric Curved Quadrilateral Thick Shell           |              2 |       | \check | \check |       |       | PL, PR             |
    |-----+--------+----+----------------------------------------------------------+----------------+-------+-------+-------+-------+-------+--------------------|
    |  29 | =MCQS= |  8 | Subparam. Curved Quadr. Thick Sandwich Elem.             | 2[fn:th_shell] |       | \check | \check |       |       |                    |

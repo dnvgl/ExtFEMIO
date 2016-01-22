@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for mcqs.
 
-   Detailed description
+   Subparam. Curved Quadr. Thick Sandwich Elem.
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long mcqs::nnodes = 8;
+
+el_types mcqs::get_type() const {return MCQS;}
 
 namespace {
    const size_t procs_len = 3;

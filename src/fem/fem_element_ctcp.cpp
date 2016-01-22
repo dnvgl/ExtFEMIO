@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ctcp.
 
-   Detailed description
+   2-Noded Contact Element
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long ctcp::nnodes = 2;
+
+el_types ctcp::get_type() const {return CTCP;}
 
 namespace {
    const size_t procs_len = 1;

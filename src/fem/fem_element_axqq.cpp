@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for axqq.
 
-   Detailed description
+   Axisymmetric Linear Strain Quadrilateral
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long axqq::nnodes = 8;
+
+el_types axqq::get_type() const {return AXQQ;}
 
 namespace {
    const size_t procs_len = 3;

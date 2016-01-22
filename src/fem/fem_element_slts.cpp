@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for slts.
 
-   Detailed description
+   Semiloof Triangular Curved Thin Shell (24 d.o.fs)
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long slts::nnodes = 6;
+
+el_types slts::get_type() const {return SLTS;}
 
 namespace {
    const size_t procs_len = 1;

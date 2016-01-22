@@ -4,7 +4,17 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ghex163.
 
-   Detailed description
+   General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+        - node 21 at pos 21
+        - node 22 at pos 22
+        - node 23 at pos 23
+        - node 24 at pos 24
+        - node 25 at pos 25
+        - node 26 at pos 26
+        - node 27 at pos 27
 */
 
 // ID:
@@ -22,6 +32,8 @@ using namespace ::dnvgl::extfem::fem::elements;
 
 const long ghex163::nnodes = 27;
 
+el_types ghex163::get_type() const {return GHEX163;}
+
 namespace {
    const size_t procs_len = 2;
    el_processor procs[
@@ -30,7 +42,7 @@ namespace {
 const ::std::set<el_processor> ghex163::processors(procs, procs+procs_len);
 
 ghex163::ghex163(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+   ::dnvgl::extfem::fem::elements::ghex(data) {}
 
 // Local Variables:
 // mode: c++

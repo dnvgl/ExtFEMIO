@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for scqs.
 
-   Detailed description
+   Subparametric Curved Quadrilateral Thick Shell
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long scqs::nnodes = 8;
+
+el_types scqs::get_type() const {return SCQS;}
 
 namespace {
    const size_t procs_len = 5;

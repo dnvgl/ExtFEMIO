@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for gdam.
 
-   Detailed description
+   Damper to Ground
 */
 
 // ID:
@@ -21,6 +21,7 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long gdam::nnodes = 1;
+el_types gdam::get_type() const {return GDAM;}
 
 namespace {
    const size_t procs_len = 5;

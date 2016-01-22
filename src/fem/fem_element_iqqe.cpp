@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for iqqe.
 
-   Detailed description
+   Plane Quadrilateral Membrane Element
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long iqqe::nnodes = 8;
+
+el_types iqqe::get_type() const {return IQQE;}
 
 namespace {
    const size_t procs_len = 3;

@@ -34,6 +34,19 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
+            class gelmnt1;
+            class gelref1;
+         }
+      }
+   }
+}
+
+#include "fem/elements.h"
+
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
+         namespace cards {
 
             /**
                \brief Name the different cards.
@@ -485,6 +498,8 @@ Defines end of a superelement.
                static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELTYAD;
                static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODIN;
 
+               static const ::std::map<long, ::dnvgl::extfem::fem::elements::el_types> eltyp_map;
+
             public:
 
                /** External element number (specified or controlled by
@@ -500,7 +515,7 @@ Defines end of a superelement.
                    matrices a.s.o. See the AMATRIX record for more
                    information.
                */
-               long ELTYP;
+               dnvgl::extfem::fem::elements::el_types ELTYP;
                /** Additional information related to element type.
 
                    - For membrane elements used to specify plane stress /
@@ -543,7 +558,12 @@ Defines end of a superelement.
 
                DllExport gelmnt1(
                   const long &ELNOX, const long &ELNO,
-                  const long &ELTYP, const long &ELTYAD,
+                  const ::dnvgl::extfem::fem::elements::el_types &ELTYP, const long &ELTYAD,
+                  const ::std::deque<long> &NODIN);
+
+               DllExport gelmnt1(
+                  const long &ELNOX, const long &ELNO,
+                  const ::dnvgl::extfem::fem::elements::el_types &ELTYP,
                   const ::std::deque<long> &NODIN);
 
                DllExport const ::dnvgl::extfem::fem::cards::types

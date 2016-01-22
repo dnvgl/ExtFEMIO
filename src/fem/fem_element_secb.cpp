@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for secb.
 
-   Detailed description
+   Subparametric Curved Beam
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long secb::nnodes = 3;
+
+el_types secb::get_type() const {return SECB;}
 
 namespace {
    const size_t procs_len = 1;

@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for beas.
 
-   Detailed description
+   3-D, 2 Node Beam
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long beas::nnodes = 2;
+
+el_types beas::get_type() const {return BEAS;}
 
 namespace {
    const size_t procs_len = 11;

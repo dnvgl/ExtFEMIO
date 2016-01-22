@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for gmas.
 
-   Detailed description
+   1-Noded Mass-Matrix
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long gmas::nnodes = 1;
+
+el_types gmas::get_type() const {return GMAS;}
 
 namespace {
    const size_t procs_len = 6;

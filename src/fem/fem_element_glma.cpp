@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for glma.
 
-   Detailed description
+   2-Noded Mass-Matrix
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long glma::nnodes = 2;
+
+el_types glma::get_type() const {return GLMA;}
 
 namespace {
    const size_t procs_len = 2;

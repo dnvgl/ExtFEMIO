@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for scts.
 
-   Detailed description
+   Subparametric Curved Triangular Thick Shell
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long scts::nnodes = 6;
+
+el_types scts::get_type() const {return SCTS;}
 
 namespace {
    const size_t procs_len = 4;

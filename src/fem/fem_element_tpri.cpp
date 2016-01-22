@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for tpri.
 
-   Detailed description
+   Triangular Prism
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long tpri::nnodes = 6;
+
+el_types tpri::get_type() const {return TPRI;}
 
 namespace {
    const size_t procs_len = 4;

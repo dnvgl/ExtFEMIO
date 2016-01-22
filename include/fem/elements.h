@@ -9,14 +9,14 @@
 
 // ID: $Id$
 
-#ifndef _FEM_CARDS_ELEMENTS_H_
-#define _FEM_CARDS_ELEMENTS_H_
+#include "fem/cards.h"
+
+#ifndef _FEM_ELEMENTS_H_
+#define _FEM_ELEMENTS_H_
 
 #include <my_c++14.h>
 
 #include <set>
-
-#include "cards.h"
 
 namespace dnvgl {
    namespace extfem {
@@ -38,7 +38,28 @@ namespace dnvgl {
                           CTCL = 52, CTAL = 53, CTCC = 54, CTAQ = 55,
                           CTLQ = 56, CTCQ = 57, CTMQ = 58, HCQS = 61,
                           SLQS = 66, SLTS = 67, SLCB = 68, MATR = 70,
-                          GHEX100 = 100, GHEX163 = 163} el_types;
+                          GHEX100 = 100, GHEX101 = 101, GHEX102 = 102,
+                          GHEX103 = 103, GHEX104 = 104, GHEX105 = 105,
+                          GHEX106 = 106, GHEX107 = 107, GHEX108 = 108,
+                          GHEX109 = 109, GHEX110 = 110, GHEX111 = 111,
+                          GHEX112 = 112, GHEX113 = 113, GHEX114 = 114,
+                          GHEX115 = 115, GHEX116 = 116, GHEX117 = 117,
+                          GHEX118 = 118, GHEX119 = 119, GHEX120 = 120,
+                          GHEX121 = 121, GHEX122 = 122, GHEX123 = 123,
+                          GHEX124 = 124, GHEX125 = 125, GHEX126 = 126,
+                          GHEX127 = 127, GHEX128 = 128, GHEX129 = 129,
+                          GHEX130 = 130, GHEX131 = 131, GHEX132 = 132,
+                          GHEX133 = 133, GHEX134 = 134, GHEX135 = 135,
+                          GHEX136 = 136, GHEX137 = 137, GHEX138 = 138,
+                          GHEX139 = 139, GHEX140 = 140, GHEX141 = 141,
+                          GHEX142 = 142, GHEX143 = 143, GHEX144 = 144,
+                          GHEX145 = 145, GHEX146 = 146, GHEX147 = 147,
+                          GHEX148 = 148, GHEX149 = 149, GHEX150 = 150,
+                          GHEX151 = 151, GHEX152 = 152, GHEX153 = 153,
+                          GHEX154 = 154, GHEX155 = 155, GHEX156 = 156,
+                          GHEX157 = 157, GHEX158 = 158, GHEX159 = 159,
+                          GHEX160 = 160, GHEX161 = 161, GHEX162 = 162,
+                          GHEX163 = 163} el_types;
 
             typedef enum {general, Preframe, Prefem, Sestra, ADVANCE,
                           Framework, Launch, Platework, Pretube,
@@ -48,6 +69,8 @@ namespace dnvgl {
             /** Base class for FEM element representation.
              */
             class __base {
+            protected:
+               static const el_types type;
             public:
                __base(const ::dnvgl::extfem::fem::cards::gelmnt1&);
 
@@ -59,11 +82,14 @@ namespace dnvgl {
                ::std::deque<long> nodes;
 
                void add(const ::dnvgl::extfem::fem::cards::gelref1&);
+
+               virtual el_types get_type(void) const = 0;
             };
 
             class undef : public __base {
             public:
                static const long nnodes;
+               el_types get_type(void) const;
             };
 
             /** 2-D, 2 Node Beam
@@ -72,6 +98,7 @@ namespace dnvgl {
             public:
                beps(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -81,6 +108,7 @@ namespace dnvgl {
             public:
                csta(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -90,6 +118,7 @@ namespace dnvgl {
             public:
                rpbq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -99,6 +128,7 @@ namespace dnvgl {
             public:
                ilst(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -108,6 +138,7 @@ namespace dnvgl {
             public:
                iqqe(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -117,6 +148,7 @@ namespace dnvgl {
             public:
                lqua(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -126,6 +158,7 @@ namespace dnvgl {
             public:
                tess(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -135,6 +168,7 @@ namespace dnvgl {
             public:
                gmas(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -144,6 +178,7 @@ namespace dnvgl {
             public:
                glma(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -153,6 +188,7 @@ namespace dnvgl {
             public:
                glda(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -162,6 +198,7 @@ namespace dnvgl {
             public:
                beas(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -171,6 +208,7 @@ namespace dnvgl {
             public:
                axis(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -180,6 +218,7 @@ namespace dnvgl {
             public:
                axda(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -189,6 +228,7 @@ namespace dnvgl {
             public:
                gspr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -198,6 +238,7 @@ namespace dnvgl {
             public:
                gdam(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -207,6 +248,7 @@ namespace dnvgl {
             public:
                ihex(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -216,6 +258,7 @@ namespace dnvgl {
             public:
                lhex(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -225,6 +268,7 @@ namespace dnvgl {
             public:
                secb(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -234,6 +278,7 @@ namespace dnvgl {
             public:
                btss(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -244,6 +289,7 @@ namespace dnvgl {
             public:
                fqus_ffq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -254,6 +300,7 @@ namespace dnvgl {
             public:
                ftrs_fftr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -263,6 +310,7 @@ namespace dnvgl {
             public:
                scts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -272,6 +320,7 @@ namespace dnvgl {
             public:
                mcts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -281,6 +330,7 @@ namespace dnvgl {
             public:
                scqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -290,6 +340,7 @@ namespace dnvgl {
             public:
                mcqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -299,6 +350,7 @@ namespace dnvgl {
             public:
                ipri(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -308,6 +360,7 @@ namespace dnvgl {
             public:
                itet(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -317,6 +370,7 @@ namespace dnvgl {
             public:
                tpri(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -326,6 +380,7 @@ namespace dnvgl {
             public:
                tetr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -335,6 +390,7 @@ namespace dnvgl {
             public:
                lcts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -344,6 +400,7 @@ namespace dnvgl {
             public:
                lcqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -353,6 +410,7 @@ namespace dnvgl {
             public:
                trs1(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -362,6 +420,7 @@ namespace dnvgl {
             public:
                trs2(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -371,6 +430,7 @@ namespace dnvgl {
             public:
                trs3(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -380,6 +440,7 @@ namespace dnvgl {
             public:
                glsh(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -389,6 +450,7 @@ namespace dnvgl {
             public:
                axcs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -398,6 +460,7 @@ namespace dnvgl {
             public:
                axlq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -407,6 +470,7 @@ namespace dnvgl {
             public:
                axls(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -416,6 +480,7 @@ namespace dnvgl {
             public:
                axqq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -425,6 +490,7 @@ namespace dnvgl {
             public:
                pils(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -434,6 +500,7 @@ namespace dnvgl {
             public:
                pcab(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -443,6 +510,7 @@ namespace dnvgl {
             public:
                pspr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -452,6 +520,7 @@ namespace dnvgl {
             public:
                adva_4(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -461,6 +530,7 @@ namespace dnvgl {
             public:
                adva_2(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -470,6 +540,7 @@ namespace dnvgl {
             public:
                ctcp(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -479,6 +550,7 @@ namespace dnvgl {
             public:
                ctcl(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -488,6 +560,7 @@ namespace dnvgl {
             public:
                ctal(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -497,6 +570,7 @@ namespace dnvgl {
             public:
                ctcc(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -506,6 +580,7 @@ namespace dnvgl {
             public:
                ctaq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -515,6 +590,7 @@ namespace dnvgl {
             public:
                ctlq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -524,6 +600,7 @@ namespace dnvgl {
             public:
                ctcq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -533,6 +610,7 @@ namespace dnvgl {
             public:
                ctmq(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -542,6 +620,7 @@ namespace dnvgl {
             public:
                hcqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -551,6 +630,7 @@ namespace dnvgl {
             public:
                slqs(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -560,6 +640,7 @@ namespace dnvgl {
             public:
                slts(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -569,6 +650,7 @@ namespace dnvgl {
             public:
                slcb(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -578,36 +660,30 @@ namespace dnvgl {
             public:
                matr(const ::dnvgl::extfem::fem::cards::gelmnt1&);
                static const long nnodes;
+               el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
             /** General Hexahedron
              */
-            class ghex100: public __base {
-            public:
-               ghex100(const ::dnvgl::extfem::fem::cards::gelmnt1&);
-               static const long nnodes;
-               static const ::std::set<el_processor> processors;
-            };
-
-            /** General Hexahedron
-             */
-            class ghex163: public __base {
-            public:
-               ghex163(const ::dnvgl::extfem::fem::cards::gelmnt1&);
-               static const long nnodes;
-               static const ::std::set<el_processor> processors;
+            class ghex: public __base {
+            protected:
+               ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 &data)
+                  : __base(data) {};
             };
 
             /** Dispatch element class instance for `id`
              */
-            __base &dispatch(const long &id);
+            void dispatch(std::unique_ptr<__base>&,
+                          const ::dnvgl::extfem::fem::cards::gelmnt1 &data);
          }
       }
    }
 }
 
-#endif // _FEM_CARDS_ELEMENTS_H_
+#include "elements_ghex.h"
+
+#endif // _FEM_ELEMENTS_H_
 
 // Local Variables:
 // mode: c++

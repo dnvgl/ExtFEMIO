@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ftrs_fftr.
 
-   Detailed description
+   Flat Triangular Thin Shell / Free Formulation Triangular Shell
 */
 
 // ID:
@@ -22,10 +22,13 @@ using namespace ::dnvgl::extfem::fem::elements;
 
 const long ftrs_fftr::nnodes = 3;
 
+el_types ftrs_fftr::get_type() const {return FTRS_FFTR;}
+
 namespace {
-   const size_t procs_len = 5;
+   const size_t procs_len = 6;
    el_processor procs[
-      procs_len] = {general, Prefem, Sestra, ADVANCE, Platework};
+      procs_len] = {general, Prefem, Sestra, ADVANCE, Platework,
+                    Poseidon};
 }
 const ::std::set<el_processor> ftrs_fftr::processors(procs, procs+procs_len);
 

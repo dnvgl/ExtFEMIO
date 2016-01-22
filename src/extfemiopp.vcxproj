@@ -203,8 +203,6 @@
     <ClCompile Include="fem\fem_cards_tdsupnam.cpp" />
     <ClCompile Include="fem\fem_cards_text.cpp" />
     <ClCompile Include="fem\fem_elements.cpp" />
-
-
     <ClCompile Include="fem\fem_element_beps.cpp" />
     <ClCompile Include="fem\fem_element_csta.cpp" />
     <ClCompile Include="fem\fem_element_rpbq.cpp" />
@@ -263,13 +261,69 @@
     <ClCompile Include="fem\fem_element_slcb.cpp" />
     <ClCompile Include="fem\fem_element_matr.cpp" />
     <ClCompile Include="fem\fem_element_ghex100.cpp" />
+    <ClCompile Include="fem\fem_element_ghex101.cpp" />
+    <ClCompile Include="fem\fem_element_ghex102.cpp" />
+    <ClCompile Include="fem\fem_element_ghex103.cpp" />
+    <ClCompile Include="fem\fem_element_ghex104.cpp" />
+    <ClCompile Include="fem\fem_element_ghex105.cpp" />
+    <ClCompile Include="fem\fem_element_ghex106.cpp" />
+    <ClCompile Include="fem\fem_element_ghex107.cpp" />
+    <ClCompile Include="fem\fem_element_ghex108.cpp" />
+    <ClCompile Include="fem\fem_element_ghex109.cpp" />
+    <ClCompile Include="fem\fem_element_ghex110.cpp" />
+    <ClCompile Include="fem\fem_element_ghex111.cpp" />
+    <ClCompile Include="fem\fem_element_ghex112.cpp" />
+    <ClCompile Include="fem\fem_element_ghex113.cpp" />
+    <ClCompile Include="fem\fem_element_ghex114.cpp" />
+    <ClCompile Include="fem\fem_element_ghex115.cpp" />
+    <ClCompile Include="fem\fem_element_ghex116.cpp" />
+    <ClCompile Include="fem\fem_element_ghex117.cpp" />
+    <ClCompile Include="fem\fem_element_ghex118.cpp" />
+    <ClCompile Include="fem\fem_element_ghex119.cpp" />
+    <ClCompile Include="fem\fem_element_ghex120.cpp" />
+    <ClCompile Include="fem\fem_element_ghex121.cpp" />
+    <ClCompile Include="fem\fem_element_ghex122.cpp" />
+    <ClCompile Include="fem\fem_element_ghex123.cpp" />
+    <ClCompile Include="fem\fem_element_ghex124.cpp" />
+    <ClCompile Include="fem\fem_element_ghex125.cpp" />
+    <ClCompile Include="fem\fem_element_ghex126.cpp" />
+    <ClCompile Include="fem\fem_element_ghex127.cpp" />
+    <ClCompile Include="fem\fem_element_ghex128.cpp" />
+    <ClCompile Include="fem\fem_element_ghex129.cpp" />
+    <ClCompile Include="fem\fem_element_ghex130.cpp" />
+    <ClCompile Include="fem\fem_element_ghex131.cpp" />
+    <ClCompile Include="fem\fem_element_ghex132.cpp" />
+    <ClCompile Include="fem\fem_element_ghex133.cpp" />
+    <ClCompile Include="fem\fem_element_ghex134.cpp" />
+    <ClCompile Include="fem\fem_element_ghex135.cpp" />
+    <ClCompile Include="fem\fem_element_ghex136.cpp" />
+    <ClCompile Include="fem\fem_element_ghex137.cpp" />
+    <ClCompile Include="fem\fem_element_ghex138.cpp" />
+    <ClCompile Include="fem\fem_element_ghex139.cpp" />
+    <ClCompile Include="fem\fem_element_ghex140.cpp" />
+    <ClCompile Include="fem\fem_element_ghex141.cpp" />
+    <ClCompile Include="fem\fem_element_ghex142.cpp" />
+    <ClCompile Include="fem\fem_element_ghex143.cpp" />
+    <ClCompile Include="fem\fem_element_ghex144.cpp" />
+    <ClCompile Include="fem\fem_element_ghex145.cpp" />
+    <ClCompile Include="fem\fem_element_ghex146.cpp" />
+    <ClCompile Include="fem\fem_element_ghex147.cpp" />
+    <ClCompile Include="fem\fem_element_ghex148.cpp" />
+    <ClCompile Include="fem\fem_element_ghex149.cpp" />
+    <ClCompile Include="fem\fem_element_ghex150.cpp" />
+    <ClCompile Include="fem\fem_element_ghex151.cpp" />
+    <ClCompile Include="fem\fem_element_ghex152.cpp" />
+    <ClCompile Include="fem\fem_element_ghex153.cpp" />
+    <ClCompile Include="fem\fem_element_ghex154.cpp" />
+    <ClCompile Include="fem\fem_element_ghex155.cpp" />
+    <ClCompile Include="fem\fem_element_ghex156.cpp" />
+    <ClCompile Include="fem\fem_element_ghex157.cpp" />
+    <ClCompile Include="fem\fem_element_ghex158.cpp" />
+    <ClCompile Include="fem\fem_element_ghex159.cpp" />
+    <ClCompile Include="fem\fem_element_ghex160.cpp" />
+    <ClCompile Include="fem\fem_element_ghex161.cpp" />
+    <ClCompile Include="fem\fem_element_ghex162.cpp" />
     <ClCompile Include="fem\fem_element_ghex163.cpp" />
-
-
-
-
-
-
     <ClCompile Include="fem\fem_errors.cpp" />
     <ClCompile Include="fem\fem_file.cpp" />
     <ClCompile Include="fem\fem_type_bounds.cpp" />

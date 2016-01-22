@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for tess.
 
-   Detailed description
+   Truss Element
 */
 
 // ID:
@@ -21,6 +21,7 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long tess::nnodes = 2;
+el_types tess::get_type() const {return TESS;}
 
 namespace {
    const size_t procs_len = 6;

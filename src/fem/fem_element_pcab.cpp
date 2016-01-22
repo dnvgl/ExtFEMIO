@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for pcab.
 
-   Detailed description
+   Plane Cable-Bar Element
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long pcab::nnodes = 2;
+
+el_types pcab::get_type() const {return PCAB;}
 
 namespace {
    const size_t procs_len = 3;

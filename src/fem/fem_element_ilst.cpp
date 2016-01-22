@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ilst.
 
-   Detailed description
+   Plane Lin. Strain Triangle
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long ilst::nnodes = 6;
+
+el_types ilst::get_type() const {return ILST;}
 
 namespace {
    const size_t procs_len = 3;

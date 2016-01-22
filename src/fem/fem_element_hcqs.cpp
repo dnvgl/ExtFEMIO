@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for hcqs.
 
-   Detailed description
+   9-Noded Shell Element
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long hcqs::nnodes = 9;
+
+el_types hcqs::get_type() const {return HCQS;}
 
 namespace {
    const size_t procs_len = 3;

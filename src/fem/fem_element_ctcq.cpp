@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ctcq.
 
-   Detailed description
+   16-Noded (8+8) Contact Element
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long ctcq::nnodes = 16;
+
+el_types ctcq::get_type() const {return CTCQ;}
 
 namespace {
    const size_t procs_len = 3;

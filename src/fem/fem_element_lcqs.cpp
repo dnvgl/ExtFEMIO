@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for lcqs.
 
-   Detailed description
+   Subparam. Layered Curved Quadrilat. Thick Shell
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long lcqs::nnodes = 8;
+
+el_types lcqs::get_type() const {return LCQS;}
 
 namespace {
    const size_t procs_len = 3;

@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for tetr.
 
-   Detailed description
+   Tetrahedron
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long tetr::nnodes = 4;
+
+el_types tetr::get_type() const {return TETR;}
 
 namespace {
    const size_t procs_len = 2;

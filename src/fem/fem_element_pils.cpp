@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for pils.
 
-   Detailed description
+   Pile / Soil
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long pils::nnodes = 1;
+
+el_types pils::get_type() const {return PILS;}
 
 namespace {
    const size_t procs_len = 3;

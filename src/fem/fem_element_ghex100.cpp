@@ -4,7 +4,11 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for ghex100.
 
-   Detailed description
+   General Hexahedron, define with nodes 1 to 20 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+        - node 27 at pos 21
 */
 
 // ID:
@@ -22,6 +26,8 @@ using namespace ::dnvgl::extfem::fem::elements;
 
 const long ghex100::nnodes = 21;
 
+el_types ghex100::get_type() const {return GHEX100;}
+
 namespace {
    const size_t procs_len = 2;
    el_processor procs[
@@ -30,7 +36,7 @@ namespace {
 const ::std::set<el_processor> ghex100::processors(procs, procs+procs_len);
 
 ghex100::ghex100(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+   ::dnvgl::extfem::fem::elements::ghex(data) {}
 
 // Local Variables:
 // mode: c++

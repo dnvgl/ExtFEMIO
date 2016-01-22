@@ -4,7 +4,7 @@
    \copyright Copyright © 2016 by DNV GL SE
    \brief FEM element definition for glda.
 
-   Detailed description
+   2-Noded Damping-Matrix
 */
 
 // ID:
@@ -21,6 +21,8 @@ namespace {
 using namespace ::dnvgl::extfem::fem::elements;
 
 const long glda::nnodes = 2;
+
+el_types glda::get_type() const {return GLDA;}
 
 namespace {
    const size_t procs_len = 1;
