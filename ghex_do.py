@@ -1,12 +1,19 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Generate access code for FEM GHEX elements.
+"""
 
 from __future__ import (
     division, print_function, absolute_import, unicode_literals)
 
 # Standard libraries.
-import codecs
 import itertools
+
+# ID: $Id$
+__date__ = "$Date::                            $"[7:-1]
+__scm_version__ = "$Revision$"[10:-1]
+__author__ = "`Berthold Höllmann <berthold.hoellmann@dnvgl.com>`__"
+__copyright__ = "Copyright © 2016 by DNV GL SE"
 
 
 src_tmpl = ("""/**
