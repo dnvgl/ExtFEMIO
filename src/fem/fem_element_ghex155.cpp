@@ -16,6 +16,8 @@
         - node 27 at pos 26
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

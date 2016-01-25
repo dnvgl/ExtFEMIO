@@ -29,6 +29,8 @@ src_tmpl = ("""/**
 {nodepos}
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {{
    const char  cID[]
