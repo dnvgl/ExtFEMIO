@@ -7,6 +7,8 @@
    General Spring / Shim Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

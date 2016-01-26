@@ -7,6 +7,8 @@
    Rect. Plate. Bending Modes
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

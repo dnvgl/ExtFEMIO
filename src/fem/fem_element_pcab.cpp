@@ -7,6 +7,8 @@
    Plane Cable-Bar Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

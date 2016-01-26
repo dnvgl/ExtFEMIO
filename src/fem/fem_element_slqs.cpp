@@ -7,6 +7,8 @@
    Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

@@ -7,6 +7,8 @@
    2-Noded Link Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

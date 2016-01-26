@@ -7,6 +7,8 @@
    General Matrix Element with arbitrary no. of nodes (/n/)
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

@@ -7,6 +7,8 @@
    Subparam. Layered Curved Quadrilat. Thick Shell
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

@@ -7,6 +7,8 @@
    6-Noded (3+3) Axisymmetric Contact Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

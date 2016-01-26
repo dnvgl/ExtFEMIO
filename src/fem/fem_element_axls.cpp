@@ -7,6 +7,8 @@
    Axisymmetric Linear Strain Triangle
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

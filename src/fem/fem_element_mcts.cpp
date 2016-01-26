@@ -7,6 +7,8 @@
    Subparam. Curved Triang. Thick Sandwich Elem.
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

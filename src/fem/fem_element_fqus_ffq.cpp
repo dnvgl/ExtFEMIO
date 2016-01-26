@@ -7,6 +7,8 @@
    Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

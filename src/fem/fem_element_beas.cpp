@@ -7,6 +7,8 @@
    3-D, 2 Node Beam
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

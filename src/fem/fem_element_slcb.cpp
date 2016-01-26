@@ -7,6 +7,8 @@
    Semiloof Curved Beam (11 d.o.fs)
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

@@ -7,6 +7,8 @@
    Axial Spring
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

@@ -7,6 +7,8 @@
    2nd Order Hexahed. Transition Elem., Solid / Shell
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

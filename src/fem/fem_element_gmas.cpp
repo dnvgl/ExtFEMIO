@@ -7,6 +7,8 @@
    1-Noded Mass-Matrix
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

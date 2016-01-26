@@ -7,6 +7,8 @@
    Plane Quadrilateral Membrane Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

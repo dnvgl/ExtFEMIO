@@ -7,6 +7,8 @@
    4-node Contact Element with triangular Shape
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

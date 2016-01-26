@@ -7,6 +7,8 @@
    Subparametric Curved Quadrilateral Thick Shell
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

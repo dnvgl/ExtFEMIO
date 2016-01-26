@@ -7,6 +7,8 @@
    8-Noded (4+4) Contact Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

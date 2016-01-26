@@ -7,6 +7,8 @@
    Axial Damper
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

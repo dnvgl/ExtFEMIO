@@ -7,6 +7,8 @@
    Plane Spring Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

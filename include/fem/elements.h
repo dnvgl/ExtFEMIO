@@ -72,8 +72,8 @@ namespace dnvgl {
             protected:
                static const el_types type;
             public:
-               __base(const ::dnvgl::extfem::fem::cards::gelmnt1&);
-               __base(const ::dnvgl::extfem::fem::cards::gelref1&);
+               __base(const ::dnvgl::extfem::fem::cards::gelmnt1*);
+               __base(const ::dnvgl::extfem::fem::cards::gelref1*);
 
                /** Element number ->
                    dnvgl::extfem::fem::cards::gelmnt1::ELNOX
@@ -737,14 +737,16 @@ namespace dnvgl {
              */
             class ghex: public __base {
             protected:
-               ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 &data)
+               ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 *data)
+                  : __base(data) {};
+               ghex(const ::dnvgl::extfem::fem::cards::gelref1 *data)
                   : __base(data) {};
             };
 
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base>&,
-                          const ::dnvgl::extfem::fem::cards::gelmnt1 &data);
+               const ::dnvgl::extfem::fem::cards::gelmnt1 &data);
          }
       }
    }

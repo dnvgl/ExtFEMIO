@@ -7,6 +7,8 @@
    2-Noded Damping-Matrix
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

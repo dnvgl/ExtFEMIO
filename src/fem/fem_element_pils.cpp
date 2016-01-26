@@ -7,6 +7,8 @@
    Pile / Soil
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

@@ -7,6 +7,8 @@
    Axisymmetric Linear Strain Quadrilateral
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

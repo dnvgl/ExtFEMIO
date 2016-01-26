@@ -7,6 +7,8 @@
    9-Noded Shell Element
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]

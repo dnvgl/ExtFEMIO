@@ -7,6 +7,8 @@
    Flat Triangular Thin Shell / Free Formulation Triangular Shell
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    const char  cID[]
