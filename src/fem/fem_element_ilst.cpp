@@ -32,7 +32,10 @@ namespace {
 }
 const ::std::set<el_processor> ilst::processors(procs, procs+procs_len);
 
-ilst::ilst(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+ilst::ilst(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+ilst::ilst(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

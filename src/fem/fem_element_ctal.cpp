@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> ctal::processors(procs, procs+procs_len);
 
-ctal::ctal(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+ctal::ctal(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+ctal::ctal(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> glsh::processors(procs, procs+procs_len);
 
-glsh::glsh(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+glsh::glsh(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+glsh::glsh(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

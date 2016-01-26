@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> pcab::processors(procs, procs+procs_len);
 
-pcab::pcab(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+pcab::pcab(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+pcab::pcab(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

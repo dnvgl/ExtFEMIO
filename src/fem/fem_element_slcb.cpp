@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> slcb::processors(procs, procs+procs_len);
 
-slcb::slcb(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+slcb::slcb(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+slcb::slcb(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

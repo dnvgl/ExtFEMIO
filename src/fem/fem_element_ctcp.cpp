@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> ctcp::processors(procs, procs+procs_len);
 
-ctcp::ctcp(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+ctcp::ctcp(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+ctcp::ctcp(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

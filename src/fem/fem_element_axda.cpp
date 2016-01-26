@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> axda::processors(procs, procs+procs_len);
 
-axda::axda(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+axda::axda(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+axda::axda(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

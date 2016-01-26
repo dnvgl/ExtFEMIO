@@ -33,8 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> gspr::processors(procs, procs+procs_len);
 
-gspr::gspr
-(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+gspr::gspr(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+gspr::gspr(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

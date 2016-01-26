@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> tetr::processors(procs, procs+procs_len);
 
-tetr::tetr(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+tetr::tetr(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+tetr::tetr(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

@@ -32,7 +32,10 @@ namespace {
 }
 const ::std::set<el_processor> csta::processors(procs, procs+procs_len);
 
-csta::csta(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+csta::csta(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+csta::csta(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

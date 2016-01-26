@@ -34,7 +34,10 @@ namespace {
 }
 const ::std::set<el_processor> beps::processors(procs, procs+procs_len);
 
-beps::beps(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+beps::beps(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+beps::beps(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

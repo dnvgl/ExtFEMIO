@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> axlq::processors(procs, procs+procs_len);
 
-axlq::axlq(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+axlq::axlq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+axlq::axlq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

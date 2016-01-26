@@ -34,7 +34,10 @@ namespace {
 }
 const ::std::set<el_processor> axis::processors(procs, procs+procs_len);
 
-axis::axis(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+axis::axis(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+axis::axis(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

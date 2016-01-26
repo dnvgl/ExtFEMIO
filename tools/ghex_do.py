@@ -56,7 +56,10 @@ namespace {{
 const ::std::set<el_processor> ghex1{num:02d}::processors(procs, """
             """procs+procs_len);
 
-ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1 *) :
+   ::dnvgl::extfem::fem::elements::ghex(data) {{}}
+
+ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::ghex(data) {{}}
 
 // Local Variables:
@@ -156,7 +159,8 @@ namespace dnvgl {
              */
             class ghex1{num:02d}: public ghex {{
             public:
-               ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1*);
                static const long nnodes;
                el_types get_type(void) const;
                static const ::std::set<el_processor> processors;

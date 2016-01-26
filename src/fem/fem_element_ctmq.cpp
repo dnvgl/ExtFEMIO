@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> ctmq::processors(procs, procs+procs_len);
 
-ctmq::ctmq(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+ctmq::ctmq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+ctmq::ctmq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> itet::processors(procs, procs+procs_len);
 
-itet::itet(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+itet::itet(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+itet::itet(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

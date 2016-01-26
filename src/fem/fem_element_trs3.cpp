@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> trs3::processors(procs, procs+procs_len);
 
-trs3::trs3(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+trs3::trs3(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+trs3::trs3(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

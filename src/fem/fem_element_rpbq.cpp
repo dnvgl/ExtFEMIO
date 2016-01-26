@@ -32,7 +32,10 @@ namespace {
 }
 const ::std::set<el_processor> rpbq::processors(procs, procs+procs_len);
 
-rpbq::rpbq(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+rpbq::rpbq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+rpbq::rpbq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

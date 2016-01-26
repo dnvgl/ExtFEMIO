@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> scts::processors(procs, procs+procs_len);
 
-scts::scts(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+scts::scts(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+scts::scts(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

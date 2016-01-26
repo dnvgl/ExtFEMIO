@@ -32,7 +32,10 @@ namespace {
 }
 const ::std::set<el_processor> glma::processors(procs, procs+procs_len);
 
-glma::glma(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+glma::glma(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+glma::glma(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

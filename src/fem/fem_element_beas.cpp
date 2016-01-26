@@ -35,7 +35,10 @@ namespace {
 }
 const ::std::set<el_processor> beas::processors(procs, procs+procs_len);
 
-beas::beas(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+beas::beas(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+beas::beas(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

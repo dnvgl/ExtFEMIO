@@ -35,7 +35,10 @@ namespace {
 const ::std::set<el_processor> fqus_ffq::processors(
    procs, procs+procs_len);
 
-fqus_ffq::fqus_ffq(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+fqus_ffq::fqus_ffq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+fqus_ffq::fqus_ffq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

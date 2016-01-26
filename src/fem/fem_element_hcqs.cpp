@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> hcqs::processors(procs, procs+procs_len);
 
-hcqs::hcqs(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+hcqs::hcqs(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+hcqs::hcqs(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> tpri::processors(procs, procs+procs_len);
 
-tpri::tpri(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+tpri::tpri(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+tpri::tpri(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

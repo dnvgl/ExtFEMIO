@@ -32,8 +32,10 @@ namespace {
 }
 const ::std::set<el_processor> gdam::processors(procs, procs+procs_len);
 
-gdam::gdam
-(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+gdam::gdam(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+gdam::gdam(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

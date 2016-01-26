@@ -33,7 +33,10 @@ namespace {
 }
 const ::std::set<el_processor> matr::processors(procs, procs+procs_len);
 
-matr::matr(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+matr::matr(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::__base(data) {}
+
+matr::matr(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

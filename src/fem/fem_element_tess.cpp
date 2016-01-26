@@ -31,10 +31,10 @@ namespace {
 }
 const ::std::set<el_processor> tess::processors(procs, procs+procs_len);
 
-tess::tess(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+tess::tess(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
-tess::tess(const ::dnvgl::extfem::fem::cards::gelref1 &data) :
+tess::tess(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

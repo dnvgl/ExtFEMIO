@@ -41,7 +41,10 @@ namespace {
 }
 const ::std::set<el_processor> ghex127::processors(procs, procs+procs_len);
 
-ghex127::ghex127(const ::dnvgl::extfem::fem::cards::gelmnt1 &data) :
+ghex127::ghex127(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   ::dnvgl::extfem::fem::elements::ghex(data) {}
+
+ghex127::ghex127(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::ghex(data) {}
 
 // Local Variables:

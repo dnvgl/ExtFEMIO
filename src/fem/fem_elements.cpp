@@ -34,9 +34,9 @@ using namespace ::dnvgl::extfem::fem::elements;
 
 
 void dnvgl::extfem::fem::elements::dispatch(
-   std::unique_ptr<__base> &res, const ::dnvgl::extfem::fem::cards::gelmnt1 &data) {
+   std::unique_ptr<__base> &res, const ::dnvgl::extfem::fem::cards::gelmnt1 *data) {
 
-   switch (data.ELTYP) {
+   switch (data->ELTYP) {
    case BEPS: res = ::std::make_unique<beps>(data); break;
    case CSTA: res = ::std::make_unique<csta>(data); break;
    case RPBQ: res = ::std::make_unique<rpbq>(data); break;
@@ -163,10 +163,11 @@ void dnvgl::extfem::fem::elements::dispatch(
 
 const long undef::nnodes = -1;
 
-__base::__base(dnvgl::extfem::fem::cards::gelmnt1 const &data) :
-   eleno(data.ELNOX), elident(data.ELNO), nodes(data.NODIN.begin(), data.NODIN.end()) {}
+__base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
+   eleno(data->ELNOX), elident(data->ELNO),
+   nodes(data->NODIN.begin(), data->NODIN.end()) {}
 
-__base::__base(dnvgl::extfem::fem::cards::gelref1 const &data) {}
+__base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
 // Local Variables:
 // mode: c++

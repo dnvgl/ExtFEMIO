@@ -61,7 +61,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    CHECK(data1.NODIN[0] == 6);
    CHECK(data1.NODIN[1] == 7);
 
-   tess probe1(data1);
+   tess probe1(&data1);
    CHECK(probe1.get_type() == elements::TESS);
    CHECK(probe1.nnodes == 2);
    CHECK(probe1.nodes.size() == 2);
@@ -69,7 +69,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    CHECK(probe1.nodes[1] == 7);
 
    ::std::unique_ptr<__base> probe2;
-   dispatch(probe2, data1);
+   dispatch(probe2, &data1);
    CHECK(probe2->get_type() == TESS);
    CHECK(static_cast<tess*>(probe2.get())->nnodes == 2);
 }
