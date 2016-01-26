@@ -169,6 +169,17 @@ __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
 
 __base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
+__base::__base(__base const *data) {}
+
+ghex::ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   __base(data) {}
+
+ghex::ghex(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
+   __base(data) {}
+
+ghex::ghex(const __base *p) :
+   __base(p) {}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

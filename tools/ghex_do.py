@@ -56,11 +56,14 @@ namespace {{
 const ::std::set<el_processor> ghex1{num:02d}::processors(procs, """
             """procs+procs_len);
 
-ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1 *) :
+ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
    ::dnvgl::extfem::fem::elements::ghex(data) {{}}
 
 ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::ghex(data) {{}}
+
+ghex1{num:02d}::ghex1{num:02d}(const __base *data) :
+   ghex(data) {{}}
 
 // Local Variables:
 // mode: c+"""
@@ -161,6 +164,7 @@ namespace dnvgl {
             public:
                ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1*);
+               ghex1{num:02d}(const __base*);
                static const long nnodes;
                el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
@@ -176,7 +180,7 @@ namespace dnvgl {
 }
 #endif // _FEM_CARDS_ELEMENTS_GHEX_H_
 
-// Local Variables:
+// Local Var""" """iables:
 // mode: c++
 // ispell-local-dictionary: "english"
 // coding: utf-8
@@ -189,5 +193,5 @@ namespace dnvgl {
 # Local Variables:
 # mode: python
 # ispell-local-dictionary: "english"
-# compile-command: "python setup.py build"
+# compile-command: "cd ..;python3 tools/ghex_do.py&&make check - j8"
 # End:

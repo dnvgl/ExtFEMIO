@@ -74,6 +74,7 @@ namespace dnvgl {
             public:
                __base(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                __base(const ::dnvgl::extfem::fem::cards::gelref1*);
+               __base(const __base*);
 
                /** Element number ->
                    dnvgl::extfem::fem::cards::gelmnt1::ELNOX
@@ -795,10 +796,9 @@ namespace dnvgl {
              */
             class ghex: public __base {
             protected:
-               ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 *data)
-                  : __base(data) {};
-               ghex(const ::dnvgl::extfem::fem::cards::gelref1 *data)
-                  : __base(data) {};
+               ghex(const ::dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex(const ::dnvgl::extfem::fem::cards::gelref1*);
+               ghex(const __base*);
             };
 
             /** Dispatch element class instance for `id`

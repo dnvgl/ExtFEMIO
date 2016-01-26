@@ -48,6 +48,9 @@ ghex162::ghex162(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
 ghex162::ghex162(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::ghex(data) {}
 
+ghex162::ghex162(const __base *data) :
+   ghex(data) {}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"
