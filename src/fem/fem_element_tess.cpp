@@ -37,6 +37,9 @@ tess::tess(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
 tess::tess(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
+tess::tess(const __base *p) :
+   __base(p) {}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

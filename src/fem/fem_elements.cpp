@@ -163,13 +163,17 @@ void dnvgl::extfem::fem::elements::dispatch(
 
 const long undef::nnodes = -1;
 
-__base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
+DllExport __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
    eleno(data->ELNOX), elident(data->ELNO),
    nodes(data->NODIN.begin(), data->NODIN.end()) {}
 
-__base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
+DllExport __base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
-__base::__base(__base const *data) {}
+DllExport __base::__base(__base const *data) {}
+
+DllExport void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {}
+
+DllExport void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
 ghex::ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
    __base(data) {}

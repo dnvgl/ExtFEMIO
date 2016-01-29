@@ -38,6 +38,10 @@ lqua::lqua(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
 lqua::lqua(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}
 
+lqua::lqua(const __base *p) :
+   __base(p) {}
+
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

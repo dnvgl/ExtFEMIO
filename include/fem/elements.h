@@ -72,9 +72,9 @@ namespace dnvgl {
             protected:
                static const el_types type;
             public:
-               __base(const ::dnvgl::extfem::fem::cards::gelmnt1*);
-               __base(const ::dnvgl::extfem::fem::cards::gelref1*);
-               __base(const __base*);
+               DllExport __base(const ::dnvgl::extfem::fem::cards::gelmnt1*);
+               DllExport __base(const ::dnvgl::extfem::fem::cards::gelref1*);
+               DllExport __base(const __base*);
 
                /** Element number ->
                    dnvgl::extfem::fem::cards::gelmnt1::ELNOX
@@ -144,8 +144,8 @@ namespace dnvgl {
                */
                std::deque<long> csys;
 
-               void add(const ::dnvgl::extfem::fem::cards::gelref1&);
-               void add(const ::dnvgl::extfem::fem::cards::gelmnt1&);
+               DllExport void add(::dnvgl::extfem::fem::cards::gelref1 const*);
+               DllExport void add(::dnvgl::extfem::fem::cards::gelmnt1 const*);
 
                virtual el_types get_type(void) const = 0;
             };
@@ -215,10 +215,11 @@ namespace dnvgl {
              */
             class lqua : public __base {
             public:
-               lqua(const ::dnvgl::extfem::fem::cards::gelmnt1*);
-               lqua(const ::dnvgl::extfem::fem::cards::gelref1*);
+               DllExport lqua(const ::dnvgl::extfem::fem::cards::gelmnt1*);
+               DllExport lqua(const ::dnvgl::extfem::fem::cards::gelref1*);
+               DllExport lqua(const __base*);
                static const long nnodes;
-               el_types get_type(void) const;
+               DllExport el_types get_type(void) const;
                static const ::std::set<el_processor> processors;
             };
 
@@ -226,14 +227,14 @@ namespace dnvgl {
              */
             class tess : public __base {
             public:
-               tess(const ::dnvgl::extfem::fem::cards::gelmnt1*);
-               tess(const ::dnvgl::extfem::fem::cards::gelref1*);
-               tess(const ::dnvgl::extfem::fem::cards::gelref1&);
-               void add(const ::dnvgl::extfem::fem::cards::gelmnt1*);
-               void add(const ::dnvgl::extfem::fem::cards::gelref1*);
-               void add(const ::dnvgl::extfem::fem::cards::gelref1&);
-               void add(const ::dnvgl::extfem::fem::cards::gbeamg&);
-               void add(const ::dnvgl::extfem::fem::cards::misosel&);
+               DllExport tess(const ::dnvgl::extfem::fem::cards::gelmnt1*);
+               DllExport tess(const ::dnvgl::extfem::fem::cards::gelref1*);
+               DllExport tess(const __base*);
+               DllExport void add(const ::dnvgl::extfem::fem::cards::gelmnt1*);
+               DllExport void add(const ::dnvgl::extfem::fem::cards::gelref1*);
+               DllExport void add(const ::dnvgl::extfem::fem::cards::gelref1&);
+               DllExport void add(const ::dnvgl::extfem::fem::cards::gbeamg&);
+               DllExport void add(const ::dnvgl::extfem::fem::cards::misosel&);
                // void add(const ::dnvgl::extfem::fem::cards::beiste&);
                static const long nnodes;
                el_types get_type(void) const;
