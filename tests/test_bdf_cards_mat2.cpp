@@ -70,6 +70,40 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
       CHECK((long)probe.MCSID == 17);
    }
 
+   SECTION("FFEMIO-3") {
+      data.empty();
+      data.push_back("MAT2*    10              7.01670932+10   "
+                     "2.78474977+10   0.");
+      data.push_back("*        1.35642948+11   0.              "
+                     "1.26610002+10   0.");
+      data.push_back("*        .000012         .000012         "
+                     ".000012         0.");
+      data.push_back("*        2.99999993-2    0.              "
+                     "0.              0.");
+      data.push_back("*");
+
+      ::std::deque<string> lines;
+      card::card_split(data, lines);
+      mat2 probe(lines);
+
+      CHECK((long)probe.MID == 10);
+      CHECK((double)probe.G11 == 7.01670932e+10);
+      CHECK((double)probe.G12 == 2.78474977e+10);
+      CHECK((double)probe.G13 == 0.);
+      CHECK((double)probe.G22 == 1.35642948e+11);
+      CHECK((double)probe.G23 == 0.);
+      CHECK((double)probe.G33 == 1.26610002e+10);
+      CHECK((double)probe.RHO == 0.);
+      CHECK((double)probe.A1 == 12.e-6);
+      CHECK((double)probe.A2 == 12.e-6);
+      CHECK((double)probe.A3 == 12.e-6);
+      CHECK((double)probe.TREF == 0.);
+      CHECK((double)probe.GE == 2.99999993e-2);
+      CHECK((double)probe.ST == 0.);
+      CHECK((double)probe.SC == 0.);
+      CHECK((double)probe.SS == 0.);
+      CHECK((long)probe.MCSID == 0);
+   }
 }
 
 // Local Variables:

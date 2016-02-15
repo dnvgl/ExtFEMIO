@@ -161,7 +161,7 @@ card::card_split(const deque<std::string> &inp,
             res.push_back(extfem::string::string(head).trim("\t\n*"));
          }
          if (head.length() > 0 && head.back() == '*') {
-            ::std::string tmp(pos->substr(8));
+            ::std::string tmp(pos->length() > 8 ? pos->substr(8) : "");
             tmp.resize(64, ' ');
             if ((++pos)->length() > 8)
                tmp += extfem::string::string((pos)->substr(8)).trim("\t\n");
