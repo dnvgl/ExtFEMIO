@@ -9,6 +9,8 @@
 
 #include "StdAfx.h"
 
+#define _EXTFEMIO_EXPORT_IMPL
+
 // ID:
 namespace {
    const char  cID[]
@@ -43,20 +45,28 @@ namespace {
 
 bdf::types::empty card::empty = bdf::types::empty();
 
+namespace {
+   const void _stderr_warn(std::string &msg) {
+      std::cerr << msg << std::endl;
+   }
+}
+
 namespace dnvgl {
    namespace extfem {
       namespace bdf{
          namespace cards{
-             bdf::types::card card::head = bdf::types::card("<DUMMY>");
+            EXTFEMIO_API const void(*warn_report)(std::string&) = &_stderr_warn;
+                        
+            bdf::types::card card::head = bdf::types::card("<DUMMY>");
 
-             ::std::ostream
-                 &operator<<(::std::ostream &os, const enddata &card){
-                     std::deque<std::unique_ptr<format_entry>> entries;
-
-                     entries.push_back(format(enddata::head));
-                     os << card.format_outlist(entries) << std::endl;
-                     return os;
-             }
+            ::std::ostream
+               &operator<<(::std::ostream &os, const enddata &card){
+               std::deque<std::unique_ptr<format_entry>> entries;
+               
+               entries.push_back(format(enddata::head));
+               os << card.format_outlist(entries) << std::endl;
+               return os;
+            }
          }
       }
    }
@@ -155,7 +165,7 @@ card::card_split(const deque<std::string> &inp,
          }
          res.push_back(tmp);
          first = false;
-         // Long Field Format
+      // Long Field Format
       } else {
          if (first) {
             res.push_back(extfem::string::string(head).trim("\t\n*"));
@@ -163,13 +173,19 @@ card::card_split(const deque<std::string> &inp,
          if (head.length() > 0 && head.back() == '*') {
             ::std::string tmp(pos->length() > 8 ? pos->substr(8) : "");
             tmp.resize(64, ' ');
-            if ((++pos)->length() > 8)
-               tmp += extfem::string::string((pos)->substr(8)).trim("\t\n");
+            if ((pos + 1) != inp.end()) {
+               if ((++pos)->length() > 8)
+                  tmp += extfem::string::string((pos)->substr(8)).trim("\t\n");
+            } else {
+               std::ostringstream msg("Long Field Format: Missing continuation line for record:\n", std::ostringstream::ate);
+               for (auto l : inp) msg << "--> " << l << std::endl;
+               (*warn_report)(msg.str());
+            }
             tmp.resize(128, ' ');
             for (int i=0; i<8; ++i) {
                res.push_back(extfem::string::string(tmp.substr(i*16, 16)).trim(" \t\n"));
             }
-            // Short Field Format
+         // Short Field Format
          } else {
             auto tmp(*pos);
             tmp.resize(80, ' ');

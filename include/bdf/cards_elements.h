@@ -39,7 +39,7 @@ namespace dnvgl {
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_T3;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_T4;
 
-               DllExport base_shell(const ::std::deque<::std::string> &inp) :
+               EXTFEMIO_API base_shell(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
 
             public:
@@ -155,13 +155,13 @@ plate element.
 
             public:
 
-               DllExport ctria3(const ::std::deque<::std::string> &);
+               EXTFEMIO_API ctria3(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CTRIA3; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -187,13 +187,13 @@ quadrilateral plate element.
 
             public:
 
-               DllExport cquad4(const ::std::deque<::std::string> &);
+               EXTFEMIO_API cquad4(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CQUAD4; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -390,13 +390,13 @@ Defines a beam element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> SB;
 
-               DllExport cbeam(const ::std::deque<::std::string> &inp);
+               EXTFEMIO_API cbeam(const ::std::deque<::std::string> &inp);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CBEAM; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -446,7 +446,7 @@ Defines a simple beam element.
 
             public:
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return CBAR;
                };
 
@@ -585,9 +585,9 @@ Defines a simple beam element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<double> W3B;
 
-               DllExport cbar(const ::std::deque<::std::string> &inp);
+               EXTFEMIO_API cbar(const ::std::deque<::std::string> &inp);
 
-               DllExport cbar(
+               EXTFEMIO_API cbar(
                   const long *EID, const long *PID,
                   const long *GA, const long *GB,
                   const double *X1, const double *X2, const double *X3,
@@ -598,7 +598,7 @@ Defines a simple beam element.
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
 
-               DllExport cbar(
+               EXTFEMIO_API cbar(
                   const long *EID, const long *PID,
                   const long *GA, const long *GB, const long *G0,
                   const ::std::string *OFFT = nullptr,
@@ -607,10 +607,10 @@ Defines a simple beam element.
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
 
-               DllExport
+               EXTFEMIO_API
                friend ::std::ostream&
                operator<<(::std::ostream&, const cbar&);
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<<(::std::ostream& os) const;
             };
@@ -655,13 +655,13 @@ Defines a tension-compression-torsion element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> G2;
 
-               DllExport crod(const ::std::deque<::std::string> &inp);
+               EXTFEMIO_API crod(const ::std::deque<::std::string> &inp);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CROD; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator << (::std::ostream& os) const;
             };

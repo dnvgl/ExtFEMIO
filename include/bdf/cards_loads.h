@@ -67,13 +67,13 @@ namespace dnvgl {
                void add_collect(::std::deque<::std::unique_ptr<format_entry>>&,
                                 const momforce_base&) const;
 
-               DllExport momforce_base(const ::std::deque<::std::string> &inp);
-               DllExport momforce_base(
+               EXTFEMIO_API momforce_base(const ::std::deque<::std::string> &inp);
+               EXTFEMIO_API momforce_base(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2, const double *N3);
 
-               DllExport const ::std::ostream& operator << (::std::ostream& os) const;
+               EXTFEMIO_API const ::std::ostream& operator << (::std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `FORCE` entries.
@@ -97,21 +97,21 @@ vector.
 
             public:
 
-               DllExport force(const ::std::deque<::std::string> &inp) :
+               EXTFEMIO_API force(const ::std::deque<::std::string> &inp) :
                   momforce_base(inp) {};
 
-               DllExport force(
+               EXTFEMIO_API force(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
                   momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return FORCE;
                };
 
-               DllExport friend ::std::ostream& operator<<(::std::ostream&, const force&);
-               DllExport const ::std::ostream& operator << (::std::ostream& os) const;
+               EXTFEMIO_API friend ::std::ostream& operator<<(::std::ostream&, const force&);
+               EXTFEMIO_API const ::std::ostream& operator << (::std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `MOMENT` entries.
@@ -135,20 +135,20 @@ vector.
 
             public:
 
-               DllExport moment(const ::std::deque<::std::string> &inp) :
+               EXTFEMIO_API moment(const ::std::deque<::std::string> &inp) :
                   momforce_base(inp) {};
-               DllExport moment(
+               EXTFEMIO_API moment(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
                   momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return MOMENT;
                };
 
-               DllExport friend ::std::ostream& operator<< (::std::ostream&, const moment&);
-               DllExport const ::std::ostream& operator<< (::std::ostream& os) const;
+               EXTFEMIO_API friend ::std::ostream& operator<< (::std::ostream&, const moment&);
+               EXTFEMIO_API const ::std::ostream& operator<< (::std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `LOAD` entries.
@@ -193,19 +193,19 @@ Defines a static load as a linear combination of load sets defined via
                */
                ::std::deque<long> Li;
 
-               DllExport load(const ::std::deque<::std::string> &inp);
+               EXTFEMIO_API load(const ::std::deque<::std::string> &inp);
 
-               DllExport load(const long *SID, const double *S,
+               EXTFEMIO_API load(const long *SID, const double *S,
                               const ::std::deque<double> *Si,
                               const ::std::deque<long> *Li);
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return LOAD;
                };
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<<(::std::ostream&, const load&);
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator << (::std::ostream& os) const;
             };
          }

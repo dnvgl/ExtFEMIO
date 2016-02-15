@@ -85,7 +85,7 @@ namespace dnvgl {
 
                static out_form_type out_form;
 
-               DllExport base(const ::std::string&);
+               EXTFEMIO_API base(const ::std::string&);
 
                ~base() {};
 

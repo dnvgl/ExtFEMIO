@@ -113,14 +113,14 @@ properties of thin shell elements.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> MID4;
 
-               DllExport
+               EXTFEMIO_API
                pshell(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PSHELL; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator << (::std::ostream& os) const;
             };
@@ -132,7 +132,7 @@ properties of thin shell elements.
                static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
                static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
 
-               DllExport
+               EXTFEMIO_API
                beam_base(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
 
@@ -141,7 +141,7 @@ properties of thin shell elements.
                ::dnvgl::extfem::bdf::types::entry_value<long> PID;
                ::dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return BEAM_BASE; };
             };
@@ -150,12 +150,12 @@ properties of thin shell elements.
                // base class for beam property classes.
             protected:
 
-               DllExport beam_prop(const ::std::deque<::std::string> &inp) :
+               EXTFEMIO_API beam_prop(const ::std::deque<::std::string> &inp) :
                   beam_base(inp) {};
 
             public:
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
             };
 
 /// Handle Nastran Bulk `PBEAM` entries.
@@ -382,14 +382,14 @@ The last two continuations are:
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> N2_B;
 
-               DllExport
+               EXTFEMIO_API
                pbeam(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAM; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator << (::std::ostream& os) const;
             };
@@ -477,13 +477,13 @@ dimensions.
                */
                ::std::deque<double> X_XB;
 
-               DllExport pbeaml(const ::std::deque<::std::string> &);
+               EXTFEMIO_API pbeaml(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAML; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -504,11 +504,11 @@ dimensions.
                /// 0)
                ::dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return BAR_PROP; };
 
-               DllExport
+               EXTFEMIO_API
                bar_prop(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
             };
@@ -606,13 +606,13 @@ stations)
                */
                ::dnvgl::extfem::bdf::types::entry_value<double> I12;
 
-               DllExport pbar(const ::std::deque<::std::string> &);
+               EXTFEMIO_API pbar(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBAR; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -664,13 +664,13 @@ cross-sectional dimensions.
                */
                ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               DllExport pbarl(const ::std::deque<::std::string> &);
+               EXTFEMIO_API pbarl(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBARL; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -720,13 +720,13 @@ Defines the properties of a rod element (`CROD` entry).
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               DllExport prod(const ::std::deque<::std::string> &);
+               EXTFEMIO_API prod(const ::std::deque<::std::string> &);
 
-               DllExport
+               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PROD; };
 
-               DllExport
+               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };

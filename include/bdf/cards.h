@@ -36,6 +36,9 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
+            EXTFEMIO_API extern const void(*warn_report)(std::string&);
+
+
 /**
    \brief Unique identifier for each class representing a BDF card.
 
@@ -112,7 +115,7 @@ namespace dnvgl {
 
                static ::dnvgl::extfem::bdf::types::card head;
 
-               DllExport ::std::string format_outlist(
+               EXTFEMIO_API ::std::string format_outlist(
                   const ::std::deque<::std::unique_ptr<format_entry>>&) const;
 
             public:
@@ -130,11 +133,11 @@ namespace dnvgl {
                format(const ::dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
                       const _Ty *val);
 
-               DllExport static void
+               EXTFEMIO_API static void
                card_split(std::deque<std::string> const &, std::deque<std::string> &);
 
-               DllExport card (const ::std::deque<::std::string> &);
-               DllExport card ();
+               EXTFEMIO_API card (const ::std::deque<::std::string> &);
+               EXTFEMIO_API card ();
 
                virtual const ::dnvgl::extfem::bdf::cards::types card_type(void) const = 0;
                virtual const ::std::ostream& operator<<(::std::ostream&) const = 0;
@@ -174,14 +177,14 @@ namespace dnvgl {
 
             public:
 
-               DllExport unknown(const ::std::deque<::std::string> &inp) :
+               EXTFEMIO_API unknown(const ::std::deque<::std::string> &inp) :
                   card(inp), content(inp) {};
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return UNKNOWN; }
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return UNKNOWN; }
 
                ::std::deque<::std::string> content;
 
-               DllExport const ::std::ostream& operator << (::std::ostream& os) const {
+               EXTFEMIO_API const ::std::ostream& operator << (::std::ostream& os) const {
                   throw errors::error("can't write UNKNOWN.");
                   return os;
                };
@@ -206,20 +209,20 @@ Designates the end of the Bulk Data Section.
 
             public:
 
-               DllExport enddata(const ::std::deque<::std::string> &inp) :
+               EXTFEMIO_API enddata(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
 
-               DllExport enddata() : card() {};
+               EXTFEMIO_API enddata() : card() {};
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return ENDDATA; };
 
-               DllExport const ::std::ostream& operator<< (::std::ostream& os) const {
+               EXTFEMIO_API const ::std::ostream& operator<< (::std::ostream& os) const {
                   os << this;
                   return os;
                };
 
-               DllExport
+               EXTFEMIO_API
                friend ::std::ostream&
                operator<<(::std::ostream &, const enddata&);
             };
@@ -290,14 +293,14 @@ displacement, and its permanent single-point constraints.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> SEID;
 
-               DllExport grid(const ::std::deque<::std::string> &);
-               DllExport grid(
+               EXTFEMIO_API grid(const ::std::deque<::std::string> &);
+               EXTFEMIO_API grid(
                   long &ID, long &CP, double &X1, double &X2, double &X3);
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return GRID; };
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -384,12 +387,12 @@ Defines the material properties for linear isotropic materials.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> MCSID;
 
-               DllExport mat1(const ::std::deque<::std::string> &);
+               EXTFEMIO_API mat1(const ::std::deque<::std::string> &);
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT1; };
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -512,7 +515,7 @@ namespace dnvgl {
          namespace cards {
             /** Dispatch instances of the different BDF card classes.
              */
-            DllExport void
+            EXTFEMIO_API void
             dispatch(
                const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }
