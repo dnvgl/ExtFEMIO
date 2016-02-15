@@ -67,6 +67,9 @@
     <ClCompile Include="test_bdf_cards_mat1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_bdf_cards_mat2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="test_bdf_cards_moment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

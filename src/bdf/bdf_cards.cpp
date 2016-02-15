@@ -230,6 +230,9 @@ bdf::cards::dispatch(const deque<std::string> &inp, std::unique_ptr<bdf::cards::
       case MAT1:
          res = ::std::make_unique<bdf::cards::mat1>(inp);
          break;
+      case MAT2:
+         res = ::std::make_unique<bdf::cards::mat2>(inp);
+         break;
       case ENDDATA:
          res = ::std::make_unique<bdf::cards::enddata>(inp);
          break;

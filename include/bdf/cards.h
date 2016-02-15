@@ -49,6 +49,8 @@ namespace dnvgl {
                GRID,
                /// Isotropic Material Property Definition
                MAT1,
+               /// Shell Element Anisotropic Material Property Definition
+               MAT2,
                /// Triangular Plate Element Connection
                CTRIA3,
                /// Fully Nonlinear Axisymmetric Element
@@ -386,6 +388,111 @@ Defines the material properties for linear isotropic materials.
 
                DllExport const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT1; };
+
+               DllExport const ::std::ostream&
+               operator<< (::std::ostream& os) const;
+            };
+
+/// Handle Nastran Bulk MAT2 entries.
+/** # Shell Element Anisotropic Material Property Definition
+
+Defines the material properties for linear anisotropic materials for
+two-dimensional elements.
+
+
+# Format
+
+| 1      | 2       | 3     | 4     | 5      | 6     | 7     | 8     | 9     | 10 |
+| ------ | ------- | ----- | ----- | ------ | ----- | ----- | ----- | ----- | -- |
+| `MAT2` | `MID`   | `G11` | `G12` | `G13`  | `G22` | `G23` | `G33` | `RHO` |    |
+|        | `A1`    | `A2`  | `A3`  | `TREF` | `GE`  | `ST`  | `SC`  | `SS`  |    |
+|        | `MCSID` |       |       |        |       |       |       |       |    |
+
+Example:
+........
+
+| 1      | 2     | 3     | 4 | 5     | 6     | 7     | 8     | 9     | 10 |
+| ------ | ----- | ----- | - | ----- | ----- | ----- | ----- | ----- | -- |
+| `MAT2` | 13    | 6.2+3 |   |       | 6.2+3 |       | 5.1+3 | 0.056 |    |
+|        | 6.5-6 | 6.5-6 |   | -500. | 0.002 | 20.+5 |       |       |    |
+|        | 1003  |       |   |       |       |       |       |       |    |
+*/
+
+            class mat2 : public card {
+               // NASTRAN `BDF` `MAT2` representation.
+
+            private:
+
+               static ::dnvgl::extfem::bdf::types::card head;
+
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_G;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_GE;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_ST;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SC;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SS;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
+
+            public:
+
+               /** Material identification number. (Integer > 0)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
+
+
+
+
+
+
+
+               /** The material property matrix. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> G11;
+               ::dnvgl::extfem::bdf::types::entry_value<double> G12;
+               ::dnvgl::extfem::bdf::types::entry_value<double> G13;
+               ::dnvgl::extfem::bdf::types::entry_value<double> G22;
+               ::dnvgl::extfem::bdf::types::entry_value<double> G23;
+               ::dnvgl::extfem::bdf::types::entry_value<double> G33;
+               /**   Mass density. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> RHO;
+               /** Thermal expansion coefficient vector. (Real)
+                */
+               ::dnvgl::extfem::bdf::types::entry_value<double> A1;
+               ::dnvgl::extfem::bdf::types::entry_value<double> A2;
+               ::dnvgl::extfem::bdf::types::entry_value<double> A3;
+               /** Reference temperature for the calculation of
+                   thermal loads, or a temperature-dependent thermal
+                   expansion coefficient. See Remarks 10. and 11.
+                   (Real or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> TREF;
+               /** Structural element damping coefficient. See Remarks
+                   7., 10., and 12. (Real)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> GE;
+               /** Stress limits for tension, compression, and shear
+                   are optionally supplied (these are used only to
+                   compute margins of safety in certain elements) and
+                   have no effect on the computational procedures.
+                   (Real or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> ST;
+               ::dnvgl::extfem::bdf::types::entry_value<double> SC;
+               ::dnvgl::extfem::bdf::types::entry_value<double> SS;
+               /** Material coordinate system identification number.
+                   Used only for ``PARAM,CURV`` processing. See
+                   “Parameters” on page 603. (Integer > 0 or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MCSID;
+
+               DllExport mat2(const ::std::deque<::std::string> &);
+
+               DllExport const ::dnvgl::extfem::bdf::cards::types
+               card_type(void) const { return MAT2; };
 
                DllExport const ::std::ostream&
                operator<< (::std::ostream& os) const;

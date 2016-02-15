@@ -211,6 +211,7 @@
     <ClCompile Include="test_bdf_cards_grid.cpp" />
     <ClCompile Include="test_bdf_cards_load.cpp" />
     <ClCompile Include="test_bdf_cards_mat1.cpp" />
+    <ClCompile Include="test_bdf_cards_mat2.cpp" />
     <ClCompile Include="test_bdf_cards_moment.cpp" />
     <ClCompile Include="test_bdf_cards_pbar.cpp" />
     <ClCompile Include="test_bdf_cards_pbarl.cpp" />
