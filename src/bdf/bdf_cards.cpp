@@ -35,7 +35,7 @@ using namespace ::dnvgl;
 using namespace extfem;
 using namespace bdf::cards;
 
-bdf::cards::card::card(const deque<::std::string> &inp) {}
+EXTFEMIO_API dnvgl::extfem::bdf::cards::card::card(const ::std::deque<::std::string> &inp) {}
 
 bdf::cards::card::card() {}
 
@@ -43,10 +43,10 @@ namespace {
    const char initVals[3] = { '+', '*', ',' };
 }
 
-bdf::types::empty card::empty = bdf::types::empty();
+::dnvgl::extfem::bdf::types::empty dnvgl::extfem::bdf::cards::card::empty = bdf::types::empty();
 
 namespace {
-   const void _stderr_warn(std::string &msg) {
+   const void _stderr_warn(const std::string &msg) {
       std::cerr << msg << std::endl;
    }
 }
@@ -55,7 +55,7 @@ namespace dnvgl {
    namespace extfem {
       namespace bdf{
          namespace cards{
-            EXTFEMIO_API const void(*warn_report)(std::string&) = &_stderr_warn;
+            EXTFEMIO_API const void(*warn_report)(const std::string&) = &_stderr_warn;
                         
             bdf::types::card card::head = bdf::types::card("<DUMMY>");
 
@@ -73,7 +73,7 @@ namespace dnvgl {
 }
 
 
-const set<char> card::free_form_cont(initVals, initVals + 3);
+const set<char> dnvgl::extfem::bdf::cards::card::free_form_cont(initVals, initVals + 3);
 
 std::string card::format_outlist(
    const ::std::deque<::std::unique_ptr<format_entry>> &en) const {
@@ -132,7 +132,7 @@ const map<std::string, types> cardtype_map(
    map_pairs, map_pairs + map_pairs_num);
 
 void
-card::card_split(const deque<std::string> &inp,
+dnvgl::extfem::bdf::cards::card::card_split(const deque<std::string> &inp,
                  deque<::std::string> &res) {
    ::std::string head;
 

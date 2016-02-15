@@ -36,7 +36,7 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
-            EXTFEMIO_API extern const void(*warn_report)(std::string&);
+            EXTFEMIO_API extern const void(*warn_report)(const std::string&);
 
 
 /**
@@ -492,12 +492,12 @@ Example:
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> MCSID;
 
-               DllExport mat2(const ::std::deque<::std::string> &);
+               EXTFEMIO_API mat2(const ::std::deque<::std::string> &);
 
-               DllExport const ::dnvgl::extfem::bdf::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT2; };
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
          }

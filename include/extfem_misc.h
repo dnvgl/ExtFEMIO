@@ -12,7 +12,7 @@
 #if !defined _EXTFEM_MISC_H_
 #define _EXTFEM_MISC_H_
 
-#ifdef _MSC_VER && _EXTFEMIO_DLL
+#if (defined(_MSC_VER) && defined(_EXTFEMIO_DLL))
 #ifdef _EXTFEMIO_EXPORT_IMPL
 #define EXTFEMIO_API __declspec( dllexport )
 // #pragma message("EXTFEMIO_API: EXTFEMIO_API")
