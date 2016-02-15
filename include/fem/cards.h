@@ -132,11 +132,11 @@ namespace dnvgl {
 
             public:
 
-               DllExport static void
+               EXTFEMIO_API static void
                card_split(::std::deque<::std::string> const &, ::std::deque<::std::string>&);
 
-               DllExport card (const ::std::deque<::std::string> &);
-               DllExport card ();
+               EXTFEMIO_API card (const ::std::deque<::std::string> &);
+               EXTFEMIO_API card ();
 
                virtual const ::dnvgl::extfem::fem::cards::types
                card_type(void) const = 0;
@@ -149,17 +149,17 @@ namespace dnvgl {
 
             public:
 
-               DllExport unknown(const ::std::deque<::std::string> &inp);
+               EXTFEMIO_API unknown(const ::std::deque<::std::string> &inp);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                ::std::deque<::std::string> content;
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const unknown&);
             };
 
@@ -237,23 +237,23 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                */
                ::std::deque<::std::string> CONT;
 
-               DllExport date(const ::std::deque<::std::string>&);
+               EXTFEMIO_API date(const ::std::deque<::std::string>&);
 
-               DllExport date(
+               EXTFEMIO_API date(
                   const long &TYPE, const long &SUBTYPE,
                   const long &NRECS, const long &NBYTE,
                   const ::std::deque<::std::string> &CONT);
 
-               DllExport date(
+               EXTFEMIO_API date(
                   const long &TYPE, const long &SUBTYPE,
                   const ::std::deque<::std::string> &CONT);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const date&);
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -296,18 +296,18 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                double ZCOORD;
 
 
-               DllExport gcoord(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gcoord(const ::std::deque<::std::string>&);
 
-               DllExport gcoord(
+               EXTFEMIO_API gcoord(
                   const long &NODENO,
                   const double &XCOORD, const double &YCOORD, const double &ZCOORD);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gcoord&);
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -357,22 +357,22 @@ system, unless a local nodal coordinate system is specified (see the
                 */
                ::std::deque<int> ODOF;
 
-               DllExport gnode(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gnode(const ::std::deque<::std::string>&);
 
-               DllExport gnode(
+               EXTFEMIO_API gnode(
                   const long &NODEX, const long &NODENO,
                   const long &NDOF, const ::std::deque<int> &ODOF);
 
-               DllExport gnode(
+               EXTFEMIO_API gnode(
                   const long &NODEX, const long &NODENO,
                   const ::std::deque<int> &ODOF);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gnode&);
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -418,19 +418,19 @@ system, unless a local nodal coordinate system is specified (see the
                */
                mod_type SELMOD;
 
-               DllExport ident(const ::std::deque<::std::string>&);
+               EXTFEMIO_API ident(const ::std::deque<::std::string>&);
 
-               DllExport ident(
+               EXTFEMIO_API ident(
                   const long &SLEVEL, const long &SELTYP,
                   const mod_type &SELMOD);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const ident&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -466,16 +466,16 @@ Defines end of a superelement.
                */
                long CONT;
 
-               DllExport iend(const ::std::deque<::std::string>&);
+               EXTFEMIO_API iend(const ::std::deque<::std::string>&);
 
-               DllExport iend(const long &CONT);
+               EXTFEMIO_API iend(const long &CONT);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const iend&);
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -557,24 +557,24 @@ Defines end of a superelement.
                */
                ::std::deque<long> NODIN;
 
-               DllExport gelmnt1(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gelmnt1(const ::std::deque<::std::string>&);
 
-               DllExport gelmnt1(
+               EXTFEMIO_API gelmnt1(
                   const long &ELNOX, const long &ELNO,
                   const ::dnvgl::extfem::fem::elements::el_types &ELTYP, const long &ELTYAD,
                   const ::std::deque<long> &NODIN);
 
-               DllExport gelmnt1(
+               EXTFEMIO_API gelmnt1(
                   const long &ELNOX, const long &ELNO,
                   const ::dnvgl::extfem::fem::elements::el_types &ELTYP,
                   const ::std::deque<long> &NODIN);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gelmnt1&);
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -735,9 +735,9 @@ Shortest version:
                */
                ::std::deque<long> TRANSNO;
 
-               DllExport gelref1(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gelref1(const ::std::deque<::std::string>&);
 
-               DllExport gelref1(
+               EXTFEMIO_API gelref1(
                   const long &ELNO, const long &MATNO,
                   const long &ADDNO, const long &INTNO,
                   const long &MINTNO, const long &STRANO,
@@ -749,13 +749,13 @@ Shortest version:
                   const ::std::deque<long> &ECCNO=::std::deque<long>(),
                   const ::std::deque<long> &TRANSNO=::std::deque<long>());
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gelref1&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -837,21 +837,21 @@ Shortest version:
                 */
                long NLOBZ;
 
-               DllExport gbarm(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gbarm(const ::std::deque<::std::string>&);
 
-               DllExport gbarm(
+               EXTFEMIO_API gbarm(
                   const long &GEONO,
                   const double &HZ, const double &BT, const double &BB,
                   const double &SFY, const double &SFZ,
                   const long &NLOBY, const long &NLOBZ);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gbarm&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -944,9 +944,9 @@ record may be on the interface.
                 */
                double SZ;
 
-               DllExport gbeamg(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gbeamg(const ::std::deque<::std::string>&);
 
-               DllExport gbeamg(
+               EXTFEMIO_API gbeamg(
                   const long &GEONO,
                   const double &AREA,
                   const double &IX, const double &IY, const double &IZ, const double &IYZ,
@@ -955,13 +955,13 @@ record may be on the interface.
                   const double &SHCENY, const double &SHCENZ,
                   const double &SY, const double &SZ);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gbeamg&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1008,19 +1008,19 @@ record may be on the interface.
                 */
                double EZ;
 
-               DllExport geccen(const ::std::deque<::std::string>&);
+               EXTFEMIO_API geccen(const ::std::deque<::std::string>&);
 
-               DllExport geccen(
+               EXTFEMIO_API geccen(
                   const long &ECCNO,
                   const double &EX, const double &EY, const double &EZ);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const geccen&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1048,18 +1048,18 @@ record may be on the interface.
                double TH;
                long NINT;
 
-               DllExport gelth(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gelth(const ::std::deque<::std::string>&);
 
-               DllExport gelth(
+               EXTFEMIO_API gelth(
                   const long &GEONO, const double &TH, const long &NINT);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gelth&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1153,22 +1153,22 @@ record may be on the interface.
                 */
                long NLOBZ;
 
-               DllExport giorh(const ::std::deque<::std::string>&);
+               EXTFEMIO_API giorh(const ::std::deque<::std::string>&);
 
-               DllExport giorh(
+               EXTFEMIO_API giorh(
                 const long &GEONO,
                 const double &HZ, const double &TY, const double &BT,
                 const double &TT, const double &BB, const double &TB,
                 const double &SFY, const double &SFZ,
                 const long &NLOBYT, const long &NLOBYB, const long &NLOBZ);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const giorh&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1262,9 +1262,9 @@ record may be on the interface.
                 */
                long NLOBZ;
 
-               DllExport glsec(const ::std::deque<::std::string>&);
+               EXTFEMIO_API glsec(const ::std::deque<::std::string>&);
 
-               DllExport glsec(
+               EXTFEMIO_API glsec(
                 const long &GEONO,
                 const double &HZ, const double &TY, const double &BY,
                 const double &TZ,
@@ -1272,13 +1272,13 @@ record may be on the interface.
                 const bool &K,
                 const long &NLOBY, const long &NLOBZ);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const glsec&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1354,21 +1354,21 @@ record may be on the interface.
                 */
                long NRAD;
 
-               DllExport gpipe(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gpipe(const ::std::deque<::std::string>&);
 
-               DllExport gpipe(
+               EXTFEMIO_API gpipe(
                 const long &GEONO,
                 const double &DI, const double &DY, const double &T,
                 const double &SFY, const double &SFZ,
                 const long &NDIR, const long &NRAD);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gpipe&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1450,9 +1450,9 @@ be specified on one BQDP record.
                */
                ::std::deque<double> b;
 
-               DllExport bldep(const ::std::deque<::std::string>&);
+               EXTFEMIO_API bldep(const ::std::deque<::std::string>&);
 
-               DllExport bldep(const long &NODENO,
+               EXTFEMIO_API bldep(const long &NODENO,
                                const long &CNOD,
                                const long &NDDOF,
                                const long &NDEP,
@@ -1460,13 +1460,13 @@ be specified on one BQDP record.
                                const ::std::deque<long> &INDEPDOF,
                                const ::std::deque<double> &b);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const bldep&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1527,22 +1527,22 @@ according to the increasing order of their internal node number.
                */
                ::std::deque<long> FIX;
 
-               DllExport bnbcd(const ::std::deque<::std::string>&);
+               EXTFEMIO_API bnbcd(const ::std::deque<::std::string>&);
 
-               DllExport bnbcd(const long &NODENO,
+               EXTFEMIO_API bnbcd(const long &NODENO,
                                const long &NDOF,
                                const ::std::deque<long> &FIX);
 
-               DllExport bnbcd(const long &NODENO,
+               EXTFEMIO_API bnbcd(const long &NODENO,
                                const ::std::deque<long> &FIX);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const bnbcd&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1618,9 +1618,9 @@ If phase shift is not specified, the fields or positions
                */
                ::std::deque<double> IDISP;
 
-               DllExport bndispl(const ::std::deque<::std::string>&);
+               EXTFEMIO_API bndispl(const ::std::deque<::std::string>&);
 
-               DllExport bndispl(const long &LLC,
+               EXTFEMIO_API bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const bool &COMPLX,
                                  const long &NODENO,
@@ -1628,33 +1628,33 @@ If phase shift is not specified, the fields or positions
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               DllExport bndispl(const long &LLC,
+               EXTFEMIO_API bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const bool &COMPLX,
                                  const long &NODENO,
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               DllExport bndispl(const long &LLC,
+               EXTFEMIO_API bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const long &NODENO,
                                  const long &NDOF,
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               DllExport bndispl(const long &LLC,
+               EXTFEMIO_API bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const long &NODENO,
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const bndispl&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1730,9 +1730,9 @@ out.
                */
                ::std::deque<double> ILOAD;
 
-               DllExport bnload(const ::std::deque<::std::string>&);
+               EXTFEMIO_API bnload(const ::std::deque<::std::string>&);
 
-               DllExport bnload(const long &LLC,
+               EXTFEMIO_API bnload(const long &LLC,
                                 const long &LOTYP,
                                 const bool &COMPLX,
                                 const long &NODENO,
@@ -1740,33 +1740,33 @@ out.
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               DllExport bnload(const long &LLC,
+               EXTFEMIO_API bnload(const long &LLC,
                                 const long &LOTYP,
                                 const bool &COMPLX,
                                 const long &NODENO,
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               DllExport bnload(const long &LLC,
+               EXTFEMIO_API bnload(const long &LLC,
                                 const long &LOTYP,
                                 const long &NODENO,
                                 const long &NDOF,
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               DllExport bnload(const long &LLC,
+               EXTFEMIO_API bnload(const long &LLC,
                                 const long &LOTYP,
                                 const long &NODENO,
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const bnload&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1814,22 +1814,22 @@ the *j*’th d.o.f.
                ::std::deque<::std::deque<double>> K;
 
 
-               DllExport mgsprng(const ::std::deque<::std::string>&);
+               EXTFEMIO_API mgsprng(const ::std::deque<::std::string>&);
 
-               DllExport mgsprng(const long &MATNO,
+               EXTFEMIO_API mgsprng(const long &MATNO,
                                  const long &NDOR,
                                  const ::std::deque<::std::deque<double>> &K);
 
-               DllExport mgsprng(const long &MATNO,
+               EXTFEMIO_API mgsprng(const long &MATNO,
                                  const ::std::deque<::std::deque<double>> &K);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const mgsprng&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1935,39 +1935,39 @@ Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
                */
                ::std::deque<long> IRMEMB;
 
-               DllExport gsetmemb(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gsetmemb(const ::std::deque<::std::string>&);
 
-               DllExport gsetmemb(const long &NFIELD,
+               EXTFEMIO_API gsetmemb(const long &NFIELD,
                                   const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG,
                                   const ::std::deque<long> &IRMEMB);
 
-               DllExport gsetmemb(const long &NFIELD,
+               EXTFEMIO_API gsetmemb(const long &NFIELD,
                                   const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG);
 
-               DllExport gsetmemb(const long &ISREF,
+               EXTFEMIO_API gsetmemb(const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG,
                                   const ::std::deque<long> &IRMEMB);
 
-               DllExport gsetmemb(const long &ISREF,
+               EXTFEMIO_API gsetmemb(const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gsetmemb&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2020,20 +2020,20 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                */
                double UNIZ;
 
-               DllExport gunivec(const ::std::deque<::std::string>&);
+               EXTFEMIO_API gunivec(const ::std::deque<::std::string>&);
 
-               DllExport gunivec(const long &TRANSNO,
+               EXTFEMIO_API gunivec(const long &TRANSNO,
                                  const double &UNIX,
                                  const double &UNIY,
                                  const double &UNIZ);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const gunivec&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2081,22 +2081,22 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                double ALPHA;
 
 
-               DllExport misosel(const ::std::deque<::std::string>&);
+               EXTFEMIO_API misosel(const ::std::deque<::std::string>&);
 
-               DllExport misosel(const long &MATNO,
+               EXTFEMIO_API misosel(const long &MATNO,
                                  const double &YOUNG,
                                  const double &POISS,
                                  const double &RHO,
                                  const double &DAMP,
                                  const double &ALPHA);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const misosel&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2203,34 +2203,34 @@ This record together with the set of nodes or elements record(s)
                ::std::string SET_NAME;
                ::std::deque<::std::string> CONT;
 
-               DllExport tdsetnam(const ::std::deque<::std::string>&);
+               EXTFEMIO_API tdsetnam(const ::std::deque<::std::string>&);
 
-               DllExport tdsetnam(const long &NFIELD,
+               EXTFEMIO_API tdsetnam(const long &NFIELD,
                                   const long &ISREF,
                                   const long &CODNAM,
                                   const long &CODTXT,
                                   const ::std::string &SET_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               DllExport tdsetnam(const long &ISREF,
+               EXTFEMIO_API tdsetnam(const long &ISREF,
                                   const ::std::string &SET_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               DllExport tdsetnam(const long &NFIELD,
+               EXTFEMIO_API tdsetnam(const long &NFIELD,
                                   const long &ISREF,
                                   const long &CODNAM,
                                   const ::std::string &SET_NAME);
 
-               DllExport tdsetnam(const long &ISREF,
+               EXTFEMIO_API tdsetnam(const long &ISREF,
                                   const ::std::string &SET_NAME);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const tdsetnam&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2340,34 +2340,34 @@ super-element hierarchy.
                ::std::string SUP_NAME;
                ::std::deque<::std::string> CONT;
 
-               DllExport tdsupnam(const ::std::deque<::std::string>&);
+               EXTFEMIO_API tdsupnam(const ::std::deque<::std::string>&);
 
-               DllExport tdsupnam(const long &NFIELD,
+               EXTFEMIO_API tdsupnam(const long &NFIELD,
                                   const long &IHREF,
                                   const long &CODNAM,
                                   const long &CODTXT,
                                   const ::std::string &SUP_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               DllExport tdsupnam(const long &IHREF,
+               EXTFEMIO_API tdsupnam(const long &IHREF,
                                   const ::std::string &SUP_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               DllExport tdsupnam(const long &NFIELD,
+               EXTFEMIO_API tdsupnam(const long &NFIELD,
                                   const long &IHREF,
                                   const long &CODNAM,
                                   const ::std::string &SUP_NAME);
 
-               DllExport tdsupnam(const long &IHREF,
+               EXTFEMIO_API tdsupnam(const long &IHREF,
                                   const ::std::string &SUP_NAME);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const tdsupnam&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2431,24 +2431,24 @@ per record.
                */
                ::std::deque<::std::string> CONT;
 
-               DllExport text(const ::std::deque<::std::string>&);
+               EXTFEMIO_API text(const ::std::deque<::std::string>&);
 
-               DllExport text(
+               EXTFEMIO_API text(
                   const long &TYPE, const long &SUBTYPE,
                   const long &NRECS, const long &NBYTE,
                   const ::std::deque<::std::string> &CONT);
 
-               DllExport text(
+               EXTFEMIO_API text(
                   const long &TYPE, const long &SUBTYPE,
                   const ::std::deque<::std::string> &CONT);
 
-               DllExport const ::dnvgl::extfem::fem::cards::types
+               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               DllExport friend ::std::ostream&
+               EXTFEMIO_API friend ::std::ostream&
                operator<< (::std::ostream&, const text&);
 
-               DllExport const ::std::ostream&
+               EXTFEMIO_API const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 }
@@ -2464,7 +2464,7 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
-            DllExport void
+            EXTFEMIO_API void
             dispatch(const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }
       }

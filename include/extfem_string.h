@@ -26,8 +26,8 @@ namespace dnvgl {
 
          class string : public ::std::string {
          public:
-            DllExport string(const ::std::string& in) : ::std::string(in) {};
-            DllExport string trim(const ::std::string& = " \t");
+            EXTFEMIO_API string(const ::std::string& in) : ::std::string(in) {};
+            EXTFEMIO_API string trim(const ::std::string& = " \t");
             string upper();
             string lower();
          };

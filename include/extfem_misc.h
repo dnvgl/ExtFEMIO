@@ -12,11 +12,18 @@
 #if !defined _EXTFEM_MISC_H_
 #define _EXTFEM_MISC_H_
 
-#ifdef _MSC_VER
-#define DllExport __declspec( dllexport )
+#ifdef _MSC_VER && _EXTFEMIO_DLL
+#ifdef _EXTFEMIO_EXPORT_IMPL
+#define EXTFEMIO_API __declspec( dllexport )
+// #pragma message("EXTFEMIO_API: EXTFEMIO_API")
 #else
-#define DllExport
+#define EXTFEMIO_API __declspec( dllimport ) 
+// #pragma message("EXTFEMIO_API: dllimport")
 #endif
+#else //  !_EXTFEMIO_DLL
+#define EXTFEMIO_API
+#endif
+
 
 namespace dnvgl {
    namespace extfem {

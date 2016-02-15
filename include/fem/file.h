@@ -56,17 +56,17 @@ namespace dnvgl {
 
                bool eof;
 
-               DllExport fem_file(::std::istream&);
+               EXTFEMIO_API fem_file(::std::istream&);
 
-               DllExport void get(::std::deque<::std::string>&);
-
-               /// actual byte position (hopefully no fem > 2Gybte will be
-               /// readin ...)
-               DllExport ::std::streampos size(void);
+               EXTFEMIO_API void get(::std::deque<::std::string>&);
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)
-               DllExport ::std::streampos pos(void);
+               EXTFEMIO_API ::std::streampos size(void);
+
+               /// actual byte position (hopefully no fem > 2Gybte will be
+               /// readin ...)
+               EXTFEMIO_API ::std::streampos pos(void);
             };
          }
       }

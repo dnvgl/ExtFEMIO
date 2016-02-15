@@ -33,15 +33,15 @@ namespace dnvgl {
 
             public:
 
-               DllExport error(
+               EXTFEMIO_API error(
                   const ::std::string &msg,
                   const ::std::string &err_class="fem_error");
 
-               DllExport error(
+               EXTFEMIO_API error(
                   const ::std::string&, const ::std::string &msg,
                   const ::std::string &err_class="fem_error");
 
-               DllExport ::std::string operator() (void) const;
+               EXTFEMIO_API ::std::string operator() (void) const;
             };
 
             class types_error : public error {
