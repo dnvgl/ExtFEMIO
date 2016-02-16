@@ -37,6 +37,17 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return Catch::toString( ex() );
 }
 
+namespace {
+   std::string err_msg;
+
+   const void _warn_res(const std::string &msg) {
+      err_msg = msg;
+   }
+}
+
+EXTFEMIO_API const void(*dnvgl::extfem::bdf::cards::warn_report)(const std::string&) = &_warn_res;
+
+
 TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
           "[bdf_mat2]" ) {
 
@@ -103,6 +114,13 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
       CHECK((double)probe.SC == 0.);
       CHECK((double)probe.SS == 0.);
       CHECK((long)probe.MCSID == 0);
+      CHECK(err_msg ==
+            "Long Field Format: Missing continuation line for record:\n"
+            "--> MAT2*    10              7.01670932+10   2.78474977+10   0.\n"
+            "--> *        1.35642948+11   0.              1.26610002+10   0.\n"
+            "--> *        .000012         .000012         .000012         0.\n"
+            "--> *        2.99999993-2    0.              0.              0.\n"
+            "--> *\n");
    }
 }
 

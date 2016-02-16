@@ -53,8 +53,8 @@ namespace {
 
 namespace dnvgl {
    namespace extfem {
-      namespace bdf{
-         namespace cards{
+      namespace bdf {
+         namespace cards {
             EXTFEMIO_API const void(*warn_report)(const std::string&) = &_stderr_warn;
                         
             bdf::types::card card::head = bdf::types::card("<DUMMY>");
