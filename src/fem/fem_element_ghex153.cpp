@@ -50,10 +50,6 @@ ghex153::ghex153(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
 ghex153::ghex153(const __base *data) :
    ghex(data) {}
 
-el_types ghex153::get_type(void) const {
-   return GHEX153;
-}
-
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"
