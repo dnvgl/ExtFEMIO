@@ -133,8 +133,8 @@ const map<std::string, types> cardtype_map(
    map_pairs, map_pairs + map_pairs_num);
 
 void
-dnvgl::extfem::bdf::cards::card::card_split(const deque<std::string> &inp,
-                 deque<::std::string> &res) {
+dnvgl::extfem::bdf::cards::card::card_split(::std::deque<::std::string> const &inp,
+                                            ::std::deque<::std::string> &res) {
    ::std::string head;
 
    res.clear();
@@ -201,7 +201,7 @@ dnvgl::extfem::bdf::cards::card::card_split(const deque<std::string> &inp,
 }
 
 void
-bdf::cards::dispatch(const deque<std::string> &inp, std::unique_ptr<bdf::cards::card> &res) {
+dnvgl::extfem::bdf::cards::dispatch(const deque<std::string> &inp, std::unique_ptr<bdf::cards::card> &res) {
 
    res = nullptr;
 

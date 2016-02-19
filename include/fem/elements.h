@@ -72,6 +72,7 @@ namespace dnvgl {
             class DECLSPECIFIER __base {
             protected:
                static const el_types type;
+               __base(void);
             public:
                __base(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                __base(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -153,6 +154,7 @@ namespace dnvgl {
 
             class DECLSPECIFIER undef : public __base {
             public:
+               undef (void);
                static const long nnodes;
                el_types get_type(void) const;
             };

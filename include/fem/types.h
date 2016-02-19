@@ -437,7 +437,7 @@ namespace dnvgl {
                   tmp = (long)tmp_d;
 
                   while (tmp) {
-                     ldiv_t divmod = div(tmp, (long)10);
+                     ldiv_t divmod = std::div(tmp, (long)10);
                      value->push_back(divmod.rem);
                      tmp /= 10;
                   }

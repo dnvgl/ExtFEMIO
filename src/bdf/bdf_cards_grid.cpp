@@ -58,7 +58,7 @@ const entry_type<long> grid::form_SEID(
    "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
 
 
-grid::grid(const deque<std::string> &inp) : card(inp) {
+grid::grid(const ::std::deque<::std::string> &inp) : card(inp) {
 
    auto pos = inp.rbegin();
 

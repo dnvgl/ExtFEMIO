@@ -164,16 +164,7 @@ namespace dnvgl {
                entry_value(const _Ty &value, const bool &is_value=true) :
                   value(value), is_value(is_value) {};
 
-               entry_value(const _Ty *value) {
-                  if (!value) {
-                     is_value = false;
-                     this->value = _Ty();
-                  } else {
-                     is_value = true;
-                     this->value = *value;
-                  }
-               };
-
+               entry_value(const _Ty *value);
                entry_value() : value(_Ty()), is_value(false) {};
 
                entry_value(const entry_value<_Ty> &val) :
@@ -203,29 +194,38 @@ namespace dnvgl {
                void push_back(const long&);
             };
 
+            template<class _Ty>
+            entry_value<_Ty>::entry_value(const _Ty *value) {
+               if (!value) {
+                  is_value = false;
+                  this->value = _Ty();
+               } else {
+                  is_value = true;
+                  this->value = *value;
+               }
+            };
+
+            template <> inline
             entry_value<::std::deque<int>>::entry_value(
                const entry_value<::std::deque<int>> &val) :
-               value(val.value.begin(), val.value.end()),
-               is_value(val.is_value) {
-            };
+                               value(val.value.begin(), val.value.end()),
+                               is_value(val.is_value) {};
 
             template <> inline
             entry_value<::std::deque<int>>::entry_value(
                const ::std::deque<int> &value, const bool &is_value) :
-               value(value.begin(), value.end()),
-               is_value(is_value) {
+                         value(value.begin(), value.end()),
+                         is_value(is_value) {
             };
 
             template <> inline
-            entry_value<::std::deque<int>>::entry_value(
-               const ::std::deque<int> *value) {
+            entry_value<::std::deque<int>>::entry_value(const ::std::deque<int> *value) {
                if (!value) {
                   this->is_value = false;
-               }
-               else {
+               } else {
                   is_value = true;
                   copy(value->begin(), value->end(),
-                     back_inserter(this->value));
+                       back_inserter(this->value));
                }
             };
 
@@ -234,9 +234,8 @@ namespace dnvgl {
                this->value.push_back(inp);
             };
 
-            template <>
-            entry_value<::std::string>::entry_value(
-               const ::std::string *value) {
+            template <> inline
+            entry_value<::std::string>::entry_value(const ::std::string *value) {
                if (!value) {
                   this->is_value = false;
                   this->value = "";
@@ -244,7 +243,7 @@ namespace dnvgl {
                   this->is_value = true;
                   this->value = *value;
                }
-            }
+            };
 
             template <class _Ty>
             class entry_type : public base { };

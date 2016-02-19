@@ -101,7 +101,7 @@ namespace dnvgl {
                bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
 
-            cbar::cbar(const deque<::std::string> &inp) :
+            cbar::cbar(const ::std::deque<::std::string> &inp) :
                card(inp) {
 
                auto pos = inp.rbegin();

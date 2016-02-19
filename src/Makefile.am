@@ -40,6 +40,7 @@ libextfemio_la_SOURCES += bdf/bdf_cards_crod.cpp
 libextfemio_la_SOURCES += bdf/bdf_cards_ctria3.cpp
 libextfemio_la_SOURCES += bdf/bdf_cards_enddata.cpp
 libextfemio_la_SOURCES += bdf/bdf_cards_grid.cpp
+libextfemio_la_SOURCES += bdf/bdf_cards_mat.cpp
 libextfemio_la_SOURCES += bdf/bdf_cards_mat1.cpp
 libextfemio_la_SOURCES += bdf/bdf_cards_mat2.cpp
 libextfemio_la_SOURCES += bdf/bdf_cards_pbar.cpp

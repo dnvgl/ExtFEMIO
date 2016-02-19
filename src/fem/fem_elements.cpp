@@ -158,24 +158,29 @@ void dnvgl::extfem::fem::elements::dispatch(
    case GHEX161: res = ::std::make_unique<ghex161>(data); break;
    case GHEX162: res = ::std::make_unique<ghex162>(data); break;
    case GHEX163: res = ::std::make_unique<ghex163>(data); break;
+   case UNDEFINED: res = ::std::make_unique<undef>(); break;
    };
 }
+
+undef::undef (void) {}
 
 const long undef::nnodes = -1;
 
 el_types undef::get_type(void) const { return UNDEFINED; }
 
-DECLSPECIFIER __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
+__base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
    eleno(data->ELNOX), elident(data->ELNO),
    nodes(data->NODIN.begin(), data->NODIN.end()) {}
 
-DECLSPECIFIER __base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
+__base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
-DECLSPECIFIER __base::__base(__base const *data) {}
+__base::__base(__base const *data) {}
 
-DECLSPECIFIER void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {}
+__base::__base(void) {}
 
-DECLSPECIFIER void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {}
+void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {}
+
+void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
 ghex::ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
    __base(data) {}
