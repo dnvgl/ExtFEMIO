@@ -3,10 +3,9 @@
 """Generate access code for FEM GHEX elements.
 """
 
-from __future__ import (
-    division, print_function, absolute_import, unicode_literals)
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
-# Standard libraries.
 import itertools
 
 # ID: $Id$
@@ -160,7 +159,7 @@ namespace dnvgl {
 
 {nodepos}
              */
-            class ghex1{num:02d}: public ghex {{
+            class DECLSPECIFIER ghex1{num:02d}: public ghex {{
             public:
                ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1*);
