@@ -47,7 +47,7 @@ ghex132::ghex132(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
 ghex132::ghex132(const __base *data) :
    ghex(data) {}
 
-el_types ghex132::get_type(void) {
+el_types ghex132::get_type(void) const {
    return GHEX132;
 }
 

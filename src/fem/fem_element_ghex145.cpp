@@ -50,7 +50,7 @@ ghex145::ghex145(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
 ghex145::ghex145(const __base *data) :
    ghex(data) {}
 
-el_types ghex145::get_type(void) {
+el_types ghex145::get_type(void) const {
    return GHEX145;
 }
 
