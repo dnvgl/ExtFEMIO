@@ -3,9 +3,10 @@
 """Generate access code for FEM GHEX elements.
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import (
+    division, print_function, absolute_import, unicode_literals)
 
+# Standard libraries.
 import itertools
 
 # ID: $Id$
