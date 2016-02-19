@@ -48,6 +48,10 @@ ghex117::ghex117(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
 ghex117::ghex117(const __base *data) :
    ghex(data) {}
 
+el_types ghex117::get_type(void) {
+   return GHEX117;
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

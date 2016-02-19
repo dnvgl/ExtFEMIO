@@ -65,6 +65,10 @@ ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1 *data)
 ghex1{num:02d}::ghex1{num:02d}(const __base *data) :
    ghex(data) {{}}
 
+el_types ghex1{num:02d}::get_type(void) {{
+   return GHEX1{num:02d};
+}}
+
 // Local Variables:
 // mode: c+"""
             """+
