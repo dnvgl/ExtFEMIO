@@ -33,7 +33,7 @@ properties of thin shell elements.
 | `PSHELL` | `PID` | `MID1` | `T`    | `MID2` | `12I/T**3` | `MID3` | `TS/T` | `NSM` |    |
 |          | `Z1`  | `Z2`   | `MID4` |        |            |        |        |       |    |
 */
-            class pshell : public card {
+            class DECLSPECIFIER pshell : public card {
                // Handle Nastran Bulk PSHELL entries.
 
             private:
@@ -113,26 +113,22 @@ properties of thin shell elements.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> MID4;
 
-               EXTFEMIO_API
                pshell(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PSHELL; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator << (::std::ostream& os) const;
             };
 
-            class beam_base : public card {
+            class DECLSPECIFIER beam_base : public card {
 
             protected:
 
                static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
                static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
 
-               EXTFEMIO_API
                beam_base(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
 
@@ -141,7 +137,6 @@ properties of thin shell elements.
                ::dnvgl::extfem::bdf::types::entry_value<long> PID;
                ::dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return BEAM_BASE; };
             };
@@ -150,12 +145,12 @@ properties of thin shell elements.
                // base class for beam property classes.
             protected:
 
-               EXTFEMIO_API beam_prop(const ::std::deque<::std::string> &inp) :
+               beam_prop(const ::std::deque<::std::string> &inp) :
                   beam_base(inp) {};
 
             public:
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
+               const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
             };
 
 /// Handle Nastran Bulk `PBEAM` entries.
@@ -188,7 +183,7 @@ The last two continuations are:
 |   | `K1`    | `K2`    | `S1`    | `S2`    | `NSI(A)` | `NSI(B)` | `CW(A)` | `CW(B)`  |    |
 |   | `M1(A)` | `M2(A)` | `M1(B)` | `M2(B)` | `N1(A)`  | `N2(A)`  | `N1(B)` | `N2(B)`  |    |
 */
-            class pbeam : public beam_prop {
+            class DECLSPECIFIER pbeam : public beam_prop {
                // Handle Nastran Bulk PBEAM entries.
 
             private:
@@ -382,19 +377,16 @@ The last two continuations are:
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> N2_B;
 
-               EXTFEMIO_API
                pbeam(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAM; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator << (::std::ostream& os) const;
             };
 
-            class l_geom {
+            class DECLSPECIFIER l_geom {
 
             protected:
 
@@ -427,7 +419,7 @@ dimensions.
 |         | `DIMn(m)` | `NSM(m)`  | `SO(B)`  | 1.0       | `DIM1(B)` | `DIM2(B)` | *etc.*    | `DIMn(B)` |    |
 |         |           | `NSM(B)`  |          |           |           |           |           |           |    |
 */
-            class pbeaml : public beam_prop, private l_geom {
+            class DECLSPECIFIER pbeaml : public beam_prop, private l_geom {
                // Handle Nastran Bulk PBEAML entries.
 
             private:
@@ -455,7 +447,7 @@ dimensions.
                    station *j* and end `B`. (Real > 0.0 for `GROUP` =
                    `MSCBML0`)
                */
-               ::std::deque<::std::unique_ptr<::std::deque<double>>> DIM;
+               ::std::deque<::std::deque<double>> DIM;
                /** Nonstructural mass per unit length. (Default = 0.0)
                 */
                ::std::deque<double> NSM;
@@ -477,19 +469,17 @@ dimensions.
                */
                ::std::deque<double> X_XB;
 
-               EXTFEMIO_API pbeaml(const ::std::deque<::std::string> &);
+               pbeaml(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAML; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
 /// Base class for `pbar` and `pbarl`.
-            class bar_prop : public card {
+            class DECLSPECIFIER bar_prop : public card {
 
             protected:
                static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
@@ -504,11 +494,9 @@ dimensions.
                /// 0)
                ::dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return BAR_PROP; };
 
-               EXTFEMIO_API
                bar_prop(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
             };
@@ -530,7 +518,7 @@ stations)
 |        | `K1`  | `K2`  | `I12` |      |      |      |          |      |    |
 */
 
-            class pbar : public bar_prop {
+            class DECLSPECIFIER pbar : public bar_prop {
 
             private:
 
@@ -606,13 +594,11 @@ stations)
                */
                ::dnvgl::extfem::bdf::types::entry_value<double> I12;
 
-               EXTFEMIO_API pbar(const ::std::deque<::std::string> &);
+               pbar(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBAR; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -633,7 +619,7 @@ cross-sectional dimensions.
 |         | `DIM1` | `DIM2`   | `DIM3`  | `DIM4` | `DIM5` | `DIM6` | `DIM7` | `DIM8` |    |
 |         | `DIM9` | *etc.*   | `NSM`   |        |        |        |        |        |    |
 */
-            class pbarl : public bar_prop, private l_geom {
+            class DECLSPECIFIER pbarl : public bar_prop, private l_geom {
 
             private:
 
@@ -664,13 +650,11 @@ cross-sectional dimensions.
                */
                ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               EXTFEMIO_API pbarl(const ::std::deque<::std::string> &);
+               pbarl(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBARL; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -686,7 +670,7 @@ Defines the properties of a rod element (`CROD` entry).
 | ------- | ----- | ----- | --- | --- | --- | ----- | - | - | -- |
 | `PROD`  | `PID` | `MID` | `A` | `J` | `C` | `NSM` |   |   |    |
 */
-            class prod : public card {
+            class DECLSPECIFIER prod : public card {
 
             private:
 
@@ -720,13 +704,11 @@ Defines the properties of a rod element (`CROD` entry).
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               EXTFEMIO_API prod(const ::std::deque<::std::string> &);
+               prod(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PROD; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };

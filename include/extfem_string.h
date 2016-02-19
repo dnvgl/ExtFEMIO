@@ -26,10 +26,29 @@ namespace dnvgl {
 
          class string : public ::std::string {
          public:
-            EXTFEMIO_API string(const ::std::string& in) : ::std::string(in) {};
-            EXTFEMIO_API string trim(const ::std::string& = " \t");
-            string upper();
-            string lower();
+            DECLSPECIFIER string(const ::std::string& in) : ::std::string(in) {};
+
+            // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
+            DECLSPECIFIER string inline trim(const ::std::string &whitespace = " \t") {
+               const auto strBegin = this->find_first_not_of(whitespace);
+               if (strBegin == std::string::npos)
+                  return extfem::string::string(""); // no content
+
+               const auto strEnd = this->find_last_not_of(whitespace);
+               const auto strRange = strEnd - strBegin + 1;
+
+               return this->substr(strBegin, strRange);
+            };
+
+            string inline upper() {
+               transform(this->begin(), this->end(), this->begin(), ::toupper);
+               return *this;
+            };
+
+            string inline lower() {
+               transform(this->begin(), this->end(), this->begin(), ::tolower);
+               return *this;
+            };
          };
       }
    }

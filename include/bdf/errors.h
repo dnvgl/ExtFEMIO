@@ -21,10 +21,10 @@ namespace dnvgl {
       namespace bdf {
          namespace errors {
 
-            class error {
+            class error{
 
             protected:
-
+               
                ::std::string msg;
                ::std::string name;
                ::std::string err_class;
@@ -33,81 +33,81 @@ namespace dnvgl {
 
             public:
 
-               EXTFEMIO_API error(
+               DECLSPECIFIER error(
                   const ::std::string &msg,
                   const ::std::string &err_class="bdf_error");
 
-               EXTFEMIO_API error(
+               DECLSPECIFIER error(
                   const ::std::string&, const ::std::string &msg,
                   const ::std::string &err_class="bdf_error");
 
-               EXTFEMIO_API ::std::string operator() (void) const;
+               DECLSPECIFIER ::std::string operator() (void) const;
             };
 
-            class types_error : public error {
+            class types_error : public error{
 
             public:
 
-               types_error(const ::std::string &msg);
+               DECLSPECIFIER types_error(const ::std::string &msg);
             };
 
-            class form_error : public error {
+            class form_error : public error{
 
             protected:
 
-               form_error(
+               DECLSPECIFIER form_error(
                   const ::std::string &name, const ::std::string &msg,
                   const ::std::string &cls) :
                   error(name, msg, cls) {};
             };
 
-            class float_error : public form_error {
+            class float_error : public form_error{
 
             public:
 
-               float_error(const ::std::string&, const ::std::string&);
+               DECLSPECIFIER float_error(const ::std::string&, const ::std::string&);
             };
 
-            class int_error : public form_error {
+            class int_error : public form_error{
 
             public:
 
-               int_error(const ::std::string&, const ::std::string&);
+               DECLSPECIFIER int_error(const ::std::string&, const ::std::string&);
             };
 
-            class output_error : public error {
+            class output_error : public error{
 
             public:
 
-               output_error(const ::std::string&, const ::std::string&);
+               DECLSPECIFIER output_error(const ::std::string&, const ::std::string&);
             };
 
-            class list_error : public error {
+            class list_error : public error{
 
             public:
 
-               list_error(const ::std::string&, const ::std::string &);
+               DECLSPECIFIER list_error(const ::std::string&, const ::std::string &);
             };
 
-            class str_error : public error {
+            class str_error : public error{
 
             public:
 
-               str_error(const ::std::string&, const ::std::string &);
+               DECLSPECIFIER str_error(const ::std::string&, const ::std::string &);
             };
 
-            class string_error : public error {
+            class string_error : public error{
 
             public:
 
-               string_error(const ::std::string&, const ::std::string &);
+               DECLSPECIFIER string_error(const ::std::string&, const ::std::string &);
             };
 
-            class parse_error : public error {
+            class parse_error : public error{
 
             public:
 
-               parse_error(const ::std::string&, const ::std::string &);
+               DECLSPECIFIER parse_error(const ::std::string&, const ::std::string &);
             };
          }
       }

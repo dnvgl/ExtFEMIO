@@ -45,13 +45,12 @@ namespace {
    }
 }
 
-EXTFEMIO_API const void(*dnvgl::extfem::bdf::cards::warn_report)(const std::string&) = &_warn_res;
-
-
 TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
           "[bdf_mat2]" ) {
 
    ::std::deque<string> data;
+
+   warn_report = &_warn_res;
 
    SECTION("first mat2") {
       data.empty();

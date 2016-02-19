@@ -22,7 +22,7 @@ namespace dnvgl {
          namespace cards {
 
 /// Base class for handling forces and moments.
-            class momforce_base : public card {
+            class DECLSPECIFIER momforce_base : public card {
 
             private:
 
@@ -67,13 +67,14 @@ namespace dnvgl {
                void add_collect(::std::deque<::std::unique_ptr<format_entry>>&,
                                 const momforce_base&) const;
 
-               EXTFEMIO_API momforce_base(const ::std::deque<::std::string> &inp);
-               EXTFEMIO_API momforce_base(
+               momforce_base(const ::std::deque<::std::string> &inp);
+
+               momforce_base(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2, const double *N3);
 
-               EXTFEMIO_API const ::std::ostream& operator << (::std::ostream& os) const;
+               const ::std::ostream& operator << (::std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `FORCE` entries.
@@ -88,7 +89,7 @@ vector.
 | ------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `FORCE` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class force : public momforce_base {
+            class DECLSPECIFIER force : public momforce_base {
                // Handle Nastran Bulk FORCE entries.
 
             private:
@@ -97,21 +98,22 @@ vector.
 
             public:
 
-               EXTFEMIO_API force(const ::std::deque<::std::string> &inp) :
+               force(const ::std::deque<::std::string> &inp) :
                   momforce_base(inp) {};
 
-               EXTFEMIO_API force(
+               force(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
                   momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return FORCE;
                };
 
-               EXTFEMIO_API friend ::std::ostream& operator<<(::std::ostream&, const force&);
-               EXTFEMIO_API const ::std::ostream& operator << (::std::ostream& os) const;
+               friend DECLSPECIFIER ::std::ostream& operator<<(::std::ostream&, const force&);
+               
+               const ::std::ostream& operator << (::std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `MOMENT` entries.
@@ -126,7 +128,7 @@ vector.
 | -------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `MOMENT` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class moment : public momforce_base {
+            class DECLSPECIFIER moment : public momforce_base {
                // Handle Nastran Bulk MOMENT entries.
 
             private:
@@ -135,20 +137,22 @@ vector.
 
             public:
 
-               EXTFEMIO_API moment(const ::std::deque<::std::string> &inp) :
+               moment(const ::std::deque<::std::string> &inp) :
                   momforce_base(inp) {};
-               EXTFEMIO_API moment(
+               
+               moment(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
                   momforce_base(SID, G, CID, F, N1, N2, N3) {};
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return MOMENT;
                };
 
-               EXTFEMIO_API friend ::std::ostream& operator<< (::std::ostream&, const moment&);
-               EXTFEMIO_API const ::std::ostream& operator<< (::std::ostream& os) const;
+               friend DECLSPECIFIER ::std::ostream& operator<< (::std::ostream&, const moment&);
+
+               const ::std::ostream& operator<< (::std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `LOAD` entries.
@@ -166,7 +170,7 @@ Defines a static load as a linear combination of load sets defined via
 | `LOAD` | `SID` | `S`  | `S1`   | `L1` | `S2` | `L2` | `S3` | `L3` |    |
 |        | `S4`  | `L4` | *etc.* |      |      |      |      |      |    |
 */
-            class load : public card {
+            class DECLSPECIFIER load : public card {
 
             private:
 
@@ -193,19 +197,20 @@ Defines a static load as a linear combination of load sets defined via
                */
                ::std::deque<long> Li;
 
-               EXTFEMIO_API load(const ::std::deque<::std::string> &inp);
+               load(const ::std::deque<::std::string> &inp);
 
-               EXTFEMIO_API load(const long *SID, const double *S,
-                              const ::std::deque<double> *Si,
-                              const ::std::deque<long> *Li);
+               load(const long *SID, const double *S,
+                  const ::std::deque<double> *Si,
+                  const ::std::deque<long> *Li);
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return LOAD;
                };
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER ::std::ostream&
                operator<<(::std::ostream&, const load&);
-               EXTFEMIO_API const ::std::ostream&
+
+               const ::std::ostream&
                operator << (::std::ostream& os) const;
             };
          }

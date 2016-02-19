@@ -20,7 +20,7 @@ namespace dnvgl {
          namespace cards {
 
             /// Base class for `ctria3` and `cquad4`.
-            class base_shell : public card {
+            class DECLSPECIFIER base_shell : public card {
 
             protected:
 
@@ -39,7 +39,7 @@ namespace dnvgl {
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_T3;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_T4;
 
-               EXTFEMIO_API base_shell(const ::std::deque<::std::string> &inp) :
+               base_shell(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
 
             public:
@@ -147,7 +147,7 @@ plate element.
 | `CTRIA3` | `EID` | `PID`   | `G1` | `G2` | `G3` | `THETA` or `MCID` | `ZOFFS` |   |    |
 |          |       | `TFLAG` | `T1` | `T2` | `T3` |                   |         |   |    |
 */
-            class ctria3 : public base_shell {
+            class DECLSPECIFIER ctria3 : public base_shell {
 
             private:
 
@@ -155,13 +155,11 @@ plate element.
 
             public:
 
-               EXTFEMIO_API ctria3(const ::std::deque<::std::string> &);
+               ctria3(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CTRIA3; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -179,7 +177,7 @@ quadrilateral plate element.
 | `CQUAD4` | `EID`   | `PID` | `G1` | `G2` | `G3` | `G4` | `THETA` or `MCID` | `ZOFFS` |    |
 |          | `TFLAG` | `T1`  | `T2` | `T3` | `T4` |      |                   |         |    |
 */
-            class cquad4 : public base_shell {
+            class DECLSPECIFIER cquad4 : public base_shell {
 
             private:
 
@@ -187,13 +185,11 @@ quadrilateral plate element.
 
             public:
 
-               EXTFEMIO_API cquad4(const ::std::deque<::std::string> &);
+               cquad4(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CQUAD4; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -219,7 +215,7 @@ Defines a beam element.
 |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`         |    |
 |         | `SA`  | `SB`  |       |       |       |       |       |               |    |
 */
-            class cbeam : public card {
+            class DECLSPECIFIER cbeam : public card {
 
             private:
 
@@ -390,13 +386,10 @@ Defines a beam element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> SB;
 
-               EXTFEMIO_API cbeam(const ::std::deque<::std::string> &inp);
-
-               EXTFEMIO_API
+               cbeam(const ::std::deque<::std::string> &inp);
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CBEAM; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
@@ -420,7 +413,7 @@ Defines a simple beam element.
 | `CBAR`  | `EID` | `PID` | `GA`  | `GB`  | `G0`  |       |       | `OFFT` |    |
 |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
 */
-            class cbar : public card {
+            class DECLSPECIFIER cbar : public card {
 
             private:
 
@@ -446,7 +439,7 @@ Defines a simple beam element.
 
             public:
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
+               const ::dnvgl::extfem::bdf::cards::types card_type(void) const {
                   return CBAR;
                };
 
@@ -585,9 +578,9 @@ Defines a simple beam element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<double> W3B;
 
-               EXTFEMIO_API cbar(const ::std::deque<::std::string> &inp);
+               cbar(const ::std::deque<::std::string> &inp);
 
-               EXTFEMIO_API cbar(
+               cbar(
                   const long *EID, const long *PID,
                   const long *GA, const long *GB,
                   const double *X1, const double *X2, const double *X3,
@@ -598,7 +591,7 @@ Defines a simple beam element.
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
 
-               EXTFEMIO_API cbar(
+               cbar(
                   const long *EID, const long *PID,
                   const long *GA, const long *GB, const long *G0,
                   const ::std::string *OFFT = nullptr,
@@ -607,10 +600,70 @@ Defines a simple beam element.
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
 
-               EXTFEMIO_API
-               friend ::std::ostream&
-               operator<<(::std::ostream&, const cbar&);
-               EXTFEMIO_API
+               friend inline ::std::ostream&
+                  operator<<(::std::ostream &os, const cbar &card) {
+
+                  ::std::deque<::std::unique_ptr<format_entry>> entries;
+
+                  entries.push_back(format(cbar::head));
+
+                  entries.push_back(format<long>(card.form_EID, card.EID));
+                  entries.push_back(format<long>(card.form_PID, card.PID));
+                  entries.push_back(format<long>(card.form_GA, card.GA));
+                  entries.push_back(format<long>(card.form_GB, card.GB));
+                  if (card.choose_dir_code == card.has_DCODE) {
+                     entries.push_back(format<long>(card.form_G0, card.G0));
+                     if ((bool)card.OFFT || (bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A ||
+                        (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B) {
+                        entries.push_back(format(cbar::empty));
+                        entries.push_back(format(cbar::empty));
+                     }
+                  }
+                  else {
+                     entries.push_back(format<double>(card.form_X1, card.X1));
+                     entries.push_back(format<double>(card.form_X2, card.X2));
+                     entries.push_back(format<double>(card.form_X3, card.X3));
+                  }
+
+                  if ((bool)card.OFFT || (bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A ||
+                     (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
+                     entries.push_back(format<::std::string>(card.form_OFFT, card.OFFT));
+                  else goto cont;
+
+                  if ((bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A ||
+                     (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
+                     entries.push_back(format<::std::deque<int>>(card.form_PA, card.PA));
+                  else goto cont;
+                  if ((bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B ||
+                     (bool)card.W2B || (bool)card.W3B)
+                     entries.push_back(format<::std::deque<int>>(card.form_PB, card.PB));
+                  else goto cont;
+                  if ((bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B || (bool)card.W2B ||
+                     (bool)card.W3B)
+                     entries.push_back(format<double>(card.form_W1A, card.W1A));
+                  else goto cont;
+                  if ((bool)card.W2A || (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
+                     entries.push_back(format<double>(card.form_W2A, card.W2A));
+                  else goto cont;
+                  if ((bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
+                     entries.push_back(format<double>(card.form_W3A, card.W3A));
+                  else goto cont;
+                  if ((bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
+                     entries.push_back(format<double>(card.form_W1B, card.W1B));
+                  else goto cont;
+                  if ((bool)card.W2B || (bool)card.W3B)
+                     entries.push_back(format<double>(card.form_W2B, card.W2B));
+                  else goto cont;
+                  if ((bool)card.W3B)
+                     entries.push_back(format<double>(card.form_W3B, card.W3B));
+
+               cont:
+
+                  os << card.format_outlist(entries) << ::std::endl;
+
+                  return os;
+               };
+
                const ::std::ostream&
                operator<<(::std::ostream& os) const;
             };
@@ -626,7 +679,7 @@ Defines a tension-compression-torsion element.
 | ------- | ----- | ----- | ---- | ---- | - | - | - | - | -- |
 | `CROD`  | `EID` | `PID` | `G1` | `G2` |   |   |   |   |    |
 */
-            class crod : public card {
+            class DECLSPECIFIER crod : public card {
 
             private:
 
@@ -655,13 +708,11 @@ Defines a tension-compression-torsion element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> G2;
 
-               EXTFEMIO_API crod(const ::std::deque<::std::string> &inp);
+               crod(const ::std::deque<::std::string> &inp);
 
-               EXTFEMIO_API
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CROD; };
 
-               EXTFEMIO_API
                const ::std::ostream&
                operator << (::std::ostream& os) const;
             };

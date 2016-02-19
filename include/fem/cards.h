@@ -114,7 +114,7 @@ namespace dnvgl {
                // TDLOAD,
             } types;
 
-            class card {
+            class DECLSPECIFIER card {
 
             private:
 
@@ -132,11 +132,11 @@ namespace dnvgl {
 
             public:
 
-               EXTFEMIO_API static void
+               static void
                card_split(::std::deque<::std::string> const &, ::std::deque<::std::string>&);
 
-               EXTFEMIO_API card (const ::std::deque<::std::string> &);
-               EXTFEMIO_API card ();
+               card (const ::std::deque<::std::string> &);
+               card ();
 
                virtual const ::dnvgl::extfem::fem::cards::types
                card_type(void) const = 0;
@@ -145,21 +145,21 @@ namespace dnvgl {
                operator<<(::std::ostream&) const = 0;
             };
 
-            class unknown : public card {
+            class DECLSPECIFIER unknown : public card {
 
             public:
 
-               EXTFEMIO_API unknown(const ::std::deque<::std::string> &inp);
+               unknown(const ::std::deque<::std::string> &inp);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                ::std::deque<::std::string> content;
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const unknown&);
             };
 
@@ -194,7 +194,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 ------------------------------------------------------------------------
 ~~~
 */
-            class date : public card {
+            class DECLSPECIFIER date : public card {
 
             private:
 
@@ -237,23 +237,23 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                */
                ::std::deque<::std::string> CONT;
 
-               EXTFEMIO_API date(const ::std::deque<::std::string>&);
+               date(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API date(
+               date(
                   const long &TYPE, const long &SUBTYPE,
                   const long &NRECS, const long &NBYTE,
                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API date(
+               date(
                   const long &TYPE, const long &SUBTYPE,
                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const date&);
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -265,7 +265,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 | -------- | -------- | -------- | ------- | -------- |
 | `GCOORD` | `NODENO` | `XCOORD` | `YCOORD`| `ZCOORD` |
 */
-            class gcoord : public card {
+            class DECLSPECIFIER gcoord : public card {
 
             private:
 
@@ -296,18 +296,18 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                double ZCOORD;
 
 
-               EXTFEMIO_API gcoord(const ::std::deque<::std::string>&);
+               gcoord(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gcoord(
+               gcoord(
                   const long &NODENO,
                   const double &XCOORD, const double &YCOORD, const double &ZCOORD);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gcoord&);
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -328,7 +328,7 @@ and *Ry* direction respectively in the superelement’s coordinate
 system, unless a local nodal coordinate system is specified (see the
 `BNDOF` and `BNTRCOS` record).
 */
-            class gnode : public card {
+            class DECLSPECIFIER gnode : public card {
 
             private:
 
@@ -357,22 +357,22 @@ system, unless a local nodal coordinate system is specified (see the
                 */
                ::std::deque<int> ODOF;
 
-               EXTFEMIO_API gnode(const ::std::deque<::std::string>&);
+               gnode(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gnode(
+               gnode(
                   const long &NODEX, const long &NODENO,
                   const long &NDOF, const ::std::deque<int> &ODOF);
 
-               EXTFEMIO_API gnode(
+               gnode(
                   const long &NODEX, const long &NODENO,
                   const ::std::deque<int> &ODOF);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gnode&);
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -384,7 +384,7 @@ system, unless a local nodal coordinate system is specified (see the
 | ------- | -------- | -------- | -------- | - |
 | `IDENT` | `SLEVEL` | `SELTYP` | `SELMOD` |   |
 */
-            class ident : public card {
+            class DECLSPECIFIER ident : public card {
 
             private:
 
@@ -418,19 +418,19 @@ system, unless a local nodal coordinate system is specified (see the
                */
                mod_type SELMOD;
 
-               EXTFEMIO_API ident(const ::std::deque<::std::string>&);
+               ident(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API ident(
+               ident(
                   const long &SLEVEL, const long &SELTYP,
                   const mod_type &SELMOD);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const ident&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -444,7 +444,7 @@ system, unless a local nodal coordinate system is specified (see the
 
 Defines end of a superelement.
 */
-            class iend : public card {
+            class DECLSPECIFIER iend : public card {
 
             private:
 
@@ -466,16 +466,16 @@ Defines end of a superelement.
                */
                long CONT;
 
-               EXTFEMIO_API iend(const ::std::deque<::std::string>&);
+               iend(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API iend(const long &CONT);
+               iend(const long &CONT);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const iend&);
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -489,7 +489,7 @@ Defines end of a superelement.
 |           | `NODIN`<sub>`1`</sub> | `NODIN`<sub>`2`</sub> | ...                   | ...      |
 |           | ...                   | ...                   | `NODIN`<sub>`N`</sub> |          |
 */
-            class gelmnt1 : public card {
+            class DECLSPECIFIER gelmnt1 : public card {
 
             private:
 
@@ -557,24 +557,24 @@ Defines end of a superelement.
                */
                ::std::deque<long> NODIN;
 
-               EXTFEMIO_API gelmnt1(const ::std::deque<::std::string>&);
+               gelmnt1(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gelmnt1(
+               gelmnt1(
                   const long &ELNOX, const long &ELNO,
                   const ::dnvgl::extfem::fem::elements::el_types &ELTYP, const long &ELTYAD,
                   const ::std::deque<long> &NODIN);
 
-               EXTFEMIO_API gelmnt1(
+               gelmnt1(
                   const long &ELNOX, const long &ELNO,
                   const ::dnvgl::extfem::fem::elements::el_types &ELTYP,
                   const ::std::deque<long> &NODIN);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gelmnt1&);
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -600,7 +600,7 @@ Shortest version:
 |           | `GEONO/OPT`  | `FIXNO/OPT`  | `ECCNO/OPT`  | `TRANSNO/OPT`  |
 */
 
-            class gelref1 : public card {
+            class DECLSPECIFIER gelref1 : public card {
 
             private:
 
@@ -735,9 +735,9 @@ Shortest version:
                */
                ::std::deque<long> TRANSNO;
 
-               EXTFEMIO_API gelref1(const ::std::deque<::std::string>&);
+               gelref1(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gelref1(
+               gelref1(
                   const long &ELNO, const long &MATNO,
                   const long &ADDNO, const long &INTNO,
                   const long &MINTNO, const long &STRANO,
@@ -749,13 +749,13 @@ Shortest version:
                   const ::std::deque<long> &ECCNO=::std::deque<long>(),
                   const ::std::deque<long> &TRANSNO=::std::deque<long>());
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gelref1&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -772,7 +772,7 @@ Shortest version:
 \image latex gbarm.eps "Massive bar"
 \image html gbarm.svg "Massive bar"
 */
-            class gbarm : public card {
+            class DECLSPECIFIER gbarm : public card {
 
             private:
 
@@ -837,21 +837,21 @@ Shortest version:
                 */
                long NLOBZ;
 
-               EXTFEMIO_API gbarm(const ::std::deque<::std::string>&);
+               gbarm(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gbarm(
+               gbarm(
                   const long &GEONO,
                   const double &HZ, const double &BT, const double &BB,
                   const double &SFY, const double &SFZ,
                   const long &NLOBY, const long &NLOBZ);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gbarm&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -871,7 +871,7 @@ The succeding data concern the cross section at a specific local node.
 If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
 record may be on the interface.
 */
-            class gbeamg : public card {
+            class DECLSPECIFIER gbeamg : public card {
 
             private:
 
@@ -944,9 +944,9 @@ record may be on the interface.
                 */
                double SZ;
 
-               EXTFEMIO_API gbeamg(const ::std::deque<::std::string>&);
+               gbeamg(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gbeamg(
+               gbeamg(
                   const long &GEONO,
                   const double &AREA,
                   const double &IX, const double &IY, const double &IZ, const double &IYZ,
@@ -955,13 +955,13 @@ record may be on the interface.
                   const double &SHCENY, const double &SHCENZ,
                   const double &SY, const double &SZ);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gbeamg&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -973,7 +973,7 @@ record may be on the interface.
 |--------- | ------- | ---- | ---- | ---- |
 | `GECCEN` | `ECCNO` | `EX` | `EY` | `EZ` |
 */
-            class geccen : public card {
+            class DECLSPECIFIER geccen : public card {
 
             private:
 
@@ -1008,19 +1008,19 @@ record may be on the interface.
                 */
                double EZ;
 
-               EXTFEMIO_API geccen(const ::std::deque<::std::string>&);
+               geccen(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API geccen(
+               geccen(
                   const long &ECCNO,
                   const double &EX, const double &EY, const double &EZ);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const geccen&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1032,7 +1032,7 @@ record may be on the interface.
 | ------- | ------- | ---- | ------ | - |
 | `GELTH` | `GEONO` | `TH` | `NINT` |   |
 */
-            class gelth : public card {
+            class DECLSPECIFIER gelth : public card {
 
             private:
 
@@ -1048,18 +1048,18 @@ record may be on the interface.
                double TH;
                long NINT;
 
-               EXTFEMIO_API gelth(const ::std::deque<::std::string>&);
+               gelth(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gelth(
+               gelth(
                   const long &GEONO, const double &TH, const long &NINT);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gelth&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1076,7 +1076,7 @@ record may be on the interface.
 \image latex giorh.eps "I or H beam"
 \image html giorh.svg "I or H beam"
 */
-            class giorh : public card {
+            class DECLSPECIFIER giorh : public card {
 
             private:
 
@@ -1153,22 +1153,22 @@ record may be on the interface.
                 */
                long NLOBZ;
 
-               EXTFEMIO_API giorh(const ::std::deque<::std::string>&);
+               giorh(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API giorh(
+               giorh(
                 const long &GEONO,
                 const double &HZ, const double &TY, const double &BT,
                 const double &TT, const double &BB, const double &TB,
                 const double &SFY, const double &SFZ,
                 const long &NLOBYT, const long &NLOBYB, const long &NLOBZ);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const giorh&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1185,7 +1185,7 @@ record may be on the interface.
 \image latex glsec.eps "I or H beam"
 \image html glsec.svg "I or H beam"
 */
-            class glsec : public card {
+            class DECLSPECIFIER glsec : public card {
 
             private:
 
@@ -1262,9 +1262,9 @@ record may be on the interface.
                 */
                long NLOBZ;
 
-               EXTFEMIO_API glsec(const ::std::deque<::std::string>&);
+               glsec(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API glsec(
+               glsec(
                 const long &GEONO,
                 const double &HZ, const double &TY, const double &BY,
                 const double &TZ,
@@ -1272,13 +1272,13 @@ record may be on the interface.
                 const bool &K,
                 const long &NLOBY, const long &NLOBZ);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const glsec&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1294,7 +1294,7 @@ record may be on the interface.
 \image latex gpipe.eps "Tube"
 \image html gpipe.svg "Tube"
 */
-            class gpipe : public card {
+            class DECLSPECIFIER gpipe : public card {
 
             private:
 
@@ -1354,21 +1354,21 @@ record may be on the interface.
                 */
                long NRAD;
 
-               EXTFEMIO_API gpipe(const ::std::deque<::std::string>&);
+               gpipe(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gpipe(
+               gpipe(
                 const long &GEONO,
                 const double &DI, const double &DY, const double &T,
                 const double &SFY, const double &SFZ,
                 const long &NDIR, const long &NRAD);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gpipe&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1407,7 +1407,7 @@ may be found as Lagrange multiplicators or coefficients (Lagrange
 interpolation polynomial). For 2nd order dependence this may as well
 be specified on one BQDP record.
 */
-            class bldep : public card {
+            class DECLSPECIFIER bldep : public card {
 
             private:
 
@@ -1450,9 +1450,9 @@ be specified on one BQDP record.
                */
                ::std::deque<double> b;
 
-               EXTFEMIO_API bldep(const ::std::deque<::std::string>&);
+               bldep(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API bldep(const long &NODENO,
+               bldep(const long &NODENO,
                                const long &CNOD,
                                const long &NDDOF,
                                const long &NDEP,
@@ -1460,13 +1460,13 @@ be specified on one BQDP record.
                                const ::std::deque<long> &INDEPDOF,
                                const ::std::deque<double> &b);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const bldep&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1503,7 +1503,7 @@ The nodes (degrees of freedom) with `FIX` = 4 are called supernodes
 (super degrees of freedom). The supernode sequence numbering is
 according to the increasing order of their internal node number.
 */
-            class bnbcd : public card {
+            class DECLSPECIFIER bnbcd : public card {
 
             private:
 
@@ -1527,22 +1527,22 @@ according to the increasing order of their internal node number.
                */
                ::std::deque<long> FIX;
 
-               EXTFEMIO_API bnbcd(const ::std::deque<::std::string>&);
+               bnbcd(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API bnbcd(const long &NODENO,
+               bnbcd(const long &NODENO,
                                const long &NDOF,
                                const ::std::deque<long> &FIX);
 
-               EXTFEMIO_API bnbcd(const long &NODENO,
+               bnbcd(const long &NODENO,
                                const ::std::deque<long> &FIX);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const bnbcd&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1569,7 +1569,7 @@ imaginary part.
 If phase shift is not specified, the fields or positions
 `IDISP`<sub>`1`</sub>, `IDISP`<sub>`2`</sub>, etc. are left out.
 */
-            class bndispl : public card {
+            class DECLSPECIFIER bndispl : public card {
 
             private:
 
@@ -1618,9 +1618,9 @@ If phase shift is not specified, the fields or positions
                */
                ::std::deque<double> IDISP;
 
-               EXTFEMIO_API bndispl(const ::std::deque<::std::string>&);
+               bndispl(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API bndispl(const long &LLC,
+               bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const bool &COMPLX,
                                  const long &NODENO,
@@ -1628,33 +1628,33 @@ If phase shift is not specified, the fields or positions
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               EXTFEMIO_API bndispl(const long &LLC,
+               bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const bool &COMPLX,
                                  const long &NODENO,
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               EXTFEMIO_API bndispl(const long &LLC,
+               bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const long &NODENO,
                                  const long &NDOF,
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               EXTFEMIO_API bndispl(const long &LLC,
+               bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const long &NODENO,
                                  const ::std::deque<double> &RDISP,
                                  const ::std::deque<double> &IDISP=::std::deque<double>());
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const bndispl&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1678,7 +1678,7 @@ If phase shift is not specified, i.e. `COMPLX` == false, the fields or
 positions `ILOAD`<sub>`1`</sub>, `ILOAD`<sub>`2`</sub>, etc. are left
 out.
 */
-            class bnload : public card {
+            class DECLSPECIFIER bnload : public card {
 
             private:
 
@@ -1730,9 +1730,9 @@ out.
                */
                ::std::deque<double> ILOAD;
 
-               EXTFEMIO_API bnload(const ::std::deque<::std::string>&);
+               bnload(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API bnload(const long &LLC,
+               bnload(const long &LLC,
                                 const long &LOTYP,
                                 const bool &COMPLX,
                                 const long &NODENO,
@@ -1740,33 +1740,33 @@ out.
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               EXTFEMIO_API bnload(const long &LLC,
+               bnload(const long &LLC,
                                 const long &LOTYP,
                                 const bool &COMPLX,
                                 const long &NODENO,
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               EXTFEMIO_API bnload(const long &LLC,
+               bnload(const long &LLC,
                                 const long &LOTYP,
                                 const long &NODENO,
                                 const long &NDOF,
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               EXTFEMIO_API bnload(const long &LLC,
+               bnload(const long &LLC,
                                 const long &LOTYP,
                                 const long &NODENO,
                                 const ::std::deque<double> &RLOAD,
                                 const ::std::deque<double> &ILOAD=::std::deque<double>());
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const bnload&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1785,7 +1785,7 @@ The (*i*, *j*)’th element of the stiffness matrix corresponds to the
 force to be given in the *i*’th d.o.f. to get a unit displacement in
 the *j*’th d.o.f.
 */
-            class mgsprng : public card {
+            class DECLSPECIFIER mgsprng : public card {
 
             private:
 
@@ -1814,22 +1814,22 @@ the *j*’th d.o.f.
                ::std::deque<::std::deque<double>> K;
 
 
-               EXTFEMIO_API mgsprng(const ::std::deque<::std::string>&);
+               mgsprng(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API mgsprng(const long &MATNO,
+               mgsprng(const long &MATNO,
                                  const long &NDOR,
                                  const ::std::deque<::std::deque<double>> &K);
 
-               EXTFEMIO_API mgsprng(const long &MATNO,
+               mgsprng(const long &MATNO,
                                  const ::std::deque<::std::deque<double>> &K);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const mgsprng&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1869,7 +1869,7 @@ records.
 
   - A set member (number) should only be included once in the list.
 */
-            class gsetmemb : public card {
+            class DECLSPECIFIER gsetmemb : public card {
 
             private:
 
@@ -1935,39 +1935,39 @@ Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
                */
                ::std::deque<long> IRMEMB;
 
-               EXTFEMIO_API gsetmemb(const ::std::deque<::std::string>&);
+               gsetmemb(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gsetmemb(const long &NFIELD,
+               gsetmemb(const long &NFIELD,
                                   const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG,
                                   const ::std::deque<long> &IRMEMB);
 
-               EXTFEMIO_API gsetmemb(const long &NFIELD,
+               gsetmemb(const long &NFIELD,
                                   const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG);
 
-               EXTFEMIO_API gsetmemb(const long &ISREF,
+               gsetmemb(const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG,
                                   const ::std::deque<long> &IRMEMB);
 
-               EXTFEMIO_API gsetmemb(const long &ISREF,
+               gsetmemb(const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gsetmemb&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -1985,7 +1985,7 @@ element types 2, 15 and 23. Other basic element types may refer to
 `BNTRCOS` record have same `TRANSNO`, but they should preferably have
 separate numbering (`TRANSNO`) to avoid possible program problems.
 */
-            class gunivec : public card {
+            class DECLSPECIFIER gunivec : public card {
 
             private:
 
@@ -2020,20 +2020,20 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                */
                double UNIZ;
 
-               EXTFEMIO_API gunivec(const ::std::deque<::std::string>&);
+               gunivec(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API gunivec(const long &TRANSNO,
+               gunivec(const long &TRANSNO,
                                  const double &UNIX,
                                  const double &UNIY,
                                  const double &UNIZ);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const gunivec&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2046,7 +2046,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 | `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO` |
 |           | `DAMP`  | `ALPHA` |         |       |
 */
-            class misosel : public card {
+            class DECLSPECIFIER misosel : public card {
 
             private:
 
@@ -2081,22 +2081,22 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                double ALPHA;
 
 
-               EXTFEMIO_API misosel(const ::std::deque<::std::string>&);
+               misosel(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API misosel(const long &MATNO,
+               misosel(const long &MATNO,
                                  const double &YOUNG,
                                  const double &POISS,
                                  const double &RHO,
                                  const double &DAMP,
                                  const double &ALPHA);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const misosel&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2115,7 +2115,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 This record together with the set of nodes or elements record(s)
 (`GSETMEMB`) constitutes the set (group) datatype.
 */
-            class tdsetnam : public card {
+            class DECLSPECIFIER tdsetnam : public card {
 
             private:
 
@@ -2203,34 +2203,34 @@ This record together with the set of nodes or elements record(s)
                ::std::string SET_NAME;
                ::std::deque<::std::string> CONT;
 
-               EXTFEMIO_API tdsetnam(const ::std::deque<::std::string>&);
+               tdsetnam(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API tdsetnam(const long &NFIELD,
+               tdsetnam(const long &NFIELD,
                                   const long &ISREF,
                                   const long &CODNAM,
                                   const long &CODTXT,
                                   const ::std::string &SET_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API tdsetnam(const long &ISREF,
+               tdsetnam(const long &ISREF,
                                   const ::std::string &SET_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API tdsetnam(const long &NFIELD,
+               tdsetnam(const long &NFIELD,
                                   const long &ISREF,
                                   const long &CODNAM,
                                   const ::std::string &SET_NAME);
 
-               EXTFEMIO_API tdsetnam(const long &ISREF,
+               tdsetnam(const long &ISREF,
                                   const ::std::string &SET_NAME);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const tdsetnam&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2249,7 +2249,7 @@ This record together with the set of nodes or elements record(s)
 This record will associate a name with a super-element in the
 super-element hierarchy.
 */
-            class tdsupnam : public card {
+            class DECLSPECIFIER tdsupnam : public card {
 
             private:
 
@@ -2340,34 +2340,34 @@ super-element hierarchy.
                ::std::string SUP_NAME;
                ::std::deque<::std::string> CONT;
 
-               EXTFEMIO_API tdsupnam(const ::std::deque<::std::string>&);
+               tdsupnam(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API tdsupnam(const long &NFIELD,
+               tdsupnam(const long &NFIELD,
                                   const long &IHREF,
                                   const long &CODNAM,
                                   const long &CODTXT,
                                   const ::std::string &SUP_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API tdsupnam(const long &IHREF,
+               tdsupnam(const long &IHREF,
                                   const ::std::string &SUP_NAME,
                                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API tdsupnam(const long &NFIELD,
+               tdsupnam(const long &NFIELD,
                                   const long &IHREF,
                                   const long &CODNAM,
                                   const ::std::string &SUP_NAME);
 
-               EXTFEMIO_API tdsupnam(const long &IHREF,
+               tdsupnam(const long &IHREF,
                                   const ::std::string &SUP_NAME);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const tdsupnam&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -2384,7 +2384,7 @@ The identifier is used to transfer text-strings on the interface file.
 The following NRECS records must be read in A-format, 72 characters
 per record.
 */
-            class text : public card {
+            class DECLSPECIFIER text : public card {
 
             private:
 
@@ -2431,27 +2431,34 @@ per record.
                */
                ::std::deque<::std::string> CONT;
 
-               EXTFEMIO_API text(const ::std::deque<::std::string>&);
+               text(const ::std::deque<::std::string>&);
 
-               EXTFEMIO_API text(
+               text(
                   const long &TYPE, const long &SUBTYPE,
                   const long &NRECS, const long &NBYTE,
                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API text(
+               text(
                   const long &TYPE, const long &SUBTYPE,
                   const ::std::deque<::std::string> &CONT);
 
-               EXTFEMIO_API const ::dnvgl::extfem::fem::cards::types
+               const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               EXTFEMIO_API friend ::std::ostream&
+               friend DECLSPECIFIER  ::std::ostream&
                operator<< (::std::ostream&, const text&);
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
-}
+
+
+
+
+
+
+
+         }
       }
    }
 }
@@ -2464,7 +2471,7 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
-            EXTFEMIO_API void
+            void DECLSPECIFIER
             dispatch(const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }
       }

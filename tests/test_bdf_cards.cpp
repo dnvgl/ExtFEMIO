@@ -543,11 +543,11 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
       CHECK(static_cast<pbeaml*>(current.get())->GROUP.value == "MSCBML0");
       CHECK(static_cast<pbeaml*>(current.get())->TYPE.value == "L");
       CHECK(static_cast<pbeaml*>(current.get())->DIM.size() == 1);
-      CHECK(static_cast<pbeaml*>(current.get())->DIM[0]->size() == 4);
-      CHECK((*static_cast<pbeaml*>(current.get())->DIM[0])[0] == 63.);
-      CHECK((*static_cast<pbeaml*>(current.get())->DIM[0])[1] == 340.);
-      CHECK((*static_cast<pbeaml*>(current.get())->DIM[0])[2] == 35.);
-      CHECK((*static_cast<pbeaml*>(current.get())->DIM[0])[3] == 14.);
+      CHECK(static_cast<pbeaml*>(current.get())->DIM[0].size() == 4);
+      CHECK(static_cast<pbeaml*>(current.get())->DIM[0][0] == 63.);
+      CHECK(static_cast<pbeaml*>(current.get())->DIM[0][1] == 340.);
+      CHECK(static_cast<pbeaml*>(current.get())->DIM[0][2] == 35.);
+      CHECK(static_cast<pbeaml*>(current.get())->DIM[0][3] == 14.);
       CHECK(static_cast<pbeaml*>(current.get())->NSM.size() == 1);
       CHECK(static_cast<pbeaml*>(current.get())->NSM[0] == 0.);
       CHECK(static_cast<pbeaml*>(current.get())->SO.size() == 0);

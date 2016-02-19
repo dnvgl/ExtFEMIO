@@ -14,20 +14,21 @@
 
 #if (defined(_MSC_VER) && defined(_EXTFEMIO_DLL))
 #ifdef _EXTFEMIO_EXPORT_IMPL
-#define EXTFEMIO_API __declspec( dllexport )
-// #pragma message("EXTFEMIO_API: EXTFEMIO_API")
+#  define DECLSPECIFIER __declspec( dllexport )
+#  define EXPIMP_TEMPLATE
+//#pragma message("DECLSPECIFIER: dllexport")
 #else
-#define EXTFEMIO_API __declspec( dllimport ) 
-// #pragma message("EXTFEMIO_API: dllimport")
+#  define DECLSPECIFIER __declspec( dllimport ) 
+#  define EXPIMP_TEMPLATE extern
+//#pragma message("DECLSPECIFIER: dllimport")
 #endif
 #else //  !_EXTFEMIO_DLL
-#define EXTFEMIO_API
+#define DECLSPECIFIER
 #endif
 
 
 namespace dnvgl {
    namespace extfem {
-
    }
 }
 

@@ -26,6 +26,7 @@ namespace {
 #define CATCH_CONFIG_MAIN
 
 #include <memory>
+#include <string>
 
 #include <catch.hpp>
 

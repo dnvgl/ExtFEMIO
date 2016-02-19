@@ -54,6 +54,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
       CHECK(probe("   1.   ").value == 1.);
    }
 
+   /*
    SECTION("'  .1    '") {
       CHECK(probe("  .1    ").value == .1);
    }
@@ -156,8 +157,9 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
          "probe", bound<double>(nullptr, nullptr, nullptr, true));
       CHECK_FALSE(probe("        "));
    }
+   */
 }
-
+/*
 TEST_CASE("BDF double types output.", "[bdf_types]" ) {
 
    entry_type<double> obj("dummy");
@@ -272,6 +274,7 @@ TEST_CASE("Exception, mkoe 2015-12-17", "[bdf_types]" ) {
       CHECK(obj.format(lval) == "-1.1104650285+01");
    }
 }
+*/
 
 // Local Variables:
 // mode: c++

@@ -36,15 +36,14 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
-            EXTFEMIO_API extern const void(*warn_report)(const std::string&);
+            DECLSPECIFIER extern const void(*warn_report)(std::string const &);
 
+            /**
+               \brief Unique identifier for each class representing a BDF card.
 
-/**
-   \brief Unique identifier for each class representing a BDF card.
-
-   These are used to identify the classes that are returned from
-   `dispatch` as `card` superclass.
-*/
+               These are used to identify the classes that are returned from
+               `dispatch` as `card` superclass.
+               */
             typedef enum {
                /// undknown card
                UNKNOWN,
@@ -97,7 +96,7 @@ namespace dnvgl {
 /**
    \brief Base class for all classes representing BDF cards.
 */
-            class card {
+            class DECLSPECIFIER card {
 
             private:
 
@@ -115,29 +114,29 @@ namespace dnvgl {
 
                static ::dnvgl::extfem::bdf::types::card head;
 
-               EXTFEMIO_API ::std::string format_outlist(
+               ::std::string format_outlist(
                   const ::std::deque<::std::unique_ptr<format_entry>>&) const;
 
             public:
 
-               friend
+               friend inline
                ::std::unique_ptr<format_entry>
                format(const ::std::unique_ptr<::dnvgl::extfem::bdf::types::card> &formatter);
 
-               friend
+               friend inline
                ::std::unique_ptr<format_entry>
                format(const ::std::unique_ptr<::dnvgl::extfem::bdf::types::empty> &formatter);
 
-               template <class _Ty> friend
+               template <class _Ty> friend inline
                ::std::unique_ptr<format_entry>
                format(const ::dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
                       const _Ty *val);
 
-               EXTFEMIO_API static void
+               static void
                card_split(std::deque<std::string> const &, std::deque<std::string> &);
 
-               EXTFEMIO_API card (const ::std::deque<::std::string> &);
-               EXTFEMIO_API card ();
+               card (const ::std::deque<::std::string> &);
+               card ();
 
                virtual const ::dnvgl::extfem::bdf::cards::types card_type(void) const = 0;
                virtual const ::std::ostream& operator<<(::std::ostream&) const = 0;
@@ -173,18 +172,18 @@ namespace dnvgl {
                   (void*)&val);
             };
 
-            class unknown : public card {
+            class DECLSPECIFIER unknown : public card{
 
             public:
 
-               EXTFEMIO_API unknown(const ::std::deque<::std::string> &inp) :
+               unknown(const ::std::deque<::std::string> &inp) :
                   card(inp), content(inp) {};
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return UNKNOWN; }
+               const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return UNKNOWN; }
 
                ::std::deque<::std::string> content;
 
-               EXTFEMIO_API const ::std::ostream& operator << (::std::ostream& os) const {
+               const ::std::ostream& operator << (::std::ostream& os) const {
                   throw errors::error("can't write UNKNOWN.");
                   return os;
                };
@@ -201,7 +200,7 @@ Designates the end of the Bulk Data Section.
 | ---------- | - | - | - | - | - | - | - | - | -- |
 | `ENDDATA`  |   |   |   |   |   |   |   |   |    |
 */
-            class enddata : public card {
+            class DECLSPECIFIER enddata : public card {
 
             private:
 
@@ -209,22 +208,21 @@ Designates the end of the Bulk Data Section.
 
             public:
 
-               EXTFEMIO_API enddata(const ::std::deque<::std::string> &inp) :
+               enddata(const ::std::deque<::std::string> &inp) :
                   card(inp) {};
 
-               EXTFEMIO_API enddata() : card() {};
+               enddata() : card() {};
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
+               const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return ENDDATA; };
 
-               EXTFEMIO_API const ::std::ostream& operator<< (::std::ostream& os) const {
+               const ::std::ostream& operator<< (::std::ostream& os) const {
                   os << this;
                   return os;
                };
 
-               EXTFEMIO_API
-               friend ::std::ostream&
-               operator<<(::std::ostream &, const enddata&);
+               friend DECLSPECIFIER ::std::ostream&
+                  operator<<(::std::ostream &, const enddata&);
             };
 
 /// Handle Nastran Bulk `GRID` entries.
@@ -239,7 +237,7 @@ displacement, and its permanent single-point constraints.
 | ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ------ | -- |
 | `GRID`  | `ID` | `CP` | `X1` | `X2` | `X3` | `CD` | `PS` | `SEID` |    |
 */
-            class grid : public card {
+            class DECLSPECIFIER grid : public card {
 
             private:
 
@@ -293,15 +291,73 @@ displacement, and its permanent single-point constraints.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> SEID;
 
-               EXTFEMIO_API grid(const ::std::deque<::std::string> &);
-               EXTFEMIO_API grid(
-                  long &ID, long &CP, double &X1, double &X2, double &X3);
+               grid(const ::std::deque<::std::string> &);
+               grid(long &ID, long &CP, double &X1, double &X2, double &X3);
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
+               const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return GRID; };
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
+            };
+
+/// Base class for material definitions
+            class DECLSPECIFIER mat : public card {
+
+            protected:
+
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_G;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_GE;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_ST;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SC;
+               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SS;
+               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
+
+            public:
+
+               /** Material identification number. (Integer > 0)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
+               /** Mass density. See Remark 5. (Real)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> RHO;
+               /** Reference temperature for the calculation of thermal
+               loads, or a temperature-dependent thermal expansion
+               coefficient. (Real; Default = 0.0 if `A` is specified.)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> TREF;
+               /** Structural element damping coefficient. (Real)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> GE;
+               /** Stress limits for tension is optionally supplied, used
+               only to compute margins of safety in certain elements;
+               and have no effect on the computational procedures.
+               (Real > 0.0 or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> ST;
+               /** Stress limits for compression is optionally supplied,
+               used only to compute margins of safety in certain
+               elements; and have no effect on the computational
+               procedures. (Real > 0.0 or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> SC;
+               /** Stress limits for shear is optionally supplied, used
+               only to compute margins of safety in certain elements;
+               and have no effect on the computational procedures.
+               (Real > 0.0 or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<double> SS;
+               /** Material coordinate system identification number. Used
+               only for `PARAM,CURV` processing. (Integer > 0 or blank)
+               */
+               ::dnvgl::extfem::bdf::types::entry_value<long> MCSID;
+
+               mat(const ::std::deque<::std::string> &);
+               mat();
             };
 
 /// Handle Nastran Bulk `MAT1` entries.
@@ -316,31 +372,28 @@ Defines the material properties for linear isotropic materials.
 | `MAT1` | `MID` | `E`  | `G`  | `NU`    | `RHO` | `A` | `TREF` | `GE` |    |
 |        | `ST`  | `SC` | `SS` | `MCSID` |       |     |        |      |    |
 */
-            class mat1 : public card {
+            class DECLSPECIFIER mat1 : public mat {
                // NASTRAN `BDF` `MAT1` representation.
 
             private:
 
                static ::dnvgl::extfem::bdf::types::card head;
 
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_E;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_G;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_G;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NU;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_GE;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_ST;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SC;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SS;
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_GE;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_ST;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SC;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SS;
+               // static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
 
             public:
 
-               /** Material identification number. (Integer > 0)
-                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
                /** Young’s modulus. (Real > 0.0 or blank)
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> E;
@@ -350,49 +403,16 @@ Defines the material properties for linear isotropic materials.
                /** Poisson’s ratio. (-1.0 < Real < 0.5 or blank)
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> NU;
-               /** Mass density. See Remark 5. (Real)
-                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> RHO;
                /** Thermal expansion coefficient. (Real)
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> A;
-               /** Reference temperature for the calculation of thermal
-                   loads, or a temperature-dependent thermal expansion
-                   coefficient. (Real; Default = 0.0 if `A` is specified.)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<double> TREF;
-               /** Structural element damping coefficient. (Real)
-                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> GE;
-               /** Stress limits for tension is optionally supplied, used
-                   only to compute margins of safety in certain elements;
-                   and have no effect on the computational procedures.
-                   (Real > 0.0 or blank)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<double> ST;
-               /** Stress limits for compression is optionally supplied,
-                   used only to compute margins of safety in certain
-                   elements; and have no effect on the computational
-                   procedures. (Real > 0.0 or blank)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<double> SC;
-               /** Stress limits for shear is optionally supplied, used
-                   only to compute margins of safety in certain elements;
-                   and have no effect on the computational procedures.
-                   (Real > 0.0 or blank)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<double> SS;
-               /** Material coordinate system identification number. Used
-                   only for `PARAM,CURV` processing. (Integer > 0 or blank)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<long> MCSID;
 
-               EXTFEMIO_API mat1(const ::std::deque<::std::string> &);
+               mat1(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
+               const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT1; };
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
 
@@ -421,35 +441,14 @@ Example:
 |        | 1003  |       |   |       |       |       |       |       |    |
 */
 
-            class mat2 : public card {
+            class DECLSPECIFIER mat2 : public mat {
                // NASTRAN `BDF` `MAT2` representation.
 
             private:
 
                static ::dnvgl::extfem::bdf::types::card head;
 
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_G;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_GE;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_ST;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SC;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SS;
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
-
             public:
-
-               /** Material identification number. (Integer > 0)
-                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
-
-
-
-
-
-
 
                /** The material property matrix. (Real)
                 */
@@ -459,45 +458,18 @@ Example:
                ::dnvgl::extfem::bdf::types::entry_value<double> G22;
                ::dnvgl::extfem::bdf::types::entry_value<double> G23;
                ::dnvgl::extfem::bdf::types::entry_value<double> G33;
-               /**   Mass density. (Real)
-                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> RHO;
                /** Thermal expansion coefficient vector. (Real)
                 */
                ::dnvgl::extfem::bdf::types::entry_value<double> A1;
                ::dnvgl::extfem::bdf::types::entry_value<double> A2;
                ::dnvgl::extfem::bdf::types::entry_value<double> A3;
-               /** Reference temperature for the calculation of
-                   thermal loads, or a temperature-dependent thermal
-                   expansion coefficient. See Remarks 10. and 11.
-                   (Real or blank)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<double> TREF;
-               /** Structural element damping coefficient. See Remarks
-                   7., 10., and 12. (Real)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<double> GE;
-               /** Stress limits for tension, compression, and shear
-                   are optionally supplied (these are used only to
-                   compute margins of safety in certain elements) and
-                   have no effect on the computational procedures.
-                   (Real or blank)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<double> ST;
-               ::dnvgl::extfem::bdf::types::entry_value<double> SC;
-               ::dnvgl::extfem::bdf::types::entry_value<double> SS;
-               /** Material coordinate system identification number.
-                   Used only for ``PARAM,CURV`` processing. See
-                   “Parameters” on page 603. (Integer > 0 or blank)
-               */
-               ::dnvgl::extfem::bdf::types::entry_value<long> MCSID;
 
-               EXTFEMIO_API mat2(const ::std::deque<::std::string> &);
+               mat2(const ::std::deque<::std::string> &);
 
-               EXTFEMIO_API const ::dnvgl::extfem::bdf::cards::types
+               const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT2; };
 
-               EXTFEMIO_API const ::std::ostream&
+               const ::std::ostream&
                operator<< (::std::ostream& os) const;
             };
          }
@@ -515,7 +487,7 @@ namespace dnvgl {
          namespace cards {
             /** Dispatch instances of the different BDF card classes.
              */
-            EXTFEMIO_API void
+            DECLSPECIFIER void
             dispatch(
                const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }

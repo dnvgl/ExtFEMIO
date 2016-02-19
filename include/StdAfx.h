@@ -41,16 +41,6 @@
 
 #include <regex>
 
-#include "my_c++14.h"
-#include "bdf/cards.h"
-#include "bdf/cards_elements.h"
-#include "bdf/cards_properties.h"
-#include "bdf/errors.h"
-#include "bdf/file.h"
-#include "extfem_string.h"
-#include "bdf/type_bounds.h"
-#include "bdf/types.h"
-
 #endif
 
 // Local Variables:

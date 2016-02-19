@@ -17,6 +17,7 @@
 #include <string>
 #include <deque>
 #include <set>
+#include <list>
 #include <iostream>
 #include <typeinfo>
 #include <limits>
@@ -61,7 +62,7 @@ namespace dnvgl {
                List
             } fem_types;
 
-            class base {
+            class DECLSPECIFIER base {
 
             protected:
 
@@ -109,6 +110,15 @@ namespace dnvgl {
                virtual ::std::string format(const _Ty &d) const = 0;
             };
 
+
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex
+#else
+               ::std::regex
+#endif
+               int_re;
+
             template <>
             class entry_type<long> : public base {
 
@@ -117,13 +127,6 @@ namespace dnvgl {
             private:
 
                ::dnvgl::extfem::fem::type_bounds::bound<long> bounds;
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
-#else
-               ::std::regex
-#endif
-               int_re;
 
             protected:
 
@@ -131,28 +134,80 @@ namespace dnvgl {
 
             public:
 
-               entry_type<long>(const ::std::string&);
+               entry_type(const ::std::string &name) :
+                  fem::types::base(name), bounds() {};
 
-               entry_type<long>(
-                  const ::std::string&,
-                  const ::dnvgl::extfem::fem::type_bounds::bound<long>&);
 
-               long operator() (const ::std::string&) const;
+               entry_type(
+                  const std::string &name,
+                  const fem::type_bounds::bound<long> &bounds) :
+                  fem::types::base(name), bounds(bounds) {};
+
+/// Convert string to long
+               long operator() (const std::string &inp) const {
+                  double value;
+
+                  if (inp.length() == 0) {
+                     if (!this->bounds.has_default())
+                        throw errors::int_error(name, "empty entry without default");
+                     return this->bounds.get_default();
+                  } else {
+                     if (! regex_match(inp, int_re)) {
+                        std::string msg("illegal input (""");
+                        throw errors::int_error(name, msg + inp + """), no integer!");
+                     }
+
+                     conv.str(inp);
+                     conv.seekg(0);
+                     conv >> value;
+                  }
+                  if (!this->bounds.in_bounds(long(value))) {
+                     std::string msg("boundary condition violated (");
+                     throw errors::int_error(
+                        name, msg + name + ")\n(""" + inp + """)");
+                  }
+                  return long(value);
+               };
 
                fem_types type() const { return _type; };
 
-               ::std::string format(const long&) const;
+               ::std::string format(const long &inp) const {
+
+                  std::ostringstream res;
+
+#ifdef _MSC_VER
+                  // Set output to two digit exponetial format.
+                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+#endif
+
+                  res.setf(std::ios_base::showpos);
+                  res.setf(std::ios_base::scientific, std::ios_base::floatfield);
+                  res.setf(std::ios_base::adjustfield, std::ios::left);
+
+                  res.precision(8);
+                  res.width(16);
+                  res.fill(' ');
+
+                  res << double(inp);
+                  std::string out(res.str());
+                  if (out.size() != 16) {
+                     std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                     msg << double(inp) << " of incorrect size, got length of " << out.size()
+                         << " instead of allowed length of 16." << out;
+                     throw errors::int_error(name, msg.str());
+                  }
+
+#ifdef _MSC_VER
+                  // Reset exponetial format to former settings.
+                  _set_output_format(ext_exp_format);
+#endif
+
+                  return out;
+               };
             };
 
-            template <>
-            class entry_type<bool> : public base {
-
-               // Integer value.
-
-            private:
-
-               ::dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
-               static const
+            /// Boolean value.
+            DECLSPECIFIER extern const
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else
@@ -160,37 +215,75 @@ namespace dnvgl {
 #endif
                bool_re;
 
+            template <>
+            class entry_type<bool> : public base {
+
+            private:
+
+               ::dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
+
             protected:
 
                static const fem_types _type = Int;
 
             public:
 
-               entry_type<bool>(const ::std::string&);
+               entry_type(const ::std::string &name) :
+                  fem::types::base(name), bounds() {}
 
-               bool operator() (const ::std::string&) const;
+
+               bool operator() (const ::std::string &inp) const {
+                  double value;
+
+                  if (inp.length() == 0) {
+                     if (!this->bounds.has_default())
+                        throw errors::bool_error(name, "empty entry without default");
+                     return this->bounds.get_default();
+                  }
+                  else {
+                     if (!regex_match(inp, bool_re)) {
+                        std::string msg("illegal input (""");
+                        throw errors::bool_error(name, msg + inp + """), no bool!");
+                     }
+
+                     conv.str(inp);
+                     conv.seekg(0);
+                     conv >> value;
+                  }
+                  if (value == 1.) return true;
+                  else if (value == 0.) return false;
+                  else {
+                     std::string msg("boundary condition violated (");
+                     throw errors::bool_error(
+                        name, msg + name + ")\n(""" + inp + """)");
+                  }
+               }
+
 
                fem_types type() const { return _type; };
 
-               ::std::string format(const bool&) const;
+               ::std::string format(const bool &inp) const {
+                  if (inp) return " 1.00000000e+00 ";
+                  else return " 0.00000000e+00 ";
+               }
             };
+
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+            boost::regex
+#else
+            ::std::regex
+#endif
+            float_re;
 
             template <>
             class entry_type<double> : public base {
 
-               // Real value.
+            /// Real value.
 
             private:
 
                ::dnvgl::extfem::fem::type_bounds::bound<double> bounds;
-
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
-#else
-               ::std::regex
-#endif
-               float_re;
 
             protected:
 
@@ -198,17 +291,77 @@ namespace dnvgl {
 
             public:
 
-               entry_type<double>(const ::std::string&);
+               entry_type(const ::std::string &name) :
+                  base(name), bounds() {};
 
-               entry_type<double>(
-                  const ::std::string&,
-                  const ::dnvgl::extfem::fem::type_bounds::bound<double>&);
 
-               double operator() (const ::std::string&) const;
+               entry_type(
+                  const std::string &name,
+                  const fem::type_bounds::bound<double> &bounds) :
+                  fem::types::base(name), bounds(bounds) {};
+
+               /// Convert string to double
+               double operator() (const ::std::string &inp) const {
+                  double value;
+
+                  if (inp.length() == 0) {
+                     if (!this->bounds.has_default())
+                        throw errors::float_error(name, "empty entry without default");
+                     value = this->bounds.get_default();
+                  }
+                  else {
+                     if (!regex_match(inp, float_re)) {
+                        std::string msg("illegal input, (""");
+                        throw errors::float_error(name, msg + inp + """), no float!");
+                     }
+
+                     conv.str(inp);
+                     conv.seekg(0);
+                     conv >> value;
+                  }
+                  if (!this->bounds.in_bounds(value)) {
+                     std::string msg("boundary condition violated (");
+                     throw errors::float_error(
+                        name, msg + name + ")\n(""" + inp + """)");
+                  }
+                  return value;
+               };
 
                fem_types type() const {return _type;};
 
-               ::std::string format(const double&) const;
+               ::std::string format(const double &inp) const {
+
+                  std::ostringstream res;
+
+#ifdef _MSC_VER
+                  // Set output to two digit exponetial format.
+                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+#endif
+
+                  res.setf(std::ios_base::showpos);
+                  res.setf(std::ios_base::scientific, std::ios::floatfield);
+                  res.setf(std::ios_base::adjustfield, std::ios::left);
+
+                  res.precision(8);
+                  res.width(16);
+                  res.fill(' ');
+
+                  res << inp;
+                  std::string out(res.str());
+                  if (out.size() != 16) {
+                     std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                     msg << inp << " of incorrect size, got length of " << out.size()
+                         << " instead of allowed length of 16.";
+                     throw errors::output_error(name, msg.str());
+                  }
+
+#ifdef _MSC_VER
+                  // Reset exponetial format to former settings.
+                  _set_output_format(ext_exp_format);
+#endif
+
+                  return out;
+               };
             };
 
             template <>
@@ -226,9 +379,9 @@ namespace dnvgl {
 
             public:
 
-               entry_type<::std::string>(const ::std::string&);
+               entry_type(const ::std::string&);
 
-               entry_type<::std::string>(
+               entry_type(
                   const ::std::string&,
                   const ::dnvgl::extfem::fem::type_bounds::bound<::std::string>&);
 
@@ -242,20 +395,19 @@ namespace dnvgl {
                   const ::std::string&, const size_t &len=72) const;
             };
 
-            template <>
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex
+#else
+               ::std::regex
+#endif
+               list_int_re;
+
+               
+               template <>
             class entry_type<::std::deque<int>> : public base {
 
                // List of integers.
-
-            private:
-
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-                  boost::regex
-#else
-                  ::std::regex
-#endif
-                  int_re;
 
             protected:
 
@@ -263,16 +415,82 @@ namespace dnvgl {
 
             public:
 
-               entry_type<::std::deque<int>>(
+               entry_type(
                   const ::std::string &name) :
                   base(name) {};
 
-               ::std::deque<int>* operator() (
-                  const ::std::string&) const;
+               ::std::deque<int>* operator() (const std::string &inp) const {
+                  auto *value =  new std::deque<int>();
+
+                  double tmp_d;
+                  ::std::list<int> tmp_l;
+                  long tmp;
+
+                  if (! regex_match(inp, int_re)) {
+                     std::string msg("illegal input (""");
+                     throw errors::int_error(name, msg + inp + """), no integer!");
+                  }
+
+                  conv.str(inp);
+                  conv.seekg(0);
+                  conv >> tmp_d;
+                  tmp = (long)tmp_d;
+
+                  while (tmp) {
+                     ldiv_t divmod = div(tmp, (long)10);
+                     value->push_back(divmod.rem);
+                     tmp /= 10;
+                  }
+                  ::std::sort(value->begin(), value->end());
+
+                  return value;
+               };
 
                inline fem_types type() const {return _type;};
 
-               ::std::string format(const ::std::deque<int>&) const;
+               ::std::string format(
+                  const std::deque<int> &inp) const {
+
+                  std::ostringstream res, res2;
+
+                  double value = 0;
+                  for (auto &p : inp) {
+                     value *= 10.;
+                     value += p;
+                  }
+
+#ifdef _MSC_VER
+                  // Set output to two digit exponetial format.
+                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+#endif
+
+                  res << " ";
+                  res.setf(std::ios_base::scientific, std::ios::floatfield);
+                  res.setf(std::ios_base::adjustfield, std::ios::left);
+
+                  res.precision(8);
+                  res.width(15);
+                  res.fill(' ');
+
+                  res << value;
+                  std::string out(res.str());
+                  if (out.size() != 16) {
+                     ::std::ostringstream msg("output string for value ",
+                                              ::std::ostringstream::ate);
+                     ::std::copy(inp.begin(), inp.end(),
+                                 std::ostream_iterator<int>(msg, ", "));
+                     msg << " of incorrect size, got length of " << out.size()
+                         << " instead of allowed length of 16.";
+                     throw errors::output_error(name, msg.str());
+                  }
+
+#ifdef _MSC_VER
+                  // Reset exponetial format to former settings.
+                  _set_output_format(ext_exp_format);
+#endif
+
+                  return out;
+               };
             };
          }
       }

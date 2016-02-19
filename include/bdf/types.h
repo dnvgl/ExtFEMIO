@@ -14,14 +14,17 @@
 #if !defined _BDF_TYPES_H_
 #define _BDF_TYPES_H_
 
+#include <cmath>
 #include <string>
 #include <deque>
 #include <set>
 #include <iostream>
+#include <iomanip>
 #include <typeinfo>
 #include <limits>
 #include <memory>
 #include <sstream>
+#include <iomanip>
 
 #ifdef __GNUC__
 #include "config.h"
@@ -67,7 +70,7 @@ namespace dnvgl {
                /// Cards are written in Free Field Format
                FREE=-1} out_form_type;
 
-            class base {
+            class DECLSPECIFIER base {
 
             protected:
 
@@ -85,7 +88,7 @@ namespace dnvgl {
 
                static out_form_type out_form;
 
-               EXTFEMIO_API base(const ::std::string&);
+               base(const ::std::string&);
 
                ~base() {};
 
@@ -129,13 +132,13 @@ namespace dnvgl {
                ::std::string format() const;
             };
 
-            class empty : public base {
+            class DECLSPECIFIER empty : public base {
 
             public:
 
-               empty(void) : base("<empty>") {};
+               empty(void);
 
-               bdf_types type(void) const {return None;};
+               bdf_types type(void) const { return None; };
 
                ::std::string format(const void*) const;
                ::std::string format() const;
@@ -200,23 +203,67 @@ namespace dnvgl {
                void push_back(const long&);
             };
 
+            entry_value<::std::deque<int>>::entry_value(
+               const entry_value<::std::deque<int>> &val) :
+               value(val.value.begin(), val.value.end()),
+               is_value(val.is_value) {
+            };
+
+            template <> inline
+            entry_value<::std::deque<int>>::entry_value(
+               const ::std::deque<int> &value, const bool &is_value) :
+               value(value.begin(), value.end()),
+               is_value(is_value) {
+            };
+
+            template <> inline
+            entry_value<::std::deque<int>>::entry_value(
+               const ::std::deque<int> *value) {
+               if (!value) {
+                  this->is_value = false;
+               }
+               else {
+                  is_value = true;
+                  copy(value->begin(), value->end(),
+                     back_inserter(this->value));
+               }
+            };
+
+            template <> inline
+            void entry_value<::std::deque<int>>::push_back(const long &inp) {
+               this->value.push_back(inp);
+            };
+
+            template <>
+            entry_value<::std::string>::entry_value(
+               const ::std::string *value) {
+               if (!value) {
+                  this->is_value = false;
+                  this->value = "";
+               } else {
+                  this->is_value = true;
+                  this->value = *value;
+               }
+            }
+
             template <class _Ty>
             class entry_type : public base { };
 
 /// Integer value.
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+            boost::regex
+#else
+            ::std::regex
+#endif
+            int_re;
+
             template <>
             class entry_type<long> : public base {
 
             private:
 
                ::dnvgl::extfem::bdf::type_bounds::bound<long> bounds;
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
-#else
-               ::std::regex
-#endif
-               int_re;
 
             protected:
 
@@ -224,71 +271,278 @@ namespace dnvgl {
 
             public:
 
-               entry_type<long>(const ::std::string&);
+               entry_type(const ::std::string &name) :
+               bdf::types::base(name), bounds(0) {};
 
-               entry_type<long>(
-                  const ::std::string&,
-                  const ::dnvgl::extfem::bdf::type_bounds::bound<long>&);
+               entry_type(
+                  const std::string &name,
+                  const bdf::type_bounds::bound<long> &bounds) :
+               bdf::types::base(name), bounds(bounds) {};
 
-               entry_value<long> operator() (const ::std::string&) const;
+               entry_value<long> operator() (const std::string &inp) const {
+                  entry_value<long> val;
+                  this->set_value(val, inp);
+                  return val;
+               };
 
                bdf_types type() const { return _type; };
 
-               void set_value(entry_value<long>&, const ::std::string&) const;
+               void set_value(
+                  ::dnvgl::extfem::bdf::types::entry_value<long> &val,
+                  const ::std::string &inp) const {
+                  auto sval = extfem::string::string(inp).trim();
 
-               ::std::string format(const void*) const;
-               ::std::string format(const entry_value<long> &v) const;
-               ::std::string format(const long&) const;
+                  if (sval.length() == 0) {
+                     if (this->bounds.does_allow_empty()) {
+                        val.is_value = false;
+                        return;
+                     };
+                     if (!this->bounds.has_default())
+                        throw errors::int_error(name, "empty entry without default");
+                     val.is_value = true;
+                     val = this->bounds.get_default();
+                     return;
+                  } else {
+                     if (! regex_match(inp, int_re)) {
+                        std::string msg("illegal input (""");
+                        msg += inp;
+                        msg += """), no integer";
+                        throw errors::int_error(name, msg);
+                     }
+                     conv.str(sval);
+                     conv.seekg(0);
+                     conv >> val.value;
+                     val.is_value = true;
+                  }
+                  if (!this->bounds.in_bounds(val)) {
+                     std::ostringstream msg("boundary condition violated (",
+                                            ::std::ostringstream::ate);
+                     msg << name << ")\n(""" << inp << ", " << sval << ", " << val.value << """)";
+                     throw errors::int_error(name, msg.str());
+                  }
+                  return;
+               };
+
+               ::std::string format(const void *v) const {
+                  if (!v)
+                     return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+                  else {
+                     entry_value<long> val((long*)v);
+                     return this->format(val);
+                  }
+               };
+
+               ::std::string format(const entry_value<long> &inp) const {
+                  std::ostringstream outp;
+
+                  switch (out_form) {
+                  case LONG:
+                     outp << std::setiosflags(std::ios::right) << std::setfill(' ')
+                          << std::setw(16) << inp.value;
+                     break;
+                  case SHORT:
+                     outp << std::setiosflags(std::ios::right) << std::setfill(' ')
+                          << std::setw(8) << inp.value;
+                     break;
+                  case FREE:
+                     outp << inp.value;
+                     break;
+                  }
+
+                  std::string out(outp.str());
+
+                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                     std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                     msg << inp.value << " of incorrect size, got length of " << out.size()
+                         << " instead of allowed length of " << out_form << ".";
+                     throw errors::int_error(name, msg.str());
+                  }
+
+                  return out;
+               };
+
+               ::std::string format(const long &val) const {
+                  entry_value<long> tmp(val);
+                  return format(tmp);
+               };
             };
 
 /// Real value.
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+            boost::regex
+#else
+            ::std::regex
+#endif
+            float_exp_re;
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+            boost::regex
+#else
+            ::std::regex
+#endif
+            float_re;
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+            boost::regex
+#else
+            ::std::regex
+#endif
+            float_lead_dot;
+
             template <>
-            class entry_type<double> : public base {
+            class entry_type<double> : public base{
 
             private:
 
                ::dnvgl::extfem::bdf::type_bounds::bound<double> bounds;
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
-#else
-               ::std::regex
-#endif
-               float_exp_re;
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
-#else
-               ::std::regex
-#endif
-               float_re;
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
-#else
-               ::std::regex
-#endif
-               float_lead_dot;
 
                static const bdf_types _type = Float;
 
             public:
 
-               entry_type<double>(const ::std::string&);
+               entry_type<double>(const ::std::string &name) :
+                  bdf::types::base(name), bounds(bdf::type_bounds::bound<double>()) {};
 
                entry_type<double>(
-                  const ::std::string&,
-                  const ::dnvgl::extfem::bdf::type_bounds::bound<double>&);
+                  const ::std::string &name,
+                  const bdf::type_bounds::bound<double> &bounds) :
+                  bdf::types::base(name), bounds(bounds) {};
 
-               entry_value<double> operator() (const ::std::string&) const;
+               bdf_types inline type() const { return _type; };
 
-               bdf_types type() const {return _type;};
+               // Convert string to float
+               void set_value(
+                  entry_value<double> &val, const ::std::string &inp) const {
 
-               void set_value(entry_value<double> &, const ::std::string &i) const;
+                  auto sval = extfem::string::string(inp).trim().upper();
 
-               ::std::string format(const void *) const;
-               ::std::string format(const entry_value<double>&) const;
-               ::std::string format(const double&) const;
+                  if (sval.length() == 0) {
+                     if (this->bounds.does_allow_empty()) {
+                        val.is_value = false;
+                        return;
+                     }
+                     if (!this->bounds.has_default())
+                        throw errors::float_error(name, "empty entry without default");
+                     val.value = this->bounds.get_default();
+                  }
+                  else {
+                     if (!regex_match(sval, float_re)) {
+                        ::std::string msg("illegal input, no float");
+                        throw errors::float_error(name, msg + "; !" + sval + "!");
+                     }
+
+#ifdef HAVE_BOOST_REGEX_HPP
+                     ::boost::smatch m;
+#else
+                     ::std::smatch m;
+#endif
+
+                     if (regex_search(sval, m, float_exp_re))
+                        sval = m[1].str() + "E" + m[2].str();
+
+                     if (regex_match(sval, float_lead_dot)) {
+                        auto pos = sval.find('.');
+                        sval.insert(pos, 1, '0');
+                     }
+
+                     conv.str(sval);
+                     conv.seekg(0);
+                     conv >> val.value;
+                  }
+                  if (!this->bounds.in_bounds(val))
+                     throw errors::float_error(name, "boundary condition violated");
+                  val.is_value = true;
+                  return;
+               }
+
+               entry_value<double> operator() (const ::std::string &inp) const {
+                  entry_value<double> val;
+                  this->set_value(val, inp);
+                  return val;
+               }
+
+               ::std::string inline format(const void *v) const {
+                  if (!v)
+                     return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+                  else {
+                     double val(*((entry_value<double>*)v));
+                     return this->format(val);
+                  }
+               }
+
+               ::std::string inline format(const entry_value<double> &inp) const {
+
+                  if (!inp)
+                     return bdf::types::empty().format(nullptr);
+
+                  std::ostringstream outp;
+
+                  outp << std::setiosflags(std::ios::scientific);
+
+#ifdef _MSC_VER
+                  // Set output to two digit exponetial format.
+                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+#endif
+                  switch (out_form) {
+                  case LONG:
+                     outp << std::setiosflags(std::ios::right) << std::setfill(' ');
+                     if (inp.value < 0)
+                        outp << std::setprecision(10);
+                     else
+                        outp << std::setprecision(11);
+                     outp << std::setw(17) << inp.value;
+                     break;
+                  case SHORT: {
+                     // Check on how much precision is lost when using SHORT format.
+                     // If too much precision is list raise exception which causes
+                     // calling routine to switch to LONG format.
+                     double order(pow(10., -floor(::std::log10(fabs(inp.value))) + 3.));
+                     if (fabs(fabs(round(inp.value * order) / (inp.value * order)) - 1.) > 1e-8) {
+                        ::std::ostringstream msg("output string for value ",
+                           ::std::ostringstream::ate);
+                        msg << inp.value
+                           << " looses too much precision of being crammed into string of "
+                           << out_form << " characters.";
+                        throw errors::float_error(name, msg.str());
+                     }
+                  }
+                              outp << std::setiosflags(std::ios::right) << std::setfill(' ');
+                              if (inp.value < 0)
+                                 outp << std::setprecision(2);
+                              else
+                                 outp << std::setprecision(3);
+                              outp << std::setw(9) << inp.value;
+                              break;
+                  case FREE:
+                     ::std::ostringstream res;
+                     res << std::setiosflags(std::ios::scientific)
+                        << inp.value;
+                     outp << ::std::string(res.str());
+                     break;
+                  }
+
+                  ::std::string out(outp.str());
+                  out.erase(out.find('e'), 1);
+                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                     ::std::ostringstream msg("output string for value ", ::std::ostringstream::ate);
+                     msg << inp.value << " of incorrect size, got length of " << out.size()
+                        << " instead of allowed length of " << out_form << ".";
+                     throw errors::float_error(name, msg.str());
+                  }
+
+#ifdef _MSC_VER
+                  // Reset exponetial format to former settings.
+                  _set_output_format(ext_exp_format);
+#endif
+
+                  return out;
+               }
+
+               ::std::string inline format(const double &val) const {
+                  entry_value<double> tmp(val);
+                  return format(tmp);
+               }
             };
 
             /// String value.
@@ -305,40 +559,95 @@ namespace dnvgl {
 
             public:
 
-               entry_type<::std::string>(const ::std::string&);
+               entry_type(const std::string &name) :
+                  base(name), bounds(bdf::type_bounds::bound<std::string>()) {};
 
-               entry_type<::std::string>(
-                  const ::std::string&,
-                  const ::dnvgl::extfem::bdf::type_bounds::bound<::std::string>&);
+               entry_type(
+                  const std::string &name,
+                  const bdf::type_bounds::bound<std::string> &bounds) :
+                  bdf::types::base(name), bounds(bounds) {};
 
-               entry_value<::std::string>
-                  operator() (const ::std::string &) const;
+               entry_value<std::string>
+                  operator() (const std::string &inp) const {
+                  auto sval = extfem::string::string(inp).trim();
 
-               bdf_types type() const { return _type; }
+                  if (sval.length() == 0)
+                     sval = bounds.get_default();
+
+                  if (!bounds.is_allowed(sval))
+                     throw errors::str_error(name, "!" + sval + "! Value not in list of allowed values.");
+
+                  return entry_value<std::string>(sval, true);
+               };
+
+               bdf_types inline type() const { return _type; }
 
                void set_value(
-                  entry_value<::std::string> &, const ::std::string &i) const;
+                  entry_value<std::string> &val, std::string const &inp) const {
+                  val = this->operator() (inp);
+               }
+
                void set_value(
                   entry_value<::std::string> &, const ::std::string *inp) const ;
 
-               ::std::string format(const void *) const;
-               ::std::string format(const entry_value<::std::string>&) const;
-               ::std::string format(const ::std::string&) const;
+               ::std::string format(const void *v) const {
+                  if (!v)
+                     return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+                  else {
+                     entry_value<::std::string> val((std::string*)v);
+                     return this->format(val);
+                  }
+               }
+
+               std::string format(const entry_value<std::string> &inp) const {
+                  if (!inp)
+                     return bdf::types::empty().format(nullptr);
+
+                  std::ostringstream outp;
+
+                  switch (out_form) {
+                  case LONG:
+                     outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
+                          << std::setw(16) << (::std::string)inp;
+                     break;
+                  case SHORT:
+                     outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
+                          << std::setw(8) << (::std::string)inp;
+                     break;
+                  case FREE:
+                     outp << (::std::string)inp;
+                     break;
+                  }
+                  std::string out(outp.str());
+                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                     std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                     msg << (::std::string)inp << " of incorrect size, got length of " << out.size()
+                         << " instead of allowed length of " << out_form << ".";
+                     throw errors::int_error(name, msg.str());
+                  }
+
+                  return out;
+               };
+
+               ::std::string format(const ::std::string &val) const {
+                  entry_value<std::string> tmp(val);
+                  return format(tmp);
+               };
             };
 
             /// List of integers.
+            DECLSPECIFIER extern const
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex
+#else
+               ::std::regex
+#endif
+               list_int_re;
+
             template <>
             class entry_type<::std::deque<int>> : public base {
 
             private:
-
-               static const
-#ifdef HAVE_BOOST_REGEX_HPP
-                  boost::regex
-#else
-                  ::std::regex
-#endif
-                  int_re;
 
             protected:
 
@@ -350,15 +659,77 @@ namespace dnvgl {
                   base(name) {};
 
                entry_value<::std::deque<int>>
-                  operator() (const ::std::string&) const;
+                  operator() (const ::std::string &inp) const {
+                  entry_value<::std::deque<int>> val;
+                  this->set_value(val, inp);
+                  return val;
+               };
 
-               inline bdf_types type() const {return _type;};
+               bdf_types type() const {return _type;};
 
                void set_value(
-                  entry_value<::std::deque<int>>&, const ::std::string) const;
+                  entry_value<::std::deque<int>> &val, const ::std::string inp) const {
 
-               ::std::string format(const void *v) const;
-               ::std::string format(const entry_value<::std::deque<int>>&) const;
+                  auto sval = extfem::string::string(inp).trim();
+
+                  if (! regex_match(sval, list_int_re)) {
+                     ::std::string msg(name + ":illegal input (""");
+                     throw errors::types_error(msg + sval + """), no integer in list");
+                  }
+                  val.is_value = true;
+                  for (auto pos = sval.begin(); pos != sval.end(); ++pos)
+                     val.value.push_back((int)(*pos - '0'));
+
+                  return;
+               };
+
+               ::std::string format(const void *inp) const {
+                  if (!inp)
+                     return ::dnvgl::extfem::bdf::types::empty().format(nullptr);
+                  else {
+                     entry_value<::std::deque<int>> val((::std::deque<int>*)inp);
+                     return this->format(val);
+                  }
+               };
+
+               ::std::string format(const entry_value<::std::deque<int>> &inp) const {
+
+                  if (!inp)
+                     return bdf::types::empty().format(nullptr);
+
+                  ::std::ostringstream res1, res2;
+
+                  for (const auto &p : inp.value) res1 << p;
+
+                  ::std::string inp_proc(res1.str());
+
+                  switch (out_form) {
+                  case LONG:
+                     res2 << std::setiosflags(std::ios::right)
+                          << std::setfill(' ') << std::setw(16) << inp_proc;
+                     // res2.setf(ios_base::right, std::ios_base::adjustfield);
+                     // res2.fill(' ');
+                     // res2 << setw(16) << inp_proc;
+                     break;
+                  case SHORT:
+                     res2.setf(std::ios_base::right, std::ios_base::adjustfield);
+                     res2.fill(' ');
+                     res2 << std::setw(8) << inp_proc;
+                     break;
+                  case FREE:
+                     res2 << inp_proc;
+                     break;
+                  }
+
+                  ::std::string out(res2.str());
+                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                     ::std::ostringstream msg("output string for value ", ::std::ostringstream::ate);
+                     msg << inp_proc << " of incorrect size, got length of " << out.size()
+                         << " instead of allowed length of " << out_form << ".";
+                     throw errors::output_error(name, msg.str());
+                  }
+                  return out;
+               };
             };
          }
       }

@@ -9,8 +9,6 @@
 
 #include "StdAfx.h"
 
-#define _EXTFEMIO_EXPORT_IMPL
-
 // ID:
 namespace {
    const char  cID[]
@@ -19,6 +17,8 @@ namespace {
 #endif
       = "@(#) $Id$";
 }
+
+#include <string>
 
 #include "bdf/cards.h"
 #include "bdf/errors.h"
@@ -35,7 +35,7 @@ using namespace ::dnvgl;
 using namespace extfem;
 using namespace bdf::cards;
 
-EXTFEMIO_API dnvgl::extfem::bdf::cards::card::card(const ::std::deque<::std::string> &inp) {}
+dnvgl::extfem::bdf::cards::card::card(::std::deque<::std::string> const &inp) {}
 
 bdf::cards::card::card() {}
 
@@ -46,21 +46,22 @@ namespace {
 ::dnvgl::extfem::bdf::types::empty dnvgl::extfem::bdf::cards::card::empty = bdf::types::empty();
 
 namespace {
-   const void _stderr_warn(const std::string &msg) {
+   const void _stderr_warn(std::string const &msg) {
       std::cerr << msg << std::endl;
    }
 }
+
+DECLSPECIFIER const void(*dnvgl::extfem::bdf::cards::warn_report)(std::string const &) = &_stderr_warn;
 
 namespace dnvgl {
    namespace extfem {
       namespace bdf {
          namespace cards {
-            EXTFEMIO_API const void(*warn_report)(const std::string&) = &_stderr_warn;
-                        
+
             bdf::types::card card::head = bdf::types::card("<DUMMY>");
 
-            ::std::ostream
-               &operator<<(::std::ostream &os, const enddata &card){
+            ::std::ostream DECLSPECIFIER
+               &operator<<(::std::ostream &os, enddata const &card){
                std::deque<std::unique_ptr<format_entry>> entries;
                
                entries.push_back(format(enddata::head));

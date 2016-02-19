@@ -29,7 +29,7 @@ namespace dnvgl {
       namespace bdf {
          namespace input {
 
-            struct line_reader : ::std::ctype<char> {
+            struct DECLSPECIFIER line_reader : ::std::ctype<char> {
 
                line_reader() : ctype(make_table()) { }
 
@@ -43,7 +43,7 @@ namespace dnvgl {
                }
             };
 
-            class bdf_file {
+            class DECLSPECIFIER bdf_file {
 
             private:
 
@@ -57,19 +57,19 @@ namespace dnvgl {
 
                bool eof;
 
-               EXTFEMIO_API bdf_file(::std::istream&);
+               bdf_file(::std::istream&);
 
-               EXTFEMIO_API void get(std::deque<std::string>& oContent);
-
-               /** actual byte position (hopefully no bdf > 2Gybte will be
-                   readin....)
-               */
-               EXTFEMIO_API ::std::streampos size(void);
+               void get(std::deque<std::string>& oContent);
 
                /** actual byte position (hopefully no bdf > 2Gybte will be
                    readin....)
                */
-               EXTFEMIO_API ::std::streampos pos(void);
+               ::std::streampos size(void);
+
+               /** actual byte position (hopefully no bdf > 2Gybte will be
+                   readin....)
+               */
+               ::std::streampos pos(void);
             };
          }
       }

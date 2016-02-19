@@ -194,67 +194,6 @@ namespace dnvgl {
                return os;
             }
 
-            ::std::ostream& operator<<(::std::ostream &os, const cbar &card) {
-
-               ::std::deque<::std::unique_ptr<format_entry>> entries;
-
-               entries.push_back(format(cbar::head));
-
-               entries.push_back(format<long>(card.form_EID, card.EID));
-               entries.push_back(format<long>(card.form_PID, card.PID));
-               entries.push_back(format<long>(card.form_GA, card.GA));
-               entries.push_back(format<long>(card.form_GB, card.GB));
-               if (card.choose_dir_code == card.has_DCODE) {
-                  entries.push_back(format<long>(card.form_G0, card.G0));
-                  if ((bool)card.OFFT || (bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A ||
-                      (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B) {
-                     entries.push_back(format(cbar::empty));
-                     entries.push_back(format(cbar::empty));
-                  }
-               } else {
-                  entries.push_back(format<double>(card.form_X1, card.X1));
-                  entries.push_back(format<double>(card.form_X2, card.X2));
-                  entries.push_back(format<double>(card.form_X3, card.X3));
-               }
-
-               if ((bool)card.OFFT || (bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A ||
-                   (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                  entries.push_back(format<::std::string>(card.form_OFFT, card.OFFT));
-               else goto cont;
-
-               if ((bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A ||
-                   (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                  entries.push_back(format<::std::deque<int>>(card.form_PA, card.PA));
-               else goto cont;
-               if ((bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B ||
-                   (bool)card.W2B || (bool)card.W3B)
-                  entries.push_back(format<::std::deque<int>>(card.form_PB, card.PB));
-               else goto cont;
-               if ((bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B || (bool)card.W2B ||
-                   (bool)card.W3B)
-                  entries.push_back(format<double>(card.form_W1A, card.W1A));
-               else goto cont;
-               if ((bool)card.W2A || (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                  entries.push_back(format<double>(card.form_W2A, card.W2A));
-               else goto cont;
-               if ((bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                  entries.push_back(format<double>(card.form_W3A, card.W3A));
-               else goto cont;
-               if ((bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                  entries.push_back(format<double>(card.form_W1B, card.W1B));
-               else goto cont;
-               if ((bool)card.W2B || (bool)card.W3B)
-                  entries.push_back(format<double>(card.form_W2B, card.W2B));
-               else goto cont;
-               if ((bool)card.W3B)
-                  entries.push_back(format<double>(card.form_W3B, card.W3B));
-
-            cont:
-
-               os << card.format_outlist(entries) << ::std::endl;
-
-               return os;
-            }
          }
       }
    }

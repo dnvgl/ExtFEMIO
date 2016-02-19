@@ -21,7 +21,7 @@ namespace dnvgl {
       namespace fem {
          namespace type_bounds {
 
-            class base {
+            class DECLSPECIFIER base {
 
             private:
 
@@ -112,7 +112,7 @@ namespace dnvgl {
                };
             };
 
-            template<> class bound<::std::string> : public base {
+            template<> class bound<::std::string> : public base{
 
             private:
 
@@ -121,17 +121,36 @@ namespace dnvgl {
 
             public:
 
-               bound();
-               bound(::std::set<::std::string> allowed);
-               bound(::std::set<::std::string> allowed, ::std::string default_val);
-               bound(::std::string default_val);
+               bound() {};
 
-               bool is_allowed(const ::std::string probe) const;
+               bound(::std::set<::std::string> &allowed) :
+                  base(), allowed(allowed) {};
 
-               ::std::string get_default(void) const;
+               bound(::std::set<::std::string> &allowed, ::std::string &default_val) :
+                  base(), allowed(allowed), default_val(default_val) {
+                  got_default();
+               };
+
+               bound(::std::string &default_val) :
+                  base(), default_val(default_val) {
+                  got_default();
+               };
+
+               bool is_allowed(const ::std::string &probe) const {
+                  if (allowed.size() == 0)
+                     return true;
+                  return !(allowed.find(probe) == allowed.end());
+               };
+
+
+               ::std::string get_default(void) const {
+                  if (!has_default())
+                     throw ::dnvgl::extfem::fem::errors::types_error("** ERROR **: No default value avaliable.");
+                  return this->default_val;
+               };
             };
 
-            template<> class bound<bool> : public base {
+            template<> class bound<bool> : public base{
 
             private:
 
@@ -139,11 +158,18 @@ namespace dnvgl {
 
             public:
 
-               bound();
+               bound() {};
 
-               bound(bool &_default);
+               bound(bool &_default) {
+                  got_default();
+               }
 
-               bool get_default(void) const;
+               bool get_default(void) const {
+                  if (!has_default())
+                     throw ::dnvgl::extfem::fem::errors::types_error(
+                     "** ERROR **: No default value avaliable.");
+                  return this->default_val;
+               };
             };
          }
       }

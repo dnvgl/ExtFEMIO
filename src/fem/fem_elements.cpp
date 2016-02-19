@@ -163,17 +163,19 @@ void dnvgl::extfem::fem::elements::dispatch(
 
 const long undef::nnodes = -1;
 
-EXTFEMIO_API __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
+el_types undef::get_type(void) const { return UNDEFINED; }
+
+DECLSPECIFIER __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
    eleno(data->ELNOX), elident(data->ELNO),
    nodes(data->NODIN.begin(), data->NODIN.end()) {}
 
-EXTFEMIO_API __base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
+DECLSPECIFIER __base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
-EXTFEMIO_API __base::__base(__base const *data) {}
+DECLSPECIFIER __base::__base(__base const *data) {}
 
-EXTFEMIO_API void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {}
+DECLSPECIFIER void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {}
 
-EXTFEMIO_API void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {}
+DECLSPECIFIER void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
 ghex::ghex(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
    __base(data) {}

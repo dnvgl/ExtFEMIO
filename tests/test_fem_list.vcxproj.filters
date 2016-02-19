@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test_bdf_list.cpp">
+    <ClCompile Include="test_fem_list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -22,13 +22,13 @@
     <ClInclude Include="..\include\extfem_string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdf\cards.h">
+    <ClInclude Include="..\include\fem\cards.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdf\file.h">
+    <ClInclude Include="..\include\fem\file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\bdf\types.h">
+    <ClInclude Include="..\include\fem\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

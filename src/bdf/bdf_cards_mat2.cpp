@@ -41,37 +41,7 @@ namespace {
    static const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
 }
 
-const entry_type<long> mat2::form_MID(
-   "MID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<double> mat2::form_G(
-   "G",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat2::form_RHO(
-   "RHO",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat2::form_A(
-   "A",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat2::form_TREF(
-   "TREF",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat2::form_GE(
-   "GE",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat2::form_ST(
-   "ST",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat2::form_SC(
-   "SC",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat2::form_SS(
-   "SS",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<long> mat2::form_MCSID(
-   "MCSID",
-   bdf::type_bounds::bound<long>(&cl0, nullptr, nullptr, true));
-
-mat2::mat2(const deque<std::string> &inp) : card(inp) {
+mat2::mat2(const deque<std::string> &inp) : mat(inp) {
 
    form_MCSID.set_value(MCSID, "");
    form_SS.set_value(SS, "");
