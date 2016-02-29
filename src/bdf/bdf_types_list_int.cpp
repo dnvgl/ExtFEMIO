@@ -26,12 +26,6 @@ namespace {
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 #ifdef __GNUC__
 using ::boost::regex;
 #else

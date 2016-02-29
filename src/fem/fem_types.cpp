@@ -25,12 +25,6 @@ namespace {
 #include "fem/types.h"
 #include "extfem_string.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 using namespace ::dnvgl::extfem;
 
 fem::types::base::base(const::std::string &name) : name(name) {};

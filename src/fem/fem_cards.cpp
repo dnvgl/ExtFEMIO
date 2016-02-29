@@ -18,12 +18,6 @@ namespace {
       = "@(#) $Id$";
 }
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 #include "fem/cards.h"
 #include "fem/errors.h"
 #include "extfem_string.h"

@@ -24,14 +24,7 @@ namespace {
 #include "fem/cards.h"
 #include "fem/elements.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 using namespace ::dnvgl::extfem::fem::elements;
-
 
 void dnvgl::extfem::fem::elements::dispatch(
    std::unique_ptr<__base> &res, const ::dnvgl::extfem::fem::cards::gelmnt1 *data) {

@@ -26,12 +26,6 @@ namespace {
 #include "bdf/types.h"
 #include "extfem_string.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 using namespace ::dnvgl::extfem;
 
 ::std::istringstream bdf::types::base::conv;

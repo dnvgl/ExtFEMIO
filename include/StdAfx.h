@@ -31,7 +31,13 @@
 
 #define VC_EXTRALEAN    // Exclude rarely-used stuff from Windows headers
 
-// #include <afx.h>
+#if defined(WIN32) && defined(_MFC_VER) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+#include <afx.h>
 
 #include <deque>
 #include <string>

@@ -27,12 +27,6 @@ namespace {
 #include "fem/types.h"
 #include "fem/errors.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 DECLSPECIFIER const
 #if HAVE_BOOST_REGEX_HPP
 boost::regex
