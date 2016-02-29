@@ -32,6 +32,12 @@ using ::boost::regex;
 using ::std::regex;
 #endif
 
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 DECLSPECIFIER const regex dnvgl::extfem::bdf::types::list_int_re("[[:digit:]]*");
 
 

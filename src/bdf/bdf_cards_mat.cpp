@@ -1,7 +1,7 @@
 /**
 \file bdf/bdf_cards_mat.cpp
-\author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-\copyright Copyright © 2016 by DNV GL SE
+\author Berthold HÃ¶llmann <berthold.hoellmann@dnvgl.com>
+\copyright Copyright Â© 2016 by DNV GL SE
 \brief Common definitions for Nastran BDF MAT1 and MAT2 cards.
 
 Detailed description
@@ -24,6 +24,12 @@ namespace {
 #include "bdf/cards.h"
 #include "bdf/types.h"
 #include "bdf/errors.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace std;
 using namespace ::dnvgl::extfem;

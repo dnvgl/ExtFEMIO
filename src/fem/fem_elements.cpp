@@ -24,6 +24,12 @@ namespace {
 #include "fem/cards.h"
 #include "fem/elements.h"
 
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem::fem::elements;
 
 void dnvgl::extfem::fem::elements::dispatch(

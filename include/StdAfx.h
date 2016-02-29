@@ -31,13 +31,15 @@
 
 #define VC_EXTRALEAN    // Exclude rarely-used stuff from Windows headers
 
-#if defined(WIN32) && defined(_MFC_VER) && defined(_DEBUG)
+#ifdef _MFC_VER
+#include <afx.h>
+#endif
+
+#if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
-
-#include <afx.h>
 
 #include <deque>
 #include <string>
@@ -55,5 +57,5 @@ static char THIS_FILE[] = __FILE__;
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C .. check -j8"
 // End:

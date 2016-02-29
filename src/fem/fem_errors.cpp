@@ -22,6 +22,12 @@ namespace {
 
 #include "fem/errors.h"
 
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace ::dnvgl::extfem::fem::errors;
 
 error::error(

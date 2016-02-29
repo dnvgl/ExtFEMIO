@@ -22,6 +22,12 @@ namespace {
 
 using namespace ::dnvgl::extfem::fem::elements;
 
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 const long axis::nnodes = 2;
 
 el_types axis::get_type() const {return AXIS;}

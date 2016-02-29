@@ -21,6 +21,12 @@ namespace {
 
 using namespace ::dnvgl::extfem::bdf::errors;
 
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 error::error(
    const std::string &msg, const std::string &err_class) :
    msg(msg), name(""), err_class(err_class) {}

@@ -403,7 +403,7 @@ namespace dnvgl {
 #endif
                list_int_re;
 
-               
+
                template <>
             class entry_type<::std::deque<int>> : public base {
 
