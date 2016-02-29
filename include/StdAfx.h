@@ -31,7 +31,7 @@
 
 #define VC_EXTRALEAN    // Exclude rarely-used stuff from Windows headers
 
-#include <afx.h>
+// #include <afx.h>
 
 #include <deque>
 #include <string>
