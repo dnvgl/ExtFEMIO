@@ -22,7 +22,7 @@ namespace dnvgl {
          namespace cards {
 
 /// Base class for handling forces and moments.
-            class DECLSPECIFIER momforce_base : public card {
+            class momforce_base : public card {
 
             private:
 
@@ -89,7 +89,7 @@ vector.
 | ------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `FORCE` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class DECLSPECIFIER force : public momforce_base {
+            class force : public momforce_base {
                // Handle Nastran Bulk FORCE entries.
 
             private:
@@ -111,7 +111,7 @@ vector.
                   return FORCE;
                };
 
-               friend DECLSPECIFIER ::std::ostream& operator<<(::std::ostream&, const force&);
+               friend ::std::ostream& operator<<(::std::ostream&, const force&);
                
                const ::std::ostream& operator << (::std::ostream& os) const;
             };
@@ -128,7 +128,7 @@ vector.
 | -------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `MOMENT` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class DECLSPECIFIER moment : public momforce_base {
+            class moment : public momforce_base {
                // Handle Nastran Bulk MOMENT entries.
 
             private:
@@ -150,7 +150,7 @@ vector.
                   return MOMENT;
                };
 
-               friend DECLSPECIFIER ::std::ostream& operator<< (::std::ostream&, const moment&);
+               friend ::std::ostream& operator<< (::std::ostream&, const moment&);
 
                const ::std::ostream& operator<< (::std::ostream& os) const;
             };
@@ -170,7 +170,7 @@ Defines a static load as a linear combination of load sets defined via
 | `LOAD` | `SID` | `S`  | `S1`   | `L1` | `S2` | `L2` | `S3` | `L3` |    |
 |        | `S4`  | `L4` | *etc.* |      |      |      |      |      |    |
 */
-            class DECLSPECIFIER load : public card {
+            class load : public card {
 
             private:
 
@@ -207,7 +207,7 @@ Defines a static load as a linear combination of load sets defined via
                   return LOAD;
                };
 
-               friend DECLSPECIFIER ::std::ostream&
+               friend ::std::ostream&
                operator<<(::std::ostream&, const load&);
 
                const ::std::ostream&

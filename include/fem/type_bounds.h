@@ -21,7 +21,7 @@ namespace dnvgl {
       namespace fem {
          namespace type_bounds {
 
-            class DECLSPECIFIER base {
+            class base {
 
             private:
 

@@ -70,7 +70,7 @@ namespace dnvgl {
                /// Cards are written in Free Field Format
                FREE=-1} out_form_type;
 
-            class DECLSPECIFIER base {
+            class base {
 
             protected:
 
@@ -132,7 +132,7 @@ namespace dnvgl {
                ::std::string format() const;
             };
 
-            class DECLSPECIFIER empty : public base {
+            class empty : public base {
 
             public:
 
@@ -249,7 +249,7 @@ namespace dnvgl {
             class entry_type : public base { };
 
 /// Integer value.
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
             boost::regex
 #else
@@ -367,21 +367,21 @@ namespace dnvgl {
             };
 
 /// Real value.
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
             boost::regex
 #else
             ::std::regex
 #endif
             float_exp_re;
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
             boost::regex
 #else
             ::std::regex
 #endif
             float_re;
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
             boost::regex
 #else
@@ -635,7 +635,7 @@ namespace dnvgl {
             };
 
             /// List of integers.
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else

@@ -69,7 +69,7 @@ namespace dnvgl {
 
             /** Base class for FEM element representation.
              */
-            class DECLSPECIFIER __base {
+            class __base {
             protected:
                static const el_types type;
                __base(void);
@@ -152,7 +152,7 @@ namespace dnvgl {
                virtual el_types get_type(void) const = 0;
             };
 
-            class DECLSPECIFIER undef : public __base {
+            class undef : public __base {
             public:
                undef (void);
                static const long nnodes;
@@ -161,7 +161,7 @@ namespace dnvgl {
 
             /** 2-D, 2 Node Beam
              */
-            class DECLSPECIFIER beps : public __base {
+            class beps : public __base {
             public:
                beps(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                beps(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -172,7 +172,7 @@ namespace dnvgl {
 
             /** Plane Constant Strain Triangle
              */
-            class DECLSPECIFIER csta : public __base {
+            class csta : public __base {
             public:
                csta(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                csta(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -183,7 +183,7 @@ namespace dnvgl {
 
             /** Rect. Plate. Bending Modes
              */
-            class DECLSPECIFIER rpbq : public __base {
+            class rpbq : public __base {
             public:
                rpbq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                rpbq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -194,7 +194,7 @@ namespace dnvgl {
 
             /** Plane Lin. Strain Triangle
              */
-            class DECLSPECIFIER ilst : public __base {
+            class ilst : public __base {
             public:
                ilst(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ilst(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -205,7 +205,7 @@ namespace dnvgl {
 
             /** Plane Quadrilateral Membrane Element
              */
-            class DECLSPECIFIER iqqe : public __base {
+            class iqqe : public __base {
             public:
                iqqe(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                iqqe(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -216,7 +216,7 @@ namespace dnvgl {
 
             /** Plane Quadrilateral Membrane Element
              */
-            class DECLSPECIFIER lqua : public __base {
+            class lqua : public __base {
             public:
                lqua(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                lqua(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -228,7 +228,7 @@ namespace dnvgl {
 
             /** Truss Element
              */
-            class DECLSPECIFIER tess : public __base {
+            class tess : public __base {
             public:
                tess(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                tess(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -246,7 +246,7 @@ namespace dnvgl {
 
             /** 1-Noded Mass-Matrix
              */
-            class DECLSPECIFIER gmas : public __base {
+            class gmas : public __base {
             public:
                gmas(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                gmas(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -257,7 +257,7 @@ namespace dnvgl {
 
             /** 2-Noded Mass-Matrix
              */
-            class DECLSPECIFIER glma : public __base {
+            class glma : public __base {
             public:
                glma(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                glma(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -268,7 +268,7 @@ namespace dnvgl {
 
             /** 2-Noded Damping-Matrix
              */
-            class DECLSPECIFIER glda : public __base {
+            class glda : public __base {
             public:
                glda(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                glda(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -279,7 +279,7 @@ namespace dnvgl {
 
             /** 3-D, 2 Node Beam
              */
-            class DECLSPECIFIER beas : public __base {
+            class beas : public __base {
             public:
                beas(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                beas(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -290,7 +290,7 @@ namespace dnvgl {
 
             /** Axial Spring
              */
-            class DECLSPECIFIER axis : public __base {
+            class axis : public __base {
             public:
                axis(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                axis(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -301,7 +301,7 @@ namespace dnvgl {
 
             /** Axial Damper
              */
-            class DECLSPECIFIER axda : public __base {
+            class axda : public __base {
             public:
                axda(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                axda(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -312,7 +312,7 @@ namespace dnvgl {
 
             /** Spring to Ground
              */
-            class DECLSPECIFIER gspr : public __base {
+            class gspr : public __base {
             public:
                gspr(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                gspr(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -323,7 +323,7 @@ namespace dnvgl {
 
             /** Damper to Ground
              */
-            class DECLSPECIFIER gdam : public __base {
+            class gdam : public __base {
             public:
                gdam(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                gdam(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -334,7 +334,7 @@ namespace dnvgl {
 
             /** Isoparametric Hexahedron
              */
-            class DECLSPECIFIER ihex : public __base {
+            class ihex : public __base {
             public:
                ihex(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ihex(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -345,7 +345,7 @@ namespace dnvgl {
 
             /** Linear Hexahedron
              */
-            class DECLSPECIFIER lhex : public __base {
+            class lhex : public __base {
             public:
                lhex(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                lhex(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -356,7 +356,7 @@ namespace dnvgl {
 
             /** Subparametric Curved Beam
              */
-            class DECLSPECIFIER secb : public __base {
+            class secb : public __base {
             public:
                secb(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                secb(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -367,7 +367,7 @@ namespace dnvgl {
 
             /** General Curved Beam
              */
-            class DECLSPECIFIER btss : public __base {
+            class btss : public __base {
             public:
                btss(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                btss(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -379,7 +379,7 @@ namespace dnvgl {
             /** Flat Quadrilateral Thin Shell (FQUS) or Free Formulation
                 Quadrilateral Shell (FQQ)
             */
-            class DECLSPECIFIER fqus_ffq : public __base {
+            class fqus_ffq : public __base {
             public:
                fqus_ffq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                fqus_ffq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -391,7 +391,7 @@ namespace dnvgl {
             /** Flat Triangular Thin Shell (FTRS) or Free Formulation
                 Triangular Shell (FFTR)
             */
-            class DECLSPECIFIER ftrs_fftr : public __base {
+            class ftrs_fftr : public __base {
             public:
                ftrs_fftr(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ftrs_fftr(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -402,7 +402,7 @@ namespace dnvgl {
 
             /** Subparametric Curved Triangular Thick Shell
              */
-            class DECLSPECIFIER scts : public __base {
+            class scts : public __base {
             public:
                scts(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                scts(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -413,7 +413,7 @@ namespace dnvgl {
 
             /** Subparam. Curved Triang. Thick Sandwich Elem.
              */
-            class DECLSPECIFIER mcts : public __base {
+            class mcts : public __base {
             public:
                mcts(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                mcts(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -424,7 +424,7 @@ namespace dnvgl {
 
             /** Subparametric Curved Quadrilateral Thick Shell
              */
-            class DECLSPECIFIER scqs : public __base {
+            class scqs : public __base {
             public:
                scqs(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                scqs(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -435,7 +435,7 @@ namespace dnvgl {
 
             /** Subparam. Curved Quadr. Thick Sandwich Elem.
              */
-            class DECLSPECIFIER mcqs : public __base {
+            class mcqs : public __base {
             public:
                mcqs(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                mcqs(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -446,7 +446,7 @@ namespace dnvgl {
 
             /** Isoparametric Triangular Prism
              */
-            class DECLSPECIFIER ipri : public __base {
+            class ipri : public __base {
             public:
                ipri(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ipri(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -457,7 +457,7 @@ namespace dnvgl {
 
             /** Isoparametric Tetrahedron
              */
-            class DECLSPECIFIER itet : public __base {
+            class itet : public __base {
             public:
                itet(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                itet(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -468,7 +468,7 @@ namespace dnvgl {
 
             /** Triangular Prism
              */
-            class DECLSPECIFIER tpri : public __base {
+            class tpri : public __base {
             public:
                tpri(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                tpri(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -479,7 +479,7 @@ namespace dnvgl {
 
             /** Tetrahedron
              */
-            class DECLSPECIFIER tetr : public __base {
+            class tetr : public __base {
             public:
                tetr(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                tetr(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -490,7 +490,7 @@ namespace dnvgl {
 
             /** Subparam. Layered Curved Triangular Thick Shell
              */
-            class DECLSPECIFIER lcts : public __base {
+            class lcts : public __base {
             public:
                lcts(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                lcts(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -501,7 +501,7 @@ namespace dnvgl {
 
             /** Subparam. Layered Curved Quadrilat. Thick Shell
              */
-            class DECLSPECIFIER lcqs : public __base {
+            class lcqs : public __base {
             public:
                lcqs(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                lcqs(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -512,7 +512,7 @@ namespace dnvgl {
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class DECLSPECIFIER trs1 : public __base {
+            class trs1 : public __base {
             public:
                trs1(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                trs1(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -523,7 +523,7 @@ namespace dnvgl {
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class DECLSPECIFIER trs2 : public __base {
+            class trs2 : public __base {
             public:
                trs2(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                trs2(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -534,7 +534,7 @@ namespace dnvgl {
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class DECLSPECIFIER trs3 : public __base {
+            class trs3 : public __base {
             public:
                trs3(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                trs3(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -545,7 +545,7 @@ namespace dnvgl {
 
             /** General Spring / Shim Element
              */
-            class DECLSPECIFIER glsh : public __base {
+            class glsh : public __base {
             public:
                glsh(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                glsh(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -556,7 +556,7 @@ namespace dnvgl {
 
             /** Axisymmetric Constant Strain Triangle
              */
-            class DECLSPECIFIER axcs : public __base {
+            class axcs : public __base {
             public:
                axcs(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                axcs(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -567,7 +567,7 @@ namespace dnvgl {
 
             /** Axisymmetric Quadrilateral
              */
-            class DECLSPECIFIER axlq : public __base {
+            class axlq : public __base {
             public:
                axlq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                axlq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -578,7 +578,7 @@ namespace dnvgl {
 
             /** Axisymmetric Linear Strain Triangle
              */
-            class DECLSPECIFIER axls : public __base {
+            class axls : public __base {
             public:
                axls(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                axls(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -589,7 +589,7 @@ namespace dnvgl {
 
             /** Axisymmetric Linear Strain Quadrilateral
              */
-            class DECLSPECIFIER axqq : public __base {
+            class axqq : public __base {
             public:
                axqq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                axqq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -600,7 +600,7 @@ namespace dnvgl {
 
             /** Pile / Soil
              */
-            class DECLSPECIFIER pils : public __base {
+            class pils : public __base {
             public:
                pils(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                pils(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -611,7 +611,7 @@ namespace dnvgl {
 
             /** Plane Cable-Bar Element
              */
-            class DECLSPECIFIER pcab : public __base {
+            class pcab : public __base {
             public:
                pcab(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                pcab(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -622,7 +622,7 @@ namespace dnvgl {
 
             /** Plane Spring Element
              */
-            class DECLSPECIFIER pspr : public __base {
+            class pspr : public __base {
             public:
                pspr(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                pspr(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -633,7 +633,7 @@ namespace dnvgl {
 
             /** 4-node Contact Element with triangular Shape for ADVANCE.
              */
-            class DECLSPECIFIER adva_4 : public __base {
+            class adva_4 : public __base {
             public:
                adva_4(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                adva_4(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -644,7 +644,7 @@ namespace dnvgl {
 
             /** 2-Noded Link Element for ADVANCE.
              */
-            class DECLSPECIFIER adva_2 : public __base {
+            class adva_2 : public __base {
             public:
                adva_2(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                adva_2(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -655,7 +655,7 @@ namespace dnvgl {
 
             /** 2-Noded Contact Element
              */
-            class DECLSPECIFIER ctcp : public __base {
+            class ctcp : public __base {
             public:
                ctcp(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctcp(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -666,7 +666,7 @@ namespace dnvgl {
 
             /** 4-Noded Contact Element
              */
-            class DECLSPECIFIER ctcl : public __base {
+            class ctcl : public __base {
             public:
                ctcl(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctcl(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -677,7 +677,7 @@ namespace dnvgl {
 
             /** 4-Noded Axisymmetric Contact Element
              */
-            class DECLSPECIFIER ctal : public __base {
+            class ctal : public __base {
             public:
                ctal(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctal(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -688,7 +688,7 @@ namespace dnvgl {
 
             /** 6-Noded Contact Element
              */
-            class DECLSPECIFIER ctcc : public __base {
+            class ctcc : public __base {
             public:
                ctcc(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctcc(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -699,7 +699,7 @@ namespace dnvgl {
 
             /** 6-Noded (3+3) Axisymmetric Contact Element
              */
-            class DECLSPECIFIER ctaq : public __base {
+            class ctaq : public __base {
             public:
                ctaq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctaq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -710,7 +710,7 @@ namespace dnvgl {
 
             /** 8-Noded (4+4) Contact Element
              */
-            class DECLSPECIFIER ctlq : public __base {
+            class ctlq : public __base {
             public:
                ctlq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctlq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -721,7 +721,7 @@ namespace dnvgl {
 
             /** 16-Noded (8+8) Contact Element
              */
-            class DECLSPECIFIER ctcq : public __base {
+            class ctcq : public __base {
             public:
                ctcq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctcq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -732,7 +732,7 @@ namespace dnvgl {
 
             /** 18-Noded (9+9) Contact Element
              */
-            class DECLSPECIFIER ctmq : public __base {
+            class ctmq : public __base {
             public:
                ctmq(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ctmq(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -743,7 +743,7 @@ namespace dnvgl {
 
             /** 9-Noded Shell Element
              */
-            class DECLSPECIFIER hcqs : public __base {
+            class hcqs : public __base {
             public:
                hcqs(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                hcqs(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -754,7 +754,7 @@ namespace dnvgl {
 
             /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
              */
-            class DECLSPECIFIER slqs : public __base {
+            class slqs : public __base {
             public:
                slqs(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                slqs(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -765,7 +765,7 @@ namespace dnvgl {
 
             /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
              */
-            class DECLSPECIFIER slts : public __base {
+            class slts : public __base {
             public:
                slts(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                slts(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -776,7 +776,7 @@ namespace dnvgl {
 
             /** Semiloof Curved Beam (11 d.o.fs)
              */
-            class DECLSPECIFIER slcb : public __base {
+            class slcb : public __base {
             public:
                slcb(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                slcb(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -787,7 +787,7 @@ namespace dnvgl {
 
             /** General Matrix Element with arbitrary no. of nodes (/n/)
              */
-            class DECLSPECIFIER matr : public __base {
+            class matr : public __base {
             public:
                matr(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                matr(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -798,7 +798,7 @@ namespace dnvgl {
 
             /** General Hexahedron
              */
-            class DECLSPECIFIER ghex : public __base {
+            class ghex : public __base {
             public:
                ghex(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -808,7 +808,7 @@ namespace dnvgl {
 
             /** Dispatch element class instance for `id`
              */
-            void DECLSPECIFIER dispatch(std::unique_ptr<__base>&,
+            void dispatch(std::unique_ptr<__base>&,
                const ::dnvgl::extfem::fem::cards::gelmnt1 *data);
          }
       }

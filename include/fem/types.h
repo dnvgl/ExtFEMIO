@@ -62,7 +62,7 @@ namespace dnvgl {
                List
             } fem_types;
 
-            class DECLSPECIFIER base {
+            class base {
 
             protected:
 
@@ -111,7 +111,7 @@ namespace dnvgl {
             };
 
 
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else
@@ -207,7 +207,7 @@ namespace dnvgl {
             };
 
             /// Boolean value.
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else
@@ -268,7 +268,7 @@ namespace dnvgl {
                }
             };
 
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
             boost::regex
 #else
@@ -395,7 +395,7 @@ namespace dnvgl {
                   const ::std::string&, const size_t &len=72) const;
             };
 
-            DECLSPECIFIER extern const
+            extern const
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else

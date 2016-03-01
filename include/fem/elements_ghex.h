@@ -29,7 +29,7 @@ namespace dnvgl {
 
                     - node 27 at pos 21
              */
-            class DECLSPECIFIER ghex100: public ghex {
+            class ghex100: public ghex {
             public:
                ghex100(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex100(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -46,7 +46,7 @@ namespace dnvgl {
                     - node 21 at pos 21
                     - node 27 at pos 22
              */
-            class DECLSPECIFIER ghex101: public ghex {
+            class ghex101: public ghex {
             public:
                ghex101(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex101(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -63,7 +63,7 @@ namespace dnvgl {
                     - node 22 at pos 21
                     - node 27 at pos 22
              */
-            class DECLSPECIFIER ghex102: public ghex {
+            class ghex102: public ghex {
             public:
                ghex102(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex102(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -81,7 +81,7 @@ namespace dnvgl {
                     - node 22 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex103: public ghex {
+            class ghex103: public ghex {
             public:
                ghex103(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex103(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -98,7 +98,7 @@ namespace dnvgl {
                     - node 23 at pos 21
                     - node 27 at pos 22
              */
-            class DECLSPECIFIER ghex104: public ghex {
+            class ghex104: public ghex {
             public:
                ghex104(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex104(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -116,7 +116,7 @@ namespace dnvgl {
                     - node 23 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex105: public ghex {
+            class ghex105: public ghex {
             public:
                ghex105(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex105(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -134,7 +134,7 @@ namespace dnvgl {
                     - node 23 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex106: public ghex {
+            class ghex106: public ghex {
             public:
                ghex106(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex106(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -153,7 +153,7 @@ namespace dnvgl {
                     - node 23 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex107: public ghex {
+            class ghex107: public ghex {
             public:
                ghex107(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex107(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -170,7 +170,7 @@ namespace dnvgl {
                     - node 24 at pos 21
                     - node 27 at pos 22
              */
-            class DECLSPECIFIER ghex108: public ghex {
+            class ghex108: public ghex {
             public:
                ghex108(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex108(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -188,7 +188,7 @@ namespace dnvgl {
                     - node 24 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex109: public ghex {
+            class ghex109: public ghex {
             public:
                ghex109(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex109(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -206,7 +206,7 @@ namespace dnvgl {
                     - node 24 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex110: public ghex {
+            class ghex110: public ghex {
             public:
                ghex110(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex110(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -225,7 +225,7 @@ namespace dnvgl {
                     - node 24 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex111: public ghex {
+            class ghex111: public ghex {
             public:
                ghex111(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex111(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -243,7 +243,7 @@ namespace dnvgl {
                     - node 24 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex112: public ghex {
+            class ghex112: public ghex {
             public:
                ghex112(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex112(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -262,7 +262,7 @@ namespace dnvgl {
                     - node 24 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex113: public ghex {
+            class ghex113: public ghex {
             public:
                ghex113(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex113(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -281,7 +281,7 @@ namespace dnvgl {
                     - node 24 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex114: public ghex {
+            class ghex114: public ghex {
             public:
                ghex114(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex114(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -301,7 +301,7 @@ namespace dnvgl {
                     - node 24 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex115: public ghex {
+            class ghex115: public ghex {
             public:
                ghex115(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex115(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -318,7 +318,7 @@ namespace dnvgl {
                     - node 25 at pos 21
                     - node 27 at pos 22
              */
-            class DECLSPECIFIER ghex116: public ghex {
+            class ghex116: public ghex {
             public:
                ghex116(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex116(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -336,7 +336,7 @@ namespace dnvgl {
                     - node 25 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex117: public ghex {
+            class ghex117: public ghex {
             public:
                ghex117(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex117(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -354,7 +354,7 @@ namespace dnvgl {
                     - node 25 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex118: public ghex {
+            class ghex118: public ghex {
             public:
                ghex118(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex118(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -373,7 +373,7 @@ namespace dnvgl {
                     - node 25 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex119: public ghex {
+            class ghex119: public ghex {
             public:
                ghex119(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex119(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -391,7 +391,7 @@ namespace dnvgl {
                     - node 25 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex120: public ghex {
+            class ghex120: public ghex {
             public:
                ghex120(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex120(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -410,7 +410,7 @@ namespace dnvgl {
                     - node 25 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex121: public ghex {
+            class ghex121: public ghex {
             public:
                ghex121(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex121(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -429,7 +429,7 @@ namespace dnvgl {
                     - node 25 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex122: public ghex {
+            class ghex122: public ghex {
             public:
                ghex122(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex122(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -449,7 +449,7 @@ namespace dnvgl {
                     - node 25 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex123: public ghex {
+            class ghex123: public ghex {
             public:
                ghex123(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex123(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -467,7 +467,7 @@ namespace dnvgl {
                     - node 25 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex124: public ghex {
+            class ghex124: public ghex {
             public:
                ghex124(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex124(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -486,7 +486,7 @@ namespace dnvgl {
                     - node 25 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex125: public ghex {
+            class ghex125: public ghex {
             public:
                ghex125(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex125(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -505,7 +505,7 @@ namespace dnvgl {
                     - node 25 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex126: public ghex {
+            class ghex126: public ghex {
             public:
                ghex126(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex126(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -525,7 +525,7 @@ namespace dnvgl {
                     - node 25 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex127: public ghex {
+            class ghex127: public ghex {
             public:
                ghex127(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex127(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -544,7 +544,7 @@ namespace dnvgl {
                     - node 25 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex128: public ghex {
+            class ghex128: public ghex {
             public:
                ghex128(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex128(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -564,7 +564,7 @@ namespace dnvgl {
                     - node 25 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex129: public ghex {
+            class ghex129: public ghex {
             public:
                ghex129(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex129(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -584,7 +584,7 @@ namespace dnvgl {
                     - node 25 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex130: public ghex {
+            class ghex130: public ghex {
             public:
                ghex130(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex130(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -605,7 +605,7 @@ namespace dnvgl {
                     - node 25 at pos 25
                     - node 27 at pos 26
              */
-            class DECLSPECIFIER ghex131: public ghex {
+            class ghex131: public ghex {
             public:
                ghex131(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex131(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -622,7 +622,7 @@ namespace dnvgl {
                     - node 26 at pos 21
                     - node 27 at pos 22
              */
-            class DECLSPECIFIER ghex132: public ghex {
+            class ghex132: public ghex {
             public:
                ghex132(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex132(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -640,7 +640,7 @@ namespace dnvgl {
                     - node 26 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex133: public ghex {
+            class ghex133: public ghex {
             public:
                ghex133(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex133(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -658,7 +658,7 @@ namespace dnvgl {
                     - node 26 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex134: public ghex {
+            class ghex134: public ghex {
             public:
                ghex134(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex134(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -677,7 +677,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex135: public ghex {
+            class ghex135: public ghex {
             public:
                ghex135(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex135(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -695,7 +695,7 @@ namespace dnvgl {
                     - node 26 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex136: public ghex {
+            class ghex136: public ghex {
             public:
                ghex136(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex136(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -714,7 +714,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex137: public ghex {
+            class ghex137: public ghex {
             public:
                ghex137(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex137(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -733,7 +733,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex138: public ghex {
+            class ghex138: public ghex {
             public:
                ghex138(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex138(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -753,7 +753,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex139: public ghex {
+            class ghex139: public ghex {
             public:
                ghex139(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex139(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -771,7 +771,7 @@ namespace dnvgl {
                     - node 26 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex140: public ghex {
+            class ghex140: public ghex {
             public:
                ghex140(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex140(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -790,7 +790,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex141: public ghex {
+            class ghex141: public ghex {
             public:
                ghex141(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex141(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -809,7 +809,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex142: public ghex {
+            class ghex142: public ghex {
             public:
                ghex142(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex142(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -829,7 +829,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex143: public ghex {
+            class ghex143: public ghex {
             public:
                ghex143(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex143(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -848,7 +848,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex144: public ghex {
+            class ghex144: public ghex {
             public:
                ghex144(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex144(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -868,7 +868,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex145: public ghex {
+            class ghex145: public ghex {
             public:
                ghex145(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex145(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -888,7 +888,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex146: public ghex {
+            class ghex146: public ghex {
             public:
                ghex146(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex146(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -909,7 +909,7 @@ namespace dnvgl {
                     - node 26 at pos 25
                     - node 27 at pos 26
              */
-            class DECLSPECIFIER ghex147: public ghex {
+            class ghex147: public ghex {
             public:
                ghex147(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex147(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -927,7 +927,7 @@ namespace dnvgl {
                     - node 26 at pos 22
                     - node 27 at pos 23
              */
-            class DECLSPECIFIER ghex148: public ghex {
+            class ghex148: public ghex {
             public:
                ghex148(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex148(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -946,7 +946,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex149: public ghex {
+            class ghex149: public ghex {
             public:
                ghex149(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex149(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -965,7 +965,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex150: public ghex {
+            class ghex150: public ghex {
             public:
                ghex150(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex150(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -985,7 +985,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex151: public ghex {
+            class ghex151: public ghex {
             public:
                ghex151(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex151(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1004,7 +1004,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex152: public ghex {
+            class ghex152: public ghex {
             public:
                ghex152(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex152(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1024,7 +1024,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex153: public ghex {
+            class ghex153: public ghex {
             public:
                ghex153(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex153(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1044,7 +1044,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex154: public ghex {
+            class ghex154: public ghex {
             public:
                ghex154(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex154(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1065,7 +1065,7 @@ namespace dnvgl {
                     - node 26 at pos 25
                     - node 27 at pos 26
              */
-            class DECLSPECIFIER ghex155: public ghex {
+            class ghex155: public ghex {
             public:
                ghex155(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex155(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1084,7 +1084,7 @@ namespace dnvgl {
                     - node 26 at pos 23
                     - node 27 at pos 24
              */
-            class DECLSPECIFIER ghex156: public ghex {
+            class ghex156: public ghex {
             public:
                ghex156(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex156(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1104,7 +1104,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex157: public ghex {
+            class ghex157: public ghex {
             public:
                ghex157(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex157(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1124,7 +1124,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex158: public ghex {
+            class ghex158: public ghex {
             public:
                ghex158(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex158(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1145,7 +1145,7 @@ namespace dnvgl {
                     - node 26 at pos 25
                     - node 27 at pos 26
              */
-            class DECLSPECIFIER ghex159: public ghex {
+            class ghex159: public ghex {
             public:
                ghex159(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex159(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1165,7 +1165,7 @@ namespace dnvgl {
                     - node 26 at pos 24
                     - node 27 at pos 25
              */
-            class DECLSPECIFIER ghex160: public ghex {
+            class ghex160: public ghex {
             public:
                ghex160(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex160(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1186,7 +1186,7 @@ namespace dnvgl {
                     - node 26 at pos 25
                     - node 27 at pos 26
              */
-            class DECLSPECIFIER ghex161: public ghex {
+            class ghex161: public ghex {
             public:
                ghex161(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex161(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1207,7 +1207,7 @@ namespace dnvgl {
                     - node 26 at pos 25
                     - node 27 at pos 26
              */
-            class DECLSPECIFIER ghex162: public ghex {
+            class ghex162: public ghex {
             public:
                ghex162(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex162(const ::dnvgl::extfem::fem::cards::gelref1*);
@@ -1229,7 +1229,7 @@ namespace dnvgl {
                     - node 26 at pos 26
                     - node 27 at pos 27
              */
-            class DECLSPECIFIER ghex163: public ghex {
+            class ghex163: public ghex {
             public:
                ghex163(const ::dnvgl::extfem::fem::cards::gelmnt1*);
                ghex163(const ::dnvgl::extfem::fem::cards::gelref1*);

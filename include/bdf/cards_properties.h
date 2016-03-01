@@ -33,7 +33,7 @@ properties of thin shell elements.
 | `PSHELL` | `PID` | `MID1` | `T`    | `MID2` | `12I/T**3` | `MID3` | `TS/T` | `NSM` |    |
 |          | `Z1`  | `Z2`   | `MID4` |        |            |        |        |       |    |
 */
-            class DECLSPECIFIER pshell : public card {
+            class pshell : public card {
                // Handle Nastran Bulk PSHELL entries.
 
             private:
@@ -122,7 +122,7 @@ properties of thin shell elements.
                operator << (::std::ostream& os) const;
             };
 
-            class DECLSPECIFIER beam_base : public card {
+            class beam_base : public card {
 
             protected:
 
@@ -183,7 +183,7 @@ The last two continuations are:
 |   | `K1`    | `K2`    | `S1`    | `S2`    | `NSI(A)` | `NSI(B)` | `CW(A)` | `CW(B)`  |    |
 |   | `M1(A)` | `M2(A)` | `M1(B)` | `M2(B)` | `N1(A)`  | `N2(A)`  | `N1(B)` | `N2(B)`  |    |
 */
-            class DECLSPECIFIER pbeam : public beam_prop {
+            class pbeam : public beam_prop {
                // Handle Nastran Bulk PBEAM entries.
 
             private:
@@ -386,7 +386,7 @@ The last two continuations are:
                operator << (::std::ostream& os) const;
             };
 
-            class DECLSPECIFIER l_geom {
+            class l_geom {
 
             protected:
 
@@ -419,7 +419,7 @@ dimensions.
 |         | `DIMn(m)` | `NSM(m)`  | `SO(B)`  | 1.0       | `DIM1(B)` | `DIM2(B)` | *etc.*    | `DIMn(B)` |    |
 |         |           | `NSM(B)`  |          |           |           |           |           |           |    |
 */
-            class DECLSPECIFIER pbeaml : public beam_prop, private l_geom {
+            class pbeaml : public beam_prop, private l_geom {
                // Handle Nastran Bulk PBEAML entries.
 
             private:
@@ -479,7 +479,7 @@ dimensions.
             };
 
 /// Base class for `pbar` and `pbarl`.
-            class DECLSPECIFIER bar_prop : public card {
+            class bar_prop : public card {
 
             protected:
                static const ::dnvgl::extfem::bdf::types::entry_type<long> form_PID;
@@ -518,7 +518,7 @@ stations)
 |        | `K1`  | `K2`  | `I12` |      |      |      |          |      |    |
 */
 
-            class DECLSPECIFIER pbar : public bar_prop {
+            class pbar : public bar_prop {
 
             private:
 
@@ -619,7 +619,7 @@ cross-sectional dimensions.
 |         | `DIM1` | `DIM2`   | `DIM3`  | `DIM4` | `DIM5` | `DIM6` | `DIM7` | `DIM8` |    |
 |         | `DIM9` | *etc.*   | `NSM`   |        |        |        |        |        |    |
 */
-            class DECLSPECIFIER pbarl : public bar_prop, private l_geom {
+            class pbarl : public bar_prop, private l_geom {
 
             private:
 
@@ -670,7 +670,7 @@ Defines the properties of a rod element (`CROD` entry).
 | ------- | ----- | ----- | --- | --- | --- | ----- | - | - | -- |
 | `PROD`  | `PID` | `MID` | `A` | `J` | `C` | `NSM` |   |   |    |
 */
-            class DECLSPECIFIER prod : public card {
+            class prod : public card {
 
             private:
 

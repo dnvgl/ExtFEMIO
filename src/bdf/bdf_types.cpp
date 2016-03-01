@@ -64,9 +64,9 @@ bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
    return outp.str();
 }
 
-DECLSPECIFIER bdf::types::empty::empty(void) : bdf::types::base("<empty>") {}
+bdf::types::empty::empty(void) : bdf::types::base("<empty>") {}
 
-::std::string DECLSPECIFIER bdf::types::empty::format(const void* d) const {
+::std::string bdf::types::empty::format(const void* d) const {
    std::ostringstream outp;
 
    switch (out_form) {
@@ -80,7 +80,7 @@ DECLSPECIFIER bdf::types::empty::empty(void) : bdf::types::base("<empty>") {}
    return outp.str();
 }
 
-::std::string DECLSPECIFIER bdf::types::empty::format() const {
+::std::string bdf::types::empty::format() const {
    return this->format(nullptr);
 }
 

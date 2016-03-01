@@ -125,7 +125,7 @@ namespace dnvgl {
                return os << *this;
             }
 
-            std::ostream DECLSPECIFIER &operator<<(std::ostream &os, const force &card) {
+            std::ostream &operator<<(std::ostream &os, const force &card) {
 
                std::deque<std::unique_ptr<format_entry>> entries;
 
@@ -138,7 +138,7 @@ namespace dnvgl {
                return os;
             }
 
-            std::ostream DECLSPECIFIER &operator<<(std::ostream &os, const moment &card) {
+            std::ostream &operator<<(std::ostream &os, const moment &card) {
 
                std::deque<std::unique_ptr<format_entry>> entries;
 

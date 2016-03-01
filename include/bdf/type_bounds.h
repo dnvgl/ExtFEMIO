@@ -22,7 +22,7 @@ namespace dnvgl {
       */
       namespace type_bounds {
 
-         class DECLSPECIFIER base {
+         class base {
 
          private:
 

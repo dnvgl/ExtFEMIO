@@ -20,7 +20,7 @@ namespace dnvgl {
          namespace cards {
 
             /// Base class for `ctria3` and `cquad4`.
-            class DECLSPECIFIER base_shell : public card {
+            class base_shell : public card {
 
             protected:
 
@@ -147,7 +147,7 @@ plate element.
 | `CTRIA3` | `EID` | `PID`   | `G1` | `G2` | `G3` | `THETA` or `MCID` | `ZOFFS` |   |    |
 |          |       | `TFLAG` | `T1` | `T2` | `T3` |                   |         |   |    |
 */
-            class DECLSPECIFIER ctria3 : public base_shell {
+            class ctria3 : public base_shell {
 
             private:
 
@@ -177,7 +177,7 @@ quadrilateral plate element.
 | `CQUAD4` | `EID`   | `PID` | `G1` | `G2` | `G3` | `G4` | `THETA` or `MCID` | `ZOFFS` |    |
 |          | `TFLAG` | `T1`  | `T2` | `T3` | `T4` |      |                   |         |    |
 */
-            class DECLSPECIFIER cquad4 : public base_shell {
+            class cquad4 : public base_shell {
 
             private:
 
@@ -215,7 +215,7 @@ Defines a beam element.
 |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`         |    |
 |         | `SA`  | `SB`  |       |       |       |       |       |               |    |
 */
-            class DECLSPECIFIER cbeam : public card {
+            class cbeam : public card {
 
             private:
 
@@ -413,7 +413,7 @@ Defines a simple beam element.
 | `CBAR`  | `EID` | `PID` | `GA`  | `GB`  | `G0`  |       |       | `OFFT` |    |
 |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
 */
-            class DECLSPECIFIER cbar : public card {
+            class cbar : public card {
 
             private:
 
@@ -679,7 +679,7 @@ Defines a tension-compression-torsion element.
 | ------- | ----- | ----- | ---- | ---- | - | - | - | - | -- |
 | `CROD`  | `EID` | `PID` | `G1` | `G2` |   |   |   |   |    |
 */
-            class DECLSPECIFIER crod : public card {
+            class crod : public card {
 
             private:
 

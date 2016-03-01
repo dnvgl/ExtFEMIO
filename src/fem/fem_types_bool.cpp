@@ -32,7 +32,7 @@ namespace dnvgl {
       namespace fem {
          namespace types {
 
-            DECLSPECIFIER const
+            const
 #if HAVE_BOOST_REGEX_HPP
             boost::regex
 #else

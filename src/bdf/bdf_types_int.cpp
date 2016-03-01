@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-DECLSPECIFIER const
+const
 #if HAVE_BOOST_REGEX_HPP
 boost::regex
 #else

@@ -21,7 +21,7 @@ namespace dnvgl {
       namespace fem {
          namespace errors {
 
-            class DECLSPECIFIER error {
+            class error {
 
             protected:
 
@@ -44,70 +44,70 @@ namespace dnvgl {
                ::std::string operator() (void) const;
             };
 
-            class DECLSPECIFIER types_error : public error {
+            class types_error : public error {
 
             public:
 
                types_error(const ::std::string &msg);
             };
 
-            class DECLSPECIFIER float_error : public error {
+            class float_error : public error {
 
             public:
 
                float_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER int_error : public error {
+            class int_error : public error {
 
             public:
 
                int_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER bool_error : public error {
+            class bool_error : public error {
 
             public:
 
                bool_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER output_error : public error {
+            class output_error : public error {
 
             public:
 
                output_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER list_error : public error {
+            class list_error : public error {
 
             public:
 
                list_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER str_error : public error {
+            class str_error : public error {
 
             public:
 
                str_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER string_error : public error {
+            class string_error : public error {
 
             public:
 
                string_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER parse_error : public error {
+            class parse_error : public error {
 
             public:
 
                parse_error(const ::std::string &name, const ::std::string &msg);
             };
 
-            class DECLSPECIFIER usage_error : public error {
+            class usage_error : public error {
 
             public:
 

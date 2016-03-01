@@ -51,7 +51,7 @@ namespace {
    }
 }
 
-DECLSPECIFIER const void(*dnvgl::extfem::bdf::cards::warn_report)(std::string const &) = &_stderr_warn;
+const void(*dnvgl::extfem::bdf::cards::warn_report)(std::string const &) = &_stderr_warn;
 
 namespace dnvgl {
    namespace extfem {
@@ -60,8 +60,7 @@ namespace dnvgl {
 
             bdf::types::card card::head = bdf::types::card("<DUMMY>");
 
-            ::std::ostream DECLSPECIFIER
-               &operator<<(::std::ostream &os, enddata const &card){
+            ::std::ostream &operator<<(::std::ostream &os, enddata const &card){
                std::deque<std::unique_ptr<format_entry>> entries;
                
                entries.push_back(format(enddata::head));

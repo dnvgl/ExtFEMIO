@@ -56,17 +56,17 @@ namespace dnvgl {
 
                bool eof;
 
-               DECLSPECIFIER fem_file(::std::istream&);
+               fem_file(::std::istream&);
 
-               DECLSPECIFIER void get(::std::deque<::std::string>&);
-
-               /// actual byte position (hopefully no fem > 2Gybte will be
-               /// readin ...)
-               DECLSPECIFIER ::std::streampos size(void);
+               void get(::std::deque<::std::string>&);
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)
-               DECLSPECIFIER ::std::streampos pos(void);
+               ::std::streampos size(void);
+
+               /// actual byte position (hopefully no fem > 2Gybte will be
+               /// readin ...)
+               ::std::streampos pos(void);
             };
          }
       }

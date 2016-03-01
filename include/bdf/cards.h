@@ -36,7 +36,7 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
-            DECLSPECIFIER extern const void(*warn_report)(std::string const &);
+            extern const void(*warn_report)(std::string const &);
 
             /**
                \brief Unique identifier for each class representing a BDF card.
@@ -96,7 +96,7 @@ namespace dnvgl {
 /**
    \brief Base class for all classes representing BDF cards.
 */
-            class DECLSPECIFIER card {
+            class card {
 
             private:
 
@@ -172,7 +172,7 @@ namespace dnvgl {
                   (void*)&val);
             };
 
-            class DECLSPECIFIER unknown : public card{
+            class unknown : public card{
 
             public:
 
@@ -200,7 +200,7 @@ Designates the end of the Bulk Data Section.
 | ---------- | - | - | - | - | - | - | - | - | -- |
 | `ENDDATA`  |   |   |   |   |   |   |   |   |    |
 */
-            class DECLSPECIFIER enddata : public card {
+            class enddata : public card {
 
             private:
 
@@ -221,7 +221,7 @@ Designates the end of the Bulk Data Section.
                   return os;
                };
 
-               friend DECLSPECIFIER ::std::ostream&
+               friend ::std::ostream&
                   operator<<(::std::ostream &, const enddata&);
             };
 
@@ -237,7 +237,7 @@ displacement, and its permanent single-point constraints.
 | ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ------ | -- |
 | `GRID`  | `ID` | `CP` | `X1` | `X2` | `X3` | `CD` | `PS` | `SEID` |    |
 */
-            class DECLSPECIFIER grid : public card {
+            class grid : public card {
 
             private:
 
@@ -302,7 +302,7 @@ displacement, and its permanent single-point constraints.
             };
 
 /// Base class for material definitions
-            class DECLSPECIFIER mat : public card {
+            class mat : public card {
 
             protected:
 
@@ -372,7 +372,7 @@ Defines the material properties for linear isotropic materials.
 | `MAT1` | `MID` | `E`  | `G`  | `NU`    | `RHO` | `A` | `TREF` | `GE` |    |
 |        | `ST`  | `SC` | `SS` | `MCSID` |       |     |        |      |    |
 */
-            class DECLSPECIFIER mat1 : public mat {
+            class mat1 : public mat {
                // NASTRAN `BDF` `MAT1` representation.
 
             private:
@@ -441,7 +441,7 @@ Example:
 |        | 1003  |       |   |       |       |       |       |       |    |
 */
 
-            class DECLSPECIFIER mat2 : public mat {
+            class mat2 : public mat {
                // NASTRAN `BDF` `MAT2` representation.
 
             private:
@@ -487,7 +487,7 @@ namespace dnvgl {
          namespace cards {
             /** Dispatch instances of the different BDF card classes.
              */
-            DECLSPECIFIER void
+            void
             dispatch(
                const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }

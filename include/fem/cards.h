@@ -114,7 +114,7 @@ namespace dnvgl {
                // TDLOAD,
             } types;
 
-            class DECLSPECIFIER card {
+            class card {
 
             private:
 
@@ -145,7 +145,7 @@ namespace dnvgl {
                operator<<(::std::ostream&) const = 0;
             };
 
-            class DECLSPECIFIER unknown : public card {
+            class unknown : public card {
 
             public:
 
@@ -159,7 +159,7 @@ namespace dnvgl {
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const unknown&);
             };
 
@@ -194,7 +194,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 ------------------------------------------------------------------------
 ~~~
 */
-            class DECLSPECIFIER date : public card {
+            class date : public card {
 
             private:
 
@@ -251,7 +251,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const date&);
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
@@ -265,7 +265,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 | -------- | -------- | -------- | ------- | -------- |
 | `GCOORD` | `NODENO` | `XCOORD` | `YCOORD`| `ZCOORD` |
 */
-            class DECLSPECIFIER gcoord : public card {
+            class gcoord : public card {
 
             private:
 
@@ -305,7 +305,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gcoord&);
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
@@ -328,7 +328,7 @@ and *Ry* direction respectively in the superelement’s coordinate
 system, unless a local nodal coordinate system is specified (see the
 `BNDOF` and `BNTRCOS` record).
 */
-            class DECLSPECIFIER gnode : public card {
+            class gnode : public card {
 
             private:
 
@@ -370,7 +370,7 @@ system, unless a local nodal coordinate system is specified (see the
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gnode&);
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
@@ -384,7 +384,7 @@ system, unless a local nodal coordinate system is specified (see the
 | ------- | -------- | -------- | -------- | - |
 | `IDENT` | `SLEVEL` | `SELTYP` | `SELMOD` |   |
 */
-            class DECLSPECIFIER ident : public card {
+            class ident : public card {
 
             private:
 
@@ -427,7 +427,7 @@ system, unless a local nodal coordinate system is specified (see the
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const ident&);
 
                const ::std::ostream&
@@ -444,7 +444,7 @@ system, unless a local nodal coordinate system is specified (see the
 
 Defines end of a superelement.
 */
-            class DECLSPECIFIER iend : public card {
+            class iend : public card {
 
             private:
 
@@ -473,7 +473,7 @@ Defines end of a superelement.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const iend&);
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
@@ -489,7 +489,7 @@ Defines end of a superelement.
 |           | `NODIN`<sub>`1`</sub> | `NODIN`<sub>`2`</sub> | ...                   | ...      |
 |           | ...                   | ...                   | `NODIN`<sub>`N`</sub> |          |
 */
-            class DECLSPECIFIER gelmnt1 : public card {
+            class gelmnt1 : public card {
 
             private:
 
@@ -572,7 +572,7 @@ Defines end of a superelement.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gelmnt1&);
                const ::std::ostream&
                operator<< (::std::ostream& os) const;
@@ -600,7 +600,7 @@ Shortest version:
 |           | `GEONO/OPT`  | `FIXNO/OPT`  | `ECCNO/OPT`  | `TRANSNO/OPT`  |
 */
 
-            class DECLSPECIFIER gelref1 : public card {
+            class gelref1 : public card {
 
             private:
 
@@ -752,7 +752,7 @@ Shortest version:
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gelref1&);
 
                const ::std::ostream&
@@ -772,7 +772,7 @@ Shortest version:
 \image latex gbarm.eps "Massive bar"
 \image html gbarm.svg "Massive bar"
 */
-            class DECLSPECIFIER gbarm : public card {
+            class gbarm : public card {
 
             private:
 
@@ -848,7 +848,7 @@ Shortest version:
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gbarm&);
 
                const ::std::ostream&
@@ -871,7 +871,7 @@ The succeding data concern the cross section at a specific local node.
 If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
 record may be on the interface.
 */
-            class DECLSPECIFIER gbeamg : public card {
+            class gbeamg : public card {
 
             private:
 
@@ -958,7 +958,7 @@ record may be on the interface.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gbeamg&);
 
                const ::std::ostream&
@@ -973,7 +973,7 @@ record may be on the interface.
 |--------- | ------- | ---- | ---- | ---- |
 | `GECCEN` | `ECCNO` | `EX` | `EY` | `EZ` |
 */
-            class DECLSPECIFIER geccen : public card {
+            class geccen : public card {
 
             private:
 
@@ -1017,7 +1017,7 @@ record may be on the interface.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const geccen&);
 
                const ::std::ostream&
@@ -1032,7 +1032,7 @@ record may be on the interface.
 | ------- | ------- | ---- | ------ | - |
 | `GELTH` | `GEONO` | `TH` | `NINT` |   |
 */
-            class DECLSPECIFIER gelth : public card {
+            class gelth : public card {
 
             private:
 
@@ -1056,7 +1056,7 @@ record may be on the interface.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gelth&);
 
                const ::std::ostream&
@@ -1076,7 +1076,7 @@ record may be on the interface.
 \image latex giorh.eps "I or H beam"
 \image html giorh.svg "I or H beam"
 */
-            class DECLSPECIFIER giorh : public card {
+            class giorh : public card {
 
             private:
 
@@ -1165,7 +1165,7 @@ record may be on the interface.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const giorh&);
 
                const ::std::ostream&
@@ -1185,7 +1185,7 @@ record may be on the interface.
 \image latex glsec.eps "I or H beam"
 \image html glsec.svg "I or H beam"
 */
-            class DECLSPECIFIER glsec : public card {
+            class glsec : public card {
 
             private:
 
@@ -1275,7 +1275,7 @@ record may be on the interface.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const glsec&);
 
                const ::std::ostream&
@@ -1294,7 +1294,7 @@ record may be on the interface.
 \image latex gpipe.eps "Tube"
 \image html gpipe.svg "Tube"
 */
-            class DECLSPECIFIER gpipe : public card {
+            class gpipe : public card {
 
             private:
 
@@ -1365,7 +1365,7 @@ record may be on the interface.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gpipe&);
 
                const ::std::ostream&
@@ -1407,7 +1407,7 @@ may be found as Lagrange multiplicators or coefficients (Lagrange
 interpolation polynomial). For 2nd order dependence this may as well
 be specified on one BQDP record.
 */
-            class DECLSPECIFIER bldep : public card {
+            class bldep : public card {
 
             private:
 
@@ -1463,7 +1463,7 @@ be specified on one BQDP record.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const bldep&);
 
                const ::std::ostream&
@@ -1503,7 +1503,7 @@ The nodes (degrees of freedom) with `FIX` = 4 are called supernodes
 (super degrees of freedom). The supernode sequence numbering is
 according to the increasing order of their internal node number.
 */
-            class DECLSPECIFIER bnbcd : public card {
+            class bnbcd : public card {
 
             private:
 
@@ -1539,7 +1539,7 @@ according to the increasing order of their internal node number.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const bnbcd&);
 
                const ::std::ostream&
@@ -1569,7 +1569,7 @@ imaginary part.
 If phase shift is not specified, the fields or positions
 `IDISP`<sub>`1`</sub>, `IDISP`<sub>`2`</sub>, etc. are left out.
 */
-            class DECLSPECIFIER bndispl : public card {
+            class bndispl : public card {
 
             private:
 
@@ -1651,7 +1651,7 @@ If phase shift is not specified, the fields or positions
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const bndispl&);
 
                const ::std::ostream&
@@ -1678,7 +1678,7 @@ If phase shift is not specified, i.e. `COMPLX` == false, the fields or
 positions `ILOAD`<sub>`1`</sub>, `ILOAD`<sub>`2`</sub>, etc. are left
 out.
 */
-            class DECLSPECIFIER bnload : public card {
+            class bnload : public card {
 
             private:
 
@@ -1763,7 +1763,7 @@ out.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const bnload&);
 
                const ::std::ostream&
@@ -1785,7 +1785,7 @@ The (*i*, *j*)’th element of the stiffness matrix corresponds to the
 force to be given in the *i*’th d.o.f. to get a unit displacement in
 the *j*’th d.o.f.
 */
-            class DECLSPECIFIER mgsprng : public card {
+            class mgsprng : public card {
 
             private:
 
@@ -1826,7 +1826,7 @@ the *j*’th d.o.f.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const mgsprng&);
 
                const ::std::ostream&
@@ -1869,7 +1869,7 @@ records.
 
   - A set member (number) should only be included once in the list.
 */
-            class DECLSPECIFIER gsetmemb : public card {
+            class gsetmemb : public card {
 
             private:
 
@@ -1964,7 +1964,7 @@ Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gsetmemb&);
 
                const ::std::ostream&
@@ -1985,7 +1985,7 @@ element types 2, 15 and 23. Other basic element types may refer to
 `BNTRCOS` record have same `TRANSNO`, but they should preferably have
 separate numbering (`TRANSNO`) to avoid possible program problems.
 */
-            class DECLSPECIFIER gunivec : public card {
+            class gunivec : public card {
 
             private:
 
@@ -2030,7 +2030,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const gunivec&);
 
                const ::std::ostream&
@@ -2046,7 +2046,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 | `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO` |
 |           | `DAMP`  | `ALPHA` |         |       |
 */
-            class DECLSPECIFIER misosel : public card {
+            class misosel : public card {
 
             private:
 
@@ -2093,7 +2093,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const misosel&);
 
                const ::std::ostream&
@@ -2115,7 +2115,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 This record together with the set of nodes or elements record(s)
 (`GSETMEMB`) constitutes the set (group) datatype.
 */
-            class DECLSPECIFIER tdsetnam : public card {
+            class tdsetnam : public card {
 
             private:
 
@@ -2227,7 +2227,7 @@ This record together with the set of nodes or elements record(s)
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const tdsetnam&);
 
                const ::std::ostream&
@@ -2249,7 +2249,7 @@ This record together with the set of nodes or elements record(s)
 This record will associate a name with a super-element in the
 super-element hierarchy.
 */
-            class DECLSPECIFIER tdsupnam : public card {
+            class tdsupnam : public card {
 
             private:
 
@@ -2364,7 +2364,7 @@ super-element hierarchy.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const tdsupnam&);
 
                const ::std::ostream&
@@ -2384,7 +2384,7 @@ The identifier is used to transfer text-strings on the interface file.
 The following NRECS records must be read in A-format, 72 characters
 per record.
 */
-            class DECLSPECIFIER text : public card {
+            class text : public card {
 
             private:
 
@@ -2445,7 +2445,7 @@ per record.
                const ::dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend DECLSPECIFIER  ::std::ostream&
+               friend  ::std::ostream&
                operator<< (::std::ostream&, const text&);
 
                const ::std::ostream&
@@ -2471,7 +2471,7 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
-            void DECLSPECIFIER
+            void
             dispatch(const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
          }
       }

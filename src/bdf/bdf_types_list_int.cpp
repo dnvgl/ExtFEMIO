@@ -38,7 +38,7 @@ using ::std::regex;
 static char THIS_FILE[] = __FILE__;
 #endif
 
-DECLSPECIFIER const regex dnvgl::extfem::bdf::types::list_int_re("[[:digit:]]*");
+const regex dnvgl::extfem::bdf::types::list_int_re("[[:digit:]]*");
 
 
 // Local Variables:

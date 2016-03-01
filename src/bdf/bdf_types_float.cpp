@@ -44,7 +44,7 @@ using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf::types;
 
-DECLSPECIFIER const
+const
 #ifdef HAVE_BOOST_REGEX_HPP
 ::boost::regex
 #else
@@ -58,7 +58,7 @@ dnvgl::extfem::bdf::types::float_exp_re(
 ::std::regex_constants::ECMAScript);
 #endif
 
-DECLSPECIFIER const
+const
 #ifdef HAVE_BOOST_REGEX_HPP
 ::boost::regex
 #else
@@ -73,7 +73,7 @@ dnvgl::extfem::bdf::types::float_re(
 ::std::regex_constants::ECMAScript);
 #endif
 
-DECLSPECIFIER const
+const
 #ifdef HAVE_BOOST_REGEX_HPP
 ::boost::regex
 #else

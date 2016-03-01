@@ -26,10 +26,10 @@ namespace dnvgl {
 
          class string : public ::std::string {
          public:
-            DECLSPECIFIER string(const ::std::string& in) : ::std::string(in) {};
+            string(const ::std::string& in) : ::std::string(in) {};
 
             // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-            DECLSPECIFIER string inline trim(const ::std::string &whitespace = " \t") {
+            string inline trim(const ::std::string &whitespace = " \t") {
                const auto strBegin = this->find_first_not_of(whitespace);
                if (strBegin == std::string::npos)
                   return extfem::string::string(""); // no content

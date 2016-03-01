@@ -29,7 +29,7 @@ namespace dnvgl {
       namespace bdf {
          namespace input {
 
-            struct DECLSPECIFIER line_reader : ::std::ctype<char> {
+            struct line_reader : ::std::ctype<char> {
 
                line_reader() : ctype(make_table()) { }
 
@@ -43,7 +43,7 @@ namespace dnvgl {
                }
             };
 
-            class DECLSPECIFIER bdf_file {
+            class bdf_file {
 
             private:
 
