@@ -36,7 +36,9 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
+            extern const void(*info_report)(std::string const &);
             extern const void(*warn_report)(std::string const &);
+            extern const void(*error_report)(std::string const &);
 
             /**
                \brief Unique identifier for each class representing a BDF card.

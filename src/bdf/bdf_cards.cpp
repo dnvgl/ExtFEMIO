@@ -51,7 +51,9 @@ namespace {
    }
 }
 
+const void(*dnvgl::extfem::bdf::cards::info_report)(std::string const &) = &_stderr_warn;
 const void(*dnvgl::extfem::bdf::cards::warn_report)(std::string const &) = &_stderr_warn;
+const void(*dnvgl::extfem::bdf::cards::error_report)(std::string const &) = &_stderr_warn;
 
 namespace dnvgl {
    namespace extfem {
