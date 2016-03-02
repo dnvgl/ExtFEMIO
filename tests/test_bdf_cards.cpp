@@ -64,53 +64,54 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
    istringstream ist(s);
    bdf_file probe(ist);
    deque<::std::string> l;
+
    deque<::std::string> ref;
 
-   ref.push_back("MAT1    1       2.305+6 80000.0 0.3     7.850-6");
-   probe.get(l);
-   CAPTURE( l[0] );
-   CHECK(l == ref);
 
-   ref.clear();
-   ref.push_back("MAT1    4       2.305+6 80000.0 0.3     7.850-6");
-   probe.get(l);
-   CAPTURE( l[0] );
-   CHECK(l[0] == ref[0]);
-   CHECK(l == ref);
+   {
+      deque<::std::string> ref({
+         "MAT1    1       2.305+6 80000.0 0.3     7.850-6" });
+      probe.get(l);
+      CAPTURE(l[0]);
+      CHECK(l == ref);
+   }
 
-   ref.clear();
-   ref.push_back("PBEAML  104010  4               L     ");
-   ref.push_back("           63.0   340.0    35.0    14.0");
-   probe.get(l);
-   CAPTURE( l[0] );
-   CHECK(l == ref);
+   {
+      deque<::std::string> ref({
+         "MAT1    4       2.305+6 80000.0 0.3     7.850-6" });
+      probe.get(l);
+      CAPTURE(l[0]);
+      CHECK(l[0] == ref[0]);
+      CHECK(l == ref);
+   }
 
-   ref.clear();
-   ref.push_back("PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6");
-   probe.get(l);
-   CAPTURE( l[0] );
-   CHECK(l == ref);
+   {
+      deque<::std::string> ref({
+         "PBEAML  104010  4               L     ",
+         "           63.0   340.0    35.0    14.0" });
+      probe.get(l);
+      CAPTURE(l[0]);
+      CHECK(l == ref);
+   }
+
+   {
+      deque<::std::string> ref({
+         "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6" });
+      probe.get(l);
+      CAPTURE(l[0]);
+      CHECK(l == ref);
+   }
 }
 
 TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
 
    // Test data as found in the BDF documentation.
 
-   ::std::deque<string> data;
-
    SECTION("Sample 1") {
-      data.empty();
-      data.push_back("GRID,2,1.0,-2.0,3.0,,136");
+      ::std::deque<string> data({ "GRID,2,1.0,-2.0,3.0,,136" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
-      deque<::std::string> ref;
-      ref.push_back("GRID");
-      ref.push_back("2");
-      ref.push_back("1.0");
-      ref.push_back("-2.0");
-      ref.push_back("3.0");
-      ref.push_back("");
-      ref.push_back("136");
+      deque<::std::string> ref({ "GRID", "2", "1.0", "-2.0", "3.0", "", "136" });
       CHECK(probe.size() == ref.size());
       for (size_t i=0; i<probe.size(); ++i) {
          CAPTURE( i );
@@ -119,9 +120,9 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 2") {
-      data.empty();
-      data.push_back("MATT9,1101,2 ,3 ,4 ,,,,8 ,+P101\n");
-      data.push_back("+P101,9 ,,,,13\n");
+      ::std::deque<string> data({
+         "MATT9,1101,2 ,3 ,4 ,,,,8 ,+P101\n",
+         "+P101,9 ,,,,13\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -147,8 +148,8 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 3") {
-      data.empty();
-      data.push_back("GRID,100,,1.0,0.0,0.0,,456\n");
+      ::std::deque<string> data({
+         "GRID,100,,1.0,0.0,0.0,,456\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -168,8 +169,8 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 4") {
-      data.empty();
-      data.push_back("SPC1,100,12456,1,2,3,4,5,6,+SPC-A+SPC-A,7,8,9,10\n");
+      ::std::deque<string> data({
+         "SPC1,100,12456,1,2,3,4,5,6,+SPC-A+SPC-A,7,8,9,10\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -195,8 +196,8 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 5") {
-      data.empty();
-      data.push_back("SPC1,100,12456,1,2,3,4,5,6,7,8,9,10\n");
+      ::std::deque<string> data({
+         "SPC1,100,12456,1,2,3,4,5,6,7,8,9,10\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -221,9 +222,9 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 6") {
-      data.empty();
-      data.push_back("MATT9,1151,2 ,3 ,4 ,,,,8 \n");
-      data.push_back(",9 ,,,,13\n");
+      ::std::deque<string> data({
+         "MATT9,1151,2 ,3 ,4 ,,,,8 \n",
+         ",9 ,,,,13\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -249,9 +250,9 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 7") {
-      data.empty();
-      data.push_back("MATT9,1151,2 ,3 ,4 ,,,,8 ,+\n");
-      data.push_back("+,9 ,,,,13\n");
+      ::std::deque<string> data({
+         "MATT9,1151,2 ,3 ,4 ,,,,8 ,+\n",
+         "+,9 ,,,,13\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -277,9 +278,9 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 8") {
-      data.empty();
-      data.push_back("MATT9*,1302,2 ,,4 ,+\n");
-      data.push_back("+,,,,,,13\n");
+      ::std::deque<string> data({
+         "MATT9*,1302,2 ,,4 ,+\n",
+         "+,,,,,,13\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -302,10 +303,10 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 9") {
-      data.empty();
-      data.push_back("MATT9,1303,2 ,3 ,4 ,,,,8 ,+\n");
-      data.push_back("*,9 ,,,,\n");
-      data.push_back("*,13\n");
+      ::std::deque<string> data({
+         "MATT9,1303,2 ,3 ,4 ,,,,8 ,+\n",
+         "*,9 ,,,,\n",
+         "*,13\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -331,10 +332,10 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 10") {
-      data.empty();
-      data.push_back("MATT9,1355,2 ,3 ,,5 ,,,8 ,+\n");
-      data.push_back("*,,10,,,\n");
-      data.push_back("*,17\n");
+      ::std::deque<string> data({
+         "MATT9,1355,2 ,3 ,,5 ,,,8 ,+\n",
+         "*,,10,,,\n",
+         "*,17\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;
@@ -360,8 +361,8 @@ TEST_CASE("Split Free Field Cards", "[bdf_cards]") {
    }
 
    SECTION("Sample 11") {
-      data.empty();
-      data.push_back("CHEXA,200,200,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20\n");
+      ::std::deque<string> data({
+         "CHEXA,200,200,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20\n" });
       ::std::deque<string> probe;
       card::card_split(data, probe);
       deque<::std::string> ref;

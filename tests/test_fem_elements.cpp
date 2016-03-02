@@ -56,9 +56,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
       const el_types &ELTYP, const long &ELTYAD,
       const ::std::deque<long> &NODIN);
    */
-   ::std::deque<long> nodes;
-   nodes.push_back(6);
-   nodes.push_back(7);
+   ::std::deque<long> nodes({ 6, 7 });
    gelmnt1 data1(1, 2, elements::TESS, nodes);
    CHECK(data1.ELNOX == 1);
    CHECK(data1.ELNO == 2);

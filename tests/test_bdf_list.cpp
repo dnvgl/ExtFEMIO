@@ -53,20 +53,12 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
    entry_type<std::deque<int>> probe("dummy");
 
    SECTION("' 1234   '") {
-      deque<int> ref;
-      ref.push_back(1);
-      ref.push_back(2);
-      ref.push_back(3);
-      ref.push_back(4);
+      deque<int> ref({ 1, 2, 3, 4 });
       CHECK(probe("  1234  ").value == ref);
    }
 
    SECTION("' 1236   '") {
-      deque<int> ref;
-      ref.push_back(1);
-      ref.push_back(2);
-      ref.push_back(3);
-      ref.push_back(6);
+      deque<int> ref({ 1, 2, 3, 6 });
       CHECK(probe(" 1236   ").value == ref);
    }
 
@@ -79,12 +71,8 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
 
    entry_type<std::deque<int>> obj("dummy");
 
-   std::deque<int> inp;
-   inp.push_back(1);
-   inp.push_back(2);
-   inp.push_back(3);
-   inp.push_back(4);
-   entry_value<std::deque<int>> lval(inp);
+   //std::deque<int> inp({ 1, 2, 3, 4 });
+   entry_value<std::deque<int>> lval({ 1, 2, 3, 4 });
 
    std::ostringstream stream(std::ostringstream::ate);
 

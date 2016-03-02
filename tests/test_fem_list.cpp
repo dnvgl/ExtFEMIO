@@ -54,19 +54,12 @@ TEST_CASE("FEM list types parsing.", "[fem_types]" ) {
 
    SECTION("' 1.34000000e+02 '") {
 
-      deque<int> ref;
-      ref.push_back(1);
-      ref.push_back(3);
-      ref.push_back(4);
+      deque<int> ref({ 1, 3, 4 });
       CHECK(*probe(" 1.34000000e+02 ") == ref);
    }
 
    SECTION("' 1.23600000e+03 '") {
-      deque<int> ref;
-      ref.push_back(1);
-      ref.push_back(2);
-      ref.push_back(3);
-      ref.push_back(6);
+      deque<int> ref({ 1, 2, 3, 6 });
       CHECK(*probe(" 1.23600000e+03 ") == ref);
    }
 
@@ -79,11 +72,7 @@ TEST_CASE("FEM list of int types output.", "[fem_types]" ) {
 
    entry_type<std::deque<int>> obj("dummy");
 
-   std::deque<int> lval;
-   lval.push_back(1);
-   lval.push_back(2);
-   lval.push_back(3);
-   lval.push_back(4);
+   std::deque<int> lval({ 1, 2, 3, 4 });
 
    std::ostringstream stream(std::ostringstream::ate);
 
