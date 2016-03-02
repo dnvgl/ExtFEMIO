@@ -84,11 +84,14 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMFloatDir);$(LibraryPath)</LibraryPath>
     <FEMFloatDir>$(Configuration)\test_fem_float\</FEMFloatDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)fem_float\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMFloatDir);$(LibraryPath)</LibraryPath>
     <FEMFloatDir>$(Platform)\$(Configuration)\test_fem_float\</FEMFloatDir>
+    <IntDir>$(ProjectDir)fem_float\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -83,11 +83,14 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFBoundsDir);$(LibraryPath)</LibraryPath>
     <BDFBoundsDir>$(Configuration)\test_bdf_bounds\</BDFBoundsDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)bdf_bounds\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFBoundsDir);$(LibraryPath)</LibraryPath>
     <BDFBoundsDir>$(Platform)\$(Configuration)\test_bdf_bounds\</BDFBoundsDir>
+    <IntDir>$(ProjectDir)bdf_bounds\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

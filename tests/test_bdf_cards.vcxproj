@@ -88,6 +88,8 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFCardsDir);$(LibraryPath)</LibraryPath>
     <BDFCardsDir>$(Configuration)\test_bdf_cards\</BDFCardsDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)bdf_cards\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -97,6 +99,7 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFCardsDir);$(LibraryPath)</LibraryPath>
     <BDFCardsDir>$(Platform)\$(Configuration)\test_bdf_cards\</BDFCardsDir>
+    <IntDir>$(ProjectDir)bdf_cards\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

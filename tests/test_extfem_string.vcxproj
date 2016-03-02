@@ -84,11 +84,14 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(ExtFEMStringDir);$(LibraryPath)</LibraryPath>
     <ExtFEMStringDir>$(Configuration)\test_extfem_string\</ExtFEMStringDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)extfem_string\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(ExtFEMStringDir);$(LibraryPath)</LibraryPath>
     <ExtFEMStringDir>$(Platform)\$(Configuration)\test_extfem_string\</ExtFEMStringDir>
+    <IntDir>$(ProjectDir)extfem_string\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -83,11 +83,14 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
     <FEMCardsDir>$(Configuration)\test_fem_cards\</FEMCardsDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)fem_cards\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMCardsDir);$(LibraryPath)</LibraryPath>
     <FEMCardsDir>$(Platform)\$(Configuration)\test_fem_cards\</FEMCardsDir>
+    <IntDir>$(ProjectDir)fem_cards\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

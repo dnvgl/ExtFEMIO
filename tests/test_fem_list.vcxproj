@@ -84,11 +84,14 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMListDir);$(LibraryPath)</LibraryPath>
     <FEMListDir>$(Configuration)\test_fem_list\</FEMListDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)fem_list\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMListDir);$(LibraryPath)</LibraryPath>
     <FEMListDir>$(Platform)\$(Configuration)\test_fem_list\</FEMListDir>
+    <IntDir>$(ProjectDir)fem_list\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

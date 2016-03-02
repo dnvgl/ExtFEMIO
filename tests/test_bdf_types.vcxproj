@@ -84,11 +84,14 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFTypesDir);$(LibraryPath)</LibraryPath>
     <BDFTypesDir>$(Configuration)\test_bdf_types\</BDFTypesDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)bdf_types\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFTypesDir);$(LibraryPath)</LibraryPath>
     <BDFTypesDir>$(Platform)\$(Configuration)\test_bdf_types\</BDFTypesDir>
+    <IntDir>$(ProjectDir)bdf_types\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

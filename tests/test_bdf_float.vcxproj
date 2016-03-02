@@ -83,11 +83,14 @@
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFFloatDir);$(LibraryPath)</LibraryPath>
     <BDFFloatDir>$(Configuration)\test_bdf_float\</BDFFloatDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)bdf_float\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFFloatDir);$(LibraryPath)</LibraryPath>
     <BDFFloatDir>$(Platform)\$(Configuration)\test_bdf_float\</BDFFloatDir>
+    <IntDir>$(ProjectDir)bdf_float\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
