@@ -37,7 +37,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -45,17 +44,17 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("BDF LOAD definitions. (Small Field Format)", "[bdf_load]" ) {
 
-   ::std::deque<string> data;
+   std::deque<std::string> data;
    data.push_back(
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "LOAD    101     -0.5    1.0     3       6.2     4                         \n");
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    load probe(lines);
 
@@ -77,8 +76,8 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]" ) {
 
    long SID(2);
    double S(2.9);
-   ::std::deque<double> Si;
-   ::std::deque<long> Li;
+   std::deque<double> Si;
+   std::deque<long> Li;
 
    SECTION("write (1)") {
       Si.push_back(3.);

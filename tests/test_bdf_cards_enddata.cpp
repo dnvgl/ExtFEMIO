@@ -35,7 +35,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -47,11 +46,11 @@ TEST_CASE("BDF ENDDATA definitions. (Small Field Format)",
           "[bdf_ENDDATA]" ) {
 
    SECTION("enddata read") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "ENDDAT                                                                  \n");
 
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       enddata probe(lines);
    }

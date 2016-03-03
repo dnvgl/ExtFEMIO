@@ -35,7 +35,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -46,13 +45,13 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
           "[bdf_mat1]" ) {
 
-   ::std::deque<string> data;
+   std::deque<std::string> data;
 
    SECTION("first mat1") {
       data.empty();
       data.push_back("MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n");
 
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       mat1 probe(lines);
 
@@ -74,7 +73,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
       data.empty();
       data.push_back(
          "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       mat1 probe(lines);
 
@@ -96,7 +95,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
       data.empty();
       data.push_back(
          "MAT1,1,2.070+5\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       mat1 probe(lines);
 
@@ -118,7 +117,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
       data.empty();
       data.push_back(
          "MAT1    1       2.070+5 80000.0\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       mat1 probe(lines);
 
@@ -139,7 +138,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
    SECTION("mat1 default values 3") {
       data.empty();
       data.push_back("MAT1,1,2.070+5,,.3\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       mat1 probe(lines);
 

@@ -32,7 +32,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem;
 using fem::types::entry_type;
 
@@ -62,7 +61,7 @@ std::string entry_type<std::string>::format(const std::string &inp, const size_t
 
    std::ostringstream res;
 
-   res.setf(ios_base::left, ios_base::adjustfield);
+   res.setf(std::ios_base::left, std::ios_base::adjustfield);
    res.fill(' ');
    res.width(len-8);
 

@@ -38,7 +38,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::types;
@@ -53,12 +52,12 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
    entry_type<std::deque<int>> probe("dummy");
 
    SECTION("' 1234   '") {
-      deque<int> ref({ 1, 2, 3, 4 });
+      std::deque<int> ref({ 1, 2, 3, 4 });
       CHECK(probe("  1234  ").value == ref);
    }
 
    SECTION("' 1236   '") {
-      deque<int> ref({ 1, 2, 3, 6 });
+      std::deque<int> ref({ 1, 2, 3, 6 });
       CHECK(probe(" 1236   ").value == ref);
    }
 

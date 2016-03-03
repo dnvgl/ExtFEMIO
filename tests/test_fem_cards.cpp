@@ -42,7 +42,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 using namespace ::dnvgl::extfem::fem::input;
@@ -54,7 +53,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
-   ::std::string s(
+   std::string s(
       //  45678|234567890123456|234567890123456|234567890123456|234567890123456
       //       SLEVEL          SELTYP          SELMOD
       "IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n"
@@ -128,17 +127,17 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "        KEY_HOLE_ROOF\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
-   istringstream ist(s);
+   std::istringstream ist(s);
    fem_file probe(ist);
-   deque<::std::string> l;
-   deque<::std::string> ref;
-   deque<::std::string> entries;
+   std::deque<std::string> l;
+   std::deque<std::string> ref;
+   std::deque<std::string> entries;
 
-   ::std::unique_ptr<cards::card> current;
+   std::unique_ptr<cards::card> current;
 
    SECTION("Checking dispatch [ident].") {
       probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       card::card_split(l, entries);
       cards::dispatch(entries, current);
@@ -152,7 +151,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [text].") {
       for (int i = 0; i < 2; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -183,7 +182,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [date].") {
       for (int i = 0; i < 3; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -213,7 +212,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [tdload].") {
       for (int i = 0; i < 4; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -226,7 +225,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gnode].") {
       for (int i = 0; i < 5; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -248,7 +247,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gcoord].") {
       for (int i = 0; i < 6; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -264,7 +263,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gelmnt1].") {
       for (int i = 0; i < 7; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -286,7 +285,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gelref1].") {
       for (int i = 0; i < 8; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -316,7 +315,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gbarm].") {
       for (int i = 0; i < 9; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -337,7 +336,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gbeamg].") {
       for (int i = 0; i < 10; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -367,7 +366,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [geccen].") {
       for (int i = 0; i < 11; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -383,7 +382,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gelth].") {
       for (int i = 0; i < 12; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -399,7 +398,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [giorh].") {
       for (int i = 0; i < 13; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -424,7 +423,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [glsec].") {
       for (int i = 0; i < 14; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -447,7 +446,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gpipe].") {
       for (int i = 0; i < 15; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -467,7 +466,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [bldep].") {
       for (int i = 0; i < 16; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -493,9 +492,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       double c_ref_b[9] = {1., 2.27000996e+4, 9.07859961e+3,
                            1., -9.07859961e+3, 0.,
                            1., 0., -2.27000996e+4};
-      ::std::deque<long> ref_depdof(c_ref_depdof, c_ref_depdof + 9);
-      ::std::deque<long> ref_indepdof(c_ref_indepdof, c_ref_indepdof + 9);
-      ::std::deque<double> ref_b(c_ref_b, c_ref_b + 9);
+      std::deque<long> ref_depdof(c_ref_depdof, c_ref_depdof + 9);
+      std::deque<long> ref_indepdof(c_ref_indepdof, c_ref_indepdof + 9);
+      std::deque<double> ref_b(c_ref_b, c_ref_b + 9);
       CHECK(static_cast<bldep*>(current.get())->DEPDOF == ref_depdof);
       CHECK(static_cast<bldep*>(current.get())->INDEPDOF == ref_indepdof);
       CHECK(static_cast<bldep*>(current.get())->b == ref_b);
@@ -503,7 +502,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [bnbcd].") {
       for (int i = 0; i < 17; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -515,13 +514,13 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
 
       long c_ref_fix[6] = {1, 1, 1, 1, 1, 1};
-      ::std::deque<long> ref_fix(c_ref_fix, c_ref_fix + 6);
+      std::deque<long> ref_fix(c_ref_fix, c_ref_fix + 6);
       CHECK(static_cast<bnbcd*>(current.get())->FIX == ref_fix);
    }
 
    SECTION("Checking dispatch [bndispl].") {
       for (int i = 0; i < 18; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -537,13 +536,13 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<bndispl*>(current.get())->NDOF == 6);
       double c_ref_rdisp[6] = {0., 0., 0., 0., 0., 0.};
       CHECK(static_cast<bndispl*>(current.get())->RDISP ==
-            ::std::deque<double>(c_ref_rdisp, c_ref_rdisp + 6));
+            std::deque<double>(c_ref_rdisp, c_ref_rdisp + 6));
       CHECK(static_cast<bndispl*>(current.get())->IDISP.size() == 0);
    }
 
    SECTION("Checking dispatch [bnload].") {
       for (int i = 0; i < 19; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -559,13 +558,13 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<bnload*>(current.get())->NDOF == 6);
       double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
       CHECK(static_cast<bnload*>(current.get())->RLOAD ==
-            ::std::deque<double>(c_ref_rload, c_ref_rload + 6));
+            std::deque<double>(c_ref_rload, c_ref_rload + 6));
       CHECK(static_cast<bnload*>(current.get())->ILOAD.size() == 0);
    }
 
    SECTION("Checking dispatch [mgsprng].") {
       for (int i = 0; i < 20; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -580,9 +579,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<mgsprng*>(current.get())->MATNO == 69);
       CHECK(static_cast<mgsprng*>(current.get())->NDOF == 6);
       double c_ref_k[6] = {0., 0., 0., 0., 0., 0.};
-      ::std::deque<::std::deque<double>> ref_K;
+      std::deque<std::deque<double>> ref_K;
       for (int i = 0; i < 6; i++)
-         ref_K.push_back(::std::deque<double>(c_ref_k, c_ref_k + 6));
+         ref_K.push_back(std::deque<double>(c_ref_k, c_ref_k + 6));
       ref_K[0][0] = 1e8;
 
       CHECK(static_cast<mgsprng*>(current.get())->K == ref_K);
@@ -590,7 +589,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gsetmemb].") {
       for (int i = 0; i < 21; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -608,7 +607,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [gunivec].") {
       for (int i = 0; i < 22; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -623,7 +622,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [misosel].") {
       for (int i = 0; i < 23; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -641,7 +640,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [tdsetnam].") {
       for (int i = 0; i < 24; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -660,7 +659,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [tdsupnam].") {
       for (int i = 0; i < 25; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);
@@ -679,7 +678,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
    SECTION("Checking dispatch [iend].") {
       for (int i = 0; i < 26; i++) probe.get(l);
-      ::std::string msg;
+      std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
       card::card_split(l, entries);

@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,18 +40,18 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
-   ::std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   ::std::deque<::std::string> lines;
+   std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   std::deque<std::string> lines;
 
    SECTION("MISOSEL (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "MISOSEL  4.10000000e+001 2.06000000e+008 3.00032000e-001 7.80000000e+000\n");
@@ -70,7 +69,7 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
    }
 
    SECTION("MISOSEL (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "MISOSEL  4.10000000e+01  2.06000000e+08  3.00032000e-01  7.80000000e+00 \n");

@@ -33,7 +33,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
+using namespace std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,18 +41,18 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
-   ::std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   ::std::deque<::std::string> lines;
+   std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   std::deque<std::string> lines;
 
    SECTION("GUNIVEC (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n");
@@ -66,7 +66,7 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
    }
 
    SECTION("GUNIVEC (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GUNIVEC  5.34000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n");

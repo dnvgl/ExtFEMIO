@@ -33,7 +33,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
+using namespace std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +41,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
-   ::std::deque<string> lines;
-   
+   std::deque<std::string> lines;
+
    SECTION("IDENT (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n");
       card::card_split(data, lines);
@@ -62,7 +62,7 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "IDENT   +1.00000000e+000+1.00000000e+000+3.00000000e+000+0.00000000e+000\n");
       card::card_split(data, lines);
@@ -74,7 +74,7 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (3)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "IDENT    1.00000000e+00  1.00000000e+00  3.00000000e+00  0.00000000e+00 \n");
       card::card_split(data, lines);

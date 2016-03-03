@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
 
    SECTION("GBEAMG (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008\n");
       data.push_back(
@@ -80,7 +79,7 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
    }
 
    SECTION("GBEAMG (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "GBEAMG   1.68500000e+03  0.00000000e+00  1.11500000e+04  1.00000000e-08 \n");
       data.push_back(
@@ -115,7 +114,7 @@ TEST_CASE("FEM GBEAMG types output.", "[fem_gbeamg,out]" ) {
    std::ostringstream test;
 
    long NODEX(1), NODENO(222), NDOF(3);
-   ::std::deque<int> ODOF;
+   std::deque<int> ODOF;
    ODOF.push_back(2);
    ODOF.push_back(6);
    ODOF.push_back(3);

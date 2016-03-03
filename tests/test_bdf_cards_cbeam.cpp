@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -41,23 +40,23 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
-using namespace ::std;
+using namespace std;
 using namespace ::dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
 
-   ::std::deque<string> data({
+   std::deque<std::string> data({
          "CBEAM   7869    104010  76      153     0.0     66.5206 997.785  2.\n",
          "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
-   ::std::deque<string> data_2({
+   std::deque<std::string> data_2({
          "CBEAM   36      103023  7       9       0.0     1000.00 0.0\n",
          "                        0.0     -240.00 0.0     0.0     -240.00 0.0\n"});
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    cbeam probe(lines);
 
@@ -87,7 +86,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
       CHECK_FALSE(probe.SB);
    }
    SECTION("OFFT default") {
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data_2, lines);
       cbeam probe(lines);
 
@@ -102,7 +101,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
       CHECK((double)probe.X2 == 1000.);
       CHECK((double)probe.X3 == 0.);
       CHECK(probe.choose_dir_code == cbeam::has_DVEC);
-      CHECK((::std::string)probe.OFFT == "GGG");
+      CHECK((std::string)probe.OFFT == "GGG");
       CHECK_FALSE((bool)probe.BIT);
       CHECK(probe.choose_offt_bit == cbeam::has_OFFT);
       deque<int> p_ref;
@@ -122,13 +121,13 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
 TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
           "[bdf_cbeam,dcode]" ) {
 
-   ::std::deque<string> data({
+   std::deque<std::string> data({
          "CBEAM   7869    104010  76      153      13                     GOO     \n",
          "                        0.0     -22.617 -339.25 0.0     22.617 "});
-   ::std::deque<string> data_2({
+   std::deque<std::string> data_2({
          "CBEAM   7869    104010  76      153      13\n",
          "                        0.0     -22.617 -339.25 0.0     22.617 "});
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    cbeam probe(lines);
 
@@ -142,7 +141,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
       CHECK_FALSE((bool)probe.X2);
       CHECK_FALSE((bool)probe.X3);
       CHECK(probe.choose_dir_code == cbeam::has_DCODE);
-      CHECK((::std::string)probe.OFFT == "GOO");
+      CHECK((std::string)probe.OFFT == "GOO");
       CHECK_FALSE(probe.BIT);
       CHECK(probe.choose_offt_bit == cbeam::has_OFFT);
       deque<int> p_ref;
@@ -159,7 +158,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
    }
 
    SECTION("OFFT default") {
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data_2, lines);
       cbeam probe(lines);
 
@@ -174,7 +173,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
       CHECK_FALSE((bool)probe.X2);
       CHECK_FALSE((bool)probe.X3);
       CHECK(probe.choose_dir_code == cbeam::has_DCODE);
-      CHECK((::std::string)probe.OFFT == "GGG");
+      CHECK((std::string)probe.OFFT == "GGG");
       CHECK_FALSE((bool)probe.BIT);
       CHECK(probe.choose_offt_bit == cbeam::has_OFFT);
       deque<int> p_ref;

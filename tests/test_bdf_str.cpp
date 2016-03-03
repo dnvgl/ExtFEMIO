@@ -47,32 +47,32 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 TEST_CASE("BDF str types parsing.", "[bdf_types]" ) {
 
    const char* _allowed[3] = { "ONE", "TWO", "THREE" };
-   const ::std::set<::std::string> allowed(_allowed, _allowed+3);
-   type_bounds::bound<::std::string> str_allowed(allowed);
-   type_bounds::bound<::std::string> str_allowed_default(allowed, "ONE");
+   const std::set<std::string> allowed(_allowed, _allowed+3);
+   type_bounds::bound<std::string> str_allowed(allowed);
+   type_bounds::bound<std::string> str_allowed_default(allowed, "ONE");
 
    SECTION("'TEST    '") {
-      entry_type<::std::string> obj("dummy");
-      CHECK(obj(entry_value<::std::string>("TEST    ")) == ::std::string("TEST"));
+      entry_type<std::string> obj("dummy");
+      CHECK(obj(entry_value<std::string>("TEST    ")) == std::string("TEST"));
    }
 
    SECTION("'ONE     '") {
-      entry_type<::std::string> obj("dummy", str_allowed);
+      entry_type<std::string> obj("dummy", str_allowed);
       CHECK(obj("ONE     ") == "ONE");
    }
 
    SECTION("'FOUR        '") {
-      entry_type<::std::string> obj("dummy", str_allowed);
+      entry_type<std::string> obj("dummy", str_allowed);
       CHECK_THROWS(obj("FOUR    "));
    }
 
    SECTION("'            '") {
-      entry_type<::std::string> obj("dummy", str_allowed);
+      entry_type<std::string> obj("dummy", str_allowed);
       CHECK_THROWS(obj("        "));
    }
 
    SECTION("'            ', 1") {
-      entry_type<::std::string> obj("dummy", str_allowed_default);
+      entry_type<std::string> obj("dummy", str_allowed_default);
       CHECK(obj("        ") == "ONE");
    }
 }
@@ -110,7 +110,7 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
 
    SECTION("SHORT (too long)") {
       bdf::types::base::out_form = bdf::types::SHORT;
-      lval = entry_value<::std::string>("abcdefghi");
+      lval = entry_value<std::string>("abcdefghi");
       CHECK_THROWS(obj.format(lval));
    }
 

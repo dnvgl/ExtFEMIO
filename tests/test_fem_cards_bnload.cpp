@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,18 +40,18 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
-   ::std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   ::std::deque<string> lines;
+   std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   std::deque<std::string> lines;
 
    SECTION("BNLOAD (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
@@ -73,7 +72,7 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
    }
 
    SECTION("BNLOAD (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
@@ -103,7 +102,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple") {
       bnload probe(1, 1, false, 4, 6,
-                    ::std::deque<double>(inp_rload, inp_rload + 6));
+                    std::deque<double>(inp_rload, inp_rload + 6));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -113,8 +112,8 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple (with ILOAD)") {
       bnload probe(1, 1, true, 4, 6,
-                    ::std::deque<double>(inp_rload, inp_rload + 6),
-                    ::std::deque<double>(inp_iload, inp_iload + 6));
+                    std::deque<double>(inp_rload, inp_rload + 6),
+                    std::deque<double>(inp_iload, inp_iload + 6));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"
@@ -126,7 +125,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple (calc COMPLX)") {
       bnload probe(1, 1, (long)4, 6,
-                    ::std::deque<double>(inp_rload, inp_rload + 6));
+                    std::deque<double>(inp_rload, inp_rload + 6));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -136,8 +135,8 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple (with ILOAD, calc COMPLX)") {
       bnload probe(1, 1, (long)4, 6,
-                    ::std::deque<double>(inp_rload, inp_rload + 6),
-                    ::std::deque<double>(inp_iload, inp_iload + 6));
+                    std::deque<double>(inp_rload, inp_rload + 6),
+                    std::deque<double>(inp_iload, inp_iload + 6));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"
@@ -149,7 +148,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("calc ndof") {
       bnload probe(1, 1, false, 4,
-                    ::std::deque<double>(inp_rload, inp_rload + 6));
+                    std::deque<double>(inp_rload, inp_rload + 6));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -158,7 +157,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
    }
    SECTION("calc NDOF (calc COMPLX)") {
       bnload probe(1, 1, 4,
-                    ::std::deque<double>(inp_rload, inp_rload + 6));
+                    std::deque<double>(inp_rload, inp_rload + 6));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -168,8 +167,8 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("calc NDOF (with ILOAD, calc COMPLX)") {
       bnload probe(1, 1, 4,
-                    ::std::deque<double>(inp_rload, inp_rload + 6),
-                    ::std::deque<double>(inp_iload, inp_iload + 6));
+                    std::deque<double>(inp_rload, inp_rload + 6),
+                    std::deque<double>(inp_iload, inp_iload + 6));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"

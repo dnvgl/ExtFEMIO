@@ -35,7 +35,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long ghex131::nnodes = 26;
 
@@ -46,13 +46,13 @@ namespace {
    el_processor procs[
       procs_len] = {general, Sestra};
 }
-const ::std::set<el_processor> ghex131::processors(procs, procs+procs_len);
+const std::set<el_processor> ghex131::processors(procs, procs+procs_len);
 
-ghex131::ghex131(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::ghex(data) {}
+ghex131::ghex131(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::ghex(data) {}
 
-ghex131::ghex131(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::ghex(data) {}
+ghex131::ghex131(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::ghex(data) {}
 
 ghex131::ghex131(const __base *data) :
    ghex(data) {}

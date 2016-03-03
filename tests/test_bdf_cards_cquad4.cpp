@@ -35,7 +35,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -45,10 +44,10 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]" ) {
 
-   ::std::deque<string> data;
+   std::deque<std::string> data;
    data.push_back(
       "CQUAD4  1       1       16      200     141     17\n");
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    cquad4 probe(lines);
 
@@ -68,12 +67,12 @@ TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]" ) {
 
 TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]" ) {
 
-   ::std::deque<string> data;
+   std::deque<std::string> data;
    data.push_back(
       "CQUAD4* 2               1               16              200             *\n");
    data.push_back(
       "*       141             17\n");
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    cquad4 probe(lines);
 

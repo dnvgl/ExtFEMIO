@@ -16,6 +16,7 @@
   |          | =CBEAM=    | Complex beams [fn:cbeam]                        | \check | \sad    |
   |          | =CBAR=     | Simple beams                                    | \check | \check  |
   |          | =CROD=     | Trusses                                         | \check | \sad    |
+  |          | =CELAS1=   | Scalar Spring Connection                        | \sad   | \sad    |
   |----------+------------+-------------------------------------------------+--------+---------|
   | Element  | properties |                                                 |        |         |
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=           | \check | \sad    |
@@ -24,6 +25,7 @@
   |          | =PBAR=     | Integral properties for =CBAR=                  | \check | \sad    |
   |          | =PBARL=    | Properties for =CBAR= describing cross section  | \check | \sad    |
   |          | =PROD=     | Properties for =CROD=                           | \check | \sad    |
+  |          | =PELAS=    | Properties for =CELAS*=                         | \sad   | \sad    |
   |----------+------------+-------------------------------------------------+--------+---------|
   | Load     |            |                                                 |        |         |
   |          | =LOAD=     | Load case combination                           | \check | \check  |

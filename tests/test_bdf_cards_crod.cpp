@@ -35,7 +35,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -43,15 +42,15 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]" ) {
 
-   ::std::deque<string> data;
+   std::deque<std::string> data;
    data.push_back("CROD,222,13,14,15\n");
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    crod probe(lines);
 

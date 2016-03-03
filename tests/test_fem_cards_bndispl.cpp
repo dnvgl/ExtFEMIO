@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,18 +40,18 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
 
    double c_ref_rdisp[6] = {0., 0., 0., 0., 0., 0.};
-   ::std::deque<double> ref_rdisp(c_ref_rdisp, c_ref_rdisp + 6);
-   ::std::deque<::std::string> lines;
+   std::deque<double> ref_rdisp(c_ref_rdisp, c_ref_rdisp + 6);
+   std::deque<std::string> lines;
 
    SECTION("BNDISPL (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "BNDISPL  1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n");
@@ -73,7 +72,7 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
    }
 
    SECTION("BNDISPL (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "BNDISPL  1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
@@ -103,7 +102,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("simple") {
       bndispl probe(1, 1, false, 4, 6,
-                    ::std::deque<double>(inp_rdisp, inp_rdisp + 6));
+                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -113,8 +112,8 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("simple (with IDISP)") {
       bndispl probe(1, 1, true, 4, 6,
-                    ::std::deque<double>(inp_rdisp, inp_rdisp + 6),
-                    ::std::deque<double>(inp_idisp, inp_idisp + 6));
+                    std::deque<double>(inp_rdisp, inp_rdisp + 6),
+                    std::deque<double>(inp_idisp, inp_idisp + 6));
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"
@@ -126,7 +125,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("simple (calc COMPLX)") {
       bndispl probe(1, 1, (long)4, 6,
-                    ::std::deque<double>(inp_rdisp, inp_rdisp + 6));
+                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -136,8 +135,8 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("simple (with IDISP, calc COMPLX)") {
       bndispl probe(1, 1, (long)4, 6,
-                    ::std::deque<double>(inp_rdisp, inp_rdisp + 6),
-                    ::std::deque<double>(inp_idisp, inp_idisp + 6));
+                    std::deque<double>(inp_rdisp, inp_rdisp + 6),
+                    std::deque<double>(inp_idisp, inp_idisp + 6));
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"
@@ -149,7 +148,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("calc ndof") {
       bndispl probe(1, 1, false, 4,
-                    ::std::deque<double>(inp_rdisp, inp_rdisp + 6));
+                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -158,7 +157,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
    }
    SECTION("calc NDOF (calc COMPLX)") {
       bndispl probe(1, 1, 4,
-                    ::std::deque<double>(inp_rdisp, inp_rdisp + 6));
+                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -168,8 +167,8 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("calc NDOF (with IDISP, calc COMPLX)") {
       bndispl probe(1, 1, 4,
-                    ::std::deque<double>(inp_rdisp, inp_rdisp + 6),
-                    ::std::deque<double>(inp_idisp, inp_idisp + 6));
+                    std::deque<double>(inp_rdisp, inp_rdisp + 6),
+                    std::deque<double>(inp_idisp, inp_idisp + 6));
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"

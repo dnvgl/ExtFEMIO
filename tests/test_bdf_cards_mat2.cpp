@@ -35,7 +35,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -54,7 +53,7 @@ namespace {
 TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
           "[bdf_mat2]" ) {
 
-   ::std::deque<string> data;
+   std::deque<std::string> data;
 
    warn_report = &_warn_res;
 
@@ -63,7 +62,7 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
       data.push_back("MAT2,1,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,"
                      "13.,14.,15.,16.,17\n");
 
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       mat2 probe(lines);
 
@@ -98,7 +97,7 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
                      "0.              0.");
       data.push_back("*");
 
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       mat2 probe(lines);
 

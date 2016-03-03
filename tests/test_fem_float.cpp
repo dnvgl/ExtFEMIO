@@ -39,7 +39,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::types;
@@ -118,7 +117,7 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
    }
 
    SECTION("Quick Reference") {
-      ::std::vector<::std::string> samples;
+      std::vector<std::string> samples;
       //            12345678901e3456
       CHECK(probe(" 7.00000000e+00 ") == 7.);
       CHECK(probe(" 7.00000000E+00 ") == 7.);

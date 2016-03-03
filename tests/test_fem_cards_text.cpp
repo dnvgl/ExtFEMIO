@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,27 +40,22 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
 
-   ::std::deque<string> lines;
-   
+   std::deque<std::string> lines;
+
    SECTION("TEXT (1)") {
-      ::std::deque<string> data;
-      data.push_back(
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001");
-      data.push_back(
-         "        CONVERSION DETAILS:");
-      data.push_back(
-         "        Msc Nastran File Format -> Sesam Interface File.");
-      data.push_back(
-         "        Input  : \\test_01.bdt");
-      data.push_back(
-         "        Log    : \\test_01.txt");
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
+            "        CONVERSION DETAILS:",
+            "        Msc Nastran File Format -> Sesam Interface File.",
+            "        Input  : \\test_01.bdt",
+            "        Log    : \\test_01.txt"});
 
       card::card_split(data, lines);
       text probe(lines);
@@ -83,18 +77,13 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
    }
 
    SECTION("TEXT (2)") {
-      ::std::deque<string> data;
-      data.push_back(
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "TEXT     0.00000000e+00  0.00000000e+00  4.00000000e+00  7.20000000e+01 ");
-      data.push_back(
-         "        CONVERSION DETAILS:");
-      data.push_back(
-         "        Msc Nastran File Format -> Sesam Interface File.");
-      data.push_back(
-         "        Input  : \\test_01.bdt");
-      data.push_back(
-         "        Log    : \\test_01.txt");
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TEXT     0.00000000e+00  0.00000000e+00  4.00000000e+00  7.20000000e+01 ",
+            "        CONVERSION DETAILS:",
+            "        Msc Nastran File Format -> Sesam Interface File.",
+            "        Input  : \\test_01.bdt",
+            "        Log    : \\test_01.txt"});
 
       card::card_split(data, lines);
       text probe(lines);
@@ -121,14 +110,11 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
    std::ostringstream test;
 
    SECTION("simple") {
-      deque<::std::string> CONT;
-      CONT.push_back("CONVERSION DETAILS:");
-      CONT.push_back(
-         "Msc Nastran File Format -> Sesam Interface File.");
-      CONT.push_back(
-         "Input  : \\test_01.bdt");
-      CONT.push_back(
-         "Log    : \\test_01.txt");
+      std::deque<std::string> CONT({
+            "CONVERSION DETAILS:",
+            "Msc Nastran File Format -> Sesam Interface File.",
+            "Input  : \\test_01.bdt",
+            "Log    : \\test_01.txt"});
       text probe(0, 0, 4, 72, CONT);
       test << probe;
       CHECK(test.str() ==

@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
 
    SECTION("GECCEN (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back("GECCEN   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n");
       card::card_split(data, lines);
       geccen probe(lines);
@@ -62,7 +61,7 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
    }
 
    SECTION("GECCEN (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back("GECCEN   1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n");
       card::card_split(data, lines);
       geccen probe(lines);

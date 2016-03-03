@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 
-   ::std::deque<string> data({
+   std::deque<std::string> data({
          "CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n",
          "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    cbar probe(lines);
 
@@ -65,7 +64,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
       CHECK_FALSE(probe.G0);
       CHECK(probe.choose_dir_code == cbar::has_DVEC);
       CHECK(probe.OFFT == "GGG");
-      deque<int> p_ref;
+      std::deque<int> p_ref;
       CHECK(probe.PA == p_ref);
       CHECK(probe.PB == p_ref);
       CHECK((double)probe.W1A == 0.);
@@ -80,10 +79,10 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
           "[bdf_cbar,dcode]" ) {
 
-   ::std::deque<string> data({
+   std::deque<std::string> data({
          "CBAR    7869    104010  76      153      13                     GOO     \n",
          "                        0.0     -22.617 -339.25 0.0     -22.617 "});
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    cbar probe(lines);
 
@@ -98,7 +97,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
       CHECK_FALSE(probe.X3);
       CHECK(probe.choose_dir_code == cbar::has_DCODE);
       CHECK(probe.OFFT == "GOO");
-      deque<int> p_ref;
+      std::deque<int> p_ref;
       CHECK(probe.PA.value == p_ref);
       CHECK(probe.PB.value == p_ref);
       CHECK(probe.W1A.value == 0.);

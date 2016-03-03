@@ -35,7 +35,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -43,7 +42,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
@@ -51,11 +50,11 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
 
    SECTION("Free Field Format (generic)") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "PBAR,1,2,3.,4.,5.,6.,7.,,9.,10.,11.,12.,13.,14.,15.,16.,17.,"
          "18.,19.\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       pbar probe(lines);
 
@@ -81,12 +80,12 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
 
    SECTION("Small Field Format 1") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "PBAR    4000001 3       1.046+4 9.369+7 1.694+6 1.316+6\n");
       data.push_back(
          "                        6.856+6\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       pbar probe(lines);
 
@@ -112,13 +111,13 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
 
    SECTION("Small Field Format 2") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
          "PBAR          29       6     2.9            5.97                                \n");
       data.push_back(
          "                             2.0     4.0                                        \n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       pbar probe(lines);
 

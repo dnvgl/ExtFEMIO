@@ -36,7 +36,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 using namespace ::dnvgl::extfem::fem::elements;
@@ -45,7 +44,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
@@ -54,9 +53,9 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    DllExport gelmnt1(
       const long &ELNOX, const long &ELNO,
       const el_types &ELTYP, const long &ELTYAD,
-      const ::std::deque<long> &NODIN);
+      const std::deque<long> &NODIN);
    */
-   ::std::deque<long> nodes({ 6, 7 });
+   std::deque<long> nodes({ 6, 7 });
    gelmnt1 data1(1, 2, elements::TESS, nodes);
    CHECK(data1.ELNOX == 1);
    CHECK(data1.ELNO == 2);
@@ -72,7 +71,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    CHECK(probe1.nodes[0] == 6);
    CHECK(probe1.nodes[1] == 7);
 
-   ::std::unique_ptr<__base> probe2;
+   std::unique_ptr<__base> probe2;
    dispatch(probe2, &data1);
    CHECK(probe2->get_type() == TESS);
    CHECK(static_cast<tess*>(probe2.get())->nnodes == 2);

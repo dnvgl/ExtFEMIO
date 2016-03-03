@@ -33,7 +33,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
+using namespace std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,25 +41,25 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
 
    double c_ref_K[6] = {0., 0., 0., 0., 0., 0.};
-   ::std::deque<::std::deque<double>> ref_K(6);
+   std::deque<std::deque<double>> ref_K(6);
    for (int i = 0; i < 6; i++) {
-      ref_K[i] = ::std::deque<double>(6);
+      ref_K[i] = std::deque<double>(6);
       for (int j = 0; j < 6; j++)
          ref_K[i][j] = 0;
    }
    ref_K[1][1] = 1e8;
 
-   ::std::deque<::std::string> lines;
+   std::deque<std::string> lines;
 
    SECTION("MGSPRNG (1)") {
-      ::std::deque<string> data;
+      std::deque<string> data;
 
       data.push_back(
          "MGSPRNG  7.00000000e+001 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
@@ -85,7 +85,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
    }
 
    SECTION("MGSPRNG (2)") {
-      ::std::deque<string> data;
+      std::deque<string> data;
 
       data.push_back(
          "MGSPRNG  7.00000000e+01  6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
@@ -112,7 +112,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
 
    SECTION("MGSPRNG (3)") {
 
-      ::std::deque<string> data;
+      std::deque<string> data;
 
       double c_ref_K_0[6] = { 1.,  2.,  3.,  4.,  5.,  6.};
       double c_ref_K_1[6] = { 2.,  7.,  8.,  9., 10., 11.};
@@ -120,13 +120,13 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
       double c_ref_K_3[6] = { 4.,  9., 13., 16., 17., 18.};
       double c_ref_K_4[6] = { 5., 10., 14., 17., 19., 20.};
       double c_ref_K_5[6] = { 6., 11., 15., 18., 20., 21.};
-      ::std::deque<::std::deque<double>> ref_K(6);
-      ref_K[0] = ::std::deque<double>(c_ref_K_0, c_ref_K_0 + 6);
-      ref_K[1] = ::std::deque<double>(c_ref_K_1, c_ref_K_1 + 6);
-      ref_K[2] = ::std::deque<double>(c_ref_K_2, c_ref_K_2 + 6);
-      ref_K[3] = ::std::deque<double>(c_ref_K_3, c_ref_K_3 + 6);
-      ref_K[4] = ::std::deque<double>(c_ref_K_4, c_ref_K_4 + 6);
-      ref_K[5] = ::std::deque<double>(c_ref_K_5, c_ref_K_5 + 6);
+      std::deque<std::deque<double>> ref_K(6);
+      ref_K[0] = std::deque<double>(c_ref_K_0, c_ref_K_0 + 6);
+      ref_K[1] = std::deque<double>(c_ref_K_1, c_ref_K_1 + 6);
+      ref_K[2] = std::deque<double>(c_ref_K_2, c_ref_K_2 + 6);
+      ref_K[3] = std::deque<double>(c_ref_K_3, c_ref_K_3 + 6);
+      ref_K[4] = std::deque<double>(c_ref_K_4, c_ref_K_4 + 6);
+      ref_K[5] = std::deque<double>(c_ref_K_5, c_ref_K_5 + 6);
 
       data.push_back(
          "MGSPRNG  7.00000000e+01  6.00000000e+00  1.00000000e+00  2.00000000e+00 \n");
@@ -158,9 +158,9 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
    std::ostringstream test;
 
    double c_ref_K[6] = { 0.,  0.,  0.,  0.,  0.,  0.};
-   ::std::deque<::std::deque<double>> ref_K(6);
+   std::deque<std::deque<double>> ref_K(6);
    for (int i = 0; i < 6; i++)
-      ref_K[i] = ::std::deque<double>(c_ref_K, c_ref_K + 6);
+      ref_K[i] = std::deque<double>(c_ref_K, c_ref_K + 6);
    ref_K[1][1] = 999;
 
    SECTION("simple") {
@@ -194,13 +194,13 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
       double c_ref_K_3[6] = { 4.,  9., 13., 16., 17., 18.};
       double c_ref_K_4[6] = { 5., 10., 14., 17., 19., 20.};
       double c_ref_K_5[6] = { 6., 11., 15., 18., 20., 21.};
-      ::std::deque<::std::deque<double>> ref_K(6);
-      ref_K[0] = ::std::deque<double>(c_ref_K_0, c_ref_K_0 + 6);
-      ref_K[1] = ::std::deque<double>(c_ref_K_1, c_ref_K_1 + 6);
-      ref_K[2] = ::std::deque<double>(c_ref_K_2, c_ref_K_2 + 6);
-      ref_K[3] = ::std::deque<double>(c_ref_K_3, c_ref_K_3 + 6);
-      ref_K[4] = ::std::deque<double>(c_ref_K_4, c_ref_K_4 + 6);
-      ref_K[5] = ::std::deque<double>(c_ref_K_5, c_ref_K_5 + 6);
+      std::deque<std::deque<double>> ref_K(6);
+      ref_K[0] = std::deque<double>(c_ref_K_0, c_ref_K_0 + 6);
+      ref_K[1] = std::deque<double>(c_ref_K_1, c_ref_K_1 + 6);
+      ref_K[2] = std::deque<double>(c_ref_K_2, c_ref_K_2 + 6);
+      ref_K[3] = std::deque<double>(c_ref_K_3, c_ref_K_3 + 6);
+      ref_K[4] = std::deque<double>(c_ref_K_4, c_ref_K_4 + 6);
+      ref_K[5] = std::deque<double>(c_ref_K_5, c_ref_K_5 + 6);
 
       mgsprng probe(1, ref_K);
       test << probe;

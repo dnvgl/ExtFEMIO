@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
 
-    ::std::deque<::std::string> lines; 
+    std::deque<std::string> lines; 
 
    SECTION("BLDEP (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "BLDEP    1.10720000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000\n");
@@ -84,16 +83,16 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
       double ref_b[9] = { 1.000e+0,  6.430e+3, -1.065e+3,
                             1.000e+0,  1.065e+3,  0.000e+0,
                             1.000e+0,  0.000e+0, -6.430e+3};
-      CHECK(probe.DEPDOF == ::std::deque<long>(
+      CHECK(probe.DEPDOF == std::deque<long>(
                ref_depdof, ref_depdof + 9));
-      CHECK(probe.INDEPDOF == ::std::deque<long>(
+      CHECK(probe.INDEPDOF == std::deque<long>(
                ref_indepdof, ref_indepdof + 9));
-      CHECK(probe.b == ::std::deque<double>(
+      CHECK(probe.b == std::deque<double>(
                ref_b, ref_b + 9));
    }
 
    SECTION("BLDEP (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "BLDEP    1.10720000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000\n");
@@ -127,11 +126,11 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
       double ref_b[9] = { 1.000e+0,  6.430e+3, -1.065e+3,
                             1.000e+0,  1.065e+3,  0.000e+0,
                             1.000e+0,  0.000e+0, -6.430e+3};
-      CHECK(probe.DEPDOF == ::std::deque<long>(
+      CHECK(probe.DEPDOF == std::deque<long>(
                ref_depdof, ref_depdof + 9));
-      CHECK(probe.INDEPDOF == ::std::deque<long>(
+      CHECK(probe.INDEPDOF == std::deque<long>(
                ref_indepdof, ref_indepdof + 9));
-      CHECK(probe.b == ::std::deque<double>(
+      CHECK(probe.b == std::deque<double>(
                ref_b, ref_b + 9));
    }
 }
@@ -145,9 +144,9 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
       long inp_indepdof[9] = {3, 2, 1, 3, 2, 1, 3, 2, 1};
       double inp_b[9] = { 1., 2., 3., 4., 5., 6., 7., 8., 9.};
       bldep probe(1, 2, 6, 6,
-                  ::std::deque<long>(inp_depdof, inp_depdof + 9),
-                  ::std::deque<long>(inp_indepdof, inp_indepdof + 9),
-                  ::std::deque<double>(inp_b, inp_b + 9));
+                  std::deque<long>(inp_depdof, inp_depdof + 9),
+                  std::deque<long>(inp_indepdof, inp_indepdof + 9),
+                  std::deque<double>(inp_b, inp_b + 9));
       test << probe;
       CHECK(test.str() ==
             "BLDEP   +1.00000000e+00 +2.00000000e+00 +6.00000000e+00 +6.00000000e+00 \n"

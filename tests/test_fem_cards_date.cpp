@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
     
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
     
    SECTION("DATE (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       //              12345678|234567890123456|234567890123456|234567890123456|234567890123456
       data.push_back("DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001");
       data.push_back("        DATE TIME:  11/03/2015 09:46:08");
@@ -84,7 +83,7 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
 
    SECTION("simple") {
       long TYPE(0), SUBTYPE(0), NRECS(4), NBYTE(72);
-      deque<::std::string> CONT;
+      std::deque<std::string> CONT;
       CONT.push_back("DATE TIME:  11/03/2015 09:46:08");
       CONT.push_back("PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013");
       CONT.push_back("COMPUTER: HAML130185");

@@ -39,7 +39,7 @@ namespace dnvgl {
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_T3;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_T4;
 
-               base_shell(const ::std::deque<::std::string> &inp) :
+               base_shell(const std::deque<std::string> &inp) :
                   card(inp) {};
 
             public:
@@ -155,13 +155,13 @@ plate element.
 
             public:
 
-               ctria3(const ::std::deque<::std::string> &);
+               ctria3(const std::deque<std::string> &);
 
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CTRIA3; };
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `CQUAD4` entries.
@@ -185,13 +185,13 @@ quadrilateral plate element.
 
             public:
 
-               cquad4(const ::std::deque<::std::string> &);
+               cquad4(const std::deque<std::string> &);
 
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CQUAD4; };
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `CBEAM` entries.
@@ -230,9 +230,9 @@ Defines a beam element.
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X2;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X3;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_BIT;
-               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_OFFT;
-               static const ::dnvgl::extfem::bdf::types::entry_type<::std::deque<int>> form_PA;
-               static const ::dnvgl::extfem::bdf::types::entry_type<::std::deque<int>> form_PB;
+               static const ::dnvgl::extfem::bdf::types::entry_type<std::string> form_OFFT;
+               static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PA;
+               static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PB;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_W1A;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_W2A;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_W3A;
@@ -310,7 +310,7 @@ Defines a beam element.
                /** Offset vector interpretation flag. (Character or
                    blank)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<::std::string> OFFT;
+               ::dnvgl::extfem::bdf::types::entry_value<std::string> OFFT;
                /** Pin flags for beam end `A`, respectively; used to
                    remove connections between the grid point and
                    selected degrees-offreedom of the beam. The
@@ -325,7 +325,7 @@ Defines a beam element.
                    through 6 with no embedded blanks.) Pin flags are
                    not allowed for beam p-elements.
                */
-               ::dnvgl::extfem::bdf::types::entry_value<::std::deque<int>> PA;
+               ::dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PA;
                /** Pin flags for beam end `B`, respectively; used to
                    remove connections between the grid point and
                    selected degrees-offreedom of the beam. The
@@ -340,7 +340,7 @@ Defines a beam element.
                    through 6 with no embedded blanks.) Pin flags are
                    not allowed for beam p-elements.
                */
-               ::dnvgl::extfem::bdf::types::entry_value<::std::deque<int>> PB;
+               ::dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PB;
                /** *x* Components of offset vectors from the grid
                    points to the end points of the axis of the shear
                    center at beam end `A`. (Real; Default = 0.0)
@@ -386,12 +386,12 @@ Defines a beam element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> SB;
 
-               cbeam(const ::std::deque<::std::string> &inp);
+               cbeam(const std::deque<std::string> &inp);
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CBEAM; };
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `CBAR` entries.
@@ -427,9 +427,9 @@ Defines a simple beam element.
                static const ::dnvgl::extfem::bdf::types::entry_type<long> form_G0;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X2;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X3;
-               static const ::dnvgl::extfem::bdf::types::entry_type<::std::string> form_OFFT;
-               static const ::dnvgl::extfem::bdf::types::entry_type<::std::deque<int>> form_PA;
-               static const ::dnvgl::extfem::bdf::types::entry_type<::std::deque<int>> form_PB;
+               static const ::dnvgl::extfem::bdf::types::entry_type<std::string> form_OFFT;
+               static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PA;
+               static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PB;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_W1A;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_W2A;
                static const ::dnvgl::extfem::bdf::types::entry_type<double> form_W3A;
@@ -500,7 +500,7 @@ Defines a simple beam element.
                /** Offset vector interpretation flag. (character or
                    blank) See Remark 8.
                */
-               ::dnvgl::extfem::bdf::types::entry_value<::std::string> OFFT;
+               ::dnvgl::extfem::bdf::types::entry_value<std::string> OFFT;
                /** Pin flags for bar ends `A`. Used to remove
                    connections between the grid point and selected
                    degrees-of-freedom of the bar. The
@@ -514,7 +514,7 @@ Defines a simple beam element.
                    through 6 anywhere in the field with no embedded
                    blanks; Integer > 0.)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<::std::deque<int>> PA;
+               ::dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PA;
                /** Pin flags for bar ends `B`. Used to remove
                    connections between the grid point and selected
                    degrees-of-freedom of the bar. The
@@ -528,7 +528,7 @@ Defines a simple beam element.
                    through 6 anywhere in the field with no embedded
                    blanks; Integer > 0.)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<::std::deque<int>> PB;
+               ::dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PB;
                /** *x* components of offset vectors \f$w_a\f$ and
                    \f$w_b\f$, respectively (see Figure 8-8) in
                    displacement coordinate systems (or in element
@@ -578,15 +578,15 @@ Defines a simple beam element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<double> W3B;
 
-               cbar(const ::std::deque<::std::string> &inp);
+               cbar(const std::deque<std::string> &inp);
 
                cbar(
                   const long *EID, const long *PID,
                   const long *GA, const long *GB,
                   const double *X1, const double *X2, const double *X3,
-                  const ::std::string *OFFT = nullptr,
-                  const ::std::deque<int> *PA = nullptr,
-                  const ::std::deque<int> *PB = nullptr,
+                  const std::string *OFFT = nullptr,
+                  const std::deque<int> *PA = nullptr,
+                  const std::deque<int> *PB = nullptr,
                   const double *W1A = nullptr, const double *W2A = nullptr,
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
@@ -594,16 +594,16 @@ Defines a simple beam element.
                cbar(
                   const long *EID, const long *PID,
                   const long *GA, const long *GB, const long *G0,
-                  const ::std::string *OFFT = nullptr,
-                  const ::std::deque<int> *PA = nullptr, const ::std::deque<int> *PB = nullptr,
+                  const std::string *OFFT = nullptr,
+                  const std::deque<int> *PA = nullptr, const std::deque<int> *PB = nullptr,
                   const double *W1A = nullptr, const double *W2A = nullptr,
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
 
-               friend inline ::std::ostream&
-                  operator<<(::std::ostream &os, const cbar &card) {
+               friend inline std::ostream&
+                  operator<<(std::ostream &os, const cbar &card) {
 
-                  ::std::deque<::std::unique_ptr<format_entry>> entries;
+                  std::deque<std::unique_ptr<format_entry>> entries;
 
                   entries.push_back(format(cbar::head));
 
@@ -627,16 +627,16 @@ Defines a simple beam element.
 
                   if ((bool)card.OFFT || (bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A ||
                      (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<::std::string>(card.form_OFFT, card.OFFT));
+                     entries.push_back(format<std::string>(card.form_OFFT, card.OFFT));
                   else goto cont;
 
                   if ((bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A ||
                      (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<::std::deque<int>>(card.form_PA, card.PA));
+                     entries.push_back(format<std::deque<int>>(card.form_PA, card.PA));
                   else goto cont;
                   if ((bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B ||
                      (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<::std::deque<int>>(card.form_PB, card.PB));
+                     entries.push_back(format<std::deque<int>>(card.form_PB, card.PB));
                   else goto cont;
                   if ((bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B || (bool)card.W2B ||
                      (bool)card.W3B)
@@ -659,13 +659,13 @@ Defines a simple beam element.
 
                cont:
 
-                  os << card.format_outlist(entries) << ::std::endl;
+                  os << card.format_outlist(entries) << std::endl;
 
                   return os;
                };
 
-               const ::std::ostream&
-               operator<<(::std::ostream& os) const;
+               const std::ostream&
+               operator<<(std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `CROD` entries.
@@ -708,13 +708,13 @@ Defines a tension-compression-torsion element.
                */
                ::dnvgl::extfem::bdf::types::entry_value<long> G2;
 
-               crod(const ::std::deque<::std::string> &inp);
+               crod(const std::deque<std::string> &inp);
 
                const ::dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CROD; };
 
-               const ::std::ostream&
-               operator << (::std::ostream& os) const;
+               const std::ostream&
+               operator << (std::ostream& os) const;
             };
          }
       }

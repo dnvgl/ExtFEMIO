@@ -41,7 +41,6 @@ static char THIS_FILE[] = __FILE__;
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -49,7 +48,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
@@ -58,10 +57,10 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Free Field Format 1") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "PROD,1,2,3.,4.,5.,6.\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
 
       CAPTURE( data[0] );
@@ -78,10 +77,10 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Free Field Format 2") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "PROD,1,2,3.,4.,5.\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
 
       CAPTURE( data[0] );
@@ -98,10 +97,10 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Free Field Format 3") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "PROD,1,2,3.,4.\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
 
       CAPTURE( data[0] );
@@ -118,11 +117,11 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Small Field Format") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
          "PROD          17      23    42.6   17.92  4.2356     0.5                        \n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
 
       CAPTURE( data[0] );
@@ -139,11 +138,11 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Small Field Format 2") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
 //     1234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
          "PROD    6000001 1       3000.00\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
 
       CAPTURE( data[0] );

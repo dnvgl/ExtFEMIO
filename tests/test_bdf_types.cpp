@@ -51,7 +51,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
    entry_type<long> obj_int("dummy1");
    entry_type<double> obj_float("dummy2");
-   entry_type<::std::deque<int>> obj_list("dummy3");
+   entry_type<std::deque<int>> obj_list("dummy3");
 
    SECTION("Checking 'entry_type<long>.type' against 'Int'") {
       CHECK(entry_type<long>("dummy idiot").type() == Int);
@@ -70,7 +70,7 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
    }
 
    SECTION("Checking 'bdf_list.type' against 'List'") {
-      CHECK(entry_type<::std::deque<int>>("dummy").type() == List);
+      CHECK(entry_type<std::deque<int>>("dummy").type() == List);
    }
 
    SECTION("Checking 'bdf_list->type' against 'List'") {
@@ -92,11 +92,11 @@ TEST_CASE("Testing bdf entry values.", "[bdf_types]" ) {
 
    entry_type<long> obj_int("dummy1");
    entry_type<double> obj_float("dummy2");
-   entry_type<::std::deque<int>> obj_list("dummy 3");
+   entry_type<std::deque<int>> obj_list("dummy 3");
 
    entry_value<long> val_int;
    entry_value<double> val_float;
-   entry_value<::std::deque<int>> val_list;
+   entry_value<std::deque<int>> val_list;
 
    SECTION("Simple integer value") {
       obj_int.set_value(val_int, "3");

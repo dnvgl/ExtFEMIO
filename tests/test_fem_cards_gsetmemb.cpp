@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
 
-    ::std::deque<std::string> lines; 
+    std::deque<std::string> lines; 
 
    SECTION("GSETMEMB (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GSETMEMB 2.30000000e+001 1.74000000e+002 1.00000000e+000 1.00000000e+000\n");
@@ -77,12 +76,12 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
          12760, 12766, 12783, 12787, 12799, 12817, 12842, 12850,
          12858, 12859, 12860, 12883, 12891, 12918, 12919, 12930,
          12932, 12935};
-      CHECK(probe.IRMEMB == ::std::deque<long>(
+      CHECK(probe.IRMEMB == std::deque<long>(
                c_ref_irmemb, c_ref_irmemb + 18));
    }
 
    SECTION("GSETMEMB (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000\n");
@@ -102,7 +101,7 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
 
 
    SECTION("GSETMEMB (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GSETMEMB 8.00000000e+000 1.75000000e+002 1.00000000e+000 2.00000000e+000\n");
@@ -118,12 +117,12 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
       CHECK(probe.ISORIG == 0);
       CHECK(probe.IRMEMB.size() == 3);
       long c_ref_irmemb[3] = {875, 887, 900};
-      CHECK(probe.IRMEMB == ::std::deque<long>(
+      CHECK(probe.IRMEMB == std::deque<long>(
                c_ref_irmemb, c_ref_irmemb + 3));
    }
 
    SECTION("GSETMEMB (3)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GSETMEMB 1.02400000e+003 1.76000000e+002 1.00000000e+000 2.00000000e+000\n");
@@ -776,7 +775,7 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
          62457, 67044, 52237, 36769, 67045, 66182, 66183, 66184,
          67046, 67047, 66185, 66186, 67440, 67048, 65300, 67049,
          65301, 67441, 67050};
-      CHECK(probe.IRMEMB == ::std::deque<long>(
+      CHECK(probe.IRMEMB == std::deque<long>(
                c_ref_irmemb, c_ref_irmemb + 1019));
    }
 }
@@ -785,7 +784,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
 
    std::ostringstream test;
 
-   // ::std::deque<long> ref_irmemb(1019);
+   // std::deque<long> ref_irmemb(1019);
    // for (int i = 0; i < 1019; i++)
    //    ref_irmemb[i] = i + 10;
 
@@ -798,7 +797,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
    }
 
    SECTION("simple (2)") {
-      ::std::deque<long> ref_irmemb(0);
+      std::deque<long> ref_irmemb(0);
       gsetmemb probe(5, 2, 3, 4, 5, ref_irmemb);
       test << probe;
       CHECK(test.str() ==
@@ -815,7 +814,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
    }
 
    SECTION("calc NFIELD (2)") {
-      ::std::deque<long> ref_irmemb(0);
+      std::deque<long> ref_irmemb(0);
       gsetmemb probe(2, 3, 4, 5, ref_irmemb);
       test << probe;
       CHECK(test.str() ==
@@ -824,13 +823,13 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
    }
 
    SECTION("huge") {
-      ::std::deque<long> ref_irmemb(1019);
+      std::deque<long> ref_irmemb(1019);
       for (int i = 0; i < 1019; i++)
          ref_irmemb[i] = i + 10;
 
       gsetmemb probe(2, 3, 4, 5, ref_irmemb);
       test << probe;
-      ::std::string ref_1(
+      std::string ref_1(
             "GSETMEMB+1.02400000e+03 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
             "        +5.00000000e+00 +1.00000000e+01 +1.10000000e+01 +1.20000000e+01 \n"
             "        +1.30000000e+01 +1.40000000e+01 +1.50000000e+01 +1.60000000e+01 \n"
@@ -942,7 +941,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
             "        +4.37000000e+02 +4.38000000e+02 +4.39000000e+02 +4.40000000e+02 \n"
             "        +4.41000000e+02 +4.42000000e+02 +4.43000000e+02 +4.44000000e+02 \n"
             "        +4.45000000e+02 +4.46000000e+02 +4.47000000e+02 +4.48000000e+02 \n");
-          ::std::string ref_2(
+          std::string ref_2(
             "        +4.49000000e+02 +4.50000000e+02 +4.51000000e+02 +4.52000000e+02 \n"
             "        +4.53000000e+02 +4.54000000e+02 +4.55000000e+02 +4.56000000e+02 \n"
             "        +4.57000000e+02 +4.58000000e+02 +4.59000000e+02 +4.60000000e+02 \n"
@@ -1054,7 +1053,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
             "        +8.81000000e+02 +8.82000000e+02 +8.83000000e+02 +8.84000000e+02 \n"
             "        +8.85000000e+02 +8.86000000e+02 +8.87000000e+02 +8.88000000e+02 \n"
             "        +8.89000000e+02 +8.90000000e+02 +8.91000000e+02 +8.92000000e+02 \n");
-          ::std::string ref_3(
+          std::string ref_3(
             "        +8.93000000e+02 +8.94000000e+02 +8.95000000e+02 +8.96000000e+02 \n"
             "        +8.97000000e+02 +8.98000000e+02 +8.99000000e+02 +9.00000000e+02 \n"
             "        +9.01000000e+02 +9.02000000e+02 +9.03000000e+02 +9.04000000e+02 \n"

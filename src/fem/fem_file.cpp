@@ -31,17 +31,16 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem::input;
 
-fem_file::fem_file(istream &inp) :
+fem_file::fem_file(std::istream &inp) :
    data(inp), last_comment(""), eof(false) {
-   data.imbue(locale(locale("C"), new line_reader()));
+   data.imbue(std::locale(std::locale("C"), new line_reader()));
    data >> cur_line;
 }
 
 // Return all input file lines belonging to next FEM card.
-void fem_file::get(deque<std::string> &res) {
+void fem_file::get(std::deque<std::string> &res) {
    res.clear();
    do {
       // if line not empty and not comment line add line to result set.
@@ -56,12 +55,12 @@ void fem_file::get(deque<std::string> &res) {
 }
 
 // Return size of input FEM file.
-streampos fem_file::size(void) {
+std::streampos fem_file::size(void) {
    // save current position in file
    auto cur_pos = data.tellg();
 
    // jump to end of file
-   data.seekg(0, ios::end);
+   data.seekg(0, std::ios::end);
    // determine position if file as file size
    auto fileSize = data.tellg();
 
@@ -72,7 +71,7 @@ streampos fem_file::size(void) {
 }
 
 // Return position in input FEM file.
-streampos fem_file::pos(void) {
+std::streampos fem_file::pos(void) {
    return data.tellg();
 }
 

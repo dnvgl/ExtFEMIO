@@ -35,7 +35,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -43,7 +42,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
@@ -52,10 +51,10 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Small Field Format") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "PSHELL  1       4         23.00 4               4\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       pshell probe(lines);
 
@@ -69,14 +68,14 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Large Field Format") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "PSHELL* 1               4                 23.00         4  "
          "             \n");
       data.push_back(
          "*                       4  \n");
 
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       pshell probe(lines);
 
@@ -90,9 +89,9 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Comma Field Format") {
 
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back("PSHELL,1,4,23.00,4,,4\n");
-      ::std::deque<string> lines;
+      std::deque<std::string> lines;
       card::card_split(data, lines);
       pshell probe(lines);
 

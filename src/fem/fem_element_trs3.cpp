@@ -37,7 +37,7 @@ namespace {
    el_processor procs[
       procs_len] = {general, Sestra, Pretube};
 }
-const ::std::set<el_processor> trs3::processors(procs, procs+procs_len);
+const std::set<el_processor> trs3::processors(procs, procs+procs_len);
 
 trs3::trs3(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
    ::dnvgl::extfem::fem::elements::__base(data) {}

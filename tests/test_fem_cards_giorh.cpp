@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
 
    SECTION("GIORH (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n");
       data.push_back(
@@ -75,7 +74,7 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
    }
 
    SECTION("GIORH (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "GIORH    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n");
       data.push_back(

@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long tess::nnodes = 2;
 el_types tess::get_type() const {return TESS;}
@@ -35,13 +35,13 @@ namespace {
    const size_t procs_len = 6;
    el_processor procs[procs_len] = {general, Preframe, Prefem, Sestra, ADVANCE, Poseidon};
 }
-const ::std::set<el_processor> tess::processors(procs, procs+procs_len);
+const std::set<el_processor> tess::processors(procs, procs+procs_len);
 
-tess::tess(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+tess::tess(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-tess::tess(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+tess::tess(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 tess::tess(const __base *p) :
    __base(p) {}

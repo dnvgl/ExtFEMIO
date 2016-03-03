@@ -38,7 +38,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::types;
@@ -60,7 +59,6 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
       CHECK(probe("   1.   ").value == 1.);
    }
 
-   /*
    SECTION("'  .1    '") {
       CHECK(probe("  .1    ").value == .1);
    }
@@ -79,7 +77,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
    }
 
    SECTION("Quick Reference") {
-      ::std::vector<::std::string> samples;
+      std::vector<std::string> samples;
       CHECK(probe("   7.0  ").value == 7.);
       CHECK(probe("   7.   ").value == 7.);
       CHECK(probe("   .7   ").value == .7);
@@ -163,9 +161,8 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]" ) {
          "probe", bound<double>(nullptr, nullptr, nullptr, true));
       CHECK_FALSE(probe("        "));
    }
-   */
 }
-/*
+
 TEST_CASE("BDF double types output.", "[bdf_types]" ) {
 
    entry_type<double> obj("dummy");
@@ -280,7 +277,6 @@ TEST_CASE("Exception, mkoe 2015-12-17", "[bdf_types]" ) {
       CHECK(obj.format(lval) == "-1.1104650285+01");
    }
 }
-*/
 
 // Local Variables:
 // mode: c++

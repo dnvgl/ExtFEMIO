@@ -37,7 +37,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::bdf;
 using namespace ::dnvgl::extfem::bdf::cards;
 
@@ -45,17 +44,17 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("BDF FORCE definitions. (Small Field Format)", "[bdf_force]" ) {
 
-   ::std::deque<string> data;
+   std::deque<std::string> data;
    data.push_back(
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "FORCE   2       5       6       2.9     0.0     1.9     0.0               \n");
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
    card::card_split(data, lines);
    force probe(lines);
 

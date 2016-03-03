@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,21 +40,19 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
 
    SECTION("TDSUPNAM (1)") {
-      ::std::deque<string> data;
-      data.push_back(
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "TDSUPNAM 4.00000000e+000 1.80000000e+002 1.21000000e+002 0.00000000e+000\n");
-      data.push_back(
-         "        PLAN_No6_STR(5445A/B)\n");
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDSUPNAM 4.00000000e+000 1.80000000e+002 1.21000000e+002 0.00000000e+000\n",
+            "        PLAN_No6_STR(5445A/B)\n"});
 
       card::card_split(data, lines);
       tdsupnam probe(lines);
@@ -69,12 +66,10 @@ TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
    }
 
    SECTION("TDSUPNAM (2)") {
-      ::std::deque<string> data;
-      data.push_back(
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "TDSUPNAM 4.00000000e+00  1.80000000e+02  1.21000000e+02  0.00000000e+00 \n");
-      data.push_back(
-         "        PLAN_No6_STR(5445A/B)\n");
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDSUPNAM 4.00000000e+00  1.80000000e+02  1.21000000e+02  0.00000000e+00 \n",
+            "        PLAN_No6_STR(5445A/B)\n"});
 
       card::card_split(data, lines);
       tdsupnam probe(lines);
@@ -88,16 +83,12 @@ TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
    }
 
    SECTION("TDSUPNAM (2)") {
-      ::std::deque<string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "TDSUPNAM 4.00000000e+00  1.80000000e+02  1.21000000e+02  2.64000000e+02 \n");
-      data.push_back(
-         "        PLAN_No6_STR(5445A/B)\n");
-      data.push_back(
-         "        Meaningles comment.\n");
-      data.push_back(
-         "        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+\n");
+         "TDSUPNAM 4.00000000e+00  1.80000000e+02  1.21000000e+02  2.64000000e+02 \n",
+         "        PLAN_No6_STR(5445A/B)\n",
+         "        Meaningles comment.\n",
+         "        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+\n"});
 
       card::card_split(data, lines);
       tdsupnam probe(lines);
@@ -135,7 +126,7 @@ TEST_CASE("FEM TDSUPNAM types output.", "[fem_tdsupnam,out]" ) {
    }
 
    SECTION("with comment") {
-      ::std::deque<::std::string> comments(2);
+      std::deque<std::string> comments(2);
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdsupnam probe(4, 123, 122, 233, "1234567890123456789012", comments);
@@ -148,7 +139,7 @@ TEST_CASE("FEM TDSUPNAM types output.", "[fem_tdsupnam,out]" ) {
    }
 
    SECTION("with comment (calc internal values)") {
-      ::std::deque<::std::string> comments(2);
+      std::deque<std::string> comments(2);
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdsupnam probe(123, "1234567890123456789012", comments);

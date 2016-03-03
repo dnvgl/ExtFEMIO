@@ -38,7 +38,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::types;
@@ -54,12 +53,12 @@ TEST_CASE("FEM list types parsing.", "[fem_types]" ) {
 
    SECTION("' 1.34000000e+02 '") {
 
-      deque<int> ref({ 1, 3, 4 });
+      std::deque<int> ref({ 1, 3, 4 });
       CHECK(*probe(" 1.34000000e+02 ") == ref);
    }
 
    SECTION("' 1.23600000e+03 '") {
-      deque<int> ref({ 1, 2, 3, 6 });
+      std::deque<int> ref({ 1, 2, 3, 6 });
       CHECK(*probe(" 1.23600000e+03 ") == ref);
    }
 

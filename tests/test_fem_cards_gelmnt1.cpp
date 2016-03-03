@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
 
    SECTION("GELMNT1 (BEAS)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back("GELMNT1  1.13160000e+004 1.00000000e+000 1.50000000e+001 0.00000000e+000\n");
       data.push_back("         1.00000000e+001 1.10000000e+001 0.00000000e+000 0.00000000e+000\n");
 
@@ -68,7 +67,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
    }
 
    SECTION("GELMNT1 (FQUS)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back("GELMNT1  1.00000000e+000 6.00000000e+000 2.40000000e+001 0.00000000e+000\n");
       data.push_back("         1.00000000e+000 6.00000000e+000 4.00000000e+000 2.00000000e+000\n");
 
@@ -96,7 +95,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       long ELNOX(1), ELNO(6);
       elements::el_types ELTYP(elements::FQUS_FFQ);
       long ELTYAD(0);
-      ::std::deque<long> NODIN;
+      std::deque<long> NODIN;
       NODIN.push_back(1);
       NODIN.push_back(6);
       NODIN.push_back(4);
@@ -117,7 +116,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       long ELNOX(12), ELNO(36);
       elements::el_types ELTYP(elements::ILST);
       long ELTYAD(0);
-      ::std::deque<long> NODIN;
+      std::deque<long> NODIN;
       NODIN.push_back(1);
       NODIN.push_back(6);
       NODIN.push_back(4);
@@ -137,7 +136,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       long ELNOX(12), ELNO(36);
       elements::el_types ELTYP(elements::BEAS);
       long ELTYAD(0);
-      ::std::deque<long> NODIN;
+      std::deque<long> NODIN;
       NODIN.push_back(1);
       NODIN.push_back(6);
 
@@ -151,7 +150,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
    SECTION("GELMNT1 OUT (BEAS) (ELTYAD default)") {
       long ELNOX(12), ELNO(36);
       elements::el_types ELTYP(elements::BEAS);
-      ::std::deque<long> NODIN;
+      std::deque<long> NODIN;
       NODIN.push_back(1);
       NODIN.push_back(6);
 

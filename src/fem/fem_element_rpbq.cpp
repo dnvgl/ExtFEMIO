@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long rpbq::nnodes = 4;
 
@@ -36,13 +36,13 @@ namespace {
    const size_t procs_len = 1;
    el_processor procs[procs_len] = {general};
 }
-const ::std::set<el_processor> rpbq::processors(procs, procs+procs_len);
+const std::set<el_processor> rpbq::processors(procs, procs+procs_len);
 
-rpbq::rpbq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+rpbq::rpbq(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-rpbq::rpbq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+rpbq::rpbq(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

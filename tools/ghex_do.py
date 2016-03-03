@@ -48,7 +48,7 @@ namespace {{
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long ghex1{num:02d}::nnodes = {nodes};
 
@@ -59,14 +59,14 @@ namespace {{
    el_processor procs[
       procs_len] = {{general, Sestra}};
 }}
-const ::std::set<el_processor> ghex1{num:02d}::processors(procs, """
+const std::set<el_processor> ghex1{num:02d}::processors(procs, """
             """procs+procs_len);
 
-ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::ghex(data) {{}}
+ghex1{num:02d}::ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::ghex(data) {{}}
 
-ghex1{num:02d}::ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::ghex(data) {{}}
+ghex1{num:02d}::ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::ghex(data) {{}}
 
 ghex1{num:02d}::ghex1{num:02d}(const __base *data) :
    ghex(data) {{}}
@@ -166,14 +166,14 @@ namespace dnvgl {
 
 {nodepos}
              */
-            class DECLSPECIFIER ghex1{num:02d}: public ghex {{
+            class ghex1{num:02d}: public ghex {{
             public:
-               ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex1{num:02d}(const ::dnvgl::extfem::fem::cards::gelref1*);
+               ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelref1*);
                ghex1{num:02d}(const __base*);
                static const long nnodes;
                el_types get_type(void) const;
-               static const ::std::set<el_processor> processors;
+               static const std::set<el_processor> processors;
             }};
 
 """.format(num=i, extnodes=gen_extnodes(pos[:-1]),

@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
 
    SECTION("GLSEC (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "GLSEC    2.20000000e+001 7.00000000e+002 1.20000000e+001 1.50000000e+002\n");
       data.push_back(
@@ -73,7 +72,7 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
    }
 
    SECTION("GLSEC (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
       data.push_back(
          "GLSEC    2.20000000e+01  7.00000000e+02  1.20000000e+01  1.50000000e+02 \n");
       data.push_back(

@@ -33,7 +33,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
 using namespace ::dnvgl::extfem::fem;
 using namespace ::dnvgl::extfem::fem::cards;
 
@@ -41,16 +40,16 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
 }
 
-CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
 TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
 
-   ::std::deque<string> lines;
+   std::deque<std::string> lines;
 
    SECTION("GPIPE (1)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GPIPE    6.54357000e+005 0.00000000e+000 5.90218891e-002 2.95109446e-002\n");
@@ -70,7 +69,7 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
    }
 
    SECTION("GPIPE (2)") {
-      ::std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "GPIPE    6.54357000e+05  0.00000000e+00  5.90218891e-02  2.95109446e-02 \n");
