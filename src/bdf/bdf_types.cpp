@@ -32,28 +32,28 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 
-::std::istringstream bdf::types::base::conv;
+std::istringstream bdf::types::base::conv;
 
-bdf::types::base::base(const ::std::string &name) : name(name) {};
+bdf::types::base::base(const std::string &name) : name(name) {};
 
-// set input and output locale for conv and outp
-static bdf::types::imbue_helper _imbue_helper(::std::locale::classic());
+// std::set input and output locale for conv and outp
+static bdf::types::imbue_helper _imbue_helper(std::locale::classic());
 
 bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
 
-::std::string bdf::types::card::format(const void* d) const {
+std::string bdf::types::card::format(const void* d) const {
    std::ostringstream outp;
 
    outp << std::resetiosflags(std::ios::adjustfield);
    switch (out_form) {
    case bdf::types::LONG:
-      outp << setiosflags(::std::ios::left) << std::setfill(' ')
+      outp << std::setiosflags(std::ios::left) << std::setfill(' ')
            << std::setw(8) << (name + "*");
       break;
    case bdf::types::SHORT:
-      outp << setiosflags(::std::ios_base::left) << std::setfill(' ')
+      outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
            << std::setw(8) << name;
       break;
    case bdf::types::FREE:
@@ -66,7 +66,7 @@ bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
 
 bdf::types::empty::empty(void) : bdf::types::base("<empty>") {}
 
-::std::string bdf::types::empty::format(const void* d) const {
+std::string bdf::types::empty::format(const void* d) const {
    std::ostringstream outp;
 
    switch (out_form) {
@@ -80,7 +80,7 @@ bdf::types::empty::empty(void) : bdf::types::base("<empty>") {}
    return outp.str();
 }
 
-::std::string bdf::types::empty::format() const {
+std::string bdf::types::empty::format() const {
    return this->format(nullptr);
 }
 

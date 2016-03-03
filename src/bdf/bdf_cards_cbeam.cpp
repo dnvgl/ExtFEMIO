@@ -28,8 +28,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -62,8 +61,8 @@ namespace {
 const entry_type<std::string> cbeam::form_OFFT(
    "OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
 
-const entry_type<deque<int>> cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<deque<int>> cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<std::deque<int>> cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<std::deque<int>> cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
 const entry_type<double> cbeam::form_W1A(
    "W1A",
    bdf::type_bounds::bound<double>(nullptr, nullptr, &dc0)); // default=0.),
@@ -89,7 +88,7 @@ const entry_type<long> cbeam::form_SB(
    "SB",
    bdf::type_bounds::bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
-cbeam::cbeam(const deque<std::string> &inp) :
+cbeam::cbeam(const std::deque<std::string> &inp) :
    card(inp) {
 
    auto pos = inp.rbegin();

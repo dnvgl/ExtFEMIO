@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl;
+using namespace dnvgl;
 using namespace extfem;
 using namespace bdf::cards;
 
@@ -42,7 +42,7 @@ namespace {
    const char initVals[3] = { '+', '*', ',' };
 }
 
-::dnvgl::extfem::bdf::types::empty dnvgl::extfem::bdf::cards::card::empty = bdf::types::empty();
+dnvgl::extfem::bdf::types::empty dnvgl::extfem::bdf::cards::card::empty = bdf::types::empty();
 
 namespace {
    const void _stderr_warn(std::string const &msg) {

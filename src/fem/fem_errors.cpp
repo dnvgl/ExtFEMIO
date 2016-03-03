@@ -28,7 +28,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::errors;
+using namespace dnvgl::extfem::fem::errors;
 
 error::error(
    const std::string &msg, const std::string &err_class) :

@@ -29,7 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -45,7 +45,7 @@ namespace dnvgl {
             const entry_type<double> gunivec::_form_UNIY("UNIY");
             const entry_type<double> gunivec::_form_UNIZ("UNIZ");
 
-            gunivec::gunivec(const ::std::deque<::std::string> &inp) :
+            gunivec::gunivec(const std::deque<std::string> &inp) :
                card(inp) {
                auto pos = inp.begin();
 
@@ -63,23 +63,23 @@ namespace dnvgl {
                card(), TRANSNO(TRANSNO),
                UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             gunivec::card_type(void) const {return GUNIVEC;}
 
-            const ::std::ostream&
-            gunivec::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            gunivec::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const gunivec &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const gunivec &card) {
                os << gunivec::head.format()
                   << card._form_TRANSNO.format(card.TRANSNO)
                   << card._form_UNIX.format(card.UNIX)
                   << card._form_UNIY.format(card.UNIY)
                   << card._form_UNIZ.format(card.UNIZ)
-                  << ::std::endl;
+                  << std::endl;
                return os;
             }
          }

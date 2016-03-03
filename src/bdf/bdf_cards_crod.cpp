@@ -27,8 +27,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -42,7 +41,7 @@ const entry_type<long> crod::form_PID("PID");
 const entry_type<long> crod::form_G1("G1");
 const entry_type<long> crod::form_G2("G2");
 
-crod::crod(const deque<std::string> &inp) :
+crod::crod(const std::deque<std::string> &inp) :
    card(inp) {
 
    auto pos = inp.rbegin();

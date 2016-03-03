@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long gmas::nnodes = 1;
 
@@ -36,13 +36,13 @@ namespace {
    const size_t procs_len = 6;
    el_processor procs[procs_len] = {general, Prefem, Sestra, Poseidon};
 }
-const ::std::set<el_processor> gmas::processors(procs, procs+procs_len);
+const std::set<el_processor> gmas::processors(procs, procs+procs_len);
 
-gmas::gmas(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+gmas::gmas(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-gmas::gmas(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+gmas::gmas(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

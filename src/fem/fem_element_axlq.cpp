@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long axlq::nnodes = 4;
 
@@ -37,13 +37,13 @@ namespace {
    el_processor procs[
       procs_len] = {general, Prefem, Sestra, ADVANCE};
 }
-const ::std::set<el_processor> axlq::processors(procs, procs+procs_len);
+const std::set<el_processor> axlq::processors(procs, procs+procs_len);
 
-axlq::axlq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+axlq::axlq(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-axlq::axlq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+axlq::axlq(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

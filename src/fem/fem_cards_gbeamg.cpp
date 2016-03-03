@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -57,7 +57,7 @@ namespace dnvgl {
             const entry_type<double> gbeamg::_form_SY("SY");
             const entry_type<double> gbeamg::_form_SZ("SZ");
 
-            gbeamg::gbeamg(const ::std::deque<::std::string> &inp) :
+            gbeamg::gbeamg(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -97,37 +97,37 @@ namespace dnvgl {
                SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
                SZ(SZ) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             gbeamg::card_type(void) const {return GBEAMG;}
 
-            const ::std::ostream&
-            gbeamg::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            gbeamg::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const gbeamg &data) {
+            std::ostream&
+            operator<< (std::ostream &os, const gbeamg &data) {
                os << gbeamg::head.format()
                   << data._form_GEONO.format(data.GEONO)
                   << data.empty.format()
                   << data._form_AREA.format(data.AREA)
                   << data._form_IX.format(data.IX)
-                  << ::std::endl << fem::types::card("").format()
+                  << std::endl << fem::types::card("").format()
                   << data._form_IY.format(data.IY)
                   << data._form_IZ.format(data.IZ)
                   << data._form_IYZ.format(data.IYZ)
                   << data._form_WXMIN.format(data.WXMIN)
-                  << ::std::endl << fem::types::card("").format()
+                  << std::endl << fem::types::card("").format()
                   << data._form_WYMIN.format(data.WYMIN)
                   << data._form_WZMIN.format(data.WZMIN)
                   << data._form_SHARY.format(data.SHARY)
                   << data._form_SHARZ.format(data.SHARZ)
-                  << ::std::endl << fem::types::card("").format()
+                  << std::endl << fem::types::card("").format()
                   << data._form_SHCENY.format(data.SHCENY)
                   << data._form_SHCENZ.format(data.SHCENZ)
                   << data._form_SY.format(data.SY)
-                  << data._form_SZ.format(data.SZ) << ::std::endl;
+                  << data._form_SZ.format(data.SZ) << std::endl;
                return os;
             }
          }

@@ -20,7 +20,7 @@ namespace {
 
 #include "fem/elements.h"
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -36,13 +36,13 @@ namespace {
    const size_t procs_len = 1;
    el_processor procs[procs_len] = {general};
 }
-const ::std::set<el_processor> glda::processors(procs, procs+procs_len);
+const std::set<el_processor> glda::processors(procs, procs+procs_len);
 
-glda::glda(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+glda::glda(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-glda::glda(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+glda::glda(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

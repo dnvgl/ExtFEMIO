@@ -97,14 +97,14 @@ namespace dnvgl {
                BNLOAD,
                /// Element to Ground
                MGSPRNG,
-               /// Set (group) of Nodes or Elements (Members)
+               /// std::set (group) of Nodes or Elements (Members)
                GSETMEMB,
                /// Specification of Local Element Coordinate
                /// System
                GUNIVEC,
                /// Isotropy, Linear Elastic Structural Analysis
                MISOSEL,
-               /// Name and Description of a Set (group)
+               /// Name and Description of a std::set (group)
                TDSETNAM,
                /// Name and Description of a Super-Element.
                TDSUPNAM,
@@ -120,47 +120,47 @@ namespace dnvgl {
 
                /// two character strings for continuation lines in Free Form
                /// Format cards.
-               static const ::std::set<char> free_form_cont;
+               static const std::set<char> free_form_cont;
 
-               static const ::std::map<::std::string, types> cardtype_map;
+               static const std::map<std::string, types> cardtype_map;
 
             protected:
 
-               static ::dnvgl::extfem::fem::types::empty empty;
+               static dnvgl::extfem::fem::types::empty empty;
 
-               static ::dnvgl::extfem::fem::types::card head;
+               static dnvgl::extfem::fem::types::card head;
 
             public:
 
                static void
-               card_split(::std::deque<::std::string> const &, ::std::deque<::std::string>&);
+               card_split(std::deque<std::string> const &, std::deque<std::string>&);
 
-               card (const ::std::deque<::std::string> &);
+               card (const std::deque<std::string> &);
                card ();
 
-               virtual const ::dnvgl::extfem::fem::cards::types
+               virtual const dnvgl::extfem::fem::cards::types
                card_type(void) const = 0;
 
-               virtual const ::std::ostream&
-               operator<<(::std::ostream&) const = 0;
+               virtual const std::ostream&
+               operator<<(std::ostream&) const = 0;
             };
 
             class unknown : public card {
 
             public:
 
-               unknown(const ::std::deque<::std::string> &inp);
+               unknown(const std::deque<std::string> &inp);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               ::std::deque<::std::string> content;
+               std::deque<std::string> content;
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const unknown&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const unknown&);
             };
 
 /// `DATE`: Date and Program Information
@@ -198,13 +198,13 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SUBTYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NRECS;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NBYTE;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_TYPE;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_SUBTYPE;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NRECS;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NBYTE;
+               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_CONT;
 
             public:
 
@@ -235,26 +235,26 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                    The eight first bytes on the text records shall be
                    filled with blanks.
                */
-               ::std::deque<::std::string> CONT;
+               std::deque<std::string> CONT;
 
-               date(const ::std::deque<::std::string>&);
+               date(const std::deque<std::string>&);
 
                date(
                   const long &TYPE, const long &SUBTYPE,
                   const long &NRECS, const long &NBYTE,
-                  const ::std::deque<::std::string> &CONT);
+                  const std::deque<std::string> &CONT);
 
                date(
                   const long &TYPE, const long &SUBTYPE,
-                  const ::std::deque<::std::string> &CONT);
+                  const std::deque<std::string> &CONT);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const date&);
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               friend  std::ostream&
+               operator<< (std::ostream&, const date&);
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GCOORD`: Nodal Coordinates
@@ -269,16 +269,16 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
                static const
-               ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
                static const
-               ::dnvgl::extfem::fem::types::entry_type<double> _form_XCOORD;
+               dnvgl::extfem::fem::types::entry_type<double> _form_XCOORD;
                static const
-               ::dnvgl::extfem::fem::types::entry_type<double> _form_YCOORD;
+               dnvgl::extfem::fem::types::entry_type<double> _form_YCOORD;
                static const
-               ::dnvgl::extfem::fem::types::entry_type<double> _form_ZCOORD;
+               dnvgl::extfem::fem::types::entry_type<double> _form_ZCOORD;
 
             public:
 
@@ -296,19 +296,19 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                double ZCOORD;
 
 
-               gcoord(const ::std::deque<::std::string>&);
+               gcoord(const std::deque<std::string>&);
 
                gcoord(
                   const long &NODENO,
                   const double &XCOORD, const double &YCOORD, const double &ZCOORD);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gcoord&);
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               friend  std::ostream&
+               operator<< (std::ostream&, const gcoord&);
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
@@ -332,12 +332,12 @@ system, unless a local nodal coordinate system is specified (see the
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODEX;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::deque<int>> _form_ODOF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NODEX;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const dnvgl::extfem::fem::types::entry_type<std::deque<int>> _form_ODOF;
 
             public:
 
@@ -355,25 +355,25 @@ system, unless a local nodal coordinate system is specified (see the
                long NDOF;
                /** Order of degrees of freedom. `NDOF` digits.
                 */
-               ::std::deque<int> ODOF;
+               std::deque<int> ODOF;
 
-               gnode(const ::std::deque<::std::string>&);
-
-               gnode(
-                  const long &NODEX, const long &NODENO,
-                  const long &NDOF, const ::std::deque<int> &ODOF);
+               gnode(const std::deque<std::string>&);
 
                gnode(
                   const long &NODEX, const long &NODENO,
-                  const ::std::deque<int> &ODOF);
+                  const long &NDOF, const std::deque<int> &ODOF);
 
-               const ::dnvgl::extfem::fem::cards::types
+               gnode(
+                  const long &NODEX, const long &NODENO,
+                  const std::deque<int> &ODOF);
+
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gnode&);
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               friend  std::ostream&
+               operator<< (std::ostream&, const gnode&);
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `IDENT`: Identification of Superelements
@@ -388,11 +388,11 @@ system, unless a local nodal coordinate system is specified (see the
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SLEVEL;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SELTYP;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SELMOD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_SLEVEL;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_SELTYP;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_SELMOD;
 
             public:
 
@@ -418,20 +418,20 @@ system, unless a local nodal coordinate system is specified (see the
                */
                mod_type SELMOD;
 
-               ident(const ::std::deque<::std::string>&);
+               ident(const std::deque<std::string>&);
 
                ident(
                   const long &SLEVEL, const long &SELTYP,
                   const mod_type &SELMOD);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const ident&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const ident&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `IEND`: End of a Superelement
@@ -448,9 +448,9 @@ Defines end of a superelement.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CONT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_CONT;
 
             public:
 
@@ -466,17 +466,17 @@ Defines end of a superelement.
                */
                long CONT;
 
-               iend(const ::std::deque<::std::string>&);
+               iend(const std::deque<std::string>&);
 
                iend(const long &CONT);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const iend&);
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               friend  std::ostream&
+               operator<< (std::ostream&, const iend&);
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GELMNT1`: Element Data Definition
@@ -493,15 +493,15 @@ Defines end of a superelement.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELNOX;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELTYP;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELTYAD;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODIN;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ELNOX;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ELNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ELTYP;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ELTYAD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NODIN;
 
-               static const ::std::map<long, ::dnvgl::extfem::fem::elements::el_types> eltyp_map;
+               static const std::map<long, dnvgl::extfem::fem::elements::el_types> eltyp_map;
 
             public:
 
@@ -555,27 +555,27 @@ Defines end of a superelement.
                    of the records will correspond to the program-defined
                    element numbering, `ELNO`.
                */
-               ::std::deque<long> NODIN;
+               std::deque<long> NODIN;
 
-               gelmnt1(const ::std::deque<::std::string>&);
-
-               gelmnt1(
-                  const long &ELNOX, const long &ELNO,
-                  const ::dnvgl::extfem::fem::elements::el_types &ELTYP, const long &ELTYAD,
-                  const ::std::deque<long> &NODIN);
+               gelmnt1(const std::deque<std::string>&);
 
                gelmnt1(
                   const long &ELNOX, const long &ELNO,
-                  const ::dnvgl::extfem::fem::elements::el_types &ELTYP,
-                  const ::std::deque<long> &NODIN);
+                  const dnvgl::extfem::fem::elements::el_types &ELTYP, const long &ELTYAD,
+                  const std::deque<long> &NODIN);
 
-               const ::dnvgl::extfem::fem::cards::types
+               gelmnt1(
+                  const long &ELNOX, const long &ELNO,
+                  const dnvgl::extfem::fem::elements::el_types &ELTYP,
+                  const std::deque<long> &NODIN);
+
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gelmnt1&);
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               friend  std::ostream&
+               operator<< (std::ostream&, const gelmnt1&);
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
             /// `GELREF1`: Reference to Element Data
@@ -604,24 +604,24 @@ Shortest version:
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ELNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ADDNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_INTNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MINTNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_STRANO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_STRENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_STREPONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_FIXNO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO_OPT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_FIXNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ELNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ADDNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_INTNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_MINTNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_STRANO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_STRENO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_STREPONO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO_OPT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_FIXNO_OPT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO_OPT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO_OPT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_FIXNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO;
 
             public:
 
@@ -716,26 +716,26 @@ Shortest version:
                /** Geometry reference number for the local nodes of the
                    element.
                */
-               ::std::deque<long> GEONO;
+               std::deque<long> GEONO;
                /** Number referring to the specification of degree of
                    fixation (Data type `BELFIX`). `FIXNO`[0] is the reference
                    number for the 1st local node of the element, FIXNO[*i*-1]
                    will be the reference number for the *i*’th local node.
                */
-               ::std::deque<long> FIXNO;
+               std::deque<long> FIXNO;
                /** Eccentricity number for the local nodes of the element,
                    i.e. number referring to the specification of
                    eccentricities.
                */
-               ::std::deque<long> ECCNO;
+               std::deque<long> ECCNO;
                /** Number referring to the specification of the local
                    element coordinate system for the local nodes of the
                    element. Refers to `BNTRCOS` or `GUNIVEC` record
                    depending on element type.
                */
-               ::std::deque<long> TRANSNO;
+               std::deque<long> TRANSNO;
 
-               gelref1(const ::std::deque<::std::string>&);
+               gelref1(const std::deque<std::string>&);
 
                gelref1(
                   const long &ELNO, const long &MATNO,
@@ -744,19 +744,19 @@ Shortest version:
                   const long &STRENO, const long &STREPONO,
                   const long &GEONO_OPT, const long &FIXNO_OPT,
                   const long &ECCNO_OPT, const long &TRANSNO_OPT,
-                  const ::std::deque<long> &GEONO=::std::deque<long>(),
-                  const ::std::deque<long> &FIXNO=::std::deque<long>(),
-                  const ::std::deque<long> &ECCNO=::std::deque<long>(),
-                  const ::std::deque<long> &TRANSNO=::std::deque<long>());
+                  const std::deque<long> &GEONO=std::deque<long>(),
+                  const std::deque<long> &FIXNO=std::deque<long>(),
+                  const std::deque<long> &ECCNO=std::deque<long>(),
+                  const std::deque<long> &TRANSNO=std::deque<long>());
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gelref1&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const gelref1&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GBARM`: Cross Section Type Massive Bar
@@ -776,16 +776,16 @@ Shortest version:
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BT;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BB;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBY;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_BT;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_BB;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBY;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
 
             public:
 
@@ -837,7 +837,7 @@ Shortest version:
                 */
                long NLOBZ;
 
-               gbarm(const ::std::deque<::std::string>&);
+               gbarm(const std::deque<std::string>&);
 
                gbarm(
                   const long &GEONO,
@@ -845,14 +845,14 @@ Shortest version:
                   const double &SFY, const double &SFZ,
                   const long &NLOBY, const long &NLOBZ);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gbarm&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const gbarm&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GBEAMG`: General Beam Element Data
@@ -875,23 +875,23 @@ record may be on the interface.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_AREA;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IX;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IYZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_WXMIN;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_WYMIN;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_WZMIN;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHARY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHARZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHCENY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SHCENZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_AREA;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_IX;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_IY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_IZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_IYZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_WXMIN;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_WYMIN;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_WZMIN;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SHARY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SHARZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SHCENY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SHCENZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SZ;
 
             public:
 
@@ -944,7 +944,7 @@ record may be on the interface.
                 */
                double SZ;
 
-               gbeamg(const ::std::deque<::std::string>&);
+               gbeamg(const std::deque<std::string>&);
 
                gbeamg(
                   const long &GEONO,
@@ -955,14 +955,14 @@ record may be on the interface.
                   const double &SHCENY, const double &SHCENZ,
                   const double &SY, const double &SZ);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gbeamg&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const gbeamg&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GECCEN`: Eccentricities
@@ -977,12 +977,12 @@ record may be on the interface.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_EX;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_EY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_EZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ECCNO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_EX;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_EY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_EZ;
 
             public:
                /** Eccentricity number, referenced to on record
@@ -1008,20 +1008,20 @@ record may be on the interface.
                 */
                double EZ;
 
-               geccen(const ::std::deque<::std::string>&);
+               geccen(const std::deque<std::string>&);
 
                geccen(
                   const long &ECCNO,
                   const double &EX, const double &EY, const double &EZ);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const geccen&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const geccen&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GELTH`: Thickness of Two-dimensional Elements
@@ -1036,11 +1036,11 @@ record may be on the interface.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TH;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NINT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TH;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NINT;
 
             public:
 
@@ -1048,19 +1048,19 @@ record may be on the interface.
                double TH;
                long NINT;
 
-               gelth(const ::std::deque<::std::string>&);
+               gelth(const std::deque<std::string>&);
 
                gelth(
                   const long &GEONO, const double &TH, const long &NINT);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gelth&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const gelth&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GIORH`: Cross Section Type I or H Beam
@@ -1080,20 +1080,20 @@ record may be on the interface.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BT;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TT;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BB;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TB;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYT;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYB;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_BT;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TT;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_BB;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TB;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYB;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
 
             public:
 
@@ -1153,7 +1153,7 @@ record may be on the interface.
                 */
                long NLOBZ;
 
-               giorh(const ::std::deque<::std::string>&);
+               giorh(const std::deque<std::string>&);
 
                giorh(
                 const long &GEONO,
@@ -1162,14 +1162,14 @@ record may be on the interface.
                 const double &SFY, const double &SFZ,
                 const long &NLOBYT, const long &NLOBYB, const long &NLOBZ);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const giorh&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const giorh&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GLSEC`: Cross Section Type I or H Beam
@@ -1189,18 +1189,18 @@ record may be on the interface.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_BY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_TZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<bool> _form_K;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBY;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_BY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const dnvgl::extfem::fem::types::entry_type<bool> _form_K;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBY;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
 
             public:
 
@@ -1262,7 +1262,7 @@ record may be on the interface.
                 */
                long NLOBZ;
 
-               glsec(const ::std::deque<::std::string>&);
+               glsec(const std::deque<std::string>&);
 
                glsec(
                 const long &GEONO,
@@ -1272,14 +1272,14 @@ record may be on the interface.
                 const bool &K,
                 const long &NLOBY, const long &NLOBZ);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const glsec&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const glsec&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GPIPE`: Cross Section Type Tube
@@ -1298,16 +1298,16 @@ record may be on the interface.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_DI;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_DY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_T;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NCIR;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NRAD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_DI;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_DY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_T;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NCIR;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NRAD;
 
             public:
 
@@ -1354,7 +1354,7 @@ record may be on the interface.
                 */
                long NRAD;
 
-               gpipe(const ::std::deque<::std::string>&);
+               gpipe(const std::deque<std::string>&);
 
                gpipe(
                 const long &GEONO,
@@ -1362,14 +1362,14 @@ record may be on the interface.
                 const double &SFY, const double &SFZ,
                 const long &NDIR, const long &NRAD);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gpipe&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const gpipe&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `BLDEP`: Nodes with Linear Dependence
@@ -1411,15 +1411,15 @@ be specified on one BQDP record.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CNOD;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDEP;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_DEPDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_INDEPDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_b;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_CNOD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDDOF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDEP;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_DEPDOF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_INDEPDOF;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_b;
 
             public:
 
@@ -1440,34 +1440,34 @@ be specified on one BQDP record.
                long NDEP;
                /** Dependent node’s degree of freedom.
                 */
-               ::std::deque<long> DEPDOF;
+               std::deque<long> DEPDOF;
                /** Independent node’s degree of freedom.
                 */
-               ::std::deque<long> INDEPDOF;
+               std::deque<long> INDEPDOF;
                /** The contribution of the *j*’th degree of freedom of
                    the independent node to the *i*’th degree of
                    freedom of the dependent node.
                */
-               ::std::deque<double> b;
+               std::deque<double> b;
 
-               bldep(const ::std::deque<::std::string>&);
+               bldep(const std::deque<std::string>&);
 
                bldep(const long &NODENO,
                                const long &CNOD,
                                const long &NDDOF,
                                const long &NDEP,
-                               const ::std::deque<long> &DEPDOF,
-                               const ::std::deque<long> &INDEPDOF,
-                               const ::std::deque<double> &b);
+                               const std::deque<long> &DEPDOF,
+                               const std::deque<long> &INDEPDOF,
+                               const std::deque<double> &b);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const bldep&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const bldep&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `BNBCD`: Nodes with Boundary Conditions
@@ -1507,11 +1507,11 @@ according to the increasing order of their internal node number.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_FIX;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_FIX;
 
             public:
 
@@ -1525,25 +1525,25 @@ according to the increasing order of their internal node number.
                /** Specification of boundary condition codes of
                    relevant degrees of freedom.
                */
-               ::std::deque<long> FIX;
+               std::deque<long> FIX;
 
-               bnbcd(const ::std::deque<::std::string>&);
+               bnbcd(const std::deque<std::string>&);
 
                bnbcd(const long &NODENO,
                                const long &NDOF,
-                               const ::std::deque<long> &FIX);
+                               const std::deque<long> &FIX);
 
                bnbcd(const long &NODENO,
-                               const ::std::deque<long> &FIX);
+                               const std::deque<long> &FIX);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const bnbcd&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const bnbcd&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `BNDISPL`: Nodes with Prescribed Displacements and Accelerations
@@ -1573,15 +1573,15 @@ If phase shift is not specified, the fields or positions
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_DTYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<bool> _form_COMPLX;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_RDISP;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_IDISP;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_DTYPE;
+               static const dnvgl::extfem::fem::types::entry_type<bool> _form_COMPLX;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_RDISP;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_IDISP;
 
             public:
 
@@ -1611,51 +1611,51 @@ If phase shift is not specified, the fields or positions
                /** The real part of the specified boundary condition
                    with respect to the rspt. degree of freedom.
                */
-               ::std::deque<double> RDISP;
+               std::deque<double> RDISP;
                /** The imagenary part of the specified boundary
                    condition with respect to the rspt. degree of
                    freedom.
                */
-               ::std::deque<double> IDISP;
+               std::deque<double> IDISP;
 
-               bndispl(const ::std::deque<::std::string>&);
+               bndispl(const std::deque<std::string>&);
 
                bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const bool &COMPLX,
                                  const long &NODENO,
                                  const long &NDOF,
-                                 const ::std::deque<double> &RDISP,
-                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+                                 const std::deque<double> &RDISP,
+                                 const std::deque<double> &IDISP=std::deque<double>());
 
                bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const bool &COMPLX,
                                  const long &NODENO,
-                                 const ::std::deque<double> &RDISP,
-                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+                                 const std::deque<double> &RDISP,
+                                 const std::deque<double> &IDISP=std::deque<double>());
 
                bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const long &NODENO,
                                  const long &NDOF,
-                                 const ::std::deque<double> &RDISP,
-                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+                                 const std::deque<double> &RDISP,
+                                 const std::deque<double> &IDISP=std::deque<double>());
 
                bndispl(const long &LLC,
                                  const long &DTYPE,
                                  const long &NODENO,
-                                 const ::std::deque<double> &RDISP,
-                                 const ::std::deque<double> &IDISP=::std::deque<double>());
+                                 const std::deque<double> &RDISP,
+                                 const std::deque<double> &IDISP=std::deque<double>());
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const bndispl&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const bndispl&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `BNLOAD`: Nodes with Loads
@@ -1682,15 +1682,15 @@ out.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_LOTYP;
-               static const ::dnvgl::extfem::fem::types::entry_type<bool> _form_COMPLX;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_RLOAD;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_ILOAD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_LOTYP;
+               static const dnvgl::extfem::fem::types::entry_type<bool> _form_COMPLX;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NODENO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_RLOAD;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_ILOAD;
 
             public:
 
@@ -1724,50 +1724,50 @@ out.
                /** The real part of the load with respect to the rspt.
                    degree of freedom.
                */
-               ::std::deque<double> RLOAD;
+               std::deque<double> RLOAD;
                /** The imaginary part of the load with respect to the
                    rspt. degree of freedom. (Only if `COMPLX` == true).
                */
-               ::std::deque<double> ILOAD;
+               std::deque<double> ILOAD;
 
-               bnload(const ::std::deque<::std::string>&);
+               bnload(const std::deque<std::string>&);
 
                bnload(const long &LLC,
                                 const long &LOTYP,
                                 const bool &COMPLX,
                                 const long &NODENO,
                                 const long &NDOF,
-                                const ::std::deque<double> &RLOAD,
-                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+                                const std::deque<double> &RLOAD,
+                                const std::deque<double> &ILOAD=std::deque<double>());
 
                bnload(const long &LLC,
                                 const long &LOTYP,
                                 const bool &COMPLX,
                                 const long &NODENO,
-                                const ::std::deque<double> &RLOAD,
-                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+                                const std::deque<double> &RLOAD,
+                                const std::deque<double> &ILOAD=std::deque<double>());
 
                bnload(const long &LLC,
                                 const long &LOTYP,
                                 const long &NODENO,
                                 const long &NDOF,
-                                const ::std::deque<double> &RLOAD,
-                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+                                const std::deque<double> &RLOAD,
+                                const std::deque<double> &ILOAD=std::deque<double>());
 
                bnload(const long &LLC,
                                 const long &LOTYP,
                                 const long &NODENO,
-                                const ::std::deque<double> &RLOAD,
-                                const ::std::deque<double> &ILOAD=::std::deque<double>());
+                                const std::deque<double> &RLOAD,
+                                const std::deque<double> &ILOAD=std::deque<double>());
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const bnload&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const bnload&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `MGSPRNG`: Element to Ground
@@ -1789,11 +1789,11 @@ the *j*’th d.o.f.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_K;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_K;
 
             public:
 
@@ -1811,29 +1811,29 @@ the *j*’th d.o.f.
                    defined (by `TRANSNO` on `GELREF1`), otherwise to
                    the global coordinate system of the superelement.
                */
-               ::std::deque<::std::deque<double>> K;
+               std::deque<std::deque<double>> K;
 
 
-               mgsprng(const ::std::deque<::std::string>&);
+               mgsprng(const std::deque<std::string>&);
 
                mgsprng(const long &MATNO,
                                  const long &NDOR,
-                                 const ::std::deque<::std::deque<double>> &K);
+                                 const std::deque<std::deque<double>> &K);
 
                mgsprng(const long &MATNO,
-                                 const ::std::deque<::std::deque<double>> &K);
+                                 const std::deque<std::deque<double>> &K);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const mgsprng&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const mgsprng&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
-/// `GSETMEMB`: Set (group) of Nodes or Elements (Members)
+/// `GSETMEMB`: std::set (group) of Nodes or Elements (Members)
 /**
 ## Format:
 
@@ -1843,44 +1843,44 @@ the *j*’th d.o.f.
 |            | `ISORIG`               | `IRMEMB`<sub>`1`</sub> | `IRMEMB`<sub>`2`</sub>     | `IRMEMB`<sub>`3`</sub> |
 |            | `IRMEMB`<sub>`4`</sub> | ...                    | `IRMEMB`<sub>`NMEMB`</sub> |                        |
 
-This record together with the name and description of a set record (TDSETNAM) constitutes the set (group)
+This record together with the name and description of a std::set record (TDSETNAM) constitutes the std::set (group)
 datatype.
 
 ### Comments:
 
-The set datatype consists of one name and description of set record
-(`TDSETNAM`) and one or more set member records (`GSETMEMB`).
+The std::set datatype consists of one name and description of std::set record
+(`TDSETNAM`) and one or more std::set member records (`GSETMEMB`).
 
-It should be noted that a set may have its set members distributed
-over several set member records (`GSETMEMB`) all having the same set
+It should be noted that a std::set may have its std::set members distributed
+over several std::set member records (`GSETMEMB`) all having the same std::set
 identification number (`ISREF`) and consequently also the same
-`TDSETNAM` record. The total number of set members will then be the
-sum of the number of set members (`NMEMB`) for each of the set
+`TDSETNAM` record. The total number of std::set members will then be the
+sum of the number of std::set members (`NMEMB`) for each of the std::set
 records.
 
 ### Restrictions:
 
-  - Only one set type (ISTYPE) for same set identification number
+  - Only one std::set type (ISTYPE) for same std::set identification number
     (`ISREF`) is allowed.
 
-  - If several records for the same set identification number
+  - If several records for the same std::set identification number
     (`ISREF`), record numbering must be strictly sequential; 1 <
-    `INDEX` < `NINDEX`, where `NINDEX` is number of records per set.
+    `INDEX` < `NINDEX`, where `NINDEX` is number of records per std::set.
 
-  - A set member (number) should only be included once in the list.
+  - A std::set member (number) should only be included once in the list.
 */
             class gsetmemb : public card {
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISREF;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_INDEX;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISTYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISORIG;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_IRMEMB;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISREF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_INDEX;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISTYPE;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISORIG;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_IRMEMB;
 
             public:
 
@@ -1888,34 +1888,34 @@ records.
                    1024)
                */
                long NFIELD;
-               /** Internal set identification number as defined on
-                   the name and description of a set record
+               /** Internal std::set identification number as defined on
+                   the name and description of a std::set record
                    (`TDSETNAM`).
                */
                long ISREF;
-               /** Sequential record number for current set (`ISREF`).
-                   Each set may consist of one or more `GSETMEMB`
-                   records with same set identification number
+               /** Sequential record number for current std::set (`ISREF`).
+                   Each std::set may consist of one or more `GSETMEMB`
+                   records with same std::set identification number
                    (`ISREF`). `INDEX` must be strictly increasing from
                    1 and upwards till number of `GSETMEMB` records for
-                   this set of members (nodes or elements).
+                   this std::set of members (nodes or elements).
                */
                long INDEX;
-               /** Set type
+               /** std::set type
 
-                     =1: , set of nodes
+                     =1: , std::set of nodes
 
-                     =2: , set of elements
+                     =2: , std::set of elements
 
-Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
+Set Type (`ISTYPE`) and interpretation of std::set Member Number (`IRMEMB`)
 
 | `ISTYPE` | Description     | Interpretation of `IRMEMB`        |
 | -------: | --------------- | --------------------------------- |
-| 1        | Set of Nodes    | Internal Node Number (`IINOD`)    |
-| 2        | Set of Elements | Internal Element Number (`IELNO`) |
+| 1        | std::set of Nodes    | Internal Node Number (`IINOD`)    |
+| 2        | std::set of Elements | Internal Element Number (`IELNO`) |
                */
                long ISTYPE;
-               /** Set origin type
+               /** std::set origin type
 
                     = 0:, undefined origin
 
@@ -1928,21 +1928,21 @@ Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
                     = 4:, body
                */
                long ISORIG;
-               /** `NMEMB` set member numbers on this record.
+               /** `NMEMB` std::set member numbers on this record.
 
-                   `NMEMB` is number of set members on the current
+                   `NMEMB` is number of std::set members on the current
                    record. `NMEMB` = `NFIELD` - 5
                */
-               ::std::deque<long> IRMEMB;
+               std::deque<long> IRMEMB;
 
-               gsetmemb(const ::std::deque<::std::string>&);
+               gsetmemb(const std::deque<std::string>&);
 
                gsetmemb(const long &NFIELD,
                                   const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG,
-                                  const ::std::deque<long> &IRMEMB);
+                                  const std::deque<long> &IRMEMB);
 
                gsetmemb(const long &NFIELD,
                                   const long &ISREF,
@@ -1954,21 +1954,21 @@ Set Type (`ISTYPE`) and interpretation of Set Member Number (`IRMEMB`)
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG,
-                                  const ::std::deque<long> &IRMEMB);
+                                  const std::deque<long> &IRMEMB);
 
                gsetmemb(const long &ISREF,
                                   const long &INDEX,
                                   const long &ISTYPE,
                                   const long &ISORIG);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gsetmemb&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const gsetmemb&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `GUNIVEC`: Specification of Local Element Coordinate System
@@ -1989,12 +1989,12 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_UNIX;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_UNIY;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_UNIZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_TRANSNO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_UNIX;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_UNIY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_UNIZ;
 
             public:
 
@@ -2020,21 +2020,21 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                */
                double UNIZ;
 
-               gunivec(const ::std::deque<::std::string>&);
+               gunivec(const std::deque<std::string>&);
 
                gunivec(const long &TRANSNO,
                                  const double &UNIX,
                                  const double &UNIY,
                                  const double &UNIZ);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const gunivec&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const gunivec&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
@@ -2050,14 +2050,14 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_YOUNG;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_POISS;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_RHO;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_DAMP;
-               static const ::dnvgl::extfem::fem::types::entry_type<double> _form_ALPHA;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_MATNO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_YOUNG;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_POISS;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_RHO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_DAMP;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_ALPHA;
 
             public:
                /** Material number, i.e. reference number referenced
@@ -2081,7 +2081,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                double ALPHA;
 
 
-               misosel(const ::std::deque<::std::string>&);
+               misosel(const std::deque<std::string>&);
 
                misosel(const long &MATNO,
                                  const double &YOUNG,
@@ -2090,17 +2090,17 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                                  const double &DAMP,
                                  const double &ALPHA);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const misosel&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const misosel&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
-/// `TDSETNAM`: Name and Description of a Set (group)
+/// `TDSETNAM`: Name and Description of a std::set (group)
 /**
 ## Format
 
@@ -2112,21 +2112,21 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 |            | ...                                | | | |
 |            | \<text line\>                      | | | |
 
-This record together with the set of nodes or elements record(s)
-(`GSETMEMB`) constitutes the set (group) datatype.
+This record together with the std::set of nodes or elements record(s)
+(`GSETMEMB`) constitutes the std::set (group) datatype.
 */
             class tdsetnam : public card {
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_ISREF;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_SET_NAME;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISREF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
+               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_SET_NAME;
+               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_CONT;
 
                bool nlnam;
                long ncnam;
@@ -2139,15 +2139,15 @@ This record together with the set of nodes or elements record(s)
                 * text data (MAX = 1024).
                 */
                long NFIELD;
-               /** Internal set identification number. Legal range [1,
-                   `NSET`], where `NSET` is number of sets which is
-                   equeal to number of "Name and Description of a Set"
+               /** Internal std::set identification number. Legal range [1,
+                   `NSET`], where `NSET` is number of std::sets which is
+                   equeal to number of "Name and Description of a std::set"
                    records (`TDSETNAM`). Two `TDSETNAM` records may
-                   not have identical set identification numbers
+                   not have identical std::set identification numbers
                    (`ISREF`).
                */
                long ISREF;
-               /** Coded dimension of set name:
+               /** Coded dimension of std::set name:
 
                      \f[
                        \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
@@ -2156,7 +2156,7 @@ This record together with the set of nodes or elements record(s)
                    The inverse relation will then be
 
                      - `NLNAM` - number of physical records used for
-                       storing of set name.
+                       storing of std::set name.
 
                        Legal range = [0,1]
 
@@ -2166,14 +2166,14 @@ This record together with the set of nodes or elements record(s)
 
                        `NLNAM` = integer part of (`CODNAM` / 100)
 
-                     - `NCNAM` - number of characters in set name.
+                     - `NCNAM` - number of characters in std::set name.
 
                         Legal range = [0,64]
 
                         `NCNAM` = remaindering of (`CODNAM` / 100)
                */
                long CODNAM;
-               /** Coded dimension of set description text:
+               /** Coded dimension of std::set description text:
 
                      \f[
                        \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
@@ -2182,7 +2182,7 @@ This record together with the set of nodes or elements record(s)
                    The inverse relation will then be:
 
                      - `NLTXT` - number of physical records used for
-                       storing of set description text. Legal range =
+                       storing of std::set description text. Legal range =
                        [0,5]
 
                        - = 0, no description text defined
@@ -2193,45 +2193,45 @@ This record together with the set of nodes or elements record(s)
                        `NLTXT` = integer part of (`CODTXT` / 100)
 
 
-                     - `NCTXT` - number of characters per physical set
+                     - `NCTXT` - number of characters per physical std::set
                        description text record. Legal range = [0,64]
 
                        `NCTXT` = remaindering of (`CODTXT` / 100)
                */
                long CODTXT;
 
-               ::std::string SET_NAME;
-               ::std::deque<::std::string> CONT;
+               std::string SET_NAME;
+               std::deque<std::string> CONT;
 
-               tdsetnam(const ::std::deque<::std::string>&);
+               tdsetnam(const std::deque<std::string>&);
 
                tdsetnam(const long &NFIELD,
                                   const long &ISREF,
                                   const long &CODNAM,
                                   const long &CODTXT,
-                                  const ::std::string &SET_NAME,
-                                  const ::std::deque<::std::string> &CONT);
+                                  const std::string &SET_NAME,
+                                  const std::deque<std::string> &CONT);
 
                tdsetnam(const long &ISREF,
-                                  const ::std::string &SET_NAME,
-                                  const ::std::deque<::std::string> &CONT);
+                                  const std::string &SET_NAME,
+                                  const std::deque<std::string> &CONT);
 
                tdsetnam(const long &NFIELD,
                                   const long &ISREF,
                                   const long &CODNAM,
-                                  const ::std::string &SET_NAME);
+                                  const std::string &SET_NAME);
 
                tdsetnam(const long &ISREF,
-                                  const ::std::string &SET_NAME);
+                                  const std::string &SET_NAME);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const tdsetnam&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const tdsetnam&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `TDSUPNAM`: Name and Description of a Super-Element
@@ -2253,14 +2253,14 @@ super-element hierarchy.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_IHREF;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_SUP_NAME;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_IHREF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
+               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_SUP_NAME;
+               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_CONT;
 
                bool nlnam;
                long ncnam;
@@ -2284,7 +2284,7 @@ super-element hierarchy.
                    \image html tdsupnam.svg "Superelement hierarchy with 3 levels."
                */
                long IHREF;
-               /** Coded dimension of set name:
+               /** Coded dimension of std::set name:
 
                      \f[
                        \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
@@ -2293,7 +2293,7 @@ super-element hierarchy.
                    The inverse relation will then be
 
                      - `NLNAM` - number of physical records used for
-                       storing of set name.
+                       storing of std::set name.
 
                        Legal range = [0,1]
 
@@ -2303,14 +2303,14 @@ super-element hierarchy.
 
                        `NLNAM` = integer part of (`CODNAM` / 100)
 
-                     - `NCNAM` - number of characters in set name.
+                     - `NCNAM` - number of characters in std::set name.
 
                         Legal range = [0,64]
 
                         `NCNAM` = remaindering of (`CODNAM` / 100)
                */
                long CODNAM;
-               /** Coded dimension of set description text:
+               /** Coded dimension of std::set description text:
 
                      \f[
                        \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
@@ -2319,7 +2319,7 @@ super-element hierarchy.
                    The inverse relation will then be:
 
                      - `NLTXT` - number of physical records used for
-                       storing of set description text. Legal range =
+                       storing of std::set description text. Legal range =
                        [0,5]
 
                        - = 0, no description text defined
@@ -2330,45 +2330,45 @@ super-element hierarchy.
                        `NLTXT` = integer part of (`CODTXT` / 100)
 
 
-                     - `NCTXT` - number of characters per physical set
+                     - `NCTXT` - number of characters per physical std::set
                        description text record. Legal range = [0,64]
 
                        `NCTXT` = remaindering of (`CODTXT` / 100)
                */
                long CODTXT;
 
-               ::std::string SUP_NAME;
-               ::std::deque<::std::string> CONT;
+               std::string SUP_NAME;
+               std::deque<std::string> CONT;
 
-               tdsupnam(const ::std::deque<::std::string>&);
+               tdsupnam(const std::deque<std::string>&);
 
                tdsupnam(const long &NFIELD,
                                   const long &IHREF,
                                   const long &CODNAM,
                                   const long &CODTXT,
-                                  const ::std::string &SUP_NAME,
-                                  const ::std::deque<::std::string> &CONT);
+                                  const std::string &SUP_NAME,
+                                  const std::deque<std::string> &CONT);
 
                tdsupnam(const long &IHREF,
-                                  const ::std::string &SUP_NAME,
-                                  const ::std::deque<::std::string> &CONT);
+                                  const std::string &SUP_NAME,
+                                  const std::deque<std::string> &CONT);
 
                tdsupnam(const long &NFIELD,
                                   const long &IHREF,
                                   const long &CODNAM,
-                                  const ::std::string &SUP_NAME);
+                                  const std::string &SUP_NAME);
 
                tdsupnam(const long &IHREF,
-                                  const ::std::string &SUP_NAME);
+                                  const std::string &SUP_NAME);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const tdsupnam&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const tdsupnam&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// `TEXT`: User supplied Text
@@ -2388,13 +2388,13 @@ per record.
 
             private:
 
-               static const ::dnvgl::extfem::fem::types::card head;
+               static const dnvgl::extfem::fem::types::card head;
 
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_TYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_SUBTYPE;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NRECS;
-               static const ::dnvgl::extfem::fem::types::entry_type<long> _form_NBYTE;
-               static const ::dnvgl::extfem::fem::types::entry_type<::std::string> _form_CONT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_TYPE;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_SUBTYPE;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NRECS;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NBYTE;
+               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_CONT;
 
             public:
 
@@ -2429,27 +2429,27 @@ per record.
                    The eight first bytes on the text records shall be
                    filled with blanks.
                */
-               ::std::deque<::std::string> CONT;
+               std::deque<std::string> CONT;
 
-               text(const ::std::deque<::std::string>&);
+               text(const std::deque<std::string>&);
 
                text(
                   const long &TYPE, const long &SUBTYPE,
                   const long &NRECS, const long &NBYTE,
-                  const ::std::deque<::std::string> &CONT);
+                  const std::deque<std::string> &CONT);
 
                text(
                   const long &TYPE, const long &SUBTYPE,
-                  const ::std::deque<::std::string> &CONT);
+                  const std::deque<std::string> &CONT);
 
-               const ::dnvgl::extfem::fem::cards::types
+               const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  ::std::ostream&
-               operator<< (::std::ostream&, const text&);
+               friend  std::ostream&
+               operator<< (std::ostream&, const text&);
 
-               const ::std::ostream&
-               operator<< (::std::ostream& os) const;
+               const std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 
@@ -2472,7 +2472,7 @@ namespace dnvgl {
       namespace fem {
          namespace cards {
             void
-            dispatch(const ::std::deque<::std::string>&, ::std::unique_ptr<card>&);
+            dispatch(const std::deque<std::string>&, std::unique_ptr<card>&);
          }
       }
    }

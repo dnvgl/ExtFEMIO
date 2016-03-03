@@ -25,11 +25,10 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf;
-using namespace ::dnvgl::extfem::bdf::cards;
-using ::dnvgl::extfem::bdf::types::entry_type;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf;
+using namespace dnvgl::extfem::bdf::cards;
+using dnvgl::extfem::bdf::types::entry_type;
 
 namespace {
    static const long cl0 = 0, cl1 = 1;

@@ -40,29 +40,28 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::types;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::types;
 
 const
 #ifdef HAVE_BOOST_REGEX_HPP
 ::boost::regex
 #else
-::std::regex
+std::regex
 #endif
 dnvgl::extfem::bdf::types::float_exp_re(
    "([\\+-]?[.0-9]+)([+-][0-9]+)",
 #ifdef HAVE_BOOST_REGEX_HPP
    ::boost::regex_constants::ECMAScript);
 #else
-::std::regex_constants::ECMAScript);
+std::regex_constants::ECMAScript);
 #endif
 
 const
 #ifdef HAVE_BOOST_REGEX_HPP
 ::boost::regex
 #else
-::std::regex
+std::regex
 #endif
 dnvgl::extfem::bdf::types::float_re(
    "([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
@@ -70,21 +69,21 @@ dnvgl::extfem::bdf::types::float_re(
 #ifdef HAVE_BOOST_REGEX_HPP
    ::boost::regex_constants::ECMAScript);
 #else
-::std::regex_constants::ECMAScript);
+std::regex_constants::ECMAScript);
 #endif
 
 const
 #ifdef HAVE_BOOST_REGEX_HPP
 ::boost::regex
 #else
-::std::regex
+std::regex
 #endif
 dnvgl::extfem::bdf::types::float_lead_dot(
    "^[\\+-]?[.][0-9]+",
 #ifdef HAVE_BOOST_REGEX_HPP
    ::boost::regex_constants::ECMAScript);
 #else
-::std::regex_constants::ECMAScript);
+std::regex_constants::ECMAScript);
 #endif
 
 

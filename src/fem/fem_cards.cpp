@@ -28,30 +28,28 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-
 namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
-            card::card(const deque<::std::string> &inp) {}
+            card::card(const std::deque<std::string> &inp) {}
 
             card::card() {}
 
-            unknown::unknown(const ::std::deque<::std::string> &inp) :
+            unknown::unknown(const std::deque<std::string> &inp) :
                card(inp), content(inp) {};
 
             const types
             unknown::card_type(void) const { return UNKNOWN; }
 
-            const ::std::ostream&
-            unknown::operator<< (::std::ostream &os) const {
+            const std::ostream&
+            unknown::operator<< (std::ostream &os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const unknown &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const unknown &card) {
                throw errors::error("can't write UNKNOWN.");
                return os;
             }
@@ -80,34 +78,34 @@ namespace {
    using namespace dnvgl::extfem::fem;
 
    const size_t map_pair_entries = 25;
-   const pair<::std::string, cards::types> map_pairs[map_pair_entries] = {
+   const std::pair<std::string, cards::types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
-      pair<::std::string, cards::types>("DATE", cards::DATE),
-      pair<::std::string, cards::types>("GCOORD", cards::GCOORD),
-      pair<::std::string, cards::types>("GNODE", cards::GNODE),
-      pair<::std::string, cards::types>("IDENT", cards::IDENT),
-      pair<::std::string, cards::types>("IEND", cards::IEND),
-      pair<::std::string, cards::types>("GELMNT1", cards::GELMNT1),
-      pair<::std::string, cards::types>("GELREF1", cards::GELREF1),
-      pair<::std::string, cards::types>("GBARM", cards::GBARM),
-      pair<::std::string, cards::types>("GBEAMG", cards::GBEAMG),
-      pair<::std::string, cards::types>("GECCEN", cards::GECCEN),
-      pair<::std::string, cards::types>("GELTH", cards::GELTH),
-      pair<::std::string, cards::types>("GIORH", cards::GIORH),
-      pair<::std::string, cards::types>("GLSEC", cards::GLSEC),
-      pair<::std::string, cards::types>("GPIPE", cards::GPIPE),
-      pair<::std::string, cards::types>("BLDEP", cards::BLDEP),
-      pair<::std::string, cards::types>("BNBCD", cards::BNBCD),
-      pair<::std::string, cards::types>("BNDISPL", cards::BNDISPL),
-      pair<::std::string, cards::types>("BNLOAD", cards::BNLOAD),
-      pair<::std::string, cards::types>("MGSPRNG", cards::MGSPRNG),
-      pair<::std::string, cards::types>("GSETMEMB", cards::GSETMEMB),
-      pair<::std::string, cards::types>("GUNIVEC", cards::GUNIVEC),
-      pair<::std::string, cards::types>("MISOSEL", cards::MISOSEL),
-      pair<::std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
-      pair<::std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
-      pair<::std::string, cards::types>("TEXT", cards::TEXT),
-      // pair<::std::strincards::types>("TDLOAD", cards::TDLOAD),
+      std::pair<std::string, cards::types>("DATE", cards::DATE),
+      std::pair<std::string, cards::types>("GCOORD", cards::GCOORD),
+      std::pair<std::string, cards::types>("GNODE", cards::GNODE),
+      std::pair<std::string, cards::types>("IDENT", cards::IDENT),
+      std::pair<std::string, cards::types>("IEND", cards::IEND),
+      std::pair<std::string, cards::types>("GELMNT1", cards::GELMNT1),
+      std::pair<std::string, cards::types>("GELREF1", cards::GELREF1),
+      std::pair<std::string, cards::types>("GBARM", cards::GBARM),
+      std::pair<std::string, cards::types>("GBEAMG", cards::GBEAMG),
+      std::pair<std::string, cards::types>("GECCEN", cards::GECCEN),
+      std::pair<std::string, cards::types>("GELTH", cards::GELTH),
+      std::pair<std::string, cards::types>("GIORH", cards::GIORH),
+      std::pair<std::string, cards::types>("GLSEC", cards::GLSEC),
+      std::pair<std::string, cards::types>("GPIPE", cards::GPIPE),
+      std::pair<std::string, cards::types>("BLDEP", cards::BLDEP),
+      std::pair<std::string, cards::types>("BNBCD", cards::BNBCD),
+      std::pair<std::string, cards::types>("BNDISPL", cards::BNDISPL),
+      std::pair<std::string, cards::types>("BNLOAD", cards::BNLOAD),
+      std::pair<std::string, cards::types>("MGSPRNG", cards::MGSPRNG),
+      std::pair<std::string, cards::types>("GSETMEMB", cards::GSETMEMB),
+      std::pair<std::string, cards::types>("GUNIVEC", cards::GUNIVEC),
+      std::pair<std::string, cards::types>("MISOSEL", cards::MISOSEL),
+      std::pair<std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
+      std::pair<std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
+      std::pair<std::string, cards::types>("TEXT", cards::TEXT),
+      // pair<std::strincards::types>("TDLOAD", cards::TDLOAD),
    };
 }
 
@@ -115,12 +113,12 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
-            const map<::std::string, types>
+            const std::map<std::string, types>
                cardtype_map(map_pairs, map_pairs + map_pair_entries);
 
             void
-            card::card_split(deque<::std::string> const &inp, deque<::std::string> &res) {
-               ::std::string head;
+            card::card_split(std::deque<std::string> const &inp, std::deque<std::string> &res) {
+               std::string head;
 
                bool first = true;
 
@@ -130,7 +128,7 @@ namespace dnvgl {
                   head = extfem::string::string(pos.substr(0, 8)).trim();
                   if (first)
                      res.push_back(string::string(head).trim("\t\n"));
-                  ::std::string tmp(string::string(pos).trim("\t\n"));
+                  std::string tmp(string::string(pos).trim("\t\n"));
                   tmp.resize(80, ' ');
                   tmp = tmp.substr(8);
                   for (int i=0; i<4; ++i)
@@ -140,92 +138,92 @@ namespace dnvgl {
             }
 
             void
-            dispatch(const deque<::std::string> &inp, ::std::unique_ptr<fem::cards::card> &res) {
+            dispatch(const std::deque<std::string> &inp, std::unique_ptr<fem::cards::card> &res) {
 
                try {
-                  ::std::string key(inp.at(0));
+                  std::string key(inp.at(0));
                   switch (cardtype_map.at(key)) {
                   case DATE:
-                     res = ::std::make_unique<fem::cards::date>(inp);
+                     res = std::make_unique<fem::cards::date>(inp);
                      break;
                   case GCOORD:
-                     res = ::std::make_unique<fem::cards::gcoord>(inp);
+                     res = std::make_unique<fem::cards::gcoord>(inp);
                      break;
                   case GNODE:
-                     res = ::std::make_unique<fem::cards::gnode>(inp);
+                     res = std::make_unique<fem::cards::gnode>(inp);
                      break;
                   case GBARM:
-                     res = ::std::make_unique<fem::cards::gbarm>(inp);
+                     res = std::make_unique<fem::cards::gbarm>(inp);
                      break;
                   case GBEAMG:
-                     res = ::std::make_unique<fem::cards::gbeamg>(inp);
+                     res = std::make_unique<fem::cards::gbeamg>(inp);
                      break;
                   case GECCEN:
-                     res = ::std::make_unique<fem::cards::geccen>(inp);
+                     res = std::make_unique<fem::cards::geccen>(inp);
                      break;
                   case GELTH:
-                     res = ::std::make_unique<fem::cards::gelth>(inp);
+                     res = std::make_unique<fem::cards::gelth>(inp);
                      break;
                   case GIORH:
-                     res = ::std::make_unique<fem::cards::giorh>(inp);
+                     res = std::make_unique<fem::cards::giorh>(inp);
                      break;
                   case GLSEC:
-                     res = ::std::make_unique<fem::cards::glsec>(inp);
+                     res = std::make_unique<fem::cards::glsec>(inp);
                      break;
                   case GPIPE:
-                     res = ::std::make_unique<fem::cards::gpipe>(inp);
+                     res = std::make_unique<fem::cards::gpipe>(inp);
                      break;
                   case IDENT:
-                     res = ::std::make_unique<fem::cards::ident>(inp);
+                     res = std::make_unique<fem::cards::ident>(inp);
                      break;
                   case IEND:
-                     res = ::std::make_unique<fem::cards::iend>(inp);
+                     res = std::make_unique<fem::cards::iend>(inp);
                      break;
                   case GELMNT1:
-                     res = ::std::make_unique<fem::cards::gelmnt1>(inp);
+                     res = std::make_unique<fem::cards::gelmnt1>(inp);
                      break;
                   case GELREF1:
-                     res = ::std::make_unique<fem::cards::gelref1>(inp);
+                     res = std::make_unique<fem::cards::gelref1>(inp);
                      break;
                   case BLDEP:
-                     res = ::std::make_unique<fem::cards::bldep>(inp);
+                     res = std::make_unique<fem::cards::bldep>(inp);
                      break;
                   case BNBCD:
-                     res = ::std::make_unique<fem::cards::bnbcd>(inp);
+                     res = std::make_unique<fem::cards::bnbcd>(inp);
                      break;
                   case BNDISPL:
-                     res = ::std::make_unique<fem::cards::bndispl>(inp);
+                     res = std::make_unique<fem::cards::bndispl>(inp);
                      break;
                   case BNLOAD:
-                     res = ::std::make_unique<fem::cards::bnload>(inp);
+                     res = std::make_unique<fem::cards::bnload>(inp);
                      break;
                   case MGSPRNG:
-                     res = ::std::make_unique<fem::cards::mgsprng>(inp);
+                     res = std::make_unique<fem::cards::mgsprng>(inp);
                      break;
                   case GSETMEMB:
-                     res = ::std::make_unique<fem::cards::gsetmemb>(inp);
+                     res = std::make_unique<fem::cards::gsetmemb>(inp);
                      break;
                   case GUNIVEC:
-                     res = ::std::make_unique<fem::cards::gunivec>(inp);
+                     res = std::make_unique<fem::cards::gunivec>(inp);
                      break;
                   case MISOSEL:
-                     res = ::std::make_unique<fem::cards::misosel>(inp);
+                     res = std::make_unique<fem::cards::misosel>(inp);
                      break;
                   case TEXT:
-                     res = ::std::make_unique<fem::cards::text>(inp);
+                     res = std::make_unique<fem::cards::text>(inp);
                      break;
                   case TDSETNAM:
-                     res = ::std::make_unique<fem::cards::tdsetnam>(inp);
+                     res = std::make_unique<fem::cards::tdsetnam>(inp);
                      break;
                   case TDSUPNAM:
-                     res = ::std::make_unique<fem::cards::tdsupnam>(inp);
+                     res = std::make_unique<fem::cards::tdsupnam>(inp);
                      break;
                   // These are not real card types, they can't be returned
                   case UNKNOWN:
-                     res = ::std::make_unique<fem::cards::unknown>(inp);
+                     res = std::make_unique<fem::cards::unknown>(inp);
                   }
-               } catch (out_of_range) {
-                 res = ::std::make_unique<fem::cards::unknown>(inp);
+               } catch (std::out_of_range) {
+                 res = std::make_unique<fem::cards::unknown>(inp);
                }
             }
          }

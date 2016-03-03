@@ -28,7 +28,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace std;
 using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;

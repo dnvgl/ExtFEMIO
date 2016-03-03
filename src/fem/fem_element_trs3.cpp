@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long trs3::nnodes = 12;
 
@@ -39,11 +39,11 @@ namespace {
 }
 const std::set<el_processor> trs3::processors(procs, procs+procs_len);
 
-trs3::trs3(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+trs3::trs3(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-trs3::trs3(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+trs3::trs3(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

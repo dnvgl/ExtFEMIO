@@ -24,12 +24,12 @@ namespace dnvgl {
 
       namespace string {
 
-         class string : public ::std::string {
+         class string : public std::string {
          public:
-            string(const ::std::string& in) : ::std::string(in) {};
+            string(const std::string& in) : std::string(in) {};
 
             // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-            string inline trim(const ::std::string &whitespace = " \t") {
+            string inline trim(const std::string &whitespace = " \t") {
                const auto strBegin = this->find_first_not_of(whitespace);
                if (strBegin == std::string::npos)
                   return extfem::string::string(""); // no content

@@ -30,26 +30,25 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem::bdf::input;
+using namespace dnvgl::extfem::bdf::input;
 
 namespace {
    const char initVals[3] = { '+', '*', ' ' };
 }
-const set<char> bdf_file::cont_chars(initVals, initVals + 3);
+const std::set<char> bdf_file::cont_chars(initVals, initVals + 3);
 
 
-bdf_file::bdf_file(istream &inp) :
+bdf_file::bdf_file(std::istream &inp) :
    data(inp), last_comment(""), eof(false) {
-   data.imbue(locale(locale("C"), new line_reader()));
+   data.imbue(std::locale(std::locale("C"), new line_reader()));
    data >> cur_line;
 }
 
 // Return all input file lines belonging to next BDF card.
-void bdf_file::get(deque<std::string> &res) {
+void bdf_file::get(std::deque<std::string> &res) {
    res.clear();
    do {
-      // if line not empty and not comment line add line to result set.
+      // if line not empty and not comment line add line to result std::set.
       if (cur_line.length() > 0 && cur_line[0] != '$')
          res.push_back(cur_line);
       // If line is comment save content to special member
@@ -70,7 +69,7 @@ std::streampos bdf_file::size(void) {
    auto cur_pos = data.tellg();
 
    // jump to end of file
-   data.seekg(0, ios::end);
+   data.seekg(0, std::ios::end);
    // determine position if file as file size
    auto fileSize = data.tellg();
 
@@ -81,7 +80,7 @@ std::streampos bdf_file::size(void) {
 }
 
 // Return position in input BDF file.
-streampos bdf_file::pos(void) {
+std::streampos bdf_file::pos(void) {
    return data.tellg();
 }
 

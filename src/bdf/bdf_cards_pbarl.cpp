@@ -29,9 +29,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 namespace {
@@ -55,7 +54,7 @@ const entry_type<double> pbarl::form_DIM(
 const entry_type<double> pbarl::form_NSM(
    "NSM", bdf::type_bounds::bound<double>( nullptr, nullptr, &cd0));
 
-pbarl::pbarl(const deque<std::string> &inp) : bar_prop(inp) {
+pbarl::pbarl(const std::deque<std::string> &inp) : bar_prop(inp) {
 
    size_t dim_num = 0;
    size_t i = 0;

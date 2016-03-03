@@ -32,7 +32,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-double ::std::round(double number) {
+double std::round(double number) {
    return number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5);
 }
 

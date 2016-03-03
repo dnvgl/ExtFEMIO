@@ -29,10 +29,9 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::cards;
-using ::dnvgl::extfem::bdf::types::entry_type;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
+using dnvgl::extfem::bdf::types::entry_type;
 
 namespace {
    static const long cl1 = 1;
@@ -53,7 +52,7 @@ const entry_type<double> prod::form_NSM(
    "J",
    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-prod::prod(const deque<std::string> &inp) : card(inp) {
+prod::prod(const std::deque<std::string> &inp) : card(inp) {
 
    auto pos = inp.rbegin();
 

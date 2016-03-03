@@ -43,7 +43,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::bdf;
+using namespace dnvgl::extfem::bdf;
 using types::entry_value;
 
 

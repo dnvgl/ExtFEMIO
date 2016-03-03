@@ -67,12 +67,12 @@ namespace dnvgl {
             protected:
 
                static const fem_types _type;
-               ::std::string name;
-               static ::std::istringstream conv;
+               std::string name;
+               static std::istringstream conv;
 
             public:
 
-               base(const ::std::string&);
+               base(const std::string&);
 
                ~base() {};
 
@@ -83,13 +83,13 @@ namespace dnvgl {
             class card : public base {
             public:
 
-               card(const ::std::string &name) : base(name) {};
+               card(const std::string &name) : base(name) {};
 
                card(void) : base("") {};
 
                fem_types type(void) const {return None;};
 
-               ::std::string format() const;
+               std::string format() const;
             };
 
             class empty : public base {
@@ -100,14 +100,14 @@ namespace dnvgl {
 
                fem_types type(void) const {return None;};
 
-               ::std::string format() const;
+               std::string format() const;
             };
 
             template <class _Ty>
             class entry_type : public base {
 
             public:
-               virtual ::std::string format(const _Ty &d) const = 0;
+               virtual std::string format(const _Ty &d) const = 0;
             };
 
 
@@ -115,7 +115,7 @@ namespace dnvgl {
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else
-               ::std::regex
+               std::regex
 #endif
                int_re;
 
@@ -126,7 +126,7 @@ namespace dnvgl {
 
             private:
 
-               ::dnvgl::extfem::fem::type_bounds::bound<long> bounds;
+               dnvgl::extfem::fem::type_bounds::bound<long> bounds;
 
             protected:
 
@@ -134,7 +134,7 @@ namespace dnvgl {
 
             public:
 
-               entry_type(const ::std::string &name) :
+               entry_type(const std::string &name) :
                   fem::types::base(name), bounds() {};
 
 
@@ -171,12 +171,12 @@ namespace dnvgl {
 
                fem_types type() const { return _type; };
 
-               ::std::string format(const long &inp) const {
+               std::string format(const long &inp) const {
 
                   std::ostringstream res;
 
 #ifdef _MSC_VER
-                  // Set output to two digit exponetial format.
+                  // std::set output to two digit exponetial format.
                   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
@@ -198,7 +198,7 @@ namespace dnvgl {
                   }
 
 #ifdef _MSC_VER
-                  // Reset exponetial format to former settings.
+                  // Reset exponetial format to former std::settings.
                   _set_output_format(ext_exp_format);
 #endif
 
@@ -211,7 +211,7 @@ namespace dnvgl {
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else
-               ::std::regex
+               std::regex
 #endif
                bool_re;
 
@@ -220,7 +220,7 @@ namespace dnvgl {
 
             private:
 
-               ::dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
+               dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
 
             protected:
 
@@ -228,11 +228,11 @@ namespace dnvgl {
 
             public:
 
-               entry_type(const ::std::string &name) :
+               entry_type(const std::string &name) :
                   fem::types::base(name), bounds() {}
 
 
-               bool operator() (const ::std::string &inp) const {
+               bool operator() (const std::string &inp) const {
                   double value;
 
                   if (inp.length() == 0) {
@@ -262,7 +262,7 @@ namespace dnvgl {
 
                fem_types type() const { return _type; };
 
-               ::std::string format(const bool &inp) const {
+               std::string format(const bool &inp) const {
                   if (inp) return " 1.00000000e+00 ";
                   else return " 0.00000000e+00 ";
                }
@@ -272,7 +272,7 @@ namespace dnvgl {
 #ifdef HAVE_BOOST_REGEX_HPP
             boost::regex
 #else
-            ::std::regex
+            std::regex
 #endif
             float_re;
 
@@ -283,7 +283,7 @@ namespace dnvgl {
 
             private:
 
-               ::dnvgl::extfem::fem::type_bounds::bound<double> bounds;
+               dnvgl::extfem::fem::type_bounds::bound<double> bounds;
 
             protected:
 
@@ -291,7 +291,7 @@ namespace dnvgl {
 
             public:
 
-               entry_type(const ::std::string &name) :
+               entry_type(const std::string &name) :
                   base(name), bounds() {};
 
 
@@ -301,7 +301,7 @@ namespace dnvgl {
                   fem::types::base(name), bounds(bounds) {};
 
                /// Convert string to double
-               double operator() (const ::std::string &inp) const {
+               double operator() (const std::string &inp) const {
                   double value;
 
                   if (inp.length() == 0) {
@@ -329,12 +329,12 @@ namespace dnvgl {
 
                fem_types type() const {return _type;};
 
-               ::std::string format(const double &inp) const {
+               std::string format(const double &inp) const {
 
                   std::ostringstream res;
 
 #ifdef _MSC_VER
-                  // Set output to two digit exponetial format.
+                  // std::set output to two digit exponetial format.
                   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
@@ -356,7 +356,7 @@ namespace dnvgl {
                   }
 
 #ifdef _MSC_VER
-                  // Reset exponetial format to former settings.
+                  // Reset exponetial format to former std::settings.
                   _set_output_format(ext_exp_format);
 #endif
 
@@ -365,13 +365,13 @@ namespace dnvgl {
             };
 
             template <>
-            class entry_type<::std::string> : public base {
+            class entry_type<std::string> : public base {
 
                // String value.
 
             private:
 
-               ::dnvgl::extfem::fem::type_bounds::bound<::std::string> bounds;
+               dnvgl::extfem::fem::type_bounds::bound<std::string> bounds;
 
             protected:
 
@@ -379,33 +379,33 @@ namespace dnvgl {
 
             public:
 
-               entry_type(const ::std::string&);
+               entry_type(const std::string&);
 
                entry_type(
-                  const ::std::string&,
-                  const ::dnvgl::extfem::fem::type_bounds::bound<::std::string>&);
+                  const std::string&,
+                  const dnvgl::extfem::fem::type_bounds::bound<std::string>&);
 
-               ::std::string operator() (const ::std::string&, const ::std::string&, const ::std::string&, const ::std::string&) const;
+               std::string operator() (const std::string&, const std::string&, const std::string&, const std::string&) const;
 
                fem_types type() const {
                   return _type;
                }
 
-               ::std::string format(
-                  const ::std::string&, const size_t &len=72) const;
+               std::string format(
+                  const std::string&, const size_t &len=72) const;
             };
 
             extern const
 #ifdef HAVE_BOOST_REGEX_HPP
                boost::regex
 #else
-               ::std::regex
+               std::regex
 #endif
                list_int_re;
 
 
                template <>
-            class entry_type<::std::deque<int>> : public base {
+            class entry_type<std::deque<int>> : public base {
 
                // List of integers.
 
@@ -416,14 +416,14 @@ namespace dnvgl {
             public:
 
                entry_type(
-                  const ::std::string &name) :
+                  const std::string &name) :
                   base(name) {};
 
-               ::std::deque<int>* operator() (const std::string &inp) const {
+               std::deque<int>* operator() (const std::string &inp) const {
                   auto *value =  new std::deque<int>();
 
                   double tmp_d;
-                  ::std::list<int> tmp_l;
+                  std::list<int> tmp_l;
                   long tmp;
 
                   if (! regex_match(inp, int_re)) {
@@ -441,14 +441,14 @@ namespace dnvgl {
                      value->push_back(divmod.rem);
                      tmp /= 10;
                   }
-                  ::std::sort(value->begin(), value->end());
+                  std::sort(value->begin(), value->end());
 
                   return value;
                };
 
                inline fem_types type() const {return _type;};
 
-               ::std::string format(
+               std::string format(
                   const std::deque<int> &inp) const {
 
                   std::ostringstream res, res2;
@@ -460,7 +460,7 @@ namespace dnvgl {
                   }
 
 #ifdef _MSC_VER
-                  // Set output to two digit exponetial format.
+                  // std::set output to two digit exponetial format.
                   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
@@ -475,9 +475,9 @@ namespace dnvgl {
                   res << value;
                   std::string out(res.str());
                   if (out.size() != 16) {
-                     ::std::ostringstream msg("output string for value ",
-                                              ::std::ostringstream::ate);
-                     ::std::copy(inp.begin(), inp.end(),
+                     std::ostringstream msg("output string for value ",
+                                              std::ostringstream::ate);
+                     std::copy(inp.begin(), inp.end(),
                                  std::ostream_iterator<int>(msg, ", "));
                      msg << " of incorrect size, got length of " << out.size()
                          << " instead of allowed length of 16.";
@@ -485,7 +485,7 @@ namespace dnvgl {
                   }
 
 #ifdef _MSC_VER
-                  // Reset exponetial format to former settings.
+                  // Reset exponetial format to former std::settings.
                   _set_output_format(ext_exp_format);
 #endif
 

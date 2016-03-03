@@ -29,7 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -47,7 +47,7 @@ namespace dnvgl {
             const entry_type<double> misosel::_form_DAMP("DAMP");
             const entry_type<double> misosel::_form_ALPHA("ALPHA");
 
-            misosel::misosel(const ::std::deque<::std::string> &inp) :
+            misosel::misosel(const std::deque<std::string> &inp) :
                card(inp) {
                auto pos = inp.begin();
 
@@ -69,29 +69,29 @@ namespace dnvgl {
                card(), MATNO(MATNO), YOUNG(YOUNG), POISS(POISS),
                RHO(RHO), DAMP(DAMP), ALPHA(ALPHA) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             misosel::card_type(void) const {return MISOSEL;}
 
-            const ::std::ostream&
-            misosel::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            misosel::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const misosel &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const misosel &card) {
                os << misosel::head.format()
                   << card._form_MATNO.format(card.MATNO)
                   << card._form_YOUNG.format(card.YOUNG)
                   << card._form_POISS.format(card.POISS)
                   << card._form_RHO.format(card.RHO)
-                  << ::std::endl
-                  << ::dnvgl::extfem::fem::types::card().format()
+                  << std::endl
+                  << dnvgl::extfem::fem::types::card().format()
                   << card._form_DAMP.format(card.DAMP)
                   << card._form_ALPHA.format(card.ALPHA)
                   << card.empty.format()
                   << card.empty.format()
-                  << ::std::endl;
+                  << std::endl;
                return os;
             }
          }

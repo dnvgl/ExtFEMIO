@@ -29,7 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -44,9 +44,9 @@ namespace dnvgl {
             const entry_type<long> date::_form_SUBTYPE("SUBTYPE");
             const entry_type<long> date::_form_NRECS("NRECS");
             const entry_type<long> date::_form_NBYTE("NBYTE");
-            const entry_type<::std::string> date::_form_CONT("CONT");
+            const entry_type<std::string> date::_form_CONT("CONT");
 
-            date::date(const ::std::deque<::std::string> &inp) :
+            date::date(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -58,7 +58,7 @@ namespace dnvgl {
                NBYTE = _form_NBYTE(*(pos++));
 
                for (int i = 0; i < NRECS; i++) {
-                  ::std::string cont = _form_CONT(
+                  std::string cont = _form_CONT(
                      *pos, *(pos+1), *(pos+2), *(pos+3));
                   cont.resize(NBYTE-8, ' ');
                   CONT.push_back(cont);
@@ -69,7 +69,7 @@ namespace dnvgl {
             date::date(
                const long &TYPE, const long &SUBTYPE,
                const long &NRECS, const long &NBYTE,
-               const ::std::deque<::std::string> &CONT) :
+               const std::deque<std::string> &CONT) :
                TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
                NBYTE(NBYTE), CONT(CONT) {
                for (auto &p : this->CONT)
@@ -78,7 +78,7 @@ namespace dnvgl {
 
             date::date(
                const long &TYPE, const long &SUBTYPE,
-               const ::std::deque<::std::string> &CONT) :
+               const std::deque<std::string> &CONT) :
                TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
                NRECS = static_cast<long>(CONT.size());
                NBYTE = 0;
@@ -91,14 +91,14 @@ namespace dnvgl {
             const types
             date::card_type(void) const { return DATE; };
 
-            const ::std::ostream&
-            date::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            date::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const date &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const date &card) {
 
                os << date::head.format()
                   << card._form_TYPE.format(card.TYPE)
@@ -107,7 +107,7 @@ namespace dnvgl {
                   << card._form_NBYTE.format(card.NBYTE) << std::endl;
 
                for (auto p : card.CONT)
-                  os << ::dnvgl::extfem::fem::types::card().format()
+                  os << dnvgl::extfem::fem::types::card().format()
                      << card._form_CONT.format(p, card.NBYTE-8)
                      << std::endl;
 

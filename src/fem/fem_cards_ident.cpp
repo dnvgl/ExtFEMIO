@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -45,7 +45,7 @@ namespace dnvgl {
             const entry_type<long> ident::_form_SELTYP("SELTYP");
             const entry_type<long> ident::_form_SELMOD("SELMOD");
 
-            ident::ident(const ::std::deque<::std::string> &inp) :
+            ident::ident(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -74,20 +74,20 @@ namespace dnvgl {
             const types
             ident::card_type(void) const { return IDENT; };
 
-            const ::std::ostream&
-            ident::operator<<(::std::ostream& os) const {
+            const std::ostream&
+            ident::operator<<(std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<<(::std::ostream &os, const ident &card) {
+            std::ostream&
+            operator<<(std::ostream &os, const ident &card) {
 
                os << ident::head.format()
                   << card._form_SLEVEL.format(card.SLEVEL)
                   << card._form_SELTYP.format(card.SELTYP)
                   << card._form_SELMOD.format(card.SELMOD)
-                  << ident::empty.format() << ::std::endl;
+                  << ident::empty.format() << std::endl;
 
                return os;
             }

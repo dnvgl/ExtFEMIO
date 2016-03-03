@@ -28,12 +28,11 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
-cquad4::cquad4(const deque<std::string> &inp) : base_shell(inp) {
+cquad4::cquad4(const std::deque<std::string> &inp) : base_shell(inp) {
 
    auto pos = inp.rbegin();
 

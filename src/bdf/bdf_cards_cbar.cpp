@@ -35,9 +35,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 namespace {
@@ -69,13 +68,13 @@ namespace dnvgl {
             namespace {
                const char* initVals[8] = {
                   "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO" };
-               const set<::std::string> OFFT_set(initVals, initVals + 8);
+               const std::set<std::string> OFFT_set(initVals, initVals + 8);
             }
-            const entry_type<::std::string> cbar::form_OFFT(
-               "OFFT", bdf::type_bounds::bound<::std::string>(OFFT_set, "GGG"));
+            const entry_type<std::string> cbar::form_OFFT(
+               "OFFT", bdf::type_bounds::bound<std::string>(OFFT_set, "GGG"));
 
-            const entry_type<deque<int>> cbar::form_PA("PA");
-            const entry_type<deque<int>> cbar::form_PB("PB");
+            const entry_type<std::deque<int>> cbar::form_PA("PA");
+            const entry_type<std::deque<int>> cbar::form_PB("PB");
             const entry_type<double> cbar::form_W1A(
                "W1A",
                bdf::type_bounds::bound<double>(
@@ -101,7 +100,7 @@ namespace dnvgl {
                bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
 
-            cbar::cbar(const ::std::deque<::std::string> &inp) :
+            cbar::cbar(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.rbegin();
@@ -160,9 +159,9 @@ namespace dnvgl {
                const long *EID, const long *PID,
                const long *GA, const long *GB,
                const double *X1, const double *X2, const double *X3,
-               const ::std::string *OFFT,
-               const ::std::deque<int> *PA,
-               const ::std::deque<int> *PB,
+               const std::string *OFFT,
+               const std::deque<int> *PA,
+               const std::deque<int> *PB,
                const double *W1A, const double *W2A,
                const double *W3A, const double *W1B,
                const double *W2B, const double *W3B) :
@@ -176,8 +175,8 @@ namespace dnvgl {
             cbar::cbar(
                const long *EID, const long *PID,
                const long *GA, const long *GB, const long *G0,
-               const ::std::string *OFFT,
-               const ::std::deque<int> *PA, const ::std::deque<int> *PB,
+               const std::string *OFFT,
+               const std::deque<int> *PA, const std::deque<int> *PB,
                const double *W1A, const double *W2A,
                const double *W3A, const double *W1B,
                const double *W2B, const double *W3B) :
@@ -189,7 +188,7 @@ namespace dnvgl {
                W1B(W1B), W2B(W2B), W3B(W3B) {};
 
 
-            const ::std::ostream& cbar::operator<<(::std::ostream& os) const {
+            const std::ostream& cbar::operator<<(std::ostream& os) const {
                os << this;
                return os;
             }

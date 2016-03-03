@@ -33,9 +33,8 @@ namespace {
    static const long cl1 = 1;
 }
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 using bdf::types::entry_value;
 
@@ -91,8 +90,8 @@ namespace dnvgl {
                return os << *this;
             }
 
-            ::std::ostream
-            &operator<<(::std::ostream &os, const load &card) {
+            std::ostream
+            &operator<<(std::ostream &os, const load &card) {
 
                std::deque<std::unique_ptr<format_entry>> entries;
 

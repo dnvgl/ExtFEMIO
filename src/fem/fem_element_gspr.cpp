@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long gspr::nnodes = 1;
 el_types gspr::get_type() const {return GSPR;}
@@ -37,13 +37,13 @@ namespace {
       procs_len] = {general, Preframe, Prefem, Sestra, ADVANCE,
                     Framework, Poseidon};
 }
-const ::std::set<el_processor> gspr::processors(procs, procs+procs_len);
+const std::set<el_processor> gspr::processors(procs, procs+procs_len);
 
-gspr::gspr(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+gspr::gspr(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-gspr::gspr(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+gspr::gspr(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

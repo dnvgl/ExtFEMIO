@@ -81,7 +81,7 @@ namespace dnvgl {
                FORCE,
                /// Static Moment
                MOMENT,
-               /// External Static Load Set Selection
+               /// External Static Load std::set Selection
                LOAD,
                /// Bulk Data Delimiter
                ENDDATA,
@@ -93,7 +93,7 @@ namespace dnvgl {
                BEAM_PROP,
             } types;
 
-            typedef std::pair<::dnvgl::extfem::bdf::types::base*, void*> format_entry;
+            typedef std::pair<dnvgl::extfem::bdf::types::base*, void*> format_entry;
 
 /**
    \brief Base class for all classes representing BDF cards.
@@ -112,9 +112,9 @@ namespace dnvgl {
 
             protected:
 
-               static ::dnvgl::extfem::bdf::types::empty empty;
+               static dnvgl::extfem::bdf::types::empty empty;
 
-               static ::dnvgl::extfem::bdf::types::card head;
+               static dnvgl::extfem::bdf::types::card head;
 
                std::string format_outlist(
                   const std::deque<std::unique_ptr<format_entry>>&) const;
@@ -123,15 +123,15 @@ namespace dnvgl {
 
                friend inline
                std::unique_ptr<format_entry>
-               format(const std::unique_ptr<::dnvgl::extfem::bdf::types::card> &formatter);
+               format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &formatter);
 
                friend inline
                std::unique_ptr<format_entry>
-               format(const std::unique_ptr<::dnvgl::extfem::bdf::types::empty> &formatter);
+               format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty> &formatter);
 
                template <class _Ty> friend inline
                std::unique_ptr<format_entry>
-               format(const ::dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
+               format(const dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
                       const _Ty *val);
 
                static void
@@ -140,37 +140,37 @@ namespace dnvgl {
                card (const std::deque<std::string> &);
                card ();
 
-               virtual const ::dnvgl::extfem::bdf::cards::types card_type(void) const = 0;
+               virtual const dnvgl::extfem::bdf::cards::types card_type(void) const = 0;
                virtual const std::ostream& operator<<(std::ostream&) const = 0;
             };
 
             inline std::unique_ptr<format_entry>
-            format(const ::dnvgl::extfem::bdf::types::card &formatter) {
+            format(const dnvgl::extfem::bdf::types::card &formatter) {
                return std::make_unique<format_entry>(
-                  (::dnvgl::extfem::bdf::types::card*)&formatter, (void*)NULL);
+                  (dnvgl::extfem::bdf::types::card*)&formatter, (void*)NULL);
             };
 
             inline std::unique_ptr<format_entry>
-            format(const ::dnvgl::extfem::bdf::types::empty &formatter) {
+            format(const dnvgl::extfem::bdf::types::empty &formatter) {
                return std::make_unique<format_entry>(
-                  (::dnvgl::extfem::bdf::types::base*)&formatter, (void*)NULL);
+                  (dnvgl::extfem::bdf::types::base*)&formatter, (void*)NULL);
             };
 
             template <class _Ty>
             inline std::unique_ptr<format_entry>
-            format(const ::dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
+            format(const dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
                    const _Ty *val) {
                return std::make_unique<format_entry>(
-                  (::dnvgl::extfem::bdf::types::base*)&formatter,
+                  (dnvgl::extfem::bdf::types::base*)&formatter,
                   (void*)val);
             };
 
             template <class _Ty>
             inline std::unique_ptr<format_entry>
-            format(const ::dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
-                   const ::dnvgl::extfem::bdf::types::entry_value<_Ty> &val) {
+            format(const dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
+                   const dnvgl::extfem::bdf::types::entry_value<_Ty> &val) {
                return std::make_unique<format_entry>(
-                  (::dnvgl::extfem::bdf::types::base*)&formatter,
+                  (dnvgl::extfem::bdf::types::base*)&formatter,
                   (void*)&val);
             };
 
@@ -181,7 +181,7 @@ namespace dnvgl {
                unknown(const std::deque<std::string> &inp) :
                   card(inp), content(inp) {};
 
-               const ::dnvgl::extfem::bdf::cards::types card_type(void) const { return UNKNOWN; }
+               const dnvgl::extfem::bdf::cards::types card_type(void) const { return UNKNOWN; }
 
                std::deque<std::string> content;
 
@@ -206,7 +206,7 @@ Designates the end of the Bulk Data Section.
 
             private:
 
-               static ::dnvgl::extfem::bdf::types::card head;
+               static dnvgl::extfem::bdf::types::card head;
 
             public:
 
@@ -215,7 +215,7 @@ Designates the end of the Bulk Data Section.
 
                enddata() : card() {};
 
-               const ::dnvgl::extfem::bdf::cards::types
+               const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return ENDDATA; };
 
                const std::ostream& operator<< (std::ostream& os) const {
@@ -243,60 +243,60 @@ displacement, and its permanent single-point constraints.
 
             private:
 
-               static ::dnvgl::extfem::bdf::types::card head;
+               static dnvgl::extfem::bdf::types::card head;
 
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_ID;
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_CP;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X1;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X2;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_X3;
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_CD;
-               static const ::dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PS;
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_SEID;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_ID;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_CP;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_X1;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_X2;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_X3;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_CD;
+               static const dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PS;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_SEID;
 
             public:
 
                /** Grid point identification number. (0 < Integer <
                    100000000)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> ID;
+               dnvgl::extfem::bdf::types::entry_value<long> ID;
                /** Identification number of coordinate system in which the
                    location of the grid point is defined. (Integer > 0 or
                    blank)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> CP;
+               dnvgl::extfem::bdf::types::entry_value<long> CP;
                /** *x* Location of the grid point in coordinate system CP.
                    (Real; Default = 0.0)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> X1;
+               dnvgl::extfem::bdf::types::entry_value<double> X1;
                /** *y* Location of the grid point in coordinate system CP.
                    (Real; Default = 0.0)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> X2;
+               dnvgl::extfem::bdf::types::entry_value<double> X2;
                /** *z* Location of the grid point in coordinate system CP.
                    (Real; Default = 0.0)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> X3;
+               dnvgl::extfem::bdf::types::entry_value<double> X3;
                /** Identification number of coordinate system in which the
                    displacements, degrees-of-freedom, constraints, and
-                   solution deques are defined at the grid point.
+                   solution std::deques are defined at the grid point.
                    (Integer > -1 or blank)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> CD;
+               dnvgl::extfem::bdf::types::entry_value<long> CD;
                /** Permanent single-point constraints associated with the
                    grid point. (Any of the Integers 1 through 6 with no
                    embedded blanks, or blank.)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PS;
+               dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PS;
                /** Superelement identification number. (Integer > 0;
                    Default = 0)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> SEID;
+               dnvgl::extfem::bdf::types::entry_value<long> SEID;
 
                grid(const std::deque<std::string> &);
                grid(long &ID, long &CP, double &X1, double &X2, double &X3);
 
-               const ::dnvgl::extfem::bdf::cards::types
+               const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return GRID; };
 
                const std::ostream&
@@ -308,55 +308,55 @@ displacement, and its permanent single-point constraints.
 
             protected:
 
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_G;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_GE;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_ST;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SC;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SS;
-               static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_G;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_GE;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_ST;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_SC;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_SS;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
 
             public:
 
                /** Material identification number. (Integer > 0)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> MID;
+               dnvgl::extfem::bdf::types::entry_value<long> MID;
                /** Mass density. See Remark 5. (Real)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> RHO;
+               dnvgl::extfem::bdf::types::entry_value<double> RHO;
                /** Reference temperature for the calculation of thermal
                loads, or a temperature-dependent thermal expansion
                coefficient. (Real; Default = 0.0 if `A` is specified.)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> TREF;
+               dnvgl::extfem::bdf::types::entry_value<double> TREF;
                /** Structural element damping coefficient. (Real)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> GE;
+               dnvgl::extfem::bdf::types::entry_value<double> GE;
                /** Stress limits for tension is optionally supplied, used
                only to compute margins of safety in certain elements;
                and have no effect on the computational procedures.
                (Real > 0.0 or blank)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> ST;
+               dnvgl::extfem::bdf::types::entry_value<double> ST;
                /** Stress limits for compression is optionally supplied,
                used only to compute margins of safety in certain
                elements; and have no effect on the computational
                procedures. (Real > 0.0 or blank)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> SC;
+               dnvgl::extfem::bdf::types::entry_value<double> SC;
                /** Stress limits for shear is optionally supplied, used
                only to compute margins of safety in certain elements;
                and have no effect on the computational procedures.
                (Real > 0.0 or blank)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<double> SS;
+               dnvgl::extfem::bdf::types::entry_value<double> SS;
                /** Material coordinate system identification number. Used
                only for `PARAM,CURV` processing. (Integer > 0 or blank)
                */
-               ::dnvgl::extfem::bdf::types::entry_value<long> MCSID;
+               dnvgl::extfem::bdf::types::entry_value<long> MCSID;
 
                mat(const std::deque<std::string> &);
                mat();
@@ -379,39 +379,39 @@ Defines the material properties for linear isotropic materials.
 
             private:
 
-               static ::dnvgl::extfem::bdf::types::card head;
+               static dnvgl::extfem::bdf::types::card head;
 
-               // static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MID;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_E;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_G;
-               static const ::dnvgl::extfem::bdf::types::entry_type<double> form_NU;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_GE;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_ST;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SC;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<double> form_SS;
-               // static const ::dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
+               // static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_E;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_G;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_NU;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_A;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_GE;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_ST;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_SC;
+               // static const dnvgl::extfem::bdf::types::entry_type<double> form_SS;
+               // static const dnvgl::extfem::bdf::types::entry_type<long> form_MCSID;
 
             public:
 
                /** Young’s modulus. (Real > 0.0 or blank)
                 */
-               ::dnvgl::extfem::bdf::types::entry_value<double> E;
+               dnvgl::extfem::bdf::types::entry_value<double> E;
                /** Shear modulus. (Real > 0.0 or blank)
                 */
-               ::dnvgl::extfem::bdf::types::entry_value<double> G;
+               dnvgl::extfem::bdf::types::entry_value<double> G;
                /** Poisson’s ratio. (-1.0 < Real < 0.5 or blank)
                 */
-               ::dnvgl::extfem::bdf::types::entry_value<double> NU;
+               dnvgl::extfem::bdf::types::entry_value<double> NU;
                /** Thermal expansion coefficient. (Real)
                 */
-               ::dnvgl::extfem::bdf::types::entry_value<double> A;
+               dnvgl::extfem::bdf::types::entry_value<double> A;
 
                mat1(const std::deque<std::string> &);
 
-               const ::dnvgl::extfem::bdf::cards::types
+               const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT1; };
 
                const std::ostream&
@@ -448,27 +448,27 @@ Example:
 
             private:
 
-               static ::dnvgl::extfem::bdf::types::card head;
+               static dnvgl::extfem::bdf::types::card head;
 
             public:
 
                /** The material property matrix. (Real)
                 */
-               ::dnvgl::extfem::bdf::types::entry_value<double> G11;
-               ::dnvgl::extfem::bdf::types::entry_value<double> G12;
-               ::dnvgl::extfem::bdf::types::entry_value<double> G13;
-               ::dnvgl::extfem::bdf::types::entry_value<double> G22;
-               ::dnvgl::extfem::bdf::types::entry_value<double> G23;
-               ::dnvgl::extfem::bdf::types::entry_value<double> G33;
+               dnvgl::extfem::bdf::types::entry_value<double> G11;
+               dnvgl::extfem::bdf::types::entry_value<double> G12;
+               dnvgl::extfem::bdf::types::entry_value<double> G13;
+               dnvgl::extfem::bdf::types::entry_value<double> G22;
+               dnvgl::extfem::bdf::types::entry_value<double> G23;
+               dnvgl::extfem::bdf::types::entry_value<double> G33;
                /** Thermal expansion coefficient vector. (Real)
                 */
-               ::dnvgl::extfem::bdf::types::entry_value<double> A1;
-               ::dnvgl::extfem::bdf::types::entry_value<double> A2;
-               ::dnvgl::extfem::bdf::types::entry_value<double> A3;
+               dnvgl::extfem::bdf::types::entry_value<double> A1;
+               dnvgl::extfem::bdf::types::entry_value<double> A2;
+               dnvgl::extfem::bdf::types::entry_value<double> A3;
 
                mat2(const std::deque<std::string> &);
 
-               const ::dnvgl::extfem::bdf::cards::types
+               const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT2; };
 
                const std::ostream&

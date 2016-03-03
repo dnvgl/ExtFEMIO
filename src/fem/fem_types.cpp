@@ -31,7 +31,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 
 fem::types::base::base(const std::string &name) : name(name) {};
 

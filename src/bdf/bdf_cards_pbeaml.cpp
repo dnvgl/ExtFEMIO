@@ -29,8 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -46,7 +45,7 @@ namespace {
       "T", "TW", "I", "L", "ROD", "TUBE", "CHAN", "BOX", "BAR", "CROSS",
       "H", "T1", "I1", "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA",
       "HAT", "HAT1", "DBOX"};
-   const set<std::string> TYPE_set(TYPEinit, TYPEinit + TYPE_len);
+   const std::set<std::string> TYPE_set(TYPEinit, TYPEinit + TYPE_len);
 }
 const entry_type<std::string> pbeaml::form_TYPE(
    "TYPE", bdf::type_bounds::bound<std::string>(TYPE_set));
@@ -59,7 +58,7 @@ const entry_type<double> pbeaml::form_NSM(
 namespace {
    static const size_t SO_len = 2;
    const char* SO_init[SO_len] = { "YES", "NO" };
-   const set<std::string> SO_set(SO_init, SO_init + SO_len);
+   const std::set<std::string> SO_set(SO_init, SO_init + SO_len);
 }
 const entry_type<std::string> pbeaml::form_SO(
    "SO", bdf::type_bounds::bound<std::string>(SO_set, "YES"));
@@ -68,7 +67,7 @@ const entry_type<double> pbeaml::form_X_XB(
       &cd0, nullptr,
       &cd1));
 
-pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
+pbeaml::pbeaml(const std::deque<std::string> &inp) : beam_prop(inp) {
 
    size_t dim_num = 0;
    size_t i, j = 0;
@@ -113,8 +112,8 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
       ++pos;
    }
 
-   // DIM.push_back(new ::std::deque<dnvgl::extfem::bdf::double>>);
-   DIM.push_back(::std::deque<double>());
+   // DIM.push_back(new std::deque<dnvgl::extfem::bdf::double>>);
+   DIM.push_back(std::deque<double>());
    for (i=0; i < dim_num; i++) {
       if (pos == inp.end()) goto invalid;
       (DIM[0]).push_back(form_DIM(*(pos++)));
@@ -134,8 +133,8 @@ pbeaml::pbeaml(const deque<std::string> &inp) : beam_prop(inp) {
    while (pos != inp.end()) {
       if (pos == inp.end()) goto end;
       j++;
-      // DIM.push_back(new ::std::deque<dnvgl::extfem::bdf::types::entry_value<double>>);
-      DIM.push_back(::std::deque<double>());
+      // DIM.push_back(new std::deque<dnvgl::extfem::bdf::types::entry_value<double>>);
+      DIM.push_back(std::deque<double>());
       try {
          SO.push_back(form_SO(*(pos++)));
       } catch (errors::error) {

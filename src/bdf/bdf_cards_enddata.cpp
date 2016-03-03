@@ -29,9 +29,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
 
 bdf::types::card enddata::head = bdf::types::card("ENDDATA");
 

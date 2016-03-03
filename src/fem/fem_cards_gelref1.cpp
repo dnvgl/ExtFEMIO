@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -58,12 +58,12 @@ namespace dnvgl {
             const entry_type<long> gelref1::_form_ECCNO("ECCNO");
             const entry_type<long> gelref1::_form_TRANSNO("TRANSNO");
 
-            gelref1::gelref1(const ::std::deque<::std::string> &inp) :
+            gelref1::gelref1(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
 
-               ::std::deque<::std::string> node_vals;
+               std::deque<std::string> node_vals;
                entry_type<long> lval("lval");
 
                long tmp, nvals = 0, ind_offset = 0;
@@ -95,7 +95,7 @@ namespace dnvgl {
                if (node_vals.size() != 0) {
                   divmod = ldiv((long)node_vals.size(), nvals);
                   if (divmod.rem != 0)
-                     throw ::dnvgl::extfem::fem::errors::parse_error(
+                     throw dnvgl::extfem::fem::errors::parse_error(
                         "GELREF1", "Number of node values is not multiple "
                         "of 4.");
 
@@ -129,10 +129,10 @@ namespace dnvgl {
                const long &STRENO, const long &STREPONO,
                const long &GEONO_OPT, const long &FIXNO_OPT,
                const long &ECCNO_OPT, const long &TRANSNO_OPT,
-               const ::std::deque<long> &GEONO,
-               const ::std::deque<long> &FIXNO,
-               const ::std::deque<long> &ECCNO,
-               const ::std::deque<long> &TRANSNO) :
+               const std::deque<long> &GEONO,
+               const std::deque<long> &FIXNO,
+               const std::deque<long> &ECCNO,
+               const std::deque<long> &TRANSNO) :
                card(),
                ELNO(ELNO), MATNO(MATNO), ADDNO(ADDNO), INTNO(INTNO),
                MINTNO(MINTNO), STRANO(STRANO), STRENO(STRENO),
@@ -146,8 +146,8 @@ namespace dnvgl {
                if (GEONO.size()) {
                   min_max_set = true;
                   lmin = lmax = GEONO.size();
-                  ::std::copy(GEONO.begin(), GEONO.end(),
-                              ::std::back_inserter(this->GEONO));
+                  std::copy(GEONO.begin(), GEONO.end(),
+                              std::back_inserter(this->GEONO));
                }
                if (FIXNO.size()) {
                   if (min_max_set) {
@@ -157,8 +157,8 @@ namespace dnvgl {
                      min_max_set = true;
                      lmin = lmax = FIXNO.size();
                   }
-                  ::std::copy(FIXNO.begin(), FIXNO.end(),
-                              ::std::back_inserter(this->FIXNO));
+                  std::copy(FIXNO.begin(), FIXNO.end(),
+                              std::back_inserter(this->FIXNO));
                }
                if (ECCNO.size()) {
                   if (min_max_set) {
@@ -168,8 +168,8 @@ namespace dnvgl {
                      min_max_set = true;
                      lmin = lmax = ECCNO.size();
                   }
-                  ::std::copy(ECCNO.begin(), ECCNO.end(),
-                              ::std::back_inserter(this->ECCNO));
+                  std::copy(ECCNO.begin(), ECCNO.end(),
+                              std::back_inserter(this->ECCNO));
                }
                if (TRANSNO.size()) {
                   if (min_max_set) {
@@ -179,35 +179,35 @@ namespace dnvgl {
                      min_max_set = true;
                      lmin = lmax = TRANSNO.size();
                   }
-                  ::std::copy(TRANSNO.begin(), TRANSNO.end(),
-                              ::std::back_inserter(this->TRANSNO));
+                  std::copy(TRANSNO.begin(), TRANSNO.end(),
+                              std::back_inserter(this->TRANSNO));
                }
 
                if (lmin != lmax) {
-                  throw ::dnvgl::extfem::fem::errors::usage_error(
+                  throw dnvgl::extfem::fem::errors::usage_error(
                      "GELREF1",
                      "GEONO, FIXNO, ECCNO, and TRANSNO if not empty, have "
                      "to be of same size");
                }
             }
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             gelref1::card_type(void) const { return GELREF1; }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const gelref1 &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const gelref1 &card) {
 
                os << gelref1::head.format()
                   << card._form_ELNO.format(card.ELNO)
                   << card._form_MATNO.format(card.MATNO)
                   << card._form_ADDNO.format(card.ADDNO)
-                  << card._form_INTNO.format(card.INTNO) << ::std::endl
-                  << ::dnvgl::extfem::fem::types::card().format()
+                  << card._form_INTNO.format(card.INTNO) << std::endl
+                  << dnvgl::extfem::fem::types::card().format()
                   << card._form_MINTNO.format(card.MINTNO)
                   << card._form_STRANO.format(card.STRANO)
                   << card._form_STRENO.format(card.STRENO)
-                  << card._form_STREPONO.format(card.STREPONO) << ::std::endl
-                  << ::dnvgl::extfem::fem::types::card().format()
+                  << card._form_STREPONO.format(card.STREPONO) << std::endl
+                  << dnvgl::extfem::fem::types::card().format()
                   << card._form_GEONO_OPT.format(card.GEONO_OPT)
                   << card._form_FIXNO_OPT.format(card.FIXNO_OPT)
                   << card._form_ECCNO_OPT.format(card.ECCNO_OPT)
@@ -231,14 +231,14 @@ namespace dnvgl {
                for (auto p : card.ECCNO) {
                   if (i++ >= 4) {
                      i = 1;
-                     os << std::endl << ::dnvgl::extfem::fem::types::card().format();
+                     os << std::endl << dnvgl::extfem::fem::types::card().format();
                   }
                   os << card._form_ECCNO.format(p);
                }
                for (auto p : card.TRANSNO) {
                   if (i++ >= 4) {
                      i = 1;
-                     os << std::endl << ::dnvgl::extfem::fem::types::card().format();
+                     os << std::endl << dnvgl::extfem::fem::types::card().format();
                   }
                   os << card._form_TRANSNO.format(p);
                }
@@ -249,8 +249,8 @@ namespace dnvgl {
                return os;
             }
 
-            const ::std::ostream&
-            gelref1::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            gelref1::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }

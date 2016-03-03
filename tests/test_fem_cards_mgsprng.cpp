@@ -33,9 +33,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace std;
-using namespace ::dnvgl::extfem::fem;
-using namespace ::dnvgl::extfem::fem::cards;
+using namespace dnvgl::extfem::fem;
+using namespace dnvgl::extfem::fem::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
@@ -59,7 +58,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
    std::deque<std::string> lines;
 
    SECTION("MGSPRNG (1)") {
-      std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "MGSPRNG  7.00000000e+001 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
@@ -85,7 +84,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
    }
 
    SECTION("MGSPRNG (2)") {
-      std::deque<string> data;
+      std::deque<std::string> data;
 
       data.push_back(
          "MGSPRNG  7.00000000e+01  6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
@@ -112,7 +111,7 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
 
    SECTION("MGSPRNG (3)") {
 
-      std::deque<string> data;
+      std::deque<std::string> data;
 
       double c_ref_K_0[6] = { 1.,  2.,  3.,  4.,  5.,  6.};
       double c_ref_K_1[6] = { 2.,  7.,  8.,  9., 10., 11.};
@@ -187,7 +186,7 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
             "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00  0.00000000e+00 \n");
    }
 
-   SECTION("all vals set") {
+   SECTION("all vals std::set") {
       double c_ref_K_0[6] = { 1.,  2.,  3.,  4.,  5.,  6.};
       double c_ref_K_1[6] = { 2.,  7.,  8.,  9., 10., 11.};
       double c_ref_K_2[6] = { 3.,  8., 12., 13., 14., 15.};

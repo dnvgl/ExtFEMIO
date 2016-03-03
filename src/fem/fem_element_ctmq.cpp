@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long ctmq::nnodes = 18;
 
@@ -37,13 +37,13 @@ namespace {
    el_processor procs[
       procs_len] = {general, Pretube};
 }
-const ::std::set<el_processor> ctmq::processors(procs, procs+procs_len);
+const std::set<el_processor> ctmq::processors(procs, procs+procs_len);
 
-ctmq::ctmq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+ctmq::ctmq(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-ctmq::ctmq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+ctmq::ctmq(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

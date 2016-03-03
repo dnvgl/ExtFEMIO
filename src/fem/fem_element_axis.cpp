@@ -20,7 +20,7 @@ namespace {
 
 #include "fem/elements.h"
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -38,13 +38,13 @@ namespace {
       procs_len] = {general, Preframe, Prefem, Sestra, ADVANCE,
                     Framework, Poseidon};
 }
-const ::std::set<el_processor> axis::processors(procs, procs+procs_len);
+const std::set<el_processor> axis::processors(procs, procs+procs_len);
 
-axis::axis(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+axis::axis(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-axis::axis(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+axis::axis(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

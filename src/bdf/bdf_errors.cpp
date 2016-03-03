@@ -19,7 +19,7 @@ namespace {
 
 #include "bdf/errors.h"
 
-using namespace ::dnvgl::extfem::bdf::errors;
+using namespace dnvgl::extfem::bdf::errors;
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW

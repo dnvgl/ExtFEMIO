@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<long> gbarm::_form_NLOBY("NLOBY");
             const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
-            gbarm::gbarm(const ::std::deque<::std::string> &inp) :
+            gbarm::gbarm(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -74,27 +74,27 @@ namespace dnvgl {
                GEONO(GEONO), HZ(HZ), BT(BT), BB(BB),
                SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
-            const ::std::ostream&
-            gbarm::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            gbarm::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             gbarm::card_type(void) const {return GBARM;}
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const gbarm &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const gbarm &card) {
                os << gbarm::head.format()
                   << card._form_GEONO.format(card.GEONO)
                   << card._form_HZ.format(card.HZ)
                   << card._form_BT.format(card.BT)
                   << card._form_BB.format(card.BB)
-                  << ::std::endl << fem::types::card("").format()
+                  << std::endl << fem::types::card("").format()
                   << card._form_SFY.format(card.SFY)
                   << card._form_SFZ.format(card.SFZ)
                   << card._form_NLOBY.format(card.NLOBY)
-                  << card._form_NLOBZ.format(card.NLOBZ) << ::std::endl;
+                  << card._form_NLOBZ.format(card.NLOBZ) << std::endl;
                return os;
             }
          }

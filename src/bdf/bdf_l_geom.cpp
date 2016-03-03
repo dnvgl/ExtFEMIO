@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem::bdf::cards;
 
 namespace {
    static const size_t dimnum1_len = 1;

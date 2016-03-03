@@ -29,7 +29,7 @@ namespace {
 #ifdef __GNUC__
 using ::boost::regex;
 #else
-using ::std::regex;
+using std::regex;
 #endif
 
 #if defined(__AFX_H__) && defined(_DEBUG)

@@ -38,10 +38,10 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::fem;
-using namespace ::dnvgl::extfem::fem::types;
-using namespace ::dnvgl::extfem::fem::type_bounds;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::fem;
+using namespace dnvgl::extfem::fem::types;
+using namespace dnvgl::extfem::fem::type_bounds;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return Catch::toString( ex() );

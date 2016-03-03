@@ -31,8 +31,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -115,7 +114,7 @@ const entry_type<double> pbeam::form_N2_B(
    "N2_B",
    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
+pbeam::pbeam(const std::deque<std::string> &inp) : beam_prop(inp) {
 
    auto pos = inp.rbegin();
 
@@ -246,7 +245,7 @@ pbeam::pbeam(const deque<std::string> &inp) : beam_prop(inp) {
       throw errors::parse_error("PBEAM", "Illegal number of entries.");
    }
    if (J.size() == 0)
-      J.push_front(::dnvgl::extfem::bdf::types::entry_value<double>());
+      J.push_front(dnvgl::extfem::bdf::types::entry_value<double>());
 }
 
 const std::ostream& pbeam::operator << (std::ostream& os) const {

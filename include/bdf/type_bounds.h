@@ -112,35 +112,35 @@ namespace dnvgl {
          };
          
          template<> 
-         class bound<::std::string> : public base{
+         class bound<std::string> : public base{
 
          private:
 
-            ::std::set<::std::string> allowed;
-            ::std::string default_val;
+            std::set<std::string> allowed;
+            std::string default_val;
          
          public:
             
             bound() {};
-            bound(::std::set<::std::string> allowed) :
+            bound(std::set<std::string> allowed) :
                base(), allowed(allowed) {};
-            bound(::std::set<::std::string> allowed, ::std::string default_val) :
+            bound(std::set<std::string> allowed, std::string default_val) :
                base(), allowed(allowed), default_val(default_val) {
                got_default();
             };
-            bound(::std::string default_val) :
+            bound(std::string default_val) :
                base(),
                default_val(default_val) {
                got_default();
             };
             
-            bool is_allowed(const ::std::string probe) const {
+            bool is_allowed(const std::string probe) const {
                if (allowed.size() == 0)
                   return true;
                return !(allowed.find(probe) == allowed.end());
             }
 
-            ::std::string get_default(void) const {
+            std::string get_default(void) const {
                if (!has_default())
                   throw errors::types_error("** ERROR **: No default value avaliable.");
                return this->default_val;

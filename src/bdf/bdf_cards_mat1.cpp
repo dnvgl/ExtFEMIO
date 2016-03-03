@@ -31,9 +31,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 namespace {
@@ -48,7 +47,7 @@ const entry_type<double> mat1::form_NU(
    "NU",
    bdf::type_bounds::bound<double>(&cd_1, &cd05, nullptr, true));
 
-mat1::mat1(const deque<std::string> &inp) : mat(inp) {
+mat1::mat1(const std::deque<std::string> &inp) : mat(inp) {
 
    form_MCSID.set_value(MCSID, "");
    form_SS.set_value(SS, "");

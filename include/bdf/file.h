@@ -29,7 +29,7 @@ namespace dnvgl {
       namespace bdf {
          namespace input {
 
-            struct line_reader : ::std::ctype<char> {
+            struct line_reader : std::ctype<char> {
 
                line_reader() : ctype(make_table()) { }
 
@@ -37,7 +37,7 @@ namespace dnvgl {
 
                static mask* make_table() {
                   const mask* classic = classic_table();
-                  static ::std::vector<mask> v(classic, classic + table_size);
+                  static std::vector<mask> v(classic, classic + table_size);
                   v[' '] &= ~space;
                   return &v[0];
                }
@@ -47,29 +47,29 @@ namespace dnvgl {
 
             private:
 
-               static const ::std::set<char> cont_chars;
-               ::std::string cur_line;
-               ::std::istream &data;
+               static const std::set<char> cont_chars;
+               std::string cur_line;
+               std::istream &data;
 
             public:
 
-               ::std::string last_comment;
+               std::string last_comment;
 
                bool eof;
 
-               bdf_file(::std::istream&);
+               bdf_file(std::istream&);
 
                void get(std::deque<std::string>& oContent);
 
                /** actual byte position (hopefully no bdf > 2Gybte will be
                    readin....)
                */
-               ::std::streampos size(void);
+               std::streampos size(void);
 
                /** actual byte position (hopefully no bdf > 2Gybte will be
                    readin....)
                */
-               ::std::streampos pos(void);
+               std::streampos pos(void);
             };
          }
       }

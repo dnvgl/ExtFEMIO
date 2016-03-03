@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long fqus_ffq::nnodes = 4;
 
@@ -38,14 +38,14 @@ namespace {
       procs_len] = {general, Prefem, Sestra, ADVANCE, Platework,
                     Pretube, Poseidon};
 }
-const ::std::set<el_processor> fqus_ffq::processors(
+const std::set<el_processor> fqus_ffq::processors(
    procs, procs+procs_len);
 
-fqus_ffq::fqus_ffq(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+fqus_ffq::fqus_ffq(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-fqus_ffq::fqus_ffq(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+fqus_ffq::fqus_ffq(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

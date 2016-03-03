@@ -34,7 +34,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl;
+using namespace dnvgl;
 
 CATCH_TRANSLATE_EXCEPTION( extfem::bdf::errors::error& ex ) {
    return Catch::toString( ex() );

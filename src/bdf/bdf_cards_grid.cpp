@@ -30,8 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
 
@@ -58,7 +57,7 @@ const entry_type<long> grid::form_SEID(
    "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
 
 
-grid::grid(const ::std::deque<::std::string> &inp) : card(inp) {
+grid::grid(const std::deque<std::string> &inp) : card(inp) {
 
    auto pos = inp.rbegin();
 

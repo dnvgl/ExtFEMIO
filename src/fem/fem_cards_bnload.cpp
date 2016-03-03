@@ -29,7 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -48,7 +48,7 @@ namespace dnvgl {
             const entry_type<double> bnload::_form_RLOAD("RLOAD");
             const entry_type<double> bnload::_form_ILOAD("ILOAD");
 
-            bnload::bnload(const ::std::deque<::std::string> &inp) :
+            bnload::bnload(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -73,8 +73,8 @@ namespace dnvgl {
                              const bool &COMPLX,
                              const long &NODENO,
                              const long &NDOF,
-                             const ::std::deque<double> &RLOAD,
-                             const ::std::deque<double> &ILOAD) :
+                             const std::deque<double> &RLOAD,
+                             const std::deque<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                NODENO(NODENO), NDOF(NDOF),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
@@ -84,8 +84,8 @@ namespace dnvgl {
                              const long &LOTYP,
                              const bool &COMPLX,
                              const long &NODENO,
-                             const ::std::deque<double> &RLOAD,
-                             const ::std::deque<double> &ILOAD):
+                             const std::deque<double> &RLOAD,
+                             const std::deque<double> &ILOAD):
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                NODENO(NODENO), NDOF((long)RLOAD.size()),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
@@ -94,8 +94,8 @@ namespace dnvgl {
                              const long &LOTYP,
                              const long &NODENO,
                              const long &NDOF,
-                             const ::std::deque<double> &RLOAD,
-                             const ::std::deque<double> &ILOAD) :
+                             const std::deque<double> &RLOAD,
+                             const std::deque<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP),
                COMPLX(ILOAD.size() > 0),
                NODENO(NODENO), NDOF(NDOF),
@@ -105,36 +105,36 @@ namespace dnvgl {
             bnload::bnload(const long &LLC,
                              const long &LOTYP,
                              const long &NODENO,
-                             const ::std::deque<double> &RLOAD,
-                             const ::std::deque<double> &ILOAD) :
+                             const std::deque<double> &RLOAD,
+                             const std::deque<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP),
                COMPLX(ILOAD.size() > 0),
                NODENO(NODENO), NDOF((long)RLOAD.size()),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             bnload::card_type(void) const {return BNLOAD;}
 
-            const ::std::ostream&
-            bnload::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            bnload::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const bnload &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const bnload &card) {
                os << bnload::head.format()
                   << card._form_LLC.format(card.LLC)
                   << card._form_LOTYP.format(card.LOTYP)
                   << card._form_COMPLX.format(card.COMPLX)
-                  << card.empty.format() << ::std::endl
-                  << ::dnvgl::extfem::fem::types::card().format()
+                  << card.empty.format() << std::endl
+                  << dnvgl::extfem::fem::types::card().format()
                   << card._form_NODENO.format(card.NODENO)
                   << card._form_NDOF.format(card.NDOF);
                long cnt = 2;
                for (long i = 0; i < card.NDOF; i++) {
                   if (cnt == 4) {
-                     os << ::std::endl << ::dnvgl::extfem::fem::types::card().format();
+                     os << std::endl << dnvgl::extfem::fem::types::card().format();
                      cnt = 0;
                   }
                   os << card._form_RLOAD.format(card.RLOAD[i]);
@@ -143,7 +143,7 @@ namespace dnvgl {
                if (card.COMPLX)
                   for (long i = 0; i < card.NDOF; i++) {
                      if (cnt == 4) {
-                        os << ::std::endl << ::dnvgl::extfem::fem::types::card().format();
+                        os << std::endl << dnvgl::extfem::fem::types::card().format();
                         cnt = 0;
                      }
                      os << card._form_ILOAD.format(card.ILOAD[i]);
@@ -153,7 +153,7 @@ namespace dnvgl {
                   os << card.empty.format();
                   cnt += 1;
                }
-               os << ::std::endl;
+               os << std::endl;
                return os;
             }
          }

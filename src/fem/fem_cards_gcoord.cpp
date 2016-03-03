@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -46,7 +46,7 @@ namespace dnvgl {
             const entry_type<double> gcoord::_form_YCOORD("YCOORD");
             const entry_type<double> gcoord::_form_ZCOORD("ZCOORD");
 
-            gcoord::gcoord(const ::std::deque<::std::string> &inp) :
+            gcoord::gcoord(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -64,17 +64,17 @@ namespace dnvgl {
                NODENO(NODENO),
                XCOORD(XCOORD), YCOORD(YCOORD), ZCOORD(ZCOORD) {}
 
-            const ::std::ostream&
-            gcoord::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            gcoord::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             gcoord::card_type(void) const {return GCOORD;}
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const gcoord &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const gcoord &card) {
                os << gcoord::head.format()
                   << card._form_NODENO.format(card.NODENO)
                   << card._form_XCOORD.format(card.XCOORD)

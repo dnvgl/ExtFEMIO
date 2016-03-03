@@ -29,10 +29,9 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf::cards;
-using ::dnvgl::extfem::bdf::types::entry_type;;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
+using dnvgl::extfem::bdf::types::entry_type;;
 
 namespace {
    static const double cd0 = 0.;
@@ -80,7 +79,7 @@ const entry_type<double> pbar::form_I12(
    "I12", bdf::type_bounds::bound<double>(
       nullptr, nullptr, &cd0));
 
-pbar::pbar(const deque<std::string> &inp) : bar_prop(inp) {
+pbar::pbar(const std::deque<std::string> &inp) : bar_prop(inp) {
 
    auto pos = inp.rbegin();
 

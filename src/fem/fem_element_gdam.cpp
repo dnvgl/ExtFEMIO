@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long gdam::nnodes = 1;
 el_types gdam::get_type() const {return GDAM;}
@@ -36,13 +36,13 @@ namespace {
    el_processor procs[
       procs_len] = {general, Preframe, Prefem, Sestra, Poseidon};
 }
-const ::std::set<el_processor> gdam::processors(procs, procs+procs_len);
+const std::set<el_processor> gdam::processors(procs, procs+procs_len);
 
-gdam::gdam(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+gdam::gdam(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-gdam::gdam(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+gdam::gdam(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

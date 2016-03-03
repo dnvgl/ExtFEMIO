@@ -32,7 +32,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using fem::types::entry_type;
 
 entry_type<std::string>::entry_type(const std::string &name) :

@@ -30,7 +30,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -49,7 +49,7 @@ namespace dnvgl {
             const entry_type<long> bldep::_form_INDEPDOF("INDEPDOF");
             const entry_type<double> bldep::_form_b("b");
 
-            bldep::bldep(const ::std::deque<::std::string> &inp) :
+            bldep::bldep(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -75,36 +75,36 @@ namespace dnvgl {
                const long &CNOD,
                const long &NDDOF,
                const long &NDEP,
-               const ::std::deque<long> &DEPDOF,
-               const ::std::deque<long> &INDEPDOF,
-               const ::std::deque<double> &b) :
+               const std::deque<long> &DEPDOF,
+               const std::deque<long> &INDEPDOF,
+               const std::deque<double> &b) :
                NODENO(NODENO), CNOD(CNOD), NDDOF(NDDOF), NDEP(NDEP),
                DEPDOF(DEPDOF),INDEPDOF(INDEPDOF), b(b) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             bldep::card_type(void) const {return BLDEP;}
 
-            const ::std::ostream&
-            bldep::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            bldep::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const bldep &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const bldep &card) {
                os << bldep::head.format()
                   << card._form_NODENO.format(card.NODENO)
                   << card._form_CNOD.format(card.CNOD)
                   << card._form_NDDOF.format(card.NDDOF)
                   << card._form_NDEP.format(card.NDEP)
-                  << ::std::endl;
+                  << std::endl;
                for (long i = 0; i < card.NDDOF; i++)
-                  os << ::dnvgl::extfem::fem::types::card().format()
+                  os << dnvgl::extfem::fem::types::card().format()
                      << card._form_DEPDOF.format(card.DEPDOF[i])
                      << card._form_INDEPDOF.format(card.INDEPDOF[i])
                      << card._form_b.format(card.b[i])
                      << card.empty.format()
-                     << ::std::endl;
+                     << std::endl;
                return os;
             }
          }

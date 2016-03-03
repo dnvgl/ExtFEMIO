@@ -28,10 +28,9 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::std;
-using namespace ::dnvgl::extfem;
-using namespace ::dnvgl::extfem::bdf;
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf;
+using namespace dnvgl::extfem::bdf::cards;
 using bdf::types::entry_type;
 
 namespace {
@@ -71,7 +70,7 @@ const entry_type<long> pshell::form_MID4(
    "MID4",
    bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 
-pshell::pshell(const deque<std::string> &inp) : card(inp) {
+pshell::pshell(const std::deque<std::string> &inp) : card(inp) {
 
    auto pos = inp.rbegin();
 

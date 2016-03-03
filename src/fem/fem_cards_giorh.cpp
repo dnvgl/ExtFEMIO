@@ -29,7 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -55,7 +55,7 @@ namespace dnvgl {
             const entry_type<long> giorh::_form_NLOBZ("NLOBZ");
 
 
-            giorh::giorh(const ::std::deque<::std::string> &inp) :
+            giorh::giorh(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -86,32 +86,32 @@ namespace dnvgl {
                SFY(SFY), SFZ(SFZ),
                NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             giorh::card_type(void) const {return GIORH;}
 
-            const ::std::ostream&
-            giorh::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            giorh::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const giorh &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const giorh &card) {
                os << giorh::head.format()
                   << card._form_GEONO.format(card.GEONO)
                   << card._form_HZ.format(card.HZ)
                   << card._form_TY.format(card.TY)
                   << card._form_BT.format(card.BT)
-                  << ::std::endl << ::dnvgl::extfem::fem::types::card().format()
+                  << std::endl << dnvgl::extfem::fem::types::card().format()
                   << card._form_TT.format(card.TT)
                   << card._form_BB.format(card.BB)
                   << card._form_TB.format(card.TB)
                   << card._form_SFY.format(card.SFY)
-                  << ::std::endl << ::dnvgl::extfem::fem::types::card().format()
+                  << std::endl << dnvgl::extfem::fem::types::card().format()
                   << card._form_SFZ.format(card.SFZ)
                   << card._form_NLOBYT.format(card.NLOBYT)
                   << card._form_NLOBYB.format(card.NLOBYB)
-                  << card._form_NLOBZ.format(card.NLOBZ) << ::std::endl;
+                  << card._form_NLOBZ.format(card.NLOBZ) << std::endl;
                return os;
             }
          }

@@ -31,7 +31,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::input;
+using namespace dnvgl::extfem::fem::input;
 
 fem_file::fem_file(std::istream &inp) :
    data(inp), last_comment(""), eof(false) {
@@ -43,7 +43,7 @@ fem_file::fem_file(std::istream &inp) :
 void fem_file::get(std::deque<std::string> &res) {
    res.clear();
    do {
-      // if line not empty and not comment line add line to result set.
+      // if line not empty and not comment line add line to result std::set.
       if (cur_line.length() > 0)
          res.push_back(cur_line);
       // if not EOF, read next line

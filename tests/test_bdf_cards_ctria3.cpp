@@ -36,8 +36,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::bdf;
-using namespace ::dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem::bdf;
+using namespace dnvgl::extfem::bdf::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return Catch::toString( ex() );

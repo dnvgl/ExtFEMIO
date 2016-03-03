@@ -26,7 +26,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long lqua::nnodes = 4;
 
@@ -36,13 +36,13 @@ namespace {
    const size_t procs_len = 5;
    el_processor procs[procs_len] = {general, Prefem, Sestra, ADVANCE, Poseidon};
 }
-const ::std::set<el_processor> lqua::processors(procs, procs+procs_len);
+const std::set<el_processor> lqua::processors(procs, procs+procs_len);
 
-lqua::lqua(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+lqua::lqua(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-lqua::lqua(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+lqua::lqua(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 lqua::lqua(const __base *p) :
    __base(p) {}

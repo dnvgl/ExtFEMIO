@@ -26,7 +26,7 @@ static char THIS_FILE[] = __FILE__;
 
 #include "fem/elements.h"
 
-using namespace ::dnvgl::extfem::fem::elements;
+using namespace dnvgl::extfem::fem::elements;
 
 const long lcts::nnodes = 6;
 
@@ -37,13 +37,13 @@ namespace {
    el_processor procs[
       procs_len] = {general, Prefem, Sestra};
 }
-const ::std::set<el_processor> lcts::processors(procs, procs+procs_len);
+const std::set<el_processor> lcts::processors(procs, procs+procs_len);
 
-lcts::lcts(const ::dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+lcts::lcts(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-lcts::lcts(const ::dnvgl::extfem::fem::cards::gelref1 *data) :
-   ::dnvgl::extfem::fem::elements::__base(data) {}
+lcts::lcts(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++

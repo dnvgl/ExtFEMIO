@@ -28,7 +28,7 @@ namespace dnvgl {
       namespace fem {
          namespace input {
 
-            struct line_reader : ::std::ctype<char> {
+            struct line_reader : std::ctype<char> {
 
                line_reader() : ctype(make_table()) { }
 
@@ -36,7 +36,7 @@ namespace dnvgl {
 
                static mask* make_table() {
                   const mask* classic = classic_table();
-                  static ::std::vector<mask> v(classic, classic + table_size);
+                  static std::vector<mask> v(classic, classic + table_size);
                   v[' '] &= ~space;
                   return &v[0];
                }
@@ -46,27 +46,27 @@ namespace dnvgl {
 
             private:
 
-               static const ::std::set<char> cont_chars;
-               ::std::string cur_line;
-               ::std::istream &data;
+               static const std::set<char> cont_chars;
+               std::string cur_line;
+               std::istream &data;
 
             public:
 
-               ::std::string last_comment;
+               std::string last_comment;
 
                bool eof;
 
-               fem_file(::std::istream&);
+               fem_file(std::istream&);
 
-               void get(::std::deque<::std::string>&);
-
-               /// actual byte position (hopefully no fem > 2Gybte will be
-               /// readin ...)
-               ::std::streampos size(void);
+               void get(std::deque<std::string>&);
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)
-               ::std::streampos pos(void);
+               std::streampos size(void);
+
+               /// actual byte position (hopefully no fem > 2Gybte will be
+               /// readin ...)
+               std::streampos pos(void);
             };
          }
       }

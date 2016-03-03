@@ -29,7 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -46,7 +46,7 @@ namespace dnvgl {
             const entry_type<double> geccen::_form_EY("EY");
             const entry_type<double> geccen::_form_EZ("EZ");
 
-            geccen::geccen(const ::std::deque<::std::string> &inp) :
+            geccen::geccen(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -63,22 +63,22 @@ namespace dnvgl {
                const double &EX, const double &EY, const double &EZ) :
                card(), ECCNO(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             geccen::card_type(void) const {return GECCEN;}
 
-            const ::std::ostream&
-            geccen::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            geccen::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const geccen &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const geccen &card) {
                os << geccen::head.format()
                   << card._form_ECCNO.format(card.ECCNO)
                   << card._form_EX.format(card.EX)
                   << card._form_EY.format(card.EY)
-                  << card._form_EZ.format(card.EZ) << ::std::endl;
+                  << card._form_EZ.format(card.EZ) << std::endl;
                return os;
             }
          }

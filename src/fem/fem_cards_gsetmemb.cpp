@@ -29,7 +29,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace ::dnvgl::extfem;
+using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
@@ -47,7 +47,7 @@ namespace dnvgl {
             const entry_type<long> gsetmemb::_form_ISORIG("ISORIG");
             const entry_type<long> gsetmemb::_form_IRMEMB("IRMEMB");
 
-            gsetmemb::gsetmemb(const ::std::deque<::std::string> &inp) :
+            gsetmemb::gsetmemb(const std::deque<std::string> &inp) :
                card(inp) {
 
                auto pos = inp.begin();
@@ -69,7 +69,7 @@ namespace dnvgl {
                                const long &INDEX,
                                const long &ISTYPE,
                                const long &ISORIG,
-                               const ::std::deque<long> &IRMEMB) :
+                               const std::deque<long> &IRMEMB) :
                card(), NFIELD(NFIELD), ISREF(ISREF), INDEX(INDEX),
                ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(IRMEMB) {}
 
@@ -79,13 +79,13 @@ namespace dnvgl {
                                const long &ISTYPE,
                                const long &ISORIG) :
                card(), NFIELD(NFIELD), ISREF(ISREF), INDEX(INDEX),
-               ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(::std::deque<long>()) {}
+               ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(std::deque<long>()) {}
 
             gsetmemb::gsetmemb(const long &ISREF,
                                const long &INDEX,
                                const long &ISTYPE,
                                const long &ISORIG,
-                               const ::std::deque<long> &IRMEMB) :
+                               const std::deque<long> &IRMEMB) :
                card(), NFIELD((long)IRMEMB.size() + 5), ISREF(ISREF), INDEX(INDEX),
                ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(IRMEMB) {}
 
@@ -94,30 +94,30 @@ namespace dnvgl {
                                const long &ISTYPE,
                                const long &ISORIG) :
                card(), NFIELD(5), ISREF(ISREF), INDEX(INDEX),
-               ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(::std::deque<long>()) {}
+               ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(std::deque<long>()) {}
 
-            const ::dnvgl::extfem::fem::cards::types
+            const dnvgl::extfem::fem::cards::types
             gsetmemb::card_type(void) const {return GSETMEMB;}
 
-            const ::std::ostream&
-            gsetmemb::operator<< (::std::ostream& os) const {
+            const std::ostream&
+            gsetmemb::operator<< (std::ostream& os) const {
                os << this;
                return os;
             }
 
-            ::std::ostream&
-            operator<< (::std::ostream &os, const gsetmemb &card) {
+            std::ostream&
+            operator<< (std::ostream &os, const gsetmemb &card) {
                os << gsetmemb::head.format()
                   << card._form_NFIELD.format(card.NFIELD)
                   << card._form_ISREF.format(card.ISREF)
                   << card._form_INDEX.format(card.INDEX)
                   << card._form_ISTYPE.format(card.ISTYPE)
-                  << ::std::endl << ::dnvgl::extfem::fem::types::card().format()
+                  << std::endl << dnvgl::extfem::fem::types::card().format()
                   << card._form_ISORIG.format(card.ISORIG);
                long cnt = 1;
                for (long i = 0; i < card.NFIELD - 5; i++) {
                   if (cnt == 4) {
-                     os << ::std::endl << ::dnvgl::extfem::fem::types::card().format();
+                     os << std::endl << dnvgl::extfem::fem::types::card().format();
                      cnt = 0;
                   }
                   os << card._form_IRMEMB.format(card.IRMEMB[i]);
@@ -125,7 +125,7 @@ namespace dnvgl {
                }
                for (long i=cnt; i < 4; i++)
                   os << card.empty.format();
-               os << ::std::endl;
+               os << std::endl;
                return os;
             }
          }
