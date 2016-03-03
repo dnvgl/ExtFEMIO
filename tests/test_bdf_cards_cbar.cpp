@@ -47,9 +47,9 @@ CATCH_TRANSLATE_EXCEPTION( ::std::string& ex ) {
 
 TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 
-   ::std::deque<string> data;
-   data.push_back("CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n");
-   data.push_back("                        0.0     -22.617 -339.25 0.0     -22.617 \n");
+   ::std::deque<string> data({
+         "CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n",
+         "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
    ::std::deque<string> lines;
    card::card_split(data, lines);
    cbar probe(lines);
@@ -80,11 +80,9 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
           "[bdf_cbar,dcode]" ) {
 
-   ::std::deque<string> data;
-   data.push_back(
-      "CBAR    7869    104010  76      153      13                     GOO     \n");
-   data.push_back(
-      "                        0.0     -22.617 -339.25 0.0     -22.617 ");
+   ::std::deque<string> data({
+         "CBAR    7869    104010  76      153      13                     GOO     \n",
+         "                        0.0     -22.617 -339.25 0.0     -22.617 "});
    ::std::deque<string> lines;
    card::card_split(data, lines);
    cbar probe(lines);
@@ -132,9 +130,7 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
 
       cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
       probe.PB.is_value = true;
-      probe.PB.value.push_back(5);
-      probe.PB.value.push_back(1);
-      probe.PB.value.push_back(3);
+      probe.PB.value.assign({5, 1, 3});
       test << probe;
       CHECK(test.str() ==
             "CBAR           2      39       7       36.000-011.800+012.600+01EEG     \n"
@@ -148,9 +144,8 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
 
       cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
       probe.PB.is_value = true;
-      probe.PB.value.push_back(5);
-      probe.PB.value.push_back(1);
-      probe.PB.value.push_back(3);
+      probe.PB.value.assign({5, 1, 3});
+
       test << probe;
       CHECK(test.str() ==
             "CBAR*                  2              39               7               3\n"

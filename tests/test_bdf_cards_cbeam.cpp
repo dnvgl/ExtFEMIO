@@ -50,15 +50,12 @@ using namespace ::dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
 
-   ::std::deque<string> data, data_2;
-   data.push_back(
-      "CBEAM   7869    104010  76      153     0.0     66.5206 997.785  2.\n");
-   data.push_back(
-      "                        0.0     -22.617 -339.25 0.0     -22.617 \n");
-   data_2.push_back(
-      "CBEAM   36      103023  7       9       0.0     1000.00 0.0\n");
-   data_2.push_back(
-      "                        0.0     -240.00 0.0     0.0     -240.00 0.0\n");
+   ::std::deque<string> data({
+         "CBEAM   7869    104010  76      153     0.0     66.5206 997.785  2.\n",
+         "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
+   ::std::deque<string> data_2({
+         "CBEAM   36      103023  7       9       0.0     1000.00 0.0\n",
+         "                        0.0     -240.00 0.0     0.0     -240.00 0.0\n"});
 
    ::std::deque<string> lines;
    card::card_split(data, lines);
@@ -125,15 +122,12 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]" ) {
 TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
           "[bdf_cbeam,dcode]" ) {
 
-   ::std::deque<string> data, data_2;
-   data.push_back(
-      "CBEAM   7869    104010  76      153      13                     GOO     \n");
-   data.push_back(
-      "                        0.0     -22.617 -339.25 0.0     22.617 ");
-   data_2.push_back(
-      "CBEAM   7869    104010  76      153      13\n");
-   data_2.push_back(
-      "                        0.0     -22.617 -339.25 0.0     22.617 ");
+   ::std::deque<string> data({
+         "CBEAM   7869    104010  76      153      13                     GOO     \n",
+         "                        0.0     -22.617 -339.25 0.0     22.617 "});
+   ::std::deque<string> data_2({
+         "CBEAM   7869    104010  76      153      13\n",
+         "                        0.0     -22.617 -339.25 0.0     22.617 "});
    ::std::deque<string> lines;
    card::card_split(data, lines);
    cbeam probe(lines);
