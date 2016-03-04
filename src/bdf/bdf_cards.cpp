@@ -201,7 +201,9 @@ dnvgl::extfem::bdf::cards::card::card_split(std::deque<std::string> const &inp,
 }
 
 void
-dnvgl::extfem::bdf::cards::dispatch(const std::deque<std::string> &inp, std::unique_ptr<bdf::cards::card> &res) {
+dnvgl::extfem::bdf::cards::dispatch(
+   const std::deque<std::string> &inp,
+   std::unique_ptr<dnvgl::extfem::bdf::cards::card> &res) {
 
    res = nullptr;
 

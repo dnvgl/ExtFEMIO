@@ -2472,7 +2472,9 @@ namespace dnvgl {
       namespace fem {
          namespace cards {
             void
-            dispatch(const std::deque<std::string>&, std::unique_ptr<card>&);
+            dispatch(
+               const std::deque<std::string>&,
+               std::unique_ptr<dnvgl::extfem::fem::cards::card>&);
          }
       }
    }

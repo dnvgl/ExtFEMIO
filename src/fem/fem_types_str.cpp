@@ -32,19 +32,16 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
-using fem::types::entry_type;
-
-entry_type<std::string>::entry_type(const std::string &name) :
+dnvgl::extfem::fem::types::entry_type<std::string>::entry_type(const std::string &name) :
    fem::types::base(name), bounds() {}
 
-entry_type<std::string>::entry_type(
+dnvgl::extfem::fem::types::entry_type<std::string>::entry_type(
    const std::string &name,
    const fem::type_bounds::bound<std::string> &bounds) :
    fem::types::base(name), bounds(bounds) {}
 
 std::string
-entry_type<std::string>::operator() (
+dnvgl::extfem::fem::types::entry_type<std::string>::operator() (
    const std::string &inp1, const std::string &inp2,
    const std::string &inp3, const std::string &inp4) const {
 
@@ -57,7 +54,7 @@ entry_type<std::string>::operator() (
    return sval;
 }
 
-std::string entry_type<std::string>::format(const std::string &inp, const size_t &len) const {
+std::string dnvgl::extfem::fem::types::entry_type<std::string>::format(const std::string &inp, const size_t &len) const {
 
    std::ostringstream res;
 

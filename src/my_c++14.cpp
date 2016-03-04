@@ -32,9 +32,11 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#if _MSC_VER && _MSC_VER <= 1700
 double std::round(double number) {
    return number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5);
 }
+#endif
 
 #endif
 
@@ -44,5 +46,5 @@ double std::round(double number) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C .. check -j8"
 // End:

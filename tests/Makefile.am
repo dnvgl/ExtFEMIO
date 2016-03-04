@@ -135,10 +135,74 @@ TESTS+=test_fem_cards.ju
 
 check_PROGRAMS+=test_fem_elements
 test_fem_elements_SOURCES =test_fem_elements.cpp
+test_fem_elements_SOURCES+=test_fem_element_adva_2.cpp
+test_fem_elements_SOURCES+=test_fem_element_adva_4.cpp
+test_fem_elements_SOURCES+=test_fem_element_axcs.cpp
+test_fem_elements_SOURCES+=test_fem_element_axda.cpp
+test_fem_elements_SOURCES+=test_fem_element_axis.cpp
+test_fem_elements_SOURCES+=test_fem_element_axlq.cpp
+test_fem_elements_SOURCES+=test_fem_element_axls.cpp
+test_fem_elements_SOURCES+=test_fem_element_axqq.cpp
+test_fem_elements_SOURCES+=test_fem_element_beas.cpp
+test_fem_elements_SOURCES+=test_fem_element_beps.cpp
+test_fem_elements_SOURCES+=test_fem_element_btss.cpp
+test_fem_elements_SOURCES+=test_fem_element_csta.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctal.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctaq.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctcc.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctcl.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctcp.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctcq.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctlq.cpp
+test_fem_elements_SOURCES+=test_fem_element_ctmq.cpp
+test_fem_elements_SOURCES+=test_fem_element_fqus_ffq.cpp
+test_fem_elements_SOURCES+=test_fem_element_ftrs_fftr.cpp
+test_fem_elements_SOURCES+=test_fem_element_gdam.cpp
+test_fem_elements_SOURCES+=test_fem_element_ghex.cpp
+test_fem_elements_SOURCES+=test_fem_element_glda.cpp
+test_fem_elements_SOURCES+=test_fem_element_glma.cpp
+test_fem_elements_SOURCES+=test_fem_element_glsh.cpp
+test_fem_elements_SOURCES+=test_fem_element_gmas.cpp
+test_fem_elements_SOURCES+=test_fem_element_gspr.cpp
+test_fem_elements_SOURCES+=test_fem_element_hcqs.cpp
+test_fem_elements_SOURCES+=test_fem_element_ihex.cpp
+test_fem_elements_SOURCES+=test_fem_element_ilst.cpp
+test_fem_elements_SOURCES+=test_fem_element_ipri.cpp
+test_fem_elements_SOURCES+=test_fem_element_iqqe.cpp
+test_fem_elements_SOURCES+=test_fem_element_itet.cpp
+test_fem_elements_SOURCES+=test_fem_element_lcqs.cpp
+test_fem_elements_SOURCES+=test_fem_element_lcts.cpp
+test_fem_elements_SOURCES+=test_fem_element_lhex.cpp
+test_fem_elements_SOURCES+=test_fem_element_lqua.cpp
+test_fem_elements_SOURCES+=test_fem_element_matr.cpp
+test_fem_elements_SOURCES+=test_fem_element_mcqs.cpp
+test_fem_elements_SOURCES+=test_fem_element_mcts.cpp
+test_fem_elements_SOURCES+=test_fem_element_pcab.cpp
+test_fem_elements_SOURCES+=test_fem_element_pils.cpp
+test_fem_elements_SOURCES+=test_fem_element_pspr.cpp
+test_fem_elements_SOURCES+=test_fem_element_rpbq.cpp
+test_fem_elements_SOURCES+=test_fem_element_scqs.cpp
+test_fem_elements_SOURCES+=test_fem_element_scts.cpp
+test_fem_elements_SOURCES+=test_fem_element_secb.cpp
+test_fem_elements_SOURCES+=test_fem_element_slcb.cpp
+test_fem_elements_SOURCES+=test_fem_element_slqs.cpp
+test_fem_elements_SOURCES+=test_fem_element_slts.cpp
+test_fem_elements_SOURCES+=test_fem_element_tess.cpp
+test_fem_elements_SOURCES+=test_fem_element_tetr.cpp
+test_fem_elements_SOURCES+=test_fem_element_tpri.cpp
+test_fem_elements_SOURCES+=test_fem_element_trs1.cpp
+test_fem_elements_SOURCES+=test_fem_element_trs2.cpp
+test_fem_elements_SOURCES+=test_fem_element_trs3.cpp
 test_fem_elements_LDADD=$(test_extfem_LDADD)
 TESTS+=test_fem_elements.ju
 
 test_MISC=
+
+test_fem_element_ghex.h : ../tools/ghex_do.py	\
+  ../tools/templates/elements_ghex.h		\
+  ../tools/templates/element_ghex.cpp		\
+  ../tools/templates/test_fem_element_ghex.cpp
+	(set -e ; cd .. ; python3 tools/ghex_do.py)
 
 test_%.ju: base_test.ju
 	ln -sf $< $@

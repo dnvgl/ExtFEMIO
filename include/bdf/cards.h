@@ -491,7 +491,8 @@ namespace dnvgl {
              */
             void
             dispatch(
-               const std::deque<std::string>&, std::unique_ptr<card>&);
+               const std::deque<std::string>&,
+               std::unique_ptr<dnvgl::extfem::bdf::cards::card>&);
          }
       }
    }

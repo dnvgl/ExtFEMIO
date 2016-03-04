@@ -9,78 +9,14 @@ from __future__ import (
 # Standard libraries.
 import itertools
 
+# Third party libraries.
+from jinja2 import Environment, FileSystemLoader
+
 # ID: $Id$
 __date__ = "$Date::                            $"[7:-1]
 __scm_version__ = "$Revision$"[10:-1]
 __author__ = "`Berthold Höllmann <berthold.hoellmann@dnvgl.com>`__"
 __copyright__ = "Copyright © 2016 by DNV GL SE"
-
-
-src_tmpl = ("""/**
-   \\file fem/fem_element_ghex1{num:02d}.cpp
-   \\author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   \\copyright Copyright © 2016 by DNV GL SE
-   \\brief FEM element definition for ghex1{num:02d}.
-
-   General Hexahedron, define with nodes 1 to 20{extnodes} and node 27 present.
-
-   Position of node in node array for element node numbers > 20:
-
-{nodepos}
-*/
-
-#include "StdAfx.h"
-
-// ID:
-namespace {{
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
-}}
-
-#include "fem/elements.h"
-
-#if defined(__AFX_H__) && defined(_DEBUG)
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
-using namespace dnvgl::extfem::fem::elements;
-
-const long ghex1{num:02d}::nnodes = {nodes};
-
-el_types ghex1{num:02d}::get_type() const {{return GHEX1{num:02d};}}
-
-namespace {{
-   const size_t procs_len = 2;
-   el_processor procs[
-      procs_len] = {{general, Sestra}};
-}}
-const std::set<el_processor> ghex1{num:02d}::processors(procs, """
-            """procs+procs_len);
-
-ghex1{num:02d}::ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::ghex(data) {{}}
-
-ghex1{num:02d}::ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::ghex(data) {{}}
-
-ghex1{num:02d}::ghex1{num:02d}(const __base *data) :
-   ghex(data) {{}}
-
-// Local Variables:
-// mode: c+"""
-            """+
-// ispell-local-dictionary: "english"
-// coding: utf-8
-// c-file-style: "dnvgl"
-// indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
-// End:
-""")
 
 
 def take(n):
@@ -101,103 +37,34 @@ def gen_nodepos(pos, space):
         res.append((i + 21,  num))
     return "\n".join(space + "- node {1} at pos {0}".format(*i) for i in res)
 
-RES = []
-for x in itertools.chain(itertools.combinations((1, 2, 4, 8, 16, 32), j)
-                         for j in range(7)):
-    RES += [(sum(k), take(k) + (27, )) for k in x]
-RES.sort()
+if __name__ == '__main__':
 
-with open("Makefile.am.tmlp", 'w') as make, \
-        open("vcxproj.tmpl",  'w') as vcx, \
-        open("filters.tmpl", 'w') as filters, \
-        open("include/fem/elements_ghex.h",  'w') as head:
+    res = []
 
-    head.write("""/**
-   \\file fem/elements_ghex.h
-   \\author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   \\copyright Copyright © 2015 by DNV GL SE
-   \\brief ghex* element card representation for Sesam FEM.
+    for x in itertools.chain(itertools.combinations(
+            (1, 2, 4, 8, 16, 32), j) for j in range(7)):
+        res += [(sum(k), take(k) + (27, )) for k in x]
+    res.sort()
 
-   Detailed description
-*/
+    env = Environment(loader=FileSystemLoader('tools/templates'))
+    head_tmpl = env.get_template('element_ghex.h')
+    code_tmpl = env.get_template('element_ghex.cpp')
+    test_tmpl = env.get_template('test_fem_element_ghex.cpp')
 
-// ID: $Id$
+    with open("include/fem/elements_ghex.h", "w") as head, \
+         open("src/fem/fem_element_ghex.cpp", "w") as code, \
+         open("tests/test_fem_element_ghex.cpp", "w") as test:
 
-#ifndef _FEM_CARDS_ELEMENTS_GHEX_H_
-#define _FEM_CARDS_ELEMENTS_GHEX_H_
+        head.write(head_tmpl.render(
+            res=res, gen_extnodes=gen_extnodes,
+            gen_nodepos=gen_nodepos))
 
-#include <my_c++14.h>
-
-#include <set>
-
-#include "cards.h"
-
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace elements {
-
-""")
-
-    for i, pos in RES:
-        fname = "src/fem/fem_element_ghex1{0:02d}.cpp".format(i)
-
-        with open(fname, 'w') as out:
-            out.write(src_tmpl.format(
-                num=i, nodes=20 + len(pos),
-                extnodes=gen_extnodes(pos[:-1]),
-                nodepos=gen_nodepos(pos, "        ")))
-
-        make.write(
-            'libextfemio_la_SOURCES += fem/fem_element_ghex1{0:02d}.cpp\n'
-            .format(i))
-        vcx.write(
-            '    <ClCompile Include="fem\\fem_element_ghex1{0:02d}.cpp" />\n'
-           .format(i))
-        filters.write(
-            '''    <ClCompile Include="fem\\fem_element_ghex1{0:02d}.cpp">
-      <Filter>FEM\\Source Files</Filter>
-    </ClCompile>
-'''.format(i))
-        head.write("""\
-            /** General Hexahedron, define with nodes 1 to 20{extnodes} and node 27 present.
-
-                Position of node in node array for element node numbers > 20:
-
-{nodepos}
-             */
-            class ghex1{num:02d}: public ghex {{
-            public:
-               ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex1{num:02d}(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex1{num:02d}(const __base*);
-               static const long nnodes;
-               el_types get_type(void) const;
-               static const std::set<el_processor> processors;
-            }};
-
-""".format(num=i, extnodes=gen_extnodes(pos[:-1]),
-           nodepos=gen_nodepos(pos, 20 * " ")))
-
-    head.write("""\
-         }
-      }
-   }
-}
-#endif // _FEM_CARDS_ELEMENTS_GHEX_H_
-
-// Local Var""" """iables:
-// mode: c++
-// ispell-local-dictionary: "english"
-// coding: utf-8
-// c-file-style: "dnvgl"
-// indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
-// End:
-""")
+        code.write(code_tmpl.render(
+            res=res, gen_extnodes=gen_extnodes,
+            gen_nodepos=gen_nodepos))
 
 # Local Variables:
 # mode: python
 # ispell-local-dictionary: "english"
-# compile-command: "cd ..;python3 tools/ghex_do.py&&make check - j8"
+# compile-command: "make -C .. check -j8"
 # End:

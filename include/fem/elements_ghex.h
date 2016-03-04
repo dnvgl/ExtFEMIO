@@ -1,10 +1,10 @@
 /**
+   \brief ghex* element card representation for Sesam FEM.
    \file fem/elements_ghex.h
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   \copyright Copyright © 2015 by DNV GL SE
-   \brief ghex* element card representation for Sesam FEM.
+   \copyright Copyright © 2016 by DNV GL SE
 
-   Detailed description
+   General Hexahedron elements.
 */
 
 // ID: $Id$
