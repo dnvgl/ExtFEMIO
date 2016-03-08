@@ -26,7 +26,6 @@ libextfemio_la_SOURCES += bdf/bdf_types.cpp
 libextfemio_la_SOURCES += bdf/bdf_types_float.cpp
 libextfemio_la_SOURCES += bdf/bdf_types_int.cpp
 libextfemio_la_SOURCES += bdf/bdf_types_list_int.cpp
-libextfemio_la_SOURCES += bdf/bdf_types_str.cpp
 libextfemio_la_SOURCES += bdf/bdf_file.cpp
 libextfemio_la_SOURCES += bdf/bdf_l_geom.cpp
 libextfemio_la_SOURCES += bdf/bdf_errors.cpp

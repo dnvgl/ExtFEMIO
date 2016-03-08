@@ -45,14 +45,19 @@ namespace {
 dnvgl::extfem::bdf::types::empty dnvgl::extfem::bdf::cards::card::empty = bdf::types::empty();
 
 namespace {
-   const void _stderr_warn(std::string const &msg) {
+   const void _stderr_report(std::string const &msg) {
       std::cerr << msg << std::endl;
+   }
+
+   const void _stdout_report(std::string const &msg) {
+      std::cout << msg << std::endl;
    }
 }
 
-const void(*dnvgl::extfem::bdf::cards::info_report)(std::string const &) = &_stderr_warn;
-const void(*dnvgl::extfem::bdf::cards::warn_report)(std::string const &) = &_stderr_warn;
-const void(*dnvgl::extfem::bdf::cards::error_report)(std::string const &) = &_stderr_warn;
+const void(*dnvgl::extfem::bdf::cards::note_report)(std::string const &) = &_stdout_report;
+const void(*dnvgl::extfem::bdf::cards::info_report)(std::string const &) = &_stderr_report;
+const void(*dnvgl::extfem::bdf::cards::warn_report)(std::string const &) = &_stderr_report;
+const void(*dnvgl::extfem::bdf::cards::error_report)(std::string const &) = &_stderr_report;
 
 namespace dnvgl {
    namespace extfem {

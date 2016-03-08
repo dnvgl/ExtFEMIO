@@ -146,8 +146,11 @@ namespace dnvgl {
                */
                std::deque<long> csys;
 
-               void add(dnvgl::extfem::fem::cards::gelref1 const*);
-               void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               virtual void add(dnvgl::extfem::fem::cards::gelref1 const*);
+               virtual void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               virtual void add(const dnvgl::extfem::fem::cards::gelref1&);
+               virtual void add(const dnvgl::extfem::fem::cards::gbeamg&);
+               virtual void add(const dnvgl::extfem::fem::cards::misosel&);
 
                virtual el_types get_type(void) const = 0;
             };
@@ -233,11 +236,11 @@ namespace dnvgl {
                tess(const dnvgl::extfem::fem::cards::gelmnt1*);
                tess(const dnvgl::extfem::fem::cards::gelref1*);
                tess(const __base*);
-               void add(const dnvgl::extfem::fem::cards::gelmnt1*);
-               void add(const dnvgl::extfem::fem::cards::gelref1*);
-               void add(const dnvgl::extfem::fem::cards::gelref1&);
-               void add(const dnvgl::extfem::fem::cards::gbeamg&);
-               void add(const dnvgl::extfem::fem::cards::misosel&);
+               //void add(const dnvgl::extfem::fem::cards::gelmnt1*);
+               //void add(const dnvgl::extfem::fem::cards::gelref1*);
+               //void add(const dnvgl::extfem::fem::cards::gelref1&);
+               //void add(const dnvgl::extfem::fem::cards::gbeamg&);
+               //void add(const dnvgl::extfem::fem::cards::misosel&);
                // void add(const dnvgl::extfem::fem::cards::beiste&);
                static const long nnodes;
                el_types get_type(void) const;

@@ -181,6 +181,12 @@ void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {}
 
 void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {}
 
+void __base::add(dnvgl::extfem::fem::cards::gelref1 const&) {}
+
+void __base::add(dnvgl::extfem::fem::cards::gbeamg const&) {}
+
+void __base::add(dnvgl::extfem::fem::cards::misosel const&) {}
+
 ghex::ghex(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
    __base(data) {}
 

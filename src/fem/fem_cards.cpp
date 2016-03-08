@@ -28,10 +28,28 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+namespace {
+   const void _stderr_report(std::string const &msg) {
+      std::cerr << msg << std::endl;
+   }
+
+   const void _stdout_report(std::string const &msg) {
+      std::cout << msg << std::endl;
+   }
+}
+
 namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
+
+            const void(*note_report)(std::string const &) = &_stdout_report;
+            const void(*info_report)(std::string const &) = &_stderr_report;
+            const void(*warn_report)(std::string const &) = &_stderr_report;
+            const void(*error_report)(std::string const &) = &_stderr_report;
+
+
+
             card::card(const std::deque<std::string> &inp) {}
 
             card::card() {}
