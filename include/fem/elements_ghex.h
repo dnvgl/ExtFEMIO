@@ -23,6 +23,16 @@ namespace dnvgl {
       namespace fem {
          namespace elements {
 
+            /** General Hexahedron
+             */
+            class ghex : public __base {
+            public:
+               ghex(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex(const __base*);
+               virtual el_types get_type(void) const = 0;
+            };
+
             /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
 
                 Position of node in node array for element node numbers > 20:

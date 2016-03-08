@@ -799,16 +799,6 @@ namespace dnvgl {
                static const std::set<el_processor> processors;
             };
 
-            /** General Hexahedron
-             */
-            class ghex : public __base {
-            public:
-               ghex(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex(const __base*);
-               virtual el_types get_type(void) const = 0;
-            };
-
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base>&,

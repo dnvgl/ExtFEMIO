@@ -187,15 +187,6 @@ void __base::add(dnvgl::extfem::fem::cards::gbeamg const&) {}
 
 void __base::add(dnvgl::extfem::fem::cards::misosel const&) {}
 
-ghex::ghex(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   __base(data) {}
-
-ghex::ghex(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   __base(data) {}
-
-ghex::ghex(const __base *p) :
-   __base(p) {}
-
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

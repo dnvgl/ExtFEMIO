@@ -212,7 +212,6 @@
     <ClCompile Include="bdf\bdf_types.cpp" />
     <ClCompile Include="bdf\bdf_types_float.cpp" />
     <ClCompile Include="bdf\bdf_types_int.cpp" />
-    <ClCompile Include="bdf\bdf_types_str.cpp" />
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
     <ClCompile Include="fem\fem_cards.cpp" />
     <ClCompile Include="fem\fem_cards_date.cpp" />

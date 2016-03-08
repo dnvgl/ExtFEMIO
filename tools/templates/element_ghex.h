@@ -22,6 +22,16 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace elements {
+
+            /** General Hexahedron
+             */
+            class ghex : public __base {
+            public:
+               ghex(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex(const __base*);
+               virtual el_types get_type(void) const = 0;
+            };
 {% for num, pos in res %}
             /** General Hexahedron, define with nodes 1 to 20{{ gen_extnodes(pos[:-1]) }} and node 27 present.
 

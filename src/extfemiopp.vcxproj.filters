@@ -85,9 +85,6 @@
     <ClCompile Include="bdf\bdf_types_list_int.cpp">
       <Filter>BDF\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bdf\bdf_types_str.cpp">
-      <Filter>BDF\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="extfem_string.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

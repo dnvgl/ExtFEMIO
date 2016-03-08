@@ -27,6 +27,15 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
+ghex::ghex(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+   __base(data) {}
+
+ghex::ghex(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   __base(data) {}
+
+ghex::ghex(const __base *p) :
+   __base(p) {}
+
 namespace {
    const size_t procs_len = 2;
    el_processor procs[procs_len] = {general, Sestra};
