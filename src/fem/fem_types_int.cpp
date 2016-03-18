@@ -40,8 +40,9 @@ boost::regex
 std::regex
 #endif
 dnvgl::extfem::fem::types::int_re(
-//  "[[:space:]]*[\\+-]?[1-9][0-9]*[[:space:]]*",
-   "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
+   "([[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]])|"
+   "([[:space:]][[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2})"
+   ,
 #ifdef HAVE_BOOST_REGEX_HPP
    boost::regex_constants::ECMAScript);
 #else
