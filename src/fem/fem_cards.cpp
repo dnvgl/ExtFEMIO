@@ -95,7 +95,7 @@ namespace dnvgl {
 namespace {
    using namespace dnvgl::extfem::fem;
 
-   const size_t map_pair_entries = 25;
+   const size_t map_pair_entries = 34;
    const std::pair<std::string, cards::types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
       std::pair<std::string, cards::types>("DATE", cards::DATE),
@@ -123,7 +123,15 @@ namespace {
       std::pair<std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
       std::pair<std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
       std::pair<std::string, cards::types>("TEXT", cards::TEXT),
-      // pair<std::strincards::types>("TDLOAD", cards::TDLOAD),
+      std::pair<std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
+      std::pair<std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
+      std::pair<std::string, cards::types>("TDLOAD", cards::TDLOAD),
+      std::pair<std::string, cards::types>("BSELL", cards::BSELL),
+      std::pair<std::string, cards::types>("GELMNT2", cards::GELMNT2),
+      std::pair<std::string, cards::types>("HSUPSTAT", cards::HSUPSTAT),
+      std::pair<std::string, cards::types>("HSUPTRAN", cards::HSUPTRAN),
+      std::pair<std::string, cards::types>("HIERARCH", cards::HIERARCH),
+      std::pair<std::string, cards::types>("BEUSLO", cards::BEUSLO)
    };
 }
 
@@ -235,6 +243,27 @@ namespace dnvgl {
                      break;
                   case TDSUPNAM:
                      res = std::make_unique<fem::cards::tdsupnam>(inp);
+                     break;
+                  case TDLOAD:
+                     res = std::make_unique<fem::cards::tdload>(inp);
+                     break;
+                  case BSELL:
+                     res = std::make_unique<fem::cards::bsell>(inp);
+                     break;
+                  case GELMNT2:
+                     res = std::make_unique<fem::cards::gelmnt2>(inp);
+                     break;
+                  case HSUPSTAT:
+                     res = std::make_unique<fem::cards::hsupstat>(inp);
+                     break;
+                  case HSUPTRAN:
+                     res = std::make_unique<fem::cards::hsuptran>(inp);
+                     break;
+                  case HIERARCH:
+                     res = std::make_unique<fem::cards::hierarch>(inp);
+                     break;
+                  case BEUSLO:
+                     res = std::make_unique<fem::cards::beuslo>(inp);
                      break;
                   // These are not real card types, they can't be returned
                   case UNKNOWN:

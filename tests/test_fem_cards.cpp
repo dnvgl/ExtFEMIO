@@ -125,6 +125,34 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "        KEY_HOLE_ROOF\n"
       "TDSUPNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
       "        KEY_HOLE_ROOF\n"
+      "GELMNT2   1.00000000E+00  1.00000000E+00  1.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "HSUPSTAT  9.00000000E+00  1.00000000E+00  2.32998000E+05  6.00000000E+00\n"
+      "          2.30333000E+05  1.26810000E+05  0.00000000E+00  2.00000000E+00\n"
+      "         -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00\n"
+      "          0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n"
+      "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "HIERARCH  9.00000000E+00  1.00000000E+00  2.00000000E+00  1.00000000E+00\n"
+      "          2.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n"
+      "          2.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "TDLOAD    4.00000000E+00  1.00000000E+00  1.04000000E+02  0.00000000E+00\n"
+      "        LC_1                                                            \n"
+      "BSELL     1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  1.00000000E+00  2.00000000E+00 -1.00000000E+00\n"
+      "BNBCD     3.88350000E+04  6.00000000E+00  4.00000000E+00  4.00000000E+00\n"
+      "          4.00000000E+00  4.00000000E+00  4.00000000E+00  4.00000000E+00\n"
+      "BEUSLO    1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  4.00000000E+00  0.00000000E+00  2.00000000E+00\n"
+      "          1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04\n"
+      "BNLOAD    1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n"
+      "          1.00000000e+00  3.00000000e+00  1.10000000e+00  1.20000000e+00\n"
+      "          1.30000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n"
       "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
 
    std::istringstream ist(s);
@@ -676,8 +704,223 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdsupnam*>(current.get())->CONT.size() == 0);
    }
 
-   SECTION("Checking dispatch [iend].") {
+   SECTION("Checking dispatch [gelmnt2].") {
       for (int i = 0; i < 26; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::GELMNT2);
+      // GELMNT2   1.00000000E+00  1.00000000E+00  1.00000000E+00  0.00000000E+00
+      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      //           1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
+      CHECK(static_cast<gelmnt2*>(current.get())->SUBNO == 1);
+      CHECK(static_cast<gelmnt2*>(current.get())->SLEVEL == 1);
+      CHECK(static_cast<gelmnt2*>(current.get())->STYPE == 1);
+      CHECK(static_cast<gelmnt2*>(current.get())->ADDNO == 0);
+      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[0],
+                               static_cast<gelmnt2*>(current.get())->T[0]+4) ==
+               std::deque<double>({1., 0., 0., 0.}));
+      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[1],
+                               static_cast<gelmnt2*>(current.get())->T[1]+4) ==
+            std::deque<double>({0., 1., 0., 0.}));
+      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[2],
+                               static_cast<gelmnt2*>(current.get())->T[2]+4) ==
+            std::deque<double>({0., 0., 1., 0.}));
+      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[3],
+                               static_cast<gelmnt2*>(current.get())->T[3]+4) ==
+            std::deque<double>({0., 0., 0., 1.}));
+      CHECK(static_cast<gelmnt2*>(current.get())->NNOD == 1);
+      CHECK(static_cast<gelmnt2*>(current.get())->NOD[0] == 1);
+   }
+
+   SECTION("Checking dispatch [hsupstat].") {
+      for (int i = 0; i < 27; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::HSUPSTAT);
+      // HSUPSTAT  9.00000000E+00  1.00000000E+00  2.32998000E+05  6.00000000E+00
+      //           2.30333000E+05  1.26810000E+05  0.00000000E+00  2.00000000E+00
+      //          -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      CHECK(static_cast<hsupstat*>(current.get())->NFIELD == 9);
+      CHECK(static_cast<hsupstat*>(current.get())->ISELTY == 1);
+      CHECK(static_cast<hsupstat*>(current.get())->NIDOF == 232998);
+      CHECK(static_cast<hsupstat*>(current.get())->NRDOF == 6);
+      CHECK(static_cast<hsupstat*>(current.get())->NBAND == 230333);
+      CHECK(static_cast<hsupstat*>(current.get())->NELT == 126810);
+      CHECK(static_cast<hsupstat*>(current.get())->LINDEP == 0);
+      CHECK(static_cast<hsupstat*>(current.get())->RELOADC == 2);
+      CHECK(static_cast<hsupstat*>(current.get())->COMPLC == -1);
+   }
+
+   SECTION("Checking dispatch [hsuptran].") {
+      for (int i = 0; i < 28; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::HSUPTRAN);
+      // HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00
+      //           0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00
+      //           0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      //           0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
+      CHECK(static_cast<hsuptran*>(current.get())->NFIELD == 18);
+      CHECK(static_cast<hsuptran*>(current.get())->ITREF == 2);
+      CHECK(static_cast<hsuptran*>(current.get())->T[0][0] == 1.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[0][1] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[0][2] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[0][3] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[1][0] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[1][1] == 1.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[1][2] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[1][3] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[2][0] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[2][1] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[2][2] == 1.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[2][3] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[3][0] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[3][1] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[3][2] == 0.);
+      CHECK(static_cast<hsuptran*>(current.get())->T[3][3] == 1.);
+   }
+
+   SECTION("Checking dispatch [hierarch].") {
+      for (int i = 0; i < 29; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::HIERARCH);
+      // HIERARCH  9.00000000E+00  1.00000000E+00  2.00000000E+00  1.00000000E+00
+      //           2.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00
+      //           2.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      CHECK(static_cast<hierarch*>(current.get())->NFIELD == 9);
+      CHECK(static_cast<hierarch*>(current.get())->IHREF == 1);
+      CHECK(static_cast<hierarch*>(current.get())->ISELTY == 2);
+      CHECK(static_cast<hierarch*>(current.get())->INDSEL == 1);
+      CHECK(static_cast<hierarch*>(current.get())->ISLEVL == 2);
+      CHECK(static_cast<hierarch*>(current.get())->ITREF == 0);
+      CHECK(static_cast<hierarch*>(current.get())->IHPREF == 0);
+      CHECK(static_cast<hierarch*>(current.get())->NSUB == 1);
+      CHECK(static_cast<hierarch*>(current.get())->IHSREFi.size() == 1);
+      CHECK(static_cast<hierarch*>(current.get())->IHSREFi ==
+            std::deque<long>({2}));
+   }
+
+   SECTION("Checking dispatch [tdload].") {
+      for (int i = 0; i < 30; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::TDLOAD);
+      // TDLOAD    4.00000000E+00  1.00000000E+00  1.04000000E+02  0.00000000E+00
+      //         LC_1
+      CHECK(static_cast<tdload*>(current.get())->NFIELD == 4);
+      CHECK(static_cast<tdload*>(current.get())->ISREF == 1);
+      CHECK(static_cast<tdload*>(current.get())->CODNAM == 104);
+      CHECK(static_cast<tdload*>(current.get())->CODTXT == 0);
+      CHECK(static_cast<tdload*>(current.get())->SET_NAME == "LC_1");
+      CHECK(static_cast<tdload*>(current.get())->CONT.size() == 0);
+   }
+
+   SECTION("Checking dispatch [bsell].") {
+      for (int i = 0; i < 31; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::BSELL);
+      // BSELL     1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
+      //           1.00000000E+00  1.00000000E+00  2.00000000E+00 -1.00000000E+00
+      CHECK(static_cast<bsell*>(current.get())->LC == 1);
+      CHECK(static_cast<bsell*>(current.get())->SUBNO == 1);
+      CHECK(static_cast<bsell*>(current.get())->LLC.size() == 2);
+      CHECK(static_cast<bsell*>(current.get())->LLC ==
+            std::deque<long>({1, 2}));
+      CHECK(static_cast<bsell*>(current.get())->FACT.size() == 2);
+      CHECK(static_cast<bsell*>(current.get())->FACT ==
+            std::deque<double>({1., -1.}));
+   }
+
+   SECTION("Checking dispatch [bnbcd].") {
+      for (int i = 0; i < 32; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::BNBCD);
+      // BNBCD     3.88350000E+04  6.00000000E+00  4.00000000E+00  4.00000000E+00
+      //           4.00000000E+00  4.00000000E+00  4.00000000E+00  4.00000000E+00
+      CHECK(static_cast<bnbcd*>(current.get())->NODENO == 38835);
+      CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
+      CHECK(static_cast<bnbcd*>(current.get())->FIX.size() == 6);
+      CHECK(static_cast<bnbcd*>(current.get())->FIX ==
+            std::deque<long>({4, 4, 4, 4, 4, 4}));
+   }
+
+   SECTION("Checking dispatch [beuslo].") {
+      for (int i = 0; i < 33; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::BEUSLO);
+      // BEUSLO    1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
+      //           1.00000000E+00  4.00000000E+00  0.00000000E+00  2.00000000E+00
+      //           1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04
+      CHECK(static_cast<beuslo*>(current.get())->LLC == 1);
+      CHECK(static_cast<beuslo*>(current.get())->LOTYP == 1);
+      CHECK(static_cast<beuslo*>(current.get())->COMPLX == false);
+      CHECK(static_cast<beuslo*>(current.get())->LAYER == 0);
+      CHECK(static_cast<beuslo*>(current.get())->ELNO == 1);
+      CHECK(static_cast<beuslo*>(current.get())->NDOF == 4);
+      CHECK(static_cast<beuslo*>(current.get())->INTNO == 0);
+      CHECK(static_cast<beuslo*>(current.get())->SIDE == 2);
+      CHECK(static_cast<beuslo*>(current.get())->RLOADi.size() == 4);
+      CHECK(static_cast<beuslo*>(current.get())->RLOADi ==
+            std::deque<double>({1.66046816e4, 3.86669189e3,
+                     3.86368091e3, 1.62054932e4}));
+      CHECK(static_cast<beuslo*>(current.get())->ILOADi.size() == 0);
+   }
+
+   SECTION("Checking dispatch [bnload].") {
+      for (int i = 0; i < 34; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::BNLOAD);
+      // BNLOAD    1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+      //           1.00000000e+00  3.00000000e+00  1.10000000e+00  1.20000000e+00
+      //           1.30000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+      CHECK(static_cast<bnload*>(current.get())->LLC == 1);
+      CHECK(static_cast<bnload*>(current.get())->LOTYP == 0);
+      CHECK_FALSE(static_cast<bnload*>(current.get())->COMPLX);
+      CHECK(static_cast<bnload*>(current.get())->NODENO == 1);
+      CHECK(static_cast<bnload*>(current.get())->NDOF == 3);
+      CHECK(static_cast<bnload*>(current.get())->RLOAD.size() == 3);
+      CHECK(static_cast<bnload*>(current.get())->RLOAD ==
+            std::deque<double>({1.1, 1.2, 1.3}));
+      CHECK(static_cast<bnload*>(current.get())->ILOAD.size() == 0);
+   }
+
+   SECTION("Checking dispatch [iend].") {
+      for (int i = 0; i < 35; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

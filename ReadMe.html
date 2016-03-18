@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-03 Do 17:40 -->
+<!-- 2016-03-18 Fr 15:34 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>C++ IO support for various FEM exchange file formats</title>
@@ -642,6 +642,79 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&checkmark;</td>
 <td class="org-right">6-103</td>
 </tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>TDLOAD</code></td>
+<td class="org-left"><b>not documented</b> (Seems to be similar to <code>TDMATER</code> or <code>TDSETNAM</code>)</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>BEUSLO</code></td>
+<td class="org-left">Elements with Surface Loads</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">6-21</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Superel.</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>BSELL</code></td>
+<td class="org-left">Subelement Load Description</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">7-27</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>GELMNT2</code></td>
+<td class="org-left">Subelement Description with Simple Correspondence</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">7-31</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>HSUPSTAT</code></td>
+<td class="org-left">Superelement Statistical Information</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">7-40</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>HSUPTRAN</code></td>
+<td class="org-left">Superelement Transformations</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">7-41</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>HIERARCH</code></td>
+<td class="org-left">Superelement Hierarchy Description</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-left">&checkmark;</td>
+<td class="org-right">7-38</td>
+</tr>
 </tbody>
 <tbody>
 <tr>
@@ -697,20 +770,10 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&checkmark;</td>
 <td class="org-right">4-10</td>
 </tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left"><code>TDLOAD</code></td>
-<td class="org-left"><b>not documented</b></td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">&#xa0;</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-
 
 <div id="outline-container-orgheadline4" class="outline-4">
 <h4 id="orgheadline4"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
@@ -1867,6 +1930,10 @@ at <i>A</i> and <i>B</i> end of beam.
   References page in "Technical Report: Sesam Input Interface File,
 File Description", Document id: 89-7012, Revision Number 9 / 01
 November 1996
+</p>
+
+<p class="footpara">
+*
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
@@ -1926,7 +1993,7 @@ springs are treated exactly in the same manner.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2016-03-03 Do 17:40</p>
+<p class="date">Created: 2016-03-18 Fr 15:34</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

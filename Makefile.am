@@ -1,11 +1,13 @@
 ACLOCAL_AMFLAGS=-Im4
 
 AM_CPPFLAGS=-Iinclude -Wall -Werror -std=c++11
+AM_CPPFLAGS+=-I$(top_srcdir)/gl -I$(top_builddir)/gl -I$(top_builddir)
+
 
 top="$(CURDIR)"/
 
-SUBDIRS= src tests include
-EXTRA_DIST=
+SUBDIRS=lib src tests include
+EXTRA_DIST=m4/gnulib-cache.m4
 test_MISC=configure
 
 CP=cp

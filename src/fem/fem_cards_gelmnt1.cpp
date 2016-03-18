@@ -187,6 +187,7 @@ namespace dnvgl {
                long tmp;
 
                ++pos;
+
                ELNOX = _form_ELNOX(*(pos++));
                ELNO = _form_ELNO(*(pos++));
                tmp = _form_ELTYP(*(pos++));

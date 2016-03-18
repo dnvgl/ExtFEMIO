@@ -115,8 +115,22 @@ namespace dnvgl {
                TDSUPNAM,
                /// User supplied Text
                TEXT,
-               // /// *not documented*
-               // TDLOAD,
+               /// Name of Load
+               TDLOAD,
+               /// Subelement Load Description
+               BSELL,
+               /// Subelement Description with Simple Correspondence
+               /// between Degrees of Freedom of Subelement and
+               /// Relevant Assembly
+               GELMNT2,
+               /// Superelement Statistical Information
+               HSUPSTAT,
+               /// Superelement Transformations
+               HSUPTRAN,
+               /// Superelement Hierarchy Description
+               HIERARCH,
+               /// Elements with Surface Loads
+               BEUSLO
             } types;
 
             class card {
@@ -2105,7 +2119,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                operator<< (std::ostream& os) const;
             };
 
-/// `TDSETNAM`: Name and Description of a std::set (group)
+/// `TDSETNAM`: Name and Description of a set (group)
 /**
 ## Format
 
@@ -2117,8 +2131,8 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 |            | ...                                | | | |
 |            | \<text line\>                      | | | |
 
-This record together with the std::set of nodes or elements record(s)
-(`GSETMEMB`) constitutes the std::set (group) datatype.
+This record together with the set of nodes or elements record(s)
+(`GSETMEMB`) constitutes the set (group) datatype.
 */
             class tdsetnam : public card {
 
@@ -2456,13 +2470,6 @@ per record.
                const std::ostream&
                operator<< (std::ostream& os) const;
             };
-
-
-
-
-
-
-
          }
       }
    }
@@ -2471,6 +2478,7 @@ per record.
 #include "fem/elements.h"
 #include "fem/cards_properties.h"
 #include "fem/cards_loads.h"
+#include "fem/cards_superele.h"
 
 namespace dnvgl {
    namespace extfem {

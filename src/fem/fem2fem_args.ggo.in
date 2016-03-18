@@ -1,0 +1,21 @@
+# $Id$
+## Task      Command line options for fem2fem.	
+
+## Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+
+package "fem2fem (@PACKAGE_NAME@)"
+
+# gengetopt input file.  See the info entry for directions.
+
+purpose "Testing fem part of ExtFEMIO library."
+
+option  "in-file"         i "Input file name"
+             string typestr="filename"
+option  "out-file"        o "Output file name"
+             string typestr="filename"
+
+option "verbose" v "verbose opration" flag off
+
+option "parser-debug" P "Debug the parser." no
+option "scanner-debug" S "Debug the scanner." no
+text "\n\nReport bugs to <berthold.hoellmann@dnvgl.com>."

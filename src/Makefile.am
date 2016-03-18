@@ -78,6 +78,13 @@ libextfemio_la_SOURCES += fem/fem_cards_gelref1.cpp
 libextfemio_la_SOURCES += fem/fem_cards_text.cpp
 libextfemio_la_SOURCES += fem/fem_cards_tdsetnam.cpp
 libextfemio_la_SOURCES += fem/fem_cards_tdsupnam.cpp
+libextfemio_la_SOURCES += fem/fem_cards_tdload.cpp
+libextfemio_la_SOURCES += fem/fem_cards_bsell.cpp
+libextfemio_la_SOURCES += fem/fem_cards_gelmnt2.cpp
+libextfemio_la_SOURCES += fem/fem_cards_hsupstat.cpp
+libextfemio_la_SOURCES += fem/fem_cards_hsuptran.cpp
+libextfemio_la_SOURCES += fem/fem_cards_hierarch.cpp
+libextfemio_la_SOURCES += fem/fem_cards_beuslo.cpp
 libextfemio_la_SOURCES += fem/fem_elements.cpp
 libextfemio_la_SOURCES += fem/fem_element_beps.cpp
 libextfemio_la_SOURCES += fem/fem_element_csta.cpp
@@ -153,6 +160,28 @@ fem/fem_element_ghex.cpp : ../tools/ghex_do.py	\
   ../tools/templates/element_ghex.cpp		\
   ../tools/templates/test_fem_element_ghex.cpp
 	(set -e ; cd .. ; python3 tools/ghex_do.py)
+
+bin_PROGRAMS=bdf2bdf fem2fem
+
+bdf2bdf_SOURCES =bdf/bdf2bdf.cpp
+bdf2bdf_SOURCES+=bdf/bdf2bdf_args.c
+bdf2bdf_LDADD=$(LIBOBJS) $(LTLIBINTL)
+
+fem2fem_SOURCES =fem/fem2fem.cpp
+fem2fem_SOURCES+=fem/fem2fem_args.c
+fem2fem_LDADD=$(LIBOBJS) $(LTLIBINTL)
+
+%_args.o: AM_CPPFLAGS = -I../include -Wall
+
+%.c : %.ggo
+	$(GENGETOPT) --input=$<			\
+  --file-name=$(shell basename $(@F) .c)	\
+  --header-output-dir=../include/		\
+  --src-output-dir=$(@D) --unamed-opts
+
+vpath %.ggo fem bdf
+vpath %.c fem bdf
+vpath %.o fem bdf
 
 # Local Variables:
 # mode: makefile

@@ -63,9 +63,9 @@ namespace dnvgl {
                NDOF = _form_NDOF(*(pos++));
                for (long i = 0; i < NDOF; i++)
                   RLOAD.push_back(_form_RLOAD(*(pos++)));
-
                if (COMPLX)
-                  ILOAD.push_back(_form_ILOAD(*(pos++)));
+                  for (long i = 0; i < NDOF; i++)
+                     ILOAD.push_back(_form_ILOAD(*(pos++)));
             }
 
             bnload::bnload(const long &LLC,
