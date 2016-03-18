@@ -306,9 +306,9 @@ __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
 {}
 
 __base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) :
-   eleno(0), el_add(0),
+   eleno(0), elident(data->ELNO), el_add(0),
    nodes(),
-   elident(data->ELNO), matref(data->MATNO), add_no(data->ADDNO),
+   matref(data->MATNO), add_no(data->ADDNO),
    intno(data->INTNO), mass_intno(data->INTNO), i_strain_ref(data->STRANO),
    i_stress_ref(data->STRENO), strpoint_ref(data->STREPONO),
    section(data->GEONO.begin(), data->GEONO.end()),
