@@ -26,6 +26,32 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+
+dnvgl::extfem::string::string::string(const std::string& in) :
+   std::string(in) {}
+
+// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
+dnvgl::extfem::string::string dnvgl::extfem::string::string::trim(const std::string &whitespace) {
+   const auto strBegin = this->find_first_not_of(whitespace);
+   if (strBegin == std::string::npos)
+      return extfem::string::string(""); // no content
+
+   const auto strEnd = this->find_last_not_of(whitespace);
+   const auto strRange = strEnd - strBegin + 1;
+
+   return this->substr(strBegin, strRange);
+}
+
+dnvgl::extfem::string::string dnvgl::extfem::string::string::upper() {
+   transform(this->begin(), this->end(), this->begin(), ::toupper);
+   return *this;
+}
+
+dnvgl::extfem::string::string dnvgl::extfem::string::string::lower() {
+   transform(this->begin(), this->end(), this->begin(), ::tolower);
+   return *this;
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

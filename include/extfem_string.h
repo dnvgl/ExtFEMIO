@@ -21,34 +21,18 @@
 
 namespace dnvgl {
    namespace extfem {
-
       namespace string {
 
          class string : public std::string {
          public:
-            string(const std::string& in) : std::string(in) {};
+            string(const std::string& in);
 
             // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-            string inline trim(const std::string &whitespace = " \t") {
-               const auto strBegin = this->find_first_not_of(whitespace);
-               if (strBegin == std::string::npos)
-                  return extfem::string::string(""); // no content
+            string trim(const std::string &whitespace = " \t");
 
-               const auto strEnd = this->find_last_not_of(whitespace);
-               const auto strRange = strEnd - strBegin + 1;
+            string upper();
 
-               return this->substr(strBegin, strRange);
-            };
-
-            string inline upper() {
-               transform(this->begin(), this->end(), this->begin(), ::toupper);
-               return *this;
-            };
-
-            string inline lower() {
-               transform(this->begin(), this->end(), this->begin(), ::tolower);
-               return *this;
-            };
+            string lower();
          };
       }
    }
