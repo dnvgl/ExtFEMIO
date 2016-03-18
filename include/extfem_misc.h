@@ -33,8 +33,12 @@ namespace std {
       }
 
       // Provided for compatibility with std::exception.
+#if __GNUC__
       const char *what() const noexcept {
-         return errorMessage.c_str();
+#else
+      const char *what() const {
+#endif
+            return errorMessage.c_str();
       }
 
    private:

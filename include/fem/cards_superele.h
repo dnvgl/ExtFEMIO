@@ -354,7 +354,7 @@ superelement transformation reference number, `ITREF`.
 
                static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
                static const dnvgl::extfem::fem::types::entry_type<long> _form_ITREF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_T;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_T;
 
             public:
 

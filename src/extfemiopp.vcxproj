@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -214,11 +214,14 @@
     <ClCompile Include="bdf\bdf_types_int.cpp" />
     <ClCompile Include="bdf\bdf_types_list_int.cpp" />
     <ClCompile Include="fem\fem_cards.cpp" />
+    <ClCompile Include="fem\fem_cards_beuslo.cpp" />
+    <ClCompile Include="fem\fem_cards_bsell.cpp" />
     <ClCompile Include="fem\fem_cards_date.cpp" />
     <ClCompile Include="fem\fem_cards_gbarm.cpp" />
     <ClCompile Include="fem\fem_cards_gbeamg.cpp" />
     <ClCompile Include="fem\fem_cards_gcoord.cpp" />
     <ClCompile Include="fem\fem_cards_geccen.cpp" />
+    <ClCompile Include="fem\fem_cards_gelmnt2.cpp" />
     <ClCompile Include="fem\fem_cards_gelth.cpp" />
     <ClCompile Include="fem\fem_cards_giorh.cpp" />
     <ClCompile Include="fem\fem_cards_glsec.cpp" />
@@ -228,6 +231,9 @@
     <ClCompile Include="fem\fem_cards_bnbcd.cpp" />
     <ClCompile Include="fem\fem_cards_bndispl.cpp" />
     <ClCompile Include="fem\fem_cards_bnload.cpp" />
+    <ClCompile Include="fem\fem_cards_hierarch.cpp" />
+    <ClCompile Include="fem\fem_cards_hsupstat.cpp" />
+    <ClCompile Include="fem\fem_cards_hsuptran.cpp" />
     <ClCompile Include="fem\fem_cards_mgsprng.cpp" />
     <ClCompile Include="fem\fem_cards_gsetmemb.cpp" />
     <ClCompile Include="fem\fem_cards_gunivec.cpp" />
@@ -236,6 +242,7 @@
     <ClCompile Include="fem\fem_cards_iend.cpp" />
     <ClCompile Include="fem\fem_cards_gelmnt1.cpp" />
     <ClCompile Include="fem\fem_cards_gelref1.cpp" />
+    <ClCompile Include="fem\fem_cards_tdload.cpp" />
     <ClCompile Include="fem\fem_cards_tdsetnam.cpp" />
     <ClCompile Include="fem\fem_cards_tdsupnam.cpp" />
     <ClCompile Include="fem\fem_cards_text.cpp" />
@@ -326,6 +333,7 @@
     <ClInclude Include="..\include\bdf\types.h" />
     <ClInclude Include="..\include\bdf\type_bounds.h" />
     <ClInclude Include="..\include\fem\cards.h" />
+    <ClInclude Include="..\include\fem\cards_superele.h" />
     <ClInclude Include="..\include\fem\elements.h" />
     <ClInclude Include="..\include\fem\cards_loads.h" />
     <ClInclude Include="..\include\fem\cards_properties.h" />

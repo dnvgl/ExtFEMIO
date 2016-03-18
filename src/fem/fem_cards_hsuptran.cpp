@@ -43,7 +43,7 @@ namespace dnvgl {
 
             const entry_type<long> hsuptran::_form_NFIELD("NFIELD");
             const entry_type<long> hsuptran::_form_ITREF("ITREF");
-            const entry_type<long> hsuptran::_form_T("T");
+            const entry_type<double> hsuptran::_form_T("T");
 
             hsuptran::hsuptran(const std::deque<std::string> &inp) :
                card(inp) {

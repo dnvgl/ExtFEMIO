@@ -179,11 +179,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_fem_cards.cpp" />
+    <ClCompile Include="test_fem_cards_beuslo.cpp" />
+    <ClCompile Include="test_fem_cards_bsell.cpp" />
     <ClCompile Include="test_fem_cards_date.cpp" />
     <ClCompile Include="test_fem_cards_gbarm.cpp" />
     <ClCompile Include="test_fem_cards_gbeamg.cpp" />
     <ClCompile Include="test_fem_cards_gcoord.cpp" />
     <ClCompile Include="test_fem_cards_geccen.cpp" />
+    <ClCompile Include="test_fem_cards_gelmnt2.cpp" />
     <ClCompile Include="test_fem_cards_gelth.cpp" />
     <ClCompile Include="test_fem_cards_giorh.cpp" />
     <ClCompile Include="test_fem_cards_glsec.cpp" />
@@ -193,6 +196,9 @@
     <ClCompile Include="test_fem_cards_bnbcd.cpp" />
     <ClCompile Include="test_fem_cards_bndispl.cpp" />
     <ClCompile Include="test_fem_cards_bnload.cpp" />
+    <ClCompile Include="test_fem_cards_hierarch.cpp" />
+    <ClCompile Include="test_fem_cards_hsupstat.cpp" />
+    <ClCompile Include="test_fem_cards_hsuptran.cpp" />
     <ClCompile Include="test_fem_cards_mgsprng.cpp" />
     <ClCompile Include="test_fem_cards_gsetmemb.cpp" />
     <ClCompile Include="test_fem_cards_gunivec.cpp" />
@@ -201,6 +207,7 @@
     <ClCompile Include="test_fem_cards_iend.cpp" />
     <ClCompile Include="test_fem_cards_gelmnt1.cpp" />
     <ClCompile Include="test_fem_cards_gelref1.cpp" />
+    <ClCompile Include="test_fem_cards_tdload.cpp" />
     <ClCompile Include="test_fem_cards_text.cpp" />
     <ClCompile Include="test_fem_cards_tdsupnam.cpp" />
     <ClCompile Include="test_fem_cards_tdsetnam.cpp" />

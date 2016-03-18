@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="bdf\bdf_cards.cpp">
@@ -379,6 +379,27 @@
     <ClCompile Include="fem\fem_type_bounds.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards_beuslo.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_bsell.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_gelmnt2.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_hierarch.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_hsupstat.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_hsuptran.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fem\fem_cards_tdload.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BDF">
@@ -476,6 +497,9 @@
       <Filter>FEM\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\fem\elements_ghex.h">
+      <Filter>FEM\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fem\cards_superele.h">
       <Filter>FEM\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
