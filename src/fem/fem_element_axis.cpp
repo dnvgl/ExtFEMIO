@@ -30,7 +30,7 @@ static char THIS_FILE[] = __FILE__;
 
 const long axis::nnodes = 2;
 
-el_types axis::get_type() const {return AXIS;}
+el_types axis::get_type(void) {return AXIS;}
 
 namespace {
    const size_t procs_len = 7;
@@ -44,6 +44,9 @@ axis::axis(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 axis::axis(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+axis::axis(const dnvgl::extfem::fem::elements::__base *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

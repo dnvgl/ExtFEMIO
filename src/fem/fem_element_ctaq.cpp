@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long ctaq::nnodes = 6;
 
-el_types ctaq::get_type() const {return CTAQ;}
+el_types ctaq::get_type(void) {return CTAQ;}
 
 namespace {
    const size_t procs_len = 2;

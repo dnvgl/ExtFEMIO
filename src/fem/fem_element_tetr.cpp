@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long tetr::nnodes = 4;
 
-el_types tetr::get_type() const {return TETR;}
+el_types tetr::get_type(void) {return TETR;}
 
 namespace {
    const size_t procs_len = 2;

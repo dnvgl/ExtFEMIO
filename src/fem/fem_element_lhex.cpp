@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long lhex::nnodes = 8;
 
-el_types lhex::get_type() const {return LHEX;}
+el_types lhex::get_type(void) {return LHEX;}
 
 namespace {
    const size_t procs_len = 5;

@@ -30,7 +30,7 @@ static char THIS_FILE[] = __FILE__;
 
 const long glda::nnodes = 2;
 
-el_types glda::get_type() const {return GLDA;}
+el_types glda::get_type(void) {return GLDA;}
 
 namespace {
    const size_t procs_len = 1;

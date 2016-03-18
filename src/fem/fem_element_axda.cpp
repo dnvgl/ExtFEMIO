@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long axda::nnodes = 2;
 
-el_types axda::get_type() const {return AXDA;}
+el_types axda::get_type(void) {return AXDA;}
 
 namespace {
    const size_t procs_len = 5;
@@ -43,6 +43,9 @@ axda::axda(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 axda::axda(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+axda::axda(const dnvgl::extfem::fem::elements::__base *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

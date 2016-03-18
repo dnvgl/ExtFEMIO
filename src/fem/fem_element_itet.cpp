@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long itet::nnodes = 10;
 
-el_types itet::get_type() const {return ITET;}
+el_types itet::get_type(void) {return ITET;}
 
 namespace {
    const size_t procs_len = 2;

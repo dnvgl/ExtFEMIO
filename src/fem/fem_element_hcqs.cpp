@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long hcqs::nnodes = 9;
 
-el_types hcqs::get_type() const {return HCQS;}
+el_types hcqs::get_type(void) {return HCQS;}
 
 namespace {
    const size_t procs_len = 3;

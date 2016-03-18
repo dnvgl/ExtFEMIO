@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long gmas::nnodes = 1;
 
-el_types gmas::get_type() const {return GMAS;}
+el_types gmas::get_type(void) {return GMAS;}
 
 namespace {
    const size_t procs_len = 6;
@@ -42,6 +42,9 @@ gmas::gmas(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 gmas::gmas(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+gmas::gmas(const dnvgl::extfem::fem::elements::__base *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

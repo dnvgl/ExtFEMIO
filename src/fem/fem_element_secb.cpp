@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long secb::nnodes = 3;
 
-el_types secb::get_type() const {return SECB;}
+el_types secb::get_type(void) {return SECB;}
 
 namespace {
    const size_t procs_len = 1;

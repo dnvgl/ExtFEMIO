@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long fqus_ffq::nnodes = 4;
 
-el_types fqus_ffq::get_type() const {return FQUS_FFQ;}
+el_types fqus_ffq::get_type(void) {return FQUS_FFQ;}
 
 namespace {
    const size_t procs_len = 7;
@@ -41,10 +41,13 @@ namespace {
 const std::set<el_processor> fqus_ffq::processors(
    procs, procs+procs_len);
 
-fqus_ffq::fqus_ffq(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+fqus_ffq::fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
-fqus_ffq::fqus_ffq(const dnvgl::extfem::fem::cards::gelref1 *data) :
+fqus_ffq::fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+fqus_ffq::fqus_ffq(dnvgl::extfem::fem::elements::__base const *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

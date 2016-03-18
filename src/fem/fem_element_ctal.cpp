@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long ctal::nnodes = 4;
 
-el_types ctal::get_type() const {return CTAL;}
+el_types ctal::get_type(void) {return CTAL;}
 
 namespace {
    const size_t procs_len = 1;

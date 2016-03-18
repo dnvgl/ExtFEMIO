@@ -30,7 +30,7 @@ static char THIS_FILE[] = __FILE__;
 
 const long axcs::nnodes = 3;
 
-el_types axcs::get_type() const {return AXCS;}
+el_types axcs::get_type(void) {return AXCS;}
 
 namespace {
    const size_t procs_len = 4;

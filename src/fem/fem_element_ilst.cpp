@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long ilst::nnodes = 6;
 
-el_types ilst::get_type() const {return ILST;}
+el_types ilst::get_type(void) {return ILST;}
 
 namespace {
    const size_t procs_len = 3;

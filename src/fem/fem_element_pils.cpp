@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long pils::nnodes = 1;
 
-el_types pils::get_type() const {return PILS;}
+el_types pils::get_type(void) {return PILS;}
 
 namespace {
    const size_t procs_len = 3;

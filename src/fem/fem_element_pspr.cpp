@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long pspr::nnodes = 1;
 
-el_types pspr::get_type() const {return PSPR;}
+el_types pspr::get_type(void) {return PSPR;}
 
 namespace {
    const size_t procs_len = 3;

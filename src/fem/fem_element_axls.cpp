@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long axls::nnodes = 6;
 
-el_types axls::get_type() const {return AXLS;}
+el_types axls::get_type(void) {return AXLS;}
 
 namespace {
    const size_t procs_len = 3;

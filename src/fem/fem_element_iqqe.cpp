@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long iqqe::nnodes = 8;
 
-el_types iqqe::get_type() const {return IQQE;}
+el_types iqqe::get_type(void) {return IQQE;}
 
 namespace {
    const size_t procs_len = 3;
@@ -42,6 +42,9 @@ iqqe::iqqe(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 iqqe::iqqe(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+iqqe::iqqe(const dnvgl::extfem::fem::elements::__base *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

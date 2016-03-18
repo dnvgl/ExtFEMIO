@@ -161,31 +161,211 @@ void dnvgl::extfem::fem::elements::dispatch(
    };
 }
 
+std::string dnvgl::extfem::fem::elements::name_elem(dnvgl::extfem::fem::elements::el_types const &type) {
+   switch (type) {
+      case BEPS: return "BEPS";
+      case CSTA: return "CSTA";
+      case RPBQ: return "RPBQ";
+      case ILST: return "ILST";
+      case IQQE: return "IQQE";
+      case LQUA: return "LQUA";
+      case TESS: return "TESS";
+      case GMAS: return "GMAS";
+      case GLMA: return "GLMA";
+      case GLDA: return "GLDA";
+      case BEAS: return "BEAS";
+      case AXIS: return "AXIS";
+      case AXDA: return "AXDA";
+      case GSPR: return "GSPR";
+      case GDAM: return "GDAM";
+      case IHEX: return "IHEX";
+      case LHEX: return "LHEX";
+      case SECB: return "SECB";
+      case BTSS: return "BTSS";
+      case FQUS_FFQ: return "FQUS_FFQ";
+      case FTRS_FFTR: return "FTRS_FFTR";
+      case SCTS: return "SCTS";
+      case MCTS: return "MCTS";
+      case SCQS: return "SCQS";
+      case MCQS: return "MCQS";
+      case IPRI: return "IPRI";
+      case ITET: return "ITET";
+      case TPRI: return "TPRI";
+      case TETR: return "TETR";
+      case LCTS: return "LCTS";
+      case LCQS: return "LCQS";
+      case TRS1: return "TRS1";
+      case TRS2: return "TRS2";
+      case TRS3: return "TRS3";
+      case GLSH: return "GLSH";
+      case AXCS: return "AXCS";
+      case AXLQ: return "AXLQ";
+      case AXLS: return "AXLS";
+      case AXQQ: return "AXQQ";
+      case PILS: return "PILS";
+      case PCAB: return "PCAB";
+      case PSPR: return "PSPR";
+      case ADVA_4: return "ADVA_4";
+      case ADVA_2: return "ADVA_2";
+      case CTCP: return "CTCP";
+      case CTCL: return "CTCL";
+      case CTAL: return "CTAL";
+      case CTCC: return "CTCC";
+      case CTAQ: return "CTAQ";
+      case CTLQ: return "CTLQ";
+      case CTCQ: return "CTCQ";
+      case CTMQ: return "CTMQ";
+      case HCQS: return "HCQS";
+      case SLQS: return "SLQS";
+      case SLTS: return "SLTS";
+      case SLCB: return "SLCB";
+      case MATR: return "MATR";
+      case GHEX100: return "GHEX100";
+      case GHEX101: return "GHEX101";
+      case GHEX102: return "GHEX102";
+      case GHEX103: return "GHEX103";
+      case GHEX104: return "GHEX104";
+      case GHEX105: return "GHEX105";
+      case GHEX106: return "GHEX106";
+      case GHEX107: return "GHEX107";
+      case GHEX108: return "GHEX108";
+      case GHEX109: return "GHEX109";
+      case GHEX110: return "GHEX110";
+      case GHEX111: return "GHEX111";
+      case GHEX112: return "GHEX112";
+      case GHEX113: return "GHEX113";
+      case GHEX114: return "GHEX114";
+      case GHEX115: return "GHEX115";
+      case GHEX116: return "GHEX116";
+      case GHEX117: return "GHEX117";
+      case GHEX118: return "GHEX118";
+      case GHEX119: return "GHEX119";
+      case GHEX120: return "GHEX120";
+      case GHEX121: return "GHEX121";
+      case GHEX122: return "GHEX122";
+      case GHEX123: return "GHEX123";
+      case GHEX124: return "GHEX124";
+      case GHEX125: return "GHEX125";
+      case GHEX126: return "GHEX126";
+      case GHEX127: return "GHEX127";
+      case GHEX128: return "GHEX128";
+      case GHEX129: return "GHEX129";
+      case GHEX130: return "GHEX130";
+      case GHEX131: return "GHEX131";
+      case GHEX132: return "GHEX132";
+      case GHEX133: return "GHEX133";
+      case GHEX134: return "GHEX134";
+      case GHEX135: return "GHEX135";
+      case GHEX136: return "GHEX136";
+      case GHEX137: return "GHEX137";
+      case GHEX138: return "GHEX138";
+      case GHEX139: return "GHEX139";
+      case GHEX140: return "GHEX140";
+      case GHEX141: return "GHEX141";
+      case GHEX142: return "GHEX142";
+      case GHEX143: return "GHEX143";
+      case GHEX144: return "GHEX144";
+      case GHEX145: return "GHEX145";
+      case GHEX146: return "GHEX146";
+      case GHEX147: return "GHEX147";
+      case GHEX148: return "GHEX148";
+      case GHEX149: return "GHEX149";
+      case GHEX150: return "GHEX150";
+      case GHEX151: return "GHEX151";
+      case GHEX152: return "GHEX152";
+      case GHEX153: return "GHEX153";
+      case GHEX154: return "GHEX154";
+      case GHEX155: return "GHEX155";
+      case GHEX156: return "GHEX156";
+      case GHEX157: return "GHEX157";
+      case GHEX158: return "GHEX158";
+      case GHEX159: return "GHEX159";
+      case GHEX160: return "GHEX160";
+      case GHEX161: return "GHEX161";
+      case GHEX162: return "GHEX162";
+      case GHEX163: return "GHEX163";
+      case UNDEFINED: return "UNDEFINED";
+      }
+      return "";
+};
+
 undef::undef (void) {}
 
 const long undef::nnodes = -1;
 
-el_types undef::get_type(void) const { return UNDEFINED; }
+el_types undef::get_type(void) { return UNDEFINED; }
 
 __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
-   eleno(data->ELNOX), elident(data->ELNO),
-   nodes(data->NODIN.begin(), data->NODIN.end()) {}
+   eleno(data->ELNOX), elident(data->ELNO), el_add(data->ELTYAD),
+   nodes(data->NODIN.begin(), data->NODIN.end()),
+   matref(-1), add_no(0),
+   intno(0), mass_intno(0), i_strain_ref(0),
+   i_stress_ref(0), strpoint_ref(0),
+   section(), fixations(), eccentrities(),
+   csys()
+{}
 
-__base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) {}
+__base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) :
+   eleno(0), el_add(0),
+   nodes(),
+   elident(data->ELNO), matref(data->MATNO), add_no(data->ADDNO),
+   intno(data->INTNO), mass_intno(data->INTNO), i_strain_ref(data->STRANO),
+   i_stress_ref(data->STRENO), strpoint_ref(data->STREPONO),
+   section(data->GEONO.begin(), data->GEONO.end()),
+   fixations(data->FIXNO.begin(), data->FIXNO.end()),
+   eccentrities(data->ECCNO.begin(), data->ECCNO.end()),
+   csys(data->TRANSNO.begin(), data->TRANSNO.end())
+{}
 
-__base::__base(__base const *data) {}
+__base::__base(__base const *data) {
+   this->eleno = data->eleno;
+   this->elident = data->elident;
+   this->el_add = data->el_add;
+   this->nodes = data->nodes;
+   this->matref = data->matref;
+   this->add_no = data->add_no;
+   this->intno = data->intno;
+   this->mass_intno = data->mass_intno;
+   this->i_strain_ref = data->i_strain_ref;
+   this->i_stress_ref = data->i_stress_ref;
+   this->strpoint_ref = data->strpoint_ref;
+   this->section = data->section;
+   this->fixations = data->fixations;
+   this->eccentrities = data->eccentrities;
+   this->csys = data->csys;
+}
 
 __base::__base(void) {}
 
-void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {}
+void __base::add(dnvgl::extfem::fem::cards::gelmnt1 const *data) {
+   this->eleno = data->ELNOX;
+   this->elident = data->ELNO;
+   this->el_add = data->ELTYAD;
+   this->nodes = data->NODIN;
+}
 
-void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {}
+void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {
+   this->elident = data->ELNO;
+   this->matref = data->MATNO;
+   this->add_no = data->ADDNO;
+   this->intno = data->INTNO;
+   this->mass_intno = data->INTNO;
+   this->i_strain_ref = data->STRANO;
+   this->i_stress_ref = data->STRENO;
+   this->strpoint_ref = data->STREPONO;
+   this->section = data->GEONO;
+   this->fixations = data->FIXNO;
+   this->eccentrities = data->ECCNO;
+   this->csys = data->TRANSNO;
+}
 
-void __base::add(dnvgl::extfem::fem::cards::gelref1 const&) {}
+el_types __base::get_type(void) {
+   return UNDEFINED;
+}
 
-void __base::add(dnvgl::extfem::fem::cards::gbeamg const&) {}
+undef::undef(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
 
-void __base::add(dnvgl::extfem::fem::cards::misosel const&) {}
 
 // Local Variables:
 // mode: c++

@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long ftrs_fftr::nnodes = 3;
 
-el_types ftrs_fftr::get_type() const {return FTRS_FFTR;}
+el_types ftrs_fftr::get_type(void) {return FTRS_FFTR;}
 
 namespace {
    const size_t procs_len = 6;
@@ -40,10 +40,13 @@ namespace {
 }
 const std::set<el_processor> ftrs_fftr::processors(procs, procs+procs_len);
 
-ftrs_fftr::ftrs_fftr(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+ftrs_fftr::ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
-ftrs_fftr::ftrs_fftr(const dnvgl::extfem::fem::cards::gelref1 *data) :
+ftrs_fftr::ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+ftrs_fftr::ftrs_fftr(dnvgl::extfem::fem::elements::__base const *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

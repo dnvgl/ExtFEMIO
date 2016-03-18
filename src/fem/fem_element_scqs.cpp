@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long scqs::nnodes = 8;
 
-el_types scqs::get_type() const {return SCQS;}
+el_types scqs::get_type(void) {return SCQS;}
 
 namespace {
    const size_t procs_len = 5;

@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long adva_4::nnodes = 4;
 
-el_types adva_4::get_type() const {return ADVA_4;}
+el_types adva_4::get_type(void) {return ADVA_4;}
 
 namespace {
    const size_t procs_len = 2;

@@ -30,7 +30,7 @@ static char THIS_FILE[] = __FILE__;
 
 const long glsh::nnodes = 2;
 
-el_types glsh::get_type() const {return GLSH;}
+el_types glsh::get_type(void) {return GLSH;}
 
 namespace {
    const size_t procs_len = 4;

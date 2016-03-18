@@ -29,7 +29,7 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::fem::elements;
 
 const long gspr::nnodes = 1;
-el_types gspr::get_type() const {return GSPR;}
+el_types gspr::get_type(void) {return GSPR;}
 
 namespace {
    const size_t procs_len = 7;
@@ -43,6 +43,9 @@ gspr::gspr(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 gspr::gspr(const dnvgl::extfem::fem::cards::gelref1 *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+gspr::gspr(const dnvgl::extfem::fem::elements::__base *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

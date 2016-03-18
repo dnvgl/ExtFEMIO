@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long ctmq::nnodes = 18;
 
-el_types ctmq::get_type() const {return CTMQ;}
+el_types ctmq::get_type(void) {return CTMQ;}
 
 namespace {
    const size_t procs_len = 2;

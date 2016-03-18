@@ -30,7 +30,7 @@ using namespace dnvgl::extfem::fem::elements;
 
 const long glma::nnodes = 2;
 
-el_types glma::get_type() const {return GLMA;}
+el_types glma::get_type(void) {return GLMA;}
 
 namespace {
    const size_t procs_len = 2;
