@@ -166,6 +166,10 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
          "probe", bound<double>(nullptr, nullptr, nullptr, true));
       CHECK_THROWS(probe("        "));
    }
+
+   SECTION("FEMIO-5") {
+      CHECK(probe("  1.00000000E+00") == 1.);
+   }
 }
 
 TEST_CASE("FEM double types output.", "[fem_types]" ) {
