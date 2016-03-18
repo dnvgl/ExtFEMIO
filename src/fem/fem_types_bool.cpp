@@ -27,30 +27,20 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace types {
-
-            const
+const
 #if HAVE_BOOST_REGEX_HPP
-            boost::regex
+boost::regex
 #else
-            std::regex
+std::regex
 #endif
-            bool_re(
-               "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
+dnvgl::extfem::fem::types::bool_re(
+   "([[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]])|"
+   "([[:space:]][[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2})",
 #ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex_constants::ECMAScript);
+   boost::regex_constants::ECMAScript);
 #else
-               std::regex_constants::ECMAScript);
+  std::regex_constants::ECMAScript);
 #endif
-
-         }
-      }
-   }
-}
-
 
 // Local Variables:
 // mode: c++

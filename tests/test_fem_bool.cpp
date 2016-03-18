@@ -73,9 +73,13 @@ TEST_CASE("FEM bool types parsing.", "[fem_types]" ) {
 
    //        12345678901e3456
    SECTION("'+1.23000000E+02 '") {
-      entry_type<bool> obj("dummy");
       CHECK_THROWS(probe("+1.23000000E+02 "));
    }
+
+   SECTION("FEMIO-6") {
+      CHECK_FALSE(probe("  0.00000000E+00"));
+   }
+
 }
 
 TEST_CASE("FEM bool types output.", "[fem_types]" ) {
