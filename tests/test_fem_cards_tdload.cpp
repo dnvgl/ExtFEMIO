@@ -58,7 +58,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]" ) {
       tdload probe(lines);
 
       CHECK(probe.NFIELD == 4);
-      CHECK(probe.ISREF == 180);
+      CHECK(probe.ILREF == 180);
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 0);
       CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
@@ -75,7 +75,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]" ) {
       tdload probe(lines);
 
       CHECK(probe.NFIELD == 4);
-      CHECK(probe.ISREF == 180);
+      CHECK(probe.ILREF == 180);
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 0);
       CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
@@ -94,7 +94,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]" ) {
       tdload probe(lines);
 
       CHECK(probe.NFIELD == 4);
-      CHECK(probe.ISREF == 180);
+      CHECK(probe.ILREF == 180);
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 264);
       CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");

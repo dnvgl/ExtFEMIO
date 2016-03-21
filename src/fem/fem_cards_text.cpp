@@ -60,7 +60,7 @@ namespace dnvgl {
                for (int i = 0; i < NRECS; i++) {
                   std::string cont = _form_CONT(
                      *pos, *(pos+1), *(pos+2), *(pos+3));
-                  cont.resize(NBYTE-8, ' ');
+                  cont.resize(NBYTE, ' ');
                   CONT.push_back(cont);
                   pos += 4;
                }
@@ -81,13 +81,14 @@ namespace dnvgl {
                TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
                NRECS = static_cast<long>(this->CONT.size());
                NBYTE = 0;
-               for (auto &p : CONT)
+               for (auto &p : this->CONT)
                   NBYTE = std::max(NBYTE, (long)p.size());
                for (auto &p : this->CONT)
-                  p.resize(NBYTE-8, ' ');
+                  p.resize(NBYTE, ' ');
+               NBYTE += 8;
             }
 
-            const dnvgl::extfem::fem::cards::types
+            const types
             text::card_type(void) const { return TEXT; };
 
             const std::ostream&
@@ -106,8 +107,8 @@ namespace dnvgl {
                   << card._form_NBYTE.format(card.NBYTE) << std::endl;
                for (auto p : card.CONT)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_CONT.format(p, card.NBYTE-8)
-                     <<  std::endl;
+                     << card._form_CONT.format(p, card.NBYTE)
+                     << std::endl;
                return os;
             }
          }

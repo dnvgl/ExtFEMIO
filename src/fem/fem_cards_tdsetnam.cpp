@@ -1,7 +1,7 @@
 /**
    \file fem/fem_cards_tdsetnam.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   \copyright Copyright © 2015 by DNV GL SE
+   \copyright Copyright © 2016 by DNV GL SE
    \brief Processing Sesam FEM `TDSETNAM` cards.
 
    Detailed description
@@ -169,10 +169,10 @@ namespace dnvgl {
                   << card._form_CODTXT.format(card.CODTXT) << std::endl;
                if (card.nlnam)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_SET_NAME.format(card.SET_NAME, card.ncnam) << std::endl;
+                     << card._form_SET_NAME.format(card.SET_NAME, card.ncnam+8) << std::endl;
                for (auto p : card.CONT)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_CONT.format(p, card.nctxt) << std::endl;
+                     << card._form_CONT.format(p, card.nctxt+8) << std::endl;
 
                return os;
             }

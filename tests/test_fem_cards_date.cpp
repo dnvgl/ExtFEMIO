@@ -45,9 +45,9 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 }
 
 TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
-    
+
    std::deque<std::string> lines;
-    
+
    SECTION("DATE (1)") {
       std::deque<std::string> data;
       //              12345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -65,15 +65,15 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
       CHECK(probe.NRECS == 4);
       CHECK(probe.NBYTE == 72);
       CHECK(probe.CONT[0] ==
-            //        1         2         3         4         5         6
-            // 34567890123456789012345678901234567890123456789012345678901234
-            "DATE TIME:  11/03/2015 09:46:08                                 ");
+            //        1         2         3         4         5         6         7
+            // 3456789012345678901234567890123456789012345678901234567890123456789012
+            "DATE TIME:  11/03/2015 09:46:08                                         ");
       CHECK(probe.CONT[1] ==
-            "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            ");
+            "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013                    ");
       CHECK(probe.CONT[2] ==
-            "COMPUTER: HAML130185                                            ");
+            "COMPUTER: HAML130185                                                    ");
       CHECK(probe.CONT[3] ==
-            "USER: berhol                                                    ");
+            "USER: berhol                                                            ");
    }
 }
 
@@ -81,15 +81,17 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
 
    std::ostringstream test;
 
+   long TYPE(0), SUBTYPE(0), NRECS(4), NBYTE(72);
+   std::deque<std::string> CONT({
+         "DATE TIME:  11/03/2015 09:46:08",
+         "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013",
+         "COMPUTER: HAML130185",
+         "USER: berhol"});
+
    SECTION("simple") {
-      long TYPE(0), SUBTYPE(0), NRECS(4), NBYTE(72);
-      std::deque<std::string> CONT;
-      CONT.push_back("DATE TIME:  11/03/2015 09:46:08");
-      CONT.push_back("PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013");
-      CONT.push_back("COMPUTER: HAML130185");
-      CONT.push_back("USER: berhol");
       date probe(TYPE, SUBTYPE, NRECS, NBYTE, CONT);
       test << probe;
+      CHECK(probe.NBYTE == 72);
       CHECK(test.str() ==
             //        1         2         3         4         5         6         7
             // 3456789012345678901234567890123456789012345678901234567890123456789012
@@ -98,6 +100,36 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
             "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            \n"
             "        COMPUTER: HAML130185                                            \n"
             "        USER: berhol                                                    \n");
+   }
+
+   SECTION("simple (auto dims)") {
+      date probe(TYPE, SUBTYPE, CONT);
+      test << probe;
+      CHECK(probe.NBYTE == 60);
+      CHECK(test.str() ==
+            //        1         2         3         4         5         6         7
+            // 3456789012345678901234567890123456789012345678901234567890123456789012
+            "DATE    +0.00000000e+00 +0.00000000e+00 +4.00000000e+00 +6.00000000e+01 \n"
+            "        DATE TIME:  11/03/2015 09:46:08                     \n"
+            "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013\n"
+            "        COMPUTER: HAML130185                                \n"
+            "        USER: berhol                                        \n");
+   }
+
+   SECTION("FEMIO-7") {
+      TYPE = 1;
+      std::deque<std::string> CONT({
+            std::string("PROGRAM: GL_ShipLoad"),
+            std::string("VERSION : 2.2.?")});
+      date probe(TYPE, SUBTYPE, CONT);
+      test << probe;
+      CHECK(probe.NBYTE == 28);
+      CHECK(test.str() ==
+            //        1         2         3         4         5         6         7
+            // 3456789012345678901234567890123456789012345678901234567890123456789012
+            "DATE    +1.00000000e+00 +0.00000000e+00 +2.00000000e+00 +2.80000000e+01 \n"
+            "        PROGRAM: GL_ShipLoad\n"
+            "        VERSION : 2.2.?     \n");
    }
 }
 

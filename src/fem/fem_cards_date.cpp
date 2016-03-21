@@ -60,33 +60,33 @@ namespace dnvgl {
                for (int i = 0; i < NRECS; i++) {
                   std::string cont = _form_CONT(
                      *pos, *(pos+1), *(pos+2), *(pos+3));
-                  cont.resize(NBYTE-8, ' ');
+                  cont.resize(NBYTE, ' ');
                   CONT.push_back(cont);
                   pos += 4;
                }
             }
 
-            date::date(
-               const long &TYPE, const long &SUBTYPE,
-               const long &NRECS, const long &NBYTE,
-               const std::deque<std::string> &CONT) :
+            date::date(const long &TYPE, const long &SUBTYPE,
+                       const long &NRECS, const long &NBYTE,
+                       const std::deque<std::string> &CONT) :
                TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
                NBYTE(NBYTE), CONT(CONT) {
                for (auto &p : this->CONT)
                   p.resize(NBYTE-8, ' ');
             }
 
-            date::date(
-               const long &TYPE, const long &SUBTYPE,
-               const std::deque<std::string> &CONT) :
+            date::date(const long &TYPE, const long &SUBTYPE,
+                       const std::deque<std::string> &CONT) :
+               card(),
                TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
-               NRECS = static_cast<long>(CONT.size());
+               NRECS = static_cast<long>(this->CONT.size());
                NBYTE = 0;
-               for (auto &p : CONT)
-                  NBYTE = (NBYTE < (long)p.size()) ? (long)p.size() : NBYTE;
                for (auto &p : this->CONT)
-                  p.resize(NBYTE-8, ' ');
-            };
+                  NBYTE = std::max(NBYTE, (long)p.size());
+               for (auto &p : this->CONT)
+                  p.resize(NBYTE, ' ');
+               NBYTE += 8;
+            }
 
             const types
             date::card_type(void) const { return DATE; };
@@ -105,12 +105,10 @@ namespace dnvgl {
                   << card._form_SUBTYPE.format(card.SUBTYPE)
                   << card._form_NRECS.format(card.NRECS)
                   << card._form_NBYTE.format(card.NBYTE) << std::endl;
-
                for (auto p : card.CONT)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_CONT.format(p, card.NBYTE-8)
+                     << card._form_CONT.format(p, card.NBYTE)
                      << std::endl;
-
                return os;
             }
          }

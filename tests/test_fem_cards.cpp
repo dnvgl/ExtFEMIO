@@ -197,15 +197,15 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<text*>(current.get())->NBYTE == 72);
       CHECK(static_cast<text*>(current.get())->CONT.size() == 4);
       CHECK(static_cast<text*>(current.get())->CONT[0] ==
-            //        1         2         3         4         5         6
-            // 34567890123456789012345678901234567890123456789012345678901234
-            "CONVERSION DETAILS:                                             ");
+            //        1         2         3         4         5         6         7
+            //23456789012345678901234567890123456789012345678901234567890123456789012
+            "CONVERSION DETAILS:                                                     ");
       CHECK(static_cast<text*>(current.get())->CONT[1] ==
-            "Msc Nastran File Format -> Sesam Interface File.                ");
+            "Msc Nastran File Format -> Sesam Interface File.                        ");
       CHECK(static_cast<text*>(current.get())->CONT[2] ==
-            "Input  : \\test_01.fem                                           ");
+            "Input  : \\test_01.fem                                                   ");
       CHECK(static_cast<text*>(current.get())->CONT[3] ==
-            "Log    : \\test_01.txt                                           ");
+            "Log    : \\test_01.txt                                                   ");
    }
 
    SECTION("Checking dispatch [date].") {
@@ -227,15 +227,15 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<date*>(current.get())->NRECS == 4);
       CHECK(static_cast<date*>(current.get())->NBYTE == 72);
       CHECK(static_cast<date*>(current.get())->CONT[0] ==
-            //        1         2         3         4         5         6
-            //234567890123456789012345678901234567890123456789012345678901234
-            "DATE TIME:  11/03/2015 09:46:08                                 ");
+            //        1         2         3         4         5         6         7
+            //23456789012345678901234567890123456789012345678901234567890123456789012
+            "DATE TIME:  11/03/2015 09:46:08                                         ");
       CHECK(static_cast<date*>(current.get())->CONT[1] ==
-            "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            ");
+            "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013                    ");
       CHECK(static_cast<date*>(current.get())->CONT[2] ==
-            "COMPUTER: HAML130185                                            ");
+            "COMPUTER: HAML130185                                                    ");
       CHECK(static_cast<date*>(current.get())->CONT[3] ==
-            "USER: berhol                                                    ");
+            "USER: berhol                                                            ");
    }
 
    SECTION("Checking dispatch [tdload].") {
@@ -249,6 +249,15 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000
       //         SubCase
+      CHECK(static_cast<tdsetnam*>(current.get())->NFIELD == 4);
+      CHECK(static_cast<tdsetnam*>(current.get())->ISREF == 1);
+      CHECK(static_cast<tdsetnam*>(current.get())->CODNAM == 107);
+      CHECK(static_cast<tdsetnam*>(current.get())->CODTXT == 0);
+      CHECK(static_cast<tdsetnam*>(current.get())->SET_NAME ==
+            //        1         2         3         4         5         6         7
+            //23456789012345678901234567890123456789012345678901234567890123456789012
+            "SubCase");
+      CHECK(static_cast<tdsetnam*>(current.get())->CONT.size() == 0);
    }
 
    SECTION("Checking dispatch [gnode].") {
@@ -828,7 +837,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       // TDLOAD    4.00000000E+00  1.00000000E+00  1.04000000E+02  0.00000000E+00
       //         LC_1
       CHECK(static_cast<tdload*>(current.get())->NFIELD == 4);
-      CHECK(static_cast<tdload*>(current.get())->ISREF == 1);
+      CHECK(static_cast<tdload*>(current.get())->ILREF == 1);
       CHECK(static_cast<tdload*>(current.get())->CODNAM == 104);
       CHECK(static_cast<tdload*>(current.get())->CODTXT == 0);
       CHECK(static_cast<tdload*>(current.get())->SET_NAME == "LC_1");

@@ -169,10 +169,10 @@ namespace dnvgl {
                   << card._form_CODTXT.format(card.CODTXT) << std::endl;
                if (card.nlnam)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_SUP_NAME.format(card.SUP_NAME, card.ncnam) << std::endl;
+                     << card._form_SUP_NAME.format(card.SUP_NAME, card.ncnam+8) << std::endl;
                for (auto p : card.CONT)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_CONT.format(p, card.nctxt) << std::endl;
+                     << card._form_CONT.format(p, card.nctxt+8) << std::endl;
 
                return os;
             }

@@ -54,13 +54,14 @@ dnvgl::extfem::fem::types::entry_type<std::string>::operator() (
    return sval;
 }
 
-std::string dnvgl::extfem::fem::types::entry_type<std::string>::format(const std::string &inp, const size_t &len) const {
+std::string dnvgl::extfem::fem::types::entry_type<std::string>::format(
+   const std::string &inp, const size_t &len) const {
 
    std::ostringstream res;
 
    res.setf(std::ios_base::left, std::ios_base::adjustfield);
    res.fill(' ');
-   res.width(len-8);
+   res.width(len);
 
    res << inp;
    std::string out(res.str());
@@ -70,7 +71,7 @@ std::string dnvgl::extfem::fem::types::entry_type<std::string>::format(const std
           << " instead of allowed length of " << len << ".";
       throw errors::int_error(name, msg.str());
    }
-   out.resize(len, ' ');
+   out.resize(len-8, ' ');
    return out;
 }
 

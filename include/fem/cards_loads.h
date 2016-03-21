@@ -23,7 +23,7 @@ namespace dnvgl {
 
 |          |          |         |          |          |
 | -------- | -------- | ------- | -------- | -------- |
-| `TDLOAD` | `NFIELD` | `GEONO` | `CODNAM` | `CODTXT` |
+| `TDLOAD` | `NFIELD` | `ILREF` | `CODNAM` | `CODTXT` |
 |          | \<load name\>                      | | | |
 |          | \<text line\>                      | | | |
 |          | ...                                | | | |
@@ -35,7 +35,7 @@ namespace dnvgl {
                static const dnvgl::extfem::fem::types::card head;
 
                static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISREF;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_ILREF;
                static const dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
                static const dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
                static const dnvgl::extfem::fem::types::entry_type<std::string> _form_SET_NAME;
@@ -57,9 +57,9 @@ namespace dnvgl {
                    equeal to number of "Name and Description of a load"
                    records (`TDLOAD`). Two `TDLOAD` records may
                    not have identical load identification numbers
-                   (`ISREF`).
+                   (`ILREF`).
                */
-               long ISREF;
+               long ILREF;
                /** Coded dimension of load name:
 
                      \f[
@@ -119,22 +119,22 @@ namespace dnvgl {
                tdload(const std::deque<std::string>&);
 
                tdload(const long &NFIELD,
-                      const long &ISREF,
+                      const long &ILREF,
                       const long &CODNAM,
                       const long &CODTXT,
                       const std::string &SET_NAME,
                       const std::deque<std::string> &CONT);
 
-               tdload(const long &ISREF,
+               tdload(const long &ILREF,
                       const std::string &SET_NAME,
                       const std::deque<std::string> &CONT);
 
                tdload(const long &NFIELD,
-                      const long &ISREF,
+                      const long &ILREF,
                       const long &CODNAM,
                       const std::string &SET_NAME);
 
-               tdload(const long &ISREF,
+               tdload(const long &ILREF,
                       const std::string &SET_NAME);
 
                const dnvgl::extfem::fem::cards::types
