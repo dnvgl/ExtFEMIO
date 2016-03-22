@@ -388,11 +388,19 @@ namespace dnvgl {
                static const std::set<el_processor> processors;
             };
 
+            /** Base thin shell element definitions
+            */
+            class fem_thin_shell : public __base {
+            public:
+               fem_thin_shell(const dnvgl::extfem::fem::cards::gelmnt1*);
+               fem_thin_shell(const dnvgl::extfem::fem::cards::gelref1*);
+               fem_thin_shell(const __base*);
+            };
+
             /** Flat Quadrilateral Thin Shell (FQUS) or Free Formulation
                 Quadrilateral Shell (FQQ)
             */
-            class fqus_ffq : public __base {
-            public:
+            class fqus_ffq : public fem_thin_shell {
                fqus_ffq(const dnvgl::extfem::fem::cards::gelmnt1*);
                fqus_ffq(const dnvgl::extfem::fem::cards::gelref1*);
                fqus_ffq(const __base*);
@@ -404,7 +412,7 @@ namespace dnvgl {
             /** Flat Triangular Thin Shell (FTRS) or Free Formulation
                 Triangular Shell (FFTR)
             */
-            class ftrs_fftr : public __base {
+            class ftrs_fftr : public fem_thin_shell {
             public:
                ftrs_fftr(const dnvgl::extfem::fem::cards::gelmnt1*);
                ftrs_fftr(const dnvgl::extfem::fem::cards::gelref1*);
