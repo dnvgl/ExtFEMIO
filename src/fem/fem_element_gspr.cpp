@@ -28,8 +28,8 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long gspr::nnodes = 1;
-el_types gspr::get_type(void) {return GSPR;}
+long gspr::nnodes(void) const {return 1;}
+el_types gspr::get_type(void) const {return GSPR;}
 
 namespace {
    const size_t procs_len = 7;

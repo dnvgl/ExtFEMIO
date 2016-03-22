@@ -28,8 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long tess::nnodes = 2;
-el_types tess::get_type(void) {return TESS;}
+long tess::nnodes(void) const {return 2;}
+
+el_types tess::get_type(void) const {return TESS;}
 
 namespace {
    const size_t procs_len = 6;

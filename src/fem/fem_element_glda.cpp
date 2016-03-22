@@ -28,9 +28,9 @@ using namespace dnvgl::extfem::fem::elements;
 static char THIS_FILE[] = __FILE__;
 #endif
 
-const long glda::nnodes = 2;
+long glda::nnodes(void) const {return 2;}
 
-el_types glda::get_type(void) {return GLDA;}
+el_types glda::get_type(void) const {return GLDA;}
 
 namespace {
    const size_t procs_len = 1;

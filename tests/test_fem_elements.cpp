@@ -66,7 +66,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
 
    tess probe1(&data1);
    CHECK(probe1.get_type() == elements::TESS);
-   CHECK(probe1.nnodes == 2);
+   CHECK(probe1.nnodes() == 2);
    CHECK(probe1.nodes.size() == 2);
    CHECK(probe1.nodes[0] == 6);
    CHECK(probe1.nodes[1] == 7);
@@ -74,7 +74,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    std::unique_ptr<__base> probe2;
    dispatch(probe2, &data1);
    CHECK(probe2->get_type() == TESS);
-   CHECK(static_cast<tess*>(probe2.get())->nnodes == 2);
+   CHECK(static_cast<tess*>(probe2.get())->nnodes() == 2);
 }
 
 // Local Variables:

@@ -28,9 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long adva_2::nnodes = 2;
+long adva_2::nnodes(void) const {return 2;}
 
-el_types adva_2::get_type(void) {return ADVA_2;}
+el_types adva_2::get_type(void) const {return ADVA_2;}
 
 namespace {
    const size_t procs_len = 2;

@@ -28,9 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long gmas::nnodes = 1;
+long gmas::nnodes(void) const {return 1;}
 
-el_types gmas::get_type(void) {return GMAS;}
+el_types gmas::get_type(void) const {return GMAS;}
 
 namespace {
    const size_t procs_len = 6;

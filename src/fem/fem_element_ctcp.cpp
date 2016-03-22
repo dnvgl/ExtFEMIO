@@ -28,9 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long ctcp::nnodes = 2;
+long ctcp::nnodes(void) const {return 2;}
 
-el_types ctcp::get_type(void) {return CTCP;}
+el_types ctcp::get_type(void) const {return CTCP;}
 
 namespace {
    const size_t procs_len = 1;

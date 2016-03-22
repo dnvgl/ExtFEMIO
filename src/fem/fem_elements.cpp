@@ -291,9 +291,9 @@ std::string dnvgl::extfem::fem::elements::name_elem(dnvgl::extfem::fem::elements
 
 undef::undef (void) {}
 
-const long undef::nnodes = -1;
+long undef::nnodes(void) const {return -1;}
 
-el_types undef::get_type(void) { return UNDEFINED; }
+el_types undef::get_type(void) const {return UNDEFINED;}
 
 __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
    eleno(data->ELNOX), elident(data->ELNO), el_add(data->ELTYAD),
@@ -357,10 +357,6 @@ void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {
    this->fixations = data->FIXNO;
    this->eccentrities = data->ECCNO;
    this->csys = data->TRANSNO;
-}
-
-el_types __base::get_type(void) {
-   return UNDEFINED;
 }
 
 undef::undef(const dnvgl::extfem::fem::cards::gelref1 *data) :

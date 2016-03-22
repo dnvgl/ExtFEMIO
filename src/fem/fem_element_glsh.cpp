@@ -28,9 +28,9 @@ using namespace dnvgl::extfem::fem::elements;
 static char THIS_FILE[] = __FILE__;
 #endif
 
-const long glsh::nnodes = 2;
+long glsh::nnodes(void) const {return 2;}
 
-el_types glsh::get_type(void) {return GLSH;}
+el_types glsh::get_type(void) const {return GLSH;}
 
 namespace {
    const size_t procs_len = 4;

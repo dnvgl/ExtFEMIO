@@ -28,9 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long rpbq::nnodes = 4;
+long rpbq::nnodes(void) const {return 4;}
 
-el_types rpbq::get_type(void) {return RPBQ;}
+el_types rpbq::get_type(void) const {return RPBQ;}
 
 namespace {
    const size_t procs_len = 1;

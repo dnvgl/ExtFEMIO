@@ -50,9 +50,11 @@ namespace {
                     - node 27 at pos 21
 */
 
-const long ghex100::nnodes = 21;
+long ghex100::nnodes(void) const {
+   return 21;
+}
 
-el_types ghex100::get_type(void) {
+el_types ghex100::get_type() const {
    return GHEX100;
 }
 
@@ -79,9 +81,11 @@ ghex100::ghex100(
                     - node 27 at pos 22
 */
 
-const long ghex101::nnodes = 22;
+long ghex101::nnodes(void) const {
+   return 22;
+}
 
-el_types ghex101::get_type(void) {
+el_types ghex101::get_type() const {
    return GHEX101;
 }
 
@@ -108,9 +112,11 @@ ghex101::ghex101(
                     - node 27 at pos 22
 */
 
-const long ghex102::nnodes = 22;
+long ghex102::nnodes(void) const {
+   return 22;
+}
 
-el_types ghex102::get_type(void) {
+el_types ghex102::get_type() const {
    return GHEX102;
 }
 
@@ -138,9 +144,11 @@ ghex102::ghex102(
                     - node 27 at pos 23
 */
 
-const long ghex103::nnodes = 23;
+long ghex103::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex103::get_type(void) {
+el_types ghex103::get_type() const {
    return GHEX103;
 }
 
@@ -167,9 +175,11 @@ ghex103::ghex103(
                     - node 27 at pos 22
 */
 
-const long ghex104::nnodes = 22;
+long ghex104::nnodes(void) const {
+   return 22;
+}
 
-el_types ghex104::get_type(void) {
+el_types ghex104::get_type() const {
    return GHEX104;
 }
 
@@ -197,9 +207,11 @@ ghex104::ghex104(
                     - node 27 at pos 23
 */
 
-const long ghex105::nnodes = 23;
+long ghex105::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex105::get_type(void) {
+el_types ghex105::get_type() const {
    return GHEX105;
 }
 
@@ -227,9 +239,11 @@ ghex105::ghex105(
                     - node 27 at pos 23
 */
 
-const long ghex106::nnodes = 23;
+long ghex106::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex106::get_type(void) {
+el_types ghex106::get_type() const {
    return GHEX106;
 }
 
@@ -258,9 +272,11 @@ ghex106::ghex106(
                     - node 27 at pos 24
 */
 
-const long ghex107::nnodes = 24;
+long ghex107::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex107::get_type(void) {
+el_types ghex107::get_type() const {
    return GHEX107;
 }
 
@@ -287,9 +303,11 @@ ghex107::ghex107(
                     - node 27 at pos 22
 */
 
-const long ghex108::nnodes = 22;
+long ghex108::nnodes(void) const {
+   return 22;
+}
 
-el_types ghex108::get_type(void) {
+el_types ghex108::get_type() const {
    return GHEX108;
 }
 
@@ -317,9 +335,11 @@ ghex108::ghex108(
                     - node 27 at pos 23
 */
 
-const long ghex109::nnodes = 23;
+long ghex109::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex109::get_type(void) {
+el_types ghex109::get_type() const {
    return GHEX109;
 }
 
@@ -347,9 +367,11 @@ ghex109::ghex109(
                     - node 27 at pos 23
 */
 
-const long ghex110::nnodes = 23;
+long ghex110::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex110::get_type(void) {
+el_types ghex110::get_type() const {
    return GHEX110;
 }
 
@@ -378,9 +400,11 @@ ghex110::ghex110(
                     - node 27 at pos 24
 */
 
-const long ghex111::nnodes = 24;
+long ghex111::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex111::get_type(void) {
+el_types ghex111::get_type() const {
    return GHEX111;
 }
 
@@ -408,9 +432,11 @@ ghex111::ghex111(
                     - node 27 at pos 23
 */
 
-const long ghex112::nnodes = 23;
+long ghex112::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex112::get_type(void) {
+el_types ghex112::get_type() const {
    return GHEX112;
 }
 
@@ -439,9 +465,11 @@ ghex112::ghex112(
                     - node 27 at pos 24
 */
 
-const long ghex113::nnodes = 24;
+long ghex113::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex113::get_type(void) {
+el_types ghex113::get_type() const {
    return GHEX113;
 }
 
@@ -470,9 +498,11 @@ ghex113::ghex113(
                     - node 27 at pos 24
 */
 
-const long ghex114::nnodes = 24;
+long ghex114::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex114::get_type(void) {
+el_types ghex114::get_type() const {
    return GHEX114;
 }
 
@@ -502,9 +532,11 @@ ghex114::ghex114(
                     - node 27 at pos 25
 */
 
-const long ghex115::nnodes = 25;
+long ghex115::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex115::get_type(void) {
+el_types ghex115::get_type() const {
    return GHEX115;
 }
 
@@ -531,9 +563,11 @@ ghex115::ghex115(
                     - node 27 at pos 22
 */
 
-const long ghex116::nnodes = 22;
+long ghex116::nnodes(void) const {
+   return 22;
+}
 
-el_types ghex116::get_type(void) {
+el_types ghex116::get_type() const {
    return GHEX116;
 }
 
@@ -561,9 +595,11 @@ ghex116::ghex116(
                     - node 27 at pos 23
 */
 
-const long ghex117::nnodes = 23;
+long ghex117::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex117::get_type(void) {
+el_types ghex117::get_type() const {
    return GHEX117;
 }
 
@@ -591,9 +627,11 @@ ghex117::ghex117(
                     - node 27 at pos 23
 */
 
-const long ghex118::nnodes = 23;
+long ghex118::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex118::get_type(void) {
+el_types ghex118::get_type() const {
    return GHEX118;
 }
 
@@ -622,9 +660,11 @@ ghex118::ghex118(
                     - node 27 at pos 24
 */
 
-const long ghex119::nnodes = 24;
+long ghex119::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex119::get_type(void) {
+el_types ghex119::get_type() const {
    return GHEX119;
 }
 
@@ -652,9 +692,11 @@ ghex119::ghex119(
                     - node 27 at pos 23
 */
 
-const long ghex120::nnodes = 23;
+long ghex120::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex120::get_type(void) {
+el_types ghex120::get_type() const {
    return GHEX120;
 }
 
@@ -683,9 +725,11 @@ ghex120::ghex120(
                     - node 27 at pos 24
 */
 
-const long ghex121::nnodes = 24;
+long ghex121::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex121::get_type(void) {
+el_types ghex121::get_type() const {
    return GHEX121;
 }
 
@@ -714,9 +758,11 @@ ghex121::ghex121(
                     - node 27 at pos 24
 */
 
-const long ghex122::nnodes = 24;
+long ghex122::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex122::get_type(void) {
+el_types ghex122::get_type() const {
    return GHEX122;
 }
 
@@ -746,9 +792,11 @@ ghex122::ghex122(
                     - node 27 at pos 25
 */
 
-const long ghex123::nnodes = 25;
+long ghex123::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex123::get_type(void) {
+el_types ghex123::get_type() const {
    return GHEX123;
 }
 
@@ -776,9 +824,11 @@ ghex123::ghex123(
                     - node 27 at pos 23
 */
 
-const long ghex124::nnodes = 23;
+long ghex124::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex124::get_type(void) {
+el_types ghex124::get_type() const {
    return GHEX124;
 }
 
@@ -807,9 +857,11 @@ ghex124::ghex124(
                     - node 27 at pos 24
 */
 
-const long ghex125::nnodes = 24;
+long ghex125::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex125::get_type(void) {
+el_types ghex125::get_type() const {
    return GHEX125;
 }
 
@@ -838,9 +890,11 @@ ghex125::ghex125(
                     - node 27 at pos 24
 */
 
-const long ghex126::nnodes = 24;
+long ghex126::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex126::get_type(void) {
+el_types ghex126::get_type() const {
    return GHEX126;
 }
 
@@ -870,9 +924,11 @@ ghex126::ghex126(
                     - node 27 at pos 25
 */
 
-const long ghex127::nnodes = 25;
+long ghex127::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex127::get_type(void) {
+el_types ghex127::get_type() const {
    return GHEX127;
 }
 
@@ -901,9 +957,11 @@ ghex127::ghex127(
                     - node 27 at pos 24
 */
 
-const long ghex128::nnodes = 24;
+long ghex128::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex128::get_type(void) {
+el_types ghex128::get_type() const {
    return GHEX128;
 }
 
@@ -933,9 +991,11 @@ ghex128::ghex128(
                     - node 27 at pos 25
 */
 
-const long ghex129::nnodes = 25;
+long ghex129::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex129::get_type(void) {
+el_types ghex129::get_type() const {
    return GHEX129;
 }
 
@@ -965,9 +1025,11 @@ ghex129::ghex129(
                     - node 27 at pos 25
 */
 
-const long ghex130::nnodes = 25;
+long ghex130::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex130::get_type(void) {
+el_types ghex130::get_type() const {
    return GHEX130;
 }
 
@@ -998,9 +1060,11 @@ ghex130::ghex130(
                     - node 27 at pos 26
 */
 
-const long ghex131::nnodes = 26;
+long ghex131::nnodes(void) const {
+   return 26;
+}
 
-el_types ghex131::get_type(void) {
+el_types ghex131::get_type() const {
    return GHEX131;
 }
 
@@ -1027,9 +1091,11 @@ ghex131::ghex131(
                     - node 27 at pos 22
 */
 
-const long ghex132::nnodes = 22;
+long ghex132::nnodes(void) const {
+   return 22;
+}
 
-el_types ghex132::get_type(void) {
+el_types ghex132::get_type() const {
    return GHEX132;
 }
 
@@ -1057,9 +1123,11 @@ ghex132::ghex132(
                     - node 27 at pos 23
 */
 
-const long ghex133::nnodes = 23;
+long ghex133::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex133::get_type(void) {
+el_types ghex133::get_type() const {
    return GHEX133;
 }
 
@@ -1087,9 +1155,11 @@ ghex133::ghex133(
                     - node 27 at pos 23
 */
 
-const long ghex134::nnodes = 23;
+long ghex134::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex134::get_type(void) {
+el_types ghex134::get_type() const {
    return GHEX134;
 }
 
@@ -1118,9 +1188,11 @@ ghex134::ghex134(
                     - node 27 at pos 24
 */
 
-const long ghex135::nnodes = 24;
+long ghex135::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex135::get_type(void) {
+el_types ghex135::get_type() const {
    return GHEX135;
 }
 
@@ -1148,9 +1220,11 @@ ghex135::ghex135(
                     - node 27 at pos 23
 */
 
-const long ghex136::nnodes = 23;
+long ghex136::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex136::get_type(void) {
+el_types ghex136::get_type() const {
    return GHEX136;
 }
 
@@ -1179,9 +1253,11 @@ ghex136::ghex136(
                     - node 27 at pos 24
 */
 
-const long ghex137::nnodes = 24;
+long ghex137::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex137::get_type(void) {
+el_types ghex137::get_type() const {
    return GHEX137;
 }
 
@@ -1210,9 +1286,11 @@ ghex137::ghex137(
                     - node 27 at pos 24
 */
 
-const long ghex138::nnodes = 24;
+long ghex138::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex138::get_type(void) {
+el_types ghex138::get_type() const {
    return GHEX138;
 }
 
@@ -1242,9 +1320,11 @@ ghex138::ghex138(
                     - node 27 at pos 25
 */
 
-const long ghex139::nnodes = 25;
+long ghex139::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex139::get_type(void) {
+el_types ghex139::get_type() const {
    return GHEX139;
 }
 
@@ -1272,9 +1352,11 @@ ghex139::ghex139(
                     - node 27 at pos 23
 */
 
-const long ghex140::nnodes = 23;
+long ghex140::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex140::get_type(void) {
+el_types ghex140::get_type() const {
    return GHEX140;
 }
 
@@ -1303,9 +1385,11 @@ ghex140::ghex140(
                     - node 27 at pos 24
 */
 
-const long ghex141::nnodes = 24;
+long ghex141::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex141::get_type(void) {
+el_types ghex141::get_type() const {
    return GHEX141;
 }
 
@@ -1334,9 +1418,11 @@ ghex141::ghex141(
                     - node 27 at pos 24
 */
 
-const long ghex142::nnodes = 24;
+long ghex142::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex142::get_type(void) {
+el_types ghex142::get_type() const {
    return GHEX142;
 }
 
@@ -1366,9 +1452,11 @@ ghex142::ghex142(
                     - node 27 at pos 25
 */
 
-const long ghex143::nnodes = 25;
+long ghex143::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex143::get_type(void) {
+el_types ghex143::get_type() const {
    return GHEX143;
 }
 
@@ -1397,9 +1485,11 @@ ghex143::ghex143(
                     - node 27 at pos 24
 */
 
-const long ghex144::nnodes = 24;
+long ghex144::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex144::get_type(void) {
+el_types ghex144::get_type() const {
    return GHEX144;
 }
 
@@ -1429,9 +1519,11 @@ ghex144::ghex144(
                     - node 27 at pos 25
 */
 
-const long ghex145::nnodes = 25;
+long ghex145::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex145::get_type(void) {
+el_types ghex145::get_type() const {
    return GHEX145;
 }
 
@@ -1461,9 +1553,11 @@ ghex145::ghex145(
                     - node 27 at pos 25
 */
 
-const long ghex146::nnodes = 25;
+long ghex146::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex146::get_type(void) {
+el_types ghex146::get_type() const {
    return GHEX146;
 }
 
@@ -1494,9 +1588,11 @@ ghex146::ghex146(
                     - node 27 at pos 26
 */
 
-const long ghex147::nnodes = 26;
+long ghex147::nnodes(void) const {
+   return 26;
+}
 
-el_types ghex147::get_type(void) {
+el_types ghex147::get_type() const {
    return GHEX147;
 }
 
@@ -1524,9 +1620,11 @@ ghex147::ghex147(
                     - node 27 at pos 23
 */
 
-const long ghex148::nnodes = 23;
+long ghex148::nnodes(void) const {
+   return 23;
+}
 
-el_types ghex148::get_type(void) {
+el_types ghex148::get_type() const {
    return GHEX148;
 }
 
@@ -1555,9 +1653,11 @@ ghex148::ghex148(
                     - node 27 at pos 24
 */
 
-const long ghex149::nnodes = 24;
+long ghex149::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex149::get_type(void) {
+el_types ghex149::get_type() const {
    return GHEX149;
 }
 
@@ -1586,9 +1686,11 @@ ghex149::ghex149(
                     - node 27 at pos 24
 */
 
-const long ghex150::nnodes = 24;
+long ghex150::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex150::get_type(void) {
+el_types ghex150::get_type() const {
    return GHEX150;
 }
 
@@ -1618,9 +1720,11 @@ ghex150::ghex150(
                     - node 27 at pos 25
 */
 
-const long ghex151::nnodes = 25;
+long ghex151::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex151::get_type(void) {
+el_types ghex151::get_type() const {
    return GHEX151;
 }
 
@@ -1649,9 +1753,11 @@ ghex151::ghex151(
                     - node 27 at pos 24
 */
 
-const long ghex152::nnodes = 24;
+long ghex152::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex152::get_type(void) {
+el_types ghex152::get_type() const {
    return GHEX152;
 }
 
@@ -1681,9 +1787,11 @@ ghex152::ghex152(
                     - node 27 at pos 25
 */
 
-const long ghex153::nnodes = 25;
+long ghex153::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex153::get_type(void) {
+el_types ghex153::get_type() const {
    return GHEX153;
 }
 
@@ -1713,9 +1821,11 @@ ghex153::ghex153(
                     - node 27 at pos 25
 */
 
-const long ghex154::nnodes = 25;
+long ghex154::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex154::get_type(void) {
+el_types ghex154::get_type() const {
    return GHEX154;
 }
 
@@ -1746,9 +1856,11 @@ ghex154::ghex154(
                     - node 27 at pos 26
 */
 
-const long ghex155::nnodes = 26;
+long ghex155::nnodes(void) const {
+   return 26;
+}
 
-el_types ghex155::get_type(void) {
+el_types ghex155::get_type() const {
    return GHEX155;
 }
 
@@ -1777,9 +1889,11 @@ ghex155::ghex155(
                     - node 27 at pos 24
 */
 
-const long ghex156::nnodes = 24;
+long ghex156::nnodes(void) const {
+   return 24;
+}
 
-el_types ghex156::get_type(void) {
+el_types ghex156::get_type() const {
    return GHEX156;
 }
 
@@ -1809,9 +1923,11 @@ ghex156::ghex156(
                     - node 27 at pos 25
 */
 
-const long ghex157::nnodes = 25;
+long ghex157::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex157::get_type(void) {
+el_types ghex157::get_type() const {
    return GHEX157;
 }
 
@@ -1841,9 +1957,11 @@ ghex157::ghex157(
                     - node 27 at pos 25
 */
 
-const long ghex158::nnodes = 25;
+long ghex158::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex158::get_type(void) {
+el_types ghex158::get_type() const {
    return GHEX158;
 }
 
@@ -1874,9 +1992,11 @@ ghex158::ghex158(
                     - node 27 at pos 26
 */
 
-const long ghex159::nnodes = 26;
+long ghex159::nnodes(void) const {
+   return 26;
+}
 
-el_types ghex159::get_type(void) {
+el_types ghex159::get_type() const {
    return GHEX159;
 }
 
@@ -1906,9 +2026,11 @@ ghex159::ghex159(
                     - node 27 at pos 25
 */
 
-const long ghex160::nnodes = 25;
+long ghex160::nnodes(void) const {
+   return 25;
+}
 
-el_types ghex160::get_type(void) {
+el_types ghex160::get_type() const {
    return GHEX160;
 }
 
@@ -1939,9 +2061,11 @@ ghex160::ghex160(
                     - node 27 at pos 26
 */
 
-const long ghex161::nnodes = 26;
+long ghex161::nnodes(void) const {
+   return 26;
+}
 
-el_types ghex161::get_type(void) {
+el_types ghex161::get_type() const {
    return GHEX161;
 }
 
@@ -1972,9 +2096,11 @@ ghex161::ghex161(
                     - node 27 at pos 26
 */
 
-const long ghex162::nnodes = 26;
+long ghex162::nnodes(void) const {
+   return 26;
+}
 
-el_types ghex162::get_type(void) {
+el_types ghex162::get_type() const {
    return GHEX162;
 }
 
@@ -2006,9 +2132,11 @@ ghex162::ghex162(
                     - node 27 at pos 27
 */
 
-const long ghex163::nnodes = 27;
+long ghex163::nnodes(void) const {
+   return 27;
+}
 
-el_types ghex163::get_type(void) {
+el_types ghex163::get_type() const {
    return GHEX163;
 }
 

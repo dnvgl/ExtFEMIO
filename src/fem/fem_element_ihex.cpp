@@ -28,9 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long ihex::nnodes = 20;
+long ihex::nnodes(void) const {return 20;}
 
-el_types ihex::get_type(void) {return IHEX;}
+el_types ihex::get_type(void) const {return IHEX;}
 
 namespace {
    const size_t procs_len = 5;

@@ -50,7 +50,9 @@ namespace {
 {{ gen_nodepos(pos, 20 * " ") }}
 */
 
-const long ghex1{{ "%02d"|format(num) }}::nnodes = {{ pos|length + 20 }};
+long ghex1{{ "%02d"|format(num) }}::nnodes(void) const {
+   return {{ pos|length + 20 }};
+}
 
 el_types ghex1{{ "%02d"|format(num) }}::get_type() const {
    return GHEX1{{ "%02d"|format(num) }};

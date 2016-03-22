@@ -28,8 +28,8 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long gdam::nnodes = 1;
-el_types gdam::get_type(void) {return GDAM;}
+long gdam::nnodes(void) const {return 1;}
+el_types gdam::get_type(void) const {return GDAM;}
 
 namespace {
    const size_t procs_len = 5;

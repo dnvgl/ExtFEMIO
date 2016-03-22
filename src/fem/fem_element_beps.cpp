@@ -30,9 +30,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long beps::nnodes = 2;
+long beps::nnodes(void) const {return 2;}
 
-el_types beps::get_type(void) {return BEPS;}
+el_types beps::get_type(void) const {return BEPS;}
 
 namespace {
    const size_t procs_len = 3;

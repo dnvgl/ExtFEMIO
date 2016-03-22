@@ -30,6 +30,7 @@ namespace dnvgl {
                ghex(const dnvgl::extfem::fem::cards::gelmnt1*);
                ghex(const dnvgl::extfem::fem::cards::gelref1*);
                ghex(const __base*);
+               virtual long nnodes(void) const = 0;
                virtual el_types get_type(void) const = 0;
             };
 {% for num, pos in res %}
@@ -44,8 +45,8 @@ namespace dnvgl {
                ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::cards::gelmnt1*);
                ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::cards::gelref1*);
                ghex1{{ "%02d"|format(num) }}(const __base*);
-               static const long nnodes;
-               el_types get_type(void) const;
+               virtual long nnodes(void) const;
+               virtual el_types get_type(void) const;
                static const std::set<el_processor> processors;
             };
 {% endfor %}

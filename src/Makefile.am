@@ -86,6 +86,7 @@ libextfemio_la_SOURCES += fem/fem_cards_hsuptran.cpp
 libextfemio_la_SOURCES += fem/fem_cards_hierarch.cpp
 libextfemio_la_SOURCES += fem/fem_cards_beuslo.cpp
 libextfemio_la_SOURCES += fem/fem_elements.cpp
+libextfemio_la_SOURCES += fem/fem_element_thin_shell.cpp
 libextfemio_la_SOURCES += fem/fem_element_beps.cpp
 libextfemio_la_SOURCES += fem/fem_element_csta.cpp
 libextfemio_la_SOURCES += fem/fem_element_rpbq.cpp

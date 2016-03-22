@@ -28,9 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long axda::nnodes = 2;
+long axda::nnodes(void) const {return 2;}
 
-el_types axda::get_type(void) {return AXDA;}
+el_types axda::get_type(void) const {return AXDA;}
 
 namespace {
    const size_t procs_len = 5;

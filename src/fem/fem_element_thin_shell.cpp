@@ -1,10 +1,11 @@
 /**
-   \file fem/fem_element_tpri.cpp
+   \file fem/fem_element_thin_shell.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief FEM element definition for tpri.
+   \brief FEM element definition for fem_thin_shell.
 
-   Triangular Prism
+   Flat Quadrilateral/Triangular Thin Shell / Free Formulation
+   Quadrilateral/Triangular Shell
 */
 
 #include "StdAfx.h"
@@ -28,21 +29,13 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-long tpri::nnodes(void) const {return 6;}
-
-el_types tpri::get_type(void) const {return TPRI;}
-
-namespace {
-   const size_t procs_len = 4;
-   el_processor procs[
-      procs_len] = {general, Prefem, Sestra, Platework};
-}
-const std::set<el_processor> tpri::processors(procs, procs+procs_len);
-
-tpri::tpri(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+fem_thin_shell::fem_thin_shell(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
-tpri::tpri(const dnvgl::extfem::fem::cards::gelref1 *data) :
+fem_thin_shell::fem_thin_shell(dnvgl::extfem::fem::cards::gelref1 const *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
+fem_thin_shell::fem_thin_shell(dnvgl::extfem::fem::elements::__base const *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:

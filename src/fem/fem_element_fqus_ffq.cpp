@@ -28,9 +28,9 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::elements;
 
-const long fqus_ffq::nnodes = 4;
+long fqus_ffq::nnodes(void) const {return 4;}
 
-el_types fqus_ffq::get_type(void) {return FQUS_FFQ;}
+el_types fqus_ffq::get_type(void) const {return FQUS_FFQ;}
 
 namespace {
    const size_t procs_len = 7;
@@ -42,13 +42,13 @@ const std::set<el_processor> fqus_ffq::processors(
    procs, procs+procs_len);
 
 fqus_ffq::fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
 
 fqus_ffq::fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
 
 fqus_ffq::fqus_ffq(dnvgl::extfem::fem::elements::__base const *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
 
 // Local Variables:
 // mode: c++

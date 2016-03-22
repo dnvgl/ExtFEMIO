@@ -28,9 +28,9 @@ using namespace dnvgl::extfem::fem::elements;
 static char THIS_FILE[] = __FILE__;
 #endif
 
-const long axcs::nnodes = 3;
+long axcs::nnodes(void) const {return 3;}
 
-el_types axcs::get_type(void) {return AXCS;}
+el_types axcs::get_type(void) const {return AXCS;}
 
 namespace {
    const size_t procs_len = 4;

@@ -94,6 +94,9 @@
     <ClCompile Include="fem\fem_elements.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_element_thin_shell.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="fem\fem_element_beps.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
