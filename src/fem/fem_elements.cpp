@@ -345,7 +345,7 @@ void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {
    this->i_strain_ref = data->STRANO;
    this->i_stress_ref = data->STRENO;
    this->strpoint_ref = data->STREPONO;
-   if (data->GEONO.size() == -(data->GEONO_OPT))
+   if (data->GEONO.size() == (size_t)(-(data->GEONO_OPT)))
       this->section = data->GEONO;
    else
       this->section.push_back(data->GEONO_OPT);
