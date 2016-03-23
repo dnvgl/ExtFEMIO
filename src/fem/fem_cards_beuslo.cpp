@@ -113,7 +113,7 @@ namespace dnvgl {
                if (!this->COMPLX)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "BEUSLO", "ILOAD data given with COMPLX == false");
-               this->NDOF = this->RLOADi.size();
+               this->NDOF = long(this->RLOADi.size());
                if (this->ILOADi.size() != (size_t)this->NDOF)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "BEUSLO", "ILOAD not of same size RLOAD");
@@ -153,7 +153,7 @@ namespace dnvgl {
                if (this->COMPLX)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "BEUSLO", "no ILOAD data given with COMPLX == True");
-               this->NDOF = this->RLOADi.size();
+               this->NDOF = long(this->RLOADi.size());
             }
 
             beuslo::beuslo(const long &LLC,
@@ -187,7 +187,7 @@ namespace dnvgl {
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(true),
                LAYER(LAYER), ELNO(ELNO), INTNO(INTNO),
                SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
-               this->NDOF = this->RLOADi.size();
+               this->NDOF = long(this->RLOADi.size());
                if (this->ILOADi.size() != (size_t)this->NDOF)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "BEUSLO", "ILOAD not of same size RLOAD");
@@ -219,7 +219,7 @@ namespace dnvgl {
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(false),
                LAYER(LAYER), ELNO(ELNO), INTNO(INTNO),
                SIDE(SIDE), RLOADi(RLOAD), ILOADi() {
-               this->NDOF = this->RLOADi.size();
+               this->NDOF = long(this->RLOADi.size());
             }
 
             const dnvgl::extfem::fem::cards::types

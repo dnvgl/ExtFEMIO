@@ -99,7 +99,7 @@ namespace dnvgl {
                card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
                INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
                IHPREF(IHPREF), IHSREFi(IHSREF) {
-               this->NSUB = this->IHSREFi.size();
+               this->NSUB = long(this->IHSREFi.size());
             }
 
             const dnvgl::extfem::fem::cards::types

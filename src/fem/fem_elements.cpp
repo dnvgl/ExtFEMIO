@@ -296,26 +296,18 @@ long undef::nnodes(void) const {return -1;}
 el_types undef::get_type(void) const {return UNDEFINED;}
 
 __base::__base(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
-   eleno(data->ELNOX), elident(data->ELNO), el_add(data->ELTYAD),
-   nodes(data->NODIN.begin(), data->NODIN.end()),
-   matref(-1), add_no(0),
-   intno(0), mass_intno(0), i_strain_ref(0),
-   i_stress_ref(0), strpoint_ref(0),
-   section(), fixations(), eccentrities(),
-   csys()
-{}
+matref(-1), add_no(0),
+intno(0), mass_intno(0), i_strain_ref(0),
+i_stress_ref(0), strpoint_ref(0),
+section(), fixations(), eccentrities(),
+csys() {
+   this->add(data);
+}
 
 __base::__base(dnvgl::extfem::fem::cards::gelref1 const *data) :
-   eleno(0), elident(data->ELNO), el_add(0),
-   nodes(),
-   matref(data->MATNO), add_no(data->ADDNO),
-   intno(data->INTNO), mass_intno(data->INTNO), i_strain_ref(data->STRANO),
-   i_stress_ref(data->STRENO), strpoint_ref(data->STREPONO),
-   section(data->GEONO.begin(), data->GEONO.end()),
-   fixations(data->FIXNO.begin(), data->FIXNO.end()),
-   eccentrities(data->ECCNO.begin(), data->ECCNO.end()),
-   csys(data->TRANSNO.begin(), data->TRANSNO.end())
-{}
+   eleno(0), el_add(0), nodes() {
+   this->add(data);
+}
 
 __base::__base(__base const *data) {
    this->eleno = data->eleno;
@@ -353,7 +345,10 @@ void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {
    this->i_strain_ref = data->STRANO;
    this->i_stress_ref = data->STRENO;
    this->strpoint_ref = data->STREPONO;
-   this->section = data->GEONO;
+   if (data->GEONO.size() == -(data->GEONO_OPT))
+      this->section = data->GEONO;
+   else
+      this->section.push_back(data->GEONO_OPT);
    this->fixations = data->FIXNO;
    this->eccentrities = data->ECCNO;
    this->csys = data->TRANSNO;

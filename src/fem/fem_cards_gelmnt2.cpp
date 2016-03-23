@@ -94,7 +94,7 @@ namespace dnvgl {
                              const double T[4][4],
                              const std::deque<long> &NOD) :
                card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
-               ADDNO(ADDNO), NNOD(NOD.size()), NOD(NOD) {
+               ADDNO(ADDNO), NNOD(long(NOD.size())), NOD(NOD) {
                for (int i=0; i<4; i++)
                   for (int j=0; j<4; j++)
                      this->T[j][i] = T[j][i];
@@ -160,7 +160,7 @@ namespace dnvgl {
                              const std::deque<long> &NOD) :
                card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
                ADDNO(ADDNO), NOD(NOD) {
-               this->NNOD = this->NOD.size();
+               this->NNOD = long(this->NOD.size());
                T[0][0] = T11;
                T[1][0] = T21;
                T[2][0] = T31;
