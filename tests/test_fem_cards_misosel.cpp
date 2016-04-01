@@ -51,12 +51,9 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
    std::deque<std::string> lines;
 
    SECTION("MISOSEL (1)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "MISOSEL  4.10000000e+001 2.06000000e+008 3.00032000e-001 7.80000000e+000\n");
-      data.push_back(
-         "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+            "MISOSEL  4.10000000e+001 2.06000000e+008 3.00032000e-001 7.80000000e+000\n",
+            "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       misosel probe(lines);
 
@@ -66,15 +63,14 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
       CHECK(probe.RHO == 7.8);
       CHECK(probe.DAMP == 0.);
       CHECK(probe.ALPHA == 0.);
+      CHECK(probe.DUMMY == 0.);
+      CHECK(probe.YIELD == 0.);
    }
 
    SECTION("MISOSEL (2)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "MISOSEL  4.10000000e+01  2.06000000e+08  3.00032000e-01  7.80000000e+00 \n");
-      data.push_back(
-         "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+            "MISOSEL  4.10000000e+01  2.06000000e+08  3.00032000e-01  7.80000000e+00 \n",
+            "         0.00000000e+00  0.00000000e+00  1.00000000e+00  2.34000000e+02 \n"});
       card::card_split(data, lines);
       misosel probe(lines);
 
@@ -84,6 +80,8 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
       CHECK(probe.RHO == 7.8);
       CHECK(probe.DAMP == 0.);
       CHECK(probe.ALPHA == 0.);
+      CHECK(probe.DUMMY == 1.);
+      CHECK(probe.YIELD == 234.);
    }
 }
 
@@ -92,11 +90,11 @@ TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
    std::ostringstream test;
 
    SECTION("simple") {
-      misosel probe(1, 2., 3., 4., 5., 6.);
+      misosel probe(1, 2., 3., 4., 5., 6., 7., 8.);
       test << probe;
       CHECK(test.str() ==
             "MISOSEL +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
-            "        +5.00000000e+00 +6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00 +8.00000000e+00 \n");
    }
 }
 

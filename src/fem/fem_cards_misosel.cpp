@@ -46,6 +46,8 @@ namespace dnvgl {
             const entry_type<double> misosel::_form_RHO("RHO");
             const entry_type<double> misosel::_form_DAMP("DAMP");
             const entry_type<double> misosel::_form_ALPHA("ALPHA");
+            const entry_type<double> misosel::_form_DUMMY("DUMMY");
+            const entry_type<double> misosel::_form_YIELD("YIELD");
 
             misosel::misosel(const std::deque<std::string> &inp) :
                card(inp) {
@@ -58,6 +60,8 @@ namespace dnvgl {
                RHO = _form_RHO(*(pos++));
                DAMP = _form_DAMP(*(pos++));
                ALPHA = _form_ALPHA(*(pos++));
+               DUMMY = _form_DUMMY(*(pos++));
+               YIELD = _form_YIELD(*(pos++));
             }
 
             misosel::misosel(const long &MATNO,
@@ -65,9 +69,12 @@ namespace dnvgl {
                              const double &POISS,
                              const double &RHO,
                              const double &DAMP,
-                             const double &ALPHA) :
+                             const double &ALPHA,
+                             const double &DUMMY,
+                             const double &YIELD) :
                card(), MATNO(MATNO), YOUNG(YOUNG), POISS(POISS),
-               RHO(RHO), DAMP(DAMP), ALPHA(ALPHA) {}
+               RHO(RHO), DAMP(DAMP), ALPHA(ALPHA), DUMMY(DUMMY),
+               YIELD(YIELD) {}
 
             const dnvgl::extfem::fem::cards::types
             misosel::card_type(void) const {return MISOSEL;}
@@ -89,8 +96,8 @@ namespace dnvgl {
                   << dnvgl::extfem::fem::types::card().format()
                   << card._form_DAMP.format(card.DAMP)
                   << card._form_ALPHA.format(card.ALPHA)
-                  << card.empty.format()
-                  << card.empty.format()
+                  << card._form_DUMMY.format(card.DUMMY)
+                  << card._form_YIELD.format(card.YIELD)
                   << std::endl;
                return os;
             }

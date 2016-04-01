@@ -1089,7 +1089,7 @@ record may be on the interface.
 |         |         |          |          |         |
 | ------- | ------- | -------- | -------- | ------- |
 | `GIORH` | `GEONO` | `HZ`     | `TY`     | `BT`    |
-|         | `TT`    | `BB`     | `TB`     | `SFY'   |
+|         | `TT`    | `BB`     | `TB`     | `SFY`   |
 |         | `SFZ`   | `NLOBYT` | `NLOBYB` | `NLOBZ` |
 
 \image latex giorh.eps "I or H beam"
@@ -2060,10 +2060,10 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 /**
 ## Format:
 
-|           |         |         |         |       |
-| --------- | ------- | ------- | ------- | ----- |
-| `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO` |
-|           | `DAMP`  | `ALPHA` |         |       |
+|           |         |         |         |         |
+| --------- | ------- | ------- | ------- | ------- |
+| `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO`   |
+|           | `DAMP`  | `ALPHA` | `HAS_Y` | `YIELD` |
 */
             class misosel : public card {
 
@@ -2077,6 +2077,8 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                static const dnvgl::extfem::fem::types::entry_type<double> _form_RHO;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_DAMP;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_ALPHA;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_DUMMY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_YIELD;
 
             public:
                /** Material number, i.e. reference number referenced
@@ -2098,16 +2100,23 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                /** Thermal expansion coefficient.
                 */
                double ALPHA;
-
+               /** **Unknown value, not documented!!
+                */
+               double DUMMY;
+               /** Yield stress value for this material.
+                */
+               double YIELD;
 
                misosel(const std::deque<std::string>&);
 
                misosel(const long &MATNO,
-                                 const double &YOUNG,
-                                 const double &POISS,
-                                 const double &RHO,
-                                 const double &DAMP,
-                                 const double &ALPHA);
+                       const double &YOUNG,
+                       const double &POISS,
+                       const double &RHO,
+                       const double &DAMP,
+                       const double &ALPHA,
+                       const double &DUMMY,
+                       const double &YIELD);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
