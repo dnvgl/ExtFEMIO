@@ -2063,7 +2063,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 |           |         |         |         |         |
 | --------- | ------- | ------- | ------- | ------- |
 | `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO`   |
-|           | `DAMP`  | `ALPHA` | `HAS_Y` | `YIELD` |
+|           | `DAMP`  | `ALPHA` | `DUMMY` | `YIELD` |
 */
             class misosel : public card {
 
@@ -2100,7 +2100,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                /** Thermal expansion coefficient.
                 */
                double ALPHA;
-               /** **Unknown value, not documented!!
+               /** *Unknown value, not documented!!*
                 */
                double DUMMY;
                /** Yield stress value for this material.
