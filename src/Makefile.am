@@ -160,7 +160,8 @@ fem/fem_element_ghex.cpp : ../tools/ghex_do.py	\
   ../tools/templates/element_ghex.h		\
   ../tools/templates/element_ghex.cpp		\
   ../tools/templates/test_fem_element_ghex.cpp
-	(set -e ; cd .. ; python3 tools/ghex_do.py)
+	(set -e ; cd .. ; python3 tools/ghex_do.py) || \
+	svn revert fem/fem_element_ghex.cpp ../include/fem/elements_ghex.h
 
 bin_PROGRAMS=bdf2bdf fem2fem
 
