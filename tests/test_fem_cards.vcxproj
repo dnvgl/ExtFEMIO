@@ -179,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_fem_cards.cpp" />
+    <ClCompile Include="test_fem_cards_belfix.cpp" />
     <ClCompile Include="test_fem_cards_beuslo.cpp" />
     <ClCompile Include="test_fem_cards_bsell.cpp" />
     <ClCompile Include="test_fem_cards_date.cpp" />
