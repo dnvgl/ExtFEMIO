@@ -49,13 +49,10 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
    std::deque<std::string> lines;
 
    SECTION("GIORH (1)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n");
-      data.push_back(
-         "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n");
-      data.push_back(
-         "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n",
+         "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n",
+         "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       giorh probe(lines);
 
@@ -74,13 +71,10 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
    }
 
    SECTION("GIORH (2)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GIORH    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n");
-      data.push_back(
-         "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n");
-      data.push_back(
-         "         1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+         "GIORH    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
+         "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
+         "         1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
       card::card_split(data, lines);
       giorh probe(lines);
 

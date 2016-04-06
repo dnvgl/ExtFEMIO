@@ -49,12 +49,9 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
    std::deque<std::string> lines;
 
    SECTION("GPIPE (1)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "GPIPE    6.54357000e+005 0.00000000e+000 5.90218891e-002 2.95109446e-002\n");
-      data.push_back(
-         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "GPIPE    6.54357000e+005 0.00000000e+000 5.90218891e-002 2.95109446e-002\n",
+         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       gpipe probe(lines);
 
@@ -69,12 +66,9 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
    }
 
    SECTION("GPIPE (2)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "GPIPE    6.54357000e+05  0.00000000e+00  5.90218891e-02  2.95109446e-02 \n");
-      data.push_back(
-         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+         "GPIPE    6.54357000e+05  0.00000000e+00  5.90218891e-02  2.95109446e-02 \n",
+         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
       card::card_split(data, lines);
       gpipe probe(lines);
 

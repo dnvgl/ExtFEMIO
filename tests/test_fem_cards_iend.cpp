@@ -49,8 +49,8 @@ TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
    std::deque<std::string> lines;
 
    SECTION("IEND (1)") {
-      std::deque<std::string> data;
-      data.push_back("IEND     1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "IEND     1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       iend probe(lines);
 
@@ -58,8 +58,8 @@ TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
    }
 
    SECTION("IEND (2)") {
-      std::deque<std::string> data;
-      data.push_back("IEND    +1.00000000e+000+0.00000000e+000+0.00000000e+000+0.00000000e+000\n");
+      std::deque<std::string> data({
+         "IEND    +1.00000000e+000+0.00000000e+000+0.00000000e+000+0.00000000e+000\n"});
       card::card_split(data, lines);
       iend probe(lines);
 
@@ -67,8 +67,8 @@ TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
    }
 
    SECTION("IEND (3)") {
-      std::deque<std::string> data;
-      data.push_back("IEND     1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+         "IEND     1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
       card::card_split(data, lines);
       iend probe(lines);
 

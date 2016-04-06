@@ -41,7 +41,6 @@ namespace dnvgl {
 
             const fem::types::card gbeamg::head("GBEAMG");
 
-            const entry_type<long> gbeamg::_form_GEONO("GEONO");
             const entry_type<double> gbeamg::_form_AREA("AREA");
             const entry_type<double> gbeamg::_form_IX("IX");
             const entry_type<double> gbeamg::_form_IY("IY");
@@ -58,7 +57,7 @@ namespace dnvgl {
             const entry_type<double> gbeamg::_form_SZ("SZ");
 
             gbeamg::gbeamg(const std::deque<std::string> &inp) :
-               card(inp) {
+               BeamProp(inp) {
 
                auto pos = inp.begin();
 
@@ -89,13 +88,14 @@ namespace dnvgl {
                const double &SHARY, const double &SHARZ,
                const double &SHCENY, const double &SHCENZ,
                const double &SY, const double &SZ) :
-               card(),
-               GEONO(GEONO),
+               BeamProp(),
                AREA(AREA), IX(IX), IY(IY), IZ(IZ), IYZ(IYZ),
                WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
                SHARY(SHARY), SHARZ(SHARZ),
                SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
-               SZ(SZ) {}
+               SZ(SZ) {
+               this->GEONO = GEONO;
+            }
 
             const dnvgl::extfem::fem::cards::types
             gbeamg::card_type(void) const {return GBEAMG;}

@@ -45,9 +45,8 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 TEST_CASE("BDF GRID definitions. (Small Field Format)",
           "[bdf_grid]" ) {
 
-   std::deque<std::string> data;
-   data.push_back(
-      "GRID           1      22111525. 18000.  21000.        11       6       2\n");
+   std::deque<std::string> data({
+      "GRID           1      22111525. 18000.  21000.        11       6       2\n"});
 
    std::deque<std::string> lines;
    card::card_split(data, lines);
@@ -60,8 +59,7 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)",
       CHECK((double)probe.X2 == 18000.);
       CHECK((double)probe.X3 == 21000.);
       CHECK((long)probe.CD == 11);
-      std::deque<int> ps_ref;
-      ps_ref.push_back(6);
+      std::deque<int> ps_ref({6});
       CHECK(probe.PS == ps_ref);
       CHECK((long)probe.SEID == 2);
    }
@@ -70,11 +68,9 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)",
 TEST_CASE("BDF GRID definitions. (Large Field Format)",
           "[bdf_grid]" ) {
 
-   std::deque<std::string> data;
-   data.push_back(
-      "GRID*                  1              22         111525.          18000.\n");
-   data.push_back(
-      "                  21000.              11               6               2\n");
+   std::deque<std::string> data({
+      "GRID*                  1              22         111525.          18000.\n",
+      "                  21000.              11               6               2\n"});
 
    std::deque<std::string> lines;
    card::card_split(data, lines);
@@ -87,8 +83,7 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)",
       CHECK((double)probe.X2 == 18000.);
       CHECK((double)probe.X3 == 21000.);
       CHECK((long)probe.CD == 11);
-      std::deque<int> ps_ref;
-      ps_ref.push_back(6);
+      std::deque<int> ps_ref({6});
       CHECK(probe.PS == ps_ref);
       CHECK((long)probe.SEID == 2);
    }
@@ -98,9 +93,10 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
           "[bdf_grid]" ) {
 
    std::deque<std::string> data;
+
    SECTION("first grid") {
-      data.empty();
-      data.push_back("GRID,1,22,111525.,18000.,21000.,11,6,2\n");
+      std::deque<std::string> data({
+         "GRID,1,22,111525.,18000.,21000.,11,6,2\n"});
 
       std::deque<std::string> lines;
       card::card_split(data, lines);
@@ -112,16 +108,15 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
       CHECK((double)probe.X2 == 18000.);
       CHECK((double)probe.X3 == 21000.);
       CHECK((long)probe.CD == 11);
-      std::deque<int> ps_ref;
-      ps_ref.push_back(6);
+      std::deque<int> ps_ref({6});
       CHECK(probe.PS == ps_ref);
       CHECK((long)probe.SEID == 2);
    }
 
    SECTION("first grid (cont)") {
-      data.empty();
-      data.push_back("GRID,1,22,111525.,\n");
-      data.push_back(",18000.,21000.,11,6,2\n");
+      std::deque<std::string> data({
+         "GRID,1,22,111525.,\n",
+         ",18000.,21000.,11,6,2\n"});
 
       std::deque<std::string> lines;
       card::card_split(data, lines);
@@ -133,16 +128,15 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
       CHECK((double)probe.X2 == 18000.);
       CHECK((double)probe.X3 == 21000.);
       CHECK((long)probe.CD == 11);
-      std::deque<int> ps_ref;
-      ps_ref.push_back(6);
+      std::deque<int> ps_ref({6});
       CHECK(probe.PS == ps_ref);
       CHECK((long)probe.SEID == 2);
    }
 
    SECTION("first grid (cont+)") {
-      data.empty();
-      data.push_back("GRID,1,22,111525.,+");
-      data.push_back("+,18000.,21000.,11,6,2\n");
+      std::deque<std::string> data({
+         "GRID,1,22,111525.,+",
+         "+,18000.,21000.,11,6,2\n"});
 
       std::deque<std::string> lines;
       card::card_split(data, lines);
@@ -154,16 +148,15 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
       CHECK((double)probe.X2 == 18000.);
       CHECK((double)probe.X3 == 21000.);
       CHECK((long)probe.CD == 11);
-      std::deque<int> ps_ref;
-      ps_ref.push_back(6);
+      std::deque<int> ps_ref({6});
       CHECK(probe.PS == ps_ref);
       CHECK((long)probe.SEID == 2);
    }
 
    SECTION("first grid (cont named +)") {
-      data.empty();
-      data.push_back("GRID,1,22,111525.,+G001\n");
-      data.push_back("+G001,18000.,21000.,11,6,2\n");
+      std::deque<std::string> data({
+         "GRID,1,22,111525.,+G001\n",
+         "+G001,18000.,21000.,11,6,2\n"});
 
       std::deque<std::string> lines;
       card::card_split(data, lines);
@@ -175,8 +168,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
       CHECK((double)probe.X2 == 18000.);
       CHECK((double)probe.X3 == 21000.);
       CHECK((long)probe.CD == 11);
-      std::deque<int> ps_ref;
-      ps_ref.push_back(6);
+      std::deque<int> ps_ref({6});
       CHECK(probe.PS == ps_ref);
       CHECK((long)probe.SEID == 2);
    }

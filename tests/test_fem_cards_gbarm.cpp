@@ -49,11 +49,9 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
    std::deque<std::string> lines;
 
    SECTION("GBARM (1)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n");
-      data.push_back(
-         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n",
+         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       gbarm probe(lines);
 
@@ -68,11 +66,9 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
    }
 
    SECTION("GBARM (2)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GBARM    2.00000000e+00  2.50000000e+02  3.20000000e+01  3.20000000e+01 \n");
-      data.push_back(
-         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+         "GBARM    2.00000000e+00  2.50000000e+02  3.20000000e+01  3.20000000e+01 \n",
+         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
       card::card_split(data, lines);
       gbarm probe(lines);
 
@@ -92,10 +88,7 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
    std::ostringstream test;
 
    long NODEX(1), NODENO(222), NDOF(3);
-   std::deque<int> ODOF;
-   ODOF.push_back(2);
-   ODOF.push_back(6);
-   ODOF.push_back(3);
+   std::deque<int> ODOF({2, 6, 3});
 
    SECTION("simple") {
       gbarm probe(1, 2., 3., 4., 5., 6., 7, 8);

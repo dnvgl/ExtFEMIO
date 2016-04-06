@@ -50,10 +50,9 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("BDF FORCE definitions. (Small Field Format)", "[bdf_force]" ) {
 
-   std::deque<std::string> data;
-   data.push_back(
+   std::deque<std::string> data({
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-      "FORCE   2       5       6       2.9     0.0     1.9     0.0               \n");
+      "FORCE   2       5       6       2.9     0.0     1.9     0.0               \n"});
    std::deque<std::string> lines;
    card::card_split(data, lines);
    force probe(lines);

@@ -48,12 +48,11 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
-TEST_CASE("BDF MOMENT definitions. (Small Field Format)", "[bdf_moment]" ) {
+TEST_CASE("BDF MOMENT definitions. (Small Field Format)", "[bdf_moment]") {
 
-   std::deque<std::string> data;
-   data.push_back(
+   std::deque<std::string> data({
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-      "MOMENT  2       5       6       2.9     0.0     1.9     0.0               \n");
+      "MOMENT  2       5       6       2.9     0.0     1.9     0.0               \n"});
    std::deque<std::string> lines;
    card::card_split(data, lines);
    moment probe(lines);

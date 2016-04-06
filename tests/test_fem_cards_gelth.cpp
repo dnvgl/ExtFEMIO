@@ -49,9 +49,8 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
     std::deque<std::string> lines;
 
    SECTION("GELTH (1)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       gelth probe(lines);
 
@@ -61,9 +60,8 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
    }
 
    SECTION("GELTH (2)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GELTH    6.54394000e+05  1.00000000e-01  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+         "GELTH    6.54394000e+05  1.00000000e-01  0.00000000e+00  0.00000000e+00 \n"});
       card::card_split(data, lines);
       gelth probe(lines);
 

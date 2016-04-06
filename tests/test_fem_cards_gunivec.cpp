@@ -51,10 +51,8 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
    std::deque<std::string> lines;
 
    SECTION("GUNIVEC (1)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n");
+      std::deque<std::string> data({
+         "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"});
       card::card_split(data, lines);
       gunivec probe(lines);
 
@@ -65,10 +63,8 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
    }
 
    SECTION("GUNIVEC (2)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "GUNIVEC  5.34000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n");
+      std::deque<std::string> data({
+         "GUNIVEC  5.34000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n"});
       card::card_split(data, lines);
       gunivec probe(lines);
 

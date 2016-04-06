@@ -50,11 +50,10 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Small Field Format") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          //       PID     MID     A       I1      I2      I12     J
          // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
-         "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n");
+         "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeam probe(lines);
@@ -77,11 +76,10 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Small Field Format2") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          //       PID     MID     A       I1      I2      I12     J
          // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
-         "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n");
+         "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeam probe(lines);
@@ -104,9 +102,8 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Free Field Format 1") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.\n");
+      std::deque<std::string> data({
+         "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeam probe(lines);
@@ -147,15 +144,11 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Free Field Format 2") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n");
-      data.push_back(
-         ",YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,\n");
-      data.push_back(
-         ",NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,\n");
-      data.push_back(
-         ",49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64.\n");
+      std::deque<std::string> data({
+         "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
+         ",YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,\n",
+         ",NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,\n",
+         ",49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64.\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
 
@@ -249,13 +242,12 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Free Field Format 3") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,"
          "YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,"
          "NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,"
          "49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64."
-         ",65.\n");
+         ",65.\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
 
@@ -269,37 +261,14 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Tapered Beam") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         // 34567A1234567B1234567C1234567D1234567E1234567F
-         "PBEAM         39       6     2.9     3.5    5.97"
-         // 34567G1234567H1234567I
-         "                        \n");
-      data.push_back(
-         // 34567A1234567B1234567C1234567D1234567E1234567F
-         "                             2.0    -4.0         "
-         // 34567G1234567H1234567I
-         "                        \n");
-      data.push_back(
-         // 34567A1234567B1234567C1234567D1234567E1234567F
-         "             YES     1.0     5.3    56.2    78.6"
-         // 34567G1234567H1234567I
-         "                        \n");
-      data.push_back(
-         // 34567A1234567B1234567C1234567D1234567E1234567F
-         "                             2.5    -5.0        "
-         // 34567G1234567H1234567I
-         "                        \n");
-      data.push_back(
-         // 34567A1234567B1234567C1234567D1234567E1234567F
-         "                             1.1             2.1"
-         // 34567G1234567H1234567I
-         "            0.21        \n");
-      data.push_back(
-         // 34567A1234567B1234567C1234567D1234567E1234567F
-         "                                             0.5"
-         // 34567G1234567H1234567I
-         "             0.0        \n");
+      std::deque<std::string> data({
+         // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+         "PBEAM         39       6     2.9     3.5    5.97                        \n",
+         "                             2.0    -4.0                                \n",
+         "             YES     1.0     5.3    56.2    78.6                        \n",
+         "                             2.5    -5.0                                \n",
+         "                             1.1             2.1            0.21        \n",
+         "                                             0.5             0.0        \n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeam probe(lines);

@@ -48,8 +48,7 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]" ) {
 
-   std::deque<std::string> data;
-   data.push_back("CROD,222,13,14,15\n");
+   std::deque<std::string> data({"CROD,222,13,14,15\n"});
    std::deque<std::string> lines;
    card::card_split(data, lines);
    crod probe(lines);

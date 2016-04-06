@@ -50,12 +50,10 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (BAR)") {
 
-      std::deque<std::string> data;
-      data.push_back(
-//        1234567A1234567B1234567C1234567D1234567E1234567F
-         "PBEAML  104018  4               BAR\n");
-      data.push_back(
-         "           25.0   600.0\n");
+      std::deque<std::string> data({
+         // 34567A1234567B1234567C1234567D1234567E1234567F
+         "PBEAML  104018  4               BAR\n",
+         "           25.0   600.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeaml probe(lines);
@@ -76,11 +74,9 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (BAR 2)") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PBEAML       134       8            BAR\n");
-      data.push_back(
-         "            55.0   500.0\n");
+      std::deque<std::string> data({
+         "PBEAML       134       8            BAR\n",
+         "            55.0   500.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeaml probe(lines);
@@ -101,11 +97,9 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (L)") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PBEAML  104010  4               L\n");
-      data.push_back(
-         "           63.0   340.0    35.0    14.0\n");
+      std::deque<std::string> data({
+         "PBEAML  104010  4               L\n",
+         "           63.0   340.0    35.0    14.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeaml probe(lines);
@@ -128,11 +122,9 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (T)") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PBEAML  101031  1               T\n");
-      data.push_back(
-         "          150.0   400.0    12.0    10.0\n");
+      std::deque<std::string> data({
+         "PBEAML  101031  1               T\n",
+         "          150.0   400.0    12.0    10.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeaml probe(lines);
@@ -155,11 +147,9 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (I)") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PBEAML  104018  4               I\n");
-      data.push_back(
-         "           600.0   200.0   200.0    12.0    10.0    10.0\n");
+      std::deque<std::string> data({
+         "PBEAML  104018  4               I\n",
+         "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeaml probe(lines);
@@ -184,11 +174,9 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (TUBE)") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PBEAML  104019  5               TUBE\n");
-      data.push_back(
-         "           600.0   500.0");
+      std::deque<std::string> data({
+         "PBEAML  104019  5               TUBE\n",
+         "           600.0   500.0"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeaml probe(lines);
@@ -208,16 +196,12 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (T, tapered)") {
 
-      std::deque<std::string> data;
-      data.push_back(
-//        1234567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I1234567J
-         "PBEAML        99      21               T                                        \n");
-      data.push_back(
-         "             12.    14.8     2.5     2.6              NO     0.4      6.        \n");
-      data.push_back(
-         "              7.     1.2     2.6             YES     0.6      6.     7.8        \n");
-      data.push_back(
-         "             5.6     2.3             YES                                        \n");
+      std::deque<std::string> data({
+         // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I1234567J
+         "PBEAML        99      21               T                                        \n",
+         "             12.    14.8     2.5     2.6              NO     0.4      6.        \n",
+         "              7.     1.2     2.6             YES     0.6      6.     7.8        \n",
+         "             5.6     2.3             YES                                        \n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbeaml probe(lines);

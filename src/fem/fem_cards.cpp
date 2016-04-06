@@ -163,6 +163,14 @@ namespace dnvgl {
                }
             }
 
+            BeamProp::BeamProp(std::deque<std::string> const &inp) :
+               card(inp) {}
+
+            BeamProp::BeamProp() :
+               card() {}
+
+            const dnvgl::extfem::fem::types::entry_type<long> BeamProp::_form_GEONO("GEONO");
+
             void
             dispatch(const std::deque<std::string> &inp, std::unique_ptr<fem::cards::card> &res) {
 

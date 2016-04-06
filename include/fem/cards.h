@@ -59,7 +59,7 @@ namespace dnvgl {
             /**
                \brief Name the different cards.
             */
-            typedef enum {
+            typedef enum types {
                UNKNOWN,
                /// Date and Program Information
                DATE,
@@ -102,14 +102,14 @@ namespace dnvgl {
                BNLOAD,
                /// Element to Ground
                MGSPRNG,
-               /// std::set (group) of Nodes or Elements (Members)
+               /// set (group) of Nodes or Elements (Members)
                GSETMEMB,
                /// Specification of Local Element Coordinate
                /// System
                GUNIVEC,
                /// Isotropy, Linear Elastic Structural Analysis
                MISOSEL,
-               /// Name and Description of a std::set (group)
+               /// Name and Description of a set (group)
                TDSETNAM,
                /// Name and Description of a Super-Element.
                TDSUPNAM,
@@ -778,6 +778,28 @@ Shortest version:
                operator<< (std::ostream& os) const;
             };
 
+/// Base class for FEM beam property describing classes.
+            class BeamProp : public card {
+
+            protected:
+
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+
+            public:
+               
+               /** Geometry type number, i.e. reference number used
+                   for element data definition of geometry properties
+                   (Cross sectional properties) of beams.
+                */
+               long GEONO;
+
+               BeamProp(std::deque<std::string> const&);
+               BeamProp();
+
+               const virtual dnvgl::extfem::fem::cards::types
+                  card_type(void) const = 0;
+            };
+
 /// `GBARM`: Cross Section Type Massive Bar
 /**
 ## Format
@@ -791,13 +813,12 @@ Shortest version:
 \image latex gbarm.eps "Massive bar"
 \image html gbarm.svg "Massive bar"
 */
-            class gbarm : public card {
+            class gbarm : public BeamProp {
 
             private:
 
                static const dnvgl::extfem::fem::types::card head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_BT;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_BB;
@@ -808,11 +829,6 @@ Shortest version:
 
             public:
 
-               /** Geometry type number, i.e. reference number used
-                   for element data definition of geometry properties
-                   (Cross sectional properties) of beams.
-               */
-               long GEONO;
                /** Height of beam.
                 */
                double HZ;
@@ -890,13 +906,12 @@ The succeding data concern the cross section at a specific local node.
 If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
 record may be on the interface.
 */
-            class gbeamg : public card {
+            class gbeamg : public BeamProp {
 
             private:
 
                static const dnvgl::extfem::fem::types::card head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_AREA;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_IX;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_IY;
@@ -914,9 +929,6 @@ record may be on the interface.
 
             public:
 
-               /** Geometry number, referenced to on `GELREF1`.
-                */
-               long GEONO;
                /** Cross section area.
                 */
                double AREA;
@@ -1073,13 +1085,13 @@ record may be on the interface.
                   const long &GEONO, const double &TH, const long &NINT);
 
                const dnvgl::extfem::fem::cards::types
-               card_type(void) const;
+                  card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const gelth&);
+                  operator<< (std::ostream&, const gelth&);
 
                const std::ostream&
-               operator<< (std::ostream& os) const;
+                  operator<< (std::ostream& os) const;
             };
 
 /// `GIORH`: Cross Section Type I or H Beam
@@ -1095,13 +1107,12 @@ record may be on the interface.
 \image latex giorh.eps "I or H beam"
 \image html giorh.svg "I or H beam"
 */
-            class giorh : public card {
+            class giorh : public BeamProp {
 
             private:
 
                static const dnvgl::extfem::fem::types::card head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_TY;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_BT;
@@ -1116,11 +1127,6 @@ record may be on the interface.
 
             public:
 
-               /** Beam stress type number, i.e. reference number used
-                   for element data definition of cross sectional
-                   properties of beams.
-                */
-               long GEONO;
                /** Height of beam at current location
                 */
                double HZ;
@@ -1204,13 +1210,12 @@ record may be on the interface.
 \image latex glsec.eps "I or H beam"
 \image html glsec.svg "I or H beam"
 */
-            class glsec : public card {
+            class glsec : public BeamProp {
 
             private:
 
                static const dnvgl::extfem::fem::types::card head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_TY;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_BY;
@@ -1223,11 +1228,6 @@ record may be on the interface.
 
             public:
 
-               /** Geometry type number, i.e. reference number used
-                   for element data definition of geometry properties
-                   (Cross sectional properties) of beams.
-               */
-               long GEONO;
                /** Height of beam at current location.
                 */
                double HZ;
@@ -1313,13 +1313,12 @@ record may be on the interface.
 \image latex gpipe.eps "Tube"
 \image html gpipe.svg "Tube"
 */
-            class gpipe : public card {
+            class gpipe : public BeamProp {
 
             private:
 
                static const dnvgl::extfem::fem::types::card head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_DI;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_DY;
                static const dnvgl::extfem::fem::types::entry_type<double> _form_T;
@@ -1330,11 +1329,6 @@ record may be on the interface.
 
             public:
 
-               /** Geometry type number, i.e. reference number used
-                   for element data definition of geometry properties
-                   (Cross sectional properties) of beams.
-               */
-               long GEONO;
                /** Inner diameter of tube.
                 */
                double DI;
@@ -1852,7 +1846,7 @@ the *j*’th d.o.f.
                operator<< (std::ostream& os) const;
             };
 
-/// `GSETMEMB`: std::set (group) of Nodes or Elements (Members)
+/// `GSETMEMB`: set (group) of Nodes or Elements (Members)
 /**
 ## Format:
 
@@ -1862,31 +1856,31 @@ the *j*’th d.o.f.
 |            | `ISORIG`               | `IRMEMB`<sub>`1`</sub> | `IRMEMB`<sub>`2`</sub>     | `IRMEMB`<sub>`3`</sub> |
 |            | `IRMEMB`<sub>`4`</sub> | ...                    | `IRMEMB`<sub>`NMEMB`</sub> |                        |
 
-This record together with the name and description of a std::set record (TDSETNAM) constitutes the std::set (group)
+This record together with the name and description of a set record (TDSETNAM) constitutes the set (group)
 datatype.
 
 ### Comments:
 
-The std::set datatype consists of one name and description of std::set record
-(`TDSETNAM`) and one or more std::set member records (`GSETMEMB`).
+The set datatype consists of one name and description of set record
+(`TDSETNAM`) and one or more set member records (`GSETMEMB`).
 
-It should be noted that a std::set may have its std::set members distributed
-over several std::set member records (`GSETMEMB`) all having the same std::set
+It should be noted that a set may have its set members distributed
+over several set member records (`GSETMEMB`) all having the same set
 identification number (`ISREF`) and consequently also the same
-`TDSETNAM` record. The total number of std::set members will then be the
-sum of the number of std::set members (`NMEMB`) for each of the std::set
+`TDSETNAM` record. The total number of set members will then be the
+sum of the number of set members (`NMEMB`) for each of the set
 records.
 
 ### Restrictions:
 
-  - Only one std::set type (ISTYPE) for same std::set identification number
+  - Only one set type (ISTYPE) for same set identification number
     (`ISREF`) is allowed.
 
-  - If several records for the same std::set identification number
+  - If several records for the same set identification number
     (`ISREF`), record numbering must be strictly sequential; 1 <
-    `INDEX` < `NINDEX`, where `NINDEX` is number of records per std::set.
+    `INDEX` < `NINDEX`, where `NINDEX` is number of records per set.
 
-  - A std::set member (number) should only be included once in the list.
+  - A set member (number) should only be included once in the list.
 */
             class gsetmemb : public card {
 
@@ -1907,34 +1901,34 @@ records.
                    1024)
                */
                long NFIELD;
-               /** Internal std::set identification number as defined on
-                   the name and description of a std::set record
+               /** Internal set identification number as defined on
+                   the name and description of a set record
                    (`TDSETNAM`).
                */
                long ISREF;
-               /** Sequential record number for current std::set (`ISREF`).
-                   Each std::set may consist of one or more `GSETMEMB`
-                   records with same std::set identification number
+               /** Sequential record number for current set (`ISREF`).
+                   Each set may consist of one or more `GSETMEMB`
+                   records with same set identification number
                    (`ISREF`). `INDEX` must be strictly increasing from
                    1 and upwards till number of `GSETMEMB` records for
-                   this std::set of members (nodes or elements).
+                   this set of members (nodes or elements).
                */
                long INDEX;
-               /** std::set type
+               /** set type
 
-                     =1: , std::set of nodes
+                     =1: , set of nodes
 
-                     =2: , std::set of elements
+                     =2: , set of elements
 
-Set Type (`ISTYPE`) and interpretation of std::set Member Number (`IRMEMB`)
+Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
 
 | `ISTYPE` | Description     | Interpretation of `IRMEMB`        |
 | -------: | --------------- | --------------------------------- |
-| 1        | std::set of Nodes    | Internal Node Number (`IINOD`)    |
-| 2        | std::set of Elements | Internal Element Number (`IELNO`) |
+| 1        | set of Nodes    | Internal Node Number (`IINOD`)    |
+| 2        | set of Elements | Internal Element Number (`IELNO`) |
                */
                long ISTYPE;
-               /** std::set origin type
+               /** set origin type
 
                     = 0:, undefined origin
 
@@ -1947,9 +1941,9 @@ Set Type (`ISTYPE`) and interpretation of std::set Member Number (`IRMEMB`)
                     = 4:, body
                */
                long ISORIG;
-               /** `NMEMB` std::set member numbers on this record.
+               /** `NMEMB` set member numbers on this record.
 
-                   `NMEMB` is number of std::set members on the current
+                   `NMEMB` is number of set members on the current
                    record. `NMEMB` = `NFIELD` - 5
                */
                std::deque<long> IRMEMB;
@@ -2167,15 +2161,15 @@ This record together with the set of nodes or elements record(s)
                 * text data (MAX = 1024).
                 */
                long NFIELD;
-               /** Internal std::set identification number. Legal range [1,
-                   `NSET`], where `NSET` is number of std::sets which is
-                   equeal to number of "Name and Description of a std::set"
+               /** Internal set identification number. Legal range [1,
+                   `NSET`], where `NSET` is number of sets which is
+                   equeal to number of "Name and Description of a set"
                    records (`TDSETNAM`). Two `TDSETNAM` records may
-                   not have identical std::set identification numbers
+                   not have identical set identification numbers
                    (`ISREF`).
                */
                long ISREF;
-               /** Coded dimension of std::set name:
+               /** Coded dimension of set name:
 
                      \f[
                        \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
@@ -2184,7 +2178,7 @@ This record together with the set of nodes or elements record(s)
                    The inverse relation will then be
 
                      - `NLNAM` - number of physical records used for
-                       storing of std::set name.
+                       storing of set name.
 
                        Legal range = [0,1]
 
@@ -2194,14 +2188,14 @@ This record together with the set of nodes or elements record(s)
 
                        `NLNAM` = integer part of (`CODNAM` / 100)
 
-                     - `NCNAM` - number of characters in std::set name.
+                     - `NCNAM` - number of characters in set name.
 
                         Legal range = [0,64]
 
                         `NCNAM` = remaindering of (`CODNAM` / 100)
                */
                long CODNAM;
-               /** Coded dimension of std::set description text:
+               /** Coded dimension of set description text:
 
                      \f[
                        \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
@@ -2210,7 +2204,7 @@ This record together with the set of nodes or elements record(s)
                    The inverse relation will then be:
 
                      - `NLTXT` - number of physical records used for
-                       storing of std::set description text. Legal range =
+                       storing of set description text. Legal range =
                        [0,5]
 
                        - = 0, no description text defined
@@ -2221,7 +2215,7 @@ This record together with the set of nodes or elements record(s)
                        `NLTXT` = integer part of (`CODTXT` / 100)
 
 
-                     - `NCTXT` - number of characters per physical std::set
+                     - `NCTXT` - number of characters per physical set
                        description text record. Legal range = [0,64]
 
                        `NCTXT` = remaindering of (`CODTXT` / 100)
@@ -2312,7 +2306,7 @@ super-element hierarchy.
                    \image html tdsupnam.svg "Superelement hierarchy with 3 levels."
                */
                long IHREF;
-               /** Coded dimension of std::set name:
+               /** Coded dimension of set name:
 
                      \f[
                        \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
@@ -2321,7 +2315,7 @@ super-element hierarchy.
                    The inverse relation will then be
 
                      - `NLNAM` - number of physical records used for
-                       storing of std::set name.
+                       storing of set name.
 
                        Legal range = [0,1]
 
@@ -2331,14 +2325,14 @@ super-element hierarchy.
 
                        `NLNAM` = integer part of (`CODNAM` / 100)
 
-                     - `NCNAM` - number of characters in std::set name.
+                     - `NCNAM` - number of characters in set name.
 
                         Legal range = [0,64]
 
                         `NCNAM` = remaindering of (`CODNAM` / 100)
                */
                long CODNAM;
-               /** Coded dimension of std::set description text:
+               /** Coded dimension of set description text:
 
                      \f[
                        \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
@@ -2347,7 +2341,7 @@ super-element hierarchy.
                    The inverse relation will then be:
 
                      - `NLTXT` - number of physical records used for
-                       storing of std::set description text. Legal range =
+                       storing of set description text. Legal range =
                        [0,5]
 
                        - = 0, no description text defined
@@ -2358,7 +2352,7 @@ super-element hierarchy.
                        `NLTXT` = integer part of (`CODTXT` / 100)
 
 
-                     - `NCTXT` - number of characters per physical std::set
+                     - `NCTXT` - number of characters per physical set
                        description text record. Legal range = [0,64]
 
                        `NCTXT` = remaindering of (`CODTXT` / 100)
@@ -2493,8 +2487,7 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
-            void
-            dispatch(
+            void dispatch(
                const std::deque<std::string>&,
                std::unique_ptr<dnvgl::extfem::fem::cards::card>&);
          }

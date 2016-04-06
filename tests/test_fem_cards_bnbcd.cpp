@@ -50,12 +50,9 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
    std::deque<std::string> lines;
 
    SECTION("BNBCD (1)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "BNBCD    8.31700000e+003 6.00000000e+000 1.00000000e+000 1.00000000e+000\n");
-      data.push_back(
-         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 1.00000000e+000\n");
+      std::deque<std::string> data({
+         "BNBCD    8.31700000e+003 6.00000000e+000 1.00000000e+000 1.00000000e+000\n",
+         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 1.00000000e+000\n"});
       card::card_split(data, lines);
       bnbcd probe(lines);
 
@@ -65,12 +62,9 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
    }
 
    SECTION("BNBCD (2)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "BNBCD    8.31700000e+03  6.00000000e+00  1.00000000e+00  1.00000000e+00 \n");
-      data.push_back(
-         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  1.00000000e+00 \n");
+      std::deque<std::string> data({
+         "BNBCD    8.31700000e+03  6.00000000e+00  1.00000000e+00  1.00000000e+00 \n",
+         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  1.00000000e+00 \n"});
       card::card_split(data, lines);
       bnbcd probe(lines);
 

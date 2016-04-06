@@ -821,8 +821,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<hierarch*>(current.get())->IHPREF == 0);
       CHECK(static_cast<hierarch*>(current.get())->NSUB == 1);
       CHECK(static_cast<hierarch*>(current.get())->IHSREFi.size() == 1);
-      std::deque<long> ref;
-      ref.push_back(2);
+      std::deque<long> ref({2, 0});
+      ref.resize(1);
       CHECK(static_cast<hierarch*>(current.get())->IHSREFi == ref);
    }
 

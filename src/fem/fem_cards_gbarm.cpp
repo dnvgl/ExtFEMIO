@@ -41,7 +41,6 @@ namespace dnvgl {
 
             const fem::types::card gbarm::head("GBARM");
 
-            const entry_type<long> gbarm::_form_GEONO("GEONO");
             const entry_type<double> gbarm::_form_HZ("HZ");
             const entry_type<double> gbarm::_form_BT("BT");
             const entry_type<double> gbarm::_form_BB("BB");
@@ -51,7 +50,7 @@ namespace dnvgl {
             const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
             gbarm::gbarm(const std::deque<std::string> &inp) :
-               card(inp) {
+               BeamProp(inp) {
 
                auto pos = inp.begin();
 
@@ -67,12 +66,14 @@ namespace dnvgl {
             }
 
             gbarm::gbarm(
-                  const long &GEONO,
-                  const double &HZ, const double &BT, const double &BB,
-                  const double &SFY, const double &SFZ,
-                  const long &NLOBY, const long &NLOBZ) :
-               GEONO(GEONO), HZ(HZ), BT(BT), BB(BB),
-               SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+               const long &GEONO,
+               const double &HZ, const double &BT, const double &BB,
+               const double &SFY, const double &SFZ,
+               const long &NLOBY, const long &NLOBZ) :
+               BeamProp(), HZ(HZ), BT(BT), BB(BB),
+               SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {
+               this->GEONO = GEONO;
+            }
 
             const std::ostream&
             gbarm::operator<< (std::ostream& os) const {

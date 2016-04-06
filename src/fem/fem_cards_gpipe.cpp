@@ -40,7 +40,6 @@ namespace dnvgl {
 
             const fem::types::card gpipe::head("GPIPE");
 
-            const entry_type<long> gpipe::_form_GEONO("GEONO");
             const entry_type<double> gpipe::_form_DI("DI");
             const entry_type<double> gpipe::_form_DY("DY");
             const entry_type<double> gpipe::_form_T("T");
@@ -49,8 +48,8 @@ namespace dnvgl {
             const entry_type<long> gpipe::_form_NCIR("NCIR");
             const entry_type<long> gpipe::_form_NRAD("NRAD");
 
-            gpipe::gpipe(const std::deque<std::string> &inp) :
-               card(inp) {
+            gpipe::gpipe(std::deque<std::string> const &inp) :
+               BeamProp(inp) {
 
                auto pos = inp.begin();
 
@@ -70,10 +69,12 @@ namespace dnvgl {
                          const double &T, const double &SFY,
                          const double &SFZ,
                          const long &NCIR, const long &NRAD) :
-               card(), GEONO(GEONO),
+               BeamProp(),
                DI(DI), DY(DY), T(T),
                SFY(SFY), SFZ(SFZ),
-               NCIR(NCIR), NRAD(NRAD) {}
+               NCIR(NCIR), NRAD(NRAD) {
+               this->GEONO = GEONO;
+            }
 
             const dnvgl::extfem::fem::cards::types
             gpipe::card_type(void) const {return GPIPE;}

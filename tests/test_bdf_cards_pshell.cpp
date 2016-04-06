@@ -51,9 +51,8 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Small Field Format") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PSHELL  1       4         23.00 4               4\n");
+      std::deque<std::string> data({
+         "PSHELL  1       4         23.00 4               4\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pshell probe(lines);
@@ -68,12 +67,9 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Large Field Format") {
 
-      std::deque<std::string> data;
-      data.push_back(
-         "PSHELL* 1               4                 23.00         4  "
-         "             \n");
-      data.push_back(
-         "*                       4  \n");
+      std::deque<std::string> data({
+         "PSHELL* 1               4                 23.00         4               \n",
+         "*                       4  \n"});
 
       std::deque<std::string> lines;
       card::card_split(data, lines);
@@ -89,8 +85,7 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Comma Field Format") {
 
-      std::deque<std::string> data;
-      data.push_back("PSHELL,1,4,23.00,4,,4\n");
+      std::deque<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pshell probe(lines);

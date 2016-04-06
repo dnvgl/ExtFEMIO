@@ -50,12 +50,10 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
    SECTION("Small Field Format (BAR)") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "PBARL   104018  4               BAR\n");
-      data.push_back(
-         "           25.0   600.0\n");
+         "PBARL   104018  4               BAR\n",
+         "           25.0   600.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbarl probe(lines);
@@ -73,13 +71,10 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
    SECTION("Small Field Format (BAR) (alt.)") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "PBARL        134       8            BAR\n");
-      data.push_back(
-         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "            55.0   500.0");
+         "PBARL        134       8            BAR\n",
+         "            55.0   500.0"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbarl probe(lines);
@@ -96,12 +91,10 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
    SECTION("Small Field Format (L)") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "PBARL   104010  4               L\n");
-      data.push_back(
-         "           63.0   340.0    35.0    14.0\n");
+         "PBARL   104010  4               L\n",
+         "           63.0   340.0    35.0    14.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbarl probe(lines);
@@ -120,12 +113,10 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
    SECTION("Small Field Format (T)") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "PBARL   101031  1               T\n");
-      data.push_back(
-         "          150.0   400.0    12.0    10.0\n");
+         "PBARL   101031  1               T\n",
+         "          150.0   400.0    12.0    10.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbarl probe(lines);
@@ -144,13 +135,10 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
    SECTION("Small Field Format (I)") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "PBARL   104018  4               I\n");
-      data.push_back(
-         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "           600.0   200.0   200.0    12.0    10.0    10.0\n");
+         "PBARL   104018  4               I\n",
+         "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbarl probe(lines);
@@ -171,13 +159,10 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
    SECTION("Small Field Format (I) (alt)") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "PBARL         39       6               I\n");
-      data.push_back(
-         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "             14.      6.      .5      .5      .5      .5\n");
+         "PBARL         39       6               I\n",
+         "             14.      6.      .5      .5      .5      .5\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbarl probe(lines);
@@ -198,13 +183,10 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 
    SECTION("Small Field Format (TUBE)") {
 
-      std::deque<std::string> data;
-      data.push_back(
+      std::deque<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "PBARL   104019  5               TUBE\n");
-      data.push_back(
-         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-         "           600.0   500.0\n");
+         "PBARL   104019  5               TUBE\n",
+         "           600.0   500.0\n"});
       std::deque<std::string> lines;
       card::card_split(data, lines);
       pbarl probe(lines);

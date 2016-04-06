@@ -74,7 +74,7 @@ namespace dnvgl {
 
                base(const std::string&);
 
-               ~base() {};
+               virtual ~base() {};
 
                virtual fem_types type() const = 0;
 

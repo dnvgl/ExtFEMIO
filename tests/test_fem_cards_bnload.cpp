@@ -51,14 +51,10 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
    std::deque<std::string> lines;
 
    SECTION("BNLOAD (1)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      data.push_back(
-         "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      data.push_back(
-         "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+         "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+         "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       bnload probe(lines);
 
@@ -72,14 +68,10 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
    }
 
    SECTION("BNLOAD (2)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      data.push_back(
-         "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      data.push_back(
-         "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+         "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+         "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       bnload probe(lines);
 

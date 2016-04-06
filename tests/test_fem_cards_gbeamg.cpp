@@ -49,15 +49,11 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
    std::deque<std::string> lines;
 
    SECTION("GBEAMG (1)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008\n");
-      data.push_back(
-         "         5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008\n");
-      data.push_back(
-         "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n");
-      data.push_back(
-         "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n");
+      std::deque<std::string> data({
+         "GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008\n",
+         "         5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008\n",
+         "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n",
+         "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"});
       card::card_split(data, lines);
       gbeamg probe(lines);
 
@@ -79,15 +75,11 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
    }
 
    SECTION("GBEAMG (2)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GBEAMG   1.68500000e+03  0.00000000e+00  1.11500000e+04  1.00000000e-08 \n");
-      data.push_back(
-         "         5.93000000e+08  1.57380000e+07  0.00000000e+00  1.00000000e-08 \n");
-      data.push_back(
-         "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n");
-      data.push_back(
-         "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n");
+      std::deque<std::string> data({
+         "GBEAMG   1.68500000e+03  0.00000000e+00  1.11500000e+04  1.00000000e-08 \n",
+         "         5.93000000e+08  1.57380000e+07  0.00000000e+00  1.00000000e-08 \n",
+         "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n",
+         "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n"});
       card::card_split(data, lines);
       gbeamg probe(lines);
 
@@ -114,10 +106,7 @@ TEST_CASE("FEM GBEAMG types output.", "[fem_gbeamg,out]" ) {
    std::ostringstream test;
 
    long NODEX(1), NODENO(222), NDOF(3);
-   std::deque<int> ODOF;
-   ODOF.push_back(2);
-   ODOF.push_back(6);
-   ODOF.push_back(3);
+   std::deque<int> ODOF({2, 6, 3});
 
    SECTION("simple") {
       gbeamg probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13., 14., 15.);

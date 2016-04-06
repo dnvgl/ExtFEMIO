@@ -50,10 +50,9 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("BDF LOAD definitions. (Small Field Format)", "[bdf_load]" ) {
 
-   std::deque<std::string> data;
-   data.push_back(
+   std::deque<std::string> data({
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-      "LOAD    101     -0.5    1.0     3       6.2     4                         \n");
+      "LOAD    101     -0.5    1.0     3       6.2     4                         \n"});
    std::deque<std::string> lines;
    card::card_split(data, lines);
    load probe(lines);
@@ -76,14 +75,10 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]" ) {
 
    long SID(2);
    double S(2.9);
-   std::deque<double> Si;
-   std::deque<long> Li;
 
    SECTION("write (1)") {
-      Si.push_back(3.);
-      Si.push_back(1.7);
-      Li.push_back(3);
-      Li.push_back(4);
+      std::deque<double> Si({3., 1.7});
+      std::deque<long> Li({3, 4});
       load probe(&SID, &S, &Si, &Li);
       test << probe;
       CHECK(test.str() ==
@@ -91,8 +86,9 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]" ) {
    }
 
    SECTION("write (2)") {
-      Si.push_back(3.);
-      Li.push_back(3);
+      std::deque<double> Si({3.});
+      std::deque<long> Li({3, 0});
+      Li.resize(1);
       load probe(&SID, &S, &Si, &Li);
       test << probe;
       CHECK(test.str() ==
@@ -100,10 +96,8 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]" ) {
    }
 
    SECTION("write (3)") {
-      for (long i=0; i<10; ++i) {
-         Li.push_back(i+4);
-         Si.push_back(static_cast<double>(i));
-      }
+      std::deque<double> Si({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+      std::deque<long> Li({4, 5, 6, 7, 8, 9, 10, 11, 12, 13});
       load probe(&SID, &S, &Si, &Li);
       test << probe;
       CHECK(test.str() ==

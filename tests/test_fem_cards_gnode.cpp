@@ -49,8 +49,8 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    std::deque<std::string> lines;
 
    SECTION("GNODE (1)") {
-      std::deque<std::string> data;
-      data.push_back("GNODE    1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n");
+      std::deque<std::string> data({
+         "GNODE    1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
       card::card_split(data, lines);
       gnode probe(lines);
 
@@ -64,8 +64,8 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    }
 
    SECTION("GNODE (2)") {
-      std::deque<std::string> data;
-      data.push_back("GNODE    1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n");
+      std::deque<std::string> data({
+         "GNODE    1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n"});
       card::card_split(data, lines);
       gnode probe(lines);
 
@@ -84,10 +84,7 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
    std::ostringstream test;
 
    long NODEX(1), NODENO(222), NDOF(3);
-   std::deque<int> ODOF;
-   ODOF.push_back(2);
-   ODOF.push_back(6);
-   ODOF.push_back(3);
+   std::deque<int> ODOF({2, 6, 3});
 
    SECTION("simple") {
       gnode probe(NODEX, NODENO, NDOF, ODOF);

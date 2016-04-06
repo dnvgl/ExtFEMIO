@@ -53,14 +53,12 @@ namespace {
 TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
           "[bdf_mat2]" ) {
 
-   std::deque<std::string> data;
-
    warn_report = &_warn_res;
 
    SECTION("first mat2") {
-      data.empty();
-      data.push_back("MAT2,1,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,"
-                     "13.,14.,15.,16.,17\n");
+      std::deque<std::string> data({
+         "MAT2,1,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,"
+         "13.,14.,15.,16.,17\n"});
 
       std::deque<std::string> lines;
       card::card_split(data, lines);
@@ -86,16 +84,12 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
    }
 
    SECTION("FFEMIO-3") {
-      data.empty();
-      data.push_back("MAT2*    10              7.01670932+10   "
-                     "2.78474977+10   0.");
-      data.push_back("*        1.35642948+11   0.              "
-                     "1.26610002+10   0.");
-      data.push_back("*        .000012         .000012         "
-                     ".000012         0.");
-      data.push_back("*        2.99999993-2    0.              "
-                     "0.              0.");
-      data.push_back("*");
+      std::deque<std::string> data({
+         "MAT2*    10              7.01670932+10   2.78474977+10   0.",
+         "*        1.35642948+11   0.              1.26610002+10   0.",
+         "*        .000012         .000012         .000012         0.",
+         "*        2.99999993-2    0.              0.              0.",
+         "*"});
 
       std::deque<std::string> lines;
       card::card_split(data, lines);

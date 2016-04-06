@@ -51,14 +51,10 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
    std::deque<std::string> lines;
 
    SECTION("BNDISPL (1)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "BNDISPL  1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      data.push_back(
-         "         2.30470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n");
-      data.push_back(
-         "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "BNDISPL  1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+         "         2.30470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+         "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       bndispl probe(lines);
 
@@ -72,14 +68,10 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
    }
 
    SECTION("BNDISPL (2)") {
-      std::deque<std::string> data;
-
-      data.push_back(
-         "BNDISPL  1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      data.push_back(
-         "         2.30470000e+04  6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
-      data.push_back(
-         "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+         "BNDISPL  1.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
+         "         2.30470000e+04  6.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
+         "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
       card::card_split(data, lines);
       bndispl probe(lines);
 

@@ -49,13 +49,10 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
    std::deque<std::string> lines;
 
    SECTION("GLSEC (1)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GLSEC    2.20000000e+001 7.00000000e+002 1.20000000e+001 1.50000000e+002\n");
-      data.push_back(
-         "         1.20000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000\n");
-      data.push_back(
-         "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      std::deque<std::string> data({
+         "GLSEC    2.20000000e+001 7.00000000e+002 1.20000000e+001 1.50000000e+002\n",
+         "         1.20000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
+         "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       glsec probe(lines);
 
@@ -72,13 +69,10 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
    }
 
    SECTION("GLSEC (2)") {
-      std::deque<std::string> data;
-      data.push_back(
-         "GLSEC    2.20000000e+01  7.00000000e+02  1.20000000e+01  1.50000000e+02 \n");
-      data.push_back(
-         "         1.20000000e+01  1.00000000e+00  1.00000000e+00  1.00000000e+00 \n");
-      data.push_back(
-         "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      std::deque<std::string> data({
+         "GLSEC    2.20000000e+01  7.00000000e+02  1.20000000e+01  1.50000000e+02 \n",
+         "         1.20000000e+01  1.00000000e+00  1.00000000e+00  1.00000000e+00 \n",
+         "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
       card::card_split(data, lines);
       glsec probe(lines);
 

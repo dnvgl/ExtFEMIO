@@ -49,13 +49,13 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
    std::deque<std::string> lines;
 
    SECTION("DATE (1)") {
-      std::deque<std::string> data;
-      //              12345678|234567890123456|234567890123456|234567890123456|234567890123456
-      data.push_back("DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001");
-      data.push_back("        DATE TIME:  11/03/2015 09:46:08");
-      data.push_back("        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013");
-      data.push_back("        COMPUTER: HAML130185");
-      data.push_back("        USER: berhol");
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
+         "        DATE TIME:  11/03/2015 09:46:08",
+         "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013",
+         "        COMPUTER: HAML130185",
+         "        USER: berhol"});
 
       card::card_split(data, lines);
       date probe(lines);

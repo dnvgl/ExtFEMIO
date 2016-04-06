@@ -41,7 +41,6 @@ namespace dnvgl {
             const fem::types::card giorh::head("GIORH");
 
 
-            const entry_type<long> giorh::_form_GEONO("GENO");
             const entry_type<double> giorh::_form_HZ("HZ");
             const entry_type<double> giorh::_form_TY("TY");
             const entry_type<double> giorh::_form_BT("BT");
@@ -56,7 +55,7 @@ namespace dnvgl {
 
 
             giorh::giorh(const std::deque<std::string> &inp) :
-               card(inp) {
+               BeamProp(inp) {
 
                auto pos = inp.begin();
 
@@ -81,10 +80,12 @@ namespace dnvgl {
                          const double &TB, const double &SFY,
                          const double &SFZ, const long &NLOBYT,
                          const long &NLOBYB, const long &NLOBZ) :
-               card(), GEONO(GEONO),
+               BeamProp(),
                HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
                SFY(SFY), SFZ(SFZ),
-               NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
+               NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {
+               this->GEONO = GEONO;
+            }
 
             const dnvgl::extfem::fem::cards::types
             giorh::card_type(void) const {return GIORH;}

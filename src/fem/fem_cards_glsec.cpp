@@ -40,7 +40,6 @@ namespace dnvgl {
 
             const fem::types::card glsec::head("GLSEC");
 
-            const entry_type<long> glsec::_form_GEONO("GEONO");
             const entry_type<double> glsec::_form_HZ("HZ");
             const entry_type<double> glsec::_form_TY("TY");
             const entry_type<double> glsec::_form_BY("BY");
@@ -52,7 +51,7 @@ namespace dnvgl {
             const entry_type<long> glsec::_form_NLOBZ("NLOBZ");
 
             glsec::glsec(const std::deque<std::string> &inp) :
-               card(inp) {
+               BeamProp(inp) {
 
                auto pos = inp.begin();
 
@@ -74,10 +73,12 @@ namespace dnvgl {
                          const double &TZ, const double &SFY,
                          const double &SFZ, const bool &K,
                          const long &NLOBY, const long &NLOBZ) :
-               card(), GEONO(GEONO),
+               BeamProp(),
                HZ(HZ), TY(TY), BY(BY), TZ(TZ),
                SFY(SFY), SFZ(SFZ),
-               K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+               K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {
+               this->GEONO = GEONO;
+            }
 
             const dnvgl::extfem::fem::cards::types
             glsec::card_type(void) const {return GLSEC;}
