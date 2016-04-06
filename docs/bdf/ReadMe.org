@@ -1,5 +1,4 @@
 # -*- mode: org -*-
-#+OPTIONS: toc:nil
 
 * BDF Cards supported
 

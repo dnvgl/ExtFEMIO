@@ -91,6 +91,8 @@ namespace dnvgl {
                GLSEC,
                /// Cross Section Type Tube
                GPIPE,
+               /// Flexible Joint/Hinge
+               BELFIX,
                /// Nodes with Linear Dependence
                BLDEP,
                /// Nodes with Boundary Conditions
@@ -313,7 +315,6 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                /** Cartesian `Z`-coordinates of node `NODENO`.
                 */
                double ZCOORD;
-
 
                gcoord(const std::deque<std::string>&);
 
@@ -786,7 +787,7 @@ Shortest version:
                static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
 
             public:
-               
+
                /** Geometry type number, i.e. reference number used
                    for element data definition of geometry properties
                    (Cross sectional properties) of beams.
@@ -1075,8 +1076,16 @@ record may be on the interface.
 
             public:
 
+               /** Geometry type number, i.e. referenced to by
+                   `GELREF1`.
+                */
                long GEONO;
+               /** Thickness of the element, measured in a specific
+                   node.
+                */
                double TH;
+               /** Number of integration points through thickness.
+                */
                long NINT;
 
                gelth(const std::deque<std::string>&);
@@ -1385,6 +1394,98 @@ record may be on the interface.
                operator<< (std::ostream& os) const;
             };
 
+/// `BELFIX`: Flexible Joint/Hinge
+/**
+## Format:
+
+|          |         |        |         |        |
+| -------- | ------- | ------ | ------- | ------ |
+| `BELFIX` | `FIXNO` | `OPT`  | `TRANO` | *void* |
+|          | `A(1)`  | `A(2)` | `A(3)`  | `A(4)` |
+|          | `A(5)`  | `A(6)` |         |        |
+*/
+            class belfix : public card {
+
+            private:
+
+               static const dnvgl::extfem::fem::types::card head;
+
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_FIXNO;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_OPT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_TRANO;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_A;
+
+            public:
+
+               typedef enum n_opt {FIXATION = 1, SPRING = 2} n_opt;
+
+               /** Fixation number to a node.
+                   =FIXNO= is referenced to from =GELREF=.
+                */
+               long FIXNO;
+
+               /**
+                  =FIXATION: A(i) = ai is a value between 0 and 1, and
+                             gives the degree of fixation
+                             (connectivity) to degree of freedom
+                             number i in the node. The extreme values
+                             of a is described by:
+
+                     a = 0, fully released
+
+                     a = 1, fully connected
+
+                  =SPRING: A(i) = Ci is the interelement elastic
+                          spring stiffness to degree of freedom number
+                          i in the node. The degrees of freedom which
+                          are neither flexible nor free will be given
+                          Ci = -1 (instead of Ci = ∞). The relation
+                          between Ci and ai is
+
+                             ai = Ci / ( kii + Ci) ≥ 0.0
+
+                          where kii is the diagonal term of the
+                          element stiffness matrix corresponding to
+                          degree of freedom number i of the current
+                          node.
+                */
+               n_opt OPT;
+               /**
+
+                  = -1: The fixation/flexibility (=A(i)) is given in
+                        the superelement coordinate system.
+
+                  =0: A(i) is given in the local element coordinate
+                      system
+
+                  >0: A(i) is given in a local coordinate system
+                   defined by `TRANO`, which refers to a
+                   transformation matrix given on record `BNTRCOS`.
+                   The transformation matrix is defined by
+                   transformation from global to local system.
+               */
+               long TRANO;
+               /** See above (under the explanation of `OPT`).
+                */
+               std::deque<double> A;
+
+               belfix(const std::deque<std::string>&);
+
+               belfix(const long &FIXNO,
+                      const n_opt &OPT,
+                      const long &TRANO,
+                      const std::deque<double> &A);
+
+               const dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               friend  std::ostream&
+               operator<< (std::ostream&, const belfix&);
+
+               const std::ostream&
+               operator<< (std::ostream& os) const;
+            };
+
 /// `BLDEP`: Nodes with Linear Dependence
 /**
 ## Format:
@@ -1466,12 +1567,12 @@ be specified on one BQDP record.
                bldep(const std::deque<std::string>&);
 
                bldep(const long &NODENO,
-                               const long &CNOD,
-                               const long &NDDOF,
-                               const long &NDEP,
-                               const std::deque<long> &DEPDOF,
-                               const std::deque<long> &INDEPDOF,
-                               const std::deque<double> &b);
+                     const long &CNOD,
+                     const long &NDDOF,
+                     const long &NDEP,
+                     const std::deque<long> &DEPDOF,
+                     const std::deque<long> &INDEPDOF,
+                     const std::deque<double> &b);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;

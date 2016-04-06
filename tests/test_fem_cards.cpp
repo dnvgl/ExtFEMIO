@@ -104,6 +104,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         3.00000000e+000 4.00000000e+000-2.27000996e+004 0.00000000e+000\n"
       "BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000\n"
       "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
+      "BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
+      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         2.30460000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
@@ -555,8 +558,27 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<bnbcd*>(current.get())->FIX == ref_fix);
    }
 
-   SECTION("Checking dispatch [bndispl].") {
+   SECTION("Checking dispatch [belfix].") {
       for (int i = 0; i < 18; i++) probe.get(l);
+      std::string msg;
+      for (auto p : l) msg += p + "\n";
+      CAPTURE(msg);
+      card::card_split(l, entries);
+      cards::dispatch(entries, current);
+      CHECK(current->card_type() == cards::BELFIX);
+      // BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000
+      //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
+      //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
+      CHECK(static_cast<belfix*>(current.get())->FIXNO == 23047);
+      CHECK(static_cast<belfix*>(current.get())->OPT == belfix::FIXATION);
+      CHECK(static_cast<belfix*>(current.get())->TRANO == 0);
+
+      std::deque<double> a_ref({1., 1., 1., 1., 1., 0.});
+      CHECK(static_cast<belfix*>(current.get())->A == a_ref);
+   }
+
+   SECTION("Checking dispatch [bndispl].") {
+      for (int i = 0; i < 19; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -578,7 +600,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [bnload].") {
-      for (int i = 0; i < 19; i++) probe.get(l);
+      for (int i = 0; i < 20; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -600,7 +622,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [mgsprng].") {
-      for (int i = 0; i < 20; i++) probe.get(l);
+      for (int i = 0; i < 21; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -625,7 +647,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gsetmemb].") {
-      for (int i = 0; i < 21; i++) probe.get(l);
+      for (int i = 0; i < 22; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -643,7 +665,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gunivec].") {
-      for (int i = 0; i < 22; i++) probe.get(l);
+      for (int i = 0; i < 23; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -658,7 +680,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [misosel].") {
-      for (int i = 0; i < 23; i++) probe.get(l);
+      for (int i = 0; i < 24; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -676,7 +698,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [tdsetnam].") {
-      for (int i = 0; i < 24; i++) probe.get(l);
+      for (int i = 0; i < 25; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -695,7 +717,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [tdsupnam].") {
-      for (int i = 0; i < 25; i++) probe.get(l);
+      for (int i = 0; i < 26; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -714,7 +736,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [gelmnt2].") {
-      for (int i = 0; i < 26; i++) probe.get(l);
+      for (int i = 0; i < 27; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -747,7 +769,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [hsupstat].") {
-      for (int i = 0; i < 27; i++) probe.get(l);
+      for (int i = 0; i < 28; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -769,7 +791,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [hsuptran].") {
-      for (int i = 0; i < 28; i++) probe.get(l);
+      for (int i = 0; i < 29; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -802,7 +824,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [hierarch].") {
-      for (int i = 0; i < 29; i++) probe.get(l);
+      for (int i = 0; i < 30; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -827,7 +849,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [tdload].") {
-      for (int i = 0; i < 30; i++) probe.get(l);
+      for (int i = 0; i < 31; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -845,7 +867,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [bsell].") {
-      for (int i = 0; i < 31; i++) probe.get(l);
+      for (int i = 0; i < 32; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -865,7 +887,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [bnbcd].") {
-      for (int i = 0; i < 32; i++) probe.get(l);
+      for (int i = 0; i < 33; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -882,7 +904,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [beuslo].") {
-      for (int i = 0; i < 33; i++) probe.get(l);
+      for (int i = 0; i < 34; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -908,7 +930,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [bnload].") {
-      for (int i = 0; i < 34; i++) probe.get(l);
+      for (int i = 0; i < 35; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);
@@ -930,7 +952,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    }
 
    SECTION("Checking dispatch [iend].") {
-      for (int i = 0; i < 35; i++) probe.get(l);
+      for (int i = 0; i < 36; i++) probe.get(l);
       std::string msg;
       for (auto p : l) msg += p + "\n";
       CAPTURE(msg);

@@ -6,6 +6,7 @@
 \usepackage{calc}
 \usepackage{mydoxygen}
 \usepackage{graphicx}
+\usepackage{svg}
 
 \usepackage[utf8x]{inputenc}
 \usepackage{makeidx}

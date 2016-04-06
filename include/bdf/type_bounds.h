@@ -29,15 +29,15 @@ namespace dnvgl {
             bool _has_min;
             bool _has_max;
             bool _has_default;
-         
+
          protected:
-            
+
             ~base () {};
-            
+
             bool has_min() const {return _has_min;};
-            
+
             void got_min() {_has_min = true;};
-            
+
             bool has_max() const {return _has_max;};
 
             void got_max() {_has_max = true;};
@@ -62,7 +62,7 @@ namespace dnvgl {
             _Ty max_val;
             _Ty default_val;
             bool allow_empty;
-         
+
          public:
 
             ~bound() {};
@@ -105,22 +105,22 @@ namespace dnvgl {
                return ((!has_min() || val >= this->min_val) &&
                   (!has_max() || val <= this->max_val));
             };
-            
+
             bool does_allow_empty(void) const {
                return allow_empty;
             };
          };
-         
-         template<> 
+
+         template<>
          class bound<std::string> : public base{
 
          private:
 
             std::set<std::string> allowed;
             std::string default_val;
-         
+
          public:
-            
+
             bound() {};
             bound(std::set<std::string> allowed) :
                base(), allowed(allowed) {};
@@ -133,7 +133,7 @@ namespace dnvgl {
                default_val(default_val) {
                got_default();
             };
-            
+
             bool is_allowed(const std::string probe) const {
                if (allowed.size() == 0)
                   return true;

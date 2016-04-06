@@ -1,5 +1,6 @@
 # -*- mode: org -*-
-#+OPTIONS: toc:nil
+#+STARTUP: showall
+#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
 
 * FEM Cards supported
 
@@ -27,6 +28,7 @@
    |          | =GIORH=    | Cross Section Type I or H Beam                               | \check | \check  |  6-71 |
    |          | =GLSEC=    | Cross Section Type L-Section                                 | \check | \check  |  6-76 |
    |          | =GPIPE=    | Cross Section Type Tube                                      | \check | \check  |  6-81 |
+   |          | =BELFIX=   | Flexible Joint/Hinge                                         | \check | \check  |   6-8 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Load     |            |                                                              |        |         |       |
    |          | =BLDEP=    | Nodes with Linear Dependence                                 | \check | \check  |  6-27 |
@@ -38,11 +40,11 @@
    |          | =BEUSLO=   | Elements with Surface Loads                                  | \check | \check  |  6-21 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Superel. |            |                                                              |        |         |       |
-   |          | =BSELL=    | Subelement Load Description                                  | \check | \check |  7-27 |
-   |          | =GELMNT2=  | Subelement Description with Simple Correspondence            | \check | \check |  7-31 |
-   |          | =HSUPSTAT= | Superelement Statistical Information                         | \check | \check |  7-40 |
-   |          | =HSUPTRAN= | Superelement Transformations                                 | \check | \check |  7-41 |
-   |          | =HIERARCH= | Superelement Hierarchy Description                           | \check | \check |  7-38 |
+   |          | =BSELL=    | Subelement Load Description                                  | \check | \check  |  7-27 |
+   |          | =GELMNT2=  | Subelement Description with Simple Correspondence            | \check | \check  |  7-31 |
+   |          | =HSUPSTAT= | Superelement Statistical Information                         | \check | \check  |  7-40 |
+   |          | =HSUPTRAN= | Superelement Transformations                                 | \check | \check  |  7-41 |
+   |          | =HIERARCH= | Superelement Hierarchy Description                           | \check | \check  |  7-38 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Misc     |            |                                                              |        |         |       |
    |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | \check | \check  |  6-84 |
@@ -51,30 +53,23 @@
    |          | =TDSETNAM= | Name and Description of a Set (group)                        | \check | \check  |   4-7 |
    |          | =TEXT=     | User supplied Text                                           | \check | \check  |  4-10 |
 
-[fn:page]
-  References page in "Technical Report: Sesam Input Interface File,
-  File Description", Document id: 89-7012, Revision Number 9 / 01
-  November 1996
-
-*
-
 * Element Types in SESAM
 
-Conventions for use of the interface file for the elements in SESAM
-are defined here. Other element types may be introduced for use in
-other programs.
+   Conventions for use of the interface file for the elements in SESAM
+   are defined here. Other element types may be introduced for use in
+   other programs.
 
-The table below contains element type numbers already reserved. (Not
-all of them are included in SESAM).
+   The table below contains element type numbers already reserved. (Not
+   all of them are included in SESAM).
 
-For ADVANCE, the element types listed are those available from the
-SESAM preprocessors. In addition to that ADVANCE has a lot of other
-element types.
+   For ADVANCE, the element types listed are those available from the
+   SESAM preprocessors. In addition to that ADVANCE has a lot of other
+   element types.
 
 
-#+CAPTION: List of existing Element Types
-#+NAME:    tab:sesam-elements
-#+ATTR_LATEX: :booktabs :environment longtabu :align @{}r|lcXc|cccccp{4em}@{} :width \textwidth
+   #+CAPTION: List of existing Element Types
+   #+NAME:    tab:sesam-elements
+   #+ATTR_LATEX: :booktabs :environment longtabu :align @{}r|lcXc|cccccp{4em}@{} :width \textwidth
    | *Typ[fn:typ]* | *Name* | *N.[fn:num]* | *Description of Element*                                 | *Ref.* | *[fn:preframe]* | *[fn:prefem]* | *[fn:sestra]* | *[fn:advan]* | *[fn:poseidon]* | *Other[fn:other]*  |
    |-----+--------+----+----------------------------------------------------------+------+-------+-------+-------+-------+-------+--------------------|
    |   / | <      |    |                                                          |      | <     |       |       |       |       |                    |
@@ -104,9 +99,9 @@ element types.
    |  21 | =LHEX= |  8 | Linear Hexahedron                                        | 2, 4 |       | \check | \check | \check |       | FR                 |
    |  22 | =SECB= |  3 | Subparametric Curved Beam                                |    2 |       |       |       |       |       |                    |
    |  23 | =BTSS= |  3 | General Curved Beam                                      |    2 |       | \check | \check |       |       | PL, PR             |
-   |  24 | =FQUS= |  4 | Flat Quadrilateral Thin Shell                            |    4 |       | \check | \check |       | \sad  | PL, PR             |
+   |  24 | =FQUS= |  4 | Flat Quadrilateral Thin Shell                            |    4 |       | \check | \check |       | \check | PL, PR             |
    |  24 | =FFQ=  |  4 | Free Formulation Quadrilateral Shell                     |    5 |       |       |       | \check |       |                    |
-   |  25 | =FTRS= |  3 | Flat Triangular Thin Shell                               |    4 |       | \check | \check |       | \sad  | PL                 |
+   |  25 | =FTRS= |  3 | Flat Triangular Thin Shell                               |    4 |       | \check | \check |       | \check | PL                 |
    |  25 | =FFTR= |  3 | Free Formulation Triangular Shell                        |    5 |       |       |       | \check |       |                    |
    |  26 | =SCTS= |  6 | Subparametric Curved Triangular Thick Shell              |    2 |       | \check | \check |       |       | PL                 |
    |  27 | =MCTS= |  6 | Subparametric Curved Triangular Thick Sandwich Element   | 2[fn:th_shell] |       | \check | \check |       |       |                    |
@@ -160,6 +155,833 @@ element types.
    | 100 | =GHEX= | 21 | General Hexahedron                                       |      |       |       | \check |       |       |                    |
    | \dots |        |    |                                                          |      |       |       |       |       |       |                    |
    | 163 | =GHEX= | 27 | General Hexahedron                                       |      |       |       | \check |       |       |                    |
+
+* Contents of =FQUS= and =FTRS=: Flat Quadrilateral/Triangular Thin Shell
+
+** =GELMNT1=: Element Data Definition (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GELMNT1= record layout
+   |-----------+----------+----------+----------+------------|
+   | =GELMNT1= | =ELNOX=  | =ELNO=   | =ELTYP=  | =ELTYAD=   |
+   |           | =NODIN1= | =NODIN2= | =NODIN3= | (=NODIN4=) |
+   |-----------+----------+----------+----------+------------|
+
+   - =ELNOX=: External element number (specified or controlled by
+     user).
+
+   - =ELNO=: Internal element number (generated by program)
+
+   - =ELTYP=: 24 (=FQUS=), or 25 (=FTRS=).
+
+   - =ELTYAD=:  Not used here.
+
+   - =NODIN=: Internal node numbers in the assembly, to which this
+     element is connected.
+
+     The sequence of the node numbers is in accordance with the local
+     node numbering of the basic element.
+
+     By ’internal node numbers’ is meant the node numbering of the
+     entire superelement of which the element =ELNOX= is a part. The
+     internal node number refers to the node number generated by the
+     program. The program-defined element number ranges from 1 up to
+     number of elements. The sequence of the records will correspond
+     to the program-defined element numbering, =ELNO=.
+
+     4 entries for =FQUS=, 3 entries for =FTRS=.
+
+** =GNODE= Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GELMNT1= record layout
+   |---------+---------+----------+--------+--------|
+   | =GNODE= | =NODEX= | =NODENO= | =NDOF= | =ODOF= |
+   |---------+---------+----------+--------+--------|
+
+   There will be one record with the identifier =GNODE= for each node.
+   The sequence of the records will correspond to the internal node
+   number, =NODENO=.
+
+   Example: =NDOF= =3, =ODOF= =135 means 3 degrees of freedom in $x$,
+   $z$ and $Ry$ direction respectively in the superelement’s
+   coordinate system, unless a local nodal coordinate system is
+   specified (see the =BNDOF= and =BNTRCOS= record).
+
+   - =NODEX=: External node number (specified or controlled by user).
+
+   - =NODENO=: Internal node number defined by the program (may be
+     generated by internal node numbering optimalizer). The internal
+     node numbers range from 1 up to number of nodes.
+
+   - =NDOF=: Number of degrees of freedom of nodal point =NODENO=.
+
+   - =ODOF=: Order of degrees of freedom. =NDOF= digits.
+
+** =GCOORD= Nodal Coordinates (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GCOORD= record layout
+   |----------+----------+----------+----------+----------|
+   | =GCOORD= | =NODENO= | =XCOORD= | =YCOORD= | =ZCOORD= |
+   |----------+----------+----------+----------+----------|
+
+   - =NODENO=: Program defined (internal) node number
+
+   - =XCOORD=: Cartesian $X$-coordinates of node =NODENO=.
+
+   - =YCOORD=: Cartesian $Y$-coordinates of node =NODENO=.
+
+   - =ZCOORD=: Cartesian $Z$-coordinates of node =NODENO=.
+
+** =GELREF1=: Reference to Element Data (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GELREF1= record layout
+   |-----------+---------------+---------------+---------------+-----------------|
+   | =GELREF1= | =ELNO=        | =MATNO=       | =ADDNO=       | =INTNO=         |
+   |           | =MINTNO=      | =STRANO=      | =STRENO=      | =STREPONO=      |
+   |           | =GEONO/OPT=   | =FIXNO/OPT=   | =ECCNO/OPT=   | =TRANSNO/OPT=   |
+   |           | =GEONO= (1)   | ...           | =GEONO= (/N/) | =FIXNO= (1)     |
+   |           | ...           | =FIXNO= (1)   | =ECCNO= (1)   | ...             |
+   |           | =ECCNO= (/N/) | =TRANSNO= (1) | ...           | =TRANSNO= (/N/) |
+   |-----------+---------------+---------------+---------------+-----------------|
+
+   - =ELNO=: Internal element number (generated by the program).
+
+   - =MATNO=: Material number
+
+     - $=0$ no material data attached to the element
+
+   - =ADDNO=: Additional data type number, i.e. number referring to
+     additional data specification
+
+     - $=0$ no additional data attached to the element
+
+   - =INTNO=: /not used here/
+
+   - =MINTNO=: Integration station reference number for mass and
+     damping matrices. Integration station, see =INTNO=.
+
+     =MINTNO= $= 0$: Default values of the analysis program are
+     employed.
+
+   - =STRANO=: Initial strain number, i.e. number referring to the
+     specification of initial strains. The data type containing these
+     data is not yet defined.
+
+   - =STRENO=: Initial stress number, i.e. number referring to the
+     specification of initial stresses. The data type containing these
+     data is not yet defined.
+
+   - =STREPONO=: /not used here/
+
+   - =GEONO_OPT=: Geometry reference number or option for geometry
+     reference number specified later in this record sequence.
+
+     - $>0$: The geometry reference number (the same for all nodes in
+       the element). =GEONO= (1), ..., =GEONO= (/N/) will not be
+       specified.
+
+       As =FQUS=, and =FTRS= do not allow thickness variation, this is
+       the recommended entry type. Otherwise a mean thickness has to
+       be calculated.
+
+     - $=-1$: Reference numbers to geometry data are specified later in
+       this record sequence for all nodes, i.e. all =GEONO= (1), ...,
+       =GEONO= (/N/) will be given.
+
+   - =FIXNO_OPT=: Fixation reference number or option for fixation
+     reference numbers specified later in this record sequence. The
+     meaning assigned to the values of =FIXNO_OPT= corresponds to those
+     for =GEONO_OPT=.
+
+   - =ECCNO_OPT=: Eccentricity reference number or option for
+     eccentricity reference numbers specified later in this record
+     sequence. The meaning assigned to the values of =ECCNO_OPT=
+     corresponds to those for =GEONO_OPT=.
+
+   - =TRANSNO_OPT=: Reference number for local coordinate system
+     specification or option for specification of local nodal coordinate
+     systems later in this record sequence. Refers to =GUNIVEC= or
+     =BNTRCOS= record. The meaning assigned to the values of
+     =TRANSNO_OPT= corresponds to those for =GEONO_OPT=.
+
+   - =GEONO=: Geometry reference number for the local nodes of the
+     element.
+
+   - =FIXNO=:Number referring to the specification of degree of fixation
+     (Data type =BELFIX=). =FIXNO= (0) is the reference number for the
+     1st local node of the element, =FIXNO= ($i-1$) will be the
+     reference number for the $i$ ’th local node.
+
+   - =ECCNO=: Eccentricity number for the local nodes of the element,
+     i.e. number referring to the specification of eccentricities.
+
+   - =TRANSNO=: Number referring to the specification of the local
+     element coordinate system for the local nodes of the element.
+     Refers to =BNTRCOS= or =GUNIVEC= record depending on element type.
+
+** =GELTH=: Thickness of Two-dimensional Elements (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GELTH= record layout
+   |---------+---------+------+--------+---|
+   | =GELTH= | =GEONO= | =TH= | =NINT= |   |
+   |---------+---------+------+--------+---|
+
+   - =GEONO=: Geometry type number, i.e. referenced to by =GELREF1=.
+
+   - =TH=: Thickness of the element, measured in a specific node.
+
+   - =NINT=: Number of integration points through thickness.
+
+** one of (mandatory)
+*** =MISOSEL=: Isotropy, Linear Elastic Structural Analysis
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =MISOSEL= record layout
+   |-----------+---------+---------+---------+---------|
+   | =MISOSEL= | =MATNO= | =YOUNG= | =POISS= | =RHO=   |
+   |           | =DAMP=  | =ALPHA= | /DUMMY/ | =YIELD= |
+   |-----------+---------+---------+---------+---------|
+
+   - =MATNO=: Material number, i.e. reference number referenced to by
+     the element specification.
+
+   - =YOUNG=: Young’s modulus.
+
+   - =POISS=: Poisson’s ratio.
+
+   - =RHO=: Density.
+
+   - =DAMP=: Specific damping.
+
+   - =ALPHA=: Thermal expansion coefficient.
+
+   - /DUMMY/: /undocumented/
+
+   - =YIELD=: Yield stress.
+
+*** =MORSMEL=: Anisotropy, Linear Elastic Structural Analysis, 2-D Membrane Elements and 2-D Thin Shell Elements
+
+   /Not supported by Poseidon import/
+
+** =MTRMEL=: Local Transformation of the Axes of Anisotropy, 2-D Membrane Elements and 2-D Thin Shell Elements
+
+   /Not supported by Poseidon import/
+
+** =BEUSLO=: Elements with Surface Loads
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =BEUSLO= record layout
+   |----------+---------------+----------+----------+---------------|
+   | =BEUSLO= | =LLC=         | =LOTYP=  | =COMPLX= | =LAYER=       |
+   |          | =ELNO=        | =NDOF=   | =INTNO=  | =SIDE=        |
+   |          | =RLOAD1=      | =RLOAD2= | ...      | ...           |
+   |          | =RLOAD(NDOF)= | =ILOAD1= | ...      | =ILOAD(NDOF)= |
+   |----------+---------------+----------+----------+---------------|
+
+   If phase shift is not specified, i.e. =COMPLX= $= 0$, the fields or
+   positions =ILOAD1=, =ILOAD2=, etc. are left out.
+
+   Normal pressure means that only one pressure component is specified
+   for each node, and this pressure component is acting normal to the
+   surface.
+
+   For volume elements a positive value means normal pressure directed
+   into the element. For shell elements, a positive value means normal
+   pressure in the local $z$-direction.
+
+   - =LLC=: Local load case number (positive integer number).
+
+   - =LOTYP=: Load type.
+
+     Only =LOTYP= $=1$ is really supported by =FQUS= and =FTRS= as
+     only pressures actibg perpendicular to the element surface can be
+     used. Other componets are ignored with =LOTYP= $=2$.
+
+     - $=1$: normal pressure, conservative load
+
+     - $=2$: load given in component form, conservative load
+
+   - =COMPLX=: Phase shift definition.
+
+     - $=0$: no phase shift
+
+     - $=1$: phase shift
+
+   - =LAYER=: Layer number for elements with more than one layer. If
+     =LAYER= equals 0, the surface load will be positioned in the shell
+     layer (in opposition to a stiffener layer). If more than one shell
+     layer and =LAYER= equals 0, the programs shall stop and give an
+     error message. For elements which are treated as one layer in the
+     load calculations (e.g. the sandwich element in SESTRA), =LAYER=
+     does not have any meaning.
+
+   - =ELNO=: Internal element number (generated by the program).
+
+   - =NDOF=:
+
+     * If =LOTYP= $=1$: number of nodes of the specified element side
+
+     * If =LOTYP= $=2$: number of translational degrees of freedom of
+       the specified element side
+
+   - =INTNO=: Integration station reference number. Referring to record
+     =GELINT=. This reference is usually not used ($=0$). It means that
+     the program performing the load calculation chooses integration
+     points.
+
+   - =SIDE=: Side definition
+
+     For shell elements:
+
+     - $=1$: loads referred to element side where $z=-1$
+
+     - $=2$: loads referred to element side where $z=0$
+
+     - $=3$: loads referred to element side where $z=1$
+
+   - =RLOADi=: The real part of the load with respect to the $i$ th
+     degree of freedom or $i$ th node of the element side.
+
+   - =ILOADi=: The imaginary part of the load with respect to the $i$
+     th degree of freedom or $i$ th node of the element side.
+
+     If =LOTYP= $=3$, =RLOAD= $=±1.0$ indicating which side the
+     element pressure comes from. (+1 indicates shell element =SIDE=
+     $=1$ ($z=-1$), -1 indicates shell element =SIDE= $=3$ ($z=1$)).
+     For solids when =LOTYP= $=3$, =RLOAD= must be +1.0.
+
+** =BELLO2=: Elements with Line Loads, Solid, 3-D Shell, 2-D Shell-, Membrane and Curved Beam Elements
+
+   /Not supported by Poseidon import/
+
+** =BEISTE=: Elements with Initial Strain Due to Thermal Expansion
+
+   /Not supported by Poseidon import/
+
+** =BGRAV=: Gravitational Load (Constant of Gravity)
+
+   /Not supported by Poseidon import/
+
+** =BNACCLO=: Nodes with Acceleration Load
+
+   /Not supported by Poseidon import/
+
+* Contents of =BEAS=: 3-D, 2 Node Beam
+
+** =GELMNT1=: Element Data Definition (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GELMNT1= record layout
+   |-----------+----------+----------+---------+----------|
+   | =GELMNT1= | =ELNOX=  | =ELNO=   | =ELTYP= | =ELTYAD= |
+   |           | =NODIN1= | =NODIN2= |         |          |
+   |-----------+----------+----------+---------+----------|
+
+   - =ELNOX=: External element number (specified or controlled by user).
+
+   - =ELNO=:  Internal element number (generated by program)
+
+   - =ELTYP=: 15.
+
+   - =ELTYAD=:  Additional information related to element type.
+
+     - For two noded beam elements used to specify
+       structural / non-structural elements:
+
+        $=0$: Structural beam
+
+        $=1$: Non structural beam
+
+   - =NODIN=: Internal node numbers in the assembly, to which this
+     element is connected.
+
+     The sequence of the node numbers is in accordance with the local
+     node numbering of the basic element.
+
+     By ’internal node numbers’ is meant the node numbering of the
+     entire superelement of which the element =ELNOX= is a part. The
+     internal node number refers to the node number generated by the
+     program. The program-defined element number ranges from 1 up to
+     number of elements. The sequence of the records will correspond to
+     the program-defined element numbering, =ELNO=.
+
+** =GBEAMG=: General Beam Element Data (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GBEAMG= record layout
+   |----------+----------+----------+---------+---------|
+   | =GBEAMG= | =GEONO=  | /void/   | =AREA=  | =IX=    |
+   |          | =IY=     | =IZ=     | =IYZ=   | =WXMIN= |
+   |          | =WYMIN=  | =WZMIN=  | =SHARY= | =SHARZ= |
+   |          | =SHCENY= | =SHCENZ= | =SY=    | =SZ=    |
+   |----------+----------+----------+---------+---------|
+
+   - =GEONO=: Geometry number, referenced to on =GELREF1=.
+
+   - =AREA=:  Cross section area.
+
+   - =IX=: Torsional moment of inertia about the shear center.
+
+   - =IY=: Moment of inertia about the $y$ axis $= ∫z² dA$.
+
+   - =IZ=: Moment of inertia about the $z$ axis $= ∫y² dA$.
+
+   - =IYZ=; Product of inertia about $y$ and $z$ axis $= ∫yz dA$.
+
+   - =WXMIN=: Minimum torsional section modulus about shear center
+              ($=IX/rmax$ for a =PIPE= element).
+
+   - =WYMIN=: Minimum sectionmodulus about $y$ axis $= IY/zmax$.
+
+   - =WZMIN=: Minimum sectionmodulus about $z$ axis $= IZ/ymax$.
+
+   - =SHARY=: Shear area in the direction of $y$ axis. If zero,
+              shear is not included.
+
+   - =SHARZ=: Shear area in the direction of $z$ axis. If zero,
+              shear is not included.
+
+   - =SHCENY=: Shear center location $y$ component.
+
+   - =SHCENZ=: Shear center location $z$ component
+
+   - =SY=: Static area moment about $y$ -axis $= ∫z dA$.
+
+   - =SZ=: Static area moment about $z$ -axis $= ∫y dA$.
+
+** =GELREF1=: Reference to Element Data (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GELREF1= record layout
+   |-----------+---------------+---------------+---------------+-----------------|
+   | =GELREF1= | =ELNO=        | =MATNO=       | =ADDNO=       | =INTNO=         |
+   |           | =MINTNO=      | =STRANO=      | =STRENO=      | =STREPONO=      |
+   |           | =GEONO/OPT=   | =FIXNO/OPT=   | =ECCNO/OPT=   | =TRANSNO/OPT=   |
+   |           | =GEONO= (1)   | ...           | =GEONO= (/N/) | =FIXNO= (1)     |
+   |           | ...           | =FIXNO= (1)   | =ECCNO= (1)   | ...             |
+   |           | =ECCNO= (/N/) | =TRANSNO= (1) | ...           | =TRANSNO= (/N/) |
+   |-----------+---------------+---------------+---------------+-----------------|
+
+   - =ELNO=: Internal element number (generated by the program).
+
+   - =MATNO=: Material number
+
+     - $=0$ no material data attached to the element
+
+   - =ADDNO=: Additional data type number, i.e. number referring to
+     additional data specification
+
+     - $=0$ no additional data attached to the element
+
+   - =INTNO=: Integration station reference number for stiffness matrix,
+     i.e. number referring to the specification of integration stations.
+     An integration station is defined as:
+
+     - an assembly of integration points over a cross section of a
+       1-dimensional (beam or bar) element,
+
+     - an assembly of integration points on a line through the
+       thickness of a 2-dimensional element,
+
+     - one single integration point for a 3-dimensional element. For
+       further explanation see record =GELINT=.
+
+     =INTNO= $= 0$: Default values of the analysis program are
+     employed.
+
+   - =MINTNO=: Integration station reference number for mass and
+     damping matrices. Integration station, see =INTNO=.
+
+     =MINTNO= $= 0$: Default values of the analysis program are
+     employed.
+
+   - =STRANO=: Initial strain number, i.e. number referring to the
+     specification of initial strains. The data type containing these
+     data is not yet defined.
+
+   - =STRENO=: Initial stress number, i.e. number referring to the
+     specification of initial stresses. The data type containing these
+     data is not yet defined.
+
+   - =STREPONO=: Stresspoint specification reference number. See record
+     =GELSTRP= for further information.
+
+   - =GEONO_OPT=: Geometry reference number or option for geometry
+     reference number specified later in this record sequence.
+
+     =BEAS= supports constant cross section only.
+
+     - $>0$: The geometry reference number (the same for all nodes in
+       the element). =GEONO= (1), ..., =GEONO= (/N/) will not be
+       specified.
+
+     - $=0$: No geometry data is given, i.e. neither here nor on
+       =GEONO= (1), ..., =GEONO= (/N/).
+
+     - $=-1$: Reference numbers to geometry data are specified later in
+       this record sequence for all nodes, i.e. all =GEONO= (1), ...,
+       =GEONO= (/N/) will be given.
+
+   - =FIXNO_OPT=: Fixation reference number or option for fixation
+     reference numbers specified later in this record sequence. The
+     meaning assigned to the values of =FIXNO_OPT= corresponds to those
+     for =GEONO_OPT=.
+
+   - =ECCNO_OPT=: Eccentricity reference number or option for
+     eccentricity reference numbers specified later in this record
+     sequence. The meaning assigned to the values of =ECCNO_OPT=
+     corresponds to those for =GEONO_OPT=.
+
+   - =TRANSNO_OPT=: Reference number for local coordinate system
+     specification or option for specification of local nodal
+     coordinate systems later in this record sequence. Refers to
+     =GUNIVEC= or =BNTRCOS= record. The meaning assigned to the values
+     of =TRANSNO_OPT= corresponds to those for =GEONO_OPT=.
+
+   - =GEONO=: Geometry reference number for the local nodes of the
+     element.
+
+   - =FIXNO=:Number referring to the specification of degree of
+     fixation (Data type =BELFIX=). =FIXNO= (0) is the reference number
+     for the 1st local node of the element, =FIXNO= ($i-1$) will be the
+     reference number for the $i$ ’th local node.
+
+   - =ECCNO=: Eccentricity number for the local nodes of the element,
+     i.e. number referring to the specification of eccentricities.
+
+   - =TRANSNO=: Number referring to the specification of the local
+     element coordinate system for the local nodes of the element.
+     Refers to =BNTRCOS= or =GUNIVEC= record depending on element type.
+
+** One of
+*** =GIORH=: Cross Section Type I or H Beam
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GIORH= record layout
+   |---------+---------+----------+----------+---------|
+   | =GIORH= | =GEONO= | =HZ=     | =TY=     | =BT=    |
+   |         | =TT=    | =BB=     | =TB=     | =SFY=   |
+   |         | =SFZ=   | =NLOBYT= | =NLOBYB= | =NLOBZ= |
+   |---------+---------+----------+----------+---------|
+
+   #+CAPTION: =GIORH= cross section dimensions
+   #+BEGIN_HTML
+   <div class="figure">
+   <p><img src="./docs/images/giorh.svg" />
+   </p>
+   #+END_HTML
+   #+BEGIN_LATEX
+   \begin{center}
+     \includegraphics[width=65.45mm]{giorh.eps}
+   \end{center}
+   #+END_LATEX
+
+   - =GEONO=: Beam stress type number, i.e. reference number used for
+     element data definition of cross sectional properties of beams.
+
+   - =HZ=: Height of beam at current location
+
+   - =TY=: Thickness of beam web
+
+   - =BT=: Width of top flange
+
+   - =TT=: Thickness of top flange
+
+   - =BB=: Width of bottom flange
+
+   - =TB=: Thickness of bottom flange
+
+   - =SFY=: Factor modifying the shear area calculated by the
+     preprocessor program such that the modified shear area is
+     \begin{equation}
+       SHARY(MOD) = SHARY(PROG) · SFY
+     \end{equation}
+     (The shear areas on =GBEAMG= are SHARY(MOD)).
+
+   - =SFZ=: Factor modifying the shear area calculated by the
+     preprocessor program such that the modified shear area is
+     \begin{equation}
+       SHARZ(MOD) = SHARZ(PROG) · SFY
+     \end{equation}
+     (The shear areas on =GBEAMG= are SHARZ(MOD)).
+
+   - =NLOBYT=: Number of integration points in top flange (optional)
+
+   - =NLOBYB=: Number of integration points in bottom flange (optional)
+
+   - =NLOBZ=: Number of integration points in beam web (optional)
+
+*** =GUSYI: Cross Section Type Unsymmetrical I-Beam=
+
+*** =GCHAN=: Cross Section Type Channel Beam
+
+*** =GBOX=: Cross Section Type Box Beam
+
+*** =GPIPE=: Cross Section Type Tube
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GIORH= record layout
+   |---------+---------+-------+--------+--------|
+   | =GPIPE= | =GEONO= | =DI=  | =DY=   | =T=    |
+   |         | =SFY=   | =SFZ= | =NDIR= | =NRAD= |
+   |---------+---------+-------+--------+--------|
+
+   #+CAPTION: =GPIPE= cross section dimensions
+   #+BEGIN_HTML
+   <div class="figure">
+   <p><img src="./docs/images/gpipe.svg" />
+   </p>
+   #+END_HTML
+   #+BEGIN_LATEX
+   \begin{center}
+     \includegraphics[width=65.13mm]{gpipe.eps}
+   \end{center}
+   #+END_LATEX
+
+   - =GEONO=: Geometry type number, i.e. reference number used for
+     element data definition of geometry properties (Cross sectional
+     properties) of beams.
+
+   - =DI=: Inner diameter of tube.
+
+   - =DY=: Outer diameter of tube (mandatory).
+
+   - =T=: Thickness of tube (not necessary if =DI= is given).
+
+   - =SFY=: Factor modifying the shear area calculated by the
+     preprocessor program such that the modified shear area is
+     \begin{equation}
+       SHARY(MOD) = SHARY(PROG) · SFY
+     \end{equation}
+     (The shear area on =GBEAMG= is SHARY(MOD)).
+
+   - =SFZ=: Factor modifying the shear area calculated by the
+     preprocessor program such that the modified shear area is
+     \begin{equation}
+       SHARZ(MOD) = SHARZ(PROG) · SFZ
+     \end{equation}
+     (The shear area on =GBEAMG= os SHARZ(MOD)).
+
+   - =NCIR=: Number of integration points in circumferential direction (optional)
+
+   - =NRAD=: Number of integration points in radial direction (optional)
+
+*** =GBARM=: Cross Section Type Massive Bar
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GBARM= record layout
+   |---------+---------+-------+---------+---------|
+   | =GBARM= | =GEONO= | =HZ=  | =BT=    | =BB=    |
+   |         | =SFY=   | =SFZ= | =NLOBY= | =NLOBZ= |
+   |---------+---------+-------+---------+---------|
+
+   #+CAPTION: =GBARM= cross section dimensions
+   #+BEGIN_HTML
+   <div class="figure">
+   <p><img src="./docs/images/gbarm.svg" />
+   </p>
+   #+END_HTML
+   #+BEGIN_LATEX
+   \begin{center}
+     \includegraphics[width=66.47mm]{gbarm.eps}
+   \end{center}
+   #+END_LATEX
+
+   - =GEONO=: Geometry type number, i.e. reference number used for
+     element data definition of geometry properties (Cross sectional
+     properties) of beams.
+
+   - =HZ=: Height of beam.
+
+   - =BT=: Width of bar at top. For massive bars which are not able to
+     have different widths at top and bottom this variable is used as
+     the width of the beam.
+
+   - =BB=: Width of bar at bottom.
+
+   - =SFY=: Factor modifying the shear area calculated by the
+     preprocessor program such that the modified shear area is
+     \begin{equation}
+        SHARY(MOD) = SHARY(PROG) · SFY
+     \end{equation}
+     (The shear area on =GBEAMG= is SHARY(MOD)).
+
+   - =SFZ=: Factor modifying the shear area calculated by the
+     preprocessor program such that the modified shear area is
+     \begin{equation}
+        SHARZ(MOD) = SHARZ(PROG) · SFZ
+     \end{equation}
+     (The shear area on =GBEAMG= is SHARZ(MOD)).
+
+   - =NLOBY=: Number of integration points in Y’ direction (optional)
+
+   - =NLOBZ=: Number of integration points in Z’ direction (optional)
+
+*** =GTONP=: Cross Section T on Plate
+
+*** =GDOBO=: Section Type Double Bottom
+
+** =MISOSEL=: Isotropy, Linear Elastic Structural Analysis (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =MISOSEL= record layout
+   |-----------+---------+---------+---------+---------|
+   | =MISOSEL= | =MATNO= | =YOUNG= | =POISS= | =RHO=   |
+   |           | =DAMP=  | =ALPHA= | /DUMMY/ | =YIELD= |
+   |-----------+---------+---------+---------+---------|
+
+   - =MATNO=: Material number, i.e. reference number referenced to by
+     the element specification.
+
+   - =YOUNG=: Young’s modulus.
+
+   - =POISS=: Poisson’s ratio.
+
+   - =RHO=: Density.
+
+   - =DAMP=: Specific damping.
+
+   - =ALPHA=: Thermal expansion coefficient.
+
+   - /DUMMY/: /undocumented/
+
+   - =YIELD=: Yield stress.
+
+** =GUNIVEC=: Specification of Local Element Coordinate System (mandatory)
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =MISOSEL= record layout
+   |-----------+-----------+--------+--------+--------|
+   | =GUNIVEC= | =TRANSNO= | =UNIX= | =UNIY= | =UNIZ= |
+   |-----------+-----------+--------+--------+--------|
+
+   The =GUNIVEC= records are used for beam elements only, i.e. basic
+   element types 2, 15 and 23. Other basic element types may refer to
+   =BNTRCOS= records. No ambiguity thus exists if both a =GUNIVEC= and
+   =BNTRCOS= record have same =TRANSNO=, but they should preferably
+   have separate numbering (=TRANSNO=) to avoid possible program
+   problems.
+
+   - =TRANSNO=: Unit vector number, referenced to on record =GELREF1=.
+
+   - =UNIX=: $x$ component of Unit vector given in superelement
+     coordinate system along the local z-axis (reference axis in
+     z-direction) of the element in the particular node.
+
+   - =UNIY=: $y$ component of Unit vector given in superelement
+     coordinate system along the local z-axis (reference axis in
+     z-direction) of the element in the particular node.
+
+   - =UNIZ=: /z/ component of Unit vector given in superelement
+     coordinate system along the local z-axis (reference axis in
+     z-direction) of the element in the particular node.
+
+** =GECCEN=: Eccentricities
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =GECCEN= record layout
+   |----------+---------+------+------+------|
+   | =GECCEN= | =ECCNO= | =EX= | =EY= | =EZ= |
+   |----------+---------+------+------+------|
+
+   - =ECCNO=: Eccentricity number, referenced to on record =GELREF1=.
+
+   - =EX=: $x$ component of eccentricity vector given in superelement
+     coordinate system, the vector points from the global node towards
+     the local element node.
+
+   - =EY=: $y$ component of eccentricity vector given in superelement
+     coordinate system, the vector points from the global node towards
+     the local element node.
+
+   - =EZ=: /z/ component of eccentricity vector given in superelement
+     coordinate system, the vector points from the global node towards
+     the local element node.
+
+** =BEDRAG1=: Hydrodynamic Drag and Damping from Wave Load Program
+
+   /Not supported by Poseidon import/
+
+
+** =BEMASS1=: Hydrodynamic added Mass from Wave Load Program
+
+   /Not supported by Poseidon import/
+
+** =BELOAD1=: Beams with Line Loads
+
+   /Not supported by Poseidon import/
+
+** =BGRAV=: Gravitational Load (Constant of Gravity)
+
+   /Not supported by Poseidon import/
+
+** =BNACCLO=: Nodes with Acceleration Load
+
+   /Not supported by Poseidon import/
+
+** =BEISTE=: Elements with Initial Strain Due to Thermal Expansion
+
+   /Not supported by Poseidon import/
+
+** =BELFIX=: Flexible Joint/Hinge
+
+   #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+   #+CAPTION: =BELFIX= record layout
+   |----------+---------+--------+---------+--------|
+   | =BELFIX= | =FIXNO= | =OPT=  | =TRANO= | /void/ |
+   |          | =A(1)=  | =A(2)= | =A(3)=  | =A(4)= |
+   |          | =A(5)=  | =A(6)= |         |        |
+   |----------+---------+--------+---------+--------|
+
+   - =FIXNO=: Fixation number to a node.
+
+     =FIXNO= is referenced to from =GELREF=.
+
+   - =OPT=:
+
+     - = =FIXATION=: A(i) = ai is a value between 0 and 1, and gives
+       the degree of fixation (connectivity) to degree of freedom
+       number i in the node. The extreme values of a is described by:
+
+       - a = 0, fully released
+
+       - a = 1, fully connected
+
+     - = =SPRING=: A(i) = Ci is the interelement elastic spring
+       stiffness to degree of freedom number i in the node. The
+       degrees of freedom which are neither flexible nor free will be
+       given Ci = -1 (instead of Ci = ∞). The relation between Ci and
+       ai is
+
+          ai = Ci / ( kii + Ci) ≥ 0.0
+
+       where kii is the diagonal term of the element stiffness matrix
+       corresponding to degree of freedom number i of the current
+       node.
+
+   - =TRANO=:
+
+     - = -1: The fixation/flexibility (=A(i)) is given in the
+       superelement coordinate system.
+
+     - =0: A(i) is given in the local element coordinate system
+
+     - >0: A(i) is given in a local coordinate system defined by
+       =TRANO=, which refers to a transformation matrix given on
+       record =BNTRCOS=. The transformation matrix is defined by
+       transformation from global to local system.
+
+  - =A=: See above (under the explanation of =OPT=).
+
+* Footnotes
+
+[fn:page]
+   References page in "Technical Report: Sesam Input Interface File,
+   File Description", Document id: 89-7012, Revision Number 9 / 01
 
 [fn:typ] =ELTYP=
 

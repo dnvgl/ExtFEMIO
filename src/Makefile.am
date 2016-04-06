@@ -63,6 +63,7 @@ libextfemio_la_SOURCES += fem/fem_cards_gelth.cpp
 libextfemio_la_SOURCES += fem/fem_cards_giorh.cpp
 libextfemio_la_SOURCES += fem/fem_cards_glsec.cpp
 libextfemio_la_SOURCES += fem/fem_cards_gpipe.cpp
+libextfemio_la_SOURCES += fem/fem_cards_belfix.cpp
 libextfemio_la_SOURCES += fem/fem_cards_bldep.cpp
 libextfemio_la_SOURCES += fem/fem_cards_bnbcd.cpp
 libextfemio_la_SOURCES += fem/fem_cards_bndispl.cpp

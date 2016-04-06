@@ -56,7 +56,7 @@ TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
    card::card_split(data, lines);
    beuslo probe(lines);
 
-   SECTION("first moment") {
+   SECTION("first") {
 
       CHECK(probe.LLC == 1);
       CHECK(probe.LOTYP == 1);

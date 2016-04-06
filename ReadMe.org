@@ -1,8 +1,15 @@
 # -*- mode: org -*-
+#+STARTUP: showall
+#+OPTIONS: H:6
+#+OPTIONS: toc:6
 #+LATEX_CLASS: dnvglartcl
-#+LATEX_HEADER: \usepackage{tabu,booktabs}
-#+OPTIONS: toc:nil
+#+LATEX_HEADER: \usepackage{tabu}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \graphicspath{{./docs/images/}}
+#+LATEX_HEADER: \let\strcmp\pdfstrcmp
+#+LATEX_HEADER: \setcounter{secnumdepth}{6}
 #+ATTR_LATEX: :booktabs t
+#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
 #+TITLE: C++ IO support for various FEM exchange file formats
 
 * Supported FEM file formats
@@ -16,8 +23,8 @@ the according directories in the doc dubdirectory.
 
 ** NASTRAN Bulk Data Format (BDF)
 
-#+INCLUDE: "docs/bdf/ReadMe.org" :minlevel 3
+   #+INCLUDE: "docs/bdf/ReadMe.org"
 
 ** DNV GL Seasam Input Interface File (FEM)
 
-#+INCLUDE: "docs/fem/ReadMe.org" :minlevel 3
+   #+INCLUDE: "docs/fem/ReadMe.org"

@@ -115,6 +115,7 @@ test_fem_cards_SOURCES += test_fem_cards_gelth.cpp
 test_fem_cards_SOURCES += test_fem_cards_giorh.cpp
 test_fem_cards_SOURCES += test_fem_cards_glsec.cpp
 test_fem_cards_SOURCES += test_fem_cards_gpipe.cpp
+test_fem_cards_SOURCES += test_fem_cards_belfix.cpp
 test_fem_cards_SOURCES += test_fem_cards_gnode.cpp
 test_fem_cards_SOURCES += test_fem_cards_bldep.cpp
 test_fem_cards_SOURCES += test_fem_cards_bnbcd.cpp
