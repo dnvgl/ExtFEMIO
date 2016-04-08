@@ -595,6 +595,6 @@ superelement transformation reference number, `ITREF`.
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:
