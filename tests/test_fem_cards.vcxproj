@@ -197,6 +197,7 @@
     <ClCompile Include="test_fem_cards_bnbcd.cpp" />
     <ClCompile Include="test_fem_cards_bndispl.cpp" />
     <ClCompile Include="test_fem_cards_bnload.cpp" />
+    <ClCompile Include="test_fem_cards_gusyi.cpp" />
     <ClCompile Include="test_fem_cards_hierarch.cpp" />
     <ClCompile Include="test_fem_cards_hsupstat.cpp" />
     <ClCompile Include="test_fem_cards_hsuptran.cpp" />

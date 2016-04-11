@@ -16,18 +16,12 @@
 
 #pragma once
 
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT _WIN32_WINNT_MAXVER
+#ifdef _X64
+   #define NTDDI_VERSION    NTDDI_WIN7SP4
+#else
+   #define NTDDI_VERSION    NTDDI_WINXPSP3
 #endif
 
-#ifndef EXTFEM_IGNORE_STINGRAY
-#include "NDStingrayVersions.h"
-#if  _StingrayVersion >= 1000
-   #define NO_TARGETING
-#endif
-#include "CRT4VS2005.h"
-#undef NO_TARGETING
-#endif // EXTFEM_IGNORE_STINGRAY
 
 #define VC_EXTRALEAN    // Exclude rarely-used stuff from Windows headers
 
@@ -50,6 +44,20 @@ static char THIS_FILE[] = __FILE__;
 #include <regex>
 
 #endif
+
+#pragma message(">--- ExtFEMIO settings ---------------------------------------------<")
+#define __PRAGMASTRING2(x) #x
+#define __PRAGMASTRING(x) __PRAGMASTRING2(x)
+#pragma message("Operating System:")
+#pragma message("   NTDDI_VERSION == " __PRAGMASTRING(NTDDI_VERSION))
+#pragma message("   WINVER        >= " __PRAGMASTRING(WINVER))
+#pragma message("   _WIN32_WINNT  == " __PRAGMASTRING(_WIN32_WINNT))
+#pragma message("   _WIN32_IE     == " __PRAGMASTRING(_WIN32_IE))
+#pragma message("Compiler:")
+#pragma message("   _MSC_VER      == " __PRAGMASTRING(_MSC_VER))
+#pragma message("Libraries:")
+#pragma message(">------------------------------------------------------------------<")
+
 
 // Local Variables:
 // mode: c++

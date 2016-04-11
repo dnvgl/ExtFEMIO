@@ -406,6 +406,9 @@
     <ClCompile Include="fem\fem_cards_belfix.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fem\fem_cards_gusyi.cpp">
+      <Filter>FEM\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BDF">
