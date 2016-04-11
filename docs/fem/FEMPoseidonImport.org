@@ -655,9 +655,68 @@
 
     - =NRAD=: Number of integration points in radial direction (optional)
 
+**** =GLSEC=: Cross Section Type L-Section
+
+    #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
+    #+CAPTION: =GLSEC= record layout
+    |---------+---------+---------+-------+------|
+    | =GLSEC= | =GEONO= | =HZ=    | =TY=  | =BY= |
+    |         | =TZ=    | =SFY=   | =SFZ= | =K=  |
+    |         | =NLOBY= | =NLOBZ= |       |      |
+    |---------+---------+---------+-------+------|
+
+    #+BEGIN_HTML
+    <div class="figure">
+    <caption class="t-above"><span class="figure-number">Figure 4:</span> <code>GLSEC</code>cross section dimensions.</caption>
+    <p><img src="../images/glsec.svg" />
+    </p>
+    #+END_HTML
+    #+BEGIN_LATEX
+    \captionof{figure}{\texttt{GLSEC} cross section dimensions.}
+    \begin{center}
+      \includegraphics[width=65.13mm]{glsec.eps}
+    \end{center}
+    #+END_LATEX
+
+    - =HZ=: Height of beam at current location.
+
+    - =TY=: Thickness of beam web.
+
+    - =BY=: Width of flange.
+
+    - =TZ=: Thickness of flange.
+
+    - =SFY=: Factor modifying the shear area calculated by the
+      preprocessor program such that the modified shear area is
+      \begin{equation}
+        SHARY(MOD) = SHARY(PROG) · SFY
+      \end{equation}
+      (The shear areas on =GBEAMG= are SHARY(MOD)).
+
+    - =SFZ=: Factor modifying the shear area calculated by the
+      preprocessor program such that the modified shear area is
+      \begin{equation}
+        SHARZ(MOD) = SHARZ(PROG) · SFY
+      \end{equation}
+      (The shear areas on =GBEAMG= are SHARZ(MOD)).
+
+    - =K=: Web orientation:
+
+          - =0: web located in the negative local *y*-direction (and
+            consequently flange in the positive *y*’-direction)
+
+          - =1: web located in the positive local *y*-direction (and
+            consequently flange in the negative *y*’-direction)
+
+    - =NLOBYT=: Number of integration points in top flange (optional)
+
+    - =NLOBYB=: Number of integration points in bottom flange (optional)
+
+    - =NLOBZ=: Number of integration points in beam web (optional)
+
 **** =GBARM=: Cross Section Type Massive Bar
 
-    #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil 
+    #+ATTR_LATEX: :booktabs :environment tabu :align @{}|X|X|X|X|X|@{} :width .85\textwidth :float nil
     #+CAPTION: =GBARM= record layout
     |---------+---------+-------+---------+---------|
     | =GBARM= | =GEONO= | =HZ=  | =BT=    | =BB=    |

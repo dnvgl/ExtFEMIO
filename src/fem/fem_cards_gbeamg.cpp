@@ -59,6 +59,10 @@ namespace dnvgl {
             gbeamg::gbeamg(const std::deque<std::string> &inp) :
                BeamProp(inp) {
 
+               if (inp.size() < 17)
+                  throw errors::parse_error(
+                     "GBEAMG", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

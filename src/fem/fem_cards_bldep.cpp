@@ -52,6 +52,10 @@ namespace dnvgl {
             bldep::bldep(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 9)
+                  throw errors::parse_error(
+                     "BLDEP", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

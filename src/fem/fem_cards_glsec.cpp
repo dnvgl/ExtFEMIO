@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_glsec.cpp
+   \file fem/fem_cards_glsec.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Processing Sesam FEM `GLSEC` cards.
@@ -52,6 +52,10 @@ namespace dnvgl {
 
             glsec::glsec(const std::deque<std::string> &inp) :
                BeamProp(inp) {
+
+               if (inp.size() < 11)
+                  throw errors::parse_error(
+                     "GLSEC", "Illegal number of entries.");
 
                auto pos = inp.begin();
 

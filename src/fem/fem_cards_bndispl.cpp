@@ -51,6 +51,10 @@ namespace dnvgl {
             bndispl::bndispl(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 8)
+                  throw errors::parse_error(
+                     "BNDISPL", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

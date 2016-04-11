@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_belfix.cpp
+   \file fem/fem_cards_belfix.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Processing Sesam FEM `BELFIX` cards.
@@ -55,6 +55,10 @@ namespace dnvgl {
 
             belfix::belfix(const std::deque<std::string> &inp) :
                card(inp) {
+
+               if (inp.size() < 11)
+                  throw errors::parse_error(
+                     "BELFIX", "Illegal number of entries.");
 
                auto pos = inp.begin();
 

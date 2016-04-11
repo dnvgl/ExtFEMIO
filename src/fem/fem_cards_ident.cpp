@@ -48,6 +48,10 @@ namespace dnvgl {
             ident::ident(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 5)
+                  throw errors::parse_error(
+                     "IDENT", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

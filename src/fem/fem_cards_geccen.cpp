@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_geccen.cpp
+   \file fem/fem_cards_geccen.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Processing Sesam FEM `GECCEN` cards.
@@ -48,6 +48,10 @@ namespace dnvgl {
 
             geccen::geccen(const std::deque<std::string> &inp) :
                card(inp) {
+
+               if (inp.size() < 5)
+                  throw errors::parse_error(
+                     "GECCEN", "Illegal number of entries.");
 
                auto pos = inp.begin();
 

@@ -52,6 +52,10 @@ namespace dnvgl {
             gbarm::gbarm(const std::deque<std::string> &inp) :
                BeamProp(inp) {
 
+               if (inp.size() < 9)
+                  throw errors::parse_error(
+                     "GBARM", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_gelth.cpp
+   \file fem/fem_cards_gelth.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Processing Sesam FEM `GELTH` cards.
@@ -48,9 +48,14 @@ namespace dnvgl {
             gelth::gelth(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 4)
+                  throw errors::parse_error(
+                     "GELTH", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;
+
                GEONO = _form_GEONO(*(pos++));
                TH = _form_TH(*(pos++));
                NINT = _form_NINT(*(pos++));

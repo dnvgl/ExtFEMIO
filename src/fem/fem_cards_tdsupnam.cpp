@@ -51,6 +51,10 @@ namespace dnvgl {
             tdsupnam::tdsupnam(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 9)
+                  throw errors::parse_error(
+                     "TDSUPNAM", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

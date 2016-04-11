@@ -47,6 +47,10 @@ namespace dnvgl {
             mgsprng::mgsprng(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 4)
+                  throw errors::parse_error(
+                     "MGSPRNG", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

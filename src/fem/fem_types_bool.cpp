@@ -1,5 +1,5 @@
 /**
-   \file fem_types_bool.cpp
+   \file fem/fem_types_bool.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Implemention of bool boundaries for Sesam FEM IO.
@@ -48,5 +48,5 @@ dnvgl::extfem::fem::types::bool_re(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8
+// compile-command: "make -C ../.. check -j8"
 // End:

@@ -45,6 +45,10 @@ namespace dnvgl {
             iend::iend(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 1)
+                  throw errors::parse_error(
+                     "IEND", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

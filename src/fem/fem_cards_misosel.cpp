@@ -51,6 +51,11 @@ namespace dnvgl {
 
             misosel::misosel(const std::deque<std::string> &inp) :
                card(inp) {
+
+               if (inp.size() < 7)
+                  throw errors::parse_error(
+                     "MISOSEL", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

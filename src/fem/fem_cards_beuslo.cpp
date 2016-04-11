@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_beuslo.cpp
+   \file fem/fem_cards_beuslo.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Processing Sesam FEM `BEUSLO` cards.
@@ -54,6 +54,10 @@ namespace dnvgl {
 
             beuslo::beuslo(const std::deque<std::string> &inp) :
                card(inp) {
+
+               if (inp.size() < 10)
+                  throw errors::parse_error(
+                     "BEUSLO", "Illegal number of entries.");
 
                auto pos = inp.begin();
 

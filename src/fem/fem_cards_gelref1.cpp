@@ -61,6 +61,10 @@ namespace dnvgl {
             gelref1::gelref1(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 13)
+                  throw errors::parse_error(
+                     "GELREF1", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                std::deque<std::string> node_vals;

@@ -50,6 +50,10 @@ namespace dnvgl {
             gsetmemb::gsetmemb(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 7)
+                  throw errors::parse_error(
+                     "GSETMEMB", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

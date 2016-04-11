@@ -49,6 +49,10 @@ namespace dnvgl {
             text::text(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 9)
+                  throw errors::parse_error(
+                     "TEXT", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

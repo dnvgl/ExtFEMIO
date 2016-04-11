@@ -54,6 +54,10 @@ namespace dnvgl {
             hsupstat::hsupstat(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 10)
+                  throw errors::parse_error(
+                     "HSUPSTAT", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

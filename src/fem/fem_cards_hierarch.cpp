@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_hierarch.cpp
+   \file fem/fem_cards_hierarch.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Processing Sesam FEM `HIERARCH` cards.
@@ -54,6 +54,10 @@ namespace dnvgl {
 
             hierarch::hierarch(const std::deque<std::string> &inp) :
                card(inp) {
+
+               if (inp.size() < 10)
+                  throw errors::parse_error(
+                     "HIERARCH", "Illegal number of entries.");
 
                auto pos(inp.begin());
 

@@ -51,6 +51,10 @@ namespace dnvgl {
 
                long tmp;
 
+               if (inp.size() < 7)
+                  throw errors::parse_error(
+                     "BSELL", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

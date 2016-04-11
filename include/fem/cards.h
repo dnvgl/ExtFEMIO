@@ -91,6 +91,8 @@ namespace dnvgl {
                GLSEC,
                /// Cross Section Type Tube
                GPIPE,
+               /// Cross Section Type Unsymmetrical I-Beam
+               GUSYI,
                /// Flexible Joint/Hinge
                BELFIX,
                /// Nodes with Linear Dependence
@@ -1213,7 +1215,7 @@ record may be on the interface.
 |         |         |          |       |      |
 | ------- | ------- | -------- | ----- | ---- |
 | `GLSEC` | `GEONO` | `HZ`     | `TY`  | `BY` |
-|         | `TZ`    | `SFY`    | `SFZ` | `K'  |
+|         | `TZ`    | `SFY`    | `SFZ` | `K`  |
 |         | `NLOBY` | `NLOBZ`  |       |      |
 
 \image latex glsec.eps "I or H beam"
@@ -1389,6 +1391,119 @@ record may be on the interface.
 
                friend  std::ostream&
                operator<< (std::ostream&, const gpipe&);
+
+               const std::ostream&
+               operator<< (std::ostream& os) const;
+            };
+
+/// `GUSYI`: Cross Section Type Unsymmetrical I-Beam
+/**
+## Format:
+
+|         |          |         |       |          |
+| ------- | -------- | ------- | ----- | -------- |
+| `GUSYI` | `GEONO`  | `HZ`    | `TY`  | `BT`     |
+|         | `B1`     | `TT`    | `BB`  | `B2`     |
+|         | `TB`     | `SFY`   | `SFZ` | `NLOBYT` |
+|         | `NLOBYB` | `NLOBZ` |       |          |
+
+\image latex gusyi.eps "Tube"
+\image html gusyi.svg "Tube"
+*/
+            class gusyi : public BeamProp {
+
+            private:
+
+               static const dnvgl::extfem::fem::types::card head;
+
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_HZ;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_BT;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_B1;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TT;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_BB;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_B2;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_TB;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFY;
+               static const dnvgl::extfem::fem::types::entry_type<double> _form_SFZ;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYT;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBYB;
+               static const dnvgl::extfem::fem::types::entry_type<long> _form_NLOBZ;
+
+
+            public:
+
+               /** Height of beam
+                */
+               double HZ;
+               /** Thickness of beam web
+                */
+               double TY;
+               /** Width of top flange
+                */
+               double BT;
+               /** Width of half top-flange in positive local y-direction
+                */
+               double B1;
+               /** Thickness of top flange
+                */
+               double TT;
+               /** Width of bottom flange
+                */
+               double BB;
+               /** Width of half bottom-flange in positive local y-direction
+                */
+               double B2;
+               /** Thickness of bottom flange
+                */
+               double TB;
+               /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                   SHARY(MOD) = SHARY(PROG) · SFY
+                   \f]
+
+                   (The shear area on `GBEAMG` os SHARY(MOD)).
+               */
+               double SFY;
+               /** Factor modifying the shear area calculated by the
+                   preprocessor program such that the modified shear
+                   area is
+
+                   \f[
+                   SHARZ(MOD) = SHARZ(PROG) · SFZ
+                   \f]
+
+                   (The shear area on `GBEAMG` os SHARZ(MOD)).
+               */
+               double SFZ;
+               /** Number of integration points in top flange (optional)
+                */
+               long NLOBYT;
+               /** Number of integration points in bottom flange (optional)
+                */
+               long NLOBYB;
+               /** Number of integration points in beam web (optional)
+                */
+               long NLOBZ;
+
+               gusyi(const std::deque<std::string>&);
+
+               gusyi(
+                  long const &GEONO,
+                  double const &HZ, double const &TY,
+                  double const &BT, double const &B1, double const &TT,
+                  double const &BB, double const &B2, double const &TB,
+                  double const &SFY, double const &SFZ,
+                  long const &NLOBYT=0, long const &NLOBYB=0, long const &NLOBZ=0);
+
+               const dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               friend  std::ostream&
+               operator<< (std::ostream&, const gusyi&);
 
                const std::ostream&
                operator<< (std::ostream& os) const;

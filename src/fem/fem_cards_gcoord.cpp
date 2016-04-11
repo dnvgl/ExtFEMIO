@@ -49,6 +49,10 @@ namespace dnvgl {
             gcoord::gcoord(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 5)
+                  throw errors::parse_error(
+                     "GCOORD", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

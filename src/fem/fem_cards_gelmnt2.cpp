@@ -51,6 +51,11 @@ namespace dnvgl {
 
             gelmnt2::gelmnt2(const std::deque<std::string> &inp) :
                card(inp) {
+
+               if (inp.size() < 18)
+                  throw errors::parse_error(
+                     "GELMNT2", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

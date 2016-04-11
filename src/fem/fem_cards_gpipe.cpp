@@ -51,6 +51,10 @@ namespace dnvgl {
             gpipe::gpipe(std::deque<std::string> const &inp) :
                BeamProp(inp) {
 
+               if (inp.size() < 9)
+                  throw errors::parse_error(
+                     "GPIPE", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;

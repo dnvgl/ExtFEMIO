@@ -51,6 +51,10 @@ namespace dnvgl {
             bnload::bnload(const std::deque<std::string> &inp) :
                card(inp) {
 
+               if (inp.size() < 8)
+                  throw errors::parse_error(
+                     "BNLOAD", "Illegal number of entries.");
+
                auto pos = inp.begin();
 
                ++pos;
