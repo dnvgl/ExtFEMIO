@@ -43,8 +43,6 @@ static char THIS_FILE[] = __FILE__;
 
 #include <regex>
 
-#endif
-
 #pragma message(">--- ExtFEMIO settings ---------------------------------------------<")
 #define __PRAGMASTRING2(x) #x
 #define __PRAGMASTRING(x) __PRAGMASTRING2(x)
@@ -58,6 +56,7 @@ static char THIS_FILE[] = __FILE__;
 #pragma message("Libraries:")
 #pragma message(">------------------------------------------------------------------<")
 
+#endif
 
 // Local Variables:
 // mode: c++
