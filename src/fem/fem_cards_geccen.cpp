@@ -46,6 +46,8 @@ namespace dnvgl {
             const entry_type<double> geccen::_form_EY("EY");
             const entry_type<double> geccen::_form_EZ("EZ");
 
+            geccen::geccen() : geccen(-1, 0., 0., 0.) {}
+
             geccen::geccen(const std::deque<std::string> &inp) :
                card(inp) {
 
@@ -63,8 +65,8 @@ namespace dnvgl {
             }
 
             geccen::geccen(
-               const long &ECCNO,
-               const double &EX, const double &EY, const double &EZ) :
+               long const &ECCNO,
+               double const &EX, double const &EY, double const &EZ) :
                card(), ECCNO(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
 
             const dnvgl::extfem::fem::cards::types
@@ -77,7 +79,7 @@ namespace dnvgl {
             }
 
             std::ostream&
-            operator<< (std::ostream &os, const geccen &card) {
+               operator<< (std::ostream &os, geccen const &card) {
                os << geccen::head.format()
                   << card._form_ECCNO.format(card.ECCNO)
                   << card._form_EX.format(card.EX)

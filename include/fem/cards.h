@@ -772,13 +772,13 @@ Shortest version:
                   const std::deque<long> &TRANSNO=std::deque<long>());
 
                const dnvgl::extfem::fem::cards::types
-               card_type(void) const;
+                  card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const gelref1&);
+                  operator<< (std::ostream&, gelref1 const &);
 
                const std::ostream&
-               operator<< (std::ostream& os) const;
+                  operator<< (std::ostream& os) const;
             };
 
 /// Base class for FEM beam property describing classes.
@@ -787,6 +787,11 @@ Shortest version:
             protected:
 
                static const dnvgl::extfem::fem::types::entry_type<long> _form_GEONO;
+               BeamProp();
+
+            private:
+
+               BeamProp(long const &GEONO);
 
             public:
 
@@ -797,7 +802,6 @@ Shortest version:
                long GEONO;
 
                BeamProp(std::deque<std::string> const&);
-               BeamProp();
 
                const virtual dnvgl::extfem::fem::cards::types
                   card_type(void) const = 0;
@@ -1042,20 +1046,22 @@ record may be on the interface.
                 */
                double EZ;
 
-               geccen(const std::deque<std::string>&);
+               geccen();
+
+               geccen(std::deque<std::string> const &);
 
                geccen(
-                  const long &ECCNO,
-                  const double &EX, const double &EY, const double &EZ);
+                  long const &ECCNO,
+                  double const &EX, double const &EY, double const &EZ);
 
                const dnvgl::extfem::fem::cards::types
-               card_type(void) const;
+                  card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const geccen&);
+                  operator<< (std::ostream&, geccen const &);
 
                const std::ostream&
-               operator<< (std::ostream& os) const;
+                  operator<< (std::ostream& os) const;
             };
 
 /// `GELTH`: Thickness of Two-dimensional Elements

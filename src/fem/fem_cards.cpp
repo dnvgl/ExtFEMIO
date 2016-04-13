@@ -50,11 +50,11 @@ namespace dnvgl {
 
 
 
-            card::card(const std::deque<std::string> &inp) {}
+            card::card(std::deque<std::string> const &inp) {}
 
             card::card() {}
 
-            unknown::unknown(const std::deque<std::string> &inp) :
+            unknown::unknown(std::deque<std::string> const &inp) :
                card(inp), content(inp) {};
 
             const types
@@ -67,7 +67,7 @@ namespace dnvgl {
             }
 
             std::ostream&
-            operator<< (std::ostream &os, const unknown &card) {
+               operator<< (std::ostream &os, unknown const &card) {
                throw errors::error("can't write UNKNOWN.");
                return os;
             }
@@ -169,12 +169,15 @@ namespace dnvgl {
                card(inp) {}
 
             BeamProp::BeamProp() :
-               card() {}
+               BeamProp(-1) {}
+
+            BeamProp::BeamProp(long const &GEONO) :
+               card(), GEONO(GEONO) {}
 
             const dnvgl::extfem::fem::types::entry_type<long> BeamProp::_form_GEONO("GEONO");
 
             void
-            dispatch(const std::deque<std::string> &inp, std::unique_ptr<fem::cards::card> &res) {
+            dispatch(std::deque<std::string> const &inp, std::unique_ptr<fem::cards::card> &res) {
 
                try {
                   std::string key(inp.at(0));

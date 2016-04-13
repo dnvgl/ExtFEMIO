@@ -80,6 +80,12 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]" ) {
    long ECCNO(1);
    double EX(1.), EY(3.), EZ(134.);
 
+   SECTION("default") {
+      geccen probe;
+      test << probe;
+      CHECK(test.str() == "GECCEN  -1.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
+   }
+
    SECTION("simple") {
       geccen probe(ECCNO, EX, EY, EZ);
       test << probe;
