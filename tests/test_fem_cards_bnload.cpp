@@ -92,6 +92,22 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
    double inp_rload[6] = {1., 2., 3., 4., 5., 6.};
    double inp_iload[6] = {1., 2., 3., 4., 5., 6.};
 
+   SECTION("empty") {
+      bnload probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("fixed") {
+      bnload probe(1, 1, false, 4, 6,
+                    std::deque<double>(inp_rload, inp_rload + 6));
+      test << probe;
+      CHECK(test.str() ==
+            "BNLOAD  +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
+            "        +4.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
+            "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+   }
+
    SECTION("simple") {
       bnload probe(1, 1, false, 4, 6,
                     std::deque<double>(inp_rload, inp_rload + 6));

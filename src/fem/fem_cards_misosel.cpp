@@ -69,6 +69,9 @@ namespace dnvgl {
                YIELD = _form_YIELD(*(pos++));
             }
 
+            misosel::misosel(void) :
+               misosel(-1, 0., 0., 0., 0., 0., 0., 0.) {}
+
             misosel::misosel(const long &MATNO,
                              const double &YOUNG,
                              const double &POISS,
@@ -92,6 +95,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const misosel &card) {
+               if (card.MATNO == -1) return os;
                os << misosel::head.format()
                   << card._form_MATNO.format(card.MATNO)
                   << card._form_YOUNG.format(card.YOUNG)

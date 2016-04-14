@@ -62,22 +62,24 @@ namespace dnvgl {
                ODOF = std::deque<int>(*_form_ODOF(*(pos++)));
             }
 
-            gnode::gnode(
-               const long &NODEX, const long &NODENO,
-               const long &NDOF, const std::deque<int> &ODOF) :
+            gnode::gnode(void) :
+               gnode(-1, 0, {}) {}
+
+            gnode::gnode(const long &NODEX,
+                         const long &NODENO,
+                         const long &NDOF,
+                         const std::deque<int> &ODOF) :
+               card(),
                NODEX(NODEX), NODENO(NODENO), NDOF(NDOF),
                ODOF(ODOF.begin(), ODOF.end()) {
                std::sort(this->ODOF.begin(), this->ODOF.end());
             };
 
-            gnode::gnode(
-               const long &NODEX, const long &NODENO,
-               const std::deque<int> &ODOF) :
-               NODEX(NODEX), NODENO(NODENO),
-               ODOF(ODOF.begin(), ODOF.end()) {
-               NDOF = static_cast<long>(this->ODOF.size());
-               std::sort(this->ODOF.begin(), this->ODOF.end());
-            };
+            gnode::gnode(const long &NODEX,
+                         const long &NODENO,
+                         const std::deque<int> &ODOF) :
+               gnode(NODEX, NODENO,
+                     static_cast<long>(this->ODOF.size()), ODOF) {}
 
             const std::ostream&
             gnode::operator<< (std::ostream& os) const {
@@ -90,6 +92,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gnode &card) {
+               if (card.NODEX == -1) return os;
                os << gnode::head.format()
                   << card._form_NODEX.format(card.NODEX)
                   << card._form_NODENO.format(card.NODENO)

@@ -73,6 +73,10 @@ namespace dnvgl {
                COMPLC = _form_COMPLC(*(pos++));
             }
 
+            hsupstat::hsupstat(void) :
+               hsupstat(-1, 0, 0, 0, 0, 0, 0, 0, 0) {}
+
+
             hsupstat::hsupstat(const long &NFIELD,
                                const long &ISELTY,
                                const long &NIDOF,
@@ -93,6 +97,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const hsupstat &card) {
+               if (card.NFIELD == -1) return os;
                os << hsupstat::head.format()
                   << card._form_NFIELD.format(card.NFIELD)
                   << card._form_ISELTY.format(card.ISELTY)

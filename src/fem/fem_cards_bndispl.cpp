@@ -72,6 +72,9 @@ namespace dnvgl {
                   IDISP.push_back(_form_IDISP(*(pos++)));
             }
 
+            bndispl::bndispl(void) :
+               bndispl(-1, 0, false, 0, {}) {}
+
             bndispl::bndispl(const long &LLC,
                              const long &DTYPE,
                              const bool &COMPLX,
@@ -127,6 +130,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const bndispl &card) {
+               if (card.LLC == -1) return os;
                os << bndispl::head.format()
                   << card._form_LLC.format(card.LLC)
                   << card._form_DTYPE.format(card.DTYPE)

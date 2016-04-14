@@ -79,6 +79,12 @@ TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      gunivec probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       gunivec probe(1, 2., 3., 4.);
       test << probe;

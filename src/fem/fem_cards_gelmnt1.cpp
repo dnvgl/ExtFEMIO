@@ -209,28 +209,30 @@ namespace dnvgl {
                }
             }
 
-            gelmnt1::gelmnt1(
-               const long &ELNOX, const long &ELNO,
-               const elements::el_types &ELTYP, const long &ELTYAD,
-               const std::deque<long> &NODIN) :
+            gelmnt1::gelmnt1(void) :
+               gelmnt1(-1, 0, elements::INVALID, {}) {}
+
+            gelmnt1::gelmnt1(long const &ELNOX,
+                             long const &ELNO,
+                             elements::el_types const &ELTYP,
+                             long const &ELTYAD,
+                             std::deque<long> const &NODIN) :
                card(),
                ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
                NODIN(NODIN.begin(), NODIN.end()) {}
 
-            gelmnt1::gelmnt1(
-               const long &ELNOX, const long &ELNO,
-               const elements::el_types &ELTYP,
-               const std::deque<long> &NODIN) :
-               card(),
-               ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(0),
-               NODIN(NODIN.begin(), NODIN.end()) {}
+            gelmnt1::gelmnt1(long const &ELNOX,
+                             long const &ELNO,
+                             elements::el_types const &ELTYP,
+                             std::deque<long> const &NODIN) :
+               gelmnt1(ELNOX, ELNO, ELTYP, 0, NODIN) {}
 
             const dnvgl::extfem::fem::cards::types
             gelmnt1::card_type(void) const { return GELMNT1; }
 
             std::ostream&
             operator<< (std::ostream &os, const gelmnt1 &card) {
-
+               if (card.ELTYP == elements::INVALID) return os;
                os << gelmnt1::head.format()
                   << card._form_ELNOX.format(card.ELNOX)
                   << card._form_ELNO.format(card.ELNO)

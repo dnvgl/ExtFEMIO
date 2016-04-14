@@ -89,6 +89,12 @@ TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      misosel probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       misosel probe(1, 2., 3., 4., 5., 6., 7., 8.);
       test << probe;

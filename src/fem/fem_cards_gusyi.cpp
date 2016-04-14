@@ -82,6 +82,9 @@ namespace dnvgl {
                NLOBZ = _form_NLOBZ(*(pos++));
             }
 
+            gusyi::gusyi(void) :
+               gusyi(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.) {}
+
             gusyi::gusyi(
                long const &GEONO,
                double const &HZ, double const &TY,
@@ -89,14 +92,12 @@ namespace dnvgl {
                double const &BB, double const &B2, double const &TB,
                double const &SFY, double const &SFZ,
                long const &NLOBYT, long const &NLOBYB, long const &NLOBZ) :
-               BeamProp(),
+               BeamProp(GEONO),
                HZ(HZ), TY(TY),
                BT(BT), B1(B1), TT(TT),
                BB(BB), B2(B2),TB(TB),
                SFY(SFY), SFZ(SFZ),
-               NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {
-               this->GEONO = GEONO;
-            }
+               NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
 
             const dnvgl::extfem::fem::cards::types
             gusyi::card_type(void) const {return GUSYI;}
@@ -109,6 +110,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gusyi &card) {
+               if (card.GEONO == -1) return os;
                os << gusyi::head.format()
                   << card._form_GEONO.format(card.GEONO)
                   << card._form_HZ.format(card.HZ)

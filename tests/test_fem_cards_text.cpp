@@ -114,6 +114,12 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
          "Input  : \\test_01.bdt",
          "Log    : \\test_01.txt"});
 
+   SECTION("simple (empty)") {
+      text probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       text probe(0, 0, 4, 72, CONT);
       test << probe;

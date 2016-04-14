@@ -226,6 +226,12 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("GELREF1 OUT (empty)") {
+      gelref1 probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("GELREF1 OUT (sample 1)") {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
          STRENO(0), STREPONO(0), GEONO_OPT(1), FIXNO_OPT(0),
@@ -252,6 +258,17 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
                     STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
                     ECCNO_OPT, TRANSNO_OPT, GEONO, FIXNO, ECCNO);
+      test << probe;
+      CHECK(test.str() ==
+            "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
+            "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
+            "        +1.03005000e+05 +0.00000000e+00 -1.00000000e+00 +1.70000000e+01 \n"
+            "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
+   }
+
+   SECTION("GELREF1 OUT (sample cons)") {
+      gelref1 probe(18, 3, 0, 0, 0, 0, 0, 0, 103005, 0, -1, 17,
+                    {}, {}, {33, 34}, {});
       test << probe;
       CHECK(test.str() ==
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"

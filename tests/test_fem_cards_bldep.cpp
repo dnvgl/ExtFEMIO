@@ -117,6 +117,12 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      bldep probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       long inp_depdof[9] = {1, 1, 1, 2, 2, 2, 3, 3, 3};
       long inp_indepdof[9] = {3, 2, 1, 3, 2, 1, 3, 2, 1};
@@ -125,6 +131,22 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
                   std::deque<long>(inp_depdof, inp_depdof + 9),
                   std::deque<long>(inp_indepdof, inp_indepdof + 9),
                   std::deque<double>(inp_b, inp_b + 9));
+      test << probe;
+      CHECK(test.str() ==
+            "BLDEP   +1.00000000e+00 +2.00000000e+00 +6.00000000e+00 +6.00000000e+00 \n"
+            "        +1.00000000e+00 +3.00000000e+00 +1.00000000e+00  0.00000000e+00 \n"
+            "        +1.00000000e+00 +2.00000000e+00 +2.00000000e+00  0.00000000e+00 \n"
+            "        +1.00000000e+00 +1.00000000e+00 +3.00000000e+00  0.00000000e+00 \n"
+            "        +2.00000000e+00 +3.00000000e+00 +4.00000000e+00  0.00000000e+00 \n"
+            "        +2.00000000e+00 +2.00000000e+00 +5.00000000e+00  0.00000000e+00 \n"
+            "        +2.00000000e+00 +1.00000000e+00 +6.00000000e+00  0.00000000e+00 \n");
+   }
+
+   SECTION("simple (fixed)") {
+      bldep probe(1, 2, 6, 6,
+                  {1, 1, 1, 2, 2, 2, 3, 3, 3},
+                  {3, 2, 1, 3, 2, 1, 3, 2, 1},
+                  { 1., 2., 3., 4., 5., 6., 7., 8., 9.});
       test << probe;
       CHECK(test.str() ==
             "BLDEP   +1.00000000e+00 +2.00000000e+00 +6.00000000e+00 +6.00000000e+00 \n"

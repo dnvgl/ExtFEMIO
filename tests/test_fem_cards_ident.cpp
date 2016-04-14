@@ -86,6 +86,19 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      ident probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("const") {
+      ident probe(1, 2, ident::DIM_3D);
+      test << probe;
+      CHECK(test.str() ==
+            "IDENT   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00  0.00000000e+00 \n");
+   }
+
    SECTION("simple") {
       long SLEVEL(1), SELTYP(2);
       ident::mod_type SELMOD(ident::DIM_3D);

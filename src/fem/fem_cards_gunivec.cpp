@@ -61,6 +61,9 @@ namespace dnvgl {
                UNIZ = _form_UNIZ(*(pos++));
             }
 
+            gunivec::gunivec(void) :
+               gunivec(-1, 0., 0., 0.) {}
+
             gunivec::gunivec(const long &TRANSNO,
                              const double &UNIX,
                              const double &UNIY,
@@ -79,6 +82,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gunivec &card) {
+               if (card.TRANSNO == -1) return os;
                os << gunivec::head.format()
                   << card._form_TRANSNO.format(card.TRANSNO)
                   << card._form_UNIX.format(card.UNIX)

@@ -31,12 +31,12 @@ namespace dnvgl {
             class bsell : public card {
 
 
-               static const dnvgl::extfem::fem::types::card head;
+               dnvgl::extfem::fem::types::card static const head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_LC;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_SUBNO;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
-               static const dnvgl::extfem::fem::types::entry_type<double> _form_FACT;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_LC;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_SUBNO;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_LLC;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_FACT;
 
             public:
 
@@ -53,18 +53,20 @@ namespace dnvgl {
                */
                std::deque<double> FACT;
 
-               bsell(const std::deque<std::string>&);
+               bsell(std::deque<std::string> const &);
 
-               bsell(const long &LC,
-                     const long &SUBNO,
-                     const std::deque<long> &LLC,
-                     const std::deque<double> &FACT);
+               bsell(void);
+
+               bsell(long const &LC,
+                     long const &SUBNO,
+                     std::deque<long> const &LLC,
+                     std::deque<double> const &FACT);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const bsell&);
+               operator<< (std::ostream&, bsell const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;
@@ -89,19 +91,21 @@ namespace dnvgl {
 
             private:
 
-               static const dnvgl::extfem::fem::types::card head;
+               dnvgl::extfem::fem::types::card static const head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_SUBNO;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_SLEVEL;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_STYPE;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ADDNO;
-               static const dnvgl::extfem::fem::types::entry_type<double> _form_T;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NNOD;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NOD;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_SUBNO;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_SLEVEL;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_STYPE;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ADDNO;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_T;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NNOD;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NOD;
 
             public:
                /** Subelement number within the relevant assembly
                    which this superelement is part of.
+
+bsell(
                 */
                long SUBNO;
                /** Superelement level. Should be identical to `SLEVEL`
@@ -174,65 +178,67 @@ namespace dnvgl {
                */
                std::deque<long> NOD;
 
-               gelmnt2(const std::deque<std::string>&);
+               gelmnt2(std::deque<std::string> const &);
 
-               gelmnt2(const long &SUBNO,
-                       const long &SLEVEL,
-                       const long &STYPE,
-                       const long &ADDNO,
+               gelmnt2(void);
+
+               gelmnt2(long const &SUBNO,
+                       long const &SLEVEL,
+                       long const &STYPE,
+                       long const &ADDNO,
                        const double T[4][4],
-                       const long &NNOD,
-                       const std::deque<long> &NOD);
+                       long const &NNOD,
+                       std::deque<long> const &NOD);
 
-               gelmnt2(const long &SUBNO,
-                       const long &SLEVEL,
-                       const long &STYPE,
-                       const long &ADDNO,
-                       const double T[4][4],
-                       const std::deque<long> &NOD);
+               gelmnt2(long const &SUBNO,
+                       long const &SLEVEL,
+                       long const &STYPE,
+                       long const &ADDNO,
+                       double const T[4][4],
+                       std::deque<long> const &NOD);
 
-               gelmnt2(const long &SUBNO,
-                       const long &SLEVEL,
-                       const long &STYPE,
-                       const long &ADDNO,
-                       const double &T11,
-                       const double &T21,
-                       const double &T31,
-                       const double &T12,
-                       const double &T22,
-                       const double &T32,
-                       const double &T13,
-                       const double &T23,
-                       const double &T33,
-                       const double &T14,
-                       const double &T24,
-                       const double &T34,
-                       const long &NNOD,
-                       const std::deque<long> &NOD);
+               gelmnt2(long const &SUBNO,
+                       long const &SLEVEL,
+                       long const &STYPE,
+                       long const &ADDNO,
+                       double const &T11,
+                       double const &T21,
+                       double const &T31,
+                       double const &T12,
+                       double const &T22,
+                       double const &T32,
+                       double const &T13,
+                       double const &T23,
+                       double const &T33,
+                       double const &T14,
+                       double const &T24,
+                       double const &T34,
+                       long const &NNOD,
+                       std::deque<long> const &NOD);
 
-               gelmnt2(const long &SUBNO,
-                       const long &SLEVEL,
-                       const long &STYPE,
-                       const long &ADDNO,
-                       const double &T11,
-                       const double &T21,
-                       const double &T31,
-                       const double &T12,
-                       const double &T22,
-                       const double &T32,
-                       const double &T13,
-                       const double &T23,
-                       const double &T33,
-                       const double &T14,
-                       const double &T24,
-                       const double &T34,
-                       const std::deque<long> &NOD);
+               gelmnt2(long const &SUBNO,
+                       long const &SLEVEL,
+                       long const &STYPE,
+                       long const &ADDNO,
+                       double const &T11,
+                       double const &T21,
+                       double const &T31,
+                       double const &T12,
+                       double const &T22,
+                       double const &T32,
+                       double const &T13,
+                       double const &T23,
+                       double const &T33,
+                       double const &T14,
+                       double const &T24,
+                       double const &T34,
+                       std::deque<long> const &NOD);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const gelmnt2&);
+               operator<< (std::ostream&, gelmnt2 const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;
@@ -258,17 +264,17 @@ through the superelement type number (`ISELTY`).
 
             private:
 
-               static const dnvgl::extfem::fem::types::card head;
+               dnvgl::extfem::fem::types::card static const head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISELTY;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NIDOF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NRDOF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NBAND;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NELT;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_LINDEP;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_RELOADC;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_COMPLC;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NFIELD;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ISELTY;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NIDOF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NRDOF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NBAND;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NELT;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_LINDEP;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_RELOADC;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_COMPLC;
 
             public:
 
@@ -305,23 +311,25 @@ through the superelement type number (`ISELTY`).
                 */
                long COMPLC;
 
-               hsupstat(const std::deque<std::string>&);
+               hsupstat(std::deque<std::string> const &);
 
-               hsupstat(const long &NFIELD,
-                        const long &ISELTY,
-                        const long &NIDOF,
-                        const long &NRDOF,
-                        const long &NBAND,
-                        const long &NELT,
-                        const long &LINDEP,
-                        const long &RELOADC,
-                        const long &COMPLC);
+               hsupstat(void);
+
+               hsupstat(long const &NFIELD,
+                        long const &ISELTY,
+                        long const &NIDOF,
+                        long const &NRDOF,
+                        long const &NBAND,
+                        long const &NELT,
+                        long const &LINDEP,
+                        long const &RELOADC,
+                        long const &COMPLC);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const hsupstat&);
+               operator<< (std::ostream&, hsupstat const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;
@@ -350,11 +358,11 @@ superelement transformation reference number, `ITREF`.
 
             private:
 
-               static const dnvgl::extfem::fem::types::card head;
+               dnvgl::extfem::fem::types::card static const head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ITREF;
-               static const dnvgl::extfem::fem::types::entry_type<double> _form_T;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NFIELD;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ITREF;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_T;
 
             public:
 
@@ -419,36 +427,38 @@ superelement transformation reference number, `ITREF`.
                 */
                double T[4][4];
 
-               hsuptran(const std::deque<std::string>&);
+               hsuptran(std::deque<std::string> const &);
 
-               hsuptran(const long &NFIELD,
-                        const long &ITREF,
-                        const double &T11,
-                        const double &T21,
-                        const double &T31,
-                        const double &T41,
-                        const double &T12,
-                        const double &T22,
-                        const double &T32,
-                        const double &T42,
-                        const double &T13,
-                        const double &T23,
-                        const double &T33,
-                        const double &T43,
-                        const double &T14,
-                        const double &T24,
-                        const double &T34,
-                        const double &T44);
+               hsuptran(void);
 
-               hsuptran(const long &NFIELD,
-                        const long &ITREF,
-                        const double T[4][4]);
+               hsuptran(long const &NFIELD,
+                        long const &ITREF,
+                        double const &T11,
+                        double const &T21,
+                        double const &T31,
+                        double const &T41,
+                        double const &T12,
+                        double const &T22,
+                        double const &T32,
+                        double const &T42,
+                        double const &T13,
+                        double const &T23,
+                        double const &T33,
+                        double const &T43,
+                        double const &T14,
+                        double const &T24,
+                        double const &T34,
+                        double const &T44);
+
+               hsuptran(long const &NFIELD,
+                        long const &ITREF,
+                        double const T[4][4]);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const hsuptran&);
+               operator<< (std::ostream&, hsuptran const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;
@@ -499,17 +509,17 @@ superelement transformation reference number, `ITREF`.
 
             private:
 
-               static const dnvgl::extfem::fem::types::card head;
+               dnvgl::extfem::fem::types::card static const head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_IHREF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISELTY;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_INDSEL;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ISLEVL;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ITREF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_IHPREF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NSUB;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_IHSREF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NFIELD;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_IHREF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ISELTY;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_INDSEL;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ISLEVL;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ITREF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_IHPREF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NSUB;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_IHSREF;
 
             public:
 
@@ -553,32 +563,34 @@ superelement transformation reference number, `ITREF`.
                 */
                std::deque<long> IHSREFi;
 
-               hierarch(const std::deque<std::string>&);
+               hierarch(std::deque<std::string> const &);
 
-               hierarch(const long &NFIELD,
-                        const long &IHREF,
-                        const long &ISELTY,
-                        const long &INDSEL,
-                        const long &ISLEVL,
-                        const long &ITREF,
-                        const long &IHPREF,
-                        const long &NSUB,
-                        const std::deque<long> &IHSREF);
+               hierarch(void);
 
-               hierarch(const long &NFIELD,
-                        const long &IHREF,
-                        const long &ISELTY,
-                        const long &INDSEL,
-                        const long &ISLEVL,
-                        const long &ITREF,
-                        const long &IHPREF,
-                        const std::deque<long> &IHSREF);
+               hierarch(long const &NFIELD,
+                        long const &IHREF,
+                        long const &ISELTY,
+                        long const &INDSEL,
+                        long const &ISLEVL,
+                        long const &ITREF,
+                        long const &IHPREF,
+                        long const &NSUB,
+                        std::deque<long> const &IHSREF);
+
+               hierarch(long const &NFIELD,
+                        long const &IHREF,
+                        long const &ISELTY,
+                        long const &INDSEL,
+                        long const &ISLEVL,
+                        long const &ITREF,
+                        long const &IHPREF,
+                        std::deque<long> const &IHSREF);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const hierarch&);
+               operator<< (std::ostream&, hierarch const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;

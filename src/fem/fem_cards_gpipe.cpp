@@ -68,17 +68,18 @@ namespace dnvgl {
                NRAD = _form_NRAD(*pos);
             }
 
+            gpipe::gpipe(void) :
+               gpipe(-1, 0., 0., 0., 0., 0.) {}
+
             gpipe::gpipe(const long &GEONO, const double &DI,
                          const double &DY,
                          const double &T, const double &SFY,
                          const double &SFZ,
                          const long &NCIR, const long &NRAD) :
-               BeamProp(),
+               BeamProp(GEONO),
                DI(DI), DY(DY), T(T),
                SFY(SFY), SFZ(SFZ),
-               NCIR(NCIR), NRAD(NRAD) {
-               this->GEONO = GEONO;
-            }
+               NCIR(NCIR), NRAD(NRAD) {}
 
             const dnvgl::extfem::fem::cards::types
             gpipe::card_type(void) const {return GPIPE;}
@@ -91,6 +92,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gpipe &card) {
+               if (card.GEONO == -1) return os;
                os << gpipe::head.format()
                   << card._form_GEONO.format(card.GEONO)
                   << card._form_DI.format(card.DI)

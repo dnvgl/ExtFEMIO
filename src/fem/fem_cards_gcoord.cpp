@@ -62,6 +62,9 @@ namespace dnvgl {
                ZCOORD = _form_ZCOORD(*(pos++));
             }
 
+            gcoord::gcoord(void) :
+               gcoord(-1, 0., 0., 0.) {}
+
             gcoord::gcoord(
                const long &NODENO,
                const double &XCOORD, const double &YCOORD, const double &ZCOORD) :
@@ -79,6 +82,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gcoord &card) {
+               if (card.NODENO == -1) return os;
                os << gcoord::head.format()
                   << card._form_NODENO.format(card.NODENO)
                   << card._form_XCOORD.format(card.XCOORD)

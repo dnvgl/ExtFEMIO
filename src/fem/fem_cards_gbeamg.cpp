@@ -84,7 +84,11 @@ namespace dnvgl {
                SZ = _form_SZ(*(pos++));
             }
 
-            gbeamg::gbeamg(
+            gbeamg::gbeamg(void) :
+               gbeamg(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+                      0., 0., 0.) {}
+
+               gbeamg::gbeamg(
                const long &GEONO,
                const double &AREA,
                const double &IX, const double &IY, const double &IZ, const double &IYZ,
@@ -92,14 +96,12 @@ namespace dnvgl {
                const double &SHARY, const double &SHARZ,
                const double &SHCENY, const double &SHCENZ,
                const double &SY, const double &SZ) :
-               BeamProp(),
+               BeamProp(GEONO),
                AREA(AREA), IX(IX), IY(IY), IZ(IZ), IYZ(IYZ),
                WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
                SHARY(SHARY), SHARZ(SHARZ),
                SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
-               SZ(SZ) {
-               this->GEONO = GEONO;
-            }
+               SZ(SZ) {}
 
             const dnvgl::extfem::fem::cards::types
             gbeamg::card_type(void) const {return GBEAMG;}
@@ -112,6 +114,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gbeamg &data) {
+               if (data.GEONO == -1) return os;
                os << gbeamg::head.format()
                   << data._form_GEONO.format(data.GEONO)
                   << data.empty.format()

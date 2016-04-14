@@ -91,6 +91,25 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("GELMNT1 OUT (empty)") {
+      gelmnt1 probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("GELMNT1 OUT (FQUS, const)") {
+      long ELNOX(1), ELNO(6);
+      elements::el_types ELTYP(elements::FQUS_FFQ);
+      long ELTYAD(0);
+      std::deque<long> NODIN({1, 6, 4, 2});
+
+      gelmnt1 probe(1, 6, elements::FQUS_FFQ, 0, {1, 6, 4, 2});
+      test << probe;
+      CHECK(test.str() ==
+            "GELMNT1 +1.00000000e+00 +6.00000000e+00 +2.40000000e+01 +0.00000000e+00 \n"
+            "        +1.00000000e+00 +6.00000000e+00 +4.00000000e+00 +2.00000000e+00 \n");
+   }
+
    SECTION("GELMNT1 OUT (FQUS)") {
       long ELNOX(1), ELNO(6);
       elements::el_types ELTYP(elements::FQUS_FFQ);
@@ -98,10 +117,6 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       std::deque<long> NODIN({1, 6, 4, 2});
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
-      CHECK(probe.ELNOX == 1);
-      CHECK(probe.ELNO == 6);
-      CHECK(probe.ELTYAD == 0);
-      CHECK(probe.ELTYP == elements::FQUS_FFQ);
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.00000000e+00 +6.00000000e+00 +2.40000000e+01 +0.00000000e+00 \n"

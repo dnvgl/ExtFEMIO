@@ -72,6 +72,9 @@ namespace dnvgl {
                }
             }
 
+            bsell::bsell(void) :
+               bsell(-1, 0, {}, {}) {}
+
             bsell::bsell(const long &LC,
                          const long &SUBNO,
                          const std::deque<long> &LLC,
@@ -85,7 +88,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const bsell &card) {
-
+               if (card.LC == -1) return os;
                os << bsell::head.format()
                   << card._form_LC.format(card.LC)
                   << card._form_SUBNO.format(card.SUBNO)

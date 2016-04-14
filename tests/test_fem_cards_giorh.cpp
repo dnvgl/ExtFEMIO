@@ -97,6 +97,12 @@ TEST_CASE("FEM GIORH types output.", "[fem_giorh,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      giorh probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       giorh probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11, 12);
       test << probe;

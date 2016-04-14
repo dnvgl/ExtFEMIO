@@ -62,10 +62,12 @@ namespace dnvgl {
                   FIX.push_back(_form_FIX(*(pos++)));
             }
 
-            bnbcd::bnbcd(
-               const long &NODENO,
-               const long &NDOF,
-               const std::deque<long> &FIX) :
+            bnbcd::bnbcd(void) :
+               bnbcd(-1, {}) {}
+
+            bnbcd::bnbcd(const long &NODENO,
+                         const long &NDOF,
+                         const std::deque<long> &FIX) :
                card(), NODENO(NODENO), NDOF(NDOF), FIX(FIX) {}
 
             bnbcd::bnbcd(
@@ -84,6 +86,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const bnbcd &card) {
+               if (card.NODENO == -1) return os;
                os << bnbcd::head.format()
                   << card._form_NODENO.format(card.NODENO)
                   << card._form_NDOF.format(card.NDOF);

@@ -158,6 +158,8 @@ void dnvgl::extfem::fem::elements::dispatch(
    case GHEX162: res = std::make_unique<ghex162>(data); break;
    case GHEX163: res = std::make_unique<ghex163>(data); break;
    case UNDEFINED: res = std::make_unique<undef>(); break;
+   case INVALID: throw errors::parse_error(
+      "GELMNT1", "invalid element type"); break;
    };
 }
 
@@ -285,6 +287,7 @@ std::string dnvgl::extfem::fem::elements::name_elem(dnvgl::extfem::fem::elements
       case GHEX162: return "GHEX162";
       case GHEX163: return "GHEX163";
       case UNDEFINED: return "UNDEFINED";
+      case INVALID: return "INVALID";
       }
       return "";
 };

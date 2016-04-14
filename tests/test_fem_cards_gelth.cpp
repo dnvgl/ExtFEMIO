@@ -75,6 +75,12 @@ TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      gelth probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       gelth probe(1, 2., 3);
       test << probe;

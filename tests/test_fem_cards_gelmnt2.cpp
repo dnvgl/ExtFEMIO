@@ -122,6 +122,18 @@ TEST_CASE("FEM GELMNT2 types output.", "[fem_gelmnt2,out]" ) {
       "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00 +8.00000000e+00 \n"
       "        +9.00000000e+00 +1.00000000e+01  0.00000000e+00  0.00000000e+00 \n");
 
+   SECTION("write (empty)") {
+      gelmnt2 probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("write (const)") {
+      gelmnt2 probe(1, 2, 3, 4, T, 5, {6, 7, 8, 9, 10});
+      test << probe;
+      CHECK(test.str() == ref);
+   }
+
    SECTION("write (1)") {
       gelmnt2 probe(SUBNO, SLEVEL, STYPE, ADDNO, T, NNOD, NOD);
       test << probe;

@@ -74,14 +74,17 @@ namespace dnvgl {
                }
             }
 
+            bldep::bldep(void) :
+               bldep(-1, 0, 0, 0, {}, {}, {}) {}
+
             bldep::bldep(
-               const long &NODENO,
-               const long &CNOD,
-               const long &NDDOF,
-               const long &NDEP,
-               const std::deque<long> &DEPDOF,
-               const std::deque<long> &INDEPDOF,
-               const std::deque<double> &b) :
+               long const &NODENO,
+               long const &CNOD,
+               long const &NDDOF,
+               long const &NDEP,
+               std::deque<long> const &DEPDOF,
+               std::deque<long> const &INDEPDOF,
+               std::deque<double> const &b) :
                NODENO(NODENO), CNOD(CNOD), NDDOF(NDDOF), NDEP(NDEP),
                DEPDOF(DEPDOF),INDEPDOF(INDEPDOF), b(b) {}
 
@@ -96,6 +99,8 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const bldep &card) {
+               if (card.NODENO == -1)
+                  return os;
                os << bldep::head.format()
                   << card._form_NODENO.format(card.NODENO)
                   << card._form_CNOD.format(card.CNOD)

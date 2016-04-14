@@ -83,6 +83,23 @@ TEST_CASE("FEM HSUPSTAT types output.", "[fem_hsupstat,out]" ) {
    long RELOADC(8);
    long COMPLC(9);
 
+   SECTION("write (empty)") {
+      hsupstat probe;
+
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("write (const)") {
+      hsupstat probe(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+      test << probe;
+      CHECK(test.str() ==
+            "HSUPSTAT+1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
+            "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00 +8.00000000e+00 \n"
+            "        +9.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+   }
+
    SECTION("write (1)") {
       hsupstat probe(NFIELD, ISELTY, NIDOF, NRDOF, NBAND, NELT,
                      LINDEP, RELOADC, COMPLC);

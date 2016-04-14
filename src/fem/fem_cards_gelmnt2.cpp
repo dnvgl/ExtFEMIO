@@ -75,6 +75,9 @@ namespace dnvgl {
                   NOD.push_back(_form_NOD(*(pos++)));
             }
 
+            gelmnt2::gelmnt2(void) :
+               gelmnt2(-1, 0, 0, 0, NULL, 0, {}) {}
+
             gelmnt2::gelmnt2(const long &SUBNO,
                              const long &SLEVEL,
                              const long &STYPE,
@@ -87,9 +90,10 @@ namespace dnvgl {
                if (this->NOD.size() != (size_t)this->NNOD)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "GELMNT2", "NOD not of size NNOD");
-               for (int i=0; i<4; i++)
-                  for (int j=0; j<4; j++)
-                     this->T[j][i] = T[j][i];
+               if (T)
+                  for (int i=0; i<4; i++)
+                     for (int j=0; j<4; j++)
+                        this->T[j][i] = T[j][i];
             }
 
             gelmnt2::gelmnt2(const long &SUBNO,
@@ -98,12 +102,8 @@ namespace dnvgl {
                              const long &ADDNO,
                              const double T[4][4],
                              const std::deque<long> &NOD) :
-               card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
-               ADDNO(ADDNO), NNOD(long(NOD.size())), NOD(NOD) {
-               for (int i=0; i<4; i++)
-                  for (int j=0; j<4; j++)
-                     this->T[j][i] = T[j][i];
-            }
+               gelmnt2(SUBNO, SLEVEL, STYPE, ADDNO, T,
+                       static_cast<long>(NOD.size()), NOD) {}
 
             gelmnt2::gelmnt2(const long &SUBNO,
                              const long &SLEVEL,
@@ -191,6 +191,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gelmnt2 &card) {
+               if (card.SUBNO == -1) return os;
                os << gelmnt2::head.format()
                   << card._form_SUBNO.format(card.SUBNO)
                   << card._form_SLEVEL.format(card.SLEVEL)

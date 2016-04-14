@@ -77,6 +77,8 @@ namespace dnvgl {
                NLOBYB = _form_NLOBYB(*(pos++));
                NLOBZ = _form_NLOBZ(*pos);
             }
+            giorh::giorh(void) :
+               giorh(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
             giorh::giorh(const long &GEONO, const double &HZ,
                          const double &TY, const double &BT,
@@ -84,12 +86,10 @@ namespace dnvgl {
                          const double &TB, const double &SFY,
                          const double &SFZ, const long &NLOBYT,
                          const long &NLOBYB, const long &NLOBZ) :
-               BeamProp(),
+               BeamProp(GEONO),
                HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
                SFY(SFY), SFZ(SFZ),
-               NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {
-               this->GEONO = GEONO;
-            }
+               NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
 
             const dnvgl::extfem::fem::cards::types
             giorh::card_type(void) const {return GIORH;}
@@ -102,6 +102,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const giorh &card) {
+               if (card.GEONO == -1) return os;
                os << giorh::head.format()
                   << card._form_GEONO.format(card.GEONO)
                   << card._form_HZ.format(card.HZ)

@@ -32,14 +32,14 @@ namespace dnvgl {
 */
             class tdload : public card {
 
-               static const dnvgl::extfem::fem::types::card head;
+               dnvgl::extfem::fem::types::card static const head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NFIELD;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ILREF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_CODNAM;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_CODTXT;
-               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_SET_NAME;
-               static const dnvgl::extfem::fem::types::entry_type<std::string> _form_CONT;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NFIELD;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ILREF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_CODNAM;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_CODTXT;
+               dnvgl::extfem::fem::types::entry_type<std::string> static const _form_SET_NAME;
+               dnvgl::extfem::fem::types::entry_type<std::string> static const _form_CONT;
 
                bool nlnam;
                long ncnam;
@@ -116,32 +116,34 @@ namespace dnvgl {
                std::string SET_NAME;
                std::deque<std::string> CONT;
 
-               tdload(const std::deque<std::string>&);
+               tdload(std::deque<std::string> const &);
 
-               tdload(const long &NFIELD,
-                      const long &ILREF,
-                      const long &CODNAM,
-                      const long &CODTXT,
-                      const std::string &SET_NAME,
-                      const std::deque<std::string> &CONT);
+               tdload(void);
 
-               tdload(const long &ILREF,
-                      const std::string &SET_NAME,
-                      const std::deque<std::string> &CONT);
+               tdload(long const &NFIELD,
+                      long const &ILREF,
+                      long const &CODNAM,
+                      long const &CODTXT,
+                      std::string const &SET_NAME,
+                      std::deque<std::string> const &CONT);
 
-               tdload(const long &NFIELD,
-                      const long &ILREF,
-                      const long &CODNAM,
-                      const std::string &SET_NAME);
+               tdload(long const &ILREF,
+                      std::string const &SET_NAME,
+                      std::deque<std::string> const &CONT);
 
-               tdload(const long &ILREF,
-                      const std::string &SET_NAME);
+               tdload(long const &NFIELD,
+                      long const &ILREF,
+                      long const &CODNAM,
+                      std::string const &SET_NAME);
+
+               tdload(long const &ILREF,
+                      std::string const &SET_NAME);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
                friend  std::ostream&
-               operator<< (std::ostream&, const tdload&);
+               operator<< (std::ostream&, tdload const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;
@@ -173,18 +175,18 @@ pressure in the local /z/-direction.
 
             private:
 
-               static const dnvgl::extfem::fem::types::card head;
+               dnvgl::extfem::fem::types::card static const head;
 
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_LLC;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_LOTYP;
-               static const dnvgl::extfem::fem::types::entry_type<bool> _form_COMPLX;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_LAYER;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_ELNO;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_NDOF;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_INTNO;
-               static const dnvgl::extfem::fem::types::entry_type<long> _form_SIDE;
-               static const dnvgl::extfem::fem::types::entry_type<double> _form_RLOAD;
-               static const dnvgl::extfem::fem::types::entry_type<double> _form_ILOAD;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_LLC;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_LOTYP;
+               dnvgl::extfem::fem::types::entry_type<bool> static const _form_COMPLX;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_LAYER;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_ELNO;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_INTNO;
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_SIDE;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_RLOAD;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_ILOAD;
 
 
             public:
@@ -286,89 +288,55 @@ pressure in the local /z/-direction.
                 */
                std::deque<double> ILOADi;
 
-               beuslo(const std::deque<std::string>&);
+               beuslo(void);
 
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const bool &COMPLX,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &NDOF,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD,
-                      const std::deque<double> &ILOAD);
+               beuslo(std::deque<std::string> const &);
 
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const bool &COMPLX,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD,
-                      const std::deque<double> &ILOAD);
+               beuslo(long const &LLC,
+                      long const &LOTYP,
+                      bool const &COMPLX,
+                      long const &LAYER,
+                      long const &ELNO,
+                      long const &NDOF,
+                      long const &INTNO,
+                      long const &SIDE,
+                      std::deque<double> const &RLOAD,
+                      std::deque<double> const &ILOAD = {});
 
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const bool &COMPLX,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &NDOF,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD);
+               beuslo(long const &LLC,
+                      long const &LOTYP,
+                      bool const &COMPLX,
+                      long const &LAYER,
+                      long const &ELNO,
+                      long const &INTNO,
+                      long const &SIDE,
+                      std::deque<double> const &RLOAD,
+                      std::deque<double> const &ILOAD = {});
 
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const bool &COMPLX,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD);
+               beuslo(long const &LLC,
+                      long const &LOTYP,
+                      long const &LAYER,
+                      long const &ELNO,
+                      long const &NDOF,
+                      long const &INTNO,
+                      long const &SIDE,
+                      std::deque<double> const &RLOAD,
+                      std::deque<double> const &ILOAD = {});
 
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &NDOF,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD,
-                      const std::deque<double> &ILOAD);
-
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD,
-                      const std::deque<double> &ILOAD);
-
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &NDOF,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD);
-
-               beuslo(const long &LLC,
-                      const long &LOTYP,
-                      const long &LAYER,
-                      const long &ELNO,
-                      const long &INTNO,
-                      const long &SIDE,
-                      const std::deque<double> &RLOAD);
+               beuslo(long const &LLC,
+                      long const &LOTYP,
+                      long const &LAYER,
+                      long const &ELNO,
+                      long const &INTNO,
+                      long const &SIDE,
+                      std::deque<double> const &RLOAD,
+                      std::deque<double> const &ILOAD = {});
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  std::ostream&
-               operator<< (std::ostream&, const beuslo&);
+               friend std::ostream&
+               operator<< (std::ostream&, beuslo const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;
@@ -385,6 +353,6 @@ pressure in the local /z/-direction.
 // ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:

@@ -70,6 +70,9 @@ namespace dnvgl {
                }
             }
 
+            text::text(void) :
+               text(-1, 0, 0, 0, {}) {}
+
             text::text(const long &TYPE, const long &SUBTYPE,
                        const long &NRECS, const long &NBYTE,
                        const std::deque<std::string> &CONT) :
@@ -103,7 +106,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const text &card) {
-
+               if (card.TYPE == -1) return os;
                os << text::head.format()
                   << card._form_TYPE.format(card.TYPE)
                   << card._form_SUBTYPE.format(card.SUBTYPE)

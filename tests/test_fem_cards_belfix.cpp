@@ -66,6 +66,15 @@ TEST_CASE("FEM BELFIX definitions. (Small Field Format)", "[fem_belfix]" ) {
 
 TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
 
+   SECTION("write default") {
+      std::ostringstream test;
+
+      belfix probe;
+      test << probe;
+
+      CHECK(test.str() == "");
+   }
+
    SECTION("write") {
       std::ostringstream test;
 
@@ -75,6 +84,18 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
       std::deque<double> A({1., 0., .5, 1., 1., 1.});
 
       belfix probe(FIXNO, OPT, TRANO, A);
+      test << probe;
+
+      CHECK(test.str() ==
+            "BELFIX  +1.00000000e+00 +1.00000000e+00 +1.00000000e+00  0.00000000e+00 \n"
+            "        +1.00000000e+00 +0.00000000e+00 +5.00000000e-01 +1.00000000e+00 \n"
+            "        +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+   }
+
+   SECTION("write (const)") {
+      std::ostringstream test;
+
+      belfix probe(1, belfix::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
       test << probe;
 
       CHECK(test.str() ==

@@ -72,34 +72,36 @@ namespace dnvgl {
                      ILOAD.push_back(_form_ILOAD(*(pos++)));
             }
 
+            bnload::bnload(void) :
+               bnload(-1, 0, 0, {}) {}
+
             bnload::bnload(const long &LLC,
-                             const long &LOTYP,
-                             const bool &COMPLX,
-                             const long &NODENO,
-                             const long &NDOF,
-                             const std::deque<double> &RLOAD,
-                             const std::deque<double> &ILOAD) :
+                           const long &LOTYP,
+                           const bool &COMPLX,
+                           const long &NODENO,
+                           const long &NDOF,
+                           const std::deque<double> &RLOAD,
+                           const std::deque<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                NODENO(NODENO), NDOF(NDOF),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
 
-
             bnload::bnload(const long &LLC,
-                             const long &LOTYP,
-                             const bool &COMPLX,
-                             const long &NODENO,
-                             const std::deque<double> &RLOAD,
-                             const std::deque<double> &ILOAD):
+                           const long &LOTYP,
+                           const bool &COMPLX,
+                           const long &NODENO,
+                           const std::deque<double> &RLOAD,
+                           const std::deque<double> &ILOAD):
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                NODENO(NODENO), NDOF((long)RLOAD.size()),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
 
             bnload::bnload(const long &LLC,
-                             const long &LOTYP,
-                             const long &NODENO,
-                             const long &NDOF,
-                             const std::deque<double> &RLOAD,
-                             const std::deque<double> &ILOAD) :
+                           const long &LOTYP,
+                           const long &NODENO,
+                           const long &NDOF,
+                           const std::deque<double> &RLOAD,
+                           const std::deque<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP),
                COMPLX(ILOAD.size() > 0),
                NODENO(NODENO), NDOF(NDOF),
@@ -107,10 +109,10 @@ namespace dnvgl {
 
 
             bnload::bnload(const long &LLC,
-                             const long &LOTYP,
-                             const long &NODENO,
-                             const std::deque<double> &RLOAD,
-                             const std::deque<double> &ILOAD) :
+                           const long &LOTYP,
+                           const long &NODENO,
+                           const std::deque<double> &RLOAD,
+                           const std::deque<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP),
                COMPLX(ILOAD.size() > 0),
                NODENO(NODENO), NDOF((long)RLOAD.size()),
@@ -127,6 +129,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const bnload &card) {
+               if (card.LLC == -1) return os;
                os << bnload::head.format()
                   << card._form_LLC.format(card.LLC)
                   << card._form_LOTYP.format(card.LOTYP)

@@ -93,6 +93,9 @@ namespace dnvgl {
                }
             }
 
+            tdsetnam::tdsetnam(void) :
+               tdsetnam(-1, 0, 0, 0, "", {}) {}
+
             tdsetnam::tdsetnam(const long &NFIELD,
                                const long &ISREF,
                                const long &CODNAM,
@@ -165,7 +168,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const tdsetnam &card) {
-
+               if (card.NFIELD == -1) return os;
                os << tdsetnam::head.format()
                   << card._form_NFIELD.format(card.NFIELD)
                   << card._form_ISREF.format(card.ISREF)

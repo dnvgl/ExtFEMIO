@@ -87,8 +87,11 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
 
    std::ostringstream test;
 
-   long NODEX(1), NODENO(222), NDOF(3);
-   std::deque<int> ODOF({2, 6, 3});
+   SECTION("empty") {
+      gbarm probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
 
    SECTION("simple") {
       gbarm probe(1, 2., 3., 4., 5., 6., 7, 8);

@@ -50,7 +50,6 @@ namespace dnvgl {
 
             tdsupnam::tdsupnam(const std::deque<std::string> &inp) :
                card(inp) {
-
                if (inp.size() < 9)
                   throw errors::parse_error(
                      "TDSUPNAM", "Illegal number of entries.");
@@ -92,6 +91,9 @@ namespace dnvgl {
                   CONT.push_back(cont);
                }
             }
+
+            tdsupnam::tdsupnam(void) :
+               tdsupnam(-1, 0, 0, 0, {}, {}) {}
 
             tdsupnam::tdsupnam(const long &NFIELD,
                                const long &IHREF,
@@ -165,7 +167,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const tdsupnam &card) {
-
+               if (card.NFIELD == -1) return os;
                os << tdsupnam::head.format()
                   << card._form_NFIELD.format(card.NFIELD)
                   << card._form_IHREF.format(card.IHREF)

@@ -72,17 +72,18 @@ namespace dnvgl {
                NLOBZ = _form_NLOBZ(*pos);
             }
 
+            glsec::glsec(void) :
+               glsec(-1, 0., 0., 0., 0., 0., 0., false) {}
+
             glsec::glsec(const long &GEONO, const double &HZ,
                          const double &TY, const double &BY,
                          const double &TZ, const double &SFY,
                          const double &SFZ, const bool &K,
                          const long &NLOBY, const long &NLOBZ) :
-               BeamProp(),
+               BeamProp(GEONO),
                HZ(HZ), TY(TY), BY(BY), TZ(TZ),
                SFY(SFY), SFZ(SFZ),
-               K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {
-               this->GEONO = GEONO;
-            }
+               K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
             const dnvgl::extfem::fem::cards::types
             glsec::card_type(void) const {return GLSEC;}
@@ -95,6 +96,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const glsec &card) {
+               if (card.GEONO == -1) return os;
                os << glsec::head.format()
                   << card._form_GEONO.format(card.GEONO)
                   << card._form_HZ.format(card.HZ)

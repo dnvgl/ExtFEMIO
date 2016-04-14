@@ -135,6 +135,12 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
       ref_K[i] = std::deque<double>(c_ref_K, c_ref_K + 6);
    ref_K[1][1] = 999;
 
+   SECTION("empty") {
+      mgsprng probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       mgsprng probe(1, 6, ref_K);
       test << probe;

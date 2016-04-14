@@ -55,6 +55,8 @@ namespace dnvgl {
                CONT = _form_CONT(*(pos));
             }
 
+            iend::iend(void) : iend(-1) {}
+
             iend::iend(const long &CONT) : CONT(CONT) {}
 
             const types
@@ -68,7 +70,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<<(std::ostream &os, const iend &card) {
-
+               if (card.CONT == -1) return os;
                os << iend::head.format()
                   << card._form_CONT.format(card.CONT)
                   << iend::empty.format()

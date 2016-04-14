@@ -61,6 +61,9 @@ namespace dnvgl {
                NINT = _form_NINT(*(pos++));
             }
 
+            gelth::gelth(void) :
+               gelth(-1, 0, 0) {}
+
             gelth::gelth(
                const long &GEONO,
                const double &TH, const long &NINT) :
@@ -77,6 +80,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gelth &data) {
+               if (data.GEONO == -1) return os;
                os << gelth::head.format()
                   << data._form_GEONO.format(data.GEONO)
                   << data._form_TH.format(data.TH)

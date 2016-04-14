@@ -103,6 +103,12 @@ TEST_CASE("FEM GUSYI types output.", "[fem_gusyi,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      gusyi probe;
+      test << probe;
+      CHECK(test.str() == "");
+  }
+
    SECTION("simple") {
       gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11, 12);
       test << probe;

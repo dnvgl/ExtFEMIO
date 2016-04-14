@@ -126,6 +126,10 @@ namespace dnvgl {
                }
             }
 
+            gelref1::gelref1(void) :
+               gelref1(-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                       {}, {}, {}, {})  {}
+
             gelref1::gelref1(
                const long &ELNO, const long &MATNO,
                const long &ADDNO, const long &INTNO,
@@ -200,7 +204,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gelref1 &card) {
-
+               if (card.ELNO == -1) return os;
                os << gelref1::head.format()
                   << card._form_ELNO.format(card.ELNO)
                   << card._form_MATNO.format(card.MATNO)

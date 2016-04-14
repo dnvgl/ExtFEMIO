@@ -53,6 +53,10 @@ namespace dnvgl {
                "TRANO", type_bounds::bound<long>(&m_one));
             const fem::types::entry_type<double> belfix::_form_A("A");
 
+            belfix::belfix() :
+               belfix(-1, belfix::INVALID, 0,
+                      {0., 0., 0., 0., 0., 0.}) {}
+
             belfix::belfix(const std::deque<std::string> &inp) :
                card(inp) {
 
@@ -78,10 +82,10 @@ namespace dnvgl {
                   A.push_back(_form_A(*(pos++)));
             }
 
-            belfix::belfix(const long &FIXNO,
-                           const n_opt &OPT,
-                           const long &TRANO,
-                           const std::deque<double> &A) :
+            belfix::belfix(long const &FIXNO,
+                           n_opt const &OPT,
+                           long const &TRANO,
+                           std::deque<double> const &A) :
                card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 
             const std::ostream&
@@ -95,6 +99,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const belfix &card) {
+               if (card.OPT == belfix::INVALID) return os;
                os << belfix::head.format()
                   << card._form_FIXNO.format(card.FIXNO)
                   << card._form_OPT.format(card.OPT)

@@ -80,8 +80,22 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
 
    long inp_fix[6] = {1, 2, 3, 4, 5, 6};
 
+   SECTION("empty") {
+      bnbcd probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       bnbcd probe(1, 6, std::deque<long>(inp_fix, inp_fix + 6));
+      test << probe;
+      CHECK(test.str() ==
+            "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
+            "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+   }
+
+   SECTION("simple (const)") {
+      bnbcd probe(1, 6, {1, 2, 3, 4, 5, 6});
       test << probe;
       CHECK(test.str() ==
             "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"

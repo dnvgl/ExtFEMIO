@@ -109,6 +109,12 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      tdsetnam probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       tdsetnam probe(4, 123, 122, "1234567890123456789012");
       test << probe;

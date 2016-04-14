@@ -90,6 +90,13 @@ TEST_CASE("FEM HIERARCH types output.", "[fem_hierarch,out]" ) {
       "        +9.00000000e+00 +1.00000000e+01 +1.10000000e+01 +1.20000000e+01 \n"
       "        +1.30000000e+01 +1.40000000e+01 +1.50000000e+01 +1.60000000e+01 \n");
 
+   SECTION("write (empty)") {
+      hierarch probe;
+
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("write (1)") {
       hierarch probe(NFIELD, IHREF, ISELTY, INDSEL, ISLEVL, ITREF,
                      IHPREF, NSUB, IHSREFi);

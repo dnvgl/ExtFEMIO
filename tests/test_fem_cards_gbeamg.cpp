@@ -108,6 +108,12 @@ TEST_CASE("FEM GBEAMG types output.", "[fem_gbeamg,out]" ) {
    long NODEX(1), NODENO(222), NDOF(3);
    std::deque<int> ODOF({2, 6, 3});
 
+   SECTION("empty") {
+      gbeamg probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       gbeamg probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12., 13., 14., 15.);
       test << probe;

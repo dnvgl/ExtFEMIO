@@ -76,6 +76,9 @@ namespace dnvgl {
                T[3][3] = _form_T(*(pos++));
             }
 
+            hsuptran::hsuptran(void) :
+               hsuptran(-1, 0, NULL) {}
+
 
             hsuptran::hsuptran(const long &NFIELD,
                                const long &ITREF,
@@ -119,9 +122,10 @@ namespace dnvgl {
                                const long &ITREF,
                                const double T[4][4]) :
                card(), NFIELD(NFIELD), ITREF(ITREF) {
-               for (int i=0; i<4; i++)
-                  for (int j=0; j<4; j++)
-                     this->T[i][j] = T[i][j];
+               if (this->NFIELD != -1)
+                  for (int i=0; i<4; i++)
+                     for (int j=0; j<4; j++)
+                        this->T[i][j] = T[i][j];
             }
 
             const dnvgl::extfem::fem::cards::types
@@ -131,6 +135,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const hsuptran &card) {
+               if (card.NFIELD == -1) return os;
                os << hsuptran::head.format()
                   << card._form_NFIELD.format(card.NFIELD)
                   << card._form_ITREF.format(card.ITREF)
@@ -176,5 +181,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../../ check -j8"
 // End:

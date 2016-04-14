@@ -87,6 +87,12 @@ TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("emtpy") {
+      gpipe probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       gpipe probe(1, 2., 3., 4., 5., 6., 7, 8);
       test << probe;

@@ -514,9 +514,11 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
 
    std::ostringstream test;
 
-   // std::deque<long> ref_irmemb(1019);
-   // for (int i = 0; i < 1019; i++)
-   //    ref_irmemb[i] = i + 10;
+   SECTION("empty") {
+      gsetmemb probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
 
    SECTION("simple") {
       gsetmemb probe(5, 2, 3, 4, 5);

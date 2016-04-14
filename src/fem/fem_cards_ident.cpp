@@ -70,9 +70,11 @@ namespace dnvgl {
                }
             }
 
-            ident::ident(
-               const long &SLEVEL, const long &SELTYP,
-               const ident::mod_type &SELMOD) :
+            ident::ident(void) :
+               ident(-1, 0, ident::INVALID) {}
+
+            ident::ident(const long &SLEVEL, const long &SELTYP,
+                         const ident::mod_type &SELMOD) :
                SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
 
             const types
@@ -86,7 +88,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<<(std::ostream &os, const ident &card) {
-
+               if (card.SELMOD == ident::INVALID) return os;
                os << ident::head.format()
                   << card._form_SLEVEL.format(card.SLEVEL)
                   << card._form_SELTYP.format(card.SELTYP)

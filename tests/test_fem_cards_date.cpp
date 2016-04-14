@@ -88,6 +88,30 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
          "COMPUTER: HAML130185",
          "USER: berhol"});
 
+   SECTION("empty") {
+      date probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("simple (fixed)") {
+      date probe(0, 0, 4, 72,
+                 {"DATE TIME:  11/03/2015 09:46:08",
+                  "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013",
+                  "COMPUTER: HAML130185",
+                  "USER: berhol"});
+      test << probe;
+      CHECK(probe.NBYTE == 72);
+      CHECK(test.str() ==
+            //        1         2         3         4         5         6         7
+            // 3456789012345678901234567890123456789012345678901234567890123456789012
+            "DATE    +0.00000000e+00 +0.00000000e+00 +4.00000000e+00 +7.20000000e+01 \n"
+            "        DATE TIME:  11/03/2015 09:46:08                                 \n"
+            "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013            \n"
+            "        COMPUTER: HAML130185                                            \n"
+            "        USER: berhol                                                    \n");
+   }
+
    SECTION("simple") {
       date probe(TYPE, SUBTYPE, NRECS, NBYTE, CONT);
       test << probe;

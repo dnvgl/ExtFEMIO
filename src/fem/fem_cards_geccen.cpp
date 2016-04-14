@@ -80,6 +80,7 @@ namespace dnvgl {
 
             std::ostream&
                operator<< (std::ostream &os, geccen const &card) {
+               if (card.ECCNO == -1) return os;
                os << geccen::head.format()
                   << card._form_ECCNO.format(card.ECCNO)
                   << card._form_EX.format(card.EX)

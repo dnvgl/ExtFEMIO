@@ -110,7 +110,26 @@ TEST_CASE("FEM HSUPTRAN types output.", "[fem_hsuptran,out]" ) {
       "        +3.30000000e+01 +0.00000000e+00 +1.40000000e+01 +2.40000000e+01 \n"
       "        +3.40000000e+01 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
 
-   SECTION("write (1)") {
+   SECTION("write (empty)") {
+      hsuptran probe;
+
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+
+      SECTION("write (const)") {
+         hsuptran probe(1, 2,
+                        11., 21., 31., 0.,
+                        12., 22., 32., 0.,
+                        13., 33., 33., 0.,
+                        14., 24., 34., 1.);
+
+      test << probe;
+      CHECK(test.str() == ref);
+   }
+
+SECTION("write (1)") {
       hsuptran probe(NFIELD, ITREF,
                      T11, T21, T31, T41,
                      T12, T22, T32, T42,

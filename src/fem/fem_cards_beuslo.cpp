@@ -52,7 +52,7 @@ namespace dnvgl {
             const entry_type<double> beuslo::_form_RLOAD("RLOAD");
             const entry_type<double> beuslo::_form_ILOAD("ILOAD");
 
-            beuslo::beuslo(const std::deque<std::string> &inp) :
+            beuslo::beuslo(std::deque<std::string> const &inp) :
                card(inp) {
 
                if (inp.size() < 10)
@@ -78,6 +78,9 @@ namespace dnvgl {
                      ILOADi.push_back(_form_ILOAD(*(pos++)));
             };
 
+            beuslo::beuslo() :
+               beuslo(-1, 0, 0, 0, 0, 0, 0, 0, {}, {}) {}
+
             beuslo::beuslo(const long &LLC,
                            const long &LOTYP,
                            const bool &COMPLX,
@@ -91,13 +94,17 @@ namespace dnvgl {
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
                SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
-               if (!this->COMPLX)
+               if (!this->COMPLX && this->ILOADi.size() > 0)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "BEUSLO", "ILOAD data given with COMPLX == false");
+               else if (this->COMPLX  && this->ILOADi.size() == 0)
+                  throw dnvgl::extfem::fem::errors::usage_error(
+                     "BEUSLO", "no ILOAD data given with COMPLX == True");
                if (this->RLOADi.size() != (size_t)this->NDOF)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "BEUSLO", "RLOAD not of size NDOF");
-               if (this->ILOADi.size() != (size_t)this->NDOF)
+               if (this->ILOADi.size() > 0 &&
+                   this->ILOADi.size() != (size_t)this->NDOF)
                   throw dnvgl::extfem::fem::errors::usage_error(
                      "BEUSLO", "ILOAD not of size NDOF");
             }
@@ -111,54 +118,8 @@ namespace dnvgl {
                            const long &SIDE,
                            const std::deque<double> &RLOAD,
                            const std::deque<double> &ILOAD) :
-               card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
-               LAYER(LAYER), ELNO(ELNO), INTNO(INTNO),
-               SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
-               if (!this->COMPLX)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "ILOAD data given with COMPLX == false");
-               this->NDOF = long(this->RLOADi.size());
-               if (this->ILOADi.size() != (size_t)this->NDOF)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "ILOAD not of same size RLOAD");
-            }
-
-            beuslo::beuslo(const long &LLC,
-                           const long &LOTYP,
-                           const bool &COMPLX,
-                           const long &LAYER,
-                           const long &ELNO,
-                           const long &NDOF,
-                           const long &INTNO,
-                           const long &SIDE,
-                           const std::deque<double> &RLOAD) :
-               card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
-               LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
-               SIDE(SIDE), RLOADi(RLOAD), ILOADi() {
-               if (this->COMPLX)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "no ILOAD data given with COMPLX == True");
-               if (this->RLOADi.size() != (size_t)this->NDOF)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "RLOAD not of size NDOF");
-            }
-
-            beuslo::beuslo(const long &LLC,
-                           const long &LOTYP,
-                           const bool &COMPLX,
-                           const long &LAYER,
-                           const long &ELNO,
-                           const long &INTNO,
-                           const long &SIDE,
-                           const std::deque<double> &RLOAD) :
-               card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
-               LAYER(LAYER), ELNO(ELNO), INTNO(INTNO),
-               SIDE(SIDE), RLOADi(RLOAD), ILOADi() {
-               if (this->COMPLX)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "no ILOAD data given with COMPLX == True");
-               this->NDOF = long(this->RLOADi.size());
-            }
+               beuslo(LLC, LOTYP, COMPLX, LAYER, ELNO, RLOAD.size(),
+                      INTNO, SIDE, RLOAD, ILOAD) {}
 
             beuslo::beuslo(const long &LLC,
                            const long &LOTYP,
@@ -169,16 +130,8 @@ namespace dnvgl {
                            const long &SIDE,
                            const std::deque<double> &RLOAD,
                            const std::deque<double> &ILOAD) :
-               card(), LLC(LLC), LOTYP(LOTYP), COMPLX(true),
-               LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
-               SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
-               if (this->RLOADi.size() != (size_t)this->NDOF)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "RLOAD not of size NDOF");
-               if (this->ILOADi.size() != (size_t)this->NDOF)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "ILOAD not of size NDOF");
-            }
+               beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, NDOF, INTNO,
+                      SIDE, RLOAD, ILOAD) {}
 
             beuslo::beuslo(const long &LLC,
                            const long &LOTYP,
@@ -188,43 +141,8 @@ namespace dnvgl {
                            const long &SIDE,
                            const std::deque<double> &RLOAD,
                            const std::deque<double> &ILOAD) :
-               card(), LLC(LLC), LOTYP(LOTYP), COMPLX(true),
-               LAYER(LAYER), ELNO(ELNO), INTNO(INTNO),
-               SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
-               this->NDOF = long(this->RLOADi.size());
-               if (this->ILOADi.size() != (size_t)this->NDOF)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "ILOAD not of same size RLOAD");
-            }
-
-            beuslo::beuslo(const long &LLC,
-                           const long &LOTYP,
-                           const long &LAYER,
-                           const long &ELNO,
-                           const long &NDOF,
-                           const long &INTNO,
-                           const long &SIDE,
-                           const std::deque<double> &RLOAD) :
-               card(), LLC(LLC), LOTYP(LOTYP), COMPLX(false),
-               LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
-               SIDE(SIDE), RLOADi(RLOAD), ILOADi() {
-               if (this->RLOADi.size() != (size_t)this->NDOF)
-                  throw dnvgl::extfem::fem::errors::usage_error(
-                     "BEUSLO", "RLOAD not of size NDOF");
-            }
-
-            beuslo::beuslo(const long &LLC,
-                           const long &LOTYP,
-                           const long &LAYER,
-                           const long &ELNO,
-                           const long &INTNO,
-                           const long &SIDE,
-                           const std::deque<double> &RLOAD) :
-               card(), LLC(LLC), LOTYP(LOTYP), COMPLX(false),
-               LAYER(LAYER), ELNO(ELNO), INTNO(INTNO),
-               SIDE(SIDE), RLOADi(RLOAD), ILOADi() {
-               this->NDOF = long(this->RLOADi.size());
-            }
+               beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, RLOAD.size(),
+                      INTNO, SIDE, RLOAD, ILOAD) {}
 
             const dnvgl::extfem::fem::cards::types
             beuslo::card_type(void) const {
@@ -233,6 +151,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const beuslo &card) {
+               if (card.LLC == -1) return os;
                os << beuslo::head.format()
                   << card._form_LLC.format(card.LLC)
                   << card._form_LOTYP.format(card.LOTYP)
@@ -291,5 +210,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../.. check -j8"
 // End:

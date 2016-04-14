@@ -69,6 +69,9 @@ namespace dnvgl {
                }
             }
 
+            mgsprng::mgsprng(void) :
+               mgsprng(-1, 0, {}) {}
+
             mgsprng::mgsprng(const long &MATNO,
                              const long &NDOF,
                              const std::deque<std::deque<double>> &K) :
@@ -89,6 +92,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const mgsprng &card) {
+               if (card.MATNO == -1) return os;
                os << mgsprng::head.format()
                   << card._form_MATNO.format(card.MATNO)
                   << card._form_NDOF.format(card.NDOF);

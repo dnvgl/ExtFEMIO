@@ -93,6 +93,12 @@ TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      glsec probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       glsec probe(1, 2., 3., 4., 5., 6., 7., true, 9, 10);
       test << probe;

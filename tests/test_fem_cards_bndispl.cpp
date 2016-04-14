@@ -89,12 +89,14 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    std::ostringstream test;
 
-   double inp_rdisp[6] = {1., 2., 3., 4., 5., 6.};
-   double inp_idisp[6] = {1., 2., 3., 4., 5., 6.};
+   SECTION("empty") {
+      bndispl probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
 
    SECTION("simple") {
-      bndispl probe(1, 1, false, 4, 6,
-                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
+      bndispl probe(1, 1, false, 4, 6, {1., 2., 3., 4., 5., 6.});
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -104,8 +106,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("simple (with IDISP)") {
       bndispl probe(1, 1, true, 4, 6,
-                    std::deque<double>(inp_rdisp, inp_rdisp + 6),
-                    std::deque<double>(inp_idisp, inp_idisp + 6));
+                    {1., 2., 3., 4., 5., 6.}, {1., 2., 3., 4., 5., 6.});
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"
@@ -117,7 +118,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("simple (calc COMPLX)") {
       bndispl probe(1, 1, (long)4, 6,
-                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
+                    {1., 2., 3., 4., 5., 6.});
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -127,8 +128,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("simple (with IDISP, calc COMPLX)") {
       bndispl probe(1, 1, (long)4, 6,
-                    std::deque<double>(inp_rdisp, inp_rdisp + 6),
-                    std::deque<double>(inp_idisp, inp_idisp + 6));
+                    {1., 2., 3., 4., 5., 6.}, {1., 2., 3., 4., 5., 6.});
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"
@@ -139,8 +139,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
    }
 
    SECTION("calc ndof") {
-      bndispl probe(1, 1, false, 4,
-                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
+      bndispl probe(1, 1, false, 4, {1., 2., 3., 4., 5., 6.});
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -148,8 +147,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
             "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
    }
    SECTION("calc NDOF (calc COMPLX)") {
-      bndispl probe(1, 1, 4,
-                    std::deque<double>(inp_rdisp, inp_rdisp + 6));
+      bndispl probe(1, 1, 4, {1., 2., 3., 4., 5., 6.});
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"
@@ -159,8 +157,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
    SECTION("calc NDOF (with IDISP, calc COMPLX)") {
       bndispl probe(1, 1, 4,
-                    std::deque<double>(inp_rdisp, inp_rdisp + 6),
-                    std::deque<double>(inp_idisp, inp_idisp + 6));
+                    {1., 2., 3., 4., 5., 6.}, {1., 2., 3., 4., 5., 6.});
       test << probe;
       CHECK(test.str() ==
             "BNDISPL +1.00000000e+00 +1.00000000e+00  1.00000000e+00  0.00000000e+00 \n"

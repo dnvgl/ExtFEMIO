@@ -93,12 +93,15 @@ namespace dnvgl {
                }
             }
 
+            tdload::tdload(void) :
+               tdload(0, -1, 0, {}) {}
+
             tdload::tdload(const long &NFIELD,
-                               const long &ILREF,
-                               const long &CODNAM,
-                               const long &CODTXT,
-                               const std::string &SET_NAME,
-                               const std::deque<std::string> &CONT) :
+                           const long &ILREF,
+                           const long &CODNAM,
+                           const long &CODTXT,
+                           const std::string &SET_NAME,
+                           const std::deque<std::string> &CONT) :
                card(), NFIELD(NFIELD), ILREF(ILREF),
                CODNAM(CODNAM), CODTXT(CODTXT),
                SET_NAME(SET_NAME), CONT(CONT) {
@@ -111,8 +114,8 @@ namespace dnvgl {
             }
 
             tdload::tdload(const long &ILREF,
-                               const std::string &SET_NAME,
-                               const std::deque<std::string> &CONT) :
+                           const std::string &SET_NAME,
+                           const std::deque<std::string> &CONT) :
                card(), NFIELD(4), ILREF(ILREF),
                SET_NAME(SET_NAME), CONT(CONT) {
 
@@ -129,21 +132,13 @@ namespace dnvgl {
             }
 
             tdload::tdload(const long &NFIELD,
-                               const long &ILREF,
-                               const long &CODNAM,
-                               const std::string &SET_NAME) :
-               card() , NFIELD(NFIELD), ILREF(ILREF),
-               CODNAM(CODNAM), CODTXT(0),
-               SET_NAME(SET_NAME), CONT() {
-               auto div_val = ldiv(CODNAM, 100);
-               nlnam = div_val.quot != 0;
-               ncnam = div_val.rem;
-               nltxt = 0;
-               nctxt = 0;
-            }
+                           const long &ILREF,
+                           const long &CODNAM,
+                           const std::string &SET_NAME) :
+               tdload(NFIELD, ILREF, CODNAM, 0, SET_NAME, {}) {}
 
             tdload::tdload(const long &ILREF,
-                               const std::string &SET_NAME) :
+                           const std::string &SET_NAME) :
                card() , NFIELD(4), ILREF(ILREF),
                CODTXT(0),
                SET_NAME(SET_NAME), CONT() {
@@ -165,7 +160,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const tdload &card) {
-
+               if (card.ILREF == -1) return os;
                os << tdload::head.format()
                   << card._form_NFIELD.format(card.NFIELD)
                   << card._form_ILREF.format(card.ILREF)

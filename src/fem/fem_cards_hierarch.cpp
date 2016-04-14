@@ -75,15 +75,19 @@ namespace dnvgl {
                   IHSREFi.push_back(_form_IHSREF(*(pos++)));
             }
 
-            hierarch::hierarch(const long &NFIELD,
-                               const long &IHREF,
-                               const long &ISELTY,
-                               const long &INDSEL,
-                               const long &ISLEVL,
-                               const long &ITREF,
-                               const long &IHPREF,
-                               const long &NSUB,
-                               const std::deque<long> &IHSREF) :
+            hierarch::hierarch(void) :
+               hierarch(-1, 0, 0, 0, 0, 0, 0, {}) {}
+
+
+            hierarch::hierarch(long const &NFIELD,
+                               long const &IHREF,
+                               long const &ISELTY,
+                               long const &INDSEL,
+                               long const &ISLEVL,
+                               long const &ITREF,
+                               long const &IHPREF,
+                               long const &NSUB,
+                               std::deque<long> const &IHSREF) :
                card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
                INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
                IHPREF(IHPREF), NSUB(NSUB), IHSREFi(IHSREF) {
@@ -113,6 +117,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const hierarch &card) {
+               if (card.NFIELD == -1) return os;
                os << hierarch::head.format()
                   << card._form_NFIELD.format(card.NFIELD)
                   << card._form_IHREF.format(card.IHREF)
@@ -160,5 +165,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../.. check -j8"
 // End:

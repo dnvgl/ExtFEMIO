@@ -80,10 +80,16 @@ TEST_CASE("FEM IEND types output.", "[fem_iend,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("emtpy") {
+      iend probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
    SECTION("simple") {
       iend probe(3);
       test << probe;
-      CHECK(test.str() == "IEND    +3.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      CHECK(test.str() ==
+            "IEND    +3.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
    }
 }
 

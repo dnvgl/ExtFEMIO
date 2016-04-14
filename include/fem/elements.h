@@ -60,7 +60,7 @@ namespace dnvgl {
                           GHEX157 = 157, GHEX158 = 158, GHEX159 = 159,
                           GHEX160 = 160, GHEX161 = 161, GHEX162 = 162,
                           GHEX163 = 163,
-                          UNDEFINED=-1} el_types;
+                          INVALID=-1, UNDEFINED=-2} el_types;
 
             typedef enum {general, Preframe, Prefem, Sestra, ADVANCE,
                           Framework, Launch, Platework, Pretube,

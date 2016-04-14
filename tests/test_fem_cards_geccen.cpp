@@ -80,16 +80,24 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]" ) {
    long ECCNO(1);
    double EX(1.), EY(3.), EZ(134.);
 
-   SECTION("default") {
+   SECTION("empty") {
       geccen probe;
       test << probe;
-      CHECK(test.str() == "GECCEN  -1.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n");
+      CHECK(test.str() == "");
+   }
+
+   SECTION("const") {
+      geccen probe(1, 1., 3, 134.);
+      test << probe;
+      CHECK(test.str() ==
+            "GECCEN  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
    }
 
    SECTION("simple") {
       geccen probe(ECCNO, EX, EY, EZ);
       test << probe;
-      CHECK(test.str() == "GECCEN  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
+      CHECK(test.str() ==
+            "GECCEN  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
    }
 }
 

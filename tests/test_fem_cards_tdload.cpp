@@ -109,6 +109,12 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      tdload probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("simple") {
       tdload probe(4, 123, 122, "1234567890123456789012");
       test << probe;

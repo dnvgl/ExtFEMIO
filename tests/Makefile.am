@@ -20,44 +20,44 @@ top=../
 SUBDIRS=
 EXTRA_DIST=base_test.ju
 
-test_extfem_LDADD=../src/libextfemio.la -lboost_regex
+test_extfem_bdf_LDADD=../src/libextfemio_bdf.la ../src/libextfemio.la -lboost_regex
 
 TESTS=
 check_PROGRAMS=
 
 check_PROGRAMS += test_extfem_string
 test_extfem_string_SOURCES=test_extfem_string.cpp
-test_extfem_string_LDADD=$(test_extfem_LDADD)
+test_extfem_string_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_extfem_string.ju
 
 check_PROGRAMS += test_bdf_bounds
 test_bdf_bounds_SOURCES=test_bdf_bounds.cpp
-test_bdf_bounds_LDADD=$(test_extfem_LDADD)
+test_bdf_bounds_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_bounds.ju
 
 check_PROGRAMS += test_bdf_float
 test_bdf_float_SOURCES=test_bdf_float.cpp
-test_bdf_float_LDADD=$(test_extfem_LDADD)
+test_bdf_float_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_float.ju
 
 check_PROGRAMS += test_bdf_int
 test_bdf_int_SOURCES=test_bdf_int.cpp
-test_bdf_int_LDADD=$(test_extfem_LDADD)
+test_bdf_int_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_int.ju
 
 check_PROGRAMS += test_bdf_list
 test_bdf_list_SOURCES=test_bdf_list.cpp
-test_bdf_list_LDADD=$(test_extfem_LDADD)
+test_bdf_list_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_list.ju
 
 check_PROGRAMS += test_bdf_str
 test_bdf_str_SOURCES=test_bdf_str.cpp
-test_bdf_str_LDADD=$(test_extfem_LDADD)
+test_bdf_str_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_str.ju
 
 check_PROGRAMS += test_bdf_types
 test_bdf_types_SOURCES=test_bdf_types.cpp
-test_bdf_types_LDADD=$(test_extfem_LDADD)
+test_bdf_types_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_types.ju
 
 check_PROGRAMS += test_bdf_cards
@@ -81,27 +81,29 @@ test_bdf_cards_SOURCES += test_bdf_cards_force.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_moment.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_load.cpp
 
-test_bdf_cards_LDADD=$(test_extfem_LDADD)
+test_bdf_cards_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_cards.ju
+
+test_extfem_fem_LDADD=../src/libextfemio_fem.la ../src/libextfemio.la -lboost_regex
 
 check_PROGRAMS += test_fem_float
 test_fem_float_SOURCES=test_fem_float.cpp
-test_fem_float_LDADD=$(test_extfem_LDADD)
+test_fem_float_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_float.ju
 
 check_PROGRAMS += test_fem_int
 test_fem_int_SOURCES=test_fem_int.cpp
-test_fem_int_LDADD=$(test_extfem_LDADD)
+test_fem_int_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_int.ju
 
 check_PROGRAMS += test_fem_bool
 test_fem_bool_SOURCES=test_fem_bool.cpp
-test_fem_bool_LDADD=$(test_extfem_LDADD)
+test_fem_bool_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_bool.ju
 
 check_PROGRAMS += test_fem_list
 test_fem_list_SOURCES=test_fem_list.cpp
-test_fem_list_LDADD=$(test_extfem_LDADD)
+test_fem_list_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_list.ju
 
 check_PROGRAMS += test_fem_cards
@@ -140,7 +142,7 @@ test_fem_cards_SOURCES += test_fem_cards_hsupstat.cpp
 test_fem_cards_SOURCES += test_fem_cards_hsuptran.cpp
 test_fem_cards_SOURCES += test_fem_cards_hierarch.cpp
 test_fem_cards_SOURCES += test_fem_cards_beuslo.cpp
-test_fem_cards_LDADD=$(test_extfem_LDADD)
+test_fem_cards_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_cards.ju
 
 check_PROGRAMS += test_fem_elements
@@ -203,7 +205,7 @@ test_fem_elements_SOURCES += test_fem_element_tpri.cpp
 test_fem_elements_SOURCES += test_fem_element_trs1.cpp
 test_fem_elements_SOURCES += test_fem_element_trs2.cpp
 test_fem_elements_SOURCES += test_fem_element_trs3.cpp
-test_fem_elements_LDADD=$(test_extfem_LDADD)
+test_fem_elements_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_elements.ju
 
 test_MISC=

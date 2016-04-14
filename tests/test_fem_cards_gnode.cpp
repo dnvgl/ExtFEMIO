@@ -86,16 +86,31 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
    long NODEX(1), NODENO(222), NDOF(3);
    std::deque<int> ODOF({2, 6, 3});
 
+   SECTION("emtpy") {
+      gnode probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("const") {
+      gnode probe(1, 222, 3, {2, 6, 3});
+      test << probe;
+      CHECK(test.str() ==
+            "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
+   }
+
    SECTION("simple") {
       gnode probe(NODEX, NODENO, NDOF, ODOF);
       test << probe;
-      CHECK(test.str() == "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
+      CHECK(test.str() ==
+            "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
    }
 
    SECTION("simple (2)") {
       gnode probe(NODEX, NODENO, ODOF);
       test << probe;
-      CHECK(test.str() == "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
+      CHECK(test.str() ==
+            "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
    }
 }
 

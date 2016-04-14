@@ -100,6 +100,20 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
       "        +1.10000000e+01 +1.20000000e+01 +1.30000000e+01 +1.40000000e+01 \n"
       "        +1.50000000e+01 +1.60000000e+01  0.00000000e+00  0.00000000e+00 \n");
 
+   SECTION("write (empty)") {
+      beuslo probe;
+
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("write (fixed, verbose)") {
+      beuslo probe(1,  2, false, 3, 4, 5, 6, 2, {7., 8., 9., 10., 11.});
+
+      test << probe;
+      CHECK(test.str() == ref_r);
+   }
+
    SECTION("write (real, verbose)") {
       beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
                    SIDE, RLOADi);

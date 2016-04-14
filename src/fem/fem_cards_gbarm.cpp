@@ -69,15 +69,16 @@ namespace dnvgl {
                NLOBZ = _form_NLOBZ(*(pos++));
             }
 
+            gbarm::gbarm(void) :
+               gbarm(-1, 0, 0, 0, 0, 0, 0, 0) {}
+
             gbarm::gbarm(
                const long &GEONO,
                const double &HZ, const double &BT, const double &BB,
                const double &SFY, const double &SFZ,
                const long &NLOBY, const long &NLOBZ) :
-               BeamProp(), HZ(HZ), BT(BT), BB(BB),
-               SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {
-               this->GEONO = GEONO;
-            }
+               BeamProp(GEONO), HZ(HZ), BT(BT), BB(BB),
+               SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
             const std::ostream&
             gbarm::operator<< (std::ostream& os) const {
@@ -90,6 +91,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const gbarm &card) {
+               if (card.GEONO == -1) return os;
                os << gbarm::head.format()
                   << card._form_GEONO.format(card.GEONO)
                   << card._form_HZ.format(card.HZ)
