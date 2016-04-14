@@ -78,8 +78,7 @@ namespace dnvgl {
             gnode::gnode(const long &NODEX,
                          const long &NODENO,
                          const std::deque<int> &ODOF) :
-               gnode(NODEX, NODENO,
-                     static_cast<long>(this->ODOF.size()), ODOF) {}
+               gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
 
             const std::ostream&
             gnode::operator<< (std::ostream& os) const {

@@ -118,7 +118,7 @@ namespace dnvgl {
                            const long &SIDE,
                            const std::deque<double> &RLOAD,
                            const std::deque<double> &ILOAD) :
-               beuslo(LLC, LOTYP, COMPLX, LAYER, ELNO, RLOAD.size(),
+                           beuslo(LLC, LOTYP, COMPLX, LAYER, ELNO, static_cast<long>(RLOAD.size()),
                       INTNO, SIDE, RLOAD, ILOAD) {}
 
             beuslo::beuslo(const long &LLC,
@@ -141,7 +141,7 @@ namespace dnvgl {
                            const long &SIDE,
                            const std::deque<double> &RLOAD,
                            const std::deque<double> &ILOAD) :
-               beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, RLOAD.size(),
+               beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, static_cast<long>(RLOAD.size()),
                       INTNO, SIDE, RLOAD, ILOAD) {}
 
             const dnvgl::extfem::fem::cards::types
