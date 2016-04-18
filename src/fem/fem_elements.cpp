@@ -348,13 +348,22 @@ void __base::add(dnvgl::extfem::fem::cards::gelref1 const *data) {
    this->i_strain_ref = data->STRANO;
    this->i_stress_ref = data->STRENO;
    this->strpoint_ref = data->STREPONO;
-   if (data->GEONO.size() == (size_t)(-(data->GEONO_OPT)))
+   if (data->GEONO_OPT == -1)
       this->section = data->GEONO;
-   else
+   else if (data->GEONO_OPT != 0)
       this->section.push_back(data->GEONO_OPT);
-   this->fixations = data->FIXNO;
-   this->eccentrities = data->ECCNO;
-   this->csys = data->TRANSNO;
+   if (data->FIXNO_OPT == -1)
+      this->fixations = data->FIXNO;
+   else if (data->FIXNO_OPT != 0)
+      this->fixations.push_back(data->FIXNO_OPT);
+   if (data->ECCNO_OPT == -1)
+      this->eccentrities = data->ECCNO;
+   else if (data->ECCNO_OPT != 0)
+      this->eccentrities.push_back(data->ECCNO_OPT);
+   if (data->TRANSNO_OPT == -1)
+      this->csys = data->TRANSNO;
+   else if (data->TRANSNO_OPT != 0)
+      this->csys.push_back(data->TRANSNO_OPT);
 }
 
 undef::undef(const dnvgl::extfem::fem::cards::gelref1 *data) :

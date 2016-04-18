@@ -105,6 +105,23 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
    }
 }
 
+TEST_CASE("FEM BELFIX conversion to Poseidon BEAM dofs.", "[fem_belfix,fixation]") {
+
+   SECTION("first test") {
+      belfix probe(1, belfix::FIXATION, 1, {1., 0., 1., 0., 1., 0.});
+      CHECK(probe.pos_string() == "101010");
+   }
+
+   SECTION("Invalid fixation values") {
+      belfix probe(1, belfix::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
+      CHECK_THROWS(probe.pos_string());
+   }
+
+   SECTION("Invalid spring values") {
+      belfix probe(1, belfix::SPRING, 1, {1., 0., 0., 1., 1., 1.});
+      CHECK_THROWS(probe.pos_string());
+   }
+}
 
 // Local Variables:
 // mode: c++

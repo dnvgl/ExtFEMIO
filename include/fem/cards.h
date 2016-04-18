@@ -1072,9 +1072,10 @@ record may be on the interface.
 
                geccen(void);
 
-               geccen(
-                  long const &ECCNO,
-                  double const &EX, double const &EY, double const &EZ);
+               geccen(long const &ECCNO,
+                      double const &EX, double const &EY, double const &EZ);
+
+               geccen(geccen const *);
 
                const dnvgl::extfem::fem::cards::types
                   card_type(void) const;
@@ -1640,6 +1641,8 @@ record may be on the interface.
 
                const std::ostream&
                operator<< (std::ostream& os) const;
+
+               std::string pos_string(void);
             };
 
 /// `BLDEP`: Nodes with Linear Dependence

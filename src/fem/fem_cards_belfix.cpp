@@ -118,6 +118,20 @@ namespace dnvgl {
                   << std::endl;
                return os;
             }
+
+            std::string belfix::pos_string(void) {
+               std::ostringstream res;
+               if (OPT != FIXATION)
+                  throw errors::types_error(
+                  "Only BELFIX records with OPT==1 can be transformed to Poseidon BEAM DOFs.");
+               for (double a : A) {
+                  if (a != 0. && a != 1.)
+                     throw errors::types_error(
+                     "Only BELFIX fixation values of 0. and 1. can be transformed to Poseidon BEAM DOFs.");
+                  res << static_cast<int>(a);
+               }
+               return res.str();
+            }
          }
       }
    }

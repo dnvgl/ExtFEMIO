@@ -46,7 +46,10 @@ namespace dnvgl {
             const entry_type<double> geccen::_form_EY("EY");
             const entry_type<double> geccen::_form_EZ("EZ");
 
-            geccen::geccen() : geccen(-1, 0., 0., 0.) {}
+            geccen::geccen(void) : geccen(-1, 0., 0., 0.) {}
+
+            geccen::geccen(geccen const *that) :
+               geccen(that->ECCNO, that->EX, that->EY, that->EZ) {}
 
             geccen::geccen(const std::deque<std::string> &inp) :
                card(inp) {
