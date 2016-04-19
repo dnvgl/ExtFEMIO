@@ -119,7 +119,7 @@ namespace dnvgl {
                return os;
             }
 
-            std::string belfix::pos_string(void) {
+            std::string belfix::pos_string(void) const {
                std::ostringstream res;
                if (OPT != FIXATION)
                   throw errors::types_error(

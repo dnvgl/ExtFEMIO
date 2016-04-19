@@ -1642,7 +1642,7 @@ record may be on the interface.
                const std::ostream&
                operator<< (std::ostream& os) const;
 
-               std::string pos_string(void);
+               std::string pos_string(void) const;
             };
 
 /// `BLDEP`: Nodes with Linear Dependence
