@@ -71,7 +71,6 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
          "GELMNT1  1.00000000e+000 6.00000000e+000 2.40000000e+001 0.00000000e+000\n",
          "         1.00000000e+000 6.00000000e+000 4.00000000e+000 2.00000000e+000\n"});
 
-
       card::card_split(data, lines);
       gelmnt1 probe(lines);
 
@@ -84,6 +83,38 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
       CHECK(probe.NODIN[1] == 6);
       CHECK(probe.NODIN[2] == 4);
       CHECK(probe.NODIN[3] == 2);
+   }
+
+   SECTION("GELMNT1 (BEAS)") {
+      std::deque<std::string> data({
+            "GELMNT1   1.00000000E+00  1.00000000E+00  1.50000000E+01  0.00000000E+00\n",
+            "          1.00000000E+00  2.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
+      card::card_split(data, lines);
+      gelmnt1 probe(lines);
+
+      CHECK(probe.ELNOX == 1);
+      CHECK(probe.ELNO == 1);
+      CHECK(probe.ELTYP == 15);
+      CHECK(probe.ELTYAD == 0);
+      CHECK(probe.NODIN.size() == 2);
+      CHECK(probe.NODIN[0] == 1);
+      CHECK(probe.NODIN[1] == 2);
+   }
+
+   SECTION("GELMNT1 (BEAS) (empty fields)") {
+      std::deque<std::string> data({
+            "GELMNT1   1.00000000E+00  1.00000000E+00  1.50000000E+01  0.00000000E+00\n",
+            "          1.00000000E+00  2.00000000E+00\n"});
+      card::card_split(data, lines);
+      gelmnt1 probe(lines);
+
+      CHECK(probe.ELNOX == 1);
+      CHECK(probe.ELNO == 1);
+      CHECK(probe.ELTYP == 15);
+      CHECK(probe.ELTYAD == 0);
+      CHECK(probe.NODIN.size() == 2);
+      CHECK(probe.NODIN[0] == 1);
+      CHECK(probe.NODIN[1] == 2);
    }
 }
 
@@ -134,7 +165,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       CHECK(test.str() ==
             "GELMNT1 +1.20000000e+01 +3.60000000e+01 +6.00000000e+00 +0.00000000e+00 \n"
             "        +1.00000000e+00 +6.00000000e+00 +4.00000000e+00 +2.00000000e+00 \n"
-            "        +1.30000000e+01 +2.20000000e+01  0.00000000e+00  0.00000000e+00 \n");
+            "        +1.30000000e+01 +2.20000000e+01 \n");
    }
 
    SECTION("GELMNT1 OUT (BEAS)") {
@@ -147,7 +178,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.20000000e+01 +3.60000000e+01 +1.50000000e+01 +0.00000000e+00 \n"
-            "        +1.00000000e+00 +6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "        +1.00000000e+00 +6.00000000e+00 \n");
    }
 
    SECTION("GELMNT1 OUT (BEAS) (ELTYAD default)") {
@@ -159,7 +190,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]" ) {
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.20000000e+01 +3.60000000e+01 +1.50000000e+01 +0.00000000e+00 \n"
-            "        +1.00000000e+00 +6.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "        +1.00000000e+00 +6.00000000e+00 \n");
    }
 }
 

@@ -74,6 +74,15 @@ TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
 
       CHECK(probe.CONT == 1);
    }
+
+   SECTION("IEND (4)") {
+      std::deque<std::string> data({
+         "IEND                0.00            0.00            0.00            0.00\n"});
+      card::card_split(data, lines);
+      iend probe(lines);
+
+      CHECK(probe.CONT == 0);
+   }
 }
 
 TEST_CASE("FEM IEND types output.", "[fem_iend,out]" ) {

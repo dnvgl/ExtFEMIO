@@ -202,7 +202,7 @@ namespace dnvgl {
                      "gelmnt1", "wrong element type");
                }
                ELTYAD = _form_ELTYAD(*(pos++));
-               while (pos != inp.end()) {
+               while (pos != inp.end() && *pos != "                ") {
                   tmp = _form_NODIN(*(pos++));
                   if (tmp == 0) break;
                   NODIN.push_back(tmp);
@@ -246,8 +246,6 @@ namespace dnvgl {
                   }
                   os << card._form_NODIN.format(p);
                }
-               while (i++ < 4)
-                  os << card.empty.format();
                os << std::endl;
                return os;
             }

@@ -99,8 +99,7 @@ namespace dnvgl {
 
             std::ostream&
             operator<< (std::ostream &os, const bldep &card) {
-               if (card.NODENO == -1)
-                  return os;
+               if (card.NODENO == -1) return os;
                os << bldep::head.format()
                   << card._form_NODENO.format(card.NODENO)
                   << card._form_CNOD.format(card.CNOD)

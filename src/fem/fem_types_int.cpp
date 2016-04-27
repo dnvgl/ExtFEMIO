@@ -41,8 +41,8 @@ std::regex
 #endif
 dnvgl::extfem::fem::types::int_re(
    "([[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]])|"
-   "([[:space:]][[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2})"
-   ,
+   "([[:space:]][[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2})|"
+   "(            0.00)",
 #ifdef HAVE_BOOST_REGEX_HPP
    boost::regex_constants::ECMAScript);
 #else
