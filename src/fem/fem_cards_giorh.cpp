@@ -76,13 +76,18 @@ namespace dnvgl {
                if (pos == inp.end()) return;
                if (*pos != "                ")
                   NLOBYT = _form_NLOBYT(*(pos++));
+               else
+                  pos++;
                if (pos == inp.end()) return;
                if (*pos != "                ")
                   NLOBYB = _form_NLOBYB(*(pos++));
+               else
+                  pos++;
                if (pos == inp.end()) return;
                if (*pos != "                ")
                   NLOBZ = _form_NLOBZ(*pos);
             }
+
             giorh::giorh(void) :
                giorh(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
@@ -120,10 +125,12 @@ namespace dnvgl {
                   << card._form_TB.format(card.TB)
                   << card._form_SFY.format(card.SFY)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_SFZ.format(card.SFZ)
-                  << card._form_NLOBYT.format(card.NLOBYT)
-                  << card._form_NLOBYB.format(card.NLOBYB)
-                  << card._form_NLOBZ.format(card.NLOBZ) << std::endl;
+                  << card._form_SFZ.format(card.SFZ);
+               if ((card.NLOBYT || card.NLOBYB || card.NLOBZ))
+                  os << card._form_NLOBYT.format(card.NLOBYT)
+                     << card._form_NLOBYB.format(card.NLOBYB)
+                     << card._form_NLOBZ.format(card.NLOBZ);
+               os << std::endl;
                return os;
             }
          }

@@ -83,7 +83,29 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
    }
 }
 
-TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
+TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file") {
+
+   std::deque<std::string> lines;
+
+   SECTION("Failing card") {
+      std::deque<std::string> data({
+            "GPIPE     1.80000000E+01  1.49100006E-01  2.19100013E-01  3.50000001E-02\n",
+            "          1.00000000E+00  1.00000000E+00\n"});
+      card::card_split(data, lines);
+      gpipe probe(lines);
+
+      CHECK(probe.GEONO == 18);
+      CHECK(probe.DI == 1.49100006e-1);
+      CHECK(probe.DY == 2.19100013e-1);
+      CHECK(probe.T == 3.50000001e-2);
+      CHECK(probe.SFY == 1.);
+      CHECK(probe.SFZ == 1.);
+      CHECK(probe.NCIR == 0);
+      CHECK(probe.NRAD == 0);
+   }
+}
+
+         TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
 
    std::ostringstream test;
 
@@ -99,6 +121,14 @@ TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
       CHECK(test.str() ==
             "GPIPE   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
             "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00 +8.00000000e+00 \n");
+   }
+
+   SECTION("NC* default") {
+      gpipe probe(1, 2., 3., 4., 5., 6.);
+      test << probe;
+      CHECK(test.str() ==
+            "GPIPE   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
+            "        +5.00000000e+00 +6.00000000e+00 \n");
    }
 }
 

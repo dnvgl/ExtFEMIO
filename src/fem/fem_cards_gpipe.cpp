@@ -49,9 +49,9 @@ namespace dnvgl {
             const entry_type<long> gpipe::_form_NRAD("NRAD");
 
             gpipe::gpipe(std::deque<std::string> const &inp) :
-               BeamProp(inp) {
+               BeamProp(inp), NCIR(0), NRAD(0) {
 
-               if (inp.size() < 9)
+               if (inp.size() < 7)
                   throw errors::parse_error(
                      "GPIPE", "Illegal number of entries.");
 
@@ -64,8 +64,14 @@ namespace dnvgl {
                T = _form_T(*(pos++));
                SFY = _form_SFY(*(pos++));
                SFZ = _form_SFZ(*(pos++));
-               NCIR = _form_NCIR(*(pos++));
-               NRAD = _form_NRAD(*pos);
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NCIR = _form_NCIR(*(pos++));
+               else
+                  pos++;
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NRAD = _form_NRAD(*pos);
             }
 
             gpipe::gpipe(void) :
@@ -75,7 +81,7 @@ namespace dnvgl {
                          const double &DY,
                          const double &T, const double &SFY,
                          const double &SFZ,
-                         const long &NCIR, const long &NRAD) :
+                         const long &NCIR/*=0*/, const long &NRAD/*=0*/) :
                BeamProp(GEONO),
                DI(DI), DY(DY), T(T),
                SFY(SFY), SFZ(SFZ),
@@ -100,10 +106,11 @@ namespace dnvgl {
                   << card._form_T.format(card.T)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
                   << card._form_SFY.format(card.SFY)
-                  << card._form_SFZ.format(card.SFZ)
-                  << card._form_NCIR.format(card.NCIR)
-                  << card._form_NRAD.format(card.NRAD)
-                  << std::endl;
+                  << card._form_SFZ.format(card.SFZ);
+               if ((card.NCIR || card.NRAD))
+                  os << card._form_NCIR.format(card.NCIR)
+                     << card._form_NRAD.format(card.NRAD);
+               os << std::endl;
                return os;
             }
          }
