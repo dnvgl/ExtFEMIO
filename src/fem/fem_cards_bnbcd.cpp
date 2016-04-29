@@ -17,6 +17,10 @@ namespace {
       = "@(#) $Id$";
 }
 
+#ifdef FIX
+#undef FIX
+#endif // FIX
+
 #include <memory>
 #include <algorithm>
 

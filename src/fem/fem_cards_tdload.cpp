@@ -18,6 +18,10 @@ namespace {
       = "@(#) $Id$";
 }
 
+#ifdef max
+#undef max
+#endif // max
+
 #include <memory>
 
 #include "fem/cards.h"
