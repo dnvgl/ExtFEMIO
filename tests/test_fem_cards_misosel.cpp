@@ -85,6 +85,28 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
    }
 }
 
+TEST_CASE("FEMIO-27: Failing to import MISOEL card from SESAM GeniE FEM file") {
+
+   std::deque<std::string> lines;
+
+   SECTION("Failing card") {
+      std::deque<std::string> data({
+            "MISOSEL  1.00000000e+000 2.06000000e+008 3.00000012e-001 7.84999990e+000\n",
+            "         0.00000000e+000 0.00000000e+000\n"});
+      card::card_split(data, lines);
+      misosel probe(lines);
+
+      CHECK(probe.MATNO == 1);
+      CHECK(probe.YOUNG == 2.06e8);
+      CHECK(probe.POISS == 3.00000012e-1);
+      CHECK(probe.RHO == 7.84999990);
+      CHECK(probe.DAMP == 0.);
+      CHECK(probe.ALPHA == 0.);
+      CHECK(probe.DUMMY == 0.);
+      CHECK(probe.YIELD == 0.);
+   }
+}
+
 TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
 
    std::ostringstream test;
@@ -101,6 +123,14 @@ TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
       CHECK(test.str() ==
             "MISOSEL +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
             "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00 +8.00000000e+00 \n");
+   }
+
+   SECTION("default YIELD") {
+      misosel probe(1, 2., 3., 4., 5., 6.);
+      test << probe;
+      CHECK(test.str() ==
+            "MISOSEL +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
+            "        +5.00000000e+00 +6.00000000e+00 \n");
    }
 }
 

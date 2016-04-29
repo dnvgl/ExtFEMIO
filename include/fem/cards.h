@@ -2384,8 +2384,8 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                        double const &RHO,
                        double const &DAMP,
                        double const &ALPHA,
-                       double const &DUMMY,
-                       double const &YIELD);
+                       double const &DUMMY=0.,
+                       double const &YIELD=0.);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;

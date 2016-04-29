@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<double> misosel::_form_YIELD("YIELD");
 
             misosel::misosel(const std::deque<std::string> &inp) :
-               card(inp) {
+               card(inp), DUMMY(0.), YIELD(0.) {
 
                if (inp.size() < 7)
                   throw errors::parse_error(
@@ -65,12 +65,18 @@ namespace dnvgl {
                RHO = _form_RHO(*(pos++));
                DAMP = _form_DAMP(*(pos++));
                ALPHA = _form_ALPHA(*(pos++));
-               DUMMY = _form_DUMMY(*(pos++));
-               YIELD = _form_YIELD(*(pos++));
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  DUMMY = _form_DUMMY(*(pos++));
+               else
+                  pos++;
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  YIELD = _form_YIELD(*pos);
             }
 
             misosel::misosel(void) :
-               misosel(-1, 0., 0., 0., 0., 0., 0., 0.) {}
+               misosel(-1, 0., 0., 0., 0., 0.) {}
 
             misosel::misosel(const long &MATNO,
                              const double &YOUNG,
@@ -78,8 +84,8 @@ namespace dnvgl {
                              const double &RHO,
                              const double &DAMP,
                              const double &ALPHA,
-                             const double &DUMMY,
-                             const double &YIELD) :
+                             const double &DUMMY/*=0.*/,
+                             const double &YIELD/*=0.*/) :
                card(), MATNO(MATNO), YOUNG(YOUNG), POISS(POISS),
                RHO(RHO), DAMP(DAMP), ALPHA(ALPHA), DUMMY(DUMMY),
                YIELD(YIELD) {}
@@ -104,10 +110,11 @@ namespace dnvgl {
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
                   << card._form_DAMP.format(card.DAMP)
-                  << card._form_ALPHA.format(card.ALPHA)
-                  << card._form_DUMMY.format(card.DUMMY)
-                  << card._form_YIELD.format(card.YIELD)
-                  << std::endl;
+                  << card._form_ALPHA.format(card.ALPHA);
+               if ((card.DUMMY || card.YIELD))
+                  os << card._form_DUMMY.format(card.DUMMY)
+                     << card._form_YIELD.format(card.YIELD);
+               os << std::endl;
                return os;
             }
          }

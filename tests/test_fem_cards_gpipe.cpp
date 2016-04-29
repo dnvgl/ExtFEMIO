@@ -105,7 +105,7 @@ TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file") {
    }
 }
 
-         TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
+TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
 
    std::ostringstream test;
 
