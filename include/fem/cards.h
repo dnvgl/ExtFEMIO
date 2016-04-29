@@ -1124,7 +1124,7 @@ record may be on the interface.
                gelth(void);
 
                gelth(
-                  long const &GEONO, double const &TH, long const &NINT);
+                  long const &GEONO, double const &TH, long const &NINT=0);
 
                const dnvgl::extfem::fem::cards::types
                   card_type(void) const;

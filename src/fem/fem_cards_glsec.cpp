@@ -81,7 +81,7 @@ namespace dnvgl {
                          const double &TY, const double &BY,
                          const double &TZ, const double &SFY,
                          const double &SFZ, const bool &K,
-                         const long &NLOBY, const long &NLOBZ) :
+                         const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
                BeamProp(GEONO),
                HZ(HZ), TY(TY), BY(BY), TZ(TZ),
                SFY(SFY), SFZ(SFZ),

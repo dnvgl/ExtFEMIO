@@ -46,7 +46,7 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
 
-    std::deque<std::string> lines;
+   std::deque<std::string> lines;
 
    SECTION("GELTH (1)") {
       std::deque<std::string> data({
@@ -71,6 +71,22 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
    }
 }
 
+TEST_CASE("FEMIO-24: Failing to import line from SESAM GeniE FEM file") {
+
+   std::deque<std::string> lines;
+
+   SECTION("Failing card") {
+      std::deque<std::string> data({
+            "GELTH     1.00000000E+00  2.99999993E-02\n"});
+      card::card_split(data, lines);
+      gelth probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.TH == 2.99999993e-02);
+      CHECK(probe.NINT == 0);
+   }
+}
+
 TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
 
    std::ostringstream test;
@@ -85,7 +101,14 @@ TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
       gelth probe(1, 2., 3);
       test << probe;
       CHECK(test.str() ==
-            "GELTH   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00  0.00000000e+00 \n");
+            "GELTH   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 \n");
+   }
+
+   SECTION("simple NINT default") {
+      gelth probe(1, 2.);
+      test << probe;
+      CHECK(test.str() ==
+            "GELTH   +1.00000000e+00 +2.00000000e+00 \n");
    }
 }
 

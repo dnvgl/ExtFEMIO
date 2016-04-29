@@ -46,7 +46,7 @@ namespace dnvgl {
             const entry_type<long> gelth::_form_NINT("NINT");
 
             gelth::gelth(const std::deque<std::string> &inp) :
-               card(inp) {
+               card(inp), NINT(0) {
 
                if (inp.size() < 4)
                   throw errors::parse_error(
@@ -58,15 +58,16 @@ namespace dnvgl {
 
                GEONO = _form_GEONO(*(pos++));
                TH = _form_TH(*(pos++));
-               NINT = _form_NINT(*(pos++));
+               if (*pos != "                ")
+                  NINT = _form_NINT(*pos);
             }
 
             gelth::gelth(void) :
-               gelth(-1, 0, 0) {}
+               gelth(-1, 0) {}
 
             gelth::gelth(
                const long &GEONO,
-               const double &TH, const long &NINT) :
+               const double &TH, const long &NINT/*=0*/) :
                card(), GEONO(GEONO), TH(TH), NINT(NINT) {}
 
             const dnvgl::extfem::fem::cards::types
@@ -83,9 +84,10 @@ namespace dnvgl {
                if (data.GEONO == -1) return os;
                os << gelth::head.format()
                   << data._form_GEONO.format(data.GEONO)
-                  << data._form_TH.format(data.TH)
-                  << data._form_NINT.format(data.NINT)
-                  << data.empty.format() << std::endl;
+                  << data._form_TH.format(data.TH);
+               if (data.NINT)
+                  os << data._form_NINT.format(data.NINT);
+               os << std::endl;
                return os;
             }
          }
