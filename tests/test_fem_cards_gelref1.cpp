@@ -222,6 +222,39 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
    }
 }
 
+TEST_CASE("FEMIO-28: Failing to import GELREF1 card from SESAM GeniE FEM file") {
+
+   std::deque<std::string> lines;
+
+   SECTION("Failing card") {
+      std::deque<std::string> data({
+            "GELREF1   5.61680000E+04  3.00000000E+00  0.00000000E+00  0.00000000E+00\n",
+            "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
+            "          1.10000000E+01  0.00000000E+00 -1.00000000E+00  6.00000000E+00\n",
+            "          1.80000000E+01  1.90000000E+01\n"});
+      card::card_split(data, lines);
+      gelref1 probe(lines);
+
+      CHECK(probe.ELNO == 56168);
+      CHECK(probe.MATNO == 3);
+      CHECK(probe.ADDNO == 0);
+      CHECK(probe.INTNO == 0);
+      CHECK(probe.MINTNO == 0);
+      CHECK(probe.STRANO == 0);
+      CHECK(probe.STRENO == 0);
+      CHECK(probe.STREPONO == 0);
+      CHECK(probe.GEONO_OPT == 11);
+      CHECK(probe.FIXNO_OPT == 0);
+      CHECK(probe.ECCNO_OPT == -1);
+      CHECK(probe.TRANSNO_OPT == 6);
+      CHECK(probe.GEONO.size() == 0);
+      CHECK(probe.FIXNO.size() == 0);
+      CHECK(probe.ECCNO.size() == 2);
+      CHECK(probe.ECCNO[0] == 18);
+      CHECK(probe.ECCNO[1] == 19);
+      CHECK(probe.TRANSNO.size() == 0);
+   }
+}
 TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
 
    std::ostringstream test;
@@ -263,7 +296,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +1.03005000e+05 +0.00000000e+00 -1.00000000e+00 +1.70000000e+01 \n"
-            "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
+            "        +3.30000000e+01 +3.40000000e+01 \n");
    }
 
    SECTION("GELREF1 OUT (sample cons)") {
@@ -274,7 +307,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +1.03005000e+05 +0.00000000e+00 -1.00000000e+00 +1.70000000e+01 \n"
-            "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
+            "        +3.30000000e+01 +3.40000000e+01 \n");
    }
 
    SECTION("GELREF1 OUT (sample 3)") {
@@ -295,7 +328,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +1.03005000e+05 +0.00000000e+00 -1.00000000e+00 +1.70000000e+01 \n"
-            "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
+            "        +3.30000000e+01 +3.40000000e+01 \n");
    }
 
    SECTION("GELREF1 OUT (sample 4)") {
@@ -312,7 +345,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        -1.00000000e+00 +0.00000000e+00 +1.03005000e+05 +1.70000000e+01 \n"
-            "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
+            "        +3.30000000e+01 +3.40000000e+01 \n");
    }
 
    SECTION("GELREF1 OUT (sample 5)") {
@@ -329,7 +362,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +1.03005000e+05 -1.00000000e+00 +1.00000000e+00 +1.70000000e+01 \n"
-            "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
+            "        +3.30000000e+01 +3.40000000e+01 \n");
    }
    SECTION("GELREF1 OUT (sample 6)") {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
@@ -346,7 +379,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
             "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n"
             "        +1.03005000e+05 +0.00000000e+00 +1.00000000e+00 -1.00000000e+00 \n"
-            "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n");
+            "        +3.30000000e+01 +3.40000000e+01 \n");
    }
 }
 

@@ -59,7 +59,7 @@ namespace dnvgl {
             const entry_type<long> gelref1::_form_TRANSNO("TRANSNO");
 
             gelref1::gelref1(const std::deque<std::string> &inp) :
-               card(inp) {
+               card(inp), GEONO(0), FIXNO(0), ECCNO(0), TRANSNO(0) {
 
                if (inp.size() < 13)
                   throw errors::parse_error(
@@ -91,7 +91,7 @@ namespace dnvgl {
                TRANSNO_OPT = _form_TRANSNO_OPT(*(pos++));
                if (TRANSNO_OPT == -1) nvals += 1;
 
-               while (pos != inp.end()) {
+               while (pos != inp.end() && *pos != "                ") {
                   tmp = lval(*pos);
                   if (tmp == 0) break;
                   node_vals.push_back(*(pos++));
@@ -100,8 +100,8 @@ namespace dnvgl {
                   divmod = ldiv((long)node_vals.size(), nvals);
                   if (divmod.rem != 0)
                      throw dnvgl::extfem::fem::errors::parse_error(
-                        "GELREF1", "Number of node values is not multiple "
-                        "of 4.");
+                        "GELREF1", "Number of node values is not "
+                        "as required.");
 
                   if (GEONO_OPT == -1) {
                      for (long i=0; i < divmod.quot; i++)
@@ -250,9 +250,6 @@ namespace dnvgl {
                   }
                   os << card._form_TRANSNO.format(p);
                }
-
-               while (i++ < 4)
-                  os << card.empty.format();
                os << std::endl;
                return os;
             }
