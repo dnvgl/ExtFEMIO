@@ -93,6 +93,33 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
    }
 }
 
+TEST_CASE("FEMIO-25: Failing to import GIORH card from SESAM GeniE FEM file") {
+
+   std::deque<std::string> lines;
+
+   SECTION("Failing card") {
+      std::deque<std::string> data({
+            "GIORH     6.00000000E+00  7.14999974E-01  9.99999978E-03  1.09999999E-02\n",
+            "          1.00000005E-03  1.50000006E-01  1.49999997E-02  1.00000000E+00\n",
+            "          1.00000000E+00\n"});
+      card::card_split(data, lines);
+      giorh probe(lines);
+
+      CHECK(probe.GEONO == 6);
+      CHECK(probe.HZ == 7.14999974e-1);
+      CHECK(probe.TY == 9.99999978e-3);
+      CHECK(probe.BT == 1.09999999e-2);
+      CHECK(probe.TT == 1.00000005e-3);
+      CHECK(probe.BB == 1.50000006e-1);
+      CHECK(probe.TB == 1.49999997e-2);
+      CHECK(probe.SFY == 1.);
+      CHECK(probe.SFZ == 1.);
+      CHECK(probe.NLOBYT == 0);
+      CHECK(probe.NLOBYB == 0);
+      CHECK(probe.NLOBZ == 0);
+   }
+}
+
 TEST_CASE("FEM GIORH types output.", "[fem_giorh,out]" ) {
 
    std::ostringstream test;

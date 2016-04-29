@@ -55,7 +55,7 @@ namespace dnvgl {
 
 
             giorh::giorh(const std::deque<std::string> &inp) :
-               BeamProp(inp) {
+               BeamProp(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
 
                if (inp.size() < 13)
                   throw errors::parse_error(
@@ -73,9 +73,15 @@ namespace dnvgl {
                TB = _form_TB(*(pos++));
                SFY = _form_SFY(*(pos++));
                SFZ = _form_SFZ(*(pos++));
-               NLOBYT = _form_NLOBYT(*(pos++));
-               NLOBYB = _form_NLOBYB(*(pos++));
-               NLOBZ = _form_NLOBZ(*pos);
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBYT = _form_NLOBYT(*(pos++));
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBYB = _form_NLOBYB(*(pos++));
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBZ = _form_NLOBZ(*pos);
             }
             giorh::giorh(void) :
                giorh(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
@@ -84,8 +90,8 @@ namespace dnvgl {
                          const double &TY, const double &BT,
                          const double &TT, const double &BB,
                          const double &TB, const double &SFY,
-                         const double &SFZ, const long &NLOBYT,
-                         const long &NLOBYB, const long &NLOBZ) :
+                         const double &SFZ,
+                         const long &NLOBYT/*=0*/, const long &NLOBYB/*=0*/, const long &NLOBZ/*=0*/) :
                BeamProp(GEONO),
                HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
                SFY(SFY), SFZ(SFZ),
