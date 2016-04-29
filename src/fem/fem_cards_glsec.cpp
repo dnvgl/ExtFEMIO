@@ -51,9 +51,9 @@ namespace dnvgl {
             const entry_type<long> glsec::_form_NLOBZ("NLOBZ");
 
             glsec::glsec(const std::deque<std::string> &inp) :
-               BeamProp(inp) {
+               BeamProp(inp), NLOBY(0), NLOBZ(0) {
 
-               if (inp.size() < 11)
+               if (inp.size() < 9)
                   throw errors::parse_error(
                      "GLSEC", "Illegal number of entries.");
 
@@ -68,7 +68,9 @@ namespace dnvgl {
                SFY = _form_SFY(*(pos++));
                SFZ = _form_SFZ(*(pos++));
                K = _form_K(*(pos++));
+               if (pos == inp.end()) return;
                NLOBY = _form_NLOBY(*(pos++));
+               if (pos == inp.end()) return;
                NLOBZ = _form_NLOBZ(*pos);
             }
 
@@ -107,7 +109,10 @@ namespace dnvgl {
                   << card._form_SFY.format(card.SFY)
                   << card._form_SFZ.format(card.SFZ)
                   << card._form_K.format(card.K)
-                  << std::endl << dnvgl::extfem::fem::types::card().format()
+                  << std::endl;
+               if (!(card.NLOBY || card.NLOBZ))
+                  return os;
+               os << dnvgl::extfem::fem::types::card().format()
                   << card._form_NLOBY.format(card.NLOBY)
                   << card._form_NLOBZ.format(card.NLOBZ)
                   << card.empty.format() << card.empty.format()

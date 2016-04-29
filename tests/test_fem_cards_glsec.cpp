@@ -87,6 +87,25 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
       CHECK(probe.NLOBY == 0);
       CHECK(probe.NLOBZ == 0);
    }
+
+   SECTION("GLSEC (2)") {
+      std::deque<std::string> data({
+            "GLSEC     1.60000000E+02  1.50000006E-01  9.00000054E-03  9.00000036E-02\n",
+               "          9.00000054E-03  1.00000000E+00  1.00000000E+00  1.00000000E+00\n"});
+      card::card_split(data, lines);
+      glsec probe(lines);
+
+      CHECK(probe.GEONO == 160);
+      CHECK(probe.HZ == .150000006);
+      CHECK(probe.TY == .00900000054);
+      CHECK(probe.BY == .0900000036);
+      CHECK(probe.TZ == .00900000054);
+      CHECK(probe.SFY == 1.);
+      CHECK(probe.SFZ == 1.);
+      CHECK(probe.K);
+      CHECK(probe.NLOBY == 0);
+      CHECK(probe.NLOBZ == 0);
+   }
 }
 
 TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
@@ -106,6 +125,14 @@ TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
             "GLSEC   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
             "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00  1.00000000e+00 \n"
             "        +9.00000000e+00 +1.00000000e+01  0.00000000e+00  0.00000000e+00 \n");
+   }
+
+   SECTION("NLOB? default") {
+      glsec probe(1, 2., 3., 4., 5., 6., 7., true);
+      test << probe;
+      CHECK(test.str() ==
+            "GLSEC   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n"
+            "        +5.00000000e+00 +6.00000000e+00 +7.00000000e+00  1.00000000e+00 \n");
    }
 }
 
