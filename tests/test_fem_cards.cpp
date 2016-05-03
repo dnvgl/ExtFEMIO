@@ -66,37 +66,37 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "        DATE TIME:  11/03/2015 09:46:08\n"
       "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013\n"
       "        COMPUTER: HAML130185\n"
-      "        USER: berhol\n"
-      "TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000\n"
-      "        SubCase\n"
-      "GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005\n"
-      "GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004\n"
-      "GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000\n"
-      "         6.08000000e+002 6.18000000e+002 5.71000000e+002 5.65000000e+002\n"
-      "GELREF1  4.64000000e+002 3.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "        USER: berhol\n");
+   s += "TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000\n"
+      "        SubCase\n";
+   s += "GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005\n";
+   s += "GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004\n";
+   s += "GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000\n"
+      "         6.08000000e+002 6.18000000e+002 5.71000000e+002 5.65000000e+002\n";
+   s += "GELREF1  4.64000000e+002 3.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n"
-      "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008\n"
+      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n"
+      "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008\n"
       "         5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008\n"
       "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"
-      "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"
-      "GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000\n"
-      "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"
-      "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n"
+      "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n";
+   s += "GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000\n";
+   s += "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n";
+   s += "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n"
+      "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n"
+      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n"
       "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n"
       "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n"
-      "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n"
-      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001\n"
+      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001\n"
       "         1.40000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
-      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "GPIPE    6.54391000e+005 0.00000000e+000 3.12094257e-001 1.56047128e-001\n"
-      "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "BLDEP    1.11140000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "GPIPE    6.54391000e+005 0.00000000e+000 3.12094257e-001 1.56047128e-001\n"
+      "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "BLDEP    1.11140000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000\n"
       "         1.00000000e+000 1.00000000e+000 1.00000000e+000 0.00000000e+000\n"
       "         1.00000000e+000 6.00000000e+000 2.27000996e+004 0.00000000e+000\n"
       "         1.00000000e+000 5.00000000e+000 9.07859961e+003 0.00000000e+000\n"
@@ -105,62 +105,62 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       "         2.00000000e+000 6.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         3.00000000e+000 3.00000000e+000 1.00000000e+000 0.00000000e+000\n"
       "         3.00000000e+000 5.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "         3.00000000e+000 4.00000000e+000-2.27000996e+004 0.00000000e+000\n"
-      "BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000\n"
+      "         3.00000000e+000 4.00000000e+000-2.27000996e+004 0.00000000e+000\n";
+   s += "BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000\n"
+      "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n";
+   s += "BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
-      "BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n"
-      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
+      "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         2.30460000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         1.52200000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "MGSPRNG  6.90000000e+001 6.00000000e+000 1.00000000e+008 0.00000000e+000\n"
+      "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "MGSPRNG  6.90000000e+001 6.00000000e+000 1.00000000e+008 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
       "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000\n"
-      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"
-      "MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000\n"
-      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"
-      "TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
-      "        KEY_HOLE_ROOF\n"
-      "TDSUPNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
-      "        KEY_HOLE_ROOF\n"
-      "GELMNT2   1.00000000E+00  1.00000000E+00  1.00000000E+00  0.00000000E+00\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n";
+   s += "MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000\n"
+      "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
+   s += "TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
+      "        KEY_HOLE_ROOF\n";
+   s += "TDSUPNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000\n"
+      "        KEY_HOLE_ROOF\n";
+   s += "GELMNT2   1.00000000E+00  1.00000000E+00  1.00000000E+00  0.00000000E+00\n"
       "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
       "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
       "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
-      "          1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
-      "HSUPSTAT  9.00000000E+00  1.00000000E+00  2.32998000E+05  6.00000000E+00\n"
+      "          1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n";
+   s += "HSUPSTAT  9.00000000E+00  1.00000000E+00  2.32998000E+05  6.00000000E+00\n"
       "          2.30333000E+05  1.26810000E+05  0.00000000E+00  2.00000000E+00\n"
-      "         -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
-      "HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00\n"
+      "         -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n";
+   s += "HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00\n"
       "          0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n"
       "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
       "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
-      "          0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
-      "HIERARCH  9.00000000E+00  1.00000000E+00  2.00000000E+00  1.00000000E+00\n"
+      "          0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n";
+   s += "HIERARCH  9.00000000E+00  1.00000000E+00  2.00000000E+00  1.00000000E+00\n"
       "          2.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n"
-      "          2.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"
-      "TDLOAD    4.00000000E+00  1.00000000E+00  1.04000000E+02  0.00000000E+00\n"
-      "        LC_1                                                            \n"
-      "BSELL     1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
-      "          1.00000000E+00  1.00000000E+00  2.00000000E+00 -1.00000000E+00\n"
-      "BNBCD     3.88350000E+04  6.00000000E+00  4.00000000E+00  4.00000000E+00\n"
-      "          4.00000000E+00  4.00000000E+00  4.00000000E+00  4.00000000E+00\n"
-      "BEUSLO    1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          2.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n";
+   s += "TDLOAD    4.00000000E+00  1.00000000E+00  1.04000000E+02  0.00000000E+00\n"
+      "        LC_1                                                            \n";
+   s += "BSELL     1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
+      "          1.00000000E+00  1.00000000E+00  2.00000000E+00 -1.00000000E+00\n";
+   s += "BNBCD     3.88350000E+04  6.00000000E+00  4.00000000E+00  4.00000000E+00\n"
+      "          4.00000000E+00  4.00000000E+00  4.00000000E+00  4.00000000E+00\n";
+   s += "BEUSLO    1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"
       "          1.00000000E+00  4.00000000E+00  0.00000000E+00  2.00000000E+00\n"
-      "          1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04\n"
-      "BNLOAD    1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n"
+      "          1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04\n";
+   s += "BNLOAD    1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n"
       "          1.00000000e+00  3.00000000e+00  1.10000000e+00  1.20000000e+00\n"
-      "          1.30000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n"
-      "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n");
+      "          1.30000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n";
+   s += "IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n";
 
    std::istringstream ist(s);
    fem_file probe(ist);
@@ -340,20 +340,20 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<gelref1*>(current.get())->ELNO == 464);
-      CHECK(static_cast<gelref1*>(current.get())->MATNO          == 3);
-      CHECK(static_cast<gelref1*>(current.get())->ADDNO          == 0);
-      CHECK(static_cast<gelref1*>(current.get())->INTNO          == 0);
-      CHECK(static_cast<gelref1*>(current.get())->MINTNO         == 0);
-      CHECK(static_cast<gelref1*>(current.get())->STRANO         == 0);
-      CHECK(static_cast<gelref1*>(current.get())->STRENO         == 0);
-      CHECK(static_cast<gelref1*>(current.get())->STREPONO       == 0);
-      CHECK(static_cast<gelref1*>(current.get())->GEONO_OPT      == 1);
-      CHECK(static_cast<gelref1*>(current.get())->FIXNO_OPT      == 0);
-      CHECK(static_cast<gelref1*>(current.get())->ECCNO_OPT      == 0);
-      CHECK(static_cast<gelref1*>(current.get())->TRANSNO_OPT    == 0);
-      CHECK(static_cast<gelref1*>(current.get())->GEONO.size()   == 0);
-      CHECK(static_cast<gelref1*>(current.get())->FIXNO.size()   == 0);
-      CHECK(static_cast<gelref1*>(current.get())->ECCNO.size()   == 0);
+      CHECK(static_cast<gelref1*>(current.get())->MATNO == 3);
+      CHECK(static_cast<gelref1*>(current.get())->ADDNO == 0);
+      CHECK(static_cast<gelref1*>(current.get())->INTNO == 0);
+      CHECK(static_cast<gelref1*>(current.get())->MINTNO == 0);
+      CHECK(static_cast<gelref1*>(current.get())->STRANO == 0);
+      CHECK(static_cast<gelref1*>(current.get())->STRENO == 0);
+      CHECK(static_cast<gelref1*>(current.get())->STREPONO == 0);
+      CHECK(static_cast<gelref1*>(current.get())->GEONO_OPT == 1);
+      CHECK(static_cast<gelref1*>(current.get())->FIXNO_OPT == 0);
+      CHECK(static_cast<gelref1*>(current.get())->ECCNO_OPT == 0);
+      CHECK(static_cast<gelref1*>(current.get())->TRANSNO_OPT == 0);
+      CHECK(static_cast<gelref1*>(current.get())->GEONO.size() == 0);
+      CHECK(static_cast<gelref1*>(current.get())->FIXNO.size() == 0);
+      CHECK(static_cast<gelref1*>(current.get())->ECCNO.size() == 0);
       CHECK(static_cast<gelref1*>(current.get())->TRANSNO.size() == 0);
    }
 
@@ -562,8 +562,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       long c_ref_depdof[9] = {1, 1, 1, 2, 2, 2, 3, 3, 3};
       long c_ref_indepdof[9] = {1, 6, 5, 2, 4, 6, 3, 5, 4};
       double c_ref_b[9] = {1., 2.27000996e+4, 9.07859961e+3,
-                           1., -9.07859961e+3, 0.,
-                           1., 0., -2.27000996e+4};
+         1., -9.07859961e+3, 0.,
+         1., 0., -2.27000996e+4};
       std::deque<long> ref_depdof(c_ref_depdof, c_ref_depdof + 9);
       std::deque<long> ref_indepdof(c_ref_indepdof, c_ref_indepdof + 9);
       std::deque<double> ref_b(c_ref_b, c_ref_b + 9);
@@ -744,7 +744,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdsetnam*>(current.get())->CODNAM == 113);
       CHECK(static_cast<tdsetnam*>(current.get())->CODTXT == 0);
       CHECK(static_cast<tdsetnam*>(current.get())->SET_NAME ==
-         "KEY_HOLE_ROOF");
+            "KEY_HOLE_ROOF");
       CHECK(static_cast<tdsetnam*>(current.get())->CONT.size() == 0);
    }
 
@@ -763,7 +763,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdsupnam*>(current.get())->CODNAM == 113);
       CHECK(static_cast<tdsupnam*>(current.get())->CODTXT == 0);
       CHECK(static_cast<tdsupnam*>(current.get())->SUP_NAME ==
-         "KEY_HOLE_ROOF");
+            "KEY_HOLE_ROOF");
       CHECK(static_cast<tdsupnam*>(current.get())->CONT.size() == 0);
    }
 
@@ -775,27 +775,27 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::GELMNT2);
-      // GELMNT2   1.00000000E+00  1.00000000E+00  1.00000000E+00  0.00000000E+00
-      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
-      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
-      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
-      //           1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
+      // GELMNT2   1.000000000e+00 1.000000000e+00 1.000000000e+00 0.00000000E+00
+      //           1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
+      //           1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
+      //           1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
+      //           1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
       CHECK(static_cast<gelmnt2*>(current.get())->SUBNO == 1);
       CHECK(static_cast<gelmnt2*>(current.get())->SLEVEL == 1);
       CHECK(static_cast<gelmnt2*>(current.get())->STYPE == 1);
       CHECK(static_cast<gelmnt2*>(current.get())->ADDNO == 0);
       CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[0],
-                               static_cast<gelmnt2*>(current.get())->T[0]+4) ==
-               std::deque<double>({1., 0., 0., 0.}));
+         static_cast<gelmnt2*>(current.get())->T[0] + 4) ==
+         std::deque<double>({1., 0., 0., 0.}));
       CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[1],
-                               static_cast<gelmnt2*>(current.get())->T[1]+4) ==
-            std::deque<double>({0., 1., 0., 0.}));
+         static_cast<gelmnt2*>(current.get())->T[1] + 4) ==
+         std::deque<double>({0., 1., 0., 0.}));
       CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[2],
-                               static_cast<gelmnt2*>(current.get())->T[2]+4) ==
-            std::deque<double>({0., 0., 1., 0.}));
+         static_cast<gelmnt2*>(current.get())->T[2] + 4) ==
+         std::deque<double>({0., 0., 1., 0.}));
       CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[3],
-                               static_cast<gelmnt2*>(current.get())->T[3]+4) ==
-            std::deque<double>({0., 0., 0., 1.}));
+         static_cast<gelmnt2*>(current.get())->T[3] + 4) ==
+         std::deque<double>({0., 0., 0., 1.}));
       CHECK(static_cast<gelmnt2*>(current.get())->NNOD == 1);
       CHECK(static_cast<gelmnt2*>(current.get())->NOD[0] == 1);
    }
@@ -808,9 +808,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::HSUPSTAT);
-      // HSUPSTAT  9.00000000E+00  1.00000000E+00  2.32998000E+05  6.00000000E+00
-      //           2.30333000E+05  1.26810000E+05  0.00000000E+00  2.00000000E+00
-      //          -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      // HSUPSTAT  9.000000000e+00 1.000000000e+00 2.32998000E+05  6.00000000E+00
+      //           2.30333000E+05  1.26810000E+05  0.000000000e+00 2.00000000E+00
+      //          -1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
       CHECK(static_cast<hsupstat*>(current.get())->NFIELD == 9);
       CHECK(static_cast<hsupstat*>(current.get())->ISELTY == 1);
       CHECK(static_cast<hsupstat*>(current.get())->NIDOF == 232998);
@@ -830,11 +830,11 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::HSUPTRAN);
-      // HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00
-      //           0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00
-      //           0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
-      //           1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
-      //           0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
+      // HSUPTRAN  1.800000000e+01 2.000000000e+00 1.000000000e+00 0.00000000E+00
+      //           0.000000000e+00 0.000000000e+00 0.000000000e+00 1.00000000E+00
+      //           0.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
+      //           1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
+      //           0.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
       CHECK(static_cast<hsuptran*>(current.get())->NFIELD == 18);
       CHECK(static_cast<hsuptran*>(current.get())->ITREF == 2);
       CHECK(static_cast<hsuptran*>(current.get())->T[0][0] == 1.);
@@ -863,9 +863,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::HIERARCH);
-      // HIERARCH  9.00000000E+00  1.00000000E+00  2.00000000E+00  1.00000000E+00
-      //           2.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00
-      //           2.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+      // HIERARCH  9.000000000e+00 1.000000000e+00 2.000000000e+00 1.00000000E+00
+      //           2.000000000e+00 0.000000000e+00 0.000000000e+00 1.00000000E+00
+      //           2.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
       CHECK(static_cast<hierarch*>(current.get())->NFIELD == 9);
       CHECK(static_cast<hierarch*>(current.get())->IHREF == 1);
       CHECK(static_cast<hierarch*>(current.get())->ISELTY == 2);
@@ -888,7 +888,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::TDLOAD);
-      // TDLOAD    4.00000000E+00  1.00000000E+00  1.04000000E+02  0.00000000E+00
+      // TDLOAD    4.000000000e+00 1.000000000e+00 1.04000000E+02  0.00000000E+00
       //         LC_1
       CHECK(static_cast<tdload*>(current.get())->NFIELD == 4);
       CHECK(static_cast<tdload*>(current.get())->ILREF == 1);
@@ -906,8 +906,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BSELL);
-      // BSELL     1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
-      //           1.00000000E+00  1.00000000E+00  2.00000000E+00 -1.00000000E+00
+      // BSELL     1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
+      //           1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00
       CHECK(static_cast<bsell*>(current.get())->LC == 1);
       CHECK(static_cast<bsell*>(current.get())->SUBNO == 1);
       CHECK(static_cast<bsell*>(current.get())->LLC.size() == 2);
@@ -926,8 +926,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BNBCD);
-      // BNBCD     3.88350000E+04  6.00000000E+00  4.00000000E+00  4.00000000E+00
-      //           4.00000000E+00  4.00000000E+00  4.00000000E+00  4.00000000E+00
+      // BNBCD     3.88350000E+04  6.000000000e+00 4.000000000e+00 4.00000000E+00
+      //           4.000000000e+00 4.000000000e+00 4.000000000e+00 4.00000000E+00
       CHECK(static_cast<bnbcd*>(current.get())->NODENO == 38835);
       CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
       CHECK(static_cast<bnbcd*>(current.get())->FIX.size() == 6);
@@ -943,8 +943,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BEUSLO);
-      // BEUSLO    1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00
-      //           1.00000000E+00  4.00000000E+00  0.00000000E+00  2.00000000E+00
+      // BEUSLO    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
+      //           1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00
       //           1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04
       CHECK(static_cast<beuslo*>(current.get())->LLC == 1);
       CHECK(static_cast<beuslo*>(current.get())->LOTYP == 1);
@@ -957,7 +957,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<beuslo*>(current.get())->RLOADi.size() == 4);
       CHECK(static_cast<beuslo*>(current.get())->RLOADi ==
             std::deque<double>({1.66046816e4, 3.86669189e3,
-                     3.86368091e3, 1.62054932e4}));
+            3.86368091e3, 1.62054932e4}));
       CHECK(static_cast<beuslo*>(current.get())->ILOADi.size() == 0);
    }
 
@@ -969,9 +969,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       card::card_split(l, entries);
       cards::dispatch(entries, current);
       CHECK(current->card_type() == cards::BNLOAD);
-      // BNLOAD    1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
-      //           1.00000000e+00  3.00000000e+00  1.10000000e+00  1.20000000e+00
-      //           1.30000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+      // BNLOAD    1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000e+00
+      //           1.000000000e+00 3.000000000e+00 1.100000000e+00 1.20000000e+00
+      //           1.300000000e+00 0.000000000e+00 0.000000000e+00 0.00000000e+00
       CHECK(static_cast<bnload*>(current.get())->LLC == 1);
       CHECK(static_cast<bnload*>(current.get())->LOTYP == 0);
       CHECK_FALSE(static_cast<bnload*>(current.get())->COMPLX);
@@ -996,6 +996,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<iend*>(current.get())->CONT == 0);
    }
 }
+     
 
 // Local Variables:
 // mode: c++

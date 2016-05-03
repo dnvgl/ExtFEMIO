@@ -103,10 +103,6 @@ namespace dnvgl {
                   os << card._form_FIX.format(card.FIX[i]);
                   cnt += 1;
                }
-               while (cnt < 4) {
-                  os << card.empty.format();
-                  cnt += 1;
-               }
                os << std::endl;
                return os;
             }

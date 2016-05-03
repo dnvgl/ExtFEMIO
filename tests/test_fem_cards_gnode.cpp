@@ -65,7 +65,7 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
 
    SECTION("GNODE (2)") {
       std::deque<std::string> data({
-         "GNODE    1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n"});
+         "GNODE    1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
       card::card_split(data, lines);
       gnode probe(lines);
 
@@ -76,6 +76,21 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
       CHECK(probe.ODOF[0] == 1);
       CHECK(probe.ODOF[1] == 3);
       CHECK(probe.ODOF[2] == 4);
+   }
+
+   SECTION("GNODE (3)") {
+      std::deque<std::string> data({
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"});
+      card::card_split(data, lines);
+      gnode probe(lines);
+
+      CHECK(probe.NODEX == 1);
+      CHECK(probe.NODENO == 222);
+      CHECK(probe.NDOF == 3);
+      CHECK(probe.ODOF.size() == 3);
+      CHECK(probe.ODOF[0] == 2);
+      CHECK(probe.ODOF[1] == 3);
+      CHECK(probe.ODOF[2] == 6);
    }
 }
 
@@ -96,21 +111,21 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
       gnode probe(1, 222, 3, {2, 6, 3});
       test << probe;
       CHECK(test.str() ==
-            "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
    }
 
    SECTION("simple") {
       gnode probe(NODEX, NODENO, NDOF, ODOF);
       test << probe;
       CHECK(test.str() ==
-            "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
    }
 
    SECTION("simple (2)") {
       gnode probe(NODEX, NODENO, ODOF);
       test << probe;
       CHECK(test.str() ==
-            "GNODE   +1.00000000e+00 +2.22000000e+02 +3.00000000e+00  2.36000000e+02 \n");
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
    }
 }
 

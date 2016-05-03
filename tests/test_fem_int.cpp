@@ -106,6 +106,11 @@ TEST_CASE("FEM int types parsing.", "[fem_types]" ) {
       CHECK(probe("-7.00000000E+00 ") == -7);
    }
 
+   SECTION("own output") {
+      //           12345678901e3456
+      CHECK(probe("+1.000000000E+00") == 1);
+   }
+
    SECTION("FEMIO-4") {
       //           12345678901e3456
       CHECK(probe("  1.00000000E+00") == 1);
@@ -120,20 +125,20 @@ TEST_CASE("FEM int types output.", "[fem_types]" ) {
 
    SECTION("Output") {
       CHECK(obj.format(lval).size() == 16);
-      CHECK(obj.format(lval) == "+1.00000000e+00 ");
+      CHECK(obj.format(lval) == "+1.000000000e+00");
    }
 
    SECTION("Output (neg. val)") {
       long lval(-1);
       CHECK(obj.format(lval).size() == 16);
-      CHECK(obj.format(lval) == "-1.00000000e+00 ");
+      CHECK(obj.format(lval) == "-1.000000000e+00");
    }
 
    SECTION("Output (void)") {
       long lval(1);
       CHECK(lval == 1);
       CHECK(obj.format(lval).size() == 16);
-      CHECK(obj.format(lval) == "+1.00000000e+00 ");
+      CHECK(obj.format(lval) == "+1.000000000e+00");
    }
 }
 

@@ -72,7 +72,18 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
    SECTION("IDENT (3)") {
       std::deque<std::string> data({
-         "IDENT    1.00000000e+00  1.00000000e+00  3.00000000e+00  0.00000000e+00 \n"});
+         "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00 0.000000000e+00\n"});
+      card::card_split(data, lines);
+      ident probe(lines);
+
+      CHECK(probe.SLEVEL == 1);
+      CHECK(probe.SELTYP == 1);
+      CHECK(probe.SELMOD == 3);
+   }
+
+   SECTION("IDENT (4)") {
+      std::deque<std::string> data({
+         "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00\n"});
       card::card_split(data, lines);
       ident probe(lines);
 
@@ -96,7 +107,7 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
       ident probe(1, 2, ident::DIM_3D);
       test << probe;
       CHECK(test.str() ==
-            "IDENT   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00  0.00000000e+00 \n");
+            "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
    }
 
    SECTION("simple") {
@@ -105,7 +116,7 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
       ident probe(SLEVEL, SELTYP, SELMOD);
       test << probe;
       CHECK(test.str() ==
-            "IDENT   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00  0.00000000e+00 \n");
+            "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
    }
 }
 

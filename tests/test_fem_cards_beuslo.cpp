@@ -47,16 +47,16 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 }
 
 TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
-   std::deque<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "BEUSLO    1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n",
-         "          1.00000000E+00  4.00000000E+00  0.00000000E+00  2.00000000E+00\n",
-         "          1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
-   beuslo probe(lines);
 
    SECTION("first") {
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BEUSLO   1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00 \n",
+         "         1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00 \n",
+         "         1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04 \n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      beuslo probe(lines);
 
       CHECK(probe.LLC == 1);
       CHECK(probe.LOTYP == 1);
@@ -71,6 +71,57 @@ TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
       CHECK(probe.RLOADi[1] == 3.86669189e+3);
       CHECK(probe.RLOADi[2] == 3.86368091e+3);
       CHECK(probe.RLOADi[3] == 1.62054932e+4);
+      CHECK(probe.ILOADi.size() == 0);
+   }
+
+   SECTION("BEUSLO (own output, only r)") {
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BEUSLO  +1.000000000e+00+2.000000000e+00           +0.00+3.000000000e+00\n",
+         "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
+         "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
+         "        +1.100000000e+01\n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      beuslo probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 2);
+      CHECK_FALSE(probe.COMPLX);
+      CHECK(probe.LAYER == 3);
+      CHECK(probe.ELNO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.INTNO == 6);
+      CHECK(probe.SIDE == 2);
+      CHECK(probe.RLOADi.size() == 5);
+      CHECK(probe.RLOADi == std::deque<double>({7., 8., 9., 10., 11.}));
+      CHECK(probe.ILOADi.size() == 0);
+   }
+
+   SECTION("BEUSLO (own output, r + i)") {
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BEUSLO  +1.000000000e+00+2.000000000e+00           +1.00+3.000000000e+00\n",
+         "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
+         "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
+         "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
+         "        +1.500000000e+01+1.600000000e+01\n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      beuslo probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 2);
+      CHECK(probe.COMPLX);
+      CHECK(probe.LAYER == 3);
+      CHECK(probe.ELNO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.INTNO == 6);
+      CHECK(probe.SIDE == 2);
+      CHECK(probe.RLOADi.size() == 5);
+      CHECK(probe.RLOADi == std::deque<double>({7., 8., 9., 10., 11.}));
+      CHECK(probe.ILOADi.size() == 5);
+      CHECK(probe.ILOADi == std::deque<double>({12., 13., 14., 15., 16.}));
    }
 }
 
@@ -89,16 +140,16 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
    std::deque<double> ILOADi({12., 13., 14., 15., 16.});
 
    std::string ref_r(
-      "BEUSLO  +1.00000000e+00 +2.00000000e+00  0.00000000e+00 +3.00000000e+00 \n"
-      "        +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 +2.00000000e+00 \n"
-      "        +7.00000000e+00 +8.00000000e+00 +9.00000000e+00 +1.00000000e+01 \n"
-      "        +1.10000000e+01  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+      "BEUSLO  +1.000000000e+00+2.000000000e+00           +0.00+3.000000000e+00\n"
+      "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n"
+      "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n"
+      "        +1.100000000e+01\n");
    std::string ref_c(
-      "BEUSLO  +1.00000000e+00 +2.00000000e+00  1.00000000e+00 +3.00000000e+00 \n"
-      "        +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 +2.00000000e+00 \n"
-      "        +7.00000000e+00 +8.00000000e+00 +9.00000000e+00 +1.00000000e+01 \n"
-      "        +1.10000000e+01 +1.20000000e+01 +1.30000000e+01 +1.40000000e+01 \n"
-      "        +1.50000000e+01 +1.60000000e+01  0.00000000e+00  0.00000000e+00 \n");
+      "BEUSLO  +1.000000000e+00+2.000000000e+00           +1.00+3.000000000e+00\n"
+      "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n"
+      "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n"
+      "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n"
+      "        +1.500000000e+01+1.600000000e+01\n");
 
    SECTION("write (empty)") {
       beuslo probe;

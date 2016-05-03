@@ -98,7 +98,7 @@ TEST_CASE("FEM IEND types output.", "[fem_iend,out]" ) {
       iend probe(3);
       test << probe;
       CHECK(test.str() ==
-            "IEND    +3.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "IEND    +3.000000000e+00            0.00            0.00            0.00\n");
    }
 }
 

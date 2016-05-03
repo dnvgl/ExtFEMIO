@@ -57,7 +57,7 @@ namespace dnvgl {
             giorh::giorh(const std::deque<std::string> &inp) :
                BeamProp(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
 
-               if (inp.size() < 13)
+               if (inp.size() < 10)
                   throw errors::parse_error(
                      "GIORH", "Illegal number of entries.");
 

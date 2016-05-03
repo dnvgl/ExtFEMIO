@@ -89,7 +89,7 @@ TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
       gunivec probe(1, 2., 3., 4.);
       test << probe;
       CHECK(test.str() ==
-            "GUNIVEC +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 +4.00000000e+00 \n");
+            "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n");
    }
 }
 

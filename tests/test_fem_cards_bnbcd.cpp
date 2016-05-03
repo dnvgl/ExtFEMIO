@@ -63,14 +63,26 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
    SECTION("BNBCD (2)") {
       std::deque<std::string> data({
-         "BNBCD    8.31700000e+03  6.00000000e+00  1.00000000e+00  1.00000000e+00 \n",
-         "         1.00000000e+00  1.00000000e+00  0.00000000e+00  1.00000000e+00 \n"});
+         "BNBCD    8.31700000e+03  6.000000000e+00 1.000000000e+00 1.000000000e+00\n",
+         "         1.000000000e+00 1.000000000e+00 0.000000000e+00 1.000000000e+00\n"});
       card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 8317);
       CHECK(probe.NDOF == 6);
       CHECK(probe.FIX == std::deque<long>(ref_fix, ref_fix + 6));
+   }
+
+   SECTION("BNBCD (2)") {
+      std::deque<std::string> data({
+         "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+         "        +3.000000000e+00\n"});
+      card::card_split(data, lines);
+      bnbcd probe(lines);
+
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.NDOF == 3);
+      CHECK(probe.FIX == std::deque<long>({1, 2, 3}));
    }
 }
 
@@ -90,40 +102,40 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
       bnbcd probe(1, 6, std::deque<long>(inp_fix, inp_fix + 6));
       test << probe;
       CHECK(test.str() ==
-            "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
-            "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
    }
 
    SECTION("simple (const)") {
       bnbcd probe(1, 6, {1, 2, 3, 4, 5, 6});
       test << probe;
       CHECK(test.str() ==
-            "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
-            "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
    }
 
    SECTION("simple (2)") {
       bnbcd probe(1, 3, std::deque<long>(inp_fix, inp_fix + 3));
       test << probe;
       CHECK(test.str() ==
-            "BNBCD   +1.00000000e+00 +3.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
-            "        +3.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00\n");
    }
 
    SECTION("calc ndof") {
       bnbcd probe(1, std::deque<long>(inp_fix, inp_fix + 6));
       test << probe;
       CHECK(test.str() ==
-            "BNBCD   +1.00000000e+00 +6.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
-            "        +3.00000000e+00 +4.00000000e+00 +5.00000000e+00 +6.00000000e+00 \n");
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
    }
 
    SECTION("calc ndof (2)") {
       bnbcd probe(1, std::deque<long>(inp_fix, inp_fix + 3));
       test << probe;
       CHECK(test.str() ==
-            "BNBCD   +1.00000000e+00 +3.00000000e+00 +1.00000000e+00 +2.00000000e+00 \n"
-            "        +3.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00\n");
    }
 }
 

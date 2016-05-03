@@ -205,7 +205,7 @@ per record.
 Example of format of `DATE` record as used in SESAM:
 
 ~~~{txt}
-DATE      0.10000000E+01  0.00000000E+00  0.40000000E+01  0.72000000E+02
+DATE      0.100000000e+01 0.000000000e+00 0.400000000e+01 0.72000000E+02
 DATE:     23-MAY-86           TIME:         13:53:03
 PROGRAM:  SESAM WALOCO        VERSION:      5.1-0 15-MAY-86
 COMPUTER: VAX VMS V4.3        INSTALLATION: VERITEC
@@ -2153,6 +2153,19 @@ records.
 */
             class gsetmemb : public card {
 
+            public:
+
+               /** Define the possible set types.
+               */
+               typedef enum types {
+                  NODE_SET = 1, ELEM_SET = 2, UNDEF_TYPE=-999
+               } types;
+               /** Dfine the possible set origins
+               */
+               typedef enum origins {
+                  UNDEF_ORIGIN = 0, POINT_ORIGIN = 1, LINE_OR_CURVE_ORIGIN = 2, SURFACE_ORIGIN = 3, BODY_ORIGIN = 4
+               } origins;
+
             private:
 
                dnvgl::extfem::fem::types::card static const head;
@@ -2163,6 +2176,11 @@ records.
                dnvgl::extfem::fem::types::entry_type<long> static const _form_ISTYPE;
                dnvgl::extfem::fem::types::entry_type<long> static const _form_ISORIG;
                dnvgl::extfem::fem::types::entry_type<long> static const _form_IRMEMB;
+
+               static const std::map<long, types> types_map;
+               static types to_types(long const&);
+               static const std::map<long, origins> origins_map;
+               static origins to_origins(long const&);
 
             public:
 
@@ -2196,7 +2214,7 @@ Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
 | 1        | set of Nodes    | Internal Node Number (`IINOD`)    |
 | 2        | set of Elements | Internal Element Number (`IELNO`) |
                */
-               long ISTYPE;
+               types ISTYPE;
                /** set origin type
 
                     = 0:, undefined origin
@@ -2209,7 +2227,7 @@ Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
 
                     = 4:, body
                */
-               long ISORIG;
+               origins ISORIG;
                /** `NMEMB` set member numbers on this record.
 
                    `NMEMB` is number of set members on the current
@@ -2224,26 +2242,26 @@ Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
                gsetmemb(long const &NFIELD,
                         long const &ISREF,
                         long const &INDEX,
-                        long const &ISTYPE,
-                        long const &ISORIG,
+                        types const &ISTYPE,
+                        origins const &ISORIG,
                         std::deque<long> const &IRMEMB);
 
                gsetmemb(long const &NFIELD,
                         long const &ISREF,
                         long const &INDEX,
-                        long const &ISTYPE,
-                        long const &ISORIG);
+                        types const &ISTYPE,
+                        origins const &ISORIG);
 
                gsetmemb(long const &ISREF,
                         long const &INDEX,
-                        long const &ISTYPE,
-                        long const &ISORIG,
+                        types const &ISTYPE,
+                        origins const &ISORIG,
                         std::deque<long> const &IRMEMB);
 
                gsetmemb(long const &ISREF,
                         long const &INDEX,
-                        long const &ISTYPE,
-                        long const &ISORIG);
+                        types const &ISTYPE,
+                        origins const &ISORIG);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;

@@ -48,15 +48,15 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]" ) {
 
-   std::deque<std::string> data({
+   SECTION("BSELL (1)") {
+      std::deque<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "BSELL     1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n",
-         "          1.00000000E+00  1.00000000E+00  2.00000000E+00 -1.00000000E+00\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
-   bsell probe(lines);
+         "BSELL    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00\n",
+         "         1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00\n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      bsell probe(lines);
 
-   SECTION("first moment") {
       CHECK((long)probe.LC == 1);
       CHECK((double)probe.SUBNO == 1);
       CHECK(probe.LLC.size() == 2);
@@ -66,6 +66,26 @@ TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]" ) {
       CHECK(probe.FACT[0] == 1.);
       CHECK(probe.FACT[1] == -1.);
    }
+
+   SECTION("BSELL (own output)" ) {
+
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
+         "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
+         "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
+         "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      bsell probe(lines);
+
+      CHECK((long)probe.LC == 2);
+      CHECK((double)probe.SUBNO == 29);
+      CHECK(probe.LLC.size() == 6);
+      CHECK(probe.LLC == std::deque<long>({1, 2, 3, 4, 5, 6}));
+      CHECK(probe.FACT.size() == 6);
+      CHECK(probe.FACT == std::deque<double>({1., -2., 3., -4., 5., -6.}));
+   }
 }
 
 TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
@@ -73,7 +93,7 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
    std::ostringstream test;
 
    long LC(2);
-   double SUBNO(29);
+   long SUBNO(29);
    std::deque<long> LLC({1, 2, 3, 4, 5, 6});
    std::deque<double> FACT({1., -2., 3., -4., 5., -6.});
 
@@ -88,20 +108,20 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
                   {1., -2., 3., -4., 5., -6.});
       test << probe;
       CHECK(test.str() ==
-"BSELL   +2.00000000e+00 +2.90000000e+01  0.00000000e+00  0.00000000e+00 \n"
-            "        +1.00000000e+00 +1.00000000e+00 +2.00000000e+00 -2.00000000e+00 \n"
-            "        +3.00000000e+00 +3.00000000e+00 +4.00000000e+00 -4.00000000e+00 \n"
-            "        +5.00000000e+00 +5.00000000e+00 +6.00000000e+00 -6.00000000e+00 \n");
+            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
    }
 
    SECTION("write (1)") {
       bsell probe(LC, SUBNO, LLC, FACT);
       test << probe;
       CHECK(test.str() ==
-"BSELL   +2.00000000e+00 +2.90000000e+01  0.00000000e+00  0.00000000e+00 \n"
-            "        +1.00000000e+00 +1.00000000e+00 +2.00000000e+00 -2.00000000e+00 \n"
-            "        +3.00000000e+00 +3.00000000e+00 +4.00000000e+00 -4.00000000e+00 \n"
-            "        +5.00000000e+00 +5.00000000e+00 +6.00000000e+00 -6.00000000e+00 \n");
+            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
    }
 }
 

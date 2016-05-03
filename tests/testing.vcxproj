@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CAC4D6C3-41FD-45AF-AC18-E57A50174B00}</ProjectGuid>
+    <ProjectGuid>{EF2B1AEE-ED70-4272-9A7E-16BC012E6A84}</ProjectGuid>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>testing</RootNamespace>
@@ -104,51 +104,12 @@
       <Message>Testing the module</Message>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_bdf_bounds ====================
-$(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
-echo ==================== test_bdf_types ====================
-$(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
-echo ==================== test_bdf_int ====================
-$(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
-echo ==================== test_bdf_float ====================
-$(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_$(Platform)_junit.xml
-echo ==================== test_bdf_str ====================
-$(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_$(Platform)_junit.xml
-echo ==================== test_bdf_list ====================
-$(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_$(Platform)_junit.xml
-echo ==================== test_bdf_cards ====================
-$(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
-      <Message>Testing the module</Message>
-      <Outputs>__dummy__</Outputs>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -167,55 +128,16 @@ $(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Pla
       </Command>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_bdf_bounds ====================
-$(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
-echo ==================== test_bdf_types ====================
-$(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
-echo ==================== test_bdf_int ====================
-$(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
-echo ==================== test_bdf_float ====================
-$(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_$(Platform)_junit.xml
-echo ==================== test_bdf_str ====================
-$(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_$(Platform)_junit.xml
-echo ==================== test_bdf_list ====================
-$(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_$(Platform)_junit.xml
-echo ==================== test_bdf_cards ====================
-$(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
+      <Command>
+      </Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Message>Testing the module</Message>
+      <Message>
+      </Message>
       <TreatOutputAsContent>
       </TreatOutputAsContent>
-      <Outputs>__dummy__</Outputs>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -233,51 +155,12 @@ $(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Pla
       <Message>Testing the module</Message>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_bdf_bounds ====================
-$(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
-echo ==================== test_bdf_types ====================
-$(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
-echo ==================== test_bdf_int ====================
-$(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
-echo ==================== test_bdf_float ====================
-$(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_$(Platform)_junit.xml
-echo ==================== test_bdf_str ====================
-$(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_$(Platform)_junit.xml
-echo ==================== test_bdf_list ====================
-$(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_$(Platform)_junit.xml
-echo ==================== test_bdf_cards ====================
-$(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
-      <Message>Testing the module</Message>
-      <Outputs>__dummy__</Outputs>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -296,51 +179,12 @@ $(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Pla
       <Message>Testing the module</Message>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_bdf_bounds ====================
-$(OutputPath)test_bdf_bounds.exe
-$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
-echo ==================== test_bdf_types ====================
-$(OutputPath)test_bdf_types.exe
-$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
-echo ==================== test_bdf_int ====================
-$(OutputPath)test_bdf_int.exe
-$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
-echo ==================== test_bdf_float ====================
-$(OutputPath)test_bdf_float.exe
-$(OutputPath)test_bdf_float.exe --reporter junit &gt; test_bdf_float_$(Platform)_junit.xml
-echo ==================== test_bdf_str ====================
-$(OutputPath)test_bdf_str.exe
-$(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_$(Platform)_junit.xml
-echo ==================== test_bdf_list ====================
-$(OutputPath)test_bdf_list.exe
-$(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_$(Platform)_junit.xml
-echo ==================== test_bdf_cards ====================
-$(OutputPath)test_bdf_cards.exe
-$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
-      <Message>Testing the module</Message>
-      <Outputs>__dummy__</Outputs>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+      <Outputs>
+      </Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>

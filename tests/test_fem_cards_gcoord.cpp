@@ -50,6 +50,7 @@ TEST_CASE("FEM GCOORD definitions.", "[fem_gcoord]" ) {
 
    SECTION("GCOORD (1)") {
       std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GCOORD   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
       card::card_split(data, lines);
       gcoord probe(lines);
@@ -62,7 +63,21 @@ TEST_CASE("FEM GCOORD definitions.", "[fem_gcoord]" ) {
 
    SECTION("GCOORD (2)") {
       std::deque<std::string> data({
-         "GCOORD   1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n"});
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "GCOORD   1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
+      card::card_split(data, lines);
+      gcoord probe(lines);
+
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.XCOORD == 1.);
+      CHECK(probe.YCOORD == 3.);
+      CHECK(probe.ZCOORD == 134.);
+   }
+
+   SECTION("GCOORD (own output)") {
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
       card::card_split(data, lines);
       gcoord probe(lines);
 
@@ -90,14 +105,14 @@ TEST_CASE("FEM GCOORD types output.", "[fem_gcoord,out]" ) {
       gcoord probe(1, 1., 3., 134.);
       test << probe;
       CHECK(test.str() ==
-            "GCOORD  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
+            "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
    }
 
    SECTION("simple") {
       gcoord probe(NODENO, XCOORD, YCOORD, ZCOORD);
       test << probe;
       CHECK(test.str() ==
-            "GCOORD  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
+            "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
    }
 }
 

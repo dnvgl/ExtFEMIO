@@ -88,25 +88,31 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
 
    //        12345678901e3456
    SECTION("' 1.00000000e+00 '") {
-      //            12345678901e3456
+      //           12345678901e3456
       CHECK(probe("+1.00000000e+00 ") == 1.);
    }
 
    //        12345678901e3456
    SECTION("' 1.00000000e-01 '") {
-      //            12345678901e3456
+      //           12345678901e3456
       CHECK(probe("+1.00000000e-01 ") == .1);
    }
 
    //        12345678901e3456
    SECTION("'-1.00000000e+00 '") {
-      //            12345678901e3456
+      //           12345678901e3456
       CHECK(probe("-1.00000000e+00 ") == -1.);
+   }
+   
+   //        12345678901e3456
+   SECTION("' 0.000000000e+00'") {
+      //           12345678901e3456
+      CHECK(probe(" 0.000000000e+00") == 0);
    }
 
    //        12345678901e3456
    SECTION("'-1.00000000e-01 '") {
-      //            12345678901e3456
+      //           12345678901e3456
       CHECK(probe("-1.00000000e-01 ") == -.1);
    }
 
@@ -167,6 +173,10 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
       CHECK_THROWS(probe("        "));
    }
 
+   SECTION("Own output") {
+      CHECK(probe("+1.000000000e+00") == 1.);
+   }
+
    SECTION("FEMIO-5") {
       CHECK(probe("  1.00000000E+00") == 1.);
    }
@@ -182,7 +192,7 @@ TEST_CASE("FEM double types output.", "[fem_types]" ) {
       std::string res(obj.format(lval));
       CHECK(obj.format(lval).size() == 16);
       //                         12345678901e3456
-      CHECK(obj.format(lval) == "+1.00000000e+00 ");
+      CHECK(obj.format(lval) == "+1.000000000e+00");
    }
 }
 

@@ -62,7 +62,7 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
 
    SECTION("GECCEN (2)") {
       std::deque<std::string> data({
-         "GECCEN   1.00000000e+00  1.00000000e+00  3.00000000e+00  1.34000000e+02 \n"});
+         "GECCEN   1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
       card::card_split(data, lines);
       geccen probe(lines);
 
@@ -71,6 +71,19 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
       CHECK(probe.EY == 3.);
       CHECK(probe.EZ == 134.);
    }
+
+   SECTION("GECCEN (3)") {
+      std::deque<std::string> data({
+         "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
+      card::card_split(data, lines);
+      geccen probe(lines);
+
+      CHECK(probe.ECCNO == 1);
+      CHECK(probe.EX == 1.);
+      CHECK(probe.EY == 3.);
+      CHECK(probe.EZ == 134.);
+   }
+
 }
 
 TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]" ) {
@@ -90,14 +103,14 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]" ) {
       geccen probe(1, 1., 3, 134.);
       test << probe;
       CHECK(test.str() ==
-            "GECCEN  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
+            "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
    }
 
    SECTION("simple") {
       geccen probe(ECCNO, EX, EY, EZ);
       test << probe;
       CHECK(test.str() ==
-            "GECCEN  +1.00000000e+00 +1.00000000e+00 +3.00000000e+00 +1.34000000e+02 \n");
+            "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
    }
 }
 

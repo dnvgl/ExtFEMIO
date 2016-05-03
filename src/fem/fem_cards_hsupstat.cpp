@@ -110,9 +110,6 @@ namespace dnvgl {
                   << card._form_RELOADC.format(card.RELOADC) << std::endl
                   << dnvgl::extfem::fem::types::card().format()
                   << card._form_COMPLC.format(card.COMPLC)
-                  << card.empty.format()
-                  << card.empty.format()
-                  << card.empty.format()
                   << std::endl;
                return os;
             }

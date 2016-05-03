@@ -50,6 +50,7 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
 
    SECTION("GELTH (1)") {
       std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"});
       card::card_split(data, lines);
       gelth probe(lines);
@@ -61,7 +62,8 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
 
    SECTION("GELTH (2)") {
       std::deque<std::string> data({
-         "GELTH    6.54394000e+05  1.00000000e-01  0.00000000e+00  0.00000000e+00 \n"});
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "GELTH    6.54394000e+05  1.00000000e-01  0.000000000e+00 0.000000000e+00\n"});
       card::card_split(data, lines);
       gelth probe(lines);
 
@@ -101,14 +103,14 @@ TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
       gelth probe(1, 2., 3);
       test << probe;
       CHECK(test.str() ==
-            "GELTH   +1.00000000e+00 +2.00000000e+00 +3.00000000e+00 \n");
+            "GELTH   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
    }
 
    SECTION("simple NINT default") {
       gelth probe(1, 2.);
       test << probe;
       CHECK(test.str() ==
-            "GELTH   +1.00000000e+00 +2.00000000e+00 \n");
+            "GELTH   +1.000000000e+00+2.000000000e+00\n");
    }
 }
 

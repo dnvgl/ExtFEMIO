@@ -69,7 +69,8 @@ namespace dnvgl {
                   RDISP.push_back(_form_RDISP(*(pos++)));
 
                if (COMPLX)
-                  IDISP.push_back(_form_IDISP(*(pos++)));
+                  for (long i = 0; i < NDOF; i++)
+                     IDISP.push_back(_form_IDISP(*(pos++)));
             }
 
             bndispl::bndispl(void) :
@@ -157,10 +158,6 @@ namespace dnvgl {
                      os << card._form_IDISP.format(card.IDISP[i]);
                      cnt += 1;
                   }
-               while (cnt < 4) {
-                  os << card.empty.format();
-                  cnt += 1;
-               }
                os << std::endl;
                return os;
             }

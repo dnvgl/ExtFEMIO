@@ -156,10 +156,6 @@ namespace dnvgl {
                      os << card._form_ILOAD.format(card.ILOAD[i]);
                      cnt += 1;
                   }
-               while (cnt < 4) {
-                  os << card.empty.format();
-                  cnt += 1;
-               }
                os << std::endl;
                return os;
             }

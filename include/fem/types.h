@@ -176,7 +176,7 @@ namespace dnvgl {
                   std::ostringstream res;
 
 #ifdef _MSC_VER
-                  // std::set output to two digit exponetial format.
+                  // std::set output to two digit exponential format.
                   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
@@ -184,7 +184,7 @@ namespace dnvgl {
                   res.setf(std::ios_base::scientific, std::ios_base::floatfield);
                   res.setf(std::ios_base::adjustfield, std::ios::left);
 
-                  res.precision(8);
+                  res.precision(9);
                   res.width(16);
                   res.fill(' ');
 
@@ -263,8 +263,8 @@ namespace dnvgl {
                fem_types type() const { return _type; };
 
                std::string format(const bool &inp) const {
-                  if (inp) return " 1.00000000e+00 ";
-                  else return " 0.00000000e+00 ";
+                  if (inp) return "           +1.00";
+                  else return "           +0.00";
                }
             };
 
@@ -342,7 +342,7 @@ namespace dnvgl {
                   res.setf(std::ios_base::scientific, std::ios::floatfield);
                   res.setf(std::ios_base::adjustfield, std::ios::left);
 
-                  res.precision(8);
+                  res.precision(9);
                   res.width(16);
                   res.fill(' ');
 
@@ -464,11 +464,11 @@ namespace dnvgl {
                   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-                  res << " ";
                   res.setf(std::ios_base::scientific, std::ios::floatfield);
                   res.setf(std::ios_base::adjustfield, std::ios::left);
 
-                  res.precision(8);
+                  res << " ";
+                  res.precision(9);
                   res.width(15);
                   res.fill(' ');
 
@@ -480,7 +480,7 @@ namespace dnvgl {
                      std::copy(inp.begin(), inp.end(),
                                  std::ostream_iterator<int>(msg, ", "));
                      msg << " of incorrect size, got length of " << out.size()
-                         << " instead of allowed length of 16.";
+                         << " instead of allowed length of 16. " << "!" << out << "!";
                      throw errors::output_error(name, msg.str());
                   }
 

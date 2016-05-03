@@ -119,7 +119,7 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
       tdsetnam probe(4, 123, 122, "1234567890123456789012");
       test << probe;
       CHECK(test.str() ==
-            "TDSETNAM+4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +0.00000000e+00 \n"
+            "TDSETNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
             "        1234567890123456789012\n");
    }
 
@@ -127,7 +127,7 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
       tdsetnam probe(123, "1234567890123456789012");
       test << probe;
       CHECK(test.str() ==
-            "TDSETNAM+4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +0.00000000e+00 \n"
+            "TDSETNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
             "        1234567890123456789012\n");
    }
 
@@ -138,7 +138,7 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
       tdsetnam probe(4, 123, 122, 233, "1234567890123456789012", comments);
       test << probe;
       CHECK(test.str() ==
-            "TDSETNAM+4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +2.33000000e+02 \n"
+            "TDSETNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
             "        1234567890123456789012\n"
             "        test                             \n"
             "        123456789112345678921234567893123\n");
@@ -151,7 +151,7 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
       tdsetnam probe(123, "1234567890123456789012", comments);
       test << probe;
       CHECK(test.str() ==
-            "TDSETNAM+4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +2.33000000e+02 \n"
+            "TDSETNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
             "        1234567890123456789012\n"
             "        test                             \n"
             "        123456789112345678921234567893123\n");

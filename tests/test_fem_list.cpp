@@ -52,14 +52,16 @@ TEST_CASE("FEM list types parsing.", "[fem_types]" ) {
    entry_type<std::deque<int>> probe("dummy");
 
    SECTION("' 1.34000000e+02 '") {
-
-      std::deque<int> ref({ 1, 3, 4 });
-      CHECK(*probe(" 1.34000000e+02 ") == ref);
+      CHECK(*probe(" 1.34000000e+02 ") == std::deque<int>({ 1, 3, 4 }));
    }
 
    SECTION("' 1.23600000e+03 '") {
+      CHECK(*probe(" 1.23600000e+03 ") == std::deque<int>({ 1, 2, 3, 6 }));
+   }
+
+   SECTION("' 1.236000000e+03'") {
       std::deque<int> ref({ 1, 2, 3, 6 });
-      CHECK(*probe(" 1.23600000e+03 ") == ref);
+      CHECK(*probe(" 1.236000000e+03") == std::deque<int>({ 1, 2, 3, 6 }));
    }
 
    SECTION("' 1a3b   '") {
@@ -78,7 +80,7 @@ TEST_CASE("FEM list of int types output.", "[fem_types]" ) {
    SECTION("Output") {
       std::string res(obj.format(lval));
       CHECK(res.size() == 16);
-      CHECK(res == " 1.23400000e+03 ");
+      CHECK(res == " 1.234000000e+03");
    }
 }
 

@@ -107,8 +107,6 @@ namespace dnvgl {
                      cnt += 1;
                   }
                }
-               for (long i=cnt; i < 4; i++)
-                  os << card.empty.format();
                os << std::endl;
                return os;
             }

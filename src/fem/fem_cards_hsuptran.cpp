@@ -159,8 +159,6 @@ namespace dnvgl {
                   << dnvgl::extfem::fem::types::card().format()
                   << card._form_T.format(card.T[3][2])
                   << card._form_T.format(card.T[3][3])
-                  << card.empty.format()
-                  << card.empty.format()
                   << std::endl;
                return os;
             }

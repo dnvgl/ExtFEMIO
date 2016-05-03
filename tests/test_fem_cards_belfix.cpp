@@ -44,7 +44,7 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
-TEST_CASE("FEM BELFIX definitions. (Small Field Format)", "[fem_belfix]" ) {
+TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
 
    SECTION("first") {
 
@@ -61,6 +61,23 @@ TEST_CASE("FEM BELFIX definitions. (Small Field Format)", "[fem_belfix]" ) {
       CHECK(probe.OPT == belfix::FIXATION);
       CHECK(probe.TRANO == 0);
       CHECK(probe.A == std::deque<double>({1., 1., 1., 1., 1., 0.}));
+   }
+
+   SECTION("BELFIX (own output)") {
+
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n",
+         "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n",
+         "        +1.000000000e+00+1.000000000e+00\n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      belfix probe(lines);
+
+      CHECK(probe.FIXNO == 1);
+      CHECK(probe.OPT == belfix::FIXATION);
+      CHECK(probe.TRANO == 1);
+      CHECK(probe.A == std::deque<double>({1., 0., .5, 1., 1., 1.}));
    }
 }
 
@@ -87,9 +104,9 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
       test << probe;
 
       CHECK(test.str() ==
-            "BELFIX  +1.00000000e+00 +1.00000000e+00 +1.00000000e+00  0.00000000e+00 \n"
-            "        +1.00000000e+00 +0.00000000e+00 +5.00000000e-01 +1.00000000e+00 \n"
-            "        +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n"
+            "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n"
+            "        +1.000000000e+00+1.000000000e+00\n");
    }
 
    SECTION("write (const)") {
@@ -99,9 +116,9 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
       test << probe;
 
       CHECK(test.str() ==
-            "BELFIX  +1.00000000e+00 +1.00000000e+00 +1.00000000e+00  0.00000000e+00 \n"
-            "        +1.00000000e+00 +0.00000000e+00 +5.00000000e-01 +1.00000000e+00 \n"
-            "        +1.00000000e+00 +1.00000000e+00  0.00000000e+00  0.00000000e+00 \n");
+            "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n"
+            "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n"
+            "        +1.000000000e+00+1.000000000e+00\n");
    }
 }
 

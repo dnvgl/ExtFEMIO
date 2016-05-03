@@ -115,7 +115,6 @@ namespace dnvgl {
                os << dnvgl::extfem::fem::types::card().format()
                   << card._form_NLOBY.format(card.NLOBY)
                   << card._form_NLOBZ.format(card.NLOBZ)
-                  << card.empty.format() << card.empty.format()
                   << std::endl;
                return os;
             }

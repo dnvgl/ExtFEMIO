@@ -93,7 +93,7 @@ namespace dnvgl {
                   << card._form_SLEVEL.format(card.SLEVEL)
                   << card._form_SELTYP.format(card.SELTYP)
                   << card._form_SELMOD.format(card.SELMOD)
-                  << ident::empty.format() << std::endl;
+                  << std::endl;
 
                return os;
             }

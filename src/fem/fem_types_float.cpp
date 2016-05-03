@@ -50,8 +50,7 @@ boost::regex
 std::regex
 #endif
 dnvgl::extfem::fem::types::float_re(
-   "([[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]])|"
-   "([[:space:]][[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2})",
+   "([[:space:]]*[[:space:]+-]?[[:digit:]][.][[:digit:]]+[eE][\\+-][[:digit:]]{2,3}[[:space:]]*)",
 #ifdef HAVE_BOOST_REGEX_HPP
    boost::regex_constants::ECMAScript);
 #else

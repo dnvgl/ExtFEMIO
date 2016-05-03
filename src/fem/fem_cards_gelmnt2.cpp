@@ -228,10 +228,6 @@ namespace dnvgl {
                   num++;
                   os << card._form_NOD.format(card.NOD[i]);
                }
-               while (num < 4) {
-                  num++;
-                  os << card.empty.format();
-               }
                os << std::endl;
 
                return os;

@@ -13,7 +13,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: test_fem_cards_tdload.cpp 319 2016-03-03 17:08:42Z berhol $";
+      = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -68,7 +68,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]" ) {
    SECTION("TDLOAD (2)") {
       std::deque<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-            "TDLOAD   4.00000000e+00  1.80000000e+02  1.21000000e+02  0.00000000e+00 \n",
+            "TDLOAD   4.000000000e+00 1.80000000e+02  1.21000000e+02  0.000000000e+00\n",
             "        PLAN_No6_STR(5445A/B)\n"});
 
       card::card_split(data, lines);
@@ -85,7 +85,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]" ) {
    SECTION("TDLOAD (2)") {
       std::deque<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-            "TDLOAD   4.00000000e+00  1.80000000e+02  1.21000000e+02  2.64000000e+02 \n",
+            "TDLOAD   4.000000000e+00 1.80000000e+02  1.21000000e+02  2.64000000e+02 \n",
             "        PLAN_No6_STR(5445A/B)\n",
             "        Meaningles comment.\n",
             "        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+\n"});
@@ -119,7 +119,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       tdload probe(4, 123, 122, "1234567890123456789012");
       test << probe;
       CHECK(test.str() ==
-            "TDLOAD  +4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +0.00000000e+00 \n"
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
             "        1234567890123456789012\n");
    }
 
@@ -127,7 +127,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       tdload probe(123, "1234567890123456789012");
       test << probe;
       CHECK(test.str() ==
-            "TDLOAD  +4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +0.00000000e+00 \n"
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
             "        1234567890123456789012\n");
    }
 
@@ -138,7 +138,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       tdload probe(4, 123, 122, 233, "1234567890123456789012", comments);
       test << probe;
       CHECK(test.str() ==
-            "TDLOAD  +4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +2.33000000e+02 \n"
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
             "        1234567890123456789012\n"
             "        test                             \n"
             "        123456789112345678921234567893123\n");
@@ -151,7 +151,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       tdload probe(123, "1234567890123456789012", comments);
       test << probe;
       CHECK(test.str() ==
-            "TDLOAD  +4.00000000e+00 +1.23000000e+02 +1.22000000e+02 +2.33000000e+02 \n"
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
             "        1234567890123456789012\n"
             "        test                             \n"
             "        123456789112345678921234567893123\n");
