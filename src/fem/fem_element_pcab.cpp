@@ -45,6 +45,9 @@ pcab::pcab(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
 pcab::pcab(const dnvgl::extfem::fem::cards::gelref1 *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
+pcab::pcab(const dnvgl::extfem::fem::elements::__base *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

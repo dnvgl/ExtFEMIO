@@ -45,6 +45,9 @@ mcts::mcts(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
 mcts::mcts(const dnvgl::extfem::fem::cards::gelref1 *data) :
    dnvgl::extfem::fem::elements::__base(data) {}
 
+mcts::mcts(const dnvgl::extfem::fem::elements::__base *data) :
+   dnvgl::extfem::fem::elements::__base(data) {}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"
