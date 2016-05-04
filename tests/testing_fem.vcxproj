@@ -99,9 +99,10 @@
       <AdditionalDependencies />
     </Link>
     <PostBuildEvent>
-      <Command>"$(OutputPath)test_fem_bounds.exe"
-"$(OutputPath)test_fem_types.exe"</Command>
-      <Message>Testing the module</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
     <CustomBuildStep>
       <Command>echo ==================== test_extfem_string ====================
