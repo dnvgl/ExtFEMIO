@@ -55,7 +55,6 @@ namespace dnvgl {
                   "GSETMEMB", "Illegal number of entries.");
 
                auto pos = inp.begin();
-               long tmp;
 
                ++pos;
 
