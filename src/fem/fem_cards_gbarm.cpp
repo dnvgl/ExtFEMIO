@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
             gbarm::gbarm(const std::deque<std::string> &inp) :
-               BeamProp(inp) {
+               base_beam_prop(inp) {
 
                if (inp.size() < 9)
                   throw errors::parse_error(
@@ -77,7 +77,7 @@ namespace dnvgl {
                const double &HZ, const double &BT, const double &BB,
                const double &SFY, const double &SFZ,
                const long &NLOBY, const long &NLOBZ) :
-               BeamProp(GEONO), HZ(HZ), BT(BT), BB(BB),
+               base_beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
                SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
             const std::ostream&

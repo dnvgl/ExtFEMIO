@@ -21,14 +21,15 @@
    |          | =GELREF1=  | Reference to Element Data                                    | \check | \check  |  6-66 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Element  | properties |                                                              |        |         |       |
-   |          | =GBARM=    | Cross Section Type Massive Bar                               | \check | \check  |  6-48 |
    |          | =GBEAMG=   | General Beam Element Data                                    | \check | \check  |  6-49 |
-   |          | =GECCEN=   | Eccentricities                                               | \check | \check  |  6-61 |
-   |          | =GELTH=    | Thickness of Two-dimensional Elements                        | \check | \check  |  6-70 |
+   |          | =GBARM=    | Cross Section Type Massive Bar                               | \check | \check  |  6-48 |
    |          | =GIORH=    | Cross Section Type I or H Beam                               | \check | \check  |  6-71 |
    |          | =GLSEC=    | Cross Section Type L-Section                                 | \check | \check  |  6-76 |
    |          | =GPIPE=    | Cross Section Type Tube                                      | \check | \check  |  6-81 |
+   |          | =GUSYI=    | Cross Section Type Unsymmetrical I-Beam                      | \check | \check  |  6-93 |
+   |          | =GECCEN=   | Eccentricities                                               | \check | \check  |  6-61 |
    |          | =BELFIX=   | Flexible Joint/Hinge                                         | \check | \check  |   6-8 |
+   |          | =GELTH=    | Thickness of Two-dimensional Elements                        | \check | \check  |  6-70 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Load     |            |                                                              |        |         |       |
    |          | =BLDEP=    | Nodes with Linear Dependence                                 | \check | \check  |  6-27 |
@@ -45,11 +46,13 @@
    |          | =HSUPSTAT= | Superelement Statistical Information                         | \check | \check  |  7-40 |
    |          | =HSUPTRAN= | Superelement Transformations                                 | \check | \check  |  7-41 |
    |          | =HIERARCH= | Superelement Hierarchy Description                           | \check | \check  |  7-38 |
+   |          | =TDSUPNAM= | Name and Description of a Super-Element.                     | \check | \check  |   4-8 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Misc     |            |                                                              |        |         |       |
    |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | \check | \check  |  6-84 |
    |          | =GUNIVEC=  | Specification of Local Element Coordinate System             | \check | \check  |  6-92 |
    |          | =MISOSEL=  | Isotropy, Linear Elastic Structural Analysis                 | \check | \check  | 6-115 |
+   |          | =MORSMEL=  | Anisotropy, Linear Elastic Structural Analysis, 2-D Membrane Elements and 2-D Thin Shell Elements | \check | \check  | 6-117 |
    |          | =TDSETNAM= | Name and Description of a Set (group)                        | \check | \check  |   4-7 |
    |          | =TEXT=     | User supplied Text                                           | \check | \check  |  4-10 |
 

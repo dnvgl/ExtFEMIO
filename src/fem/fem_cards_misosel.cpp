@@ -40,7 +40,7 @@ namespace dnvgl {
 
             const fem::types::card misosel::head("MISOSEL");
 
-            const entry_type<long> misosel::_form_MATNO("MATNO");
+            // const entry_type<long> misosel::_form_MATNO("MATNO");
             const entry_type<double> misosel::_form_YOUNG("YOUNG");
             const entry_type<double> misosel::_form_POISS("POISS");
             const entry_type<double> misosel::_form_RHO("RHO");
@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<double> misosel::_form_YIELD("YIELD");
 
             misosel::misosel(const std::deque<std::string> &inp) :
-               card(inp), DUMMY(0.), YIELD(0.) {
+               base_material(inp), DUMMY(0.), YIELD(0.) {
 
                if (inp.size() < 7)
                   throw errors::parse_error(
@@ -86,7 +86,7 @@ namespace dnvgl {
                              const double &ALPHA,
                              const double &DUMMY/*=0.*/,
                              const double &YIELD/*=0.*/) :
-               card(), MATNO(MATNO), YOUNG(YOUNG), POISS(POISS),
+               base_material(MATNO), YOUNG(YOUNG), POISS(POISS),
                RHO(RHO), DAMP(DAMP), ALPHA(ALPHA), DUMMY(DUMMY),
                YIELD(YIELD) {}
 

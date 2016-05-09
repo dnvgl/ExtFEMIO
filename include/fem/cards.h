@@ -113,6 +113,9 @@ namespace dnvgl {
                GUNIVEC,
                /// Isotropy, Linear Elastic Structural Analysis
                MISOSEL,
+               /// Anisotropy, Linear Elastic Structural Analysis,
+               /// 2-D Membrane Elements and 2-D Thin Shell Elements
+               MORSMEL,
                /// Name and Description of a set (group)
                TDSETNAM,
                /// Name and Description of a Super-Element.
@@ -801,15 +804,19 @@ Shortest version:
             };
 
 /// Base class for FEM beam property describing classes.
-            class BeamProp : public card {
+            class base_beam_prop : public card {
 
-               BeamProp();
+            private:
+
+               base_beam_prop();
 
             protected:
 
                dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
 
-               BeamProp(long const &GEONO);
+               base_beam_prop(long const &GEONO);
+
+               base_beam_prop(std::deque<std::string> const&);
 
             public:
 
@@ -818,8 +825,6 @@ Shortest version:
                    (Cross sectional properties) of beams.
                 */
                long GEONO;
-
-               BeamProp(std::deque<std::string> const&);
 
                const virtual dnvgl::extfem::fem::cards::types
                   card_type(void) const = 0;
@@ -838,7 +843,7 @@ Shortest version:
 \image latex gbarm.eps "Massive bar"
 \image html gbarm.svg "Massive bar"
 */
-            class gbarm : public BeamProp {
+            class gbarm : public base_beam_prop {
 
             private:
 
@@ -933,7 +938,7 @@ The succeding data concern the cross section at a specific local node.
 If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
 record may be on the interface.
 */
-            class gbeamg : public BeamProp {
+            class gbeamg : public base_beam_prop {
 
             private:
 
@@ -1149,7 +1154,7 @@ record may be on the interface.
 \image latex giorh.eps "I or H beam"
 \image html giorh.svg "I or H beam"
 */
-            class giorh : public BeamProp {
+            class giorh : public base_beam_prop {
 
             private:
 
@@ -1254,7 +1259,7 @@ record may be on the interface.
 \image latex glsec.eps "I or H beam"
 \image html glsec.svg "I or H beam"
 */
-            class glsec : public BeamProp {
+            class glsec : public base_beam_prop {
 
             private:
 
@@ -1359,7 +1364,7 @@ record may be on the interface.
 \image latex gpipe.eps "Tube"
 \image html gpipe.svg "Tube"
 */
-            class gpipe : public BeamProp {
+            class gpipe : public base_beam_prop {
 
             private:
 
@@ -1447,7 +1452,7 @@ record may be on the interface.
 \image latex gusyi.eps "Unsymmetrical I-Beam"
 \image html gusyi.svg "Unsymmetrical I-Beam"
 */
-            class gusyi : public BeamProp {
+            class gusyi : public base_beam_prop {
 
             private:
 
@@ -2341,6 +2346,30 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                operator<< (std::ostream& os) const;
             };
 
+/// Base class for material cards.
+            class  base_material : public card {
+            private:
+
+               base_material();
+
+            protected:
+
+               dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
+
+               base_material(long const &MATNO);
+               base_material(std::deque<std::string> const&);
+
+            public:
+
+               /** Material number, i.e. reference number referenced
+                   to by the element specification.
+                */
+               long MATNO;
+
+               const virtual dnvgl::extfem::fem::cards::types
+                  card_type(void) const = 0;
+            };
+
 /// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
 /**
 ## Format:
@@ -2350,13 +2379,13 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 | `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO`   |
 |           | `DAMP`  | `ALPHA` | `DUMMY` | `YIELD` |
 */
-            class misosel : public card {
+            class misosel : public base_material {
 
             private:
 
                dnvgl::extfem::fem::types::card static const head;
 
-               dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
+               // dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
                dnvgl::extfem::fem::types::entry_type<double> static const _form_YOUNG;
                dnvgl::extfem::fem::types::entry_type<double> static const _form_POISS;
                dnvgl::extfem::fem::types::entry_type<double> static const _form_RHO;
@@ -2366,10 +2395,10 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                dnvgl::extfem::fem::types::entry_type<double> static const _form_YIELD;
 
             public:
-               /** Material number, i.e. reference number referenced
+               /* Material number, i.e. reference number referenced
                    to by the element specification.
                 */
-               long MATNO;
+               // long MATNO;
                /** Young’s modulus.
                 */
                double YOUNG;
@@ -2410,6 +2439,164 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
                friend  std::ostream&
                operator<< (std::ostream&, misosel const &);
+
+               const std::ostream&
+               operator<< (std::ostream& os) const;
+            };
+
+/// `MORSMEL`: Anisotropy, Linear Elastic Structural Analysis,
+///            2-D Membrane Elements and 2-D Thin Shell Elements
+
+/**
+## Format:
+
+|           |          |         |         |          |
+| --------- | -------- | ------- | ------- | -------- |
+| `MORSMEL` | `MATNO`  | `Q1`    | `Q2`    | `Q3`     |
+|           | `RHO`    | `D11`   | `D21`   | `D22`    |
+|           | `D31`    | `D32`   | `D33`   | `PS1`    |
+|           | `PS2`    | `DAMP1` | `DAMP2` | `ALPHA1` |
+|           | `ALPHA2` |         |         |          |
+
+@note The vector Q must not be perpendicular to any of the elements
+*/
+            class morsmel : public base_material {
+
+            private:
+
+               dnvgl::extfem::fem::types::card static const head;
+
+               // dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_Q1;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_Q2;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_Q3;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_RHO;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_D11;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_D21;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_D22;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_D31;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_D32;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_D33;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_PS1;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_PS2;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_DAMP1;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_DAMP2;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_ALPHA1;
+               dnvgl::extfem::fem::types::entry_type<double> static const _form_ALPHA2;
+
+            public:
+
+               /* Material number. Reference number referenced to by
+                  the element specification. */
+               // long MATNO;
+               /** First component of global components of a vector Q
+                   indicating axes of anisotropy. The first principal
+                   axis of anisotropy is referred to the projection of
+                   Q on the membrane plane.
+                */
+               double Q1;
+               /** Second component of global components of a vector Q
+                   indicating axes of anisotropy. The first principal
+                   axis of anisotropy is referred to the projection of
+                   Q on the membrane plane.
+                */
+               double Q2;
+               /** Third component of global components of a vector Q
+                   indicating axes of anisotropy. The first principal
+                   axis of anisotropy is referred to the projection of
+                   Q on the membrane plane.
+                */
+               double Q3;
+               /** Density
+                */
+               double RHO;
+               /** Component of the lower triangular part of the
+                   general anisotropic elasticity matrix.
+
+                   In case of orthotropy, only D11, D21, D22 and D33
+                   are nonzero.
+                */
+               double D11;
+               /** Component of the lower triangular part of the
+                   general anisotropic elasticity matrix.
+                */
+               double D21;
+               /** Component of the lower triangular part of the
+                   general anisotropic elasticity matrix.
+                */
+               double D22;
+               /** Component of the lower triangular part of the
+                   general anisotropic elasticity matrix.
+                */
+               double D31;
+               /** Component of the lower triangular part of the
+                   general anisotropic elasticity matrix.
+                */
+               double D32;
+               /** Component of the lower triangular part of the
+                   general anisotropic elasticity matrix.
+                */
+               double D33;
+               /** Only given for plane strain situation. The stress
+                   normal to the membrane plane (sn) is calculated as
+                   follows: sn = PS1·s1 + PS2·s2
+
+                   (For an isotropic material PS1 and PS2 equal
+                   Poisson’s ratio)
+                */
+               double PS1;
+               /** Only given for plane strain situation. The stress
+                   normal to the membrane plane (sn) is calculated as
+                   follows: sn = PS1·s1 + PS2·s2
+
+                   (For an isotropic material PS1 and PS2 equal
+                   Poisson’s ratio)
+                */
+               double PS2;
+               /** Specific damping along the 1. principal axis of
+                   anisotropy.
+                */
+               double DAMP1;
+               /** Specific damping along the 2. principal axis of
+                   anisotropy.
+                */
+               double DAMP2;
+               /** Thermal expansion coefficients along the 1.
+                   principal axis of anisotropy.
+                */
+               double ALPHA1;
+               /** Thermal expansion coefficients along the 1.
+                   principal axis of anisotropy.
+                */
+               double ALPHA2;
+
+               morsmel(std::deque<std::string> const &);
+
+               morsmel(void);
+
+               morsmel(long const &MATNO,
+                       double const &Q1,
+                       double const &Q2,
+                       double const &Q3,
+                       double const &RHO,
+                       double const &D11,
+                       double const &D21,
+                       double const &D22,
+                       double const &D31,
+                       double const &D32,
+                       double const &D33,
+                       double const &PS1,
+                       double const &PS2,
+                       double const &DAMP1,
+                       double const &DAMP2,
+                       double const &ALPHA1,
+                       double const &ALPHA2);
+
+               const dnvgl::extfem::fem::cards::types
+               card_type(void) const;
+
+               friend  std::ostream&
+               operator<< (std::ostream&, morsmel const &);
 
                const std::ostream&
                operator<< (std::ostream& os) const;

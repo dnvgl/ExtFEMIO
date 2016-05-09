@@ -55,7 +55,7 @@ namespace dnvgl {
 
 
             giorh::giorh(const std::deque<std::string> &inp) :
-               BeamProp(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
+               base_beam_prop(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
 
                if (inp.size() < 10)
                   throw errors::parse_error(
@@ -97,7 +97,7 @@ namespace dnvgl {
                          const double &TB, const double &SFY,
                          const double &SFZ,
                          const long &NLOBYT/*=0*/, const long &NLOBYB/*=0*/, const long &NLOBZ/*=0*/) :
-               BeamProp(GEONO),
+               base_beam_prop(GEONO),
                HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
                SFY(SFY), SFZ(SFZ),
                NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}

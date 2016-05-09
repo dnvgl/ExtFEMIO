@@ -51,7 +51,7 @@ namespace dnvgl {
             const entry_type<long> glsec::_form_NLOBZ("NLOBZ");
 
             glsec::glsec(const std::deque<std::string> &inp) :
-               BeamProp(inp), NLOBY(0), NLOBZ(0) {
+               base_beam_prop(inp), NLOBY(0), NLOBZ(0) {
 
                if (inp.size() < 9)
                   throw errors::parse_error(
@@ -82,7 +82,7 @@ namespace dnvgl {
                          const double &TZ, const double &SFY,
                          const double &SFZ, const bool &K,
                          const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
-               BeamProp(GEONO),
+               base_beam_prop(GEONO),
                HZ(HZ), TY(TY), BY(BY), TZ(TZ),
                SFY(SFY), SFZ(SFZ),
                K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}

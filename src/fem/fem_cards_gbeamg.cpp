@@ -57,7 +57,7 @@ namespace dnvgl {
             const entry_type<double> gbeamg::_form_SZ("SZ");
 
             gbeamg::gbeamg(const std::deque<std::string> &inp) :
-               BeamProp(inp) {
+               base_beam_prop(inp) {
 
                if (inp.size() < 17)
                   throw errors::parse_error(
@@ -96,7 +96,7 @@ namespace dnvgl {
                const double &SHARY, const double &SHARZ,
                const double &SHCENY, const double &SHCENZ,
                const double &SY, const double &SZ) :
-               BeamProp(GEONO),
+               base_beam_prop(GEONO),
                AREA(AREA), IX(IX), IY(IY), IZ(IZ), IYZ(IYZ),
                WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
                SHARY(SHARY), SHARZ(SHARZ),

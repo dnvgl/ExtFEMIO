@@ -56,7 +56,7 @@ namespace dnvgl {
             entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
             gusyi::gusyi(const std::deque<std::string> &inp) :
-               BeamProp(inp) {
+               base_beam_prop(inp) {
 
                if (inp.size() < 15)
                   throw errors::parse_error(
@@ -92,7 +92,7 @@ namespace dnvgl {
                double const &BB, double const &B2, double const &TB,
                double const &SFY, double const &SFZ,
                long const &NLOBYT, long const &NLOBYB, long const &NLOBZ) :
-               BeamProp(GEONO),
+               base_beam_prop(GEONO),
                HZ(HZ), TY(TY),
                BT(BT), B1(B1), TT(TT),
                BB(BB), B2(B2),TB(TB),

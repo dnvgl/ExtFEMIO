@@ -95,7 +95,7 @@ namespace dnvgl {
 namespace {
    using namespace dnvgl::extfem::fem;
 
-   const size_t map_pair_entries = 36;
+   const size_t map_pair_entries = 37;
    const std::pair<std::string, cards::types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
       std::pair<std::string, cards::types>("DATE", cards::DATE),
@@ -122,6 +122,7 @@ namespace {
       std::pair<std::string, cards::types>("GSETMEMB", cards::GSETMEMB),
       std::pair<std::string, cards::types>("GUNIVEC", cards::GUNIVEC),
       std::pair<std::string, cards::types>("MISOSEL", cards::MISOSEL),
+      std::pair<std::string, cards::types>("MORSMEL", cards::MORSMEL),
       std::pair<std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
       std::pair<std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
       std::pair<std::string, cards::types>("TEXT", cards::TEXT),
@@ -165,16 +166,27 @@ namespace dnvgl {
                }
             }
 
-            BeamProp::BeamProp(std::deque<std::string> const &inp) :
+            base_beam_prop::base_beam_prop(std::deque<std::string> const &inp) :
                card(inp) {}
 
-            BeamProp::BeamProp() :
-               BeamProp(-1) {}
+            base_beam_prop::base_beam_prop() :
+               base_beam_prop(-1) {}
 
-            BeamProp::BeamProp(long const &GEONO) :
+            base_beam_prop::base_beam_prop(long const &GEONO) :
                card(), GEONO(GEONO) {}
 
-            const dnvgl::extfem::fem::types::entry_type<long> BeamProp::_form_GEONO("GEONO");
+            const dnvgl::extfem::fem::types::entry_type<long> base_beam_prop::_form_GEONO("GEONO");
+
+            base_material::base_material(std::deque<std::string> const &inp) :
+               card(inp) {}
+
+            base_material::base_material() :
+               base_material(-1) {}
+
+            base_material::base_material(long const &MATNO) :
+               card(), MATNO(MATNO) {}
+
+            const dnvgl::extfem::fem::types::entry_type<long> base_material::_form_MATNO("MATNO");
 
             void
             dispatch(std::deque<std::string> const &inp, std::unique_ptr<fem::cards::card> &res) {
@@ -253,6 +265,9 @@ namespace dnvgl {
                      break;
                   case MISOSEL:
                      res = std::make_unique<fem::cards::misosel>(inp);
+                     break;
+                  case MORSMEL:
+                     res = std::make_unique<fem::cards::morsmel>(inp);
                      break;
                   case TEXT:
                      res = std::make_unique<fem::cards::text>(inp);
