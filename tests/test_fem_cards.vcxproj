@@ -209,6 +209,7 @@
     <ClCompile Include="test_fem_cards_iend.cpp" />
     <ClCompile Include="test_fem_cards_gelmnt1.cpp" />
     <ClCompile Include="test_fem_cards_gelref1.cpp" />
+    <ClCompile Include="test_fem_cards_morsmel.cpp" />
     <ClCompile Include="test_fem_cards_tdload.cpp" />
     <ClCompile Include="test_fem_cards_text.cpp" />
     <ClCompile Include="test_fem_cards_tdsupnam.cpp" />

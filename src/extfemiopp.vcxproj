@@ -244,6 +244,7 @@
     <ClCompile Include="fem\fem_cards_iend.cpp" />
     <ClCompile Include="fem\fem_cards_gelmnt1.cpp" />
     <ClCompile Include="fem\fem_cards_gelref1.cpp" />
+    <ClCompile Include="fem\fem_cards_morsmel.cpp" />
     <ClCompile Include="fem\fem_cards_tdload.cpp" />
     <ClCompile Include="fem\fem_cards_tdsetnam.cpp" />
     <ClCompile Include="fem\fem_cards_tdsupnam.cpp" />
