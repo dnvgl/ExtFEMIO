@@ -26,7 +26,7 @@
 
 % Indices & bibliography
 \usepackage{natbib}
-\usepackage[titles]{tocloft}
+%\usepackage[titles]{tocloft}
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{5}
 \makeindex
