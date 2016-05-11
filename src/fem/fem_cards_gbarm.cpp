@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
             gbarm::gbarm(const std::deque<std::string> &inp) :
-               base_beam_prop(inp) {
+               base_beam_prop(inp), NLOBY(0), NLOBZ(0) {
 
                if (inp.size() < 9)
                   throw errors::parse_error(
@@ -65,8 +65,14 @@ namespace dnvgl {
                BB = _form_BB(*(pos++));
                SFY = _form_SFY(*(pos++));
                SFZ = _form_SFZ(*(pos++));
-               NLOBY = _form_NLOBY(*(pos++));
-               NLOBZ = _form_NLOBZ(*(pos++));
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBY = _form_NLOBY(*(pos++));
+               else
+                  pos++;
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBZ = _form_NLOBZ(*(pos++));
             }
 
             gbarm::gbarm(void) :
@@ -76,7 +82,7 @@ namespace dnvgl {
                const long &GEONO,
                const double &HZ, const double &BT, const double &BB,
                const double &SFY, const double &SFZ,
-               const long &NLOBY, const long &NLOBZ) :
+               const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
                base_beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
                SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
@@ -99,9 +105,11 @@ namespace dnvgl {
                   << card._form_BB.format(card.BB)
                   << std::endl << fem::types::card("").format()
                   << card._form_SFY.format(card.SFY)
-                  << card._form_SFZ.format(card.SFZ)
-                  << card._form_NLOBY.format(card.NLOBY)
-                  << card._form_NLOBZ.format(card.NLOBZ) << std::endl;
+                  << card._form_SFZ.format(card.SFZ);
+               if ((card.NLOBY || card.NLOBZ))
+                  os << card._form_NLOBY.format(card.NLOBY)
+                     << card._form_NLOBZ.format(card.NLOBZ);
+               os << std::endl;
                return os;
             }
          }

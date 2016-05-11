@@ -910,7 +910,7 @@ Shortest version:
                   long const &GEONO,
                   double const &HZ, double const &BT, double const &BB,
                   double const &SFY, double const &SFZ,
-                  long const &NLOBY, long const &NLOBZ);
+                  long const &NLOBY=0, long const &NLOBZ=0);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;

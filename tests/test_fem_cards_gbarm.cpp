@@ -83,6 +83,28 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
    }
 }
 
+TEST_CASE("FEMIO-37: Failing to import GBARM record from SESAM GeniE FEM file") {
+
+   std::deque<std::string> lines;
+
+   SECTION("Failing card") {
+      std::deque<std::string> data({
+            "GBARM     2.80000000E+01  1.50000006E-01  1.20000001E-02  1.20000001E-02\n",
+            "          1.00000000E+00  1.00000000E+00\n"});
+      card::card_split(data, lines);
+      gbarm probe(lines);
+
+      CHECK(probe.GEONO == 28);
+      CHECK(probe.HZ == .150000006);
+      CHECK(probe.BT == .0120000001);
+      CHECK(probe.BB == .0120000001);
+      CHECK(probe.SFY == 1.);
+      CHECK(probe.SFZ == 1.);
+      CHECK(probe.NLOBY == 0);
+      CHECK(probe.NLOBZ == 0);
+   }
+}
+
 TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
 
    std::ostringstream test;
@@ -99,6 +121,14 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
       CHECK(test.str() ==
             "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n");
+   }
+
+   SECTION("simple (default N*)") {
+      gbarm probe(1, 2., 3., 4., 5., 6.);
+      test << probe;
+      CHECK(test.str() ==
+            "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+            "        +5.000000000e+00+6.000000000e+00\n");
    }
 }
 
