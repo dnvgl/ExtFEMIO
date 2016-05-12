@@ -105,6 +105,27 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]" ) {
    }
 }
 
+TEST_CASE("FEMIO-32: Import failed when reading TDLOAD entry") {
+
+   std::deque<std::string> lines;
+
+   SECTION("Failing card") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDLOAD   4.00000000e+000 1.00000000e+000 1.00000000e+002 0.00000000e+000\n",
+            "         "});
+      card::card_split(data, lines);
+      tdload probe(lines);
+
+      CHECK(probe.NFIELD == 4);
+      CHECK(probe.ILREF == 1);
+      CHECK(probe.CODNAM == 100);
+      CHECK(probe.CODTXT == 0);
+      CHECK(probe.SET_NAME == "");
+      CHECK(probe.CONT.size() == 0);
+   }
+}
+
 TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
 
    std::ostringstream test;
@@ -155,6 +176,14 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
             "        1234567890123456789012\n"
             "        test                             \n"
             "        123456789112345678921234567893123\n");
+   }
+
+   SECTION("empty comment (calc internal values)") {
+      tdload probe(123, "");
+      test << probe;
+      CHECK(test.str() ==
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n"
+            "        \n");
    }
 }
 

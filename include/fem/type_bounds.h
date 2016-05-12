@@ -123,20 +123,20 @@ namespace dnvgl {
 
                bound() {};
 
-               bound(std::set<std::string> &allowed) :
+               bound(std::set<std::string> const &allowed) :
                   base(), allowed(allowed) {};
 
-               bound(std::set<std::string> &allowed, std::string &default_val) :
+               bound(std::set<std::string> const &allowed, std::string const &default_val) :
                   base(), allowed(allowed), default_val(default_val) {
                   got_default();
                };
 
-               bound(std::string &default_val) :
+               bound(std::string const &default_val) :
                   base(), default_val(default_val) {
                   got_default();
                };
 
-               bool is_allowed(const std::string &probe) const {
+               bool is_allowed(std::string const &probe) const {
                   if (allowed.size() == 0)
                      return true;
                   return !(allowed.find(probe) == allowed.end());

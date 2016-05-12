@@ -49,13 +49,14 @@ namespace dnvgl {
             const entry_type<long> tdload::_form_ILREF("ILREF");
             const entry_type<long> tdload::_form_CODNAM("CODNAM");
             const entry_type<long> tdload::_form_CODTXT("CODTXT");
-            const entry_type<std::string> tdload::_form_SET_NAME("SET_NAME");
+            const entry_type<std::string> tdload::_form_SET_NAME(
+               "SET_NAME", type_bounds::bound<std::string>(""));
             const entry_type<std::string> tdload::_form_CONT("CONT");
 
             tdload::tdload(const std::deque<std::string> &inp) :
                card(inp) {
 
-               if (inp.size() < 9)
+               if (inp.size() < 5)
                   throw errors::parse_error(
                      "TDLOAD", "Illegal number of entries.");
 
