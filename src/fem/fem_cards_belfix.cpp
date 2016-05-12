@@ -71,11 +71,16 @@ namespace dnvgl {
                long tmp(_form_OPT(*(pos++)));
                if (tmp == 1)
                   OPT = FIXATION;
-               else if (OPT == 2)
+               else if (tmp == 2)
                   OPT = SPRING;
-               else
-                  throw errors::parse_error(
-                     "BELFIX", "OPT allows only 1 or 2.");
+               else {
+                  OPT = INVALID;
+                  std::ostringstream msg(
+                     "BELFIX: OPT allows only 1 or 2, got ",
+                     std::ostringstream::ate);
+                  msg << tmp << ".";
+                  error_report(msg.str());
+               }
                TRANO = _form_TRANO(*(pos++));
                pos++;
                for (int i=0; i<6; i++)
