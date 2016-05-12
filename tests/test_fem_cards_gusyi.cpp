@@ -97,6 +97,30 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
       CHECK(probe.NLOBYB == 1);
       CHECK(probe.NLOBZ == 0);
    }
+
+   SECTION("GUSYI (3)") {
+      std::deque<std::string> data({
+         "GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
+         "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
+         "         1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
+      card::card_split(data, lines);
+      gusyi probe(lines);
+
+      CHECK(probe.GEONO == 5);
+      CHECK(probe.HZ == 466.);
+      CHECK(probe.TY == 14.5);
+      CHECK(probe.BT == 125.);
+      CHECK(probe.B1 == 16.);
+      CHECK(probe.TT == 14.5);
+      CHECK(probe.BB == 16.);
+      CHECK(probe.B2 == 1.);
+      CHECK(probe.TB == 1.);
+      CHECK(probe.SFY == 0.);
+      CHECK(probe.SFZ == 0.);
+      CHECK(probe.NLOBYT == 0);
+      CHECK(probe.NLOBYB == 0);
+      CHECK(probe.NLOBZ == 0);
+   }
 }
 
 TEST_CASE("FEM GUSYI types output.", "[fem_gusyi,out]" ) {
@@ -110,13 +134,22 @@ TEST_CASE("FEM GUSYI types output.", "[fem_gusyi,out]" ) {
   }
 
    SECTION("simple") {
-      gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11, 12);
+      gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11, 12, 13, 14);
       test << probe;
       CHECK(test.str() ==
             "GUSYI   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
-            "        +0.000000000e+00+0.000000000e+00\n");
+            "        +1.300000000e+01+1.400000000e+01\n");
+  }
+
+   SECTION("simple (default N*)") {
+      gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11);
+      test << probe;
+      CHECK(test.str() ==
+            "GUSYI   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01\n");
   }
 }
 

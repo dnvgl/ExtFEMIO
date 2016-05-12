@@ -56,9 +56,9 @@ namespace dnvgl {
             entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
             gusyi::gusyi(const std::deque<std::string> &inp) :
-               base_beam_prop(inp) {
+               base_beam_prop(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
 
-               if (inp.size() < 15)
+               if (inp.size() < 12)
                   throw errors::parse_error(
                      "GUSYU", "Illegal number of entries.");
 
@@ -77,9 +77,19 @@ namespace dnvgl {
                TB = _form_TB(*(pos++));
                SFY = _form_SFY(*(pos++));
                SFZ = _form_SFZ(*(pos++));
-               NLOBYT = _form_NLOBYT(*(pos++));
-               NLOBYB = _form_NLOBYB(*(pos++));
-               NLOBZ = _form_NLOBZ(*(pos++));
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBYT = _form_NLOBYT(*(pos++));
+               else
+                  pos++;
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBYB = _form_NLOBYB(*(pos++));
+               else
+                  pos++;
+               if (pos == inp.end()) return;
+               if (*pos != "                ")
+                  NLOBZ = _form_NLOBZ(*(pos++));
             }
 
             gusyi::gusyi(void) :
@@ -124,12 +134,13 @@ namespace dnvgl {
                   << std::endl << dnvgl::extfem::fem::types::card().format()
                   << card._form_TB.format(card.TB)
                   << card._form_SFY.format(card.SFY)
-                  << card._form_SFZ.format(card.SFZ)
-                  << card._form_NLOBYT.format(card.NLOBYT)
-                  << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_NLOBYB.format(card.NLOBYB)
-                  << card._form_NLOBZ.format(card.NLOBZ)
-                  << std::endl;
+                  << card._form_SFZ.format(card.SFZ);
+               if ((card.NLOBYT || card.NLOBYB || card.NLOBZ))
+                  os << card._form_NLOBYT.format(card.NLOBYT)
+                     << std::endl << dnvgl::extfem::fem::types::card().format()
+                     << card._form_NLOBYB.format(card.NLOBYB)
+                     << card._form_NLOBZ.format(card.NLOBZ);
+               os << std::endl;
                return os;
             }
          }
