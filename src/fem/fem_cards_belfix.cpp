@@ -36,7 +36,7 @@ using namespace fem;
 using namespace types;
 
 namespace {
-   long m_one(-1), one(1), two(2);
+   long m_one(-1)/*, one(1), two(2)*/;
 }
 
 namespace dnvgl {
@@ -48,7 +48,7 @@ namespace dnvgl {
 
             const fem::types::entry_type<long> belfix::_form_FIXNO("FIXNO");
             const fem::types::entry_type<long> belfix::_form_OPT(
-               "OPT", type_bounds::bound<long>(&one, &two));
+               "OPT", type_bounds::bound<long>(/* &one, &two */));
             const fem::types::entry_type<long> belfix::_form_TRANO(
                "TRANO", type_bounds::bound<long>(&m_one));
             const fem::types::entry_type<double> belfix::_form_A("A");
