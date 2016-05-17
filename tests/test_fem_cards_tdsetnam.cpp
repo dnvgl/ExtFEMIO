@@ -52,7 +52,7 @@ TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
       std::deque<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDSETNAM 4.00000000e+000 1.80000000e+002 1.21000000e+002 0.00000000e+000\n",
-            "        PLAN_No6_STR(5445A/B)\n"});
+               "        PLAN_No6_STR(5445A/B)\n"});
 
       card::card_split(data, lines);
       tdsetnam probe(lines);
@@ -62,14 +62,14 @@ TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 0);
       CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
-      CHECK(probe.CONT.size() == 0);
+      CHECK(probe.CONT == std::vector<std::string>(0));
    }
 
    SECTION("TDSETNAM (2)") {
       std::deque<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDSETNAM 4.00000000e+00  1.80000000e+02  1.21000000e+02  0.00000000e+00 \n",
-            "        PLAN_No6_STR(5445A/B)\n"});
+               "        PLAN_No6_STR(5445A/B)\n"});
 
       card::card_split(data, lines);
       tdsetnam probe(lines);
@@ -79,16 +79,16 @@ TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 0);
       CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
-      CHECK(probe.CONT.size() == 0);
+      CHECK(probe.CONT == std::vector<std::string>(0));
    }
 
    SECTION("TDSETNAM (2)") {
       std::deque<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDSETNAM 4.00000000e+00  1.80000000e+02  1.21000000e+02  2.64000000e+02 \n",
-            "        PLAN_No6_STR(5445A/B)\n",
-            "        Meaningles comment.\n",
-            "        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+\n"});
+               "        PLAN_No6_STR(5445A/B)\n",
+               "        Meaningles comment.\n",
+               "        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+\n"});
 
       card::card_split(data, lines);
       tdsetnam probe(lines);
@@ -98,10 +98,10 @@ TEST_CASE("FEM TDSETNAM definitions.", "[fem_tdsetnam]" ) {
       CHECK(probe.CODNAM == 121);
       CHECK(probe.CODTXT == 264);
       CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
-      CHECK(probe.CONT.size() == 2);
-      CHECK(probe.CONT[0] == "Meaningles comment.                                             ");
-      //                      1234567891123456789212345678931234567894123456789512345678961234
-      CHECK(probe.CONT[1] == "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+");
+      CHECK(probe.CONT == std::vector<std::string>({
+               // 34567891123456789212345678931234567894123456789512345678961234
+               "Meaningles comment.                                             ",
+                  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+"}));
    }
 }
 
@@ -132,7 +132,7 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
    }
 
    SECTION("with comment") {
-      std::deque<std::string> comments(2);
+      std::vector<std::string> comments(2);
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdsetnam probe(4, 123, 122, 233, "1234567890123456789012", comments);
@@ -145,7 +145,7 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
    }
 
    SECTION("with comment (calc internal values)") {
-      std::deque<std::string> comments(2);
+      std::vector<std::string> comments(2);
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdsetnam probe(123, "1234567890123456789012", comments);
@@ -155,6 +155,47 @@ TEST_CASE("FEM TDSETNAM types output.", "[fem_tdsetnam,out]" ) {
             "        1234567890123456789012\n"
             "        test                             \n"
             "        123456789112345678921234567893123\n");
+}
+}
+
+TEST_CASE("FEM TDSETNAM conversion from own output.", "[fem_tdsetnam,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("TDSETNAM (1)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDSETNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n",
+               "        1234567890123456789012\n"});
+      card::card_split(data, lines);
+      tdsetnam probe(lines);
+
+      CHECK(probe.NFIELD == 4);
+      CHECK(probe.ISREF == 123);
+      CHECK(probe.CODNAM == 122);
+      CHECK(probe.CODTXT == 0);
+      CHECK(probe.SET_NAME == "1234567890123456789012");
+      CHECK(probe.CONT == std::vector<std::string>(0));
+   }
+
+   SECTION("TDSETNAM (2)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDSETNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n",
+               "        1234567890123456789012\n",
+               "        test                             \n",
+               "        123456789112345678921234567893123\n"});
+      card::card_split(data, lines);
+      tdsetnam probe(lines);
+
+      CHECK(probe.NFIELD == 4);
+      CHECK(probe.ISREF == 123);
+      CHECK(probe.CODNAM == 122);
+      CHECK(probe.CODTXT == 233);
+      CHECK(probe.SET_NAME == "1234567890123456789012");
+      CHECK(probe.CONT == std::vector<std::string>({
+               "test                             ",
+               "123456789112345678921234567893123" }));
    }
 }
 

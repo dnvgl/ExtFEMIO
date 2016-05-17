@@ -61,9 +61,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
       CHECK(probe.ELNO == 1);
       CHECK(probe.ELTYP == 15);
       CHECK(probe.ELTYAD == 0);
-      CHECK(probe.NODIN.size() == 2);
-      CHECK(probe.NODIN[0] == 10);
-      CHECK(probe.NODIN[1] == 11);
+      CHECK(probe.NODIN == std::vector<long>({10, 11}));
    }
 
    SECTION("GELMNT1 (FQUS)") {
@@ -78,11 +76,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
       CHECK(probe.ELNO == 6);
       CHECK(probe.ELTYP == 24);
       CHECK(probe.ELTYAD == 0);
-      CHECK(probe.NODIN.size() == 4);
-      CHECK(probe.NODIN[0] == 1);
-      CHECK(probe.NODIN[1] == 6);
-      CHECK(probe.NODIN[2] == 4);
-      CHECK(probe.NODIN[3] == 2);
+      CHECK(probe.NODIN == std::vector<long>({1, 6, 4, 2}));
    }
 
    SECTION("GELMNT1 (BEAS)") {
@@ -96,9 +90,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
       CHECK(probe.ELNO == 1);
       CHECK(probe.ELTYP == 15);
       CHECK(probe.ELTYAD == 0);
-      CHECK(probe.NODIN.size() == 2);
-      CHECK(probe.NODIN[0] == 1);
-      CHECK(probe.NODIN[1] == 2);
+      CHECK(probe.NODIN == std::vector<long>({1, 2}));
    }
 
    SECTION("GELMNT1 (BEAS) (empty fields)") {
@@ -112,9 +104,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
       CHECK(probe.ELNO == 1);
       CHECK(probe.ELTYP == 15);
       CHECK(probe.ELTYAD == 0);
-      CHECK(probe.NODIN.size() == 2);
-      CHECK(probe.NODIN[0] == 1);
-      CHECK(probe.NODIN[1] == 2);
+      CHECK(probe.NODIN == std::vector<long>({1, 2}));
    }
 }
 
@@ -132,7 +122,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
       long ELNOX(1), ELNO(6);
       elements::el_types ELTYP(elements::FQUS_FFQ);
       long ELTYAD(0);
-      std::deque<long> NODIN({1, 6, 4, 2});
+      std::vector<long> NODIN({1, 6, 4, 2});
 
       gelmnt1 probe(1, 6, elements::FQUS_FFQ, 0, {1, 6, 4, 2});
       test << probe;
@@ -145,7 +135,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
       long ELNOX(1), ELNO(6);
       elements::el_types ELTYP(elements::FQUS_FFQ);
       long ELTYAD(0);
-      std::deque<long> NODIN({1, 6, 4, 2});
+      std::vector<long> NODIN({1, 6, 4, 2});
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
       test << probe;
@@ -154,11 +144,24 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
             "        +1.000000000e+00+6.000000000e+00+4.000000000e+00+2.000000000e+00\n");
    }
 
+   SECTION("GELMNT1 OUT (FTRS)") {
+      long ELNOX(1), ELNO(6);
+      elements::el_types ELTYP(elements::FTRS_FFTR);
+      long ELTYAD(0);
+      std::vector<long> NODIN({1, 6, 4});
+
+      gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
+      test << probe;
+      CHECK(test.str() ==
+            "GELMNT1 +1.000000000e+00+6.000000000e+00+2.500000000e+01+0.000000000e+00\n"
+            "        +1.000000000e+00+6.000000000e+00+4.000000000e+00\n");
+   }
+
    SECTION("GELMNT1 OUT (ILST)") {
       long ELNOX(12), ELNO(36);
       elements::el_types ELTYP(elements::ILST);
       long ELTYAD(0);
-      std::deque<long> NODIN({1, 6, 4, 2, 13, 22});
+      std::vector<long> NODIN({1, 6, 4, 2, 13, 22});
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
       test << probe;
@@ -172,7 +175,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
       long ELNOX(12), ELNO(36);
       elements::el_types ELTYP(elements::BEAS);
       long ELTYAD(0);
-      std::deque<long> NODIN({1, 6});
+      std::vector<long> NODIN({1, 6});
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
       test << probe;
@@ -184,13 +187,79 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
    SECTION("GELMNT1 OUT (BEAS) (ELTYAD default)") {
       long ELNOX(12), ELNO(36);
       elements::el_types ELTYP(elements::BEAS);
-      std::deque<long> NODIN({1, 6});
+      std::vector<long> NODIN({1, 6});
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, NODIN);
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.200000000e+01+3.600000000e+01+1.500000000e+01+0.000000000e+00\n"
             "        +1.000000000e+00+6.000000000e+00\n");
+   }
+}
+
+TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GELMNT1 (FQUS)") {
+      std::deque<std::string> data({
+            "GELMNT1 +1.000000000e+00+6.000000000e+00+2.400000000e+01+0.000000000e+00\n",
+            "        +1.000000000e+00+6.000000000e+00+4.000000000e+00+2.000000000e+00\n"});
+
+      card::card_split(data, lines);
+      gelmnt1 probe(lines);
+
+      CHECK(probe.ELNOX == 1);
+      CHECK(probe.ELNO == 6);
+      CHECK(probe.ELTYP == elements::FQUS_FFQ);
+      CHECK(probe.ELTYAD == 0);
+      CHECK(probe.NODIN == std::vector<long>({1, 6, 4, 2}));
+   }
+
+   SECTION("GELMNT1 (FTRS)") {
+      std::deque<std::string> data({
+            "GELMNT1 +1.000000000e+00+6.000000000e+00+2.500000000e+01+0.000000000e+00\n",
+            "        +1.000000000e+00+6.000000000e+00+4.000000000e+00\n"});
+
+      card::card_split(data, lines);
+      gelmnt1 probe(lines);
+
+      CHECK(probe.ELNOX == 1);
+      CHECK(probe.ELNO == 6);
+      CHECK(probe.ELTYP == elements::FTRS_FFTR);
+      CHECK(probe.ELTYAD == 0);
+      CHECK(probe.NODIN == std::vector<long>({1, 6, 4}));
+}
+
+   SECTION("GELMNT1 (ILST)") {
+      std::deque<std::string> data({
+            "GELMNT1 +1.200000000e+01+3.600000000e+01+6.000000000e+00+0.000000000e+00\n",
+            "        +1.000000000e+00+6.000000000e+00+4.000000000e+00+2.000000000e+00\n",
+            "        +1.300000000e+01+2.200000000e+01\n"});
+
+      card::card_split(data, lines);
+      gelmnt1 probe(lines);
+
+      CHECK(probe.ELNOX == 12);
+      CHECK(probe.ELNO == 36);
+      CHECK(probe.ELTYP == elements::ILST);
+      CHECK(probe.ELTYAD == 0);
+      CHECK(probe.NODIN == std::vector<long>({1, 6, 4, 2, 13, 22}));
+   }
+
+   SECTION("GELMNT1 (BEAS)") {
+      std::deque<std::string> data({
+            "GELMNT1 +1.200000000e+01+3.600000000e+01+1.500000000e+01+0.000000000e+00\n",
+            "        +1.000000000e+00+6.000000000e+00\n"});
+
+      card::card_split(data, lines);
+      gelmnt1 probe(lines);
+
+      CHECK(probe.ELNOX == 12);
+      CHECK(probe.ELNO == 36);
+      CHECK(probe.ELTYP == elements::BEAS);
+      CHECK(probe.ELTYAD == 0);
+      CHECK(probe.NODIN == std::vector<long>({1, 6}));
    }
 }
 

@@ -82,9 +82,9 @@ namespace dnvgl {
                long const &CNOD,
                long const &NDDOF,
                long const &NDEP,
-               std::deque<long> const &DEPDOF,
-               std::deque<long> const &INDEPDOF,
-               std::deque<double> const &b) :
+               std::vector<long> const &DEPDOF,
+               std::vector<long> const &INDEPDOF,
+               std::vector<double> const &b) :
                NODENO(NODENO), CNOD(CNOD), NDDOF(NDDOF), NDEP(NDEP),
                DEPDOF(DEPDOF),INDEPDOF(INDEPDOF), b(b) {}
 

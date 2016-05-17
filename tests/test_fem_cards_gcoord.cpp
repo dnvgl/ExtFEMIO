@@ -116,6 +116,23 @@ TEST_CASE("FEM GCOORD types output.", "[fem_gcoord,out]" ) {
    }
 }
 
+TEST_CASE("FEM GCOORD conversion from own output.", "[fem_gcoord,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GCOORD") {
+      std::deque<std::string> data({
+            "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
+      card::card_split(data, lines);
+      gcoord probe(lines);
+
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.XCOORD == 1.);
+      CHECK(probe.YCOORD == 3.);
+      CHECK(probe.ZCOORD == 134.);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

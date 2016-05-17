@@ -84,44 +84,6 @@ TEST_CASE("FEM GELMNT2 definitions. (Small Field Format)", "[fem_gelmnt2]" ) {
       CHECK(probe.NOD.size() == 1);
       CHECK(probe.NOD[0] == 1);
    }
-
-   SECTION("read own output") {
-   std::deque<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "GELMNT2 +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
-         "        +1.100000000e+01+2.100000000e+01+3.100000000e+01+1.200000000e+01\n",
-         "        +2.200000000e+01+3.200000000e+01+1.300000000e+01+2.300000000e+01\n",
-         "        +3.300000000e+01+1.400000000e+01+2.400000000e+01+3.400000000e+01\n",
-         "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
-         "        +9.000000000e+00+1.000000000e+01\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
-   gelmnt2 probe(lines);
-
-      CHECK(probe.SUBNO == 1);
-      CHECK(probe.SLEVEL == 2);
-      CHECK(probe.STYPE == 3);
-      CHECK(probe.ADDNO == 4);
-      CHECK(probe.T[0][0] == 11.);
-      CHECK(probe.T[1][0] == 12.);
-      CHECK(probe.T[2][0] == 13.);
-      CHECK(probe.T[3][0] == 14.);
-      CHECK(probe.T[0][1] == 21.);
-      CHECK(probe.T[1][1] == 22.);
-      CHECK(probe.T[2][1] == 23.);
-      CHECK(probe.T[3][1] == 24.);
-      CHECK(probe.T[0][2] == 31.);
-      CHECK(probe.T[1][2] == 32.);
-      CHECK(probe.T[2][2] == 33.);
-      CHECK(probe.T[3][2] == 34.);
-      CHECK(probe.T[0][3] == 0.);
-      CHECK(probe.T[1][3] == 0.);
-      CHECK(probe.T[2][3] == 0.);
-      CHECK(probe.T[3][3] == 1.);
-      CHECK(probe.NNOD == 5);
-      CHECK(probe.NOD.size() == 5);
-      CHECK(probe.NOD == std::deque<long>({6, 7, 8, 9, 10}));
-   }
 }
 
 TEST_CASE("FEM GELMNT2 types output.", "[fem_gelmnt2,out]" ) {
@@ -150,7 +112,7 @@ TEST_CASE("FEM GELMNT2 types output.", "[fem_gelmnt2,out]" ) {
                     {T31, T32, T33, T34},
                     { 0.,  0.,  0.,  1.}};
    long NNOD(5);
-   std::deque<long> NOD({6, 7, 8, 9, 10});
+   std::vector<long> NOD({6, 7, 8, 9, 10});
 
    std::string ref(
       // 345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -203,6 +165,47 @@ TEST_CASE("FEM GELMNT2 types output.", "[fem_gelmnt2,out]" ) {
                     T14, T24, T34, NOD);
       test << probe;
       CHECK(test.str() == ref);
+   }
+}
+
+TEST_CASE("FEM GELMNT2 conversion from own output.", "[fem_gelmnt2,in/out]") {
+
+   SECTION("GELMNT2") {
+   std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "GELMNT2 +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+         "        +1.100000000e+01+2.100000000e+01+3.100000000e+01+1.200000000e+01\n",
+         "        +2.200000000e+01+3.200000000e+01+1.300000000e+01+2.300000000e+01\n",
+         "        +3.300000000e+01+1.400000000e+01+2.400000000e+01+3.400000000e+01\n",
+         "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
+         "        +9.000000000e+00+1.000000000e+01\n"});
+   std::deque<std::string> lines;
+   card::card_split(data, lines);
+   gelmnt2 probe(lines);
+
+      CHECK(probe.SUBNO == 1);
+      CHECK(probe.SLEVEL == 2);
+      CHECK(probe.STYPE == 3);
+      CHECK(probe.ADDNO == 4);
+      CHECK(probe.T[0][0] == 11.);
+      CHECK(probe.T[1][0] == 12.);
+      CHECK(probe.T[2][0] == 13.);
+      CHECK(probe.T[3][0] == 14.);
+      CHECK(probe.T[0][1] == 21.);
+      CHECK(probe.T[1][1] == 22.);
+      CHECK(probe.T[2][1] == 23.);
+      CHECK(probe.T[3][1] == 24.);
+      CHECK(probe.T[0][2] == 31.);
+      CHECK(probe.T[1][2] == 32.);
+      CHECK(probe.T[2][2] == 33.);
+      CHECK(probe.T[3][2] == 34.);
+      CHECK(probe.T[0][3] == 0.);
+      CHECK(probe.T[1][3] == 0.);
+      CHECK(probe.T[2][3] == 0.);
+      CHECK(probe.T[3][3] == 1.);
+      CHECK(probe.NNOD == 5);
+      CHECK(probe.NOD.size() == 5);
+      CHECK(probe.NOD == std::vector<long>({6, 7, 8, 9, 10}));
    }
 }
 

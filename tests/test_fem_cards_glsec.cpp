@@ -139,6 +139,52 @@ TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
    }
 }
 
+TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GLSEC (1)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n",
+            "        +9.000000000e+00+1.000000000e+01\n"});
+      card::card_split(data, lines);
+      glsec probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.HZ == 2.);
+      CHECK(probe.TY == 3.);
+      CHECK(probe.BY == 4.);
+      CHECK(probe.TZ == 5.);
+      CHECK(probe.SFY == 6.);
+      CHECK(probe.SFZ == 7.);
+      CHECK(probe.K);
+      CHECK(probe.NLOBY == 9);
+      CHECK(probe.NLOBZ == 10);
+   }
+
+   SECTION("GLSEC (2)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n"});
+      card::card_split(data, lines);
+      glsec probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.HZ == 2.);
+      CHECK(probe.TY == 3.);
+      CHECK(probe.BY == 4.);
+      CHECK(probe.TZ == 5.);
+      CHECK(probe.SFY == 6.);
+      CHECK(probe.SFZ == 7.);
+      CHECK(probe.K);
+      CHECK(probe.NLOBY == 0);
+      CHECK(probe.NLOBZ == 0);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

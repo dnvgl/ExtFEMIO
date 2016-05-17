@@ -64,16 +64,13 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
       CHECK(probe.SUBTYPE == 0);
       CHECK(probe.NRECS == 4);
       CHECK(probe.NBYTE == 72);
-      CHECK(probe.CONT[0] ==
+      CHECK(probe.CONT == std::vector<std::string>({
             //        1         2         3         4         5         6         7
             // 3456789012345678901234567890123456789012345678901234567890123456789012
-            "DATE TIME:  11/03/2015 09:46:08                                         ");
-      CHECK(probe.CONT[1] ==
-            "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013                    ");
-      CHECK(probe.CONT[2] ==
-            "COMPUTER: HAML130185                                                    ");
-      CHECK(probe.CONT[3] ==
-            "USER: berhol                                                            ");
+            "DATE TIME:  11/03/2015 09:46:08                                         ",
+            "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013                    ",
+            "COMPUTER: HAML130185                                                    ",
+            "USER: berhol                                                            "}));
    }
 }
 
@@ -82,7 +79,7 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
    std::ostringstream test;
 
    long TYPE(0), SUBTYPE(0), NRECS(4), NBYTE(72);
-   std::deque<std::string> CONT({
+   std::vector<std::string> CONT({
          "DATE TIME:  11/03/2015 09:46:08",
          "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013",
          "COMPUTER: HAML130185",
@@ -139,13 +136,16 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]" ) {
             "        COMPUTER: HAML130185                                \n"
             "        USER: berhol                                        \n");
    }
+}
 
-   SECTION("FEMIO-7") {
-      TYPE = 1;
-      std::deque<std::string> CONT({
+TEST_CASE("FEMio-7: Problems with test output.", "[fem_date,out]" ) {
+
+   SECTION("Data set from issue.") {
+      std::ostringstream test;
+      std::vector<std::string> CONT({
             std::string("PROGRAM: GL_ShipLoad"),
             std::string("VERSION : 2.2.?")});
-      date probe(TYPE, SUBTYPE, CONT);
+      date probe(1, 0, CONT);
       test << probe;
       CHECK(probe.NBYTE == 28);
       CHECK(test.str() ==

@@ -15,6 +15,7 @@
 #define _FEM_CARDS_H_
 
 #include <deque>
+#include <vector>
 #include <string>
 #include <set>
 #include <map>
@@ -261,7 +262,7 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                    The eight first bytes on the text records shall be
                    filled with blanks.
                */
-               std::deque<std::string> CONT;
+               std::vector<std::string> CONT;
 
                date(std::deque<std::string> const &);
 
@@ -270,11 +271,11 @@ USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
                date(
                   long const &TYPE, long const &SUBTYPE,
                   long const &NRECS, long const &NBYTE,
-                  std::deque<std::string> const &CONT);
+                  std::vector<std::string> const &CONT);
 
                date(
                   long const &TYPE, long const &SUBTYPE,
-                  std::deque<std::string> const &CONT);
+                  std::vector<std::string> const &CONT);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -368,7 +369,7 @@ system, unless a local nodal coordinate system is specified (see the
                dnvgl::extfem::fem::types::entry_type<long> static const _form_NODEX;
                dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
                dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
-               dnvgl::extfem::fem::types::entry_type<std::deque<int>> static const _form_ODOF;
+               dnvgl::extfem::fem::types::entry_type<std::vector<int>> static const _form_ODOF;
 
             public:
 
@@ -386,7 +387,7 @@ system, unless a local nodal coordinate system is specified (see the
                long NDOF;
                /** Order of degrees of freedom. `NDOF` digits.
                 */
-               std::deque<int> ODOF;
+               std::vector<int> ODOF;
 
                gnode(std::deque<std::string> const &);
 
@@ -394,11 +395,11 @@ system, unless a local nodal coordinate system is specified (see the
 
                gnode(
                   long const &NODEX, long const &NODENO,
-                  long const &NDOF, std::deque<int> const &ODOF);
+                  long const &NDOF, std::vector<int> const &ODOF);
 
                gnode(
                   long const &NODEX, long const &NODENO,
-                  std::deque<int> const &ODOF);
+                  std::vector<int> const &ODOF);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -594,7 +595,7 @@ Defines end of a superelement.
                    of the records will correspond to the program-defined
                    element numbering, `ELNO`.
                */
-               std::deque<long> NODIN;
+               std::vector<long> NODIN;
 
                gelmnt1(std::deque<std::string> const &);
 
@@ -603,12 +604,12 @@ Defines end of a superelement.
                gelmnt1(
                   long const &ELNOX, long const &ELNO,
                   dnvgl::extfem::fem::elements::el_types const &ELTYP, long const &ELTYAD,
-                  std::deque<long> const &NODIN);
+                  std::vector<long> const &NODIN);
 
                gelmnt1(
                   long const &ELNOX, long const &ELNO,
                   dnvgl::extfem::fem::elements::el_types const &ELTYP,
-                  std::deque<long> const &NODIN);
+                  std::vector<long> const &NODIN);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -758,24 +759,24 @@ Shortest version:
                /** Geometry reference number for the local nodes of the
                    element.
                */
-               std::deque<long> GEONO;
+               std::vector<long> GEONO;
                /** Number referring to the specification of degree of
                    fixation (Data type `BELFIX`). `FIXNO`[0] is the reference
                    number for the 1st local node of the element, FIXNO[*i*-1]
                    will be the reference number for the *i*’th local node.
                */
-               std::deque<long> FIXNO;
+               std::vector<long> FIXNO;
                /** Eccentricity number for the local nodes of the element,
                    i.e. number referring to the specification of
                    eccentricities.
                */
-               std::deque<long> ECCNO;
+               std::vector<long> ECCNO;
                /** Number referring to the specification of the local
                    element coordinate system for the local nodes of the
                    element. Refers to `BNTRCOS` or `GUNIVEC` record
                    depending on element type.
                */
-               std::deque<long> TRANSNO;
+               std::vector<long> TRANSNO;
 
                gelref1(std::deque<std::string> const &);
 
@@ -788,10 +789,10 @@ Shortest version:
                   long const &STRENO, long const &STREPONO,
                   long const &GEONO_OPT, long const &FIXNO_OPT,
                   long const &ECCNO_OPT, long const &TRANSNO_OPT,
-                  std::deque<long> const &GEONO={},
-                  std::deque<long> const &FIXNO={},
-                  std::deque<long> const &ECCNO={},
-                  std::deque<long> const &TRANSNO={});
+                  std::vector<long> const &GEONO={},
+                  std::vector<long> const &FIXNO={},
+                  std::vector<long> const &ECCNO={},
+                  std::vector<long> const &TRANSNO={});
 
                const dnvgl::extfem::fem::cards::types
                   card_type(void) const;
@@ -1079,6 +1080,8 @@ record may be on the interface.
 
                geccen(long const &ECCNO,
                       double const &EX, double const &EY, double const &EZ);
+
+               geccen(long const &ECCNO, std::vector<double> const &pos);
 
                geccen(geccen const *);
 
@@ -1627,7 +1630,7 @@ record may be on the interface.
                long TRANO;
                /** See above (under the explanation of `OPT`).
                 */
-               std::deque<double> A;
+               std::vector<double> A;
 
                belfix(std::deque<std::string> const&);
 
@@ -1636,7 +1639,7 @@ record may be on the interface.
                belfix(long const &FIXNO,
                       n_opt const &OPT,
                       long const &TRANO,
-                      std::deque<double> const &A);
+                      std::vector<double> const &A);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -1718,15 +1721,15 @@ be specified on one BQDP record.
                long NDEP;
                /** Dependent node’s degree of freedom.
                 */
-               std::deque<long> DEPDOF;
+               std::vector<long> DEPDOF;
                /** Independent node’s degree of freedom.
                 */
-               std::deque<long> INDEPDOF;
+               std::vector<long> INDEPDOF;
                /** The contribution of the *j*’th degree of freedom of
                    the independent node to the *i*’th degree of
                    freedom of the dependent node.
                */
-               std::deque<double> b;
+               std::vector<double> b;
 
                bldep(std::deque<std::string> const &);
 
@@ -1736,9 +1739,9 @@ be specified on one BQDP record.
                      long const &CNOD,
                      long const &NDDOF,
                      long const &NDEP,
-                     std::deque<long> const &DEPDOF,
-                     std::deque<long> const &INDEPDOF,
-                     std::deque<double> const &b);
+                     std::vector<long> const &DEPDOF,
+                     std::vector<long> const &INDEPDOF,
+                     std::vector<double> const &b);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -1805,7 +1808,7 @@ according to the increasing order of their internal node number.
                /** Specification of boundary condition codes of
                    relevant degrees of freedom.
                */
-               std::deque<long> FIX;
+               std::vector<long> FIX;
 
                bnbcd(std::deque<std::string> const &);
 
@@ -1813,10 +1816,10 @@ according to the increasing order of their internal node number.
 
                bnbcd(long const &NODENO,
                      long const &NDOF,
-                     std::deque<long> const &FIX);
+                     std::vector<long> const &FIX);
 
                bnbcd(long const &NODENO,
-                     std::deque<long> const &FIX);
+                     std::vector<long> const &FIX);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -1893,12 +1896,12 @@ If phase shift is not specified, the fields or positions
                /** The real part of the specified boundary condition
                    with respect to the rspt. degree of freedom.
                */
-               std::deque<double> RDISP;
+               std::vector<double> RDISP;
                /** The imagenary part of the specified boundary
                    condition with respect to the rspt. degree of
                    freedom.
                */
-               std::deque<double> IDISP;
+               std::vector<double> IDISP;
 
                bndispl(std::deque<std::string> const &);
 
@@ -1909,28 +1912,28 @@ If phase shift is not specified, the fields or positions
                        bool const &COMPLX,
                        long const &NODENO,
                        long const &NDOF,
-                       std::deque<double> const &RDISP,
-                       std::deque<double> const &IDISP={});
+                       std::vector<double> const &RDISP,
+                       std::vector<double> const &IDISP={});
 
                bndispl(long const &LLC,
                        long const &DTYPE,
                        bool const &COMPLX,
                        long const &NODENO,
-                       std::deque<double> const &RDISP,
-                       std::deque<double> const &IDISP={});
+                       std::vector<double> const &RDISP,
+                       std::vector<double> const &IDISP={});
 
                bndispl(long const &LLC,
                        long const &DTYPE,
                        long const &NODENO,
                        long const &NDOF,
-                       std::deque<double> const &RDISP,
-                       std::deque<double> const &IDISP={});
+                       std::vector<double> const &RDISP,
+                       std::vector<double> const &IDISP={});
 
                bndispl(long const &LLC,
                        long const &DTYPE,
                        long const &NODENO,
-                       std::deque<double> const &RDISP,
-                       std::deque<double> const &IDISP={});
+                       std::vector<double> const &RDISP,
+                       std::vector<double> const &IDISP={});
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -2008,11 +2011,11 @@ out.
                /** The real part of the load with respect to the rspt.
                    degree of freedom.
                */
-               std::deque<double> RLOAD;
+               std::vector<double> RLOAD;
                /** The imaginary part of the load with respect to the
                    rspt. degree of freedom. (Only if `COMPLX` == true).
                */
-               std::deque<double> ILOAD;
+               std::vector<double> ILOAD;
 
                bnload(std::deque<std::string> const &);
 
@@ -2023,28 +2026,28 @@ out.
                       bool const &COMPLX,
                       long const &NODENO,
                       long const &NDOF,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD={});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD={});
 
                bnload(long const &LLC,
                       long const &LOTYP,
                       bool const &COMPLX,
                       long const &NODENO,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD={});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD={});
 
                bnload(long const &LLC,
                       long const &LOTYP,
                       long const &NODENO,
                       long const &NDOF,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD={});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD={});
 
                bnload(long const &LLC,
                       long const &LOTYP,
                       long const &NODENO,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD={});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD={});
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -2097,7 +2100,7 @@ the *j*’th d.o.f.
                    defined (by `TRANSNO` on `GELREF1`), otherwise to
                    the global coordinate system of the superelement.
                */
-               std::deque<std::deque<double>> K;
+               std::vector<std::vector<double>> K;
 
                mgsprng(std::deque<std::string> const &);
 
@@ -2105,10 +2108,10 @@ the *j*’th d.o.f.
 
                mgsprng(long const &MATNO,
                        long const &NDOR,
-                       std::deque<std::deque<double>> const &K);
+                       std::vector<std::vector<double>> const &K);
 
                mgsprng(long const &MATNO,
-                       std::deque<std::deque<double>> const &K);
+                       std::vector<std::vector<double>> const &K);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -2238,7 +2241,7 @@ Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
                    `NMEMB` is number of set members on the current
                    record. `NMEMB` = `NFIELD` - 5
                */
-               std::deque<long> IRMEMB;
+               std::vector<long> IRMEMB;
 
                gsetmemb(std::deque<std::string> const &);
 
@@ -2249,24 +2252,18 @@ Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
                         long const &INDEX,
                         types const &ISTYPE,
                         origins const &ISORIG,
-                        std::deque<long> const &IRMEMB);
-
-               gsetmemb(long const &NFIELD,
-                        long const &ISREF,
-                        long const &INDEX,
-                        types const &ISTYPE,
-                        origins const &ISORIG);
+                        std::vector<long> const &IRMEMB={});
 
                gsetmemb(long const &ISREF,
                         long const &INDEX,
                         types const &ISTYPE,
                         origins const &ISORIG,
-                        std::deque<long> const &IRMEMB);
+                        std::vector<long> const &IRMEMB={});
 
                gsetmemb(long const &ISREF,
-                        long const &INDEX,
                         types const &ISTYPE,
-                        origins const &ISORIG);
+                        origins const &ISORIG,
+                        std::vector<long> const &IRMEMB={});
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -2703,7 +2700,7 @@ This record together with the set of nodes or elements record(s)
                long CODTXT;
 
                std::string SET_NAME;
-               std::deque<std::string> CONT;
+               std::vector<std::string> CONT;
 
                tdsetnam(std::deque<std::string> const &);
 
@@ -2714,11 +2711,11 @@ This record together with the set of nodes or elements record(s)
                         long const &CODNAM,
                         long const &CODTXT,
                         std::string const &SET_NAME,
-                        std::deque<std::string> const &CONT);
+                        std::vector<std::string> const &CONT);
 
                tdsetnam(long const &ISREF,
                         std::string const &SET_NAME,
-                        std::deque<std::string> const &CONT);
+                        std::vector<std::string> const &CONT);
 
                tdsetnam(long const &NFIELD,
                         long const &ISREF,
@@ -2842,7 +2839,7 @@ super-element hierarchy.
                long CODTXT;
 
                std::string SUP_NAME;
-               std::deque<std::string> CONT;
+               std::vector<std::string> CONT;
 
                tdsupnam(std::deque<std::string> const &);
 
@@ -2853,11 +2850,11 @@ super-element hierarchy.
                         long const &CODNAM,
                         long const &CODTXT,
                         std::string const &SUP_NAME,
-                        std::deque<std::string> const &CONT);
+                        std::vector<std::string> const &CONT);
 
                tdsupnam(long const &IHREF,
                         std::string const &SUP_NAME,
-                        std::deque<std::string> const &CONT);
+                        std::vector<std::string> const &CONT);
 
                tdsupnam(long const &NFIELD,
                         long const &IHREF,
@@ -2935,7 +2932,7 @@ per record.
                    The eight first bytes on the text records shall be
                    filled with blanks.
                */
-               std::deque<std::string> CONT;
+               std::vector<std::string> CONT;
 
                text(std::deque<std::string> const &);
 
@@ -2943,10 +2940,10 @@ per record.
 
                text(long const &TYPE, long const &SUBTYPE,
                     long const &NRECS, long const &NBYTE,
-                    std::deque<std::string> const &CONT);
+                    std::vector<std::string> const &CONT);
 
                text(long const &TYPE, long const &SUBTYPE,
-                    std::deque<std::string> const &CONT);
+                    std::vector<std::string> const &CONT);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;

@@ -152,6 +152,43 @@ SECTION("write (1)") {
    }
 }
 
+TEST_CASE("FEM HSUPTRAN conversion from own output.", "[fem_hsuptran,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("HSUPTRAN") {
+
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "HSUPTRAN+1.000000000e+00+2.000000000e+00+1.100000000e+01+2.100000000e+01\n",
+            "        +3.100000000e+01+0.000000000e+00+1.200000000e+01+2.200000000e+01\n",
+            "        +3.200000000e+01+0.000000000e+00+1.300000000e+01+3.300000000e+01\n",
+            "        +3.300000000e+01+0.000000000e+00+1.400000000e+01+2.400000000e+01\n",
+            "        +3.400000000e+01+1.000000000e+00\n"});
+      card::card_split(data, lines);
+      hsuptran probe(lines);
+
+      CHECK(probe.NFIELD == 1);
+      CHECK(probe.ITREF == 2);
+      CHECK(probe.T[0][0] == 11.);
+      CHECK(probe.T[1][0] == 12.);
+      CHECK(probe.T[2][0] == 13.);
+      CHECK(probe.T[3][0] == 14.);
+      CHECK(probe.T[0][1] == 21.);
+      CHECK(probe.T[1][1] == 22.);
+      CHECK(probe.T[2][1] == 33.);
+      CHECK(probe.T[3][1] == 24.);
+      CHECK(probe.T[0][2] == 31.);
+      CHECK(probe.T[1][2] == 32.);
+      CHECK(probe.T[2][2] == 33.);
+      CHECK(probe.T[3][2] == 34.);
+      CHECK(probe.T[0][3] == 0.);
+      CHECK(probe.T[1][3] == 0.);
+      CHECK(probe.T[2][3] == 0.);
+      CHECK(probe.T[3][3] == 1.);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

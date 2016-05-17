@@ -216,15 +216,15 @@ namespace dnvgl {
                              long const &ELNO,
                              elements::el_types const &ELTYP,
                              long const &ELTYAD,
-                             std::deque<long> const &NODIN) :
+                             std::vector<long> const &NODIN) :
                card(),
                ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
-               NODIN(NODIN.begin(), NODIN.end()) {}
+               NODIN(NODIN) {}
 
             gelmnt1::gelmnt1(long const &ELNOX,
                              long const &ELNO,
                              elements::el_types const &ELTYP,
-                             std::deque<long> const &NODIN) :
+                             std::vector<long> const &NODIN) :
                gelmnt1(ELNOX, ELNO, ELTYP, 0, NODIN) {}
 
             const dnvgl::extfem::fem::cards::types

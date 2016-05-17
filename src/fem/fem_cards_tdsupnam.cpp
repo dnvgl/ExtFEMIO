@@ -104,7 +104,7 @@ namespace dnvgl {
                                const long &CODNAM,
                                const long &CODTXT,
                                const std::string &SUP_NAME,
-                               const std::deque<std::string> &CONT) :
+                               const std::vector<std::string> &CONT) :
                card(), NFIELD(NFIELD), IHREF(IHREF),
                CODNAM(CODNAM), CODTXT(CODTXT),
                SUP_NAME(SUP_NAME), CONT(CONT) {
@@ -118,7 +118,7 @@ namespace dnvgl {
 
             tdsupnam::tdsupnam(const long &IHREF,
                                const std::string &SUP_NAME,
-                               const std::deque<std::string> &CONT) :
+                               const std::vector<std::string> &CONT) :
                card(), NFIELD(4), IHREF(IHREF),
                SUP_NAME(SUP_NAME), CONT(CONT) {
 

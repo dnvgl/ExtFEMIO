@@ -59,32 +59,8 @@ TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]" ) {
 
       CHECK((long)probe.LC == 1);
       CHECK((double)probe.SUBNO == 1);
-      CHECK(probe.LLC.size() == 2);
-      CHECK(probe.LLC[0] == 1);
-      CHECK(probe.LLC[1] == 2);
-      CHECK(probe.FACT.size() == 2);
-      CHECK(probe.FACT[0] == 1.);
-      CHECK(probe.FACT[1] == -1.);
-   }
-
-   SECTION("BSELL (own output)" ) {
-
-      std::deque<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
-         "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
-         "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
-         "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
-      bsell probe(lines);
-
-      CHECK((long)probe.LC == 2);
-      CHECK((double)probe.SUBNO == 29);
-      CHECK(probe.LLC.size() == 6);
-      CHECK(probe.LLC == std::deque<long>({1, 2, 3, 4, 5, 6}));
-      CHECK(probe.FACT.size() == 6);
-      CHECK(probe.FACT == std::deque<double>({1., -2., 3., -4., 5., -6.}));
+      CHECK(probe.LLC == std::vector<long>({1, 2}));
+      CHECK(probe.FACT == std::vector<double>({1., -1.}));
    }
 }
 
@@ -94,8 +70,8 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
 
    long LC(2);
    long SUBNO(29);
-   std::deque<long> LLC({1, 2, 3, 4, 5, 6});
-   std::deque<double> FACT({1., -2., 3., -4., 5., -6.});
+   std::vector<long> LLC({1, 2, 3, 4, 5, 6});
+   std::vector<double> FACT({1., -2., 3., -4., 5., -6.});
 
    SECTION("empty") {
       bsell probe;
@@ -123,6 +99,58 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
             "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
             "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
    }
+
+   SECTION("write (less)") {
+      bsell probe(2, 29, {1, 2, 3, 4, 5},
+                  {1., -2., 3., -4., 5.});
+      test << probe;
+      CHECK(test.str() ==
+            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+            "        +5.000000000e+00+5.000000000e+00\n");
+   }
+
+}
+
+TEST_CASE("FEM BSELL conversion from own output.", "[fem_bsell,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("BSELL (own output)" ) {
+
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
+            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
+            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
+            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"});
+      card::card_split(data, lines);
+      bsell probe(lines);
+
+      CHECK((long)probe.LC == 2);
+      CHECK((double)probe.SUBNO == 29);
+      CHECK(probe.LLC == std::vector<long>({1, 2, 3, 4, 5, 6}));
+      CHECK(probe.FACT == std::vector<double>({1., -2., 3., -4., 5., -6.}));
+   }
+
+   SECTION("BSELL (less)" ) {
+
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
+            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
+            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
+            "        +5.000000000e+00+5.000000000e+00\n"});
+      card::card_split(data, lines);
+      bsell probe(lines);
+
+      CHECK((long)probe.LC == 2);
+      CHECK((double)probe.SUBNO == 29);
+      CHECK(probe.LLC == std::vector<long>({1, 2, 3, 4, 5}));
+      CHECK(probe.FACT == std::vector<double>({1., -2., 3., -4., 5.}));
+   }
+
 }
 
 // Local Variables:

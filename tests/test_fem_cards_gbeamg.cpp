@@ -154,6 +154,38 @@ TEST_CASE("FEM GBEAMG types output.", "[fem_gbeamg,out]" ) {
    }
 }
 
+TEST_CASE("FEM GBEAMG conversion from own output.", "[fem_gbeamg,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GBEAMG (1)") {
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "GBEAMG  +1.000000000e+00            0.00+2.000000000e+00+3.000000000e+00\n",
+            "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+7.000000000e+00\n",
+            "        +8.000000000e+00+9.000000000e+00+1.000000000e+01+1.100000000e+01\n",
+            "        +1.200000000e+01+1.300000000e+01+1.400000000e+01+1.500000000e+01\n"});
+      card::card_split(data, lines);
+      gbeamg probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.AREA == 2.);
+      CHECK(probe.IX == 3.);
+      CHECK(probe.IY == 4.);
+      CHECK(probe.IZ == 5.);
+      CHECK(probe.IYZ == 6.);
+      CHECK(probe.WXMIN == 7.);
+      CHECK(probe.WYMIN == 8.);
+      CHECK(probe.WZMIN == 9);
+      CHECK(probe.SHARY == 10.);
+      CHECK(probe.SHARZ == 11.);
+      CHECK(probe.SHCENY == 12.);
+      CHECK(probe.SHCENZ == 13.);
+      CHECK(probe.SY == 14.);
+      CHECK(probe.SZ == 15.);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

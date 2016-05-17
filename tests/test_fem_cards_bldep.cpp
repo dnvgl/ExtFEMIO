@@ -46,7 +46,7 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
 
-    std::deque<std::string> lines; 
+   std::deque<std::string> lines; 
 
    SECTION("BLDEP (1)") {
       std::deque<std::string> data({
@@ -67,9 +67,9 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
       CHECK(probe.CNOD == 23047);
       CHECK(probe.NDDOF == 6);
       CHECK(probe.NDEP == 9);
-      CHECK(probe.DEPDOF == std::deque<long>({1, 1, 1, 2, 2, 2, 3, 3, 3}));
-      CHECK(probe.INDEPDOF == std::deque<long>({1, 6, 5, 2, 4, 6, 3, 5, 4}));
-      CHECK(probe.b == std::deque<double>({ 1.000e+0,  6.430e+3, -1.065e+3,
+      CHECK(probe.DEPDOF == std::vector<long>({1, 1, 1, 2, 2, 2, 3, 3, 3}));
+      CHECK(probe.INDEPDOF == std::vector<long>({1, 6, 5, 2, 4, 6, 3, 5, 4}));
+      CHECK(probe.b == std::vector<double>({ 1.000e+0,  6.430e+3, -1.065e+3,
                   1.000e+0,  1.065e+3,  0.000e+0,
                   1.000e+0,  0.000e+0, -6.430e+3}));
    }
@@ -93,32 +93,11 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
       CHECK(probe.CNOD == 23047);
       CHECK(probe.NDDOF == 6);
       CHECK(probe.NDEP == 9);
-      CHECK(probe.DEPDOF == std::deque<long>({1, 1, 1, 2, 2, 2, 3, 3, 3}));
-      CHECK(probe.INDEPDOF == std::deque<long>({1, 6, 5, 2, 4, 6, 3, 5, 4}));
-      CHECK(probe.b == std::deque<double>({ 1.000e+0,  6.430e+3, -1.065e+3,
+      CHECK(probe.DEPDOF == std::vector<long>({1, 1, 1, 2, 2, 2, 3, 3, 3}));
+      CHECK(probe.INDEPDOF == std::vector<long>({1, 6, 5, 2, 4, 6, 3, 5, 4}));
+      CHECK(probe.b == std::vector<double>({ 1.000e+0,  6.430e+3, -1.065e+3,
                   1.000e+0,  1.065e+3,  0.000e+0,
                   1.000e+0,  0.000e+0, -6.430e+3}));
-   }
-
-   SECTION("BLDEP (3)") {
-      std::deque<std::string> data({
-         "BLDEP   +1.000000000e+00+2.000000000e+00+6.000000000e+00+6.000000000e+00\n",
-         "        +1.000000000e+00+3.000000000e+00+1.000000000e+00            0.00\n",
-         "        +1.000000000e+00+2.000000000e+00+2.000000000e+00            0.00\n",
-         "        +1.000000000e+00+1.000000000e+00+3.000000000e+00            0.00\n",
-         "        +2.000000000e+00+3.000000000e+00+4.000000000e+00            0.00\n",
-         "        +2.000000000e+00+2.000000000e+00+5.000000000e+00            0.00\n",
-         "        +2.000000000e+00+1.000000000e+00+6.000000000e+00            0.00\n"});
-      card::card_split(data, lines);
-      bldep probe(lines);
-
-      CHECK(probe.NODENO == 1);
-      CHECK(probe.CNOD == 2);
-      CHECK(probe.NDDOF == 6);
-      CHECK(probe.NDEP == 6);
-      CHECK(probe.DEPDOF == std::deque<long>({1, 1, 1, 2, 2, 2}));
-      CHECK(probe.INDEPDOF == std::deque<long>({3, 2, 1, 3, 2, 1}));
-      CHECK(probe.b == std::deque<double>({1.,  2., 3., 4., 5., 6.}));
    }
 }
 
@@ -137,9 +116,9 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
       long inp_indepdof[9] = {3, 2, 1, 3, 2, 1, 3, 2, 1};
       double inp_b[9] = { 1., 2., 3., 4., 5., 6., 7., 8., 9.};
       bldep probe(1, 2, 6, 6,
-                  std::deque<long>(inp_depdof, inp_depdof + 9),
-                  std::deque<long>(inp_indepdof, inp_indepdof + 9),
-                  std::deque<double>(inp_b, inp_b + 9));
+                  std::vector<long>(inp_depdof, inp_depdof + 9),
+                  std::vector<long>(inp_indepdof, inp_indepdof + 9),
+                  std::vector<double>(inp_b, inp_b + 9));
       test << probe;
       CHECK(test.str() ==
             "BLDEP   +1.000000000e+00+2.000000000e+00+6.000000000e+00+6.000000000e+00\n"
@@ -165,6 +144,32 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
             "        +2.000000000e+00+3.000000000e+00+4.000000000e+00            0.00\n"
             "        +2.000000000e+00+2.000000000e+00+5.000000000e+00            0.00\n"
             "        +2.000000000e+00+1.000000000e+00+6.000000000e+00            0.00\n");
+   }
+}
+
+TEST_CASE("FEM BLDEP conversion from own output.", "[fem_bldep,in/out]") {
+
+   std::deque<std::string> lines; 
+
+   SECTION("BLDEP (3)") {
+      std::deque<std::string> data({
+         "BLDEP   +1.000000000e+00+2.000000000e+00+6.000000000e+00+6.000000000e+00\n",
+         "        +1.000000000e+00+3.000000000e+00+1.000000000e+00            0.00\n",
+         "        +1.000000000e+00+2.000000000e+00+2.000000000e+00            0.00\n",
+         "        +1.000000000e+00+1.000000000e+00+3.000000000e+00            0.00\n",
+         "        +2.000000000e+00+3.000000000e+00+4.000000000e+00            0.00\n",
+         "        +2.000000000e+00+2.000000000e+00+5.000000000e+00            0.00\n",
+         "        +2.000000000e+00+1.000000000e+00+6.000000000e+00            0.00\n"});
+      card::card_split(data, lines);
+      bldep probe(lines);
+
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.CNOD == 2);
+      CHECK(probe.NDDOF == 6);
+      CHECK(probe.NDEP == 6);
+      CHECK(probe.DEPDOF == std::vector<long>({1, 1, 1, 2, 2, 2}));
+      CHECK(probe.INDEPDOF == std::vector<long>({3, 2, 1, 3, 2, 1}));
+      CHECK(probe.b == std::vector<double>({1.,  2., 3., 4., 5., 6.}));
    }
 }
 

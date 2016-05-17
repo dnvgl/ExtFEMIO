@@ -82,7 +82,7 @@ TEST_CASE("FEM HIERARCH types output.", "[fem_hierarch,out]" ) {
    long ITREF(6);
    long IHPREF(7);
    long NSUB(8);
-   std::deque<long> IHSREFi({9, 10, 11, 12, 13, 14, 15, 16});
+   std::vector<long> IHSREFi({9, 10, 11, 12, 13, 14, 15, 16});
 
    std::string ref(
       "HIERARCH+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
@@ -118,6 +118,64 @@ TEST_CASE("FEM HIERARCH types output.", "[fem_hierarch,out]" ) {
       test << probe;
       CHECK(test.str() == ref);
    }
+
+   SECTION("write (3)") {
+      hierarch probe(NFIELD, IHREF, ISELTY, INDSEL, ISLEVL, ITREF,
+                     IHPREF, std::vector<long>({9, 10, 11, 12, 13, 14}));
+
+      test << probe;
+      CHECK(test.str() ==
+            "HIERARCH+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+6.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01\n");
+   }
+}
+
+TEST_CASE("FEM HIERARCH conversion from own output.", "[fem_hierarch,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("HIERARCH") {
+      std::deque<std::string> data({
+            "HIERARCH+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n",
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"});
+      card::card_split(data, lines);
+      hierarch probe(lines);
+
+      CHECK(probe.NFIELD == 1);
+      CHECK(probe.IHREF == 2);
+      CHECK(probe.ISELTY == 3);
+      CHECK(probe.INDSEL == 4);
+      CHECK(probe.ISLEVL == 5);
+      CHECK(probe.ITREF == 6);
+      CHECK(probe.IHPREF == 7);
+      CHECK(probe.NSUB == 8);
+      CHECK(probe.IHSREFi == std::vector<long>({9, 10, 11, 12, 13, 14, 15, 16}));
+   }
+
+   SECTION("HIERARCH (2)") {
+      std::deque<std::string> data({
+            "HIERARCH+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+6.000000000e+00\n",
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n",
+            "        +1.300000000e+01+1.400000000e+01\n"});
+      card::card_split(data, lines);
+      hierarch probe(lines);
+
+      CHECK(probe.NFIELD == 1);
+      CHECK(probe.IHREF == 2);
+      CHECK(probe.ISELTY == 3);
+      CHECK(probe.INDSEL == 4);
+      CHECK(probe.ISLEVL == 5);
+      CHECK(probe.ITREF == 6);
+      CHECK(probe.IHPREF == 7);
+      CHECK(probe.NSUB == 6);
+      CHECK(probe.IHSREFi == std::vector<long>({9, 10, 11, 12, 13, 14}));
+   }
+
 }
 
 // Local Variables:

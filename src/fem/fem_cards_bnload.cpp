@@ -80,8 +80,8 @@ namespace dnvgl {
                            const bool &COMPLX,
                            const long &NODENO,
                            const long &NDOF,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD) :
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                NODENO(NODENO), NDOF(NDOF),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
@@ -90,8 +90,8 @@ namespace dnvgl {
                            const long &LOTYP,
                            const bool &COMPLX,
                            const long &NODENO,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD):
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD):
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                NODENO(NODENO), NDOF((long)RLOAD.size()),
                RLOAD(RLOAD), ILOAD(ILOAD) {}
@@ -100,8 +100,8 @@ namespace dnvgl {
                            const long &LOTYP,
                            const long &NODENO,
                            const long &NDOF,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD) :
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP),
                COMPLX(ILOAD.size() > 0),
                NODENO(NODENO), NDOF(NDOF),
@@ -111,8 +111,8 @@ namespace dnvgl {
             bnload::bnload(const long &LLC,
                            const long &LOTYP,
                            const long &NODENO,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD) :
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP),
                COMPLX(ILOAD.size() > 0),
                NODENO(NODENO), NDOF((long)RLOAD.size()),

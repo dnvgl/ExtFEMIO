@@ -84,7 +84,7 @@ namespace dnvgl {
                              const long &ADDNO,
                              const double T[4][4],
                              const long &NNOD,
-                             const std::deque<long> &NOD) :
+                             const std::vector<long> &NOD) :
                card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
                ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
                if (this->NOD.size() != (size_t)this->NNOD)
@@ -101,7 +101,7 @@ namespace dnvgl {
                              const long &STYPE,
                              const long &ADDNO,
                              const double T[4][4],
-                             const std::deque<long> &NOD) :
+                             const std::vector<long> &NOD) :
                gelmnt2(SUBNO, SLEVEL, STYPE, ADDNO, T,
                        static_cast<long>(NOD.size()), NOD) {}
 
@@ -122,7 +122,7 @@ namespace dnvgl {
                              const double &T24,
                              const double &T34,
                              const long &NNOD,
-                             const std::deque<long> &NOD) :
+                             const std::vector<long> &NOD) :
                card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
                ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
                if (this->NOD.size() != (size_t)this->NNOD)
@@ -162,7 +162,7 @@ namespace dnvgl {
                              const double &T14,
                              const double &T24,
                              const double &T34,
-                             const std::deque<long> &NOD) :
+                             const std::vector<long> &NOD) :
                card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
                ADDNO(ADDNO), NOD(NOD) {
                this->NNOD = long(this->NOD.size());
@@ -249,5 +249,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check"
+// compile-command: "make -C ../.. check -j8"
 // End:

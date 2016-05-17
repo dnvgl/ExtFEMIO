@@ -44,7 +44,7 @@ namespace dnvgl {
             const entry_type<long> gnode::_form_NODEX("NODEX");
             const entry_type<long> gnode::_form_NODENO("NODENO");
             const entry_type<long> gnode::_form_NDOF("NDOF");
-            const entry_type<std::deque<int>> gnode::_form_ODOF("ODOF");
+            const entry_type<std::vector<int>> gnode::_form_ODOF("ODOF");
 
             gnode::gnode(const std::deque<std::string> &inp) :
                card(inp) {
@@ -59,7 +59,7 @@ namespace dnvgl {
                NODEX = _form_NODEX(*(pos++));
                NODENO = _form_NODENO(*(pos++));
                NDOF = _form_NDOF(*(pos++));
-               ODOF = std::deque<int>(*_form_ODOF(*(pos++)));
+               ODOF = std::vector<int>(*_form_ODOF(*(pos++)));
             }
 
             gnode::gnode(void) :
@@ -68,7 +68,7 @@ namespace dnvgl {
             gnode::gnode(const long &NODEX,
                          const long &NODENO,
                          const long &NDOF,
-                         const std::deque<int> &ODOF) :
+                         const std::vector<int> &ODOF) :
                card(),
                NODEX(NODEX), NODENO(NODENO), NDOF(NDOF),
                ODOF(ODOF.begin(), ODOF.end()) {
@@ -77,7 +77,7 @@ namespace dnvgl {
 
             gnode::gnode(const long &NODEX,
                          const long &NODENO,
-                         const std::deque<int> &ODOF) :
+                         const std::vector<int> &ODOF) :
                gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
 
             const std::ostream&

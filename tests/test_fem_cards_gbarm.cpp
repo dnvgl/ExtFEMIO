@@ -61,8 +61,8 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
       CHECK(probe.BB == 32.);
       CHECK(probe.SFY == 1.);
       CHECK(probe.SFZ == 1.);
-      CHECK(probe.NLOBY == 0.);
-      CHECK(probe.NLOBZ == 0.);
+      CHECK(probe.NLOBY == 0);
+      CHECK(probe.NLOBZ == 0);
    }
 
    SECTION("GBARM (2)") {
@@ -129,6 +129,45 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
       CHECK(test.str() ==
             "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
             "        +5.000000000e+00+6.000000000e+00\n");
+   }
+}
+
+TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GBARM (1)") {
+      std::deque<std::string> data({
+            "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
+      card::card_split(data, lines);
+      gbarm probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.HZ == 2.);
+      CHECK(probe.BT == 3.);
+      CHECK(probe.BB == 4.);
+      CHECK(probe.SFY == 5.);
+      CHECK(probe.SFZ == 6.);
+      CHECK(probe.NLOBY == 7);
+      CHECK(probe.NLOBZ == 8);
+   }
+
+   SECTION("GBARM (2)") {
+      std::deque<std::string> data({
+            "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00\n"});
+      card::card_split(data, lines);
+      gbarm probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.HZ == 2.);
+      CHECK(probe.BT == 3.);
+      CHECK(probe.BB == 4.);
+      CHECK(probe.SFY == 5.);
+      CHECK(probe.SFZ == 6.);
+      CHECK(probe.NLOBY == 0);
+      CHECK(probe.NLOBZ == 0);
    }
 }
 

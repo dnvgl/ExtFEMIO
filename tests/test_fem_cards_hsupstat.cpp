@@ -112,6 +112,34 @@ TEST_CASE("FEM HSUPSTAT types output.", "[fem_hsupstat,out]" ) {
    }
 }
 
+TEST_CASE("FEM HSUPSTAT conversion from own output.", "[fem_hsupstat,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("HSUPSTAT") {
+
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "HSUPSTAT+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
+            "        +9.000000000e+00\n"});
+
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      hsupstat probe(lines);
+
+      CHECK(probe.NFIELD == 1);
+      CHECK(probe.ISELTY == 2);
+      CHECK(probe.NIDOF == 3);
+      CHECK(probe.NRDOF == 4);
+      CHECK(probe.NBAND == 5);
+      CHECK(probe.NELT == 6);
+      CHECK(probe.LINDEP == 7);
+      CHECK(probe.RELOADC == 8);
+      CHECK(probe.COMPLC == 9);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

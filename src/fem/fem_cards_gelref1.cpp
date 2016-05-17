@@ -137,10 +137,10 @@ namespace dnvgl {
                const long &STRENO, const long &STREPONO,
                const long &GEONO_OPT, const long &FIXNO_OPT,
                const long &ECCNO_OPT, const long &TRANSNO_OPT,
-               const std::deque<long> &GEONO,
-               const std::deque<long> &FIXNO,
-               const std::deque<long> &ECCNO,
-               const std::deque<long> &TRANSNO) :
+               const std::vector<long> &GEONO,
+               const std::vector<long> &FIXNO,
+               const std::vector<long> &ECCNO,
+               const std::vector<long> &TRANSNO) :
                card(),
                ELNO(ELNO), MATNO(MATNO), ADDNO(ADDNO), INTNO(INTNO),
                MINTNO(MINTNO), STRANO(STRANO), STRENO(STRENO),

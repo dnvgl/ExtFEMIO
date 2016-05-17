@@ -112,6 +112,42 @@ TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
       CHECK(test.str() ==
             "GELTH   +1.000000000e+00+2.000000000e+00\n");
    }
+
+   SECTION("simple NINT default (2)") {
+      gelth probe(1, 2., 0);
+      test << probe;
+      CHECK(test.str() ==
+            "GELTH   +1.000000000e+00+2.000000000e+00\n");
+   }
+}
+
+TEST_CASE("FEM GELTH conversion from own output.", "[fem_gelth,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GELTH (1)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "GELTH   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
+      card::card_split(data, lines);
+      gelth probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.TH == 2.);
+      CHECK(probe.NINT == 3);
+   }
+
+   SECTION("GELTH (2)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "GELTH   +1.000000000e+00+2.000000000e+00\n"});
+      card::card_split(data, lines);
+      gelth probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.TH == 2.);
+      CHECK(probe.NINT == 0);
+   }
 }
 
 // Local Variables:

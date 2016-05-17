@@ -102,6 +102,20 @@ TEST_CASE("FEM IEND types output.", "[fem_iend,out]" ) {
    }
 }
 
+TEST_CASE("FEM IEND conversion from own output.", "[fem_iend,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("IEND (1)") {
+      std::deque<std::string> data({
+            "IEND    +3.000000000e+00            0.00            0.00            0.00\n"});
+      card::card_split(data, lines);
+      iend probe(lines);
+
+      CHECK(probe.CONT == 3);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

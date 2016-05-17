@@ -66,62 +66,9 @@ TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
       CHECK(probe.NDOF == 4);
       CHECK(probe.INTNO == 0);
       CHECK(probe.SIDE == 2);
-      CHECK(probe.RLOADi.size() == 4);
-      CHECK(probe.RLOADi[0] == 1.66046816e+4);
-      CHECK(probe.RLOADi[1] == 3.86669189e+3);
-      CHECK(probe.RLOADi[2] == 3.86368091e+3);
-      CHECK(probe.RLOADi[3] == 1.62054932e+4);
-      CHECK(probe.ILOADi.size() == 0);
-   }
-
-   SECTION("BEUSLO (own output, only r)") {
-      std::deque<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "BEUSLO  +1.000000000e+00+2.000000000e+00           +0.00+3.000000000e+00\n",
-         "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
-         "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
-         "        +1.100000000e+01\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
-      beuslo probe(lines);
-
-      CHECK(probe.LLC == 1);
-      CHECK(probe.LOTYP == 2);
-      CHECK_FALSE(probe.COMPLX);
-      CHECK(probe.LAYER == 3);
-      CHECK(probe.ELNO == 4);
-      CHECK(probe.NDOF == 5);
-      CHECK(probe.INTNO == 6);
-      CHECK(probe.SIDE == 2);
-      CHECK(probe.RLOADi.size() == 5);
-      CHECK(probe.RLOADi == std::deque<double>({7., 8., 9., 10., 11.}));
-      CHECK(probe.ILOADi.size() == 0);
-   }
-
-   SECTION("BEUSLO (own output, r + i)") {
-      std::deque<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "BEUSLO  +1.000000000e+00+2.000000000e+00           +1.00+3.000000000e+00\n",
-         "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
-         "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
-         "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
-         "        +1.500000000e+01+1.600000000e+01\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
-      beuslo probe(lines);
-
-      CHECK(probe.LLC == 1);
-      CHECK(probe.LOTYP == 2);
-      CHECK(probe.COMPLX);
-      CHECK(probe.LAYER == 3);
-      CHECK(probe.ELNO == 4);
-      CHECK(probe.NDOF == 5);
-      CHECK(probe.INTNO == 6);
-      CHECK(probe.SIDE == 2);
-      CHECK(probe.RLOADi.size() == 5);
-      CHECK(probe.RLOADi == std::deque<double>({7., 8., 9., 10., 11.}));
-      CHECK(probe.ILOADi.size() == 5);
-      CHECK(probe.ILOADi == std::deque<double>({12., 13., 14., 15., 16.}));
+      CHECK(probe.RLOADi == std::vector<double>({
+               1.66046816e+4, 3.86669189e+3, 3.86368091e+3, 1.62054932e+4}));
+      CHECK(probe.ILOADi == std::vector<double>({}));
    }
 }
 
@@ -136,8 +83,8 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
    long NDOF(5);
    long INTNO(6);
    long SIDE(2);
-   std::deque<double> RLOADi({7., 8., 9., 10., 11.});
-   std::deque<double> ILOADi({12., 13., 14., 15., 16.});
+   std::vector<double> RLOADi({7., 8., 9., 10., 11.});
+   std::vector<double> ILOADi({12., 13., 14., 15., 16.});
 
    std::string ref_r(
       "BEUSLO  +1.000000000e+00+2.000000000e+00           +0.00+3.000000000e+00\n"
@@ -243,7 +190,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
 
    SECTION("write (complex, verbose, fails 3)") {
       COMPLX = true;
-      std::deque<double> ILOADi({12., 13., 14., 15., 16., 17.});
+      std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
       CHECK_THROWS(
          beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
                       SIDE, RLOADi, ILOADi));
@@ -257,14 +204,14 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
    }
 
    SECTION("write (complex, impl. COMPLX, fails 1)") {
-      std::deque<double> RLOADi({12., 13., 14., 15., 16., 17.});
+      std::vector<double> RLOADi({12., 13., 14., 15., 16., 17.});
       CHECK_THROWS(
          beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                       SIDE, RLOADi, ILOADi));
    }
 
    SECTION("write (complex, impl. COMPLX, fails 2)") {
-      std::deque<double> ILOADi({12., 13., 14., 15., 16., 17.});
+      std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
       CHECK_THROWS(
          beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                       SIDE, RLOADi, ILOADi));
@@ -287,7 +234,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
 
    SECTION("write (complex, impl. NDOF, fails 1)") {
       COMPLX = true;
-      std::deque<double> ILOADi({12., 13., 14., 15., 16., 17.});
+      std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
       CHECK_THROWS(
          beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
                       SIDE, RLOADi, ILOADi));
@@ -301,10 +248,63 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
    }
 
    SECTION("write (complex, impl. NDOF, COMPLX, fails)") {
-      std::deque<double> ILOADi({12., 13., 14., 15., 16., 17.});
+      std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
       CHECK_THROWS(
          beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
                       SIDE, RLOADi, ILOADi));
+   }
+}
+
+TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
+
+   SECTION("BEUSLO (own output, only r)") {
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BEUSLO  +1.000000000e+00+2.000000000e+00           +0.00+3.000000000e+00\n",
+         "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
+         "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
+         "        +1.100000000e+01\n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      beuslo probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 2);
+      CHECK_FALSE(probe.COMPLX);
+      CHECK(probe.LAYER == 3);
+      CHECK(probe.ELNO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.INTNO == 6);
+      CHECK(probe.SIDE == 2);
+      CHECK(probe.RLOADi.size() == 5);
+      CHECK(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
+      CHECK(probe.ILOADi.size() == 0);
+   }
+
+   SECTION("BEUSLO (own output, r + i)") {
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BEUSLO  +1.000000000e+00+2.000000000e+00           +1.00+3.000000000e+00\n",
+         "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
+         "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
+         "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
+         "        +1.500000000e+01+1.600000000e+01\n"});
+      std::deque<std::string> lines;
+      card::card_split(data, lines);
+      beuslo probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 2);
+      CHECK(probe.COMPLX);
+      CHECK(probe.LAYER == 3);
+      CHECK(probe.ELNO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.INTNO == 6);
+      CHECK(probe.SIDE == 2);
+      CHECK(probe.RLOADi.size() == 5);
+      CHECK(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
+      CHECK(probe.ILOADi.size() == 5);
+      CHECK(probe.ILOADi == std::vector<double>({12., 13., 14., 15., 16.}));
    }
 }
 

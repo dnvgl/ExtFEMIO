@@ -89,8 +89,8 @@ namespace dnvgl {
                            const long &NDOF,
                            const long &INTNO,
                            const long &SIDE,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD) :
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD) :
                card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
                LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
                SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
@@ -116,8 +116,8 @@ namespace dnvgl {
                            const long &ELNO,
                            const long &INTNO,
                            const long &SIDE,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD) :
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD) :
                            beuslo(LLC, LOTYP, COMPLX, LAYER, ELNO, static_cast<long>(RLOAD.size()),
                       INTNO, SIDE, RLOAD, ILOAD) {}
 
@@ -128,8 +128,8 @@ namespace dnvgl {
                            const long &NDOF,
                            const long &INTNO,
                            const long &SIDE,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD) :
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD) :
                beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, NDOF, INTNO,
                       SIDE, RLOAD, ILOAD) {}
 
@@ -139,8 +139,8 @@ namespace dnvgl {
                            const long &ELNO,
                            const long &INTNO,
                            const long &SIDE,
-                           const std::deque<double> &RLOAD,
-                           const std::deque<double> &ILOAD) :
+                           const std::vector<double> &RLOAD,
+                           const std::vector<double> &ILOAD) :
                beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, static_cast<long>(RLOAD.size()),
                       INTNO, SIDE, RLOAD, ILOAD) {}
 

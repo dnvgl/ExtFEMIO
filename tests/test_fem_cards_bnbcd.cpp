@@ -46,7 +46,6 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
-   long ref_fix[6] = {1, 1, 1, 1, 0, 1};
    std::deque<std::string> lines;
 
    SECTION("BNBCD (1)") {
@@ -58,7 +57,7 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
       CHECK(probe.NODENO == 8317);
       CHECK(probe.NDOF == 6);
-      CHECK(probe.FIX == std::deque<long>(ref_fix, ref_fix + 6));
+      CHECK(probe.FIX == std::vector<long>({1, 1, 1, 1, 0, 1}));
    }
 
    SECTION("BNBCD (2)") {
@@ -70,7 +69,7 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
       CHECK(probe.NODENO == 8317);
       CHECK(probe.NDOF == 6);
-      CHECK(probe.FIX == std::deque<long>(ref_fix, ref_fix + 6));
+      CHECK(probe.FIX == std::vector<long>({1, 1, 1, 1, 0, 1}));
    }
 
    SECTION("BNBCD (2)") {
@@ -82,7 +81,7 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
       CHECK(probe.NODENO == 1);
       CHECK(probe.NDOF == 3);
-      CHECK(probe.FIX == std::deque<long>({1, 2, 3}));
+      CHECK(probe.FIX == std::vector<long>({1, 2, 3}));
    }
 }
 
@@ -99,7 +98,7 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
    }
 
    SECTION("simple") {
-      bnbcd probe(1, 6, std::deque<long>(inp_fix, inp_fix + 6));
+      bnbcd probe(1, 6, std::vector<long>(inp_fix, inp_fix + 6));
       test << probe;
       CHECK(test.str() ==
             "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
@@ -115,7 +114,7 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
    }
 
    SECTION("simple (2)") {
-      bnbcd probe(1, 3, std::deque<long>(inp_fix, inp_fix + 3));
+      bnbcd probe(1, 3, std::vector<long>(inp_fix, inp_fix + 3));
       test << probe;
       CHECK(test.str() ==
             "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
@@ -123,7 +122,7 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
    }
 
    SECTION("calc ndof") {
-      bnbcd probe(1, std::deque<long>(inp_fix, inp_fix + 6));
+      bnbcd probe(1, std::vector<long>(inp_fix, inp_fix + 6));
       test << probe;
       CHECK(test.str() ==
             "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
@@ -131,11 +130,40 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
    }
 
    SECTION("calc ndof (2)") {
-      bnbcd probe(1, std::deque<long>(inp_fix, inp_fix + 3));
+      bnbcd probe(1, std::vector<long>(inp_fix, inp_fix + 3));
       test << probe;
       CHECK(test.str() ==
             "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
             "        +3.000000000e+00\n");
+   }
+}
+
+TEST_CASE("FEM BNBCD conversion from own output.", "[fem_bnbcd,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("BNBCD (1)") {
+      std::deque<std::string> data({
+            "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00\n"});
+      card::card_split(data, lines);
+      bnbcd probe(lines);
+
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.NDOF == 3);
+      CHECK(probe.FIX == std::vector<long>({1, 2, 3}));
+   }
+
+   SECTION("BNBCD (2)") {
+      std::deque<std::string> data({
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
+      card::card_split(data, lines);
+      bnbcd probe(lines);
+
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.FIX == std::vector<long>({1, 2, 3, 4, 5, 6}));
    }
 }
 

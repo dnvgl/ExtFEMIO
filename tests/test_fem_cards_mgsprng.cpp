@@ -47,9 +47,9 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
 
    double c_ref_K[6] = {0., 0., 0., 0., 0., 0.};
-   std::deque<std::deque<double>> ref_K(6);
+   std::vector<std::vector<double>> ref_K(6);
    for (int i = 0; i < 6; i++) {
-      ref_K[i] = std::deque<double>(6);
+      ref_K[i] = std::vector<double>(6);
       for (int j = 0; j < 6; j++)
          ref_K[i][j] = 0;
    }
@@ -97,13 +97,13 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
 
    SECTION("MGSPRNG (3)") {
 
-      std::deque<std::deque<double>> ref_K(6);
-      ref_K[0] = std::deque<double>({1., 2., 3., 4., 5., 6.});
-      ref_K[1] = std::deque<double>({2., 7., 8., 9., 10., 11.});
-      ref_K[2] = std::deque<double>({3., 8., 12., 13., 14., 15.});
-      ref_K[3] = std::deque<double>({4., 9., 13., 16., 17., 18.});
-      ref_K[4] = std::deque<double>({5., 10., 14., 17., 19., 20.});
-      ref_K[5] = std::deque<double>({6., 11., 15., 18., 20., 21.});
+      std::vector<std::vector<double>> ref_K(6);
+      ref_K[0] = std::vector<double>({1., 2., 3., 4., 5., 6.});
+      ref_K[1] = std::vector<double>({2., 7., 8., 9., 10., 11.});
+      ref_K[2] = std::vector<double>({3., 8., 12., 13., 14., 15.});
+      ref_K[3] = std::vector<double>({4., 9., 13., 16., 17., 18.});
+      ref_K[4] = std::vector<double>({5., 10., 14., 17., 19., 20.});
+      ref_K[5] = std::vector<double>({6., 11., 15., 18., 20., 21.});
 
       std::deque<std::string> data({
          "MGSPRNG  7.00000000e+01  6.00000000e+00  1.00000000e+00  2.00000000e+00 \n",
@@ -130,9 +130,9 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
    std::ostringstream test;
 
    double c_ref_K[6] = { 0.,  0.,  0.,  0.,  0.,  0.};
-   std::deque<std::deque<double>> ref_K(6);
+   std::vector<std::vector<double>> ref_K(6);
    for (int i = 0; i < 6; i++)
-      ref_K[i] = std::deque<double>(c_ref_K, c_ref_K + 6);
+      ref_K[i] = std::vector<double>(c_ref_K, c_ref_K + 6);
    ref_K[1][1] = 999;
 
    SECTION("empty") {
@@ -166,13 +166,13 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
    }
 
    SECTION("all vals std::set") {
-      std::deque<std::deque<double>> ref_K(6);
-      ref_K[0] = std::deque<double>({1., 2., 3., 4., 5., 6.});
-      ref_K[1] = std::deque<double>({2., 7., 8., 9., 10., 11.});
-      ref_K[2] = std::deque<double>({3., 8., 12., 13., 14., 15.});
-      ref_K[3] = std::deque<double>({4., 9., 13., 16., 17., 18.});
-      ref_K[4] = std::deque<double>({5., 10., 14., 17., 19., 20.});
-      ref_K[5] = std::deque<double>({6., 11., 15., 18., 20., 21.});
+      std::vector<std::vector<double>> ref_K(6);
+      ref_K[0] = std::vector<double>({1., 2., 3., 4., 5., 6.});
+      ref_K[1] = std::vector<double>({2., 7., 8., 9., 10., 11.});
+      ref_K[2] = std::vector<double>({3., 8., 12., 13., 14., 15.});
+      ref_K[3] = std::vector<double>({4., 9., 13., 16., 17., 18.});
+      ref_K[4] = std::vector<double>({5., 10., 14., 17., 19., 20.});
+      ref_K[5] = std::vector<double>({6., 11., 15., 18., 20., 21.});
 
 
       mgsprng probe(1, ref_K);
@@ -184,6 +184,59 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
             "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n"
             "        +1.500000000e+01+1.600000000e+01+1.700000000e+01+1.800000000e+01\n"
             "        +1.900000000e+01+2.000000000e+01+2.100000000e+01\n");
+   }
+}
+
+TEST_CASE("FEM MGSPRNG conversion from own output.", "[fem_mgsprng,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("MGSPRNG (1)") {
+      std::deque<std::string> data({
+            "MGSPRNG +1.000000000e+00+6.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +9.990000000e+02+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00\n"});
+      card::card_split(data, lines);
+      mgsprng probe(lines);
+
+      CHECK(probe.MATNO == 1);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.K.size() == 6);
+      std::vector<std::vector<double>> ref_K(6);
+      ref_K[0] = std::vector<double>({0., 0., 0., 0., 0., 0.});
+      ref_K[1] = std::vector<double>({0., 999., 0., 0., 0., 0.});
+      ref_K[2] = std::vector<double>({0., 0., 0., 0., 0., 0.});
+      ref_K[3] = std::vector<double>({0., 0., 0., 0., 0., 0.});
+      ref_K[4] = std::vector<double>({0., 0., 0., 0., 0., 0.});
+      ref_K[5] = std::vector<double>({0., 0., 0., 0., 0., 0.});
+      CHECK(probe.K == ref_K);
+   }
+
+   SECTION("MGSPRNG (2)") {
+      std::deque<std::string> data({
+            "MGSPRNG +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
+            "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
+            "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
+            "        +1.500000000e+01+1.600000000e+01+1.700000000e+01+1.800000000e+01\n",
+            "        +1.900000000e+01+2.000000000e+01+2.100000000e+01\n"});
+      card::card_split(data, lines);
+      mgsprng probe(lines);
+
+      CHECK(probe.MATNO == 1);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.K.size() == 6);
+      std::vector<std::vector<double>> ref_K(6);
+      ref_K[0] = std::vector<double>({1., 2., 3., 4., 5., 6.});
+      ref_K[1] = std::vector<double>({2., 7., 8., 9., 10., 11.});
+      ref_K[2] = std::vector<double>({3., 8., 12., 13., 14., 15.});
+      ref_K[3] = std::vector<double>({4., 9., 13., 16., 17., 18.});
+      ref_K[4] = std::vector<double>({5., 10., 14., 17., 19., 20.});
+      ref_K[5] = std::vector<double>({6., 11., 15., 18., 20., 21.});
+      CHECK(probe.K == ref_K);
    }
 }
 

@@ -153,7 +153,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
    }
 
    SECTION("with comment") {
-      std::deque<std::string> comments(2);
+      std::vector<std::string> comments(2);
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdload probe(4, 123, 122, 233, "1234567890123456789012", comments);
@@ -166,7 +166,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
    }
 
    SECTION("with comment (calc internal values)") {
-      std::deque<std::string> comments(2);
+      std::vector<std::string> comments(2);
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdload probe(123, "1234567890123456789012", comments);
@@ -184,6 +184,63 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n"
             "        \n");
+   }
+}
+
+TEST_CASE("FEM TDLOAD conversion from own output.", "[fem_tdload,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("TDLOAD (1)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n",
+            "        1234567890123456789012\n"});
+      card::card_split(data, lines);
+      tdload probe(lines);
+
+      CHECK(probe.NFIELD == 4);
+      CHECK(probe.ILREF == 123);
+      CHECK(probe.CODNAM == 122);
+      CHECK(probe.CODTXT == 0);
+      CHECK(probe.SET_NAME == "1234567890123456789012");
+      CHECK(probe.CONT == std::vector<std::string>(0));
+   }
+
+   SECTION("TDLOAD (2)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n",
+            "        1234567890123456789012\n",
+            "        test                             \n",
+            "        123456789112345678921234567893123\n"});
+      card::card_split(data, lines);
+      tdload probe(lines);
+
+      CHECK(probe.NFIELD == 4);
+      CHECK(probe.ILREF == 123);
+      CHECK(probe.CODNAM == 122);
+      CHECK(probe.CODTXT == 233);
+      CHECK(probe.SET_NAME == "1234567890123456789012");
+      CHECK(probe.CONT == std::vector<std::string>({
+            "test                             ",
+               "123456789112345678921234567893123"}));
+   }
+
+   SECTION("TDLOAD (3)") {
+      std::deque<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n",
+            "        \n"});
+      card::card_split(data, lines);
+      tdload probe(lines);
+
+      CHECK(probe.NFIELD == 4);
+      CHECK(probe.ILREF == 123);
+      CHECK(probe.CODNAM == 100);
+      CHECK(probe.CODTXT == 0);
+      CHECK(probe.SET_NAME == "");
+      CHECK(probe.CONT == std::vector<std::string>(0));
    }
 }
 

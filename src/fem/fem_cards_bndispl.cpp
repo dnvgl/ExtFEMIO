@@ -81,8 +81,8 @@ namespace dnvgl {
                              const bool &COMPLX,
                              const long &NODENO,
                              const long &NDOF,
-                             const std::deque<double> &RDISP,
-                             const std::deque<double> &IDISP) :
+                             const std::vector<double> &RDISP,
+                             const std::vector<double> &IDISP) :
                card(), LLC(LLC), DTYPE(DTYPE), COMPLX(COMPLX),
                NODENO(NODENO), NDOF(NDOF),
                RDISP(RDISP), IDISP(IDISP) {}
@@ -92,8 +92,8 @@ namespace dnvgl {
                              const long &DTYPE,
                              const bool &COMPLX,
                              const long &NODENO,
-                             const std::deque<double> &RDISP,
-                             const std::deque<double> &IDISP):
+                             const std::vector<double> &RDISP,
+                             const std::vector<double> &IDISP):
                card(), LLC(LLC), DTYPE(DTYPE), COMPLX(COMPLX),
                NODENO(NODENO), NDOF((long)RDISP.size()),
                RDISP(RDISP), IDISP(IDISP) {}
@@ -102,8 +102,8 @@ namespace dnvgl {
                              const long &DTYPE,
                              const long &NODENO,
                              const long &NDOF,
-                             const std::deque<double> &RDISP,
-                             const std::deque<double> &IDISP) :
+                             const std::vector<double> &RDISP,
+                             const std::vector<double> &IDISP) :
                card(), LLC(LLC), DTYPE(DTYPE),
                COMPLX(IDISP.size() > 0),
                NODENO(NODENO), NDOF(NDOF),
@@ -113,8 +113,8 @@ namespace dnvgl {
             bndispl::bndispl(const long &LLC,
                              const long &DTYPE,
                              const long &NODENO,
-                             const std::deque<double> &RDISP,
-                             const std::deque<double> &IDISP) :
+                             const std::vector<double> &RDISP,
+                             const std::vector<double> &IDISP) :
                card(), LLC(LLC), DTYPE(DTYPE),
                COMPLX(IDISP.size() > 0),
                NODENO(NODENO), NDOF((long)RDISP.size()),

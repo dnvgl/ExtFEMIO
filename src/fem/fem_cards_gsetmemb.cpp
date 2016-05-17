@@ -76,30 +76,24 @@ namespace dnvgl {
                                long const &INDEX,
                                gsetmemb::types const &ISTYPE,
                                gsetmemb::origins const &ISORIG,
-                               std::deque<long> const &IRMEMB) :
+                               std::vector<long> const &IRMEMB/*={}*/) :
                                card(), NFIELD(NFIELD), ISREF(ISREF), INDEX(INDEX),
                                ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(IRMEMB) {}
-
-            gsetmemb::gsetmemb(const long &NFIELD,
-                               const long &ISREF,
-                               const long &INDEX,
-                               gsetmemb::types const &ISTYPE,
-                               gsetmemb::origins const &ISORIG) :
-                               gsetmemb(NFIELD, ISREF, INDEX, ISTYPE, ISORIG, {}) {}
 
             gsetmemb::gsetmemb(long const &ISREF,
                                long const &INDEX,
                                gsetmemb::types const &ISTYPE,
                                gsetmemb::origins const &ISORIG,
-                               std::deque<long> const &IRMEMB) :
+                               std::vector<long> const &IRMEMB/*={}*/) :
                                gsetmemb((long)IRMEMB.size() + 5, ISREF, INDEX,
                                ISTYPE, ISORIG, IRMEMB) {}
 
             gsetmemb::gsetmemb(long const &ISREF,
-                               long const &INDEX,
                                gsetmemb::types const &ISTYPE,
-                               gsetmemb::origins const &ISORIG) :
-                               gsetmemb(5, ISREF, INDEX, ISTYPE, ISORIG, {}) {}
+                               gsetmemb::origins const &ISORIG,
+                               std::vector<long> const &IRMEMB/*={}*/) :
+                               gsetmemb((long)IRMEMB.size() + 5, ISREF, 1,
+                               ISTYPE, ISORIG, IRMEMB) {}
 
             const dnvgl::extfem::fem::cards::types
                gsetmemb::card_type(void) const {
@@ -114,22 +108,36 @@ namespace dnvgl {
 
             std::ostream&
                operator<< (std::ostream &os, gsetmemb const &card) {
+               size_t cnt = 0;
+               size_t field = 0;
+               int pos = 0;
+               long index = card.INDEX;
+               bool first = true;
                if (card.NFIELD == -1) return os;
-               os << gsetmemb::head.format()
-                  << card._form_NFIELD.format(card.NFIELD)
-                  << card._form_ISREF.format(card.ISREF)
-                  << card._form_INDEX.format(card.INDEX)
-                  << card._form_ISTYPE.format(card.ISTYPE)
-                  << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_ISORIG.format(card.ISORIG);
-               long cnt = 1;
-               for (long i = 0; i < card.NFIELD - 5; i++) {
-                  if (cnt == 4) {
-                     os << std::endl << dnvgl::extfem::fem::types::card().format();
-                     cnt = 0;
+               while (first || cnt < card.IRMEMB.size()) {
+                  first = false;
+                  if (div(field, 1024).rem == 0) {
+                     if (field > 1)
+                        os << std::endl;
+                     os << gsetmemb::head.format()
+                        << card._form_NFIELD.format(
+                           std::min(card.IRMEMB.size() - cnt + 5,
+                                    static_cast<size_t>(1024)))
+                        << card._form_ISREF.format(card.ISREF)
+                        << card._form_INDEX.format(index++)
+                        << card._form_ISTYPE.format(card.ISTYPE)
+                        << std::endl << dnvgl::extfem::fem::types::card().format()
+                        << card._form_ISORIG.format(card.ISORIG);
+                     field += 5;
+                     pos = 1;
                   }
-                  os << card._form_IRMEMB.format(card.IRMEMB[i]);
-                  cnt += 1;
+                  if (pos++ == 4) {
+                     os << std::endl << dnvgl::extfem::fem::types::card().format();
+                     pos = 1;
+                  }
+                  if (cnt >= card.IRMEMB.size()) break;
+                  os << card._form_IRMEMB.format(card.IRMEMB[cnt++]);
+                  field++;
                }
                os << std::endl;
                return os;

@@ -114,7 +114,7 @@ namespace dnvgl {
                long CODTXT;
 
                std::string SET_NAME;
-               std::deque<std::string> CONT;
+               std::vector<std::string> CONT;
 
                tdload(std::deque<std::string> const &);
 
@@ -125,11 +125,11 @@ namespace dnvgl {
                       long const &CODNAM,
                       long const &CODTXT,
                       std::string const &SET_NAME,
-                      std::deque<std::string> const &CONT);
+                      std::vector<std::string> const &CONT);
 
                tdload(long const &ILREF,
                       std::string const &SET_NAME,
-                      std::deque<std::string> const &CONT);
+                      std::vector<std::string> const &CONT);
 
                tdload(long const &NFIELD,
                       long const &ILREF,
@@ -275,7 +275,7 @@ pressure in the local /z/-direction.
                    degree of freedom or /i/th node of the element
                    side.
                 */
-               std::deque<double> RLOADi;
+               std::vector<double> RLOADi;
                /** The imaginary part of the load with respect to the
                    /i/th degree of freedom or /i/th node of the
                    element side.
@@ -286,7 +286,7 @@ pressure in the local /z/-direction.
                    shell element `SIDE`= 3 (/z/=1)). For solids when
                    `LOTYP` = 3, `RLOAD` must be +1.0.
                 */
-               std::deque<double> ILOADi;
+               std::vector<double> ILOADi;
 
                beuslo(void);
 
@@ -300,8 +300,8 @@ pressure in the local /z/-direction.
                       long const &NDOF,
                       long const &INTNO,
                       long const &SIDE,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD = {});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD = {});
 
                beuslo(long const &LLC,
                       long const &LOTYP,
@@ -310,8 +310,8 @@ pressure in the local /z/-direction.
                       long const &ELNO,
                       long const &INTNO,
                       long const &SIDE,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD = {});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD = {});
 
                beuslo(long const &LLC,
                       long const &LOTYP,
@@ -320,8 +320,8 @@ pressure in the local /z/-direction.
                       long const &NDOF,
                       long const &INTNO,
                       long const &SIDE,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD = {});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD = {});
 
                beuslo(long const &LLC,
                       long const &LOTYP,
@@ -329,8 +329,8 @@ pressure in the local /z/-direction.
                       long const &ELNO,
                       long const &INTNO,
                       long const &SIDE,
-                      std::deque<double> const &RLOAD,
-                      std::deque<double> const &ILOAD = {});
+                      std::vector<double> const &RLOAD,
+                      std::vector<double> const &ILOAD = {});
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;

@@ -106,7 +106,7 @@ namespace dnvgl {
                            const long &CODNAM,
                            const long &CODTXT,
                            const std::string &SET_NAME,
-                           const std::deque<std::string> &CONT) :
+                           const std::vector<std::string> &CONT) :
                card(), NFIELD(NFIELD), ILREF(ILREF),
                CODNAM(CODNAM), CODTXT(CODTXT),
                SET_NAME(SET_NAME), CONT(CONT) {
@@ -120,7 +120,7 @@ namespace dnvgl {
 
             tdload::tdload(const long &ILREF,
                            const std::string &SET_NAME,
-                           const std::deque<std::string> &CONT) :
+                           const std::vector<std::string> &CONT) :
                card(), NFIELD(4), ILREF(ILREF),
                SET_NAME(SET_NAME), CONT(CONT) {
 

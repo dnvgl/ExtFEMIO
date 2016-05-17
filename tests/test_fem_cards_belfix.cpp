@@ -60,24 +60,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
       CHECK(probe.FIXNO == 23047);
       CHECK(probe.OPT == belfix::FIXATION);
       CHECK(probe.TRANO == 0);
-      CHECK(probe.A == std::deque<double>({1., 1., 1., 1., 1., 0.}));
-   }
-
-   SECTION("BELFIX (own output)") {
-
-      std::deque<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n",
-         "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n",
-         "        +1.000000000e+00+1.000000000e+00\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
-      belfix probe(lines);
-
-      CHECK(probe.FIXNO == 1);
-      CHECK(probe.OPT == belfix::FIXATION);
-      CHECK(probe.TRANO == 1);
-      CHECK(probe.A == std::deque<double>({1., 0., .5, 1., 1., 1.}));
+      CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
    }
 }
 
@@ -98,7 +81,7 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
       long FIXNO(1);
       belfix::n_opt OPT(belfix::FIXATION);
       long TRANO(1);
-      std::deque<double> A({1., 0., .5, 1., 1., 1.});
+      std::vector<double> A({1., 0., .5, 1., 1., 1.});
 
       belfix probe(FIXNO, OPT, TRANO, A);
       test << probe;
@@ -119,6 +102,27 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
             "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n"
             "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n"
             "        +1.000000000e+00+1.000000000e+00\n");
+   }
+}
+
+TEST_CASE("FEM BELFIX conversion from own output.", "[fem_belfix,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("BELFIX (own output)") {
+
+      std::deque<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n",
+         "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n",
+         "        +1.000000000e+00+1.000000000e+00\n"});
+      card::card_split(data, lines);
+      belfix probe(lines);
+
+      CHECK(probe.FIXNO == 1);
+      CHECK(probe.OPT == belfix::FIXATION);
+      CHECK(probe.TRANO == 1);
+      CHECK(probe.A == std::vector<double>({1., 0., .5, 1., 1., 1.}));
    }
 }
 

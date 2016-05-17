@@ -48,10 +48,10 @@ namespace dnvgl {
                long SUBNO;
                /** Local load cases included in the global load case LC.
                 */
-               std::deque<long> LLC;
+               std::vector<long> LLC;
                /** Scaling factors for the local load cases.
                */
-               std::deque<double> FACT;
+               std::vector<double> FACT;
 
                bsell(std::deque<std::string> const &);
 
@@ -59,8 +59,8 @@ namespace dnvgl {
 
                bsell(long const &LC,
                      long const &SUBNO,
-                     std::deque<long> const &LLC,
-                     std::deque<double> const &FACT);
+                     std::vector<long> const &LLC,
+                     std::vector<double> const &FACT);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -176,7 +176,7 @@ bsell(
                           the level below. If this is not the case the
                           coupling of the superelements will be wrong.
                */
-               std::deque<long> NOD;
+               std::vector<long> NOD;
 
                gelmnt2(std::deque<std::string> const &);
 
@@ -188,14 +188,14 @@ bsell(
                        long const &ADDNO,
                        const double T[4][4],
                        long const &NNOD,
-                       std::deque<long> const &NOD);
+                       std::vector<long> const &NOD);
 
                gelmnt2(long const &SUBNO,
                        long const &SLEVEL,
                        long const &STYPE,
                        long const &ADDNO,
                        double const T[4][4],
-                       std::deque<long> const &NOD);
+                       std::vector<long> const &NOD);
 
                gelmnt2(long const &SUBNO,
                        long const &SLEVEL,
@@ -214,7 +214,7 @@ bsell(
                        double const &T24,
                        double const &T34,
                        long const &NNOD,
-                       std::deque<long> const &NOD);
+                       std::vector<long> const &NOD);
 
                gelmnt2(long const &SUBNO,
                        long const &SLEVEL,
@@ -232,7 +232,7 @@ bsell(
                        double const &T14,
                        double const &T24,
                        double const &T34,
-                       std::deque<long> const &NOD);
+                       std::vector<long> const &NOD);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
@@ -561,7 +561,7 @@ superelement transformation reference number, `ITREF`.
                /** Reference to `HIERARCH` record for sub-element
                    number /i/.
                 */
-               std::deque<long> IHSREFi;
+               std::vector<long> IHSREFi;
 
                hierarch(std::deque<std::string> const &);
 
@@ -575,7 +575,7 @@ superelement transformation reference number, `ITREF`.
                         long const &ITREF,
                         long const &IHPREF,
                         long const &NSUB,
-                        std::deque<long> const &IHSREF);
+                        std::vector<long> const &IHSREF);
 
                hierarch(long const &NFIELD,
                         long const &IHREF,
@@ -584,7 +584,7 @@ superelement transformation reference number, `ITREF`.
                         long const &ISLEVL,
                         long const &ITREF,
                         long const &IHPREF,
-                        std::deque<long> const &IHSREF);
+                        std::vector<long> const &IHSREF);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;

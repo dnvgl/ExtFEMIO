@@ -59,7 +59,7 @@ namespace dnvgl {
                NDOF = _form_NDOF (*(pos++));
                K.resize(NDOF);
                for (long i = 0; i < NDOF; i++) {
-                  K[i] = std::deque<double>(NDOF);
+                  K[i] = std::vector<double>(NDOF);
                   if (i > 0) {
                      for (long j = 0; j < i; j++)
                         K[i][j] = K[j][i];
@@ -74,11 +74,11 @@ namespace dnvgl {
 
             mgsprng::mgsprng(const long &MATNO,
                              const long &NDOF,
-                             const std::deque<std::deque<double>> &K) :
+                             const std::vector<std::vector<double>> &K) :
                card(), MATNO(MATNO), NDOF(NDOF), K(K) {}
 
             mgsprng::mgsprng(const long &MATNO,
-                             const std::deque<std::deque<double>> &K) :
+                             const std::vector<std::vector<double>> &K) :
                card(), MATNO(MATNO), NDOF((long)K.size()), K(K) {}
 
             const dnvgl::extfem::fem::cards::types

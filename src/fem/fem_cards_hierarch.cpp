@@ -87,7 +87,7 @@ namespace dnvgl {
                                long const &ITREF,
                                long const &IHPREF,
                                long const &NSUB,
-                               std::deque<long> const &IHSREF) :
+                               std::vector<long> const &IHSREF) :
                card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
                INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
                IHPREF(IHPREF), NSUB(NSUB), IHSREFi(IHSREF) {
@@ -103,7 +103,7 @@ namespace dnvgl {
                                const long &ISLEVL,
                                const long &ITREF,
                                const long &IHPREF,
-                               const std::deque<long> &IHSREF) :
+                               const std::vector<long> &IHSREF) :
                card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
                INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
                IHPREF(IHPREF), IHSREFi(IHSREF) {
@@ -140,10 +140,6 @@ namespace dnvgl {
                   }
                   num++;
                   os << card._form_IHSREF.format(card.IHSREFi[i]);
-               }
-               while (num < 4) {
-                  num++;
-                  os << card.empty.format();
                }
                os << std::endl;
                return os;

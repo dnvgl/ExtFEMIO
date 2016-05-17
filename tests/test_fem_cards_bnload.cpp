@@ -46,8 +46,7 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
 
-   double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
-   std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   std::vector<double> ref_rload({0., 0., 2.e6, 0., 0., 0.});
    std::deque<std::string> lines;
 
    SECTION("BNLOAD (1)") {
@@ -64,7 +63,7 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
       CHECK(probe.NODENO == 15247);
       CHECK(probe.NDOF == 6);
       CHECK(probe.RLOAD == ref_rload);
-      CHECK(probe.ILOAD.size() == 0);
+      CHECK(probe.ILOAD == std::vector<double>({}));
    }
 
    SECTION("BNLOAD (2)") {
@@ -81,16 +80,13 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
       CHECK(probe.NODENO == 15247);
       CHECK(probe.NDOF == 6);
       CHECK(probe.RLOAD == ref_rload);
-      CHECK(probe.ILOAD.size() == 0);
+      CHECK(probe.ILOAD == std::vector<double>({}));
    }
 }
 
 TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    std::ostringstream test;
-
-   double inp_rload[6] = {1., 2., 3., 4., 5., 6.};
-   double inp_iload[6] = {1., 2., 3., 4., 5., 6.};
 
    SECTION("empty") {
       bnload probe;
@@ -100,7 +96,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("fixed") {
       bnload probe(1, 1, false, 4, 6,
-                    std::deque<double>(inp_rload, inp_rload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -110,7 +106,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple") {
       bnload probe(1, 1, false, 4, 6,
-                    std::deque<double>(inp_rload, inp_rload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -120,8 +116,8 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple (with ILOAD)") {
       bnload probe(1, 1, true, 4, 6,
-                    std::deque<double>(inp_rload, inp_rload + 6),
-                    std::deque<double>(inp_iload, inp_iload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}),
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
@@ -133,7 +129,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple (calc COMPLX)") {
       bnload probe(1, 1, (long)4, 6,
-                    std::deque<double>(inp_rload, inp_rload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -143,8 +139,8 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("simple (with ILOAD, calc COMPLX)") {
       bnload probe(1, 1, (long)4, 6,
-                    std::deque<double>(inp_rload, inp_rload + 6),
-                    std::deque<double>(inp_iload, inp_iload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}),
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
@@ -156,7 +152,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("calc ndof") {
       bnload probe(1, 1, false, 4,
-                    std::deque<double>(inp_rload, inp_rload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -165,7 +161,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
    }
    SECTION("calc NDOF (calc COMPLX)") {
       bnload probe(1, 1, 4,
-                    std::deque<double>(inp_rload, inp_rload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -175,8 +171,8 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
    SECTION("calc NDOF (with ILOAD, calc COMPLX)") {
       bnload probe(1, 1, 4,
-                    std::deque<double>(inp_rload, inp_rload + 6),
-                    std::deque<double>(inp_iload, inp_iload + 6));
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}),
+                   std::vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
@@ -184,6 +180,82 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
             "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
             "        +5.000000000e+00+6.000000000e+00\n");
+   }
+}
+
+TEST_CASE("FEM BNLOAD conversion from own output.", "[fem_bnload,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("BNLOAD (own output real)") {
+      std::deque<std::string> data({
+            "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
+            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
+      card::card_split(data, lines);
+      bnload probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 1);
+      CHECK_FALSE(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.RLOAD == std::vector<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.ILOAD == std::vector<double>({}));
+   }
+
+   SECTION("BNLOAD (own output real alt)") {
+      std::deque<std::string> data({
+            "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
+            "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
+      card::card_split(data, lines);
+      bnload probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 1);
+      CHECK_FALSE(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.RLOAD == std::vector<double>({1., 2., 3., 4., 5.}));
+      CHECK(probe.ILOAD == std::vector<double>({}));
+   }
+
+   SECTION("BNLOAD (own output complex)") {
+      std::deque<std::string> data({
+            "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
+            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
+            "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00\n"});
+      card::card_split(data, lines);
+      bnload probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 1);
+      CHECK(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.RLOAD == std::vector<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.ILOAD == std::vector<double>({1., 2., 3., 4., 5., 6.}));
+   }
+
+   SECTION("BNLOAD (own output complex alt)") {
+      std::deque<std::string> data({
+            "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
+            "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+1.000000000e+00\n",
+            "        +2.000000000e+00+3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
+      card::card_split(data, lines);
+      bnload probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.LOTYP == 1);
+      CHECK(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.RLOAD == std::vector<double>({1., 2., 3., 4., 5.}));
+      CHECK(probe.ILOAD == std::vector<double>({1., 2., 3., 4., 5.}));
    }
 }
 

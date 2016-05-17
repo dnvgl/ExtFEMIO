@@ -99,7 +99,7 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
    std::ostringstream test;
 
    long NODEX(1), NODENO(222), NDOF(3);
-   std::deque<int> ODOF({2, 6, 3});
+   std::vector<int> ODOF({2, 6, 3});
 
    SECTION("emtpy") {
       gnode probe;
@@ -126,6 +126,23 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
       test << probe;
       CHECK(test.str() ==
             "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
+   }
+}
+
+TEST_CASE("FEM GNODE conversion from own output.", "[fem_gnode,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GNODE (1)") {
+      std::deque<std::string> data({
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"});
+      card::card_split(data, lines);
+      gnode probe(lines);
+
+      CHECK(probe.NODEX == 1);
+      CHECK(probe.NODENO == 222);
+      CHECK(probe.NDOF == 3);
+      CHECK(probe.ODOF == std::vector<int>({2, 3, 6}));
    }
 }
 

@@ -15,7 +15,7 @@
 #define _FEM_TYPES_H_
 
 #include <string>
-#include <deque>
+#include <vector>
 #include <set>
 #include <list>
 #include <iostream>
@@ -405,7 +405,7 @@ namespace dnvgl {
 
 
                template <>
-            class entry_type<std::deque<int>> : public base {
+            class entry_type<std::vector<int>> : public base {
 
                // List of integers.
 
@@ -419,8 +419,8 @@ namespace dnvgl {
                   const std::string &name) :
                   base(name) {};
 
-               std::deque<int>* operator() (const std::string &inp) const {
-                  auto *value =  new std::deque<int>();
+               std::vector<int>* operator() (const std::string &inp) const {
+                  auto *value =  new std::vector<int>();
 
                   double tmp_d;
                   std::list<int> tmp_l;
@@ -449,7 +449,7 @@ namespace dnvgl {
                inline fem_types type() const {return _type;};
 
                std::string format(
-                  const std::deque<int> &inp) const {
+                  const std::vector<int> &inp) const {
 
                   std::ostringstream res, res2;
 

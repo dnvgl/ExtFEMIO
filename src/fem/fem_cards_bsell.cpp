@@ -65,7 +65,9 @@ namespace dnvgl {
                pos++;
                pos++;
                while (pos != inp.end()) {
-                  tmp = _form_LLC(*(pos++));
+                  if (*pos == "                ")
+                     break;
+                  tmp = _form_LLC(*pos++);
                   if (tmp == 0) break;
                   LLC.push_back(tmp);
                   FACT.push_back(_form_FACT(*(pos++)));
@@ -77,8 +79,8 @@ namespace dnvgl {
 
             bsell::bsell(const long &LC,
                          const long &SUBNO,
-                         const std::deque<long> &LLC,
-                         const std::deque<double> &FACT) :
+                         const std::vector<long> &LLC,
+                         const std::vector<double> &FACT) :
                card(), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
 
             const dnvgl::extfem::fem::cards::types
@@ -102,10 +104,7 @@ namespace dnvgl {
                   if (i+1 < card.LLC.size())
                      os << card._form_LLC.format(card.LLC[i+1])
                         << card._form_FACT.format(card.FACT[i+1]);
-                  else
-                     os << card.empty.format()
-                        << card.empty.format();
-                     os << std::endl;
+                  os << std::endl;
                }
                return os;
             }
@@ -127,5 +126,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check"
+// compile-command: "make -C ../.. check -j8"
 // End:

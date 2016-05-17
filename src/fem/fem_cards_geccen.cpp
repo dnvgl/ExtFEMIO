@@ -72,6 +72,15 @@ namespace dnvgl {
                double const &EX, double const &EY, double const &EZ) :
                card(), ECCNO(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
 
+            geccen::geccen(long const &ECCNO,
+                           std::vector<double> const &pos) :
+               card(), ECCNO(ECCNO), EX(0.), EY(0.), EZ(0.) {
+               assert(pos.size() == 3);
+               EX = pos[0];
+               EY = pos[1];
+               EZ = pos[2];
+            }
+
             const dnvgl::extfem::fem::cards::types
             geccen::card_type(void) const {return GECCEN;}
 

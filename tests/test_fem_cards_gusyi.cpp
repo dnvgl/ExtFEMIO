@@ -123,7 +123,7 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
    }
 }
 
-TEST_CASE("FEM GUSYI types output.", "[fem_gusyi,out]" ) {
+TEST_CASE("FEM GUSYI conversion from own output.", "[fem_gusyi,out]" ) {
 
    std::ostringstream test;
 

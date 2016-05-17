@@ -58,7 +58,7 @@ namespace dnvgl {
                       {0., 0., 0., 0., 0., 0.}) {}
 
             belfix::belfix(const std::deque<std::string> &inp) :
-               card(inp) {
+               card(inp), A(6) {
 
                if (inp.size() < 11)
                   throw errors::parse_error(
@@ -84,13 +84,13 @@ namespace dnvgl {
                TRANO = _form_TRANO(*(pos++));
                pos++;
                for (int i=0; i<6; i++)
-                  A.push_back(_form_A(*(pos++)));
+                  A[i] = _form_A(*(pos++));
             }
 
             belfix::belfix(long const &FIXNO,
                            n_opt const &OPT,
                            long const &TRANO,
-                           std::deque<double> const &A) :
+                           std::vector<double> const &A) :
                card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 
             const std::ostream&

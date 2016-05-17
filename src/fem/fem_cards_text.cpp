@@ -79,7 +79,7 @@ namespace dnvgl {
 
             text::text(const long &TYPE, const long &SUBTYPE,
                        const long &NRECS, const long &NBYTE,
-                       const std::deque<std::string> &CONT) :
+                       const std::vector<std::string> &CONT) :
                TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
                NBYTE(NBYTE), CONT(CONT) {
                for (auto &p : this->CONT)
@@ -87,7 +87,7 @@ namespace dnvgl {
             }
 
             text::text(const long &TYPE, const long &SUBTYPE,
-                       const std::deque<std::string> &CONT) :
+                       const std::vector<std::string> &CONT) :
                card(),
                TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
                NRECS = static_cast<long>(this->CONT.size());

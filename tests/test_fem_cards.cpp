@@ -25,6 +25,7 @@ namespace {
 
 #include <iostream>
 #include <deque>
+#include <vector>
 
 #include <catch.hpp>
 
@@ -170,7 +171,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
    std::istringstream ist(s);
    fem_file probe(ist);
    std::deque<std::string> l;
-   std::deque<std::string> ref;
+   std::vector<std::string> ref;
    std::deque<std::string> entries;
 
    std::unique_ptr<cards::card> current;
@@ -207,17 +208,13 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<text*>(current.get())->SUBTYPE == 0);
       CHECK(static_cast<text*>(current.get())->NRECS == 4);
       CHECK(static_cast<text*>(current.get())->NBYTE == 72);
-      CHECK(static_cast<text*>(current.get())->CONT.size() == 4);
-      CHECK(static_cast<text*>(current.get())->CONT[0] ==
-            //        1         2         3         4         5         6         7
-            //23456789012345678901234567890123456789012345678901234567890123456789012
-            "CONVERSION DETAILS:                                                     ");
-      CHECK(static_cast<text*>(current.get())->CONT[1] ==
-            "Msc Nastran File Format -> Sesam Interface File.                        ");
-      CHECK(static_cast<text*>(current.get())->CONT[2] ==
-            "Input  : \\test_01.fem                                                   ");
-      CHECK(static_cast<text*>(current.get())->CONT[3] ==
-            "Log    : \\test_01.txt                                                   ");
+      CHECK(static_cast<text*>(current.get())->CONT == std::vector<std::string>({
+               //        1         2         3         4         5         6         7
+               //23456789012345678901234567890123456789012345678901234567890123456789012
+               "CONVERSION DETAILS:                                                     ",
+               "Msc Nastran File Format -> Sesam Interface File.                        ",
+               "Input  : \\test_01.fem                                                   ",
+               "Log    : \\test_01.txt                                                   "}));
    }
 
    SECTION("Checking dispatch [date].") {
@@ -238,16 +235,13 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<date*>(current.get())->SUBTYPE == 0);
       CHECK(static_cast<date*>(current.get())->NRECS == 4);
       CHECK(static_cast<date*>(current.get())->NBYTE == 72);
-      CHECK(static_cast<date*>(current.get())->CONT[0] ==
-            //        1         2         3         4         5         6         7
-            //23456789012345678901234567890123456789012345678901234567890123456789012
-            "DATE TIME:  11/03/2015 09:46:08                                         ");
-      CHECK(static_cast<date*>(current.get())->CONT[1] ==
-            "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013                    ");
-      CHECK(static_cast<date*>(current.get())->CONT[2] ==
-            "COMPUTER: HAML130185                                                    ");
-      CHECK(static_cast<date*>(current.get())->CONT[3] ==
-            "USER: berhol                                                            ");
+      CHECK(static_cast<date*>(current.get())->CONT == std::vector<std::string>({
+               //        1         2         3         4         5         6         7
+               //23456789012345678901234567890123456789012345678901234567890123456789012
+               "DATE TIME:  11/03/2015 09:46:08                                         ",
+               "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013                    ",
+               "COMPUTER: HAML130185                                                    ",
+               "USER: berhol                                                            "}));
    }
 
    SECTION("Checking dispatch [tdload].") {
@@ -269,7 +263,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
             //        1         2         3         4         5         6         7
             //23456789012345678901234567890123456789012345678901234567890123456789012
             "SubCase");
-      CHECK(static_cast<tdsetnam*>(current.get())->CONT.size() == 0);
+      CHECK(static_cast<tdsetnam*>(current.get())->CONT == std::vector<std::string>());
    }
 
    SECTION("Checking dispatch [gnode].") {
@@ -285,13 +279,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gnode*>(current.get())->NODEX == 1);
       CHECK(static_cast<gnode*>(current.get())->NODENO == 1);
       CHECK(static_cast<gnode*>(current.get())->NDOF == 6);
-      CHECK(static_cast<gnode*>(current.get())->ODOF.size() == 6);
-      CHECK(static_cast<gnode*>(current.get())->ODOF[0] == 1);
-      CHECK(static_cast<gnode*>(current.get())->ODOF[1] == 2);
-      CHECK(static_cast<gnode*>(current.get())->ODOF[2] == 3);
-      CHECK(static_cast<gnode*>(current.get())->ODOF[3] == 4);
-      CHECK(static_cast<gnode*>(current.get())->ODOF[4] == 5);
-      CHECK(static_cast<gnode*>(current.get())->ODOF[5] == 6);
+      CHECK(static_cast<gnode*>(current.get())->ODOF == std::vector<int>({
+               1, 2, 3, 4, 5, 6}));
    }
 
    SECTION("Checking dispatch [gcoord].") {
@@ -325,11 +314,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gelmnt1*>(current.get())->ELNO == 854);
       CHECK(static_cast<gelmnt1*>(current.get())->ELTYP == 24);
       CHECK(static_cast<gelmnt1*>(current.get())->ELTYAD == 0);
-      CHECK(static_cast<gelmnt1*>(current.get())->NODIN.size() == 4);
-      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[0] == 608);
-      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[1] == 618);
-      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[2] == 571);
-      CHECK(static_cast<gelmnt1*>(current.get())->NODIN[3] == 565);
+      CHECK(static_cast<gelmnt1*>(current.get())->NODIN == std::vector<long>({
+               608, 618, 571, 565}));
    }
 
    SECTION("Checking dispatch [gelref1].") {
@@ -356,10 +342,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gelref1*>(current.get())->FIXNO_OPT == 0);
       CHECK(static_cast<gelref1*>(current.get())->ECCNO_OPT == 0);
       CHECK(static_cast<gelref1*>(current.get())->TRANSNO_OPT == 0);
-      CHECK(static_cast<gelref1*>(current.get())->GEONO.size() == 0);
-      CHECK(static_cast<gelref1*>(current.get())->FIXNO.size() == 0);
-      CHECK(static_cast<gelref1*>(current.get())->ECCNO.size() == 0);
-      CHECK(static_cast<gelref1*>(current.get())->TRANSNO.size() == 0);
+      CHECK(static_cast<gelref1*>(current.get())->GEONO == std::vector<long>(0));
+      CHECK(static_cast<gelref1*>(current.get())->FIXNO == std::vector<long>(0));
+      CHECK(static_cast<gelref1*>(current.get())->ECCNO == std::vector<long>(0));
+      CHECK(static_cast<gelref1*>(current.get())->TRANSNO == std::vector<long>(0));
    }
 
    SECTION("Checking dispatch [gbarm].") {
@@ -569,9 +555,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       double c_ref_b[9] = {1., 2.27000996e+4, 9.07859961e+3,
          1., -9.07859961e+3, 0.,
          1., 0., -2.27000996e+4};
-      std::deque<long> ref_depdof(c_ref_depdof, c_ref_depdof + 9);
-      std::deque<long> ref_indepdof(c_ref_indepdof, c_ref_indepdof + 9);
-      std::deque<double> ref_b(c_ref_b, c_ref_b + 9);
+      std::vector<long> ref_depdof(c_ref_depdof, c_ref_depdof + 9);
+      std::vector<long> ref_indepdof(c_ref_indepdof, c_ref_indepdof + 9);
+      std::vector<double> ref_b(c_ref_b, c_ref_b + 9);
       CHECK(static_cast<bldep*>(current.get())->DEPDOF == ref_depdof);
       CHECK(static_cast<bldep*>(current.get())->INDEPDOF == ref_indepdof);
       CHECK(static_cast<bldep*>(current.get())->b == ref_b);
@@ -589,10 +575,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
       CHECK(static_cast<bnbcd*>(current.get())->NODENO == 23047);
       CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
-
-      long c_ref_fix[6] = {1, 1, 1, 1, 1, 1};
-      std::deque<long> ref_fix(c_ref_fix, c_ref_fix + 6);
-      CHECK(static_cast<bnbcd*>(current.get())->FIX == ref_fix);
+      CHECK(static_cast<bnbcd*>(current.get())->FIX == std::vector<long>({
+               1, 1, 1, 1, 1, 1}));
    }
 
    SECTION("Checking dispatch [belfix].") {
@@ -609,9 +593,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<belfix*>(current.get())->FIXNO == 23047);
       CHECK(static_cast<belfix*>(current.get())->OPT == belfix::FIXATION);
       CHECK(static_cast<belfix*>(current.get())->TRANO == 0);
-
-      std::deque<double> a_ref({1., 1., 1., 1., 1., 0.});
-      CHECK(static_cast<belfix*>(current.get())->A == a_ref);
+      CHECK(static_cast<belfix*>(current.get())->A == std::vector<double>({
+               1., 1., 1., 1., 1., 0.}));
    }
 
    SECTION("Checking dispatch [bndispl].") {
@@ -630,10 +613,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK_FALSE(static_cast<bndispl*>(current.get())->COMPLX);
       CHECK(static_cast<bndispl*>(current.get())->NODENO == 23046);
       CHECK(static_cast<bndispl*>(current.get())->NDOF == 6);
-      double c_ref_rdisp[6] = {0., 0., 0., 0., 0., 0.};
       CHECK(static_cast<bndispl*>(current.get())->RDISP ==
-            std::deque<double>(c_ref_rdisp, c_ref_rdisp + 6));
-      CHECK(static_cast<bndispl*>(current.get())->IDISP.size() == 0);
+            std::vector<double>({0., 0., 0., 0., 0., 0.}));
+      CHECK(static_cast<bndispl*>(current.get())->IDISP ==
+            std::vector<double>());
    }
 
    SECTION("Checking dispatch [bnload].") {
@@ -652,10 +635,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK_FALSE(static_cast<bnload*>(current.get())->COMPLX);
       CHECK(static_cast<bnload*>(current.get())->NODENO == 15220);
       CHECK(static_cast<bnload*>(current.get())->NDOF == 6);
-      double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
       CHECK(static_cast<bnload*>(current.get())->RLOAD ==
-            std::deque<double>(c_ref_rload, c_ref_rload + 6));
-      CHECK(static_cast<bnload*>(current.get())->ILOAD.size() == 0);
+            std::vector<double>({0., 0., 2.e6, 0., 0., 0.}));
+      CHECK(static_cast<bnload*>(current.get())->ILOAD ==
+            std::vector<double>(0));
    }
 
    SECTION("Checking dispatch [mgsprng].") {
@@ -675,9 +658,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<mgsprng*>(current.get())->MATNO == 69);
       CHECK(static_cast<mgsprng*>(current.get())->NDOF == 6);
       double c_ref_k[6] = {0., 0., 0., 0., 0., 0.};
-      std::deque<std::deque<double>> ref_K;
+      std::vector<std::vector<double>> ref_K;
       for (int i = 0; i < 6; i++)
-         ref_K.push_back(std::deque<double>(c_ref_k, c_ref_k + 6));
+         ref_K.push_back(std::vector<double>(c_ref_k, c_ref_k + 6));
       ref_K[0][0] = 1e8;
 
       CHECK(static_cast<mgsprng*>(current.get())->K == ref_K);
@@ -698,7 +681,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gsetmemb*>(current.get())->INDEX == 1);
       CHECK(static_cast<gsetmemb*>(current.get())->ISTYPE == 2);
       CHECK(static_cast<gsetmemb*>(current.get())->ISORIG == 0);
-      CHECK(static_cast<gsetmemb*>(current.get())->IRMEMB.size() == 0);
+      CHECK(static_cast<gsetmemb*>(current.get())->IRMEMB ==
+            std::vector<long>(0));
    }
 
    SECTION("Checking dispatch [gunivec].") {
@@ -784,7 +768,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdsetnam*>(current.get())->CODTXT == 0);
       CHECK(static_cast<tdsetnam*>(current.get())->SET_NAME ==
             "KEY_HOLE_ROOF");
-      CHECK(static_cast<tdsetnam*>(current.get())->CONT.size() == 0);
+      CHECK(static_cast<tdsetnam*>(current.get())->CONT ==
+            std::vector<std::string>(0));
    }
 
    SECTION("Checking dispatch [tdsupnam].") {
@@ -803,7 +788,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdsupnam*>(current.get())->CODTXT == 0);
       CHECK(static_cast<tdsupnam*>(current.get())->SUP_NAME ==
             "KEY_HOLE_ROOF");
-      CHECK(static_cast<tdsupnam*>(current.get())->CONT.size() == 0);
+      CHECK(static_cast<tdsupnam*>(current.get())->CONT ==
+            std::vector<std::string>(0));
    }
 
    SECTION("Checking dispatch [gelmnt2].") {
@@ -823,20 +809,21 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gelmnt2*>(current.get())->SLEVEL == 1);
       CHECK(static_cast<gelmnt2*>(current.get())->STYPE == 1);
       CHECK(static_cast<gelmnt2*>(current.get())->ADDNO == 0);
-      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[0],
+      CHECK(std::vector<double>(static_cast<gelmnt2*>(current.get())->T[0],
          static_cast<gelmnt2*>(current.get())->T[0] + 4) ==
-         std::deque<double>({1., 0., 0., 0.}));
-      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[1],
+         std::vector<double>({1., 0., 0., 0.}));
+      CHECK(std::vector<double>(static_cast<gelmnt2*>(current.get())->T[1],
          static_cast<gelmnt2*>(current.get())->T[1] + 4) ==
-         std::deque<double>({0., 1., 0., 0.}));
-      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[2],
+         std::vector<double>({0., 1., 0., 0.}));
+      CHECK(std::vector<double>(static_cast<gelmnt2*>(current.get())->T[2],
          static_cast<gelmnt2*>(current.get())->T[2] + 4) ==
-         std::deque<double>({0., 0., 1., 0.}));
-      CHECK(std::deque<double>(static_cast<gelmnt2*>(current.get())->T[3],
+         std::vector<double>({0., 0., 1., 0.}));
+      CHECK(std::vector<double>(static_cast<gelmnt2*>(current.get())->T[3],
          static_cast<gelmnt2*>(current.get())->T[3] + 4) ==
-         std::deque<double>({0., 0., 0., 1.}));
+         std::vector<double>({0., 0., 0., 1.}));
       CHECK(static_cast<gelmnt2*>(current.get())->NNOD == 1);
-      CHECK(static_cast<gelmnt2*>(current.get())->NOD[0] == 1);
+      CHECK(static_cast<gelmnt2*>(current.get())->NOD ==
+            std::vector<long>({1}));
    }
 
    SECTION("Checking dispatch [hsupstat].") {
@@ -913,10 +900,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<hierarch*>(current.get())->ITREF == 0);
       CHECK(static_cast<hierarch*>(current.get())->IHPREF == 0);
       CHECK(static_cast<hierarch*>(current.get())->NSUB == 1);
-      CHECK(static_cast<hierarch*>(current.get())->IHSREFi.size() == 1);
-      std::deque<long> ref({2, 0});
-      ref.resize(1);
-      CHECK(static_cast<hierarch*>(current.get())->IHSREFi == ref);
+      CHECK(static_cast<hierarch*>(current.get())->IHSREFi ==
+            std::vector<long>({2}));
    }
 
    SECTION("Checking dispatch [tdload].") {
@@ -934,7 +919,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<tdload*>(current.get())->CODNAM == 104);
       CHECK(static_cast<tdload*>(current.get())->CODTXT == 0);
       CHECK(static_cast<tdload*>(current.get())->SET_NAME == "LC_1");
-      CHECK(static_cast<tdload*>(current.get())->CONT.size() == 0);
+      CHECK(static_cast<tdload*>(current.get())->CONT ==
+            std::vector<std::string>(0));
    }
 
    SECTION("Checking dispatch [bsell].") {
@@ -949,12 +935,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       //           1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00
       CHECK(static_cast<bsell*>(current.get())->LC == 1);
       CHECK(static_cast<bsell*>(current.get())->SUBNO == 1);
-      CHECK(static_cast<bsell*>(current.get())->LLC.size() == 2);
       CHECK(static_cast<bsell*>(current.get())->LLC ==
-            std::deque<long>({1, 2}));
-      CHECK(static_cast<bsell*>(current.get())->FACT.size() == 2);
+            std::vector<long>({1, 2}));
       CHECK(static_cast<bsell*>(current.get())->FACT ==
-            std::deque<double>({1., -1.}));
+            std::vector<double>({1., -1.}));
    }
 
    SECTION("Checking dispatch [bnbcd].") {
@@ -969,9 +953,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       //           4.000000000e+00 4.000000000e+00 4.000000000e+00 4.00000000E+00
       CHECK(static_cast<bnbcd*>(current.get())->NODENO == 38835);
       CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
-      CHECK(static_cast<bnbcd*>(current.get())->FIX.size() == 6);
       CHECK(static_cast<bnbcd*>(current.get())->FIX ==
-            std::deque<long>({4, 4, 4, 4, 4, 4}));
+            std::vector<long>({4, 4, 4, 4, 4, 4}));
    }
 
    SECTION("Checking dispatch [beuslo].") {
@@ -993,11 +976,11 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<beuslo*>(current.get())->NDOF == 4);
       CHECK(static_cast<beuslo*>(current.get())->INTNO == 0);
       CHECK(static_cast<beuslo*>(current.get())->SIDE == 2);
-      CHECK(static_cast<beuslo*>(current.get())->RLOADi.size() == 4);
       CHECK(static_cast<beuslo*>(current.get())->RLOADi ==
-            std::deque<double>({1.66046816e4, 3.86669189e3,
-            3.86368091e3, 1.62054932e4}));
-      CHECK(static_cast<beuslo*>(current.get())->ILOADi.size() == 0);
+            std::vector<double>({1.66046816e4, 3.86669189e3,
+                     3.86368091e3, 1.62054932e4}));
+      CHECK(static_cast<beuslo*>(current.get())->ILOADi ==
+            std::vector<double>(0));
    }
 
    SECTION("Checking dispatch [bnload].") {
@@ -1016,10 +999,10 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK_FALSE(static_cast<bnload*>(current.get())->COMPLX);
       CHECK(static_cast<bnload*>(current.get())->NODENO == 1);
       CHECK(static_cast<bnload*>(current.get())->NDOF == 3);
-      CHECK(static_cast<bnload*>(current.get())->RLOAD.size() == 3);
       CHECK(static_cast<bnload*>(current.get())->RLOAD ==
-            std::deque<double>({1.1, 1.2, 1.3}));
-      CHECK(static_cast<bnload*>(current.get())->ILOAD.size() == 0);
+            std::vector<double>({1.1, 1.2, 1.3}));
+      CHECK(static_cast<bnload*>(current.get())->ILOAD ==
+            std::vector<double>(0));
    }
 
    SECTION("Checking dispatch [iend].") {

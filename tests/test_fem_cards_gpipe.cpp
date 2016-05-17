@@ -132,6 +132,45 @@ TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
    }
 }
 
+TEST_CASE("FEM GPIPE conversion from own output.", "[fem_gpipe,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GPIPE (1)") {
+      std::deque<std::string> data({
+            "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
+      card::card_split(data, lines);
+      gpipe probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.DI == 2.);
+      CHECK(probe.DY == 3.);
+      CHECK(probe.T == 4.);
+      CHECK(probe.SFY == 5.);
+      CHECK(probe.SFZ == 6.);
+      CHECK(probe.NCIR == 7);
+      CHECK(probe.NRAD == 8);
+   }
+
+   SECTION("GPIPE (2)") {
+      std::deque<std::string> data({
+            "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00\n"});
+         card::card_split(data, lines);
+      gpipe probe(lines);
+
+      CHECK(probe.GEONO == 1);
+      CHECK(probe.DI == 2.);
+      CHECK(probe.DY == 3.);
+      CHECK(probe.T == 4.);
+      CHECK(probe.SFY == 5.);
+      CHECK(probe.SFZ == 6.);
+      CHECK(probe.NCIR == 0);
+      CHECK(probe.NRAD == 0);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

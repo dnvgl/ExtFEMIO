@@ -71,12 +71,12 @@ namespace dnvgl {
 
             bnbcd::bnbcd(const long &NODENO,
                          const long &NDOF,
-                         const std::deque<long> &FIX) :
+                         const std::vector<long> &FIX) :
                card(), NODENO(NODENO), NDOF(NDOF), FIX(FIX) {}
 
             bnbcd::bnbcd(
                const long &NODENO,
-               const std::deque<long> &FIX) :
+               const std::vector<long> &FIX) :
                card(), NODENO(NODENO), NDOF((long)FIX.size()), FIX(FIX) {}
 
             const dnvgl::extfem::fem::cards::types

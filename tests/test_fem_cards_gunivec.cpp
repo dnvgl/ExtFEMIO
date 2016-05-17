@@ -93,6 +93,23 @@ TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
    }
 }
 
+TEST_CASE("FEM GUNIVEC conversion from own output.", "[fem_gunivec,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GUNIVEC (1)") {
+      std::deque<std::string> data({
+            "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"});
+      card::card_split(data, lines);
+      gunivec probe(lines);
+
+      CHECK(probe.TRANSNO == 1);
+      CHECK(probe.UNIX == 2.);
+      CHECK(probe.UNIY == 3.);
+      CHECK(probe.UNIZ == 4.);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

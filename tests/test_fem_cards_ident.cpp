@@ -120,6 +120,22 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
    }
 }
 
+TEST_CASE("FEM IDENT conversion from own output.", "[fem_ident,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("IDENT (1)") {
+      std::deque<std::string> data({
+            "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
+      card::card_split(data, lines);
+      ident probe(lines);
+
+      CHECK(probe.SLEVEL == 1);
+      CHECK(probe.SELTYP == 2);
+      CHECK(probe.SELMOD == 3);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

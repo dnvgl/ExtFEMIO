@@ -46,7 +46,7 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
 
-   std::deque<double> ref_rdisp({0., 0., 0., 0., 0., 0.});
+   std::vector<double> ref_rdisp({0., 0., 0., 0., 0., 0.});
    std::deque<std::string> lines;
 
    SECTION("BNDISPL (1)") {
@@ -63,7 +63,7 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
       CHECK(probe.NODENO == 23047);
       CHECK(probe.NDOF == 6);
       CHECK(probe.RDISP == ref_rdisp);
-      CHECK(probe.IDISP.size() == 0);
+      CHECK(probe.IDISP == std::vector<double>({}));
    }
 
    SECTION("BNDISPL (2)") {
@@ -80,28 +80,7 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
       CHECK(probe.NODENO == 23047);
       CHECK(probe.NDOF == 6);
       CHECK(probe.RDISP == ref_rdisp);
-      CHECK(probe.IDISP.size() == 0);
-   }
-
-   SECTION("BNDISPL (3)") {
-      std::deque<std::string> data({
-            "BNDISPL +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
-            "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
-            "        +5.000000000e+00+6.000000000e+00\n"});
-      card::card_split(data, lines);
-      bndispl probe(lines);
-
-      CHECK(probe.LLC == 1);
-      CHECK(probe.DTYPE == 1);
-      CHECK(probe.COMPLX);
-      CHECK(probe.NODENO == 4);
-      CHECK(probe.NDOF == 6);
-      CHECK(probe.RDISP.size() == 6);
-      CHECK(probe.RDISP == std::deque<double>({1., 2., 3., 4., 5., 6.}));
-      CHECK(probe.IDISP.size() == 6);
-      CHECK(probe.IDISP == std::deque<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.IDISP == std::vector<double>({}));
    }
 }
 
@@ -188,6 +167,82 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
    }
 }
 
+
+TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("BNDISPL (own output) (1)") {
+       std::deque<std::string> data({
+            "BNDISPL +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
+            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
+            "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00\n"});
+      card::card_split(data, lines);
+      bndispl probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.DTYPE == 1);
+      CHECK(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.IDISP == std::vector<double>({1., 2., 3., 4., 5., 6.}));
+   }
+
+   SECTION("BNDISPL (own output) (2)") {
+       std::deque<std::string> data({
+             "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
+             "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
+      card::card_split(data, lines);
+      bndispl probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.DTYPE == 1);
+      CHECK_FALSE(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.IDISP == std::vector<double>({}));
+   }
+
+   SECTION("BNDISPL (own output) (3)") {
+       std::deque<std::string> data({
+            "BNDISPL +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
+            "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+1.000000000e+00\n",
+            "        +2.000000000e+00+3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
+      card::card_split(data, lines);
+      bndispl probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.DTYPE == 1);
+      CHECK(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5.}));
+      CHECK(probe.IDISP == std::vector<double>({1., 2., 3., 4., 5.}));
+   }
+
+   SECTION("BNDISPL (own output) (4)") {
+       std::deque<std::string> data({
+             "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
+             "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
+             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
+      card::card_split(data, lines);
+      bndispl probe(lines);
+
+      CHECK(probe.LLC == 1);
+      CHECK(probe.DTYPE == 1);
+      CHECK_FALSE(probe.COMPLX);
+      CHECK(probe.NODENO == 4);
+      CHECK(probe.NDOF == 5);
+      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5.}));
+      CHECK(probe.IDISP == std::vector<double>({}));
+   }
+}
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

@@ -69,10 +69,10 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       CHECK(probe.FIXNO_OPT == 0);
       CHECK(probe.ECCNO_OPT == 0);
       CHECK(probe.TRANSNO_OPT == 0);
-      CHECK(probe.GEONO.size() == 0);
-      CHECK(probe.FIXNO.size() == 0);
-      CHECK(probe.ECCNO.size() == 0);
-      CHECK(probe.TRANSNO.size() == 0);
+      CHECK(probe.GEONO == std::vector<long>({}));
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
    }
 
    SECTION("GELREF1 (sample 2)") {
@@ -96,12 +96,10 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       CHECK(probe.FIXNO_OPT == 0);
       CHECK(probe.ECCNO_OPT == -1);
       CHECK(probe.TRANSNO_OPT == 17);
-      CHECK(probe.GEONO.size() == 0);
-      CHECK(probe.FIXNO.size() == 0);
-      CHECK(probe.ECCNO.size() == 2);
-      CHECK(probe.ECCNO[0] == 33);
-      CHECK(probe.ECCNO[1] == 34);
-      CHECK(probe.TRANSNO.size() == 0);
+      CHECK(probe.GEONO == std::vector<long>({}));
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({33, 34}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
    }
 
 
@@ -126,12 +124,10 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       CHECK(probe.FIXNO_OPT == 0);
       CHECK(probe.ECCNO_OPT == -1);
       CHECK(probe.TRANSNO_OPT == 17);
-      CHECK(probe.GEONO.size() == 0);
-      CHECK(probe.FIXNO.size() == 0);
-      CHECK(probe.ECCNO.size() == 2);
-      CHECK(probe.ECCNO[0] == 33);
-      CHECK(probe.ECCNO[1] == 34);
-      CHECK(probe.TRANSNO.size() == 0);
+      CHECK(probe.GEONO == std::vector<long>({}));
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({33, 34}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
    }
 
    SECTION("GELREF1 (sample 4)") {
@@ -158,9 +154,9 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       CHECK(probe.GEONO.size() == 2);
       CHECK(probe.GEONO[0] == 33);
       CHECK(probe.GEONO[1] == 34);
-      CHECK(probe.FIXNO.size() == 0);
-      CHECK(probe.ECCNO.size() == 0);
-      CHECK(probe.TRANSNO.size() == 0);
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
    }
 
    SECTION("GELREF1 (sample 5") {
@@ -184,12 +180,12 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       CHECK(probe.FIXNO_OPT == -1);
       CHECK(probe.ECCNO_OPT == 1);
       CHECK(probe.TRANSNO_OPT == 17);
-      CHECK(probe.GEONO.size() == 0);
+      CHECK(probe.GEONO == std::vector<long>({}));
       CHECK(probe.FIXNO.size() == 2);
       CHECK(probe.FIXNO[0] == 33);
       CHECK(probe.FIXNO[1] == 34);
-      CHECK(probe.ECCNO.size() == 0);
-      CHECK(probe.TRANSNO.size() == 0);
+      CHECK(probe.ECCNO == std::vector<long>({}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
    }
 
    SECTION("GELREF1 (sample 6") {
@@ -213,9 +209,9 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
       CHECK(probe.FIXNO_OPT == 0);
       CHECK(probe.ECCNO_OPT == 1);
       CHECK(probe.TRANSNO_OPT == -1);
-      CHECK(probe.GEONO.size() == 0);
-      CHECK(probe.FIXNO.size() == 0);
-      CHECK(probe.ECCNO.size() == 0);
+      CHECK(probe.GEONO == std::vector<long>({}));
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({}));
       CHECK(probe.TRANSNO.size() == 2);
       CHECK(probe.TRANSNO[0] == 33);
       CHECK(probe.TRANSNO[1] == 34);
@@ -247,12 +243,10 @@ TEST_CASE("FEMIO-28: Failing to import GELREF1 card from SESAM GeniE FEM file") 
       CHECK(probe.FIXNO_OPT == 0);
       CHECK(probe.ECCNO_OPT == -1);
       CHECK(probe.TRANSNO_OPT == 6);
-      CHECK(probe.GEONO.size() == 0);
-      CHECK(probe.FIXNO.size() == 0);
-      CHECK(probe.ECCNO.size() == 2);
-      CHECK(probe.ECCNO[0] == 18);
-      CHECK(probe.ECCNO[1] == 19);
-      CHECK(probe.TRANSNO.size() == 0);
+      CHECK(probe.GEONO == std::vector<long>({}));
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({18, 19}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
    }
 }
 TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
@@ -269,7 +263,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
          STRENO(0), STREPONO(0), GEONO_OPT(1), FIXNO_OPT(0),
          ECCNO_OPT(0), TRANSNO_OPT(0);
-      std::deque<long> GEONO, FIXNO, ECCNO, TRANSNO;
+      std::vector<long> GEONO, FIXNO, ECCNO, TRANSNO;
 
       gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
                     STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
@@ -286,7 +280,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
          STRENO(0), STREPONO(0), GEONO_OPT(103005), FIXNO_OPT(0),
          ECCNO_OPT(-1), TRANSNO_OPT(17);
-      std::deque<long> GEONO, FIXNO, ECCNO({33, 34});
+      std::vector<long> GEONO, FIXNO, ECCNO({33, 34});
 
       gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
                     STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
@@ -314,7 +308,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
          STRENO(0), STREPONO(0), GEONO_OPT(103005), FIXNO_OPT(0),
          ECCNO_OPT(-1), TRANSNO_OPT(17);
-      std::deque<long> GEONO, FIXNO, ECCNO, TRANSNO;
+      std::vector<long> GEONO, FIXNO, ECCNO, TRANSNO;
 
       ECCNO.push_back(33);
       ECCNO.push_back(34);
@@ -335,7 +329,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
          STRENO(0), STREPONO(0), GEONO_OPT(-1), FIXNO_OPT(0),
          ECCNO_OPT(103005), TRANSNO_OPT(17);
-      std::deque<long> GEONO({33, 34});
+      std::vector<long> GEONO({33, 34});
 
       gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
                     STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
@@ -352,7 +346,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
          STRENO(0), STREPONO(0), GEONO_OPT(103005), FIXNO_OPT(-1),
          ECCNO_OPT(1), TRANSNO_OPT(17);
-      std::deque<long> GEONO, FIXNO({33, 34});
+      std::vector<long> GEONO, FIXNO({33, 34});
 
       gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
                     STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
@@ -368,7 +362,7 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
       long ELNO(18), MATNO(3), ADDNO(0), INTNO(0), MINTNO(0), STRANO(0),
          STRENO(0), STREPONO(0), GEONO_OPT(103005), FIXNO_OPT(0),
          ECCNO_OPT(1), TRANSNO_OPT(-1);
-      std::deque<long> GEONO, FIXNO, ECCNO, TRANSNO({33, 34});
+      std::vector<long> GEONO, FIXNO, ECCNO, TRANSNO({33, 34});
 
       gelref1 probe(ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO,
                     STRENO, STREPONO, GEONO_OPT, FIXNO_OPT,
@@ -380,6 +374,64 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
             "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
             "        +1.030050000e+05+0.000000000e+00+1.000000000e+00-1.000000000e+00\n"
             "        +3.300000000e+01+3.400000000e+01\n");
+   }
+}
+
+TEST_CASE("FEM GELREF1 conversion from own output.", "[fem_gelref1,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("GELREF1 (sample 1)") {
+      std::deque<std::string> data({
+            "GELREF1 +1.800000000e+01+3.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"});
+      card::card_split(data, lines);
+      gelref1 probe(lines);
+
+      CHECK(probe.ELNO == 18);
+      CHECK(probe.MATNO == 3);
+      CHECK(probe.ADDNO == 0);
+      CHECK(probe.INTNO == 0);
+      CHECK(probe.MINTNO == 0);
+      CHECK(probe.STRANO == 0);
+      CHECK(probe.STRENO == 0);
+      CHECK(probe.STREPONO == 0);
+      CHECK(probe.GEONO_OPT == 1);
+      CHECK(probe.FIXNO_OPT == 0);
+      CHECK(probe.ECCNO_OPT == 0);
+      CHECK(probe.TRANSNO_OPT == 0);
+      CHECK(probe.GEONO == std::vector<long>({}));
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
+   }
+
+   SECTION("GELREF1 (sample 2)") {
+      std::deque<std::string> data({
+            "GELREF1 +1.800000000e+01+3.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
+            "        +1.030050000e+05+0.000000000e+00-1.000000000e+00+1.700000000e+01\n",
+            "        +3.300000000e+01+3.400000000e+01\n"});
+      card::card_split(data, lines);
+      gelref1 probe(lines);
+
+      CHECK(probe.ELNO == 18);
+      CHECK(probe.MATNO == 3);
+      CHECK(probe.ADDNO == 0);
+      CHECK(probe.INTNO == 0);
+      CHECK(probe.MINTNO == 0);
+      CHECK(probe.STRANO == 0);
+      CHECK(probe.STRENO == 0);
+      CHECK(probe.STREPONO == 0);
+      CHECK(probe.GEONO_OPT == 103005);
+      CHECK(probe.FIXNO_OPT == 0);
+      CHECK(probe.ECCNO_OPT == -1);
+      CHECK(probe.TRANSNO_OPT == 17);
+      CHECK(probe.GEONO == std::vector<long>({}));
+      CHECK(probe.FIXNO == std::vector<long>({}));
+      CHECK(probe.ECCNO == std::vector<long>({33, 34}));
+      CHECK(probe.TRANSNO == std::vector<long>({}));
    }
 }
 

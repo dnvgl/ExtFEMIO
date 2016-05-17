@@ -134,6 +134,45 @@ TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
    }
 }
 
+TEST_CASE("FEM MISOSEL conversion from own output.", "[fem_misosel,in/out]") {
+
+   std::deque<std::string> lines;
+
+   SECTION("MISOEL (1)") {
+      std::deque<std::string> data({
+            "MISOSEL +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
+      card::card_split(data, lines);
+      misosel probe(lines);
+
+      CHECK(probe.MATNO == 1);
+      CHECK(probe.YOUNG == 2.);
+      CHECK(probe.POISS == 3.);
+      CHECK(probe.RHO == 4.);
+      CHECK(probe.DAMP == 5.);
+      CHECK(probe.ALPHA == 6.);
+      CHECK(probe.DUMMY == 7.);
+      CHECK(probe.YIELD == 8.);
+   }
+
+   SECTION("MISOEL (2)") {
+      std::deque<std::string> data({
+            "MISOSEL +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+            "        +5.000000000e+00+6.000000000e+00\n"});
+            card::card_split(data, lines);
+      misosel probe(lines);
+
+      CHECK(probe.MATNO == 1);
+      CHECK(probe.YOUNG == 2.);
+      CHECK(probe.POISS == 3.);
+      CHECK(probe.RHO == 4.);
+      CHECK(probe.DAMP == 5.);
+      CHECK(probe.ALPHA == 6.);
+      CHECK(probe.DUMMY == 0.);
+      CHECK(probe.YIELD == 0.);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

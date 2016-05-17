@@ -94,7 +94,7 @@ namespace dnvgl {
                /** node references for element ->
                    dnvgl::extfem::fem::cards::gelmnt1::NODIN
                */
-               std::deque<long> nodes;
+               std::vector<long> nodes;
                /** Material reference ->
                    dnvgl::extfem::fem::cards::gelref1::MATNO
                */
@@ -128,23 +128,23 @@ namespace dnvgl {
                    dnvgl::extfem::fem::cards::gelref1::GEONO_OPT /
                    dnvgl::extfem::fem::cards::gelref1::GEONO
                */
-               std::deque<long> section;
+               std::vector<long> section;
                /** Fixation information reference for element. ->
                    dnvgl::extfem::fem::cards::gelref1::FIXNO_OPT /
                    dnvgl::extfem::fem::cards::gelref1::FIXNO
                */
-               std::deque<long> fixations;
+               std::vector<long> fixations;
                /** Eccentricity information reference for element. ->
                    dnvgl::extfem::fem::cards::gelref1::ECCNO_OPT /
                    dnvgl::extfem::fem::cards::gelref1::ECCNO
                */
-               std::deque<long> eccentrities;
+               std::vector<long> eccentrities;
                /** Local coordinate system information reference for
                    element. ->
                    dnvgl::extfem::fem::cards::gelref1::TRANSNO_OPT /
                    dnvgl::extfem::fem::cards::gelref1::TRANSNO
                */
-               std::deque<long> csys;
+               std::vector<long> csys;
 
                virtual void add(dnvgl::extfem::fem::cards::gelref1 const*);
                virtual void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
