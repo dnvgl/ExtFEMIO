@@ -19,6 +19,7 @@ namespace {
 
 #include <memory>
 #include <algorithm>
+#include <cassert>
 
 #include "fem/cards.h"
 #include "fem/types.h"

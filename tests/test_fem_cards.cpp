@@ -823,7 +823,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
          std::vector<double>({0., 0., 0., 1.}));
       CHECK(static_cast<gelmnt2*>(current.get())->NNOD == 1);
       CHECK(static_cast<gelmnt2*>(current.get())->NOD ==
-            std::vector<long>({1}));
+            std::vector<long>(1, 1));
    }
 
    SECTION("Checking dispatch [hsupstat].") {
@@ -901,7 +901,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<hierarch*>(current.get())->IHPREF == 0);
       CHECK(static_cast<hierarch*>(current.get())->NSUB == 1);
       CHECK(static_cast<hierarch*>(current.get())->IHSREFi ==
-            std::vector<long>({2}));
+            std::vector<long>(1, 2));
    }
 
    SECTION("Checking dispatch [tdload].") {
