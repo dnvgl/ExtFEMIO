@@ -69,7 +69,6 @@ TEST_CASE("BDF ENDDATA types output.", "[bdf_enddata,out]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

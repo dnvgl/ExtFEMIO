@@ -248,7 +248,7 @@ pbeam::pbeam(const std::deque<std::string> &inp) : beam_prop(inp) {
       J.push_front(dnvgl::extfem::bdf::types::entry_value<double>());
 }
 
-const std::ostream& pbeam::operator << (std::ostream& os) const {
+std::ostream& pbeam::operator << (std::ostream& os) const {
    throw errors::error("can't write PBEAM.");
    return os;
 }

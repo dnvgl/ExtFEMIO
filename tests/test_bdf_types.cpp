@@ -49,9 +49,10 @@ namespace {
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-   entry_type<long> obj_int("dummy1");
-   entry_type<double> obj_float("dummy2");
-   entry_type<std::deque<int>> obj_list("dummy3");
+   entry_type<long> obj_int("d_int");
+   entry_type<double> obj_float("d_float");
+   entry_type<std::deque<int> > obj_list("d_dque");
+   entry_type<std::complex<double> > obj_cplx("d_cplx");
 
    SECTION("Checking 'entry_type<long>.type' against 'Int'") {
       CHECK(entry_type<long>("dummy idiot").type() == Int);
@@ -75,6 +76,10 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
    SECTION("Checking 'bdf_list->type' against 'List'") {
       CHECK(obj_list.type() == List);
+   }
+
+   SECTION("Checking 'bdf_complex->type' against 'Complex'") {
+      CHECK(obj_cplx.type() == Complex);
    }
 
    SECTION("Comparing 'entry_type<long>' with 'entry_type<double>'") {

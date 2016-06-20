@@ -52,6 +52,12 @@ libextfemio_bdf_la_SOURCES += bdf/bdf_cards_pshell.cpp
 libextfemio_bdf_la_SOURCES += bdf/bdf_cards_shell.cpp
 libextfemio_bdf_la_SOURCES += bdf/bdf_cards_momforce_base.cpp
 libextfemio_bdf_la_SOURCES += bdf/bdf_cards_load.cpp
+libextfemio_bdf_la_SOURCES += bdf/bdf_cards_param.cpp
+libextfemio_bdf_la_SOURCES += bdf/bdf_header_case_echo.cpp
+libextfemio_bdf_la_SOURCES += bdf/bdf_header_case_subcase.cpp
+libextfemio_bdf_la_SOURCES += bdf/bdf_header_case_title.cpp
+libextfemio_bdf_la_SOURCES += bdf/bdf_header_exec_cend.cpp
+libextfemio_bdf_la_SOURCES += bdf/bdf_header_exec_sol.cpp
 
 lib_LTLIBRARIES += libextfemio_fem.la
 libextfemio_fem_la_SOURCES = fem/fem_cards.cpp

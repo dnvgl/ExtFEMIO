@@ -160,7 +160,7 @@ plate element.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CTRIA3; };
 
-               const std::ostream&
+               std::ostream&
                operator<< (std::ostream& os) const;
             };
 
@@ -190,7 +190,7 @@ quadrilateral plate element.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CQUAD4; };
 
-               const std::ostream&
+               std::ostream&
                operator<< (std::ostream& os) const;
             };
 
@@ -390,7 +390,7 @@ Defines a beam element.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CBEAM; };
 
-               const std::ostream&
+               std::ostream&
                operator<< (std::ostream& os) const;
             };
 
@@ -664,8 +664,8 @@ Defines a simple beam element.
                   return os;
                };
 
-               const std::ostream&
-               operator<<(std::ostream& os) const;
+               std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
 /// Handle Nastran Bulk `CROD` entries.
@@ -713,8 +713,8 @@ Defines a tension-compression-torsion element.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CROD; };
 
-               const std::ostream&
-               operator << (std::ostream& os) const;
+               std::ostream&
+               operator<< (std::ostream& os) const;
             };
          }
       }

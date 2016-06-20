@@ -67,7 +67,7 @@ crod::crod(const std::deque<std::string> &inp) :
    }
 };
 
-const std::ostream& crod::operator << (std::ostream& os) const {
+std::ostream& crod::operator << (std::ostream& os) const {
    throw errors::error("can't write CROD.");
    return os;
 }

@@ -64,8 +64,9 @@ namespace dnvgl {
 
             protected:
 
-               void add_collect(std::deque<std::unique_ptr<format_entry>>&,
-                                const momforce_base&) const;
+               void add_collect(
+                  std::deque<std::unique_ptr<format_entry>>&,
+                  const momforce_base&) const;
 
                momforce_base(const std::deque<std::string> &inp);
 
@@ -74,7 +75,7 @@ namespace dnvgl {
                   const double *F,
                   const double *N1, const double *N2, const double *N3);
 
-               const std::ostream& operator << (std::ostream& os) const;
+               std::ostream const &operator<< (std::ostream &) const;
             };
 
 /// Handle Nastran Bulk `FORCE` entries.
@@ -111,9 +112,9 @@ vector.
                   return FORCE;
                };
 
-               friend std::ostream& operator<<(std::ostream&, const force&);
-               
-               const std::ostream& operator << (std::ostream& os) const;
+               friend std::ostream const &operator<< (std::ostream &, const force&);
+
+               std::ostream const &operator<< (std::ostream &) const;
             };
 
 /// Handle Nastran Bulk `MOMENT` entries.
@@ -139,7 +140,7 @@ vector.
 
                moment(const std::deque<std::string> &inp) :
                   momforce_base(inp) {};
-               
+
                moment(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
@@ -150,9 +151,9 @@ vector.
                   return MOMENT;
                };
 
-               friend std::ostream& operator<< (std::ostream&, const moment&);
+               friend std::ostream const &operator<< (std::ostream&, const moment&);
 
-               const std::ostream& operator<< (std::ostream& os) const;
+               std::ostream const &operator<< (std::ostream &) const;
             };
 
 /// Handle Nastran Bulk `LOAD` entries.
@@ -207,11 +208,9 @@ Defines a static load as a linear combination of load std::sets defined via
                   return LOAD;
                };
 
-               friend std::ostream&
-               operator<<(std::ostream&, const load&);
+               friend std::ostream const &operator<< (std::ostream &, const load&);
 
-               const std::ostream&
-               operator << (std::ostream& os) const;
+               std::ostream const &operator<< (std::ostream &) const;
             };
          }
       }
@@ -222,7 +221,6 @@ Defines a static load as a linear combination of load std::sets defined via
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j 8"

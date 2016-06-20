@@ -40,6 +40,11 @@ test_bdf_float_SOURCES=test_bdf_float.cpp
 test_bdf_float_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_float.ju
 
+check_PROGRAMS += test_bdf_complx
+test_bdf_complx_SOURCES=test_bdf_comlpx.cpp
+test_bdf_complx_LDADD=$(test_extfem_bdf_LDADD)
+TESTS += test_bdf_complx.ju
+
 check_PROGRAMS += test_bdf_int
 test_bdf_int_SOURCES=test_bdf_int.cpp
 test_bdf_int_LDADD=$(test_extfem_bdf_LDADD)
@@ -80,9 +85,15 @@ test_bdf_cards_SOURCES += test_bdf_cards_pshell.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_force.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_moment.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_load.cpp
+test_bdf_cards_SOURCES += test_bdf_cards_param.cpp
 
 test_bdf_cards_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_cards.ju
+
+check_PROGRAMS += test_bdf_header
+test_bdf_header_SOURCES=test_bdf_header.cpp
+test_bdf_header_LDADD=$(test_extfem_bdf_LDADD)
+TESTS += test_bdf_header.ju
 
 test_extfem_fem_LDADD=../src/libextfemio_fem.la ../src/libextfemio.la -lboost_regex
 

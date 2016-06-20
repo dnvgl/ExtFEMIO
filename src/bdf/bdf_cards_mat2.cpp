@@ -118,7 +118,7 @@ mat2::mat2(const std::deque<std::string> &inp) : mat(inp) {
       form_TREF.set_value(TREF, "");
 }
 
-const std::ostream& mat2::operator << (std::ostream& os) const {
+std::ostream const &mat2::operator<< (std::ostream &os) const {
    throw errors::error("can't write MAT2.");
    return os;
 }

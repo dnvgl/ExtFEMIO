@@ -56,6 +56,8 @@ namespace dnvgl {
                Float,
                /// String value
                Str,
+               /// Complex value
+               Complex,
                /// List of Integers
                List,
                /// Empty cell (Placeholder)
@@ -729,6 +731,191 @@ namespace dnvgl {
                   }
                   return out;
                };
+            };
+
+            template <>
+            class entry_type<std::complex<double>> : public base {
+
+            private:
+
+               dnvgl::extfem::bdf::type_bounds::bound<std::complex<double>> bounds;
+
+               static const bdf_types _type = Complex;
+
+            public:
+
+               entry_type<std::complex<double>>(const std::string &name) :
+                  bdf::types::base(name), bounds(bdf::type_bounds::bound<std::complex<double>>()) {};
+
+               entry_type<std::complex<double>>(
+                  const std::string &name,
+                  const bdf::type_bounds::bound<std::complex<double>> &bounds) :
+                  bdf::types::base(name), bounds(bounds) {};
+
+               bdf_types inline type() const { return _type; };
+
+               // Convert string to float
+               void set_value(
+                  entry_value<std::complex<double>> &val, const std::string &inp1, const std::string &inp2="") const {
+
+                  auto sval1 = extfem::string::string(inp1).trim().upper();
+                  auto sval2 = extfem::string::string(inp2).trim().upper();
+
+                  double c_real, c_imag;
+
+                  val.is_value = false;
+
+                  if (sval1.length() == 0) {
+                     throw errors::float_error(name, "empty entry without default");
+                  } else {
+                     if (!regex_match(sval1, float_re)) {
+                        std::string msg("illegal input, no float");
+                        throw errors::float_error(name, msg + "; !" + sval1 + "!");
+                     }
+                     if (sval2.length() > 0 && !regex_match(sval2, float_re)) {
+                        std::string msg("illegal input, no float");
+                        throw errors::float_error(name, msg + "; !" + sval2 + "!");
+                     }
+
+#ifdef HAVE_BOOST_REGEX_HPP
+                     ::boost::smatch m;
+#else
+                     std::smatch m;
+#endif
+
+                     if (regex_search(sval1, m, float_exp_re))
+                        sval1 = m[1].str() + "E" + m[2].str();
+                     if (regex_match(sval1, float_lead_dot)) {
+                        auto pos = sval1.find('.');
+                        sval1.insert(pos, 1, '0');
+                     }
+                     conv.str(sval1);
+                     conv.seekg(0);
+                     conv >> c_real;
+
+                     if (sval2.length() > 0) {
+                        if (regex_search(sval2, m, float_exp_re))
+                           sval2 = m[1].str() + "E" + m[2].str();
+                        if (regex_match(sval2, float_lead_dot)) {
+                           auto pos = sval2.find('.');
+                           sval2.insert(pos, 1, '0');
+                        }
+                        conv.str(sval2);
+                        conv.seekg(0);
+                        conv >> c_imag;
+                     } else
+                        c_imag = 0.;
+                     val = std::complex<double>(c_real, c_imag);
+                  }
+                  // if (!this->bounds.in_bounds(val))
+                  //    throw errors::float_error(name, "boundary condition violated");
+                  val.is_value = true;
+                  return;
+               }
+
+               entry_value<std::complex<double>> operator() (const std::string &inp1, const std::string &inp2="") const {
+                  entry_value<std::complex<double>> val;
+                  this->set_value(val, inp1, inp2);
+                  return val;
+               }
+
+               std::string inline format(const void *v) const {
+                  if (!v)
+                     return (bdf::types::empty().format(nullptr) +
+                             bdf::types::empty().format(nullptr));
+                  else {
+                     entry_value<std::complex<double>> val(*(std::complex<double>*)v);
+                     return this->format(val);
+                  }
+               }
+
+               std::string inline format(const entry_value<std::complex<double>> &inp) const {
+
+                  if (!inp)
+                     return (bdf::types::empty().format(nullptr) +
+                             bdf::types::empty().format(nullptr));
+
+                  std::ostringstream outp;
+
+                  outp << std::setiosflags(std::ios::scientific);
+
+#ifdef _MSC_VER
+                  // std::set output to two digit exponetial format.
+                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+#endif
+                  switch (out_form) {
+                  case LONG:
+                     outp << std::setiosflags(std::ios::right) << std::setfill(' ');
+                     if (inp.value.real() < 0)
+                        outp << std::setprecision(10);
+                     else
+                        outp << std::setprecision(11);
+                     outp << std::setw(17) << inp.value.real();
+                     if (inp.value.imag() < 0)
+                        outp << std::setprecision(10);
+                     else
+                        outp << std::setprecision(11);
+                     outp << std::setw(17) << inp.value.imag();
+                     break;
+                  case SHORT:
+                     {
+                        // Check on how much precision is lost when using SHORT format.
+                        // If too much precision is list raise exception which causes
+                        // calling routine to switch to LONG format.
+                        double order_r(pow(10., -floor(std::log10(fabs(inp.value.real()))) + 3.));
+                        double order_i(pow(10., -floor(std::log10(fabs(inp.value.imag()))) + 3.));
+                        if ((fabs(fabs(round(inp.value.real() * order_r) / (inp.value.real() * order_r)) - 1.) > 1e-8) ||
+                            (fabs(fabs(round(inp.value.imag() * order_i) / (inp.value.imag() * order_i)) - 1.) > 1e-8)) {
+                           std::ostringstream msg("output string for value ",
+                                                  std::ostringstream::ate);
+                           msg << inp.value
+                               << " looses too much precision of being crammed into string of "
+                               << out_form << " characters.";
+                           throw errors::float_error(name, msg.str());
+                        }
+                        outp << std::setiosflags(std::ios::right) << std::setfill(' ');
+                        if (inp.value.real() < 0)
+                           outp << std::setprecision(2);
+                        else
+                           outp << std::setprecision(3);
+                        outp << std::setw(9) << inp.value.real();
+                        if (inp.value.imag() < 0)
+                           outp << std::setprecision(2);
+                        else
+                           outp << std::setprecision(3);
+                        outp << std::setw(9) << inp.value.imag();
+                        break;
+                     }
+                  case FREE:
+                     std::ostringstream res;
+                     res << std::setiosflags(std::ios::scientific)
+                         << inp.value.real() << "," << inp.value.imag();
+                     outp << std::string(res.str());
+                     break;
+                  }
+
+                  std::string out(outp.str());
+                  out.erase(out.find('e'), 1);
+                  out.erase(out.find('e'), 1);
+                  if (out.size() != static_cast<size_t>(out_form)*2 && out_form > 0) {
+                     std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                     msg << "!" << inp.value << "! -> !" << out << "! of incorrect size, got length of " << out.size()
+                        << " instead of allowed length of " << out_form << ".";
+                     throw errors::float_error(name, msg.str());
+                  }
+
+#ifdef _MSC_VER
+                  // Reset exponetial format to former std::settings.
+                  _set_output_format(ext_exp_format);
+#endif
+
+                  return out;
+               }
+
+               std::string inline format(const std::complex<double> &val) const {
+                  entry_value<std::complex<double>> tmp(val);
+                  return format(tmp);
+               }
             };
          }
       }

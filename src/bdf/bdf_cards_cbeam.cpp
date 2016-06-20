@@ -195,7 +195,7 @@ cbeam::cbeam(const std::deque<std::string> &inp) :
    }
 };
 
-const std::ostream& cbeam::operator << (std::ostream& os) const {
+std::ostream& cbeam::operator << (std::ostream& os) const {
    throw errors::error("can't write CBEAM.");
    return os;
 }

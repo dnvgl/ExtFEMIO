@@ -84,7 +84,7 @@ prod::prod(const std::deque<std::string> &inp) : card(inp) {
    if (!C.is_value) form_C.set_value(C, "");
 }
 
-const std::ostream& prod::operator << (std::ostream& os) const {
+std::ostream& prod::operator << (std::ostream& os) const {
    throw errors::error("can't write PROD.");
    return os;
 }

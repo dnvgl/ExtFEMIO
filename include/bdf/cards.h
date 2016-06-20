@@ -92,6 +92,8 @@ namespace dnvgl {
                BAR_PROP,
                /// base class for beam property description
                BEAM_PROP,
+               /// Parameter
+               PARAM,
             } types;
 
             typedef std::pair<dnvgl::extfem::bdf::types::base*, void*> format_entry;
@@ -141,8 +143,8 @@ namespace dnvgl {
                card (const std::deque<std::string> &);
                card ();
 
-               virtual const dnvgl::extfem::bdf::cards::types card_type(void) const = 0;
-               virtual const std::ostream& operator<<(std::ostream&) const = 0;
+               virtual dnvgl::extfem::bdf::cards::types const card_type(void) const = 0;
+               virtual std::ostream const &operator<< (std::ostream &) const = 0;
             };
 
             inline std::unique_ptr<format_entry>
@@ -186,7 +188,7 @@ namespace dnvgl {
 
                std::deque<std::string> content;
 
-               const std::ostream& operator << (std::ostream& os) const {
+               std::ostream& operator << (std::ostream& os) const {
                   throw errors::error("can't write UNKNOWN.");
                   return os;
                };
@@ -219,7 +221,7 @@ Designates the end of the Bulk Data Section.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return ENDDATA; };
 
-               const std::ostream& operator<< (std::ostream& os) const {
+               std::ostream const &operator<< (std::ostream & os) const {
                   os << this;
                   return os;
                };
@@ -300,8 +302,7 @@ displacement, and its permanent single-point constraints.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return GRID; };
 
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               std::ostream const &operator<< (std::ostream & os) const;
             };
 
 /// Base class for material definitions
@@ -415,8 +416,7 @@ Defines the material properties for linear isotropic materials.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT1; };
 
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               std::ostream const &operator<< (std::ostream & os) const;
             };
 
 /// Handle Nastran Bulk MAT2 entries.
@@ -472,8 +472,110 @@ Example:
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return MAT2; };
 
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               std::ostream const &operator<< (std::ostream & os) const;
+            };
+
+/// Handle Nastran Bulk PARAM entries.
+/** # Parameter
+
+Specifies values for parameters used in solution sequences or
+user-written DMAP programs.
+
+# Format:
+
+| 1       | 2   | 3    | 4    | 5 | 6 | 7 | 8 | 9 | 10 |
+| ------- | --- | ---- | ---- | - | - | - | - | - | -- |
+| `PARAM` | `N` | `V1` | `V2` |   |   |   |   |   |    |
+
+
+Example:
+
+| 1       | 2      | 3   | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| ------- | ------ | --- | - | - | - | - | - | - | -- |
+| `PARAM` | `IRES` | `1` |   |   |   |   |   |   |    |
+
+
+
+# Remarks:
+1. See “Parameters” on page 603 for a list of parameters used in solution
+sequences that may be set by the user on PARAM entries.
+2. If the large field entry format is used, the second physical entry must be
+present, even though fields 6 through 9 are blank.
+
+ */
+            class param : public card {
+            private:
+
+               static dnvgl::extfem::bdf::types::card head;
+               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_N;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_IVAL;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_RVAL;
+               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_CVAL;
+               static const dnvgl::extfem::bdf::types::entry_type<std::complex<double>> form_CPLXVAL;
+
+            public:
+
+               typedef enum {is_CHAR, is_INT, is_REAL, is_CPLX} VALUE_TYPE;
+
+               VALUE_TYPE value_type;
+
+               /** Parameter name (one to eight alphanumeric
+                   characters, the first of which is alphabetic).
+               */
+               dnvgl::extfem::bdf::types::entry_value<std::string> N;
+               /** Parameter value based on parameter type:
+                   | `V1` | `V1`  |
+                   | long | blank |
+               */
+               dnvgl::extfem::bdf::types::entry_value<long> IVAL;
+               /** Parameter value based on parameter type:
+                   | `V1`   | `V1`  |
+                   | double | blank |
+               */
+               dnvgl::extfem::bdf::types::entry_value<double> RVAL;
+               /** Parameter value based on parameter type:
+                   | `V1` | `V1`  |
+                   | char | blank |
+               */
+               dnvgl::extfem::bdf::types::entry_value<std::string> CVAL;
+               /** Parameter value based on parameter type:
+                   | `V1`   | `V1`   |
+                   | double | double |
+               */
+               dnvgl::extfem::bdf::types::entry_value<std::complex<double>> CPLXVAL;
+
+            private:
+               param();
+
+               param(std::string const&);
+
+            public:
+               param(std::deque<std::string> const&);
+
+               param(std::string const&, long const&);
+
+               param(std::string const&, double const&);
+
+               param(std::string const&, std::string const&);
+
+               param(std::string const&, std::complex<double> const&);
+
+               param(std::string const&, double const&, double const&);
+
+               const dnvgl::extfem::bdf::cards::types card_type(void) const {
+                  return PARAM;
+               };
+
+               friend std::ostream&
+               operator<<(std::ostream&, const param&);
+
+               std::ostream&
+               operator << (std::ostream& os) const;
+
+            private:
+               void add_collect(
+                  std::deque<std::unique_ptr<format_entry>> &,
+                  const param &) const;
             };
          }
       }

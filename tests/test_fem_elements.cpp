@@ -1,5 +1,5 @@
 /**
-   \file test_fem_elements.cpp
+   \file tests/test_fem_elements.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Tests for Sesam FEM element representing classes.

@@ -118,8 +118,8 @@ properties of thin shell elements.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PSHELL; };
 
-               const std::ostream&
-               operator << (std::ostream& os) const;
+               std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
             class beam_base : public card {
@@ -382,8 +382,8 @@ The last two continuations are:
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAM; };
 
-               const std::ostream&
-               operator << (std::ostream& os) const;
+               std::ostream&
+               operator<< (std::ostream& os) const;
             };
 
             class l_geom {
@@ -474,7 +474,7 @@ dimensions.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAML; };
 
-               const std::ostream&
+               std::ostream&
                operator<< (std::ostream& os) const;
             };
 
@@ -599,7 +599,7 @@ stations)
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBAR; };
 
-               const std::ostream&
+               std::ostream&
                operator<< (std::ostream& os) const;
             };
 
@@ -655,7 +655,7 @@ cross-sectional dimensions.
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBARL; };
 
-               const std::ostream&
+               std::ostream&
                operator<< (std::ostream& os) const;
             };
 
@@ -709,7 +709,7 @@ Defines the properties of a rod element (`CROD` entry).
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PROD; };
 
-               const std::ostream&
+               std::ostream&
                operator<< (std::ostream& os) const;
             };
          }

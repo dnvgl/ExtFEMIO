@@ -160,7 +160,7 @@ pbar::pbar(const std::deque<std::string> &inp) : bar_prop(inp) {
    }
 }
 
-const std::ostream& pbar::operator << (std::ostream& os) const {
+std::ostream& pbar::operator << (std::ostream& os) const {
    throw errors::error("can't write PBAR.");
    return os;
 }

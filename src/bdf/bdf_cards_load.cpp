@@ -85,13 +85,11 @@ namespace dnvgl {
 
             bdf::types::card load::head = bdf::types::card("LOAD");
 
-            const std::ostream&
-            load::operator<< (std::ostream& os) const {
+            std::ostream const &load::operator<< (std::ostream& os) const {
                return os << *this;
             }
 
-            std::ostream
-            &operator<<(std::ostream &os, const load &card) {
+            std::ostream const &operator<<(std::ostream &os, const load &card) {
 
                std::deque<std::unique_ptr<format_entry>> entries;
 
@@ -120,7 +118,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

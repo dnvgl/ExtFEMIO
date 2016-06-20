@@ -116,7 +116,7 @@ pshell::pshell(const std::deque<std::string> &inp) : card(inp) {
    }
 }
 
-const std::ostream& pshell::operator << (std::ostream& os) const {
+std::ostream& pshell::operator << (std::ostream& os) const {
    throw errors::error("can't write cbeam.");
    return os;
 }

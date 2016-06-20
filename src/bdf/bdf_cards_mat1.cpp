@@ -31,109 +31,113 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
-using bdf::types::entry_type;
-
 namespace {
    static const long cl0 = 0, cl1 = 1;
    static const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
 }
 
-const entry_type<double> mat1::form_E(
-   "E",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat1::form_NU(
-   "NU",
-   bdf::type_bounds::bound<double>(&cd_1, &cd05, nullptr, true));
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
+         namespace cards{
 
-mat1::mat1(const std::deque<std::string> &inp) : mat(inp) {
+            const bdf::types::entry_type<double> mat1::form_E(
+               "E",
+               bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
+            const bdf::types::entry_type<double> mat1::form_NU(
+               "NU",
+               bdf::type_bounds::bound<double>(&cd_1, &cd05, nullptr, true));
 
-   form_MCSID.set_value(MCSID, "");
-   form_SS.set_value(SS, "");
-   form_SC.set_value(SC, "");
-   form_ST.set_value(ST, "");
-   form_GE.set_value(GE, "");
-   form_TREF.set_value(TREF, "");
-   form_A.set_value(A, "");
-   form_RHO.set_value(RHO, "");
-   form_NU.set_value(NU, "");
-   form_G.set_value(G, "");
+            mat1::mat1(const std::deque<std::string> &inp) : mat(inp) {
 
-   auto pos = inp.rbegin();
+               form_MCSID.set_value(MCSID, "");
+               form_SS.set_value(SS, "");
+               form_SC.set_value(SC, "");
+               form_ST.set_value(ST, "");
+               form_GE.set_value(GE, "");
+               form_TREF.set_value(TREF, "");
+               form_A.set_value(A, "");
+               form_RHO.set_value(RHO, "");
+               form_NU.set_value(NU, "");
+               form_G.set_value(G, "");
 
-   switch (inp.size()-1) {
-   case 16:
-      ++pos;
-   case 15:
-      ++pos;
-   case 14:
-      ++pos;
-   case 13:
-      ++pos;
-   case 12:
-      form_MCSID.set_value(MCSID, *(pos++));
-   case 11:
-      form_SS.set_value(SS, *(pos++));
-   case 10:
-      form_SC.set_value(SC, *(pos++));
-   case 9:
-      form_ST.set_value(ST, *(pos++));
-   case 8:
-      form_GE.set_value(GE, *(pos++));
-   case 7:
-      form_TREF.set_value(TREF, *(pos++));
-   case 6:
-      form_A.set_value(A, *(pos++));
-   case 5:
-      form_RHO.set_value(RHO, *(pos++));
-   case 4:
-      form_NU.set_value(NU, *(pos++));
-   case 3:
-      form_G.set_value(G, *(pos++));
-   case 2:
-      form_E.set_value(E, *(pos++));
-      form_MID.set_value(MID, *(pos));
-      break;
-   default:
-      throw errors::parse_error("MAT1", "Illegal number of entries.");
-   }
+               auto pos = inp.rbegin();
 
-   if ((bool)A && !(bool)TREF) form_TREF.set_value(TREF, "");
+               switch (inp.size()-1) {
+               case 16:
+                  ++pos;
+               case 15:
+                  ++pos;
+               case 14:
+                  ++pos;
+               case 13:
+                  ++pos;
+               case 12:
+                  form_MCSID.set_value(MCSID, *(pos++));
+               case 11:
+                  form_SS.set_value(SS, *(pos++));
+               case 10:
+                  form_SC.set_value(SC, *(pos++));
+               case 9:
+                  form_ST.set_value(ST, *(pos++));
+               case 8:
+                  form_GE.set_value(GE, *(pos++));
+               case 7:
+                  form_TREF.set_value(TREF, *(pos++));
+               case 6:
+                  form_A.set_value(A, *(pos++));
+               case 5:
+                  form_RHO.set_value(RHO, *(pos++));
+               case 4:
+                  form_NU.set_value(NU, *(pos++));
+               case 3:
+                  form_G.set_value(G, *(pos++));
+               case 2:
+                  form_E.set_value(E, *(pos++));
+                  form_MID.set_value(MID, *(pos));
+                  break;
+               default:
+                  throw errors::parse_error("MAT1", "Illegal number of entries.");
+               }
 
-   // remark 2
-   if (!((bool)E || (bool)G))
-      throw errors::parse_error(
-         "MAT1", "Either G or E has to be given.");
-   if (!(bool)NU) {
-      if (!(bool)E) {
-         NU.value = 0.;
-         NU.is_value = true;
-         E.value = 0.;
-         E.is_value = true;
-      } else if (!(bool)G) {
-         NU.value = 0.;
-         NU.is_value = true;
-         G.value = 0.;
-         G.is_value = true;
-      } else {
-         NU.value = ((double)E / 2. / (double)G) - 1.;
-         NU.is_value = true;
+               if ((bool)A && !(bool)TREF) form_TREF.set_value(TREF, "");
+
+               // remark 2
+               if (!((bool)E || (bool)G))
+                  throw errors::parse_error(
+                     "MAT1", "Either G or E has to be given.");
+               if (!(bool)NU) {
+                  if (!(bool)E) {
+                     NU.value = 0.;
+                     NU.is_value = true;
+                     E.value = 0.;
+                     E.is_value = true;
+                  } else if (!(bool)G) {
+                     NU.value = 0.;
+                     NU.is_value = true;
+                     G.value = 0.;
+                     G.is_value = true;
+                  } else {
+                     NU.value = ((double)E / 2. / (double)G) - 1.;
+                     NU.is_value = true;
+                  }
+               } else if (!(bool)E) {
+                  E.value = 2. * (1 + (double)NU) * (double)G;
+                  E.is_value = true;
+               } else if (!(bool)G) {
+                  G.value = (double)E / (2. * (1 + (double)NU));
+                  G.is_value = true;
+               }
+            }
+
+            std::ostream const &mat1::operator<< (std::ostream &os) const {
+               throw errors::error("can't write MAT1.");
+               return os;
+            }
+         }
       }
-   } else if (!(bool)E) {
-      E.value = 2. * (1 + (double)NU) * (double)G;
-      E.is_value = true;
-   } else if (!(bool)G) {
-      G.value = (double)E / (2. * (1 + (double)NU));
-      G.is_value = true;
    }
 }
-
-const std::ostream& mat1::operator << (std::ostream& os) const {
-   throw errors::error("can't write MAT1.");
-   return os;
-}
-
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

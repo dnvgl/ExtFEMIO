@@ -1,5 +1,5 @@
 /**
-   \file test_fem_cards_gusyi.cpp
+   \file tests/test_fem_cards_gusyi.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing IO for Sesam FEM `GUSYI` cards.

@@ -269,6 +269,9 @@ dnvgl::extfem::bdf::cards::dispatch(
       case LOAD:
          res = std::make_unique<bdf::cards::load>(inp);
          break;
+      case PARAM:
+         res = std::make_unique<bdf::cards::param>(inp);
+         break;
       // These are not real card types, they can't be returned
       case UNKNOWN:
       case BEAM_PROP:

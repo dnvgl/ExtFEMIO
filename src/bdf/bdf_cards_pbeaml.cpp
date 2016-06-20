@@ -173,7 +173,7 @@ pbeaml::pbeaml(const std::deque<std::string> &inp) : beam_prop(inp) {
  end: ;
 }
 
-const std::ostream& pbeaml::operator << (std::ostream& os) const {
+std::ostream& pbeaml::operator << (std::ostream& os) const {
    throw errors::error("can't write PBEAML.");
    return os;
 }

@@ -106,7 +106,7 @@ cquad4::cquad4(const std::deque<std::string> &inp) : base_shell(inp) {
    }
 }
 
-const std::ostream& cquad4::operator << (std::ostream& os) const {
+std::ostream& cquad4::operator << (std::ostream& os) const {
    throw errors::error("can't write CQUAD4.");
    return os;
 }

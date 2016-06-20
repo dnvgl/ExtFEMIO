@@ -108,7 +108,7 @@ ctria3::ctria3(const std::deque<std::string> &inp) : base_shell(inp) {
    }
 }
 
-const std::ostream& ctria3::operator << (std::ostream& os) const {
+std::ostream& ctria3::operator << (std::ostream& os) const {
    throw errors::error("can't write cbeam.");
    return os;
 }

@@ -188,7 +188,7 @@ namespace dnvgl {
                W1B(W1B), W2B(W2B), W3B(W3B) {};
 
 
-            const std::ostream& cbar::operator<<(std::ostream& os) const {
+            std::ostream& cbar::operator<<(std::ostream& os) const {
                os << this;
                return os;
             }
