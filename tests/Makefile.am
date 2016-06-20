@@ -41,7 +41,7 @@ test_bdf_float_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_float.ju
 
 check_PROGRAMS += test_bdf_complx
-test_bdf_complx_SOURCES=test_bdf_comlpx.cpp
+test_bdf_complx_SOURCES=test_bdf_complx.cpp
 test_bdf_complx_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_complx.ju
 
