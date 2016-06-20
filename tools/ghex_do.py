@@ -63,6 +63,11 @@ if __name__ == '__main__':
             res=res, gen_extnodes=gen_extnodes,
             gen_nodepos=gen_nodepos))
 
+        # TODO: No tests defined yet
+        # test.write(test_tmpl.render(
+        #     res=res, gen_extnodes=gen_extnodes,
+        #     gen_nodepos=gen_nodepos))
+
 # Local Variables:
 # mode: python
 # ispell-local-dictionary: "english"
