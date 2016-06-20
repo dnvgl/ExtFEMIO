@@ -76,12 +76,14 @@
     <ExtFEMStringDir>$(Configuration)\test_extfem_string\</ExtFEMStringDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)extfem_string\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(ExtFEMStringDir);$(LibraryPath)</LibraryPath>
     <ExtFEMStringDir>$(Platform)\$(Configuration)\test_extfem_string\</ExtFEMStringDir>
     <IntDir>$(ProjectDir)extfem_string\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,12 +91,14 @@
     <ExtFEMStringDir>$(Configuration)\test_extfem_string\</ExtFEMStringDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)extfem_string\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(ExtFEMStringDir);$(LibraryPath)</LibraryPath>
     <ExtFEMStringDir>$(Platform)\$(Configuration)\test_extfem_string\</ExtFEMStringDir>
     <IntDir>$(ProjectDir)extfem_string\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -111,6 +115,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
+$(OutputPath)test_extfem_string.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_extfem_string</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_extfem_string_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,6 +143,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
+$(OutputPath)test_extfem_string.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_extfem_string</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_extfem_string_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -142,6 +170,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
+$(OutputPath)test_extfem_string.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_extfem_string</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_extfem_string_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -157,6 +197,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_extfem_string ====================
+$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
+$(OutputPath)test_extfem_string.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_extfem_string</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_extfem_string_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />

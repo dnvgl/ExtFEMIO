@@ -120,6 +120,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
+$(OutputPath)test_bdf_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_cards _dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -137,6 +149,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
+$(OutputPath)test_bdf_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_cards _dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -153,6 +177,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
+$(OutputPath)test_bdf_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_cards _dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -169,6 +205,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_cards ====================
+$(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml
+$(OutputPath)test_bdf_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_cards _dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />

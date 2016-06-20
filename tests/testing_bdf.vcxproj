@@ -73,6 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)testing_bdf\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -83,10 +84,12 @@
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(ProjectDir)testing_bdf\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(ProjectDir)testing_bdf\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,6 +128,9 @@ $(OutputPath)test_bdf_str.exe --reporter junit &gt; test_bdf_str_$(Platform)_jun
 echo ==================== test_bdf_list ====================
 $(OutputPath)test_bdf_list.exe
 $(OutputPath)test_bdf_list.exe --reporter junit &gt; test_bdf_list_$(Platform)_junit.xml
+echo ==================== test_bdf_complx ====================
+$(OutputPath)test_bdf_complx.exe
+$(OutputPath)test_bdf_complx.exe --reporter junit &gt; test_bdf_complx_$(Platform)_junit.xml
 echo ==================== test_bdf_cards ====================
 $(OutputPath)test_bdf_cards.exe
 $(OutputPath)test_bdf_cards.exe --reporter junit &gt; test_bdf_cards_$(Platform)_junit.xml

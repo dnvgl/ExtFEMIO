@@ -73,7 +73,7 @@ TEST_CASE("FEM bool types parsing.", "[fem_types]" ) {
 
    //        12345678901e3456
    SECTION("'+1.23000000E+02 '") {
-      CHECK_THROWS(probe("+1.23000000E+02 "));
+      CHECK_THROWS(probe("+1.23000000E+02"));
    }
 
    //        12345678901e3456
@@ -82,7 +82,7 @@ TEST_CASE("FEM bool types parsing.", "[fem_types]" ) {
    }
 
    SECTION("Own output") {
-      CHECK(probe("           +1.00"));
+      CHECK(probe("           +1.00 "));
       CHECK_FALSE(probe("           +0.00"));
    }
 

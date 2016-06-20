@@ -73,6 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)testing_fem\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -83,10 +84,12 @@
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(ProjectDir)testing_fem\$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(ProjectDir)testing_fem\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -105,28 +108,8 @@
       </Message>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
+      <Command>
+      </Command>
       <Message>Testing the module</Message>
       <Outputs>__dummy__</Outputs>
     </CustomBuildStep>
@@ -147,28 +130,8 @@ $(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Pla
       </Command>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
+      <Command>
+      </Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Message>Testing the module</Message>
@@ -192,28 +155,8 @@ $(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Pla
       <Message>Testing the module</Message>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
+      <Command>
+      </Command>
       <Message>Testing the module</Message>
       <Outputs>__dummy__</Outputs>
     </CustomBuildStep>
@@ -235,28 +178,8 @@ $(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Pla
       </Message>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>echo ==================== test_extfem_string ====================
-$(OutputPath)test_extfem_string.exe
-$(OutputPath)test_extfem_string.exe --reporter junit &gt; test_extfem_string_$(Platform)_junit.xml
-echo ==================== test_fem_float ====================
-$(OutputPath)test_fem_float.exe
-$(OutputPath)test_fem_float.exe --reporter junit &gt; test_fem_float_$(Platform)_junit.xml
-echo ==================== test_fem_bool ====================
-$(OutputPath)test_fem_bool.exe
-$(OutputPath)test_fem_bool.exe --reporter junit &gt; test_fem_bool_$(Platform)_junit.xml
-echo ==================== test_fem_int ====================
-$(OutputPath)test_fem_int.exe
-$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
-echo ==================== test_fem_list ====================
-$(OutputPath)test_fem_list.exe
-$(OutputPath)test_fem_list.exe --reporter junit &gt; test_fem_list_$(Platform)_junit.xml
-echo ==================== test_fem_cards ====================
-$(OutputPath)test_fem_cards.exe
-$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
-echo ==================== test_fem_elements ====================
-$(OutputPath)test_fem_elements.exe
-$(OutputPath)test_fem_elements.exe --reporter junit &gt; test_fem_elements_$(Platform)_junit.xml
-</Command>
+      <Command>
+      </Command>
       <Message>Testing the module</Message>
       <Outputs>__dummy__</Outputs>
     </CustomBuildStep>

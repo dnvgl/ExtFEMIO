@@ -412,6 +412,9 @@
     <ClCompile Include="fem\fem_cards_morsmel.cpp">
       <Filter>FEM\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bdf\bdf_cards_param.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BDF">
@@ -513,6 +516,9 @@
     </ClInclude>
     <ClInclude Include="..\include\fem\cards_superele.h">
       <Filter>FEM\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bdf\header.h">
+      <Filter>BDF\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

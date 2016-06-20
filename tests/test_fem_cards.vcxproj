@@ -111,6 +111,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_cards ====================
+$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
+$(OutputPath)test_fem_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_cards_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -128,6 +140,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_cards ====================
+$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
+$(OutputPath)test_fem_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_cards_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -144,6 +168,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_cards ====================
+$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
+$(OutputPath)test_fem_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_cards_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -160,6 +196,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_cards ====================
+$(OutputPath)test_fem_cards.exe --reporter junit &gt; test_fem_cards_$(Platform)_junit.xml
+$(OutputPath)test_fem_cards.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_cards</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_cards_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />

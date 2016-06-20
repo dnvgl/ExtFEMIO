@@ -76,12 +76,14 @@
     <BDFTypesDir>$(Configuration)\test_bdf_types\</BDFTypesDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)bdf_types\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFTypesDir);$(LibraryPath)</LibraryPath>
     <BDFTypesDir>$(Platform)\$(Configuration)\test_bdf_types\</BDFTypesDir>
     <IntDir>$(ProjectDir)bdf_types\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,12 +91,14 @@
     <BDFTypesDir>$(Configuration)\test_bdf_types\</BDFTypesDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)bdf_types\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(BDFTypesDir);$(LibraryPath)</LibraryPath>
     <BDFTypesDir>$(Platform)\$(Configuration)\test_bdf_types\</BDFTypesDir>
     <IntDir>$(ProjectDir)bdf_types\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -111,6 +115,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
+$(OutputPath)test_bdf_types.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_types</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_types_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,6 +143,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
+$(OutputPath)test_bdf_types.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_types</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_types_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -142,6 +170,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
+$(OutputPath)test_bdf_types.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_types</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_types_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -157,6 +197,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_types ====================
+$(OutputPath)test_bdf_types.exe --reporter junit &gt; test_bdf_types_$(Platform)_junit.xml
+$(OutputPath)test_bdf_types.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_types</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_types_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />

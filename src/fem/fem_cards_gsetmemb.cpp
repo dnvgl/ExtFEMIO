@@ -29,6 +29,10 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#ifdef min
+#undef min
+#endif
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;

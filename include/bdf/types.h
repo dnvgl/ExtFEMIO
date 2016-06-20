@@ -16,6 +16,7 @@
 
 #include <cmath>
 #include <string>
+#include <complex>
 #include <deque>
 #include <set>
 #include <iostream>
@@ -25,6 +26,8 @@
 #include <memory>
 #include <sstream>
 #include <iomanip>
+#include <typeinfo>
+#include <limits>
 
 #ifdef __GNUC__
 #include "config.h"

@@ -76,12 +76,14 @@
     <FEMIntDir>$(Configuration)\test_fem_int\</FEMIntDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)fem_int\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMIntDir);$(LibraryPath)</LibraryPath>
     <FEMIntDir>$(Platform)\$(Configuration)\test_fem_int\</FEMIntDir>
     <IntDir>$(ProjectDir)fem_int\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,12 +91,14 @@
     <FEMIntDir>$(Configuration)\test_fem_int\</FEMIntDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)fem_int\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(MSBuildStartupDirectory)/$(FEMIntDir);$(LibraryPath)</LibraryPath>
     <FEMIntDir>$(Platform)\$(Configuration)\test_fem_int\</FEMIntDir>
     <IntDir>$(ProjectDir)fem_int\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -111,6 +115,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_int ====================
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
+$(OutputPath)test_fem_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,6 +143,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_int ====================
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
+$(OutputPath)test_fem_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -142,6 +170,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_int ====================
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
+$(OutputPath)test_fem_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -157,6 +197,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_fem_int ====================
+$(OutputPath)test_fem_int.exe --reporter junit &gt; test_fem_int_$(Platform)_junit.xml
+$(OutputPath)test_fem_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_fem_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_fem_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />

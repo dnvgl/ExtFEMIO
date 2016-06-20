@@ -111,6 +111,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
+$(OutputPath)test_bdf_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -128,6 +140,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
+$(OutputPath)test_bdf_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -144,6 +168,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
+$(OutputPath)test_bdf_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -160,6 +196,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_int ====================
+$(OutputPath)test_bdf_int.exe --reporter junit &gt; test_bdf_int_$(Platform)_junit.xml
+$(OutputPath)test_bdf_int.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_int</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_int_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -167,6 +215,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\StdAfx.cpp" />
     <ClCompile Include="test_bdf_int.cpp" />
   </ItemGroup>
   <ItemGroup>

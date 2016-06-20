@@ -111,6 +111,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
+$(OutputPath)test_bdf_bounds.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_bounds</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_bounds_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -128,6 +140,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
+$(OutputPath)test_bdf_bounds.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_bounds</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_bounds_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -144,6 +168,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
+$(OutputPath)test_bdf_bounds.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_bounds</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_bounds_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -160,6 +196,18 @@
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <CustomBuildStep>
+      <Command>echo ==================== test_bdf_bounds ====================
+$(OutputPath)test_bdf_bounds.exe --reporter junit &gt; test_bdf_bounds_$(Platform)_junit.xml
+$(OutputPath)test_bdf_bounds.exe
+</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Message>test_bdf_bounds</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>test_bdf_bounds_dummy</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="System" />
