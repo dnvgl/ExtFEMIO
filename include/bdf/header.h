@@ -40,7 +40,7 @@ Specifies the solution sequence or main subDMAP to be executed.
 
 \f$
 SOL \left\{
-\begin{array}{x}
+\begin{array}{c}
 n\\
 subDMAP-name
 \end{array}
@@ -222,7 +222,7 @@ Controls echo (i.e., printout) of the Bulk Data.
 
 \f$ \text{ECHO} = \left\{
 \begin{array}{c}
-\text{SORT} \left(\left[\text{EXCEPT}\right\]\text{cdni}, ...\right)\right]\\
+\text{SORT} \left[\left(\left[\text{EXCEPT}\right]\text{cdni}, ...\right)\right]\\
 \text{UNSORT}\\
 \text{BOTH}\\
 \text{NONE}
