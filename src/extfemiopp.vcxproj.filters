@@ -415,6 +415,42 @@
     <ClCompile Include="bdf\bdf_cards_param.cpp">
       <Filter>BDF\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bdf\bdf_header.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_begin_bulk.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_displacement.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_echo.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_load.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_spcforces.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_stress.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_subcase.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_subtitle.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_case_control_title.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_exec_control_cend.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bdf\bdf_header_exec_control_sol.cpp">
+      <Filter>BDF\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BDF">
@@ -425,9 +461,11 @@
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{7b858452-1df7-45e6-8a19-e097a4bd867a}</UniqueIdentifier>
+      <Extensions>h</Extensions>
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{d4c8d886-9794-4f4b-914b-2ba7cc665749}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
     </Filter>
     <Filter Include="FEM\Header Files">
       <UniqueIdentifier>{b9b26207-6f69-40f8-837b-30919625b3d7}</UniqueIdentifier>
