@@ -66,7 +66,7 @@ test_bdf_types_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_types.ju
 
 check_PROGRAMS += test_bdf_cards
-test_bdf_cards_SOURCES=test_bdf_cards.cpp
+test_bdf_cards_SOURCES  = test_bdf_cards.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_cbar.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_cbeam.cpp
 test_bdf_cards_SOURCES += test_bdf_cards_cquad4.cpp
@@ -91,7 +91,11 @@ test_bdf_cards_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_cards.ju
 
 check_PROGRAMS += test_bdf_header
-test_bdf_header_SOURCES=test_bdf_header.cpp
+test_bdf_header_SOURCES  = test_bdf_header.cpp
+test_bdf_header_SOURCES += test_bdf_header_echo.cpp
+test_bdf_header_SOURCES += test_bdf_header_displacement.cpp
+test_bdf_header_SOURCES += test_bdf_header_spcforces.cpp
+test_bdf_header_SOURCES += test_bdf_header_stress.cpp
 test_bdf_header_LDADD=$(test_extfem_bdf_LDADD)
 TESTS += test_bdf_header.ju
 
@@ -118,7 +122,7 @@ test_fem_list_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_list.ju
 
 check_PROGRAMS += test_fem_cards
-test_fem_cards_SOURCES =test_fem_cards.cpp
+test_fem_cards_SOURCES  = test_fem_cards.cpp
 test_fem_cards_SOURCES += test_fem_cards_belfix.cpp
 test_fem_cards_SOURCES += test_fem_cards_beuslo.cpp
 test_fem_cards_SOURCES += test_fem_cards_bldep.cpp
@@ -158,7 +162,7 @@ test_fem_cards_LDADD=$(test_extfem_fem_LDADD)
 TESTS += test_fem_cards.ju
 
 check_PROGRAMS += test_fem_elements
-test_fem_elements_SOURCES =test_fem_elements.cpp
+test_fem_elements_SOURCES  = test_fem_elements.cpp
 test_fem_elements_SOURCES += test_fem_element_adva_2.cpp
 test_fem_elements_SOURCES += test_fem_element_adva_4.cpp
 test_fem_elements_SOURCES += test_fem_element_axcs.cpp

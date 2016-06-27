@@ -1,8 +1,8 @@
 /**
-   \file bdf/bdf_header_exec_cend.cpp
+   \file bdf/bdf_header_case_control_title.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief Implementation for EXEC CEND
+   \brief Implementation for CASE TITLE
 
    Detailed description
 */
@@ -22,23 +22,25 @@ namespace dnvgl {
    namespace extfem {
       namespace bdf {
          namespace header {
-            namespace exec {
-               cend::cend() {}
+            namespace case_control {
+               title::title(std::string const &title) :
+                  name(title) {}
 
                const std::ostream&
-               cend::operator<< (std::ostream& os) const {
+               title::operator<< (std::ostream& os) const {
                   return os << *this;
                }
 
-               std::ostream&
-               operator<<(std::ostream &os, cend const &entry) {
-                  return os << "CEND" << std::endl;
+               std::ostream &operator<<(
+                  std::ostream &os, title const &entry) {
+                  return os << "TITLE = " << entry.name << std::endl;
                }
             }
          }
       }
    }
 }
+
 
 // Local Variables:
 // mode: c++

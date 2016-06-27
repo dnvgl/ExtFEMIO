@@ -112,7 +112,6 @@ TEST_CASE("FEM GUNIVEC conversion from own output.", "[fem_gunivec,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

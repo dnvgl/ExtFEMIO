@@ -187,7 +187,6 @@ TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

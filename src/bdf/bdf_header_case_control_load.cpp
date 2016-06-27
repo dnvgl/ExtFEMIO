@@ -1,8 +1,8 @@
 /**
-   \file bdf/bdf_header_case_subcase.cpp
+   \file bdf/bdf_header_case_control_load.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief Implementation for CASE SUBCASE
+   \brief Implemention of LOAD for case control.
 
    Detailed description
 */
@@ -22,30 +22,30 @@ namespace dnvgl {
    namespace extfem {
       namespace bdf {
          namespace header {
-            namespace case_ {
-               subcase::subcase(long const &n) :
-                  n(n) {}
+            namespace case_control {
+               load::load(long const &n) : n(n) {}
 
-               const std::ostream&
-               subcase::operator<< (std::ostream& os) const {
+               const std::ostream& load::operator<<(std::ostream &os) const {
                   return os << *this;
                }
 
-               std::ostream &operator<<(
-                  std::ostream &os, subcase const &entry) {
-                  return os << "SUBCASE=" << entry.n << std:: endl;
+               std::ostream&
+               operator<<(std::ostream &os, const load &entry) {
+                  os << "LOAD = " << entry.n;
+                  return os << std::endl;
                }
+
             }
          }
       }
    }
 }
 
-
 // Local Variables:
 // mode: c++
+// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make test"
 // End:

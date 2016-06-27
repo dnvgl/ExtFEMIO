@@ -1,4 +1,5 @@
 % Latex header for doxygen 1.8.7
+% \documentclass[twoside,table,10pt,DIV=11]{dnvglbook}
 \documentclass[twoside,table,10pt,DIV=11]{dnvglbook}
 
 % Packages required by doxygen
@@ -33,7 +34,7 @@
 
 % Hyperlinks (required, but should be loaded last)
 \usepackage[pagebackref=true]{hyperref}%
-\hypersetup{pageanchor=false,
+\hypersetup{pageanchor=false,%
             colorlinks=true,%
             linkcolor=blue,%
             citecolor=blue,%
@@ -45,6 +46,9 @@
 }
 
 \usepackage{url}
+
+\let\tt\ttfamily
+\let\bf\bfseries
 
 \begin{document}
 %===== C O N T E N T S =====

@@ -1,5 +1,5 @@
 /**
-   \file bdf/bdf_header_exec_sol.cpp
+   \file bdf/bdf_header_exec_control_sol.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Implementation for EXEC SOL
@@ -25,7 +25,7 @@ namespace dnvgl {
    namespace extfem {
       namespace bdf {
          namespace header {
-            namespace exec {
+            namespace executive_control {
                sol::sol(long const &sol_no) :
                   sol_no(sol::sol_no_type_conv::from_long(sol_no)) {}
 
