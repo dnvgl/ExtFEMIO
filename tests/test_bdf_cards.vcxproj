@@ -241,6 +241,7 @@ $(OutputPath)test_bdf_cards.exe
     <ClCompile Include="test_bdf_cards_mat1.cpp" />
     <ClCompile Include="test_bdf_cards_mat2.cpp" />
     <ClCompile Include="test_bdf_cards_moment.cpp" />
+    <ClCompile Include="test_bdf_cards_param.cpp" />
     <ClCompile Include="test_bdf_cards_pbar.cpp" />
     <ClCompile Include="test_bdf_cards_pbarl.cpp" />
     <ClCompile Include="test_bdf_cards_pbeam.cpp" />

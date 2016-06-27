@@ -91,5 +91,8 @@
     <ClCompile Include="test_bdf_cards_pshell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_bdf_cards_param.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
