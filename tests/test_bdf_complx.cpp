@@ -13,7 +13,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: test_bdf_complx.cpp 319 2016-03-03 17:08:42Z berhol $";
+      = "@(#) $Id$";
 }
 
 #include <limits>
