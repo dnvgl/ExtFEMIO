@@ -215,7 +215,7 @@ namespace ExportBDF {
    }
 
    std::ostream& operator<<(std::ostream &os, const BDF_Header &entry) {
-      for (std::unique_ptr<dnvgl::extfem::bdf::header::__base::entry> const &p : entry.entries)
+      for (auto const &p : entry.entries)
          os << *p;
       os << case_control::begin_bulk();
       return os;
