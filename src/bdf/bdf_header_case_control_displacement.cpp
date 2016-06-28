@@ -43,15 +43,14 @@ namespace dnvgl {
                   displacement::displacement(describers, displacement::n, res) {}
 
                const std::ostream& displacement::operator<<(std::ostream &os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream&
-               operator<<(std::ostream &os, const displacement &entry) {
+               std::ostream const &displacement::put(std::ostream &os) const {
                   os << "DISPLACEMENT";
-                  if (entry.describers.size() > 0) {
+                  if (this->describers.size() > 0) {
                      bool first = true;
-                     for (auto &p : entry.describers) {
+                     for (auto &p : this->describers) {
                         if (first) {
                            os << "(";
                            first = false;
@@ -61,9 +60,9 @@ namespace dnvgl {
                      }
                      os << ")";
                   }
-                  switch (entry.res) {
+                  switch (this->res) {
                   case displacement::n:
-                     os << " = " << entry.res_n;
+                     os << " = " << this->res_n;
                      break;
                   case displacement::ALL:
                      os << " = ALL";

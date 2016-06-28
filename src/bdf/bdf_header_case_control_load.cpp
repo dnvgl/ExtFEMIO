@@ -28,12 +28,11 @@ namespace dnvgl {
                load::load(long const &n) : n(n) {}
 
                const std::ostream& load::operator<<(std::ostream &os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream&
-               operator<<(std::ostream &os, const load &entry) {
-                  os << "LOAD = " << entry.n;
+               std::ostream const &load::put(std::ostream &os) const {
+                  os << "LOAD = " << this->n;
                   return os << std::endl;
                }
 

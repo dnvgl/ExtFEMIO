@@ -30,12 +30,11 @@ namespace dnvgl {
 
                const std::ostream&
                title::operator<< (std::ostream& os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream &operator<<(
-                  std::ostream &os, title const &entry) {
-                  return os << "TITLE = " << entry.name << std::endl;
+               std::ostream const &title::put(std::ostream &os) const {
+                  return os << "TITLE = " << this->name << std::endl;
                }
             }
          }

@@ -28,12 +28,10 @@ namespace dnvgl {
                begin_bulk::begin_bulk() {};
 
                std::ostream const &begin_bulk::operator<< (std::ostream &os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream &operator<< (
-                  std::ostream &os,
-                  dnvgl::extfem::bdf::header::case_control::begin_bulk const &entry) {
+               std::ostream const &begin_bulk::put(std::ostream &os) const {
                   return os << "BEGIN BULK" << std::endl;
                }
             }

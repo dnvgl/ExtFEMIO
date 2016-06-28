@@ -165,6 +165,102 @@ TEST_CASE("BDF generate 'LOAD' header entries", "[bdf_header,load]") {
    }
 }
 
+namespace ExportBDF {
+
+   class BDF_Header {
+   private:
+      std::list<std::unique_ptr<dnvgl::extfem::bdf::header::__base::entry> > entries;
+   public:
+      BDF_Header(std::string const&);
+      void add_LC(long const &lc_num, long const &id, std::string const &title);
+      std::ostream const &operator<<(std::ostream&) const;
+      friend std::ostream&
+         operator<<(std::ostream &, const BDF_Header&);
+   };
+
+   BDF_Header::BDF_Header(std::string const &title) {
+      using namespace dnvgl::extfem::bdf::header;
+      entries.push_back(std::make_unique<executive_control::sol>(executive_control::sol::SESTATIC));
+      entries.push_back(std::make_unique<executive_control::cend>());
+      entries.push_back(std::make_unique<case_control::title>(title));
+      entries.push_back(std::make_unique<case_control::echo>(
+         std::list<case_control::echo::describer*>{new case_control::echo::none}));
+   }
+
+   void BDF_Header::add_LC(long const &this_case, long const &load, std::string const &title) {
+      using namespace dnvgl::extfem::bdf::header;
+      entries.push_back(std::make_unique<case_control::subcase>(this_case));
+      entries.push_back(std::make_unique<case_control::subtitle>(title));
+      entries.push_back(std::make_unique<case_control::load>(load));
+      entries.push_back(std::make_unique<case_control::displacement>(
+         std::list<case_control::displacement::describer*>{
+         new case_control::displacement::print,
+            new case_control::displacement::punch,
+            new case_control::displacement::real}, case_control::displacement::ALL));
+      entries.push_back(std::make_unique<case_control::spcforces>(
+         std::list<case_control::spcforces::describer*>{
+         new case_control::spcforces::print,
+            new case_control::spcforces::nozprint}, case_control::spcforces::ALL));
+      entries.push_back(std::make_unique<case_control::stress>(
+         std::list<case_control::stress::describer*>{
+         new case_control::stress::sort1,
+            new case_control::stress::print,
+            new case_control::stress::real,
+            new case_control::stress::vonmises,
+            new case_control::stress::center}, case_control::stress::ALL));
+   }
+
+   std::ostream const &BDF_Header::operator<< (std::ostream &os) const {
+      return os << this;
+   }
+
+   std::ostream& operator<<(std::ostream &os, const BDF_Header &entry) {
+      for (std::unique_ptr<dnvgl::extfem::bdf::header::__base::entry> const &p : entry.entries)
+         os << *p;
+      os << case_control::begin_bulk();
+      return os;
+   }
+}
+
+TEST_CASE("Sample Header", "[bdf_header]") {
+
+   std::ostringstream test;
+
+   ExportBDF::BDF_Header probe("test case");
+
+   probe.add_LC(1, 10, "LC_1");
+   probe.add_LC(2, 20, "LC_2");
+   probe.add_LC(3, 30, "LC_3");
+
+   SECTION("result") {
+      test << probe;
+      CHECK(test.str() == "SOL 101\n"
+            "CEND\n"
+            "TITLE = test case\n"
+            "ECHO = NONE\n"
+            "SUBCASE = 1\n"
+            "SUBTITLE = LC_1\n"
+            "LOAD = 10\n"
+            "DISPLACEMENT(PRINT, PUNCH, REAL) = ALL\n"
+            "SPCFORCES(PRINT, NOZPRINT) = ALL\n"
+            "STRESS(SORT1, PRINT, REAL, VONMISES, CENTER) = ALL\n"
+            "SUBCASE = 2\n"
+            "SUBTITLE = LC_2\n"
+            "LOAD = 20\n"
+            "DISPLACEMENT(PRINT, PUNCH, REAL) = ALL\n"
+            "SPCFORCES(PRINT, NOZPRINT) = ALL\n"
+            "STRESS(SORT1, PRINT, REAL, VONMISES, CENTER) = ALL\n"
+            "SUBCASE = 3\n"
+            "SUBTITLE = LC_3\n"
+            "LOAD = 30\n"
+            "DISPLACEMENT(PRINT, PUNCH, REAL) = ALL\n"
+            "SPCFORCES(PRINT, NOZPRINT) = ALL\n"
+            "STRESS(SORT1, PRINT, REAL, VONMISES, CENTER) = ALL\n"
+            "BEGIN BULK\n");
+   }
+}
+
+
 // Local Variables:
 // mode: c++
 // ispell-local-dictionary: "english"

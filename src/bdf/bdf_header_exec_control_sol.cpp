@@ -37,13 +37,12 @@ namespace dnvgl {
 
                const std::ostream&
                sol::operator<< (std::ostream& os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream &operator<<(
-                  std::ostream &os, sol const &entry) {
+               std::ostream const &sol::put(std::ostream &os) const {
                   return os << "SOL "
-                            << sol::sol_no_type_conv::to_long(entry.sol_no)
+                            << sol::sol_no_type_conv::to_long(this->sol_no)
                             << std::endl;
                }
 

@@ -26,6 +26,10 @@ namespace dnvgl {
          namespace header {
             namespace __base {
                entry::entry(void) {}
+               
+               std::ostream const &operator<<(std::ostream &os, entry const &val) {
+                  return val.put(os);
+               }
             }
          }
       }

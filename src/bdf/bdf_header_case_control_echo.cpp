@@ -41,14 +41,13 @@ namespace dnvgl {
 
                const std::ostream&
                echo::operator<< (std::ostream& os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream &operator<<(
-                  std::ostream &os, echo const &entry) {
+               std::ostream const &echo::put(std::ostream &os) const {
                   os << "ECHO = ";
                   bool first = true;
-                  for (auto &p : entry.oper) {
+                  for (auto &p : this->oper) {
                      if (first)
                         first = false;
                      else

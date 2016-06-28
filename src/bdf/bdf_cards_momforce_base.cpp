@@ -110,13 +110,13 @@ namespace dnvgl {
             bdf::types::card force::head = bdf::types::card("FORCE");
 
             std::ostream const &force::operator<< (std::ostream &os) const {
-               return os << *this;
+               return os << this;
             }
 
             bdf::types::card moment::head = bdf::types::card("MOMENT");
 
             std::ostream const &moment::operator<< (std::ostream &os) const {
-               return os << *this;
+               return os << this;
             }
 
             std::ostream const &operator<<(std::ostream &os, const force &card) {

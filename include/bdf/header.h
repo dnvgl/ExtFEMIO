@@ -26,7 +26,10 @@ namespace dnvgl {
                class entry {
                public:
                   entry (void);
-                  virtual const std::ostream& operator<<(std::ostream&) const = 0;
+                  virtual std::ostream const &operator<<(std::ostream&) const = 0;
+                  friend std::ostream const &operator<<(std::ostream &os, entry const &val);
+               private:
+                  virtual std::ostream const &put(std::ostream&) const = 0;
                };
             }
 
@@ -146,11 +149,10 @@ n\\
                   sol(sol_no_type const &sol_no=SESTATIC);
                   sol(long const&);
                   const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const sol&);
 
                private:
 
+                  std::ostream const &put(std::ostream&) const;
                   class sol_no_type_conv {
                   public:
                      static sol_no_type from_long(long const&);
@@ -177,8 +179,8 @@ Designates the end of the Executive Control Section.
                public:
                   cend(void);
                   const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const cend&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
             };
 
@@ -211,8 +213,8 @@ of each page of MSC.Nastran printer output.
                   std::string name;
                   title(std::string const&);
                   const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const title&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
 /**
@@ -390,8 +392,8 @@ ECHO=BOTH,PUNCH,FILE
                public:
                   echo(std::list<describer*> const &oper={});
                   const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const echo&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
 /**
@@ -810,8 +812,8 @@ DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
                   displacement(std::list<describer*> const &, restype const &res=NONE);
                   displacement(std::list<describer*> const &, long const &);
                   const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const displacement&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
 /** # `SPCFORCES`: Single-Point Forces of Constraint Output Request
@@ -1111,8 +1113,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
                   spcforces(std::list<describer*> const &, restype const &res=NONE);
                   spcforces(std::list<describer*> const &, long const &res);
                   std::ostream const& operator<<(std::ostream&) const;
-                  friend std::ostream const&
-                  operator<<(std::ostream &, const spcforces&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
 /** # `STRESS`: Element Stress Output Request
@@ -1478,8 +1480,8 @@ Remarks:
                   stress(std::list<describer*> const &, restype const &res=NONE);
                   stress(std::list<describer*> const &, long const &);
                   std::ostream const& operator<<(std::ostream&) const;
-                  friend std::ostream const&
-                  operator<<(std::ostream &, const stress&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
                   /** ## `LOAD`: External Static Load Set Selection
@@ -1530,8 +1532,8 @@ LOAD=15
              public:
                 load(long const &);
                 virtual const std::ostream& operator<<(std::ostream&) const;
-                friend std::ostream&
-                operator<<(std::ostream &, const load&);
+             private:
+                std::ostream const &put(std::ostream&) const;
              };
 
 
@@ -1577,8 +1579,8 @@ Any character string.
                public:
                   subtitle(std::string const &);
                   virtual const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const subtitle&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
 /**
@@ -1626,8 +1628,8 @@ SUBCASE=101
                   subcase(void);
                   subcase(long const &);
                   const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const subcase&);
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
 /** # `BEGIN BULK`: Case Control and Bulk Data Delimiter
@@ -1697,9 +1699,9 @@ Superelement identification number. (Integer>0)
                class begin_bulk : public __base::entry {
                public:
                   begin_bulk(void);
-                  const std::ostream& operator<<(std::ostream&) const;
-                  friend std::ostream&
-                  operator<<(std::ostream &, const begin_bulk&);
+                  std::ostream const &operator<<(std::ostream&) const;
+               private:
+                  std::ostream const &put(std::ostream&) const;
                };
 
             };

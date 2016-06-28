@@ -43,14 +43,14 @@ namespace dnvgl {
                   spcforces(describers, spcforces::n, res) {}
 
                std::ostream const &spcforces::operator<< (std::ostream &os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream const &operator<< (std::ostream &os, spcforces const &entry) {
+               std::ostream const &spcforces::put(std::ostream &os) const {
                   os << "SPCFORCES";
-                  if (entry.describers.size() > 0) {
+                  if (this->describers.size() > 0) {
                      bool first = true;
-                     for (auto &p : entry.describers) {
+                     for (auto &p : this->describers) {
                         if (first) {
                            os << "(";
                            first = false;
@@ -60,9 +60,9 @@ namespace dnvgl {
                      }
                      os << ")";
                   }
-                  switch (entry.res) {
+                  switch (this->res) {
                   case spcforces::n:
-                     os << " = " << entry.res_n;
+                     os << " = " << this->res_n;
                      break;
                   case spcforces::ALL:
                      os << " = ALL";

@@ -29,11 +29,10 @@ namespace dnvgl {
 
                const std::ostream&
                cend::operator<< (std::ostream& os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream&
-               operator<<(std::ostream &os, cend const &entry) {
+               std::ostream const &cend::put(std::ostream &os) const {
                   return os << "CEND" << std::endl;
                }
             }

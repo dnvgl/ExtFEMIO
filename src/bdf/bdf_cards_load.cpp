@@ -86,7 +86,7 @@ namespace dnvgl {
             bdf::types::card load::head = bdf::types::card("LOAD");
 
             std::ostream const &load::operator<< (std::ostream& os) const {
-               return os << *this;
+               return os << this;
             }
 
             std::ostream const &operator<<(std::ostream &os, const load &card) {

@@ -40,12 +40,11 @@ namespace dnvgl {
 
                const std::ostream&
                subcase::operator<< (std::ostream& os) const {
-                  return os << *this;
+                  return os << this;
                }
 
-               std::ostream &operator<< (
-                  std::ostream &os, subcase const &entry) {
-                  return os << "SUBCASE = " << entry.n << std:: endl;
+               std::ostream const &subcase::put(std::ostream &os) const {
+                  return os << "SUBCASE = " << this->n << std:: endl;
                }
             }
          }
