@@ -25,9 +25,10 @@ refman: doxyfile.stamp docs/doxy/latex/.latexmkrc
 docs/doxy/latex/.latexmkrc: docs/.latexmkrc
 	$(CP) $< $@
 
-doxyfile.stamp: $(shell find src include tests \( -name \*.cpp -o -name \*.h \) )
+doxyfile.stamp: docs/Doxyfile  docs/header.tex			\
+  $(shell find src include \( -name \*.cpp -o -name \*.h \) )
 	$(DOXYGEN) docs/Doxyfile
-	echo Timestamp > doxyfile.stamp
+	date > doxyfile.stamp
 
 CLEANFILES = doxyfile.stamp
 

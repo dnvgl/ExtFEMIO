@@ -78,7 +78,7 @@ TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]" ) {
       moment probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
       test << probe;
       CHECK(test.str() ==
-            "MOMENT         2       5       62.900+000.000+001.900+000.000+00\n");
+            "MOMENT         2       5       62.900+00 0.00+001.900+00 0.00+00\n");
    }
 
    SECTION("reverse part") {
@@ -87,7 +87,7 @@ TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]" ) {
       moment probe(&SID, &G, &CID, &F, &N1, &N2);
       test << probe;
       CHECK(test.str() ==
-            "MOMENT         2       5       62.900+000.000+001.900+00\n");
+            "MOMENT         2       5       62.900+00 0.00+001.900+00\n");
    }
 
    SECTION("reverse part (2)") {

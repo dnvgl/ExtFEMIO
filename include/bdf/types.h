@@ -512,7 +512,7 @@ namespace dnvgl {
                      }
                   }
                               outp << std::setiosflags(std::ios::right) << std::setfill(' ');
-                              if (inp.value < 0)
+                              if (inp.value <= 0)
                                  outp << std::setprecision(2);
                               else
                                  outp << std::setprecision(3);

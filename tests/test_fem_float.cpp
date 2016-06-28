@@ -62,6 +62,10 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
       CHECK(probe(" 0.00000000E+000") == 0.);
    }
 
+   SECTION("'-0.00000000E+000'") {
+      CHECK(probe("-0.00000000E+000") == 0.);
+   }
+
    //        12345678901e3456
    SECTION("' 1.00000000E+01 '") {
       //            12345678901e3456
@@ -103,7 +107,7 @@ TEST_CASE("FEM float types parsing.", "[fem_types]" ) {
       //           12345678901e3456
       CHECK(probe("-1.00000000e+00 ") == -1.);
    }
-   
+
    //        12345678901e3456
    SECTION("' 0.000000000e+00'") {
       //           12345678901e3456
@@ -193,6 +197,14 @@ TEST_CASE("FEM double types output.", "[fem_types]" ) {
       CHECK(obj.format(lval).size() == 16);
       //                         12345678901e3456
       CHECK(obj.format(lval) == "+1.000000000e+00");
+   }
+
+   SECTION("-0.") {
+      lval = -0.;
+      std::string res(obj.format(lval));
+      CHECK(obj.format(lval).size() == 16);
+      //                         12345678901e3456
+      CHECK(obj.format(lval) == "-0.000000000e+00");
    }
 }
 

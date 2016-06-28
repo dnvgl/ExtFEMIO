@@ -78,7 +78,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
       force probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
       test << probe;
       CHECK(test.str() ==
-            "FORCE          2       5       62.900+000.000+001.900+000.000+00\n");
+            "FORCE          2       5       62.900+00 0.00+001.900+00 0.00+00\n");
    }
 
    SECTION("reverse part") {
@@ -87,7 +87,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
       force probe(&SID, &G, &CID, &F, &N1, &N2);
       test << probe;
       CHECK(test.str() ==
-            "FORCE          2       5       62.900+000.000+001.900+00\n");
+            "FORCE          2       5       62.900+00 0.00+001.900+00\n");
    }
 
    SECTION("reverse part (2)") {

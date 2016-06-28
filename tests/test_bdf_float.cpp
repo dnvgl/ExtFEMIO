@@ -195,7 +195,9 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
       *lval = 1.9;
       CHECK(obj.format(lval) == "1.900+00");
       *lval = 0.;
-      CHECK(obj.format(lval) == "0.000+00");
+      CHECK(obj.format(lval) == " 0.00+00");
+      *lval = -0.;
+      CHECK(obj.format(lval) == "-0.00+00");
       delete lval;
    }
 
@@ -275,6 +277,25 @@ TEST_CASE("Exception, mkoe 2015-12-17", "[bdf_types]" ) {
       bdf::types::base::out_form = bdf::types::LONG;
       CHECK(obj.format(lval).size() == 16);
       CHECK(obj.format(lval) == "-1.1104650285+01");
+   }
+}
+
+TEST_CASE("Negative zero", "[bdf_types]") {
+
+   entry_type<double> obj("dummy");
+
+   SECTION("SHORT") {
+      const double lval(-0.);
+      bdf::types::base::out_form = bdf::types::SHORT;
+      CHECK(obj.format(lval).size() == 8);
+      CHECK(obj.format(lval) == "-0.00+00");
+   }
+
+   SECTION("LONG") {
+      const double lval(-0.);
+      bdf::types::base::out_form = bdf::types::LONG;
+      CHECK(obj.format(lval).size() == 16);
+      CHECK(obj.format(lval) == "-0.0000000000+00");
    }
 }
 
