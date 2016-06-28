@@ -26,6 +26,8 @@ namespace {
 #include <iostream>
 #include <deque>
 
+#include <my_c++14.h>
+
 #include <catch.hpp>
 
 #ifndef _MSC_VER
