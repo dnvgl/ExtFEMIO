@@ -491,7 +491,7 @@ namespace dnvgl {
                   switch (out_form) {
                   case LONG:
                      outp << std::setiosflags(std::ios::right) << std::setfill(' ');
-                     if (inp.value < 0)
+                     if (inp.value <= 0)
                         outp << std::setprecision(10);
                      else
                         outp << std::setprecision(11);
