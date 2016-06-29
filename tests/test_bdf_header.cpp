@@ -165,6 +165,12 @@ TEST_CASE("BDF generate 'LOAD' header entries", "[bdf_header,load]") {
       test << probe;
       CHECK(test.str() == "LOAD = 15\n");
    }
+
+   SECTION("ptr") {
+      std::unique_ptr<__base::entry> probe = std::make_unique<case_control::load>(15);
+      test << *probe;
+      CHECK(test.str() == "LOAD = 15\n");
+   }
 }
 
 namespace ExportBDF {
