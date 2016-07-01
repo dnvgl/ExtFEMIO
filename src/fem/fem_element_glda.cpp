@@ -20,36 +20,43 @@ namespace {
 
 #include "fem/elements.h"
 
-using namespace dnvgl::extfem::fem::elements;
-
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
 
-long glda::nnodes(void) const {return 2;}
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-el_types glda::get_type(void) const {return GLDA;}
+         using namespace cards;
 
-namespace {
-   const size_t procs_len = 1;
-   el_processor procs[procs_len] = {general};
+         namespace elements {
+            namespace {
+               const size_t procs_len = 1;
+               el_processor procs[procs_len] = {general};
+            }
+
+            long glda::nnodes(void) const {return 2;}
+
+            el_types glda::get_type(void) const {return GLDA;}
+
+            const std::set<el_processor> glda::processors(
+               procs, procs+procs_len);
+
+            glda::glda(const gelmnt1 *data) : __base::elem(data) {}
+
+            glda::glda(const gelref1 *data) : __base::elem(data) {}
+
+            glda::glda(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> glda::processors(procs, procs+procs_len);
-
-glda::glda(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-glda::glda(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-glda::glda(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

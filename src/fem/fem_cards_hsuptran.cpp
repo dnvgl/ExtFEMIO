@@ -45,7 +45,7 @@ namespace dnvgl {
             const entry_type<long> hsuptran::_form_ITREF("ITREF");
             const entry_type<double> hsuptran::_form_T("T");
 
-            hsuptran::hsuptran(const std::deque<std::string> &inp) :
+            hsuptran::hsuptran(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 15)
@@ -133,39 +133,32 @@ namespace dnvgl {
                return HSUPTRAN;
             }
 
-            std::ostream&
-            operator<< (std::ostream &os, const hsuptran &card) {
-               if (card.NFIELD == -1) return os;
+            std::ostream &hsuptran::put(std::ostream& os) const {
+               if (this->NFIELD == -1) return os;
                os << hsuptran::head.format()
-                  << card._form_NFIELD.format(card.NFIELD)
-                  << card._form_ITREF.format(card.ITREF)
-                  << card._form_T.format(card.T[0][0])
-                  << card._form_T.format(card.T[0][1]) << std::endl
+                  << this->_form_NFIELD.format(this->NFIELD)
+                  << this->_form_ITREF.format(this->ITREF)
+                  << this->_form_T.format(this->T[0][0])
+                  << this->_form_T.format(this->T[0][1]) << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_T.format(card.T[0][2])
-                  << card._form_T.format(card.T[0][3])
-                  << card._form_T.format(card.T[1][0])
-                  << card._form_T.format(card.T[1][1]) << std::endl
+                  << this->_form_T.format(this->T[0][2])
+                  << this->_form_T.format(this->T[0][3])
+                  << this->_form_T.format(this->T[1][0])
+                  << this->_form_T.format(this->T[1][1]) << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_T.format(card.T[1][2])
-                  << card._form_T.format(card.T[1][3])
-                  << card._form_T.format(card.T[2][0])
-                  << card._form_T.format(card.T[2][1]) << std::endl
+                  << this->_form_T.format(this->T[1][2])
+                  << this->_form_T.format(this->T[1][3])
+                  << this->_form_T.format(this->T[2][0])
+                  << this->_form_T.format(this->T[2][1]) << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_T.format(card.T[2][2])
-                  << card._form_T.format(card.T[2][3])
-                  << card._form_T.format(card.T[3][0])
-                  << card._form_T.format(card.T[3][1]) << std::endl
+                  << this->_form_T.format(this->T[2][2])
+                  << this->_form_T.format(this->T[2][3])
+                  << this->_form_T.format(this->T[3][0])
+                  << this->_form_T.format(this->T[3][1]) << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_T.format(card.T[3][2])
-                  << card._form_T.format(card.T[3][3])
+                  << this->_form_T.format(this->T[3][2])
+                  << this->_form_T.format(this->T[3][3])
                   << std::endl;
-               return os;
-            }
-
-            const std::ostream&
-            hsuptran::operator<< (std::ostream& os) const {
-               os << this;
                return os;
             }
          }
@@ -175,7 +168,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

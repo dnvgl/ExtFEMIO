@@ -64,8 +64,7 @@ AC_OUTPUT(Makefile tests/Makefile src/Makefile include/Makefile, [date > stamp-h
 
 # Local Variables:
 # mode: m4
-# ispell-local-dictionary: "english"
-# compile-command: "make check -j 8"
+# compile-command: "make check -j8"
 # End:
 
 # End of configure.ac

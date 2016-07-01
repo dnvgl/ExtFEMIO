@@ -49,7 +49,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("FEM list types parsing.", "[fem_types]" ) {
 
-   entry_type<std::vector<int>> probe("dummy");
+   entry_type<std::vector<int> > probe("dummy");
 
    SECTION("' 1.34000000e+02 '") {
       CHECK(*probe(" 1.34000000e+02 ") == std::vector<int>({ 1, 3, 4 }));
@@ -71,7 +71,7 @@ TEST_CASE("FEM list types parsing.", "[fem_types]" ) {
 
 TEST_CASE("FEM list of int types output.", "[fem_types]" ) {
 
-   entry_type<std::vector<int>> obj("dummy");
+   entry_type<std::vector<int> > obj("dummy");
 
    std::vector<int> lval({ 1, 2, 3, 4 });
 
@@ -86,9 +86,8 @@ TEST_CASE("FEM list of int types output.", "[fem_types]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

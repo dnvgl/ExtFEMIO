@@ -48,9 +48,9 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]" ) {
 
-   std::deque<std::string> data({"CROD,222,13,14,15\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> data({"CROD,222,13,14,15\n"});
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    crod probe(lines);
 
    SECTION("first crod") {
@@ -63,9 +63,8 @@ TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

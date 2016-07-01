@@ -46,13 +46,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BNBCD (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BNBCD    8.31700000e+003 6.00000000e+000 1.00000000e+000 1.00000000e+000\n",
          "         1.00000000e+000 1.00000000e+000 0.00000000e+000 1.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 8317);
@@ -61,10 +61,10 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
    }
 
    SECTION("BNBCD (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BNBCD    8.31700000e+03  6.000000000e+00 1.000000000e+00 1.000000000e+00\n",
          "         1.000000000e+00 1.000000000e+00 0.000000000e+00 1.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 8317);
@@ -73,10 +73,10 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
    }
 
    SECTION("BNBCD (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n",
          "        +3.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -140,13 +140,13 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
 
 TEST_CASE("FEM BNBCD conversion from own output.", "[fem_bnbcd,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BNBCD (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -155,10 +155,10 @@ TEST_CASE("FEM BNBCD conversion from own output.", "[fem_bnbcd,in/out]") {
    }
 
    SECTION("BNBCD (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnbcd probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -169,7 +169,6 @@ TEST_CASE("FEM BNBCD conversion from own output.", "[fem_bnbcd,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -56,12 +56,12 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
    warn_report = &_warn_res;
 
    SECTION("first mat2") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "MAT2,1,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,"
          "13.,14.,15.,16.,17\n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       mat2 probe(lines);
 
       CHECK((long)probe.MID == 1);
@@ -84,15 +84,15 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
    }
 
    SECTION("FFEMIO-3") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "MAT2*    10              7.01670932+10   2.78474977+10   0.",
          "*        1.35642948+11   0.              1.26610002+10   0.",
          "*        .000012         .000012         .000012         0.",
          "*        2.99999993-2    0.              0.              0.",
          "*"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       mat2 probe(lines);
 
       CHECK((long)probe.MID == 10);
@@ -124,9 +124,8 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

@@ -45,7 +45,7 @@ namespace dnvgl {
             const entry_type<double> gelth::_form_TH("TH");
             const entry_type<long> gelth::_form_NINT("NINT");
 
-            gelth::gelth(const std::deque<std::string> &inp) :
+            gelth::gelth(const std::list<std::string> &inp) :
                card(inp), NINT(0) {
 
                if (inp.size() < 4)
@@ -73,20 +73,13 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             gelth::card_type(void) const {return GELTH;}
 
-            const std::ostream&
-            gelth::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const gelth &data) {
-               if (data.GEONO == -1) return os;
+            std::ostream &gelth::put(std::ostream& os) const {
+               if (this->GEONO == -1) return os;
                os << gelth::head.format()
-                  << data._form_GEONO.format(data.GEONO)
-                  << data._form_TH.format(data.TH);
-               if (data.NINT)
-                  os << data._form_NINT.format(data.NINT);
+                  << this->_form_GEONO.format(this->GEONO)
+                  << this->_form_TH.format(this->TH);
+               if (this->NINT)
+                  os << this->_form_NINT.format(this->NINT);
                os << std::endl;
                return os;
             }
@@ -97,9 +90,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

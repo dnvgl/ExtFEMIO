@@ -17,7 +17,7 @@ namespace {
       = "@(#) $Id$";
 }
 
-#include <deque>
+#include <list>
 #include <string>
 #include <memory>
 
@@ -54,12 +54,12 @@ namespace dnvgl {
                "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
             const bdf::types::entry_type<long> grid::form_CD(
                "CD", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl_2));
-            const bdf::types::entry_type<std::deque<int>> grid::form_PS("PS");
+            const bdf::types::entry_type<std::list<int> > grid::form_PS("PS");
             const bdf::types::entry_type<long> grid::form_SEID(
                "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
 
 
-            grid::grid(const std::deque<std::string> &inp) : card(inp) {
+            grid::grid(const std::list<std::string> &inp) : card(inp) {
 
                auto pos = inp.rbegin();
 
@@ -92,9 +92,9 @@ namespace dnvgl {
                ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
                CD(), PS(), SEID() {}
 
-            std::ostream const &grid::operator << (std::ostream &os) const {
+            void grid::collect_outdata(
+               std::list<std::unique_ptr<format_entry> > &res) const {
                throw errors::error("can't write GRID.");
-               return os;
             }
          }
       }
@@ -103,7 +103,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

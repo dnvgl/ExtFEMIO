@@ -2,7 +2,7 @@
    \file bdf_header_case_control_spcforces.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief Siupport for BDF SPCFORCES case control entries.
+   \brief Support for BDF SPCFORCES case control entries.
 
    Detailed description
 */
@@ -42,11 +42,7 @@ namespace dnvgl {
                   std::list<describer*> const &describers, long const &res) :
                   spcforces(describers, spcforces::n, res) {}
 
-               std::ostream const &spcforces::operator<< (std::ostream &os) const {
-                  return os << this;
-               }
-
-               std::ostream const &spcforces::put(std::ostream &os) const {
+               std::ostream &spcforces::put(std::ostream &os) const {
                   os << "SPCFORCES";
                   if (this->describers.size() > 0) {
                      bool first = true;

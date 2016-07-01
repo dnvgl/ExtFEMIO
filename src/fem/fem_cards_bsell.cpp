@@ -39,14 +39,14 @@ namespace dnvgl {
       namespace fem {
          namespace cards {
 
-            const fem::types::card bsell::head("BSELL");
+            fem::types::card const bsell::head("BSELL");
 
-            const entry_type<long> bsell::_form_LC("LC");
-            const entry_type<long> bsell::_form_SUBNO("SUBNO");
-            const entry_type<long> bsell::_form_LLC("LLC");
-            const entry_type<double> bsell::_form_FACT("FACT");
+            entry_type<long> const bsell::_form_LC("LC");
+            entry_type<long> const bsell::_form_SUBNO("SUBNO");
+            entry_type<long> const bsell::_form_LLC("LLC");
+            entry_type<double> const bsell::_form_FACT("FACT");
 
-            bsell::bsell(const std::deque<std::string> &inp) :
+            bsell::bsell(std::list<std::string> const &inp) :
                card(inp) {
 
                long tmp;
@@ -77,41 +77,34 @@ namespace dnvgl {
             bsell::bsell(void) :
                bsell(-1, 0, {}, {}) {}
 
-            bsell::bsell(const long &LC,
-                         const long &SUBNO,
-                         const std::vector<long> &LLC,
-                         const std::vector<double> &FACT) :
+            bsell::bsell(long const &LC,
+                         long const &SUBNO,
+                         std::vector<long> const &LLC,
+                         std::vector<double> const &FACT) :
                card(), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
 
-            const dnvgl::extfem::fem::cards::types
+            dnvgl::extfem::fem::cards::types const
             bsell::card_type(void) const {
                return BSELL;
             }
 
-            std::ostream&
-            operator<< (std::ostream &os, const bsell &card) {
-               if (card.LC == -1) return os;
+            std::ostream &bsell::put(std::ostream& os) const {
+               if (this->LC == -1) return os;
                os << bsell::head.format()
-                  << card._form_LC.format(card.LC)
-                  << card._form_SUBNO.format(card.SUBNO)
-                  << card.empty.format()
-                  << card.empty.format()
+                  << this->_form_LC.format(this->LC)
+                  << this->_form_SUBNO.format(this->SUBNO)
+                  << this->empty.format()
+                  << this->empty.format()
                   << std::endl;
-               for (size_t i = 0; i < card.LLC.size(); i+=2) {
+               for (size_t i = 0; i < this->LLC.size(); i+=2) {
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_LLC.format(card.LLC[i])
-                     << card._form_FACT.format(card.FACT[i]);
-                  if (i+1 < card.LLC.size())
-                     os << card._form_LLC.format(card.LLC[i+1])
-                        << card._form_FACT.format(card.FACT[i+1]);
+                     << this->_form_LLC.format(this->LLC[i])
+                     << this->_form_FACT.format(this->FACT[i]);
+                  if (i+1 < this->LLC.size())
+                     os << this->_form_LLC.format(this->LLC[i+1])
+                        << this->_form_FACT.format(this->FACT[i+1]);
                   os << std::endl;
                }
-               return os;
-            }
-
-            const std::ostream&
-            bsell::operator<< (std::ostream& os) const {
-               os << this;
                return os;
             }
          }
@@ -119,10 +112,8 @@ namespace dnvgl {
    }
 }
 
-
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

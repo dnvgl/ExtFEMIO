@@ -49,7 +49,7 @@ namespace dnvgl {
             const entry_type<long> gelmnt2::_form_NNOD("NNOD");
             const entry_type<long> gelmnt2::_form_NOD("NOD");
 
-            gelmnt2::gelmnt2(const std::deque<std::string> &inp) :
+            gelmnt2::gelmnt2(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 18)
@@ -189,54 +189,45 @@ namespace dnvgl {
                return GELMNT2;
             }
 
-            std::ostream&
-            operator<< (std::ostream &os, const gelmnt2 &card) {
-               if (card.SUBNO == -1) return os;
+            std::ostream &gelmnt2::put(std::ostream& os) const {
+               if (this->SUBNO == -1) return os;
                os << gelmnt2::head.format()
-                  << card._form_SUBNO.format(card.SUBNO)
-                  << card._form_SLEVEL.format(card.SLEVEL)
-                  << card._form_STYPE.format(card.STYPE)
-                  << card._form_ADDNO.format(card.ADDNO)
+                  << this->_form_SUBNO.format(this->SUBNO)
+                  << this->_form_SLEVEL.format(this->SLEVEL)
+                  << this->_form_STYPE.format(this->STYPE)
+                  << this->_form_ADDNO.format(this->ADDNO)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_T.format(card.T[0][0])
-                  << card._form_T.format(card.T[1][0])
-                  << card._form_T.format(card.T[2][0])
-                  << card._form_T.format(card.T[0][1])
+                  << this->_form_T.format(this->T[0][0])
+                  << this->_form_T.format(this->T[1][0])
+                  << this->_form_T.format(this->T[2][0])
+                  << this->_form_T.format(this->T[0][1])
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_T.format(card.T[1][1])
-                  << card._form_T.format(card.T[2][1])
-                  << card._form_T.format(card.T[0][2])
-                  << card._form_T.format(card.T[1][2])
+                  << this->_form_T.format(this->T[1][1])
+                  << this->_form_T.format(this->T[2][1])
+                  << this->_form_T.format(this->T[0][2])
+                  << this->_form_T.format(this->T[1][2])
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_T.format(card.T[2][2])
-                  << card._form_T.format(card.T[0][3])
-                  << card._form_T.format(card.T[1][3])
-                  << card._form_T.format(card.T[2][3])
+                  << this->_form_T.format(this->T[2][2])
+                  << this->_form_T.format(this->T[0][3])
+                  << this->_form_T.format(this->T[1][3])
+                  << this->_form_T.format(this->T[2][3])
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_NNOD.format(card.NNOD);
+                  << this->_form_NNOD.format(this->NNOD);
                size_t num = 1;
-               for (int i = 0; i<card.NNOD; i++) {
+               for (int i = 0; i<this->NNOD; i++) {
                   if (num == 4) {
                      num = 0;
                      os << std::endl
                         << dnvgl::extfem::fem::types::card().format();
                   }
                   num++;
-                  os << card._form_NOD.format(card.NOD[i]);
+                  os << this->_form_NOD.format(this->NOD[i]);
                }
-               os << std::endl;
-
-               return os;
-            }
-
-            const std::ostream&
-            gelmnt2::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
+               return os << std::endl;
             }
          }
       }
@@ -245,7 +236,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

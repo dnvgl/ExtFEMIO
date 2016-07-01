@@ -40,17 +40,16 @@ namespace {
 const std::set<el_processor> lhex::processors(procs, procs+procs_len);
 
 lhex::lhex(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+   dnvgl::extfem::fem::elements::__base::elem(data) {}
 
 lhex::lhex(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+   dnvgl::extfem::fem::elements::__base::elem(data) {}
 
-lhex::lhex(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+lhex::lhex(const dnvgl::extfem::fem::elements::__base::elem *data) :
+   dnvgl::extfem::fem::elements::__base::elem(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

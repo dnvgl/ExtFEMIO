@@ -40,56 +40,60 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::types;
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
+         namespace types {
 
-const
+            const
 #ifdef HAVE_BOOST_REGEX_HPP
-::boost::regex
+            ::boost::regex
 #else
-std::regex
+            std::regex
 #endif
-dnvgl::extfem::bdf::types::float_exp_re(
-   "([\\+-]?[.0-9]+)([+-][0-9]+)",
+            float_exp_re("([\\+-]?[.0-9]+)([+-][0-9]+)",
 #ifdef HAVE_BOOST_REGEX_HPP
-   ::boost::regex_constants::ECMAScript);
+                         ::boost::regex_constants::ECMAScript
 #else
-std::regex_constants::ECMAScript);
+                         std::regex_constants::ECMAScript
 #endif
+               );
 
-const
+            const
 #ifdef HAVE_BOOST_REGEX_HPP
-::boost::regex
+            ::boost::regex
 #else
-std::regex
+            std::regex
 #endif
-dnvgl::extfem::bdf::types::float_re(
-   "([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
-   "[.][0-9]+)(((E[+-]?)|[+-])[0-9]+)?",
+            float_re("([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
+                     "[.][0-9]+)(((E[+-]?)|[+-])[0-9]+)?",
 #ifdef HAVE_BOOST_REGEX_HPP
-   ::boost::regex_constants::ECMAScript);
+                     ::boost::regex_constants::ECMAScript
 #else
-std::regex_constants::ECMAScript);
+                     std::regex_constants::ECMAScript
 #endif
+               );
 
-const
+            const
 #ifdef HAVE_BOOST_REGEX_HPP
-::boost::regex
+            ::boost::regex
 #else
-std::regex
+            std::regex
 #endif
-dnvgl::extfem::bdf::types::float_lead_dot(
-   "^[\\+-]?[.][0-9]+",
+            float_lead_dot("^[\\+-]?[.][0-9]+",
 #ifdef HAVE_BOOST_REGEX_HPP
-   ::boost::regex_constants::ECMAScript);
+                           ::boost::regex_constants::ECMAScript
 #else
-std::regex_constants::ECMAScript);
+                           std::regex_constants::ECMAScript
 #endif
-
+               );
+         }
+      }
+   }
+}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j 8"

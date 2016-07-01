@@ -32,54 +32,65 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-dnvgl::extfem::fem::types::entry_type<std::string>::entry_type(const std::string &name) :
-   fem::types::base(name), bounds() {}
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-dnvgl::extfem::fem::types::entry_type<std::string>::entry_type(
-   const std::string &name,
-   const fem::type_bounds::bound<std::string> &bounds) :
-   fem::types::base(name), bounds(bounds) {}
+         using namespace type_bounds;
 
-std::string
-dnvgl::extfem::fem::types::entry_type<std::string>::operator() (
-   const std::string &inp1, const std::string &inp2,
-   const std::string &inp3, const std::string &inp4) const {
+         namespace types {
 
-   std::string sval = extfem::string::string(
-      inp1 + inp2 + inp3 + inp4).trim();
+            entry_type<std::string>::entry_type(const std::string &name) :
+               __base::b_type(name), bounds() {}
 
-   if (sval.length() == 0)
-      sval = bounds.get_default();
+            entry_type<std::string>::entry_type(
+               const std::string &name,
+               const bound<std::string> &bounds) :
+               __base::b_type(name), bounds(bounds) {}
 
-   return sval;
-}
+            std::string
+            entry_type<std::string>::operator() (
+               const std::string &inp1, const std::string &inp2,
+               const std::string &inp3, const std::string &inp4) const {
 
-std::string dnvgl::extfem::fem::types::entry_type<std::string>::format(
-   const std::string &inp, const size_t &len) const {
+               std::string sval = extfem::string::string(
+                  inp1 + inp2 + inp3 + inp4).trim();
 
-   std::ostringstream res;
+               if (sval.length() == 0)
+                  sval = bounds.get_default();
 
-   res.setf(std::ios_base::left, std::ios_base::adjustfield);
-   res.fill(' ');
-   res.width(len);
+               return sval;
+            }
 
-   res << inp;
-   std::string out(res.str());
-   if (out.size() > len) {
-      std::ostringstream msg("output string for value ", std::ostringstream::ate);
-      msg << inp << " of incorrect size, got length of " << out.size()
-          << " instead of allowed length of " << len << ".";
-      throw errors::int_error(name, msg.str());
+            std::string entry_type<std::string>::format(
+               const std::string &inp, const size_t &len) const {
+
+               std::ostringstream res;
+
+               res.setf(std::ios_base::left, std::ios_base::adjustfield);
+               res.fill(' ');
+               res.width(len);
+
+               res << inp;
+               std::string out(res.str());
+               if (out.size() > len) {
+                  std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                  msg << inp << " of incorrect size, got length of " << out.size()
+                      << " instead of allowed length of " << len << ".";
+                  throw errors::int_error(name, msg.str());
+               }
+               out.resize(len-8, ' ');
+               return out;
+            }
+         }
+      }
    }
-   out.resize(len-8, ' ');
-   return out;
 }
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

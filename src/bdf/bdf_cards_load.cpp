@@ -45,7 +45,7 @@ const entry_type<double> load::form_Si("Si");
 const entry_type<long> load::form_Li(
    "Li", bdf::type_bounds::bound<long>(&cl1));
 
-load::load(const std::deque<std::string> &inp) :
+load::load(const std::list<std::string> &inp) :
    card(inp) {
 
    auto pos = inp.begin();
@@ -70,7 +70,7 @@ load::load(const std::deque<std::string> &inp) :
 }
 
 load::load(const long *SID, const double *S,
-           const std::deque<double> *Si, const std::deque<long> *Li) :
+           const std::list<double> *Si, const std::list<long> *Li) :
    SID(*SID), S(*S) {
    if (Si)
       copy(Si->begin(), Si->end(), back_inserter(this->Si));
@@ -85,31 +85,27 @@ namespace dnvgl {
 
             bdf::types::card load::head = bdf::types::card("LOAD");
 
-            std::ostream const &load::operator<< (std::ostream& os) const {
-               return os << this;
+            const types load::card_type(void) const {
+               return LOAD;
             }
 
-            std::ostream const &operator<<(std::ostream &os, const load &card) {
+            void load::collect_outdata(
+               std::list<std::unique_ptr<format_entry> > &res) const {
 
-               std::deque<std::unique_ptr<format_entry>> entries;
+               res.push_back(format(load::head));
 
-               entries.push_back(format(load::head));
+               res.push_back(format<long>(form_SID, SID));
+               res.push_back(format<double>(form_S, S));
 
-               entries.push_back(format<long>(card.form_SID, card.SID));
-               entries.push_back(format<double>(card.form_S, card.S));
+               assert(Si.size() == Li.size());
 
-               assert(card.Si.size() == card.Li.size());
-
-               auto pS = card.Si.begin();
-               for (auto pL=card.Li.begin(); pL != card.Li.end(); ++pL) {
-                  entries.push_back(format<double>(card.form_Si, &(*pS)));
-                  entries.push_back(format<long>(card.form_Li, &(*pL))); //
+               auto pS = Si.begin();
+               for (auto pL=Li.begin(); pL != Li.end(); ++pL) {
+                  res.push_back(format<double>(form_Si, &(*pS)));
+                  res.push_back(format<long>(form_Li, &(*pL))); //
                   ++pS;
                }
-
-               os << card.format_outlist(entries) << std::endl;
-
-               return os;
+               return;
             }
          }
       }

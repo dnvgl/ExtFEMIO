@@ -14,7 +14,7 @@
 #if !defined _BDF_FILE_H_
 #define _BDF_FILE_H_
 
-#include <deque>
+#include <list>
 #include <set>
 #include <string>
 #include <iostream>
@@ -59,7 +59,7 @@ namespace dnvgl {
 
                bdf_file(std::istream&);
 
-               void get(std::deque<std::string>& oContent);
+               void get(std::list<std::string>& oContent);
 
                /** actual byte position (hopefully no bdf > 2Gybte will be
                    readin....)
@@ -80,9 +80,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:

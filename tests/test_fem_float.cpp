@@ -210,9 +210,8 @@ TEST_CASE("FEM double types output.", "[fem_types]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // coding: utf-8
 // End:

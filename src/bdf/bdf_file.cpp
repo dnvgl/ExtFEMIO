@@ -21,7 +21,7 @@ namespace {
 
 #include <iostream>
 #include <iterator>
-#include <deque>
+#include <list>
 #include <algorithm>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -45,7 +45,7 @@ bdf_file::bdf_file(std::istream &inp) :
 }
 
 // Return all input file lines belonging to next BDF card.
-void bdf_file::get(std::deque<std::string> &res) {
+void bdf_file::get(std::list<std::string> &res) {
    res.clear();
    do {
       // if line not empty and not comment line add line to result std::set.
@@ -86,9 +86,8 @@ std::streampos bdf_file::pos(void) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

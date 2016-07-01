@@ -33,8 +33,10 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #if _MSC_VER && _MSC_VER <= 1700
-double std::round(double number) {
+namespace std {
+   double round(double number) {
    return number < 0.0 ? ceil(number - 0.5) : floor(number + 0.5);
+   }
 }
 #endif
 
@@ -42,7 +44,6 @@ double std::round(double number) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

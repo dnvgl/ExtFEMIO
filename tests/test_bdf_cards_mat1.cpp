@@ -46,11 +46,11 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
           "[bdf_mat1]" ) {
 
    SECTION("first mat1") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       mat1 probe(lines);
 
       CHECK((long)probe.MID == 1);
@@ -68,10 +68,10 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
    }
 
    SECTION("mat1 with missing entries") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       mat1 probe(lines);
 
       CHECK((long)probe.MID == 1);
@@ -89,9 +89,9 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
    }
 
    SECTION("mat1 default values 1") {
-      std::deque<std::string> data({"MAT1,1,2.070+5\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({"MAT1,1,2.070+5\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       mat1 probe(lines);
 
       CHECK((long)probe.MID == 1);
@@ -109,9 +109,9 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
    }
 
    SECTION("mat1 default values 2") {
-      std::deque<std::string> data({"MAT1    1       2.070+5 80000.0\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({"MAT1    1       2.070+5 80000.0\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       mat1 probe(lines);
 
       CHECK((long)probe.MID == 1);
@@ -129,9 +129,9 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
    }
 
    SECTION("mat1 default values 3") {
-      std::deque<std::string> data({"MAT1,1,2.070+5,,.3\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({"MAT1,1,2.070+5,,.3\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       mat1 probe(lines);
 
       CHECK((long)probe.MID == 1);
@@ -151,9 +151,8 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

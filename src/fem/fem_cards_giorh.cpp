@@ -38,23 +38,22 @@ namespace dnvgl {
       namespace fem {
          namespace cards {
 
-            const fem::types::card giorh::head("GIORH");
+            fem::types::card const giorh::head("GIORH");
+
+            entry_type<double> const giorh::_form_HZ("HZ");
+            entry_type<double> const giorh::_form_TY("TY");
+            entry_type<double> const giorh::_form_BT("BT");
+            entry_type<double> const giorh::_form_TT("TT");
+            entry_type<double> const giorh::_form_BB("BB");
+            entry_type<double> const giorh::_form_TB("TB");
+            entry_type<double> const giorh::_form_SFY("SFY");
+            entry_type<double> const giorh::_form_SFZ("SFZ");
+            entry_type<long> const giorh::_form_NLOBYT("NLOBYT");
+            entry_type<long> const giorh::_form_NLOBYB("NLOBYB");
+            entry_type<long> const giorh::_form_NLOBZ("NLOBZ");
 
 
-            const entry_type<double> giorh::_form_HZ("HZ");
-            const entry_type<double> giorh::_form_TY("TY");
-            const entry_type<double> giorh::_form_BT("BT");
-            const entry_type<double> giorh::_form_TT("TT");
-            const entry_type<double> giorh::_form_BB("BB");
-            const entry_type<double> giorh::_form_TB("TB");
-            const entry_type<double> giorh::_form_SFY("SFY");
-            const entry_type<double> giorh::_form_SFZ("SFZ");
-            const entry_type<long> giorh::_form_NLOBYT("NLOBYT");
-            const entry_type<long> giorh::_form_NLOBYB("NLOBYB");
-            const entry_type<long> giorh::_form_NLOBZ("NLOBZ");
-
-
-            giorh::giorh(const std::deque<std::string> &inp) :
+            giorh::giorh(std::list<std::string> const &inp) :
                base_beam_prop(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
 
                if (inp.size() < 10)
@@ -91,47 +90,39 @@ namespace dnvgl {
             giorh::giorh(void) :
                giorh(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
-            giorh::giorh(const long &GEONO, const double &HZ,
-                         const double &TY, const double &BT,
-                         const double &TT, const double &BB,
-                         const double &TB, const double &SFY,
-                         const double &SFZ,
-                         const long &NLOBYT/*=0*/, const long &NLOBYB/*=0*/, const long &NLOBZ/*=0*/) :
+            giorh::giorh(long const &GEONO, double const &HZ,
+                         double const &TY, double const &BT,
+                         double const &TT, double const &BB,
+                         double const &TB, double const &SFY,
+                         double const &SFZ,
+                         long const &NLOBYT/*=0*/, long const &NLOBYB/*=0*/, long const &NLOBZ/*=0*/) :
                base_beam_prop(GEONO),
                HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
                SFY(SFY), SFZ(SFZ),
                NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
 
-            const dnvgl::extfem::fem::cards::types
+            dnvgl::extfem::fem::cards::types const
             giorh::card_type(void) const {return GIORH;}
 
-            const std::ostream&
-            giorh::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const giorh &card) {
-               if (card.GEONO == -1) return os;
+            std::ostream &giorh::put(std::ostream& os) const {
+               if (this->GEONO == -1) return os;
                os << giorh::head.format()
-                  << card._form_GEONO.format(card.GEONO)
-                  << card._form_HZ.format(card.HZ)
-                  << card._form_TY.format(card.TY)
-                  << card._form_BT.format(card.BT)
+                  << this->_form_GEONO.format(this->GEONO)
+                  << this->_form_HZ.format(this->HZ)
+                  << this->_form_TY.format(this->TY)
+                  << this->_form_BT.format(this->BT)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_TT.format(card.TT)
-                  << card._form_BB.format(card.BB)
-                  << card._form_TB.format(card.TB)
-                  << card._form_SFY.format(card.SFY)
+                  << this->_form_TT.format(this->TT)
+                  << this->_form_BB.format(this->BB)
+                  << this->_form_TB.format(this->TB)
+                  << this->_form_SFY.format(this->SFY)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_SFZ.format(card.SFZ);
-               if ((card.NLOBYT || card.NLOBYB || card.NLOBZ))
-                  os << card._form_NLOBYT.format(card.NLOBYT)
-                     << card._form_NLOBYB.format(card.NLOBYB)
-                     << card._form_NLOBZ.format(card.NLOBZ);
-               os << std::endl;
-               return os;
+                  << this->_form_SFZ.format(this->SFZ);
+               if ((this->NLOBYT || this->NLOBYB || this->NLOBZ))
+                  os << this->_form_NLOBYT.format(this->NLOBYT)
+                     << this->_form_NLOBYB.format(this->NLOBYB)
+                     << this->_form_NLOBZ.format(this->NLOBZ);
+               return os << std::endl;
             }
          }
       }
@@ -140,9 +131,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

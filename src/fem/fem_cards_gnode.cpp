@@ -44,9 +44,9 @@ namespace dnvgl {
             const entry_type<long> gnode::_form_NODEX("NODEX");
             const entry_type<long> gnode::_form_NODENO("NODENO");
             const entry_type<long> gnode::_form_NDOF("NDOF");
-            const entry_type<std::vector<int>> gnode::_form_ODOF("ODOF");
+            const entry_type<std::vector<int> > gnode::_form_ODOF("ODOF");
 
-            gnode::gnode(const std::deque<std::string> &inp) :
+            gnode::gnode(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 5)
@@ -80,23 +80,16 @@ namespace dnvgl {
                          const std::vector<int> &ODOF) :
                gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
 
-            const std::ostream&
-            gnode::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
             const dnvgl::extfem::fem::cards::types
             gnode::card_type(void) const {return GNODE;}
 
-            std::ostream&
-            operator<< (std::ostream &os, const gnode &card) {
-               if (card.NODEX == -1) return os;
+            std::ostream &gnode::put(std::ostream& os) const {
+               if (this->NODEX == -1) return os;
                os << gnode::head.format()
-                  << card._form_NODEX.format(card.NODEX)
-                  << card._form_NODENO.format(card.NODENO)
-                  << card._form_NDOF.format(card.NDOF)
-                  << card._form_ODOF.format(card.ODOF) << std::endl;
+                  << this->_form_NODEX.format(this->NODEX)
+                  << this->_form_NODENO.format(this->NODENO)
+                  << this->_form_NDOF.format(this->NDOF)
+                  << this->_form_ODOF.format(this->ODOF) << std::endl;
 
                return os;
             }
@@ -107,9 +100,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

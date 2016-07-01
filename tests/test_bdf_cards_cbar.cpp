@@ -46,11 +46,11 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
          "CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n",
          "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    cbar probe(lines);
 
    SECTION("first cbar") {
@@ -64,7 +64,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
       CHECK_FALSE(probe.G0);
       CHECK(probe.choose_dir_code == cbar::has_DVEC);
       CHECK(probe.OFFT == "GGG");
-      std::deque<int> p_ref;
+      std::list<int> p_ref;
       CHECK(probe.PA == p_ref);
       CHECK(probe.PB == p_ref);
       CHECK((double)probe.W1A == 0.);
@@ -79,11 +79,11 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
           "[bdf_cbar,dcode]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
          "CBAR    7869    104010  76      153      13                     GOO     \n",
          "                        0.0     -22.617 -339.25 0.0     -22.617 "});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    cbar probe(lines);
 
    SECTION("dir code cbar") {
@@ -97,7 +97,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
       CHECK_FALSE(probe.X3);
       CHECK(probe.choose_dir_code == cbar::has_DCODE);
       CHECK(probe.OFFT == "GOO");
-      std::deque<int> p_ref;
+      std::list<int> p_ref;
       CHECK(probe.PA.value == p_ref);
       CHECK(probe.PB.value == p_ref);
       CHECK(probe.W1A.value == 0.);
@@ -177,14 +177,27 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
             "*                                        0.0000000000+00 0.0000000000+00\n"
             "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
    }
+
+   SECTION("dir code all large (ptr)") {
+      long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+
+      __base::card *probe = new cbar(&EID, &PID, &GA, &GB, &G0);
+      static_cast<cbar*>(probe)->W3B = 2.;
+      test << *probe;
+      CHECK(test.str() ==
+            // 34567!123456789012345!123456789012345!123456789012345!123456789012345!
+            "CBAR*          123456789               2               3               4\n"
+            "*                      5                                                \n"
+            "*                                        0.0000000000+00 0.0000000000+00\n"
+            "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
+   }
 }
 
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

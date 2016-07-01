@@ -46,11 +46,11 @@ TEST_CASE("BDF ENDDATA definitions. (Small Field Format)",
           "[bdf_ENDDATA]" ) {
 
    SECTION("enddata read") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "ENDDAT                                                                  \n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       enddata probe(lines);
    }
 }

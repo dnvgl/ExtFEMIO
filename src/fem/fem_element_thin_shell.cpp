@@ -27,20 +27,31 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-fem_thin_shell::fem_thin_shell(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+         using namespace cards;
 
-fem_thin_shell::fem_thin_shell(dnvgl::extfem::fem::cards::gelref1 const *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+         namespace elements {
+            namespace __base {
 
-fem_thin_shell::fem_thin_shell(dnvgl::extfem::fem::elements::__base const *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
+               fem_thin_shell::fem_thin_shell(gelmnt1 const *data) :
+                  elem(data) {}
+
+               fem_thin_shell::fem_thin_shell(gelref1 const *data) :
+                  elem(data) {}
+
+               fem_thin_shell::fem_thin_shell(__base::elem const *data) :
+                  elem(data) {}
+            }
+         }
+      }
+   }
+}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

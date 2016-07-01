@@ -6,3 +6,11 @@
 */
 
 #include "StdAfx.h"
+
+// Local Variables:
+// mode: c++
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C .. check -j8"
+// End:

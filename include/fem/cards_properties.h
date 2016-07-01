@@ -18,9 +18,8 @@
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:

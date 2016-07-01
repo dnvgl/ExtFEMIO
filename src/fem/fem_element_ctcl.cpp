@@ -26,31 +26,37 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long ctcl::nnodes(void) const {return 4;}
+         using namespace cards;
 
-el_types ctcl::get_type(void) const {return CTCL;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 1;
+               el_processor procs[procs_len] = {general};
+            }
 
-namespace {
-   const size_t procs_len = 1;
-   el_processor procs[
-      procs_len] = {general};
+            long ctcl::nnodes(void) const {return 4;}
+
+            el_types ctcl::get_type(void) const {return CTCL;}
+
+            const std::set<el_processor> ctcl::processors(
+               procs, procs+procs_len);
+
+            ctcl::ctcl(const gelmnt1 *data) : __base::elem(data) {}
+
+            ctcl::ctcl(const gelref1 *data) : __base::elem(data) {}
+
+            ctcl::ctcl(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> ctcl::processors(procs, procs+procs_len);
-
-ctcl::ctcl(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-ctcl::ctcl(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-ctcl::ctcl(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

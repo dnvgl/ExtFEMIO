@@ -26,33 +26,42 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long fqus_ffq::nnodes(void) const {return 4;}
+         using namespace cards;
 
-el_types fqus_ffq::get_type(void) const {return FQUS_FFQ;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 7;
+               el_processor procs[procs_len] = {
+                  general, Prefem, Sestra, ADVANCE, Platework,
+                  Pretube, Poseidon};
+            }
 
-namespace {
-   const size_t procs_len = 7;
-   el_processor procs[
-      procs_len] = {general, Prefem, Sestra, ADVANCE, Platework,
-                    Pretube, Poseidon};
+            long fqus_ffq::nnodes(void) const {return 4;}
+
+            el_types fqus_ffq::get_type(void) const {return FQUS_FFQ;}
+
+            const std::set<el_processor> fqus_ffq::processors(
+               procs, procs+procs_len);
+
+            fqus_ffq::fqus_ffq(gelmnt1 const *data) :
+               __base::fem_thin_shell(data) {}
+
+            fqus_ffq::fqus_ffq(gelref1 const *data) :
+               __base::fem_thin_shell(data) {}
+
+            fqus_ffq::fqus_ffq(__base::elem const *data) :
+               __base::fem_thin_shell(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> fqus_ffq::processors(
-   procs, procs+procs_len);
-
-fqus_ffq::fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
-   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
-
-fqus_ffq::fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const *data) :
-   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
-
-fqus_ffq::fqus_ffq(dnvgl::extfem::fem::elements::__base const *data) :
-   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

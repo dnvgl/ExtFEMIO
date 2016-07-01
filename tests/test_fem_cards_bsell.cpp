@@ -49,12 +49,12 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]" ) {
 
    SECTION("BSELL (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "BSELL    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00\n",
          "         1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       bsell probe(lines);
 
       CHECK((long)probe.LC == 1);
@@ -115,17 +115,17 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
 
 TEST_CASE("FEM BSELL conversion from own output.", "[fem_bsell,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BSELL (own output)" ) {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
             "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
             "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
             "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bsell probe(lines);
 
       CHECK((long)probe.LC == 2);
@@ -136,13 +136,13 @@ TEST_CASE("FEM BSELL conversion from own output.", "[fem_bsell,in/out]") {
 
    SECTION("BSELL (less)" ) {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
             "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
             "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
             "        +5.000000000e+00+5.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bsell probe(lines);
 
       CHECK((long)probe.LC == 2);
@@ -155,9 +155,8 @@ TEST_CASE("FEM BSELL conversion from own output.", "[fem_bsell,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

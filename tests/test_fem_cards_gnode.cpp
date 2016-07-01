@@ -46,12 +46,12 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GNODE (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GNODE    1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gnode probe(lines);
 
       CHECK(probe.NODEX == 1);
@@ -64,9 +64,9 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    }
 
    SECTION("GNODE (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GNODE    1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gnode probe(lines);
 
       CHECK(probe.NODEX == 1);
@@ -79,9 +79,9 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    }
 
    SECTION("GNODE (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gnode probe(lines);
 
       CHECK(probe.NODEX == 1);
@@ -131,12 +131,12 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
 
 TEST_CASE("FEM GNODE conversion from own output.", "[fem_gnode,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GNODE (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gnode probe(lines);
 
       CHECK(probe.NODEX == 1);
@@ -148,7 +148,6 @@ TEST_CASE("FEM GNODE conversion from own output.", "[fem_gnode,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

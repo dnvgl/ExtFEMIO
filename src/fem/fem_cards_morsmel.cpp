@@ -59,7 +59,7 @@ namespace dnvgl {
             entry_type<double> const morsmel::_form_ALPHA1("ALPHA1");
             entry_type<double> const morsmel::_form_ALPHA2("ALPHA2");
 
-            morsmel::morsmel(std::deque<std::string> const &inp) :
+            morsmel::morsmel(std::list<std::string> const &inp) :
                base_material(inp) {
 
                if (inp.size() < 7)
@@ -120,41 +120,34 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             morsmel::card_type(void) const {return MORSMEL;}
 
-            const std::ostream&
-            morsmel::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, morsmel const &card) {
-               if (card.MATNO == -1) return os;
+            std::ostream &morsmel::put(std::ostream& os) const {
+               if (this->MATNO == -1) return os;
                os << morsmel::head.format()
-                  << card._form_MATNO.format(card.MATNO)
-                  << card._form_Q1.format(card.Q1)
-                  << card._form_Q2.format(card.Q2)
-                  << card._form_Q3.format(card.Q3)
+                  << this->_form_MATNO.format(this->MATNO)
+                  << this->_form_Q1.format(this->Q1)
+                  << this->_form_Q2.format(this->Q2)
+                  << this->_form_Q3.format(this->Q3)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_RHO.format(card.RHO)
-                  << card._form_D11.format(card.D11)
-                  << card._form_D21.format(card.D21)
-                  << card._form_D22.format(card.D22)
+                  << this->_form_RHO.format(this->RHO)
+                  << this->_form_D11.format(this->D11)
+                  << this->_form_D21.format(this->D21)
+                  << this->_form_D22.format(this->D22)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_D31.format(card.D31)
-                  << card._form_D32.format(card.D32)
-                  << card._form_D33.format(card.D33)
-                  << card._form_PS1.format(card.PS1)
+                  << this->_form_D31.format(this->D31)
+                  << this->_form_D32.format(this->D32)
+                  << this->_form_D33.format(this->D33)
+                  << this->_form_PS1.format(this->PS1)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_PS2.format(card.PS2)
-                  << card._form_DAMP1.format(card.DAMP1)
-                  << card._form_DAMP2.format(card.DAMP2)
-                  << card._form_ALPHA1.format(card.ALPHA1)
+                  << this->_form_PS2.format(this->PS2)
+                  << this->_form_DAMP1.format(this->DAMP1)
+                  << this->_form_DAMP2.format(this->DAMP2)
+                  << this->_form_ALPHA1.format(this->ALPHA1)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_ALPHA2.format(card.ALPHA2)
+                  << this->_form_ALPHA2.format(this->ALPHA2)
                   << std::endl;
                return os;
             }
@@ -165,9 +158,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

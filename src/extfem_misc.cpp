@@ -1,13 +1,11 @@
 /**
-   \file bdf/bdf_header.cpp
+   \file extfem_misc.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief General implentation for BDF header entries.
+   \brief Implementation of some base extfem functionality.
 
    Detailed description
 */
-
-#include "StdAfx.h"
 
 // ID:
 namespace {
@@ -18,15 +16,19 @@ namespace {
       = "@(#) $Id$";
 }
 
-#include "bdf/header.h"
+#include "extfem_misc.h"
 
 namespace dnvgl {
    namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace __base {
-               entry::entry(void) {}
-            }
+      namespace __base {
+         outline::outline(void) {}
+
+         std::ostream &outline::operator<<(std::ostream &os) {
+            return this->put(os);
+         }
+
+         std::ostream &operator<<(std::ostream &os, outline const &val) {
+            return val.put(os);
          }
       }
    }
@@ -37,5 +39,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C .. check -j8"
 // End:

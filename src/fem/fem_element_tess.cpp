@@ -26,30 +26,36 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
+         namespace elements {
+            using namespace dnvgl::extfem::fem::cards;
 
-long tess::nnodes(void) const {return 2;}
+            namespace {
+               const size_t procs_len = 6;
+               el_processor procs[procs_len] = {
+                  general, Preframe, Prefem, Sestra, ADVANCE, Poseidon};
+            }
 
-el_types tess::get_type(void) const {return TESS;}
+            long tess::nnodes(void) const {return 2;}
 
-namespace {
-   const size_t procs_len = 6;
-   el_processor procs[procs_len] = {general, Preframe, Prefem, Sestra, ADVANCE, Poseidon};
+            el_types tess::get_type(void) const {return TESS;}
+
+            const std::set<el_processor> tess::processors(procs, procs+procs_len);
+
+            tess::tess(const gelmnt1 *data) : __base::elem(data) {}
+
+            tess::tess(const gelref1 *data) : __base::elem(data) {}
+
+            tess::tess(const __base::elem *p) : __base::elem(p) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> tess::processors(procs, procs+procs_len);
-
-tess::tess(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-tess::tess(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-tess::tess(const __base *p) :
-   __base(p) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

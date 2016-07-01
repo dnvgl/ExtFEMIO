@@ -28,7 +28,7 @@ namespace dnvgl {
 |         | `LLC1` | `FACT1` | `LLC2` | `FACT2` |
 |         | ...    | ...     | `LLCN` | `FACTN` |
 */
-            class bsell : public card {
+            class bsell : public __base::card {
 
 
                dnvgl::extfem::fem::types::card static const head;
@@ -53,7 +53,7 @@ namespace dnvgl {
                */
                std::vector<double> FACT;
 
-               bsell(std::deque<std::string> const &);
+               bsell(std::list<std::string> const &);
 
                bsell(void);
 
@@ -62,14 +62,10 @@ namespace dnvgl {
                      std::vector<long> const &LLC,
                      std::vector<double> const &FACT);
 
-               const dnvgl::extfem::fem::cards::types
+               dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
-               friend  std::ostream&
-               operator<< (std::ostream&, bsell const &);
-
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual std::ostream &put(std::ostream&) const;
             };
 
 
@@ -87,7 +83,7 @@ namespace dnvgl {
 |           | `NNOD`  | `NOD1`      | `NOD2`  | ...     |
 |           | ...     | `NOD(NNOD)` |         |         |
 */
-            class gelmnt2 : public card {
+            class gelmnt2 : public __base::card {
 
             private:
 
@@ -178,7 +174,7 @@ bsell(
                */
                std::vector<long> NOD;
 
-               gelmnt2(std::deque<std::string> const &);
+               gelmnt2(std::list<std::string> const &);
 
                gelmnt2(void);
 
@@ -237,11 +233,7 @@ bsell(
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  std::ostream&
-               operator<< (std::ostream&, gelmnt2 const &);
-
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual std::ostream &put(std::ostream&) const;
             };
 
 /// `HSUPSTAT`: Superelement Statistical Information
@@ -260,7 +252,7 @@ T-file. The `HSUPSTAT` record is referenced from the `HIERARCH` record
 through the superelement type number (`ISELTY`).
 
 */
-            class hsupstat : public card {
+            class hsupstat : public __base::card {
 
             private:
 
@@ -311,7 +303,7 @@ through the superelement type number (`ISELTY`).
                 */
                long COMPLC;
 
-               hsupstat(std::deque<std::string> const &);
+               hsupstat(std::list<std::string> const &);
 
                hsupstat(void);
 
@@ -328,11 +320,7 @@ through the superelement type number (`ISELTY`).
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  std::ostream&
-               operator<< (std::ostream&, hsupstat const &);
-
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual std::ostream &put(std::ostream&) const;
             };
 
 /// `HSUPTRAN`: Superelement Transformations
@@ -354,7 +342,7 @@ records are written in the highest level (top-level) T-file. The
 superelement transformation reference number, `ITREF`.
 
 */
-            class hsuptran : public card {
+            class hsuptran : public __base::card {
 
             private:
 
@@ -427,7 +415,7 @@ superelement transformation reference number, `ITREF`.
                 */
                double T[4][4];
 
-               hsuptran(std::deque<std::string> const &);
+               hsuptran(std::list<std::string> const &);
 
                hsuptran(void);
 
@@ -457,11 +445,7 @@ superelement transformation reference number, `ITREF`.
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  std::ostream&
-               operator<< (std::ostream&, hsuptran const &);
-
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual std::ostream &put(std::ostream&) const;
             };
 
 /// `HIERARCH`: Superelement Hierarchy Description
@@ -505,7 +489,7 @@ superelement transformation reference number, `ITREF`.
    that `N2`, `N3`, `N4` & `N5` may take any values as long as they
    are unique.
 */
-            class hierarch : public card {
+            class hierarch : public __base::card {
 
             private:
 
@@ -563,7 +547,7 @@ superelement transformation reference number, `ITREF`.
                 */
                std::vector<long> IHSREFi;
 
-               hierarch(std::deque<std::string> const &);
+               hierarch(std::list<std::string> const &);
 
                hierarch(void);
 
@@ -589,11 +573,7 @@ superelement transformation reference number, `ITREF`.
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  std::ostream&
-               operator<< (std::ostream&, hierarch const &);
-
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual std::ostream &put(std::ostream&) const;
             };
          }
       }
@@ -604,7 +584,6 @@ superelement transformation reference number, `ITREF`.
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j8"

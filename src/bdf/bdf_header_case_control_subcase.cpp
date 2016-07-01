@@ -38,12 +38,7 @@ namespace dnvgl {
                   max_n += 1;
                }
 
-               const std::ostream&
-               subcase::operator<< (std::ostream& os) const {
-                  return os << this;
-               }
-
-               std::ostream const &subcase::put(std::ostream &os) const {
+               std::ostream &subcase::put(std::ostream &os) const {
                   return os << "SUBCASE = " << this->n << std:: endl;
                }
             }

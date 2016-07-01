@@ -49,7 +49,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("BDF complx types parsing.", "[bdf_types]" ) {
 
-   entry_type<std::complex<double>> probe("dummy");
+   entry_type<std::complex<double> > probe("dummy");
 
    SECTION("'   1.      1.   '") {
       CHECK(probe("   1.   ", "   1.   ").value == std::complex<double>(1., 1));
@@ -201,9 +201,8 @@ TEST_CASE("BDF std::complex<double> types output.", "[bdf_types]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // coding: utf-8
 // End:

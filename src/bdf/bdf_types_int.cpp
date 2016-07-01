@@ -41,7 +41,6 @@ dnvgl::extfem::bdf::types::int_re(
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j 8"

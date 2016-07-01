@@ -50,10 +50,10 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
 
    SECTION("Free Field Format (generic)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PBAR,1,2,3.,4.,5.,6.,7.,,9.,10.,11.,12.,13.,14.,15.,16.,17.,18.,19.\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbar probe(lines);
 
       CHECK((long)probe.PID ==  1);
@@ -78,11 +78,11 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
 
    SECTION("Small Field Format 1") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PBAR    4000001 3       1.046+4 9.369+7 1.694+6 1.316+6\n",
          "                        6.856+6\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbar probe(lines);
 
       CHECK((long)probe.PID == 4000001);
@@ -107,12 +107,12 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
 
    SECTION("Small Field Format 2") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567
          "PBAR          29       6     2.9            5.97                                \n",
          "                             2.0     4.0                                        \n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbar probe(lines);
 
       CHECK((long)probe.PID == 29);
@@ -138,9 +138,8 @@ TEST_CASE("BDF PBAR definitions.", "[bdf_PBAR]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

@@ -26,31 +26,38 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long lqua::nnodes(void) const {return 4;}
+         using namespace cards;
 
-el_types lqua::get_type(void) const {return LQUA;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 5;
+               el_processor procs[procs_len] = {
+                  general, Prefem, Sestra, ADVANCE, Poseidon};
+            }
 
-namespace {
-   const size_t procs_len = 5;
-   el_processor procs[procs_len] = {general, Prefem, Sestra, ADVANCE, Poseidon};
+            long lqua::nnodes(void) const {return 4;}
+
+            el_types lqua::get_type(void) const {return LQUA;}
+
+            const std::set<el_processor> lqua::processors(
+               procs, procs+procs_len);
+
+            lqua::lqua(const gelmnt1 *data) : __base::elem(data) {}
+
+            lqua::lqua(const gelref1 *data) : __base::elem(data) {}
+
+            lqua::lqua(const __base::elem *p) : __base::elem(p) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> lqua::processors(procs, procs+procs_len);
-
-lqua::lqua(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-lqua::lqua(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-lqua::lqua(const __base *p) :
-   __base(p) {}
-
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

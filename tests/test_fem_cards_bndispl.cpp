@@ -47,14 +47,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
 
    std::vector<double> ref_rdisp({0., 0., 0., 0., 0., 0.});
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BNDISPL (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BNDISPL  1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         2.30470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -67,11 +67,11 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
    }
 
    SECTION("BNDISPL (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BNDISPL  1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n",
          "         2.30470000e+04  6.000000000e+00 0.000000000e+00 0.000000000e+00\n",
          "         0.000000000e+00 0.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -170,16 +170,16 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
 TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BNDISPL (own output) (1)") {
-       std::deque<std::string> data({
+       std::list<std::string> data({
             "BNDISPL +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
             "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -192,11 +192,11 @@ TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
    }
 
    SECTION("BNDISPL (own output) (2)") {
-       std::deque<std::string> data({
+       std::list<std::string> data({
              "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -209,12 +209,12 @@ TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
    }
 
    SECTION("BNDISPL (own output) (3)") {
-       std::deque<std::string> data({
+       std::list<std::string> data({
             "BNDISPL +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+1.000000000e+00\n",
             "        +2.000000000e+00+3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -227,11 +227,11 @@ TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
    }
 
    SECTION("BNDISPL (own output) (4)") {
-       std::deque<std::string> data({
+       std::list<std::string> data({
              "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
              "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bndispl probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -245,7 +245,6 @@ TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
 }
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

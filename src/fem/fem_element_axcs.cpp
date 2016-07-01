@@ -20,37 +20,43 @@ namespace {
 
 #include "fem/elements.h"
 
-using namespace dnvgl::extfem::fem::elements;
-
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
 
-long axcs::nnodes(void) const {return 3;}
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-el_types axcs::get_type(void) const {return AXCS;}
+         using namespace cards;
 
-namespace {
-   const size_t procs_len = 4;
-   el_processor procs[
-      procs_len] = {general, Prefem, Sestra, ADVANCE};
+         namespace elements {
+            namespace {
+               const size_t procs_len = 4;
+               el_processor procs[procs_len] = {
+                  general, Prefem, Sestra, ADVANCE};
+            }
+
+            long axcs::nnodes(void) const {return 3;}
+
+            el_types axcs::get_type(void) const {return AXCS;}
+
+            const std::set<el_processor> axcs::processors(procs, procs+procs_len);
+
+            axcs::axcs(const gelmnt1 *data) : __base::elem(data) {}
+
+            axcs::axcs(const gelref1 *data) : __base::elem(data) {}
+
+            axcs::axcs(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> axcs::processors(procs, procs+procs_len);
-
-axcs::axcs(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-axcs::axcs(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-axcs::axcs(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

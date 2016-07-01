@@ -46,15 +46,15 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GIORH (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n",
          "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n",
          "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 5);
@@ -72,12 +72,12 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
    }
 
    SECTION("GIORH (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GIORH    5.000000000e+00 4.66000000e+02  1.450000000e+01 1.25000000e+02 \n",
          "         1.600000000e+01 1.450000000e+01 1.600000000e+01 1.000000000e+00\n",
          "         1.000000000e+00 0.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 5);
@@ -95,12 +95,12 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
    }
 
    SECTION("GIORH (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GIORH   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
          "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
          "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -120,15 +120,15 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
 
 TEST_CASE("FEMIO-25: Failing to import GIORH card from SESAM GeniE FEM file") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("Failing card") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GIORH     6.00000000E+00  7.14999974E-01  9.99999978E-03  1.09999999E-02\n",
          "          1.00000005E-03  1.50000006E-01  1.49999997E-02  1.00000000E+00\n",
          "          1.00000000E+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 6);
@@ -177,15 +177,15 @@ TEST_CASE("FEM GIORH types output.", "[fem_giorh,out]" ) {
 
 TEST_CASE("FEM GIORH conversion from own output.", "[fem_giorh,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GIORH (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "GIORH   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -203,12 +203,12 @@ TEST_CASE("FEM GIORH conversion from own output.", "[fem_giorh,in/out]") {
    }
 
    SECTION("GIORH (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "GIORH   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
             "        +9.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       giorh probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -228,7 +228,6 @@ TEST_CASE("FEM GIORH conversion from own output.", "[fem_giorh,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

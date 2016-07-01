@@ -21,6 +21,7 @@ SUBDIRS=
 EXTRA_DIST=
 lib_LTLIBRARIES = libextfemio.la
 libextfemio_la_SOURCES  = extfem_string.cpp
+libextfemio_la_SOURCES += extfem_misc.cpp
 
 lib_LTLIBRARIES += libextfemio_bdf.la
 libextfemio_bdf_la_SOURCES  = bdf/bdf_types.cpp
@@ -205,8 +206,7 @@ vpath %.o fem bdf
 
 # Local Variables:
 # mode: makefile
-# ispell-local-dictionary: "english"
-# compile-command: "make -C .. check -j 8"
+# compile-command: "make -C .. check -j8"
 # End:
 
 # End of Makefile.am

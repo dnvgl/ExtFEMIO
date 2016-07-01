@@ -52,7 +52,7 @@ namespace dnvgl {
             const entry_type<std::string> tdsupnam::_form_SUP_NAME("SUP_NAME");
             const entry_type<std::string> tdsupnam::_form_CONT("CONT");
 
-            tdsupnam::tdsupnam(const std::deque<std::string> &inp) :
+            tdsupnam::tdsupnam(const std::list<std::string> &inp) :
                card(inp) {
                if (inp.size() < 9)
                   throw errors::parse_error(
@@ -82,15 +82,21 @@ namespace dnvgl {
                nctxt = div_val.rem;
 
                if (nlnam) {
+                  auto pos_0 = *pos++;
+                  auto pos_1 = *pos++;
+                  auto pos_2 = *pos++;
+                  auto pos_3 = *pos++;
                   SUP_NAME = _form_SUP_NAME(
-                     *pos, *(pos+1), *(pos+2), *(pos+3));
+                     pos_0, pos_1, pos_2, pos_3);
                   SUP_NAME.resize(ncnam, ' ');
-               }
-               pos += 4;
+               } else (((pos++)++)++)++;
                for (long i=0; i < nltxt; i++) {
+                  auto pos_0 = *pos++;
+                  auto pos_1 = *pos++;
+                  auto pos_2 = *pos++;
+                  auto pos_3 = *pos++;
                   std::string cont = _form_CONT(
-                     *pos, *(pos+1), *(pos+2), *(pos+3));
-                  pos += 4;
+                     pos_0, pos_1, pos_2, pos_3);
                   cont.resize(nctxt, ' ');
                   CONT.push_back(cont);
                }
@@ -163,27 +169,22 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             tdsupnam::card_type(void) const { return TDSUPNAM; };
 
-            const std::ostream&
-            tdsupnam::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const tdsupnam &card) {
-               if (card.NFIELD == -1) return os;
+            std::ostream &tdsupnam::put(std::ostream& os) const {
+               if (this->NFIELD == -1) return os;
                os << tdsupnam::head.format()
-                  << card._form_NFIELD.format(card.NFIELD)
-                  << card._form_IHREF.format(card.IHREF)
-                  << card._form_CODNAM.format(card.CODNAM)
-                  << card._form_CODTXT.format(card.CODTXT) << std::endl;
-               if (card.nlnam)
+                  << this->_form_NFIELD.format(this->NFIELD)
+                  << this->_form_IHREF.format(this->IHREF)
+                  << this->_form_CODNAM.format(this->CODNAM)
+                  << this->_form_CODTXT.format(this->CODTXT)
+                  << std::endl;
+               if (this->nlnam)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_SUP_NAME.format(card.SUP_NAME, card.ncnam+8) << std::endl;
-               for (auto p : card.CONT)
+                     << this->_form_SUP_NAME.format(this->SUP_NAME, this->ncnam+8)
+                     << std::endl;
+               for (auto p : this->CONT)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_CONT.format(p, card.nctxt+8) << std::endl;
-
+                     << this->_form_CONT.format(p, this->nctxt+8)
+                     << std::endl;
                return os;
             }
          }
@@ -193,7 +194,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

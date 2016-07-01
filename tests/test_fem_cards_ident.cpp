@@ -46,12 +46,12 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("IDENT (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       ident probe(lines);
 
       CHECK(probe.SLEVEL == 1);
@@ -60,9 +60,9 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IDENT   +1.00000000e+000+1.00000000e+000+3.00000000e+000+0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       ident probe(lines);
 
       CHECK(probe.SLEVEL == 1);
@@ -71,9 +71,9 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00 0.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       ident probe(lines);
 
       CHECK(probe.SLEVEL == 1);
@@ -82,9 +82,9 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (4)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       ident probe(lines);
 
       CHECK(probe.SLEVEL == 1);
@@ -122,12 +122,12 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
 
 TEST_CASE("FEM IDENT conversion from own output.", "[fem_ident,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("IDENT (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       ident probe(lines);
 
       CHECK(probe.SLEVEL == 1);
@@ -138,7 +138,6 @@ TEST_CASE("FEM IDENT conversion from own output.", "[fem_ident,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

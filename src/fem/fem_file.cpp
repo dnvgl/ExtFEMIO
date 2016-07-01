@@ -22,7 +22,7 @@ namespace {
 
 #include <iostream>
 #include <iterator>
-#include <deque>
+#include <list>
 #include <algorithm>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -40,7 +40,7 @@ fem_file::fem_file(std::istream &inp) :
 }
 
 // Return all input file lines belonging to next FEM card.
-void fem_file::get(std::deque<std::string> &res) {
+void fem_file::get(std::list<std::string> &res) {
    res.clear();
    do {
       // if line not empty and not comment line add line to result std::set.
@@ -77,7 +77,6 @@ std::streampos fem_file::pos(void) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

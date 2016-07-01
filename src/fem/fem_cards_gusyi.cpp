@@ -55,7 +55,7 @@ namespace dnvgl {
             entry_type<long> const gusyi::_form_NLOBYB("NLOBYB");
             entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
-            gusyi::gusyi(const std::deque<std::string> &inp) :
+            gusyi::gusyi(const std::list<std::string> &inp) :
                base_beam_prop(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
 
                if (inp.size() < 12)
@@ -112,34 +112,27 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             gusyi::card_type(void) const {return GUSYI;}
 
-            const std::ostream&
-            gusyi::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const gusyi &card) {
-               if (card.GEONO == -1) return os;
+            std::ostream &gusyi::put(std::ostream& os) const {
+               if (this->GEONO == -1) return os;
                os << gusyi::head.format()
-                  << card._form_GEONO.format(card.GEONO)
-                  << card._form_HZ.format(card.HZ)
-                  << card._form_TY.format(card.TY)
-                  << card._form_BT.format(card.BT)
+                  << this->_form_GEONO.format(this->GEONO)
+                  << this->_form_HZ.format(this->HZ)
+                  << this->_form_TY.format(this->TY)
+                  << this->_form_BT.format(this->BT)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_B1.format(card.B1)
-                  << card._form_TT.format(card.TT)
-                  << card._form_BB.format(card.BB)
-                  << card._form_B2.format(card.B2)
+                  << this->_form_B1.format(this->B1)
+                  << this->_form_TT.format(this->TT)
+                  << this->_form_BB.format(this->BB)
+                  << this->_form_B2.format(this->B2)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_TB.format(card.TB)
-                  << card._form_SFY.format(card.SFY)
-                  << card._form_SFZ.format(card.SFZ);
-               if ((card.NLOBYT || card.NLOBYB || card.NLOBZ))
-                  os << card._form_NLOBYT.format(card.NLOBYT)
+                  << this->_form_TB.format(this->TB)
+                  << this->_form_SFY.format(this->SFY)
+                  << this->_form_SFZ.format(this->SFZ);
+               if ((this->NLOBYT || this->NLOBYB || this->NLOBZ))
+                  os << this->_form_NLOBYT.format(this->NLOBYT)
                      << std::endl << dnvgl::extfem::fem::types::card().format()
-                     << card._form_NLOBYB.format(card.NLOBYB)
-                     << card._form_NLOBZ.format(card.NLOBZ);
+                     << this->_form_NLOBYB.format(this->NLOBYB)
+                     << this->_form_NLOBZ.format(this->NLOBZ);
                os << std::endl;
                return os;
             }
@@ -150,9 +143,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

@@ -120,13 +120,10 @@ namespace dnvgl {
 
 #endif // _FEM_ERRORS_H_
 
-/*
-Local Variables:
-mode: c++
-ispell-local-dictionary: "english"
-c-file-style: "dnvgl"
-indent-tabs-mode: nil
-compile-command: "make -C ../.. check -j8"
-coding: utf-8
-End:
-*/
+// Local Variables:
+// mode: c++
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../.. check -j8"
+// coding: utf-8
+// End:

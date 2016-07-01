@@ -20,63 +20,64 @@ namespace dnvgl {
    namespace extfem {
       namespace bdf {
          namespace cards {
+            namespace __base {
 
 /// Base class for handling forces and moments.
-            class momforce_base : public card {
+               class momforce : public __base::card {
 
-            private:
+               protected:
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_SID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_CID;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_F;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_N1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_N2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_N3;
+                  static const dnvgl::extfem::bdf::types::entry_type<long> form_SID;
+                  static const dnvgl::extfem::bdf::types::entry_type<long> form_G;
+                  static const dnvgl::extfem::bdf::types::entry_type<long> form_CID;
+                  static const dnvgl::extfem::bdf::types::entry_type<double> form_F;
+                  static const dnvgl::extfem::bdf::types::entry_type<double> form_N1;
+                  static const dnvgl::extfem::bdf::types::entry_type<double> form_N2;
+                  static const dnvgl::extfem::bdf::types::entry_type<double> form_N3;
 
-            public:
+               public:
 
-               /** Load std::set identification number. (Integer > 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> SID;
-               /** Grid point identification number. (Integer > 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> G;
-               /** Coordinate system identification number. (Integer > 0;
-                   Default = 0)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> CID;
-               /** Scale factor. (Real)
-                */
-               dnvgl::extfem::bdf::types::entry_value<double> F;
-               /** *x* components of a vector measured in coordinate system
-                   defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> N1;
-               /** *y* components of a vector measured in coordinate system
-                   defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> N2;
-               /** *z* components of a vector measured in coordinate system
-                   defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> N3;
+                  /** Load std::set identification number. (Integer > 0)
+                   */
+                  dnvgl::extfem::bdf::types::entry_value<long> SID;
+                  /** Grid point identification number. (Integer > 0)
+                   */
+                  dnvgl::extfem::bdf::types::entry_value<long> G;
+                  /** Coordinate system identification number. (Integer > 0;
+                      Default = 0)
+                  */
+                  dnvgl::extfem::bdf::types::entry_value<long> CID;
+                  /** Scale factor. (Real)
+                   */
+                  dnvgl::extfem::bdf::types::entry_value<double> F;
+                  /** *x* components of a vector measured in coordinate system
+                      defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+                  */
+                  dnvgl::extfem::bdf::types::entry_value<double> N1;
+                  /** *y* components of a vector measured in coordinate system
+                      defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+                  */
+                  dnvgl::extfem::bdf::types::entry_value<double> N2;
+                  /** *z* components of a vector measured in coordinate system
+                      defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+                  */
+                  dnvgl::extfem::bdf::types::entry_value<double> N3;
 
-            protected:
+               protected:
 
-               void add_collect(
-                  std::deque<std::unique_ptr<format_entry>>&,
-                  const momforce_base&) const;
+                  momforce(const std::list<std::string> &inp);
 
-               momforce_base(const std::deque<std::string> &inp);
+                  momforce(
+                     const long *SID, const long *G, const long *CID,
+                     const double *F,
+                     const double *N1, const double *N2, const double *N3);
 
-               momforce_base(
-                  const long *SID, const long *G, const long *CID,
-                  const double *F,
-                  const double *N1, const double *N2, const double *N3);
+                  virtual std::unique_ptr<format_entry> get_head(void) const = 0;
 
-               std::ostream const &operator<< (std::ostream &) const;
-            };
+                  virtual void collect_outdata (
+                     std::list<std::unique_ptr<format_entry> > &) const;
+               };
+            }
 
 /// Handle Nastran Bulk `FORCE` entries.
 /** # Static Force
@@ -90,7 +91,7 @@ vector.
 | ------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `FORCE` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class force : public momforce_base {
+            class force : public __base::momforce {
                // Handle Nastran Bulk FORCE entries.
 
             private:
@@ -99,22 +100,22 @@ vector.
 
             public:
 
-               force(const std::deque<std::string> &inp) :
-                  momforce_base(inp) {};
+               force(const std::list<std::string> &inp) :
+                  __base::momforce(inp) {};
 
                force(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-                  momforce_base(SID, G, CID, F, N1, N2, N3) {};
+                  __base::momforce(SID, G, CID, F, N1, N2, N3) {};
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const {
-                  return FORCE;
-               };
+               const dnvgl::extfem::bdf::cards::types card_type(void) const;
 
-               friend std::ostream const &operator<< (std::ostream &, const force&);
+            private:
 
-               std::ostream const &operator<< (std::ostream &) const;
+               virtual std::unique_ptr<format_entry> get_head(void) const;
+
+               using __base::momforce::collect_outdata;
             };
 
 /// Handle Nastran Bulk `MOMENT` entries.
@@ -129,7 +130,7 @@ vector.
 | -------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `MOMENT` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class moment : public momforce_base {
+            class moment : public __base::momforce {
                // Handle Nastran Bulk MOMENT entries.
 
             private:
@@ -138,22 +139,22 @@ vector.
 
             public:
 
-               moment(const std::deque<std::string> &inp) :
-                  momforce_base(inp) {};
+               moment(const std::list<std::string> &inp) :
+                  __base::momforce(inp) {};
 
                moment(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
                   const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-                  momforce_base(SID, G, CID, F, N1, N2, N3) {};
+                  __base::momforce(SID, G, CID, F, N1, N2, N3) {};
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const {
-                  return MOMENT;
-               };
+               dnvgl::extfem::bdf::cards::types const card_type(void) const;
 
-               friend std::ostream const &operator<< (std::ostream&, const moment&);
+            private:
 
-               std::ostream const &operator<< (std::ostream &) const;
+               virtual std::unique_ptr<format_entry> get_head(void) const;
+
+               using __base::momforce::collect_outdata;
             };
 
 /// Handle Nastran Bulk `LOAD` entries.
@@ -171,7 +172,7 @@ Defines a static load as a linear combination of load std::sets defined via
 | `LOAD` | `SID` | `S`  | `S1`   | `L1` | `S2` | `L2` | `S3` | `L3` |    |
 |        | `S4`  | `L4` | *etc.* |      |      |      |      |      |    |
 */
-            class load : public card {
+            class load : public __base::card {
 
             private:
 
@@ -192,25 +193,24 @@ Defines a static load as a linear combination of load std::sets defined via
                dnvgl::extfem::bdf::types::entry_value<double> S;
                /** Scale factor on `Li`. (Real)
                 */
-               std::deque<double> Si;
+               std::list<double> Si;
                /** Load std::set identification numbers defined on entry types
                    listed above. (Integer > 0)
                */
-               std::deque<long> Li;
+               std::list<long> Li;
 
-               load(const std::deque<std::string> &inp);
+               load(const std::list<std::string> &inp);
 
                load(const long *SID, const double *S,
-                  const std::deque<double> *Si,
-                  const std::deque<long> *Li);
+                  const std::list<double> *Si,
+                  const std::list<long> *Li);
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const {
-                  return LOAD;
-               };
+               const dnvgl::extfem::bdf::cards::types card_type(void) const;
 
-               friend std::ostream const &operator<< (std::ostream &, const load&);
+            private:
 
-               std::ostream const &operator<< (std::ostream &) const;
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> > &res) const;
             };
          }
       }
@@ -223,6 +223,6 @@ Defines a static load as a linear combination of load std::sets defined via
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:

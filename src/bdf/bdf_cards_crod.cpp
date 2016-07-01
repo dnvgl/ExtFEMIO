@@ -27,54 +27,62 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
-using namespace bdf::cards;
-using bdf::types::entry_type;
-
 namespace {
    static const long cl1 = 1;
 }
 
-const entry_type<long> crod::form_EID(
-   "EID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<long> crod::form_PID("PID");
-const entry_type<long> crod::form_G1("G1");
-const entry_type<long> crod::form_G2("G2");
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
 
-crod::crod(const std::deque<std::string> &inp) :
-   card(inp) {
+         using types::entry_type;
 
-   auto pos = inp.rbegin();
+         namespace cards {
 
-   switch (inp.size()-1) {
-   case 8:
-      ++pos;
-   case 7:
-      ++pos;
-   case 6:
-      ++pos;
-   case 5:
-      ++pos;
-   case 4:
-      form_G2.set_value(G2, *(pos++));
-      form_G1.set_value(G1, *(pos++));
-      form_PID.set_value(PID, *(pos++));
-      form_EID.set_value(EID, *pos);
-      break;
-   default:
-      throw errors::parse_error(
-         "CROD", "Illegal number of entries for CROD");
+            const entry_type<long> crod::form_EID(
+               "EID", bdf::type_bounds::bound<long>(&cl1));
+            const entry_type<long> crod::form_PID("PID");
+            const entry_type<long> crod::form_G1("G1");
+            const entry_type<long> crod::form_G2("G2");
+
+            crod::crod(const std::list<std::string> &inp) :
+               __base::card(inp) {
+
+               auto pos = inp.rbegin();
+
+               switch (inp.size()-1) {
+               case 8:
+                  ++pos;
+               case 7:
+                  ++pos;
+               case 6:
+                  ++pos;
+               case 5:
+                  ++pos;
+               case 4:
+                  form_G2.set_value(G2, *(pos++));
+                  form_G1.set_value(G1, *(pos++));
+                  form_PID.set_value(PID, *(pos++));
+                  form_EID.set_value(EID, *pos);
+                  break;
+               default:
+                  throw errors::parse_error(
+                     "CROD", "Illegal number of entries for CROD");
+               }
+            }
+
+            void crod::collect_outdata(
+               std::list<std::unique_ptr<format_entry> > &res) const {
+               throw errors::error("can't write CROD.");
+               return;
+            }
+         }
+      }
    }
-};
-
-std::ostream& crod::operator << (std::ostream& os) const {
-   throw errors::error("can't write CROD.");
-   return os;
 }
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

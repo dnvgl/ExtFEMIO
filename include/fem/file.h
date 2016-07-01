@@ -13,7 +13,7 @@
 #if !defined _FEM_FILE_H_
 #define _FEM_FILE_H_
 
-#include <deque>
+#include <list>
 #include <set>
 #include <string>
 #include <iostream>
@@ -58,7 +58,7 @@ namespace dnvgl {
 
                fem_file(std::istream&);
 
-               void get(std::deque<std::string>&);
+               void get(std::list<std::string>&);
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)
@@ -77,9 +77,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check"
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:

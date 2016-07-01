@@ -179,7 +179,7 @@ namespace dnvgl {
             const entry_type<long> gelmnt1::_form_ELTYAD("ELTYAD");
             const entry_type<long> gelmnt1::_form_NODIN("NODIN");
 
-            gelmnt1::gelmnt1(const std::deque<std::string> &inp) :
+            gelmnt1::gelmnt1(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 6)
@@ -230,30 +230,22 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             gelmnt1::card_type(void) const { return GELMNT1; }
 
-            std::ostream&
-            operator<< (std::ostream &os, const gelmnt1 &card) {
-               if (card.ELTYP == elements::INVALID) return os;
+            std::ostream &gelmnt1::put(std::ostream& os) const {
+               if (this->ELTYP == elements::INVALID) return os;
                os << gelmnt1::head.format()
-                  << card._form_ELNOX.format(card.ELNOX)
-                  << card._form_ELNO.format(card.ELNO)
-                  << card._form_ELTYP.format(static_cast<long>(card.ELTYP))
-                  << card._form_ELTYAD.format(card.ELTYAD);
+                  << this->_form_ELNOX.format(this->ELNOX)
+                  << this->_form_ELNO.format(this->ELNO)
+                  << this->_form_ELTYP.format(static_cast<long>(this->ELTYP))
+                  << this->_form_ELTYAD.format(this->ELTYAD);
                size_t i = 5;
-               for (auto p : card.NODIN) {
+               for (auto p : this->NODIN) {
                   if (i++ >= 4) {
                      i = 1;
                      os << std::endl << dnvgl::extfem::fem::types::card().format();
                   }
-                  os << card._form_NODIN.format(p);
+                  os << this->_form_NODIN.format(p);
                }
-               os << std::endl;
-               return os;
-            }
-
-            const std::ostream&
-            gelmnt1::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
+               return os << std::endl;
             }
          }
       }
@@ -262,7 +254,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

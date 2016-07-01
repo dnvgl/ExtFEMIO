@@ -24,7 +24,7 @@ namespace dnvgl {
             class error{
 
             protected:
-               
+
                std::string msg;
                std::string name;
                std::string err_class;

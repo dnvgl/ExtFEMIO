@@ -49,7 +49,7 @@ namespace dnvgl {
             const entry_type<long> gbarm::_form_NLOBY("NLOBY");
             const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
-            gbarm::gbarm(const std::deque<std::string> &inp) :
+            gbarm::gbarm(const std::list<std::string> &inp) :
                base_beam_prop(inp), NLOBY(0), NLOBZ(0) {
 
                if (inp.size() < 9)
@@ -86,29 +86,22 @@ namespace dnvgl {
                base_beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
                SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
-            const std::ostream&
-            gbarm::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
             const dnvgl::extfem::fem::cards::types
             gbarm::card_type(void) const {return GBARM;}
 
-            std::ostream&
-            operator<< (std::ostream &os, const gbarm &card) {
-               if (card.GEONO == -1) return os;
+            std::ostream &gbarm::put(std::ostream& os) const {
+               if (this->GEONO == -1) return os;
                os << gbarm::head.format()
-                  << card._form_GEONO.format(card.GEONO)
-                  << card._form_HZ.format(card.HZ)
-                  << card._form_BT.format(card.BT)
-                  << card._form_BB.format(card.BB)
+                  << this->_form_GEONO.format(this->GEONO)
+                  << this->_form_HZ.format(this->HZ)
+                  << this->_form_BT.format(this->BT)
+                  << this->_form_BB.format(this->BB)
                   << std::endl << fem::types::card("").format()
-                  << card._form_SFY.format(card.SFY)
-                  << card._form_SFZ.format(card.SFZ);
-               if ((card.NLOBY || card.NLOBZ))
-                  os << card._form_NLOBY.format(card.NLOBY)
-                     << card._form_NLOBZ.format(card.NLOBZ);
+                  << this->_form_SFY.format(this->SFY)
+                  << this->_form_SFZ.format(this->SFZ);
+               if ((this->NLOBY || this->NLOBZ))
+                  os << this->_form_NLOBY.format(this->NLOBY)
+                     << this->_form_NLOBZ.format(this->NLOBZ);
                os << std::endl;
                return os;
             }
@@ -119,9 +112,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

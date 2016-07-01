@@ -48,13 +48,13 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
 
    SECTION("first") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000\n",
             "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
             "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       belfix probe(lines);
 
       CHECK(probe.FIXNO == 23047);
@@ -107,16 +107,16 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
 
 TEST_CASE("FEM BELFIX conversion from own output.", "[fem_belfix,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BELFIX (own output)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n",
          "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n",
          "        +1.000000000e+00+1.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       belfix probe(lines);
 
       CHECK(probe.FIXNO == 1);
@@ -146,7 +146,6 @@ TEST_CASE("FEM BELFIX conversion to Poseidon BEAM dofs.", "[fem_belfix,fixation]
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

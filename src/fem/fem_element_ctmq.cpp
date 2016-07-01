@@ -26,31 +26,40 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long ctmq::nnodes(void) const {return 18;}
+         using namespace cards;
 
-el_types ctmq::get_type(void) const {return CTMQ;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 2;
+               el_processor procs[procs_len] = {general, Pretube};
+            }
 
-namespace {
-   const size_t procs_len = 2;
-   el_processor procs[
-      procs_len] = {general, Pretube};
+            long ctmq::nnodes(void) const {return 18;}
+
+            el_types ctmq::get_type(void) const {return CTMQ;}
+
+            const std::set<el_processor> ctmq::processors(
+               procs, procs+procs_len);
+
+            ctmq::ctmq(const gelmnt1 *data) :
+               dnvgl::extfem::fem::elements::__base::elem(data) {}
+
+            ctmq::ctmq(const dnvgl::extfem::fem::cards::gelref1 *data) :
+               dnvgl::extfem::fem::elements::__base::elem(data) {}
+
+            ctmq::ctmq(const dnvgl::extfem::fem::elements::__base::elem *data) :
+               dnvgl::extfem::fem::elements::__base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> ctmq::processors(procs, procs+procs_len);
-
-ctmq::ctmq(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-ctmq::ctmq(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-ctmq::ctmq(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -46,16 +46,16 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GBEAMG (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008\n",
          "         5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008\n",
          "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n",
          "         1.00000000e-008 1.00000000e-008 1.00000000e-008 1.00000000e-008\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbeamg probe(lines);
 
       CHECK(probe.GEONO == 1685);
@@ -76,13 +76,13 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
    }
 
    SECTION("GBEAMG (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GBEAMG   1.68500000e+03  0.000000000e+00 1.11500000e+04  1.00000000e-08 \n",
          "         5.93000000e+08  1.57380000e+07  0.000000000e+00 1.00000000e-08 \n",
          "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n",
          "         1.00000000e-08  1.00000000e-08  1.00000000e-08  1.00000000e-08 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbeamg probe(lines);
 
       CHECK(probe.GEONO == 1685);
@@ -103,13 +103,13 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
    }
 
    SECTION("GBEAMG (own output)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GBEAMG  +1.000000000e+00            0.00+2.000000000e+00+3.000000000e+00\n",
          "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+7.000000000e+00\n",
          "        +8.000000000e+00+9.000000000e+00+1.000000000e+01+1.100000000e+01\n",
          "        +1.200000000e+01+1.300000000e+01+1.400000000e+01+1.500000000e+01\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbeamg probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -135,7 +135,7 @@ TEST_CASE("FEM GBEAMG types output.", "[fem_gbeamg,out]" ) {
    std::ostringstream test;
 
    long NODEX(1), NODENO(222), NDOF(3);
-   std::deque<int> ODOF({2, 6, 3});
+   std::list<int> ODOF({2, 6, 3});
 
    SECTION("empty") {
       gbeamg probe;
@@ -156,16 +156,16 @@ TEST_CASE("FEM GBEAMG types output.", "[fem_gbeamg,out]" ) {
 
 TEST_CASE("FEM GBEAMG conversion from own output.", "[fem_gbeamg,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GBEAMG (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "GBEAMG  +1.000000000e+00            0.00+2.000000000e+00+3.000000000e+00\n",
             "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+7.000000000e+00\n",
             "        +8.000000000e+00+9.000000000e+00+1.000000000e+01+1.100000000e+01\n",
             "        +1.200000000e+01+1.300000000e+01+1.400000000e+01+1.500000000e+01\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbeamg probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -188,7 +188,6 @@ TEST_CASE("FEM GBEAMG conversion from own output.", "[fem_gbeamg,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

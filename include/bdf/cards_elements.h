@@ -15,232 +15,249 @@
 #include <memory>
 
 namespace dnvgl {
-  namespace extfem {
-    namespace bdf {
+   namespace extfem {
+      namespace bdf {
+
+         using types::entry_value;
+         using types::entry_type;
+
          namespace cards {
+            namespace __base {
 
-            /// Base class for `ctria3` and `cquad4`.
-            class base_shell : public card {
+               /// Base class for `ctria3` and `cquad4`.
+               class shell : public card {
 
-            protected:
+               protected:
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G1;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G2;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G3;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G4;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MCID;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_THETA;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_ZOFFS;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_TFLAG;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_T1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_T2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_T3;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_T4;
+                  static const entry_type<long> form_EID;
+                  static const entry_type<long> form_PID;
+                  static const entry_type<long> form_G1;
+                  static const entry_type<long> form_G2;
+                  static const entry_type<long> form_G3;
+                  static const entry_type<long> form_G4;
+                  static const entry_type<long> form_MCID;
+                  static const entry_type<double> form_THETA;
+                  static const entry_type<double> form_ZOFFS;
+                  static const entry_type<long> form_TFLAG;
+                  static const entry_type<double> form_T1;
+                  static const entry_type<double> form_T2;
+                  static const entry_type<double> form_T3;
+                  static const entry_type<double> form_T4;
 
-               base_shell(const std::deque<std::string> &inp) :
-                  card(inp) {};
+                  shell(const std::list<std::string> &inp) :
+                     __base::card(inp) {};
 
-            public:
+               public:
 
-               typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
+                  typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
 
-               CHOOSE_MCID_THETA choose_mcid_theta;
+                  CHOOSE_MCID_THETA choose_mcid_theta;
 
-               /** Element identification number. (Integer > 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> EID;
-               /** Property identification number of a `PSHELL`,
-                   `PCOMP` or `PLPLANE` entry. (Integer > 0; Default =
-                   `EID`)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> PID;
-               /** Grid point identification numbers of first
-                   connection point. (Integers > 0, all unique)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> G1;
-               /** Grid point identification numbers of second
-                   connection point. (Integers > 0, all unique)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> G2;
-               /** Grid point identification numbers of third
-                   connection point. (Integers > 0, all unique)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> G3;
-               /** Grid point identification numbers of fourth
-                   connection point. (Integers > 0, all unique)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> G4;
-               /** Material property orientation angle in degrees.
-                   `THETA` is ignored for hyperelastic elements.
-                   (Real; Default = 0.0)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> THETA;
-               /** Material coordinate system identification number.
-                   The x-axis of the material coordinate system is
-                   determined by projecting the x-axis of the `MCID`
-                   coordinate system (defined by the `CORDij` entry or
-                   zero for the basic coordinate system) onto the
-                   surface of the element. `MCID` is ignored for
-                   hyperelastic elements. (Integer > 0; if blank, then
-                   `THETA` = 0.0 is assumed.)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> MCID;
-               /** Offset from the surface of grid points to the
-                   element reference plane. `ZOFFS` is ignored for
-                   hyperelastic elements. (Real)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> ZOFFS;
-               /** An integer flag, signifying the meaning of the `Ti`
-                   values. (Integer 0, 1, or blank)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> TFLAG;
-               /** Membrane thickness of element at grid point G1. If
-                   `TFLAG` zero or blank, then `T1` is actual user
-                   specified thickness. (Real > 0.0 or blank, not all
-                   zero.) If `TFLAG` one, then the `T1` is fraction
-                   relative to the `T` value of the `PSHELL`. (Real >
-                   0.0 or blank; not all zero. Default = 1.0) `T1` is
-                   ignored for hyperelastic elements.
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> T1;
-               /** Membrane thickness of element at grid point G2. If
-                   `TFLAG` zero or blank, then `T2` is actual user
-                   specified thickness. (Real > 0.0 or blank, not all
-                   zero.) If `TFLAG` one, then the `T2` is fraction
-                   relative to the `T` value of the `PSHELL`. (Real >
-                   0.0 or blank; not all zero. Default = 1.0) `T2` is
-                   ignored for hyperelastic elements.
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> T2;
-               /** Membrane thickness of element at grid point G3. If
-                   `TFLAG` zero or blank, then `T3` is actual user
-                   specified thickness. (Real > 0.0 or blank, not all
-                   zero.) If `TFLAG` one, then the `T3` is fraction
-                   relative to the `T` value of the `PSHELL`. (Real >
-                   0.0 or blank; not all zero. Default = 1.0) `T3` is
-                   ignored for hyperelastic elements.
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> T3;
-               /** Membrane thickness of element at grid point G4. If
-                   `TFLAG` zero or blank, then `T4` is actual user
-                   specified thickness. (Real > 0.0 or blank, not all
-                   zero.) If `TFLAG` one, then the `T4` is fraction
-                   relative to the `T` value of the `PSHELL`. (Real >
-                   0.0 or blank; not all zero. Default = 1.0) `T4` is
-                   ignored for hyperelastic elements.
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> T4;
-            };
+                  /** Element identification number. (Integer > 0)
+                   */
+                  entry_value<long> EID;
+                  /** Property identification number of a `PSHELL`,
+                      `PCOMP` or `PLPLANE` entry. (Integer > 0; Default =
+                      `EID`)
+                  */
+                  entry_value<long> PID;
+                  /** Grid point identification numbers of first
+                      connection point. (Integers > 0, all unique)
+                  */
+                  entry_value<long> G1;
+                  /** Grid point identification numbers of second
+                      connection point. (Integers > 0, all unique)
+                  */
+                  entry_value<long> G2;
+                  /** Grid point identification numbers of third
+                      connection point. (Integers > 0, all unique)
+                  */
+                  entry_value<long> G3;
+                  /** Grid point identification numbers of fourth
+                      connection point. (Integers > 0, all unique)
+                  */
+                  entry_value<long> G4;
+                  /** Material property orientation angle in degrees.
+                      `THETA` is ignored for hyperelastic elements.
+                      (Real; Default = 0.0)
+                  */
+                  entry_value<double> THETA;
+                  /** Material coordinate system identification number.
+                      The x-axis of the material coordinate system is
+                      determined by projecting the x-axis of the `MCID`
+                      coordinate system (defined by the `CORDij` entry or
+                      zero for the basic coordinate system) onto the
+                      surface of the element. `MCID` is ignored for
+                      hyperelastic elements. (Integer > 0; if blank, then
+                      `THETA` = 0.0 is assumed.)
+                  */
+                  entry_value<long> MCID;
+                  /** Offset from the surface of grid points to the
+                      element reference plane. `ZOFFS` is ignored for
+                      hyperelastic elements. (Real)
+                  */
+                  entry_value<double> ZOFFS;
+                  /** An integer flag, signifying the meaning of the `Ti`
+                      values. (Integer 0, 1, or blank)
+                  */
+                  entry_value<long> TFLAG;
+                  /** Membrane thickness of element at grid point G1. If
+                      `TFLAG` zero or blank, then `T1` is actual user
+                      specified thickness. (Real > 0.0 or blank, not all
+                      zero.) If `TFLAG` one, then the `T1` is fraction
+                      relative to the `T` value of the `PSHELL`. (Real >
+                      0.0 or blank; not all zero. Default = 1.0) `T1` is
+                      ignored for hyperelastic elements.
+                  */
+                  entry_value<double> T1;
+                  /** Membrane thickness of element at grid point G2. If
+                      `TFLAG` zero or blank, then `T2` is actual user
+                      specified thickness. (Real > 0.0 or blank, not all
+                      zero.) If `TFLAG` one, then the `T2` is fraction
+                      relative to the `T` value of the `PSHELL`. (Real >
+                      0.0 or blank; not all zero. Default = 1.0) `T2` is
+                      ignored for hyperelastic elements.
+                  */
+                  entry_value<double> T2;
+                  /** Membrane thickness of element at grid point G3. If
+                      `TFLAG` zero or blank, then `T3` is actual user
+                      specified thickness. (Real > 0.0 or blank, not all
+                      zero.) If `TFLAG` one, then the `T3` is fraction
+                      relative to the `T` value of the `PSHELL`. (Real >
+                      0.0 or blank; not all zero. Default = 1.0) `T3` is
+                      ignored for hyperelastic elements.
+                  */
+                  entry_value<double> T3;
+                  /** Membrane thickness of element at grid point G4. If
+                      `TFLAG` zero or blank, then `T4` is actual user
+                      specified thickness. (Real > 0.0 or blank, not all
+                      zero.) If `TFLAG` one, then the `T4` is fraction
+                      relative to the `T` value of the `PSHELL`. (Real >
+                      0.0 or blank; not all zero. Default = 1.0) `T4` is
+                      ignored for hyperelastic elements.
+                  */
+                  entry_value<double> T4;
 
+               protected:
+
+                  using card::put;
+               };
+            }
 /// Handle Nastran Bulk `CTRIA3` entries.
 /** # Triangular Plate Element Connection
 
-Defines an isoparametric membrane-bending or plane strain triangular
-plate element.
+    Defines an isoparametric membrane-bending or plane strain triangular
+    plate element.
 
-# Format
+    # Format
 
-| 1        | 2     | 3       | 4    | 5    | 6    | 7                 | 8       | 9 | 10 |
-| -------- | ----- | ------- | ---- | ---- | ---- | ----------------- | ------- | - | -- |
-| `CTRIA3` | `EID` | `PID`   | `G1` | `G2` | `G3` | `THETA` or `MCID` | `ZOFFS` |   |    |
-|          |       | `TFLAG` | `T1` | `T2` | `T3` |                   |         |   |    |
+    | 1        | 2     | 3       | 4    | 5    | 6    | 7                 | 8       | 9 | 10 |
+    | -------- | ----- | ------- | ---- | ---- | ---- | ----------------- | ------- | - | -- |
+    | `CTRIA3` | `EID` | `PID`   | `G1` | `G2` | `G3` | `THETA` or `MCID` | `ZOFFS` |   |    |
+    |          |       | `TFLAG` | `T1` | `T2` | `T3` |                   |         |   |    |
 */
-            class ctria3 : public base_shell {
+            class ctria3 : public __base::shell {
 
             private:
 
-               static dnvgl::extfem::bdf::types::card head;
+               static bdf::types::card head;
 
             public:
 
-               ctria3(const std::deque<std::string> &);
+               ctria3(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CTRIA3; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               using __base::shell::put;
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> >&) const;
             };
 
 /// Handle Nastran Bulk `CQUAD4` entries.
 /** # Quadrilateral Plate Element Connection
 
-Defines an isoparametric membrane-bending or plane strain
-quadrilateral plate element.
+    Defines an isoparametric membrane-bending or plane strain
+    quadrilateral plate element.
 
-# Format
+    # Format
 
-| 1        | 2       | 3     | 4    | 5    | 6   | 7     | 8                 | 9       | 10 |
-| -------- | ------- | ----- | ---- | ---- | ---- | ---- | ----------------- | ------- | -- |
-| `CQUAD4` | `EID`   | `PID` | `G1` | `G2` | `G3` | `G4` | `THETA` or `MCID` | `ZOFFS` |    |
-|          | `TFLAG` | `T1`  | `T2` | `T3` | `T4` |      |                   |         |    |
+    | 1        | 2       | 3     | 4    | 5    | 6   | 7     | 8                 | 9       | 10 |
+    | -------- | ------- | ----- | ---- | ---- | ---- | ---- | ----------------- | ------- | -- |
+    | `CQUAD4` | `EID`   | `PID` | `G1` | `G2` | `G3` | `G4` | `THETA` or `MCID` | `ZOFFS` |    |
+    |          | `TFLAG` | `T1`  | `T2` | `T3` | `T4` |      |                   |         |    |
 */
-            class cquad4 : public base_shell {
+            class cquad4 : public __base::shell {
 
             private:
 
-               static dnvgl::extfem::bdf::types::card head;
+               static bdf::types::card head;
 
             public:
 
-               cquad4(const std::deque<std::string> &);
+               cquad4(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CQUAD4; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               using __base::shell::put;
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> >&) const;
             };
 
 /// Handle Nastran Bulk `CBEAM` entries.
 /** # Beam Element Connection
 
-Defines a beam element.
+    Defines a beam element.
 
-# Format
+    # Format
 
-| 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9             | 10 |
-| ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------------- | -- |
-| `CBEAM` | `EID` | `PID` | `GA`  | `GB`  | `X1`  | `X2`  | `X3`  | `OFFT` / `BIT`|    |
-|         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`         |    |
-|         | `SA`  | `SB`  |       |       |       |       |       |               |    |
+    | 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9             | 10 |
+    | ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------------- | -- |
+    | `CBEAM` | `EID` | `PID` | `GA`  | `GB`  | `X1`  | `X2`  | `X3`  | `OFFT` / `BIT`|    |
+    |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`         |    |
+    |         | `SA`  | `SB`  |       |       |       |       |       |               |    |
 
-# Alternate Format
+    # Alternate Format
 
-| 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9             | 10 |
-| ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------------- | -- |
-| `CBEAM` | `EID` | `PID` | `GA`  | `GB`  | `G0`  |       |       | `OFFT` / `BIT`|    |
-|         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`         |    |
-|         | `SA`  | `SB`  |       |       |       |       |       |               |    |
+    | 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9             | 10 |
+    | ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------------- | -- |
+    | `CBEAM` | `EID` | `PID` | `GA`  | `GB`  | `G0`  |       |       | `OFFT` / `BIT`|    |
+    |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`         |    |
+    |         | `SA`  | `SB`  |       |       |       |       |       |               |    |
 */
-            class cbeam : public card {
+            class cbeam : public __base::card {
 
             private:
 
-               static dnvgl::extfem::bdf::types::card head;
+               static bdf::types::card head;
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_GA;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_GB;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X1;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G0;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X3;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_BIT;
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_OFFT;
-               static const dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PA;
-               static const dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PB;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W1A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W2A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W3A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W1B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W2B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W3B;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_SA;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_SB;
+               static const entry_type<long> form_EID;
+               static const entry_type<long> form_PID;
+               static const entry_type<long> form_GA;
+               static const entry_type<long> form_GB;
+               static const entry_type<double> form_X1;
+               static const entry_type<long> form_G0;
+               static const entry_type<double> form_X2;
+               static const entry_type<double> form_X3;
+               static const entry_type<double> form_BIT;
+               static const entry_type<std::string> form_OFFT;
+               static const entry_type<std::list<int> > form_PA;
+               static const entry_type<std::list<int> > form_PB;
+               static const entry_type<double> form_W1A;
+               static const entry_type<double> form_W2A;
+               static const entry_type<double> form_W3A;
+               static const entry_type<double> form_W1B;
+               static const entry_type<double> form_W2B;
+               static const entry_type<double> form_W3B;
+               static const entry_type<long> form_SA;
+               static const entry_type<long> form_SB;
 
             public:
 
@@ -265,52 +282,52 @@ Defines a beam element.
                /** Unique element identification number. (0 <
                    Integer < 100,000,000)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> EID;
+               entry_value<long> EID;
                /** Property identification number of `PBEAM`, `PBCOMP`
                    or `PBEAML` entry. (Integer > 0; Default = `EID`)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> PID;
+               entry_value<long> PID;
                /** First grid point identification numbers of
                    connection points. (Integer > 0)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> GA;
+               entry_value<long> GA;
                /** Second grid point identification numbers of
                    connection points. (Integer > 0)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> GB;
+               entry_value<long> GB;
                /** First components of orientation vector , from `GA`,
                    in the displacement coordinate system at `GA`
                    (default), or in the basic coordinate system.
                    (Real)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> X1;
+               entry_value<double> X1;
                /** Alternate method to supply the orientation vector
                    using grid point `G0`. Direction of is from `GA` to
                    G0. is then transferred to End `A`. (Integer > 0;
                    or `GB`)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> G0;
+               entry_value<long> G0;
                /** Second components of orientation vector , from
                    `GA`, in the displacement coordinate system at `GA`
                    (default), or in the basic coordinate system.
                    (Real)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> X2;
+               entry_value<double> X2;
                /** Third components of orientation vector , from `GA`,
                    in the displacement coordinate system at `GA`
                    (default), or in the basic coordinate system.
                    (Real)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> X3;
+               entry_value<double> X3;
                /** Built-in twist of the cross-sectional axes about
                    the beam axis at end `B` relative to end `A`. For
                    beam p-elements only. (Real; Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> BIT;
+               entry_value<double> BIT;
                /** Offset vector interpretation flag. (Character or
                    blank)
                */
-               dnvgl::extfem::bdf::types::entry_value<std::string> OFFT;
+               entry_value<std::string> OFFT;
                /** Pin flags for beam end `A`, respectively; used to
                    remove connections between the grid point and
                    selected degrees-offreedom of the beam. The
@@ -325,7 +342,7 @@ Defines a beam element.
                    through 6 with no embedded blanks.) Pin flags are
                    not allowed for beam p-elements.
                */
-               dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PA;
+               entry_value<std::list<int> > PA;
                /** Pin flags for beam end `B`, respectively; used to
                    remove connections between the grid point and
                    selected degrees-offreedom of the beam. The
@@ -340,102 +357,107 @@ Defines a beam element.
                    through 6 with no embedded blanks.) Pin flags are
                    not allowed for beam p-elements.
                */
-               dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PB;
+               entry_value<std::list<int> > PB;
                /** *x* Components of offset vectors from the grid
                    points to the end points of the axis of the shear
                    center at beam end `A`. (Real; Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W1A;
+               entry_value<double> W1A;
                /** *y* Components of offset vectors from the grid
                    points to the end points of the axis of the shear
                    center at beam end `A`. (Real; Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W2A;
+               entry_value<double> W2A;
                /** *z* Components of offset vectors from the grid
                    points to the end points of the axis of the shear
                    center at beam end `A`. (Real; Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W3A;
+               entry_value<double> W3A;
                /** *x* Components of offset vectors from the grid
                    points to the end points of the axis of the shear
                    center at beam end `B`. (Real; Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W1B;
+               entry_value<double> W1B;
                /** *y* Components of offset vectors from the grid
                    points to the end points of the axis of the shear
                    center at beam end `B`. (Real; Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W2B;
+               entry_value<double> W2B;
                /** *z* Components of offset vectors from the grid
                    points to the end points of the axis of the shear
                    center at beam end `B`. (Real; Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W3B;
+               entry_value<double> W3B;
                /** Scalar or grid point identification numbers for the
                    end `A`. The degrees-of-freedom at these points are
                    the warping variables . `SA` and `SB` cannot be
                    specified for beam p-elements. (Integers > 0 or
                    blank)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> SA;
+               entry_value<long> SA;
                /** Scalar or grid point identification numbers for the
                    end `B`. The degrees-of-freedom at these points are
                    the warping variables . `SA` and `SB` cannot be
                    specified for beam p-elements. (Integers > 0 or
                    blank)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> SB;
+               entry_value<long> SB;
 
-               cbeam(const std::deque<std::string> &inp);
+               cbeam(const std::list<std::string> &inp);
+
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CBEAM; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               using __base::card::put;
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> >&) const;
             };
 
 /// Handle Nastran Bulk `CBAR` entries.
 /** # Simple Beam Element Connection
 
-Defines a simple beam element.
+    Defines a simple beam element.
 
-# Format
+    # Format
 
-| 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
-| ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
-| `CBAR`  | `EID` | `PID` | `GA`  | `GB`  | `X1`  | `X2`  | `X3`  | `OFFT` |    |
-|         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
+    | 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
+    | ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
+    | `CBAR`  | `EID` | `PID` | `GA`  | `GB`  | `X1`  | `X2`  | `X3`  | `OFFT` |    |
+    |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
 
-# Alternate Format
+    # Alternate Format
 
-| 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
-| ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
-| `CBAR`  | `EID` | `PID` | `GA`  | `GB`  | `G0`  |       |       | `OFFT` |    |
-|         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
+    | 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9      | 10 |
+    | ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | -- |
+    | `CBAR`  | `EID` | `PID` | `GA`  | `GB`  | `G0`  |       |       | `OFFT` |    |
+    |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
 */
-            class cbar : public card {
+            class cbar : public __base::card {
 
             private:
 
-               static dnvgl::extfem::bdf::types::card head;
+               static bdf::types::card head;
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_GA;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_GB;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X1;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G0;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X3;
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_OFFT;
-               static const dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PA;
-               static const dnvgl::extfem::bdf::types::entry_type<std::deque<int>> form_PB;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W1A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W2A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W3A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W1B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W2B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_W3B;
+               static const entry_type<long> form_EID;
+               static const entry_type<long> form_PID;
+               static const entry_type<long> form_GA;
+               static const entry_type<long> form_GB;
+               static const entry_type<double> form_X1;
+               static const entry_type<long> form_G0;
+               static const entry_type<double> form_X2;
+               static const entry_type<double> form_X3;
+               static const entry_type<std::string> form_OFFT;
+               static const entry_type<std::list<int> > form_PA;
+               static const entry_type<std::list<int> > form_PB;
+               static const entry_type<double> form_W1A;
+               static const entry_type<double> form_W2A;
+               static const entry_type<double> form_W3A;
+               static const entry_type<double> form_W1B;
+               static const entry_type<double> form_W2B;
+               static const entry_type<double> form_W3B;
 
             public:
 
@@ -456,51 +478,51 @@ Defines a simple beam element.
                /** Unique element identification number. (0 <
                    Integer < 100,000,000)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> EID;
+               entry_value<long> EID;
                /** Property identification number of a `PBAR` or
                    `PBARL` entry. (Integer > 0 or blank*; Default =
                    `EID` unless `BAROR` entry has nonzero entry in
                    field 3.)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> PID;
+               entry_value<long> PID;
                /** Grid point identification numbers of connection
                    point at `A` side of beam. (Integer > 0; `GA` ≠
                    `GB` )
                */
-               dnvgl::extfem::bdf::types::entry_value<long> GA;
+               entry_value<long> GA;
                /** Grid point identification numbers of connection
                    point at `B` side of beam. (Integer > 0; `GA` ≠
                    `GB` )
                */
-               dnvgl::extfem::bdf::types::entry_value<long> GB;
+               entry_value<long> GB;
                /** *x* components of orientation vector *v* , from
                    `GA`, in the displacement coordinate system at `GA`
                    (default), or in the basic coordinate system. See
                    Remark 8. (Real)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> X1;
+               entry_value<double> X1;
                /** Alternate method to supply the orientation
                    vector *v* using grid point `G0`. The direction of
                    *v* is from `GA` to `G0`. 'v* is then translated to
                    End `A`. (Integer > 0; `G0` ≠ `GA` or `GB`)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> G0;
+               entry_value<long> G0;
                /** *y* components of orientation vector *v* , from
                    `GA`, in the displacement coordinate system at `GA`
                    (default), or in the basic coordinate system. See
                    Remark 8. (Real)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> X2;
+               entry_value<double> X2;
                /** *z* components of orientation vector *v* , from
                    `GA`, in the displacement coordinate system at `GA`
                    (default), or in the basic coordinate system. See
                    Remark 8. (Real)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> X3;
+               entry_value<double> X3;
                /** Offset vector interpretation flag. (character or
                    blank) See Remark 8.
                */
-               dnvgl::extfem::bdf::types::entry_value<std::string> OFFT;
+               entry_value<std::string> OFFT;
                /** Pin flags for bar ends `A`. Used to remove
                    connections between the grid point and selected
                    degrees-of-freedom of the bar. The
@@ -514,7 +536,7 @@ Defines a simple beam element.
                    through 6 anywhere in the field with no embedded
                    blanks; Integer > 0.)
                */
-               dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PA;
+               entry_value<std::list<int> > PA;
                /** Pin flags for bar ends `B`. Used to remove
                    connections between the grid point and selected
                    degrees-of-freedom of the bar. The
@@ -528,7 +550,7 @@ Defines a simple beam element.
                    through 6 anywhere in the field with no embedded
                    blanks; Integer > 0.)
                */
-               dnvgl::extfem::bdf::types::entry_value<std::deque<int>> PB;
+               entry_value<std::list<int> > PB;
                /** *x* components of offset vectors \f$w_a\f$ and
                    \f$w_b\f$, respectively (see Figure 8-8) in
                    displacement coordinate systems (or in element
@@ -536,7 +558,7 @@ Defines a simple beam element.
                    field), at point `GA`. See Remark 7. and 8. (Real;
                    Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W1A;
+               entry_value<double> W1A;
                /** *y* components of offset vectors \f$w_a\f$ and
                    \f$w_b\f$, respectively (see Figure 8-8) in
                    displacement coordinate systems (or in element
@@ -544,7 +566,7 @@ Defines a simple beam element.
                    field), at point `GA`. See Remark 7. and 8. (Real;
                    Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W2A;
+               entry_value<double> W2A;
                /** *z* components of offset vectors \f$w_a\f$ and
                    \f$w_b\f$, respectively (see Figure 8-8) in
                    displacement coordinate systems (or in element
@@ -552,7 +574,7 @@ Defines a simple beam element.
                    field), at point `GA`. See Remark 7. and 8. (Real;
                    Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W3A;
+               entry_value<double> W3A;
                /** *x* components of offset vectors \f$w_a\f$ and
                    \f$w_b\f$, respectively (see Figure 8-8) in
                    displacement coordinate systems (or in element
@@ -560,7 +582,7 @@ Defines a simple beam element.
                    field), at point `GB`. See Remark 7. and 8. (Real;
                    Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W1B;
+               entry_value<double> W1B;
                /** *y* components of offset vectors \f$w_a\f$ and
                    \f$w_b\f$, respectively (see Figure 8-8) in
                    displacement coordinate systems (or in element
@@ -568,7 +590,7 @@ Defines a simple beam element.
                    field), at point `GB`. See Remark 7. and 8. (Real;
                    Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W2B;
+               entry_value<double> W2B;
                /** *z* components of offset vectors \f$w_a\f$ and
                    \f$w_b\f$, respectively (see Figure 8-8) in
                    displacement coordinate systems (or in element
@@ -576,17 +598,17 @@ Defines a simple beam element.
                    field), at point `GB`. See Remark 7. and 8. (Real;
                    Default = 0.0)
                */
-               dnvgl::extfem::bdf::types::entry_value<double> W3B;
+               entry_value<double> W3B;
 
-               cbar(const std::deque<std::string> &inp);
+               cbar(const std::list<std::string> &inp);
 
                cbar(
                   const long *EID, const long *PID,
                   const long *GA, const long *GB,
                   const double *X1, const double *X2, const double *X3,
                   const std::string *OFFT = nullptr,
-                  const std::deque<int> *PA = nullptr,
-                  const std::deque<int> *PB = nullptr,
+                  const std::list<int> *PA = nullptr,
+                  const std::list<int> *PB = nullptr,
                   const double *W1A = nullptr, const double *W2A = nullptr,
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
@@ -595,126 +617,66 @@ Defines a simple beam element.
                   const long *EID, const long *PID,
                   const long *GA, const long *GB, const long *G0,
                   const std::string *OFFT = nullptr,
-                  const std::deque<int> *PA = nullptr, const std::deque<int> *PB = nullptr,
+                  const std::list<int> *PA = nullptr, const std::list<int> *PB = nullptr,
                   const double *W1A = nullptr, const double *W2A = nullptr,
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
 
-               friend inline std::ostream&
-                  operator<<(std::ostream &os, const cbar &card) {
+            private:
 
-                  std::deque<std::unique_ptr<format_entry>> entries;
-
-                  entries.push_back(format(cbar::head));
-
-                  entries.push_back(format<long>(card.form_EID, card.EID));
-                  entries.push_back(format<long>(card.form_PID, card.PID));
-                  entries.push_back(format<long>(card.form_GA, card.GA));
-                  entries.push_back(format<long>(card.form_GB, card.GB));
-                  if (card.choose_dir_code == card.has_DCODE) {
-                     entries.push_back(format<long>(card.form_G0, card.G0));
-                     if ((bool)card.OFFT || (bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A ||
-                        (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B) {
-                        entries.push_back(format(cbar::empty));
-                        entries.push_back(format(cbar::empty));
-                     }
-                  }
-                  else {
-                     entries.push_back(format<double>(card.form_X1, card.X1));
-                     entries.push_back(format<double>(card.form_X2, card.X2));
-                     entries.push_back(format<double>(card.form_X3, card.X3));
-                  }
-
-                  if ((bool)card.OFFT || (bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A ||
-                     (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<std::string>(card.form_OFFT, card.OFFT));
-                  else goto cont;
-
-                  if ((bool)card.PA || (bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A ||
-                     (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<std::deque<int>>(card.form_PA, card.PA));
-                  else goto cont;
-                  if ((bool)card.PB || (bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B ||
-                     (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<std::deque<int>>(card.form_PB, card.PB));
-                  else goto cont;
-                  if ((bool)card.W1A || (bool)card.W2A || (bool)card.W3A || (bool)card.W1B || (bool)card.W2B ||
-                     (bool)card.W3B)
-                     entries.push_back(format<double>(card.form_W1A, card.W1A));
-                  else goto cont;
-                  if ((bool)card.W2A || (bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<double>(card.form_W2A, card.W2A));
-                  else goto cont;
-                  if ((bool)card.W3A || (bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<double>(card.form_W3A, card.W3A));
-                  else goto cont;
-                  if ((bool)card.W1B || (bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<double>(card.form_W1B, card.W1B));
-                  else goto cont;
-                  if ((bool)card.W2B || (bool)card.W3B)
-                     entries.push_back(format<double>(card.form_W2B, card.W2B));
-                  else goto cont;
-                  if ((bool)card.W3B)
-                     entries.push_back(format<double>(card.form_W3B, card.W3B));
-
-               cont:
-
-                  os << card.format_outlist(entries) << std::endl;
-
-                  return os;
-               };
-
-               std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> >&) const;
             };
 
 /// Handle Nastran Bulk `CROD` entries.
 /** # Rod Element Connection
 
-Defines a tension-compression-torsion element.
+    Defines a tension-compression-torsion element.
 
-# Format
+    # Format
 
-| 1       | 2     | 3     | 4    | 5    | 6 | 7 | 8 | 9 | 10 |
-| ------- | ----- | ----- | ---- | ---- | - | - | - | - | -- |
-| `CROD`  | `EID` | `PID` | `G1` | `G2` |   |   |   |   |    |
+    | 1       | 2     | 3     | 4    | 5    | 6 | 7 | 8 | 9 | 10 |
+    | ------- | ----- | ----- | ---- | ---- | - | - | - | - | -- |
+    | `CROD`  | `EID` | `PID` | `G1` | `G2` |   |   |   |   |    |
 */
-            class crod : public card {
+            class crod : public __base::card {
 
             private:
 
-               static dnvgl::extfem::bdf::types::card head;
+               static bdf::types::card head;
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G1;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G2;
+               static const entry_type<long> form_EID;
+               static const entry_type<long> form_PID;
+               static const entry_type<long> form_G1;
+               static const entry_type<long> form_G2;
 
             public:
 
                /** Element identification number. (Integer > 0)
                 */
-               dnvgl::extfem::bdf::types::entry_value<long> EID;
+               entry_value<long> EID;
                /** Property identification number of a `PROD` entry.
                    (Integer > 0; Default = `EID`)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> PID;
+               entry_value<long> PID;
                /** Grid point identification number of first connection
                    point. (Integer > 0; `G1` ≠ `G2`)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> G1;
+               entry_value<long> G1;
                /** Grid point identification number of second connection
                    point. (Integer > 0; `G1` ≠ `G2`)
                */
-               dnvgl::extfem::bdf::types::entry_value<long> G2;
+               entry_value<long> G2;
 
-               crod(const std::deque<std::string> &inp);
+               crod(const std::list<std::string> &inp);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CROD; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> >&) const;
             };
          }
       }
@@ -725,9 +687,8 @@ Defines a tension-compression-torsion element.
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:

@@ -52,7 +52,7 @@ namespace dnvgl {
             const entry_type<long> hierarch::_form_IHSREF("IHSREF");
 
 
-            hierarch::hierarch(const std::deque<std::string> &inp) :
+            hierarch::hierarch(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 10)
@@ -115,39 +115,32 @@ namespace dnvgl {
                return HIERARCH;
             }
 
-            std::ostream&
-            operator<< (std::ostream &os, const hierarch &card) {
-               if (card.NFIELD == -1) return os;
+            std::ostream &hierarch::put(std::ostream& os) const {
+               if (this->NFIELD == -1) return os;
                os << hierarch::head.format()
-                  << card._form_NFIELD.format(card.NFIELD)
-                  << card._form_IHREF.format(card.IHREF)
-                  << card._form_ISELTY.format(card.ISELTY)
-                  << card._form_INDSEL.format(card.INDSEL)
+                  << this->_form_NFIELD.format(this->NFIELD)
+                  << this->_form_IHREF.format(this->IHREF)
+                  << this->_form_ISELTY.format(this->ISELTY)
+                  << this->_form_INDSEL.format(this->INDSEL)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_ISLEVL.format(card.ISLEVL)
-                  << card._form_ITREF.format(card.ITREF)
-                  << card._form_IHPREF.format(card.IHPREF)
-                  << card._form_NSUB.format(card.NSUB)
+                  << this->_form_ISLEVL.format(this->ISLEVL)
+                  << this->_form_ITREF.format(this->ITREF)
+                  << this->_form_IHPREF.format(this->IHPREF)
+                  << this->_form_NSUB.format(this->NSUB)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format();
                size_t num = 0;
-               for (int i = 0; i<card.NSUB; i++) {
+               for (int i = 0; i<this->NSUB; i++) {
                   if (num == 4) {
                      num = 0;
                      os << std::endl
                         << dnvgl::extfem::fem::types::card().format();
                   }
                   num++;
-                  os << card._form_IHSREF.format(card.IHSREFi[i]);
+                  os << this->_form_IHSREF.format(this->IHSREFi[i]);
                }
                os << std::endl;
-               return os;
-            }
-
-            const std::ostream&
-            hierarch::operator<< (std::ostream& os) const {
-               os << this;
                return os;
             }
          }
@@ -157,7 +150,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

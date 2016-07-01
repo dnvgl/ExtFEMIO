@@ -25,11 +25,11 @@ namespace dnvgl {
 
             /** General Hexahedron
              */
-            class ghex : public __base {
+            class ghex : public __base::elem {
             public:
                ghex(const dnvgl::extfem::fem::cards::gelmnt1*);
                ghex(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex(const __base*);
+               ghex(const dnvgl::extfem::fem::elements::__base::elem*);
                virtual long nnodes(void) const = 0;
                virtual el_types get_type(void) const = 0;
             };
@@ -44,7 +44,7 @@ namespace dnvgl {
             public:
                ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::cards::gelmnt1*);
                ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex1{{ "%02d"|format(num) }}(const __base*);
+               ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::elements::__base::elem*);
                virtual long nnodes(void) const;
                virtual el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -58,7 +58,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

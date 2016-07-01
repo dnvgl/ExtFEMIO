@@ -50,11 +50,11 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("BDF MOMENT definitions. (Small Field Format)", "[bdf_moment]") {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "MOMENT  2       5       6       2.9     0.0     1.9     0.0               \n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    moment probe(lines);
 
    SECTION("first moment") {
@@ -102,9 +102,8 @@ TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

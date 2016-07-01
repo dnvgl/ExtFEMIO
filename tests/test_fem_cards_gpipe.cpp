@@ -46,13 +46,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GPIPE (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GPIPE    6.54357000e+005 0.00000000e+000 5.90218891e-002 2.95109446e-002\n",
          "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gpipe probe(lines);
 
       CHECK(probe.GEONO == 654357);
@@ -66,10 +66,10 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
    }
 
    SECTION("GPIPE (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GPIPE    6.54357000e+05  0.000000000e+00 5.90218891e-02  2.95109446e-02 \n",
          "         1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gpipe probe(lines);
 
       CHECK(probe.GEONO == 654357);
@@ -85,13 +85,13 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
 
 TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("Failing card") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GPIPE     1.80000000E+01  1.49100006E-01  2.19100013E-01  3.50000001E-02\n",
             "          1.00000000E+00  1.00000000E+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gpipe probe(lines);
 
       CHECK(probe.GEONO == 18);
@@ -134,13 +134,13 @@ TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
 
 TEST_CASE("FEM GPIPE conversion from own output.", "[fem_gpipe,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GPIPE (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gpipe probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -154,10 +154,10 @@ TEST_CASE("FEM GPIPE conversion from own output.", "[fem_gpipe,in/out]") {
    }
 
    SECTION("GPIPE (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00\n"});
-         card::card_split(data, lines);
+         __base::card::card_split(data, lines);
       gpipe probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -173,7 +173,6 @@ TEST_CASE("FEM GPIPE conversion from own output.", "[fem_gpipe,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

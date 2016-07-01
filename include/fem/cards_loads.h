@@ -30,7 +30,7 @@ namespace dnvgl {
 |          | \<text line\>                      | | | |
 
 */
-            class tdload : public card {
+            class tdload : public __base::card {
 
                dnvgl::extfem::fem::types::card static const head;
 
@@ -116,7 +116,7 @@ namespace dnvgl {
                std::string SET_NAME;
                std::vector<std::string> CONT;
 
-               tdload(std::deque<std::string> const &);
+               tdload(std::list<std::string> const &);
 
                tdload(void);
 
@@ -142,11 +142,7 @@ namespace dnvgl {
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend  std::ostream&
-               operator<< (std::ostream&, tdload const &);
-
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual std::ostream &put(std::ostream&) const;
             };
 
 /// `BEUSLO`: Elements with Surface Loads
@@ -171,7 +167,7 @@ For volume elements a positive value means normal pressure directed
 into the element. For shell elements, a positive value means normal
 pressure in the local /z/-direction.
 */
-            class beuslo : public card {
+            class beuslo : public __base::card {
 
             private:
 
@@ -290,7 +286,7 @@ pressure in the local /z/-direction.
 
                beuslo(void);
 
-               beuslo(std::deque<std::string> const &);
+               beuslo(std::list<std::string> const &);
 
                beuslo(long const &LLC,
                       long const &LOTYP,
@@ -335,11 +331,7 @@ pressure in the local /z/-direction.
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
 
-               friend std::ostream&
-               operator<< (std::ostream&, beuslo const &);
-
-               const std::ostream&
-               operator<< (std::ostream& os) const;
+               virtual std::ostream &put(std::ostream&) const;
             };
          }
       }
@@ -350,7 +342,6 @@ pressure in the local /z/-direction.
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j8"

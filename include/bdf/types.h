@@ -17,7 +17,7 @@
 #include <cmath>
 #include <string>
 #include <complex>
-#include <deque>
+#include <list>
 #include <set>
 #include <iostream>
 #include <iomanip>
@@ -41,7 +41,6 @@
 
 #include <my_c++14.h>
 
-#include "bdf/errors.h"
 #include "extfem_string.h"
 #include "bdf/type_bounds.h"
 
@@ -211,20 +210,20 @@ namespace dnvgl {
             };
 
             template <> inline
-            entry_value<std::deque<int>>::entry_value(
-               const entry_value<std::deque<int>> &val) :
+            entry_value<std::list<int> >::entry_value(
+               const entry_value<std::list<int> > &val) :
                                value(val.value.begin(), val.value.end()),
                                is_value(val.is_value) {};
 
             template <> inline
-            entry_value<std::deque<int>>::entry_value(
-               const std::deque<int> &value, const bool &is_value) :
+            entry_value<std::list<int> >::entry_value(
+               const std::list<int> &value, const bool &is_value) :
                          value(value.begin(), value.end()),
                          is_value(is_value) {
             };
 
             template <> inline
-            entry_value<std::deque<int>>::entry_value(const std::deque<int> *value) {
+            entry_value<std::list<int> >::entry_value(const std::list<int> *value) {
                if (!value) {
                   this->is_value = false;
                } else {
@@ -235,7 +234,7 @@ namespace dnvgl {
             };
 
             template <> inline
-            void entry_value<std::deque<int>>::push_back(const long &inp) {
+            void entry_value<std::list<int> >::push_back(const long &inp) {
                this->value.push_back(inp);
             };
 
@@ -649,7 +648,7 @@ namespace dnvgl {
                list_int_re;
 
             template <>
-            class entry_type<std::deque<int>> : public base {
+            class entry_type<std::list<int> > : public base {
 
             private:
 
@@ -659,12 +658,12 @@ namespace dnvgl {
 
             public:
 
-               entry_type<std::deque<int>>(const std::string &name) :
+               entry_type<std::list<int> >(const std::string &name) :
                   base(name) {};
 
-               entry_value<std::deque<int>>
+               entry_value<std::list<int> >
                   operator() (const std::string &inp) const {
-                  entry_value<std::deque<int>> val;
+                  entry_value<std::list<int> > val;
                   this->set_value(val, inp);
                   return val;
                };
@@ -672,7 +671,7 @@ namespace dnvgl {
                bdf_types type() const {return _type;};
 
                void set_value(
-                  entry_value<std::deque<int>> &val, const std::string inp) const {
+                  entry_value<std::list<int> > &val, const std::string inp) const {
 
                   auto sval = extfem::string::string(inp).trim();
 
@@ -691,12 +690,12 @@ namespace dnvgl {
                   if (!inp)
                      return dnvgl::extfem::bdf::types::empty().format(nullptr);
                   else {
-                     entry_value<std::deque<int>> val((std::deque<int>*)inp);
+                     entry_value<std::list<int> > val((std::list<int>*)inp);
                      return this->format(val);
                   }
                };
 
-               std::string format(const entry_value<std::deque<int>> &inp) const {
+               std::string format(const entry_value<std::list<int> > &inp) const {
 
                   if (!inp)
                      return bdf::types::empty().format(nullptr);
@@ -737,29 +736,29 @@ namespace dnvgl {
             };
 
             template <>
-            class entry_type<std::complex<double>> : public base {
+            class entry_type<std::complex<double> > : public base {
 
             private:
 
-               dnvgl::extfem::bdf::type_bounds::bound<std::complex<double>> bounds;
+               dnvgl::extfem::bdf::type_bounds::bound<std::complex<double> > bounds;
 
                static const bdf_types _type = Complex;
 
             public:
 
-               entry_type<std::complex<double>>(const std::string &name) :
-                  bdf::types::base(name), bounds(bdf::type_bounds::bound<std::complex<double>>()) {};
+               entry_type<std::complex<double> >(const std::string &name) :
+                  bdf::types::base(name), bounds(bdf::type_bounds::bound<std::complex<double> >()) {};
 
-               entry_type<std::complex<double>>(
+               entry_type<std::complex<double> >(
                   const std::string &name,
-                  const bdf::type_bounds::bound<std::complex<double>> &bounds) :
+                  const bdf::type_bounds::bound<std::complex<double> > &bounds) :
                   bdf::types::base(name), bounds(bounds) {};
 
                bdf_types inline type() const { return _type; };
 
                // Convert string to float
                void set_value(
-                  entry_value<std::complex<double>> &val, const std::string &inp1, const std::string &inp2="") const {
+                  entry_value<std::complex<double> > &val, const std::string &inp1, const std::string &inp2="") const {
 
                   auto sval1 = extfem::string::string(inp1).trim().upper();
                   auto sval2 = extfem::string::string(inp2).trim().upper();
@@ -816,8 +815,8 @@ namespace dnvgl {
                   return;
                }
 
-               entry_value<std::complex<double>> operator() (const std::string &inp1, const std::string &inp2="") const {
-                  entry_value<std::complex<double>> val;
+               entry_value<std::complex<double> > operator() (const std::string &inp1, const std::string &inp2="") const {
+                  entry_value<std::complex<double> > val;
                   this->set_value(val, inp1, inp2);
                   return val;
                }
@@ -827,12 +826,12 @@ namespace dnvgl {
                      return (bdf::types::empty().format(nullptr) +
                              bdf::types::empty().format(nullptr));
                   else {
-                     entry_value<std::complex<double>> val(*(std::complex<double>*)v);
+                     entry_value<std::complex<double> > val(*(std::complex<double>*)v);
                      return this->format(val);
                   }
                }
 
-               std::string inline format(const entry_value<std::complex<double>> &inp) const {
+               std::string inline format(const entry_value<std::complex<double> > &inp) const {
 
                   if (!inp)
                      return (bdf::types::empty().format(nullptr) +
@@ -916,7 +915,7 @@ namespace dnvgl {
                }
 
                std::string inline format(const std::complex<double> &val) const {
-                  entry_value<std::complex<double>> tmp(val);
+                  entry_value<std::complex<double> > tmp(val);
                   return format(tmp);
                }
             };
@@ -929,9 +928,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // coding:utf-8
 // End:

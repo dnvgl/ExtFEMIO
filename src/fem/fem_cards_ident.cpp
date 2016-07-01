@@ -45,7 +45,7 @@ namespace dnvgl {
             const entry_type<long> ident::_form_SELTYP("SELTYP");
             const entry_type<long> ident::_form_SELMOD("SELMOD");
 
-            ident::ident(const std::deque<std::string> &inp) :
+            ident::ident(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 5)
@@ -80,22 +80,13 @@ namespace dnvgl {
             const types
             ident::card_type(void) const { return IDENT; };
 
-            const std::ostream&
-            ident::operator<<(std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<<(std::ostream &os, const ident &card) {
-               if (card.SELMOD == ident::INVALID) return os;
+            std::ostream &ident::put(std::ostream& os) const {
+               if (this->SELMOD == ident::INVALID) return os;
                os << ident::head.format()
-                  << card._form_SLEVEL.format(card.SLEVEL)
-                  << card._form_SELTYP.format(card.SELTYP)
-                  << card._form_SELMOD.format(card.SELMOD)
-                  << std::endl;
-
-               return os;
+                  << this->_form_SLEVEL.format(this->SLEVEL)
+                  << this->_form_SELTYP.format(this->SELTYP)
+                  << this->_form_SELMOD.format(this->SELMOD);
+               return os << std::endl;
             }
          }
       }
@@ -104,7 +95,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

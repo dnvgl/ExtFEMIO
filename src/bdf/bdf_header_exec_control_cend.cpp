@@ -27,12 +27,7 @@ namespace dnvgl {
             namespace executive_control {
                cend::cend() {}
 
-               const std::ostream&
-               cend::operator<< (std::ostream& os) const {
-                  return os << this;
-               }
-
-               std::ostream const &cend::put(std::ostream &os) const {
+               std::ostream &cend::put(std::ostream &os) const {
                   return os << "CEND" << std::endl;
                }
             }

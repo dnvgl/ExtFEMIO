@@ -33,7 +33,7 @@ properties of thin shell elements.
 | `PSHELL` | `PID` | `MID1` | `T`    | `MID2` | `12I/T**3` | `MID3` | `TS/T` | `NSM` |    |
 |          | `Z1`  | `Z2`   | `MID4` |        |            |        |        |       |    |
 */
-            class pshell : public card {
+            class pshell : public __base::card {
                // Handle Nastran Bulk PSHELL entries.
 
             private:
@@ -113,45 +113,49 @@ properties of thin shell elements.
                */
                dnvgl::extfem::bdf::types::entry_value<long> MID4;
 
-               pshell(const std::deque<std::string> &);
+               pshell(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PSHELL; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> > &res) const;
             };
 
-            class beam_base : public card {
+            namespace __base {
+               class beam_base : public card {
 
-            protected:
+               protected:
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+                  static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
+                  static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
 
-               beam_base(const std::deque<std::string> &inp) :
-                  card(inp) {};
+                  beam_base(const std::list<std::string> &inp) :
+                     __base::card(inp) {};
 
-            public:
+               public:
 
-               dnvgl::extfem::bdf::types::entry_value<long> PID;
-               dnvgl::extfem::bdf::types::entry_value<long> MID;
+                  dnvgl::extfem::bdf::types::entry_value<long> PID;
+                  dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-               const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return BEAM_BASE; };
-            };
+                  const dnvgl::extfem::bdf::cards::types
+                  card_type(void) const { return BEAM_BASE; };
+               };
 
-            class beam_prop : public beam_base {
-               // base class for beam property classes.
-            protected:
+               class beam_prop : public beam_base {
+                  // base class for beam property classes.
+               protected:
 
-               beam_prop(const std::deque<std::string> &inp) :
-                  beam_base(inp) {};
+                  beam_prop(const std::list<std::string> &inp) :
+                     beam_base(inp) {};
 
-            public:
+               public:
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
-            };
+                  const dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
+               };
+            }
 
 /// Handle Nastran Bulk `PBEAM` entries.
 /** # Beam Property
@@ -183,7 +187,7 @@ The last two continuations are:
 |   | `K1`    | `K2`    | `S1`    | `S2`    | `NSI(A)` | `NSI(B)` | `CW(A)` | `CW(B)`  |    |
 |   | `M1(A)` | `M2(A)` | `M1(B)` | `M2(B)` | `N1(A)`  | `N2(A)`  | `N1(B)` | `N2(B)`  |    |
 */
-            class pbeam : public beam_prop {
+               class pbeam : public __base::beam_prop {
                // Handle Nastran Bulk PBEAM entries.
 
             private:
@@ -228,69 +232,69 @@ The last two continuations are:
                /** Area of the beam cross section at the various
                    stations. (Real > 0.0)
                */
-               std::deque<double> A;
+               std::list<double> A;
                /** Area moment of inertia at the various stations for
                    bending in plane 1 about the neutral axis. (Real >
                    0.0)
                */
-               std::deque<double> I1;
+               std::list<double> I1;
                /** Area moment of inertia at the various stations for
                    bending in plane 2 about the neutral axis. (Real >
                    0.0)
                */
-               std::deque<double> I2;
+               std::list<double> I2;
                /** Area product of inertia at the various stations. (Real)
                 */
-               std::deque<double> I12;
+               std::list<double> I12;
                /** Torsional stiffness parameter at the various
                    stations. (Real >= 0.0 but > 0.0 if warping is
                    present)
                */
-               std::deque<double> J;
+               std::list<double> J;
                /** Nonstructural mass per unit length at the various
                    stations. (Real, Default=0.0)
                */
-               std::deque<double> NSM;
+               std::list<double> NSM;
                /** *y* coordinate for location of first stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> C1;
+               std::list<double> C1;
                /** *z* coordinate for location of first stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> C2;
+               std::list<double> C2;
                /** *y* coordinate for location of second stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> D1;
+               std::list<double> D1;
                /** *z* coordinate for location of second stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> D2;
+               std::list<double> D2;
                /** *y* coordinate for location of third stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> E1;
+               std::list<double> E1;
                /** *z* coordinate for location of third stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> E2;
+               std::list<double> E2;
                /** *y* coordinate for location of fourth stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> F1;
+               std::list<double> F1;
                /** *z* coordinate for location of fourth stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::deque<double> F2;
+               std::list<double> F2;
                /** Stress output request option at the various
                    stations. (Character)
 
@@ -302,12 +306,12 @@ The last two continuations are:
 
                    - `NO` --- No stresses or forces are recovered.
                */
-               std::deque<dnvgl::extfem::bdf::types::entry_value<std::string>> SO;
+               std::list<dnvgl::extfem::bdf::types::entry_value<std::string> > SO;
                /** `X/XB` : Distance from end `A` in the element
                    coordinate system divided by the length of the
                    element. (Real > 0.0)
                */
-               std::deque<double> X_XB;
+               std::list<double> X_XB;
                /** Shear stiffness factor *K* in *KxAxG* for plane 1.
                    (Real, Default = 1.0)
                */
@@ -377,29 +381,34 @@ The last two continuations are:
                 */
                dnvgl::extfem::bdf::types::entry_value<double> N2_B;
 
-               pbeam(const std::deque<std::string> &);
+               pbeam(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAM; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> > &res) const;
             };
 
-            class l_geom {
+            namespace __base {
+               class l_geom {
 
-            protected:
+               protected:
 
-               l_geom () {};
+                  l_geom () {};
 
-               static const std::set<std::string> dimnum1;
-               static const std::set<std::string> dimnum2;
-               static const std::set<std::string> dimnum3;
-               static const std::set<std::string> dimnum4;
-               static const std::set<std::string> dimnum5;
-               static const std::set<std::string> dimnum6;
-               static const std::set<std::string> dimnum10;
-            };
+                  static const std::set<std::string> dimnum1;
+                  static const std::set<std::string> dimnum2;
+                  static const std::set<std::string> dimnum3;
+                  static const std::set<std::string> dimnum4;
+                  static const std::set<std::string> dimnum5;
+                  static const std::set<std::string> dimnum6;
+                  static const std::set<std::string> dimnum10;
+               };
+            }
+
 /// Handle Nastran Bulk `PBEAML` entries.
 /** # Beam Cross-Section Property
 
@@ -419,7 +428,7 @@ dimensions.
 |         | `DIMn(m)` | `NSM(m)`  | `SO(B)`  | 1.0       | `DIM1(B)` | `DIM2(B)` | *etc.*    | `DIMn(B)` |    |
 |         |           | `NSM(B)`  |          |           |           |           |           |           |    |
 */
-            class pbeaml : public beam_prop, private l_geom {
+            class pbeaml : public __base::beam_prop, private __base::l_geom {
                // Handle Nastran Bulk PBEAML entries.
 
             private:
@@ -447,10 +456,10 @@ dimensions.
                    station *j* and end `B`. (Real > 0.0 for `GROUP` =
                    `MSCBML0`)
                */
-               std::deque<std::deque<double>> DIM;
+               std::deque<std::list<double> > DIM;
                /** Nonstructural mass per unit length. (Default = 0.0)
                 */
-               std::deque<double> NSM;
+               std::list<double> NSM;
                /** Stress output request option for intermediate
                    station *j* and end `B`. (Character; Default =
                    `YES`):
@@ -461,45 +470,49 @@ dimensions.
 
                    - `NO` --- No stresses or forces are recovered.
                */
-               std::deque<std::string> SO;
+               std::list<std::string> SO;
                /** `X(j)/XB` : Distance from end `A` to intermediate
                    station *j* in the element coordinate system
                    divided by the length of the element. (Real>0.0;
                    Default = 1.0)
                */
-               std::deque<double> X_XB;
+               std::list<double> X_XB;
 
-               pbeaml(const std::deque<std::string> &);
+               pbeaml(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBEAML; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> > &res) const;
             };
 
+            namespace __base {
 /// Base class for `pbar` and `pbarl`.
-            class bar_prop : public card {
+               class bar_prop : public card {
 
-            protected:
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+               protected:
+                  static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
+                  static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
 
-            public:
+               public:
 
-               /// `PID` : Property identification number. (Integer >
-               /// 0)
-               dnvgl::extfem::bdf::types::entry_value<long> PID;
-               /// `MID` : Material identification number. (Integer >
-               /// 0)
-               dnvgl::extfem::bdf::types::entry_value<long> MID;
+                  /// `PID` : Property identification number. (Integer >
+                  /// 0)
+                  dnvgl::extfem::bdf::types::entry_value<long> PID;
+                  /// `MID` : Material identification number. (Integer >
+                  /// 0)
+                  dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-               const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return BAR_PROP; };
+                  const dnvgl::extfem::bdf::cards::types
+                  card_type(void) const { return BAR_PROP; };
 
-               bar_prop(const std::deque<std::string> &inp) :
-                  card(inp) {};
-            };
+                  bar_prop(const std::list<std::string> &inp) :
+                     card(inp) {};
+               };
+            }
 
 /// Handle Nastran Bulk `PBAR` entries.
 /** # Simple Beam Property
@@ -518,7 +531,7 @@ stations)
 |        | `K1`  | `K2`  | `I12` |      |      |      |          |      |    |
 */
 
-            class pbar : public bar_prop {
+            class pbar : public __base::bar_prop {
 
             private:
 
@@ -594,13 +607,15 @@ stations)
                */
                dnvgl::extfem::bdf::types::entry_value<double> I12;
 
-               pbar(const std::deque<std::string> &);
+               pbar(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBAR; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> > &res) const;
             };
 
 /// Handle Nastran Bulk `PBARL` entries.
@@ -619,7 +634,7 @@ cross-sectional dimensions.
 |         | `DIM1` | `DIM2`   | `DIM3`  | `DIM4` | `DIM5` | `DIM6` | `DIM7` | `DIM8` |    |
 |         | `DIM9` | *etc.*   | `NSM`   |        |        |        |        |        |    |
 */
-            class pbarl : public bar_prop, private l_geom {
+            class pbarl : public __base::bar_prop, private __base::l_geom {
 
             private:
 
@@ -644,19 +659,21 @@ cross-sectional dimensions.
                /** Cross-section dimensions. (Real > 0.0 for `GROUP` =
                    `MSCBML0`)
                */
-               std::deque<double> DIM;
+               std::list<double> DIM;
                /** Nonstructural mass per unit length. `NSM` is
                    specified after the last `DIMi`. (Default = 0.0)
                */
                dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               pbarl(const std::deque<std::string> &);
+               pbarl(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PBARL; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> > &res) const;
             };
 
 /// Handle Nastran Bulk `PROD` entries.
@@ -670,7 +687,7 @@ Defines the properties of a rod element (`CROD` entry).
 | ------- | ----- | ----- | --- | --- | --- | ----- | - | - | -- |
 | `PROD`  | `PID` | `MID` | `A` | `J` | `C` | `NSM` |   |   |    |
 */
-            class prod : public card {
+            class prod : public __base::card {
 
             private:
 
@@ -704,13 +721,15 @@ Defines the properties of a rod element (`CROD` entry).
                 */
                dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               prod(const std::deque<std::string> &);
+               prod(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return PROD; };
 
-               std::ostream&
-               operator<< (std::ostream& os) const;
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> > &res) const;
             };
          }
       }
@@ -721,9 +740,8 @@ Defines the properties of a rod element (`CROD` entry).
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // coding: utf-8
 // End:

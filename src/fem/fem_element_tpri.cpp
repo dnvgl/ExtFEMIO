@@ -26,31 +26,36 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
+         namespace elements {
+            using namespace dnvgl::extfem::fem::cards;
 
-long tpri::nnodes(void) const {return 6;}
+            namespace {
+               const size_t procs_len = 4;
+               el_processor procs[procs_len] = {
+                  general, Prefem, Sestra, Platework};
+            }
 
-el_types tpri::get_type(void) const {return TPRI;}
+            long tpri::nnodes(void) const {return 6;}
 
-namespace {
-   const size_t procs_len = 4;
-   el_processor procs[
-      procs_len] = {general, Prefem, Sestra, Platework};
+            el_types tpri::get_type(void) const {return TPRI;}
+
+            const std::set<el_processor> tpri::processors(procs, procs+procs_len);
+
+            tpri::tpri(const gelmnt1 *data) : __base::elem(data) {}
+
+            tpri::tpri(const gelref1 *data) : __base::elem(data) {}
+
+            tpri::tpri(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> tpri::processors(procs, procs+procs_len);
-
-tpri::tpri(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-tpri::tpri(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-tpri::tpri(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -46,17 +46,17 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GSETMEMB (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GSETMEMB 2.30000000e+001 1.74000000e+002 1.00000000e+000 1.00000000e+000\n",
          "         0.00000000e+000 1.27600000e+004 1.27660000e+004 1.27830000e+004\n",
          "         1.27870000e+004 1.27990000e+004 1.28170000e+004 1.28420000e+004\n",
          "         1.28500000e+004 1.28580000e+004 1.28590000e+004 1.28600000e+004\n",
          "         1.28830000e+004 1.28910000e+004 1.29180000e+004 1.29190000e+004\n",
          "         1.29300000e+004 1.29320000e+004 1.29350000e+004 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gsetmemb probe(lines);
 
       CHECK(probe.NFIELD == 23);
@@ -71,11 +71,11 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
    }
 
    SECTION("GSETMEMB (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
 
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gsetmemb probe(lines);
 
       CHECK(probe.NFIELD == 5);
@@ -88,10 +88,10 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
 
 
    SECTION("GSETMEMB (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GSETMEMB 8.00000000e+000 1.75000000e+002 1.00000000e+000 2.00000000e+000\n",
          "         0.00000000e+000 8.75000000e+002 8.87000000e+002 9.00000000e+002\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gsetmemb probe(lines);
 
       CHECK(probe.NFIELD == 8);
@@ -104,7 +104,7 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
    }
 
    SECTION("GSETMEMB (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GSETMEMB 1.02400000e+003 1.76000000e+002 1.00000000e+000 2.00000000e+000\n",
          "         0.00000000e+000 6.59770000e+004 6.59780000e+004 6.58070000e+004\n",
          "         6.21740000e+004 6.58080000e+004 6.58090000e+004 5.86830000e+004\n",
@@ -361,7 +361,7 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
          "         6.61840000e+004 6.70460000e+004 6.70470000e+004 6.61850000e+004\n",
          "         6.61860000e+004 6.74400000e+004 6.70480000e+004 6.53000000e+004\n",
          "         6.70490000e+004 6.53010000e+004 6.74410000e+004 6.70500000e+004\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gsetmemb probe(lines);
 
 
@@ -832,14 +832,14 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
 
 TEST_CASE("FEM GSETMEMB conversion from own output.", "[fem_gsetmemb,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GSETMEMB (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GSETMEMB+5.000000000e+00+2.000000000e+00+3.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00\n"});
 
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gsetmemb probe(lines);
 
       CHECK(probe.NFIELD == 5);
@@ -853,7 +853,6 @@ TEST_CASE("FEM GSETMEMB conversion from own output.", "[fem_gsetmemb,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -49,7 +49,7 @@ namespace dnvgl {
             const entry_type<long> bldep::_form_INDEPDOF("INDEPDOF");
             const entry_type<double> bldep::_form_b("b");
 
-            bldep::bldep(const std::deque<std::string> &inp) :
+            bldep::bldep(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 9)
@@ -91,27 +91,20 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             bldep::card_type(void) const {return BLDEP;}
 
-            const std::ostream&
-            bldep::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const bldep &card) {
-               if (card.NODENO == -1) return os;
+            std::ostream &bldep::put(std::ostream& os) const {
+               if (this->NODENO == -1) return os;
                os << bldep::head.format()
-                  << card._form_NODENO.format(card.NODENO)
-                  << card._form_CNOD.format(card.CNOD)
-                  << card._form_NDDOF.format(card.NDDOF)
-                  << card._form_NDEP.format(card.NDEP)
+                  << this->_form_NODENO.format(this->NODENO)
+                  << this->_form_CNOD.format(this->CNOD)
+                  << this->_form_NDDOF.format(this->NDDOF)
+                  << this->_form_NDEP.format(this->NDEP)
                   << std::endl;
-               for (long i = 0; i < card.NDDOF; i++)
+               for (long i = 0; i < this->NDDOF; i++)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_DEPDOF.format(card.DEPDOF[i])
-                     << card._form_INDEPDOF.format(card.INDEPDOF[i])
-                     << card._form_b.format(card.b[i])
-                     << card.empty.format()
+                     << this->_form_DEPDOF.format(this->DEPDOF[i])
+                     << this->_form_INDEPDOF.format(this->INDEPDOF[i])
+                     << this->_form_b.format(this->b[i])
+                     << this->empty.format()
                      << std::endl;
                return os;
             }
@@ -122,9 +115,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

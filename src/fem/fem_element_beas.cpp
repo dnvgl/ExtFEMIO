@@ -26,33 +26,40 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long beas::nnodes(void) const {return 2;}
+         using namespace cards;
 
-el_types beas::get_type(void) const {return BEAS;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 11;
+               el_processor procs[procs_len] = {
+                  general, Preframe, Prefem, Sestra, ADVANCE,
+                  Framework, Launch, Platework, Pretube, Wadam,
+                  Poseidon};
+            }
 
-namespace {
-   const size_t procs_len = 11;
-   el_processor procs[
-      procs_len] = {general, Preframe, Prefem, Sestra, ADVANCE,
-                    Framework, Launch, Platework, Pretube, Wadam,
-                    Poseidon};
+            long beas::nnodes(void) const {return 2;}
+
+            el_types beas::get_type(void) const {return BEAS;}
+
+            const std::set<el_processor> beas::processors(
+               procs, procs+procs_len);
+
+            beas::beas(const gelmnt1 *data) : __base::elem(data) {}
+
+            beas::beas(const gelref1 *data) : __base::elem(data) {}
+
+            beas::beas(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> beas::processors(procs, procs+procs_len);
-
-beas::beas(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-beas::beas(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-beas::beas(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

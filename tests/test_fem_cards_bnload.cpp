@@ -47,14 +47,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
 
    std::vector<double> ref_rload({0., 0., 2.e6, 0., 0., 0.});
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BNLOAD (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -67,11 +67,11 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
    }
 
    SECTION("BNLOAD (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         1.52470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -185,14 +185,14 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
 
 TEST_CASE("FEM BNLOAD conversion from own output.", "[fem_bnload,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("BNLOAD (own output real)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
             "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -205,11 +205,11 @@ TEST_CASE("FEM BNLOAD conversion from own output.", "[fem_bnload,in/out]") {
    }
 
    SECTION("BNLOAD (own output real alt)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
             "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -222,13 +222,13 @@ TEST_CASE("FEM BNLOAD conversion from own output.", "[fem_bnload,in/out]") {
    }
 
    SECTION("BNLOAD (own output complex)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
             "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -241,12 +241,12 @@ TEST_CASE("FEM BNLOAD conversion from own output.", "[fem_bnload,in/out]") {
    }
 
    SECTION("BNLOAD (own output complex alt)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+1.000000000e+00\n",
             "        +2.000000000e+00+3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bnload probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -261,7 +261,6 @@ TEST_CASE("FEM BNLOAD conversion from own output.", "[fem_bnload,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

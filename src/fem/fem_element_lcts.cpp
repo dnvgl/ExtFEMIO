@@ -26,31 +26,39 @@ static char THIS_FILE[] = __FILE__;
 
 #include "fem/elements.h"
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long lcts::nnodes(void) const {return 6;}
+         using namespace cards;
 
-el_types lcts::get_type(void) const {return LCTS;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 3;
+               el_processor procs[procs_len] = {general, Prefem, Sestra};
 
-namespace {
-   const size_t procs_len = 3;
-   el_processor procs[
-      procs_len] = {general, Prefem, Sestra};
+            }
+
+            long lcts::nnodes(void) const {return 6;}
+
+            el_types lcts::get_type(void) const {return LCTS;}
+
+            const std::set<el_processor> lcts::processors(procs, procs+procs_len);
+
+            lcts::lcts(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
+               dnvgl::extfem::fem::elements::__base::elem::elem(data) {}
+
+            lcts::lcts(const dnvgl::extfem::fem::cards::gelref1 *data) :
+               dnvgl::extfem::fem::elements::__base::elem::elem(data) {}
+
+            lcts::lcts(const dnvgl::extfem::fem::elements::__base::elem *data) :
+               dnvgl::extfem::fem::elements::__base::elem::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> lcts::processors(procs, procs+procs_len);
-
-lcts::lcts(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-lcts::lcts(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-lcts::lcts(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

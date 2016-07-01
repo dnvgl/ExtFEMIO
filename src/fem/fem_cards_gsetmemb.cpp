@@ -51,7 +51,7 @@ namespace dnvgl {
             const entry_type<long> gsetmemb::_form_ISORIG("ISORIG");
             const entry_type<long> gsetmemb::_form_IRMEMB("IRMEMB");
 
-            gsetmemb::gsetmemb(const std::deque<std::string> &inp) :
+            gsetmemb::gsetmemb(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 7)
@@ -104,34 +104,27 @@ namespace dnvgl {
                return GSETMEMB;
             }
 
-            const std::ostream&
-               gsetmemb::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-               operator<< (std::ostream &os, gsetmemb const &card) {
+            std::ostream &gsetmemb::put(std::ostream& os) const {
                size_t cnt = 0;
                size_t field = 0;
                int pos = 0;
-               long index = card.INDEX;
+               long index = this->INDEX;
                bool first = true;
-               if (card.NFIELD == -1) return os;
-               while (first || cnt < card.IRMEMB.size()) {
+               if (this->NFIELD == -1) return os;
+               while (first || cnt < this->IRMEMB.size()) {
                   first = false;
                   if (div(field, 1024).rem == 0) {
                      if (field > 1)
                         os << std::endl;
                      os << gsetmemb::head.format()
-                        << card._form_NFIELD.format(
-                           std::min(card.IRMEMB.size() - cnt + 5,
+                        << this->_form_NFIELD.format(
+                           std::min(this->IRMEMB.size() - cnt + 5,
                                     static_cast<size_t>(1024)))
-                        << card._form_ISREF.format(card.ISREF)
-                        << card._form_INDEX.format(index++)
-                        << card._form_ISTYPE.format(card.ISTYPE)
+                        << this->_form_ISREF.format(this->ISREF)
+                        << this->_form_INDEX.format(index++)
+                        << this->_form_ISTYPE.format(this->ISTYPE)
                         << std::endl << dnvgl::extfem::fem::types::card().format()
-                        << card._form_ISORIG.format(card.ISORIG);
+                        << this->_form_ISORIG.format(this->ISORIG);
                      field += 5;
                      pos = 1;
                   }
@@ -139,8 +132,8 @@ namespace dnvgl {
                      os << std::endl << dnvgl::extfem::fem::types::card().format();
                      pos = 1;
                   }
-                  if (cnt >= card.IRMEMB.size()) break;
-                  os << card._form_IRMEMB.format(card.IRMEMB[cnt++]);
+                  if (cnt >= this->IRMEMB.size()) break;
+                  os << this->_form_IRMEMB.format(this->IRMEMB[cnt++]);
                   field++;
                }
                os << std::endl;
@@ -204,9 +197,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

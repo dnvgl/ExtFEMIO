@@ -50,177 +50,111 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Small Field Format") {
 
-      std::deque<std::string> data({
-         //       PID     MID     A       I1      I2      I12     J
-         // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
-         "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({
+            //       PID     MID     A       I1      I2      I12     J
+            // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+            "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeam probe(lines);
 
-      CAPTURE(data[0]);
+      CAPTURE( data.front() );
 
       CHECK((long)probe.PID == 4000001);
       CHECK((long)probe.MID == 3);
-      CHECK(probe.A.size() == 1);
-      CHECK(probe.A[0] == 10460.);
-      CHECK(probe.I1.size() == 1);
-      CHECK(probe.I1[0] == 93690000.);
-      CHECK(probe.I2.size() == 1);
-      CHECK(probe.I2[0] == 1694000.);
-      CHECK(probe.I12.size() == 1);
-      CHECK(probe.I12[0] == 6.856e6);
-      CHECK(probe.J.size() == 1);
-      CHECK(probe.J[0] == 1.316e6);
+      CHECK(probe.A == std::list<double>({10460.}));
+      CHECK(probe.I1 == std::list<double>({93690000.}));
+      CHECK(probe.I2 == std::list<double>({1694000.}));
+      CHECK(probe.I12 == std::list<double>({6.856e6}));
+      CHECK(probe.J == std::list<double>({1.316e6}));
    }
 
    SECTION("Small Field Format2") {
 
-      std::deque<std::string> data({
-         //       PID     MID     A       I1      I2      I12     J
-         // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
-         "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({
+            //       PID     MID     A       I1      I2      I12     J
+            // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+            "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeam probe(lines);
 
-      CAPTURE(data[0]);
+      CAPTURE( data.front() );
 
       CHECK((long)probe.PID == 4000001);
       CHECK((long)probe.MID == 3);
-      CHECK(probe.A.size() == 1);
-      CHECK(probe.A[0] == 10460.);
-      CHECK(probe.I1.size() == 1);
-      CHECK(probe.I1[0] == 93690000.);
-      CHECK(probe.I2.size() == 1);
-      CHECK(probe.I2[0] == 1694000.);
-      CHECK(probe.I12.size() == 1);
-      CHECK(probe.I12[0] == 6.856e6);
-      CHECK(probe.J.size() == 1);
-      CHECK(probe.J[0] == 1.316e6);
+      CHECK(probe.A == std::list<double>({10460.}));
+      CHECK(probe.I1 == std::list<double>({93690000.}));
+      CHECK(probe.I2 == std::list<double>({1694000.}));
+      CHECK(probe.I12 == std::list<double>({6.856e6}));
+      CHECK(probe.J == std::list<double>({1.316e6}));
    }
 
    SECTION("Free Field Format 1") {
 
-      std::deque<std::string> data({
-         "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({
+            "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeam probe(lines);
 
-      CAPTURE(data[0]);
+      CAPTURE( data.front() );
 
       CHECK((long)probe.PID == 1);
       CHECK((long)probe.MID == 2);
-      CHECK(probe.A.size() == 1);
-      CHECK(probe.A[0] == 3.);
-      CHECK(probe.I1.size() == 1);
-      CHECK(probe.I1[0] == 4.);
-      CHECK(probe.I2.size() == 1);
-      CHECK(probe.I2[0] == 5.);
-      CHECK(probe.I12.size() == 1);
-      CHECK(probe.I12[0] == 6.);
-      CHECK(probe.J.size() == 1);
-      CHECK(probe.J[0] == 7.);
-      CHECK(probe.NSM.size() == 1);
-      CHECK(probe.NSM[0] == 8.);
-      CHECK(probe.C1.size() == 1);
-      CHECK(probe.C1[0] ==  9.);
-      CHECK(probe.C2.size() == 1);
-      CHECK(probe.C2[0] == 10.);
-      CHECK(probe.D1.size() == 1);
-      CHECK(probe.D1[0] == 11.);
-      CHECK(probe.D2.size() == 1);
-      CHECK(probe.D2[0] == 12.);
-      CHECK(probe.E1.size() == 1);
-      CHECK(probe.E1[0] == 13.);
-      CHECK(probe.E2.size() == 1);
-      CHECK(probe.E2[0] == 14.);
-      CHECK(probe.F1.size() == 1);
-      CHECK(probe.F1[0] == 15.);
-      CHECK(probe.F2.size() == 1);
-      CHECK(probe.F2[0] == 16.);
+      CHECK(probe.A == std::list<double>({3.}));
+      CHECK(probe.I1 == std::list<double>({4.}));
+      CHECK(probe.I2 == std::list<double>({5.}));
+      CHECK(probe.I12 == std::list<double>({6.}));
+      CHECK(probe.J == std::list<double>({7.}));
+      CHECK(probe.NSM == std::list<double>({8.}));
+      CHECK(probe.C1 == std::list<double>({9.}));
+      CHECK(probe.C2 == std::list<double>({10.}));
+      CHECK(probe.D1 == std::list<double>({11.}));
+      CHECK(probe.D2 == std::list<double>({12.}));
+      CHECK(probe.E1 == std::list<double>({13.}));
+      CHECK(probe.E2 == std::list<double>({14.}));
+      CHECK(probe.F1 == std::list<double>({15.}));
+      CHECK(probe.F2 == std::list<double>({16.}));
    }
 
    SECTION("Free Field Format 2") {
 
-      std::deque<std::string> data({
-         "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
-         ",YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,\n",
-         ",NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,\n",
-         ",49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64.\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({
+            "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
+               ",YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,\n",
+               ",NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,\n",
+               ",49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64.\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
 
       CHECK(lines.size() == 65);
       pbeam probe(lines);
 
-      CAPTURE(data[0]);
+      CAPTURE( data.front() );
 
       CHECK((long)probe.PID == 1);
       CHECK((long)probe.MID == 2);
-      CHECK(probe.SO.size() == 2);
-      CHECK(probe.SO[0] == "YES");
-      CHECK(probe.SO[1] == "NO");
-      CHECK(probe.X_XB.size() == 2);
-      CHECK(probe.X_XB[0] == 18.);
-      CHECK(probe.X_XB[1] == 34.);
-      CHECK(probe.A.size() == 3);
-      CHECK(probe.A[0] == 3.);
-      CHECK(probe.A[1] == 19.);
-      CHECK(probe.A[2] == 35.);
-      CHECK(probe.I1.size() == 3);
-      CHECK(probe.I1[0] == 4.);
-      CHECK(probe.I1[1] == 20.);
-      CHECK(probe.I1[2] == 36.);
-      CHECK(probe.I2.size() == 3);
-      CHECK(probe.I2[0] == 5.);
-      CHECK(probe.I2[1] == 21.);
-      CHECK(probe.I2[2] == 37.);
-      CHECK(probe.I12.size() == 3);
-      CHECK(probe.I12[0] == 6.);
-      CHECK(probe.I12[1] == 22.);
-      CHECK(probe.I12[2] == 38.);
-      CHECK(probe.J.size() == 3);
-      CHECK(probe.J[0] == 7.);
-      CHECK(probe.J[1] == 23.);
-      CHECK(probe.J[2] == 39.);
-      CHECK(probe.NSM.size() == 3);
-      CHECK(probe.NSM[0] == 8.);
-      CHECK(probe.NSM[1] == 24.);
-      CHECK(probe.NSM[2] == 40.);
-      CHECK(probe.C1.size() == 3);
-      CHECK(probe.C1[0] == 9.);
-      CHECK(probe.C1[1] == 25.);
-      CHECK(probe.C1[2] == 41.);
-      CHECK(probe.C2.size() == 3);
-      CHECK(probe.C2[0] == 10.);
-      CHECK(probe.C2[1] == 26.);
-      CHECK(probe.C2[2] == 42.);
-      CHECK(probe.D1.size() == 3);
-      CHECK(probe.D1[0] == 11.);
-      CHECK(probe.D1[1] == 27.);
-      CHECK(probe.D1[2] == 43.);
-      CHECK(probe.D2.size() == 3);
-      CHECK(probe.D2[0] == 12.);
-      CHECK(probe.D2[1] == 28.);
-      CHECK(probe.D2[2] == 44.);
-      CHECK(probe.E1.size() == 3);
-      CHECK(probe.E1[0] == 13.);
-      CHECK(probe.E1[1] == 29.);
-      CHECK(probe.E1[2] == 45.);
-      CHECK(probe.E2.size() == 3);
-      CHECK(probe.E2[0] == 14.);
-      CHECK(probe.E2[1] == 30.);
-      CHECK(probe.E2[2] == 46.);
-      CHECK(probe.F1.size() == 3);
-      CHECK(probe.F1[0] == 15.);
-      CHECK(probe.F1[1] == 31.);
-      CHECK(probe.F1[2] == 47.);
-      CHECK(probe.F2.size() == 3);
-      CHECK(probe.F2[0] == 16.);
-      CHECK(probe.F2[1] == 32.);
-      CHECK(probe.F2[2] == 48.);
+      std::list<std::string> ref({"YES", "NO"});
+      for (auto p : probe.SO) {
+         CHECK(p == ref.front());
+         ref.pop_front();
+      }
+      CHECK(probe.X_XB == std::list<double>({18., 34.}));
+      CHECK(probe.A == std::list<double>({3., 19., 35.}));
+      CHECK(probe.I1 == std::list<double>({4., 20., 36.}));
+      CHECK(probe.I2 == std::list<double>({5., 21., 37.}));
+      CHECK(probe.I12 == std::list<double>({6., 22., 38.}));
+      CHECK(probe.J == std::list<double>({7., 23., 39.}));
+      CHECK(probe.NSM == std::list<double>({8., 24., 40.}));
+      CHECK(probe.C1 == std::list<double>({9., 25., 41.}));
+      CHECK(probe.C2 == std::list<double>({10., 26., 42.}));
+      CHECK(probe.D1 == std::list<double>({11., 27., 43.}));
+      CHECK(probe.D2 == std::list<double>({12., 28., 44.}));
+      CHECK(probe.E1 == std::list<double>({13., 29., 45.}));
+      CHECK(probe.E2 == std::list<double>({14., 30., 46.}));
+      CHECK(probe.F1 == std::list<double>({15., 31., 47.}));
+      CHECK(probe.F2 == std::list<double>({16., 32., 48.}));
 
       CHECK((double)probe.K1 == 49);
       CHECK((double)probe.K2 == 50);
@@ -242,16 +176,16 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Free Field Format 3") {
 
-      std::deque<std::string> data({
-         "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,"
-         "YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,"
-         "NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,"
-         "49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64."
-         ",65.\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({
+            "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,"
+               "YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,"
+               "NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,"
+               "49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64."
+               ",65.\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
 
-      CAPTURE(data[0]);
+      CAPTURE( data.front() );
 
       CHECK(lines.size() == 66);
 
@@ -261,68 +195,41 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
    SECTION("Tapered Beam") {
 
-      std::deque<std::string> data({
-         // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
-         "PBEAM         39       6     2.9     3.5    5.97                        \n",
-         "                             2.0    -4.0                                \n",
-         "             YES     1.0     5.3    56.2    78.6                        \n",
-         "                             2.5    -5.0                                \n",
-         "                             1.1             2.1            0.21        \n",
-         "                                             0.5             0.0        \n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({
+            // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+            "PBEAM         39       6     2.9     3.5    5.97                        \n",
+               "                             2.0    -4.0                                \n",
+               "             YES     1.0     5.3    56.2    78.6                        \n",
+               "                             2.5    -5.0                                \n",
+               "                             1.1             2.1            0.21        \n",
+               "                                             0.5             0.0        \n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeam probe(lines);
 
-      CAPTURE(data[0]);
+      CAPTURE( data.front() );
 
       CHECK((long)probe.PID == 39);
       CHECK((long)probe.MID == 6);
-      CHECK(probe.A.size() == 2);
-      CHECK(probe.A[0] == 2.9);
-      CHECK(probe.A[1] == 5.3);
-      CHECK(probe.I1.size() == 2);
-      CHECK(probe.I1[0] == 3.5);
-      CHECK(probe.I1[1] == 56.2);
-      CHECK(probe.I2.size() == 2);
-      CHECK(probe.I2[0] == 5.97);
-      CHECK(probe.I2[1] == 78.6);
-      CHECK(probe.I12.size() == 2);
-      CHECK_FALSE(probe.I12[0]);
-      CHECK_FALSE(probe.I12[1]);
-      CHECK(probe.J.size() == 2);
-      CHECK_FALSE(probe.J[0]);
-      CHECK_FALSE(probe.J[1]);
-      CHECK(probe.NSM.size() == 2);
-      CHECK_FALSE(probe.NSM[0]);
-      CHECK_FALSE(probe.NSM[1]);
-      CHECK(probe.C1.size() == 2);
-      CHECK(probe.C1[0] == 0.);
-      CHECK(probe.C1[1] == 0.);
-      CHECK(probe.C2.size() == 2);
-      CHECK(probe.C2[0] == 0.);
-      CHECK(probe.C2[1] == 0.);
-      CHECK(probe.D1.size() == 2);
-      CHECK(probe.D1[0] == 2.);
-      CHECK(probe.D1[1] == 2.5);
-      CHECK(probe.D2.size() == 2);
-      CHECK(probe.D2[0] == -4.);
-      CHECK(probe.D2[1] == -5.);
-      CHECK(probe.E1.size() == 2);
-      CHECK(probe.E1[0] == 0.);
-      CHECK(probe.E1[1] == 0.);
-      CHECK(probe.E2.size() == 2);
-      CHECK(probe.E2[0] == 0.);
-      CHECK(probe.E2[1] == 0.);
-      CHECK(probe.F1.size() == 2);
-      CHECK(probe.F1[0] == 0.);
-      CHECK(probe.F1[1] == 0.);
-      CHECK(probe.F2.size() == 2);
-      CHECK(probe.F2[0] == 0.);
-      CHECK(probe.F2[1] == 0.);
-      CHECK(probe.SO.size() == 1);
-      CHECK(probe.SO[0] == "YES");
-      CHECK(probe.X_XB.size() == 1);
-      CHECK(probe.X_XB[0] == 1.);
+      CHECK(probe.A == std::list<double>({2.9, 5.3}));
+      CHECK(probe.I1 == std::list<double>({3.5, 56.2}));
+      CHECK(probe.I2 == std::list<double>({5.97, 78.6}));
+      CHECK(probe.I12 == std::list<double>({0., 0.}));
+      CHECK(probe.J == std::list<double>({0., 0.}));
+      CHECK(probe.NSM == std::list<double>({0., 0.}));
+      CHECK(probe.C1 == std::list<double>({0., 0.}));
+      CHECK(probe.C2 == std::list<double>({0., 0.}));
+      CHECK(probe.D1 == std::list<double>({2., 2.5}));
+      CHECK(probe.D2 == std::list<double>({-4., -5.}));
+      CHECK(probe.E1 == std::list<double>({0., 0.}));
+      CHECK(probe.E2 == std::list<double>({0., 0.}));
+      CHECK(probe.F1 == std::list<double>({0., 0.}));
+      CHECK(probe.F2 == std::list<double>({0., 0.}));
+      std::list<entry_value<std::string> > ref(1);
+      entry_type<std::string> tmp("tmp");
+      tmp.set_value(ref.front(), "YES");
+      CHECK(probe.SO == ref);
+      CHECK(probe.X_XB == std::list<double>({1.}));
 
       CHECK((double)probe.K1 == 1.);
       CHECK((double)probe.K2 == 1.);
@@ -345,9 +252,8 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

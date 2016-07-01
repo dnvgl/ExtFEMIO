@@ -48,13 +48,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM HSUPSTAT definitions. (Small Field Format)", "[fem_hsupstat]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "HSUPSTAT  9.00000000E+00  2.00000000E+00  6.00000000E+00  0.00000000E+00\n",
          "          5.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "         -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    hsupstat probe(lines);
 
    SECTION("first moment") {
@@ -114,18 +114,18 @@ TEST_CASE("FEM HSUPSTAT types output.", "[fem_hsupstat,out]" ) {
 
 TEST_CASE("FEM HSUPSTAT conversion from own output.", "[fem_hsupstat,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("HSUPSTAT") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "HSUPSTAT+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
             "        +9.000000000e+00\n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       hsupstat probe(lines);
 
       CHECK(probe.NFIELD == 1);
@@ -142,9 +142,8 @@ TEST_CASE("FEM HSUPSTAT conversion from own output.", "[fem_hsupstat,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

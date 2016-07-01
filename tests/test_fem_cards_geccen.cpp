@@ -46,12 +46,12 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GECCEN (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GECCEN   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       geccen probe(lines);
 
       CHECK(probe.ECCNO == 1);
@@ -61,9 +61,9 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
    }
 
    SECTION("GECCEN (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GECCEN   1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       geccen probe(lines);
 
       CHECK(probe.ECCNO == 1);
@@ -73,9 +73,9 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
    }
 
    SECTION("GECCEN (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       geccen probe(lines);
 
       CHECK(probe.ECCNO == 1);
@@ -122,12 +122,12 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]" ) {
 
 TEST_CASE("FEM GECCEN conversion from own output.", "[fem_geccen,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GECCEN") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       geccen probe(lines);
 
       CHECK(probe.ECCNO == 1);
@@ -139,7 +139,6 @@ TEST_CASE("FEM GECCEN conversion from own output.", "[fem_geccen,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

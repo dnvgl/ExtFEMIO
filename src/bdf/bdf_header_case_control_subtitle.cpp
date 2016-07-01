@@ -29,11 +29,7 @@ namespace dnvgl {
                subtitle::subtitle(std::string const &title) :
                   title(title) {}
 
-               const std::ostream& subtitle::operator<< (std::ostream &os) const {
-                  return os << this;
-               }
-
-               std::ostream const &subtitle::put(std::ostream &os) const {
+               std::ostream &subtitle::put(std::ostream &os) const {
                   os << "SUBTITLE = " << this->title;
                   return os << std::endl;
                }
@@ -45,9 +41,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

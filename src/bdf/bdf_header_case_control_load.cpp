@@ -27,11 +27,7 @@ namespace dnvgl {
             namespace case_control {
                load::load(long const &n) : n(n) {}
 
-               const std::ostream& load::operator<<(std::ostream &os) const {
-                  return os << this;
-               }
-
-               std::ostream const &load::put(std::ostream &os) const {
+               std::ostream &load::put(std::ostream &os) const {
                   os << "LOAD = " << this->n;
                   return os << std::endl;
                }
@@ -44,9 +40,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../.. check -j8"
 // End:

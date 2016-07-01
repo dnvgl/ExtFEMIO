@@ -62,41 +62,43 @@ namespace dnvgl {
                List
             } fem_types;
 
-            class base {
+            namespace __base {
+               class b_type {
 
-            protected:
+               protected:
 
-               static const fem_types _type;
-               std::string name;
-               static std::istringstream conv;
+                  static const fem_types _type;
+                  std::string name;
+                  static std::istringstream conv;
 
+               public:
+
+                  b_type(const std::string&);
+
+                  virtual ~b_type() {};
+
+                  virtual fem_types type() const = 0;
+
+               };
+            }
+
+            class card : public __base::b_type {
             public:
 
-               base(const std::string&);
+               card(const std::string &name) : __base::b_type(name) {};
 
-               virtual ~base() {};
-
-               virtual fem_types type() const = 0;
-
-            };
-
-            class card : public base {
-            public:
-
-               card(const std::string &name) : base(name) {};
-
-               card(void) : base("") {};
+               card(void) : __base::b_type("") {};
 
                fem_types type(void) const {return None;};
 
                std::string format() const;
             };
 
-            class empty : public base {
+            class empty : public __base::b_type {
 
             public:
 
-               empty(void) : base("") {};
+               empty(void) : __base::b_type("") {};
 
                fem_types type(void) const {return None;};
 
@@ -104,7 +106,7 @@ namespace dnvgl {
             };
 
             template <class _Ty>
-            class entry_type : public base {
+            class entry_type : public __base::b_type {
 
             public:
                virtual std::string format(const _Ty &d) const = 0;
@@ -113,14 +115,14 @@ namespace dnvgl {
 
             extern const
 #ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
+            boost::regex
 #else
-               std::regex
+            std::regex
 #endif
-               int_re;
+            int_re;
 
             template <>
-            class entry_type<long> : public base {
+            class entry_type<long> : public __base::b_type {
 
                // Integer value.
 
@@ -135,13 +137,13 @@ namespace dnvgl {
             public:
 
                entry_type(const std::string &name) :
-                  fem::types::base(name), bounds() {};
+                  fem::types::__base::b_type(name), bounds() {};
 
 
                entry_type(
                   const std::string &name,
                   const fem::type_bounds::bound<long> &bounds) :
-                  fem::types::base(name), bounds(bounds) {};
+                  fem::types::__base::b_type(name), bounds(bounds) {};
 
 /// Convert string to long
                long operator() (const std::string &inp) const {
@@ -209,14 +211,14 @@ namespace dnvgl {
             /// Boolean value.
             extern const
 #ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
+            boost::regex
 #else
-               std::regex
+            std::regex
 #endif
-               bool_re;
+            bool_re;
 
             template <>
-            class entry_type<bool> : public base {
+            class entry_type<bool> : public __base::b_type {
 
             private:
 
@@ -229,7 +231,7 @@ namespace dnvgl {
             public:
 
                entry_type(const std::string &name) :
-                  fem::types::base(name), bounds() {}
+                  fem::types::__base::b_type(name), bounds() {}
 
 
                bool operator() (const std::string &inp) const {
@@ -277,9 +279,9 @@ namespace dnvgl {
             float_re;
 
             template <>
-            class entry_type<double> : public base {
+            class entry_type<double> : public __base::b_type {
 
-            /// Real value.
+               /// Real value.
 
             private:
 
@@ -292,13 +294,13 @@ namespace dnvgl {
             public:
 
                entry_type(const std::string &name) :
-                  base(name), bounds() {};
+                  __base::b_type(name), bounds() {};
 
 
                entry_type(
                   const std::string &name,
                   const fem::type_bounds::bound<double> &bounds) :
-                  fem::types::base(name), bounds(bounds) {};
+                  fem::types::__base::b_type(name), bounds(bounds) {};
 
                /// Convert string to double
                double operator() (const std::string &inp) const {
@@ -365,7 +367,7 @@ namespace dnvgl {
             };
 
             template <>
-            class entry_type<std::string> : public base {
+            class entry_type<std::string> : public __base::b_type {
 
                // String value.
 
@@ -397,15 +399,15 @@ namespace dnvgl {
 
             extern const
 #ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex
+            boost::regex
 #else
-               std::regex
+            std::regex
 #endif
-               list_int_re;
+            list_int_re;
 
 
-               template <>
-            class entry_type<std::vector<int>> : public base {
+            template <>
+            class entry_type<std::vector<int> > : public __base::b_type {
 
                // List of integers.
 
@@ -417,7 +419,7 @@ namespace dnvgl {
 
                entry_type(
                   const std::string &name) :
-                  base(name) {};
+                  __base::b_type(name) {};
 
                std::vector<int>* operator() (const std::string &inp) const {
                   auto *value =  new std::vector<int>();
@@ -476,9 +478,9 @@ namespace dnvgl {
                   std::string out(res.str());
                   if (out.size() != 16) {
                      std::ostringstream msg("output string for value ",
-                                              std::ostringstream::ate);
+                                            std::ostringstream::ate);
                      std::copy(inp.begin(), inp.end(),
-                                 std::ostream_iterator<int>(msg, ", "));
+                               std::ostream_iterator<int>(msg, ", "));
                      msg << " of incorrect size, got length of " << out.size()
                          << " instead of allowed length of 16. " << "!" << out << "!";
                      throw errors::output_error(name, msg.str());
@@ -501,7 +503,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

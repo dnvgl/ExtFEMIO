@@ -26,31 +26,38 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long axda::nnodes(void) const {return 2;}
+         using namespace cards;
 
-el_types axda::get_type(void) const {return AXDA;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 5;
+               el_processor procs[procs_len] = {
+                  general, Preframe, Prefem, Sestra, Poseidon};
+            }
 
-namespace {
-   const size_t procs_len = 5;
-   el_processor procs[
-      procs_len] = {general, Preframe, Prefem, Sestra, Poseidon};
+            long axda::nnodes(void) const {return 2;}
+
+            el_types axda::get_type(void) const {return AXDA;}
+
+            const std::set<el_processor> axda::processors(
+               procs, procs+procs_len);
+
+            axda::axda(const gelmnt1 *data) : __base::elem(data) {}
+
+            axda::axda(const gelref1 *data) : __base::elem(data) {}
+
+            axda::axda(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> axda::processors(procs, procs+procs_len);
-
-axda::axda(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-axda::axda(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-axda::axda(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

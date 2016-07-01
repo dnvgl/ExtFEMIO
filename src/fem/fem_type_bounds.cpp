@@ -62,8 +62,6 @@ namespace dnvgl {
             bool base::has_default() const {
                return _has_default;
             }
-
-
          }
       }
    }
@@ -71,7 +69,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

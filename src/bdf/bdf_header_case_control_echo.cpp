@@ -36,15 +36,7 @@ namespace dnvgl {
                      oper.push_back(std::unique_ptr<echo::describer>(new echo::none));
                }
 
-               // echo::echo(echo::echo const &other) :
-               //    oper(other.oper) {}
-
-               const std::ostream&
-               echo::operator<< (std::ostream& os) const {
-                  return os << this;
-               }
-
-               std::ostream const &echo::put(std::ostream &os) const {
+               std::ostream &echo::put(std::ostream &os) const {
                   os << "ECHO = ";
                   bool first = true;
                   for (auto &p : this->oper) {

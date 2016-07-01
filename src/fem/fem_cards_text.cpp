@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<long> text::_form_NBYTE("NBYTE");
             const entry_type<std::string> text::_form_CONT("CONT");
 
-            text::text(const std::deque<std::string> &inp) :
+            text::text(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 9)
@@ -66,11 +66,14 @@ namespace dnvgl {
                NBYTE = _form_NBYTE(*(pos++));
 
                for (int i = 0; i < NRECS; i++) {
+                  auto pos_0 = *pos++;
+                  auto pos_1 = *pos++;
+                  auto pos_2 = *pos++;
+                  auto pos_3 = *pos++;
                   std::string cont = _form_CONT(
-                     *pos, *(pos+1), *(pos+2), *(pos+3));
+                     pos_0, pos_1, pos_2, pos_3);
                   cont.resize(NBYTE, ' ');
                   CONT.push_back(cont);
-                  pos += 4;
                }
             }
 
@@ -102,23 +105,16 @@ namespace dnvgl {
             const types
             text::card_type(void) const { return TEXT; };
 
-            const std::ostream&
-            text::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const text &card) {
-               if (card.TYPE == -1) return os;
+            std::ostream &text::put(std::ostream& os) const {
+               if (this->TYPE == -1) return os;
                os << text::head.format()
-                  << card._form_TYPE.format(card.TYPE)
-                  << card._form_SUBTYPE.format(card.SUBTYPE)
-                  << card._form_NRECS.format(card.NRECS)
-                  << card._form_NBYTE.format(card.NBYTE) << std::endl;
-               for (auto p : card.CONT)
+                  << this->_form_TYPE.format(this->TYPE)
+                  << this->_form_SUBTYPE.format(this->SUBTYPE)
+                  << this->_form_NRECS.format(this->NRECS)
+                  << this->_form_NBYTE.format(this->NBYTE) << std::endl;
+               for (auto p : this->CONT)
                   os << dnvgl::extfem::fem::types::card().format()
-                     << card._form_CONT.format(p, card.NBYTE)
+                     << this->_form_CONT.format(p, this->NBYTE)
                      << std::endl;
                return os;
             }
@@ -129,7 +125,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

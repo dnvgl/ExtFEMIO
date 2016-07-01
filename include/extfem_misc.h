@@ -38,7 +38,7 @@ namespace std {
 #else
       const char *what() const {
 #endif
-            return errorMessage.c_str();
+         return errorMessage.c_str();
       }
 
    private:
@@ -47,13 +47,28 @@ namespace std {
    };
 }
 
+namespace dnvgl {
+   namespace extfem {
+      namespace __base {
+         class outline {
+         protected:
+            outline(void);
+         public:
+            std::ostream &operator<<(std::ostream&);
+            friend std::ostream &operator<<(std::ostream&, outline const &);
+         protected:
+            virtual std::ostream &put(std::ostream&) const = 0;
+         };
+      }
+   }
+}
+
 #endif // _EXTFEM_MISC_H_
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

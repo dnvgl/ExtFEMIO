@@ -46,7 +46,7 @@ namespace dnvgl {
             const entry_type<double> gcoord::_form_YCOORD("YCOORD");
             const entry_type<double> gcoord::_form_ZCOORD("ZCOORD");
 
-            gcoord::gcoord(const std::deque<std::string> &inp) :
+            gcoord::gcoord(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 5)
@@ -71,25 +71,17 @@ namespace dnvgl {
                NODENO(NODENO),
                XCOORD(XCOORD), YCOORD(YCOORD), ZCOORD(ZCOORD) {}
 
-            const std::ostream&
-            gcoord::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
             const dnvgl::extfem::fem::cards::types
             gcoord::card_type(void) const {return GCOORD;}
 
-            std::ostream&
-            operator<< (std::ostream &os, const gcoord &card) {
-               if (card.NODENO == -1) return os;
+            std::ostream &gcoord::put(std::ostream& os) const {
+               if (this->NODENO == -1) return os;
                os << gcoord::head.format()
-                  << card._form_NODENO.format(card.NODENO)
-                  << card._form_XCOORD.format(card.XCOORD)
-                  << card._form_YCOORD.format(card.YCOORD)
-                  << card._form_ZCOORD.format(card.ZCOORD) << std::endl;
-
-               return os;
+                  << this->_form_NODENO.format(this->NODENO)
+                  << this->_form_XCOORD.format(this->XCOORD)
+                  << this->_form_YCOORD.format(this->YCOORD)
+                  << this->_form_ZCOORD.format(this->ZCOORD);
+               return os << std::endl;
             }
          }
       }
@@ -98,9 +90,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

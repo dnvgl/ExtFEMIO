@@ -29,6 +29,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
+   const char initVals[3] = { '+', '*', ',' };
+
    const void _stderr_report(std::string const &msg) {
       std::cerr << msg << std::endl;
    }
@@ -36,63 +38,7 @@ namespace {
    const void _stdout_report(std::string const &msg) {
       std::cout << msg << std::endl;
    }
-}
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
-
-            const void(*note_report)(std::string const &) = &_stdout_report;
-            const void(*info_report)(std::string const &) = &_stderr_report;
-            const void(*warn_report)(std::string const &) = &_stderr_report;
-            const void(*error_report)(std::string const &) = &_stderr_report;
-
-
-
-            card::card(std::deque<std::string> const &inp) {}
-
-            card::card() {}
-
-            unknown::unknown(std::deque<std::string> const &inp) :
-               card(inp), content(inp) {};
-
-            const types
-            unknown::card_type(void) const { return UNKNOWN; }
-
-            const std::ostream&
-            unknown::operator<< (std::ostream &os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-               operator<< (std::ostream &os, unknown const &card) {
-               throw errors::error("can't write UNKNOWN.");
-               return os;
-            }
-         }
-      }
-   }
-}
-
-namespace {
-   const char initVals[3] = { '+', '*', ',' };
-}
-
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
-            fem::types::empty card::empty = fem::types::empty();
-
-            fem::types::card card::head = fem::types::card("<DUMMY>");
-         }
-      }
-   }
-}
-
-namespace {
    using namespace dnvgl::extfem::fem;
 
    const size_t map_pair_entries = 37;
@@ -142,31 +88,59 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
+
+            const void(*note_report)(std::string const &) = &_stdout_report;
+            const void(*info_report)(std::string const &) = &_stderr_report;
+            const void(*warn_report)(std::string const &) = &_stderr_report;
+            const void(*error_report)(std::string const &) = &_stderr_report;
+
+            unknown::unknown(std::list<std::string> const &inp) :
+               __base::card(inp), content(inp) {};
+
+            const types
+            unknown::card_type(void) const { return UNKNOWN; }
+
+            std::ostream &unknown::put(std::ostream &os) const {
+               throw errors::error("can't write UNKNOWN.");
+               return os;
+            }
+
             const std::map<std::string, types>
                cardtype_map(map_pairs, map_pairs + map_pair_entries);
 
-            void
-            card::card_split(std::deque<std::string> const &inp, std::deque<std::string> &res) {
-               std::string head;
+            namespace __base {
+               card::card(std::list<std::string> const &inp) {}
 
-               bool first = true;
+               card::card() {}
 
-               res.clear();
+               fem::types::empty const card::empty = fem::types::empty();
 
-               for (auto &pos : inp) {
-                  head = extfem::string::string(pos.substr(0, 8)).trim();
-                  if (first)
-                     res.push_back(string::string(head).trim("\t\n"));
-                  std::string tmp(string::string(pos).trim("\t\n"));
-                  tmp.resize(80, ' ');
-                  tmp = tmp.substr(8);
-                  for (int i=0; i<4; ++i)
-                     res.push_back(tmp.substr(i*16, 16));
-                  first = false;
+               fem::types::card const card::head = fem::types::card("<DUMMY>");
+
+
+               void
+               card::card_split(std::list<std::string> const &inp, std::list<std::string> &res) {
+                  std::string head;
+
+                  bool first = true;
+
+                  res.clear();
+
+                  for (auto &pos : inp) {
+                     head = extfem::string::string(pos.substr(0, 8)).trim();
+                     if (first)
+                        res.push_back(string::string(head).trim("\t\n"));
+                     std::string tmp(string::string(pos).trim("\t\n"));
+                     tmp.resize(80, ' ');
+                     tmp = tmp.substr(8);
+                     for (int i=0; i<4; ++i)
+                        res.push_back(tmp.substr(i*16, 16));
+                     first = false;
+                  }
                }
             }
 
-            base_beam_prop::base_beam_prop(std::deque<std::string> const &inp) :
+            base_beam_prop::base_beam_prop(std::list<std::string> const &inp) :
                card(inp) {}
 
             base_beam_prop::base_beam_prop() :
@@ -177,7 +151,7 @@ namespace dnvgl {
 
             const dnvgl::extfem::fem::types::entry_type<long> base_beam_prop::_form_GEONO("GEONO");
 
-            base_material::base_material(std::deque<std::string> const &inp) :
+            base_material::base_material(std::list<std::string> const &inp) :
                card(inp) {}
 
             base_material::base_material() :
@@ -189,10 +163,10 @@ namespace dnvgl {
             const dnvgl::extfem::fem::types::entry_type<long> base_material::_form_MATNO("MATNO");
 
             void
-            dispatch(std::deque<std::string> const &inp, std::unique_ptr<fem::cards::card> &res) {
+            dispatch(std::list<std::string> const &inp, std::unique_ptr<__base::card> &res) {
 
                try {
-                  std::string key(inp.at(0));
+                  std::string key(inp.front());
                   switch (cardtype_map.at(key)) {
                   case DATE:
                      res = std::make_unique<fem::cards::date>(inp);
@@ -299,12 +273,12 @@ namespace dnvgl {
                   case BEUSLO:
                      res = std::make_unique<fem::cards::beuslo>(inp);
                      break;
-                  // These are not real card types, they can't be returned
+                     // These are not real card types, they can't be returned
                   case UNKNOWN:
                      res = std::make_unique<fem::cards::unknown>(inp);
                   }
                } catch (std::out_of_range) {
-                 res = std::make_unique<fem::cards::unknown>(inp);
+                  res = std::make_unique<fem::cards::unknown>(inp);
                }
             }
          }
@@ -312,9 +286,9 @@ namespace dnvgl {
    }
 }
 
+
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

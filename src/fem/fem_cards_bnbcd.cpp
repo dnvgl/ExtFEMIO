@@ -48,7 +48,7 @@ namespace dnvgl {
             const entry_type<long> bnbcd::_form_NDOF("NDOF");
             const entry_type<long> bnbcd::_form_FIX("FIX");
 
-            bnbcd::bnbcd(const std::deque<std::string> &inp) :
+            bnbcd::bnbcd(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 4)
@@ -82,25 +82,18 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             bnbcd::card_type(void) const {return BNBCD;}
 
-            const std::ostream&
-            bnbcd::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const bnbcd &card) {
-               if (card.NODENO == -1) return os;
+            std::ostream &bnbcd::put(std::ostream& os) const {
+               if (this->NODENO == -1) return os;
                os << bnbcd::head.format()
-                  << card._form_NODENO.format(card.NODENO)
-                  << card._form_NDOF.format(card.NDOF);
+                  << this->_form_NODENO.format(this->NODENO)
+                  << this->_form_NDOF.format(this->NDOF);
                long cnt = 2;
-               for (long i = 0; i < card.NDOF; i++) {
+               for (long i = 0; i < this->NDOF; i++) {
                   if (cnt == 4) {
                      os << std::endl << dnvgl::extfem::fem::types::card().format();
                      cnt = 0;
                   }
-                  os << card._form_FIX.format(card.FIX[i]);
+                  os << this->_form_FIX.format(this->FIX[i]);
                   cnt += 1;
                }
                os << std::endl;
@@ -113,9 +106,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

@@ -45,7 +45,7 @@ namespace dnvgl {
             const entry_type<double> gunivec::_form_UNIY("UNIY");
             const entry_type<double> gunivec::_form_UNIZ("UNIZ");
 
-            gunivec::gunivec(const std::deque<std::string> &inp) :
+            gunivec::gunivec(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 5)
@@ -74,20 +74,13 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             gunivec::card_type(void) const {return GUNIVEC;}
 
-            const std::ostream&
-            gunivec::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const gunivec &card) {
-               if (card.TRANSNO == -1) return os;
+            std::ostream &gunivec::put(std::ostream& os) const {
+               if (this->TRANSNO == -1) return os;
                os << gunivec::head.format()
-                  << card._form_TRANSNO.format(card.TRANSNO)
-                  << card._form_UNIX.format(card.UNIX)
-                  << card._form_UNIY.format(card.UNIY)
-                  << card._form_UNIZ.format(card.UNIZ)
+                  << this->_form_TRANSNO.format(this->TRANSNO)
+                  << this->_form_UNIX.format(this->UNIX)
+                  << this->_form_UNIY.format(this->UNIY)
+                  << this->_form_UNIZ.format(this->UNIZ)
                   << std::endl;
                return os;
             }
@@ -98,9 +91,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

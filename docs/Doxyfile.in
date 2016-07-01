@@ -2363,7 +2363,6 @@ GENERATE_LEGEND        = YES
 DOT_CLEANUP            = YES
 
 ##! Local Variables:
-##! ispell-local-dictionary: "english"
 ##! indent-tabs-mode: nil
 ##! compile-command: "make -C ../.. check doxyfile.stamp -j8"
 ##! coding: utf-8

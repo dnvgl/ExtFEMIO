@@ -30,8 +30,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::bdf::cards;
-
 namespace {
    static const size_t dimnum1_len = 1;
    static const size_t dimnum2_len = 2;
@@ -59,19 +57,28 @@ namespace {
    const std::set<std::string> dimnum6_set(dimnum6_init, dimnum6_init + dimnum6_len);
    const std::set<std::string> dimnum10_set(dimnum10_init, dimnum10_init + dimnum10_len);
 }
-const std::set<std::string> l_geom::dimnum1(dimnum1_set);
-const std::set<std::string> l_geom::dimnum2(dimnum2_set);
-const std::set<std::string> l_geom::dimnum3(dimnum3_set);
-const std::set<std::string> l_geom::dimnum4(dimnum4_set);
-const std::set<std::string> l_geom::dimnum5(dimnum5_set);
-const std::set<std::string> l_geom::dimnum6(dimnum6_set);
-const std::set<std::string> l_geom::dimnum10(dimnum10_set);
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
+         namespace cards {
+            namespace __base {
+               const std::set<std::string> l_geom::dimnum1(dimnum1_set);
+               const std::set<std::string> l_geom::dimnum2(dimnum2_set);
+               const std::set<std::string> l_geom::dimnum3(dimnum3_set);
+               const std::set<std::string> l_geom::dimnum4(dimnum4_set);
+               const std::set<std::string> l_geom::dimnum5(dimnum5_set);
+               const std::set<std::string> l_geom::dimnum6(dimnum6_set);
+               const std::set<std::string> l_geom::dimnum10(dimnum10_set);
+            }
+         }
+      }
+   }
+}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

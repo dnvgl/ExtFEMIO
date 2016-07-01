@@ -47,14 +47,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
-   std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   std::deque<std::string> lines;
+   std::list<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   std::list<std::string> lines;
 
    SECTION("MISOSEL (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "MISOSEL  4.10000000e+001 2.06000000e+008 3.00032000e-001 7.80000000e+000\n",
             "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       misosel probe(lines);
 
       CHECK(probe.MATNO == 41);
@@ -68,10 +68,10 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
    }
 
    SECTION("MISOSEL (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "MISOSEL  4.10000000e+01  2.06000000e+08  3.00032000e-01  7.80000000e+00 \n",
             "         0.00000000e+00  0.00000000e+00  1.00000000e+00  2.34000000e+02 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       misosel probe(lines);
 
       CHECK(probe.MATNO == 41);
@@ -87,13 +87,13 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 
 TEST_CASE("FEMIO-27: Failing to import MISOEL card from SESAM GeniE FEM file") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("Failing card") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "MISOSEL  1.00000000e+000 2.06000000e+008 3.00000012e-001 7.84999990e+000\n",
             "         0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       misosel probe(lines);
 
       CHECK(probe.MATNO == 1);
@@ -136,13 +136,13 @@ TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
 
 TEST_CASE("FEM MISOSEL conversion from own output.", "[fem_misosel,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("MISOEL (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "MISOSEL +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       misosel probe(lines);
 
       CHECK(probe.MATNO == 1);
@@ -156,10 +156,10 @@ TEST_CASE("FEM MISOSEL conversion from own output.", "[fem_misosel,in/out]") {
    }
 
    SECTION("MISOEL (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "MISOSEL +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00\n"});
-            card::card_split(data, lines);
+            __base::card::card_split(data, lines);
       misosel probe(lines);
 
       CHECK(probe.MATNO == 1);
@@ -175,7 +175,6 @@ TEST_CASE("FEM MISOSEL conversion from own output.", "[fem_misosel,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -65,7 +65,6 @@ static char THIS_FILE[] = __FILE__;
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

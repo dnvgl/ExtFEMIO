@@ -65,7 +65,7 @@ namespace dnvgl {
                CPLXVAL = cplxval;
             }
 
-            param::param(std::deque<std::string> const &inp) :
+            param::param(std::list<std::string> const &inp) :
                   card(inp) {
 
                const bdf::types::entry_type<long> form_V_I("int val");
@@ -116,40 +116,23 @@ namespace dnvgl {
                }
             }
 
-            void param::add_collect(
-               std::deque<std::unique_ptr<format_entry>> &res,
-               const param &card) const {
-               res.push_back(format<std::string>(card.form_N, card.N));
+            void param::collect_outdata(
+               std::list<std::unique_ptr<format_entry> > &res) const {
 
-               if (card.IVAL)
-                  res.push_back(format<long>(card.form_IVAL, card.IVAL));
-               else if (card.RVAL)
-                  res.push_back(format<double>(card.form_RVAL, card.RVAL));
-               else if (card.CVAL)
-                  res.push_back(format<std::string>(card.form_CVAL, card.CVAL));
-               else if (card.CPLXVAL)
-                  res.push_back(format<std::complex<double> >(card.form_CPLXVAL, card.CPLXVAL));
+               res.push_back(format(param::head));
+
+               res.push_back(format<std::string>(this->form_N, this->N));
+
+               if (this->IVAL)
+                  res.push_back(format<long>(this->form_IVAL, this->IVAL));
+               else if (this->RVAL)
+                  res.push_back(format<double>(this->form_RVAL, this->RVAL));
+               else if (this->CVAL)
+                  res.push_back(format<std::string>(this->form_CVAL, this->CVAL));
+               else if (this->CPLXVAL)
+                  res.push_back(format<std::complex<double> >(this->form_CPLXVAL, this->CPLXVAL));
                else
                   throw errors::output_error("PARAM", "no output value.");
-            }
-
-            std::ostream& param::operator << (std::ostream& os) const {
-               os << *this;
-               return os;
-            }
-
-            std::ostream& operator<<(
-               std::ostream &os, dnvgl::extfem::bdf::cards::param const &card) {
-
-               std::deque<std::unique_ptr<format_entry>> entries;
-
-               entries.push_back(format(param::head));
-
-               card.add_collect(entries, card);
-
-               os << card.format_outlist(entries) << std::endl;
-
-               return os;
             }
          }
       }

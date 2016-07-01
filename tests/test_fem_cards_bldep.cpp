@@ -46,10 +46,10 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
 
-   std::deque<std::string> lines; 
+   std::list<std::string> lines; 
 
    SECTION("BLDEP (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BLDEP    1.10720000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000\n",
          "         1.00000000e+000 1.00000000e+000 1.00000000e+000 0.00000000e+000\n",
          "         1.00000000e+000 6.00000000e+000 6.43000000e+003 0.00000000e+000\n",
@@ -60,7 +60,7 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
          "         3.00000000e+000 3.00000000e+000 1.00000000e+000 0.00000000e+000\n",
          "         3.00000000e+000 5.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         3.00000000e+000 4.00000000e+000-6.43000000e+003 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bldep probe(lines);
 
       CHECK(probe.NODENO == 11072);
@@ -75,7 +75,7 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
    }
 
    SECTION("BLDEP (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BLDEP    1.10720000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000\n",
          "         1.00000000e+000 1.00000000e+000 1.00000000e+000 0.00000000e+000\n",
          "         1.00000000e+000 6.00000000e+000 6.43000000e+003 0.00000000e+000\n",
@@ -86,7 +86,7 @@ TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
          "         3.000000000e+00 3.000000000e+00 1.000000000e+00 0.000000000e+00\n",
          "         3.000000000e+00 5.000000000e+00 0.000000000e+00 0.000000000e+00\n",
          "         3.000000000e+00 4.000000000e+00-6.43000000e+03  0.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bldep probe(lines);
 
       CHECK(probe.NODENO == 11072);
@@ -149,10 +149,10 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
 
 TEST_CASE("FEM BLDEP conversion from own output.", "[fem_bldep,in/out]") {
 
-   std::deque<std::string> lines; 
+   std::list<std::string> lines; 
 
    SECTION("BLDEP (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "BLDEP   +1.000000000e+00+2.000000000e+00+6.000000000e+00+6.000000000e+00\n",
          "        +1.000000000e+00+3.000000000e+00+1.000000000e+00            0.00\n",
          "        +1.000000000e+00+2.000000000e+00+2.000000000e+00            0.00\n",
@@ -160,7 +160,7 @@ TEST_CASE("FEM BLDEP conversion from own output.", "[fem_bldep,in/out]") {
          "        +2.000000000e+00+3.000000000e+00+4.000000000e+00            0.00\n",
          "        +2.000000000e+00+2.000000000e+00+5.000000000e+00            0.00\n",
          "        +2.000000000e+00+1.000000000e+00+6.000000000e+00            0.00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       bldep probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -175,7 +175,6 @@ TEST_CASE("FEM BLDEP conversion from own output.", "[fem_bldep,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

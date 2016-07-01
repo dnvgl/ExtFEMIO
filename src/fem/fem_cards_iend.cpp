@@ -42,7 +42,7 @@ namespace dnvgl {
 
             const entry_type<long> iend::_form_CONT("SLEVEL");
 
-            iend::iend(const std::deque<std::string> &inp) :
+            iend::iend(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 1)
@@ -62,17 +62,10 @@ namespace dnvgl {
             const types
             iend::card_type(void) const { return IEND; };
 
-            const std::ostream&
-            iend::operator<<(std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<<(std::ostream &os, const iend &card) {
-               if (card.CONT == -1) return os;
+            std::ostream &iend::put(std::ostream& os) const {
+               if (this->CONT == -1) return os;
                os << iend::head.format()
-                  << card._form_CONT.format(card.CONT)
+                  << this->_form_CONT.format(this->CONT)
                   << iend::empty.format()
                   << iend::empty.format()
                   << iend::empty.format() << std::endl;
@@ -86,7 +79,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

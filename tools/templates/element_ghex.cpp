@@ -25,21 +25,23 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-ghex::ghex(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   __base(data) {}
+         using namespace cards;
 
-ghex::ghex(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   __base(data) {}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 2;
+               el_processor procs[procs_len] = {general, Sestra};
+            }
 
-ghex::ghex(const __base *p) :
-   __base(p) {}
+            ghex::ghex(const gelmnt1 *data) : __base::elem(data) {}
 
-namespace {
-   const size_t procs_len = 2;
-   el_processor procs[procs_len] = {general, Sestra};
-}
+            ghex::ghex(const gelref1 *data) : __base::elem(data) {}
+
+            ghex::ghex(const __base::elem *p) : __base::elem(p) {}
 
 {% for num, pos in res %}
 /**
@@ -50,32 +52,33 @@ namespace {
 {{ gen_nodepos(pos, 20 * " ") }}
 */
 
-long ghex1{{ "%02d"|format(num) }}::nnodes(void) const {
-   return {{ pos|length + 20 }};
-}
+            long ghex1{{ "%02d"|format(num) }}::nnodes(void) const {
+               return {{ pos|length + 20 }};
+            }
 
-el_types ghex1{{ "%02d"|format(num) }}::get_type() const {
-   return GHEX1{{ "%02d"|format(num) }};
-}
+            el_types ghex1{{ "%02d"|format(num) }}::get_type() const {
+               return GHEX1{{ "%02d"|format(num) }};
+            }
 
-const std::set<el_processor> ghex1{{ "%02d"|format(num) }}::processors(procs, procs+procs_len);
+            const std::set<el_processor> ghex1{{ "%02d"|format(num) }}::processors(procs, procs+procs_len);
 
-ghex1{{ "%02d"|format(num) }}::ghex1{{ "%02d"|format(num) }}(
-   const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::ghex(data) {}
+            ghex1{{ "%02d"|format(num) }}::ghex1{{ "%02d"|format(num) }}(
+               const gelmnt1 *data) : ghex(data) {}
 
-ghex1{{ "%02d"|format(num) }}::ghex1{{ "%02d"|format(num) }}(
-   const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::ghex(data) {}
+            ghex1{{ "%02d"|format(num) }}::ghex1{{ "%02d"|format(num) }}(
+               const gelref1 *data) : ghex(data) {}
 
-ghex1{{ "%02d"|format(num) }}::ghex1{{ "%02d"|format(num) }}(
-   const __base *data) :
-   ghex(data) {}
+            ghex1{{ "%02d"|format(num) }}::ghex1{{ "%02d"|format(num) }}(
+               const __base::elem *data) :
+            ghex(data) {}
 {% endfor %}
+         }
+      }
+   }
+}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -39,8 +39,7 @@ endif
 
 # Local Variables:
 # mode: makefile
-# ispell-local-dictionary: "english"
-# compile-command: "make check -j 8"
+# compile-command: "make check -j8"
 # End:
 
 # End of Makefile.am

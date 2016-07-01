@@ -29,14 +29,34 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
+         namespace cards {
 
-bdf::types::card enddata::head = bdf::types::card("ENDDATA");
+            enddata::enddata(const std::list<std::string> &inp) :
+               __base::card(inp) {}
+
+            enddata::enddata(void) : __base::card() {}
+
+            const types enddata::card_type(void) const {
+               return ENDDATA;
+            }
+
+            bdf::types::card enddata::head = bdf::types::card("ENDDATA");
+
+            void enddata::collect_outdata(
+               std::list<std::unique_ptr<format_entry> > &res) const {
+               res.push_back(format(enddata::head));
+               return;
+            }
+         }
+      }
+   }
+}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

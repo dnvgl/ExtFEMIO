@@ -28,25 +28,32 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
-using namespace bdf::cards;
-using bdf::types::entry_type;
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
 
-namespace {
-   static const long cl1 = 1;
+         using types::entry_type;
+         using namespace type_bounds;
+
+         namespace cards {
+            namespace {
+               static const long cl1 = 1;
+            }
+
+            const entry_type<long> __base::beam_base::form_PID(
+               "PID", bound<long>(&cl1));
+
+            const entry_type<long> __base::beam_base::form_MID(
+               "MID", bound<long>(&cl1, nullptr, nullptr, true));
+         }
+      }
+   }
 }
-
-const entry_type<long> beam_base::form_PID(
-   "PID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<long> beam_base::form_MID(
-   "MID",
-   bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

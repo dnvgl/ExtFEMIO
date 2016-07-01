@@ -47,12 +47,12 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
           "[bdf_PARAM]" ) {
 
    SECTION("param read int") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   IRES     1                                                      \n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       param probe(lines);
       CHECK(probe.N == "IRES");
       CHECK(probe.IVAL.value == 1);
@@ -62,12 +62,12 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
    }
 
    SECTION("param read real") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   ADPCON   1.                                                     \n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       param probe(lines);
       CHECK(probe.N == "ADPCON");
       CHECK_FALSE(probe.IVAL);
@@ -77,12 +77,12 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
    }
 
    SECTION("param read char") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   ACOUT    PEAK                                                   \n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       param probe(lines);
       CHECK(probe.N == "ACOUT");
       CHECK_FALSE(probe.IVAL);
@@ -92,12 +92,12 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
    }
 
    SECTION("param read complex") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   CP1      2.      3.                                             \n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       param probe(lines);
       CHECK(probe.N == "CP1");
       CHECK_FALSE(probe.IVAL);
@@ -147,5 +147,5 @@ TEST_CASE("BDF PARAM types output.", "[bdf_param,out]" ) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

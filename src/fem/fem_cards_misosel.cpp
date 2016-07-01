@@ -49,7 +49,7 @@ namespace dnvgl {
             const entry_type<double> misosel::_form_DUMMY("DUMMY");
             const entry_type<double> misosel::_form_YIELD("YIELD");
 
-            misosel::misosel(const std::deque<std::string> &inp) :
+            misosel::misosel(const std::list<std::string> &inp) :
                base_material(inp), DUMMY(0.), YIELD(0.) {
 
                if (inp.size() < 7)
@@ -93,27 +93,20 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             misosel::card_type(void) const {return MISOSEL;}
 
-            const std::ostream&
-            misosel::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const misosel &card) {
-               if (card.MATNO == -1) return os;
+            std::ostream &misosel::put(std::ostream& os) const {
+               if (this->MATNO == -1) return os;
                os << misosel::head.format()
-                  << card._form_MATNO.format(card.MATNO)
-                  << card._form_YOUNG.format(card.YOUNG)
-                  << card._form_POISS.format(card.POISS)
-                  << card._form_RHO.format(card.RHO)
+                  << this->_form_MATNO.format(this->MATNO)
+                  << this->_form_YOUNG.format(this->YOUNG)
+                  << this->_form_POISS.format(this->POISS)
+                  << this->_form_RHO.format(this->RHO)
                   << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_DAMP.format(card.DAMP)
-                  << card._form_ALPHA.format(card.ALPHA);
-               if ((card.DUMMY || card.YIELD))
-                  os << card._form_DUMMY.format(card.DUMMY)
-                     << card._form_YIELD.format(card.YIELD);
+                  << this->_form_DAMP.format(this->DAMP)
+                  << this->_form_ALPHA.format(this->ALPHA);
+               if ((this->DUMMY || this->YIELD))
+                  os << this->_form_DUMMY.format(this->DUMMY)
+                     << this->_form_YIELD.format(this->YIELD);
                os << std::endl;
                return os;
             }
@@ -124,9 +117,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

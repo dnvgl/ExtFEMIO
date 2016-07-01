@@ -61,7 +61,7 @@ ImportFEM::Importer::Importer(std::string iPath) : iStream(iPath) {
    }
 
 // Convert Sesam ODOF list to BMF DOF string.
-   void ImportFEM::Importer::genNodeDOF(::std::deque<int> &inp, ::std::string &oNodeDOF) {
+   void ImportFEM::Importer::genNodeDOF(::std::list<int> &inp, ::std::string &oNodeDOF) {
       oNodeDOF = ::std::string(6, '0');
 
       for (auto &pos : inp)
@@ -70,7 +70,7 @@ ImportFEM::Importer::Importer(std::string iPath) : iStream(iPath) {
 
    bool ImportFEM::Importer::readFEM() {
 
-      deque<::std::string> inp_card;
+      list<::std::string> inp_card;
 
       using namespace ::dnvgl::Poseidon::ImportFEM::EntryStore;
 
@@ -107,7 +107,7 @@ ImportFEM::Importer::Importer(std::string iPath) : iStream(iPath) {
       CNDProgress *xpProgress = nullptr;
       xpProgress = new CNDProgress("reading data ",100);
 
-      ::std::deque<std::string> inp_stack;
+      ::std::list<std::string> inp_stack;
       ::std::unique_ptr<::dnvgl::extfem::fem::cards::card> current;
 
       try {
@@ -301,7 +301,7 @@ ImportFEM::Importer::Importer(std::string iPath) : iStream(iPath) {
          */
          /*
            xpProgress = new CNDProgress("Processing beams from CBEAM elements ", cbeam_store.size() / cmark);
-           Entries::processBarBeamList<vector<std::unique_ptr<::dnvgl::extfem::fem::cards::cbeam>>, dnvgl::Poseidon::ImportFEM::EntryStore::beam_props>(cbeam_store, beam_prop_store, grpInfo, mat_store, grid_store, xpProgress, cmark);
+           Entries::processBarBeamList<vector<std::unique_ptr<::dnvgl::extfem::fem::cards::cbeam> >, dnvgl::Poseidon::ImportFEM::EntryStore::beam_props>(cbeam_store, beam_prop_store, grpInfo, mat_store, grid_store, xpProgress, cmark);
            if (xpProgress != nullptr) {
            delete xpProgress;
            xpProgress = nullptr;
@@ -314,7 +314,7 @@ ImportFEM::Importer::Importer(std::string iPath) : iStream(iPath) {
          */
          /*
            xpProgress = new CNDProgress("Processing beams from CBAR elements ", cbar_store.size() / cmark);
-           Entries::processBarBeamList<vector<std::unique_ptr<::dnvgl::extfem::fem::cards::cbar>>, dnvgl::Poseidon::ImportFEM::EntryStore::bar_props>(cbar_store, bar_prop_store, grpInfo, mat_store, grid_store, xpProgress, cmark);
+           Entries::processBarBeamList<vector<std::unique_ptr<::dnvgl::extfem::fem::cards::cbar> >, dnvgl::Poseidon::ImportFEM::EntryStore::bar_props>(cbar_store, bar_prop_store, grpInfo, mat_store, grid_store, xpProgress, cmark);
            if (xpProgress != nullptr) {
            delete xpProgress;
            xpProgress = nullptr;
@@ -395,7 +395,6 @@ main (int argc, char **argv) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

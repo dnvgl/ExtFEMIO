@@ -17,7 +17,7 @@ namespace {
       = "@(#) $Id$";
 }
 
-#include <deque>
+#include <list>
 #include <string>
 #include <memory>
 
@@ -31,52 +31,53 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
-using bdf::types::entry_type;
-
 namespace {
    static const long cl0 = 0, cl1 = 1;
    static const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
 }
 
-const entry_type<long> mat::form_MID(
-   "MID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<double> mat::form_G(
-   "G",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat::form_RHO(
-   "RHO",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_A(
-   "A",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_TREF(
-   "TREF",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_GE(
-   "GE",
-   bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_ST(
-   "ST",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat::form_SC(
-   "SC",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat::form_SS(
-   "SS",
-   bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<long> mat::form_MCSID(
-   "MCSID",
-   bdf::type_bounds::bound<long>(&cl0, nullptr, nullptr, true));
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
 
-mat::mat(const std::deque<std::string> &inp) : card(inp) {}
+         using types::entry_type;
+         using namespace type_bounds;
 
-mat::mat() : card() {}
+         namespace cards {
+            namespace __base {
+
+               const entry_type<long> mat::form_MID(
+                  "MID", bound<long>(&cl1));
+               const entry_type<double> mat::form_G(
+                  "G", bound<double>(&cd0, nullptr, nullptr, true));
+               const entry_type<double> mat::form_RHO(
+                  "RHO", bound<double>(nullptr, nullptr, nullptr, true));
+               const entry_type<double> mat::form_A(
+                  "A", bound<double>(nullptr, nullptr, nullptr, true));
+               const entry_type<double> mat::form_TREF(
+                  "TREF", bound<double>(nullptr, nullptr, nullptr, true));
+               const entry_type<double> mat::form_GE(
+                  "GE", bound<double>(nullptr, nullptr, nullptr, true));
+               const entry_type<double> mat::form_ST(
+                  "ST", bound<double>(&cd0, nullptr, nullptr, true));
+               const entry_type<double> mat::form_SC(
+                  "SC", bound<double>(&cd0, nullptr, nullptr, true));
+               const entry_type<double> mat::form_SS(
+                  "SS", bound<double>(&cd0, nullptr, nullptr, true));
+               const entry_type<long> mat::form_MCSID(
+                  "MCSID", bound<long>(&cl0, nullptr, nullptr, true));
+
+               mat::mat(const std::list<std::string> &inp) : card(inp) {}
+
+               mat::mat() : card() {}
+            }
+         }
+      }
+   }
+}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

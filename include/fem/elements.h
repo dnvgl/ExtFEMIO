@@ -67,94 +67,97 @@ namespace dnvgl {
                           Splice, Wadam, Wajac,
                           Poseidon} el_processor;
 
+            namespace __base {
             /** Base class for FEM element representation.
              */
-            class __base {
-            protected:
-               static const el_types type;
-               __base(void);
-            public:
-               __base(const dnvgl::extfem::fem::cards::gelmnt1*);
-               __base(const dnvgl::extfem::fem::cards::gelref1*);
-               __base(const __base*);
+               class elem {
 
-               /** Element number ->
-                   dnvgl::extfem::fem::cards::gelmnt1::ELNOX
-               */
-               long eleno;
-               /** internal element identifier ->
-                   dnvgl::extfem::fem::cards::gelmnt1::ELNO, ->
-                   dnvgl::extfem::fem::cards::gelref1::ELNO
-               */
-               long elident;
-               /** Additional element information ->
-                   dnvgl::extfem::fem::cards::gelmnt1::ELTYAD
-               */
-               long el_add;
-               /** node references for element ->
-                   dnvgl::extfem::fem::cards::gelmnt1::NODIN
-               */
-               std::vector<long> nodes;
-               /** Material reference ->
-                   dnvgl::extfem::fem::cards::gelref1::MATNO
-               */
-               long matref;
-               /** additional data type number ->
-                   dnvgl::extfem::fem::cards::gelref1::ADDNO
-               */
-               long add_no;
-               /** Integration station reference for stiffness
-                   matrix-> dnvgl::extfem::fem::cards::gelref1::INTNO
-               */
-               long intno;
-               /** Integration station reference for mass and damping
-                   matrices->
-                   dnvgl::extfem::fem::cards::gelref1::INTNO
-               */
-               long mass_intno;
-               /** Reference to initial strain information (unused).
-                   -> dnvgl::extfem::fem::cards::gelref1::STRANO
-               */
-               long i_strain_ref;
-               /** Reference to initial stress information (unused).
-                   -> dnvgl::extfem::fem::cards::gelref1::STRENO
-               */
-               long i_stress_ref;
-               /** Reference to stresspoint definition ->
-                   dnvgl::extfem::fem::cards::gelref1::STREPONO
-               */
-               long strpoint_ref;
-               /** Geometry information reference for element. ->
-                   dnvgl::extfem::fem::cards::gelref1::GEONO_OPT /
-                   dnvgl::extfem::fem::cards::gelref1::GEONO
-               */
-               std::vector<long> section;
-               /** Fixation information reference for element. ->
-                   dnvgl::extfem::fem::cards::gelref1::FIXNO_OPT /
-                   dnvgl::extfem::fem::cards::gelref1::FIXNO
-               */
-               std::vector<long> fixations;
-               /** Eccentricity information reference for element. ->
-                   dnvgl::extfem::fem::cards::gelref1::ECCNO_OPT /
-                   dnvgl::extfem::fem::cards::gelref1::ECCNO
-               */
-               std::vector<long> eccentrities;
-               /** Local coordinate system information reference for
-                   element. ->
-                   dnvgl::extfem::fem::cards::gelref1::TRANSNO_OPT /
-                   dnvgl::extfem::fem::cards::gelref1::TRANSNO
-               */
-               std::vector<long> csys;
+               protected:
+                  static const el_types type;
+                  elem(void);
+               public:
+                  elem(const dnvgl::extfem::fem::cards::gelmnt1*);
+                  elem(const dnvgl::extfem::fem::cards::gelref1*);
+                  elem(const elem*);
 
-               virtual void add(dnvgl::extfem::fem::cards::gelref1 const*);
-               virtual void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                  /** Element number ->
+                      dnvgl::extfem::fem::cards::gelmnt1::ELNOX
+                  */
+                  long eleno;
+                  /** internal element identifier ->
+                      dnvgl::extfem::fem::cards::gelmnt1::ELNO, ->
+                      dnvgl::extfem::fem::cards::gelref1::ELNO
+                  */
+                  long elident;
+                  /** Additional element information ->
+                      dnvgl::extfem::fem::cards::gelmnt1::ELTYAD
+                  */
+                  long el_add;
+                  /** node references for element ->
+                      dnvgl::extfem::fem::cards::gelmnt1::NODIN
+                  */
+                  std::vector<long> nodes;
+                  /** Material reference ->
+                      dnvgl::extfem::fem::cards::gelref1::MATNO
+                  */
+                  long matref;
+                  /** additional data type number ->
+                      dnvgl::extfem::fem::cards::gelref1::ADDNO
+                  */
+                  long add_no;
+                  /** Integration station reference for stiffness
+                      matrix-> dnvgl::extfem::fem::cards::gelref1::INTNO
+                  */
+                  long intno;
+                  /** Integration station reference for mass and damping
+                      matrices->
+                      dnvgl::extfem::fem::cards::gelref1::INTNO
+                  */
+                  long mass_intno;
+                  /** Reference to initial strain information (unused).
+                      -> dnvgl::extfem::fem::cards::gelref1::STRANO
+                  */
+                  long i_strain_ref;
+                  /** Reference to initial stress information (unused).
+                      -> dnvgl::extfem::fem::cards::gelref1::STRENO
+                  */
+                  long i_stress_ref;
+                  /** Reference to stresspoint definition ->
+                      dnvgl::extfem::fem::cards::gelref1::STREPONO
+                  */
+                  long strpoint_ref;
+                  /** Geometry information reference for element. ->
+                      dnvgl::extfem::fem::cards::gelref1::GEONO_OPT /
+                      dnvgl::extfem::fem::cards::gelref1::GEONO
+                  */
+                  std::vector<long> section;
+                  /** Fixation information reference for element. ->
+                      dnvgl::extfem::fem::cards::gelref1::FIXNO_OPT /
+                      dnvgl::extfem::fem::cards::gelref1::FIXNO
+                  */
+                  std::vector<long> fixations;
+                  /** Eccentricity information reference for element. ->
+                      dnvgl::extfem::fem::cards::gelref1::ECCNO_OPT /
+                      dnvgl::extfem::fem::cards::gelref1::ECCNO
+                  */
+                  std::vector<long> eccentrities;
+                  /** Local coordinate system information reference for
+                      element. ->
+                      dnvgl::extfem::fem::cards::gelref1::TRANSNO_OPT /
+                      dnvgl::extfem::fem::cards::gelref1::TRANSNO
+                  */
+                  std::vector<long> csys;
 
-               virtual long nnodes(void) const = 0;
+                  virtual void add(dnvgl::extfem::fem::cards::gelref1 const*);
+                  virtual void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
 
-               virtual el_types get_type(void) const = 0;
-            };
+                  virtual long nnodes(void) const = 0;
 
-            class undef : public __base {
+                  virtual el_types get_type(void) const = 0;
+               };
+            }
+
+            class undef : public __base::elem {
             public:
                undef (void);
                undef(const dnvgl::extfem::fem::cards::gelref1*);
@@ -164,11 +167,11 @@ namespace dnvgl {
 
             /** 2-D, 2 Node Beam
              */
-            class beps : public __base {
+            class beps : public __base::elem {
             public:
                beps(const dnvgl::extfem::fem::cards::gelmnt1*);
                beps(const dnvgl::extfem::fem::cards::gelref1*);
-               beps(const __base*);
+               beps(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -176,11 +179,11 @@ namespace dnvgl {
 
             /** Plane Constant Strain Triangle
              */
-            class csta : public __base {
+            class csta : public __base::elem {
             public:
                csta(const dnvgl::extfem::fem::cards::gelmnt1*);
                csta(const dnvgl::extfem::fem::cards::gelref1*);
-               csta(const __base*);
+               csta(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -188,11 +191,11 @@ namespace dnvgl {
 
             /** Rect. Plate. Bending Modes
              */
-            class rpbq : public __base {
+            class rpbq : public __base::elem {
             public:
                rpbq(const dnvgl::extfem::fem::cards::gelmnt1*);
                rpbq(const dnvgl::extfem::fem::cards::gelref1*);
-               rpbq(const __base*);
+               rpbq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -200,11 +203,11 @@ namespace dnvgl {
 
             /** Plane Lin. Strain Triangle
              */
-            class ilst : public __base {
+            class ilst : public __base::elem {
             public:
                ilst(const dnvgl::extfem::fem::cards::gelmnt1*);
                ilst(const dnvgl::extfem::fem::cards::gelref1*);
-               ilst(const __base*);
+               ilst(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -212,11 +215,11 @@ namespace dnvgl {
 
             /** Plane Quadrilateral Membrane Element
              */
-            class iqqe : public __base {
+            class iqqe : public __base::elem {
             public:
                iqqe(const dnvgl::extfem::fem::cards::gelmnt1*);
                iqqe(const dnvgl::extfem::fem::cards::gelref1*);
-               iqqe(const __base*);
+               iqqe(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -224,11 +227,11 @@ namespace dnvgl {
 
             /** Plane Quadrilateral Membrane Element
              */
-            class lqua : public __base {
+            class lqua : public __base::elem {
             public:
                lqua(const dnvgl::extfem::fem::cards::gelmnt1*);
                lqua(const dnvgl::extfem::fem::cards::gelref1*);
-               lqua(const __base*);
+               lqua(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -236,11 +239,11 @@ namespace dnvgl {
 
             /** Truss Element
              */
-            class tess : public __base {
+            class tess : public __base::elem {
             public:
                tess(const dnvgl::extfem::fem::cards::gelmnt1*);
                tess(const dnvgl::extfem::fem::cards::gelref1*);
-               tess(const __base*);
+               tess(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -248,11 +251,11 @@ namespace dnvgl {
 
             /** 1-Noded Mass-Matrix
              */
-            class gmas : public __base {
+            class gmas : public __base::elem {
             public:
                gmas(const dnvgl::extfem::fem::cards::gelmnt1*);
                gmas(const dnvgl::extfem::fem::cards::gelref1*);
-               gmas(const __base*);
+               gmas(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -260,11 +263,11 @@ namespace dnvgl {
 
             /** 2-Noded Mass-Matrix
              */
-            class glma : public __base {
+            class glma : public __base::elem {
             public:
                glma(const dnvgl::extfem::fem::cards::gelmnt1*);
                glma(const dnvgl::extfem::fem::cards::gelref1*);
-               glma(const __base*);
+               glma(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -272,11 +275,11 @@ namespace dnvgl {
 
             /** 2-Noded Damping-Matrix
              */
-            class glda : public __base {
+            class glda : public __base::elem {
             public:
                glda(const dnvgl::extfem::fem::cards::gelmnt1*);
                glda(const dnvgl::extfem::fem::cards::gelref1*);
-               glda(const __base*);
+               glda(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -284,11 +287,11 @@ namespace dnvgl {
 
             /** 3-D, 2 Node Beam
              */
-            class beas : public __base {
+            class beas : public __base::elem {
             public:
                beas(const dnvgl::extfem::fem::cards::gelmnt1*);
                beas(const dnvgl::extfem::fem::cards::gelref1*);
-               beas(const __base*);
+               beas(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -296,11 +299,11 @@ namespace dnvgl {
 
             /** Axial Spring
              */
-            class axis : public __base {
+            class axis : public __base::elem {
             public:
                axis(const dnvgl::extfem::fem::cards::gelmnt1*);
                axis(const dnvgl::extfem::fem::cards::gelref1*);
-               axis(const __base*);
+               axis(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -308,11 +311,11 @@ namespace dnvgl {
 
             /** Axial Damper
              */
-            class axda : public __base {
+            class axda : public __base::elem {
             public:
                axda(const dnvgl::extfem::fem::cards::gelmnt1*);
                axda(const dnvgl::extfem::fem::cards::gelref1*);
-               axda(const __base*);
+               axda(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -320,11 +323,11 @@ namespace dnvgl {
 
             /** Spring to Ground
              */
-            class gspr : public __base {
+            class gspr : public __base::elem {
             public:
                gspr(const dnvgl::extfem::fem::cards::gelmnt1*);
                gspr(const dnvgl::extfem::fem::cards::gelref1*);
-               gspr(const __base*);
+               gspr(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -332,11 +335,11 @@ namespace dnvgl {
 
             /** Damper to Ground
              */
-            class gdam : public __base {
+            class gdam : public __base::elem {
             public:
                gdam(const dnvgl::extfem::fem::cards::gelmnt1*);
                gdam(const dnvgl::extfem::fem::cards::gelref1*);
-               gdam(const __base*);
+               gdam(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -344,11 +347,11 @@ namespace dnvgl {
 
             /** Isoparametric Hexahedron
              */
-            class ihex : public __base {
+            class ihex : public __base::elem {
             public:
                ihex(const dnvgl::extfem::fem::cards::gelmnt1*);
                ihex(const dnvgl::extfem::fem::cards::gelref1*);
-               ihex(const __base*);
+               ihex(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -356,11 +359,11 @@ namespace dnvgl {
 
             /** Linear Hexahedron
              */
-            class lhex : public __base {
+            class lhex : public __base::elem {
             public:
                lhex(const dnvgl::extfem::fem::cards::gelmnt1*);
                lhex(const dnvgl::extfem::fem::cards::gelref1*);
-               lhex(const __base*);
+               lhex(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -368,11 +371,11 @@ namespace dnvgl {
 
             /** Subparametric Curved Beam
              */
-            class secb : public __base {
+            class secb : public __base::elem {
             public:
                secb(const dnvgl::extfem::fem::cards::gelmnt1*);
                secb(const dnvgl::extfem::fem::cards::gelref1*);
-               secb(const __base*);
+               secb(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -380,33 +383,35 @@ namespace dnvgl {
 
             /** General Curved Beam
              */
-            class btss : public __base {
+            class btss : public __base::elem {
             public:
                btss(const dnvgl::extfem::fem::cards::gelmnt1*);
                btss(const dnvgl::extfem::fem::cards::gelref1*);
-               btss(const __base*);
+               btss(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
             };
 
-            /** Base thin shell element definitions
-            */
-            class fem_thin_shell : public __base {
-            public:
-               fem_thin_shell(const dnvgl::extfem::fem::cards::gelmnt1*);
-               fem_thin_shell(const dnvgl::extfem::fem::cards::gelref1*);
-               fem_thin_shell(const __base*);
-            };
+            namespace __base {
+               /** Base thin shell element definitions
+                */
+               class fem_thin_shell : public __base::elem {
+               public:
+                  fem_thin_shell(const dnvgl::extfem::fem::cards::gelmnt1*);
+                  fem_thin_shell(const dnvgl::extfem::fem::cards::gelref1*);
+                  fem_thin_shell(const __base::elem*);
+               };
+            }
 
             /** Flat Quadrilateral Thin Shell (FQUS) or Free Formulation
                 Quadrilateral Shell (FQQ)
             */
-            class fqus_ffq : public fem_thin_shell {
+            class fqus_ffq : public __base::fem_thin_shell {
             public:
                fqus_ffq(const dnvgl::extfem::fem::cards::gelmnt1*);
                fqus_ffq(const dnvgl::extfem::fem::cards::gelref1*);
-               fqus_ffq(const __base*);
+               fqus_ffq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -415,11 +420,11 @@ namespace dnvgl {
             /** Flat Triangular Thin Shell (FTRS) or Free Formulation
                 Triangular Shell (FFTR)
             */
-            class ftrs_fftr : public fem_thin_shell {
+            class ftrs_fftr : public __base::fem_thin_shell {
             public:
                ftrs_fftr(const dnvgl::extfem::fem::cards::gelmnt1*);
                ftrs_fftr(const dnvgl::extfem::fem::cards::gelref1*);
-               ftrs_fftr(const __base*);
+               ftrs_fftr(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -427,11 +432,11 @@ namespace dnvgl {
 
             /** Subparametric Curved Triangular Thick Shell
              */
-            class scts : public __base {
+            class scts : public __base::elem {
             public:
                scts(const dnvgl::extfem::fem::cards::gelmnt1*);
                scts(const dnvgl::extfem::fem::cards::gelref1*);
-               scts(const __base*);
+               scts(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -439,11 +444,11 @@ namespace dnvgl {
 
             /** Subparam. Curved Triang. Thick Sandwich Elem.
              */
-            class mcts : public __base {
+            class mcts : public __base::elem {
             public:
                mcts(const dnvgl::extfem::fem::cards::gelmnt1*);
                mcts(const dnvgl::extfem::fem::cards::gelref1*);
-               mcts(const __base*);
+               mcts(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -451,11 +456,11 @@ namespace dnvgl {
 
             /** Subparametric Curved Quadrilateral Thick Shell
              */
-            class scqs : public __base {
+            class scqs : public __base::elem {
             public:
                scqs(const dnvgl::extfem::fem::cards::gelmnt1*);
                scqs(const dnvgl::extfem::fem::cards::gelref1*);
-               scqs(const __base*);
+               scqs(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -463,11 +468,11 @@ namespace dnvgl {
 
             /** Subparam. Curved Quadr. Thick Sandwich Elem.
              */
-            class mcqs : public __base {
+            class mcqs : public __base::elem {
             public:
                mcqs(const dnvgl::extfem::fem::cards::gelmnt1*);
                mcqs(const dnvgl::extfem::fem::cards::gelref1*);
-               mcqs(const __base*);
+               mcqs(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -475,11 +480,11 @@ namespace dnvgl {
 
             /** Isoparametric Triangular Prism
              */
-            class ipri : public __base {
+            class ipri : public __base::elem {
             public:
                ipri(const dnvgl::extfem::fem::cards::gelmnt1*);
                ipri(const dnvgl::extfem::fem::cards::gelref1*);
-               ipri(const __base*);
+               ipri(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -487,11 +492,11 @@ namespace dnvgl {
 
             /** Isoparametric Tetrahedron
              */
-            class itet : public __base {
+            class itet : public __base::elem {
             public:
                itet(const dnvgl::extfem::fem::cards::gelmnt1*);
                itet(const dnvgl::extfem::fem::cards::gelref1*);
-               itet(const __base*);
+               itet(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -499,11 +504,11 @@ namespace dnvgl {
 
             /** Triangular Prism
              */
-            class tpri : public __base {
+            class tpri : public __base::elem {
             public:
                tpri(const dnvgl::extfem::fem::cards::gelmnt1*);
                tpri(const dnvgl::extfem::fem::cards::gelref1*);
-               tpri(const __base*);
+               tpri(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -511,11 +516,11 @@ namespace dnvgl {
 
             /** Tetrahedron
              */
-            class tetr : public __base {
+            class tetr : public __base::elem {
             public:
                tetr(const dnvgl::extfem::fem::cards::gelmnt1*);
                tetr(const dnvgl::extfem::fem::cards::gelref1*);
-               tetr(const __base*);
+               tetr(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -523,11 +528,11 @@ namespace dnvgl {
 
             /** Subparam. Layered Curved Triangular Thick Shell
              */
-            class lcts : public __base {
+            class lcts : public __base::elem {
             public:
                lcts(const dnvgl::extfem::fem::cards::gelmnt1*);
                lcts(const dnvgl::extfem::fem::cards::gelref1*);
-               lcts(const __base*);
+               lcts(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -535,11 +540,11 @@ namespace dnvgl {
 
             /** Subparam. Layered Curved Quadrilat. Thick Shell
              */
-            class lcqs : public __base {
+            class lcqs : public __base::elem {
             public:
                lcqs(const dnvgl::extfem::fem::cards::gelmnt1*);
                lcqs(const dnvgl::extfem::fem::cards::gelref1*);
-               lcqs(const __base*);
+               lcqs(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -547,11 +552,11 @@ namespace dnvgl {
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class trs1 : public __base {
+            class trs1 : public __base::elem {
             public:
                trs1(const dnvgl::extfem::fem::cards::gelmnt1*);
                trs1(const dnvgl::extfem::fem::cards::gelref1*);
-               trs1(const __base*);
+               trs1(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -559,11 +564,11 @@ namespace dnvgl {
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class trs2 : public __base {
+            class trs2 : public __base::elem {
             public:
                trs2(const dnvgl::extfem::fem::cards::gelmnt1*);
                trs2(const dnvgl::extfem::fem::cards::gelref1*);
-               trs2(const __base*);
+               trs2(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -571,11 +576,11 @@ namespace dnvgl {
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
-            class trs3 : public __base {
+            class trs3 : public __base::elem {
             public:
                trs3(const dnvgl::extfem::fem::cards::gelmnt1*);
                trs3(const dnvgl::extfem::fem::cards::gelref1*);
-               trs3(const __base*);
+               trs3(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -583,11 +588,11 @@ namespace dnvgl {
 
             /** General Spring / Shim Element
              */
-            class glsh : public __base {
+            class glsh : public __base::elem {
             public:
                glsh(const dnvgl::extfem::fem::cards::gelmnt1*);
                glsh(const dnvgl::extfem::fem::cards::gelref1*);
-               glsh(const __base*);
+               glsh(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -595,11 +600,11 @@ namespace dnvgl {
 
             /** Axisymmetric Constant Strain Triangle
              */
-            class axcs : public __base {
+            class axcs : public __base::elem {
             public:
                axcs(const dnvgl::extfem::fem::cards::gelmnt1*);
                axcs(const dnvgl::extfem::fem::cards::gelref1*);
-               axcs(const __base*);
+               axcs(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -607,11 +612,11 @@ namespace dnvgl {
 
             /** Axisymmetric Quadrilateral
              */
-            class axlq : public __base {
+            class axlq : public __base::elem {
             public:
                axlq(const dnvgl::extfem::fem::cards::gelmnt1*);
                axlq(const dnvgl::extfem::fem::cards::gelref1*);
-               axlq(const __base*);
+               axlq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -619,11 +624,11 @@ namespace dnvgl {
 
             /** Axisymmetric Linear Strain Triangle
              */
-            class axls : public __base {
+            class axls : public __base::elem {
             public:
                axls(const dnvgl::extfem::fem::cards::gelmnt1*);
                axls(const dnvgl::extfem::fem::cards::gelref1*);
-               axls(const __base*);
+               axls(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -631,11 +636,11 @@ namespace dnvgl {
 
             /** Axisymmetric Linear Strain Quadrilateral
              */
-            class axqq : public __base {
+            class axqq : public __base::elem {
             public:
                axqq(const dnvgl::extfem::fem::cards::gelmnt1*);
                axqq(const dnvgl::extfem::fem::cards::gelref1*);
-               axqq(const __base*);
+               axqq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -643,11 +648,11 @@ namespace dnvgl {
 
             /** Pile / Soil
              */
-            class pils : public __base {
+            class pils : public __base::elem {
             public:
                pils(const dnvgl::extfem::fem::cards::gelmnt1*);
                pils(const dnvgl::extfem::fem::cards::gelref1*);
-               pils(const __base*);
+               pils(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -655,11 +660,11 @@ namespace dnvgl {
 
             /** Plane Cable-Bar Element
              */
-            class pcab : public __base {
+            class pcab : public __base::elem {
             public:
                pcab(const dnvgl::extfem::fem::cards::gelmnt1*);
                pcab(const dnvgl::extfem::fem::cards::gelref1*);
-               pcab(const __base*);
+               pcab(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -667,11 +672,11 @@ namespace dnvgl {
 
             /** Plane Spring Element
              */
-            class pspr : public __base {
+            class pspr : public __base::elem {
             public:
                pspr(const dnvgl::extfem::fem::cards::gelmnt1*);
                pspr(const dnvgl::extfem::fem::cards::gelref1*);
-               pspr(const __base*);
+               pspr(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -679,11 +684,11 @@ namespace dnvgl {
 
             /** 4-node Contact Element with triangular Shape for ADVANCE.
              */
-            class adva_4 : public __base {
+            class adva_4 : public __base::elem {
             public:
                adva_4(const dnvgl::extfem::fem::cards::gelmnt1*);
                adva_4(const dnvgl::extfem::fem::cards::gelref1*);
-               adva_4(const __base*);
+               adva_4(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -691,11 +696,11 @@ namespace dnvgl {
 
             /** 2-Noded Link Element for ADVANCE.
              */
-            class adva_2 : public __base {
+            class adva_2 : public __base::elem {
             public:
                adva_2(const dnvgl::extfem::fem::cards::gelmnt1*);
                adva_2(const dnvgl::extfem::fem::cards::gelref1*);
-               adva_2(const __base*);
+               adva_2(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -703,11 +708,11 @@ namespace dnvgl {
 
             /** 2-Noded Contact Element
              */
-            class ctcp : public __base {
+            class ctcp : public __base::elem {
             public:
                ctcp(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctcp(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcp(const __base*);
+               ctcp(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -715,11 +720,11 @@ namespace dnvgl {
 
             /** 4-Noded Contact Element
              */
-            class ctcl : public __base {
+            class ctcl : public __base::elem {
             public:
                ctcl(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctcl(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcl(const __base*);
+               ctcl(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -727,11 +732,11 @@ namespace dnvgl {
 
             /** 4-Noded Axisymmetric Contact Element
              */
-            class ctal : public __base {
+            class ctal : public __base::elem {
             public:
                ctal(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctal(const dnvgl::extfem::fem::cards::gelref1*);
-               ctal(const __base*);
+               ctal(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -739,11 +744,11 @@ namespace dnvgl {
 
             /** 6-Noded Contact Element
              */
-            class ctcc : public __base {
+            class ctcc : public __base::elem {
             public:
                ctcc(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctcc(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcc(const __base*);
+               ctcc(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -751,11 +756,11 @@ namespace dnvgl {
 
             /** 6-Noded (3+3) Axisymmetric Contact Element
              */
-            class ctaq : public __base {
+            class ctaq : public __base::elem {
             public:
                ctaq(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctaq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctaq(const __base*);
+               ctaq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -763,11 +768,11 @@ namespace dnvgl {
 
             /** 8-Noded (4+4) Contact Element
              */
-            class ctlq : public __base {
+            class ctlq : public __base::elem {
             public:
                ctlq(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctlq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctlq(const __base*);
+               ctlq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -775,11 +780,11 @@ namespace dnvgl {
 
             /** 16-Noded (8+8) Contact Element
              */
-            class ctcq : public __base {
+            class ctcq : public __base::elem {
             public:
                ctcq(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctcq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcq(const __base*);
+               ctcq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -787,11 +792,11 @@ namespace dnvgl {
 
             /** 18-Noded (9+9) Contact Element
              */
-            class ctmq : public __base {
+            class ctmq : public __base::elem {
             public:
                ctmq(const dnvgl::extfem::fem::cards::gelmnt1*);
                ctmq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctmq(const __base*);
+               ctmq(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -799,11 +804,11 @@ namespace dnvgl {
 
             /** 9-Noded Shell Element
              */
-            class hcqs : public __base {
+            class hcqs : public __base::elem {
             public:
                hcqs(const dnvgl::extfem::fem::cards::gelmnt1*);
                hcqs(const dnvgl::extfem::fem::cards::gelref1*);
-               hcqs(const __base*);
+               hcqs(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -811,11 +816,11 @@ namespace dnvgl {
 
             /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
              */
-            class slqs : public __base {
+            class slqs : public __base::elem {
             public:
                slqs(const dnvgl::extfem::fem::cards::gelmnt1*);
                slqs(const dnvgl::extfem::fem::cards::gelref1*);
-               slqs(const __base*);
+               slqs(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -823,11 +828,11 @@ namespace dnvgl {
 
             /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
              */
-            class slts : public __base {
+            class slts : public __base::elem {
             public:
                slts(const dnvgl::extfem::fem::cards::gelmnt1*);
                slts(const dnvgl::extfem::fem::cards::gelref1*);
-               slts(const __base*);
+               slts(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -835,11 +840,11 @@ namespace dnvgl {
 
             /** Semiloof Curved Beam (11 d.o.fs)
              */
-            class slcb : public __base {
+            class slcb : public __base::elem {
             public:
                slcb(const dnvgl::extfem::fem::cards::gelmnt1*);
                slcb(const dnvgl::extfem::fem::cards::gelref1*);
-               slcb(const __base*);
+               slcb(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -847,11 +852,11 @@ namespace dnvgl {
 
             /** General Matrix Element with arbitrary no. of nodes (/n/)
              */
-            class matr : public __base {
+            class matr : public __base::elem {
             public:
                matr(const dnvgl::extfem::fem::cards::gelmnt1*);
                matr(const dnvgl::extfem::fem::cards::gelref1*);
-               matr(const __base*);
+               matr(const __base::elem*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
                static const std::set<el_processor> processors;
@@ -859,7 +864,7 @@ namespace dnvgl {
 
             /** Dispatch element class instance for `id`
              */
-            void dispatch(std::unique_ptr<__base>&,
+            void dispatch(std::unique_ptr<__base::elem>&,
                const dnvgl::extfem::fem::cards::gelmnt1 *data);
 
             /** Match element type id to element type name.
@@ -876,7 +881,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -57,12 +57,12 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Free Field Format 1") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PROD,1,2,3.,4.,5.,6.\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
 
-      CAPTURE( data[0] );
+      CAPTURE( data.front() );
 
       prod probe(lines);
 
@@ -76,12 +76,12 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Free Field Format 2") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PROD,1,2,3.,4.,5.\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
 
-      CAPTURE( data[0] );
+      CAPTURE( data.front() );
 
       prod probe(lines);
 
@@ -95,12 +95,12 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Free Field Format 3") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PROD,1,2,3.,4.\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
 
-      CAPTURE( data[0] );
+      CAPTURE( data.front() );
 
       prod probe(lines);
 
@@ -114,13 +114,13 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Small Field Format") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
          "PROD          17      23    42.6   17.92  4.2356     0.5                        \n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
 
-      CAPTURE( data[0] );
+      CAPTURE( data.front() );
 
       prod probe(lines);
 
@@ -134,13 +134,13 @@ TEST_CASE("BDF PROD definitions.",
 
    SECTION("Small Field Format 2") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
          "PROD    6000001 1       3000.00\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
 
-      CAPTURE( data[0] );
+      CAPTURE( data.front() );
 
       prod probe(lines);
 
@@ -155,9 +155,8 @@ TEST_CASE("BDF PROD definitions.",
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

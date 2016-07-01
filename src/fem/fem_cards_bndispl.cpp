@@ -48,7 +48,7 @@ namespace dnvgl {
             const entry_type<double> bndispl::_form_RDISP("RDISP");
             const entry_type<double> bndispl::_form_IDISP("IDISP");
 
-            bndispl::bndispl(const std::deque<std::string> &inp) :
+            bndispl::bndispl(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 8)
@@ -123,39 +123,32 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             bndispl::card_type(void) const {return BNDISPL;}
 
-            const std::ostream&
-            bndispl::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const bndispl &card) {
-               if (card.LLC == -1) return os;
+            std::ostream &bndispl::put(std::ostream& os) const {
+               if (this->LLC == -1) return os;
                os << bndispl::head.format()
-                  << card._form_LLC.format(card.LLC)
-                  << card._form_DTYPE.format(card.DTYPE)
-                  << card._form_COMPLX.format(card.COMPLX)
-                  << card.empty.format() << std::endl
+                  << this->_form_LLC.format(this->LLC)
+                  << this->_form_DTYPE.format(this->DTYPE)
+                  << this->_form_COMPLX.format(this->COMPLX)
+                  << this->empty.format() << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_NODENO.format(card.NODENO)
-                  << card._form_NDOF.format(card.NDOF);
+                  << this->_form_NODENO.format(this->NODENO)
+                  << this->_form_NDOF.format(this->NDOF);
                long cnt = 2;
-               for (long i = 0; i < card.NDOF; i++) {
+               for (long i = 0; i < this->NDOF; i++) {
                   if (cnt == 4) {
                      os << std::endl << dnvgl::extfem::fem::types::card().format();
                      cnt = 0;
                   }
-                  os << card._form_RDISP.format(card.RDISP[i]);
+                  os << this->_form_RDISP.format(this->RDISP[i]);
                   cnt += 1;
                }
-               if (card.COMPLX)
-                  for (long i = 0; i < card.NDOF; i++) {
+               if (this->COMPLX)
+                  for (long i = 0; i < this->NDOF; i++) {
                      if (cnt == 4) {
                         os << std::endl << dnvgl::extfem::fem::types::card().format();
                         cnt = 0;
                      }
-                     os << card._form_IDISP.format(card.IDISP[i]);
+                     os << this->_form_IDISP.format(this->IDISP[i]);
                      cnt += 1;
                   }
                os << std::endl;
@@ -168,9 +161,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

@@ -27,11 +27,7 @@ namespace dnvgl {
             namespace case_control {
                begin_bulk::begin_bulk() {};
 
-               std::ostream const &begin_bulk::operator<< (std::ostream &os) const {
-                  return os << this;
-               }
-
-               std::ostream const &begin_bulk::put(std::ostream &os) const {
+               std::ostream &begin_bulk::put(std::ostream &os) const {
                   return os << "BEGIN BULK" << std::endl;
                }
             }
@@ -42,9 +38,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

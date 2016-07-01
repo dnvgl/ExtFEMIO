@@ -271,7 +271,6 @@ TEST_CASE("Sample Header", "[bdf_header]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -46,10 +46,10 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("DATE (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
          "        DATE TIME:  11/03/2015 09:46:08",
@@ -57,7 +57,7 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
          "        COMPUTER: HAML130185",
          "        USER: berhol"});
 
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       date probe(lines);
 
       CHECK(probe.TYPE == 0);
@@ -159,7 +159,6 @@ TEST_CASE("FEMio-7: Problems with test output.", "[fem_date,out]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

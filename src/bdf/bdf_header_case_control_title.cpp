@@ -28,12 +28,7 @@ namespace dnvgl {
                title::title(std::string const &title) :
                   name(title) {}
 
-               const std::ostream&
-               title::operator<< (std::ostream& os) const {
-                  return os << this;
-               }
-
-               std::ostream const &title::put(std::ostream &os) const {
+               std::ostream &title::put(std::ostream &os) const {
                   return os << "TITLE = " << this->name << std::endl;
                }
             }

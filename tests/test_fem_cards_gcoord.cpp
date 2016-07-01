@@ -46,13 +46,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GCOORD definitions.", "[fem_gcoord]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GCOORD (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GCOORD   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gcoord probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -62,10 +62,10 @@ TEST_CASE("FEM GCOORD definitions.", "[fem_gcoord]" ) {
    }
 
    SECTION("GCOORD (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GCOORD   1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gcoord probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -75,10 +75,10 @@ TEST_CASE("FEM GCOORD definitions.", "[fem_gcoord]" ) {
    }
 
    SECTION("GCOORD (own output)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gcoord probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -118,12 +118,12 @@ TEST_CASE("FEM GCOORD types output.", "[fem_gcoord,out]" ) {
 
 TEST_CASE("FEM GCOORD conversion from own output.", "[fem_gcoord,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GCOORD") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gcoord probe(lines);
 
       CHECK(probe.NODENO == 1);
@@ -135,7 +135,6 @@ TEST_CASE("FEM GCOORD conversion from own output.", "[fem_gcoord,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

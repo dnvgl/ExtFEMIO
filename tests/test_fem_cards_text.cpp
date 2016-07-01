@@ -46,10 +46,10 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("TEXT (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
                "        CONVERSION DETAILS:",
@@ -57,7 +57,7 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
                "        Input  : \\test_01.bdt",
                "        Log    : \\test_01.txt"});
 
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       text probe(lines);
 
       CHECK(probe.TYPE == 0);
@@ -74,7 +74,7 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
    }
 
    SECTION("TEXT (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TEXT     0.000000000e+00 0.000000000e+00 4.000000000e+00 7.200000000e+01",
             "        CONVERSION DETAILS:",
@@ -82,7 +82,7 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
             "        Input  : \\test_01.bdt",
             "        Log    : \\test_01.txt"});
 
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       text probe(lines);
 
       CHECK(probe.TYPE == 0);
@@ -143,17 +143,17 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
 
 TEST_CASE("FEM TEXT conversion from own output.", "[fem_text,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("TEXT (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n",
             "        CONVERSION DETAILS:                             \n",
             "        Msc Nastran File Format -> Sesam Interface File.\n",
             "        Input  : \\test_01.bdt                           \n",
             "        Log    : \\test_01.txt                           \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       text probe(lines);
 
       CHECK(probe.TYPE == 0);
@@ -172,7 +172,6 @@ TEST_CASE("FEM TEXT conversion from own output.", "[fem_text,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

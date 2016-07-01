@@ -46,11 +46,11 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
           "[bdf_ctria3]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
       // 34567|1234567|1234567|1234567|1234567|1234567|
       "CTRIA3  1       1       16      200     141\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    ctria3 probe(lines);
 
    SECTION("first ctria3") {
@@ -69,12 +69,12 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
 TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
           "[bdf_ctria3]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
       // 34567|123456781234567|123456781234567|123456781234567|123456781234567|
       "CTRIA3* 2               1               16              200             *\n",
       "*       141\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    ctria3 probe(lines);
 
    SECTION("first ctria3") {
@@ -90,9 +90,8 @@ TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

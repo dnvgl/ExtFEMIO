@@ -50,12 +50,12 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
 
    SECTION("Small Field Format (BAR)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 34567A1234567B1234567C1234567D1234567E1234567F
          "PBEAML  104018  4               BAR\n",
          "           25.0   600.0\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeaml probe(lines);
 
       CHECK((long)probe.PID == 104018);
@@ -63,22 +63,19 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "BAR");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0].size() == 2);
-      CHECK(probe.DIM[0][0] == 25.);
-      CHECK(probe.DIM[0][1] == 600.);
-      CHECK(probe.NSM.size() == 1);
-      CHECK((double)probe.NSM[0] == 0.);
+      CHECK(probe.DIM[0] == std::list<double>({25., 600.}));
+      CHECK(probe.NSM == std::list<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
 
    SECTION("Small Field Format (BAR 2)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PBEAML       134       8            BAR\n",
          "            55.0   500.0\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeaml probe(lines);
 
       CHECK((long)probe.PID == 134);
@@ -86,22 +83,19 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "BAR");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0].size() == 2);
-      CHECK(probe.DIM[0][0] == 55.);
-      CHECK(probe.DIM[0][1] == 500.);
-      CHECK(probe.NSM.size() == 1);
-      CHECK((double)probe.NSM[0] == 0.);
+      CHECK(probe.DIM[0] == std::list<double>({55., 500.}));
+      CHECK(probe.NSM == std::list<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
 
    SECTION("Small Field Format (L)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PBEAML  104010  4               L\n",
          "           63.0   340.0    35.0    14.0\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeaml probe(lines);
 
       CHECK((long)probe.PID == 104010);
@@ -109,24 +103,19 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "L");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0].size() == 4);
-      CHECK(probe.DIM[0][0] == 63.);
-      CHECK(probe.DIM[0][1] == 340.);
-      CHECK(probe.DIM[0][2] == 35.);
-      CHECK(probe.DIM[0][3] == 14.);
-      CHECK(probe.NSM.size() == 1);
-      CHECK((double)probe.NSM[0] == 0.);
+      CHECK(probe.DIM[0] == std::list<double>({63., 340., 35., 14.}));
+      CHECK(probe.NSM == std::list<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
 
    SECTION("Small Field Format (T)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PBEAML  101031  1               T\n",
          "          150.0   400.0    12.0    10.0\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeaml probe(lines);
 
       CHECK((long)probe.PID == 101031);
@@ -134,24 +123,19 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "T");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0].size() == 4);
-      CHECK(probe.DIM[0][0] == 150.);
-      CHECK(probe.DIM[0][1] == 400.);
-      CHECK(probe.DIM[0][2] == 12.);
-      CHECK(probe.DIM[0][3] == 10.);
-      CHECK(probe.NSM.size() == 1);
-      CHECK((double)probe.NSM[0] == 0.);
+      CHECK(probe.DIM[0] == std::list<double>({150., 400., 12., 10.}));
+      CHECK(probe.NSM == std::list<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
 
    SECTION("Small Field Format (I)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PBEAML  104018  4               I\n",
          "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeaml probe(lines);
 
       CHECK((long)probe.PID == 104018);
@@ -159,51 +143,42 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "I");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0].size() == 6);
-      CHECK(probe.DIM[0][0] == 600.);
-      CHECK(probe.DIM[0][1] == 200.);
-      CHECK(probe.DIM[0][2] == 200.);
-      CHECK(probe.DIM[0][3] == 12.);
-      CHECK(probe.DIM[0][4] == 10.);
-      CHECK(probe.DIM[0][5] == 10.);
-      CHECK(probe.NSM.size() == 1);
-      CHECK((double)probe.NSM[0] == 0.);
+      CHECK(probe.DIM[0] == std::list<double>({
+               600., 200., 200., 12., 10., 10.}));
+      CHECK(probe.NSM == std::list<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
 
    SECTION("Small Field Format (TUBE)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PBEAML  104019  5               TUBE\n",
          "           600.0   500.0"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeaml probe(lines);
 
       CHECK((long)probe.PID == 104019);
       CHECK((long)probe.MID == 5);
       CHECK(probe.TYPE == "TUBE");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0].size() == 2);
-      CHECK(probe.DIM[0][0] == 600.);
-      CHECK(probe.DIM[0][1] == 500.);
-      CHECK(probe.NSM.size() == 1);
-      CHECK((double)probe.NSM[0] == 0.);
+      CHECK(probe.DIM[0] == std::list<double>({600., 500.}));
+      CHECK(probe.NSM == std::list<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
 
    SECTION("Small Field Format (T, tapered)") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I1234567J
          "PBEAML        99      21               T                                        \n",
          "             12.    14.8     2.5     2.6              NO     0.4      6.        \n",
          "              7.     1.2     2.6             YES     0.6      6.     7.8        \n",
          "             5.6     2.3             YES                                        \n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pbeaml probe(lines);
 
       CHECK((long)probe.PID == 99);
@@ -211,39 +186,19 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "T");
       CHECK(probe.DIM.size() == 3);
-      CHECK(probe.DIM[0].size() == 4);
-      CHECK(probe.DIM[0][0] == 12.);
-      CHECK(probe.DIM[0][1] == 14.8);
-      CHECK(probe.DIM[0][2] == 2.5);
-      CHECK(probe.DIM[0][3] == 2.6);
-      CHECK(probe.DIM[1].size() == 4);
-      CHECK(probe.DIM[1][0] == 6.);
-      CHECK(probe.DIM[1][1] == 7.);
-      CHECK(probe.DIM[1][2] == 1.2);
-      CHECK(probe.DIM[1][3] == 2.6);
-      CHECK(probe.DIM[2].size() == 4);
-      CHECK(probe.DIM[2][0] == 6.);
-      CHECK(probe.DIM[2][1] == 7.8);
-      CHECK(probe.DIM[2][2] == 5.6);
-      CHECK(probe.DIM[2][3] == 2.3);
-      CHECK(probe.NSM.size() == 3);
-      CHECK(probe.NSM[0] == 0.);
-      CHECK(probe.NSM[1] == 0.);
-      CHECK(probe.NSM[2] == 0.);
-      CHECK(probe.SO.size() == 2);
-      CHECK(probe.SO[0] == "NO");
-      CHECK(probe.SO[1] == "YES");
-      CHECK(probe.X_XB.size() == 2);
-      CHECK(probe.NSM[0] == 0.);
-      CHECK(probe.NSM[1] == 0.);
+      CHECK(probe.DIM[0] == std::list<double>({12., 14.8, 2.5, 2.6}));
+      CHECK(probe.DIM[1] == std::list<double>({6., 7., 1.2, 2.6}));
+      CHECK(probe.DIM[2] == std::list<double>({6., 7.8, 5.6, 2.3}));
+      CHECK(probe.NSM == std::list<double>({0., 0., 0.}));
+      CHECK(probe.SO == std::list<std::string>({"NO", "YES"}));
+      CHECK(probe.X_XB == std::list<double>({.4, .6}));
    }
 }
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

@@ -48,15 +48,15 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GELMNT2 definitions. (Small Field Format)", "[fem_gelmnt2]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GELMNT2   1.00000000E+00  1.00000000E+00  1.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    gelmnt2 probe(lines);
 
    SECTION("first moment") {
@@ -171,7 +171,7 @@ TEST_CASE("FEM GELMNT2 types output.", "[fem_gelmnt2,out]" ) {
 TEST_CASE("FEM GELMNT2 conversion from own output.", "[fem_gelmnt2,in/out]") {
 
    SECTION("GELMNT2") {
-   std::deque<std::string> data({
+   std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GELMNT2 +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
          "        +1.100000000e+01+2.100000000e+01+3.100000000e+01+1.200000000e+01\n",
@@ -179,8 +179,8 @@ TEST_CASE("FEM GELMNT2 conversion from own output.", "[fem_gelmnt2,in/out]") {
          "        +3.300000000e+01+1.400000000e+01+2.400000000e+01+3.400000000e+01\n",
          "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
          "        +9.000000000e+00+1.000000000e+01\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    gelmnt2 probe(lines);
 
       CHECK(probe.SUBNO == 1);
@@ -211,9 +211,8 @@ TEST_CASE("FEM GELMNT2 conversion from own output.", "[fem_gelmnt2,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

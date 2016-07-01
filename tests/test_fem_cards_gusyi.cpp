@@ -46,15 +46,15 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GUSYI (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n",
          "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n",
          "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gusyi probe(lines);
 
       CHECK(probe.GEONO == 5);
@@ -74,12 +74,12 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
    }
 
    SECTION("GUSYI (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
          "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
          "         1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
          "         1.00000000e+00  0.00000000e+00 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gusyi probe(lines);
 
       CHECK(probe.GEONO == 5);
@@ -99,11 +99,11 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
    }
 
    SECTION("GUSYI (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
          "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
          "         1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gusyi probe(lines);
 
       CHECK(probe.GEONO == 5);
@@ -155,7 +155,6 @@ TEST_CASE("FEM GUSYI conversion from own output.", "[fem_gusyi,out]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

@@ -18,18 +18,16 @@
 #include <list>
 #include <memory>
 
+#include "extfem_misc.h"
+
 namespace dnvgl {
    namespace extfem {
       namespace bdf {
          namespace header {
             namespace __base {
-               class entry {
+               class entry : public extfem::__base::outline {
                public:
-                  entry (void);
-                  virtual std::ostream const &operator<<(std::ostream&) const = 0;
-                  friend std::ostream const &operator<<(std::ostream &os, entry const &val);
-               private:
-                  virtual std::ostream const &put(std::ostream&) const = 0;
+                  entry(void);
                };
             }
 
@@ -148,11 +146,10 @@ n\\
                   sol_no_type sol_no;
                   sol(sol_no_type const &sol_no=SESTATIC);
                   sol(long const&);
-                  const std::ostream& operator<<(std::ostream&) const;
 
                private:
 
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                   class sol_no_type_conv {
                   public:
                      static sol_no_type from_long(long const&);
@@ -178,9 +175,8 @@ Designates the end of the Executive Control Section.
                class cend : public __base::entry {
                public:
                   cend(void);
-                  const std::ostream& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
             };
 
@@ -212,9 +208,8 @@ of each page of MSC.Nastran printer output.
                public:
                   std::string name;
                   title(std::string const&);
-                  const std::ostream& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
 /**
@@ -391,9 +386,8 @@ ECHO=BOTH,PUNCH,FILE
 
                public:
                   echo(std::list<describer*> const &oper={});
-                  const std::ostream& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
 /**
@@ -811,9 +805,8 @@ DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
                public:
                   displacement(std::list<describer*> const &, restype const &res=NONE);
                   displacement(std::list<describer*> const &, long const &);
-                  const std::ostream& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
 /** # `SPCFORCES`: Single-Point Forces of Constraint Output Request
@@ -1112,9 +1105,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
                public:
                   spcforces(std::list<describer*> const &, restype const &res=NONE);
                   spcforces(std::list<describer*> const &, long const &res);
-                  std::ostream const& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
 /** # `STRESS`: Element Stress Output Request
@@ -1479,9 +1471,8 @@ Remarks:
                public:
                   stress(std::list<describer*> const &, restype const &res=NONE);
                   stress(std::list<describer*> const &, long const &);
-                  std::ostream const& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
                   /** ## `LOAD`: External Static Load Set Selection
@@ -1531,9 +1522,8 @@ LOAD=15
 
              public:
                 load(long const &);
-                virtual const std::ostream& operator<<(std::ostream&) const;
              private:
-                std::ostream const &put(std::ostream&) const;
+                std::ostream &put(std::ostream&) const;
              };
 
 
@@ -1578,9 +1568,8 @@ Any character string.
 
                public:
                   subtitle(std::string const &);
-                  virtual const std::ostream& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
 /**
@@ -1627,9 +1616,8 @@ SUBCASE=101
 
                   subcase(void);
                   subcase(long const &);
-                  const std::ostream& operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
 /** # `BEGIN BULK`: Case Control and Bulk Data Delimiter
@@ -1699,9 +1687,8 @@ Superelement identification number. (Integer>0)
                class begin_bulk : public __base::entry {
                public:
                   begin_bulk(void);
-                  std::ostream const &operator<<(std::ostream&) const;
                private:
-                  std::ostream const &put(std::ostream&) const;
+                  std::ostream &put(std::ostream&) const;
                };
 
             };

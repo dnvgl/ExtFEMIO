@@ -237,8 +237,7 @@ test_%.ju: base_test.ju
 
 # Local Variables:
 # mode: makefile-automake
-# ispell-local-dictionary: "english"
-# compile-command: "make -C .. check -j 8"
+# compile-command: "make -C .. check -j8"
 # End:
 
 # End of Makefile.am

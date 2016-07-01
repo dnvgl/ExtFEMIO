@@ -50,11 +50,11 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("BDF FORCE definitions. (Small Field Format)", "[bdf_force]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
       "FORCE   2       5       6       2.9     0.0     1.9     0.0               \n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    force probe(lines);
 
    SECTION("first force") {
@@ -136,9 +136,8 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

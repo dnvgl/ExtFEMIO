@@ -46,39 +46,39 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("IEND (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IEND     1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 1);
    }
 
    SECTION("IEND (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IEND    +1.00000000e+000+0.00000000e+000+0.00000000e+000+0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 1);
    }
 
    SECTION("IEND (3)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IEND     1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 1);
    }
 
    SECTION("IEND (4)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "IEND                0.00            0.00            0.00            0.00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 0);
@@ -104,12 +104,12 @@ TEST_CASE("FEM IEND types output.", "[fem_iend,out]" ) {
 
 TEST_CASE("FEM IEND conversion from own output.", "[fem_iend,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("IEND (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "IEND    +3.000000000e+00            0.00            0.00            0.00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       iend probe(lines);
 
       CHECK(probe.CONT == 3);
@@ -118,7 +118,6 @@ TEST_CASE("FEM IEND conversion from own output.", "[fem_iend,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

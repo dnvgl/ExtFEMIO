@@ -17,7 +17,7 @@ namespace {
       = "@(#) $Id$";
 }
 
-#include <deque>
+#include <list>
 #include <string>
 #include <memory>
 
@@ -39,16 +39,19 @@ namespace {
 namespace dnvgl {
    namespace extfem {
       namespace bdf {
+
+         using types::entry_type;
+         using namespace type_bounds;
+
          namespace cards{
 
-            const bdf::types::entry_type<double> mat1::form_E(
-               "E",
-               bdf::type_bounds::bound<double>(&cd0, nullptr, nullptr, true));
-            const bdf::types::entry_type<double> mat1::form_NU(
-               "NU",
-               bdf::type_bounds::bound<double>(&cd_1, &cd05, nullptr, true));
+            const entry_type<double> mat1::form_E(
+               "E", bound<double>(&cd0, nullptr, nullptr, true));
+            const entry_type<double> mat1::form_NU(
+               "NU", bound<double>(&cd_1, &cd05, nullptr, true));
 
-            mat1::mat1(const std::deque<std::string> &inp) : mat(inp) {
+            mat1::mat1(const std::list<std::string> &inp) :
+               __base::mat(inp) {
 
                form_MCSID.set_value(MCSID, "");
                form_SS.set_value(SS, "");
@@ -130,17 +133,18 @@ namespace dnvgl {
                }
             }
 
-            std::ostream const &mat1::operator<< (std::ostream &os) const {
+            void mat1::collect_outdata(
+               std::list<std::unique_ptr<format_entry> > &res) const {
                throw errors::error("can't write MAT1.");
-               return os;
+               return;
             }
          }
       }
    }
 }
+
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

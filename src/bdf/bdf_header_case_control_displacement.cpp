@@ -42,11 +42,7 @@ namespace dnvgl {
                   std::list<describer*> const &describers, long const &res) :
                   displacement::displacement(describers, displacement::n, res) {}
 
-               const std::ostream& displacement::operator<<(std::ostream &os) const {
-                  return os << this;
-               }
-
-               std::ostream const &displacement::put(std::ostream &os) const {
+               std::ostream &displacement::put(std::ostream &os) const {
                   os << "DISPLACEMENT";
                   if (this->describers.size() > 0) {
                      bool first = true;
@@ -243,8 +239,6 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
-// coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j8"

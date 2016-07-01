@@ -32,61 +32,67 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
+namespace dnvgl {
+   namespace extfem {
+      namespace bdf {
+         namespace types {
 
-std::istringstream bdf::types::base::conv;
+            std::istringstream base::conv;
 
-bdf::types::base::base(const std::string &name) : name(name) {};
+            base::base(const std::string &name) : name(name) {};
 
-// std::set input and output locale for conv and outp
-static bdf::types::imbue_helper _imbue_helper(std::locale::classic());
+            /// std::set input and output locale for conv and outp
+            static imbue_helper _imbue_helper(std::locale::classic());
 
-bdf::types::out_form_type bdf::types::base::out_form = bdf::types::SHORT;
+            out_form_type base::out_form = SHORT;
 
-std::string bdf::types::card::format(const void* d) const {
-   std::ostringstream outp;
+            std::string card::format(const void* d) const {
+               std::ostringstream outp;
 
-   outp << std::resetiosflags(std::ios::adjustfield);
-   switch (out_form) {
-   case bdf::types::LONG:
-      outp << std::setiosflags(std::ios::left) << std::setfill(' ')
-           << std::setw(8) << (name + "*");
-      break;
-   case bdf::types::SHORT:
-      outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
-           << std::setw(8) << name;
-      break;
-   case bdf::types::FREE:
-      outp << name;
-      break;
+               outp << std::resetiosflags(std::ios::adjustfield);
+               switch (out_form) {
+               case LONG:
+                  outp << std::setiosflags(std::ios::left) << std::setfill(' ')
+                       << std::setw(8) << (name + "*");
+                  break;
+               case SHORT:
+                  outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
+                       << std::setw(8) << name;
+                  break;
+               case FREE:
+                  outp << name;
+                  break;
+               }
+
+               return outp.str();
+            }
+
+            empty::empty(void) : base("<empty>") {}
+
+            std::string empty::format(const void* d) const {
+               std::ostringstream outp;
+
+               switch (out_form) {
+               case LONG:
+               case SHORT:
+                  outp << std::setfill(' ') << std::setw(out_form) << " ";
+                  break;
+               case FREE:
+                  break;
+               }
+               return outp.str();
+            }
+
+            std::string empty::format() const {
+               return this->format(nullptr);
+            }
+         }
+      }
    }
-
-   return outp.str();
-}
-
-bdf::types::empty::empty(void) : bdf::types::base("<empty>") {}
-
-std::string bdf::types::empty::format(const void* d) const {
-   std::ostringstream outp;
-
-   switch (out_form) {
-   case bdf::types::LONG:
-   case bdf::types::SHORT:
-      outp << std::setfill(' ') << std::setw(out_form) << " ";
-      break;
-   case bdf::types::FREE:
-      break;
-   }
-   return outp.str();
-}
-
-std::string bdf::types::empty::format() const {
-   return this->format(nullptr);
 }
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../.. check -j 8"

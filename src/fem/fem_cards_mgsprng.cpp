@@ -44,7 +44,7 @@ namespace dnvgl {
             const entry_type<long> mgsprng::_form_NDOF("NDOF");
             const entry_type<double> mgsprng::_form_K("K");
 
-            mgsprng::mgsprng(const std::deque<std::string> &inp) :
+            mgsprng::mgsprng(std::list<std::string> const &inp) :
                card(inp) {
 
                if (inp.size() < 4)
@@ -72,38 +72,31 @@ namespace dnvgl {
             mgsprng::mgsprng(void) :
                mgsprng(-1, 0, {}) {}
 
-            mgsprng::mgsprng(const long &MATNO,
-                             const long &NDOF,
-                             const std::vector<std::vector<double>> &K) :
+            mgsprng::mgsprng(long const &MATNO,
+                             long const &NDOF,
+                             std::vector<std::vector<double> > const &K) :
                card(), MATNO(MATNO), NDOF(NDOF), K(K) {}
 
-            mgsprng::mgsprng(const long &MATNO,
-                             const std::vector<std::vector<double>> &K) :
+            mgsprng::mgsprng(long const &MATNO,
+                             std::vector<std::vector<double> > const &K) :
                card(), MATNO(MATNO), NDOF((long)K.size()), K(K) {}
 
             const dnvgl::extfem::fem::cards::types
             mgsprng::card_type(void) const {return MGSPRNG;}
 
-            const std::ostream&
-            mgsprng::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const mgsprng &card) {
-               if (card.MATNO == -1) return os;
+            std::ostream &mgsprng::put(std::ostream& os) const {
+               if (this->MATNO == -1) return os;
                os << mgsprng::head.format()
-                  << card._form_MATNO.format(card.MATNO)
-                  << card._form_NDOF.format(card.NDOF);
+                  << this->_form_MATNO.format(this->MATNO)
+                  << this->_form_NDOF.format(this->NDOF);
                long cnt = 2;
-               for (long i = 0; i < card.NDOF; i++) {
-                  for (long j = i; j < card.NDOF; j++) {
+               for (long i = 0; i < this->NDOF; i++) {
+                  for (long j = i; j < this->NDOF; j++) {
                      if (cnt == 4) {
                         os << std::endl << dnvgl::extfem::fem::types::card().format();
                         cnt = 0;
                      }
-                     os << card._form_K.format(card.K[i][j]);
+                     os << this->_form_K.format(this->K[i][j]);
                      cnt += 1;
                   }
                }
@@ -117,9 +110,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

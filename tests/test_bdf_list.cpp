@@ -49,15 +49,15 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 
-   entry_type<std::deque<int>> probe("dummy");
+   entry_type<std::list<int> > probe("dummy");
 
    SECTION("' 1234   '") {
-      std::deque<int> ref({ 1, 2, 3, 4 });
+      std::list<int> ref({ 1, 2, 3, 4 });
       CHECK(probe("  1234  ").value == ref);
    }
 
    SECTION("' 1236   '") {
-      std::deque<int> ref({ 1, 2, 3, 6 });
+      std::list<int> ref({ 1, 2, 3, 6 });
       CHECK(probe(" 1236   ").value == ref);
    }
 
@@ -68,10 +68,10 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]" ) {
 
 TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
 
-   entry_type<std::deque<int>> obj("dummy");
+   entry_type<std::list<int> > obj("dummy");
 
-   //std::deque<int> inp({ 1, 2, 3, 4 });
-   entry_value<std::deque<int>> lval({ 1, 2, 3, 4 });
+   //std::list<int> inp({ 1, 2, 3, 4 });
+   entry_value<std::list<int> > lval({ 1, 2, 3, 4 });
 
    std::ostringstream stream(std::ostringstream::ate);
 
@@ -89,7 +89,7 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
    }
 
    SECTION("SHORT (void)") {
-      std::deque<int> llval(lval.value);
+      std::list<int> llval(lval.value);
       bdf::types::base::out_form = bdf::types::SHORT;
       CHECK(obj.format(&llval).size() == 8);
       CHECK(obj.format(&llval) == "    1234");
@@ -127,9 +127,8 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

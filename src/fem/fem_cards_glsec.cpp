@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<long> glsec::_form_NLOBY("NLOBY");
             const entry_type<long> glsec::_form_NLOBZ("NLOBZ");
 
-            glsec::glsec(const std::deque<std::string> &inp) :
+            glsec::glsec(const std::list<std::string> &inp) :
                base_beam_prop(inp), NLOBY(0), NLOBZ(0) {
 
                if (inp.size() < 9)
@@ -90,31 +90,24 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             glsec::card_type(void) const {return GLSEC;}
 
-            const std::ostream&
-            glsec::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const glsec &card) {
-               if (card.GEONO == -1) return os;
+            std::ostream &glsec::put(std::ostream& os) const {
+               if (this->GEONO == -1) return os;
                os << glsec::head.format()
-                  << card._form_GEONO.format(card.GEONO)
-                  << card._form_HZ.format(card.HZ)
-                  << card._form_TY.format(card.TY)
-                  << card._form_BY.format(card.BY)
+                  << this->_form_GEONO.format(this->GEONO)
+                  << this->_form_HZ.format(this->HZ)
+                  << this->_form_TY.format(this->TY)
+                  << this->_form_BY.format(this->BY)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_TZ.format(card.TZ)
-                  << card._form_SFY.format(card.SFY)
-                  << card._form_SFZ.format(card.SFZ)
-                  << card._form_K.format(card.K)
+                  << this->_form_TZ.format(this->TZ)
+                  << this->_form_SFY.format(this->SFY)
+                  << this->_form_SFZ.format(this->SFZ)
+                  << this->_form_K.format(this->K)
                   << std::endl;
-               if (!(card.NLOBY || card.NLOBZ))
+               if (!(this->NLOBY || this->NLOBZ))
                   return os;
                os << dnvgl::extfem::fem::types::card().format()
-                  << card._form_NLOBY.format(card.NLOBY)
-                  << card._form_NLOBZ.format(card.NLOBZ)
+                  << this->_form_NLOBY.format(this->NLOBY)
+                  << this->_form_NLOBZ.format(this->NLOBZ)
                   << std::endl;
                return os;
             }
@@ -125,9 +118,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

@@ -47,15 +47,15 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 }
 
 TEST_CASE("FEM HSUPTRAN definitions. (Small Field Format)", "[fem_hsuptran]" ) {
-   std::deque<std::string> data({
+   std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00\n",
          "          0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n",
          "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    hsuptran probe(lines);
 
    SECTION("first moment") {
@@ -154,18 +154,18 @@ SECTION("write (1)") {
 
 TEST_CASE("FEM HSUPTRAN conversion from own output.", "[fem_hsuptran,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("HSUPTRAN") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "HSUPTRAN+1.000000000e+00+2.000000000e+00+1.100000000e+01+2.100000000e+01\n",
             "        +3.100000000e+01+0.000000000e+00+1.200000000e+01+2.200000000e+01\n",
             "        +3.200000000e+01+0.000000000e+00+1.300000000e+01+3.300000000e+01\n",
             "        +3.300000000e+01+0.000000000e+00+1.400000000e+01+2.400000000e+01\n",
             "        +3.400000000e+01+1.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       hsuptran probe(lines);
 
       CHECK(probe.NFIELD == 1);
@@ -191,9 +191,8 @@ TEST_CASE("FEM HSUPTRAN conversion from own output.", "[fem_hsuptran,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

@@ -46,13 +46,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GELTH (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gelth probe(lines);
 
       CHECK(probe.GEONO == 654394);
@@ -61,10 +61,10 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
    }
 
    SECTION("GELTH (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GELTH    6.54394000e+05  1.00000000e-01  0.000000000e+00 0.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gelth probe(lines);
 
       CHECK(probe.GEONO == 654394);
@@ -75,12 +75,12 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
 
 TEST_CASE("FEMIO-24: Failing to import line from SESAM GeniE FEM file") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("Failing card") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GELTH     1.00000000E+00  2.99999993E-02\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gelth probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -123,13 +123,13 @@ TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
 
 TEST_CASE("FEM GELTH conversion from own output.", "[fem_gelth,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GELTH (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "GELTH   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gelth probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -138,10 +138,10 @@ TEST_CASE("FEM GELTH conversion from own output.", "[fem_gelth,in/out]") {
    }
 
    SECTION("GELTH (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "GELTH   +1.000000000e+00+2.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gelth probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -152,7 +152,6 @@ TEST_CASE("FEM GELTH conversion from own output.", "[fem_gelth,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

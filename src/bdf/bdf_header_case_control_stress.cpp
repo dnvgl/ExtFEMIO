@@ -44,12 +44,7 @@ namespace dnvgl {
                   long const &res) :
                   stress(describers, stress::n, res) {}
 
-               std::ostream const& stress::operator<< (std::ostream &os) const {
-                  return os << this;
-               }
-
-
-               std::ostream const &stress::put(std::ostream &os) const {
+               std::ostream &stress::put(std::ostream &os) const {
                   os << "STRESS";
                   if (this->describers.size() > 0) {
                      bool first = true;

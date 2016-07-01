@@ -26,30 +26,36 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long gmas::nnodes(void) const {return 1;}
+         using namespace cards;
 
-el_types gmas::get_type(void) const {return GMAS;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 6;
+               el_processor procs[procs_len] = {general, Prefem, Sestra, Poseidon};
+            }
 
-namespace {
-   const size_t procs_len = 6;
-   el_processor procs[procs_len] = {general, Prefem, Sestra, Poseidon};
+            long gmas::nnodes(void) const {return 1;}
+
+            el_types gmas::get_type(void) const {return GMAS;}
+
+            const std::set<el_processor> gmas::processors(procs, procs+procs_len);
+
+            gmas::gmas(const gelmnt1 *data) : __base::elem(data) {}
+
+            gmas::gmas(const gelref1 *data) : __base::elem(data) {}
+
+            gmas::gmas(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> gmas::processors(procs, procs+procs_len);
-
-gmas::gmas(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-gmas::gmas(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-gmas::gmas(const dnvgl::extfem::fem::elements::__base *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

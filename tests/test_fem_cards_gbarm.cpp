@@ -46,13 +46,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GBARM (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n",
          "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbarm probe(lines);
 
       CHECK(probe.GEONO == 2);
@@ -66,10 +66,10 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
    }
 
    SECTION("GBARM (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GBARM    2.000000000e+00 2.50000000e+02  3.200000000e+01 3.200000000e+01\n",
          "         1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbarm probe(lines);
 
       CHECK(probe.GEONO == 2);
@@ -85,13 +85,13 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
 
 TEST_CASE("FEMIO-37: Failing to import GBARM record from SESAM GeniE FEM file") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("Failing card") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GBARM     2.80000000E+01  1.50000006E-01  1.20000001E-02  1.20000001E-02\n",
             "          1.00000000E+00  1.00000000E+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbarm probe(lines);
 
       CHECK(probe.GEONO == 28);
@@ -134,13 +134,13 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
 
 TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GBARM (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbarm probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -154,10 +154,10 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
    }
 
    SECTION("GBARM (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gbarm probe(lines);
 
       CHECK(probe.GEONO == 1);
@@ -173,7 +173,6 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

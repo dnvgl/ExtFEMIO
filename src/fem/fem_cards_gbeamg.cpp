@@ -56,7 +56,7 @@ namespace dnvgl {
             const entry_type<double> gbeamg::_form_SY("SY");
             const entry_type<double> gbeamg::_form_SZ("SZ");
 
-            gbeamg::gbeamg(const std::deque<std::string> &inp) :
+            gbeamg::gbeamg(const std::list<std::string> &inp) :
                base_beam_prop(inp) {
 
                if (inp.size() < 17)
@@ -106,35 +106,28 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             gbeamg::card_type(void) const {return GBEAMG;}
 
-            const std::ostream&
-            gbeamg::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const gbeamg &data) {
-               if (data.GEONO == -1) return os;
+            std::ostream &gbeamg::put(std::ostream& os) const {
+               if (this->GEONO == -1) return os;
                os << gbeamg::head.format()
-                  << data._form_GEONO.format(data.GEONO)
-                  << data.empty.format()
-                  << data._form_AREA.format(data.AREA)
-                  << data._form_IX.format(data.IX)
+                  << this->_form_GEONO.format(this->GEONO)
+                  << this->empty.format()
+                  << this->_form_AREA.format(this->AREA)
+                  << this->_form_IX.format(this->IX)
                   << std::endl << fem::types::card("").format()
-                  << data._form_IY.format(data.IY)
-                  << data._form_IZ.format(data.IZ)
-                  << data._form_IYZ.format(data.IYZ)
-                  << data._form_WXMIN.format(data.WXMIN)
+                  << this->_form_IY.format(this->IY)
+                  << this->_form_IZ.format(this->IZ)
+                  << this->_form_IYZ.format(this->IYZ)
+                  << this->_form_WXMIN.format(this->WXMIN)
                   << std::endl << fem::types::card("").format()
-                  << data._form_WYMIN.format(data.WYMIN)
-                  << data._form_WZMIN.format(data.WZMIN)
-                  << data._form_SHARY.format(data.SHARY)
-                  << data._form_SHARZ.format(data.SHARZ)
+                  << this->_form_WYMIN.format(this->WYMIN)
+                  << this->_form_WZMIN.format(this->WZMIN)
+                  << this->_form_SHARY.format(this->SHARY)
+                  << this->_form_SHARZ.format(this->SHARZ)
                   << std::endl << fem::types::card("").format()
-                  << data._form_SHCENY.format(data.SHCENY)
-                  << data._form_SHCENZ.format(data.SHCENZ)
-                  << data._form_SY.format(data.SY)
-                  << data._form_SZ.format(data.SZ) << std::endl;
+                  << this->_form_SHCENY.format(this->SHCENY)
+                  << this->_form_SHCENZ.format(this->SHCENZ)
+                  << this->_form_SY.format(this->SY)
+                  << this->_form_SZ.format(this->SZ) << std::endl;
                return os;
             }
          }
@@ -144,9 +137,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

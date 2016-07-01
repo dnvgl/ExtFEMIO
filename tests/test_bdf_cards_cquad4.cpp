@@ -44,10 +44,10 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
 
 TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
       "CQUAD4  1       1       16      200     141     17\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    cquad4 probe(lines);
 
    SECTION("first cquad4") {
@@ -66,11 +66,11 @@ TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]" ) {
 
 TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]" ) {
 
-   std::deque<std::string> data({
+   std::list<std::string> data({
       "CQUAD4* 2               1               16              200             *\n",
       "*       141             17\n"});
-   std::deque<std::string> lines;
-   card::card_split(data, lines);
+   std::list<std::string> lines;
+   __base::card::card_split(data, lines);
    cquad4 probe(lines);
 
    SECTION("first cquad4") {
@@ -87,9 +87,8 @@ TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]" ) {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

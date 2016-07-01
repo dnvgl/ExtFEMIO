@@ -48,8 +48,7 @@ fem/elements_ghex.h : ../tools/ghex_do.py	\
 
 # Local Variables:
 # mode: makefile
-# ispell-local-dictionary: "english"
-# compile-command: "make -C .. check -j 7"
+# compile-command: "make -C .. check -j8"
 # End:
 
 # End of Makefile.am

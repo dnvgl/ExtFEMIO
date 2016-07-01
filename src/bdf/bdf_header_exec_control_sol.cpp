@@ -35,12 +35,7 @@ namespace dnvgl {
                   sol::sol_no_type const &sol_no) :
                   sol_no(sol_no) {}
 
-               const std::ostream&
-               sol::operator<< (std::ostream& os) const {
-                  return os << this;
-               }
-
-               std::ostream const &sol::put(std::ostream &os) const {
+               std::ostream &sol::put(std::ostream &os) const {
                   return os << "SOL "
                             << sol::sol_no_type_conv::to_long(this->sol_no)
                             << std::endl;

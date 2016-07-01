@@ -70,6 +70,5 @@ if __name__ == '__main__':
 
 # Local Variables:
 # mode: python
-# ispell-local-dictionary: "english"
 # compile-command: "make -C .. check -j8"
 # End:

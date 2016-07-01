@@ -49,13 +49,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
 
    SECTION("first") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "BEUSLO   1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00 \n",
          "         1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00 \n",
          "         1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04 \n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       beuslo probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -258,14 +258,14 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
 TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
 
    SECTION("BEUSLO (own output, only r)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "BEUSLO  +1.000000000e+00+2.000000000e+00           +0.00+3.000000000e+00\n",
          "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
          "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
          "        +1.100000000e+01\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       beuslo probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -282,15 +282,15 @@ TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
    }
 
    SECTION("BEUSLO (own output, r + i)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "BEUSLO  +1.000000000e+00+2.000000000e+00           +1.00+3.000000000e+00\n",
          "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
          "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
          "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
          "        +1.500000000e+01+1.600000000e+01\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       beuslo probe(lines);
 
       CHECK(probe.LLC == 1);
@@ -310,9 +310,8 @@ TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:

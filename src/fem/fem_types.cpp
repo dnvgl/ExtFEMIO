@@ -31,34 +31,42 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
+         namespace types {
+            namespace __base {
 
-fem::types::base::base(const std::string &name) : name(name) {};
+               b_type::b_type(const std::string &name) : name(name) {};
 
-std::istringstream fem::types::base::conv;
+               std::istringstream b_type::conv;
+            }
 
-std::string fem::types::card::format() const {
-   std::ostringstream res;
-   res.setf(std::ios_base::left, std::ios_base::adjustfield);
-   res.fill(' ');
-   res.width(8);
-   res << name;
-   return res.str();
-}
+            std::string card::format() const {
+               std::ostringstream res;
+               res.setf(std::ios_base::left, std::ios_base::adjustfield);
+               res.fill(' ');
+               res.width(8);
+               res << name;
+               return res.str();
+            }
 
-std::string fem::types::empty::format() const {
-   std::ostringstream res;
-   res.fill(' ');
-   res.width(16);
-   res << "            0.00";
-   return res.str();
+            std::string empty::format() const {
+               std::ostringstream res;
+               res.fill(' ');
+               res.width(16);
+               res << "            0.00";
+               return res.str();
+            }
+         }
+      }
+   }
 }
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

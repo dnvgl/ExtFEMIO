@@ -26,31 +26,36 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long adva_4::nnodes(void) const {return 4;}
+         using namespace cards;
 
-el_types adva_4::get_type(void) const {return ADVA_4;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 2;
+               el_processor procs[procs_len] = {general, ADVANCE};
+            }
 
-namespace {
-   const size_t procs_len = 2;
-   el_processor procs[
-      procs_len] = {general, ADVANCE};
+            long adva_4::nnodes(void) const {return 4;}
+
+            el_types adva_4::get_type(void) const {return ADVA_4;}
+
+            const std::set<el_processor> adva_4::processors(procs, procs+procs_len);
+
+            adva_4::adva_4(const gelmnt1 *data) : __base::elem(data) {}
+
+            adva_4::adva_4(const gelref1 *data) : __base::elem(data) {}
+
+            adva_4::adva_4(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> adva_4::processors(procs, procs+procs_len);
-
-adva_4::adva_4(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-adva_4::adva_4(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base(data) {}
-
-adva_4::adva_4(const dnvgl::extfem::fem::elements::__base *data) :
-    dnvgl::extfem::fem::elements::__base(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

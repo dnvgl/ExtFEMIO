@@ -57,7 +57,7 @@ namespace dnvgl {
                belfix(-1, belfix::INVALID, 0,
                       {0., 0., 0., 0., 0., 0.}) {}
 
-            belfix::belfix(const std::deque<std::string> &inp) :
+            belfix::belfix(const std::list<std::string> &inp) :
                card(inp), A(6) {
 
                if (inp.size() < 11)
@@ -93,33 +93,25 @@ namespace dnvgl {
                            std::vector<double> const &A) :
                card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 
-            const std::ostream&
-            belfix::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
             const dnvgl::extfem::fem::cards::types
             belfix::card_type(void) const {return BELFIX;}
 
-            std::ostream&
-            operator<< (std::ostream &os, const belfix &card) {
-               if (card.OPT == belfix::INVALID) return os;
+            std::ostream &belfix::put(std::ostream &os) const {
+               if (this->OPT == belfix::INVALID) return os;
                os << belfix::head.format()
-                  << card._form_FIXNO.format(card.FIXNO)
-                  << card._form_OPT.format(card.OPT)
-                  << card._form_TRANO.format(card.TRANO)
-                  << card.empty.format()
+                  << this->_form_FIXNO.format(this->FIXNO)
+                  << this->_form_OPT.format(this->OPT)
+                  << this->_form_TRANO.format(this->TRANO)
+                  << this->empty.format()
                   << std::endl << fem::types::card("").format()
-                  << card._form_A.format(card.A[0])
-                  << card._form_A.format(card.A[1])
-                  << card._form_A.format(card.A[2])
-                  << card._form_A.format(card.A[3])
+                  << this->_form_A.format(this->A[0])
+                  << this->_form_A.format(this->A[1])
+                  << this->_form_A.format(this->A[2])
+                  << this->_form_A.format(this->A[3])
                   << std::endl << fem::types::card("").format()
-                  << card._form_A.format(card.A[4])
-                  << card._form_A.format(card.A[5])
-                  << std::endl;
-               return os;
+                  << this->_form_A.format(this->A[4])
+                  << this->_form_A.format(this->A[5]);
+               return os << std::endl;;
             }
 
             std::string belfix::pos_string(void) const {
@@ -143,9 +135,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

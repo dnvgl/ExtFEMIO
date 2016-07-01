@@ -48,7 +48,7 @@ namespace dnvgl {
             const entry_type<long> gpipe::_form_NCIR("NCIR");
             const entry_type<long> gpipe::_form_NRAD("NRAD");
 
-            gpipe::gpipe(std::deque<std::string> const &inp) :
+            gpipe::gpipe(std::list<std::string> const &inp) :
                base_beam_prop(inp), NCIR(0), NRAD(0) {
 
                if (inp.size() < 7)
@@ -90,26 +90,19 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             gpipe::card_type(void) const {return GPIPE;}
 
-            const std::ostream&
-            gpipe::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-            operator<< (std::ostream &os, const gpipe &card) {
-               if (card.GEONO == -1) return os;
+            std::ostream &gpipe::put(std::ostream& os) const {
+               if (this->GEONO == -1) return os;
                os << gpipe::head.format()
-                  << card._form_GEONO.format(card.GEONO)
-                  << card._form_DI.format(card.DI)
-                  << card._form_DY.format(card.DY)
-                  << card._form_T.format(card.T)
+                  << this->_form_GEONO.format(this->GEONO)
+                  << this->_form_DI.format(this->DI)
+                  << this->_form_DY.format(this->DY)
+                  << this->_form_T.format(this->T)
                   << std::endl << dnvgl::extfem::fem::types::card().format()
-                  << card._form_SFY.format(card.SFY)
-                  << card._form_SFZ.format(card.SFZ);
-               if ((card.NCIR || card.NRAD))
-                  os << card._form_NCIR.format(card.NCIR)
-                     << card._form_NRAD.format(card.NRAD);
+                  << this->_form_SFY.format(this->SFY)
+                  << this->_form_SFZ.format(this->SFZ);
+               if ((this->NCIR || this->NRAD))
+                  os << this->_form_NCIR.format(this->NCIR)
+                     << this->_form_NRAD.format(this->NRAD);
                os << std::endl;
                return os;
             }
@@ -120,9 +113,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

@@ -51,7 +51,7 @@ namespace dnvgl {
             const entry_type<long> hsupstat::_form_RELOADC("RELOADC");
             const entry_type<long> hsupstat::_form_COMPLC("COMPLC");
 
-            hsupstat::hsupstat(const std::deque<std::string> &inp) :
+            hsupstat::hsupstat(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 10)
@@ -95,28 +95,21 @@ namespace dnvgl {
                return HSUPSTAT;
             }
 
-            std::ostream&
-            operator<< (std::ostream &os, const hsupstat &card) {
-               if (card.NFIELD == -1) return os;
+            std::ostream &hsupstat::put(std::ostream& os) const {
+               if (this->NFIELD == -1) return os;
                os << hsupstat::head.format()
-                  << card._form_NFIELD.format(card.NFIELD)
-                  << card._form_ISELTY.format(card.ISELTY)
-                  << card._form_NIDOF.format(card.NIDOF)
-                  << card._form_NRDOF.format(card.NRDOF) << std::endl
+                  << this->_form_NFIELD.format(this->NFIELD)
+                  << this->_form_ISELTY.format(this->ISELTY)
+                  << this->_form_NIDOF.format(this->NIDOF)
+                  << this->_form_NRDOF.format(this->NRDOF) << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_NBAND.format(card.NBAND)
-                  << card._form_NELT.format(card.NELT)
-                  << card._form_LINDEP.format(card.LINDEP)
-                  << card._form_RELOADC.format(card.RELOADC) << std::endl
+                  << this->_form_NBAND.format(this->NBAND)
+                  << this->_form_NELT.format(this->NELT)
+                  << this->_form_LINDEP.format(this->LINDEP)
+                  << this->_form_RELOADC.format(this->RELOADC) << std::endl
                   << dnvgl::extfem::fem::types::card().format()
-                  << card._form_COMPLC.format(card.COMPLC)
+                  << this->_form_COMPLC.format(this->COMPLC)
                   << std::endl;
-               return os;
-            }
-
-            const std::ostream&
-            hsupstat::operator<< (std::ostream& os) const {
-               os << this;
                return os;
             }
          }
@@ -124,12 +117,10 @@ namespace dnvgl {
    }
 }
 
-
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check"
+// compile-command: "make -C ../.. check -j8"
 // End:

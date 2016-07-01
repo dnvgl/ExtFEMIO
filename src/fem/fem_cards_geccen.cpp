@@ -52,7 +52,7 @@ namespace dnvgl {
             geccen::geccen(geccen const *that) :
                geccen(that->ECCNO, that->EX, that->EY, that->EZ) {}
 
-            geccen::geccen(const std::deque<std::string> &inp) :
+            geccen::geccen(const std::list<std::string> &inp) :
                card(inp) {
 
                if (inp.size() < 5)
@@ -85,21 +85,14 @@ namespace dnvgl {
             const dnvgl::extfem::fem::cards::types
             geccen::card_type(void) const {return GECCEN;}
 
-            const std::ostream&
-            geccen::operator<< (std::ostream& os) const {
-               os << this;
-               return os;
-            }
-
-            std::ostream&
-               operator<< (std::ostream &os, geccen const &card) {
-               if (card.ECCNO == -1) return os;
+            std::ostream &geccen::put(std::ostream& os) const {
+               if (this->ECCNO == -1) return os;
                os << geccen::head.format()
-                  << card._form_ECCNO.format(card.ECCNO)
-                  << card._form_EX.format(card.EX)
-                  << card._form_EY.format(card.EY)
-                  << card._form_EZ.format(card.EZ) << std::endl;
-               return os;
+                  << this->_form_ECCNO.format(this->ECCNO)
+                  << this->_form_EX.format(this->EX)
+                  << this->_form_EY.format(this->EY)
+                  << this->_form_EZ.format(this->EZ);
+               return os << std::endl;
             }
          }
       }
@@ -108,9 +101,8 @@ namespace dnvgl {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

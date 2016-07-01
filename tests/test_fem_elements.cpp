@@ -77,7 +77,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    }
 
    SECTION("check downcast") {
-      std::unique_ptr<__base> probe2;
+      std::unique_ptr<elements::__base::elem> probe2;
       dispatch(probe2, &data1);
       CHECK(probe2->get_type() == TESS);
       CHECK(static_cast<tess*>(probe2.get())->nnodes() == 2);
@@ -86,7 +86,6 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

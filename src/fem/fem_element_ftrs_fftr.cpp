@@ -26,32 +26,41 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long ftrs_fftr::nnodes(void) const {return 3;}
+         using namespace cards;
 
-el_types ftrs_fftr::get_type(void) const {return FTRS_FFTR;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 6;
+               el_processor procs[procs_len] = {general, Prefem, Sestra, ADVANCE, Platework,
+                                                Poseidon};
+            }
 
-namespace {
-   const size_t procs_len = 6;
-   el_processor procs[
-      procs_len] = {general, Prefem, Sestra, ADVANCE, Platework,
-                    Poseidon};
+            long ftrs_fftr::nnodes(void) const {return 3;}
+
+            el_types ftrs_fftr::get_type(void) const {return FTRS_FFTR;}
+
+            const std::set<el_processor> ftrs_fftr::processors(
+               procs, procs+procs_len);
+
+            ftrs_fftr::ftrs_fftr(gelmnt1 const *data) :
+               __base::fem_thin_shell(data) {}
+
+            ftrs_fftr::ftrs_fftr(gelref1 const *data) :
+               __base::fem_thin_shell(data) {}
+
+            ftrs_fftr::ftrs_fftr(__base::elem const *data) :
+               __base::fem_thin_shell(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> ftrs_fftr::processors(procs, procs+procs_len);
-
-ftrs_fftr::ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const *data) :
-   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
-
-ftrs_fftr::ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const *data) :
-   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
-
-ftrs_fftr::ftrs_fftr(dnvgl::extfem::fem::elements::__base const *data) :
-   dnvgl::extfem::fem::elements::fem_thin_shell(data) {}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil

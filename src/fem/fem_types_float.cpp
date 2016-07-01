@@ -43,26 +43,34 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-const
-#ifdef HAVE_BOOST_REGEX_HPP
-boost::regex
-#else
-std::regex
-#endif
-dnvgl::extfem::fem::types::float_re(
-   "([[:space:]]*[[:space:]+-]?[[:digit:]][.][[:digit:]]+[eE][\\+-][[:digit:]]{2,3}[[:space:]]*)",
-#ifdef HAVE_BOOST_REGEX_HPP
-   boost::regex_constants::ECMAScript);
-#else
-std::regex_constants::ECMAScript);
-#endif
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
+         namespace types {
 
+            const
+#ifdef HAVE_BOOST_REGEX_HPP
+            boost::regex
+#else
+            std::regex
+#endif
+            float_re(
+               "([[:space:]]*[[:space:]+-]?[[:digit:]][.][[:digit:]]+[eE][\\+-][[:digit:]]{2,3}[[:space:]]*)",
+#ifdef HAVE_BOOST_REGEX_HPP
+               boost::regex_constants::ECMAScript
+#else
+               std::regex_constants::ECMAScript
+#endif
+               );
+         }
+      }
+   }
+}
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../.. check -j8"
 // End:

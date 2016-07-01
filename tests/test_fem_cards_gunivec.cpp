@@ -47,13 +47,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
-   std::deque<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   std::deque<std::string> lines;
+   std::list<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+   std::list<std::string> lines;
 
    SECTION("GUNIVEC (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gunivec probe(lines);
 
       CHECK(probe.TRANSNO == 534);
@@ -63,9 +63,9 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
    }
 
    SECTION("GUNIVEC (2)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "GUNIVEC  5.34000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gunivec probe(lines);
 
       CHECK(probe.TRANSNO == 534);
@@ -95,12 +95,12 @@ TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
 
 TEST_CASE("FEM GUNIVEC conversion from own output.", "[fem_gunivec,in/out]") {
 
-   std::deque<std::string> lines;
+   std::list<std::string> lines;
 
    SECTION("GUNIVEC (1)") {
-      std::deque<std::string> data({
+      std::list<std::string> data({
             "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"});
-      card::card_split(data, lines);
+      __base::card::card_split(data, lines);
       gunivec probe(lines);
 
       CHECK(probe.TRANSNO == 1);

@@ -51,10 +51,10 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Small Field Format") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PSHELL  1       4         23.00 4               4\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pshell probe(lines);
 
       CHECK((long)probe.PID == 1);
@@ -67,12 +67,12 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Large Field Format") {
 
-      std::deque<std::string> data({
+      std::list<std::string> data({
          "PSHELL* 1               4                 23.00         4               \n",
          "*                       4  \n"});
 
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pshell probe(lines);
 
       CHECK((long)probe.PID == 1);
@@ -85,9 +85,9 @@ TEST_CASE("BDF PSHELL definitions.",
 
    SECTION("Comma Field Format") {
 
-      std::deque<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
-      std::deque<std::string> lines;
-      card::card_split(data, lines);
+      std::list<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
       pshell probe(lines);
 
       CHECK((long)probe.PID == 1);
@@ -102,9 +102,8 @@ TEST_CASE("BDF PSHELL definitions.",
 
 // Local Variables:
 // mode: c++
-// ispell-local-dictionary: "english"
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C .. check -j8"
 // End:
