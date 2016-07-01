@@ -35,7 +35,8 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 3;
-               el_processor procs[procs_len] = {general, Prefem, Sestra};
+               el_processor procs[procs_len] = {
+                  general, Prefem, Sestra};
 
             }
 
@@ -43,16 +44,14 @@ namespace dnvgl {
 
             el_types lcts::get_type(void) const {return LCTS;}
 
-            const std::set<el_processor> lcts::processors(procs, procs+procs_len);
+            const std::set<el_processor> lcts::processors(
+               procs, procs+procs_len);
 
-            lcts::lcts(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-               dnvgl::extfem::fem::elements::__base::elem::elem(data) {}
+            lcts::lcts(const gelmnt1 *data) : __base::elem(data) {}
 
-            lcts::lcts(const dnvgl::extfem::fem::cards::gelref1 *data) :
-               dnvgl::extfem::fem::elements::__base::elem::elem(data) {}
+            lcts::lcts(const gelref1 *data) : __base::elem(data) {}
 
-            lcts::lcts(const dnvgl::extfem::fem::elements::__base::elem *data) :
-               dnvgl::extfem::fem::elements::__base::elem::elem(data) {}
+            lcts::lcts(const __base::elem *data) : __base::elem(data) {}
          }
       }
    }

@@ -42,13 +42,14 @@ namespace dnvgl {
 
             el_types ctcp::get_type(void) const {return CTCP;}
 
-            const std::set<el_processor> ctcp::processors(procs, procs+procs_len);
+            const std::set<el_processor> ctcp::processors(
+               procs, procs+procs_len);
 
-            ctcp::ctcp(const gelmnt1 *data) : __base::elem::elem(data) {}
+            ctcp::ctcp(const gelmnt1 *data) : __base::elem(data) {}
 
-            ctcp::ctcp(const gelref1 *data) : __base::elem::elem(data) {}
+            ctcp::ctcp(const gelref1 *data) : __base::elem(data) {}
 
-            ctcp::ctcp(const __base::elem *data) : __base::elem::elem(data) {}
+            ctcp::ctcp(const __base::elem *data) : __base::elem(data) {}
          }
       }
    }
