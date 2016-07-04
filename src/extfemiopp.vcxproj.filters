@@ -451,6 +451,9 @@
     <ClCompile Include="bdf\bdf_header_exec_control_sol.cpp">
       <Filter>BDF\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="extfem_misc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BDF">

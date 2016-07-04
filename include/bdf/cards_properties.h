@@ -14,6 +14,7 @@
 #define _BDF_CARDS_PROPERTIES_H_
 
 #include <memory>
+#include <deque>
 
 namespace dnvgl {
    namespace extfem {
