@@ -39,7 +39,7 @@ const std::set<char> bdf_file::cont_chars(initVals, initVals + 3);
 
 
 bdf_file::bdf_file(std::istream &inp) :
-   data(inp), last_comment(""), cur_line("") { }
+   cur_line(""), data(inp), last_comment("") { }
 
 // Return all input file lines belonging to next BDF card.
 void bdf_file::get(std::list<std::string> &res) {

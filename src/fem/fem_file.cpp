@@ -34,7 +34,7 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::fem::input;
 
 fem_file::fem_file(std::istream &inp) :
-   data(inp), last_comment(""), cur_line("") {
+   cur_line(""), data(inp), last_comment("") {
 }
 
 // Return all input file lines belonging to next FEM card.
