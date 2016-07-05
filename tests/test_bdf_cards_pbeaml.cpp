@@ -63,8 +63,8 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "BAR");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0] == std::list<double>({25., 600.}));
-      CHECK(probe.NSM == std::list<double>({0.}));
+      CHECK(probe.DIM[0] == std::vector<double>({25., 600.}));
+      CHECK(probe.NSM == std::vector<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
@@ -83,8 +83,8 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "BAR");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0] == std::list<double>({55., 500.}));
-      CHECK(probe.NSM == std::list<double>({0.}));
+      CHECK(probe.DIM[0] == std::vector<double>({55., 500.}));
+      CHECK(probe.NSM == std::vector<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
@@ -103,8 +103,8 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "L");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0] == std::list<double>({63., 340., 35., 14.}));
-      CHECK(probe.NSM == std::list<double>({0.}));
+      CHECK(probe.DIM[0] == std::vector<double>({63., 340., 35., 14.}));
+      CHECK(probe.NSM == std::vector<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
@@ -123,8 +123,8 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "T");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0] == std::list<double>({150., 400., 12., 10.}));
-      CHECK(probe.NSM == std::list<double>({0.}));
+      CHECK(probe.DIM[0] == std::vector<double>({150., 400., 12., 10.}));
+      CHECK(probe.NSM == std::vector<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
@@ -143,9 +143,9 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "I");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0] == std::list<double>({
+      CHECK(probe.DIM[0] == std::vector<double>({
                600., 200., 200., 12., 10., 10.}));
-      CHECK(probe.NSM == std::list<double>({0.}));
+      CHECK(probe.NSM == std::vector<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
@@ -163,8 +163,8 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK((long)probe.MID == 5);
       CHECK(probe.TYPE == "TUBE");
       CHECK(probe.DIM.size() == 1);
-      CHECK(probe.DIM[0] == std::list<double>({600., 500.}));
-      CHECK(probe.NSM == std::list<double>({0.}));
+      CHECK(probe.DIM[0] == std::vector<double>({600., 500.}));
+      CHECK(probe.NSM == std::vector<double>({0.}));
       CHECK(probe.SO.size() == 0);
       CHECK(probe.X_XB.size() == 0);
    }
@@ -186,12 +186,12 @@ TEST_CASE("BDF PBEAML definitions.", "[bdf_PBEAML]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "T");
       CHECK(probe.DIM.size() == 3);
-      CHECK(probe.DIM[0] == std::list<double>({12., 14.8, 2.5, 2.6}));
-      CHECK(probe.DIM[1] == std::list<double>({6., 7., 1.2, 2.6}));
-      CHECK(probe.DIM[2] == std::list<double>({6., 7.8, 5.6, 2.3}));
-      CHECK(probe.NSM == std::list<double>({0., 0., 0.}));
-      CHECK(probe.SO == std::list<std::string>({"NO", "YES"}));
-      CHECK(probe.X_XB == std::list<double>({.4, .6}));
+      CHECK(probe.DIM[0] == std::vector<double>({12., 14.8, 2.5, 2.6}));
+      CHECK(probe.DIM[1] == std::vector<double>({6., 7., 1.2, 2.6}));
+      CHECK(probe.DIM[2] == std::vector<double>({6., 7.8, 5.6, 2.3}));
+      CHECK(probe.NSM == std::vector<double>({0., 0., 0.}));
+      CHECK(probe.SO == std::vector<std::string>({"NO", "YES"}));
+      CHECK(probe.X_XB == std::vector<double>({.4, .6}));
    }
 }
 

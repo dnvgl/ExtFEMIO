@@ -31,6 +31,10 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#ifdef _C2
+#undef _C2
+#endif
+
 namespace {
    static const double cd0 = 0., cd1 = 1.;
 }
@@ -126,6 +130,17 @@ namespace dnvgl {
                auto block_cnt = div_val.quot;
                auto block_rem = div_val.rem;
 
+               std::deque<std::string> _SO;
+               std::deque<double> _X_XB;
+               std::deque<double> _A;
+               std::deque<double> _I1, _I2, _I12;
+               std::deque<double> _J;
+               std::deque<double> _NSM;
+               std::deque<double> _C1, _C2;
+               std::deque<double> _D1, _D2;
+               std::deque<double> _E1, _E2;
+               std::deque<double> _F1, _F2;
+
                form_K1.set_value(K1, "");
                form_S1.set_value(S1, "");
                form_S2.set_value(S2, "");
@@ -187,68 +202,100 @@ namespace dnvgl {
                for (size_t i = block_cnt; i > 2; --i ) {
                   switch (block_rem) {
                   case 16:
-                     F2.push_front(form_F2(*(pos++)));
+                     _F2.push_front(form_F2(*(pos++)));
                   case 15:
-                     F1.push_front(form_F1(*(pos++)));
+                     _F1.push_front(form_F1(*(pos++)));
                   case 14:
-                     E2.push_front(form_E2(*(pos++)));
+                     _E2.push_front(form_E2(*(pos++)));
                   case 13:
-                     E1.push_front(form_E1(*(pos++)));
+                     _E1.push_front(form_E1(*(pos++)));
                   case 12:
-                     D2.push_front(form_D2(*(pos++)));
+                     _D2.push_front(form_D2(*(pos++)));
                   case 11:
-                     D1.push_front(form_D1(*(pos++)));
+                     _D1.push_front(form_D1(*(pos++)));
                   case 10:
-                     C2.push_front(form_C2(*(pos++)));
+                     _C2.push_front(form_C2(*(pos++)));
                   case 9:
-                     C1.push_front(form_C1(*(pos++)));
+                     _C1.push_front(form_C1(*(pos++)));
                   case 8:
-                     NSM.push_front(form_NSM(*(pos++)));
-                     J.push_front(form_J(*(pos++)));
-                     I12.push_front(form_I12(*(pos++)));
-                     I2.push_front(form_I2(*(pos++)));
-                     I1.push_front(form_I1(*(pos++)));
-                     A.push_front(form_A(*(pos++)));
-                     X_XB.push_front(form_X_XB(*(pos++)));
-                     SO.push_front(form_SO(*(pos++)));
+                     _NSM.push_front(form_NSM(*(pos++)));
+                     _J.push_front(form_J(*(pos++)));
+                     _I12.push_front(form_I12(*(pos++)));
+                     _I2.push_front(form_I2(*(pos++)));
+                     _I1.push_front(form_I1(*(pos++)));
+                     _A.push_front(form_A(*(pos++)));
+                     _X_XB.push_front(form_X_XB(*(pos++)));
+                     _SO.push_front(form_SO(*(pos++)));
                   }
                }
 
                switch (block_rem) {
                case 16:
-                  F2.push_front(form_F2(*(pos++)));
+                  _F2.push_front(form_F2(*(pos++)));
                case 15:
-                  F1.push_front(form_F1(*(pos++)));
+                  _F1.push_front(form_F1(*(pos++)));
                case 14:
-                  E2.push_front(form_E2(*(pos++)));
+                  _E2.push_front(form_E2(*(pos++)));
                case 13:
-                  E1.push_front(form_E1(*(pos++)));
+                  _E1.push_front(form_E1(*(pos++)));
                case 12:
-                  D2.push_front(form_D2(*(pos++)));
+                  _D2.push_front(form_D2(*(pos++)));
                case 11:
-                  D1.push_front(form_D1(*(pos++)));
+                  _D1.push_front(form_D1(*(pos++)));
                case 10:
-                  C2.push_front(form_C2(*(pos++)));
+                  _C2.push_front(form_C2(*(pos++)));
                case 9:
-                  C1.push_front(form_C1(*(pos++)));
+                  _C1.push_front(form_C1(*(pos++)));
                case 8:
-                  NSM.push_front(form_NSM(*(pos++)));
+                  _NSM.push_front(form_NSM(*(pos++)));
                case 7:
-                  J.push_front(form_J(*(pos++)));
+                  _J.push_front(form_J(*(pos++)));
                case 6:
-                  I12.push_front(form_I12(*(pos++)));
+                  _I12.push_front(form_I12(*(pos++)));
                case 5:
-                  I2.push_front(form_I2(*(pos++)));
-                  I1.push_front(form_I1(*(pos++)));
-                  A.push_front(form_A(*(pos++)));
+                  _I2.push_front(form_I2(*(pos++)));
+                  _I1.push_front(form_I1(*(pos++)));
+                  _A.push_front(form_A(*(pos++)));
                   form_MID.set_value(MID, *(pos++));
                   form_PID.set_value(PID, *(pos));
                   break;
                default:
                   throw errors::parse_error("PBEAM", "Illegal number of entries.");
                }
-               if (J.size() == 0)
-                  J.push_front(dnvgl::extfem::bdf::types::entry_value<double>());
+               if (_J.size() == 0)
+                  _J.push_front(dnvgl::extfem::bdf::types::entry_value<double>());
+               SO.resize(_SO.size(), entry_value<std::string>(""));
+               std::copy(_SO.begin(), _SO.end(), SO.begin());
+               X_XB.resize(_X_XB.size());
+               std::copy(_X_XB.begin(), _X_XB.end(), X_XB.begin());
+               A.resize(_A.size());
+               std::copy(_A.begin(), _A.end(), A.begin());
+               I1.resize(_I1.size());
+               std::copy(_I1.begin(), _I1.end(), I1.begin());
+               I2.resize(_I2.size());
+               std::copy(_I2.begin(), _I2.end(), I2.begin());
+               I12.resize(_I12.size());
+               std::copy(_I12.begin(), _I12.end(), I12.begin());
+               J.resize(_J.size());
+               std::copy(_J.begin(), _J.end(), J.begin());
+               NSM.resize(_NSM.size());
+               std::copy(_NSM.begin(), _NSM.end(), NSM.begin());
+               C1.resize(_C1.size());
+               std::copy(_C1.begin(), _C1.end(), C1.begin());
+               C2.resize(_C2.size());
+               std::copy(_C2.begin(), _C2.end(), C2.begin());
+               D1.resize(_D1.size());
+               std::copy(_D1.begin(), _D1.end(), D1.begin());
+               D2.resize(_D2.size());
+               std::copy(_D2.begin(), _D2.end(), D2.begin());
+               E1.resize(_E1.size());
+               std::copy(_E1.begin(), _E1.end(), E1.begin());
+               E2.resize(_E2.size());
+               std::copy(_E2.begin(), _E2.end(), E2.begin());
+               F1.resize(_F1.size());
+               std::copy(_F1.begin(), _F1.end(), F1.begin());
+               F2.resize(_F2.size());
+               std::copy(_F2.begin(), _F2.end(), F2.begin());
             }
 
             void pbeam::collect_outdata(

@@ -29,20 +29,6 @@ namespace dnvgl {
       namespace bdf {
          namespace input {
 
-            struct line_reader : std::ctype<char> {
-
-               line_reader() : ctype(make_table()) { }
-
-            private:
-
-               static mask* make_table() {
-                  const mask* classic = classic_table();
-                  static std::vector<mask> v(classic, classic + table_size);
-                  v[' '] &= ~space;
-                  return &v[0];
-               }
-            };
-
             class bdf_file {
 
             private:
@@ -55,7 +41,7 @@ namespace dnvgl {
 
                std::string last_comment;
 
-               bool eof;
+               bool eof(void);
 
                bdf_file(std::istream&);
 

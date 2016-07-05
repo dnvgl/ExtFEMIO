@@ -34,23 +34,21 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::fem::input;
 
 fem_file::fem_file(std::istream &inp) :
-   data(inp), last_comment(""), eof(false) {
-   data.imbue(std::locale(std::locale("C"), new line_reader()));
-   data >> cur_line;
+   data(inp), last_comment(""), cur_line("") {
 }
 
 // Return all input file lines belonging to next FEM card.
 void fem_file::get(std::list<std::string> &res) {
    res.clear();
+   while (cur_line.length() == 0)
+      std::getline(data, cur_line);
    do {
       // if line not empty and not comment line add line to result std::set.
       if (cur_line.length() > 0)
          res.push_back(cur_line);
-      // if not EOF, read next line
-      if (!data.eof()) data >> cur_line;
-      else eof = true;
-      // loop while no next card starts and file has still content.
-   } while (!data.eof() &&
+   // if not EOF, read next line
+   // loop while no next card starts and file has still content.
+   } while (std::getline(this->data, this->cur_line) &&
             (res.size() == 0 || cur_line[0] == ' '));
 }
 
@@ -73,6 +71,10 @@ std::streampos fem_file::size(void) {
 // Return position in input FEM file.
 std::streampos fem_file::pos(void) {
    return data.tellg();
+}
+
+bool fem_file::eof(void) {
+   return data.eof();
 }
 
 // Local Variables:

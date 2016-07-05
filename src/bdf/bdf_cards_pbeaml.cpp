@@ -116,7 +116,7 @@ namespace dnvgl {
                }
 
                // DIM.push_back(new std::list<dnvgl::extfem::bdf::double> >);
-               DIM.push_back(std::list<double>());
+               DIM.push_back(std::vector<double>());
                for (i=0; i < dim_num; i++) {
                   if (pos == inp.end()) goto invalid;
                   (DIM[0]).push_back(form_DIM(*(pos++)));
@@ -137,7 +137,7 @@ namespace dnvgl {
                   if (pos == inp.end()) goto end;
                   j++;
                   // DIM.push_back(new std::list<dnvgl::extfem::bdf::types::entry_value<double> >);
-                  DIM.push_back(std::list<double>());
+                  DIM.push_back(std::vector<double>());
                   try {
                      SO.push_back(form_SO(*(pos++)));
                   } catch (errors::error) {

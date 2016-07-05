@@ -213,70 +213,73 @@ namespace dnvgl {
                   return;
                }
 
-               std::string key(inp.front());
-               switch (cardtype_map.at(key)) {
-               case GRID:
-                  res = std::make_unique<bdf::cards::grid>(inp);
-                  break;
-               case CTRIA3:
-                  res = std::make_unique<bdf::cards::ctria3>(inp);
-                  break;
-               case CQUAD4:
-                  res = std::make_unique<bdf::cards::cquad4>(inp);
-                  break;
-               case CBEAM:
-                  res = std::make_unique<bdf::cards::cbeam>(inp);
-                  break;
-               case CBAR:
-                  res = std::make_unique<bdf::cards::cbar>(inp);
-                  break;
-               case CROD:
-                  res = std::make_unique<bdf::cards::crod>(inp);
-                  break;
-               case PSHELL:
-                  res = std::make_unique<bdf::cards::pshell>(inp);
-                  break;
-               case PBEAM:
-                  res = std::make_unique<bdf::cards::pbeam>(inp);
-                  break;
-               case PBEAML:
-                  res = std::make_unique<bdf::cards::pbeaml>(inp);
-                  break;
-               case PBAR:
-                  res = std::make_unique<bdf::cards::pbar>(inp);
-                  break;
-               case PBARL:
-                  res = std::make_unique<bdf::cards::pbarl>(inp);
-                  break;
-               case PROD:
-                  res = std::make_unique<bdf::cards::prod>(inp);
-                  break;
-               case MAT1:
-                  res = std::make_unique<bdf::cards::mat1>(inp);
-                  break;
-               case MAT2:
-                  res = std::make_unique<bdf::cards::mat2>(inp);
-                  break;
-               case ENDDATA:
-                  res = std::make_unique<bdf::cards::enddata>(inp);
-                  break;
-               case FORCE:
-                  res = std::make_unique<bdf::cards::force>(inp);
-                  break;
-               case MOMENT:
-                  res = std::make_unique<bdf::cards::moment>(inp);
-                  break;
-               case LOAD:
-                  res = std::make_unique<bdf::cards::load>(inp);
-                  break;
-               case PARAM:
-                  res = std::make_unique<bdf::cards::param>(inp);
-                  break;
-                  // These are not real card types, they can't be returned
-               case UNKNOWN:
-               case BEAM_PROP:
-               case BAR_PROP:
-               case BEAM_BASE:
+               try {
+                  switch (cardtype_map.at(inp.front())) {
+                  case GRID:
+                     res = std::make_unique<bdf::cards::grid>(inp);
+                     break;
+                  case CTRIA3:
+                     res = std::make_unique<bdf::cards::ctria3>(inp);
+                     break;
+                  case CQUAD4:
+                     res = std::make_unique<bdf::cards::cquad4>(inp);
+                     break;
+                  case CBEAM:
+                     res = std::make_unique<bdf::cards::cbeam>(inp);
+                     break;
+                  case CBAR:
+                     res = std::make_unique<bdf::cards::cbar>(inp);
+                     break;
+                  case CROD:
+                     res = std::make_unique<bdf::cards::crod>(inp);
+                     break;
+                  case PSHELL:
+                     res = std::make_unique<bdf::cards::pshell>(inp);
+                     break;
+                  case PBEAM:
+                     res = std::make_unique<bdf::cards::pbeam>(inp);
+                     break;
+                  case PBEAML:
+                     res = std::make_unique<bdf::cards::pbeaml>(inp);
+                     break;
+                  case PBAR:
+                     res = std::make_unique<bdf::cards::pbar>(inp);
+                     break;
+                  case PBARL:
+                     res = std::make_unique<bdf::cards::pbarl>(inp);
+                     break;
+                  case PROD:
+                     res = std::make_unique<bdf::cards::prod>(inp);
+                     break;
+                  case MAT1:
+                     res = std::make_unique<bdf::cards::mat1>(inp);
+                     break;
+                  case MAT2:
+                     res = std::make_unique<bdf::cards::mat2>(inp);
+                     break;
+                  case ENDDATA:
+                     res = std::make_unique<bdf::cards::enddata>(inp);
+                     break;
+                  case FORCE:
+                     res = std::make_unique<bdf::cards::force>(inp);
+                     break;
+                  case MOMENT:
+                     res = std::make_unique<bdf::cards::moment>(inp);
+                     break;
+                  case LOAD:
+                     res = std::make_unique<bdf::cards::load>(inp);
+                     break;
+                  case PARAM:
+                     res = std::make_unique<bdf::cards::param>(inp);
+                     break;
+                     // These are not real card types, they can't be returned
+                  case UNKNOWN:
+                  case BEAM_PROP:
+                  case BAR_PROP:
+                  case BEAM_BASE:
+                     res = std::make_unique<bdf::cards::unknown>(inp);
+                  }
+               } catch (std::out_of_range) {
                   res = std::make_unique<bdf::cards::unknown>(inp);
                }
             }
@@ -289,7 +292,7 @@ namespace dnvgl {
                std::list<std::unique_ptr<format_entry> > &res) const {
                throw errors::error("can't write UNKNOWN.");
                return;
-            };
+            }
          }
       }
    }

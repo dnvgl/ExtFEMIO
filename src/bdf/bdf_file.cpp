@@ -39,28 +39,31 @@ const std::set<char> bdf_file::cont_chars(initVals, initVals + 3);
 
 
 bdf_file::bdf_file(std::istream &inp) :
-   data(inp), last_comment(""), eof(false) {
-   data.imbue(std::locale(std::locale("C"), new line_reader()));
-   data >> cur_line;
-}
+   data(inp), last_comment(""), cur_line("") { }
 
 // Return all input file lines belonging to next BDF card.
 void bdf_file::get(std::list<std::string> &res) {
    res.clear();
+   while (cur_line.length() == 0)
+      std::getline(data, cur_line);
    do {
       // if line not empty and not comment line add line to result std::set.
-      if (cur_line.length() > 0 && cur_line[0] != '$')
-         res.push_back(cur_line);
-      // If line is comment save content to special member
-      else if (cur_line.length() > 0 && cur_line[0] == '$')
-         last_comment = cur_line;
-      // if not EOF, read next line
-      if (!data.eof()) data >> cur_line;
-      else eof = true;
-      // loop while no next card starts and file has still content.
-   } while (!data.eof() &&
+      if (cur_line.length() > 0) {
+         if (cur_line[0] != '$')
+            res.push_back(cur_line);
+         // If line is comment save content to special member
+         else
+            last_comment = cur_line;
+      }
+   // if not EOF, read next line
+   // loop while no next card starts and file has still content.
+   } while (std::getline(this->data, this->cur_line) &&
             (res.size() == 0 ||
              cont_chars.find(cur_line[0]) != cont_chars.end()));
+}
+
+bool bdf_file::eof(void) {
+   return data.eof();
 }
 
 // Return size of input BDF file.

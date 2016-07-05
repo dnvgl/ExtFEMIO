@@ -62,11 +62,11 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
       CHECK((long)probe.PID == 4000001);
       CHECK((long)probe.MID == 3);
-      CHECK(probe.A == std::list<double>({10460.}));
-      CHECK(probe.I1 == std::list<double>({93690000.}));
-      CHECK(probe.I2 == std::list<double>({1694000.}));
-      CHECK(probe.I12 == std::list<double>({6.856e6}));
-      CHECK(probe.J == std::list<double>({1.316e6}));
+      CHECK(probe.A == std::vector<double>({10460.}));
+      CHECK(probe.I1 == std::vector<double>({93690000.}));
+      CHECK(probe.I2 == std::vector<double>({1694000.}));
+      CHECK(probe.I12 == std::vector<double>({6.856e6}));
+      CHECK(probe.J == std::vector<double>({1.316e6}));
    }
 
    SECTION("Small Field Format2") {
@@ -83,11 +83,11 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
       CHECK((long)probe.PID == 4000001);
       CHECK((long)probe.MID == 3);
-      CHECK(probe.A == std::list<double>({10460.}));
-      CHECK(probe.I1 == std::list<double>({93690000.}));
-      CHECK(probe.I2 == std::list<double>({1694000.}));
-      CHECK(probe.I12 == std::list<double>({6.856e6}));
-      CHECK(probe.J == std::list<double>({1.316e6}));
+      CHECK(probe.A == std::vector<double>({10460.}));
+      CHECK(probe.I1 == std::vector<double>({93690000.}));
+      CHECK(probe.I2 == std::vector<double>({1694000.}));
+      CHECK(probe.I12 == std::vector<double>({6.856e6}));
+      CHECK(probe.J == std::vector<double>({1.316e6}));
    }
 
    SECTION("Free Field Format 1") {
@@ -102,20 +102,20 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
       CHECK((long)probe.PID == 1);
       CHECK((long)probe.MID == 2);
-      CHECK(probe.A == std::list<double>({3.}));
-      CHECK(probe.I1 == std::list<double>({4.}));
-      CHECK(probe.I2 == std::list<double>({5.}));
-      CHECK(probe.I12 == std::list<double>({6.}));
-      CHECK(probe.J == std::list<double>({7.}));
-      CHECK(probe.NSM == std::list<double>({8.}));
-      CHECK(probe.C1 == std::list<double>({9.}));
-      CHECK(probe.C2 == std::list<double>({10.}));
-      CHECK(probe.D1 == std::list<double>({11.}));
-      CHECK(probe.D2 == std::list<double>({12.}));
-      CHECK(probe.E1 == std::list<double>({13.}));
-      CHECK(probe.E2 == std::list<double>({14.}));
-      CHECK(probe.F1 == std::list<double>({15.}));
-      CHECK(probe.F2 == std::list<double>({16.}));
+      CHECK(probe.A == std::vector<double>({3.}));
+      CHECK(probe.I1 == std::vector<double>({4.}));
+      CHECK(probe.I2 == std::vector<double>({5.}));
+      CHECK(probe.I12 == std::vector<double>({6.}));
+      CHECK(probe.J == std::vector<double>({7.}));
+      CHECK(probe.NSM == std::vector<double>({8.}));
+      CHECK(probe.C1 == std::vector<double>({9.}));
+      CHECK(probe.C2 == std::vector<double>({10.}));
+      CHECK(probe.D1 == std::vector<double>({11.}));
+      CHECK(probe.D2 == std::vector<double>({12.}));
+      CHECK(probe.E1 == std::vector<double>({13.}));
+      CHECK(probe.E2 == std::vector<double>({14.}));
+      CHECK(probe.F1 == std::vector<double>({15.}));
+      CHECK(probe.F2 == std::vector<double>({16.}));
    }
 
    SECTION("Free Field Format 2") {
@@ -135,26 +135,26 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
       CHECK((long)probe.PID == 1);
       CHECK((long)probe.MID == 2);
-      std::list<std::string> ref({"YES", "NO"});
+      std::vector<std::string> ref({"YES", "NO"});
       for (auto p : probe.SO) {
          CHECK(p == ref.front());
-         ref.pop_front();
+         ref.erase(ref.begin());
       }
-      CHECK(probe.X_XB == std::list<double>({18., 34.}));
-      CHECK(probe.A == std::list<double>({3., 19., 35.}));
-      CHECK(probe.I1 == std::list<double>({4., 20., 36.}));
-      CHECK(probe.I2 == std::list<double>({5., 21., 37.}));
-      CHECK(probe.I12 == std::list<double>({6., 22., 38.}));
-      CHECK(probe.J == std::list<double>({7., 23., 39.}));
-      CHECK(probe.NSM == std::list<double>({8., 24., 40.}));
-      CHECK(probe.C1 == std::list<double>({9., 25., 41.}));
-      CHECK(probe.C2 == std::list<double>({10., 26., 42.}));
-      CHECK(probe.D1 == std::list<double>({11., 27., 43.}));
-      CHECK(probe.D2 == std::list<double>({12., 28., 44.}));
-      CHECK(probe.E1 == std::list<double>({13., 29., 45.}));
-      CHECK(probe.E2 == std::list<double>({14., 30., 46.}));
-      CHECK(probe.F1 == std::list<double>({15., 31., 47.}));
-      CHECK(probe.F2 == std::list<double>({16., 32., 48.}));
+      CHECK(probe.X_XB == std::vector<double>({18., 34.}));
+      CHECK(probe.A == std::vector<double>({3., 19., 35.}));
+      CHECK(probe.I1 == std::vector<double>({4., 20., 36.}));
+      CHECK(probe.I2 == std::vector<double>({5., 21., 37.}));
+      CHECK(probe.I12 == std::vector<double>({6., 22., 38.}));
+      CHECK(probe.J == std::vector<double>({7., 23., 39.}));
+      CHECK(probe.NSM == std::vector<double>({8., 24., 40.}));
+      CHECK(probe.C1 == std::vector<double>({9., 25., 41.}));
+      CHECK(probe.C2 == std::vector<double>({10., 26., 42.}));
+      CHECK(probe.D1 == std::vector<double>({11., 27., 43.}));
+      CHECK(probe.D2 == std::vector<double>({12., 28., 44.}));
+      CHECK(probe.E1 == std::vector<double>({13., 29., 45.}));
+      CHECK(probe.E2 == std::vector<double>({14., 30., 46.}));
+      CHECK(probe.F1 == std::vector<double>({15., 31., 47.}));
+      CHECK(probe.F2 == std::vector<double>({16., 32., 48.}));
 
       CHECK((double)probe.K1 == 49);
       CHECK((double)probe.K2 == 50);
@@ -211,25 +211,25 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
       CHECK((long)probe.PID == 39);
       CHECK((long)probe.MID == 6);
-      CHECK(probe.A == std::list<double>({2.9, 5.3}));
-      CHECK(probe.I1 == std::list<double>({3.5, 56.2}));
-      CHECK(probe.I2 == std::list<double>({5.97, 78.6}));
-      CHECK(probe.I12 == std::list<double>({0., 0.}));
-      CHECK(probe.J == std::list<double>({0., 0.}));
-      CHECK(probe.NSM == std::list<double>({0., 0.}));
-      CHECK(probe.C1 == std::list<double>({0., 0.}));
-      CHECK(probe.C2 == std::list<double>({0., 0.}));
-      CHECK(probe.D1 == std::list<double>({2., 2.5}));
-      CHECK(probe.D2 == std::list<double>({-4., -5.}));
-      CHECK(probe.E1 == std::list<double>({0., 0.}));
-      CHECK(probe.E2 == std::list<double>({0., 0.}));
-      CHECK(probe.F1 == std::list<double>({0., 0.}));
-      CHECK(probe.F2 == std::list<double>({0., 0.}));
-      std::list<entry_value<std::string> > ref(1);
+      CHECK(probe.A == std::vector<double>({2.9, 5.3}));
+      CHECK(probe.I1 == std::vector<double>({3.5, 56.2}));
+      CHECK(probe.I2 == std::vector<double>({5.97, 78.6}));
+      CHECK(probe.I12 == std::vector<double>({0., 0.}));
+      CHECK(probe.J == std::vector<double>({0., 0.}));
+      CHECK(probe.NSM == std::vector<double>({0., 0.}));
+      CHECK(probe.C1 == std::vector<double>({0., 0.}));
+      CHECK(probe.C2 == std::vector<double>({0., 0.}));
+      CHECK(probe.D1 == std::vector<double>({2., 2.5}));
+      CHECK(probe.D2 == std::vector<double>({-4., -5.}));
+      CHECK(probe.E1 == std::vector<double>({0., 0.}));
+      CHECK(probe.E2 == std::vector<double>({0., 0.}));
+      CHECK(probe.F1 == std::vector<double>({0., 0.}));
+      CHECK(probe.F2 == std::vector<double>({0., 0.}));
+      std::vector<entry_value<std::string> > ref(1);
       entry_type<std::string> tmp("tmp");
       tmp.set_value(ref.front(), "YES");
       CHECK(probe.SO == ref);
-      CHECK(probe.X_XB == std::list<double>({1.}));
+      CHECK(probe.X_XB == std::vector<double>({1.}));
 
       CHECK((double)probe.K1 == 1.);
       CHECK((double)probe.K2 == 1.);

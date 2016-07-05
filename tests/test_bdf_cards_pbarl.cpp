@@ -63,7 +63,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "BAR");
       CHECK(probe.DIM.size() == 2);
-      CHECK(probe.DIM == std::list<double>({25., 600.}));
+      CHECK(probe.DIM == std::vector<double>({25., 600.}));
       CHECK((double)probe.NSM == 0.);
    }
 
@@ -82,7 +82,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       CHECK((long)probe.MID == 8);
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "BAR");
-      CHECK(probe.DIM == std::list<double>({55., 500.}));
+      CHECK(probe.DIM == std::vector<double>({55., 500.}));
       CHECK((double)probe.NSM == 0.);
    }
 
@@ -100,7 +100,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       CHECK((long)probe.MID == 4);
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "L");
-      CHECK(probe.DIM == std::list<double>({63., 340., 35., 14.}));
+      CHECK(probe.DIM == std::vector<double>({63., 340., 35., 14.}));
       CHECK((double)probe.NSM == 0.);
    }
 
@@ -118,7 +118,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       CHECK((long)probe.MID == 1);
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "T");
-      CHECK(probe.DIM == std::list<double>({150., 400., 12., 10.}));
+      CHECK(probe.DIM == std::vector<double>({150., 400., 12., 10.}));
       CHECK((double)probe.NSM == 0.);
    }
 
@@ -136,7 +136,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       CHECK((long)probe.MID == 4);
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "I");
-      CHECK(probe.DIM == std::list<double>({
+      CHECK(probe.DIM == std::vector<double>({
                600., 200., 200., 12., 10., 10.}));
       CHECK((double)probe.NSM == 0.);
    }
@@ -155,7 +155,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       CHECK((long)probe.MID == 6);
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "I");
-      CHECK(probe.DIM == std::list<double>({
+      CHECK(probe.DIM == std::vector<double>({
                14., 6., .5, .5, .5, .5}));
       CHECK((double)probe.NSM == 0.);
    }
@@ -174,7 +174,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
       CHECK((long)probe.MID == 5);
       CHECK(probe.GROUP == "MSCBML0");
       CHECK(probe.TYPE == "TUBE");
-      CHECK(probe.DIM == std::list<double>({600., 500.}));
+      CHECK(probe.DIM == std::vector<double>({600., 500.}));
       CHECK((double)probe.NSM == 0.);
    }
 }

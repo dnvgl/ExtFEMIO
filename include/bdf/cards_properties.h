@@ -233,69 +233,69 @@ The last two continuations are:
                /** Area of the beam cross section at the various
                    stations. (Real > 0.0)
                */
-               std::list<double> A;
+               std::vector<double> A;
                /** Area moment of inertia at the various stations for
                    bending in plane 1 about the neutral axis. (Real >
                    0.0)
                */
-               std::list<double> I1;
+               std::vector<double> I1;
                /** Area moment of inertia at the various stations for
                    bending in plane 2 about the neutral axis. (Real >
                    0.0)
                */
-               std::list<double> I2;
+               std::vector<double> I2;
                /** Area product of inertia at the various stations. (Real)
                 */
-               std::list<double> I12;
+               std::vector<double> I12;
                /** Torsional stiffness parameter at the various
                    stations. (Real >= 0.0 but > 0.0 if warping is
                    present)
                */
-               std::list<double> J;
+               std::vector<double> J;
                /** Nonstructural mass per unit length at the various
                    stations. (Real, Default=0.0)
                */
-               std::list<double> NSM;
+               std::vector<double> NSM;
                /** *y* coordinate for location of first stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> C1;
+               std::vector<double> C1;
                /** *z* coordinate for location of first stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> C2;
+               std::vector<double> C2;
                /** *y* coordinate for location of second stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> D1;
+               std::vector<double> D1;
                /** *z* coordinate for location of second stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> D2;
+               std::vector<double> D2;
                /** *y* coordinate for location of third stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> E1;
+               std::vector<double> E1;
                /** *z* coordinate for location of third stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> E2;
+               std::vector<double> E2;
                /** *y* coordinate for location of fourth stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> F1;
+               std::vector<double> F1;
                /** *z* coordinate for location of fourth stress
                    recovery point at the various stations. (Real;
                    Default: 0)
                */
-               std::list<double> F2;
+               std::vector<double> F2;
                /** Stress output request option at the various
                    stations. (Character)
 
@@ -307,12 +307,12 @@ The last two continuations are:
 
                    - `NO` --- No stresses or forces are recovered.
                */
-               std::list<dnvgl::extfem::bdf::types::entry_value<std::string> > SO;
+               std::vector<dnvgl::extfem::bdf::types::entry_value<std::string> > SO;
                /** `X/XB` : Distance from end `A` in the element
                    coordinate system divided by the length of the
                    element. (Real > 0.0)
                */
-               std::list<double> X_XB;
+               std::vector<double> X_XB;
                /** Shear stiffness factor *K* in *KxAxG* for plane 1.
                    (Real, Default = 1.0)
                */
@@ -457,10 +457,10 @@ dimensions.
                    station *j* and end `B`. (Real > 0.0 for `GROUP` =
                    `MSCBML0`)
                */
-               std::deque<std::list<double> > DIM;
+               std::vector<std::vector<double> > DIM;
                /** Nonstructural mass per unit length. (Default = 0.0)
                 */
-               std::list<double> NSM;
+               std::vector<double> NSM;
                /** Stress output request option for intermediate
                    station *j* and end `B`. (Character; Default =
                    `YES`):
@@ -471,13 +471,13 @@ dimensions.
 
                    - `NO` --- No stresses or forces are recovered.
                */
-               std::list<std::string> SO;
+               std::vector<std::string> SO;
                /** `X(j)/XB` : Distance from end `A` to intermediate
                    station *j* in the element coordinate system
                    divided by the length of the element. (Real>0.0;
                    Default = 1.0)
                */
-               std::list<double> X_XB;
+               std::vector<double> X_XB;
 
                pbeaml(const std::list<std::string> &);
 
@@ -660,7 +660,7 @@ cross-sectional dimensions.
                /** Cross-section dimensions. (Real > 0.0 for `GROUP` =
                    `MSCBML0`)
                */
-               std::list<double> DIM;
+               std::vector<double> DIM;
                /** Nonstructural mass per unit length. `NSM` is
                    specified after the last `DIMi`. (Default = 0.0)
                */

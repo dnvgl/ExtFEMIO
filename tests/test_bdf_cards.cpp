@@ -377,10 +377,10 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
       CHECK(static_cast<pbeaml*>(current.get())->TYPE.value == "L");
       CHECK(static_cast<pbeaml*>(current.get())->DIM.size() == 1);
       CHECK(static_cast<pbeaml*>(current.get())->DIM[0] ==
-            std::list<double>({63., 340., 35., 14.}));
+            std::vector<double>({63., 340., 35., 14.}));
       CHECK(static_cast<pbeaml*>(current.get())->NSM.size() == 1);
       CHECK(static_cast<pbeaml*>(current.get())->NSM ==
-            std::list<double>({0.}));
+            std::vector<double>({0.}));
       CHECK(static_cast<pbeaml*>(current.get())->SO.size() == 0);
       CHECK(static_cast<pbeaml*>(current.get())->X_XB.size() == 0);
 
@@ -393,15 +393,15 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
       CHECK(static_cast<pbeam*>(current.get())->PID.value == 4000001);
       CHECK(static_cast<pbeam*>(current.get())->MID.value == 3);
       CHECK(static_cast<pbeam*>(current.get())->A ==
-            std::list<double>({10460.}));
+            std::vector<double>({10460.}));
       CHECK(static_cast<pbeam*>(current.get())->I1 ==
-            std::list<double>({93690000.}));
+            std::vector<double>({93690000.}));
       CHECK(static_cast<pbeam*>(current.get())->I2 ==
-            std::list<double>({1694000.}));
+            std::vector<double>({1694000.}));
       CHECK(static_cast<pbeam*>(current.get())->I12 ==
-            std::list<double>({6.856e6}));
+            std::vector<double>({6.856e6}));
       CHECK(static_cast<pbeam*>(current.get())->J ==
-            std::list<double>({1.316e6}));
+            std::vector<double>({1.316e6}));
 
       probe.get(l);
       CAPTURE( l.front() );
