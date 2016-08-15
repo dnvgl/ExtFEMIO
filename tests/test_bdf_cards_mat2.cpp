@@ -83,7 +83,7 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
       CHECK((long)probe.MCSID == 17);
    }
 
-   SECTION("FFEMIO-3") {
+   SECTION("FEMIO-3") {
       std::list<std::string> data({
          "MAT2*    10              7.01670932+10   2.78474977+10   0.",
          "*        1.35642948+11   0.              1.26610002+10   0.",
