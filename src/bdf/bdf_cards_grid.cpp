@@ -45,7 +45,7 @@ namespace dnvgl {
             const bdf::types::entry_type<long> grid::form_ID(
                "ID", bdf::type_bounds::bound<long>(&cl1, &cl1e8));
             const bdf::types::entry_type<long> grid::form_CP(
-               "CP", bdf::type_bounds::bound<long>(&cl1, nullptr, &cl_1));
+               "CP", bdf::type_bounds::bound<long>(&cl0, nullptr, nullptr, true));
             const bdf::types::entry_type<double> grid::form_X1(
                "X1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
             const bdf::types::entry_type<double> grid::form_X2(

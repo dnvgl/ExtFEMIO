@@ -174,6 +174,51 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
    }
 }
 
+TEST_CASE("FEMIO-43: BDF import failed") {
+
+   std::list<std::string> data;
+
+   SECTION("report") {
+      std::list<std::string> data({
+            // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+            "GRID    1       0       -9550.  0.      5700.   0\n"});
+
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
+      grid probe(lines);
+
+      CHECK((long)probe.ID == 1);
+      CHECK((long)probe.CP == 0);
+      CHECK((double)probe.X1 == -9550.);
+      CHECK((double)probe.X2 == 0.);
+      CHECK((double)probe.X3 == 5700.);
+      CHECK((long)probe.CD == 0);
+      std::list<int> ps_ref({});
+      CHECK(probe.PS == ps_ref);
+      CHECK((long)probe.SEID == 0);
+   }
+
+   SECTION("default CP") {
+      std::list<std::string> data({
+            // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+            "GRID    1               -9550.  0.      5700.   0\n"});
+
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
+      grid probe(lines);
+
+      CHECK((long)probe.ID == 1);
+      CHECK_FALSE(probe.CP);
+      CHECK((double)probe.X1 == -9550.);
+      CHECK((double)probe.X2 == 0.);
+      CHECK((double)probe.X3 == 5700.);
+      CHECK((long)probe.CD == 0);
+      std::list<int> ps_ref({});
+      CHECK(probe.PS == ps_ref);
+      CHECK((long)probe.SEID == 0);
+   }
+}
+
 // Local Variables:
 // mode: c++
 // c-file-style: "dnvgl"
