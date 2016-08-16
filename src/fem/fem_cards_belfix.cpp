@@ -73,10 +73,14 @@ namespace dnvgl {
                   OPT = FIXATION;
                else if (tmp == 2)
                   OPT = SPRING;
+               else if (tmp == 3)
+                  OPT = FIXATION_END;
+               else if (tmp == 4)
+                  OPT = SPRING_END;
                else {
                   OPT = INVALID;
                   std::ostringstream msg(
-                     "BELFIX: OPT allows only 1 or 2, got ",
+                     "BELFIX: OPT allows only 1, 2, 3, or 4, got ",
                      std::ostringstream::ate);
                   msg << tmp << ".";
                   error_report(msg.str());

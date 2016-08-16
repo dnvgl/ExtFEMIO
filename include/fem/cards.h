@@ -1511,9 +1511,12 @@ record may be on the interface.
             public:
 
                typedef enum n_opt {
-                  INVALID = -1, FIXATION = 1, SPRING = 2} n_opt;
+                  INVALID = -1,
+                  FIXATION = 1, SPRING = 2,
+                  FIXATION_END = 3, SPRING_END = 4} n_opt;
 
                /** Fixation number to a node.
+
                    =FIXNO= is referenced to from =GELREF=.
                 */
                long FIXNO;
@@ -1542,6 +1545,16 @@ record may be on the interface.
                           element stiffness matrix corresponding to
                           degree of freedom number i of the current
                           node.
+
+                  =FIXATION_END: As =OPT=FIXATION=, where the hinge is
+                          located at the end of the beam — and not at
+                          the node as for =OPT=FIXATION=. This option
+                          is thus relevant for eccentric beams.
+
+                  =SPRING_END: As =OPT=SPRING=, where the hinge is
+                          located at the end of the beam — and not at
+                          the node as for =OPT=SPRING=. This option
+                          is thus relevant for eccentric beams.
                 */
                n_opt OPT;
                /**

@@ -62,6 +62,57 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
       CHECK(probe.TRANO == 0);
       CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
    }
+
+   SECTION("spring") {
+
+      std::list<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "BELFIX   2.30470000e+004 2.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+            "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
+            "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
+      belfix probe(lines);
+
+      CHECK(probe.FIXNO == 23047);
+      CHECK(probe.OPT == belfix::SPRING);
+      CHECK(probe.TRANO == 0);
+      CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
+   }
+
+   SECTION("fixation end") {
+
+      std::list<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "BELFIX   2.30470000e+004 3.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+            "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
+            "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
+      belfix probe(lines);
+
+      CHECK(probe.FIXNO == 23047);
+      CHECK(probe.OPT == belfix::FIXATION_END);
+      CHECK(probe.TRANO == 0);
+      CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
+   }
+
+   SECTION("spring end") {
+
+      std::list<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "BELFIX   2.30470000e+004 4.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+            "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
+            "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
+      std::list<std::string> lines;
+      __base::card::card_split(data, lines);
+      belfix probe(lines);
+
+      CHECK(probe.FIXNO == 23047);
+      CHECK(probe.OPT == belfix::SPRING_END);
+      CHECK(probe.TRANO == 0);
+      CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
+   }
 }
 
 TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
