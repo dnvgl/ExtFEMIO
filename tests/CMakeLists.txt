@@ -10,7 +10,7 @@
 # Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
 if(DEFINED ENV{TEAMCITY_VERSION})
-  set(CATCH_ARGS --reporter teamcity)
+  set(CATCH_ARGS --reporter JUnit >> extfemio_junit.xml)
 endif()
 
 set (EXTFEM_LIBS -lextfemio_bdf -lextfemio -lboost_regex)
