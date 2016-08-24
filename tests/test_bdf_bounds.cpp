@@ -29,6 +29,7 @@ namespace {
 #include <string>
 
 #include <catch.hpp>
+#include <catch_reporter_teamcity.hpp>
 
 #ifndef _MSC_VER
 #include <config.h>

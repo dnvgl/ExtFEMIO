@@ -9,6 +9,13 @@
 # $Revision$
 # Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+if(DEFINED ENV{TEAMCITY_VERSION})
+  set(CATCH_ARGS --reporter teamcity)
+  message("TEAMCITY!!\n\n")
+else()
+  message("no TEAMCITY!!\n\n")
+endif()
+
 set (EXTFEM_LIBS -lextfemio_bdf -lextfemio -lboost_regex)
 set (EXTFEM_BDF_LIBS -lextfemio_bdf -lextfemio -lboost_regex)
 set (EXTFEM_FEM_LIBS -lextfemio_fem -lextfemio -lboost_regex)
@@ -22,42 +29,42 @@ link_directories(
 add_executable(test_extfem_string
   test_extfem_string)
 target_link_libraries(test_extfem_string ${EXTFEM_LIBS})
-# add_test(NAME TEST_EXTFEM_STRING COMMAND test_extfem_string)
+add_test(NAME TEST_EXTFEM_STRING COMMAND test_extfem_string ${CATCH_ARGS})
 
 add_executable(test_bdf_bounds
   test_bdf_bounds)
 target_link_libraries(test_bdf_bounds ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_BOUNDS COMMAND test_bdf_bounds)
+add_test(NAME TEST_BDF_BOUNDS COMMAND test_bdf_bounds ${CATCH_ARGS})
 
 add_executable(test_bdf_float
   test_bdf_float)
 target_link_libraries(test_bdf_float ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_FLOAT COMMAND test_bdf_float)
+add_test(NAME TEST_BDF_FLOAT COMMAND test_bdf_float ${CATCH_ARGS})
 
 add_executable(test_bdf_complx
   test_bdf_complx)
 target_link_libraries(test_bdf_complx ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_COMPLX COMMAND test_bdf_complx)
+add_test(NAME TEST_BDF_COMPLX COMMAND test_bdf_complx ${CATCH_ARGS})
 
 add_executable(test_bdf_int
   test_bdf_int)
 target_link_libraries(test_bdf_int ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_INT COMMAND test_bdf_int)
+add_test(NAME TEST_BDF_INT COMMAND test_bdf_int ${CATCH_ARGS})
 
 add_executable(test_bdf_list
   test_bdf_list)
 target_link_libraries(test_bdf_list ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_LIST COMMAND test_bdf_list)
+add_test(NAME TEST_BDF_LIST COMMAND test_bdf_list ${CATCH_ARGS})
 
 add_executable(test_bdf_str
   test_bdf_str)
 target_link_libraries(test_bdf_str ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_STR COMMAND test_bdf_str)
+add_test(NAME TEST_BDF_STR COMMAND test_bdf_str ${CATCH_ARGS})
 
 add_executable(test_bdf_types
   test_bdf_types)
 target_link_libraries(test_bdf_types ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_TYPES COMMAND test_bdf_types)
+add_test(NAME TEST_BDF_TYPES COMMAND test_bdf_types)
 
 add_executable(test_bdf_cards
   test_bdf_cards
@@ -81,7 +88,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_load
   test_bdf_cards_param)
 target_link_libraries(test_bdf_cards ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_CARDS COMMAND test_bdf_cards)
+add_test(NAME TEST_BDF_CARDS COMMAND test_bdf_cards ${CATCH_ARGS})
 
 add_executable(test_bdf_header
   test_bdf_header
@@ -90,27 +97,27 @@ add_executable(test_bdf_header
   test_bdf_header_spcforces
   test_bdf_header_stress)
 target_link_libraries(test_bdf_header ${EXTFEM_BDF_LIBS})
-# add_test(NAME TEST_BDF_HEADER COMMAND test_bdf_header)
+add_test(NAME TEST_BDF_HEADER COMMAND test_bdf_header ${CATCH_ARGS})
 
 add_executable(test_fem_float
   test_fem_float)
 target_link_libraries(test_fem_float ${EXTFEM_FEM_LIBS})
-# add_test(NAME TEST_FEM_FLOAT COMMAND test_fem_float)
+add_test(NAME TEST_FEM_FLOAT COMMAND test_fem_float ${CATCH_ARGS})
 
 add_executable(test_fem_int
   test_fem_int)
 target_link_libraries(test_fem_int ${EXTFEM_FEM_LIBS})
-# add_test(NAME TEST_FEM_INT COMMAND test_fem_int)
+add_test(NAME TEST_FEM_INT COMMAND test_fem_int ${CATCH_ARGS})
 
 add_executable(test_fem_bool
   test_fem_bool)
 target_link_libraries(test_fem_bool ${EXTFEM_FEM_LIBS})
-# add_test(NAME TEST_FEM_BOOL COMMAND test_fem_bool)
+add_test(NAME TEST_FEM_BOOL COMMAND test_fem_bool ${CATCH_ARGS})
 
 add_executable(test_fem_list
   test_fem_list)
 target_link_libraries(test_fem_list ${EXTFEM_FEM_LIBS})
-# add_test(NAME TEST_FEM_LIST COMMAND test_fem_list)
+add_test(NAME TEST_FEM_LIST COMMAND test_fem_list ${CATCH_ARGS})
 
 add_executable(test_fem_cards
   test_fem_cards
@@ -150,7 +157,7 @@ add_executable(test_fem_cards
   test_fem_cards_tdsupnam
   test_fem_cards_text)
 target_link_libraries(test_fem_cards ${EXTFEM_FEM_LIBS})
-# add_test(NAME TEST_FEM_CARDS COMMAND test_fem_cards)
+add_test(NAME TEST_FEM_CARDS COMMAND test_fem_cards ${CATCH_ARGS})
 
 add_executable(test_fem_elements
   test_fem_elements
@@ -214,7 +221,7 @@ add_executable(test_fem_elements
   test_fem_element_trs3
   )
 target_link_libraries(test_fem_elements ${EXTFEM_FEM_LIBS})
-add_test(NAME TEST_FEM_ELEMENTS COMMAND test_fem_elements)
+add_test(NAME TEST_FEM_ELEMENTS COMMAND test_fem_elements ${CATCH_ARGS})
 
 # test_fem_element_ghex.cpp : ../tools/ghex_do.py	\
 #   ../tools/templates/elements_ghex.h		\
