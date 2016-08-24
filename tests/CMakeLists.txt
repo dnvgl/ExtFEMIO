@@ -63,7 +63,7 @@ add_test(NAME TEST_BDF_STR COMMAND test_bdf_str --reporter junit --out test_bdf_
 add_executable(test_bdf_types
   test_bdf_types.cpp)
 target_link_libraries(test_bdf_types ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_TYPES COMMAND test_bdf_types --reporter junit --out test_bdf_types.xml)
+add_test(NAME TEST_BDF_TYPES COMMAND test_bdf_types --reporter junit --out test_bdf_types_junit.xml)
 
 add_executable(test_bdf_cards
   test_bdf_cards.cpp
