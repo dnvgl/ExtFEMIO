@@ -214,10 +214,7 @@ add_executable(test_fem_elements
   test_fem_element_trs3
   )
 target_link_libraries(test_fem_elements ${EXTFEM_FEM_LIBS})
-# add_test(NAME TEST_FEM_ELEMENTS COMMAND test_fem_elements)
-ms_add_catch_tests(test_fem_elements)
-ms_add_catch_tests(test_fem_cards)
-
+add_test(NAME TEST_FEM_ELEMENTS COMMAND test_fem_elements)
 
 # test_fem_element_ghex.cpp : ../tools/ghex_do.py	\
 #   ../tools/templates/elements_ghex.h		\

@@ -4,12 +4,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(ExtFEMIO)
 
-set(CMAKE_MODULE_PATH
-  ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR})
-
-
 include(CTest)
-include(add_catch_tests)
 
 include_directories(include)
 
