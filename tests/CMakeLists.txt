@@ -9,6 +9,12 @@
 # $Revision$
 # Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
+FUNCTION(my_add_test inp)
+  string(TOUPPER ${inp} NAME)
+  string(TOLOWER ${inp} COMMAND)
+  add_test(NAME ${NAME} COMMAND ${COMMAND} --reporter junit --out ${COMMAND}_junit.xml)
+ENDFUNCTION()
+
 if(DEFINED ENV{TEAMCITY_VERSION})
   set(CATCH_ARGS --reporter junit --out $@_junit.xml)
 endif()
@@ -28,42 +34,42 @@ link_directories(
 add_executable(test_extfem_string
   test_extfem_string.cpp)
 target_link_libraries(test_extfem_string ${EXTFEM_LIBS})
-add_test(NAME TEST_EXTFEM_STRING COMMAND test_extfem_string --reporter junit --out test_extfem_string_junit.xml)
+my_add_test(test_extfem_string)
 
 add_executable(test_bdf_bounds
   test_bdf_bounds.cpp)
 target_link_libraries(test_bdf_bounds ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_BOUNDS COMMAND test_bdf_bounds --reporter junit --out test_bdf_bounds_junit.xml)
+my_add_test(test_bdf_bounds)
 
 add_executable(test_bdf_float
   test_bdf_float.cpp)
 target_link_libraries(test_bdf_float ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_FLOAT COMMAND test_bdf_float --reporter junit --out test_bdf_float_junit.xml)
+my_add_test(test_bdf_float)
 
 add_executable(test_bdf_complx
   test_bdf_complx.cpp)
 target_link_libraries(test_bdf_complx ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_COMPLX COMMAND test_bdf_complx --reporter junit --out test_bdf_complx_junit.xml)
+my_add_test(test_bdf_complx)
 
 add_executable(test_bdf_int
   test_bdf_int.cpp)
 target_link_libraries(test_bdf_int ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_INT COMMAND test_bdf_int --reporter junit --out test_bdf_int_junit.xml)
+my_add_test(test_bdf_int)
 
 add_executable(test_bdf_list
   test_bdf_list.cpp)
 target_link_libraries(test_bdf_list ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_LIST COMMAND test_bdf_list --reporter junit --out test_bdf_list_junit.xml)
+my_add_test(test_bdf_list)
 
 add_executable(test_bdf_str
   test_bdf_str.cpp)
 target_link_libraries(test_bdf_str ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_STR COMMAND test_bdf_str --reporter junit --out test_bdf_str_junit.xml)
+my_add_test(test_bdf_str)
 
 add_executable(test_bdf_types
   test_bdf_types.cpp)
 target_link_libraries(test_bdf_types ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_TYPES COMMAND test_bdf_types --reporter junit --out test_bdf_types_junit.xml)
+my_add_test(test_bdf_types)
 
 add_executable(test_bdf_cards
   test_bdf_cards.cpp
@@ -87,7 +93,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_load.cpp
   test_bdf_cards_param.cpp)
 target_link_libraries(test_bdf_cards ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_CARDS COMMAND test_bdf_cards --reporter junit --out test_bdf_cards_junit.xml)
+my_add_test(test_bdf_cards)
 
 add_executable(test_bdf_header
   test_bdf_header.cpp
@@ -96,27 +102,27 @@ add_executable(test_bdf_header
   test_bdf_header_spcforces.cpp
   test_bdf_header_stress.cpp)
 target_link_libraries(test_bdf_header ${EXTFEM_BDF_LIBS})
-add_test(NAME TEST_BDF_HEADER COMMAND test_bdf_header --reporter junit --out test_bdf_header_junit.xml)
+my_add_test(test_bdf_header)
 
 add_executable(test_fem_float
   test_fem_float.cpp)
 target_link_libraries(test_fem_float ${EXTFEM_FEM_LIBS})
-add_test(NAME TEST_FEM_FLOAT COMMAND test_fem_float --reporter junit --out test_fem_float_junit.xml)
+my_add_test(test_fem_float)
 
 add_executable(test_fem_int
   test_fem_int.cpp)
 target_link_libraries(test_fem_int ${EXTFEM_FEM_LIBS})
-add_test(NAME TEST_FEM_INT COMMAND test_fem_int --reporter junit --out test_fem_int_junit.xml)
+my_add_test(test_fem_int)
 
 add_executable(test_fem_bool
   test_fem_bool.cpp)
 target_link_libraries(test_fem_bool ${EXTFEM_FEM_LIBS})
-add_test(NAME TEST_FEM_BOOL COMMAND test_fem_bool --reporter junit --out test_fem_bool_junit.xml)
+my_add_test(test_fem_bool)
 
 add_executable(test_fem_list
   test_fem_list.cpp)
 target_link_libraries(test_fem_list ${EXTFEM_FEM_LIBS})
-add_test(NAME TEST_FEM_LIST COMMAND test_fem_list --reporter junit --out test_fem_list_junit.xml)
+my_add_test(test_fem_list)
 
 add_executable(test_fem_cards
   test_fem_cards.cpp
@@ -156,7 +162,7 @@ add_executable(test_fem_cards
   test_fem_cards_tdsupnam.cpp
   test_fem_cards_text.cpp)
 target_link_libraries(test_fem_cards ${EXTFEM_FEM_LIBS})
-add_test(NAME TEST_FEM_CARDS COMMAND test_fem_cards --reporter junit --out test_fem_cards_junit.xml)
+my_add_test(test_fem_cards)
 
 add_executable(test_fem_elements
   test_fem_elements.cpp
@@ -219,7 +225,7 @@ add_executable(test_fem_elements
   test_fem_element_trs2.cpp
   test_fem_element_trs3.cpp)
 target_link_libraries(test_fem_elements ${EXTFEM_FEM_LIBS})
-add_test(NAME TEST_FEM_ELEMENTS COMMAND test_fem_elements --reporter junit --out test_fem_elements_junit.xml)
+my_add_test(test_fem_elements)
 
 # test_fem_element_ghex.cpp : ../tools/ghex_do.py	\
 #   ../tools/templates/elements_ghex.h		\
