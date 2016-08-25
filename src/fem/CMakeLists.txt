@@ -138,16 +138,18 @@ add_library (extfemio_fem STATIC
 
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-# add the command to generate the source code
-add_custom_command (
-  OUTPUT
-    ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
-    ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ghex.cpp
-  COMMAND
-    cd ${CMAKE_SOURCE_DIR} && python3 tools/ghex_do.py ||
-    svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ghex.cpp ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
-  DEPENDS
-    ${CMAKE_SOURCE_DIR}/tools/ghex_do.py
-    ${CMAKE_SOURCE_DIR}/tools/templates/element_ghex.h
-    ${CMAKE_SOURCE_DIR}/tools/templates/element_ghex.cpp
-    ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element_ghex.cpp)
+if(CMAKE_COMPILER_IS_GNUCXX)
+  # add the command to generate the source code
+  add_custom_command (
+    OUTPUT
+      ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ghex.cpp
+    COMMAND
+      cd ${CMAKE_SOURCE_DIR} && python3 tools/ghex_do.py ||
+      svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ghex.cpp ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
+    DEPENDS
+      ${CMAKE_SOURCE_DIR}/tools/ghex_do.py
+      ${CMAKE_SOURCE_DIR}/tools/templates/element_ghex.h
+      ${CMAKE_SOURCE_DIR}/tools/templates/element_ghex.cpp
+      ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element_ghex.cpp)
+endif()
