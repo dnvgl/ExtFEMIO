@@ -21,9 +21,12 @@ endif()
 
 set(CATCH_ARGS --reporter junit --out $<TARGET_FILE:test>_junit.xml)
 
-set (EXTFEM_LIBS -lextfemio_bdf -lextfemio -lboost_regex)
-set (EXTFEM_BDF_LIBS -lextfemio_bdf -lextfemio -lboost_regex)
-set (EXTFEM_FEM_LIBS -lextfemio_fem -lextfemio -lboost_regex)
+if(HAVE_BOOST_REGEX_HPP)
+  set (BOOST_LIBS boost_regex)
+endif()
+set (EXTFEM_LIBS extfemio_bdf extfemio ${BOOST_LIBS})
+set (EXTFEM_BDF_LIBS extfemio_bdf extfemio ${BOOST_LIBS})
+set (EXTFEM_FEM_LIBS extfemio_fem extfemio ${BOOST_LIBS})
 
 link_directories(
   ${PROJECT_BINARY_DIR}/src
@@ -231,5 +234,4 @@ my_add_test(test_fem_elements)
 #   ../tools/templates/elements_ghex.h		\
 #   ../tools/templates/element_ghex.cpp		\
 #   ../tools/templates/test_fem_element_ghex.cpp
-# 	(set -e ; cd .. ; python3 tools/ghex_do.py)
-
+#       (set -e ; cd .. ; python3 tools/ghex_do.py)
