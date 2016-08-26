@@ -349,7 +349,7 @@ namespace dnvgl {
                   this->matref = data->MATNO;
                   this->add_no = data->ADDNO;
                   this->intno = data->INTNO;
-                  this->mass_intno = data->INTNO;
+                  this->mass_intno = data->MINTNO;
                   this->i_strain_ref = data->STRANO;
                   this->i_stress_ref = data->STRENO;
                   this->strpoint_ref = data->STREPONO;
