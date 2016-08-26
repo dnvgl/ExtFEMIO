@@ -1683,6 +1683,19 @@ be specified on one BQDP record.
                      std::vector<long> const &INDEPDOF,
                      std::vector<double> const &b);
 
+               bldep(long const &NODENO,
+                     long const &CNOD,
+                     long const &NDDOF,
+                     std::vector<long> const &DEPDOF,
+                     std::vector<long> const &INDEPDOF,
+                     std::vector<double> const &b);
+
+               bldep(long const &NODENO,
+                     long const &CNOD,
+                     std::vector<long> const &DEPDOF,
+                     std::vector<long> const &INDEPDOF,
+                     std::vector<double> const &b);
+
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
@@ -2873,6 +2886,6 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test""
 // coding: utf-8
 // End:

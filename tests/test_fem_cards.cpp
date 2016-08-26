@@ -679,8 +679,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CHECK(static_cast<gsetmemb*>(current.get())->NFIELD == 5);
       CHECK(static_cast<gsetmemb*>(current.get())->ISREF == 174);
       CHECK(static_cast<gsetmemb*>(current.get())->INDEX == 1);
-      CHECK(static_cast<gsetmemb*>(current.get())->ISTYPE == 2);
-      CHECK(static_cast<gsetmemb*>(current.get())->ISORIG == 0);
+      CHECK(static_cast<gsetmemb*>(current.get())->ISTYPE == gsetmemb::ELEM_SET);
+      CHECK(static_cast<gsetmemb*>(current.get())->ISORIG == gsetmemb::UNDEF_ORIGIN);
       CHECK(static_cast<gsetmemb*>(current.get())->IRMEMB ==
             std::vector<long>(0));
    }
@@ -1012,10 +1012,254 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::IEND);
+      CHECK(current->card_type() == IEND);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<iend*>(current.get())->CONT == 0);
+   }
+
+   SECTION("Testing writing.") {
+
+      std::list<std::unique_ptr<__base::card>> cards;
+      std::ostringstream test;
+
+      cards.push_back(std::make_unique<ident>(
+                         1, 1, ident::DIM_3D));
+      cards.push_back(std::make_unique<text>(
+                         0, 0,
+                         std::vector<std::string>({
+                               "CONVERSION DETAILS:",
+                               "Msc Nastran File Format -> Sesam Interface File.",
+                               "Input  : \\test_01.fem",
+                               "Log    : \\test_01.txt"})));
+      cards.push_back(std::make_unique<date>(
+                         0, 0,
+                         std::vector<std::string>({
+                               "DATE TIME:  11/03/2015 09:46:08",
+                               "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013",
+                               "COMPUTER: HAML130185",
+                               "USER: berhol"})));
+      cards.push_back(std::make_unique<tdload>(
+                         1, "SubCase"));
+      cards.push_back(std::make_unique<gnode>(
+                         1, 1, 6, std::vector<int>({1, 2, 3, 4, 5, 6})));
+      cards.push_back(std::make_unique<gcoord>(
+                         1, 11152.5, 1800., 2100.));
+      cards.push_back(std::make_unique<gelmnt1>(
+                         339, 854, elements::FQUS_FFQ,
+                         std::vector<long>({608, 618, 571, 565})));
+      cards.push_back(std::make_unique<gelref1>(
+                         464, 3, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+                         std::vector<long>(0), std::vector<long>(0),
+                         std::vector<long>(0), std::vector<long>(0)));
+      cards.push_back(std::make_unique<gbarm>(
+                         2, 250., 32., 32., 1., 1.));
+      cards.push_back(std::make_unique<gbeamg>(
+                         1685, 1.115e4, 1e-8, 5.93e8, 1.5738e7, 0.,
+                         1e-8, 1e-8, 1e-8, 1e-8, 1e-8, 1e-8, 1e-8,
+                         1e-8, 1e-8));
+      cards.push_back(std::make_unique<geccen>(
+                         1372, 0., -248.199365, -9.05288207));
+      cards.push_back(std::make_unique<gelth>(
+                         654394, .1, 0));
+      cards.push_back(std::make_unique<giorh>(
+                         5, 466., 14.5, 125, 16., 14.5, 16., 1., 1.,
+                         0, 0, 0));
+      cards.push_back(std::make_unique<gusyi>(
+                         5, 466., 14.5, 125., 16., 14.5, 16., 1, 1.,
+                         0., 0., 0, 1, 0));
+      cards.push_back(std::make_unique<glsec>(
+                         19, 200., 10, 90., 14., 1., 1., true, 0, 0));
+      cards.push_back(std::make_unique<gpipe>(
+                         654391, .0, .312094257, .156047128, 1., 1.,
+                         0, 0));
+      cards.push_back(std::make_unique<bldep>(
+                         11114, 23047, 6,
+                         std::vector<long>({1, 1, 1, 2, 2, 2, 3, 3, 3}),
+                         std::vector<long>({1, 6, 5, 2, 4, 6, 3, 5, 4}),
+                         std::vector<double>({1., 2.27000996e+4, 9.07859961e+3,
+                                  1., -9.07859961e+3, 0.,
+                                  1., 0., -2.27000996e+4})));
+      cards.push_back(std::make_unique<bnbcd>(
+                         23047, std::vector<long>({1, 1, 1, 1, 1, 1})));
+      cards.push_back(std::make_unique<belfix>(
+                         23047, belfix::FIXATION, 0,
+                         std::vector<double>({1., 1., 1., 1., 1., 0.})));
+      cards.push_back(std::make_unique<bndispl>(
+                         2, 1, 23046,
+                         std::vector<double>({0., 0., 0., 0., 0., 0.})));
+      cards.push_back(std::make_unique<bnload>(
+                         1, 0, (long)15220,
+                         std::vector<double>({0., 0., 2.e6, 0., 0., 0.})));
+      cards.push_back(std::make_unique<mgsprng>(
+                         69,
+                         std::vector<std::vector<double> >({
+                               std::vector<double>{1e8, 0., 0., 0., 0., 0.},
+                               std::vector<double>{0., 0., 0., 0., 0., 0.},
+                               std::vector<double>{0., 0., 0., 0., 0., 0.},
+                               std::vector<double>{0., 0., 0., 0., 0., 0.},
+                               std::vector<double>{0., 0., 0., 0., 0., 0.},
+                               std::vector<double>{0., 0., 0., 0., 0., 0.}})));
+      cards.push_back(std::make_unique<gsetmemb>(
+                         5, 174, 1, gsetmemb::ELEM_SET, gsetmemb::UNDEF_ORIGIN));
+      cards.push_back(std::make_unique<gunivec>(
+                         517, 0., 0., -1.));
+      cards.push_back(std::make_unique<misosel>(
+                         66, 2.06e8, 3.00036e-1, 7.8, 0., 0.));
+      cards.push_back(std::make_unique<morsmel>(
+                         8, 0., 0., 1., 0., 1.07820425e+11,
+                         3.14079724e+10, 1.41541114e+11, 0., 0.,
+                         3.26140006e+10, 2.21900001e-1, 2.91298896e-1,
+                         2.99999993e-2, 2.99999993e-2, 1.20000004e-5,
+                         1.20000004e-5));
+      cards.push_back(std::make_unique<tdsetnam>(
+                         166, "KEY_HOLE_ROOF"));
+      cards.push_back(std::make_unique<gelmnt2>(
+                         1, 1, 1, 0,
+                         (double[4][4]){
+                            {1., 0., 0., 0.},
+                            {0., 1., 0., 0.},
+                            {0., 0., 1., 0.},
+                            {0., 0., 0., 1.}},
+                         1, std::vector<long>(1, 1)));
+      cards.push_back(std::make_unique<hsupstat>(
+                         9, 1, 232998, 6, 230333, 126810, 0, 2, -1));
+      cards.push_back(std::make_unique<hsuptran>(
+                         18, 2, 1., 0., 0., 0., 0., 1., 0., 0., 0., 0.,
+                         1., 0., 0., 0., 0., 1.));
+      cards.push_back(std::make_unique<hierarch>(
+                         9, 1, 2, 1, 2, 0, 0, 1,
+                         std::vector<long>(1, 2)));
+      cards.push_back(std::make_unique<tdload>(1, "LC_1"));
+      cards.push_back(std::make_unique<bsell>(
+                         1, 1, std::vector<long>({1, 2}),
+                         std::vector<double>({1., -1.})));
+      cards.push_back(std::make_unique<bnbcd>(
+                         38835, std::vector<long>({4, 4, 4, 4, 4, 4})));
+      cards.push_back(std::make_unique<beuslo>(
+                         1, 1, 0, 1, 0, 2,
+                         std::vector<double>({1.66046816e4, 3.86669189e3,
+                                  3.86368091e3, 1.62054932e4})));
+      cards.push_back(std::make_unique<bnload>(
+                         1, 0, 1, std::vector<double>({1.1, 1.2, 1.3})));
+      cards.push_back(std::make_unique<tdsupnam>(
+                         166, "KEY_HOLE_ROOF"));
+      cards.push_back(std::make_unique<iend>(0));
+
+      for (auto const &card : cards)
+         test << *card;
+
+      CHECK("IDENT   +1.000000000e+00+1.000000000e+00+3.000000000e+00\n"
+            "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+            "        CONVERSION DETAILS:                             \n"
+            "        Msc Nastran File Format -> Sesam Interface File.\n"
+            "        Input  : \\test_01.fem                           \n"
+            "        Log    : \\test_01.txt                           \n"
+            "DATE    +0.000000000e+00+0.000000000e+00+4.000000000e+00+6.000000000e+01\n"
+            "        DATE TIME:  11/03/2015 09:46:08                     \n"
+            "        PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013\n"
+            "        COMPUTER: HAML130185                                \n"
+            "        USER: berhol                                        \n"
+            "TDLOAD  +4.000000000e+00+1.000000000e+00+1.070000000e+02+0.000000000e+00\n"
+            "        SubCase\n"
+            "GNODE   +1.000000000e+00+1.000000000e+00+6.000000000e+00 1.234560000e+05\n"
+            "GCOORD  +1.000000000e+00+1.115250000e+04+1.800000000e+03+2.100000000e+03\n"
+            "GELMNT1 +3.390000000e+02+8.540000000e+02+2.400000000e+01+0.000000000e+00\n"
+            "        +6.080000000e+02+6.180000000e+02+5.710000000e+02+5.650000000e+02\n"
+            "GELREF1 +4.640000000e+02+3.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "GBARM   +2.000000000e+00+2.500000000e+02+3.200000000e+01+3.200000000e+01\n"
+            "        +1.000000000e+00+1.000000000e+00\n"
+            "GBEAMG  +1.685000000e+03            0.00+1.115000000e+04+1.000000000e-08\n"
+            "        +5.930000000e+08+1.573800000e+07+0.000000000e+00+1.000000000e-08\n"
+            "        +1.000000000e-08+1.000000000e-08+1.000000000e-08+1.000000000e-08\n"
+            "        +1.000000000e-08+1.000000000e-08+1.000000000e-08+1.000000000e-08\n"
+            "GECCEN  +1.372000000e+03+0.000000000e+00-2.481993650e+02-9.052882070e+00\n"
+            "GELTH   +6.543940000e+05+1.000000000e-01\n"
+            "GIORH   +5.000000000e+00+4.660000000e+02+1.450000000e+01+1.250000000e+02\n"
+            "        +1.600000000e+01+1.450000000e+01+1.600000000e+01+1.000000000e+00\n"
+            "        +1.000000000e+00\n"
+            "GUSYI   +5.000000000e+00+4.660000000e+02+1.450000000e+01+1.250000000e+02\n"
+            "        +1.600000000e+01+1.450000000e+01+1.600000000e+01+1.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00\n"
+            "GLSEC   +1.900000000e+01+2.000000000e+02+1.000000000e+01+9.000000000e+01\n"
+            "        +1.400000000e+01+1.000000000e+00+1.000000000e+00           +1.00\n"
+            "GPIPE   +6.543910000e+05+0.000000000e+00+3.120942570e-01+1.560471280e-01\n"
+            "        +1.000000000e+00+1.000000000e+00\n"
+            "BLDEP   +1.111400000e+04+2.304700000e+04+6.000000000e+00+9.000000000e+00\n"
+            "        +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n"
+            "        +1.000000000e+00+6.000000000e+00+2.270009960e+04            0.00\n"
+            "        +1.000000000e+00+5.000000000e+00+9.078599610e+03            0.00\n"
+            "        +2.000000000e+00+2.000000000e+00+1.000000000e+00            0.00\n"
+            "        +2.000000000e+00+4.000000000e+00-9.078599610e+03            0.00\n"
+            "        +2.000000000e+00+6.000000000e+00+0.000000000e+00            0.00\n"
+            "        +3.000000000e+00+3.000000000e+00+1.000000000e+00            0.00\n"
+            "        +3.000000000e+00+5.000000000e+00+0.000000000e+00            0.00\n"
+            "        +3.000000000e+00+4.000000000e+00-2.270009960e+04            0.00\n"
+            "BNBCD   +2.304700000e+04+6.000000000e+00+1.000000000e+00+1.000000000e+00\n"
+            "        +1.000000000e+00+1.000000000e+00+1.000000000e+00+1.000000000e+00\n"
+            "BELFIX  +2.304700000e+04+1.000000000e+00+0.000000000e+00            0.00\n"
+            "        +1.000000000e+00+1.000000000e+00+1.000000000e+00+1.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00\n"
+            "BNDISPL +2.000000000e+00+1.000000000e+00           +0.00            0.00\n"
+            "        +2.304600000e+04+6.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "BNLOAD  +1.000000000e+00+0.000000000e+00           +0.00            0.00\n"
+            "        +1.522000000e+04+6.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +2.000000000e+06+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "MGSPRNG +6.900000000e+01+6.000000000e+00+1.000000000e+08+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "GSETMEMB+5.000000000e+00+1.740000000e+02+1.000000000e+00+2.000000000e+00\n"
+            "        +0.000000000e+00\n"
+            "GUNIVEC +5.170000000e+02+0.000000000e+00+0.000000000e+00-1.000000000e+00\n"
+            "MISOSEL +6.600000000e+01+2.060000000e+08+3.000360000e-01+7.800000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00\n"
+            "MORSMEL +8.000000000e+00+0.000000000e+00+0.000000000e+00+1.000000000e+00\n"
+            "        +0.000000000e+00+1.078204250e+11+3.140797240e+10+1.415411140e+11\n"
+            "        +0.000000000e+00+0.000000000e+00+3.261400060e+10+2.219000010e-01\n"
+            "        +2.912988960e-01+2.999999930e-02+2.999999930e-02+1.200000040e-05\n"
+            "        +1.200000040e-05\n"
+            "TDSETNAM+4.000000000e+00+1.660000000e+02+1.130000000e+02+0.000000000e+00\n"
+            "        KEY_HOLE_ROOF\n"
+            "GELMNT2 +1.000000000e+00+1.000000000e+00+1.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+1.000000000e+00\n"
+            "HSUPSTAT+9.000000000e+00+1.000000000e+00+2.329980000e+05+6.000000000e+00\n"
+            "        +2.303330000e+05+1.268100000e+05+0.000000000e+00+2.000000000e+00\n"
+            "        -1.000000000e+00\n"
+            "HSUPTRAN+1.800000000e+01+2.000000000e+00+1.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+1.000000000e+00\n"
+            "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+            "        +0.000000000e+00+1.000000000e+00\n"
+            "HIERARCH+9.000000000e+00+1.000000000e+00+2.000000000e+00+1.000000000e+00\n"
+            "        +2.000000000e+00+0.000000000e+00+0.000000000e+00+1.000000000e+00\n"
+            "        +2.000000000e+00\n"
+            "TDLOAD  +4.000000000e+00+1.000000000e+00+1.040000000e+02+0.000000000e+00\n"
+            "        LC_1\n"
+            "BSELL   +1.000000000e+00+1.000000000e+00            0.00            0.00\n"
+            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-1.000000000e+00\n"
+            "BNBCD   +3.883500000e+04+6.000000000e+00+4.000000000e+00+4.000000000e+00\n"
+            "        +4.000000000e+00+4.000000000e+00+4.000000000e+00+4.000000000e+00\n"
+            "BEUSLO  +1.000000000e+00+1.000000000e+00           +0.00+0.000000000e+00\n"
+            "        +1.000000000e+00+4.000000000e+00+0.000000000e+00+2.000000000e+00\n"
+            "        +1.660468160e+04+3.866691890e+03+3.863680910e+03+1.620549320e+04\n"
+            "BNLOAD  +1.000000000e+00+0.000000000e+00           +0.00            0.00\n"
+            "        +1.000000000e+00+3.000000000e+00+1.100000000e+00+1.200000000e+00\n"
+            "        +1.300000000e+00\n"
+            "TDSUPNAM+4.000000000e+00+1.660000000e+02+1.130000000e+02+0.000000000e+00\n"
+            "        KEY_HOLE_ROOF\n"
+            "IEND    +0.000000000e+00            0.00            0.00            0.00\n"
+
+            == test.str());
    }
 }
 
@@ -1024,5 +1268,5 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

@@ -22,9 +22,8 @@ namespace {
 
 #include <catch.hpp>
 
-#ifndef _MSC_VER
 #include <config.h>
-#endif
+
 #include "fem/cards.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -162,5 +161,5 @@ TEST_CASE("FEMio-7: Problems with test output.", "[fem_date,out]" ) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

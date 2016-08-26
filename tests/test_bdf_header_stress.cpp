@@ -25,9 +25,7 @@ namespace {
 
 #include <catch.hpp>
 
-#ifndef _MSC_VER
 #include <config.h>
-#endif
 
 #include "bdf/header.h"
 #include "bdf/errors.h"

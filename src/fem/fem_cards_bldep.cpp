@@ -86,7 +86,29 @@ namespace dnvgl {
                std::vector<long> const &INDEPDOF,
                std::vector<double> const &b) :
                NODENO(NODENO), CNOD(CNOD), NDDOF(NDDOF), NDEP(NDEP),
-               DEPDOF(DEPDOF),INDEPDOF(INDEPDOF), b(b) {}
+               DEPDOF(DEPDOF), INDEPDOF(INDEPDOF), b(b) {
+               assert(DEPDOF.size() == INDEPDOF.size());
+               assert(DEPDOF.size() == b.size());
+            }
+
+            bldep::bldep(
+               long const &NODENO,
+               long const &CNOD,
+               long const &NDDOF,
+               std::vector<long> const &DEPDOF,
+               std::vector<long> const &INDEPDOF,
+               std::vector<double> const &b) :
+               bldep(NODENO, CNOD, NDDOF, DEPDOF.size(),
+                     DEPDOF, INDEPDOF, b) {}
+
+            bldep::bldep(
+               long const &NODENO,
+               long const &CNOD,
+               std::vector<long> const &DEPDOF,
+               std::vector<long> const &INDEPDOF,
+               std::vector<double> const &b) :
+               bldep(NODENO, CNOD, DEPDOF.size(), DEPDOF.size(),
+                     DEPDOF, INDEPDOF, b) {}
 
             const dnvgl::extfem::fem::cards::types
             bldep::card_type(void) const {return BLDEP;}
@@ -99,7 +121,7 @@ namespace dnvgl {
                   << this->_form_NDDOF.format(this->NDDOF)
                   << this->_form_NDEP.format(this->NDEP)
                   << std::endl;
-               for (long i = 0; i < this->NDDOF; i++)
+               for (long i = 0; i < this->NDEP; i++)
                   os << dnvgl::extfem::fem::types::card().format()
                      << this->_form_DEPDOF.format(this->DEPDOF[i])
                      << this->_form_INDEPDOF.format(this->INDEPDOF[i])
@@ -118,5 +140,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:
