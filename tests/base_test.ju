@@ -1,6 +1,0 @@
-#! /bin/bash
-
-tester=$(dirname $0)/$(basename $0 .ju)
-junit_result=$(basename $0 .ju)_junit.xml
-
-$tester --reporter junit > $junit_result

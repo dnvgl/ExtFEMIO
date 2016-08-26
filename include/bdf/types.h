@@ -501,7 +501,7 @@ namespace dnvgl {
                      // If too much precision is list raise exception which causes
                      // calling routine to switch to LONG format.
                      double order(pow(10., -floor(std::log10(fabs(inp.value))) + 3.));
-                     if (fabs(fabs(round(inp.value * order) / (inp.value * order)) - 1.) > 1e-8) {
+                     if (fabs(fabs(std::round(inp.value * order) / (inp.value * order)) - 1.) > 1e-8) {
                         std::ostringstream msg("output string for value ",
                            std::ostringstream::ate);
                         msg << inp.value
@@ -866,8 +866,8 @@ namespace dnvgl {
                         // calling routine to switch to LONG format.
                         double order_r(pow(10., -floor(std::log10(fabs(inp.value.real()))) + 3.));
                         double order_i(pow(10., -floor(std::log10(fabs(inp.value.imag()))) + 3.));
-                        if ((fabs(fabs(round(inp.value.real() * order_r) / (inp.value.real() * order_r)) - 1.) > 1e-8) ||
-                            (fabs(fabs(round(inp.value.imag() * order_i) / (inp.value.imag() * order_i)) - 1.) > 1e-8)) {
+                        if ((fabs(fabs(std::round(inp.value.real() * order_r) / (inp.value.real() * order_r)) - 1.) > 1e-8) ||
+                            (fabs(fabs(std::round(inp.value.imag() * order_i) / (inp.value.imag() * order_i)) - 1.) > 1e-8)) {
                            std::ostringstream msg("output string for value ",
                                                   std::ostringstream::ate);
                            msg << inp.value
