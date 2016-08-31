@@ -20,6 +20,7 @@ namespace {
 
 #include <memory>
 #include <algorithm>
+#include <cassert>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -98,7 +99,8 @@ namespace dnvgl {
                std::vector<long> const &DEPDOF,
                std::vector<long> const &INDEPDOF,
                std::vector<double> const &b) :
-               bldep(NODENO, CNOD, NDDOF, DEPDOF.size(),
+               bldep(NODENO, CNOD, NDDOF,
+                     static_cast<long>(DEPDOF.size()),
                      DEPDOF, INDEPDOF, b) {}
 
             bldep::bldep(
@@ -107,7 +109,8 @@ namespace dnvgl {
                std::vector<long> const &DEPDOF,
                std::vector<long> const &INDEPDOF,
                std::vector<double> const &b) :
-               bldep(NODENO, CNOD, DEPDOF.size(), DEPDOF.size(),
+               bldep(NODENO, CNOD, static_cast<long>(DEPDOF.size()),
+                     static_cast<long>(DEPDOF.size()),
                      DEPDOF, INDEPDOF, b) {}
 
             const dnvgl::extfem::fem::cards::types

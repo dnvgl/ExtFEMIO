@@ -105,21 +105,21 @@ namespace dnvgl {
             }
 
             std::ostream &gsetmemb::put(std::ostream& os) const {
-               size_t cnt = 0;
-               size_t field = 0;
+               std::list<int>::size_type cnt = 0;
+               std::list<int>::size_type field = 0;
                int pos = 0;
                long index = this->INDEX;
                bool first = true;
                if (this->NFIELD == -1) return os;
                while (first || cnt < this->IRMEMB.size()) {
                   first = false;
-                  if (div(field, 1024).rem == 0) {
+                  if (lldiv(field, 1024).rem == 0) {
                      if (field > 1)
                         os << std::endl;
                      os << gsetmemb::head.format()
                         << this->_form_NFIELD.format(
                            std::min(this->IRMEMB.size() - cnt + 5,
-                                    static_cast<size_t>(1024)))
+                                    static_cast<std::vector<long int>::size_type>(1024)))
                         << this->_form_ISREF.format(this->ISREF)
                         << this->_form_INDEX.format(index++)
                         << this->_form_ISTYPE.format(this->ISTYPE)
@@ -200,5 +200,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:
