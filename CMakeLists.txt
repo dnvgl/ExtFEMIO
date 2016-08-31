@@ -8,7 +8,7 @@ include(CTest)
 
 include_directories(include)
 if(MSVC)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Wall /WX")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
 elseif(CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror --std=c++11")
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.9)

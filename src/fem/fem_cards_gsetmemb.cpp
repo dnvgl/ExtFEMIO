@@ -117,9 +117,9 @@ namespace dnvgl {
                      if (field > 1)
                         os << std::endl;
                      os << gsetmemb::head.format()
-                        << this->_form_NFIELD.format(
+                        << this->_form_NFIELD.format(static_cast<long>(
                            std::min(this->IRMEMB.size() - cnt + 5,
-                                    static_cast<std::vector<long int>::size_type>(1024)))
+                                    static_cast<std::vector<long int>::size_type>(1024))))
                         << this->_form_ISREF.format(this->ISREF)
                         << this->_form_INDEX.format(index++)
                         << this->_form_ISTYPE.format(this->ISTYPE)
