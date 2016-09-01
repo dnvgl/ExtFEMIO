@@ -9,9 +9,9 @@ from __future__ import (
 # Third party libraries.
 from jinja2 import Environment, FileSystemLoader
 
-# ID: $Id: ghex_do.py 402 2016-07-01 16:03:47Z berhol $
-__date__ = "$Date:: 2016-07-01 18:03:47 +0200 #$"[7:-1]
-__scm_version__ = "$Revision: 402 $"[10:-1]
+# ID: $Id$
+__date__ = "$Date::                            $"[7:-1]
+__scm_version__ = "$Revision$"[10:-1]
 __author__ = "`Berthold Höllmann <berthold.hoellmann@dnvgl.com>`__"
 __copyright__ = "Copyright © 2016 by DNV GL SE"
 
