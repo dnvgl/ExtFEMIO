@@ -1,4 +1,4 @@
-/**
+   /**
    \file fem/fem_element_beps.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -18,8 +18,6 @@ namespace {
       = "@(#) $Id$";
 }
 
-#include <set>
-
 #include "fem/elements.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -37,19 +35,42 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 3;
-               el_processor procs[procs_len] = {
-                  general, Preframe, ADVANCE};
+               el_processor procs[procs_len] = { general, ADVANCE, Preframe };
             }
 
             long beps::nnodes(void) const {return 2;}
 
             el_types beps::get_type(void) const {return BEPS;}
 
-            const std::set<el_processor> beps::processors(procs, procs+procs_len);
+            const std::set<el_processor> beps::processors(
+               procs, procs+procs_len);
 
-            beps::beps(const gelmnt1 *data) : __base::elem(data) {}
+            beps::beps(void) : elem() {}
 
-            beps::beps(const gelref1 *data) : __base::elem(data) {}
+            beps::beps(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  elem(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
+
+            beps::beps(const cards::gelmnt1 *data) : elem(data) {}
+
+            beps::beps(const cards::gelref1 *data) : elem(data) {}
 
             beps::beps(const __base::elem *data) : __base::elem(data) {}
          }
@@ -62,5 +83,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

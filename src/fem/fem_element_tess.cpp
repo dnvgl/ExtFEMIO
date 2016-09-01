@@ -1,4 +1,4 @@
-/**
+   /**
    \file fem/fem_element_tess.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -29,26 +29,50 @@ static char THIS_FILE[] = __FILE__;
 namespace dnvgl {
    namespace extfem {
       namespace fem {
-         namespace elements {
-            using namespace dnvgl::extfem::fem::cards;
 
+         using namespace cards;
+
+         namespace elements {
             namespace {
                const size_t procs_len = 6;
-               el_processor procs[procs_len] = {
-                  general, Preframe, Prefem, Sestra, ADVANCE, Poseidon};
+               el_processor procs[procs_len] = { Prefem, Sestra, Preframe, Poseidon, general, ADVANCE };
             }
 
             long tess::nnodes(void) const {return 2;}
 
             el_types tess::get_type(void) const {return TESS;}
 
-            const std::set<el_processor> tess::processors(procs, procs+procs_len);
+            const std::set<el_processor> tess::processors(
+               procs, procs+procs_len);
 
-            tess::tess(const gelmnt1 *data) : __base::elem(data) {}
+            tess::tess(void) : elem() {}
 
-            tess::tess(const gelref1 *data) : __base::elem(data) {}
+            tess::tess(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  elem(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
 
-            tess::tess(const __base::elem *p) : __base::elem(p) {}
+            tess::tess(const cards::gelmnt1 *data) : elem(data) {}
+
+            tess::tess(const cards::gelref1 *data) : elem(data) {}
+
+            tess::tess(const __base::elem *data) : __base::elem(data) {}
          }
       }
    }
@@ -59,5 +83,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

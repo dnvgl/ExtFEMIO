@@ -139,7 +139,7 @@ add_library (extfemio_fem STATIC
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-  # add the command to generate the source code
+  # add the commands to generate the source code
   add_custom_command (
     OUTPUT
       ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
@@ -149,7 +149,76 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ghex.cpp ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
     DEPENDS
       ${CMAKE_SOURCE_DIR}/tools/ghex_do.py
-      ${CMAKE_SOURCE_DIR}/tools/templates/element_ghex.h
-      ${CMAKE_SOURCE_DIR}/tools/templates/element_ghex.cpp
+      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element_ghex.h
+      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element_ghex.cpp
       ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element_ghex.cpp)
+  add_custom_command (
+    OUTPUT
+      ${CMAKE_SOURCE_DIR}/include/fem/elements.h
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_adva_2.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_adva_4.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axcs.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axda.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axis.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axlq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axls.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axqq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_beas.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_beps.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_btss.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_csta.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctal.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctaq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcc.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcl.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcp.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctlq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctmq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_fqus_ffq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ftrs_fftr.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_gdam.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_glda.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_glma.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_glsh.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_gmas.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_gspr.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_hcqs.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ihex.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ilst.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ipri.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_iqqe.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_itet.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lcqs.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lcts.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lhex.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lqua.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_matr.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_mcqs.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_mcts.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_pcab.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_pils.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_pspr.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_rpbq.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_scqs.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_scts.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_secb.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_slcb.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_slqs.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_slts.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_tess.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_tetr.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_thin_shell.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_tpri.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs1.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs2.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs3.cpp
+    COMMAND
+      cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_do.py ||
+      svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_*.cpp ${CMAKE_SOURCE_DIR}/include/fem/elements.h
+    DEPENDS
+      ${CMAKE_SOURCE_DIR}/tools/elements_do.py
+      ${CMAKE_SOURCE_DIR}/tools/templates/fem_elements.h
+      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element.cpp
+      ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element.cpp)
 endif()

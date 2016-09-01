@@ -47,7 +47,7 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
-TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]" ) {
+TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
@@ -100,6 +100,43 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]" ) {
       CHECK(probe.fixations == std::vector<long>(1, FIXNO_OPT));
       CHECK(probe.eccentrities == std::vector<long>(1, ECCNO_OPT));
       CHECK(probe.csys == std::vector<long>(1, TRANSNO_OPT));
+   }
+}
+
+TEST_CASE("Output for beas elements.", "[fem_element_beas]") {
+
+   std::stringstream test;
+
+   beas probe(1,                         // elnox
+              2,                         // elno
+              3,                         // eltyad
+              std::vector<long>({4, 5}), // nodin
+              6,                         // matno
+              7,                         // addno
+              8,                         // intno
+              9,                         // mintno
+              10,                        // strano
+              11,                        // streno
+              12,                        // strepono
+              std::vector<long>(1, 13),  // geono_opt
+              std::vector<long>(1, 14),  // fixno_opt
+              std::vector<long>(1, 15),  // eccno_opt
+              std::vector<long>(1, 16)); // transno_opt
+
+   SECTION("simple (empty)") {
+      beas probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("check output") {
+      test << probe;
+      CHECK(test.str() ==
+            "GELMNT1 +1.000000000e+00+2.000000000e+00+1.500000000e+01+3.000000000e+00\n"
+            "        +4.000000000e+00+5.000000000e+00\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
    }
 }
 

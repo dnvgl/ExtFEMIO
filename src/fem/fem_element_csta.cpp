@@ -1,4 +1,4 @@
-/**
+   /**
    \file fem/fem_element_csta.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -35,8 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 4;
-               el_processor procs[procs_len] = {
-                  general, Prefem, Sestra, ADVANCE};
+               el_processor procs[procs_len] = { Prefem, Sestra, ADVANCE, general };
             }
 
             long csta::nnodes(void) const {return 3;}
@@ -46,9 +45,32 @@ namespace dnvgl {
             const std::set<el_processor> csta::processors(
                procs, procs+procs_len);
 
-            csta::csta(const gelmnt1 *data) : __base::elem(data) {}
+            csta::csta(void) : elem() {}
 
-            csta::csta(const gelref1 *data) : __base::elem(data) {}
+            csta::csta(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  elem(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
+
+            csta::csta(const cards::gelmnt1 *data) : elem(data) {}
+
+            csta::csta(const cards::gelref1 *data) : elem(data) {}
 
             csta::csta(const __base::elem *data) : __base::elem(data) {}
          }
@@ -61,5 +83,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

@@ -1,4 +1,4 @@
-/**
+   /**
    \file fem/fem_element_hcqs.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -35,8 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 3;
-               el_processor procs[procs_len] = {
-                  general, Prefem, Pretube};
+               el_processor procs[procs_len] = { Prefem, Pretube, general };
             }
 
             long hcqs::nnodes(void) const {return 9;}
@@ -46,9 +45,32 @@ namespace dnvgl {
             const std::set<el_processor> hcqs::processors(
                procs, procs+procs_len);
 
-            hcqs::hcqs(const gelmnt1 *data) : __base::elem(data) {}
+            hcqs::hcqs(void) : elem() {}
 
-            hcqs::hcqs(const cards::gelref1 *data) : __base::elem(data) {}
+            hcqs::hcqs(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  elem(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
+
+            hcqs::hcqs(const cards::gelmnt1 *data) : elem(data) {}
+
+            hcqs::hcqs(const cards::gelref1 *data) : elem(data) {}
 
             hcqs::hcqs(const __base::elem *data) : __base::elem(data) {}
          }
@@ -61,5 +83,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

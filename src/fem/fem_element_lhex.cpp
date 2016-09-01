@@ -1,4 +1,4 @@
-/**
+   /**
    \file fem/fem_element_lhex.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -26,32 +26,62 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::fem::elements;
+namespace dnvgl {
+   namespace extfem {
+      namespace fem {
 
-long lhex::nnodes(void) const {return 8;}
+         using namespace cards;
 
-el_types lhex::get_type(void) const {return LHEX;}
+         namespace elements {
+            namespace {
+               const size_t procs_len = 5;
+               el_processor procs[procs_len] = { Prefem, Framework, Sestra, ADVANCE, general };
+            }
 
-namespace {
-   const size_t procs_len = 5;
-   el_processor procs[
-      procs_len] = {general, Prefem, Sestra, ADVANCE, Framework};
+            long lhex::nnodes(void) const {return 8;}
+
+            el_types lhex::get_type(void) const {return LHEX;}
+
+            const std::set<el_processor> lhex::processors(
+               procs, procs+procs_len);
+
+            lhex::lhex(void) : elem() {}
+
+            lhex::lhex(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  elem(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
+
+            lhex::lhex(const cards::gelmnt1 *data) : elem(data) {}
+
+            lhex::lhex(const cards::gelref1 *data) : elem(data) {}
+
+            lhex::lhex(const __base::elem *data) : __base::elem(data) {}
+         }
+      }
+   }
 }
-const std::set<el_processor> lhex::processors(procs, procs+procs_len);
-
-lhex::lhex(const dnvgl::extfem::fem::cards::gelmnt1 *data) :
-   dnvgl::extfem::fem::elements::__base::elem(data) {}
-
-lhex::lhex(const dnvgl::extfem::fem::cards::gelref1 *data) :
-   dnvgl::extfem::fem::elements::__base::elem(data) {}
-
-lhex::lhex(const dnvgl::extfem::fem::elements::__base::elem *data) :
-   dnvgl::extfem::fem::elements::__base::elem(data) {}
 
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

@@ -47,8 +47,8 @@ if __name__ == '__main__':
     res.sort()
 
     env = Environment(loader=FileSystemLoader('tools/templates'))
-    head_tmpl = env.get_template('element_ghex.h')
-    code_tmpl = env.get_template('element_ghex.cpp')
+    head_tmpl = env.get_template('fem_element_ghex.h')
+    code_tmpl = env.get_template('fem_element_ghex.cpp')
     test_tmpl = env.get_template('test_fem_element_ghex.cpp')
 
     with open("include/fem/elements_ghex.h", "w") as head, \
@@ -70,5 +70,5 @@ if __name__ == '__main__':
 
 # Local Variables:
 # mode: python
-# compile-command: "make -C .. check -j8"
+# compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 # End:

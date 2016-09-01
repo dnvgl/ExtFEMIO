@@ -1,4 +1,4 @@
-/**
+   /**
    \file fem/fem_element_lcts.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -18,13 +18,13 @@ namespace {
       = "@(#) $Id$";
 }
 
+#include "fem/elements.h"
+
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
-
-#include "fem/elements.h"
 
 namespace dnvgl {
    namespace extfem {
@@ -35,9 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 3;
-               el_processor procs[procs_len] = {
-                  general, Prefem, Sestra};
-
+               el_processor procs[procs_len] = { Prefem, Sestra, general };
             }
 
             long lcts::nnodes(void) const {return 6;}
@@ -47,19 +45,43 @@ namespace dnvgl {
             const std::set<el_processor> lcts::processors(
                procs, procs+procs_len);
 
-            lcts::lcts(const gelmnt1 *data) : __base::elem(data) {}
+            lcts::lcts(void) : elem() {}
 
-            lcts::lcts(const gelref1 *data) : __base::elem(data) {}
+            lcts::lcts(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  elem(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
+
+            lcts::lcts(const cards::gelmnt1 *data) : elem(data) {}
+
+            lcts::lcts(const cards::gelref1 *data) : elem(data) {}
 
             lcts::lcts(const __base::elem *data) : __base::elem(data) {}
          }
       }
    }
 }
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

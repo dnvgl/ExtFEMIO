@@ -27,6 +27,22 @@ namespace dnvgl {
              */
             class ghex : public __base::elem {
             public:
+               ghex(void);
+               ghex(long const elno,
+                    long const elident,
+                    long const el_add,
+                    std::vector<long> const nodes,
+                    long const matref,
+                    long const add_no,
+                    long const intno,
+                    long const mass_intno,
+                    long const i_strain_ref,
+                    long const i_stressef,
+                    long const strpoint_ref,
+                    std::vector<long> const sections,
+                    std::vector<long> const fixations,
+                    std::vector<long> const eccentrities,
+                    std::vector<long> const csys);
                ghex(const dnvgl::extfem::fem::cards::gelmnt1*);
                ghex(const dnvgl::extfem::fem::cards::gelref1*);
                ghex(const dnvgl::extfem::fem::elements::__base::elem*);
@@ -42,6 +58,23 @@ namespace dnvgl {
              */
             class ghex1{{ "%02d"|format(num) }}: public ghex {
             public:
+               ghex1{{ "%02d"|format(num) }}(void);
+               ghex1{{ "%02d"|format(num) }}(
+                  long const elno,
+                  long const elident,
+                  long const el_add,
+                  std::vector<long> const nodes,
+                  long const matref,
+                  long const add_no,
+                  long const intno,
+                  long const mass_intno,
+                  long const i_strain_ref,
+                  long const i_stressef,
+                  long const strpoint_ref,
+                  std::vector<long> const sections,
+                  std::vector<long> const fixations,
+                  std::vector<long> const eccentrities,
+                  std::vector<long> const csys);
                ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::cards::gelmnt1*);
                ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::cards::gelref1*);
                ghex1{{ "%02d"|format(num) }}(const dnvgl::extfem::fem::elements::__base::elem*);
@@ -61,5 +94,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

@@ -1,4 +1,4 @@
-/**
+   /**
    \file fem/fem_element_slts.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -29,27 +29,50 @@ static char THIS_FILE[] = __FILE__;
 namespace dnvgl {
    namespace extfem {
       namespace fem {
-         namespace elements{
-            using namespace fem::cards;
 
+         using namespace cards;
+
+         namespace elements {
             namespace {
                const size_t procs_len = 1;
-               el_processor procs[
-                  procs_len] = {general};
+               el_processor procs[procs_len] = { general };
             }
 
             long slts::nnodes(void) const {return 6;}
 
             el_types slts::get_type(void) const {return SLTS;}
 
-            const std::set<el_processor> slts::processors(procs, procs+procs_len);
+            const std::set<el_processor> slts::processors(
+               procs, procs+procs_len);
 
-            slts::slts(const gelmnt1 *data) : __base::elem(data) {}
+            slts::slts(void) : elem() {}
 
-            slts::slts(const gelref1 *data) : __base::elem(data) {}
+            slts::slts(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  elem(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
 
-            slts::slts(const __base::elem *data) :
-               __base::elem(data) {}
+            slts::slts(const cards::gelmnt1 *data) : elem(data) {}
+
+            slts::slts(const cards::gelref1 *data) : elem(data) {}
+
+            slts::slts(const __base::elem *data) : __base::elem(data) {}
          }
       }
    }
@@ -60,5 +83,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

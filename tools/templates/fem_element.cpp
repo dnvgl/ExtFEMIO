@@ -1,10 +1,10 @@
    /**
-   \file fem/fem_element_gmas.cpp
+   \file fem/fem_element_{{ elem }}.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief FEM element definition for gmas.
+   \brief FEM element definition for {{ elem }}.
 
-   1-Noded Mass-Matrix
+   {{ doc }}
 */
 
 #include "StdAfx.h"
@@ -34,20 +34,20 @@ namespace dnvgl {
 
          namespace elements {
             namespace {
-               const size_t procs_len = 4;
-               el_processor procs[procs_len] = { Prefem, Poseidon, Sestra, general };
+               const size_t procs_len = {{ procs|length() }};
+               el_processor procs[procs_len] = { {{ procs|join(', ') }} };
             }
 
-            long gmas::nnodes(void) const {return 1;}
+            long {{ elem }}::nnodes(void) const {return {{ nnodes }};}
 
-            el_types gmas::get_type(void) const {return GMAS;}
+            el_types {{ elem }}::get_type(void) const {return {{ elem|upper() }};}
 
-            const std::set<el_processor> gmas::processors(
+            const std::set<el_processor> {{ elem }}::processors(
                procs, procs+procs_len);
 
-            gmas::gmas(void) : elem() {}
+            {{ elem }}::{{ elem }}(void) : {{ base }}() {}
 
-            gmas::gmas(long const eleno,
+            {{ elem }}::{{ elem }}(long const eleno,
                           long const elident,
                           long const el_add,
                           std::vector<long> const nodes,
@@ -62,17 +62,17 @@ namespace dnvgl {
                           std::vector<long> const fixations,
                           std::vector<long> const eccentrities,
                           std::vector<long> const csys) :
-                  elem(
+                  {{ base }}(
                      eleno, elident, el_add, nodes, matref, add_no,
                      intno, mass_intno, i_strain_ref, i_stress_ref,
                      strpoint_ref, section, fixations, eccentrities,
                      csys) {}
 
-            gmas::gmas(const cards::gelmnt1 *data) : elem(data) {}
+            {{ elem }}::{{ elem }}(const cards::gelmnt1 *data) : {{ base }}(data) {}
 
-            gmas::gmas(const cards::gelref1 *data) : elem(data) {}
+            {{ elem }}::{{ elem }}(const cards::gelref1 *data) : {{ base }}(data) {}
 
-            gmas::gmas(const __base::elem *data) : __base::elem(data) {}
+            {{ elem }}::{{ elem }}(const __base::elem *data) : __base::{{ base }}(data) {}
          }
       }
    }
