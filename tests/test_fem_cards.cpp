@@ -1115,7 +1115,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       cards.push_back(std::make_unique<tdsetnam>(
                          166, "KEY_HOLE_ROOF"));
       cards.push_back(std::make_unique<gelmnt2>(
-                         1, 1, 1, 0, 1., 0., 0., 0., 1., 0., 0., 0., 1., 1., 1., 1.,
+                         1, 1, 1, 0, 1., 0., 0., 0., 1., 0., 0., 0., 1., 0., 0., 0.,
                          std::vector<long>(1, 1)));
       cards.push_back(std::make_unique<hsupstat>(
                          9, 1, 232998, 6, 230333, 126810, 0, 2, -1));
