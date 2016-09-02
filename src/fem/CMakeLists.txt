@@ -154,7 +154,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element_ghex.cpp)
   add_custom_command (
     OUTPUT
-      ${CMAKE_SOURCE_DIR}/include/fem/elements.h
       ${CMAKE_SOURCE_DIR}/src/fem/fem_element_adva_2.cpp
       ${CMAKE_SOURCE_DIR}/src/fem/fem_element_adva_4.cpp
       ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axcs.cpp
@@ -214,11 +213,20 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs2.cpp
       ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs3.cpp
     COMMAND
-      cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_do.py ||
-      svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_*.cpp ${CMAKE_SOURCE_DIR}/include/fem/elements.h
+      cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_cpp_do.py ||
+      svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_*.cpp
     DEPENDS
-      ${CMAKE_SOURCE_DIR}/tools/elements_do.py
-      ${CMAKE_SOURCE_DIR}/tools/templates/fem_elements.h
-      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element.cpp
-      ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element.cpp)
+      ${CMAKE_SOURCE_DIR}/tools/elements_cpp_do.py
+      ${CMAKE_SOURCE_DIR}/tools/elements_data.py
+      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element.cpp)
+  add_custom_command (
+    OUTPUT
+      ${CMAKE_SOURCE_DIR}/include/fem/elements.h
+    COMMAND
+      cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_h_do.py ||
+      svn revert ${CMAKE_SOURCE_DIR}/include/fem/elements.h
+    DEPENDS
+      ${CMAKE_SOURCE_DIR}/tools/elements_h_do.py
+      ${CMAKE_SOURCE_DIR}/tools/elements_data.py
+      ${CMAKE_SOURCE_DIR}/tools/templates/fem_elements.h)
 endif()

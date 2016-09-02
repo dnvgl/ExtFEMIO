@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 5;
-               el_processor procs[procs_len] = { Prefem, Framework, Sestra, ADVANCE, general };
+               el_processor procs[procs_len] = { Framework, Sestra, ADVANCE, general, Prefem };
             }
 
             long lhex::nnodes(void) const {return 8;}

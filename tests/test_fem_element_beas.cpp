@@ -53,7 +53,7 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
    long const ELNO = 1;
    el_types const ELTYP = BEAS;
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({10, 11});
+   std::vector<long> const NODIN ({ 100, 101 });
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -82,9 +82,7 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Prefem, Sestra, ADVANCE,
-                  Framework, Launch, Platework, Pretube, Wadam,
-                  Poseidon}));
+               ADVANCE, Preframe, Prefem, Pretube, Poseidon, general, Sestra, Launch, Framework, Platework, Wadam }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -103,14 +101,14 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
    }
 }
 
-TEST_CASE("Output for beas elements.", "[fem_element_beas]") {
+TEST_CASE("Output for BEAS elements.", "[fem_element_beas]") {
 
    std::stringstream test;
 
    beas probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({4, 5}), // nodin
+              std::vector<long>({ 100, 101 }), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno
@@ -133,7 +131,7 @@ TEST_CASE("Output for beas elements.", "[fem_element_beas]") {
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.000000000e+00+2.000000000e+00+1.500000000e+01+3.000000000e+00\n"
-            "        +4.000000000e+00+5.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");

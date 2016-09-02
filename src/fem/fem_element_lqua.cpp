@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 5;
-               el_processor procs[procs_len] = { Prefem, general, Poseidon, ADVANCE, Sestra };
+               el_processor procs[procs_len] = { Prefem, Sestra, ADVANCE, general, Poseidon };
             }
 
             long lqua::nnodes(void) const {return 4;}

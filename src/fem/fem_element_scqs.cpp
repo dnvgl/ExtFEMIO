@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 5;
-               el_processor procs[procs_len] = { Prefem, Pretube, Platework, Sestra, general };
+               el_processor procs[procs_len] = { Sestra, Platework, Pretube, general, Prefem };
             }
 
             long scqs::nnodes(void) const {return 8;}

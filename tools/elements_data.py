@@ -9,9 +9,9 @@ from __future__ import (
 # Third party libraries.
 from jinja2 import Environment, FileSystemLoader
 
-# ID: $Id$
-__date__ = "$Date::                            $"[7:-1]
-__scm_version__ = "$Revision$"[10:-1]
+# ID: $Id: elements_do.py 438 2016-09-01 15:15:08Z berhol $
+__date__ = "$Date:: 2016-09-01 17:15:08 +0200 #$"[7:-1]
+__scm_version__ = "$Revision: 438 $"[10:-1]
 __author__ = "`Berthold Höllmann <berthold.hoellmann@dnvgl.com>`__"
 __copyright__ = "Copyright © 2016 by DNV GL SE"
 
@@ -161,32 +161,11 @@ _ELEMENTS = dict(
               procs={general, Sestra, Pretube}, nnodes=12, eltyp=38))
 [_ELEMENTS[i].setdefault("base", "elem") for i in _ELEMENTS]
 
-if __name__ == '__main__':
 
-    def s_key(i):
-        return i[1]['eltyp']
+def s_key(i):
+    return i[1]['eltyp']
 
-    elements = sorted([(i, _ELEMENTS[i]) for i in _ELEMENTS], key=s_key)
-
-    enums = [(i[0].upper(), i[1]['eltyp']) for i in elements]
-    for n in range(100, 164):
-        enums.append(("GHEX{}".format(n), n))
-
-    env = Environment(loader=FileSystemLoader('tools/templates'))
-    head_tmpl = env.get_template('fem_elements.h')
-    code_tmpl = env.get_template('fem_element.cpp')
-    test_tmpl = env.get_template('test_fem_element.cpp')
-
-    with open("include/fem/elements.h", "w") as head:
-        head.write(head_tmpl.render(elements=elements, enums=enums))
-
-    for elem, vals in elements:
-        with open("src/fem/fem_element_{}.cpp".format(elem), "w") as code, \
-             open("tests/test_fem_element_{}_auto.cpp".format(elem), "w") as test:
-            code.write(code_tmpl.render(elem=elem, **vals))
-
-    # TODO: No tests defined yet
-    # test.write(test_tmpl.render(elem=elem, **vals)
+ELEMENTS = sorted([(i, _ELEMENTS[i]) for i in _ELEMENTS], key=s_key)
 
 # Local Variables:
 # mode: python
