@@ -82,7 +82,7 @@ TEST_CASE("FEM FTRS_FFTR element definitions.", "[fem_element_ftrs_fftr]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Platework, Prefem, general, Poseidon, Sestra, ADVANCE }));
+               general, Prefem, Sestra, ADVANCE, Platework, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

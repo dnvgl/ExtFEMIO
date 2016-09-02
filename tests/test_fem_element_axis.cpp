@@ -82,7 +82,7 @@ TEST_CASE("FEM AXIS element definitions.", "[fem_element_axis]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Prefem, general, Framework, Preframe, Poseidon, Sestra, ADVANCE }));
+               general, Preframe, Prefem, Sestra, ADVANCE, Framework, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

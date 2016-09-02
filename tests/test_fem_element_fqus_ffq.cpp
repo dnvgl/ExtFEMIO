@@ -82,7 +82,7 @@ TEST_CASE("FEM FQUS_FFQ element definitions.", "[fem_element_fqus_ffq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Platework, Prefem, Pretube, general, Poseidon, Sestra, ADVANCE }));
+               general, Prefem, Sestra, ADVANCE, Platework, Pretube, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

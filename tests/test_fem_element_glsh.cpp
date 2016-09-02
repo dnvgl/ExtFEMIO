@@ -82,7 +82,7 @@ TEST_CASE("FEM GLSH element definitions.", "[fem_element_glsh]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general, Preframe, Poseidon }));
+               general, Preframe, Sestra, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

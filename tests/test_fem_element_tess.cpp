@@ -82,7 +82,7 @@ TEST_CASE("FEM TESS element definitions.", "[fem_element_tess]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Prefem, general, Preframe, Poseidon, Sestra, ADVANCE }));
+               general, Preframe, Prefem, Sestra, ADVANCE, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

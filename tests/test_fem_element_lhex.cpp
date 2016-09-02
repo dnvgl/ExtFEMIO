@@ -82,7 +82,7 @@ TEST_CASE("FEM LHEX element definitions.", "[fem_element_lhex]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, Framework, general, ADVANCE, Prefem }));
+               general, Prefem, Sestra, ADVANCE, Framework }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

@@ -82,7 +82,7 @@ TEST_CASE("FEM ITET element definitions.", "[fem_element_itet]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general }));
+               general, Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

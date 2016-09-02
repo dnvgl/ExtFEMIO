@@ -82,7 +82,7 @@ TEST_CASE("FEM LQUA element definitions.", "[fem_element_lqua]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general, Poseidon, ADVANCE, Prefem }));
+               general, Prefem, Sestra, ADVANCE, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

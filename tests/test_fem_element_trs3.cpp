@@ -82,7 +82,7 @@ TEST_CASE("FEM TRS3 element definitions.", "[fem_element_trs3]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general, Pretube }));
+               general, Sestra, Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

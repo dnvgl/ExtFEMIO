@@ -13,7 +13,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: test_fem_element.cpp 439 2016-09-02 08:39:29Z berhol $";
+      = "@(#) $Id: test_fem_element.cpp 440 2016-09-02 13:14:08Z berhol $";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -82,7 +82,7 @@ TEST_CASE("FEM GHEX128 element definitions.", "[fem_element_ghex128]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general }));
+               general, Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 11;
-               el_processor procs[procs_len] = { Poseidon, Launch, Wadam, ADVANCE, Preframe, Pretube, Prefem, Framework, Platework, Sestra, general };
+               el_processor procs[procs_len] = { general, Preframe, Prefem, Sestra, ADVANCE, Framework, Launch, Platework, Pretube, Wadam, Poseidon };
             }
 
             long beas::nnodes(void) const {return 2;}

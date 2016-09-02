@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 2;
-               el_processor procs[procs_len] = { ADVANCE, general };
+               el_processor procs[procs_len] = { general, ADVANCE };
             }
 
             long adva_4::nnodes(void) const {return 4;}

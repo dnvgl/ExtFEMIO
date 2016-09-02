@@ -82,7 +82,7 @@ TEST_CASE("FEM SCTS element definitions.", "[fem_element_scts]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general, Prefem, Platework }));
+               general, Prefem, Sestra, Platework }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

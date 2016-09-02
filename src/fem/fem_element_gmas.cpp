@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 4;
-               el_processor procs[procs_len] = { Prefem, Poseidon, Sestra, general };
+               el_processor procs[procs_len] = { general, Prefem, Sestra, Poseidon };
             }
 
             long gmas::nnodes(void) const {return 1;}

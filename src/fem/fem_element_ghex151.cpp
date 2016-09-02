@@ -43,7 +43,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 2;
-               el_processor procs[procs_len] = { Sestra, general };
+               el_processor procs[procs_len] = { general, Sestra };
             }
 
             long ghex151::nnodes(void) const {return 25;}

@@ -82,7 +82,7 @@ TEST_CASE("FEM GMAS element definitions.", "[fem_element_gmas]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general, Poseidon, Prefem }));
+               general, Prefem, Sestra, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

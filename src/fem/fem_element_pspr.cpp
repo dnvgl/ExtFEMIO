@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 3;
-               el_processor procs[procs_len] = { ADVANCE, Preframe, general };
+               el_processor procs[procs_len] = { general, Preframe, ADVANCE };
             }
 
             long pspr::nnodes(void) const {return 1;}

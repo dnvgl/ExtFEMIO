@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 6;
-               el_processor procs[procs_len] = { Poseidon, ADVANCE, Prefem, Platework, Sestra, general };
+               el_processor procs[procs_len] = { general, Prefem, Sestra, ADVANCE, Platework, Poseidon };
             }
 
             long ftrs_fftr::nnodes(void) const {return 3;}

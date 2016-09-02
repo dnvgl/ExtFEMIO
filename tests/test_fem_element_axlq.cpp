@@ -82,7 +82,7 @@ TEST_CASE("FEM AXLQ element definitions.", "[fem_element_axlq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Sestra, general, ADVANCE, Prefem }));
+               general, Prefem, Sestra, ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

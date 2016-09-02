@@ -82,7 +82,7 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Platework, Prefem, Pretube, Launch, general, Framework, Preframe, Poseidon, Wadam, Sestra, ADVANCE }));
+               general, Preframe, Prefem, Sestra, ADVANCE, Framework, Launch, Platework, Pretube, Wadam, Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
