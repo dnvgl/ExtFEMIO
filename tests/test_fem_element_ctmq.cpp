@@ -53,7 +53,7 @@ TEST_CASE("FEM CTMQ element definitions.", "[fem_element_ctmq]") {
    long const ELNO = 1;
    el_types const ELTYP = CTMQ;
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({ 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117 });
+   std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -82,7 +82,7 @@ TEST_CASE("FEM CTMQ element definitions.", "[fem_element_ctmq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               Pretube, general }));
+               general, Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -108,7 +108,7 @@ TEST_CASE("Output for CTMQ elements.", "[fem_element_ctmq]") {
    ctmq probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({ 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117 }), // nodin
+              std::vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117}), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno

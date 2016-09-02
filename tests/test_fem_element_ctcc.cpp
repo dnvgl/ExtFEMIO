@@ -53,7 +53,7 @@ TEST_CASE("FEM CTCC element definitions.", "[fem_element_ctcc]") {
    long const ELNO = 1;
    el_types const ELTYP = CTCC;
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({ 100, 101, 102, 103, 104, 105 });
+   std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -108,7 +108,7 @@ TEST_CASE("Output for CTCC elements.", "[fem_element_ctcc]") {
    ctcc probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({ 100, 101, 102, 103, 104, 105 }), // nodin
+              std::vector<long>({100, 101, 102, 103, 104, 105}), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno

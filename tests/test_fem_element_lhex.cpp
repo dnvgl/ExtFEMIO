@@ -53,7 +53,7 @@ TEST_CASE("FEM LHEX element definitions.", "[fem_element_lhex]") {
    long const ELNO = 1;
    el_types const ELTYP = LHEX;
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({ 100, 101, 102, 103, 104, 105, 106, 107 });
+   std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -82,7 +82,7 @@ TEST_CASE("FEM LHEX element definitions.", "[fem_element_lhex]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, ADVANCE, Sestra, Framework, Prefem }));
+               Sestra, Framework, general, ADVANCE, Prefem }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -108,7 +108,7 @@ TEST_CASE("Output for LHEX elements.", "[fem_element_lhex]") {
    lhex probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({ 100, 101, 102, 103, 104, 105, 106, 107 }), // nodin
+              std::vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno

@@ -21,10 +21,6 @@ __copyright__ = "Copyright © 2016 by DNV GL SE"
 
 if __name__ == '__main__':
 
-    enums = [(i[0].upper(), i[1]['eltyp']) for i in ELEMENTS]
-    for n in range(100, 164):
-        enums.append(("GHEX{}".format(n), n))
-
     env = Environment(loader=FileSystemLoader('tools/templates'))
     code_tmpl = env.get_template('fem_element.cpp')
 

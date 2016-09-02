@@ -53,7 +53,7 @@ TEST_CASE("FEM AXLS element definitions.", "[fem_element_axls]") {
    long const ELNO = 1;
    el_types const ELTYP = AXLS;
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({ 100, 101, 102, 103, 104, 105 });
+   std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -82,7 +82,7 @@ TEST_CASE("FEM AXLS element definitions.", "[fem_element_axls]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra, Prefem }));
+               Sestra, general, Prefem }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -108,7 +108,7 @@ TEST_CASE("Output for AXLS elements.", "[fem_element_axls]") {
    axls probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({ 100, 101, 102, 103, 104, 105 }), // nodin
+              std::vector<long>({100, 101, 102, 103, 104, 105}), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno

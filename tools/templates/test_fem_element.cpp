@@ -53,7 +53,7 @@ TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }
    long const ELNO = 1;
    el_types const ELTYP = {{ elem|upper() }};
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({ {{ range(100, 100+nnodes)|join(", ") }} });
+   std::vector<long> const NODIN ({{ list_init_form(100, 100+nnodes) }});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -108,7 +108,7 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
    {{ elem }} probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({ {{ range(100, 100+nnodes)|join(", ") }} }), // nodin
+              std::vector<long>({{ list_init_form(100, 100+nnodes) }}), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno
@@ -130,7 +130,7 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
    SECTION("check output") {
       test << probe;
       CHECK(test.str() ==
-            {{ gelmnt1(*([1, 2, eltyp, 3] + range(100, 100+nnodes)|list())) }}
+            {{ gelmnt1(*([1, 2, eltyp, 3] + list_init(100, 100+nnodes))) }}
             {{ gelref1(2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
    }
 }

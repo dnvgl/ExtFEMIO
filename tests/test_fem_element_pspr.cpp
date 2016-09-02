@@ -53,7 +53,7 @@ TEST_CASE("FEM PSPR element definitions.", "[fem_element_pspr]") {
    long const ELNO = 1;
    el_types const ELTYP = PSPR;
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({ 100 });
+   std::vector<long> const NODIN (1, 100);
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -82,7 +82,7 @@ TEST_CASE("FEM PSPR element definitions.", "[fem_element_pspr]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               ADVANCE, Preframe, general }));
+               general, Preframe, ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -108,7 +108,7 @@ TEST_CASE("Output for PSPR elements.", "[fem_element_pspr]") {
    pspr probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({ 100 }), // nodin
+              std::vector<long>(1, 100), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno

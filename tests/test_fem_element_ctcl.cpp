@@ -53,7 +53,7 @@ TEST_CASE("FEM CTCL element definitions.", "[fem_element_ctcl]") {
    long const ELNO = 1;
    el_types const ELTYP = CTCL;
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({ 100, 101, 102, 103 });
+   std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -108,7 +108,7 @@ TEST_CASE("Output for CTCL elements.", "[fem_element_ctcl]") {
    ctcl probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({ 100, 101, 102, 103 }), // nodin
+              std::vector<long>({100, 101, 102, 103}), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno

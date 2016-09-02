@@ -6,8 +6,8 @@
 from __future__ import (
     division, print_function, absolute_import, unicode_literals)
 
-# Third party libraries.
-from jinja2 import Environment, FileSystemLoader
+# Standard libraries.
+import itertools
 
 # ID: $Id: elements_do.py 438 2016-09-01 15:15:08Z berhol $
 __date__ = "$Date:: 2016-09-01 17:15:08 +0200 #$"[7:-1]
@@ -76,7 +76,8 @@ _ELEMENTS = dict(
     ctmq=dict(doc="18-Noded (9+9) Contact Element",
               procs={general, Pretube}, nnodes=18, eltyp=58),
     fqus_ffq=dict(
-        doc="Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell",
+        doc="Flat Quadrilateral Thin Shell / Free Formulation "
+        "Quadrilateral Shell",
         procs={general, Prefem, Sestra, ADVANCE, Platework, Pretube, Poseidon},
         nnodes=4, eltyp=24, base="fem_thin_shell"),
     ftrs_fftr=dict(
@@ -159,6 +160,55 @@ _ELEMENTS = dict(
               procs={general, Sestra, Pretube}, nnodes=15, eltyp=37),
     trs3=dict(doc="2nd Order Hexahed. Transition Elem., Solid / Shell",
               procs={general, Sestra, Pretube}, nnodes=12, eltyp=38))
+
+
+class ghex:
+
+    nodes = {1: 21, 2: 22, 4: 23, 8: 24, 16: 25, 32: 26}
+
+    def __init__(self, n):
+        self.n = n
+
+    @property
+    def pos(self):
+        return tuple(self.nodes[i] for i in self.n) + (27, )
+
+    def gen_extnodes(self):
+        if self.pos[:-1]:
+            return ", {}".format(
+                ", ".join("node {}".format(i) for i in self.pos))
+        return ""
+
+    def gen_nodepos(self, space):
+        res = []
+        for i, num in enumerate(self.pos):
+            res.append((i + 21,  num))
+        return "\n".join(space + "- node {1} at pos {0}".format(*i)
+                         for i in res)
+
+    @property
+    def eltyp(self):
+        return sum(self.n) + 100
+
+    def get_dict(self):
+        return dict(
+            doc="""General Hexahedron, define with nodes 1 to 20{} and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+{}""".format(self.gen_extnodes(), self.gen_nodepos(20 * " ")),
+            procs={"general", "Sestra"},
+            nnodes=20 + len(self.pos),
+            eltyp=self.eltyp)
+
+    def get_name(self):
+        return "ghex{:03d}".format(self.eltyp)
+
+for j in range(7):
+    for k in itertools.combinations((1, 2, 4, 8, 16, 32), j):
+        g = ghex(k)
+        _ELEMENTS[g.get_name()] = g.get_dict()
+
 [_ELEMENTS[i].setdefault("base", "elem") for i in _ELEMENTS]
 
 
@@ -166,6 +216,22 @@ def s_key(i):
     return i[1]['eltyp']
 
 ELEMENTS = sorted([(i, _ELEMENTS[i]) for i in _ELEMENTS], key=s_key)
+ENUMS = [(i[0].upper(), i[1]['eltyp']) for i in ELEMENTS]
+
+
+def list_init(start, stop):
+    if start == stop:
+        return list(range(start, start + 70))
+    else:
+        return list(range(start,  stop))
+
+
+def list_init_form(start, stop):
+    data = list_init(start, stop)
+    if len(data) > 1:
+        return "{{{}}}".format(", ".join("{}".format(i) for i in data))
+    else:
+        return "1, {:d}".format(start)
 
 # Local Variables:
 # mode: python

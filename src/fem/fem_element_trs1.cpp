@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 3;
-               el_processor procs[procs_len] = { Sestra, Pretube, general };
+               el_processor procs[procs_len] = { general, Sestra, Pretube };
             }
 
             long trs1::nnodes(void) const {return 18;}

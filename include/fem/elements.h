@@ -1894,6 +1894,2246 @@ namespace dnvgl {
                static const std::set<el_processor> processors;
             };
 
+            /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 27 at pos 21
+             */
+            class ghex100 : public __base::elem {
+            public:
+               ghex100(void);
+               ghex100(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex100(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex100(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex100(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 27 at pos 22
+             */
+            class ghex101 : public __base::elem {
+            public:
+               ghex101(void);
+               ghex101(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex101(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex101(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex101(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 27 at pos 22
+             */
+            class ghex102 : public __base::elem {
+            public:
+               ghex102(void);
+               ghex102(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex102(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex102(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex102(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex103 : public __base::elem {
+            public:
+               ghex103(void);
+               ghex103(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex103(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex103(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex103(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 27 at pos 22
+             */
+            class ghex104 : public __base::elem {
+            public:
+               ghex104(void);
+               ghex104(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex104(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex104(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex104(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex105 : public __base::elem {
+            public:
+               ghex105(void);
+               ghex105(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex105(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex105(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex105(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex106 : public __base::elem {
+            public:
+               ghex106(void);
+               ghex106(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex106(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex106(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex106(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex107 : public __base::elem {
+            public:
+               ghex107(void);
+               ghex107(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex107(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex107(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex107(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 24 at pos 21
+                    - node 27 at pos 22
+             */
+            class ghex108 : public __base::elem {
+            public:
+               ghex108(void);
+               ghex108(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex108(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex108(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex108(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 24 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex109 : public __base::elem {
+            public:
+               ghex109(void);
+               ghex109(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex109(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex109(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex109(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 24 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex110 : public __base::elem {
+            public:
+               ghex110(void);
+               ghex110(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex110(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex110(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex110(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 24 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex111 : public __base::elem {
+            public:
+               ghex111(void);
+               ghex111(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex111(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex111(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex111(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 24 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex112 : public __base::elem {
+            public:
+               ghex112(void);
+               ghex112(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex112(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex112(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex112(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex113 : public __base::elem {
+            public:
+               ghex113(void);
+               ghex113(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex113(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex113(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex113(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex114 : public __base::elem {
+            public:
+               ghex114(void);
+               ghex114(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex114(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex114(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex114(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 24 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex115 : public __base::elem {
+            public:
+               ghex115(void);
+               ghex115(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex115(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex115(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex115(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 25 at pos 21
+                    - node 27 at pos 22
+             */
+            class ghex116 : public __base::elem {
+            public:
+               ghex116(void);
+               ghex116(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex116(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex116(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex116(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 25 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex117 : public __base::elem {
+            public:
+               ghex117(void);
+               ghex117(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex117(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex117(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex117(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 25 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex118 : public __base::elem {
+            public:
+               ghex118(void);
+               ghex118(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex118(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex118(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex118(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 25 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex119 : public __base::elem {
+            public:
+               ghex119(void);
+               ghex119(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex119(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex119(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex119(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 25 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex120 : public __base::elem {
+            public:
+               ghex120(void);
+               ghex120(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex120(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex120(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex120(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 25 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex121 : public __base::elem {
+            public:
+               ghex121(void);
+               ghex121(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex121(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex121(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex121(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 25 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex122 : public __base::elem {
+            public:
+               ghex122(void);
+               ghex122(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex122(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex122(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex122(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 25 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex123 : public __base::elem {
+            public:
+               ghex123(void);
+               ghex123(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex123(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex123(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex123(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 24 at pos 21
+                    - node 25 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex124 : public __base::elem {
+            public:
+               ghex124(void);
+               ghex124(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex124(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex124(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex124(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 24 at pos 22
+                    - node 25 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex125 : public __base::elem {
+            public:
+               ghex125(void);
+               ghex125(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex125(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex125(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex125(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 24 at pos 22
+                    - node 25 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex126 : public __base::elem {
+            public:
+               ghex126(void);
+               ghex126(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex126(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex126(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex126(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 24 at pos 23
+                    - node 25 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex127 : public __base::elem {
+            public:
+               ghex127(void);
+               ghex127(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex127(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex127(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex127(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 24 at pos 22
+                    - node 25 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex128 : public __base::elem {
+            public:
+               ghex128(void);
+               ghex128(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex128(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex128(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex128(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 25 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex129 : public __base::elem {
+            public:
+               ghex129(void);
+               ghex129(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex129(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex129(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex129(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 25 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex130 : public __base::elem {
+            public:
+               ghex130(void);
+               ghex130(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex130(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex130(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex130(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 24 at pos 24
+                    - node 25 at pos 25
+                    - node 27 at pos 26
+             */
+            class ghex131 : public __base::elem {
+            public:
+               ghex131(void);
+               ghex131(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex131(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex131(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex131(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 26 at pos 21
+                    - node 27 at pos 22
+             */
+            class ghex132 : public __base::elem {
+            public:
+               ghex132(void);
+               ghex132(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex132(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex132(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex132(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 26 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex133 : public __base::elem {
+            public:
+               ghex133(void);
+               ghex133(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex133(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex133(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex133(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 26 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex134 : public __base::elem {
+            public:
+               ghex134(void);
+               ghex134(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex134(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex134(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex134(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex135 : public __base::elem {
+            public:
+               ghex135(void);
+               ghex135(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex135(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex135(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex135(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 26 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex136 : public __base::elem {
+            public:
+               ghex136(void);
+               ghex136(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex136(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex136(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex136(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex137 : public __base::elem {
+            public:
+               ghex137(void);
+               ghex137(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex137(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex137(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex137(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex138 : public __base::elem {
+            public:
+               ghex138(void);
+               ghex138(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex138(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex138(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex138(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex139 : public __base::elem {
+            public:
+               ghex139(void);
+               ghex139(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex139(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex139(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex139(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 24 at pos 21
+                    - node 26 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex140 : public __base::elem {
+            public:
+               ghex140(void);
+               ghex140(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex140(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex140(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex140(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 24 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex141 : public __base::elem {
+            public:
+               ghex141(void);
+               ghex141(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex141(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex141(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex141(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 24 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex142 : public __base::elem {
+            public:
+               ghex142(void);
+               ghex142(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex142(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex142(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex142(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 24 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex143 : public __base::elem {
+            public:
+               ghex143(void);
+               ghex143(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex143(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex143(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex143(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 24 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex144 : public __base::elem {
+            public:
+               ghex144(void);
+               ghex144(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex144(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex144(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex144(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex145 : public __base::elem {
+            public:
+               ghex145(void);
+               ghex145(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex145(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex145(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex145(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex146 : public __base::elem {
+            public:
+               ghex146(void);
+               ghex146(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex146(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex146(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex146(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 24 at pos 24
+                    - node 26 at pos 25
+                    - node 27 at pos 26
+             */
+            class ghex147 : public __base::elem {
+            public:
+               ghex147(void);
+               ghex147(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex147(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex147(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex147(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 25 at pos 21
+                    - node 26 at pos 22
+                    - node 27 at pos 23
+             */
+            class ghex148 : public __base::elem {
+            public:
+               ghex148(void);
+               ghex148(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex148(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex148(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex148(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 25 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex149 : public __base::elem {
+            public:
+               ghex149(void);
+               ghex149(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex149(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex149(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex149(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 25 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex150 : public __base::elem {
+            public:
+               ghex150(void);
+               ghex150(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex150(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex150(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex150(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 25 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex151 : public __base::elem {
+            public:
+               ghex151(void);
+               ghex151(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex151(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex151(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex151(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 25 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex152 : public __base::elem {
+            public:
+               ghex152(void);
+               ghex152(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex152(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex152(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex152(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 25 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex153 : public __base::elem {
+            public:
+               ghex153(void);
+               ghex153(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex153(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex153(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex153(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 25 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex154 : public __base::elem {
+            public:
+               ghex154(void);
+               ghex154(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex154(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex154(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex154(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 25 at pos 24
+                    - node 26 at pos 25
+                    - node 27 at pos 26
+             */
+            class ghex155 : public __base::elem {
+            public:
+               ghex155(void);
+               ghex155(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex155(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex155(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex155(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 24 at pos 21
+                    - node 25 at pos 22
+                    - node 26 at pos 23
+                    - node 27 at pos 24
+             */
+            class ghex156 : public __base::elem {
+            public:
+               ghex156(void);
+               ghex156(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex156(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex156(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex156(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 24 at pos 22
+                    - node 25 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex157 : public __base::elem {
+            public:
+               ghex157(void);
+               ghex157(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex157(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex157(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex157(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 24 at pos 22
+                    - node 25 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex158 : public __base::elem {
+            public:
+               ghex158(void);
+               ghex158(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex158(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex158(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex158(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 24 at pos 23
+                    - node 25 at pos 24
+                    - node 26 at pos 25
+                    - node 27 at pos 26
+             */
+            class ghex159 : public __base::elem {
+            public:
+               ghex159(void);
+               ghex159(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex159(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex159(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex159(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 23 at pos 21
+                    - node 24 at pos 22
+                    - node 25 at pos 23
+                    - node 26 at pos 24
+                    - node 27 at pos 25
+             */
+            class ghex160 : public __base::elem {
+            public:
+               ghex160(void);
+               ghex160(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex160(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex160(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex160(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 25 at pos 24
+                    - node 26 at pos 25
+                    - node 27 at pos 26
+             */
+            class ghex161 : public __base::elem {
+            public:
+               ghex161(void);
+               ghex161(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex161(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex161(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex161(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 22 at pos 21
+                    - node 23 at pos 22
+                    - node 24 at pos 23
+                    - node 25 at pos 24
+                    - node 26 at pos 25
+                    - node 27 at pos 26
+             */
+            class ghex162 : public __base::elem {
+            public:
+               ghex162(void);
+               ghex162(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex162(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex162(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex162(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
+            /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
+
+   Position of node in node array for element node numbers > 20:
+
+                    - node 21 at pos 21
+                    - node 22 at pos 22
+                    - node 23 at pos 23
+                    - node 24 at pos 24
+                    - node 25 at pos 25
+                    - node 26 at pos 26
+                    - node 27 at pos 27
+             */
+            class ghex163 : public __base::elem {
+            public:
+               ghex163(void);
+               ghex163(long const elno,
+                       long const elident,
+                       long const el_add,
+                       std::vector<long> const nodes,
+                       long const matref,
+                       long const add_no,
+                       long const intno,
+                       long const mass_intno,
+                       long const i_strain_ref,
+                       long const i_stressef,
+                       long const strpoint_ref,
+                       std::vector<long> const sections,
+                       std::vector<long> const fixations,
+                       std::vector<long> const eccentrities,
+                       std::vector<long> const csys);
+               ghex163(const dnvgl::extfem::fem::cards::gelmnt1*);
+               ghex163(const dnvgl::extfem::fem::cards::gelref1*);
+               ghex163(const __base::elem*);
+               virtual long nnodes(void) const;
+               el_types get_type(void) const;
+               static const std::set<el_processor> processors;
+            };
+
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base::elem>&,
@@ -1906,8 +4146,6 @@ namespace dnvgl {
       }
    }
 }
-
-#include "elements_ghex.h"
 
 #endif // _FEM_ELEMENTS_H_
 

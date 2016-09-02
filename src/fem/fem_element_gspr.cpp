@@ -35,7 +35,7 @@ namespace dnvgl {
          namespace elements {
             namespace {
                const size_t procs_len = 7;
-               el_processor procs[procs_len] = { Sestra, general, Framework, Poseidon, Preframe, ADVANCE, Prefem };
+               el_processor procs[procs_len] = { Poseidon, ADVANCE, Preframe, Prefem, Framework, Sestra, general };
             }
 
             long gspr::nnodes(void) const {return 1;}

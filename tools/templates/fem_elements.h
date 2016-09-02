@@ -219,8 +219,6 @@ namespace dnvgl {
    }
 }
 
-#include "elements_ghex.h"
-
 #endif // _FEM_ELEMENTS_H_
 
 // Local Variables:

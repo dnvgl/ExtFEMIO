@@ -46,6 +46,7 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_cards_tdsetnam.cpp
   fem_cards_tdsupnam.cpp
   fem_cards_text.cpp
+  fem_elements.cpp
   fem_element_adva_2.cpp
   fem_element_adva_4.cpp
   fem_element_axcs.cpp
@@ -69,7 +70,70 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_element_fqus_ffq.cpp
   fem_element_ftrs_fftr.cpp
   fem_element_gdam.cpp
-  fem_element_ghex.cpp
+  fem_element_ghex100.cpp
+  fem_element_ghex101.cpp
+  fem_element_ghex102.cpp
+  fem_element_ghex103.cpp
+  fem_element_ghex104.cpp
+  fem_element_ghex105.cpp
+  fem_element_ghex106.cpp
+  fem_element_ghex107.cpp
+  fem_element_ghex108.cpp
+  fem_element_ghex109.cpp
+  fem_element_ghex110.cpp
+  fem_element_ghex111.cpp
+  fem_element_ghex112.cpp
+  fem_element_ghex113.cpp
+  fem_element_ghex114.cpp
+  fem_element_ghex115.cpp
+  fem_element_ghex116.cpp
+  fem_element_ghex117.cpp
+  fem_element_ghex118.cpp
+  fem_element_ghex119.cpp
+  fem_element_ghex120.cpp
+  fem_element_ghex121.cpp
+  fem_element_ghex122.cpp
+  fem_element_ghex123.cpp
+  fem_element_ghex124.cpp
+  fem_element_ghex125.cpp
+  fem_element_ghex126.cpp
+  fem_element_ghex127.cpp
+  fem_element_ghex128.cpp
+  fem_element_ghex129.cpp
+  fem_element_ghex130.cpp
+  fem_element_ghex131.cpp
+  fem_element_ghex132.cpp
+  fem_element_ghex133.cpp
+  fem_element_ghex134.cpp
+  fem_element_ghex135.cpp
+  fem_element_ghex136.cpp
+  fem_element_ghex137.cpp
+  fem_element_ghex138.cpp
+  fem_element_ghex139.cpp
+  fem_element_ghex140.cpp
+  fem_element_ghex141.cpp
+  fem_element_ghex142.cpp
+  fem_element_ghex143.cpp
+  fem_element_ghex144.cpp
+  fem_element_ghex145.cpp
+  fem_element_ghex146.cpp
+  fem_element_ghex147.cpp
+  fem_element_ghex148.cpp
+  fem_element_ghex149.cpp
+  fem_element_ghex150.cpp
+  fem_element_ghex151.cpp
+  fem_element_ghex152.cpp
+  fem_element_ghex153.cpp
+  fem_element_ghex154.cpp
+  fem_element_ghex155.cpp
+  fem_element_ghex156.cpp
+  fem_element_ghex157.cpp
+  fem_element_ghex158.cpp
+  fem_element_ghex159.cpp
+  fem_element_ghex160.cpp
+  fem_element_ghex161.cpp
+  fem_element_ghex162.cpp
+  fem_element_ghex163.cpp
   fem_element_glda.cpp
   fem_element_glma.cpp
   fem_element_glsh.cpp
@@ -105,7 +169,6 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_element_trs1.cpp
   fem_element_trs2.cpp
   fem_element_trs3.cpp
-  fem_elements.cpp
   fem_errors.cpp
   fem_file.cpp
   fem_type_bounds.cpp
@@ -142,16 +205,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   # add the commands to generate the source code
   add_custom_command (
     OUTPUT
-      ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ghex.cpp
+      ${CMAKE_SOURCE_DIR}/src/fem/fem_elements.cpp
     COMMAND
-      cd ${CMAKE_SOURCE_DIR} && python3 tools/ghex_do.py ||
-      svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ghex.cpp ${CMAKE_SOURCE_DIR}/include/fem/elements_ghex.h
+      cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_com_cpp_do.py ||
+      svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_elements.cpp
     DEPENDS
-      ${CMAKE_SOURCE_DIR}/tools/ghex_do.py
-      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element_ghex.h
-      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element_ghex.cpp
-      ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element_ghex.cpp)
+      ${CMAKE_SOURCE_DIR}/tools/elements_com_cpp_do.py
+      ${CMAKE_SOURCE_DIR}/tools/elements_data.py
+      ${CMAKE_SOURCE_DIR}/tools/templates/fem_elements.cpp)
   add_custom_command (
     OUTPUT
       ${CMAKE_SOURCE_DIR}/src/fem/fem_element_adva_2.cpp
