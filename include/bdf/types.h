@@ -337,6 +337,7 @@ namespace dnvgl {
 
                std::string format(const entry_value<long> &inp) const {
                   std::ostringstream outp;
+                  outp.imbue(std::locale::classic());
 
                   switch (out_form) {
                   case LONG:
@@ -480,6 +481,7 @@ namespace dnvgl {
                      return bdf::types::empty().format(nullptr);
 
                   std::ostringstream outp;
+                  outp.imbue(std::locale::classic());
 
                   outp << std::setiosflags(std::ios::scientific);
 
@@ -607,6 +609,7 @@ namespace dnvgl {
                      return bdf::types::empty().format(nullptr);
 
                   std::ostringstream outp;
+                  outp.imbue(std::locale::classic());
 
                   switch (out_form) {
                   case LONG:
@@ -838,6 +841,7 @@ namespace dnvgl {
                              bdf::types::empty().format(nullptr));
 
                   std::ostringstream outp;
+                  outp.imbue(std::locale::classic());
 
                   outp << std::setiosflags(std::ios::scientific);
 
@@ -890,6 +894,7 @@ namespace dnvgl {
                      }
                   case FREE:
                      std::ostringstream res;
+                     res.imbue(std::locale::classic());
                      res << std::setiosflags(std::ios::scientific)
                          << inp.value.real() << "," << inp.value.imag();
                      outp << std::string(res.str());

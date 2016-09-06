@@ -40,6 +40,9 @@ namespace dnvgl {
                b_type::b_type(const std::string &name) : name(name) {};
 
                std::istringstream b_type::conv;
+
+               /// std::set input and output locale for conv
+               static imbue_helper _imbue_helper(std::locale::classic());
             }
 
             std::string card::format() const {

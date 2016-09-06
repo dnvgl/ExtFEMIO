@@ -80,6 +80,25 @@ namespace dnvgl {
                   virtual fem_types type() const = 0;
 
                };
+
+               // Helper class to std::set conv locale for all
+               // classes derived from base.
+               class imbue_helper : public b_type {
+               public:
+
+                  imbue_helper(const std::locale &loc) : b_type("") {
+                     conv.imbue(loc);
+                  };
+
+                  fem_types type(void) const {
+                     return None;
+                  };
+
+                  std::string format(const void*) const {
+                     return "";
+                  };
+               };
+
             }
 
             class card : public __base::b_type {
@@ -176,6 +195,7 @@ namespace dnvgl {
                std::string format(const long &inp) const {
 
                   std::ostringstream res;
+                  res.imbue(std::locale::classic());
 
 #ifdef _MSC_VER
                   // std::set output to two digit exponential format.
@@ -334,6 +354,7 @@ namespace dnvgl {
                std::string format(const double &inp) const {
 
                   std::ostringstream res;
+                  res.imbue(std::locale::classic());
 
 #ifdef _MSC_VER
                   // std::set output to two digit exponetial format.
@@ -454,6 +475,8 @@ namespace dnvgl {
                   const std::vector<int> &inp) const {
 
                   std::ostringstream res, res2;
+                  res.imbue(std::locale::classic());
+                  res2.imbue(std::locale::classic());
 
                   double value = 0;
                   for (auto &p : inp) {
