@@ -189,7 +189,6 @@ set(LIBEXTFEMIO_FEM_HEADERS
   ../../include/fem/cards_loads.h
   ../../include/fem/cards_properties.h
   ../../include/fem/cards_superele.h
-  ../../include/fem/elements_ghex.h
   ../../include/fem/elements.h
   ../../include/fem/errors.h
   ../../include/fem/file.h

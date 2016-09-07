@@ -33,16 +33,6 @@ target_include_directories (extfemio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(bdf)
 add_subdirectory(fem)
 
-
-
-# ../include/fem/elements_ghex.h : fem/fem_element_ghex.cpp
-# fem/fem_element_ghex.cpp : ../tools/ghex_do.py	\
-#   ../tools/templates/element_ghex.h		\
-#   ../tools/templates/element_ghex.cpp		\
-#   ../tools/templates/test_fem_element_ghex.cpp
-#         (set -e ; cd .. ; python3 tools/ghex_do.py) || \
-#         svn revert fem/fem_element_ghex.cpp ../include/fem/elements_ghex.h
-
 # bin_PROGRAMS=bdf2bdf fem2fem
 
 # bdf2bdf_SOURCES =bdf/bdf2bdf.cpp

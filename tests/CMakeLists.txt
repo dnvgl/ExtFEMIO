@@ -426,9 +426,3 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/tools/elements_data.py
       ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element.cpp)
 endif()
-
-# test_fem_element_ghex.cpp : ../tools/ghex_do.py	\
-#   ../tools/templates/elements_ghex.h		\
-#   ../tools/templates/element_ghex.cpp		\
-#   ../tools/templates/test_fem_element_ghex.cpp
-#       (set -e ; cd .. ; python3 tools/ghex_do.py)

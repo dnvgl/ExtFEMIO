@@ -9,8 +9,12 @@
 \RequirePackage{float}
 \RequirePackage{ifthen}
 \RequirePackage{verbatim}
-% \RequirePackage[table]{xcolor}
+\RequirePackage[cmyk,table]{xcolor}
 \RequirePackage{xtab}
+
+\RedeclareSectionCommand[tocnumwidth=2.8em]{section}
+\RedeclareSectionCommand[tocnumwidth=3.5em]{subsection}
+\RedeclareSectionCommand[tocnumwidth=4.8em]{subsubsection}
 
 %---------- Internal commands used in this style file ----------------
 
