@@ -27,6 +27,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_cards_ctria3.cpp
   bdf_cards_enddata.cpp
   bdf_cards_grid.cpp
+  bdf_cards_grav.cpp
   bdf_cards_mat.cpp
   bdf_cards_mat1.cpp
   bdf_cards_mat2.cpp

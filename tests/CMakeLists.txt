@@ -82,6 +82,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_crod.cpp
   test_bdf_cards_ctria3.cpp
   test_bdf_cards_enddata.cpp
+  test_bdf_cards_grav.cpp
   test_bdf_cards_grid.cpp
   test_bdf_cards_mat1.cpp
   test_bdf_cards_mat2.cpp

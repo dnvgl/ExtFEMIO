@@ -266,6 +266,9 @@ namespace dnvgl {
                   case MOMENT:
                      res = std::make_unique<bdf::cards::moment>(inp);
                      break;
+                  case GRAV:
+                     res = std::make_unique<bdf::cards::grav>(inp);
+                     break;
                   case LOAD:
                      res = std::make_unique<bdf::cards::load>(inp);
                      break;
@@ -303,5 +306,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

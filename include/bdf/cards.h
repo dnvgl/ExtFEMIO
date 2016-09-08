@@ -82,7 +82,9 @@ namespace dnvgl {
                FORCE,
                /// Static Moment
                MOMENT,
-               /// External Static Load std::set Selection
+               /// Acceleration or Gravity Load
+               GRAV,
+               /// External Static Load set Selection
                LOAD,
                /// Bulk Data Delimiter
                ENDDATA,
@@ -451,8 +453,7 @@ two-dimensional elements.
 |        | `A1`    | `A2`  | `A3`  | `TREF` | `GE`  | `ST`  | `SC`  | `SS`  |    |
 |        | `MCSID` |       |       |        |       |       |       |       |    |
 
-Example:
-........
+# Example:
 
 | 1      | 2     | 3     | 4 | 5     | 6     | 7     | 8     | 9     | 10 |
 | ------ | ----- | ----- | - | ----- | ----- | ----- | ----- | ----- | -- |
@@ -508,7 +509,7 @@ user-written DMAP programs.
 | `PARAM` | `N` | `V1` | `V2` |   |   |   |   |   |    |
 
 
-Example:
+# Example:
 
 | 1       | 2      | 3   | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 | ------- | ------ | --- | - | - | - | - | - | - | -- |
@@ -621,6 +622,6 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // coding: utf-8
 // End:
