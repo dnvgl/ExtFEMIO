@@ -9,7 +9,7 @@
 \RequirePackage{float}
 \RequirePackage{ifthen}
 \RequirePackage{verbatim}
-\RequirePackage[cmyk,table]{xcolor}
+\RequirePackage[cmyk]{xcolor}
 \RequirePackage{xtab}
 
 \RedeclareSectionCommand[tocnumwidth=2.8em]{section}

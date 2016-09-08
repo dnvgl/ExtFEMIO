@@ -1,12 +1,13 @@
 % Latex header for doxygen 1.8.7
 % \documentclass[twoside,table,10pt,DIV=11]{dnvglbook}
-\documentclass[twoside,table,10pt,DIV=11,table]{scrbook}
+\documentclass[twoside,table,10pt,DIV=11,cmyk]{scrbook}
 
 % Packages required by doxygen
 \usepackage{fixltx2e}
 \usepackage{calc}
 \usepackage{mydoxygen}
 \usepackage{graphicx}
+\usepackage[cmyk]{xcolor}
 \usepackage{svg}
 
 \usepackage[utf8x]{inputenc}
@@ -18,8 +19,6 @@
 \usepackage[nointegrals]{wasysym}
 
 \usepackage{dnvgl}
-
-\usepackage{xcolor}
 
 \usepackage{amsmath}
 \usepackage{amssymb}

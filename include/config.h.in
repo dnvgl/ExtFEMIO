@@ -21,6 +21,7 @@
 
 #cmakedefine HAVE_BOOST_REGEX_HPP 1
 
+#define EXTFEMIO_VERSION "@PROJECT_VERSION@"
 
 #endif // _CONFIG_H_
 
