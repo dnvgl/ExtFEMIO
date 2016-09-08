@@ -77,7 +77,13 @@ namespace dnvgl {
             bnbcd::bnbcd(
                const long &NODENO,
                const std::vector<long> &FIX) :
-               card(), NODENO(NODENO), NDOF((long)FIX.size()), FIX(FIX) {}
+               bnbcd(NODENO, (long)FIX.size(), FIX) {}
+
+            bnbcd::bnbcd(long const &NODENO,
+                         long const &FIX1, long const &FIX2, long const &FIX3,
+                         long const &FIX4, long const &FIX5, long const &FIX6) :
+               bnbcd(NODENO, 6, std::vector<long>({
+                        FIX1, FIX2, FIX3, FIX4, FIX5, FIX6})) {}
 
             const dnvgl::extfem::fem::cards::types
             bnbcd::card_type(void) const {return BNBCD;}
@@ -109,5 +115,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

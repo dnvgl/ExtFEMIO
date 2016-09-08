@@ -136,6 +136,13 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
             "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
             "        +3.000000000e+00\n");
    }
+   SECTION("calc ndof (2)") {
+      bnbcd probe(1, true, false, true, false, true, false);
+      test << probe;
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n");
+   }
 }
 
 TEST_CASE("FEM BNBCD conversion from own output.", "[fem_bnbcd,in/out]") {
@@ -172,5 +179,5 @@ TEST_CASE("FEM BNBCD conversion from own output.", "[fem_bnbcd,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

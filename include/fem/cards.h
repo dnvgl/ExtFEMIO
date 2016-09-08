@@ -1770,6 +1770,10 @@ according to the increasing order of their internal node number.
                bnbcd(long const &NODENO,
                      std::vector<long> const &FIX);
 
+               bnbcd(long const &NODENO,
+                     long const &FIX1, long const &FIX2, long const &FIX3,
+                     long const &FIX4, long const &FIX5, long const &FIX6);
+
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
@@ -2886,6 +2890,6 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test""
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test""
 // coding: utf-8
 // End:
