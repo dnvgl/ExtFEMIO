@@ -169,6 +169,57 @@ namespace dnvgl {
                   virtual dnvgl::extfem::fem::cards::types const
                   card_type(void) const = 0;
                };
+
+/// Base class for FEM beam property describing classes.
+               class base_beam_prop : public __base::card {
+
+               private:
+
+                  base_beam_prop();
+
+               protected:
+
+                  dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
+
+                  base_beam_prop(long const &GEONO);
+
+                  base_beam_prop(std::list<std::string> const&);
+
+               public:
+
+                  /** Geometry type number, i.e. reference number used
+                      for element data definition of geometry properties
+                      (Cross sectional properties) of beams.
+                  */
+                  long GEONO;
+
+                  virtual dnvgl::extfem::fem::cards::types const
+                  card_type(void) const = 0;
+               };
+
+/// Base class for material cards.
+               class  base_material : public __base::card {
+               private:
+
+                  base_material();
+
+               protected:
+
+                  dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
+
+                  base_material(long const &MATNO);
+                  base_material(std::list<std::string> const&);
+
+               public:
+
+                  /** Material number, i.e. reference number referenced
+                      to by the element specification.
+                  */
+                  long MATNO;
+
+                  virtual dnvgl::extfem::fem::cards::types const
+                  card_type(void) const = 0;
+               };
             }
 
             class unknown : public __base::card {
@@ -205,10 +256,10 @@ Example of format of `DATE` record as used in SESAM:
 
 ~~~{txt}
 DATE      0.100000000e+01 0.000000000e+00 0.400000000e+01 0.72000000E+02
-DATE:     23-MAY-86           TIME:         13:53:03
-PROGRAM:  SESAM WALOCO        VERSION:      5.1-0 15-MAY-86
-COMPUTER: VAX VMS V4.3        INSTALLATION: VERITEC
-USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
+        DATE:     23-MAY-86           TIME:         13:53:03
+        PROGRAM:  SESAM WALOCO        VERSION:      5.1-0 15-MAY-86
+        COMPUTER: VAX VMS V4.3        INSTALLATION: VERITEC
+        USERID:   999XXXX             ACCOUNT:      ZZZZZZZ
 
 ------------------------------------------------------------------------
 123456789.123456789.123456789.123456789.123456789.123456789.123456789.12
@@ -767,33 +818,6 @@ Shortest version:
                virtual std::ostream &put(std::ostream&) const;
             };
 
-/// Base class for FEM beam property describing classes.
-            class base_beam_prop : public __base::card {
-
-            private:
-
-               base_beam_prop();
-
-            protected:
-
-               dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
-
-               base_beam_prop(long const &GEONO);
-
-               base_beam_prop(std::list<std::string> const&);
-
-            public:
-
-               /** Geometry type number, i.e. reference number used
-                   for element data definition of geometry properties
-                   (Cross sectional properties) of beams.
-                */
-               long GEONO;
-
-               virtual dnvgl::extfem::fem::cards::types const
-                  card_type(void) const = 0;
-            };
-
 /// `GBARM`: Cross Section Type Massive Bar
 /**
 ## Format
@@ -807,7 +831,7 @@ Shortest version:
 \image latex gbarm.eps "Massive bar"
 \image html gbarm.svg "Massive bar"
 */
-            class gbarm : public base_beam_prop {
+            class gbarm : public __base::base_beam_prop {
 
             private:
 
@@ -898,7 +922,7 @@ The succeding data concern the cross section at a specific local node.
 If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
 record may be on the interface.
 */
-            class gbeamg : public base_beam_prop {
+            class gbeamg : public __base::base_beam_prop {
 
             private:
 
@@ -1104,7 +1128,7 @@ record may be on the interface.
 \image latex giorh.eps "I or H beam"
 \image html giorh.svg "I or H beam"
 */
-            class giorh : public base_beam_prop {
+            class giorh : public __base::base_beam_prop {
 
             private:
 
@@ -1205,7 +1229,7 @@ record may be on the interface.
 \image latex glsec.eps "I or H beam"
 \image html glsec.svg "I or H beam"
 */
-            class glsec : public base_beam_prop {
+            class glsec : public __base::base_beam_prop {
 
             private:
 
@@ -1306,7 +1330,7 @@ record may be on the interface.
 \image latex gpipe.eps "Tube"
 \image html gpipe.svg "Tube"
 */
-            class gpipe : public base_beam_prop {
+            class gpipe : public __base::base_beam_prop {
 
             private:
 
@@ -1390,7 +1414,7 @@ record may be on the interface.
 \image latex gusyi.eps "Unsymmetrical I-Beam"
 \image html gusyi.svg "Unsymmetrical I-Beam"
 */
-            class gusyi : public base_beam_prop {
+            class gusyi : public __base::base_beam_prop {
 
             private:
 
@@ -2272,30 +2296,6 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                virtual std::ostream &put(std::ostream&) const;
             };
 
-/// Base class for material cards.
-            class  base_material : public __base::card {
-            private:
-
-               base_material();
-
-            protected:
-
-               dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
-
-               base_material(long const &MATNO);
-               base_material(std::list<std::string> const&);
-
-            public:
-
-               /** Material number, i.e. reference number referenced
-                   to by the element specification.
-                */
-               long MATNO;
-
-               virtual dnvgl::extfem::fem::cards::types const
-                  card_type(void) const = 0;
-            };
-
 /// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
 /**
 ## Format:
@@ -2305,7 +2305,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 | `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO`   |
 |           | `DAMP`  | `ALPHA` | `DUMMY` | `YIELD` |
 */
-            class misosel : public base_material {
+            class misosel : public  __base::base_material {
 
             private:
 
@@ -2368,7 +2368,6 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
 /// `MORSMEL`: Anisotropy, Linear Elastic Structural Analysis,
 ///            2-D Membrane Elements and 2-D Thin Shell Elements
-
 /**
 ## Format:
 
@@ -2382,7 +2381,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
 @note The vector Q must not be perpendicular to any of the elements
 */
-            class morsmel : public base_material {
+            class morsmel : public  __base::base_material {
 
             private:
 

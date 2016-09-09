@@ -35,7 +35,8 @@ link_directories(
   ${EXTFEMIO_LIBRARY_DIR})
 
 add_executable(test_extfem_string
-  test_extfem_string.cpp)
+  test_extfem_string.cpp
+  test_extfem_misc.cpp)
 target_link_libraries(test_extfem_string ${EXTFEM_LIBS})
 my_add_test(test_extfem_string)
 

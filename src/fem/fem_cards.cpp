@@ -138,29 +138,29 @@ namespace dnvgl {
                      first = false;
                   }
                }
+
+               base_beam_prop::base_beam_prop(std::list<std::string> const &inp) :
+                  card(inp) {}
+
+               base_beam_prop::base_beam_prop() :
+                  base_beam_prop(-1) {}
+
+               base_beam_prop::base_beam_prop(long const &GEONO) :
+                  card(), GEONO(GEONO) {}
+
+               const dnvgl::extfem::fem::types::entry_type<long> base_beam_prop::_form_GEONO("GEONO");
+
+               base_material::base_material(std::list<std::string> const &inp) :
+                  card(inp) {}
+
+               base_material::base_material() :
+                  base_material(-1) {}
+
+               base_material::base_material(long const &MATNO) :
+                  card(), MATNO(MATNO) {}
+
+               const dnvgl::extfem::fem::types::entry_type<long> base_material::_form_MATNO("MATNO");
             }
-
-            base_beam_prop::base_beam_prop(std::list<std::string> const &inp) :
-               card(inp) {}
-
-            base_beam_prop::base_beam_prop() :
-               base_beam_prop(-1) {}
-
-            base_beam_prop::base_beam_prop(long const &GEONO) :
-               card(), GEONO(GEONO) {}
-
-            const dnvgl::extfem::fem::types::entry_type<long> base_beam_prop::_form_GEONO("GEONO");
-
-            base_material::base_material(std::list<std::string> const &inp) :
-               card(inp) {}
-
-            base_material::base_material() :
-               base_material(-1) {}
-
-            base_material::base_material(long const &MATNO) :
-               card(), MATNO(MATNO) {}
-
-            const dnvgl::extfem::fem::types::entry_type<long> base_material::_form_MATNO("MATNO");
 
             void
             dispatch(std::list<std::string> const &inp, std::unique_ptr<__base::card> &res) {
@@ -292,5 +292,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

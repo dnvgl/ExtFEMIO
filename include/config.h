@@ -19,10 +19,10 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#cmakedefine HAVE_BOOST_REGEX_HPP 1
+#define HAVE_BOOST_REGEX_HPP 1
 
-#define ExtFEMIO_VERSION "@PROJECT_VERSION@"
-#define ExtFEMIO_REVISION "@ExtFEMIO_WC_REVISION@"
+#define ExtFEMIO_VERSION "0.4"
+#define ExtFEMIO_REVISION "435"
 
 #endif // _CONFIG_H_
 

@@ -19,6 +19,7 @@ namespace {
 }
 
 #include "extfem_misc.h"
+#include "config.h"
 
 namespace dnvgl {
    namespace extfem {
@@ -33,6 +34,15 @@ namespace dnvgl {
             return val.put(os);
          }
       }
+
+      std::string version(void) {
+         return "ExtFEMIO, Ver. " ExtFEMIO_VERSION
+            ", SVN. Rev. " ExtFEMIO_REVISION;
+      }
+
+      std::string build_data(void) {
+         return __DATE__ ", " __TIME__;
+      }
    }
 }
 
@@ -41,5 +51,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

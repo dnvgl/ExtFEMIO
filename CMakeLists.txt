@@ -28,6 +28,13 @@ ELSEIF(CMAKE_COMPILER_IS_GNUCXX)
   ENDIF()
 ENDIF()
 
+INCLUDE(FindSubversion)
+IF(Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_SOURCE_DIR} ExtFEMIO)
+ELSE(Subversion_FOUND)
+  SET(ExtFEMIO_WC_REVISION "???")
+ENDIF(Subversion_FOUND)
+
 CONFIGURE_FILE(
   ${CMAKE_SOURCE_DIR}/include/config.h.in
   ${CMAKE_SOURCE_DIR}/include/config.h)
