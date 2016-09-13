@@ -120,7 +120,7 @@ namespace dnvgl {
 
             void pshell::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write PSHELL.");
+               throw errors::error("PSHELL", "can't write PSHELL.");
                return;
             }
          }
@@ -132,5 +132,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

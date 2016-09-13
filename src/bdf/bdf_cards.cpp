@@ -266,6 +266,12 @@ namespace dnvgl {
                   case MOMENT:
                      res = std::make_unique<bdf::cards::moment>(inp);
                      break;
+                  case CMASS2:
+                     res = std::make_unique<bdf::cards::cmass2>(inp);
+                     break;
+                  case CMASS4:
+                     res = std::make_unique<bdf::cards::cmass4>(inp);
+                     break;
                   case GRAV:
                      res = std::make_unique<bdf::cards::grav>(inp);
                      break;
@@ -293,7 +299,7 @@ namespace dnvgl {
 
             void unknown::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write UNKNOWN.");
+               throw errors::error("UNKNOWN", "can't write UNKNOWN.");
                return;
             }
          }

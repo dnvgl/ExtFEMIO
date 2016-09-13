@@ -116,7 +116,7 @@ namespace dnvgl {
 
             void ctria3::collect_outdata(
                std::list<std::unique_ptr<format_entry> >&) const {
-               throw errors::error("can't write CTRIA3.");
+               throw errors::error("CTRIA3", "can't write CTRIA3.");
                return;
             }
          }
@@ -129,5 +129,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

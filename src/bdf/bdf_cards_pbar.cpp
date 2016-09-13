@@ -153,7 +153,7 @@ namespace dnvgl {
                   break;
                default:
                   throw errors::parse_error(
-                     "CBAR.", "Illegal number of entries.");
+                     "PBAR.", "Illegal number of entries.");
                }
 
                if (!J.is_value) {
@@ -164,7 +164,7 @@ namespace dnvgl {
 
             void pbar::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write PBAR.");
+               throw errors::error("PBAR", "can't write PBAR.");
                return;
             }
          }
@@ -177,5 +177,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

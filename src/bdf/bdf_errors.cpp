@@ -28,11 +28,6 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 error::error(
-   const std::string &msg, const std::string &err_class) :
-   msg(msg), name(""), err_class(err_class) {}
-
-
-error::error(
    const std::string &name, const std::string &msg,
    const std::string &err_class) :
    msg(msg), name(name), err_class(err_class) {};
@@ -83,5 +78,5 @@ parse_error::parse_error(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

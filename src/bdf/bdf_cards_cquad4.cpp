@@ -113,7 +113,7 @@ namespace dnvgl {
 
             void cquad4::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write CQUAD4.");
+               throw errors::error("CQUAD4", "can't write CQUAD4.");
             }
          }
       }
@@ -125,5 +125,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

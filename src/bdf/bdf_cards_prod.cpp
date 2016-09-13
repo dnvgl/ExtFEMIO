@@ -89,7 +89,7 @@ namespace dnvgl {
 
             void prod::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write PROD.");
+               throw errors::error("PROD", "can't write PROD.");
                return;
             }
          }
@@ -102,5 +102,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

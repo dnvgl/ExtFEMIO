@@ -1,8 +1,8 @@
 /**
-   \file tests/test_bdf_cards_grav.cpp
+   \file tests/test_bdf_cards_cmass4.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief Testing the BDF `GRAV` card class.
+   \brief Testing the BDF `CMASS4` card class.
 
    Detailed description
 */
@@ -46,57 +46,52 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
-TEST_CASE("BDF GRAV definitions. (Small Field Format)", "[bdf_grav]" ) {
+TEST_CASE("BDF CMASS4 definitions. (Small Field Format)", "[bdf_cmass4]" ) {
 
    std::list<std::string> data({
       // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-      "GRAV    1       3       32.2    0.0     0.0     -1.0    0                 \n"});
+      "CMASS4  1       3.      32      33 \n"});
    std::list<std::string> lines;
    __base::card::card_split(data, lines);
-   grav probe(lines);
+   cmass4 probe(lines);
 
-   SECTION("first grav") {
-      CHECK((long)probe.SID == 1);
-      CHECK((long)probe.CID == 3);
-      CHECK((double)probe.A == 32.2);
-      CHECK((double)probe.N1 == 0.);
-      CHECK((double)probe.N2 == 0.);
-      CHECK((double)probe.N3 == -1.);
-      CHECK((long)probe.MB == 0);
+   SECTION("first cmass4") {
+      CHECK((long)probe.EID == 1);
+      CHECK((double)probe.M == 3.);
+      CHECK((long)probe.S1 == 32);
+      CHECK((long)probe.S2 == 33);
    }
 }
 
-TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
+TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
 
    std::ostringstream test;
 
    SECTION("reverse") {
-      long SID(2), CID(6), MB(1);
-      double A(2.9), N1(0.), N2(1.9), N3(0.);
-      grav probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+      long EID(2), S1(6), S2(1);
+      double M(2.9);
+      cmass4 probe(&EID, &M, &S1, &S2);
       test << probe;
       CHECK(test.str() ==
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-            "GRAV           2       62.900+00 0.00+001.900+00 0.00+00       1\n");
+            "CMASS4         22.900+00       6       1\n");
    }
 
    SECTION("reverse part") {
-      long SID(2), CID(6);
-      double A(2.9);
-      std::vector<double> N({0., 1.8, 0.});
-      grav probe(&SID, &CID, &A, &N);
+      long EID(2), S1(6);
+      double M(2.9);
+      cmass4 probe(&EID, &M, &S1);
       test << probe;
       CHECK(test.str() ==
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-            "GRAV           2       62.900+00 0.00+001.800+00 0.00+00\n");
+            "CMASS4         22.900+00       6\n");
    }
 
    SECTION("failed part") {
-      long SID(2), CID(6);
-      double A(2.9);
-      std::vector<double> N({0., 1.8, 0., 4.});
+      long EID(0), S1(6);
+      double M(2.9);
       CHECK_THROWS(
-         grav probe(&SID, &CID, &A, &N));
+         cmass4 probe(&EID, &M, &S1));
    }
 }
 

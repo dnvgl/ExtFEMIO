@@ -34,10 +34,6 @@ namespace dnvgl {
             public:
 
                error(
-                  const std::string &msg,
-                  const std::string &err_class="bdf_error");
-
-               error(
                   const std::string&, const std::string &msg,
                   const std::string &err_class="bdf_error");
 
@@ -120,6 +116,6 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // coding: utf-8
 // End:

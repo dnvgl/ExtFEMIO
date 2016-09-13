@@ -157,6 +157,206 @@ vector.
                using __base::momforce::collect_outdata;
             };
 
+/// Handle Nastran Bulk CMASS2 entries.
+/** # Parameter
+
+Scalar Mass Property and Connection
+
+Defines a scalar mass element without reference to a property entry.
+
+# Format:
+
+| 1        | 2     | 3   | 4    | 5    | 6    | 7    | 8 | 9 | 10 |
+| -------- | ----- | --- | ---- | ---- | ---- | ---- | - | - | -- |
+| `CMASS2` | `EID` | `M` | `G1` | `C1` | `G2` | `C2` |   |   |    |
+
+# Example:
+
+| 1        | 2  | 3    | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| -------- | -- | ---- | - | - | - | - | - | - | -- |
+| `CMASS2` | 32 | 9.25 | 6 | 1 |   |   |   |   |    |
+
+# Remarks:
+
+1. Scalar points may be used for `G1` and/or `G2`, in which case the
+   corresponding `C1` and/or `C2` must be zero or blank. Zero or blank
+   may be used to indicate a grounded terminal G1 or G2 with a
+   corresponding blank or zero `C1` or `C2`. A grounded terminal is a
+   point with a displacement that is constrained to zero. If only
+   scalar points and/or ground are involved, it is more efficient to
+   use the `CMASS4` entry.
+
+2. Element identification numbers should be unique with respect to all
+   other element identification numbers.
+
+3. The two connection points (`G1`, `C1`) and (`G2`, `C2`) must be
+   distinct. Except in unusual circumstances, one of them will be a
+   grounded terminal with blank entries for `G*i*` and `C*i*`.
+
+4. For a discussion of the scalar elements, see “Scalar Elements
+   (`CELAS*i*`, `CMASS*i*`, `CDAMP*i*`)” on page 193 of the
+   MSC.Nastran Reference Guide.
+
+5. A scalar point specified on this entry need not be defined on an
+   `SPOINT` entry.
+
+6. If `G*i*` refers to a grid point then `C*i*` refers to
+   degrees-of-freedom(s) in the displacement coordinate system
+   specified by `CD` on the `GRID` entry.
+
+7. Scalar elements input coupled mass matrices when the second pair of
+   fields is entered. When uncoupled point masses are desired input
+   only the first pair of fields. When a coupled mass matrix is
+   requested the submatrix added has M on the diagonal, and -M on the
+   off-diagonal. The element is not checked for internal constraints,
+   which is the user’s responsibility if desired. There are instances
+   where elements with internal constraints are desired, although not
+   frequently. To identify the presence of internal constraints caused
+   by coupled mass, inspect `GPWG` output, `OLOAD` output due to
+   `GRAV` loads, and rigid body modes of free structures. Some forms
+   of coupled mass will cause coupling of rigid body translational
+   mass terms in `GPWG` output, and poor rigid body modes in modal
+   analysis.
+
+*/
+
+            class cmass2 : public __base::card {
+
+               static dnvgl::extfem::bdf::types::card head;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_M;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_G1;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_G2;
+               static const dnvgl::extfem::bdf::types::entry_type<std::list<int> > form_C1;
+               static const dnvgl::extfem::bdf::types::entry_type<std::list<int> > form_C2;
+
+            public:
+               /** Unique element identification number. (0 < Integer
+                   < 100,000,000)
+                */
+               dnvgl::extfem::bdf::types::entry_value<long> EID;
+               /** Value of the scalar mass. (Real)
+                */
+               dnvgl::extfem::bdf::types::entry_value<double> M;
+               /** Geometric grid or scalar point identification
+                   number. (Integer > 0)
+                */
+               dnvgl::extfem::bdf::types::entry_value<long> G1;
+               /** Component number. (0 < Integer < 6; blank or zero
+                   if scalar point)
+               */
+               dnvgl::extfem::bdf::types::entry_value<std::list<int> > C1;
+               /** Geometric grid or scalar point identification
+                   number. (Integer > 0)
+                */
+               dnvgl::extfem::bdf::types::entry_value<long> G2;
+               /** Component number. (0 < Integer < 6; blank or zero
+                   if scalar point)
+               */
+               dnvgl::extfem::bdf::types::entry_value<std::list<int> > C2;
+
+            private:
+               cmass2();
+
+               cmass2(std::string const&);
+
+            public:
+
+               cmass2(std::list<std::string> const&);
+
+               cmass2(long const *EID, double const *M,
+                      long const *G1, std::list<int> const *C1,
+                      long const *G2=NULL, std::list<int> const *C2=NULL);
+
+               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> >&) const;
+            };
+
+/// Handle Nastran Bulk CMASS4 entries.
+/** # Parameter
+
+Scalar Mass Property and Connection to Scalar Points Only
+
+Defines a scalar mass element that is connected only to scalar points, without
+reference to a property entry.
+
+# Format:
+
+| 1        | 2     | 3   | 4    | 5    | 6 | 7 | 8 | 9 | 10 |
+| -------- | ----- | --- | ---- | ---- | - | - | - | - | -- |
+| `CMASS4` | `EID` | `M` | `S1` | `S2` |   |   |   |   |    |
+
+# Example:
+
+| 1        | 2  | 3    | 4 | 5  | 6 | 7 | 8 | 9 | 10 |
+| -------- | -- | ---- | - | -- | - | - | - | - | -- |
+| `CMASS4` | 23 |14.92 |   | 23 |   |   |   |   |    |
+
+# Remarks:
+
+1. `S1` or `S2` may be blank or zero, indicating a constrained
+   coordinate. This is the usual case.
+
+2. Element identification numbers should be unique with respect to all
+   other element identification numbers.
+
+3. Only one scalar mass element may be defined on a single entry.
+
+4. For a discussion of the scalar elements, see “Scalar Elements
+   (`CELAS*i*`, `CMASS*i*`, `CDAMP`i*`)” on page 193 of the
+   MSC.Nastran Reference Guide.
+
+5. A scalar point specified on this entry need not be defined on an
+   `SPOINT` entry.
+*/
+
+            class cmass4 : public __base::card {
+               static dnvgl::extfem::bdf::types::card head;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
+               static const dnvgl::extfem::bdf::types::entry_type<double> form_M;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_S1;
+               static const dnvgl::extfem::bdf::types::entry_type<long> form_S2;
+
+            public:
+               /** Unique element identification number. (0 < Integer
+                   < 100,000,000)
+                */
+               dnvgl::extfem::bdf::types::entry_value<long> EID;
+               /** Scalar mass value. (Real)
+                */
+               dnvgl::extfem::bdf::types::entry_value<double> M;
+               /** Scalar point identification numbers. (Integer > 0;
+                   S1 ≠ S2 )
+                */
+               dnvgl::extfem::bdf::types::entry_value<long> S1;
+               /** Scalar point identification numbers. (Integer > 0;
+                   S1 ≠ S2 )
+                */
+               dnvgl::extfem::bdf::types::entry_value<long> S2;
+            private:
+               cmass4();
+
+               cmass4(std::string const&);
+
+            public:
+
+               cmass4(std::list<std::string> const&);
+
+               cmass4(long const *EID, double const *M,
+                      long const *S1, long const *S2=NULL);
+
+               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+            private:
+
+               virtual void collect_outdata(
+                  std::list<std::unique_ptr<format_entry> >&) const;
+            };
+
 /// Handle Nastran Bulk GRAV entries.
 /** # Parameter
 

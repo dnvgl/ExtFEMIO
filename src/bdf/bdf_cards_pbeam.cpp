@@ -300,7 +300,7 @@ namespace dnvgl {
 
             void pbeam::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write PBEAM.");
+               throw errors::error("PBEAM", "can't write PBEAM.");
                return;
             }
          }
@@ -313,5 +313,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

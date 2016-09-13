@@ -123,7 +123,7 @@ namespace dnvgl {
 
             void mat2::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write MAT2.");
+               throw errors::error("MAT2", "can't write MAT2.");
                return;
             }
          }
@@ -136,5 +136,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

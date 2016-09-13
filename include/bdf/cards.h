@@ -82,6 +82,10 @@ namespace dnvgl {
                FORCE,
                /// Static Moment
                MOMENT,
+               /// Scalar Mass Property and Connection
+               CMASS2,
+               /// Scalar Mass Property and Connection to Scalar Points Only
+               CMASS4,
                /// Acceleration or Gravity Load
                GRAV,
                /// External Static Load set Selection

@@ -116,7 +116,7 @@ namespace dnvgl {
 
             void pbarl::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write PBARL.");
+               throw errors::error("PBARL", "can't write PBARL.");
                return;
             }
          }
@@ -129,5 +129,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

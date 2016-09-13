@@ -91,7 +91,7 @@ namespace dnvgl {
                        const long *MB/*=NULL*/) :
                grav(SID, CID, A, &(*N)[0], &(*N)[1], &(*N)[2], MB) {
                if (N->size() != 3)
-                  throw errors::error("GRAV N requires 3 entries.");
+                  throw errors::error("GRAV", "N requires 3 entries.");
             }
 
             bdf::types::card grav::head = bdf::types::card("GRAV");

@@ -212,14 +212,12 @@ namespace dnvgl {
             template <> inline
             entry_value<std::list<int> >::entry_value(
                const entry_value<std::list<int> > &val) :
-                               value(val.value.begin(), val.value.end()),
-                               is_value(val.is_value) {};
+                               value(val.value), is_value(val.is_value) {};
 
             template <> inline
             entry_value<std::list<int> >::entry_value(
                const std::list<int> &value, const bool &is_value) :
-                         value(value.begin(), value.end()),
-                         is_value(is_value) {
+                         value(value), is_value(is_value) {
             };
 
             template <> inline
@@ -935,6 +933,6 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // coding:utf-8
 // End:

@@ -83,6 +83,8 @@ add_executable(test_bdf_cards
   test_bdf_cards_crod.cpp
   test_bdf_cards_ctria3.cpp
   test_bdf_cards_enddata.cpp
+  test_bdf_cards_cmass2.cpp
+  test_bdf_cards_cmass4.cpp
   test_bdf_cards_grav.cpp
   test_bdf_cards_grid.cpp
   test_bdf_cards_mat1.cpp
@@ -428,3 +430,8 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/tools/elements_data.py
       ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element.cpp)
 endif()
+
+# Local Variables:
+# compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+# coding: utf-8
+# End:

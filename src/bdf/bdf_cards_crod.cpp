@@ -73,7 +73,7 @@ namespace dnvgl {
 
             void crod::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("can't write CROD.");
+               throw errors::error("CROD", "can't write CROD.");
                return;
             }
          }

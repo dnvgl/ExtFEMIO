@@ -22,7 +22,7 @@
 #define HAVE_BOOST_REGEX_HPP 1
 
 #define ExtFEMIO_VERSION "0.4"
-#define ExtFEMIO_REVISION "435"
+#define ExtFEMIO_REVISION "447"
 
 #endif // _CONFIG_H_
 
