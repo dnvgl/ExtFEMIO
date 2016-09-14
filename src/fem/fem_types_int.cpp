@@ -54,6 +54,6 @@ std::regex_constants::ECMAScript);
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // coding: utf-8
 // End:

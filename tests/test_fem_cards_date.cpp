@@ -22,7 +22,7 @@ namespace {
 
 #include <catch.hpp>
 
-#include <config.h>
+#include "config.h"
 
 #include "fem/cards.h"
 

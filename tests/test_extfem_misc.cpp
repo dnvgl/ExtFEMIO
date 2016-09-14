@@ -18,7 +18,8 @@ namespace {
 
 #include <catch.hpp>
 
-#include <config.h>
+#include "config.h"
+
 #include "extfem_misc.h"
 
 #include "bdf/errors.h"

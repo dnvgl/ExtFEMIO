@@ -40,26 +40,40 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#include <deque>
-#include <string>
-#include <set>
-#include <map>
+#include <algorithm>
+#include <functional>
+#include <iterator>
+#include <locale>
+#include <memory>
 #include <utility>
+
+#include <limits>
+#include <typeinfo>
+
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+
+#include <complex>
+
+#include <deque>
+#include <list>
+#include <map>
+#include <set>
+#include <string>
+#include <vector>
 
 #include <regex>
 
-#pragma message(">--- ExtFEMIO settings ---------------------------------------------<")
-#define __PRAGMASTRING2(x) #x
-#define __PRAGMASTRING(x) __PRAGMASTRING2(x)
-#pragma message("Operating System:")
-#pragma message("   NTDDI_VERSION == " __PRAGMASTRING(NTDDI_VERSION))
-#pragma message("   WINVER        >= " __PRAGMASTRING(WINVER))
-#pragma message("   _WIN32_WINNT  == " __PRAGMASTRING(_WIN32_WINNT))
-#pragma message("   _WIN32_IE     == " __PRAGMASTRING(_WIN32_IE))
-#pragma message("Compiler:")
-#pragma message("   _MSC_VER      == " __PRAGMASTRING(_MSC_VER))
-#pragma message("Libraries:")
-#pragma message(">------------------------------------------------------------------<")
+#include <cassert>
+#include <cmath>
+#include <cstdlib>
+
+#include "config.h"
+
+#include "my_c++14.h"
+#include "extfem_misc.h"
+#include "extfem_string.h"
 
 #endif
 
@@ -68,5 +82,5 @@ static char THIS_FILE[] = __FILE__;
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

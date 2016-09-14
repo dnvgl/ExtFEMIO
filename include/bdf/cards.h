@@ -26,9 +26,8 @@
 
 #include <my_c++14.h>
 
-#ifndef _MSC_VER
-#include <config.h>
-#endif
+#include "config.h"
+
 #include "bdf/types.h"
 
 namespace dnvgl {

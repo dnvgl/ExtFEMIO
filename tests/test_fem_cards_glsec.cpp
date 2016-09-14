@@ -22,9 +22,8 @@ namespace {
 
 #include <catch.hpp>
 
-#ifndef _MSC_VER
-#include <config.h>
-#endif
+#include "config.h"
+
 #include "fem/cards.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -190,5 +189,5 @@ TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

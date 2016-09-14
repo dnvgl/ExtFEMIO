@@ -22,9 +22,8 @@ namespace {
 
 #include <catch.hpp>
 
-#ifndef _MSC_VER
-#include <config.h>
-#endif
+#include "config.h"
+
 #include "fem/cards.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)

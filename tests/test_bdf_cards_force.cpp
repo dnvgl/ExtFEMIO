@@ -24,9 +24,7 @@ namespace {
 
 #include <catch.hpp>
 
-#ifndef _MSC_VER
-#include <config.h>
-#endif
+#include "config.h"
 
 #include "bdf/cards.h"
 #include "bdf/errors.h"
@@ -139,5 +137,5 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

@@ -22,9 +22,8 @@ namespace {
 
 #include <catch.hpp>
 
-#ifndef _MSC_VER
-#include <config.h>
-#endif
+#include "config.h"
+
 #include "bdf/cards.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -194,5 +193,5 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

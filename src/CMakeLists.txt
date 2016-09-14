@@ -55,9 +55,6 @@ add_subdirectory(fem)
 # vpath %.c fem bdf
 # vpath %.o fem bdf
 
-# # Local Variables:
-# # mode: makefile
-# # compile-command: "make -C .. check -j8"
-# # End:
-
-# # End of Makefile.am
+# Local Variables:
+# compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+# End:

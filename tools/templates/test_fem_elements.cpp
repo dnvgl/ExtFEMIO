@@ -42,7 +42,7 @@ namespace {
 
 #include <catch.hpp>
 
-#include <config.h>
+#include "config.h"
 
 #include "fem/elements.h"
 

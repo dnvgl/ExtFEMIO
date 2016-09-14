@@ -20,9 +20,8 @@ namespace {
 #include <iomanip>
 #include <locale>
 
-#ifndef _MSC_VER
-#include <config.h>
-#endif
+#include "config.h"
+
 #include "bdf/types.h"
 #include "extfem_string.h"
 
@@ -95,6 +94,6 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j 8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // coding: utf-8
 // End:

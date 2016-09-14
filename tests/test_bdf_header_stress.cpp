@@ -25,7 +25,7 @@ namespace {
 
 #include <catch.hpp>
 
-#include <config.h>
+#include "config.h"
 
 #include "bdf/header.h"
 #include "bdf/errors.h"
@@ -307,5 +307,5 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C .. check -j 8"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

@@ -2365,6 +2365,6 @@ DOT_CLEANUP            = YES
 
 ##! Local Variables:
 ##! indent-tabs-mode: nil
-##! compile-command: "make -C ../.. check doxyfile.stamp -j8"
+##! compile-command: "make -C ../../cbuild doc pdf -j8"
 ##! coding: utf-8
 ##! End:
