@@ -81,6 +81,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_cbeam.cpp
   test_bdf_cards_cquad4.cpp
   test_bdf_cards_crod.cpp
+#  test_bdf_cards_celas1.cpp
   test_bdf_cards_ctria3.cpp
   test_bdf_cards_enddata.cpp
   test_bdf_cards_cmass2.cpp
@@ -93,6 +94,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_pbarl.cpp
   test_bdf_cards_pbeam.cpp
   test_bdf_cards_pbeaml.cpp
+#  test_bdf_cards_pelas.cpp
   test_bdf_cards_prod.cpp
   test_bdf_cards_pshell.cpp
   test_bdf_cards_force.cpp
@@ -172,128 +174,7 @@ target_link_libraries(test_fem_cards ${EXTFEM_FEM_LIBS})
 my_add_test(test_fem_cards)
 
 add_executable(test_fem_elements
-  test_fem_elements.cpp
-  test_fem_element_adva_2.cpp
-  test_fem_element_adva_4.cpp
-  test_fem_element_axcs.cpp
-  test_fem_element_axda.cpp
-  test_fem_element_axis.cpp
-  test_fem_element_axlq.cpp
-  test_fem_element_axls.cpp
-  test_fem_element_axqq.cpp
-  test_fem_element_beas.cpp
-  test_fem_element_beps.cpp
-  test_fem_element_btss.cpp
-  test_fem_element_csta.cpp
-  test_fem_element_ctal.cpp
-  test_fem_element_ctaq.cpp
-  test_fem_element_ctcc.cpp
-  test_fem_element_ctcl.cpp
-  test_fem_element_ctcp.cpp
-  test_fem_element_ctcq.cpp
-  test_fem_element_ctlq.cpp
-  test_fem_element_ctmq.cpp
-  test_fem_element_fqus_ffq.cpp
-  test_fem_element_ftrs_fftr.cpp
-  test_fem_element_gdam.cpp
-  test_fem_element_ghex100.cpp
-  test_fem_element_ghex101.cpp
-  test_fem_element_ghex102.cpp
-  test_fem_element_ghex103.cpp
-  test_fem_element_ghex104.cpp
-  test_fem_element_ghex105.cpp
-  test_fem_element_ghex106.cpp
-  test_fem_element_ghex107.cpp
-  test_fem_element_ghex108.cpp
-  test_fem_element_ghex109.cpp
-  test_fem_element_ghex110.cpp
-  test_fem_element_ghex111.cpp
-  test_fem_element_ghex112.cpp
-  test_fem_element_ghex113.cpp
-  test_fem_element_ghex114.cpp
-  test_fem_element_ghex115.cpp
-  test_fem_element_ghex116.cpp
-  test_fem_element_ghex117.cpp
-  test_fem_element_ghex118.cpp
-  test_fem_element_ghex119.cpp
-  test_fem_element_ghex120.cpp
-  test_fem_element_ghex121.cpp
-  test_fem_element_ghex122.cpp
-  test_fem_element_ghex123.cpp
-  test_fem_element_ghex124.cpp
-  test_fem_element_ghex125.cpp
-  test_fem_element_ghex126.cpp
-  test_fem_element_ghex127.cpp
-  test_fem_element_ghex128.cpp
-  test_fem_element_ghex129.cpp
-  test_fem_element_ghex130.cpp
-  test_fem_element_ghex131.cpp
-  test_fem_element_ghex132.cpp
-  test_fem_element_ghex133.cpp
-  test_fem_element_ghex134.cpp
-  test_fem_element_ghex135.cpp
-  test_fem_element_ghex136.cpp
-  test_fem_element_ghex137.cpp
-  test_fem_element_ghex138.cpp
-  test_fem_element_ghex139.cpp
-  test_fem_element_ghex140.cpp
-  test_fem_element_ghex141.cpp
-  test_fem_element_ghex142.cpp
-  test_fem_element_ghex143.cpp
-  test_fem_element_ghex144.cpp
-  test_fem_element_ghex145.cpp
-  test_fem_element_ghex146.cpp
-  test_fem_element_ghex147.cpp
-  test_fem_element_ghex148.cpp
-  test_fem_element_ghex149.cpp
-  test_fem_element_ghex150.cpp
-  test_fem_element_ghex151.cpp
-  test_fem_element_ghex152.cpp
-  test_fem_element_ghex153.cpp
-  test_fem_element_ghex154.cpp
-  test_fem_element_ghex155.cpp
-  test_fem_element_ghex156.cpp
-  test_fem_element_ghex157.cpp
-  test_fem_element_ghex158.cpp
-  test_fem_element_ghex159.cpp
-  test_fem_element_ghex160.cpp
-  test_fem_element_ghex161.cpp
-  test_fem_element_ghex162.cpp
-  test_fem_element_ghex163.cpp
-  test_fem_element_glda.cpp
-  test_fem_element_glma.cpp
-  test_fem_element_glsh.cpp
-  test_fem_element_gmas.cpp
-  test_fem_element_gspr.cpp
-  test_fem_element_hcqs.cpp
-  test_fem_element_ihex.cpp
-  test_fem_element_ilst.cpp
-  test_fem_element_ipri.cpp
-  test_fem_element_iqqe.cpp
-  test_fem_element_itet.cpp
-  test_fem_element_lcqs.cpp
-  test_fem_element_lcts.cpp
-  test_fem_element_lhex.cpp
-  test_fem_element_lqua.cpp
-  test_fem_element_matr.cpp
-  test_fem_element_mcqs.cpp
-  test_fem_element_mcts.cpp
-  test_fem_element_pcab.cpp
-  test_fem_element_pils.cpp
-  test_fem_element_pspr.cpp
-  test_fem_element_rpbq.cpp
-  test_fem_element_scqs.cpp
-  test_fem_element_scts.cpp
-  test_fem_element_secb.cpp
-  test_fem_element_slcb.cpp
-  test_fem_element_slqs.cpp
-  test_fem_element_slts.cpp
-  test_fem_element_tess.cpp
-  test_fem_element_tetr.cpp
-  test_fem_element_tpri.cpp
-  test_fem_element_trs1.cpp
-  test_fem_element_trs2.cpp
-  test_fem_element_trs3.cpp)
+  test_fem_elements.cpp)
 target_link_libraries(test_fem_elements ${EXTFEM_FEM_LIBS})
 my_add_test(test_fem_elements)
 
@@ -301,134 +182,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   # add the commands to generate the source code
   add_custom_command (
     OUTPUT
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_adva_2.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_adva_4.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_axcs.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_axda.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_axis.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_axlq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_axls.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_axqq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_beas.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_beps.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_btss.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_csta.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctal.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctaq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctcc.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctcl.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctcp.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctcq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctlq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ctmq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_fqus_ffq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ftrs_fftr.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex100.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex101.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex102.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex103.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex104.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex105.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex106.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex107.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex108.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex109.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex110.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex111.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex112.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex113.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex114.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex115.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex116.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex117.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex118.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex119.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex120.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex121.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex122.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex123.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex124.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex125.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex126.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex127.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex128.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex129.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex130.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex131.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex132.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex133.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex134.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex135.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex136.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex137.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex138.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex139.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex140.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex141.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex142.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex143.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex144.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex145.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex146.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex147.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex148.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex149.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex150.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex151.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex152.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex153.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex154.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex155.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex156.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex157.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex158.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex159.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex160.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex161.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex162.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ghex163.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_gdam.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_glda.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_glma.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_glsh.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_gmas.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_gspr.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_hcqs.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ihex.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ilst.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_ipri.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_iqqe.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_itet.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_lcqs.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_lcts.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_lhex.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_lqua.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_matr.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_mcqs.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_mcts.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_pcab.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_pils.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_pspr.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_rpbq.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_scqs.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_scts.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_secb.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_slcb.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_slqs.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_slts.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_tess.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_tetr.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_tpri.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_trs1.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_trs2.cpp
-      ${CMAKE_SOURCE_DIR}/tests/test_fem_element_trs3.cpp
+      ${CMAKE_SOURCE_DIR}/tests/test_fem_elements.cpp
     COMMAND
       cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_test_do.py ||
       svn revert ${CMAKE_SOURCE_DIR}/include/fem/test_fem_element_*.cpp.cpp
     DEPENDS
       ${CMAKE_SOURCE_DIR}/tools/elements_test_do.py
       ${CMAKE_SOURCE_DIR}/tools/elements_data.py
-      ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_element.cpp)
+      ${CMAKE_SOURCE_DIR}/tools/templates/test_fem_elements.cpp)
 endif()
 
 # Local Variables:

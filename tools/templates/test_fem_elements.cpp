@@ -1,8 +1,21 @@
+/*
+   #####     #    #     # #######   ###   ####### #     #   ###
+  #     #   # #   #     #    #       #    #     # ##    #   ###
+  #        #   #  #     #    #       #    #     # # #   #   ###
+  #       #     # #     #    #       #    #     # #  #  #    #
+  #       ####### #     #    #       #    #     # #   # #
+  #     # #     # #     #    #       #    #     # #    ##   ###
+   #####  #     #  #####     #      ###   ####### #     #   ###
+
+   Automatically generated source file. Contact author if changes are
+   required.
+ */
+
 /**
-   \file test_fem_element_ghex120.cpp
+   \file test_fem_element_{{ elem }}.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
-   \brief Tests for reading and writing FEM GHEX120 element information.
+   \brief Tests for reading and writing FEM {{ elem|upper() }} element information.
 
    Detailed description
 */
@@ -13,10 +26,13 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: test_fem_element.cpp 440 2016-09-02 13:14:08Z berhol $";
+      = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
+
+// This tells Catch to provide a main() - only do this in one cpp file
+#define CATCH_CONFIG_MAIN
 
 #include <limits>
 
@@ -37,6 +53,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace dnvgl::extfem::fem;
+using namespace dnvgl::extfem::fem::cards;
 using namespace dnvgl::extfem::fem::elements;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
@@ -47,13 +64,43 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 
-TEST_CASE("FEM GHEX120 element definitions.", "[fem_element_ghex120]") {
+TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
+   std::vector<long> nodes({ 6, 7 });
+   gelmnt1 data1(1, 2, elements::TESS, nodes);
+
+   SECTION("check values") {
+      CHECK(data1.ELNOX == 1);
+      CHECK(data1.ELNO == 2);
+      CHECK(data1.ELTYP == elements::TESS);
+      CHECK(data1.NODIN.size() == 2);
+      CHECK(data1.NODIN[0] == 6);
+      CHECK(data1.NODIN[1] == 7);
+   }
+
+   SECTION("check copy") {
+      tess probe1(&data1);
+      CHECK(probe1.get_type() == elements::TESS);
+      CHECK(probe1.nnodes() == 2);
+      CHECK(probe1.nodes.size() == 2);
+      CHECK(probe1.nodes[0] == 6);
+      CHECK(probe1.nodes[1] == 7);
+   }
+
+   SECTION("check downcast") {
+      std::unique_ptr<elements::__base::elem> probe2;
+      dispatch(probe2, &data1);
+      CHECK(probe2->get_type() == TESS);
+      CHECK(static_cast<tess*>(probe2.get())->nnodes() == 2);
+   }
+}
+
+{% for elem, vals in elements %}TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }}]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX120;
+   el_types const ELTYP = {{ elem|upper() }};
    long const ELTYAD = 2;
-   std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
+   std::vector<long> const NODIN ({{ list_init_form(100, 100+vals.nnodes) }});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
       new cards::gelmnt1(
          ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
@@ -76,13 +123,13 @@ TEST_CASE("FEM GHEX120 element definitions.", "[fem_element_ghex120]") {
                          STRANO, STRENO, STREPONO, GEONO_OPT,
                          FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
 
-   ghex120 probe(gelmnt1_data.get());
+   {{ elem }} probe(gelmnt1_data.get());
    probe.add(gelref1_data.get());
 
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               {{ vals.procs|join(', ') }} }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -101,14 +148,14 @@ TEST_CASE("FEM GHEX120 element definitions.", "[fem_element_ghex120]") {
    }
 }
 
-TEST_CASE("Output for GHEX120 elements.", "[fem_element_ghex120]") {
+TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]") {
 
    std::stringstream test;
 
-   ghex120 probe(1,                         // elnox
+   {{ elem }} probe(1,                         // elnox
               2,                         // elno
               3,                         // eltyad
-              std::vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+              std::vector<long>({{ list_init_form(100, 100+vals.nnodes) }}), // nodin
               6,                         // matno
               7,                         // addno
               8,                         // intno
@@ -122,7 +169,7 @@ TEST_CASE("Output for GHEX120 elements.", "[fem_element_ghex120]") {
               std::vector<long>(1, 16)); // transno_opt
 
    SECTION("simple (empty)") {
-      ghex120 probe;
+      {{ elem }} probe;
       test << probe;
       CHECK(test.str() == "");
    }
@@ -130,20 +177,12 @@ TEST_CASE("Output for GHEX120 elements.", "[fem_element_ghex120]") {
    SECTION("check output") {
       test << probe;
       CHECK(test.str() ==
-            "GELMNT1 +1.000000000e+00+2.000000000e+00+1.200000000e+02+3.000000000e+00\n"
-            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
-            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
-            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
-            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
-            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
-            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
-            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
-            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
-            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+            {{ gelmnt1(*([1, 2, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
+            {{ gelref1(2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
    }
 }
 
-// Local Variables:
+{% endfor %}// Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"

@@ -10,6 +10,7 @@
 # Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
 set(LIBEXTFEMIO_FEM_SOURCES
+  fem_elements.cpp
   fem_cards.cpp
   fem_cards_belfix.cpp
   fem_cards_beuslo.cpp
@@ -46,129 +47,6 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_cards_tdsetnam.cpp
   fem_cards_tdsupnam.cpp
   fem_cards_text.cpp
-  fem_elements.cpp
-  fem_element_adva_2.cpp
-  fem_element_adva_4.cpp
-  fem_element_axcs.cpp
-  fem_element_axda.cpp
-  fem_element_axis.cpp
-  fem_element_axlq.cpp
-  fem_element_axls.cpp
-  fem_element_axqq.cpp
-  fem_element_beas.cpp
-  fem_element_beps.cpp
-  fem_element_btss.cpp
-  fem_element_csta.cpp
-  fem_element_ctal.cpp
-  fem_element_ctaq.cpp
-  fem_element_ctcc.cpp
-  fem_element_ctcl.cpp
-  fem_element_ctcp.cpp
-  fem_element_ctcq.cpp
-  fem_element_ctlq.cpp
-  fem_element_ctmq.cpp
-  fem_element_fqus_ffq.cpp
-  fem_element_ftrs_fftr.cpp
-  fem_element_gdam.cpp
-  fem_element_ghex100.cpp
-  fem_element_ghex101.cpp
-  fem_element_ghex102.cpp
-  fem_element_ghex103.cpp
-  fem_element_ghex104.cpp
-  fem_element_ghex105.cpp
-  fem_element_ghex106.cpp
-  fem_element_ghex107.cpp
-  fem_element_ghex108.cpp
-  fem_element_ghex109.cpp
-  fem_element_ghex110.cpp
-  fem_element_ghex111.cpp
-  fem_element_ghex112.cpp
-  fem_element_ghex113.cpp
-  fem_element_ghex114.cpp
-  fem_element_ghex115.cpp
-  fem_element_ghex116.cpp
-  fem_element_ghex117.cpp
-  fem_element_ghex118.cpp
-  fem_element_ghex119.cpp
-  fem_element_ghex120.cpp
-  fem_element_ghex121.cpp
-  fem_element_ghex122.cpp
-  fem_element_ghex123.cpp
-  fem_element_ghex124.cpp
-  fem_element_ghex125.cpp
-  fem_element_ghex126.cpp
-  fem_element_ghex127.cpp
-  fem_element_ghex128.cpp
-  fem_element_ghex129.cpp
-  fem_element_ghex130.cpp
-  fem_element_ghex131.cpp
-  fem_element_ghex132.cpp
-  fem_element_ghex133.cpp
-  fem_element_ghex134.cpp
-  fem_element_ghex135.cpp
-  fem_element_ghex136.cpp
-  fem_element_ghex137.cpp
-  fem_element_ghex138.cpp
-  fem_element_ghex139.cpp
-  fem_element_ghex140.cpp
-  fem_element_ghex141.cpp
-  fem_element_ghex142.cpp
-  fem_element_ghex143.cpp
-  fem_element_ghex144.cpp
-  fem_element_ghex145.cpp
-  fem_element_ghex146.cpp
-  fem_element_ghex147.cpp
-  fem_element_ghex148.cpp
-  fem_element_ghex149.cpp
-  fem_element_ghex150.cpp
-  fem_element_ghex151.cpp
-  fem_element_ghex152.cpp
-  fem_element_ghex153.cpp
-  fem_element_ghex154.cpp
-  fem_element_ghex155.cpp
-  fem_element_ghex156.cpp
-  fem_element_ghex157.cpp
-  fem_element_ghex158.cpp
-  fem_element_ghex159.cpp
-  fem_element_ghex160.cpp
-  fem_element_ghex161.cpp
-  fem_element_ghex162.cpp
-  fem_element_ghex163.cpp
-  fem_element_glda.cpp
-  fem_element_glma.cpp
-  fem_element_glsh.cpp
-  fem_element_gmas.cpp
-  fem_element_gspr.cpp
-  fem_element_hcqs.cpp
-  fem_element_ihex.cpp
-  fem_element_ilst.cpp
-  fem_element_ipri.cpp
-  fem_element_iqqe.cpp
-  fem_element_itet.cpp
-  fem_element_lcqs.cpp
-  fem_element_lcts.cpp
-  fem_element_lhex.cpp
-  fem_element_lqua.cpp
-  fem_element_matr.cpp
-  fem_element_mcqs.cpp
-  fem_element_mcts.cpp
-  fem_element_pcab.cpp
-  fem_element_pils.cpp
-  fem_element_pspr.cpp
-  fem_element_rpbq.cpp
-  fem_element_scqs.cpp
-  fem_element_scts.cpp
-  fem_element_secb.cpp
-  fem_element_slcb.cpp
-  fem_element_slqs.cpp
-  fem_element_slts.cpp
-  fem_element_tess.cpp
-  fem_element_tetr.cpp
-  fem_element_thin_shell.cpp
-  fem_element_tpri.cpp
-  fem_element_trs1.cpp
-  fem_element_trs2.cpp
-  fem_element_trs3.cpp
   fem_errors.cpp
   fem_file.cpp
   fem_type_bounds.cpp
@@ -214,73 +92,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/tools/templates/fem_elements.cpp)
   add_custom_command (
     OUTPUT
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_adva_2.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_adva_4.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axcs.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axda.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axis.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axlq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axls.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_axqq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_beas.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_beps.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_btss.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_csta.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctal.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctaq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcc.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcl.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcp.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctcq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctlq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ctmq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_fqus_ffq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ftrs_fftr.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_gdam.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_glda.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_glma.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_glsh.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_gmas.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_gspr.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_hcqs.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ihex.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ilst.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_ipri.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_iqqe.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_itet.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lcqs.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lcts.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lhex.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_lqua.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_matr.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_mcqs.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_mcts.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_pcab.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_pils.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_pspr.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_rpbq.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_scqs.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_scts.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_secb.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_slcb.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_slqs.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_slts.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_tess.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_tetr.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_thin_shell.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_tpri.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs1.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs2.cpp
-      ${CMAKE_SOURCE_DIR}/src/fem/fem_element_trs3.cpp
-    COMMAND
-      cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_cpp_do.py ||
-      svn revert ${CMAKE_SOURCE_DIR}/src/fem/fem_element_*.cpp
-    DEPENDS
-      ${CMAKE_SOURCE_DIR}/tools/elements_cpp_do.py
-      ${CMAKE_SOURCE_DIR}/tools/elements_data.py
-      ${CMAKE_SOURCE_DIR}/tools/templates/fem_element.cpp)
-  add_custom_command (
-    OUTPUT
       ${CMAKE_SOURCE_DIR}/include/fem/elements.h
     COMMAND
       cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_h_do.py ||
@@ -290,3 +101,8 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/tools/elements_data.py
       ${CMAKE_SOURCE_DIR}/tools/templates/fem_elements.h)
 endif()
+
+# Local Variables:
+# compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+# coding: utf-8
+# End:

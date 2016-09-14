@@ -25,6 +25,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_cards_cquad4.cpp
   bdf_cards_crod.cpp
   bdf_cards_ctria3.cpp
+#  bdf_cards_celas1.cpp
   bdf_cards_enddata.cpp
   bdf_cards_grid.cpp
   bdf_cards_cmass2.cpp
@@ -39,6 +40,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_cards_pbeaml.cpp
   bdf_cards_prod.cpp
   bdf_cards_pshell.cpp
+#  bdf_cards_pelas.cpp
   bdf_cards_shell.cpp
   bdf_cards_momforce_base.cpp
   bdf_cards_load.cpp
@@ -77,3 +79,8 @@ add_library (extfemio_bdf STATIC
 
 target_include_directories (extfemio_bdf PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
+
+# Local Variables:
+# compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+# coding: utf-8
+# End:

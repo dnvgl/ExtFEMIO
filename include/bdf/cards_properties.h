@@ -732,6 +732,7 @@ Defines the properties of a rod element (`CROD` entry).
                virtual void collect_outdata(
                   std::list<std::unique_ptr<format_entry> > &res) const;
             };
+//         pelas
          }
       }
    }
@@ -743,6 +744,6 @@ Defines the properties of a rod element (`CROD` entry).
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../.. check -j8"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // coding: utf-8
 // End:

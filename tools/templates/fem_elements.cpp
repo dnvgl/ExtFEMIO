@@ -1,8 +1,21 @@
+/*
+   #####     #    #     # #######   ###   ####### #     #   ###
+  #     #   # #   #     #    #       #    #     # ##    #   ###
+  #        #   #  #     #    #       #    #     # # #   #   ###
+  #       #     # #     #    #       #    #     # #  #  #    #
+  #       ####### #     #    #       #    #     # #   # #
+  #     # #     # #     #    #       #    #     # #    ##   ###
+   #####  #     #  #####     #      ###   ####### #     #   ###
+
+   Automatically generated source file. Contact author if changes are
+   required.
+ */
+
 /**
    \file fem/fem_elements.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
-   \brief Common definitions for FEm elements.
+   \brief Common definitions for FEM elements.
 
    Detailed description
 */
@@ -33,8 +46,10 @@ static char THIS_FILE[] = __FILE__;
 namespace dnvgl {
    namespace extfem {
       namespace fem {
+
+         using namespace cards;
+
          namespace elements {
-            using namespace dnvgl::extfem::fem::cards;
 
             void dispatch(
                std::unique_ptr<__base::elem> &res, const cards::gelmnt1 *data) {
@@ -234,7 +249,93 @@ namespace dnvgl {
                   os << data.gelref1();
                   return os;
                }
+
+/**
+   \brief FEM element definition for fem_thin_shell.
+
+   Flat Quadrilateral/Triangular Thin Shell / Free Formulation
+   Quadrilateral/Triangular Shell
+*/
+
+               fem_thin_shell::fem_thin_shell(void) : elem() {}
+
+               fem_thin_shell::fem_thin_shell(
+                  long const elno,
+                  long const elident,
+                  long const el_add,
+                  std::vector<long> const nodes,
+                  long const matref,
+                  long const add_no,
+                  long const intno,
+                  long const mass_intno,
+                  long const i_strain_ref,
+                  long const i_stressef,
+                  long const strpoint_ref,
+                  std::vector<long> const sections,
+                  std::vector<long> const fixations,
+                  std::vector<long> const eccentrities,
+                  std::vector<long> const csys) :
+                  elem (elno, elident, el_add, nodes, matref, add_no,
+                        intno, mass_intno, i_strain_ref, i_stressef,
+                        strpoint_ref, sections, fixations,
+                        eccentrities, csys) {}
+
+               fem_thin_shell::fem_thin_shell(cards::gelmnt1 const *data) :
+                  elem(data) {}
+
+               fem_thin_shell::fem_thin_shell(cards::gelref1 const *data) :
+                  elem(data) {}
+
+               fem_thin_shell::fem_thin_shell(__base::elem const *data) :
+                  elem(data) {}
             }
+
+{% for elem, vals in elements %}/**
+   \brief FEM element definition for {{ elem }}.
+
+   {{ doc }}
+*/
+
+            namespace {
+               const size_t {{ elem }}_procs_len = {{ vals.procs|length() }};
+               el_processor {{ elem }}_procs[{{ elem }}_procs_len] = { {{ vals.procs|join(', ') }} };
+            }
+
+            long {{ elem }}::nnodes(void) const {return {{ vals.nnodes }};}
+
+            el_types {{ elem }}::get_type(void) const {return {{ elem|upper() }};}
+
+            const std::set<el_processor> {{ elem }}::processors(
+               {{ elem }}_procs, {{ elem }}_procs+{{ elem }}_procs_len);
+
+            {{ elem }}::{{ elem }}(void) : {{ vals.base }}() {}
+
+            {{ elem }}::{{ elem }}(long const eleno,
+                          long const elident,
+                          long const el_add,
+                          std::vector<long> const nodes,
+                          long const matref,
+                          long const add_no,
+                          long const intno,
+                          long const mass_intno,
+                          long const i_strain_ref,
+                          long const i_stress_ref,
+                          long const strpoint_ref,
+                          std::vector<long> const section,
+                          std::vector<long> const fixations,
+                          std::vector<long> const eccentrities,
+                          std::vector<long> const csys) :
+                  {{ vals.base }}(
+                     eleno, elident, el_add, nodes, matref, add_no,
+                     intno, mass_intno, i_strain_ref, i_stress_ref,
+                     strpoint_ref, section, fixations, eccentrities,
+                     csys) {}
+
+            {{ elem }}::{{ elem }}(const cards::gelmnt1 *data) : {{ vals.base }}(data) {}
+
+            {{ elem }}::{{ elem }}(const cards::gelref1 *data) : {{ vals.base }}(data) {}
+
+            {{ elem }}::{{ elem }}(const __base::elem *data) : __base::{{ vals.base }}(data) {}{% endfor %}
          }
       }
    }

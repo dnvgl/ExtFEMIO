@@ -809,7 +809,9 @@ DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
                   std::ostream &put(std::ostream&) const;
                };
 
-/** # `SPCFORCES`: Single-Point Forces of Constraint Output Request
+/**
+
+# `SPCFORCES`: Single-Point Forces of Constraint Output Request
 
 
 Requests the form and type of single-point force of constraint vector
@@ -1475,7 +1477,9 @@ Remarks:
                   std::ostream &put(std::ostream&) const;
                };
 
-                  /** ## `LOAD`: External Static Load Set Selection
+/**
+
+## `LOAD`: External Static Load Set Selection
 
 Selects an external static load set.
 
@@ -1704,7 +1708,7 @@ Superelement identification number. (Integer>0)
   mode: c++
   c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make -C ../.. check -j8"
+  compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
   coding: utf-8
   End:
  */

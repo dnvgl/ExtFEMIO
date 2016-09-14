@@ -678,6 +678,7 @@ namespace dnvgl {
                virtual void collect_outdata(
                   std::list<std::unique_ptr<format_entry> >&) const;
             };
+            // celas
          }
       }
    }

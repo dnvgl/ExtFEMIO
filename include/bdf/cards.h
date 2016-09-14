@@ -78,6 +78,10 @@ namespace dnvgl {
                CROD,
                /// Rod Property
                PROD,
+               // /// Scalar Spring Connection
+               // CELAS1,
+               // /// Scalar Elastic Property
+               // PELAS,
                /// Element Force Output or Particle Velocity Request
                FORCE,
                /// Static Moment

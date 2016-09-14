@@ -1,3 +1,16 @@
+/*
+   #####     #    #     # #######   ###   ####### #     #   ###
+  #     #   # #   #     #    #       #    #     # ##    #   ###
+  #        #   #  #     #    #       #    #     # # #   #   ###
+  #       #     # #     #    #       #    #     # #  #  #    #
+  #       ####### #     #    #       #    #     # #   # #
+  #     # #     # #     #    #       #    #     # #    ##   ###
+   #####  #     #  #####     #      ###   ####### #     #   ###
+
+   Automatically generated source file. Contact author if changes are
+   required.
+ */
+
 /**
    \file fem/elements.h
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
