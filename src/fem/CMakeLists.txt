@@ -75,6 +75,8 @@ set(LIBEXTFEMIO_FEM_HEADERS
 add_library (extfemio_fem STATIC
   ${LIBEXTFEMIO_FEM_SOURCES}
   ${LIBEXTFEMIO_FEM_HEADERS})
+cotire(extfemio_fem)
+set_target_properties(extfemio_fem PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
 
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -103,6 +105,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # Local Variables:
+# mode: cmake
 # compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 # coding: utf-8
 # End:

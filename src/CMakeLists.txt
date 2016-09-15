@@ -25,10 +25,12 @@ set(LIBEXTFEMIO_HEADERS
 add_library (extfemio
   ${LIBEXTFEMIO_SOURCES}
   ${LIBEXTFEMIO_HEADERS})
+cotire(extfemio)
 
 # Make sure the compiler can find include files for our Hello library
 # when other libraries or executables link to Hello
 target_include_directories (extfemio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+set_target_properties(extfemio PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
 
 add_subdirectory(bdf)
 add_subdirectory(fem)
@@ -56,5 +58,7 @@ add_subdirectory(fem)
 # vpath %.o fem bdf
 
 # Local Variables:
+# mode: cmake
 # compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+# coding: utf-8
 # End:

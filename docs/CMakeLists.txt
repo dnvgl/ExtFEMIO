@@ -32,5 +32,7 @@ if(DOXYGEN_FOUND)
 ENDIF(DOXYGEN_FOUND)
 
 # Local Variables:
+# mode: cmake
 # compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+# coding: utf-8
 # End:

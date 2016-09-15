@@ -5,7 +5,10 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT(ExtFEMIO)
 SET(PROJECT_VERSION 0.4)
 
+SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake;${CMAKE_MODULE_PATH}")
+
 INCLUDE(CTest)
+INCLUDE(cotire REQUIRED)
 
 IF(MSVC)
   SET(CMAKE_CXX_FLAGS
@@ -46,3 +49,9 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
 ADD_SUBDIRECTORY(src)
 ADD_SUBDIRECTORY(tests)
 ADD_SUBDIRECTORY(docs)
+
+# Local Variables:
+# mode: cmake
+# compile-command: "make -C cbuild -j8&&make -C cbuild test"
+# coding: utf-8
+# End:

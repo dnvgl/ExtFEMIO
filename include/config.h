@@ -19,10 +19,10 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#define HAVE_BOOST_REGEX_HPP 1
+/* #undef HAVE_BOOST_REGEX_HPP */
 
 #define ExtFEMIO_VERSION "0.4"
-#define ExtFEMIO_REVISION "447"
+#define ExtFEMIO_REVISION "452"
 
 #endif // _CONFIG_H_
 

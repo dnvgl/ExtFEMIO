@@ -12,6 +12,8 @@
 FUNCTION(my_add_test inp)
   string(TOUPPER ${inp} NAME)
   string(TOLOWER ${inp} COMMAND)
+  cotire(${inp})
+  set_target_properties(${inp} PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
   add_test(NAME ${NAME} COMMAND ${COMMAND} --reporter junit --out ${COMMAND}_junit.xml)
 ENDFUNCTION()
 
@@ -193,6 +195,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 # Local Variables:
+# mode: cmake
 # compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 # coding: utf-8
 # End:
