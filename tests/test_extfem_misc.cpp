@@ -39,8 +39,7 @@ CATCH_TRANSLATE_EXCEPTION( extfem::bdf::errors::error& ex ) {
 TEST_CASE("Checking misc functions", "[extfem::misc]") {
 
    SECTION("version number") {
-      CHECK(extfem::version() == "ExtFEMIO, Ver. " ExtFEMIO_VERSION
-            ", SVN. Rev. " ExtFEMIO_REVISION);
+      CHECK(extfem::version() == "ExtFEMIO, Ver. " ExtFEMIO_VERSION);
    }
    SECTION("build data number") {
       CAPTURE(extfem::build_data());
@@ -52,5 +51,5 @@ TEST_CASE("Checking misc functions", "[extfem::misc]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
 // End:

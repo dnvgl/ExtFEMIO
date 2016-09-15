@@ -36,8 +36,7 @@ namespace dnvgl {
       }
 
       std::string version(void) {
-         return "ExtFEMIO, Ver. " ExtFEMIO_VERSION
-            ", SVN. Rev. " ExtFEMIO_REVISION;
+         return "ExtFEMIO, Ver. " ExtFEMIO_VERSION;
       }
 
       std::string build_data(void) {

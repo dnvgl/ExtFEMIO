@@ -34,7 +34,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 const
-#if HAVE_BOOST_REGEX_HPP
+#ifdef HAVE_BOOST_REGEX_HPP
 boost::regex
 #else
 std::regex

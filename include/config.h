@@ -19,10 +19,7 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-/* #undef HAVE_BOOST_REGEX_HPP */
-
-#define ExtFEMIO_VERSION "0.4"
-#define ExtFEMIO_REVISION "452"
+#define ExtFEMIO_VERSION "0.4.1"
 
 #endif // _CONFIG_H_
 
@@ -31,7 +28,7 @@
   mode: c
   c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make test"
+  compile-command: "make -C ../../cbuild -j8 all_unity&&make -C ../../cbuild test"
   coding: utf-8
   End:
  */
