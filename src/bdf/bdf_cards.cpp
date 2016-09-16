@@ -86,6 +86,11 @@ namespace dnvgl {
 
                const std::set<char> card::free_form_cont(initVals, initVals + 3);
 
+               card const *card::operator() (std::list<std::string> const &inp) {
+                  this->read(inp);
+                  return this;
+               }
+
                std::string card::format_outlist(
                   const std::list<std::unique_ptr<format_entry> > &en) const {
 
@@ -293,6 +298,9 @@ namespace dnvgl {
                }
             }
 
+            unknown::unknown(const std::list<std::string> &inp) :
+                  card(inp), content(inp) {};
+
             const types unknown::card_type(void) const{
                return UNKNOWN;
             }
@@ -301,6 +309,9 @@ namespace dnvgl {
                std::list<std::unique_ptr<format_entry> > &res) const {
                throw errors::error("UNKNOWN", "can't write UNKNOWN.");
                return;
+            }
+
+            void unknown::read(const std::list<std::string> &inp) {
             }
          }
       }

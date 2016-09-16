@@ -56,8 +56,35 @@ namespace dnvgl {
                const entry_type<double> momforce::form_N3(
                   "N3", bound<double>(nullptr, nullptr, &cd0));
 
+               momforce::momforce(void) : card() {}
+
                momforce::momforce(const std::list<std::string> &inp) :
                   card(inp) {
+                  this->read(inp);
+               }
+
+               momforce::momforce(
+                  const long *SID, const long *G, const long *CID,
+                  const double *F,
+                  const double *N1, const double *N2, const double *N3) :
+                  SID(*SID), G(*G), CID(*CID), F(*F), N1(N1), N2(N2), N3(N3) {}
+
+               __base::card const *momforce::operator() (
+                     const long *SID, const long *G, const long *CID,
+                     const double *F,
+                     const double *N1, const double *N2, const double *N3) {
+                  this->SID = *SID;
+                  this->G = *G;
+                  this->CID = *CID;
+                  this->F = *F;
+                  this->N1 = N1;
+                  this->N2 = N2;
+                  this->N3 = N3;
+                  return this;
+               }
+
+
+               void momforce::read(std::list<std::string> const &inp) {
 
                   auto pos = inp.rbegin();
 
@@ -87,12 +114,6 @@ namespace dnvgl {
                   }
                }
 
-               momforce::momforce(
-                  const long *SID, const long *G, const long *CID,
-                  const double *F,
-                  const double *N1, const double *N2, const double *N3) :
-                  SID(*SID), G(*G), CID(*CID), F(*F), N1(N1), N2(N2), N3(N3) {}
-
                void momforce::collect_outdata (
                   std::list<std::unique_ptr<format_entry> > &res) const {
                   res.push_back(get_head());
@@ -110,6 +131,17 @@ namespace dnvgl {
                }
             }
 
+            force::force(void) : __base::momforce() {}
+
+            force::force(const std::list<std::string> &inp) :
+               __base::momforce(inp) {}
+
+            force::force(
+               const long *SID, const long *G, const long *CID,
+               const double *F,
+               const double *N1, const double *N2/*=nullptr*/, const double *N3/*=nullptr*/) :
+               __base::momforce(SID, G, CID, F, N1, N2, N3) {};
+
             bdf::types::card force::head = bdf::types::card("FORCE");
 
             std::unique_ptr<format_entry> force::get_head(void) const {
@@ -119,6 +151,17 @@ namespace dnvgl {
             const types force::card_type(void) const {
                return FORCE;
             }
+
+            moment::moment(void) : __base::momforce() {}
+
+            moment::moment(const std::list<std::string> &inp) :
+               __base::momforce(inp) {}
+
+            moment::moment(
+               const long *SID, const long *G, const long *CID,
+               const double *F,
+               const double *N1, const double *N2/*=nullptr*/, const double *N3/*=nullptr*/) :
+                  __base::momforce(SID, G, CID, F, N1, N2, N3) {};
 
             bdf::types::card moment::head = bdf::types::card("MOMENT");
 

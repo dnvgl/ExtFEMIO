@@ -44,8 +44,7 @@ namespace dnvgl {
                   static const entry_type<double> form_T3;
                   static const entry_type<double> form_T4;
 
-                  shell(const std::list<std::string> &inp) :
-                     __base::card(inp) {};
+                  shell(const std::list<std::string> &);
 
                public:
 
@@ -140,7 +139,27 @@ namespace dnvgl {
 
                protected:
 
+                  const card *operator() (
+                     long const *EID, long const *PID,
+                     long const *G1, long const *G2,
+                     long const *G3, long const *G4,
+                     double const *THETA,
+                     double const *ZOFFS,
+                     long const *TFLAG,
+                     double const *T1, double const *T2,
+                     double const *T3, double const *T4);
+
+                  const card *operator() (
+                     long const *EID, long const *PID,
+                     long const *G1, long const *G2,
+                     long const *G3, long const *G4,
+                     long const *MCID,
+                     double const *ZOFFS, long const *TFLAG,
+                     double const *T1, double const *T2,
+                     double const *T3, double const *T4);
+
                   using card::put;
+                  using card::read;
                };
             }
 /// Handle Nastran Bulk `CTRIA3` entries.
@@ -167,7 +186,27 @@ namespace dnvgl {
                ctria3(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return CTRIA3; };
+               card_type(void) const;
+
+               virtual void read(const std::list<std::string> &);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *G1, long const *G2, long const *G3,
+                  double const *THETA=NULL,
+                  double const *ZOFFS=NULL,
+                  long const *TFLAG=NULL,
+                  double const *T1=NULL, double const *T2=NULL,
+                  double const *T3=NULL, double const *T4=NULL);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *G1, long const *G2, long const *G3,
+                  long const *MCID,
+                  double const *ZOFFS=NULL,
+                  long const *TFLAG=NULL,
+                  double const *T1=NULL, double const *T2=NULL,
+                  double const *T3=NULL, double const *T4=NULL);
 
             private:
 
@@ -201,7 +240,29 @@ namespace dnvgl {
                cquad4(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return CQUAD4; };
+               card_type(void) const;
+
+               virtual void read(const std::list<std::string> &);
+
+               const card *operator() (
+                  long const *EID, long const *PID,
+                  long const *G1, long const *G2,
+                  long const *G3, long const *G4,
+                  double const *THETA=NULL,
+                  double const *ZOFFS=NULL,
+                  long const *TFLAG=NULL,
+                  double const *T1=NULL, double const *T2=NULL,
+                  double const *T3=NULL, double const *T4=NULL);
+
+               const card *operator() (
+                  long const *EID, long const *PID,
+                  long const *G1, long const *G2,
+                  long const *G3, long const *G4,
+                  long const *MCID,
+                  double const *ZOFFS=NULL,
+                  long const *TFLAG=NULL,
+                  double const *T1=NULL, double const *T2=NULL,
+                  double const *T3=NULL, double const *T4=NULL);
 
             private:
 
@@ -403,10 +464,60 @@ namespace dnvgl {
                */
                entry_value<long> SB;
 
-               cbeam(const std::list<std::string> &inp);
+               cbeam(std::list<std::string> const &inp);
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CBEAM; };
+
+               virtual void read(const std::list<std::string> &);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB,
+                  double const *X1,
+                  double const *X2,
+                  double const *X3,
+                  std::string const *OFFT=NULL,
+                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
+                  double const *W1A=NULL, double const *W2A=NULL,
+                  double const *W3A=NULL, double const *W1B=NULL,
+                  double const *W2B=NULL, double const *W3B=NULL,
+                  long const *SA=NULL, long const *SB=NULL);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB,
+                  double const *X1,
+                  double const *X2,
+                  double const *X3,
+                  double const *BIT,
+                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
+                  double const *W1A=NULL, double const *W2A=NULL,
+                  double const *W3A=NULL, double const *W1B=NULL,
+                  double const *W2B=NULL, double const *W3B=NULL,
+                  long const *SA=NULL, long const *SB=NULL);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB,
+                  long const *G0,
+                  std::string const *OFFT=NULL,
+                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
+                  double const *W1A=NULL, double const *W2A=NULL,
+                  double const *W3A=NULL, double const *W1B=NULL,
+                  double const *W2B=NULL, double const *W3B=NULL,
+                  long const *SA=NULL, long const *SB=NULL);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB,
+                  long const *G0,
+                  double const *BIT,
+                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
+                  double const *W1A=NULL, double const *W2A=NULL,
+                  double const *W3A=NULL, double const *W1B=NULL,
+                  double const *W2B=NULL, double const *W3B=NULL,
+                  long const *SA=NULL, long const *SB=NULL);
 
             private:
 
@@ -622,6 +733,28 @@ namespace dnvgl {
                   const double *W3A = nullptr, const double *W1B = nullptr,
                   const double *W2B = nullptr, const double *W3B = nullptr);
 
+               virtual void read(const std::list<std::string> &);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB,
+                  long const *G0,
+                  std::string const *OFFT=NULL,
+                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
+                  double const *W1A=NULL, double const *W2A=NULL,
+                  double const *W3A=NULL, double const *W1B=NULL,
+                  double const *W2B=NULL, double const *W3B=NULL);
+
+               card const *operator() (
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB,
+                  double const *X1, double const *X2,double const *X3,
+                  std::string const *OFFT=NULL,
+                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
+                  double const *W1A=NULL, double const *W2A=NULL,
+                  double const *W3A=NULL, double const *W1B=NULL,
+                  double const *W2B=NULL, double const *W3B=NULL);
+
             private:
 
                virtual void collect_outdata(
@@ -672,6 +805,11 @@ namespace dnvgl {
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const { return CROD; };
+
+               virtual void read(const std::list<std::string> &);
+
+               const card *operator() (long const *EID, long const *PID,
+                                       long const *G1, long const *G2);
 
             private:
 

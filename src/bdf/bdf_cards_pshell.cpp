@@ -72,8 +72,12 @@ namespace dnvgl {
                "MID4",
                bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 
-            pshell::pshell(const std::list<std::string> &inp) : card(inp) {
+            pshell::pshell(const std::list<std::string> &inp) :
+               card(inp) {
+               this->read(inp);
+            }
 
+            void pshell::read(const std::list<std::string> &inp) {
                auto pos = inp.rbegin();
 
                form_MID4.set_value(MID4, "");
@@ -117,6 +121,9 @@ namespace dnvgl {
                   throw errors::parse_error("PSHELL", "Illegal number of entries.");
                }
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            pshell::card_type(void) const { return PSHELL; };
 
             void pshell::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

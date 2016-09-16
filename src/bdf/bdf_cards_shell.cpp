@@ -69,6 +69,9 @@ namespace dnvgl {
                   "T3", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
                const entry_type<double> shell::form_T4(
                   "T4", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
+
+               shell::shell(const std::list<std::string> &inp) :
+                  __base::card(inp) {};
             }
          }
       }

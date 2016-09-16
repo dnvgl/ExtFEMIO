@@ -33,60 +33,62 @@ namespace {
    static const long cl1 = 1;
 }
 
-using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
-using bdf::types::entry_type;
-using bdf::types::entry_value;
-
-const entry_type<long> load::form_SID(
-   "SID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<double> load::form_S("S");
-const entry_type<double> load::form_Si("Si");
-const entry_type<long> load::form_Li(
-   "Li", bdf::type_bounds::bound<long>(&cl1));
-
-load::load(const std::list<std::string> &inp) :
-   card(inp) {
-
-   auto pos = inp.begin();
-
-   if (pos == inp.end()) goto invalid;
-   ++pos;
-   if (pos == inp.end()) goto invalid;
-   form_SID.set_value(SID, *(pos++));
-   if (pos == inp.end()) goto invalid;
-   form_S.set_value(S, *(pos++));
-   if (pos == inp.end()) goto invalid;
-   while (pos != inp.end() && extfem::string::string(*pos) != "") {
-      Si.push_back(form_Si(*(pos++)));
-      if (pos == inp.end()) goto invalid;
-      Li.push_back(form_Li(*(pos++)));
-   }
-   goto end;
-
- invalid:
-   throw errors::parse_error("LOAD", "Illegal number of entries.");
- end: ;
-}
-
-load::load(const long *SID, const double *S,
-           const std::list<double> *Si, const std::list<long> *Li) :
-   SID(*SID), S(*S) {
-   if (Si)
-      copy(Si->begin(), Si->end(), back_inserter(this->Si));
-   if (Li)
-      copy(Li->begin(), Li->end(), back_inserter(this->Li));
-}
-
 namespace dnvgl {
    namespace extfem {
+
+      using bdf::types::entry_type;
+      using bdf::types::entry_value;
+
       namespace bdf {
          namespace cards {
+
+            const entry_type<long> load::form_SID(
+               "SID", bdf::type_bounds::bound<long>(&cl1));
+            const entry_type<double> load::form_S("S");
+            const entry_type<double> load::form_Si("Si");
+            const entry_type<long> load::form_Li(
+               "Li", bdf::type_bounds::bound<long>(&cl1));
+
+            load::load(const std::list<std::string> &inp) :
+               card(inp) {
+               (*this)(inp);
+            }
+
+            load::load(const long *SID, const double *S,
+                       const std::list<double> *Si, const std::list<long> *Li) :
+               SID(*SID), S(*S) {
+               if (Si)
+                  copy(Si->begin(), Si->end(), back_inserter(this->Si));
+               if (Li)
+                  copy(Li->begin(), Li->end(), back_inserter(this->Li));
+            }
 
             bdf::types::card load::head = bdf::types::card("LOAD");
 
             const types load::card_type(void) const {
                return LOAD;
+            }
+
+            void load::read(std::list<std::string> const &inp) {
+               auto pos = inp.begin();
+
+               if (pos == inp.end()) goto invalid;
+               ++pos;
+               if (pos == inp.end()) goto invalid;
+               form_SID.set_value(SID, *(pos++));
+               if (pos == inp.end()) goto invalid;
+               form_S.set_value(S, *(pos++));
+               if (pos == inp.end()) goto invalid;
+               while (pos != inp.end() && extfem::string::string(*pos) != "") {
+                  Si.push_back(form_Si(*(pos++)));
+                  if (pos == inp.end()) goto invalid;
+                  Li.push_back(form_Li(*(pos++)));
+               }
+               goto end;
+
+            invalid:
+               throw errors::parse_error("LOAD", "Illegal number of entries.");
+            end: ;
             }
 
             void load::collect_outdata(

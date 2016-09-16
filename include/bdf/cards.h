@@ -137,6 +137,10 @@ namespace dnvgl {
                   virtual void collect_outdata(
                      std::list<std::unique_ptr<format_entry> >&) const = 0;
 
+                  virtual card const *operator() (std::list<std::string> const &);
+
+                  virtual void read(std::list<std::string> const &) = 0;
+
                public:
 
                   friend inline
@@ -205,10 +209,11 @@ namespace dnvgl {
 
                std::list<std::string> content;
 
-               unknown(const std::list<std::string> &inp) :
-                  card(inp), content(inp) {};
+               unknown(const std::list<std::string> &inp);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+               virtual void read(const std::list<std::string> &inp);
 
             private:
 
@@ -241,6 +246,8 @@ Designates the end of the Bulk Data Section.
 
                const dnvgl::extfem::bdf::cards::types
                card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -318,7 +325,12 @@ displacement, and its permanent single-point constraints.
                grid(long &ID, long &CP, double &X1, double &X2, double &X3);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return GRID; };
+               card_type(void) const;
+
+               virtual void read(const std::list<std::string> &);
+
+               const card *operator() (long const &ID, long const &CP,
+                                       double const &X1, double const &X2, double const &X3);
 
             private:
 
@@ -437,7 +449,9 @@ Defines the material properties for linear isotropic materials.
                mat1(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return MAT1; };
+               card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -495,7 +509,9 @@ two-dimensional elements.
                mat2(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return MAT2; };
+               card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -590,9 +606,9 @@ present, even though fields 6 through 9 are blank.
 
                param(std::string const&, double const&, double const&);
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const {
-                  return PARAM;
-               };
+               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 

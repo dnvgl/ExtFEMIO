@@ -52,9 +52,28 @@ namespace dnvgl {
                "MB",
                bdf::type_bounds::bound<long>(nullptr, nullptr, &cl0));
 
-            grav::grav(const std::list<std::string> &inp) :
+            grav::grav(std::list<std::string> const &inp) :
                card(inp) {
+               this->read(inp);
+            }
 
+            grav::grav(const long *SID, const long *CID, const double *A,
+                       const double *N1, const double *N2, const double *N3,
+                       const long *MB/*=NULL*/) :
+               card(),
+               SID(SID), CID(CID), A(A), N1(N1), N2(N2), N3(N3), MB(MB) {}
+
+            grav::grav(const long *SID, const long *CID, const double *A,
+                       const std::vector<double> *N,
+                       const long *MB/*=NULL*/) :
+               grav(SID, CID, A, &(*N)[0], &(*N)[1], &(*N)[2], MB) {
+               if (N->size() != 3)
+                  throw errors::error("GRAV", "N requires 3 entries.");
+            }
+
+            bdf::types::card grav::head = bdf::types::card("GRAV");
+
+            void grav::read(std::list<std::string> const &inp) {
                auto pos = inp.begin();
 
                if (pos == inp.end()) goto invalid;
@@ -79,22 +98,6 @@ namespace dnvgl {
                throw errors::parse_error("GRAV", "Illegal number of entries.");
             end: ;
             }
-
-            grav::grav(const long *SID, const long *CID, const double *A,
-                       const double *N1, const double *N2, const double *N3,
-                       const long *MB/*=NULL*/) :
-               card(),
-               SID(SID), CID(CID), A(A), N1(N1), N2(N2), N3(N3), MB(MB) {}
-
-            grav::grav(const long *SID, const long *CID, const double *A,
-                       const std::vector<double> *N,
-                       const long *MB/*=NULL*/) :
-               grav(SID, CID, A, &(*N)[0], &(*N)[1], &(*N)[2], MB) {
-               if (N->size() != 3)
-                  throw errors::error("GRAV", "N requires 3 entries.");
-            }
-
-            bdf::types::card grav::head = bdf::types::card("GRAV");
 
             const types grav::card_type(void) const {
                return GRAV;

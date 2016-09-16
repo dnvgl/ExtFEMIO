@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -30,7 +30,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   static const double cd0 = 0.;
+   double static const cd0 = 0.;
 }
 
 namespace dnvgl {
@@ -39,49 +39,54 @@ namespace dnvgl {
          namespace cards {
             using dnvgl::extfem::bdf::types::entry_type;;
 
-            const entry_type<double> pbar::form_A(
+            entry_type<double> const pbar::form_A(
                "A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_I1(
+            entry_type<double> const pbar::form_I1(
                "I1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_I2(
+            entry_type<double> const pbar::form_I2(
                "I2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_J(
+            entry_type<double> const pbar::form_J(
                "J", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_NSM(
+            entry_type<double> const pbar::form_NSM(
                "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_C1(
+            entry_type<double> const pbar::form_C1(
                "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_C2(
+            entry_type<double> const pbar::form_C2(
                "C2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_D1(
+            entry_type<double> const pbar::form_D1(
                "D1", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_D2(
+            entry_type<double> const pbar::form_D2(
                "D2", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_E1(
+            entry_type<double> const pbar::form_E1(
                "E1", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_E2(
+            entry_type<double> const pbar::form_E2(
                "E2", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_F1(
+            entry_type<double> const pbar::form_F1(
                "F1", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_F2(
+            entry_type<double> const pbar::form_F2(
                "F2", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
-            const entry_type<double> pbar::form_K1(
+            entry_type<double> const pbar::form_K1(
                "K1", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, nullptr, true));
-            const entry_type<double> pbar::form_K2(
+            entry_type<double> const pbar::form_K2(
                "K2", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, nullptr, true));
-            const entry_type<double> pbar::form_I12(
+            entry_type<double> const pbar::form_I12(
                "I12", bdf::type_bounds::bound<double>(
                   nullptr, nullptr, &cd0));
 
-            pbar::pbar(const std::list<std::string> &inp) : bar_prop(inp) {
+            pbar::pbar(std::list<std::string> const &inp) :
+               bar_prop(inp) {
+               this->read(inp);
+            }
+
+            void pbar::read(std::list<std::string> const &inp) {
 
                auto pos = inp.rbegin();
 
@@ -161,6 +166,9 @@ namespace dnvgl {
                   J.value = (I1.value + I2.value) / 2.;
                }
             }
+
+            dnvgl::extfem::bdf::cards::types const
+            pbar::card_type(void) const { return PBAR; };
 
             void pbar::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

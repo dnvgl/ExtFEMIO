@@ -43,15 +43,28 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
-            const entry_type<long> cmass4::form_EID(
+            entry_type<long> const cmass4::form_EID(
                "EID", bdf::type_bounds::bound<long>(&cl1));
-            const entry_type<double> cmass4::form_M("M");
-            const entry_type<long> cmass4::form_S1("S1");
-            const entry_type<long> cmass4::form_S2("S2");
+            entry_type<double> const cmass4::form_M("M");
+            entry_type<long> const cmass4::form_S1("S1");
+            entry_type<long> const cmass4::form_S2("S2");
 
-            cmass4::cmass4(const std::list<std::string> &inp) :
+            cmass4::cmass4(std::list<std::string> const &inp) :
                card(inp) {
+               this->read(inp);
+            }
 
+            cmass4::cmass4(long const *EID, double const *M,
+                           long const *S1, long const *S2/*=NULL*/) :
+               card(),
+               EID(EID), M(M), S1(S1), S2(S2) {
+               if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
+                  throw errors::error("CMASS4", "EID not in valid range");
+            }
+
+            bdf::types::card cmass4::head = bdf::types::card("CMASS4");
+
+            void cmass4::read(std::list<std::string> const &inp) {
                auto pos = inp.begin();
 
                if (pos == inp.end()) goto invalid;
@@ -70,17 +83,6 @@ namespace dnvgl {
                throw errors::parse_error("CMASS4", "Illegal number of entries.");
             end: ;
             }
-
-            cmass4::cmass4(long const *EID, double const *M,
-                           long const *S1, long const *S2/*=NULL*/) :
-               card(),
-               EID(EID), M(M), S1(S1), S2(S2) {
-               if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
-                  throw errors::error("CMASS4", "EID not in valid range");
-            }
-
-            bdf::types::card cmass4::head = bdf::types::card("CMASS4");
-
             const types cmass4::card_type(void) const {
                return CMASS4;
             }

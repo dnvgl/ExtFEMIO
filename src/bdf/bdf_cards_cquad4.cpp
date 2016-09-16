@@ -38,7 +38,10 @@ namespace dnvgl {
 
             cquad4::cquad4(const std::list<std::string> &inp) :
                __base::shell(inp) {
+               this->read(inp);
+            }
 
+            void cquad4::read(const std::list<std::string> &inp) {
                auto pos = inp.rbegin();
 
                form_THETA.set_value(THETA, "");
@@ -110,6 +113,9 @@ namespace dnvgl {
                   if (!T4.is_value) form_T4.set_value(T4, "");
                }
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            cquad4::card_type(void) const { return CQUAD4; };
 
             void cquad4::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

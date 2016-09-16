@@ -62,6 +62,8 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
             namespace __base {
+               l_geom::l_geom () {};
+
                const std::set<std::string> l_geom::dimnum1(dimnum1_set);
                const std::set<std::string> l_geom::dimnum2(dimnum2_set);
                const std::set<std::string> l_geom::dimnum3(dimnum3_set);

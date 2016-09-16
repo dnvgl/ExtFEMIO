@@ -10,6 +10,7 @@
 # Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
 set(LIBEXTFEMIO_BDF_SOURCES
+  bdf_type_bounds.cpp
   bdf_types.cpp
   bdf_types_float.cpp
   bdf_types_int.cpp

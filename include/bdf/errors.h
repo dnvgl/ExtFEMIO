@@ -40,66 +40,65 @@ namespace dnvgl {
                std::string operator() (void) const;
             };
 
-            class types_error : public error{
+            class types_error : public error {
 
             public:
 
                types_error(const std::string &msg);
             };
 
-            class form_error : public error{
+            class form_error : public error {
 
             protected:
 
                form_error(
                   const std::string &name, const std::string &msg,
-                  const std::string &cls) :
-                  error(name, msg, cls) {};
+                  const std::string &cls);
             };
 
-            class float_error : public form_error{
+            class float_error : public form_error {
 
             public:
 
                float_error(const std::string&, const std::string&);
             };
 
-            class int_error : public form_error{
+            class int_error : public form_error {
 
             public:
 
                int_error(const std::string&, const std::string&);
             };
 
-            class output_error : public error{
+            class output_error : public error {
 
             public:
 
                output_error(const std::string&, const std::string&);
             };
 
-            class list_error : public error{
+            class list_error : public error {
 
             public:
 
                list_error(const std::string&, const std::string &);
             };
 
-            class str_error : public error{
+            class str_error : public error {
 
             public:
 
                str_error(const std::string&, const std::string &);
             };
 
-            class string_error : public error{
+            class string_error : public error {
 
             public:
 
                string_error(const std::string&, const std::string &);
             };
 
-            class parse_error : public error{
+            class parse_error : public error {
 
             public:
 

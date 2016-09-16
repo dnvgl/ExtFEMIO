@@ -34,13 +34,16 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
-            enddata::enddata(const std::list<std::string> &inp) :
+            enddata::enddata(std::list<std::string> const &inp) :
                __base::card(inp) {}
 
             enddata::enddata(void) : __base::card() {}
 
             const types enddata::card_type(void) const {
                return ENDDATA;
+            }
+
+            void enddata::read(std::list<std::string> const &inp) {
             }
 
             bdf::types::card enddata::head = bdf::types::card("ENDDATA");

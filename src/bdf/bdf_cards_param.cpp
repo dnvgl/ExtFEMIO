@@ -66,7 +66,15 @@ namespace dnvgl {
             }
 
             param::param(std::list<std::string> const &inp) :
-                  card(inp) {
+               card(inp) {
+               this->read(inp);
+            }
+
+            const dnvgl::extfem::bdf::cards::types param::card_type(void) const {
+               return PARAM;
+            }
+
+            void param::read(std::list<std::string> const &inp) {
 
                const bdf::types::entry_type<long> form_V_I("int val");
                const bdf::types::entry_type<double> form_V_R("double_val");

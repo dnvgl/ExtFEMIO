@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -42,8 +42,12 @@ namespace dnvgl {
 
          namespace cards{
 
-            mat2::mat2(const std::list<std::string> &inp) :
+            mat2::mat2(std::list<std::string> const &inp) :
                __base::mat(inp) {
+               this->read(inp);
+            }
+
+            void mat2::read(std::list<std::string> const &inp) {
 
                form_MCSID.set_value(MCSID, "");
                form_SS.set_value(SS, "");
@@ -120,6 +124,9 @@ namespace dnvgl {
                if (((bool)A1 || (bool)A2 || (bool)A3) && !(bool)TREF)
                   form_TREF.set_value(TREF, "");
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            mat2::card_type(void) const { return MAT2; };
 
             void mat2::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

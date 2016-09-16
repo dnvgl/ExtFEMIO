@@ -45,6 +45,12 @@ namespace dnvgl {
                   "PID", bound<long>(&cl1));
                const entry_type<long> bar_prop::form_MID(
                   "MID", bound<long>(&cl1, nullptr, nullptr, true));
+
+               bar_prop::bar_prop(const std::list<std::string> &inp) :
+                  card(inp) {}
+
+               const dnvgl::extfem::bdf::cards::types
+               bar_prop::card_type(void) const { return BAR_PROP; }
             }
          }
       }

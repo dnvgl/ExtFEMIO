@@ -50,8 +50,12 @@ namespace dnvgl {
             const entry_type<double> mat1::form_NU(
                "NU", bound<double>(&cd_1, &cd05, nullptr, true));
 
-            mat1::mat1(const std::list<std::string> &inp) :
+            mat1::mat1(std::list<std::string> const &inp) :
                __base::mat(inp) {
+               this->read(inp);
+            }
+
+            void mat1::read(std::list<std::string> const &inp) {
 
                form_MCSID.set_value(MCSID, "");
                form_SS.set_value(SS, "");
@@ -132,6 +136,9 @@ namespace dnvgl {
                   G.is_value = true;
                }
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            mat1::card_type(void) const { return MAT1; };
 
             void mat1::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

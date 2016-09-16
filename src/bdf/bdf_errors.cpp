@@ -45,6 +45,12 @@ std::string error::operator() (void) const {
 types_error::types_error(const std::string &msg) :
    error("", msg, "types_error") {}
 
+form_error::form_error(
+   const std::string &name, const std::string &msg,
+   const std::string &cls) :
+   error(name, msg, cls) {}
+
+
 float_error::float_error(
    const std::string &name, const std::string &msg) :
    form_error(name, msg, "float_error") {}

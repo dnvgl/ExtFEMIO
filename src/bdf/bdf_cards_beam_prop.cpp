@@ -36,6 +36,21 @@ namespace dnvgl {
          using namespace type_bounds;
 
          namespace cards {
+            namespace __base {
+
+               beam_base::beam_base(const std::list<std::string> &inp) :
+                  __base::card(inp) {}
+
+               const dnvgl::extfem::bdf::cards::types
+               beam_base::card_type(void) const { return BEAM_BASE; }
+
+               beam_prop::beam_prop(const std::list<std::string> &inp) :
+                  beam_base(inp) {}
+
+               const dnvgl::extfem::bdf::cards::types
+               beam_prop::card_type(void) const { return BEAM_PROP; }
+            }
+
             namespace {
                static const long cl1 = 1;
             }

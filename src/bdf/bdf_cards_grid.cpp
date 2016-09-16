@@ -59,8 +59,20 @@ namespace dnvgl {
                "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
 
 
-            grid::grid(const std::list<std::string> &inp) : card(inp) {
+            grid::grid(std::list<std::string> const &inp) :
+               card(inp) {
+               this->read(inp);
+            }
 
+            grid::grid(long &ID, long &CP, double &X1, double &X2, double &X3) :
+               card(),
+               ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
+               CD(), PS(), SEID() {}
+
+            const dnvgl::extfem::bdf::cards::types
+            grid::card_type(void) const { return GRID; };
+
+            void grid::read(std::list<std::string> const &inp) {
                auto pos = inp.rbegin();
 
 
@@ -86,11 +98,6 @@ namespace dnvgl {
                   throw errors::parse_error("GRID", "Illegal number of entries.");
                }
             }
-
-            grid::grid(long &ID, long &CP, double &X1, double &X2, double &X3) :
-               card(),
-               ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
-               CD(), PS(), SEID() {}
 
             void grid::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

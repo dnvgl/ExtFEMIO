@@ -84,9 +84,44 @@ namespace dnvgl {
             const entry_type<double> cbar::form_W3B(
                "W3B", bound<double>(nullptr, nullptr, &cd0));
 
-            cbar::cbar(const std::list<std::string> &inp) :
+            cbar::cbar(std::list<std::string> const &inp) :
                card(inp) {
+               this->read(inp);
+            }
 
+            cbar::cbar(
+               const long *EID, const long *PID,
+               const long *GA, const long *GB,
+               const double *X1, const double *X2, const double *X3,
+               const std::string *OFFT,
+               const std::list<int> *PA,
+               const std::list<int> *PB,
+               const double *W1A, const double *W2A,
+               const double *W3A, const double *W1B,
+               const double *W2B, const double *W3B) :
+               choose_dir_code(has_DVEC), EID(*EID), PID(*PID),
+               GA(*GA), GB(*GB), X1(*X1), G0(nullptr), X2(*X2), X3(*X3),
+               OFFT(OFFT),
+               PA(PA), PB(PB),
+               W1A(W1A), W2A(W2A), W3A(W3A),
+               W1B(W1B), W2B(W2B), W3B(W3B) {};
+
+            cbar::cbar(
+               const long *EID, const long *PID,
+               const long *GA, const long *GB, const long *G0,
+               const std::string *OFFT,
+               const std::list<int> *PA, const std::list<int> *PB,
+               const double *W1A, const double *W2A,
+               const double *W3A, const double *W1B,
+               const double *W2B, const double *W3B) :
+               choose_dir_code(has_DCODE), EID(*EID), PID(*PID),
+               GA(*GA), GB(*GB), X1(), G0(*G0), X2(), X3(),
+               OFFT(OFFT),
+               PA(PA), PB(PB),
+               W1A(W1A), W2A(W2A), W3A(W3A),
+               W1B(W1B), W2B(W2B), W3B(W3B) {};
+
+            void cbar::read(std::list<std::string> const &inp) {
                auto pos = inp.rbegin();
 
                switch (inp.size()-1) {
@@ -137,40 +172,7 @@ namespace dnvgl {
                   throw errors::parse_error(
                      "CBAR", "Illegal number of entries.");
                }
-            };
-
-            cbar::cbar(
-               const long *EID, const long *PID,
-               const long *GA, const long *GB,
-               const double *X1, const double *X2, const double *X3,
-               const std::string *OFFT,
-               const std::list<int> *PA,
-               const std::list<int> *PB,
-               const double *W1A, const double *W2A,
-               const double *W3A, const double *W1B,
-               const double *W2B, const double *W3B) :
-               choose_dir_code(has_DVEC), EID(*EID), PID(*PID),
-               GA(*GA), GB(*GB), X1(*X1), G0(nullptr), X2(*X2), X3(*X3),
-               OFFT(OFFT),
-               PA(PA), PB(PB),
-               W1A(W1A), W2A(W2A), W3A(W3A),
-               W1B(W1B), W2B(W2B), W3B(W3B) {};
-
-            cbar::cbar(
-               const long *EID, const long *PID,
-               const long *GA, const long *GB, const long *G0,
-               const std::string *OFFT,
-               const std::list<int> *PA, const std::list<int> *PB,
-               const double *W1A, const double *W2A,
-               const double *W3A, const double *W1B,
-               const double *W2B, const double *W3B) :
-               choose_dir_code(has_DCODE), EID(*EID), PID(*PID),
-               GA(*GA), GB(*GB), X1(), G0(*G0), X2(), X3(),
-               OFFT(OFFT),
-               PA(PA), PB(PB),
-               W1A(W1A), W2A(W2A), W3A(W3A),
-               W1B(W1B), W2B(W2B), W3B(W3B) {};
-
+            }
 
             void cbar::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

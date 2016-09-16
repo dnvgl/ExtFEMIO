@@ -18,7 +18,6 @@ namespace dnvgl {
       namespace bdf {
          /*!
            \brief Boundary definitions for BDF card entries.
-
          */
          namespace type_bounds {
 
@@ -33,25 +32,23 @@ namespace dnvgl {
 
                protected:
 
-                  ~type_bound () {};
+                  ~type_bound ();
 
-                  bool has_min() const {return _has_min;};
+                  bool has_min() const;
 
-                  void got_min() {_has_min = true;};
+                  void got_min();
 
-                  bool has_max() const {return _has_max;};
+                  bool has_max() const;
 
-                  void got_max() {_has_max = true;};
+                  void got_max();
 
-                  void got_default() {_has_default = true;};
+                  void got_default();
 
                public:
 
-                  type_bound() : _has_min(false), _has_max(false), _has_default(false) {};
+                  type_bound();
 
-                  bool has_default() const {
-                     return _has_default;
-                  };
+                  bool has_default() const;
                };
             }
 

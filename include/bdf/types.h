@@ -94,7 +94,7 @@ namespace dnvgl {
 
                base(const std::string&);
 
-               ~base() {};
+               ~base(void);
 
                virtual bdf_types type(void) const = 0;
 
@@ -116,21 +116,19 @@ namespace dnvgl {
             class imbue_helper : public base {
             public:
 
-               imbue_helper(const std::locale &loc) : base("") {
-                  conv.imbue(loc);
-               };
+               imbue_helper(const std::locale &loc);
 
-               bdf_types type(void) const {return None;};
+               bdf_types type(void) const;
 
-               std::string format(const void*) const { return "";};
+               std::string format(const void*) const;
             };
 
             class card : public base {
             public:
 
-               card(const std::string &name) : base(name) {};
+               card(const std::string &name);
 
-               bdf_types type(void) const {return None;};
+               bdf_types type(void) const;
 
                std::string format(const void*) const;
                std::string format() const;
@@ -142,7 +140,7 @@ namespace dnvgl {
 
                empty(void);
 
-               bdf_types type(void) const { return None; };
+               bdf_types type(void) const;
 
                std::string format(const void*) const;
                std::string format() const;

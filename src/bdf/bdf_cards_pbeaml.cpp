@@ -70,7 +70,12 @@ namespace dnvgl {
                   &cd0, nullptr,
                   &cd1));
 
-            pbeaml::pbeaml(const std::list<std::string> &inp) : beam_prop(inp) {
+            pbeaml::pbeaml(const std::list<std::string> &inp) :
+               beam_prop(inp) {
+               this->read(inp);
+            }
+
+            void pbeaml::read(std::list<std::string> const & inp) {
 
                size_t dim_num = 0;
                size_t i, j = 0;
@@ -175,6 +180,9 @@ namespace dnvgl {
                DIM.pop_back();
             end: ;
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            pbeaml::card_type(void) const { return PBEAML; };
 
             void pbeaml::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

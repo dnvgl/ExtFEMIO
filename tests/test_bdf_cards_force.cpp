@@ -107,6 +107,23 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
             "*       1.23450000000+03\n");
    }
 
+   SECTION("reuse") {
+      long SID(2), G(5), CID(6);
+      double F(2.9), N1(0.), N2(1.9), N3(0.);
+      force probe;
+      probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+      test << probe;
+      SID++;
+      G++;
+      CID++;
+      F += 4.;
+      probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+      test << probe;
+      CHECK(test.str() ==
+            "FORCE          2       5       62.900+00 0.00+001.900+00 0.00+00\n"
+            "FORCE          3       6       76.900+00 0.00+001.900+00 0.00+00\n");
+   }
+
    SECTION("Exception, mkoe 2015-12-17") {
       const long lg(2), nodeId(2), zero(0);
       const double one(1.), fx(15.505163191247204),

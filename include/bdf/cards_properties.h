@@ -117,7 +117,18 @@ properties of thin shell elements.
                pshell(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return PSHELL; };
+               card_type(void) const;
+
+               card const *operator() (
+                  long const *PID, long const *MID1, double const *T=NULL,
+                  long const *MID2=NULL, double const *x12I_T__3=NULL, // 12 I / T**3
+                  long const *MID3=NULL,
+                  double const *TS_T=NULL, // TS / T
+                  double const *NSM=NULL,
+                  double const *Z1=NULL, double const *Z2=NULL,
+                  long const *MID4=NULL);
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -133,8 +144,7 @@ properties of thin shell elements.
                   static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
                   static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
 
-                  beam_base(const std::list<std::string> &inp) :
-                     __base::card(inp) {};
+                  beam_base(const std::list<std::string> &inp);
 
                public:
 
@@ -142,19 +152,19 @@ properties of thin shell elements.
                   dnvgl::extfem::bdf::types::entry_value<long> MID;
 
                   const dnvgl::extfem::bdf::cards::types
-                  card_type(void) const { return BEAM_BASE; };
+                  card_type(void) const;
                };
 
                class beam_prop : public beam_base {
                   // base class for beam property classes.
                protected:
 
-                  beam_prop(const std::list<std::string> &inp) :
-                     beam_base(inp) {};
+                  beam_prop(const std::list<std::string> &inp);
 
                public:
 
-                  const dnvgl::extfem::bdf::cards::types card_type(void) const { return BEAM_PROP; };
+                  const dnvgl::extfem::bdf::cards::types
+                  card_type(void) const;
                };
             }
 
@@ -385,7 +395,9 @@ The last two continuations are:
                pbeam(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return PBEAM; };
+               card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -398,7 +410,7 @@ The last two continuations are:
 
                protected:
 
-                  l_geom () {};
+                  l_geom ();
 
                   static const std::set<std::string> dimnum1;
                   static const std::set<std::string> dimnum2;
@@ -482,7 +494,9 @@ dimensions.
                pbeaml(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return PBEAML; };
+               card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -507,11 +521,10 @@ dimensions.
                   /// 0)
                   dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-                  const dnvgl::extfem::bdf::cards::types
-                  card_type(void) const { return BAR_PROP; };
+                  bar_prop(const std::list<std::string> &inp);
 
-                  bar_prop(const std::list<std::string> &inp) :
-                     card(inp) {};
+                  const dnvgl::extfem::bdf::cards::types
+                  card_type(void) const;
                };
             }
 
@@ -611,7 +624,9 @@ stations)
                pbar(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return PBAR; };
+               card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -669,7 +684,9 @@ cross-sectional dimensions.
                pbarl(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return PBARL; };
+               card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -725,7 +742,9 @@ Defines the properties of a rod element (`CROD` entry).
                prod(const std::list<std::string> &);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return PROD; };
+               card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 

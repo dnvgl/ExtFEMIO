@@ -83,9 +83,12 @@ namespace dnvgl {
             const entry_type<long> cbeam::form_SB(
                "SB", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
-            cbeam::cbeam(const std::list<std::string> &inp) :
+            cbeam::cbeam(std::list<std::string> const &inp) :
                card(inp) {
+               this->read(inp);
+            }
 
+            void cbeam::read(std::list<std::string> const &inp) {
                auto pos = inp.rbegin();
 
                form_SB.set_value(SB, "");

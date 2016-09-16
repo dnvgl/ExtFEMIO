@@ -65,6 +65,10 @@ namespace dnvgl {
 
                protected:
 
+                  virtual void read(std::list<std::string> const &);
+
+                  momforce(void);
+
                   momforce(const std::list<std::string> &inp);
 
                   momforce(
@@ -73,6 +77,11 @@ namespace dnvgl {
                      const double *N1, const double *N2, const double *N3);
 
                   virtual std::unique_ptr<format_entry> get_head(void) const = 0;
+
+                  __base::card const *operator() (
+                     const long *SID, const long *G, const long *CID,
+                     const double *F,
+                     const double *N1, const double *N2, const double *N3);
 
                   virtual void collect_outdata (
                      std::list<std::unique_ptr<format_entry> > &) const;
@@ -100,16 +109,19 @@ vector.
 
             public:
 
-               force(const std::list<std::string> &inp) :
-                  __base::momforce(inp) {};
+               force(void);
+
+               force(const std::list<std::string> &inp);
 
                force(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
-                  const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-                  __base::momforce(SID, G, CID, F, N1, N2, N3) {};
+                  const double *N1, const double *N2=nullptr, const double *N3=nullptr);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+               using __base::momforce::read;
+               using momforce::operator();
 
             private:
 
@@ -139,16 +151,19 @@ vector.
 
             public:
 
-               moment(const std::list<std::string> &inp) :
-                  __base::momforce(inp) {};
+               moment(void);
+
+               moment(const std::list<std::string> &inp);
 
                moment(
                   const long *SID, const long *G, const long *CID,
                   const double *F,
-                  const double *N1, const double *N2=nullptr, const double *N3=nullptr) :
-                  __base::momforce(SID, G, CID, F, N1, N2, N3) {};
+                  const double *N1, const double *N2=nullptr, const double *N3=nullptr);
 
                dnvgl::extfem::bdf::cards::types const card_type(void) const;
+
+               using __base::momforce::read;
+               using momforce::operator();
 
             private:
 
@@ -256,11 +271,11 @@ Defines a scalar mass element without reference to a property entry.
                dnvgl::extfem::bdf::types::entry_value<std::list<int> > C2;
 
             private:
-               cmass2();
-
                cmass2(std::string const&);
 
             public:
+
+               cmass2();
 
                cmass2(std::list<std::string> const&);
 
@@ -269,6 +284,8 @@ Defines a scalar mass element without reference to a property entry.
                       long const *G2=NULL, std::list<int> const *C2=NULL);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -338,11 +355,11 @@ reference to a property entry.
                 */
                dnvgl::extfem::bdf::types::entry_value<long> S2;
             private:
-               cmass4();
-
                cmass4(std::string const&);
 
             public:
+
+               cmass4();
 
                cmass4(std::list<std::string> const&);
 
@@ -350,6 +367,8 @@ reference to a property entry.
                       long const *S1, long const *S2=NULL);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -464,11 +483,13 @@ Defines acceleration vectors for gravity or other acceleration loading.
                dnvgl::extfem::bdf::types::entry_value<long> MB;
 
             private:
-               grav();
 
                grav(std::string const&);
 
             public:
+
+               grav();
+
                grav(std::list<std::string> const&);
 
                grav(long const *SID, long const *CID,
@@ -482,6 +503,8 @@ Defines acceleration vectors for gravity or other acceleration loading.
                     long const *MB=NULL);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
 
             private:
 
@@ -531,6 +554,8 @@ Defines a static load as a linear combination of load std::sets defined via
                */
                std::list<long> Li;
 
+               load(void);
+
                load(const std::list<std::string> &inp);
 
                load(const long *SID, const double *S,
@@ -538,6 +563,9 @@ Defines a static load as a linear combination of load std::sets defined via
                   const std::list<long> *Li);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
+
+               virtual void read(std::list<std::string> const &);
+
 
             private:
 

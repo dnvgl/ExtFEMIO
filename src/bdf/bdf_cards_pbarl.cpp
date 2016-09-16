@@ -46,16 +46,21 @@ namespace dnvgl {
          namespace cards {
             using bdf::types::entry_type;
 
-            const entry_type<std::string> pbarl::form_GROUP(
+            entry_type<std::string> const pbarl::form_GROUP(
                "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
-            const entry_type<std::string> pbarl::form_TYPE(
+            entry_type<std::string> const pbarl::form_TYPE(
                "TYPE", bdf::type_bounds::bound<std::string>(TYPE_set));
-            const entry_type<double> pbarl::form_DIM(
+            entry_type<double> const pbarl::form_DIM(
                "DIM", bdf::type_bounds::bound<double>(&cd0));
-            const entry_type<double> pbarl::form_NSM(
+            entry_type<double> const pbarl::form_NSM(
                "NSM", bdf::type_bounds::bound<double>( nullptr, nullptr, &cd0));
 
-            pbarl::pbarl(const std::list<std::string> &inp) : bar_prop(inp) {
+            pbarl::pbarl(std::list<std::string> const &inp) :
+               bar_prop(inp) {
+               this->read(inp);
+            }
+
+            void pbarl::read(std::list<std::string> const &inp) {
 
                size_t dim_num = 0;
                size_t i = 0;
@@ -113,6 +118,9 @@ namespace dnvgl {
                throw errors::parse_error("PBARL", "Illegal number of entries.");
             end: ;
             }
+
+            dnvgl::extfem::bdf::cards::types const
+            pbarl::card_type(void) const { return PBARL; };
 
             void pbarl::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

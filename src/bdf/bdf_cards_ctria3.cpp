@@ -36,9 +36,12 @@ namespace dnvgl {
 
          namespace cards {
 
-            ctria3::ctria3(const std::list<std::string> &inp) :
+            ctria3::ctria3(std::list<std::string> const &inp) :
                __base::shell(inp) {
+               this->read(inp);
+            }
 
+            void ctria3::read(std::list<std::string> const &inp) {
                auto pos = inp.rbegin();
 
                form_THETA.set_value(THETA, "");
@@ -113,6 +116,9 @@ namespace dnvgl {
                   if (!T4.is_value) form_T4.set_value(T4, "");
                }
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            ctria3::card_type(void) const { return CTRIA3; };
 
             void ctria3::collect_outdata(
                std::list<std::unique_ptr<format_entry> >&) const {

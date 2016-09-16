@@ -121,7 +121,12 @@ namespace dnvgl {
                "N2_B",
                bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-            pbeam::pbeam(const std::list<std::string> &inp) : beam_prop(inp) {
+            pbeam::pbeam(std::list<std::string> const &inp) :
+               beam_prop(inp) {
+               this->read(inp);
+            }
+
+            void pbeam::read(std::list<std::string> const &inp) {
 
                auto pos = inp.rbegin();
 
@@ -297,6 +302,9 @@ namespace dnvgl {
                F2.resize(_F2.size());
                std::copy(_F2.begin(), _F2.end(), F2.begin());
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            pbeam::card_type(void) const { return PBEAM; };
 
             void pbeam::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

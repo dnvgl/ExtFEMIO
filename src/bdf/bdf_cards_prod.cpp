@@ -55,7 +55,12 @@ namespace dnvgl {
                "J",
                bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-            prod::prod(const std::list<std::string> &inp) : card(inp) {
+            prod::prod(std::list<std::string> const &inp) :
+               card(inp) {
+               this->read(inp);
+            }
+
+            void prod::read(std::list<std::string> const &inp) {
 
                auto pos = inp.rbegin();
 
@@ -86,6 +91,9 @@ namespace dnvgl {
 
                if (!C.is_value) form_C.set_value(C, "");
             }
+
+            const dnvgl::extfem::bdf::cards::types
+            prod::card_type(void) const { return PROD; }
 
             void prod::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

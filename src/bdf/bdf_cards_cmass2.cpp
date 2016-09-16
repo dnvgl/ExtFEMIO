@@ -53,9 +53,27 @@ namespace dnvgl {
                "G2", bound<long>(nullptr, nullptr, nullptr, true));
             const entry_type<std::list<int> > cmass2::form_C2("C2");
 
-            cmass2::cmass2(const std::list<std::string> &inp) :
+            cmass2::cmass2(std::list<std::string> const &inp) :
                card(inp) {
+               this->read(inp);
+            }
 
+            cmass2::cmass2(long const *EID, double const *M,
+                           long const *G1, std::list<int> const *C1,
+                           long const *G2/*=NULL*/, std::list<int> const *C2/*=NULL*/) :
+               card(),
+               EID(EID), M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
+               if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
+                  throw errors::error("CMASS2", "EID not in valid range");
+               if (this->G1 && this->C1.value.size() == 0)
+                  throw errors::error("CMASS2", "G1 requires C1 value");
+               if (this->G2 && this->C2.value.size() == 0)
+                  throw errors::error("CMASS2", "G2 requires C2 value");
+            }
+
+            bdf::types::card cmass2::head = bdf::types::card("CMASS2");
+
+            void cmass2::read(std::list<std::string> const &inp) {
                auto pos = inp.begin();
 
                form_G1.set_value(G1, "");
@@ -83,21 +101,6 @@ namespace dnvgl {
                throw errors::parse_error("CMASS2", "Illegal number of entries.");
             end: ;
             }
-
-            cmass2::cmass2(long const *EID, double const *M,
-                           long const *G1, std::list<int> const *C1,
-                           long const *G2/*=NULL*/, std::list<int> const *C2/*=NULL*/) :
-               card(),
-               EID(EID), M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
-               if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
-                  throw errors::error("CMASS2", "EID not in valid range");
-               if (this->G1 && this->C1.value.size() == 0)
-                  throw errors::error("CMASS2", "G1 requires C1 value");
-               if (this->G2 && this->C2.value.size() == 0)
-                  throw errors::error("CMASS2", "G2 requires C2 value");
-            }
-
-            bdf::types::card cmass2::head = bdf::types::card("CMASS2");
 
             const types cmass2::card_type(void) const {
                return CMASS2;

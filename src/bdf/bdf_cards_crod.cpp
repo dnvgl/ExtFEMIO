@@ -45,9 +45,12 @@ namespace dnvgl {
             const entry_type<long> crod::form_G1("G1");
             const entry_type<long> crod::form_G2("G2");
 
-            crod::crod(const std::list<std::string> &inp) :
+            crod::crod(std::list<std::string> const &inp) :
                __base::card(inp) {
+               this->read(inp);
+            }
 
+            void crod::read(std::list<std::string> const &inp) {
                auto pos = inp.rbegin();
 
                switch (inp.size()-1) {

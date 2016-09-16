@@ -40,10 +40,24 @@ namespace dnvgl {
 
             base::base(const std::string &name) : name(name) {};
 
-            /// std::set input and output locale for conv and outp
-            static imbue_helper _imbue_helper(std::locale::classic());
+            base::~base(void) {}
 
             out_form_type base::out_form = SHORT;
+
+            imbue_helper::imbue_helper(const std::locale &loc) : base("") {
+               conv.imbue(loc);
+            }
+
+            bdf_types imbue_helper::type(void) const { return None; }
+
+            std::string imbue_helper::format(const void*) const { return "";}
+
+            card::card(const std::string &name) : base(name) {}
+
+            bdf_types card::type(void) const {return None;}
+
+            /// std::set input and output locale for conv and outp
+            static imbue_helper _imbue_helper(std::locale::classic());
 
             std::string card::format(const void* d) const {
                std::ostringstream outp;
@@ -67,6 +81,8 @@ namespace dnvgl {
             }
 
             empty::empty(void) : base("<empty>") {}
+
+            bdf_types empty::type(void) const { return None; };
 
             std::string empty::format(const void* d) const {
                std::ostringstream outp;
