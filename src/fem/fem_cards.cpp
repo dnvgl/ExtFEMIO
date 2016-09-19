@@ -139,27 +139,27 @@ namespace dnvgl {
                   }
                }
 
-               base_beam_prop::base_beam_prop(std::list<std::string> const &inp) :
+               __base::beam_prop::beam_prop(std::list<std::string> const &inp) :
                   card(inp) {}
 
-               base_beam_prop::base_beam_prop() :
-                  base_beam_prop(-1) {}
+               __base::beam_prop::beam_prop() :
+                  __base::beam_prop(-1) {}
 
-               base_beam_prop::base_beam_prop(long const &GEONO) :
+               __base::beam_prop::beam_prop(long const &GEONO) :
                   card(), GEONO(GEONO) {}
 
-               const dnvgl::extfem::fem::types::entry_type<long> base_beam_prop::_form_GEONO("GEONO");
+               const dnvgl::extfem::fem::types::entry_type<long> __base::beam_prop::_form_GEONO("GEONO");
 
-               base_material::base_material(std::list<std::string> const &inp) :
+               __base::material::material(std::list<std::string> const &inp) :
                   card(inp) {}
 
-               base_material::base_material() :
-                  base_material(-1) {}
+               __base::material::material() :
+                  __base::material(-1) {}
 
-               base_material::base_material(long const &MATNO) :
+               __base::material::material(long const &MATNO) :
                   card(), MATNO(MATNO) {}
 
-               const dnvgl::extfem::fem::types::entry_type<long> base_material::_form_MATNO("MATNO");
+               const dnvgl::extfem::fem::types::entry_type<long> __base::material::_form_MATNO("MATNO");
             }
 
             void

@@ -49,7 +49,7 @@ namespace dnvgl {
             const entry_type<long> gpipe::_form_NRAD("NRAD");
 
             gpipe::gpipe(std::list<std::string> const &inp) :
-               base_beam_prop(inp), NCIR(0), NRAD(0) {
+               __base::beam_prop(inp), NCIR(0), NRAD(0) {
 
                if (inp.size() < 7)
                   throw errors::parse_error(
@@ -82,7 +82,7 @@ namespace dnvgl {
                          const double &T, const double &SFY,
                          const double &SFZ,
                          const long &NCIR/*=0*/, const long &NRAD/*=0*/) :
-               base_beam_prop(GEONO),
+               __base::beam_prop(GEONO),
                DI(DI), DY(DY), T(T),
                SFY(SFY), SFZ(SFZ),
                NCIR(NCIR), NRAD(NRAD) {}

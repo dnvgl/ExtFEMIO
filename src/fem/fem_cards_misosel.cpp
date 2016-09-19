@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<double> misosel::_form_YIELD("YIELD");
 
             misosel::misosel(const std::list<std::string> &inp) :
-               base_material(inp), DUMMY(0.), YIELD(0.) {
+               __base::material(inp), DUMMY(0.), YIELD(0.) {
 
                if (inp.size() < 7)
                   throw errors::parse_error(
@@ -86,7 +86,7 @@ namespace dnvgl {
                              const double &ALPHA,
                              const double &DUMMY/*=0.*/,
                              const double &YIELD/*=0.*/) :
-               base_material(MATNO), YOUNG(YOUNG), POISS(POISS),
+               __base::material(MATNO), YOUNG(YOUNG), POISS(POISS),
                RHO(RHO), DAMP(DAMP), ALPHA(ALPHA), DUMMY(DUMMY),
                YIELD(YIELD) {}
 

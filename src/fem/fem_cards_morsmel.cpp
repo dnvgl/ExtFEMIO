@@ -60,7 +60,7 @@ namespace dnvgl {
             entry_type<double> const morsmel::_form_ALPHA2("ALPHA2");
 
             morsmel::morsmel(std::list<std::string> const &inp) :
-               base_material(inp) {
+               __base::material(inp) {
 
                if (inp.size() < 7)
                   throw errors::parse_error(
@@ -109,7 +109,7 @@ namespace dnvgl {
                        double const &DAMP2,
                        double const &ALPHA1,
                        double const &ALPHA2) :
-               base_material(MATNO), Q1(Q1), Q2(Q2), Q3(Q3),
+               __base::material(MATNO), Q1(Q1), Q2(Q2), Q3(Q3),
                RHO(RHO),
                D11(D11), D21(D21), D22(D22), D31(D31), D32(D32),
                D33(D33),

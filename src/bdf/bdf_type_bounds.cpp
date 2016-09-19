@@ -6,6 +6,7 @@
 
    Classes help ensure values in correct range.
 */
+#include "StdAfx.h"
 
 // ID:
 namespace {

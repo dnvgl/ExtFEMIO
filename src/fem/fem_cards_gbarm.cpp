@@ -50,7 +50,7 @@ namespace dnvgl {
             const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
             gbarm::gbarm(const std::list<std::string> &inp) :
-               base_beam_prop(inp), NLOBY(0), NLOBZ(0) {
+               __base::beam_prop(inp), NLOBY(0), NLOBZ(0) {
 
                if (inp.size() < 9)
                   throw errors::parse_error(
@@ -83,7 +83,7 @@ namespace dnvgl {
                const double &HZ, const double &BT, const double &BB,
                const double &SFY, const double &SFZ,
                const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
-               base_beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
+               __base::beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
                SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
             const dnvgl::extfem::fem::cards::types
