@@ -170,19 +170,19 @@ namespace dnvgl {
                };
 
 /// Base class for FEM beam property describing classes.
-               class base_beam_prop : public __base::card {
+               class beam_prop : public card {
 
                private:
 
-                  base_beam_prop();
+                  beam_prop();
 
                protected:
 
                   dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
 
-                  base_beam_prop(long const &GEONO);
+                  beam_prop(long const &GEONO);
 
-                  base_beam_prop(std::list<std::string> const&);
+                  beam_prop(std::list<std::string> const&);
 
                public:
 
@@ -197,17 +197,17 @@ namespace dnvgl {
                };
 
 /// Base class for material cards.
-               class  base_material : public __base::card {
+               class material : public card {
                private:
 
-                  base_material();
+                  material();
 
                protected:
 
                   dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
 
-                  base_material(long const &MATNO);
-                  base_material(std::list<std::string> const&);
+                  material(long const &MATNO);
+                  material(std::list<std::string> const&);
 
                public:
 
@@ -830,7 +830,7 @@ Shortest version:
 \image latex gbarm.eps "Massive bar"
 \image html gbarm.svg "Massive bar"
 */
-            class gbarm : public __base::base_beam_prop {
+            class gbarm : public __base::beam_prop {
 
             private:
 
@@ -921,7 +921,7 @@ The succeding data concern the cross section at a specific local node.
 If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
 record may be on the interface.
 */
-            class gbeamg : public __base::base_beam_prop {
+            class gbeamg : public __base::beam_prop {
 
             private:
 
@@ -1127,7 +1127,7 @@ record may be on the interface.
 \image latex giorh.eps "I or H beam"
 \image html giorh.svg "I or H beam"
 */
-            class giorh : public __base::base_beam_prop {
+            class giorh : public __base::beam_prop {
 
             private:
 
@@ -1228,7 +1228,7 @@ record may be on the interface.
 \image latex glsec.eps "I or H beam"
 \image html glsec.svg "I or H beam"
 */
-            class glsec : public __base::base_beam_prop {
+            class glsec : public __base::beam_prop {
 
             private:
 
@@ -1329,7 +1329,7 @@ record may be on the interface.
 \image latex gpipe.eps "Tube"
 \image html gpipe.svg "Tube"
 */
-            class gpipe : public __base::base_beam_prop {
+            class gpipe : public __base::beam_prop {
 
             private:
 
@@ -1413,7 +1413,7 @@ record may be on the interface.
 \image latex gusyi.eps "Unsymmetrical I-Beam"
 \image html gusyi.svg "Unsymmetrical I-Beam"
 */
-            class gusyi : public __base::base_beam_prop {
+            class gusyi : public __base::beam_prop {
 
             private:
 
@@ -2304,7 +2304,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 | `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO`   |
 |           | `DAMP`  | `ALPHA` | `DUMMY` | `YIELD` |
 */
-            class misosel : public  __base::base_material {
+            class misosel : public  __base::material {
 
             private:
 
@@ -2380,7 +2380,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
 @note The vector Q must not be perpendicular to any of the elements
 */
-            class morsmel : public  __base::base_material {
+            class morsmel : public  __base::material {
 
             private:
 
