@@ -28,9 +28,10 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   static const long cl0 = 0, cl1 = 1;
-   static const double cd0 = 0.;
+   long static const cl0 = 0, cl1 = 1;
+   double static const cd0 = 0.;
 }
+
 
 namespace dnvgl {
    namespace extfem {
@@ -137,7 +138,8 @@ namespace dnvgl {
                }
             }
 
-            force::force(void) : __base::momforce() {}
+            force::force(void) :
+               __base::momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
 
             force::force(const std::list<std::string> &inp) :
                __base::momforce(inp) {}
@@ -158,7 +160,8 @@ namespace dnvgl {
                return FORCE;
             }
 
-            moment::moment(void) : __base::momforce() {}
+            moment::moment(void) :
+               __base::momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
 
             moment::moment(const std::list<std::string> &inp) :
                __base::momforce(inp) {}
