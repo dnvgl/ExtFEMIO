@@ -275,7 +275,7 @@ Defines a scalar mass element without reference to a property entry.
 
             public:
 
-               cmass2();
+               cmass2(void);
 
                cmass2(std::list<std::string> const&);
 
@@ -364,7 +364,7 @@ reference to a property entry.
 
             public:
 
-               cmass4();
+               cmass4(void);
 
                cmass4(std::list<std::string> const&);
 
@@ -497,7 +497,7 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
             public:
 
-               grav();
+               grav(void);
 
                grav(std::list<std::string> const&);
 
@@ -580,6 +580,11 @@ Defines a static load as a linear combination of load std::sets defined via
                load(const std::list<std::string> &inp);
 
                load(const long *SID, const double *S,
+                    const std::list<double> *Si,
+                    const std::list<long> *Li);
+
+               __base::card const *operator() (
+                  const long *SID, const double *S,
                   const std::list<double> *Si,
                   const std::list<long> *Li);
 

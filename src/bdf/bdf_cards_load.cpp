@@ -49,18 +49,41 @@ namespace dnvgl {
             const entry_type<long> load::form_Li(
                "Li", bdf::type_bounds::bound<long>(&cl1));
 
+            load::load() :
+               SID(nullptr), S(nullptr), Si(), Li() {}
+
             load::load(const std::list<std::string> &inp) :
                card(inp) {
-               (*this)(inp);
+               this->read(inp);
             }
 
             load::load(const long *SID, const double *S,
                        const std::list<double> *Si, const std::list<long> *Li) :
-               SID(*SID), S(*S) {
+               SID(*SID), S(*S), Si(), Li() {
                if (Si)
                   copy(Si->begin(), Si->end(), back_inserter(this->Si));
                if (Li)
                   copy(Li->begin(), Li->end(), back_inserter(this->Li));
+            }
+
+            __base::card const *load::operator() (
+               const long *SID, const double *S,
+               const std::list<double> *Si, const std::list<long> *Li) {
+
+               this->Si.clear();
+               this->Li.clear();
+
+               this->SID = *SID;
+               this->S = *S;
+               if (Si)
+                  copy(Si->begin(), Si->end(), back_inserter(this->Si));
+               else
+                  this->Si.clear();
+               if (Li)
+                  copy(Li->begin(), Li->end(), back_inserter(this->Li));
+               else
+                  this->Li.clear();
+               return this;
             }
 
             bdf::types::card load::head = bdf::types::card("LOAD");
@@ -71,6 +94,9 @@ namespace dnvgl {
 
             void load::read(std::list<std::string> const &inp) {
                auto pos = inp.begin();
+
+               Si.clear();
+               Li.clear();
 
                if (pos == inp.end()) goto invalid;
                ++pos;
@@ -93,6 +119,8 @@ namespace dnvgl {
 
             void load::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
+
+               if (static_cast<long>(SID) <= 0 ) return;
 
                res.push_back(format(load::head));
 
