@@ -14,7 +14,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id: bdf_cards_grav.cpp 402 2016-07-01 16:03:47Z berhol $";
+      = "@(#) $Id$";
 }
 
 #include <cassert>

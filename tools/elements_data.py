@@ -9,9 +9,9 @@ from __future__ import (
 # Standard libraries.
 import itertools
 
-# ID: $Id: elements_do.py 438 2016-09-01 15:15:08Z berhol $
-__date__ = "$Date:: 2016-09-01 17:15:08 +0200 #$"[7:-1]
-__scm_version__ = "$Revision: 438 $"[10:-1]
+# ID: $Id$
+__date__ = "$Date::                            $"[7:-1]
+__scm_version__ = "$Revision$"[10:-1]
 __author__ = "`Berthold Höllmann <berthold.hoellmann@dnvgl.com>`__"
 __copyright__ = "Copyright © 2016 by DNV GL SE"
 
