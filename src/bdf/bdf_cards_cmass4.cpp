@@ -107,7 +107,7 @@ namespace dnvgl {
             void cmass4::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
 
-               if (static_cast<int>(EID) <= 0)
+               if (static_cast<long>(EID) <= 0)
                   return;
 
                res.push_back(format(cmass4::head));
