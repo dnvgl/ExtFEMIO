@@ -96,6 +96,31 @@ TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
       CHECK_THROWS(
          grav probe(&SID, &CID, &A, &N));
    }
+
+   SECTION("reuse") {
+      long SID(1), CID(2), MB(7);
+      double A(3.), N1(4.), N2(5), N3(6.);
+      std::vector<double> N({8., 9., 10.});
+      grav probe;
+      test << *probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+      SID++;
+      CID++;
+      A += 4.;
+      test << *probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+      SID++;
+      test << *probe(&SID, &CID, &A, &N1, &N2, &N3);
+      SID++;
+      test << *probe(&SID, &CID, &A, &N);
+      SID++;
+      test << *probe(&SID, &CID, &A, &N, &MB);
+      CHECK(test.str() ==
+            "GRAV           1       23.000+004.000+005.000+006.000+00       7\n"
+            "GRAV           2       37.000+004.000+005.000+006.000+00       7\n"
+            "GRAV           3       37.000+004.000+005.000+006.000+00\n"
+            "GRAV           4       37.000+008.000+009.000+001.000+01\n"
+            "GRAV           5       37.000+008.000+009.000+001.000+01       7\n");
+   }
+
 }
 
 // Local Variables:

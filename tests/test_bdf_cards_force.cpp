@@ -117,9 +117,15 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]" ) {
       CID++;
       F += 4.;
       test << *probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+      SID++;
+      test << *probe(&SID, &G, &CID, &F, &N1, &N2);
+      SID++;
+      test << *probe(&SID, &G, &CID, &F, &N1);
       CHECK(test.str() ==
             "FORCE          2       5       62.900+00 0.00+001.900+00 0.00+00\n"
-            "FORCE          3       6       76.900+00 0.00+001.900+00 0.00+00\n");
+            "FORCE          3       6       76.900+00 0.00+001.900+00 0.00+00\n"
+            "FORCE          4       6       76.900+00 0.00+001.900+00\n"
+            "FORCE          5       6       76.900+00 0.00+00\n");
    }
 
    SECTION("Exception, mkoe 2015-12-17") {

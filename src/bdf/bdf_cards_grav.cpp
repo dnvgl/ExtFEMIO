@@ -57,18 +57,64 @@ namespace dnvgl {
                this->read(inp);
             }
 
+            grav::grav() :
+               card(),
+               SID(), CID(), A(), N1(), N2(), N3(), MB() {}
+
             grav::grav(const long *SID, const long *CID, const double *A,
                        const double *N1, const double *N2, const double *N3,
-                       const long *MB/*=NULL*/) :
+                       const long *MB/*=nullptr*/) :
                card(),
                SID(SID), CID(CID), A(A), N1(N1), N2(N2), N3(N3), MB(MB) {}
 
             grav::grav(const long *SID, const long *CID, const double *A,
                        const std::vector<double> *N,
-                       const long *MB/*=NULL*/) :
+                       const long *MB/*=nullptr*/) :
                grav(SID, CID, A, &(*N)[0], &(*N)[1], &(*N)[2], MB) {
                if (N->size() != 3)
                   throw errors::error("GRAV", "N requires 3 entries.");
+            }
+
+            __base::card const *grav::operator() (
+               long const *SID, long const *CID,
+               double const *A,
+               std::vector<double> const *N,
+               long const *MB/*=nullptr*/) {
+               this->SID = *SID;
+               this->CID = *CID;
+               this->A = *A;
+               this->N1 = (*N)[0];
+               if (N->size() > 1)
+                  this->N2 = (*N)[1];
+               else
+                  this->N2 = nullptr;
+               if (N->size() > 2)
+                  this->N3 = (*N)[2];
+               else
+                  this->N3 = nullptr;
+               if (MB)
+                  this->MB = *MB;
+               else
+                  this->MB = nullptr;
+               return this;
+            }
+
+            __base::card const *grav::operator() (
+               long const *SID, long const *CID,
+               double const *A,
+               double const *N1, double const*N2, double const *N3,
+               long const *MB/*=nullptr*/) {
+               this->SID = *SID;
+               this->CID = *CID;
+               this->A = *A;
+               this->N1 = *N1;
+               this->N2 = *N2;
+               this->N3 = *N3;
+               if (MB)
+                  this->MB = *MB;
+               else
+                  this->MB = nullptr;
+               return this;
             }
 
             bdf::types::card grav::head = bdf::types::card("GRAV");

@@ -74,14 +74,14 @@ namespace dnvgl {
                   momforce(
                      const long *SID, const long *G, const long *CID,
                      const double *F,
-                     const double *N1, const double *N2, const double *N3);
+                     const double *N1, const double *N2=nullptr, const double *N3=nullptr);
 
                   virtual std::unique_ptr<format_entry> get_head(void) const = 0;
 
                   __base::card const *operator() (
                      const long *SID, const long *G, const long *CID,
                      const double *F,
-                     const double *N1, const double *N2, const double *N3);
+                     const double *N1, const double *N2=nullptr, const double *N3=nullptr);
 
                   virtual void collect_outdata (
                      std::list<std::unique_ptr<format_entry> > &) const;
@@ -281,7 +281,7 @@ Defines a scalar mass element without reference to a property entry.
 
                cmass2(long const *EID, double const *M,
                       long const *G1, std::list<int> const *C1,
-                      long const *G2=NULL, std::list<int> const *C2=NULL);
+                      long const *G2=nullptr, std::list<int> const *C2=nullptr);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
 
@@ -364,7 +364,7 @@ reference to a property entry.
                cmass4(std::list<std::string> const&);
 
                cmass4(long const *EID, double const *M,
-                      long const *S1, long const *S2=NULL);
+                      long const *S1, long const *S2=nullptr);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
 
@@ -495,12 +495,24 @@ Defines acceleration vectors for gravity or other acceleration loading.
                grav(long const *SID, long const *CID,
                     double const *A,
                     double const *N1, double const*N2, double const *N3,
-                    long const *MB=0);
+                    long const *MB=nullptr);
 
                grav(long const *SID, long const *CID,
                     double const *A,
                     std::vector<double> const *N,
-                    long const *MB=NULL);
+                    long const *MB=nullptr);
+
+               __base::card const *operator() (
+                  long const *SID, long const *CID,
+                  double const *A,
+                  std::vector<double> const *N,
+                  long const *MB=nullptr);
+
+               __base::card const *operator() (
+                  long const *SID, long const *CID,
+                  double const *A,
+                  double const *N1, double const*N2, double const *N3,
+                  long const *MB=nullptr);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
 

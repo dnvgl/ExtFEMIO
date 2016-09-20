@@ -107,9 +107,15 @@ TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]" ) {
       CID++;
       F += 4.;
       test << *probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+      SID++;
+      test << *probe(&SID, &G, &CID, &F, &N1, &N2);
+      SID++;
+      test << *probe(&SID, &G, &CID, &F, &N1);
       CHECK(test.str() ==
             "MOMENT         2       5       62.900+00 0.00+001.900+00 0.00+00\n"
-            "MOMENT         3       6       76.900+00 0.00+001.900+00 0.00+00\n");
+            "MOMENT         3       6       76.900+00 0.00+001.900+00 0.00+00\n"
+            "MOMENT         4       6       76.900+00 0.00+001.900+00\n"
+            "MOMENT         5       6       76.900+00 0.00+00\n");
    }
 }
 

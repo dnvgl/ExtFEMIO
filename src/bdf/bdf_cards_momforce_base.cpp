@@ -72,14 +72,20 @@ namespace dnvgl {
                __base::card const *momforce::operator() (
                      const long *SID, const long *G, const long *CID,
                      const double *F,
-                     const double *N1, const double *N2, const double *N3) {
+                     const double *N1, const double *N2/*=nullptr*/, const double *N3/*=nullptr*/) {
                   this->SID = *SID;
                   this->G = *G;
                   this->CID = *CID;
                   this->F = *F;
                   this->N1 = N1;
-                  this->N2 = N2;
-                  this->N3 = N3;
+                  if (N2)
+                     this->N2 = N2;
+                  else
+                     this->N2 = nullptr;
+                  if (N3)
+                     this->N3 = N3;
+                  else
+                     this->N3 = nullptr;
                   return this;
                }
 
