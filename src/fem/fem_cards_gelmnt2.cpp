@@ -76,7 +76,7 @@ namespace dnvgl {
             }
 
             gelmnt2::gelmnt2(void) :
-               gelmnt2(-1, 0, 0, 0, NULL, 0, {}) {}
+               gelmnt2(-1, 0, 0, 0, nullptr, 0, {}) {}
 
             gelmnt2::gelmnt2(const long &SUBNO,
                              const long &SLEVEL,

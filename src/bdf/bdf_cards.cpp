@@ -201,9 +201,10 @@ namespace dnvgl {
 
                   this->collect_outdata(entries);
 
-                  os << this->format_outlist(entries);
+                  if (entries.size()>0)
+                     os << this->format_outlist(entries) << std::endl;
 
-                  return os << std::endl;
+                  return os;
                }
             }
 

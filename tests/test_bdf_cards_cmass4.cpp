@@ -65,6 +65,12 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      cmass4 probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("reverse") {
       long EID(2), S1(6), S2(1);
       double M(2.9);
@@ -90,6 +96,19 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
       double M(2.9);
       CHECK_THROWS(
          cmass4 probe(&EID, &M, &S1));
+   }
+
+   SECTION("multiple") {
+      long EID(1), S1(2);
+      double M(3.);
+      cmass4 probe;
+      test << *probe(&EID, &M, &S1);
+      EID++;
+      test << *probe(&EID, &M, &S1);
+      CHECK(test.str() ==
+            // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+            "CMASS4         13.000+00       2\n"
+            "CMASS4         23.000+00       2\n");
    }
 }
 

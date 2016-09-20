@@ -120,13 +120,13 @@ properties of thin shell elements.
                card_type(void) const;
 
                card const *operator() (
-                  long const *PID, long const *MID1, double const *T=NULL,
-                  long const *MID2=NULL, double const *x12I_T__3=NULL, // 12 I / T**3
-                  long const *MID3=NULL,
-                  double const *TS_T=NULL, // TS / T
-                  double const *NSM=NULL,
-                  double const *Z1=NULL, double const *Z2=NULL,
-                  long const *MID4=NULL);
+                  long const *PID, long const *MID1, double const *T=nullptr,
+                  long const *MID2=nullptr, double const *x12I_T__3=nullptr, // 12 I / T**3
+                  long const *MID3=nullptr,
+                  double const *TS_T=nullptr, // TS / T
+                  double const *NSM=nullptr,
+                  double const *Z1=nullptr, double const *Z2=nullptr,
+                  long const *MID4=nullptr);
 
                virtual void read(std::list<std::string> const &);
 

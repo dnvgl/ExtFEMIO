@@ -77,7 +77,7 @@ namespace dnvgl {
             }
 
             hsuptran::hsuptran(void) :
-               hsuptran(-1, 0, NULL) {}
+               hsuptran(-1, 0, nullptr) {}
 
 
             hsuptran::hsuptran(const long &NFIELD,

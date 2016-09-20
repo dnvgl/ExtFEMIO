@@ -283,6 +283,11 @@ Defines a scalar mass element without reference to a property entry.
                       long const *G1, std::list<int> const *C1,
                       long const *G2=nullptr, std::list<int> const *C2=nullptr);
 
+               __base::card const *operator() (
+                  long const *EID, double const *M,
+                  long const *G1, std::list<int> const *C1,
+                  long const *G2=nullptr, std::list<int> const *C2=nullptr);
+
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
 
                virtual void read(std::list<std::string> const &);
@@ -365,6 +370,10 @@ reference to a property entry.
 
                cmass4(long const *EID, double const *M,
                       long const *S1, long const *S2=nullptr);
+
+               __base::card const *operator() (
+                  long const *EID, double const *M,
+                  long const *S1, long const *S2=nullptr);
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const;
 

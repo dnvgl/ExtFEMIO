@@ -49,17 +49,34 @@ namespace dnvgl {
             entry_type<long> const cmass4::form_S1("S1");
             entry_type<long> const cmass4::form_S2("S2");
 
+            cmass4::cmass4(void):
+               card(),
+               EID(nullptr), M(nullptr), S1(nullptr), S2(nullptr) {}
+
             cmass4::cmass4(std::list<std::string> const &inp) :
                card(inp) {
                this->read(inp);
             }
 
             cmass4::cmass4(long const *EID, double const *M,
-                           long const *S1, long const *S2/*=NULL*/) :
+                           long const *S1, long const *S2/*=nullptr*/) :
                card(),
                EID(EID), M(M), S1(S1), S2(S2) {
                if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
                   throw errors::error("CMASS4", "EID not in valid range");
+            }
+
+            __base::card const *cmass4::operator() (
+                  long const *EID, double const *M,
+                  long const *S1, long const *S2/*=nullptr*/) {
+               this->EID = EID;
+               this->M = *M;
+               this->S1 = *S1;
+               if (S2)
+                  this->S2 = *S2;
+               else
+                  this->S2 = nullptr;
+               return this;
             }
 
             bdf::types::card cmass4::head = bdf::types::card("CMASS4");
@@ -89,6 +106,9 @@ namespace dnvgl {
 
             void cmass4::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
+
+               if (static_cast<int>(EID) <= 0)
+                  return;
 
                res.push_back(format(cmass4::head));
 

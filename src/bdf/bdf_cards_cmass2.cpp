@@ -31,7 +31,9 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   static const long cl1 = 1;
+   long static const cl1 = 1;
+   long static const cl0 = 0;
+   double static const cd0 = 0.;
 }
 
 namespace dnvgl {
@@ -53,6 +55,11 @@ namespace dnvgl {
                "G2", bound<long>(nullptr, nullptr, nullptr, true));
             const entry_type<std::list<int> > cmass2::form_C2("C2");
 
+            cmass2::cmass2(void) :
+               card(),
+               EID(nullptr), M(nullptr), G1(nullptr), C1(nullptr),
+               G2(nullptr), C2(nullptr) {}
+
             cmass2::cmass2(std::list<std::string> const &inp) :
                card(inp) {
                this->read(inp);
@@ -60,7 +67,7 @@ namespace dnvgl {
 
             cmass2::cmass2(long const *EID, double const *M,
                            long const *G1, std::list<int> const *C1,
-                           long const *G2/*=NULL*/, std::list<int> const *C2/*=NULL*/) :
+                           long const *G2/*=nullptr*/, std::list<int> const *C2/*=nullptr*/) :
                card(),
                EID(EID), M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
                if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
@@ -69,6 +76,25 @@ namespace dnvgl {
                   throw errors::error("CMASS2", "G1 requires C1 value");
                if (this->G2 && this->C2.value.size() == 0)
                   throw errors::error("CMASS2", "G2 requires C2 value");
+            }
+
+            __base::card const *cmass2::operator() (
+               long const *EID, double const *M,
+               long const *G1, std::list<int> const *C1,
+               long const *G2/*=nullptr*/, std::list<int> const *C2/*=nullptr*/) {
+               this->EID = EID;
+               this->M = *M;
+               this->G1 = *G1;
+               this->C1 = *C1;
+               if (G2)
+                  this->G2 = *G2;
+               else
+                  this->G2 = nullptr;
+               if (C2)
+                  this->C2 = *C2;
+               else
+                  this->C2 = nullptr;
+               return this;
             }
 
             bdf::types::card cmass2::head = bdf::types::card("CMASS2");
@@ -108,6 +134,8 @@ namespace dnvgl {
 
             void cmass2::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {
+
+               if (!EID) return;
 
                res.push_back(format(cmass2::head));
 

@@ -99,6 +99,12 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
 
    std::ostringstream test;
 
+   SECTION("empty") {
+      cmass2 probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
    SECTION("reverse") {
       long EID(2), S1(6), S2(1);
       std::list<int> C1({1, 2, 3}), C2({4, 5, 6});
@@ -127,6 +133,20 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
       std::list<int> C1({1, 2, 3});
       CHECK_THROWS(
          cmass2 prob(&EID, &M, &S1, &C1));
+   }
+
+   SECTION("multiple") {
+      long EID(2), S1(6);
+      double M(2.9);
+      std::list<int> C1({1, 2, 3});
+      cmass2 probe;
+      test << *probe(&EID, &M, &S1, &C1);
+      EID++;
+      test << *probe(&EID, &M, &S1, &C1);
+      CHECK(test.str() ==
+            // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+            "CMASS2         22.900+00       6     123\n"
+            "CMASS2         32.900+00       6     123\n");
    }
 }
 

@@ -193,20 +193,20 @@ namespace dnvgl {
                card const *operator() (
                   long const *EID, long const *PID,
                   long const *G1, long const *G2, long const *G3,
-                  double const *THETA=NULL,
-                  double const *ZOFFS=NULL,
-                  long const *TFLAG=NULL,
-                  double const *T1=NULL, double const *T2=NULL,
-                  double const *T3=NULL, double const *T4=NULL);
+                  double const *THETA=nullptr,
+                  double const *ZOFFS=nullptr,
+                  long const *TFLAG=nullptr,
+                  double const *T1=nullptr, double const *T2=nullptr,
+                  double const *T3=nullptr, double const *T4=nullptr);
 
                card const *operator() (
                   long const *EID, long const *PID,
                   long const *G1, long const *G2, long const *G3,
                   long const *MCID,
-                  double const *ZOFFS=NULL,
-                  long const *TFLAG=NULL,
-                  double const *T1=NULL, double const *T2=NULL,
-                  double const *T3=NULL, double const *T4=NULL);
+                  double const *ZOFFS=nullptr,
+                  long const *TFLAG=nullptr,
+                  double const *T1=nullptr, double const *T2=nullptr,
+                  double const *T3=nullptr, double const *T4=nullptr);
 
             private:
 
@@ -248,21 +248,21 @@ namespace dnvgl {
                   long const *EID, long const *PID,
                   long const *G1, long const *G2,
                   long const *G3, long const *G4,
-                  double const *THETA=NULL,
-                  double const *ZOFFS=NULL,
-                  long const *TFLAG=NULL,
-                  double const *T1=NULL, double const *T2=NULL,
-                  double const *T3=NULL, double const *T4=NULL);
+                  double const *THETA=nullptr,
+                  double const *ZOFFS=nullptr,
+                  long const *TFLAG=nullptr,
+                  double const *T1=nullptr, double const *T2=nullptr,
+                  double const *T3=nullptr, double const *T4=nullptr);
 
                const card *operator() (
                   long const *EID, long const *PID,
                   long const *G1, long const *G2,
                   long const *G3, long const *G4,
                   long const *MCID,
-                  double const *ZOFFS=NULL,
-                  long const *TFLAG=NULL,
-                  double const *T1=NULL, double const *T2=NULL,
-                  double const *T3=NULL, double const *T4=NULL);
+                  double const *ZOFFS=nullptr,
+                  long const *TFLAG=nullptr,
+                  double const *T1=nullptr, double const *T2=nullptr,
+                  double const *T3=nullptr, double const *T4=nullptr);
 
             private:
 
@@ -477,12 +477,12 @@ namespace dnvgl {
                   double const *X1,
                   double const *X2,
                   double const *X3,
-                  std::string const *OFFT=NULL,
-                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
-                  double const *W1A=NULL, double const *W2A=NULL,
-                  double const *W3A=NULL, double const *W1B=NULL,
-                  double const *W2B=NULL, double const *W3B=NULL,
-                  long const *SA=NULL, long const *SB=NULL);
+                  std::string const *OFFT=nullptr,
+                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  double const *W1A=nullptr, double const *W2A=nullptr,
+                  double const *W3A=nullptr, double const *W1B=nullptr,
+                  double const *W2B=nullptr, double const *W3B=nullptr,
+                  long const *SA=nullptr, long const *SB=nullptr);
 
                card const *operator() (
                   long const *EID, long const *PID,
@@ -491,33 +491,33 @@ namespace dnvgl {
                   double const *X2,
                   double const *X3,
                   double const *BIT,
-                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
-                  double const *W1A=NULL, double const *W2A=NULL,
-                  double const *W3A=NULL, double const *W1B=NULL,
-                  double const *W2B=NULL, double const *W3B=NULL,
-                  long const *SA=NULL, long const *SB=NULL);
+                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  double const *W1A=nullptr, double const *W2A=nullptr,
+                  double const *W3A=nullptr, double const *W1B=nullptr,
+                  double const *W2B=nullptr, double const *W3B=nullptr,
+                  long const *SA=nullptr, long const *SB=nullptr);
 
                card const *operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   long const *G0,
-                  std::string const *OFFT=NULL,
-                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
-                  double const *W1A=NULL, double const *W2A=NULL,
-                  double const *W3A=NULL, double const *W1B=NULL,
-                  double const *W2B=NULL, double const *W3B=NULL,
-                  long const *SA=NULL, long const *SB=NULL);
+                  std::string const *OFFT=nullptr,
+                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  double const *W1A=nullptr, double const *W2A=nullptr,
+                  double const *W3A=nullptr, double const *W1B=nullptr,
+                  double const *W2B=nullptr, double const *W3B=nullptr,
+                  long const *SA=nullptr, long const *SB=nullptr);
 
                card const *operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   long const *G0,
                   double const *BIT,
-                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
-                  double const *W1A=NULL, double const *W2A=NULL,
-                  double const *W3A=NULL, double const *W1B=NULL,
-                  double const *W2B=NULL, double const *W3B=NULL,
-                  long const *SA=NULL, long const *SB=NULL);
+                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  double const *W1A=nullptr, double const *W2A=nullptr,
+                  double const *W3A=nullptr, double const *W1B=nullptr,
+                  double const *W2B=nullptr, double const *W3B=nullptr,
+                  long const *SA=nullptr, long const *SB=nullptr);
 
             private:
 
@@ -739,21 +739,21 @@ namespace dnvgl {
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   long const *G0,
-                  std::string const *OFFT=NULL,
-                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
-                  double const *W1A=NULL, double const *W2A=NULL,
-                  double const *W3A=NULL, double const *W1B=NULL,
-                  double const *W2B=NULL, double const *W3B=NULL);
+                  std::string const *OFFT=nullptr,
+                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  double const *W1A=nullptr, double const *W2A=nullptr,
+                  double const *W3A=nullptr, double const *W1B=nullptr,
+                  double const *W2B=nullptr, double const *W3B=nullptr);
 
                card const *operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   double const *X1, double const *X2,double const *X3,
-                  std::string const *OFFT=NULL,
-                  std::list<int> const *PA=NULL, std::list<int> const *PB=NULL,
-                  double const *W1A=NULL, double const *W2A=NULL,
-                  double const *W3A=NULL, double const *W1B=NULL,
-                  double const *W2B=NULL, double const *W3B=NULL);
+                  std::string const *OFFT=nullptr,
+                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  double const *W1A=nullptr, double const *W2A=nullptr,
+                  double const *W3A=nullptr, double const *W1B=nullptr,
+                  double const *W2B=nullptr, double const *W3B=nullptr);
 
             private:
 

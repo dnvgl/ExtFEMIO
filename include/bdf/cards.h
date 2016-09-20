@@ -176,13 +176,13 @@ namespace dnvgl {
             inline std::unique_ptr<format_entry>
             format(const dnvgl::extfem::bdf::types::card &formatter) {
                return std::make_unique<format_entry>(
-                  (dnvgl::extfem::bdf::types::card*)&formatter, (void*)NULL);
+                  (dnvgl::extfem::bdf::types::card*)&formatter, nullptr);
             };
 
             inline std::unique_ptr<format_entry>
             format(const dnvgl::extfem::bdf::types::empty &formatter) {
                return std::make_unique<format_entry>(
-                  (dnvgl::extfem::bdf::types::base*)&formatter, (void*)NULL);
+                  (dnvgl::extfem::bdf::types::base*)&formatter, nullptr);
             };
 
             template <class _Ty> inline
