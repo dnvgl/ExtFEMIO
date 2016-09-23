@@ -235,10 +235,10 @@ Defines a scalar mass element without reference to a property entry.
 
 */
 
-            class cmass2 : public __base::card {
+            class cmass2 : public __base::element {
 
                static dnvgl::extfem::bdf::types::card head;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
+               // static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
                static const dnvgl::extfem::bdf::types::entry_type<double> form_M;
                static const dnvgl::extfem::bdf::types::entry_type<long> form_G1;
                static const dnvgl::extfem::bdf::types::entry_type<long> form_G2;
@@ -246,10 +246,10 @@ Defines a scalar mass element without reference to a property entry.
                static const dnvgl::extfem::bdf::types::entry_type<std::list<int> > form_C2;
 
             public:
-               /** Unique element identification number. (0 < Integer
-                   < 100,000,000)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> EID;
+               // /** Unique element identification number. (0 < Integer
+               //     < 100,000,000)
+               //  */
+               // dnvgl::extfem::bdf::types::entry_value<long> EID;
                /** Value of the scalar mass. (Real)
                 */
                dnvgl::extfem::bdf::types::entry_value<double> M;
@@ -336,18 +336,18 @@ reference to a property entry.
    `SPOINT` entry.
 */
 
-            class cmass4 : public __base::card {
+            class cmass4 : public __base::element {
                static dnvgl::extfem::bdf::types::card head;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
+               // static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
                static const dnvgl::extfem::bdf::types::entry_type<double> form_M;
                static const dnvgl::extfem::bdf::types::entry_type<long> form_S1;
                static const dnvgl::extfem::bdf::types::entry_type<long> form_S2;
 
             public:
-               /** Unique element identification number. (0 < Integer
-                   < 100,000,000)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> EID;
+               // /** Unique element identification number. (0 < Integer
+               //     < 100,000,000)
+               //  */
+               // dnvgl::extfem::bdf::types::entry_value<long> EID;
                /** Scalar mass value. (Real)
                 */
                dnvgl::extfem::bdf::types::entry_value<double> M;

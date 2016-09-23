@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_ctria3[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -78,19 +78,19 @@ namespace dnvgl {
                   try {
                      form_THETA.set_value(THETA, *pos);
                      MCID.is_value = false;
-                     choose_mcid_theta = has_THETA;
+                     choose_mcid_theta = CHOOSE_MCID_THETA::has_THETA;
                   }
                   catch (errors::float_error) {
                      try {
                         form_MCID.set_value(MCID, *pos);
                         form_THETA.set_value(THETA, "");
-                        choose_mcid_theta = has_MCID;
+                        choose_mcid_theta = CHOOSE_MCID_THETA::has_MCID;
                      }
                      catch (errors::int_error) {
                         THETA.is_value = true;
                         THETA.value = 0.;
                         MCID.is_value = false;
-                        choose_mcid_theta = has_THETA;
+                        choose_mcid_theta = CHOOSE_MCID_THETA::has_THETA;
                      }
                   }
                   ++pos;
@@ -100,7 +100,7 @@ namespace dnvgl {
                   form_G2.set_value(G2, *(pos++));
                   form_G1.set_value(G1, *(pos++));
                   form_PID.set_value(PID, *(pos++));
-                  form_EID.set_value(EID, *pos);
+                  // form_EID.set_value(EID, *pos);
                   break;
                default:
                   throw errors::parse_error(
@@ -118,7 +118,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::bdf::cards::types
-            ctria3::card_type(void) const { return CTRIA3; };
+            ctria3::card_type(void) const { return types::CTRIA3; }
 
             void ctria3::collect_outdata(
                std::list<std::unique_ptr<format_entry> >&) const {

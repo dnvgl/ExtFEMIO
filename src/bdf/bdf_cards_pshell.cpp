@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_pshell[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -123,7 +123,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::bdf::cards::types
-            pshell::card_type(void) const { return PSHELL; };
+            pshell::card_type(void) const { return types::PSHELL; };
 
             void pshell::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

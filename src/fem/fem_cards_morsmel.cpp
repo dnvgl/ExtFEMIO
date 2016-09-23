@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_morsmel[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -118,7 +118,7 @@ namespace dnvgl {
                ALPHA1(ALPHA1), ALPHA2(ALPHA2) {}
 
             const dnvgl::extfem::fem::cards::types
-            morsmel::card_type(void) const {return MORSMEL;}
+            morsmel::card_type(void) const {return types::MORSMEL;}
 
             std::ostream &morsmel::put(std::ostream& os) const {
                if (this->MATNO == -1) return os;

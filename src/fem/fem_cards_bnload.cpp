@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_bnload[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -119,7 +119,7 @@ namespace dnvgl {
                RLOAD(RLOAD), ILOAD(ILOAD) {}
 
             const dnvgl::extfem::fem::cards::types
-            bnload::card_type(void) const {return BNLOAD;}
+            bnload::card_type(void) const {return types::BNLOAD;}
 
             std::ostream &bnload::put(std::ostream& os) const {
                if (this->LLC == -1) return os;

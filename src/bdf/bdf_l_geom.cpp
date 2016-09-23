@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_l_geom[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif

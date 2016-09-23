@@ -83,44 +83,44 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]" ) {
    entry_value<std::string> lval("abcd");
 
    SECTION("SHORT") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(lval).size() == 8);
       CHECK(obj.format(lval) == "abcd    ");
    }
 
    SECTION("SHORT (nullptr)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
 
    SECTION("SHORT (void)") {
       std::string lval("abcd");
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(&lval).size() == 8);
       CHECK(obj.format(&lval) == "abcd    ");
    }
 
    SECTION("SHORT (nullptr, void)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
 
    SECTION("SHORT (too long)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       lval = entry_value<std::string>("abcdefghi");
       CHECK_THROWS(obj.format(lval));
    }
 
    SECTION("LONG") {
-      bdf::types::base::out_form = bdf::types::LONG;
+      bdf::types::base::out_form = bdf::types::out_form_type::LONG;
       CHECK(obj.format(lval).size() == 16);
       CHECK(obj.format(lval) == "abcd            ");
    }
 
    SECTION("FREE") {
-      bdf::types::base::out_form = bdf::types::FREE;
+      bdf::types::base::out_form = bdf::types::out_form_type::FREE;
       CHECK(obj.format(lval) == "abcd");
    }
 }

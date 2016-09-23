@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_beam_prop[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -42,13 +42,13 @@ namespace dnvgl {
                   __base::card(inp) {}
 
                const dnvgl::extfem::bdf::cards::types
-               beam_base::card_type(void) const { return BEAM_BASE; }
+               beam_base::card_type(void) const { return types::BEAM_BASE; }
 
                beam_prop::beam_prop(const std::list<std::string> &inp) :
                   beam_base(inp) {}
 
                const dnvgl::extfem::bdf::cards::types
-               beam_prop::card_type(void) const { return BEAM_PROP; }
+               beam_prop::card_type(void) const { return types::BEAM_PROP; }
             }
 
             namespace {

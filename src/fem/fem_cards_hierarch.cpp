@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_hierarch[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -112,7 +112,7 @@ namespace dnvgl {
 
             const dnvgl::extfem::fem::cards::types
             hierarch::card_type(void) const {
-               return HIERARCH;
+               return types::HIERARCH;
             }
 
             std::ostream &hierarch::put(std::ostream& os) const {

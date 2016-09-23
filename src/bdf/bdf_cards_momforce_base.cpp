@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_momforce_base[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -157,7 +157,7 @@ namespace dnvgl {
             }
 
             const types force::card_type(void) const {
-               return FORCE;
+               return types::FORCE;
             }
 
             moment::moment(void) :
@@ -179,7 +179,7 @@ namespace dnvgl {
             }
 
             const types moment::card_type(void) const {
-               return MOMENT;
+               return types::MOMENT;
             }
          }
       }

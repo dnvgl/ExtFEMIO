@@ -54,7 +54,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    }
 
    SECTION("first") {
-      case_control::stress probe({}, case_control::stress::ALL);
+      case_control::stress probe({}, case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS = ALL\n");
    }
@@ -91,7 +91,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
             new case_control::stress::print,
             new case_control::stress::rall,
             new case_control::stress::norprint},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(PRINT, RALL, NORPRINT) = ALL\n");
    }
@@ -99,7 +99,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("SORT1") {
       case_control::stress probe({
             new case_control::stress::sort1},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(SORT1) = ALL\n");
    }
@@ -107,7 +107,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("SORT2") {
       case_control::stress probe({
             new case_control::stress::sort2},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(SORT2) = ALL\n");
    }
@@ -115,7 +115,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("PRINT") {
       case_control::stress probe({
             new case_control::stress::print},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(PRINT) = ALL\n");
    }
@@ -123,7 +123,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("PUNCH") {
       case_control::stress probe({
             new case_control::stress::punch},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(PUNCH) = ALL\n");
    }
@@ -131,7 +131,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("PLOT") {
       case_control::stress probe({
             new case_control::stress::plot},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(PLOT) = ALL\n");
    }
@@ -139,7 +139,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("REAL") {
       case_control::stress probe({
             new case_control::stress::real},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(REAL) = ALL\n");
    }
@@ -147,7 +147,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("IMAG") {
       case_control::stress probe({
             new case_control::stress::imag},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(IMAG) = ALL\n");
    }
@@ -155,7 +155,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("PHASE") {
       case_control::stress probe({
             new case_control::stress::phase},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(PHASE) = ALL\n");
    }
@@ -165,7 +165,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
             new case_control::stress::print,
                new case_control::stress::rall,
                new case_control::stress::norprint},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(PRINT, RALL, NORPRINT) = ALL\n");
    }
@@ -173,7 +173,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("ATOC") {
       case_control::stress probe({
             new case_control::stress::atoc},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(ATOC) = ALL\n");
    }
@@ -181,7 +181,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("CRMS") {
       case_control::stress probe({
             new case_control::stress::crms},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(CRMS) = ALL\n");
    }
@@ -189,7 +189,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("RALL") {
       case_control::stress probe({
             new case_control::stress::rall},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(RALL) = ALL\n");
    }
@@ -197,7 +197,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("VONMISES") {
       case_control::stress probe({
             new case_control::stress::vonmises},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(VONMISES) = ALL\n");
    }
@@ -205,7 +205,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("MAXS") {
       case_control::stress probe({
             new case_control::stress::maxs},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(MAXS) = ALL\n");
    }
@@ -213,7 +213,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("SHEAR") {
       case_control::stress probe({
             new case_control::stress::shear},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(SHEAR) = ALL\n");
    }
@@ -221,7 +221,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("CENTER") {
       case_control::stress probe({
             new case_control::stress::center},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(CENTER) = ALL\n");
    }
@@ -229,7 +229,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("CUBIC") {
       case_control::stress probe({
             new case_control::stress::cubic},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(CUBIC) = ALL\n");
    }
@@ -237,7 +237,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("SGAGE") {
       case_control::stress probe({
             new case_control::stress::sgage},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(SGAGE) = ALL\n");
    }
@@ -245,7 +245,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("CORNER") {
       case_control::stress probe({
             new case_control::stress::corner},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(CORNER) = ALL\n");
    }
@@ -253,7 +253,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("BILIN") {
       case_control::stress probe({
             new case_control::stress::bilin},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(BILIN) = ALL\n");
    }
@@ -261,7 +261,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("RPRINT") {
       case_control::stress probe({
             new case_control::stress::rprint},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(RPRINT) = ALL\n");
    }
@@ -269,7 +269,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("NORPRINT") {
       case_control::stress probe({
             new case_control::stress::norprint},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(NORPRINT) = ALL\n");
    }
@@ -277,13 +277,13 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    SECTION("RPUNCH") {
       case_control::stress probe({
             new case_control::stress::rpunch},
-         case_control::stress::ALL);
+         case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS(RPUNCH) = ALL\n");
    }
 
    SECTION("ALL") {
-      case_control::stress probe({}, case_control::stress::ALL);
+      case_control::stress probe({}, case_control::stress::restype::ALL);
       test << probe;
       CHECK(test.str() == "STRESS = ALL\n");
    }
@@ -295,7 +295,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
    }
 
    SECTION("NONE") {
-      case_control::stress probe({}, case_control::stress::NONE);
+      case_control::stress probe({}, case_control::stress::restype::NONE);
       test << probe;
       CHECK(test.str() == "STRESS = NONE\n");
    }

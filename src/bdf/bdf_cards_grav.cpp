@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_grav[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -146,7 +146,7 @@ namespace dnvgl {
             }
 
             const types grav::card_type(void) const {
-               return GRAV;
+               return types::GRAV;
             }
 
             void grav::collect_outdata(

@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_hsupstat[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -92,7 +92,7 @@ namespace dnvgl {
 
             const dnvgl::extfem::fem::cards::types
             hsupstat::card_type(void) const {
-               return HSUPSTAT;
+               return types::HSUPSTAT;
             }
 
             std::ostream &hsupstat::put(std::ostream& os) const {

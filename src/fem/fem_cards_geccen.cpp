@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_geccen[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -83,7 +83,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::fem::cards::types
-            geccen::card_type(void) const {return GECCEN;}
+            geccen::card_type(void) const {return types::GECCEN;}
 
             std::ostream &geccen::put(std::ostream& os) const {
                if (this->ECCNO == -1) return os;

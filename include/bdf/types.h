@@ -49,7 +49,7 @@ namespace dnvgl {
       namespace bdf {
          namespace types {
             /// Indicators for different BDF card entries.
-            typedef enum {
+            enum class bdf_types{
                /// Undefined entry, used for abstract base types
                None,
                /// Integer value
@@ -63,16 +63,16 @@ namespace dnvgl {
                /// List of Integers
                List,
                /// Empty cell (Placeholder)
-               Blank} bdf_types;
+               Blank};
 
             /// Indicator for BDF card output format
-            typedef enum {
+            enum class out_form_type{
                /// Cards are written in Large Field Format
                LONG=16,
                /// Cards are written in Short Field Format
                SHORT=8,
                /// Cards are written in Free Field Format
-               FREE=-1} out_form_type;
+               FREE=-1};
 
             class base {
 
@@ -266,7 +266,7 @@ namespace dnvgl {
 
             protected:
 
-               static const bdf_types _type = Int;
+               static const bdf_types _type = bdf_types::Int;
 
             public:
 
@@ -336,25 +336,26 @@ namespace dnvgl {
                   outp.imbue(std::locale::classic());
 
                   switch (out_form) {
-                  case LONG:
+                  case out_form_type::LONG:
                      outp << std::setiosflags(std::ios::right) << std::setfill(' ')
                           << std::setw(16) << inp.value;
                      break;
-                  case SHORT:
+                  case out_form_type::SHORT:
                      outp << std::setiosflags(std::ios::right) << std::setfill(' ')
                           << std::setw(8) << inp.value;
                      break;
-                  case FREE:
+                  case out_form_type::FREE:
                      outp << inp.value;
                      break;
                   }
 
                   std::string out(outp.str());
 
-                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                  if (out.size() != static_cast<size_t>(out_form) &&
+                      out_form != out_form_type::FREE) {
                      std::ostringstream msg("output string for value ", std::ostringstream::ate);
                      msg << inp.value << " of incorrect size, got length of " << out.size()
-                         << " instead of allowed length of " << out_form << ".";
+                         << " instead of allowed length of " << static_cast<long>(out_form) << ".";
                      throw errors::int_error(name, msg.str());
                   }
 
@@ -397,7 +398,7 @@ namespace dnvgl {
 
                dnvgl::extfem::bdf::type_bounds::bound<double> bounds;
 
-               static const bdf_types _type = Float;
+               static const bdf_types _type = bdf_types::Float;
 
             public:
 
@@ -486,7 +487,7 @@ namespace dnvgl {
                   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
                   switch (out_form) {
-                  case LONG:
+                  case out_form_type::LONG:
                      outp << std::setiosflags(std::ios::right) << std::setfill(' ');
                      if (inp.value <= 0)
                         outp << std::setprecision(10);
@@ -494,7 +495,7 @@ namespace dnvgl {
                         outp << std::setprecision(11);
                      outp << std::setw(17) << inp.value;
                      break;
-                  case SHORT: {
+                  case out_form_type::SHORT: {
                      // Check on how much precision is lost when using SHORT format.
                      // If too much precision is list raise exception which causes
                      // calling routine to switch to LONG format.
@@ -504,7 +505,7 @@ namespace dnvgl {
                            std::ostringstream::ate);
                         msg << inp.value
                            << " looses too much precision of being crammed into string of "
-                           << out_form << " characters.";
+                           << static_cast<long>(out_form) << " characters.";
                         throw errors::float_error(name, msg.str());
                      }
                   }
@@ -515,7 +516,7 @@ namespace dnvgl {
                                  outp << std::setprecision(3);
                               outp << std::setw(9) << inp.value;
                               break;
-                  case FREE:
+                  case out_form_type::FREE:
                      std::ostringstream res;
                      res << std::setiosflags(std::ios::scientific)
                         << inp.value;
@@ -525,10 +526,11 @@ namespace dnvgl {
 
                   std::string out(outp.str());
                   out.erase(out.find('e'), 1);
-                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                  if (out.size() != static_cast<size_t>(out_form) &&
+                      out_form != out_form_type::FREE) {
                      std::ostringstream msg("output string for value ", std::ostringstream::ate);
                      msg << inp.value << " of incorrect size, got length of " << out.size()
-                        << " instead of allowed length of " << out_form << ".";
+                         << " instead of allowed length of " << static_cast<long>(out_form) << ".";
                      throw errors::float_error(name, msg.str());
                   }
 
@@ -556,7 +558,7 @@ namespace dnvgl {
 
             protected:
 
-               static const bdf_types _type = Str;
+               static const bdf_types _type = bdf_types::Str;
 
             public:
 
@@ -608,23 +610,24 @@ namespace dnvgl {
                   outp.imbue(std::locale::classic());
 
                   switch (out_form) {
-                  case LONG:
+                  case out_form_type::LONG:
                      outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
                           << std::setw(16) << (std::string)inp;
                      break;
-                  case SHORT:
+                  case out_form_type::SHORT:
                      outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
                           << std::setw(8) << (std::string)inp;
                      break;
-                  case FREE:
+                  case out_form_type::FREE:
                      outp << (std::string)inp;
                      break;
                   }
                   std::string out(outp.str());
-                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                  if (out.size() != static_cast<size_t>(out_form) &&
+                      out_form != out_form_type::FREE) {
                      std::ostringstream msg("output string for value ", std::ostringstream::ate);
                      msg << (std::string)inp << " of incorrect size, got length of " << out.size()
-                         << " instead of allowed length of " << out_form << ".";
+                         << " instead of allowed length of " << static_cast<long>(out_form) << ".";
                      throw errors::int_error(name, msg.str());
                   }
 
@@ -653,7 +656,7 @@ namespace dnvgl {
 
             protected:
 
-               static const bdf_types _type = List;
+               static const bdf_types _type = bdf_types::List;
 
             public:
 
@@ -706,28 +709,29 @@ namespace dnvgl {
                   std::string inp_proc(res1.str());
 
                   switch (out_form) {
-                  case LONG:
+                  case out_form_type::LONG:
                      res2 << std::setiosflags(std::ios::right)
                           << std::setfill(' ') << std::setw(16) << inp_proc;
                      // res2.setf(ios_base::right, std::ios_base::adjustfield);
                      // res2.fill(' ');
                      // res2 << std::setw(16) << inp_proc;
                      break;
-                  case SHORT:
+                  case out_form_type::SHORT:
                      res2.setf(std::ios_base::right, std::ios_base::adjustfield);
                      res2.fill(' ');
                      res2 << std::setw(8) << inp_proc;
                      break;
-                  case FREE:
+                  case out_form_type::FREE:
                      res2 << inp_proc;
                      break;
                   }
 
                   std::string out(res2.str());
-                  if (out.size() != static_cast<size_t>(out_form) && out_form > 0) {
+                  if (out.size() != static_cast<size_t>(out_form) &&
+                      out_form != out_form_type::FREE) {
                      std::ostringstream msg("output string for value ", std::ostringstream::ate);
                      msg << inp_proc << " of incorrect size, got length of " << out.size()
-                         << " instead of allowed length of " << out_form << ".";
+                         << " instead of allowed length of " << static_cast<long>(out_form) << ".";
                      throw errors::output_error(name, msg.str());
                   }
                   return out;
@@ -741,7 +745,7 @@ namespace dnvgl {
 
                dnvgl::extfem::bdf::type_bounds::bound<std::complex<double> > bounds;
 
-               static const bdf_types _type = Complex;
+               static const bdf_types _type = bdf_types::Complex;
 
             public:
 
@@ -846,7 +850,7 @@ namespace dnvgl {
                   unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
                   switch (out_form) {
-                  case LONG:
+                  case out_form_type::LONG:
                      outp << std::setiosflags(std::ios::right) << std::setfill(' ');
                      if (inp.value.real() < 0)
                         outp << std::setprecision(10);
@@ -859,7 +863,7 @@ namespace dnvgl {
                         outp << std::setprecision(11);
                      outp << std::setw(17) << inp.value.imag();
                      break;
-                  case SHORT:
+                  case out_form_type::SHORT:
                      {
                         // Check on how much precision is lost when using SHORT format.
                         // If too much precision is list raise exception which causes
@@ -872,7 +876,7 @@ namespace dnvgl {
                                                   std::ostringstream::ate);
                            msg << inp.value
                                << " looses too much precision of being crammed into string of "
-                               << out_form << " characters.";
+                               << static_cast<long>(out_form) << " characters.";
                            throw errors::float_error(name, msg.str());
                         }
                         outp << std::setiosflags(std::ios::right) << std::setfill(' ');
@@ -888,7 +892,7 @@ namespace dnvgl {
                         outp << std::setw(9) << inp.value.imag();
                         break;
                      }
-                  case FREE:
+                  case out_form_type::FREE:
                      std::ostringstream res;
                      res.imbue(std::locale::classic());
                      res << std::setiosflags(std::ios::scientific)
@@ -900,10 +904,11 @@ namespace dnvgl {
                   std::string out(outp.str());
                   out.erase(out.find('e'), 1);
                   out.erase(out.find('e'), 1);
-                  if (out.size() != static_cast<size_t>(out_form)*2 && out_form > 0) {
+                  if (out.size() != static_cast<size_t>(out_form)*2 &&
+                      out_form != out_form_type::FREE) {
                      std::ostringstream msg("output string for value ", std::ostringstream::ate);
                      msg << "!" << inp.value << "! -> !" << out << "! of incorrect size, got length of " << out.size()
-                        << " instead of allowed length of " << out_form << ".";
+                         << " instead of allowed length of " << static_cast<long>(out_form) << ".";
                      throw errors::float_error(name, msg.str());
                   }
 

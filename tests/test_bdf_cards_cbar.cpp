@@ -61,7 +61,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
       CHECK((double)probe.X2 == 66.5206);
       CHECK((double)probe.X3 == 997.785);
       CHECK_FALSE(probe.G0);
-      CHECK(probe.choose_dir_code == cbar::has_DVEC);
+      CHECK(probe.choose_dir_code == cbar::CHOOSE_DIR_CODE::has_DVEC);
       CHECK(probe.OFFT == "GGG");
       std::list<int> p_ref;
       CHECK(probe.PA == p_ref);
@@ -94,7 +94,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
       CHECK_FALSE(probe.X1);
       CHECK_FALSE(probe.X2);
       CHECK_FALSE(probe.X3);
-      CHECK(probe.choose_dir_code == cbar::has_DCODE);
+      CHECK(probe.choose_dir_code == cbar::CHOOSE_DIR_CODE::has_DCODE);
       CHECK(probe.OFFT == "GOO");
       std::list<int> p_ref;
       CHECK(probe.PA.value == p_ref);

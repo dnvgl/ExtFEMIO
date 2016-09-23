@@ -36,14 +36,15 @@ namespace dnvgl {
       namespace fem {
          namespace elements {
 
-            typedef enum {
+            enum class el_types {
                {% for name, val in enums %}{{ name }} = {{ val }},
-               {% endfor %}INVALID=-1, UNDEFINED=-2} el_types;
+               {% endfor %}INVALID=-1, UNDEFINED=-2};
 
-            typedef enum {general, Preframe, Prefem, Sestra, ADVANCE,
-                          Framework, Launch, Platework, Pretube,
-                          Splice, Wadam, Wajac,
-                          Poseidon} el_processor;
+            enum class el_processor {
+               general, Preframe, Prefem, Sestra, ADVANCE,
+               Framework, Launch, Platework, Pretube,
+               Splice, Wadam, Wajac,
+               Poseidon};
 
             namespace __base {
             /** Base class for FEM element representation.

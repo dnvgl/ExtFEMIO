@@ -22,7 +22,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_test_fem_elements[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -66,12 +66,12 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    std::vector<long> nodes({ 6, 7 });
-   gelmnt1 data1(1, 2, elements::TESS, nodes);
+   gelmnt1 data1(1, 2, elements::el_types::TESS, nodes);
 
    SECTION("check values") {
       CHECK(data1.ELNOX == 1);
       CHECK(data1.ELNO == 2);
-      CHECK(data1.ELTYP == elements::TESS);
+      CHECK(data1.ELTYP == elements::el_types::TESS);
       CHECK(data1.NODIN.size() == 2);
       CHECK(data1.NODIN[0] == 6);
       CHECK(data1.NODIN[1] == 7);
@@ -79,7 +79,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
 
    SECTION("check copy") {
       tess probe1(&data1);
-      CHECK(probe1.get_type() == elements::TESS);
+      CHECK(probe1.get_type() == elements::el_types::TESS);
       CHECK(probe1.nnodes() == 2);
       CHECK(probe1.nodes.size() == 2);
       CHECK(probe1.nodes[0] == 6);
@@ -89,7 +89,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    SECTION("check downcast") {
       std::unique_ptr<elements::__base::elem> probe2;
       dispatch(probe2, &data1);
-      CHECK(probe2->get_type() == TESS);
+      CHECK(probe2->get_type() == elements::el_types::TESS);
       CHECK(static_cast<tess*>(probe2.get())->nnodes() == 2);
    }
 }
@@ -98,7 +98,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = {{ elem|upper() }};
+   el_types const ELTYP = elements::el_types::{{ elem|upper() }};
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({{ list_init_form(100, 100+vals.nnodes) }});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(

@@ -45,7 +45,7 @@ namespace dnvgl {
       namespace fem {
          namespace types {
 
-            typedef enum {
+            enum class fem_types {
                /// Indicates class not suitable for end use.
                None,
                // /// comment cell
@@ -60,7 +60,7 @@ namespace dnvgl {
                Blank,
                /// list of integers
                List
-            } fem_types;
+            };
 
             namespace __base {
                class b_type {
@@ -91,7 +91,7 @@ namespace dnvgl {
                   };
 
                   fem_types type(void) const {
-                     return None;
+                     return fem_types::None;
                   };
 
                   std::string format(const void*) const {
@@ -108,7 +108,7 @@ namespace dnvgl {
 
                card(void) : __base::b_type("") {};
 
-               fem_types type(void) const {return None;};
+               fem_types type(void) const {return fem_types::None;};
 
                std::string format() const;
             };
@@ -119,7 +119,7 @@ namespace dnvgl {
 
                empty(void) : __base::b_type("") {};
 
-               fem_types type(void) const {return None;};
+               fem_types type(void) const {return fem_types::None;};
 
                std::string format() const;
             };
@@ -151,7 +151,7 @@ namespace dnvgl {
 
             protected:
 
-               static const fem_types _type = Int;
+               static const fem_types _type = fem_types::Int;
 
             public:
 
@@ -246,7 +246,7 @@ namespace dnvgl {
 
             protected:
 
-               static const fem_types _type = Int;
+               static const fem_types _type = fem_types::Int;
 
             public:
 
@@ -309,7 +309,7 @@ namespace dnvgl {
 
             protected:
 
-               static const fem_types _type = Float;
+               static const fem_types _type = fem_types::Float;
 
             public:
 
@@ -398,7 +398,7 @@ namespace dnvgl {
 
             protected:
 
-               static const fem_types _type = Str;
+               static const fem_types _type = fem_types::Str;
 
             public:
 
@@ -434,7 +434,7 @@ namespace dnvgl {
 
             protected:
 
-               static const fem_types _type = List;
+               static const fem_types _type = fem_types::List;
 
             public:
 

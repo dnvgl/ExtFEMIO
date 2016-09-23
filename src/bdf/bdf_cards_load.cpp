@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_load[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -89,7 +89,7 @@ namespace dnvgl {
             bdf::types::card load::head = bdf::types::card("LOAD");
 
             const types load::card_type(void) const {
-               return LOAD;
+               return types::LOAD;
             }
 
             void load::read(std::list<std::string> const &inp) {

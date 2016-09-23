@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_mat1[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -138,7 +138,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::bdf::cards::types
-            mat1::card_type(void) const { return MAT1; };
+            mat1::card_type(void) const { return types::MAT1; };
 
             void mat1::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

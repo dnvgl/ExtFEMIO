@@ -59,7 +59,7 @@ TEST_CASE("BDF generate 'SOL' header entries", "[bdf_header,sol]") {
    }
 
    SECTION("sol sol::SESTATIC") {
-      executive_control::sol probe(executive_control::sol::SESTATIC);
+      executive_control::sol probe(executive_control::sol::sol_no_type::SESTATIC);
       test << probe;
       CHECK(test.str() == "SOL 101\n");
    }
@@ -186,7 +186,7 @@ namespace ExportBDF {
 
    BDF_Header::BDF_Header(std::string const &title) {
       using namespace dnvgl::extfem::bdf::header;
-      entries.push_back(std::make_unique<executive_control::sol>(executive_control::sol::SESTATIC));
+      entries.push_back(std::make_unique<executive_control::sol>(executive_control::sol::sol_no_type::SESTATIC));
       entries.push_back(std::make_unique<executive_control::cend>());
       entries.push_back(std::make_unique<case_control::title>(title));
       entries.push_back(std::make_unique<case_control::echo>(
@@ -202,18 +202,18 @@ namespace ExportBDF {
          std::list<case_control::displacement::describer*>{
          new case_control::displacement::print,
             new case_control::displacement::punch,
-            new case_control::displacement::real}, case_control::displacement::ALL));
+            new case_control::displacement::real}, case_control::displacement::restype::ALL));
       entries.push_back(std::make_unique<case_control::spcforces>(
          std::list<case_control::spcforces::describer*>{
          new case_control::spcforces::print,
-            new case_control::spcforces::nozprint}, case_control::spcforces::ALL));
+            new case_control::spcforces::nozprint}, case_control::spcforces::restype::ALL));
       entries.push_back(std::make_unique<case_control::stress>(
          std::list<case_control::stress::describer*>{
          new case_control::stress::sort1,
             new case_control::stress::print,
             new case_control::stress::real,
             new case_control::stress::vonmises,
-            new case_control::stress::center}, case_control::stress::ALL));
+            new case_control::stress::center}, case_control::stress::restype::ALL));
    }
 
    std::ostream const &BDF_Header::operator<< (std::ostream &os) const {

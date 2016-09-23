@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_text[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -103,7 +103,7 @@ namespace dnvgl {
             }
 
             const types
-            text::card_type(void) const { return TEXT; };
+            text::card_type(void) const { return types::TEXT; };
 
             std::ostream &text::put(std::ostream& os) const {
                if (this->TYPE == -1) return os;

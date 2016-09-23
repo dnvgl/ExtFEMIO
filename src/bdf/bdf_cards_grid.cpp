@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_grid[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -70,7 +70,7 @@ namespace dnvgl {
                CD(), PS(), SEID() {}
 
             const dnvgl::extfem::bdf::cards::types
-            grid::card_type(void) const { return GRID; };
+            grid::card_type(void) const { return types::GRID; };
 
             void grid::read(std::list<std::string> const &inp) {
                auto pos = inp.rbegin();

@@ -24,37 +24,56 @@ namespace dnvgl {
          namespace cards {
             namespace __base {
 
+               /// Base class for elements.
+               class element : public card {
+               protected:
+                  static bdf::types::card head;
+                  dnvgl::extfem::bdf::types::entry_type<long> static const form_EID;
+               public:
+                  element(std::list<std::string> const &);
+                  element(long const *EID);
+
+                  virtual void collect_outdata(std::list<std::unique_ptr<format_entry> >&) const;
+                  virtual void read(std::list<std::string> const &);
+                  virtual cards::types const card_type() const;
+               public:
+                  /** Element identification number. (Integer > 0)
+                   */
+                  dnvgl::extfem::bdf::types::entry_value<long> EID;
+               };
+
                /// Base class for `ctria3` and `cquad4`.
-               class shell : public card {
+               class shell : public __base::element {
 
                protected:
 
-                  static const entry_type<long> form_EID;
-                  static const entry_type<long> form_PID;
-                  static const entry_type<long> form_G1;
-                  static const entry_type<long> form_G2;
-                  static const entry_type<long> form_G3;
-                  static const entry_type<long> form_G4;
-                  static const entry_type<long> form_MCID;
-                  static const entry_type<double> form_THETA;
-                  static const entry_type<double> form_ZOFFS;
-                  static const entry_type<long> form_TFLAG;
-                  static const entry_type<double> form_T1;
-                  static const entry_type<double> form_T2;
-                  static const entry_type<double> form_T3;
-                  static const entry_type<double> form_T4;
+                  // entry_type<long> static const form_EID;
+                  entry_type<long> static const form_PID;
+                  entry_type<long> static const form_G1;
+                  entry_type<long> static const form_G2;
+                  entry_type<long> static const form_G3;
+                  entry_type<long> static const form_G4;
+                  entry_type<long> static const form_MCID;
+                  entry_type<double> static const form_THETA;
+                  entry_type<double> static const form_ZOFFS;
+                  entry_type<long> static const form_TFLAG;
+                  entry_type<double> static const form_T1;
+                  entry_type<double> static const form_T2;
+                  entry_type<double> static const form_T3;
+                  entry_type<double> static const form_T4;
 
-                  shell(const std::list<std::string> &);
+                  shell(std::list<std::string> const &);
+                  shell(long const *);
 
                public:
 
-                  typedef enum {has_MCID, has_THETA} CHOOSE_MCID_THETA;
+                  enum class CHOOSE_MCID_THETA {has_MCID, has_THETA};
 
                   CHOOSE_MCID_THETA choose_mcid_theta;
 
-                  /** Element identification number. (Integer > 0)
-                   */
-                  entry_value<long> EID;
+                  // /** Element identification number. (Integer > 0)
+                  //  */
+                  // entry_value<long> EID;
                   /** Property identification number of a `PSHELL`,
                       `PCOMP` or `PLPLANE` entry. (Integer > 0; Default =
                       `EID`)
@@ -139,7 +158,7 @@ namespace dnvgl {
 
                protected:
 
-                  const card *operator() (
+                  card const *operator() (
                      long const *EID, long const *PID,
                      long const *G1, long const *G2,
                      long const *G3, long const *G4,
@@ -149,7 +168,7 @@ namespace dnvgl {
                      double const *T1, double const *T2,
                      double const *T3, double const *T4);
 
-                  const card *operator() (
+                  card const *operator() (
                      long const *EID, long const *PID,
                      long const *G1, long const *G2,
                      long const *G3, long const *G4,
@@ -293,57 +312,57 @@ namespace dnvgl {
     |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`         |    |
     |         | `SA`  | `SB`  |       |       |       |       |       |               |    |
 */
-            class cbeam : public __base::card {
+            class cbeam : public __base::element {
 
             private:
 
                static bdf::types::card head;
 
-               static const entry_type<long> form_EID;
-               static const entry_type<long> form_PID;
-               static const entry_type<long> form_GA;
-               static const entry_type<long> form_GB;
-               static const entry_type<double> form_X1;
-               static const entry_type<long> form_G0;
-               static const entry_type<double> form_X2;
-               static const entry_type<double> form_X3;
-               static const entry_type<double> form_BIT;
-               static const entry_type<std::string> form_OFFT;
-               static const entry_type<std::list<int> > form_PA;
-               static const entry_type<std::list<int> > form_PB;
-               static const entry_type<double> form_W1A;
-               static const entry_type<double> form_W2A;
-               static const entry_type<double> form_W3A;
-               static const entry_type<double> form_W1B;
-               static const entry_type<double> form_W2B;
-               static const entry_type<double> form_W3B;
-               static const entry_type<long> form_SA;
-               static const entry_type<long> form_SB;
+               // entry_type<long> static const form_EID;
+               entry_type<long> static const form_PID;
+               entry_type<long> static const form_GA;
+               entry_type<long> static const form_GB;
+               entry_type<double> static const form_X1;
+               entry_type<long> static const form_G0;
+               entry_type<double> static const form_X2;
+               entry_type<double> static const form_X3;
+               entry_type<double> static const form_BIT;
+               entry_type<std::string> static const form_OFFT;
+               entry_type<std::list<int> > static const form_PA;
+               entry_type<std::list<int> > static const form_PB;
+               entry_type<double> static const form_W1A;
+               entry_type<double> static const form_W2A;
+               entry_type<double> static const form_W3A;
+               entry_type<double> static const form_W1B;
+               entry_type<double> static const form_W2B;
+               entry_type<double> static const form_W3B;
+               entry_type<long> static const form_SA;
+               entry_type<long> static const form_SB;
 
             public:
 
                /** Flag to store whether direction node or direction
                    vector was std::set for cross section direction.
                */
-               typedef enum {
+               enum class CHOOSE_DIR_CODE{
                   /// Element has direction vector entry
                   has_DVEC,
                   /// Element direction defined by direction code
-                  has_DCODE} CHOOSE_DIR_CODE;
+                  has_DCODE};
                CHOOSE_DIR_CODE choose_dir_code;
                /** Flag to store whether 'OFFT' or 'BIT' was std::set.
                 */
-               typedef enum {
+               enum class CHOOSE_OFFT_BIT{
                   /// `OFFT` is std::set for element
                   has_OFFT,
                   /// `BIT` is std::set for element
-                  has_BIT} CHOOSE_OFFT_BIT;
+                  has_BIT};
                CHOOSE_OFFT_BIT choose_offt_bit;
 
-               /** Unique element identification number. (0 <
-                   Integer < 100,000,000)
-               */
-               entry_value<long> EID;
+               // /** Unique element identification number. (0 <
+               //     Integer < 100,000,000)
+               // */
+               // entry_value<long> EID;
                /** Property identification number of `PBEAM`, `PBCOMP`
                    or `PBEAML` entry. (Integer > 0; Default = `EID`)
                */
@@ -467,7 +486,7 @@ namespace dnvgl {
                cbeam(std::list<std::string> const &inp);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return CBEAM; };
+               card_type(void) const { return types::CBEAM; };
 
                virtual void read(const std::list<std::string> &);
 
@@ -546,50 +565,50 @@ namespace dnvgl {
     | `CBAR`  | `EID` | `PID` | `GA`  | `GB`  | `G0`  |       |       | `OFFT` |    |
     |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
 */
-            class cbar : public __base::card {
+            class cbar : public __base::element {
 
             private:
 
                static bdf::types::card head;
 
-               static const entry_type<long> form_EID;
-               static const entry_type<long> form_PID;
-               static const entry_type<long> form_GA;
-               static const entry_type<long> form_GB;
-               static const entry_type<double> form_X1;
-               static const entry_type<long> form_G0;
-               static const entry_type<double> form_X2;
-               static const entry_type<double> form_X3;
-               static const entry_type<std::string> form_OFFT;
-               static const entry_type<std::list<int> > form_PA;
-               static const entry_type<std::list<int> > form_PB;
-               static const entry_type<double> form_W1A;
-               static const entry_type<double> form_W2A;
-               static const entry_type<double> form_W3A;
-               static const entry_type<double> form_W1B;
-               static const entry_type<double> form_W2B;
-               static const entry_type<double> form_W3B;
+               // entry_type<long> static const form_EID;
+               entry_type<long> static const form_PID;
+               entry_type<long> static const form_GA;
+               entry_type<long> static const form_GB;
+               entry_type<double> static const form_X1;
+               entry_type<long> static const form_G0;
+               entry_type<double> static const form_X2;
+               entry_type<double> static const form_X3;
+               entry_type<std::string> static const form_OFFT;
+               entry_type<std::list<int> > static const form_PA;
+               entry_type<std::list<int> > static const form_PB;
+               entry_type<double> static const form_W1A;
+               entry_type<double> static const form_W2A;
+               entry_type<double> static const form_W3A;
+               entry_type<double> static const form_W1B;
+               entry_type<double> static const form_W2B;
+               entry_type<double> static const form_W3B;
 
             public:
 
                const dnvgl::extfem::bdf::cards::types card_type(void) const {
-                  return CBAR;
+                  return types::CBAR;
                };
 
                /** Flag to store whether direction node or direction
                    vector was std::set for cross section direction.
                */
-               typedef enum {
+               enum class CHOOSE_DIR_CODE{
                   /// Element has direction vector entry
                   has_DVEC,
                   /// Element direction defined by direction code
-                  has_DCODE} CHOOSE_DIR_CODE;
+                  has_DCODE};
                CHOOSE_DIR_CODE choose_dir_code;
 
-               /** Unique element identification number. (0 <
-                   Integer < 100,000,000)
-               */
-               entry_value<long> EID;
+               // /** Unique element identification number. (0 <
+               //     Integer < 100,000,000)
+               // */
+               // entry_value<long> EID;
                /** Property identification number of a `PBAR` or
                    `PBARL` entry. (Integer > 0 or blank*; Default =
                    `EID` unless `BAROR` entry has nonzero entry in
@@ -772,22 +791,22 @@ namespace dnvgl {
     | ------- | ----- | ----- | ---- | ---- | - | - | - | - | -- |
     | `CROD`  | `EID` | `PID` | `G1` | `G2` |   |   |   |   |    |
 */
-            class crod : public __base::card {
+            class crod : public __base::element {
 
             private:
 
                static bdf::types::card head;
 
-               static const entry_type<long> form_EID;
-               static const entry_type<long> form_PID;
-               static const entry_type<long> form_G1;
-               static const entry_type<long> form_G2;
+               // entry_type<long> static const form_EID;
+               entry_type<long> static const form_PID;
+               entry_type<long> static const form_G1;
+               entry_type<long> static const form_G2;
 
             public:
 
-               /** Element identification number. (Integer > 0)
-                */
-               entry_value<long> EID;
+               // /** Element identification number. (Integer > 0)
+               //  */
+               // entry_value<long> EID;
                /** Property identification number of a `PROD` entry.
                    (Integer > 0; Default = `EID`)
                */
@@ -804,7 +823,7 @@ namespace dnvgl {
                crod(const std::list<std::string> &inp);
 
                const dnvgl::extfem::bdf::cards::types
-               card_type(void) const { return CROD; };
+               card_type(void) const { return types::CROD; };
 
                virtual void read(const std::list<std::string> &);
 

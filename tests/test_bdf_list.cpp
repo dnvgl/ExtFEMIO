@@ -74,33 +74,33 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
    std::ostringstream stream(std::ostringstream::ate);
 
    SECTION("SHORT") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       stream << obj.format(lval);
       CHECK(stream.str().size() == 8);
       CHECK(stream.str() == "    1234");
    }
 
    SECTION("SHORT (nullptr)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
 
    SECTION("SHORT (void)") {
       std::list<int> llval(lval.value);
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(&llval).size() == 8);
       CHECK(obj.format(&llval) == "    1234");
    }
 
    SECTION("SHORT (nullptr)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
 
    SECTION("SHORT (too long)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       lval.value.push_back(1);
       lval.value.push_back(2);
       lval.value.push_back(3);
@@ -110,14 +110,14 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]" ) {
    }
 
    SECTION("LONG") {
-      bdf::types::base::out_form = bdf::types::LONG;
+      bdf::types::base::out_form = bdf::types::out_form_type::LONG;
       stream << obj.format(lval);
       CHECK(stream.str().size() == 16);
       CHECK(stream.str() == "            1234");
    }
 
    SECTION("FREE") {
-      bdf::types::base::out_form = bdf::types::FREE;
+      bdf::types::base::out_form = bdf::types::out_form_type::FREE;
       stream << obj.format(lval);
       CHECK(stream.str() == "1234");
    }

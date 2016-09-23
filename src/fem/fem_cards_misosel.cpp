@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_misosel[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -91,7 +91,7 @@ namespace dnvgl {
                YIELD(YIELD) {}
 
             const dnvgl::extfem::fem::cards::types
-            misosel::card_type(void) const {return MISOSEL;}
+            misosel::card_type(void) const {return types::MISOSEL;}
 
             std::ostream &misosel::put(std::ostream& os) const {
                if (this->MATNO == -1) return os;

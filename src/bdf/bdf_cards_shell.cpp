@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_shell[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -40,8 +40,8 @@ namespace dnvgl {
          namespace cards {
             namespace __base {
 
-               const entry_type<long> shell::form_EID(
-                  "EID", bdf::type_bounds::bound<long>(&cl1));
+               // const entry_type<long> shell::form_EID(
+               //    "EID", bdf::type_bounds::bound<long>(&cl1));
                const entry_type<long> shell::form_PID(
                   "PID",
                   bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
@@ -71,8 +71,11 @@ namespace dnvgl {
                   "T4", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
 
                shell::shell(const std::list<std::string> &inp) :
-                  __base::card(inp) {};
-            }
+                  __base::element(inp) {};
+
+               shell::shell(long const *EID) :
+                  __base::element(EID) {};
+}
          }
       }
    }

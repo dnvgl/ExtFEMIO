@@ -48,7 +48,7 @@ TEST_CASE("BDF generate 'DISPLACEMENT' header entries", "[bdf_header,displacemen
    std::ostringstream test;
 
    SECTION("first") {
-      case_control::displacement probe({}, case_control::displacement::ALL);
+      case_control::displacement probe({}, case_control::displacement::restype::ALL);
       test << probe;
       CHECK(test.str() == "DISPLACEMENT = ALL\n");
    }
@@ -58,7 +58,7 @@ TEST_CASE("BDF generate 'DISPLACEMENT' header entries", "[bdf_header,displacemen
             new case_control::displacement::print,
             new case_control::displacement::punch,
             new case_control::displacement::real},
-         case_control::displacement::ALL);
+         case_control::displacement::restype::ALL);
       test << probe;
       CHECK(test.str() == "DISPLACEMENT(PRINT, PUNCH, REAL) = ALL\n");
    }

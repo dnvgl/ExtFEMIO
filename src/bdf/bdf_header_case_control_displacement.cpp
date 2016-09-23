@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_header_case_control_displacement[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -40,7 +40,7 @@ namespace dnvgl {
 
                displacement::displacement(
                   std::list<describer*> const &describers, long const &res) :
-                  displacement::displacement(describers, displacement::n, res) {}
+                  displacement::displacement(describers, displacement::restype::n, res) {}
 
                std::ostream &displacement::put(std::ostream &os) const {
                   os << "DISPLACEMENT";
@@ -57,13 +57,13 @@ namespace dnvgl {
                      os << ")";
                   }
                   switch (this->res) {
-                  case displacement::n:
+                  case displacement::restype::n:
                      os << " = " << this->res_n;
                      break;
-                  case displacement::ALL:
+                  case displacement::restype::ALL:
                      os << " = ALL";
                      break;
-                  case displacement::NONE:
+                  case displacement::restype::NONE:
                      os << " = NONE";
                      break;
                   }

@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_gelth[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -71,7 +71,7 @@ namespace dnvgl {
                card(), GEONO(GEONO), TH(TH), NINT(NINT) {}
 
             const dnvgl::extfem::fem::cards::types
-            gelth::card_type(void) const {return GELTH;}
+            gelth::card_type(void) const {return types::GELTH;}
 
             std::ostream &gelth::put(std::ostream& os) const {
                if (this->GEONO == -1) return os;

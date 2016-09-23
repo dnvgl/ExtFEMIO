@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_gsetmemb[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -73,7 +73,7 @@ namespace dnvgl {
             }
 
             gsetmemb::gsetmemb(void) :
-               gsetmemb(-1, 0, 0, UNDEF_TYPE, UNDEF_ORIGIN) {}
+               gsetmemb(-1, 0, 0, types::UNDEF_TYPE, origins::UNDEF_ORIGIN) {}
 
             gsetmemb::gsetmemb(long const &NFIELD,
                                long const &ISREF,
@@ -101,7 +101,7 @@ namespace dnvgl {
 
             const dnvgl::extfem::fem::cards::types
                gsetmemb::card_type(void) const {
-               return GSETMEMB;
+               return cards::types::GSETMEMB;
             }
 
             std::ostream &gsetmemb::put(std::ostream& os) const {
@@ -122,9 +122,9 @@ namespace dnvgl {
                                     static_cast<std::vector<long int>::size_type>(1024))))
                         << this->_form_ISREF.format(this->ISREF)
                         << this->_form_INDEX.format(index++)
-                        << this->_form_ISTYPE.format(this->ISTYPE)
+                        << this->_form_ISTYPE.format(static_cast<long>(this->ISTYPE))
                         << std::endl << dnvgl::extfem::fem::types::card().format()
-                        << this->_form_ISORIG.format(this->ISORIG);
+                        << this->_form_ISORIG.format(static_cast<long>(this->ISORIG));
                      field += 5;
                      pos = 1;
                   }
@@ -145,17 +145,17 @@ namespace dnvgl {
 
                const size_t types_map_pair_entries = 2;
                const std::pair<long, gsetmemb::types> types_map_pairs[types_map_pair_entries] = {
-                  std::make_pair(1, gsetmemb::NODE_SET),
-                  std::make_pair(2, gsetmemb::ELEM_SET)
+                  std::make_pair(1, gsetmemb::types::NODE_SET),
+                  std::make_pair(2, gsetmemb::types::ELEM_SET)
                };
 
                const size_t origins_map_pair_entries = 5;
                const std::pair<long, gsetmemb::origins> origins_map_pairs[origins_map_pair_entries] = {
-                  std::make_pair(0, gsetmemb::UNDEF_ORIGIN),
-                  std::make_pair(1, gsetmemb::POINT_ORIGIN),
-                  std::make_pair(2, gsetmemb::LINE_OR_CURVE_ORIGIN),
-                  std::make_pair(3, gsetmemb::SURFACE_ORIGIN),
-                  std::make_pair(4, gsetmemb::BODY_ORIGIN)
+                  std::make_pair(0, gsetmemb::origins::UNDEF_ORIGIN),
+                  std::make_pair(1, gsetmemb::origins::POINT_ORIGIN),
+                  std::make_pair(2, gsetmemb::origins::LINE_OR_CURVE_ORIGIN),
+                  std::make_pair(3, gsetmemb::origins::SURFACE_ORIGIN),
+                  std::make_pair(4, gsetmemb::origins::BODY_ORIGIN)
                };
             }
 

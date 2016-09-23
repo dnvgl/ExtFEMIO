@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_bar_prop[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -50,7 +50,7 @@ namespace dnvgl {
                   card(inp) {}
 
                const dnvgl::extfem::bdf::cards::types
-               bar_prop::card_type(void) const { return BAR_PROP; }
+               bar_prop::card_type(void) const { return types::BAR_PROP; }
             }
          }
       }

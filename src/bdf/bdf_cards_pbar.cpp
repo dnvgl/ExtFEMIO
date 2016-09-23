@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   char const cID[]
+   char const cID_bdf_cards_pbar[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -168,7 +168,7 @@ namespace dnvgl {
             }
 
             dnvgl::extfem::bdf::cards::types const
-            pbar::card_type(void) const { return PBAR; };
+            pbar::card_type(void) const { return types::PBAR; };
 
             void pbar::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

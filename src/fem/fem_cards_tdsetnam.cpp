@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_tdsetnam[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -169,7 +169,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::fem::cards::types
-            tdsetnam::card_type(void) const { return TDSETNAM; };
+            tdsetnam::card_type(void) const { return types::TDSETNAM; };
 
             std::ostream &tdsetnam::put(std::ostream& os) const {
                if (this->NFIELD == -1) return os;

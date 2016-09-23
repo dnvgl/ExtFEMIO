@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_hsuptran[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -130,7 +130,7 @@ namespace dnvgl {
 
             const dnvgl::extfem::fem::cards::types
             hsuptran::card_type(void) const {
-               return HSUPTRAN;
+               return types::HSUPTRAN;
             }
 
             std::ostream &hsuptran::put(std::ostream& os) const {

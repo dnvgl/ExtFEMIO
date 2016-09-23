@@ -104,45 +104,45 @@ TEST_CASE("BDF int types output.", "[bdf_types]" ) {
    long lval(1);
 
    SECTION("SHORT") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(lval).size() == 8);
       CHECK(obj.format(lval) == "       1");
    }
 
    SECTION("SHORT (too long)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       lval = 123456789;
       CHECK_THROWS(obj.format(lval));
    }
 
    SECTION("SHORT (nullptr)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
 
    SECTION("SHORT (void)") {
       long lval = 1;
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(&lval).size() == 8);
       CHECK(obj.format(&lval) == "       1");
    }
 
    SECTION("SHORT (nullptr, void)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
 
    SECTION("LONG") {
-      bdf::types::base::out_form = bdf::types::LONG;
+      bdf::types::base::out_form = bdf::types::out_form_type::LONG;
       std::string res(obj.format(lval));
       CHECK(obj.format(lval).size() == 16);
       CHECK(obj.format(lval) == "               1");
    }
 
    SECTION("FREE") {
-      bdf::types::base::out_form = bdf::types::FREE;
+      bdf::types::base::out_form = bdf::types::out_form_type::FREE;
       std::string res(obj.format(lval));
       CHECK(obj.format(lval) == "1");
    }
@@ -157,7 +157,7 @@ TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]") {
 
       std::locale::global(locsave);
 
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(lval) == "    1234");
    }
 }

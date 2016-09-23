@@ -54,7 +54,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
    }
 
    SECTION("first") {
-      case_control::spcforces probe({}, case_control::spcforces::ALL);
+      case_control::spcforces probe({}, case_control::spcforces::restype::ALL);
       test << probe;
       CHECK(test.str() == "SPCFORCES = ALL\n");
    }
@@ -63,7 +63,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
       case_control::spcforces probe({
             new case_control::spcforces::print,
             new case_control::spcforces::nozprint
-         }, case_control::spcforces::ALL);
+         }, case_control::spcforces::restype::ALL);
       test << probe;
       CHECK(test.str() == "SPCFORCES(PRINT, NOZPRINT) = ALL\n");
    }
@@ -80,7 +80,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
                new case_control::spcforces::punch,
                new case_control::spcforces::print,
                new case_control::spcforces::imag
-         }, case_control::spcforces::ALL);
+         }, case_control::spcforces::restype::ALL);
       test << probe;
       CHECK(test.str() == "SPCFORCES(SORT2, PUNCH, PRINT, IMAG) = ALL\n");
    }
@@ -88,7 +88,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
    SECTION("PHASE") {
       case_control::spcforces probe({
             new case_control::spcforces::phase
-         }, case_control::spcforces::NONE);
+         }, case_control::spcforces::restype::NONE);
       test << probe;
       CHECK(test.str() == "SPCFORCES(PHASE) = NONE\n");
    }
@@ -110,7 +110,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
                new case_control::spcforces::print,
                new case_control::spcforces::rall,
                new case_control::spcforces::norprint
-         }, case_control::spcforces::ALL);
+         }, case_control::spcforces::restype::ALL);
       test << probe;
       CHECK(test.str() == "SPCFORCES(PRINT, RALL, NORPRINT) = ALL\n");
    }

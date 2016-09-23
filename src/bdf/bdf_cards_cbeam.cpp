@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_cbeam[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -42,8 +42,8 @@ namespace dnvgl {
 
          namespace cards {
 
-            const entry_type<long> cbeam::form_EID(
-               "EID", bound<long>(&lc1));
+            // const entry_type<long> cbeam::form_EID(
+            //    "EID", bound<long>(&lc1));
             const entry_type<long> cbeam::form_PID("PID");
             const entry_type<long> cbeam::form_GA("GA");
             const entry_type<long> cbeam::form_GB("GB");
@@ -84,7 +84,7 @@ namespace dnvgl {
                "SB", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
             cbeam::cbeam(std::list<std::string> const &inp) :
-               card(inp) {
+               __base::element(inp) {
                this->read(inp);
             }
 
@@ -141,12 +141,12 @@ namespace dnvgl {
                   try {
                      form_BIT.set_value(BIT, *pos);
                      OFFT.is_value = false;
-                     choose_offt_bit = has_BIT;
+                     choose_offt_bit = CHOOSE_OFFT_BIT::has_BIT;
                   }
                   catch (errors::float_error) {
                      form_OFFT.set_value(OFFT, *pos);
                      BIT.is_value = false;
-                     choose_offt_bit = has_OFFT;
+                     choose_offt_bit = CHOOSE_OFFT_BIT::has_OFFT;
                   }
                   ++pos;
                case 7:
@@ -161,18 +161,18 @@ namespace dnvgl {
                            "CBEAM", "Incomplete direction vector.");
                      }
                      G0.is_value = false;
-                     choose_dir_code = has_DVEC;
+                     choose_dir_code = CHOOSE_DIR_CODE::has_DVEC;
                   }
                   catch (errors::float_error) {
                      form_G0.set_value(G0, *pos);
                      X1.is_value = false;
-                     choose_dir_code = has_DCODE;
+                     choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;
                   }
                   ++pos;
                   form_GB.set_value(GB, *(pos++));
                   form_GA.set_value(GA, *(pos++));
                   form_PID.set_value(PID, *(pos++));
-                  form_EID.set_value(EID, *(pos++));
+                  // form_EID.set_value(EID, *(pos++));
                   break;
                default:
                   throw errors::parse_error(
@@ -188,7 +188,7 @@ namespace dnvgl {
                if (!PB.is_value) form_PB.set_value(PB, "");
                if (!PA.is_value) form_PA.set_value(PA, "");
                if (!(BIT.is_value || OFFT.is_value)) {
-                  choose_offt_bit = has_OFFT;
+                  choose_offt_bit = CHOOSE_OFFT_BIT::has_OFFT;
                   form_OFFT.set_value(OFFT, "");
                }
             }

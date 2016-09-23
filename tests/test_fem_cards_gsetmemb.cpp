@@ -61,8 +61,8 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
       CHECK(probe.NFIELD == 23);
       CHECK(probe.ISREF == 174);
       CHECK(probe.INDEX == 1);
-      CHECK(probe.ISTYPE == 1);
-      CHECK(probe.ISORIG == 0);
+      CHECK(probe.ISTYPE == gsetmemb::types::NODE_SET);
+      CHECK(probe.ISORIG == gsetmemb::origins::UNDEF_ORIGIN);
       CHECK(probe.IRMEMB == std::vector<long>({
          12760, 12766, 12783, 12787, 12799, 12817, 12842, 12850,
          12858, 12859, 12860, 12883, 12891, 12918, 12919, 12930,
@@ -80,8 +80,8 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
       CHECK(probe.NFIELD == 5);
       CHECK(probe.ISREF == 174);
       CHECK(probe.INDEX == 1);
-      CHECK(probe.ISTYPE == 2);
-      CHECK(probe.ISORIG == 0);
+      CHECK(probe.ISTYPE == gsetmemb::types::ELEM_SET);
+      CHECK(probe.ISORIG == gsetmemb::origins::UNDEF_ORIGIN);
       CHECK(probe.IRMEMB == std::vector<long>({}));
    }
 
@@ -96,8 +96,8 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
       CHECK(probe.NFIELD == 8);
       CHECK(probe.ISREF == 175);
       CHECK(probe.INDEX == 1);
-      CHECK(probe.ISTYPE == 2);
-      CHECK(probe.ISORIG == 0);
+      CHECK(probe.ISTYPE == gsetmemb::types::ELEM_SET);
+      CHECK(probe.ISORIG == gsetmemb::origins::UNDEF_ORIGIN);
       CHECK(probe.IRMEMB.size() == 3);
       CHECK(probe.IRMEMB == std::vector<long>({875, 887, 900}));
    }
@@ -367,8 +367,8 @@ TEST_CASE("FEM GSETMEMB definitions.", "[fem_gsetmemb]" ) {
       CHECK(probe.NFIELD == 1024);
       CHECK(probe.ISREF == 176);
       CHECK(probe.INDEX == 1);
-      CHECK(probe.ISTYPE == 2);
-      CHECK(probe.ISORIG == 0);
+      CHECK(probe.ISTYPE == gsetmemb::types::ELEM_SET);
+      CHECK(probe.ISORIG == gsetmemb::origins::UNDEF_ORIGIN);
       CHECK(probe.IRMEMB.size() == 1019);
       CHECK(probe.IRMEMB == std::vector<long>({
          65977, 65978, 65807, 62174, 65808, 65809, 58683, 60294,
@@ -513,7 +513,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
    }
 
    SECTION("simple") {
-      gsetmemb probe(5, 2, 3, gsetmemb::ELEM_SET, gsetmemb::LINE_OR_CURVE_ORIGIN);
+      gsetmemb probe(5, 2, 3, gsetmemb::types::ELEM_SET, gsetmemb::origins::LINE_OR_CURVE_ORIGIN);
       test << probe;
       CHECK(test.str() ==
             "GSETMEMB+5.000000000e+00+2.000000000e+00+3.000000000e+00+2.000000000e+00\n"
@@ -522,7 +522,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
 
    SECTION("simple (2)") {
       std::vector<long> ref_irmemb(0);
-      gsetmemb probe(5, 2, 3, gsetmemb::NODE_SET, gsetmemb::POINT_ORIGIN, ref_irmemb);
+      gsetmemb probe(5, 2, 3, gsetmemb::types::NODE_SET, gsetmemb::origins::POINT_ORIGIN, ref_irmemb);
       test << probe;
       CHECK(test.str() ==
             "GSETMEMB+5.000000000e+00+2.000000000e+00+3.000000000e+00+1.000000000e+00\n"
@@ -530,7 +530,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
    }
 
    SECTION("calc NFIELD") {
-      gsetmemb probe(2, 3, gsetmemb::ELEM_SET, gsetmemb::BODY_ORIGIN);
+      gsetmemb probe(2, 3, gsetmemb::types::ELEM_SET, gsetmemb::origins::BODY_ORIGIN);
       test << probe;
       CHECK(test.str() ==
             "GSETMEMB+5.000000000e+00+2.000000000e+00+3.000000000e+00+2.000000000e+00\n"
@@ -539,7 +539,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
 
    SECTION("calc NFIELD (2)") {
       std::vector<long> ref_irmemb(0);
-      gsetmemb probe(2, 3, gsetmemb::ELEM_SET, gsetmemb::SURFACE_ORIGIN, ref_irmemb);
+      gsetmemb probe(2, 3, gsetmemb::types::ELEM_SET, gsetmemb::origins::SURFACE_ORIGIN, ref_irmemb);
       test << probe;
       CHECK(test.str() ==
             "GSETMEMB+5.000000000e+00+2.000000000e+00+3.000000000e+00+2.000000000e+00\n"
@@ -810,7 +810,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
       for (int i = 0; i < 1019; i++)
          ref_irmemb[i] = i + 10;
 
-      gsetmemb probe(2, 3, gsetmemb::NODE_SET, gsetmemb::LINE_OR_CURVE_ORIGIN, ref_irmemb);
+      gsetmemb probe(2, 3, gsetmemb::types::NODE_SET, gsetmemb::origins::LINE_OR_CURVE_ORIGIN, ref_irmemb);
       test << probe;
       CHECK(test.str() == ref_1 + ref_2 + ref_3);
    }
@@ -819,7 +819,7 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]" ) {
       for (int i = 0; i < 1029; i++)
          ref_irmemb[i] = i + 10;
 
-      gsetmemb probe(2, 3, gsetmemb::NODE_SET, gsetmemb::LINE_OR_CURVE_ORIGIN, ref_irmemb);
+      gsetmemb probe(2, 3, gsetmemb::types::NODE_SET, gsetmemb::origins::LINE_OR_CURVE_ORIGIN, ref_irmemb);
       test << probe;
       CHECK(test.str() == ref_1 + ref_2 + ref_3 +
             "GSETMEMB+1.500000000e+01+2.000000000e+00+4.000000000e+00+1.000000000e+00\n"
@@ -844,8 +844,8 @@ TEST_CASE("FEM GSETMEMB conversion from own output.", "[fem_gsetmemb,in/out]") {
       CHECK(probe.NFIELD == 5);
       CHECK(probe.ISREF == 2);
       CHECK(probe.INDEX == 3);
-      CHECK(probe.ISTYPE == gsetmemb::ELEM_SET);
-      CHECK(probe.ISORIG == gsetmemb::SURFACE_ORIGIN);
+      CHECK(probe.ISTYPE == gsetmemb::types::ELEM_SET);
+      CHECK(probe.ISORIG == gsetmemb::origins::SURFACE_ORIGIN);
       CHECK(probe.IRMEMB == std::vector<long>({}));
    }
 }

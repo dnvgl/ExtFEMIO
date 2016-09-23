@@ -83,7 +83,7 @@ n\\
 
                class sol : public __base::entry {
                public:
-                  typedef enum {
+                  enum class sol_no_type {
                      /** Statics with Options:
                            Linear Steady State Heat Transfer
                            Alternate Reduction
@@ -142,9 +142,9 @@ n\\
                      /// Design Optimization
                      DESOPT  =200,
                      /// Nonlinear static and transient analysis
-                     NONLIN  =400} sol_no_type;
+                     NONLIN  =400};
                   sol_no_type sol_no;
-                  sol(sol_no_type const &sol_no=SESTATIC);
+                  sol(sol_no_type const &sol_no=sol_no_type::SESTATIC);
                   sol(long const&);
 
                private:
@@ -352,14 +352,14 @@ ECHO=BOTH,PUNCH,FILE
                   */
                   class punch : public describer {
                   public:
-                     typedef enum {
+                     enum class option_type{
                         SORT,
                         BOTH,
                         /** In `SOL 200`, a comlete unsorted Bulk Data
                             file is written to the punch file with
                             updated design model entries.
                         */
-                        NEWBULK} option_type;
+                        NEWBULK};
 
                   private:
                      std::list<option_type> options;
@@ -783,7 +783,7 @@ DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
                      virtual std::string const str(void) const;
                   };
 
-                  typedef enum {
+                  enum class restype{
                      /** Displacements for all points will be output.
                       */
                      ALL,
@@ -796,14 +796,14 @@ DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
                          this `SET` command will be output.
                          (Integer>0)
                       */
-                     n} restype;
+                     n};
                private:
                   std::list<std::unique_ptr<describer> > describers;
                   restype res;
                   long res_n;
                   displacement(std::list<describer*> const &, restype const &res, long const &);
                public:
-                  displacement(std::list<describer*> const &, restype const &res=NONE);
+                  displacement(std::list<describer*> const &, restype const &res=restype::NONE);
                   displacement(std::list<describer*> const &, long const &);
                private:
                   std::ostream &put(std::ostream&) const;
@@ -1083,7 +1083,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
                      cid(void);
                      virtual std::string const str(void) const;
                   };
-                  typedef enum {
+                  enum class restype{
                      /** Single-point forces of constraint for all
                          points will be output. See Remarks 2. and 5.
                      */
@@ -1098,14 +1098,14 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
                          numbers that appear on this SET command will
                          be output. (Integer>0)
                      */
-                     n} restype;
+                     n};
                private:
                   std::list<std::unique_ptr<describer> > describers;
                   restype res;
                   long res_n;
                   spcforces(std::list<describer*> const &, restype const &res, long const &);
                public:
-                  spcforces(std::list<describer*> const &, restype const &res=NONE);
+                  spcforces(std::list<describer*> const &, restype const &res=restype::NONE);
                   spcforces(std::list<describer*> const &, long const &res);
                private:
                   std::ostream &put(std::ostream&) const;
@@ -1452,7 +1452,7 @@ Remarks:
                      };
 
                public:
-                  typedef enum {
+                  enum class restype{
                      /** Stresses for all elements will be output.
                       */
                      ALL,
@@ -1464,14 +1464,14 @@ Remarks:
                      n,
                      /** No element stress will be output.
                       */
-                     NONE} restype;
+                     NONE};
                private:
                   std::list<std::unique_ptr<describer> > describers;
                   restype res;
                   long res_n;
                   stress(std::list<describer*> const &, restype const &, long const &);
                public:
-                  stress(std::list<describer*> const &, restype const &res=NONE);
+                  stress(std::list<describer*> const &, restype const &res=restype::NONE);
                   stress(std::list<describer*> const &, long const &);
                private:
                   std::ostream &put(std::ostream&) const;

@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_bldep[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -114,7 +114,7 @@ namespace dnvgl {
                      DEPDOF, INDEPDOF, b) {}
 
             const dnvgl::extfem::fem::cards::types
-            bldep::card_type(void) const {return BLDEP;}
+            bldep::card_type(void) const {return types::BLDEP;}
 
             std::ostream &bldep::put(std::ostream& os) const {
                if (this->NODENO == -1) return os;

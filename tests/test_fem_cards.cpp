@@ -180,12 +180,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       for (auto p : l) msg += p + "\n";
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::IDENT);
+      CHECK(current->card_type() == cards::types::IDENT);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000
       CHECK(static_cast<ident*>(current.get())->SLEVEL == 1);
       CHECK(static_cast<ident*>(current.get())->SELTYP == 1);
-      CHECK(static_cast<ident*>(current.get())->SELMOD == 3);
+      CHECK(static_cast<ident*>(current.get())->SELMOD == ident::mod_type::DIM_3D);
    }
 
    SECTION("Checking dispatch [text].") {
@@ -195,7 +195,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::TEXT);
+      CHECK(current->card_type() == cards::types::TEXT);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456|2
       // TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
       //         CONVERSION DETAILS:
@@ -222,7 +222,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::DATE);
+      CHECK(current->card_type() == cards::types::DATE);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
       //         DATE TIME:  11/03/2015 09:46:08
@@ -271,7 +271,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GNODE);
+      CHECK(current->card_type() == cards::types::GNODE);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005
       CHECK(static_cast<gnode*>(current.get())->NODEX == 1);
@@ -288,7 +288,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GCOORD);
+      CHECK(current->card_type() == cards::types::GCOORD);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004
       CHECK(static_cast<gcoord*>(current.get())->NODENO == 1);
@@ -304,13 +304,13 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GELMNT1);
+      CHECK(current->card_type() == cards::types::GELMNT1);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000
       //          6.08000000e+002 6.18000000e+002 5.71000000e+002 5.65000000e+002
       CHECK(static_cast<gelmnt1*>(current.get())->ELNOX == 339);
       CHECK(static_cast<gelmnt1*>(current.get())->ELNO == 854);
-      CHECK(static_cast<gelmnt1*>(current.get())->ELTYP == 24);
+      CHECK(static_cast<gelmnt1*>(current.get())->ELTYP == elements::el_types::FQUS_FFQ);
       CHECK(static_cast<gelmnt1*>(current.get())->ELTYAD == 0);
       CHECK(static_cast<gelmnt1*>(current.get())->NODIN == std::vector<long>({
                608, 618, 571, 565}));
@@ -323,7 +323,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GELREF1);
+      CHECK(current->card_type() == cards::types::GELREF1);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GELREF1  4.64000000e+002 3.00000000e+000 0.00000000e+000 0.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -353,7 +353,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GBARM);
+      CHECK(current->card_type() == cards::types::GBARM);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001
       //          1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -374,7 +374,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GBEAMG);
+      CHECK(current->card_type() == cards::types::GBEAMG);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008
       //          5.93000000e+008 1.57380000e+007 0.00000000e+000 1.00000000e-008
@@ -404,7 +404,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GECCEN);
+      CHECK(current->card_type() == cards::types::GECCEN);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000
       CHECK(static_cast<geccen*>(current.get())->ECCNO == 1372);
@@ -420,7 +420,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GELTH);
+      CHECK(current->card_type() == cards::types::GELTH);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<gelth*>(current.get())->GEONO == 654394);
@@ -436,7 +436,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GIORH);
+      CHECK(current->card_type() == cards::types::GIORH);
       // GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002
       //          1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000
       //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -461,7 +461,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GUSYI);
+      CHECK(current->card_type() == cards::types::GUSYI);
       // GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002
       //          1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000
       //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -489,7 +489,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GLSEC);
+      CHECK(current->card_type() == cards::types::GLSEC);
       // GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001
       //          1.40000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -512,7 +512,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GPIPE);
+      CHECK(current->card_type() == cards::types::GPIPE);
       // GPIPE    6.54391000e+005 0.00000000e+000 3.12094257e-001 1.56047128e-001
       //          1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<gpipe*>(current.get())->GEONO == 654391);
@@ -532,7 +532,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BLDEP);
+      CHECK(current->card_type() == cards::types::BLDEP);
       // BLDEP    1.11140000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000
       //          1.00000000e+000 1.00000000e+000 1.00000000e+000 0.00000000e+000
       //          1.00000000e+000 6.00000000e+000 2.27000996e+004 0.00000000e+000
@@ -568,7 +568,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BNBCD);
+      CHECK(current->card_type() == cards::types::BNBCD);
       // BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000
       //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
       CHECK(static_cast<bnbcd*>(current.get())->NODENO == 23047);
@@ -584,12 +584,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BELFIX);
+      CHECK(current->card_type() == cards::types::BELFIX);
       // BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000
       //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
       //          1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<belfix*>(current.get())->FIXNO == 23047);
-      CHECK(static_cast<belfix*>(current.get())->OPT == belfix::FIXATION);
+      CHECK(static_cast<belfix*>(current.get())->OPT == belfix::n_opt::FIXATION);
       CHECK(static_cast<belfix*>(current.get())->TRANO == 0);
       CHECK(static_cast<belfix*>(current.get())->A == std::vector<double>({
                1., 1., 1., 1., 1., 0.}));
@@ -602,7 +602,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BNDISPL);
+      CHECK(current->card_type() == cards::types::BNDISPL);
       // BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
       //          2.30460000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -624,7 +624,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BNLOAD);
+      CHECK(current->card_type() == cards::types::BNLOAD);
       // BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       //          1.52200000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
       //          2.00000000e+006 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -646,7 +646,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::MGSPRNG);
+      CHECK(current->card_type() == cards::types::MGSPRNG);
       // MGSPRNG  6.90000000e+001 6.00000000e+000 1.00000000e+008 0.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -671,14 +671,14 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GSETMEMB);
+      CHECK(current->card_type() == cards::types::GSETMEMB);
       // GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<gsetmemb*>(current.get())->NFIELD == 5);
       CHECK(static_cast<gsetmemb*>(current.get())->ISREF == 174);
       CHECK(static_cast<gsetmemb*>(current.get())->INDEX == 1);
-      CHECK(static_cast<gsetmemb*>(current.get())->ISTYPE == gsetmemb::ELEM_SET);
-      CHECK(static_cast<gsetmemb*>(current.get())->ISORIG == gsetmemb::UNDEF_ORIGIN);
+      CHECK(static_cast<gsetmemb*>(current.get())->ISTYPE == gsetmemb::types::ELEM_SET);
+      CHECK(static_cast<gsetmemb*>(current.get())->ISORIG == gsetmemb::origins::UNDEF_ORIGIN);
       CHECK(static_cast<gsetmemb*>(current.get())->IRMEMB ==
             std::vector<long>(0));
    }
@@ -690,7 +690,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GUNIVEC);
+      CHECK(current->card_type() == cards::types::GUNIVEC);
       // GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000
       CHECK(static_cast<gunivec*>(current.get())->TRANSNO == 517);
       CHECK(static_cast<gunivec*>(current.get())->UNIX == 0.);
@@ -705,7 +705,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::MISOSEL);
+      CHECK(current->card_type() == cards::types::MISOSEL);
       // MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000
       //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<misosel*>(current.get())->MATNO == 66);
@@ -723,7 +723,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::MORSMEL);
+      CHECK(current->card_type() == cards::types::MORSMEL);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // MORSMEL   8.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00
       //           0.00000000E+00  1.07820425E+11  3.14079724E+10  1.41541114E+11
@@ -757,7 +757,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::TDSETNAM);
+      CHECK(current->card_type() == cards::types::TDSETNAM);
       // TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000
       //         KEY_HOLE_ROOF
       CHECK(static_cast<tdsetnam*>(current.get())->NFIELD == 4);
@@ -777,7 +777,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::TDSUPNAM);
+      CHECK(current->card_type() == cards::types::TDSUPNAM);
       // TDSUPNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000
       //         KEY_HOLE_ROOF
       CHECK(static_cast<tdsupnam*>(current.get())->NFIELD == 4);
@@ -797,7 +797,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::GELMNT2);
+      CHECK(current->card_type() == cards::types::GELMNT2);
       // GELMNT2   1.000000000e+00 1.000000000e+00 1.000000000e+00 0.00000000E+00
       //           1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
       //           1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
@@ -831,7 +831,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::HSUPSTAT);
+      CHECK(current->card_type() == cards::types::HSUPSTAT);
       // HSUPSTAT  9.000000000e+00 1.000000000e+00 2.32998000E+05  6.00000000E+00
       //           2.30333000E+05  1.26810000E+05  0.000000000e+00 2.00000000E+00
       //          -1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
@@ -853,7 +853,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::HSUPTRAN);
+      CHECK(current->card_type() == cards::types::HSUPTRAN);
       // HSUPTRAN  1.800000000e+01 2.000000000e+00 1.000000000e+00 0.00000000E+00
       //           0.000000000e+00 0.000000000e+00 0.000000000e+00 1.00000000E+00
       //           0.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
@@ -886,7 +886,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::HIERARCH);
+      CHECK(current->card_type() == cards::types::HIERARCH);
       // HIERARCH  9.000000000e+00 1.000000000e+00 2.000000000e+00 1.00000000E+00
       //           2.000000000e+00 0.000000000e+00 0.000000000e+00 1.00000000E+00
       //           2.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
@@ -909,7 +909,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::TDLOAD);
+      CHECK(current->card_type() == cards::types::TDLOAD);
       // TDLOAD    4.000000000e+00 1.000000000e+00 1.04000000E+02  0.00000000E+00
       //         LC_1
       CHECK(static_cast<tdload*>(current.get())->NFIELD == 4);
@@ -928,7 +928,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BSELL);
+      CHECK(current->card_type() == cards::types::BSELL);
       // BSELL     1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
       //           1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00
       CHECK(static_cast<bsell*>(current.get())->LC == 1);
@@ -946,7 +946,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BNBCD);
+      CHECK(current->card_type() == cards::types::BNBCD);
       // BNBCD     3.88350000E+04  6.000000000e+00 4.000000000e+00 4.00000000E+00
       //           4.000000000e+00 4.000000000e+00 4.000000000e+00 4.00000000E+00
       CHECK(static_cast<bnbcd*>(current.get())->NODENO == 38835);
@@ -962,7 +962,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BEUSLO);
+      CHECK(current->card_type() == cards::types::BEUSLO);
       // BEUSLO    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
       //           1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00
       //           1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04
@@ -988,7 +988,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == cards::BNLOAD);
+      CHECK(current->card_type() == cards::types::BNLOAD);
       // BNLOAD    1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000e+00
       //           1.000000000e+00 3.000000000e+00 1.100000000e+00 1.20000000e+00
       //           1.300000000e+00 0.000000000e+00 0.000000000e+00 0.00000000e+00
@@ -1010,7 +1010,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       CAPTURE(msg);
       __base::card::card_split(l, entries);
       cards::dispatch(entries, current);
-      CHECK(current->card_type() == IEND);
+      CHECK(current->card_type() == cards::types::IEND);
       // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
       // IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
       CHECK(static_cast<iend*>(current.get())->CONT == 0);
@@ -1022,7 +1022,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       std::ostringstream test;
 
       cards.push_back(std::make_unique<ident>(
-                         1, 1, ident::DIM_3D));
+                         1, 1, ident::mod_type::DIM_3D));
       cards.push_back(std::make_unique<text>(
                          0, 0,
                          std::vector<std::string>({
@@ -1044,7 +1044,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       cards.push_back(std::make_unique<gcoord>(
                          1, 11152.5, 1800., 2100.));
       cards.push_back(std::make_unique<gelmnt1>(
-                         339, 854, elements::FQUS_FFQ,
+                         339, 854, elements::el_types::FQUS_FFQ,
                          std::vector<long>({608, 618, 571, 565})));
       cards.push_back(std::make_unique<gelref1>(
                          464, 3, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
@@ -1081,7 +1081,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
       cards.push_back(std::make_unique<bnbcd>(
                          23047, std::vector<long>({1, 1, 1, 1, 1, 1})));
       cards.push_back(std::make_unique<belfix>(
-                         23047, belfix::FIXATION, 0,
+                         23047, belfix::n_opt::FIXATION, 0,
                          std::vector<double>({1., 1., 1., 1., 1., 0.})));
       cards.push_back(std::make_unique<bndispl>(
                          2, 1, 23046,
@@ -1099,7 +1099,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
                                std::vector<double>{0., 0., 0., 0., 0., 0.},
                                std::vector<double>{0., 0., 0., 0., 0., 0.}})));
       cards.push_back(std::make_unique<gsetmemb>(
-                         5, 174, 1, gsetmemb::ELEM_SET, gsetmemb::UNDEF_ORIGIN));
+                         5, 174, 1, gsetmemb::types::ELEM_SET, gsetmemb::origins::UNDEF_ORIGIN));
       cards.push_back(std::make_unique<gunivec>(
                          517, 0., 0., -1.));
       cards.push_back(std::make_unique<misosel>(

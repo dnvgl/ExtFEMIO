@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_giorh[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -102,7 +102,7 @@ namespace dnvgl {
                NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
 
             dnvgl::extfem::fem::cards::types const
-            giorh::card_type(void) const {return GIORH;}
+            giorh::card_type(void) const {return types::GIORH;}
 
             std::ostream &giorh::put(std::ostream& os) const {
                if (this->GEONO == -1) return os;

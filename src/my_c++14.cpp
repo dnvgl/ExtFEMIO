@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_my_cpp14[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif

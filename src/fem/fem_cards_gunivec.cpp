@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_gunivec[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -72,7 +72,7 @@ namespace dnvgl {
                UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
             const dnvgl::extfem::fem::cards::types
-            gunivec::card_type(void) const {return GUNIVEC;}
+            gunivec::card_type(void) const {return types::GUNIVEC;}
 
             std::ostream &gunivec::put(std::ostream& os) const {
                if (this->TRANSNO == -1) return os;

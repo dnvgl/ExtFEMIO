@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_ident[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -60,10 +60,10 @@ namespace dnvgl {
                switch (_form_SELMOD(*(pos++))) {
                case 0:
                case 3:
-                  SELMOD = DIM_3D;
+                  SELMOD = mod_type::DIM_3D;
                   break;
                case 2:
-                  SELMOD = DIM_2D;
+                  SELMOD = mod_type::DIM_2D;
                   break;
                default:
                   throw dnvgl::extfem::fem::errors::parse_error("IDENT", "Error in selmod, value not 0, 2, or 3.");
@@ -71,21 +71,21 @@ namespace dnvgl {
             }
 
             ident::ident(void) :
-               ident(-1, 0, ident::INVALID) {}
+               ident(-1, 0, ident::mod_type::INVALID) {}
 
             ident::ident(const long &SLEVEL, const long &SELTYP,
                          const ident::mod_type &SELMOD) :
                SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
 
             const types
-            ident::card_type(void) const { return IDENT; };
+            ident::card_type(void) const { return types::IDENT; };
 
             std::ostream &ident::put(std::ostream& os) const {
-               if (this->SELMOD == ident::INVALID) return os;
+               if (this->SELMOD == ident::mod_type::INVALID) return os;
                os << ident::head.format()
                   << this->_form_SLEVEL.format(this->SLEVEL)
                   << this->_form_SELTYP.format(this->SELTYP)
-                  << this->_form_SELMOD.format(this->SELMOD);
+                  << this->_form_SELMOD.format(static_cast<long>(this->SELMOD));
                return os << std::endl;
             }
          }

@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_pbeaml[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -182,7 +182,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::bdf::cards::types
-            pbeaml::card_type(void) const { return PBEAML; };
+            pbeaml::card_type(void) const { return types::PBEAML; };
 
             void pbeaml::collect_outdata(
                std::list<std::unique_ptr<format_entry> > &res) const {

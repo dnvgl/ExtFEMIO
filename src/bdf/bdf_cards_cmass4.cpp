@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_cmass4[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -43,32 +43,32 @@ namespace dnvgl {
       namespace bdf {
          namespace cards {
 
-            entry_type<long> const cmass4::form_EID(
-               "EID", bdf::type_bounds::bound<long>(&cl1));
+            // entry_type<long> const cmass4::form_EID(
+            //    "EID", bdf::type_bounds::bound<long>(&cl1));
             entry_type<double> const cmass4::form_M("M");
             entry_type<long> const cmass4::form_S1("S1");
             entry_type<long> const cmass4::form_S2("S2");
 
             cmass4::cmass4(void):
-               card(),
-               EID(nullptr), M(nullptr), S1(nullptr), S2(nullptr) {}
+               element(nullptr),
+               M(nullptr), S1(nullptr), S2(nullptr) {}
 
             cmass4::cmass4(std::list<std::string> const &inp) :
-               card(inp) {
+               element(inp) {
                this->read(inp);
             }
 
             cmass4::cmass4(long const *EID, double const *M,
                            long const *S1, long const *S2/*=nullptr*/) :
-               card(),
-               EID(EID), M(M), S1(S1), S2(S2) {
+               element(EID),
+               M(M), S1(S1), S2(S2) {
                if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
                   throw errors::error("CMASS4", "EID not in valid range");
             }
 
             __base::card const *cmass4::operator() (
-                  long const *EID, double const *M,
-                  long const *S1, long const *S2/*=nullptr*/) {
+               long const *EID, double const *M,
+               long const *S1, long const *S2/*=nullptr*/) {
                this->EID = EID;
                this->M = *M;
                this->S1 = *S1;
@@ -101,7 +101,7 @@ namespace dnvgl {
             end: ;
             }
             const types cmass4::card_type(void) const {
-               return CMASS4;
+               return types::CMASS4;
             }
 
             void cmass4::collect_outdata(

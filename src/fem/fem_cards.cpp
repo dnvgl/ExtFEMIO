@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -44,43 +44,43 @@ namespace {
    const size_t map_pair_entries = 37;
    const std::pair<std::string, cards::types> map_pairs[map_pair_entries] = {
       // UNKNOWN,
-      std::pair<std::string, cards::types>("DATE", cards::DATE),
-      std::pair<std::string, cards::types>("GCOORD", cards::GCOORD),
-      std::pair<std::string, cards::types>("GNODE", cards::GNODE),
-      std::pair<std::string, cards::types>("IDENT", cards::IDENT),
-      std::pair<std::string, cards::types>("IEND", cards::IEND),
-      std::pair<std::string, cards::types>("GELMNT1", cards::GELMNT1),
-      std::pair<std::string, cards::types>("GELREF1", cards::GELREF1),
-      std::pair<std::string, cards::types>("GBARM", cards::GBARM),
-      std::pair<std::string, cards::types>("GBEAMG", cards::GBEAMG),
-      std::pair<std::string, cards::types>("GECCEN", cards::GECCEN),
-      std::pair<std::string, cards::types>("GELTH", cards::GELTH),
-      std::pair<std::string, cards::types>("GIORH", cards::GIORH),
-      std::pair<std::string, cards::types>("GLSEC", cards::GLSEC),
-      std::pair<std::string, cards::types>("GPIPE", cards::GPIPE),
-      std::pair<std::string, cards::types>("GUSYI", cards::GUSYI),
-      std::pair<std::string, cards::types>("BELFIX", cards::BELFIX),
-      std::pair<std::string, cards::types>("BLDEP", cards::BLDEP),
-      std::pair<std::string, cards::types>("BNBCD", cards::BNBCD),
-      std::pair<std::string, cards::types>("BNDISPL", cards::BNDISPL),
-      std::pair<std::string, cards::types>("BNLOAD", cards::BNLOAD),
-      std::pair<std::string, cards::types>("MGSPRNG", cards::MGSPRNG),
-      std::pair<std::string, cards::types>("GSETMEMB", cards::GSETMEMB),
-      std::pair<std::string, cards::types>("GUNIVEC", cards::GUNIVEC),
-      std::pair<std::string, cards::types>("MISOSEL", cards::MISOSEL),
-      std::pair<std::string, cards::types>("MORSMEL", cards::MORSMEL),
-      std::pair<std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
-      std::pair<std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
-      std::pair<std::string, cards::types>("TEXT", cards::TEXT),
-      std::pair<std::string, cards::types>("TDSETNAM", cards::TDSETNAM),
-      std::pair<std::string, cards::types>("TDSUPNAM", cards::TDSUPNAM),
-      std::pair<std::string, cards::types>("TDLOAD", cards::TDLOAD),
-      std::pair<std::string, cards::types>("BSELL", cards::BSELL),
-      std::pair<std::string, cards::types>("GELMNT2", cards::GELMNT2),
-      std::pair<std::string, cards::types>("HSUPSTAT", cards::HSUPSTAT),
-      std::pair<std::string, cards::types>("HSUPTRAN", cards::HSUPTRAN),
-      std::pair<std::string, cards::types>("HIERARCH", cards::HIERARCH),
-      std::pair<std::string, cards::types>("BEUSLO", cards::BEUSLO)
+      std::pair<std::string, cards::types>("DATE", cards::types::DATE),
+      std::pair<std::string, cards::types>("GCOORD", cards::types::GCOORD),
+      std::pair<std::string, cards::types>("GNODE", cards::types::GNODE),
+      std::pair<std::string, cards::types>("IDENT", cards::types::IDENT),
+      std::pair<std::string, cards::types>("IEND", cards::types::IEND),
+      std::pair<std::string, cards::types>("GELMNT1", cards::types::GELMNT1),
+      std::pair<std::string, cards::types>("GELREF1", cards::types::GELREF1),
+      std::pair<std::string, cards::types>("GBARM", cards::types::GBARM),
+      std::pair<std::string, cards::types>("GBEAMG", cards::types::GBEAMG),
+      std::pair<std::string, cards::types>("GECCEN", cards::types::GECCEN),
+      std::pair<std::string, cards::types>("GELTH", cards::types::GELTH),
+      std::pair<std::string, cards::types>("GIORH", cards::types::GIORH),
+      std::pair<std::string, cards::types>("GLSEC", cards::types::GLSEC),
+      std::pair<std::string, cards::types>("GPIPE", cards::types::GPIPE),
+      std::pair<std::string, cards::types>("GUSYI", cards::types::GUSYI),
+      std::pair<std::string, cards::types>("BELFIX", cards::types::BELFIX),
+      std::pair<std::string, cards::types>("BLDEP", cards::types::BLDEP),
+      std::pair<std::string, cards::types>("BNBCD", cards::types::BNBCD),
+      std::pair<std::string, cards::types>("BNDISPL", cards::types::BNDISPL),
+      std::pair<std::string, cards::types>("BNLOAD", cards::types::BNLOAD),
+      std::pair<std::string, cards::types>("MGSPRNG", cards::types::MGSPRNG),
+      std::pair<std::string, cards::types>("GSETMEMB", cards::types::GSETMEMB),
+      std::pair<std::string, cards::types>("GUNIVEC", cards::types::GUNIVEC),
+      std::pair<std::string, cards::types>("MISOSEL", cards::types::MISOSEL),
+      std::pair<std::string, cards::types>("MORSMEL", cards::types::MORSMEL),
+      std::pair<std::string, cards::types>("TDSETNAM", cards::types::TDSETNAM),
+      std::pair<std::string, cards::types>("TDSUPNAM", cards::types::TDSUPNAM),
+      std::pair<std::string, cards::types>("TEXT", cards::types::TEXT),
+      std::pair<std::string, cards::types>("TDSETNAM", cards::types::TDSETNAM),
+      std::pair<std::string, cards::types>("TDSUPNAM", cards::types::TDSUPNAM),
+      std::pair<std::string, cards::types>("TDLOAD", cards::types::TDLOAD),
+      std::pair<std::string, cards::types>("BSELL", cards::types::BSELL),
+      std::pair<std::string, cards::types>("GELMNT2", cards::types::GELMNT2),
+      std::pair<std::string, cards::types>("HSUPSTAT", cards::types::HSUPSTAT),
+      std::pair<std::string, cards::types>("HSUPTRAN", cards::types::HSUPTRAN),
+      std::pair<std::string, cards::types>("HIERARCH", cards::types::HIERARCH),
+      std::pair<std::string, cards::types>("BEUSLO", cards::types::BEUSLO)
    };
 }
 
@@ -98,7 +98,7 @@ namespace dnvgl {
                __base::card(inp), content(inp) {};
 
             const types
-            unknown::card_type(void) const { return UNKNOWN; }
+            unknown::card_type(void) const { return types::UNKNOWN; }
 
             std::ostream &unknown::put(std::ostream &os) const {
                throw errors::error("can't write UNKNOWN.");
@@ -168,113 +168,113 @@ namespace dnvgl {
                try {
                   std::string key(inp.front());
                   switch (cardtype_map.at(key)) {
-                  case DATE:
+                  case types::DATE:
                      res = std::make_unique<fem::cards::date>(inp);
                      break;
-                  case GCOORD:
+                  case types::GCOORD:
                      res = std::make_unique<fem::cards::gcoord>(inp);
                      break;
-                  case GNODE:
+                  case types::GNODE:
                      res = std::make_unique<fem::cards::gnode>(inp);
                      break;
-                  case GBARM:
+                  case types::GBARM:
                      res = std::make_unique<fem::cards::gbarm>(inp);
                      break;
-                  case GBEAMG:
+                  case types::GBEAMG:
                      res = std::make_unique<fem::cards::gbeamg>(inp);
                      break;
-                  case GECCEN:
+                  case types::GECCEN:
                      res = std::make_unique<fem::cards::geccen>(inp);
                      break;
-                  case GELTH:
+                  case types::GELTH:
                      res = std::make_unique<fem::cards::gelth>(inp);
                      break;
-                  case GIORH:
+                  case types::GIORH:
                      res = std::make_unique<fem::cards::giorh>(inp);
                      break;
-                  case GLSEC:
+                  case types::GLSEC:
                      res = std::make_unique<fem::cards::glsec>(inp);
                      break;
-                  case GPIPE:
+                  case types::GPIPE:
                      res = std::make_unique<fem::cards::gpipe>(inp);
                      break;
-                  case GUSYI:
+                  case types::GUSYI:
                      res = std::make_unique<fem::cards::gusyi>(inp);
                      break;
-                  case BELFIX:
+                  case types::BELFIX:
                      res = std::make_unique<fem::cards::belfix>(inp);
                      break;
-                  case IDENT:
+                  case types::IDENT:
                      res = std::make_unique<fem::cards::ident>(inp);
                      break;
-                  case IEND:
+                  case types::IEND:
                      res = std::make_unique<fem::cards::iend>(inp);
                      break;
-                  case GELMNT1:
+                  case types::GELMNT1:
                      res = std::make_unique<fem::cards::gelmnt1>(inp);
                      break;
-                  case GELREF1:
+                  case types::GELREF1:
                      res = std::make_unique<fem::cards::gelref1>(inp);
                      break;
-                  case BLDEP:
+                  case types::BLDEP:
                      res = std::make_unique<fem::cards::bldep>(inp);
                      break;
-                  case BNBCD:
+                  case types::BNBCD:
                      res = std::make_unique<fem::cards::bnbcd>(inp);
                      break;
-                  case BNDISPL:
+                  case types::BNDISPL:
                      res = std::make_unique<fem::cards::bndispl>(inp);
                      break;
-                  case BNLOAD:
+                  case types::BNLOAD:
                      res = std::make_unique<fem::cards::bnload>(inp);
                      break;
-                  case MGSPRNG:
+                  case types::MGSPRNG:
                      res = std::make_unique<fem::cards::mgsprng>(inp);
                      break;
-                  case GSETMEMB:
+                  case types::GSETMEMB:
                      res = std::make_unique<fem::cards::gsetmemb>(inp);
                      break;
-                  case GUNIVEC:
+                  case types::GUNIVEC:
                      res = std::make_unique<fem::cards::gunivec>(inp);
                      break;
-                  case MISOSEL:
+                  case types::MISOSEL:
                      res = std::make_unique<fem::cards::misosel>(inp);
                      break;
-                  case MORSMEL:
+                  case types::MORSMEL:
                      res = std::make_unique<fem::cards::morsmel>(inp);
                      break;
-                  case TEXT:
+                  case types::TEXT:
                      res = std::make_unique<fem::cards::text>(inp);
                      break;
-                  case TDSETNAM:
+                  case types::TDSETNAM:
                      res = std::make_unique<fem::cards::tdsetnam>(inp);
                      break;
-                  case TDSUPNAM:
+                  case types::TDSUPNAM:
                      res = std::make_unique<fem::cards::tdsupnam>(inp);
                      break;
-                  case TDLOAD:
+                  case types::TDLOAD:
                      res = std::make_unique<fem::cards::tdload>(inp);
                      break;
-                  case BSELL:
+                  case types::BSELL:
                      res = std::make_unique<fem::cards::bsell>(inp);
                      break;
-                  case GELMNT2:
+                  case types::GELMNT2:
                      res = std::make_unique<fem::cards::gelmnt2>(inp);
                      break;
-                  case HSUPSTAT:
+                  case types::HSUPSTAT:
                      res = std::make_unique<fem::cards::hsupstat>(inp);
                      break;
-                  case HSUPTRAN:
+                  case types::HSUPTRAN:
                      res = std::make_unique<fem::cards::hsuptran>(inp);
                      break;
-                  case HIERARCH:
+                  case types::HIERARCH:
                      res = std::make_unique<fem::cards::hierarch>(inp);
                      break;
-                  case BEUSLO:
+                  case types::BEUSLO:
                      res = std::make_unique<fem::cards::beuslo>(inp);
                      break;
                      // These are not real card types, they can't be returned
-                  case UNKNOWN:
+                  case types::UNKNOWN:
                      res = std::make_unique<fem::cards::unknown>(inp);
                   }
                } catch (std::out_of_range) {

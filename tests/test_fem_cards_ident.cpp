@@ -55,7 +55,7 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == 3);
+      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
    }
 
    SECTION("IDENT (2)") {
@@ -66,7 +66,7 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == 3);
+      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
    }
 
    SECTION("IDENT (3)") {
@@ -77,7 +77,7 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == 3);
+      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
    }
 
    SECTION("IDENT (4)") {
@@ -88,7 +88,7 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == 3);
+      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
    }
 }
 
@@ -103,7 +103,7 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
    }
 
    SECTION("const") {
-      ident probe(1, 2, ident::DIM_3D);
+      ident probe(1, 2, ident::mod_type::DIM_3D);
       test << probe;
       CHECK(test.str() ==
             "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
@@ -111,7 +111,7 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
 
    SECTION("simple") {
       long SLEVEL(1), SELTYP(2);
-      ident::mod_type SELMOD(ident::DIM_3D);
+      ident::mod_type SELMOD(ident::mod_type::DIM_3D);
       ident probe(SLEVEL, SELTYP, SELMOD);
       test << probe;
       CHECK(test.str() ==
@@ -131,7 +131,7 @@ TEST_CASE("FEM IDENT conversion from own output.", "[fem_ident,in/out]") {
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 2);
-      CHECK(probe.SELMOD == 3);
+      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
    }
 }
 

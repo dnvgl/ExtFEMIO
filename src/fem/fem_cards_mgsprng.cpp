@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_mgsprng[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -82,7 +82,7 @@ namespace dnvgl {
                card(), MATNO(MATNO), NDOF((long)K.size()), K(K) {}
 
             const dnvgl::extfem::fem::cards::types
-            mgsprng::card_type(void) const {return MGSPRNG;}
+            mgsprng::card_type(void) const {return types::MGSPRNG;}
 
             std::ostream &mgsprng::put(std::ostream& os) const {
                if (this->MATNO == -1) return os;

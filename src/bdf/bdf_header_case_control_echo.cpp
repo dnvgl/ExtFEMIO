@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_header_case_control_echo[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -106,13 +106,13 @@ namespace dnvgl {
                            first = false;
                         }
                         switch (p) {
-                        case echo::punch::SORT:
+                        case echo::punch::option_type::SORT:
                            res << "SORT";
                            break;
-                        case echo::punch::BOTH:
+                        case echo::punch::option_type::BOTH:
                            res << "BOTH";
                            break;
-                        case echo::punch::NEWBULK:
+                        case echo::punch::option_type::NEWBULK:
                            res << "NEWBULK";
                         }
                      }

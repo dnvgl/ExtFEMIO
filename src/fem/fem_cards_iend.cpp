@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_iend[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -60,7 +60,7 @@ namespace dnvgl {
             iend::iend(const long &CONT) : CONT(CONT) {}
 
             const types
-            iend::card_type(void) const { return IEND; };
+            iend::card_type(void) const { return types::IEND; };
 
             std::ostream &iend::put(std::ostream& os) const {
                if (this->CONT == -1) return os;

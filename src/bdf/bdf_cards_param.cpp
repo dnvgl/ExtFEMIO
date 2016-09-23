@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_param[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -23,26 +23,26 @@ namespace {
 namespace dnvgl {
    namespace extfem {
       namespace bdf {
-         namespace cards{
+         namespace cards {
 
-            bdf::types::card param::head = bdf::types::card("PARAM");
+               bdf::types::card param::head = bdf::types::card("PARAM");
 
-            const bdf::types::entry_type<std::string> param::form_N("N");
-            const bdf::types::entry_type<long> param::form_IVAL("IVAL");
-            const bdf::types::entry_type<double> param::form_RVAL("RVAL");
-            const bdf::types::entry_type<std::string> param::form_CVAL("CVAL");
-            const bdf::types::entry_type<std::complex<double> > param::form_CPLXVAL("CPLXVAL");
+               const bdf::types::entry_type<std::string> param::form_N("N");
+               const bdf::types::entry_type<long> param::form_IVAL("IVAL");
+               const bdf::types::entry_type<double> param::form_RVAL("RVAL");
+               const bdf::types::entry_type<std::string> param::form_CVAL("CVAL");
+               const bdf::types::entry_type<std::complex<double> > param::form_CPLXVAL("CPLXVAL");
 
-            param::param() : card(), IVAL(), RVAL(), CVAL(), CPLXVAL() {}
+               param::param() : card(), IVAL(), RVAL(), CVAL(), CPLXVAL() {}
 
-            param::param(std::string const &n) : param() {
-               N = extfem::string::string(n).upper();
-            }
+               param::param(std::string const &n) : param() {
+                  N = extfem::string::string(n).upper();
+               }
 
-            param::param(std::string const &n, long const &ival) :
-               param(n) {
-               IVAL = ival;
-            }
+               param::param(std::string const &n, long const &ival) :
+                  param(n) {
+                  IVAL = ival;
+               }
 
             param::param(std::string const &n, std::string const &cval) :
                param(n) {
@@ -71,7 +71,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::bdf::cards::types param::card_type(void) const {
-               return PARAM;
+               return types::PARAM;
             }
 
             void param::read(std::list<std::string> const &inp) {
@@ -146,7 +146,6 @@ namespace dnvgl {
       }
    }
 }
-
 // Local Variables:
 // mode: c++
 // coding: utf-8

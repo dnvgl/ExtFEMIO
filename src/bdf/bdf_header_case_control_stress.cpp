@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_header_case_control_stress[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -42,7 +42,7 @@ namespace dnvgl {
                stress::stress(
                   std::list<describer*> const &describers,
                   long const &res) :
-                  stress(describers, stress::n, res) {}
+                  stress(describers, stress::restype::n, res) {}
 
                std::ostream &stress::put(std::ostream &os) const {
                   os << "STRESS";
@@ -59,13 +59,13 @@ namespace dnvgl {
                      os << ")";
                   }
                   switch (this->res) {
-                  case stress::n:
+                  case stress::restype::n:
                      os << " = " << this->res_n;
                      break;
-                  case stress::ALL:
+                  case stress::restype::ALL:
                      os << " = ALL";
                      break;
-                  case stress::NONE:
+                  case stress::restype::NONE:
                      os << " = NONE";
                      break;
                   }
@@ -222,5 +222,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

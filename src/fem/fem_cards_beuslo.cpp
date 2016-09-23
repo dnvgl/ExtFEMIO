@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_beuslo[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -146,7 +146,7 @@ namespace dnvgl {
 
             const dnvgl::extfem::fem::cards::types
             beuslo::card_type(void) const {
-               return BEUSLO;
+               return types::BEUSLO;
             };
 
             std::ostream &beuslo::put(std::ostream &os) const {

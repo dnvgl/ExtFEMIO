@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_cbar[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -50,8 +50,8 @@ namespace dnvgl {
 
             bdf::types::card cbar::head = bdf::types::card("CBAR");
 
-            const entry_type<long> cbar::form_EID(
-               "EID", bound<long>(&cl1));
+            // const entry_type<long> cbar::form_EID(
+            //    "EID", bound<long>(&cl1));
             const entry_type<long> cbar::form_PID("PID");
             const entry_type<long> cbar::form_GA("GA");
             const entry_type<long> cbar::form_GB("GB");
@@ -85,7 +85,7 @@ namespace dnvgl {
                "W3B", bound<double>(nullptr, nullptr, &cd0));
 
             cbar::cbar(std::list<std::string> const &inp) :
-               card(inp) {
+               element(inp) {
                this->read(inp);
             }
 
@@ -99,12 +99,13 @@ namespace dnvgl {
                const double *W1A, const double *W2A,
                const double *W3A, const double *W1B,
                const double *W2B, const double *W3B) :
-               choose_dir_code(has_DVEC), EID(*EID), PID(*PID),
+               element(EID),
+               choose_dir_code(CHOOSE_DIR_CODE::has_DVEC), PID(*PID),
                GA(*GA), GB(*GB), X1(*X1), G0(nullptr), X2(*X2), X3(*X3),
                OFFT(OFFT),
                PA(PA), PB(PB),
                W1A(W1A), W2A(W2A), W3A(W3A),
-               W1B(W1B), W2B(W2B), W3B(W3B) {};
+               W1B(W1B), W2B(W2B), W3B(W3B) {}
 
             cbar::cbar(
                const long *EID, const long *PID,
@@ -114,12 +115,13 @@ namespace dnvgl {
                const double *W1A, const double *W2A,
                const double *W3A, const double *W1B,
                const double *W2B, const double *W3B) :
-               choose_dir_code(has_DCODE), EID(*EID), PID(*PID),
+               element(EID),
+               choose_dir_code(CHOOSE_DIR_CODE::has_DCODE), PID(*PID),
                GA(*GA), GB(*GB), X1(), G0(*G0), X2(), X3(),
                OFFT(OFFT),
                PA(PA), PB(PB),
                W1A(W1A), W2A(W2A), W3A(W3A),
-               W1B(W1B), W2B(W2B), W3B(W3B) {};
+               W1B(W1B), W2B(W2B), W3B(W3B) {}
 
             void cbar::read(std::list<std::string> const &inp) {
                auto pos = inp.rbegin();
@@ -155,18 +157,18 @@ namespace dnvgl {
                            "CBAR", "Incomplete direction vector.");
                      }
                      G0.is_value = false;
-                     choose_dir_code = has_DVEC;
+                     choose_dir_code = CHOOSE_DIR_CODE::has_DVEC;
                   }
                   catch (errors::float_error) {
                      form_G0.set_value(G0, *pos);
                      X1.is_value = false;
-                     choose_dir_code = has_DCODE;
+                     choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;
                   }
                   ++pos;
                   form_GB.set_value(GB, *(pos++));
                   form_GA.set_value(GA, *(pos++));
                   form_PID.set_value(PID, *(pos++));
-                  form_EID.set_value(EID, *(pos++));
+                  // form_EID.set_value(EID, *(pos++));
                   break;
                default:
                   throw errors::parse_error(
@@ -182,7 +184,7 @@ namespace dnvgl {
                res.push_back(format<long>(this->form_PID, this->PID));
                res.push_back(format<long>(this->form_GA, this->GA));
                res.push_back(format<long>(this->form_GB, this->GB));
-               if (this->choose_dir_code == this->has_DCODE) {
+               if (this->choose_dir_code == CHOOSE_DIR_CODE::has_DCODE) {
                   res.push_back(format<long>(this->form_G0, this->G0));
                   if ((bool)this->OFFT || (bool)this->PA || (bool)this->PB || (bool)this->W1A || (bool)this->W2A ||
                       (bool)this->W3A || (bool)this->W1B || (bool)this->W2B || (bool)this->W3B) {

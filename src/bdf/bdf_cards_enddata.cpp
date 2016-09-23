@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_enddata[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -40,7 +40,7 @@ namespace dnvgl {
             enddata::enddata(void) : __base::card() {}
 
             const types enddata::card_type(void) const {
-               return ENDDATA;
+               return types::ENDDATA;
             }
 
             void enddata::read(std::list<std::string> const &inp) {

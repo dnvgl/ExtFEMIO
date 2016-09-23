@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_bnbcd[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -86,7 +86,7 @@ namespace dnvgl {
                         FIX1, FIX2, FIX3, FIX4, FIX5, FIX6})) {}
 
             const dnvgl::extfem::fem::cards::types
-            bnbcd::card_type(void) const {return BNBCD;}
+            bnbcd::card_type(void) const {return types::BNBCD;}
 
             std::ostream &bnbcd::put(std::ostream& os) const {
                if (this->NODENO == -1) return os;

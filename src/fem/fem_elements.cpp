@@ -24,7 +24,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_elements[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -55,258 +55,258 @@ namespace dnvgl {
                std::unique_ptr<__base::elem> &res, const cards::gelmnt1 *data) {
 
                switch (data->ELTYP) {
-               case BEPS: res = std::make_unique<beps>(data); break;
-               case CSTA: res = std::make_unique<csta>(data); break;
-               case RPBQ: res = std::make_unique<rpbq>(data); break;
-               case ILST: res = std::make_unique<ilst>(data); break;
-               case IQQE: res = std::make_unique<iqqe>(data); break;
-               case LQUA: res = std::make_unique<lqua>(data); break;
-               case TESS: res = std::make_unique<tess>(data); break;
-               case GMAS: res = std::make_unique<gmas>(data); break;
-               case GLMA: res = std::make_unique<glma>(data); break;
-               case GLDA: res = std::make_unique<glda>(data); break;
-               case BEAS: res = std::make_unique<beas>(data); break;
-               case AXIS: res = std::make_unique<axis>(data); break;
-               case AXDA: res = std::make_unique<axda>(data); break;
-               case GSPR: res = std::make_unique<gspr>(data); break;
-               case GDAM: res = std::make_unique<gdam>(data); break;
-               case IHEX: res = std::make_unique<ihex>(data); break;
-               case LHEX: res = std::make_unique<lhex>(data); break;
-               case SECB: res = std::make_unique<secb>(data); break;
-               case BTSS: res = std::make_unique<btss>(data); break;
-               case FQUS_FFQ: res = std::make_unique<fqus_ffq>(data); break;
-               case FTRS_FFTR: res = std::make_unique<ftrs_fftr>(data); break;
-               case SCTS: res = std::make_unique<scts>(data); break;
-               case MCTS: res = std::make_unique<mcts>(data); break;
-               case SCQS: res = std::make_unique<scqs>(data); break;
-               case MCQS: res = std::make_unique<mcqs>(data); break;
-               case IPRI: res = std::make_unique<ipri>(data); break;
-               case ITET: res = std::make_unique<itet>(data); break;
-               case TPRI: res = std::make_unique<tpri>(data); break;
-               case TETR: res = std::make_unique<tetr>(data); break;
-               case LCTS: res = std::make_unique<lcts>(data); break;
-               case LCQS: res = std::make_unique<lcqs>(data); break;
-               case TRS1: res = std::make_unique<trs1>(data); break;
-               case TRS2: res = std::make_unique<trs2>(data); break;
-               case TRS3: res = std::make_unique<trs3>(data); break;
-               case GLSH: res = std::make_unique<glsh>(data); break;
-               case AXCS: res = std::make_unique<axcs>(data); break;
-               case AXLQ: res = std::make_unique<axlq>(data); break;
-               case AXLS: res = std::make_unique<axls>(data); break;
-               case AXQQ: res = std::make_unique<axqq>(data); break;
-               case PILS: res = std::make_unique<pils>(data); break;
-               case PCAB: res = std::make_unique<pcab>(data); break;
-               case PSPR: res = std::make_unique<pspr>(data); break;
-               case ADVA_4: res = std::make_unique<adva_4>(data); break;
-               case ADVA_2: res = std::make_unique<adva_2>(data); break;
-               case CTCP: res = std::make_unique<ctcp>(data); break;
-               case CTCL: res = std::make_unique<ctcl>(data); break;
-               case CTAL: res = std::make_unique<ctal>(data); break;
-               case CTCC: res = std::make_unique<ctcc>(data); break;
-               case CTAQ: res = std::make_unique<ctaq>(data); break;
-               case CTLQ: res = std::make_unique<ctlq>(data); break;
-               case CTCQ: res = std::make_unique<ctcq>(data); break;
-               case CTMQ: res = std::make_unique<ctmq>(data); break;
-               case HCQS: res = std::make_unique<hcqs>(data); break;
-               case SLQS: res = std::make_unique<slqs>(data); break;
-               case SLTS: res = std::make_unique<slts>(data); break;
-               case SLCB: res = std::make_unique<slcb>(data); break;
-               case MATR: res = std::make_unique<matr>(data); break;
-               case GHEX100: res = std::make_unique<ghex100>(data); break;
-               case GHEX101: res = std::make_unique<ghex101>(data); break;
-               case GHEX102: res = std::make_unique<ghex102>(data); break;
-               case GHEX103: res = std::make_unique<ghex103>(data); break;
-               case GHEX104: res = std::make_unique<ghex104>(data); break;
-               case GHEX105: res = std::make_unique<ghex105>(data); break;
-               case GHEX106: res = std::make_unique<ghex106>(data); break;
-               case GHEX107: res = std::make_unique<ghex107>(data); break;
-               case GHEX108: res = std::make_unique<ghex108>(data); break;
-               case GHEX109: res = std::make_unique<ghex109>(data); break;
-               case GHEX110: res = std::make_unique<ghex110>(data); break;
-               case GHEX111: res = std::make_unique<ghex111>(data); break;
-               case GHEX112: res = std::make_unique<ghex112>(data); break;
-               case GHEX113: res = std::make_unique<ghex113>(data); break;
-               case GHEX114: res = std::make_unique<ghex114>(data); break;
-               case GHEX115: res = std::make_unique<ghex115>(data); break;
-               case GHEX116: res = std::make_unique<ghex116>(data); break;
-               case GHEX117: res = std::make_unique<ghex117>(data); break;
-               case GHEX118: res = std::make_unique<ghex118>(data); break;
-               case GHEX119: res = std::make_unique<ghex119>(data); break;
-               case GHEX120: res = std::make_unique<ghex120>(data); break;
-               case GHEX121: res = std::make_unique<ghex121>(data); break;
-               case GHEX122: res = std::make_unique<ghex122>(data); break;
-               case GHEX123: res = std::make_unique<ghex123>(data); break;
-               case GHEX124: res = std::make_unique<ghex124>(data); break;
-               case GHEX125: res = std::make_unique<ghex125>(data); break;
-               case GHEX126: res = std::make_unique<ghex126>(data); break;
-               case GHEX127: res = std::make_unique<ghex127>(data); break;
-               case GHEX128: res = std::make_unique<ghex128>(data); break;
-               case GHEX129: res = std::make_unique<ghex129>(data); break;
-               case GHEX130: res = std::make_unique<ghex130>(data); break;
-               case GHEX131: res = std::make_unique<ghex131>(data); break;
-               case GHEX132: res = std::make_unique<ghex132>(data); break;
-               case GHEX133: res = std::make_unique<ghex133>(data); break;
-               case GHEX134: res = std::make_unique<ghex134>(data); break;
-               case GHEX135: res = std::make_unique<ghex135>(data); break;
-               case GHEX136: res = std::make_unique<ghex136>(data); break;
-               case GHEX137: res = std::make_unique<ghex137>(data); break;
-               case GHEX138: res = std::make_unique<ghex138>(data); break;
-               case GHEX139: res = std::make_unique<ghex139>(data); break;
-               case GHEX140: res = std::make_unique<ghex140>(data); break;
-               case GHEX141: res = std::make_unique<ghex141>(data); break;
-               case GHEX142: res = std::make_unique<ghex142>(data); break;
-               case GHEX143: res = std::make_unique<ghex143>(data); break;
-               case GHEX144: res = std::make_unique<ghex144>(data); break;
-               case GHEX145: res = std::make_unique<ghex145>(data); break;
-               case GHEX146: res = std::make_unique<ghex146>(data); break;
-               case GHEX147: res = std::make_unique<ghex147>(data); break;
-               case GHEX148: res = std::make_unique<ghex148>(data); break;
-               case GHEX149: res = std::make_unique<ghex149>(data); break;
-               case GHEX150: res = std::make_unique<ghex150>(data); break;
-               case GHEX151: res = std::make_unique<ghex151>(data); break;
-               case GHEX152: res = std::make_unique<ghex152>(data); break;
-               case GHEX153: res = std::make_unique<ghex153>(data); break;
-               case GHEX154: res = std::make_unique<ghex154>(data); break;
-               case GHEX155: res = std::make_unique<ghex155>(data); break;
-               case GHEX156: res = std::make_unique<ghex156>(data); break;
-               case GHEX157: res = std::make_unique<ghex157>(data); break;
-               case GHEX158: res = std::make_unique<ghex158>(data); break;
-               case GHEX159: res = std::make_unique<ghex159>(data); break;
-               case GHEX160: res = std::make_unique<ghex160>(data); break;
-               case GHEX161: res = std::make_unique<ghex161>(data); break;
-               case GHEX162: res = std::make_unique<ghex162>(data); break;
-               case GHEX163: res = std::make_unique<ghex163>(data); break;
-               case UNDEFINED: res = std::make_unique<undef>(); break;
-               case INVALID: throw errors::parse_error(
+               case el_types::BEPS: res = std::make_unique<beps>(data); break;
+               case el_types::CSTA: res = std::make_unique<csta>(data); break;
+               case el_types::RPBQ: res = std::make_unique<rpbq>(data); break;
+               case el_types::ILST: res = std::make_unique<ilst>(data); break;
+               case el_types::IQQE: res = std::make_unique<iqqe>(data); break;
+               case el_types::LQUA: res = std::make_unique<lqua>(data); break;
+               case el_types::TESS: res = std::make_unique<tess>(data); break;
+               case el_types::GMAS: res = std::make_unique<gmas>(data); break;
+               case el_types::GLMA: res = std::make_unique<glma>(data); break;
+               case el_types::GLDA: res = std::make_unique<glda>(data); break;
+               case el_types::BEAS: res = std::make_unique<beas>(data); break;
+               case el_types::AXIS: res = std::make_unique<axis>(data); break;
+               case el_types::AXDA: res = std::make_unique<axda>(data); break;
+               case el_types::GSPR: res = std::make_unique<gspr>(data); break;
+               case el_types::GDAM: res = std::make_unique<gdam>(data); break;
+               case el_types::IHEX: res = std::make_unique<ihex>(data); break;
+               case el_types::LHEX: res = std::make_unique<lhex>(data); break;
+               case el_types::SECB: res = std::make_unique<secb>(data); break;
+               case el_types::BTSS: res = std::make_unique<btss>(data); break;
+               case el_types::FQUS_FFQ: res = std::make_unique<fqus_ffq>(data); break;
+               case el_types::FTRS_FFTR: res = std::make_unique<ftrs_fftr>(data); break;
+               case el_types::SCTS: res = std::make_unique<scts>(data); break;
+               case el_types::MCTS: res = std::make_unique<mcts>(data); break;
+               case el_types::SCQS: res = std::make_unique<scqs>(data); break;
+               case el_types::MCQS: res = std::make_unique<mcqs>(data); break;
+               case el_types::IPRI: res = std::make_unique<ipri>(data); break;
+               case el_types::ITET: res = std::make_unique<itet>(data); break;
+               case el_types::TPRI: res = std::make_unique<tpri>(data); break;
+               case el_types::TETR: res = std::make_unique<tetr>(data); break;
+               case el_types::LCTS: res = std::make_unique<lcts>(data); break;
+               case el_types::LCQS: res = std::make_unique<lcqs>(data); break;
+               case el_types::TRS1: res = std::make_unique<trs1>(data); break;
+               case el_types::TRS2: res = std::make_unique<trs2>(data); break;
+               case el_types::TRS3: res = std::make_unique<trs3>(data); break;
+               case el_types::GLSH: res = std::make_unique<glsh>(data); break;
+               case el_types::AXCS: res = std::make_unique<axcs>(data); break;
+               case el_types::AXLQ: res = std::make_unique<axlq>(data); break;
+               case el_types::AXLS: res = std::make_unique<axls>(data); break;
+               case el_types::AXQQ: res = std::make_unique<axqq>(data); break;
+               case el_types::PILS: res = std::make_unique<pils>(data); break;
+               case el_types::PCAB: res = std::make_unique<pcab>(data); break;
+               case el_types::PSPR: res = std::make_unique<pspr>(data); break;
+               case el_types::ADVA_4: res = std::make_unique<adva_4>(data); break;
+               case el_types::ADVA_2: res = std::make_unique<adva_2>(data); break;
+               case el_types::CTCP: res = std::make_unique<ctcp>(data); break;
+               case el_types::CTCL: res = std::make_unique<ctcl>(data); break;
+               case el_types::CTAL: res = std::make_unique<ctal>(data); break;
+               case el_types::CTCC: res = std::make_unique<ctcc>(data); break;
+               case el_types::CTAQ: res = std::make_unique<ctaq>(data); break;
+               case el_types::CTLQ: res = std::make_unique<ctlq>(data); break;
+               case el_types::CTCQ: res = std::make_unique<ctcq>(data); break;
+               case el_types::CTMQ: res = std::make_unique<ctmq>(data); break;
+               case el_types::HCQS: res = std::make_unique<hcqs>(data); break;
+               case el_types::SLQS: res = std::make_unique<slqs>(data); break;
+               case el_types::SLTS: res = std::make_unique<slts>(data); break;
+               case el_types::SLCB: res = std::make_unique<slcb>(data); break;
+               case el_types::MATR: res = std::make_unique<matr>(data); break;
+               case el_types::GHEX100: res = std::make_unique<ghex100>(data); break;
+               case el_types::GHEX101: res = std::make_unique<ghex101>(data); break;
+               case el_types::GHEX102: res = std::make_unique<ghex102>(data); break;
+               case el_types::GHEX103: res = std::make_unique<ghex103>(data); break;
+               case el_types::GHEX104: res = std::make_unique<ghex104>(data); break;
+               case el_types::GHEX105: res = std::make_unique<ghex105>(data); break;
+               case el_types::GHEX106: res = std::make_unique<ghex106>(data); break;
+               case el_types::GHEX107: res = std::make_unique<ghex107>(data); break;
+               case el_types::GHEX108: res = std::make_unique<ghex108>(data); break;
+               case el_types::GHEX109: res = std::make_unique<ghex109>(data); break;
+               case el_types::GHEX110: res = std::make_unique<ghex110>(data); break;
+               case el_types::GHEX111: res = std::make_unique<ghex111>(data); break;
+               case el_types::GHEX112: res = std::make_unique<ghex112>(data); break;
+               case el_types::GHEX113: res = std::make_unique<ghex113>(data); break;
+               case el_types::GHEX114: res = std::make_unique<ghex114>(data); break;
+               case el_types::GHEX115: res = std::make_unique<ghex115>(data); break;
+               case el_types::GHEX116: res = std::make_unique<ghex116>(data); break;
+               case el_types::GHEX117: res = std::make_unique<ghex117>(data); break;
+               case el_types::GHEX118: res = std::make_unique<ghex118>(data); break;
+               case el_types::GHEX119: res = std::make_unique<ghex119>(data); break;
+               case el_types::GHEX120: res = std::make_unique<ghex120>(data); break;
+               case el_types::GHEX121: res = std::make_unique<ghex121>(data); break;
+               case el_types::GHEX122: res = std::make_unique<ghex122>(data); break;
+               case el_types::GHEX123: res = std::make_unique<ghex123>(data); break;
+               case el_types::GHEX124: res = std::make_unique<ghex124>(data); break;
+               case el_types::GHEX125: res = std::make_unique<ghex125>(data); break;
+               case el_types::GHEX126: res = std::make_unique<ghex126>(data); break;
+               case el_types::GHEX127: res = std::make_unique<ghex127>(data); break;
+               case el_types::GHEX128: res = std::make_unique<ghex128>(data); break;
+               case el_types::GHEX129: res = std::make_unique<ghex129>(data); break;
+               case el_types::GHEX130: res = std::make_unique<ghex130>(data); break;
+               case el_types::GHEX131: res = std::make_unique<ghex131>(data); break;
+               case el_types::GHEX132: res = std::make_unique<ghex132>(data); break;
+               case el_types::GHEX133: res = std::make_unique<ghex133>(data); break;
+               case el_types::GHEX134: res = std::make_unique<ghex134>(data); break;
+               case el_types::GHEX135: res = std::make_unique<ghex135>(data); break;
+               case el_types::GHEX136: res = std::make_unique<ghex136>(data); break;
+               case el_types::GHEX137: res = std::make_unique<ghex137>(data); break;
+               case el_types::GHEX138: res = std::make_unique<ghex138>(data); break;
+               case el_types::GHEX139: res = std::make_unique<ghex139>(data); break;
+               case el_types::GHEX140: res = std::make_unique<ghex140>(data); break;
+               case el_types::GHEX141: res = std::make_unique<ghex141>(data); break;
+               case el_types::GHEX142: res = std::make_unique<ghex142>(data); break;
+               case el_types::GHEX143: res = std::make_unique<ghex143>(data); break;
+               case el_types::GHEX144: res = std::make_unique<ghex144>(data); break;
+               case el_types::GHEX145: res = std::make_unique<ghex145>(data); break;
+               case el_types::GHEX146: res = std::make_unique<ghex146>(data); break;
+               case el_types::GHEX147: res = std::make_unique<ghex147>(data); break;
+               case el_types::GHEX148: res = std::make_unique<ghex148>(data); break;
+               case el_types::GHEX149: res = std::make_unique<ghex149>(data); break;
+               case el_types::GHEX150: res = std::make_unique<ghex150>(data); break;
+               case el_types::GHEX151: res = std::make_unique<ghex151>(data); break;
+               case el_types::GHEX152: res = std::make_unique<ghex152>(data); break;
+               case el_types::GHEX153: res = std::make_unique<ghex153>(data); break;
+               case el_types::GHEX154: res = std::make_unique<ghex154>(data); break;
+               case el_types::GHEX155: res = std::make_unique<ghex155>(data); break;
+               case el_types::GHEX156: res = std::make_unique<ghex156>(data); break;
+               case el_types::GHEX157: res = std::make_unique<ghex157>(data); break;
+               case el_types::GHEX158: res = std::make_unique<ghex158>(data); break;
+               case el_types::GHEX159: res = std::make_unique<ghex159>(data); break;
+               case el_types::GHEX160: res = std::make_unique<ghex160>(data); break;
+               case el_types::GHEX161: res = std::make_unique<ghex161>(data); break;
+               case el_types::GHEX162: res = std::make_unique<ghex162>(data); break;
+               case el_types::GHEX163: res = std::make_unique<ghex163>(data); break;
+               case el_types::UNDEFINED: res = std::make_unique<undef>(); break;
+               case el_types::INVALID: throw errors::parse_error(
                   "GELMNT1", "invalid element type"); break;
                };
             }
 
             std::string name_elem(el_types const &type) {
                switch (type) {
-               case BEPS: return "BEPS";
-               case CSTA: return "CSTA";
-               case RPBQ: return "RPBQ";
-               case ILST: return "ILST";
-               case IQQE: return "IQQE";
-               case LQUA: return "LQUA";
-               case TESS: return "TESS";
-               case GMAS: return "GMAS";
-               case GLMA: return "GLMA";
-               case GLDA: return "GLDA";
-               case BEAS: return "BEAS";
-               case AXIS: return "AXIS";
-               case AXDA: return "AXDA";
-               case GSPR: return "GSPR";
-               case GDAM: return "GDAM";
-               case IHEX: return "IHEX";
-               case LHEX: return "LHEX";
-               case SECB: return "SECB";
-               case BTSS: return "BTSS";
-               case FQUS_FFQ: return "FQUS_FFQ";
-               case FTRS_FFTR: return "FTRS_FFTR";
-               case SCTS: return "SCTS";
-               case MCTS: return "MCTS";
-               case SCQS: return "SCQS";
-               case MCQS: return "MCQS";
-               case IPRI: return "IPRI";
-               case ITET: return "ITET";
-               case TPRI: return "TPRI";
-               case TETR: return "TETR";
-               case LCTS: return "LCTS";
-               case LCQS: return "LCQS";
-               case TRS1: return "TRS1";
-               case TRS2: return "TRS2";
-               case TRS3: return "TRS3";
-               case GLSH: return "GLSH";
-               case AXCS: return "AXCS";
-               case AXLQ: return "AXLQ";
-               case AXLS: return "AXLS";
-               case AXQQ: return "AXQQ";
-               case PILS: return "PILS";
-               case PCAB: return "PCAB";
-               case PSPR: return "PSPR";
-               case ADVA_4: return "ADVA_4";
-               case ADVA_2: return "ADVA_2";
-               case CTCP: return "CTCP";
-               case CTCL: return "CTCL";
-               case CTAL: return "CTAL";
-               case CTCC: return "CTCC";
-               case CTAQ: return "CTAQ";
-               case CTLQ: return "CTLQ";
-               case CTCQ: return "CTCQ";
-               case CTMQ: return "CTMQ";
-               case HCQS: return "HCQS";
-               case SLQS: return "SLQS";
-               case SLTS: return "SLTS";
-               case SLCB: return "SLCB";
-               case MATR: return "MATR";
-               case GHEX100: return "GHEX100";
-               case GHEX101: return "GHEX101";
-               case GHEX102: return "GHEX102";
-               case GHEX103: return "GHEX103";
-               case GHEX104: return "GHEX104";
-               case GHEX105: return "GHEX105";
-               case GHEX106: return "GHEX106";
-               case GHEX107: return "GHEX107";
-               case GHEX108: return "GHEX108";
-               case GHEX109: return "GHEX109";
-               case GHEX110: return "GHEX110";
-               case GHEX111: return "GHEX111";
-               case GHEX112: return "GHEX112";
-               case GHEX113: return "GHEX113";
-               case GHEX114: return "GHEX114";
-               case GHEX115: return "GHEX115";
-               case GHEX116: return "GHEX116";
-               case GHEX117: return "GHEX117";
-               case GHEX118: return "GHEX118";
-               case GHEX119: return "GHEX119";
-               case GHEX120: return "GHEX120";
-               case GHEX121: return "GHEX121";
-               case GHEX122: return "GHEX122";
-               case GHEX123: return "GHEX123";
-               case GHEX124: return "GHEX124";
-               case GHEX125: return "GHEX125";
-               case GHEX126: return "GHEX126";
-               case GHEX127: return "GHEX127";
-               case GHEX128: return "GHEX128";
-               case GHEX129: return "GHEX129";
-               case GHEX130: return "GHEX130";
-               case GHEX131: return "GHEX131";
-               case GHEX132: return "GHEX132";
-               case GHEX133: return "GHEX133";
-               case GHEX134: return "GHEX134";
-               case GHEX135: return "GHEX135";
-               case GHEX136: return "GHEX136";
-               case GHEX137: return "GHEX137";
-               case GHEX138: return "GHEX138";
-               case GHEX139: return "GHEX139";
-               case GHEX140: return "GHEX140";
-               case GHEX141: return "GHEX141";
-               case GHEX142: return "GHEX142";
-               case GHEX143: return "GHEX143";
-               case GHEX144: return "GHEX144";
-               case GHEX145: return "GHEX145";
-               case GHEX146: return "GHEX146";
-               case GHEX147: return "GHEX147";
-               case GHEX148: return "GHEX148";
-               case GHEX149: return "GHEX149";
-               case GHEX150: return "GHEX150";
-               case GHEX151: return "GHEX151";
-               case GHEX152: return "GHEX152";
-               case GHEX153: return "GHEX153";
-               case GHEX154: return "GHEX154";
-               case GHEX155: return "GHEX155";
-               case GHEX156: return "GHEX156";
-               case GHEX157: return "GHEX157";
-               case GHEX158: return "GHEX158";
-               case GHEX159: return "GHEX159";
-               case GHEX160: return "GHEX160";
-               case GHEX161: return "GHEX161";
-               case GHEX162: return "GHEX162";
-               case GHEX163: return "GHEX163";
-               case UNDEFINED: return "UNDEFINED";
-               case INVALID: return "INVALID";
+               case el_types::BEPS: return "BEPS";
+               case el_types::CSTA: return "CSTA";
+               case el_types::RPBQ: return "RPBQ";
+               case el_types::ILST: return "ILST";
+               case el_types::IQQE: return "IQQE";
+               case el_types::LQUA: return "LQUA";
+               case el_types::TESS: return "TESS";
+               case el_types::GMAS: return "GMAS";
+               case el_types::GLMA: return "GLMA";
+               case el_types::GLDA: return "GLDA";
+               case el_types::BEAS: return "BEAS";
+               case el_types::AXIS: return "AXIS";
+               case el_types::AXDA: return "AXDA";
+               case el_types::GSPR: return "GSPR";
+               case el_types::GDAM: return "GDAM";
+               case el_types::IHEX: return "IHEX";
+               case el_types::LHEX: return "LHEX";
+               case el_types::SECB: return "SECB";
+               case el_types::BTSS: return "BTSS";
+               case el_types::FQUS_FFQ: return "FQUS_FFQ";
+               case el_types::FTRS_FFTR: return "FTRS_FFTR";
+               case el_types::SCTS: return "SCTS";
+               case el_types::MCTS: return "MCTS";
+               case el_types::SCQS: return "SCQS";
+               case el_types::MCQS: return "MCQS";
+               case el_types::IPRI: return "IPRI";
+               case el_types::ITET: return "ITET";
+               case el_types::TPRI: return "TPRI";
+               case el_types::TETR: return "TETR";
+               case el_types::LCTS: return "LCTS";
+               case el_types::LCQS: return "LCQS";
+               case el_types::TRS1: return "TRS1";
+               case el_types::TRS2: return "TRS2";
+               case el_types::TRS3: return "TRS3";
+               case el_types::GLSH: return "GLSH";
+               case el_types::AXCS: return "AXCS";
+               case el_types::AXLQ: return "AXLQ";
+               case el_types::AXLS: return "AXLS";
+               case el_types::AXQQ: return "AXQQ";
+               case el_types::PILS: return "PILS";
+               case el_types::PCAB: return "PCAB";
+               case el_types::PSPR: return "PSPR";
+               case el_types::ADVA_4: return "ADVA_4";
+               case el_types::ADVA_2: return "ADVA_2";
+               case el_types::CTCP: return "CTCP";
+               case el_types::CTCL: return "CTCL";
+               case el_types::CTAL: return "CTAL";
+               case el_types::CTCC: return "CTCC";
+               case el_types::CTAQ: return "CTAQ";
+               case el_types::CTLQ: return "CTLQ";
+               case el_types::CTCQ: return "CTCQ";
+               case el_types::CTMQ: return "CTMQ";
+               case el_types::HCQS: return "HCQS";
+               case el_types::SLQS: return "SLQS";
+               case el_types::SLTS: return "SLTS";
+               case el_types::SLCB: return "SLCB";
+               case el_types::MATR: return "MATR";
+               case el_types::GHEX100: return "GHEX100";
+               case el_types::GHEX101: return "GHEX101";
+               case el_types::GHEX102: return "GHEX102";
+               case el_types::GHEX103: return "GHEX103";
+               case el_types::GHEX104: return "GHEX104";
+               case el_types::GHEX105: return "GHEX105";
+               case el_types::GHEX106: return "GHEX106";
+               case el_types::GHEX107: return "GHEX107";
+               case el_types::GHEX108: return "GHEX108";
+               case el_types::GHEX109: return "GHEX109";
+               case el_types::GHEX110: return "GHEX110";
+               case el_types::GHEX111: return "GHEX111";
+               case el_types::GHEX112: return "GHEX112";
+               case el_types::GHEX113: return "GHEX113";
+               case el_types::GHEX114: return "GHEX114";
+               case el_types::GHEX115: return "GHEX115";
+               case el_types::GHEX116: return "GHEX116";
+               case el_types::GHEX117: return "GHEX117";
+               case el_types::GHEX118: return "GHEX118";
+               case el_types::GHEX119: return "GHEX119";
+               case el_types::GHEX120: return "GHEX120";
+               case el_types::GHEX121: return "GHEX121";
+               case el_types::GHEX122: return "GHEX122";
+               case el_types::GHEX123: return "GHEX123";
+               case el_types::GHEX124: return "GHEX124";
+               case el_types::GHEX125: return "GHEX125";
+               case el_types::GHEX126: return "GHEX126";
+               case el_types::GHEX127: return "GHEX127";
+               case el_types::GHEX128: return "GHEX128";
+               case el_types::GHEX129: return "GHEX129";
+               case el_types::GHEX130: return "GHEX130";
+               case el_types::GHEX131: return "GHEX131";
+               case el_types::GHEX132: return "GHEX132";
+               case el_types::GHEX133: return "GHEX133";
+               case el_types::GHEX134: return "GHEX134";
+               case el_types::GHEX135: return "GHEX135";
+               case el_types::GHEX136: return "GHEX136";
+               case el_types::GHEX137: return "GHEX137";
+               case el_types::GHEX138: return "GHEX138";
+               case el_types::GHEX139: return "GHEX139";
+               case el_types::GHEX140: return "GHEX140";
+               case el_types::GHEX141: return "GHEX141";
+               case el_types::GHEX142: return "GHEX142";
+               case el_types::GHEX143: return "GHEX143";
+               case el_types::GHEX144: return "GHEX144";
+               case el_types::GHEX145: return "GHEX145";
+               case el_types::GHEX146: return "GHEX146";
+               case el_types::GHEX147: return "GHEX147";
+               case el_types::GHEX148: return "GHEX148";
+               case el_types::GHEX149: return "GHEX149";
+               case el_types::GHEX150: return "GHEX150";
+               case el_types::GHEX151: return "GHEX151";
+               case el_types::GHEX152: return "GHEX152";
+               case el_types::GHEX153: return "GHEX153";
+               case el_types::GHEX154: return "GHEX154";
+               case el_types::GHEX155: return "GHEX155";
+               case el_types::GHEX156: return "GHEX156";
+               case el_types::GHEX157: return "GHEX157";
+               case el_types::GHEX158: return "GHEX158";
+               case el_types::GHEX159: return "GHEX159";
+               case el_types::GHEX160: return "GHEX160";
+               case el_types::GHEX161: return "GHEX161";
+               case el_types::GHEX162: return "GHEX162";
+               case el_types::GHEX163: return "GHEX163";
+               case el_types::UNDEFINED: return "UNDEFINED";
+               case el_types::INVALID: return "INVALID";
                }
                return "";
             };
@@ -315,7 +315,7 @@ namespace dnvgl {
 
             long undef::nnodes(void) const {return -1;}
 
-            el_types undef::get_type(void) const {return UNDEFINED;}
+            el_types undef::get_type(void) const {return el_types::UNDEFINED;}
 
             namespace __base {
 
@@ -538,12 +538,12 @@ namespace dnvgl {
 
             namespace {
                const size_t beps_procs_len = 3;
-               el_processor beps_procs[beps_procs_len] = { general, Preframe, ADVANCE };
+               el_processor beps_procs[beps_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::ADVANCE };
             }
 
             long beps::nnodes(void) const {return 2;}
 
-            el_types beps::get_type(void) const {return BEPS;}
+            el_types beps::get_type(void) const {return el_types::BEPS;}
 
             const std::set<el_processor> beps::processors(
                beps_procs, beps_procs+beps_procs_len);
@@ -583,12 +583,12 @@ namespace dnvgl {
 
             namespace {
                const size_t csta_procs_len = 4;
-               el_processor csta_procs[csta_procs_len] = { general, Prefem, Sestra, ADVANCE };
+               el_processor csta_procs[csta_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE };
             }
 
             long csta::nnodes(void) const {return 3;}
 
-            el_types csta::get_type(void) const {return CSTA;}
+            el_types csta::get_type(void) const {return el_types::CSTA;}
 
             const std::set<el_processor> csta::processors(
                csta_procs, csta_procs+csta_procs_len);
@@ -628,12 +628,12 @@ namespace dnvgl {
 
             namespace {
                const size_t rpbq_procs_len = 1;
-               el_processor rpbq_procs[rpbq_procs_len] = { general };
+               el_processor rpbq_procs[rpbq_procs_len] = { el_processor::general };
             }
 
             long rpbq::nnodes(void) const {return 4;}
 
-            el_types rpbq::get_type(void) const {return RPBQ;}
+            el_types rpbq::get_type(void) const {return el_types::RPBQ;}
 
             const std::set<el_processor> rpbq::processors(
                rpbq_procs, rpbq_procs+rpbq_procs_len);
@@ -673,12 +673,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ilst_procs_len = 3;
-               el_processor ilst_procs[ilst_procs_len] = { general, Prefem, Sestra };
+               el_processor ilst_procs[ilst_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long ilst::nnodes(void) const {return 6;}
 
-            el_types ilst::get_type(void) const {return ILST;}
+            el_types ilst::get_type(void) const {return el_types::ILST;}
 
             const std::set<el_processor> ilst::processors(
                ilst_procs, ilst_procs+ilst_procs_len);
@@ -718,12 +718,12 @@ namespace dnvgl {
 
             namespace {
                const size_t iqqe_procs_len = 3;
-               el_processor iqqe_procs[iqqe_procs_len] = { general, Prefem, Sestra };
+               el_processor iqqe_procs[iqqe_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long iqqe::nnodes(void) const {return 8;}
 
-            el_types iqqe::get_type(void) const {return IQQE;}
+            el_types iqqe::get_type(void) const {return el_types::IQQE;}
 
             const std::set<el_processor> iqqe::processors(
                iqqe_procs, iqqe_procs+iqqe_procs_len);
@@ -763,12 +763,12 @@ namespace dnvgl {
 
             namespace {
                const size_t lqua_procs_len = 5;
-               el_processor lqua_procs[lqua_procs_len] = { general, Prefem, Sestra, ADVANCE, Poseidon };
+               el_processor lqua_procs[lqua_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Poseidon };
             }
 
             long lqua::nnodes(void) const {return 4;}
 
-            el_types lqua::get_type(void) const {return LQUA;}
+            el_types lqua::get_type(void) const {return el_types::LQUA;}
 
             const std::set<el_processor> lqua::processors(
                lqua_procs, lqua_procs+lqua_procs_len);
@@ -808,12 +808,12 @@ namespace dnvgl {
 
             namespace {
                const size_t tess_procs_len = 6;
-               el_processor tess_procs[tess_procs_len] = { general, Preframe, Prefem, Sestra, ADVANCE, Poseidon };
+               el_processor tess_procs[tess_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Poseidon };
             }
 
             long tess::nnodes(void) const {return 2;}
 
-            el_types tess::get_type(void) const {return TESS;}
+            el_types tess::get_type(void) const {return el_types::TESS;}
 
             const std::set<el_processor> tess::processors(
                tess_procs, tess_procs+tess_procs_len);
@@ -853,12 +853,12 @@ namespace dnvgl {
 
             namespace {
                const size_t gmas_procs_len = 4;
-               el_processor gmas_procs[gmas_procs_len] = { general, Prefem, Sestra, Poseidon };
+               el_processor gmas_procs[gmas_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon };
             }
 
             long gmas::nnodes(void) const {return 1;}
 
-            el_types gmas::get_type(void) const {return GMAS;}
+            el_types gmas::get_type(void) const {return el_types::GMAS;}
 
             const std::set<el_processor> gmas::processors(
                gmas_procs, gmas_procs+gmas_procs_len);
@@ -898,12 +898,12 @@ namespace dnvgl {
 
             namespace {
                const size_t glma_procs_len = 2;
-               el_processor glma_procs[glma_procs_len] = { general, Sestra };
+               el_processor glma_procs[glma_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long glma::nnodes(void) const {return 2;}
 
-            el_types glma::get_type(void) const {return GLMA;}
+            el_types glma::get_type(void) const {return el_types::GLMA;}
 
             const std::set<el_processor> glma::processors(
                glma_procs, glma_procs+glma_procs_len);
@@ -943,12 +943,12 @@ namespace dnvgl {
 
             namespace {
                const size_t glda_procs_len = 1;
-               el_processor glda_procs[glda_procs_len] = { general };
+               el_processor glda_procs[glda_procs_len] = { el_processor::general };
             }
 
             long glda::nnodes(void) const {return 2;}
 
-            el_types glda::get_type(void) const {return GLDA;}
+            el_types glda::get_type(void) const {return el_types::GLDA;}
 
             const std::set<el_processor> glda::processors(
                glda_procs, glda_procs+glda_procs_len);
@@ -988,12 +988,12 @@ namespace dnvgl {
 
             namespace {
                const size_t beas_procs_len = 11;
-               el_processor beas_procs[beas_procs_len] = { general, Preframe, Prefem, Sestra, ADVANCE, Framework, Launch, Platework, Pretube, Wadam, Poseidon };
+               el_processor beas_procs[beas_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Launch, el_processor::Platework, el_processor::Pretube, el_processor::Wadam, el_processor::Poseidon };
             }
 
             long beas::nnodes(void) const {return 2;}
 
-            el_types beas::get_type(void) const {return BEAS;}
+            el_types beas::get_type(void) const {return el_types::BEAS;}
 
             const std::set<el_processor> beas::processors(
                beas_procs, beas_procs+beas_procs_len);
@@ -1033,12 +1033,12 @@ namespace dnvgl {
 
             namespace {
                const size_t axis_procs_len = 7;
-               el_processor axis_procs[axis_procs_len] = { general, Preframe, Prefem, Sestra, ADVANCE, Framework, Poseidon };
+               el_processor axis_procs[axis_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Poseidon };
             }
 
             long axis::nnodes(void) const {return 2;}
 
-            el_types axis::get_type(void) const {return AXIS;}
+            el_types axis::get_type(void) const {return el_types::AXIS;}
 
             const std::set<el_processor> axis::processors(
                axis_procs, axis_procs+axis_procs_len);
@@ -1078,12 +1078,12 @@ namespace dnvgl {
 
             namespace {
                const size_t axda_procs_len = 5;
-               el_processor axda_procs[axda_procs_len] = { general, Preframe, Prefem, Sestra, Poseidon };
+               el_processor axda_procs[axda_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon };
             }
 
             long axda::nnodes(void) const {return 2;}
 
-            el_types axda::get_type(void) const {return AXDA;}
+            el_types axda::get_type(void) const {return el_types::AXDA;}
 
             const std::set<el_processor> axda::processors(
                axda_procs, axda_procs+axda_procs_len);
@@ -1123,12 +1123,12 @@ namespace dnvgl {
 
             namespace {
                const size_t gspr_procs_len = 7;
-               el_processor gspr_procs[gspr_procs_len] = { general, Preframe, Prefem, Sestra, ADVANCE, Framework, Poseidon };
+               el_processor gspr_procs[gspr_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Poseidon };
             }
 
             long gspr::nnodes(void) const {return 1;}
 
-            el_types gspr::get_type(void) const {return GSPR;}
+            el_types gspr::get_type(void) const {return el_types::GSPR;}
 
             const std::set<el_processor> gspr::processors(
                gspr_procs, gspr_procs+gspr_procs_len);
@@ -1168,12 +1168,12 @@ namespace dnvgl {
 
             namespace {
                const size_t gdam_procs_len = 5;
-               el_processor gdam_procs[gdam_procs_len] = { general, Preframe, Prefem, Sestra, Poseidon };
+               el_processor gdam_procs[gdam_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon };
             }
 
             long gdam::nnodes(void) const {return 1;}
 
-            el_types gdam::get_type(void) const {return GDAM;}
+            el_types gdam::get_type(void) const {return el_types::GDAM;}
 
             const std::set<el_processor> gdam::processors(
                gdam_procs, gdam_procs+gdam_procs_len);
@@ -1213,12 +1213,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ihex_procs_len = 5;
-               el_processor ihex_procs[ihex_procs_len] = { general, Prefem, Sestra, ADVANCE, Framework };
+               el_processor ihex_procs[ihex_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework };
             }
 
             long ihex::nnodes(void) const {return 20;}
 
-            el_types ihex::get_type(void) const {return IHEX;}
+            el_types ihex::get_type(void) const {return el_types::IHEX;}
 
             const std::set<el_processor> ihex::processors(
                ihex_procs, ihex_procs+ihex_procs_len);
@@ -1258,12 +1258,12 @@ namespace dnvgl {
 
             namespace {
                const size_t lhex_procs_len = 5;
-               el_processor lhex_procs[lhex_procs_len] = { general, Prefem, Sestra, ADVANCE, Framework };
+               el_processor lhex_procs[lhex_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework };
             }
 
             long lhex::nnodes(void) const {return 8;}
 
-            el_types lhex::get_type(void) const {return LHEX;}
+            el_types lhex::get_type(void) const {return el_types::LHEX;}
 
             const std::set<el_processor> lhex::processors(
                lhex_procs, lhex_procs+lhex_procs_len);
@@ -1303,12 +1303,12 @@ namespace dnvgl {
 
             namespace {
                const size_t secb_procs_len = 1;
-               el_processor secb_procs[secb_procs_len] = { general };
+               el_processor secb_procs[secb_procs_len] = { el_processor::general };
             }
 
             long secb::nnodes(void) const {return 3;}
 
-            el_types secb::get_type(void) const {return SECB;}
+            el_types secb::get_type(void) const {return el_types::SECB;}
 
             const std::set<el_processor> secb::processors(
                secb_procs, secb_procs+secb_procs_len);
@@ -1348,12 +1348,12 @@ namespace dnvgl {
 
             namespace {
                const size_t btss_procs_len = 5;
-               el_processor btss_procs[btss_procs_len] = { general, Prefem, Sestra, Platework, Pretube };
+               el_processor btss_procs[btss_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework, el_processor::Pretube };
             }
 
             long btss::nnodes(void) const {return 3;}
 
-            el_types btss::get_type(void) const {return BTSS;}
+            el_types btss::get_type(void) const {return el_types::BTSS;}
 
             const std::set<el_processor> btss::processors(
                btss_procs, btss_procs+btss_procs_len);
@@ -1393,12 +1393,12 @@ namespace dnvgl {
 
             namespace {
                const size_t fqus_ffq_procs_len = 7;
-               el_processor fqus_ffq_procs[fqus_ffq_procs_len] = { general, Prefem, Sestra, ADVANCE, Platework, Pretube, Poseidon };
+               el_processor fqus_ffq_procs[fqus_ffq_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Platework, el_processor::Pretube, el_processor::Poseidon };
             }
 
             long fqus_ffq::nnodes(void) const {return 4;}
 
-            el_types fqus_ffq::get_type(void) const {return FQUS_FFQ;}
+            el_types fqus_ffq::get_type(void) const {return el_types::FQUS_FFQ;}
 
             const std::set<el_processor> fqus_ffq::processors(
                fqus_ffq_procs, fqus_ffq_procs+fqus_ffq_procs_len);
@@ -1438,12 +1438,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ftrs_fftr_procs_len = 6;
-               el_processor ftrs_fftr_procs[ftrs_fftr_procs_len] = { general, Prefem, Sestra, ADVANCE, Platework, Poseidon };
+               el_processor ftrs_fftr_procs[ftrs_fftr_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Platework, el_processor::Poseidon };
             }
 
             long ftrs_fftr::nnodes(void) const {return 3;}
 
-            el_types ftrs_fftr::get_type(void) const {return FTRS_FFTR;}
+            el_types ftrs_fftr::get_type(void) const {return el_types::FTRS_FFTR;}
 
             const std::set<el_processor> ftrs_fftr::processors(
                ftrs_fftr_procs, ftrs_fftr_procs+ftrs_fftr_procs_len);
@@ -1483,12 +1483,12 @@ namespace dnvgl {
 
             namespace {
                const size_t scts_procs_len = 4;
-               el_processor scts_procs[scts_procs_len] = { general, Prefem, Sestra, Platework };
+               el_processor scts_procs[scts_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework };
             }
 
             long scts::nnodes(void) const {return 6;}
 
-            el_types scts::get_type(void) const {return SCTS;}
+            el_types scts::get_type(void) const {return el_types::SCTS;}
 
             const std::set<el_processor> scts::processors(
                scts_procs, scts_procs+scts_procs_len);
@@ -1528,12 +1528,12 @@ namespace dnvgl {
 
             namespace {
                const size_t mcts_procs_len = 3;
-               el_processor mcts_procs[mcts_procs_len] = { general, Prefem, Sestra };
+               el_processor mcts_procs[mcts_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long mcts::nnodes(void) const {return 6;}
 
-            el_types mcts::get_type(void) const {return MCTS;}
+            el_types mcts::get_type(void) const {return el_types::MCTS;}
 
             const std::set<el_processor> mcts::processors(
                mcts_procs, mcts_procs+mcts_procs_len);
@@ -1573,12 +1573,12 @@ namespace dnvgl {
 
             namespace {
                const size_t scqs_procs_len = 5;
-               el_processor scqs_procs[scqs_procs_len] = { general, Prefem, Sestra, Platework, Pretube };
+               el_processor scqs_procs[scqs_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework, el_processor::Pretube };
             }
 
             long scqs::nnodes(void) const {return 8;}
 
-            el_types scqs::get_type(void) const {return SCQS;}
+            el_types scqs::get_type(void) const {return el_types::SCQS;}
 
             const std::set<el_processor> scqs::processors(
                scqs_procs, scqs_procs+scqs_procs_len);
@@ -1618,12 +1618,12 @@ namespace dnvgl {
 
             namespace {
                const size_t mcqs_procs_len = 3;
-               el_processor mcqs_procs[mcqs_procs_len] = { general, Prefem, Sestra };
+               el_processor mcqs_procs[mcqs_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long mcqs::nnodes(void) const {return 8;}
 
-            el_types mcqs::get_type(void) const {return MCQS;}
+            el_types mcqs::get_type(void) const {return el_types::MCQS;}
 
             const std::set<el_processor> mcqs::processors(
                mcqs_procs, mcqs_procs+mcqs_procs_len);
@@ -1663,12 +1663,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ipri_procs_len = 4;
-               el_processor ipri_procs[ipri_procs_len] = { general, Prefem, Sestra, ADVANCE };
+               el_processor ipri_procs[ipri_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE };
             }
 
             long ipri::nnodes(void) const {return 15;}
 
-            el_types ipri::get_type(void) const {return IPRI;}
+            el_types ipri::get_type(void) const {return el_types::IPRI;}
 
             const std::set<el_processor> ipri::processors(
                ipri_procs, ipri_procs+ipri_procs_len);
@@ -1708,12 +1708,12 @@ namespace dnvgl {
 
             namespace {
                const size_t itet_procs_len = 2;
-               el_processor itet_procs[itet_procs_len] = { general, Sestra };
+               el_processor itet_procs[itet_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long itet::nnodes(void) const {return 10;}
 
-            el_types itet::get_type(void) const {return ITET;}
+            el_types itet::get_type(void) const {return el_types::ITET;}
 
             const std::set<el_processor> itet::processors(
                itet_procs, itet_procs+itet_procs_len);
@@ -1753,12 +1753,12 @@ namespace dnvgl {
 
             namespace {
                const size_t tpri_procs_len = 4;
-               el_processor tpri_procs[tpri_procs_len] = { general, Prefem, Sestra, Platework };
+               el_processor tpri_procs[tpri_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework };
             }
 
             long tpri::nnodes(void) const {return 6;}
 
-            el_types tpri::get_type(void) const {return TPRI;}
+            el_types tpri::get_type(void) const {return el_types::TPRI;}
 
             const std::set<el_processor> tpri::processors(
                tpri_procs, tpri_procs+tpri_procs_len);
@@ -1798,12 +1798,12 @@ namespace dnvgl {
 
             namespace {
                const size_t tetr_procs_len = 2;
-               el_processor tetr_procs[tetr_procs_len] = { general, Sestra };
+               el_processor tetr_procs[tetr_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long tetr::nnodes(void) const {return 4;}
 
-            el_types tetr::get_type(void) const {return TETR;}
+            el_types tetr::get_type(void) const {return el_types::TETR;}
 
             const std::set<el_processor> tetr::processors(
                tetr_procs, tetr_procs+tetr_procs_len);
@@ -1843,12 +1843,12 @@ namespace dnvgl {
 
             namespace {
                const size_t lcts_procs_len = 3;
-               el_processor lcts_procs[lcts_procs_len] = { general, Prefem, Sestra };
+               el_processor lcts_procs[lcts_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long lcts::nnodes(void) const {return 6;}
 
-            el_types lcts::get_type(void) const {return LCTS;}
+            el_types lcts::get_type(void) const {return el_types::LCTS;}
 
             const std::set<el_processor> lcts::processors(
                lcts_procs, lcts_procs+lcts_procs_len);
@@ -1888,12 +1888,12 @@ namespace dnvgl {
 
             namespace {
                const size_t lcqs_procs_len = 3;
-               el_processor lcqs_procs[lcqs_procs_len] = { general, Prefem, Sestra };
+               el_processor lcqs_procs[lcqs_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long lcqs::nnodes(void) const {return 8;}
 
-            el_types lcqs::get_type(void) const {return LCQS;}
+            el_types lcqs::get_type(void) const {return el_types::LCQS;}
 
             const std::set<el_processor> lcqs::processors(
                lcqs_procs, lcqs_procs+lcqs_procs_len);
@@ -1933,12 +1933,12 @@ namespace dnvgl {
 
             namespace {
                const size_t trs1_procs_len = 3;
-               el_processor trs1_procs[trs1_procs_len] = { general, Sestra, Pretube };
+               el_processor trs1_procs[trs1_procs_len] = { el_processor::general, el_processor::Sestra, el_processor::Pretube };
             }
 
             long trs1::nnodes(void) const {return 18;}
 
-            el_types trs1::get_type(void) const {return TRS1;}
+            el_types trs1::get_type(void) const {return el_types::TRS1;}
 
             const std::set<el_processor> trs1::processors(
                trs1_procs, trs1_procs+trs1_procs_len);
@@ -1978,12 +1978,12 @@ namespace dnvgl {
 
             namespace {
                const size_t trs2_procs_len = 3;
-               el_processor trs2_procs[trs2_procs_len] = { general, Sestra, Pretube };
+               el_processor trs2_procs[trs2_procs_len] = { el_processor::general, el_processor::Sestra, el_processor::Pretube };
             }
 
             long trs2::nnodes(void) const {return 15;}
 
-            el_types trs2::get_type(void) const {return TRS2;}
+            el_types trs2::get_type(void) const {return el_types::TRS2;}
 
             const std::set<el_processor> trs2::processors(
                trs2_procs, trs2_procs+trs2_procs_len);
@@ -2023,12 +2023,12 @@ namespace dnvgl {
 
             namespace {
                const size_t trs3_procs_len = 3;
-               el_processor trs3_procs[trs3_procs_len] = { general, Sestra, Pretube };
+               el_processor trs3_procs[trs3_procs_len] = { el_processor::general, el_processor::Sestra, el_processor::Pretube };
             }
 
             long trs3::nnodes(void) const {return 12;}
 
-            el_types trs3::get_type(void) const {return TRS3;}
+            el_types trs3::get_type(void) const {return el_types::TRS3;}
 
             const std::set<el_processor> trs3::processors(
                trs3_procs, trs3_procs+trs3_procs_len);
@@ -2068,12 +2068,12 @@ namespace dnvgl {
 
             namespace {
                const size_t glsh_procs_len = 4;
-               el_processor glsh_procs[glsh_procs_len] = { general, Preframe, Sestra, Poseidon };
+               el_processor glsh_procs[glsh_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::Sestra, el_processor::Poseidon };
             }
 
             long glsh::nnodes(void) const {return 2;}
 
-            el_types glsh::get_type(void) const {return GLSH;}
+            el_types glsh::get_type(void) const {return el_types::GLSH;}
 
             const std::set<el_processor> glsh::processors(
                glsh_procs, glsh_procs+glsh_procs_len);
@@ -2113,12 +2113,12 @@ namespace dnvgl {
 
             namespace {
                const size_t axcs_procs_len = 4;
-               el_processor axcs_procs[axcs_procs_len] = { general, Prefem, Sestra, ADVANCE };
+               el_processor axcs_procs[axcs_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE };
             }
 
             long axcs::nnodes(void) const {return 3;}
 
-            el_types axcs::get_type(void) const {return AXCS;}
+            el_types axcs::get_type(void) const {return el_types::AXCS;}
 
             const std::set<el_processor> axcs::processors(
                axcs_procs, axcs_procs+axcs_procs_len);
@@ -2158,12 +2158,12 @@ namespace dnvgl {
 
             namespace {
                const size_t axlq_procs_len = 4;
-               el_processor axlq_procs[axlq_procs_len] = { general, Prefem, Sestra, ADVANCE };
+               el_processor axlq_procs[axlq_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE };
             }
 
             long axlq::nnodes(void) const {return 4;}
 
-            el_types axlq::get_type(void) const {return AXLQ;}
+            el_types axlq::get_type(void) const {return el_types::AXLQ;}
 
             const std::set<el_processor> axlq::processors(
                axlq_procs, axlq_procs+axlq_procs_len);
@@ -2203,12 +2203,12 @@ namespace dnvgl {
 
             namespace {
                const size_t axls_procs_len = 3;
-               el_processor axls_procs[axls_procs_len] = { general, Prefem, Sestra };
+               el_processor axls_procs[axls_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long axls::nnodes(void) const {return 6;}
 
-            el_types axls::get_type(void) const {return AXLS;}
+            el_types axls::get_type(void) const {return el_types::AXLS;}
 
             const std::set<el_processor> axls::processors(
                axls_procs, axls_procs+axls_procs_len);
@@ -2248,12 +2248,12 @@ namespace dnvgl {
 
             namespace {
                const size_t axqq_procs_len = 3;
-               el_processor axqq_procs[axqq_procs_len] = { general, Prefem, Sestra };
+               el_processor axqq_procs[axqq_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Sestra };
             }
 
             long axqq::nnodes(void) const {return 8;}
 
-            el_types axqq::get_type(void) const {return AXQQ;}
+            el_types axqq::get_type(void) const {return el_types::AXQQ;}
 
             const std::set<el_processor> axqq::processors(
                axqq_procs, axqq_procs+axqq_procs_len);
@@ -2293,12 +2293,12 @@ namespace dnvgl {
 
             namespace {
                const size_t pils_procs_len = 3;
-               el_processor pils_procs[pils_procs_len] = { general, Preframe, ADVANCE };
+               el_processor pils_procs[pils_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::ADVANCE };
             }
 
             long pils::nnodes(void) const {return 1;}
 
-            el_types pils::get_type(void) const {return PILS;}
+            el_types pils::get_type(void) const {return el_types::PILS;}
 
             const std::set<el_processor> pils::processors(
                pils_procs, pils_procs+pils_procs_len);
@@ -2338,12 +2338,12 @@ namespace dnvgl {
 
             namespace {
                const size_t pcab_procs_len = 3;
-               el_processor pcab_procs[pcab_procs_len] = { general, Preframe, ADVANCE };
+               el_processor pcab_procs[pcab_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::ADVANCE };
             }
 
             long pcab::nnodes(void) const {return 2;}
 
-            el_types pcab::get_type(void) const {return PCAB;}
+            el_types pcab::get_type(void) const {return el_types::PCAB;}
 
             const std::set<el_processor> pcab::processors(
                pcab_procs, pcab_procs+pcab_procs_len);
@@ -2383,12 +2383,12 @@ namespace dnvgl {
 
             namespace {
                const size_t pspr_procs_len = 3;
-               el_processor pspr_procs[pspr_procs_len] = { general, Preframe, ADVANCE };
+               el_processor pspr_procs[pspr_procs_len] = { el_processor::general, el_processor::Preframe, el_processor::ADVANCE };
             }
 
             long pspr::nnodes(void) const {return 1;}
 
-            el_types pspr::get_type(void) const {return PSPR;}
+            el_types pspr::get_type(void) const {return el_types::PSPR;}
 
             const std::set<el_processor> pspr::processors(
                pspr_procs, pspr_procs+pspr_procs_len);
@@ -2428,12 +2428,12 @@ namespace dnvgl {
 
             namespace {
                const size_t adva_4_procs_len = 2;
-               el_processor adva_4_procs[adva_4_procs_len] = { general, ADVANCE };
+               el_processor adva_4_procs[adva_4_procs_len] = { el_processor::general, el_processor::ADVANCE };
             }
 
             long adva_4::nnodes(void) const {return 4;}
 
-            el_types adva_4::get_type(void) const {return ADVA_4;}
+            el_types adva_4::get_type(void) const {return el_types::ADVA_4;}
 
             const std::set<el_processor> adva_4::processors(
                adva_4_procs, adva_4_procs+adva_4_procs_len);
@@ -2473,12 +2473,12 @@ namespace dnvgl {
 
             namespace {
                const size_t adva_2_procs_len = 2;
-               el_processor adva_2_procs[adva_2_procs_len] = { general, ADVANCE };
+               el_processor adva_2_procs[adva_2_procs_len] = { el_processor::general, el_processor::ADVANCE };
             }
 
             long adva_2::nnodes(void) const {return 2;}
 
-            el_types adva_2::get_type(void) const {return ADVA_2;}
+            el_types adva_2::get_type(void) const {return el_types::ADVA_2;}
 
             const std::set<el_processor> adva_2::processors(
                adva_2_procs, adva_2_procs+adva_2_procs_len);
@@ -2518,12 +2518,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctcp_procs_len = 1;
-               el_processor ctcp_procs[ctcp_procs_len] = { general };
+               el_processor ctcp_procs[ctcp_procs_len] = { el_processor::general };
             }
 
             long ctcp::nnodes(void) const {return 2;}
 
-            el_types ctcp::get_type(void) const {return CTCP;}
+            el_types ctcp::get_type(void) const {return el_types::CTCP;}
 
             const std::set<el_processor> ctcp::processors(
                ctcp_procs, ctcp_procs+ctcp_procs_len);
@@ -2563,12 +2563,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctcl_procs_len = 1;
-               el_processor ctcl_procs[ctcl_procs_len] = { general };
+               el_processor ctcl_procs[ctcl_procs_len] = { el_processor::general };
             }
 
             long ctcl::nnodes(void) const {return 4;}
 
-            el_types ctcl::get_type(void) const {return CTCL;}
+            el_types ctcl::get_type(void) const {return el_types::CTCL;}
 
             const std::set<el_processor> ctcl::processors(
                ctcl_procs, ctcl_procs+ctcl_procs_len);
@@ -2608,12 +2608,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctal_procs_len = 1;
-               el_processor ctal_procs[ctal_procs_len] = { general };
+               el_processor ctal_procs[ctal_procs_len] = { el_processor::general };
             }
 
             long ctal::nnodes(void) const {return 4;}
 
-            el_types ctal::get_type(void) const {return CTAL;}
+            el_types ctal::get_type(void) const {return el_types::CTAL;}
 
             const std::set<el_processor> ctal::processors(
                ctal_procs, ctal_procs+ctal_procs_len);
@@ -2653,12 +2653,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctcc_procs_len = 1;
-               el_processor ctcc_procs[ctcc_procs_len] = { general };
+               el_processor ctcc_procs[ctcc_procs_len] = { el_processor::general };
             }
 
             long ctcc::nnodes(void) const {return 6;}
 
-            el_types ctcc::get_type(void) const {return CTCC;}
+            el_types ctcc::get_type(void) const {return el_types::CTCC;}
 
             const std::set<el_processor> ctcc::processors(
                ctcc_procs, ctcc_procs+ctcc_procs_len);
@@ -2698,12 +2698,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctaq_procs_len = 2;
-               el_processor ctaq_procs[ctaq_procs_len] = { general, Prefem };
+               el_processor ctaq_procs[ctaq_procs_len] = { el_processor::general, el_processor::Prefem };
             }
 
             long ctaq::nnodes(void) const {return 6;}
 
-            el_types ctaq::get_type(void) const {return CTAQ;}
+            el_types ctaq::get_type(void) const {return el_types::CTAQ;}
 
             const std::set<el_processor> ctaq::processors(
                ctaq_procs, ctaq_procs+ctaq_procs_len);
@@ -2743,12 +2743,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctlq_procs_len = 2;
-               el_processor ctlq_procs[ctlq_procs_len] = { general, Pretube };
+               el_processor ctlq_procs[ctlq_procs_len] = { el_processor::general, el_processor::Pretube };
             }
 
             long ctlq::nnodes(void) const {return 8;}
 
-            el_types ctlq::get_type(void) const {return CTLQ;}
+            el_types ctlq::get_type(void) const {return el_types::CTLQ;}
 
             const std::set<el_processor> ctlq::processors(
                ctlq_procs, ctlq_procs+ctlq_procs_len);
@@ -2788,12 +2788,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctcq_procs_len = 3;
-               el_processor ctcq_procs[ctcq_procs_len] = { general, Prefem, Pretube };
+               el_processor ctcq_procs[ctcq_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Pretube };
             }
 
             long ctcq::nnodes(void) const {return 16;}
 
-            el_types ctcq::get_type(void) const {return CTCQ;}
+            el_types ctcq::get_type(void) const {return el_types::CTCQ;}
 
             const std::set<el_processor> ctcq::processors(
                ctcq_procs, ctcq_procs+ctcq_procs_len);
@@ -2833,12 +2833,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ctmq_procs_len = 2;
-               el_processor ctmq_procs[ctmq_procs_len] = { general, Pretube };
+               el_processor ctmq_procs[ctmq_procs_len] = { el_processor::general, el_processor::Pretube };
             }
 
             long ctmq::nnodes(void) const {return 18;}
 
-            el_types ctmq::get_type(void) const {return CTMQ;}
+            el_types ctmq::get_type(void) const {return el_types::CTMQ;}
 
             const std::set<el_processor> ctmq::processors(
                ctmq_procs, ctmq_procs+ctmq_procs_len);
@@ -2878,12 +2878,12 @@ namespace dnvgl {
 
             namespace {
                const size_t hcqs_procs_len = 3;
-               el_processor hcqs_procs[hcqs_procs_len] = { general, Prefem, Pretube };
+               el_processor hcqs_procs[hcqs_procs_len] = { el_processor::general, el_processor::Prefem, el_processor::Pretube };
             }
 
             long hcqs::nnodes(void) const {return 9;}
 
-            el_types hcqs::get_type(void) const {return HCQS;}
+            el_types hcqs::get_type(void) const {return el_types::HCQS;}
 
             const std::set<el_processor> hcqs::processors(
                hcqs_procs, hcqs_procs+hcqs_procs_len);
@@ -2923,12 +2923,12 @@ namespace dnvgl {
 
             namespace {
                const size_t slqs_procs_len = 1;
-               el_processor slqs_procs[slqs_procs_len] = { general };
+               el_processor slqs_procs[slqs_procs_len] = { el_processor::general };
             }
 
             long slqs::nnodes(void) const {return 8;}
 
-            el_types slqs::get_type(void) const {return SLQS;}
+            el_types slqs::get_type(void) const {return el_types::SLQS;}
 
             const std::set<el_processor> slqs::processors(
                slqs_procs, slqs_procs+slqs_procs_len);
@@ -2968,12 +2968,12 @@ namespace dnvgl {
 
             namespace {
                const size_t slts_procs_len = 1;
-               el_processor slts_procs[slts_procs_len] = { general };
+               el_processor slts_procs[slts_procs_len] = { el_processor::general };
             }
 
             long slts::nnodes(void) const {return 6;}
 
-            el_types slts::get_type(void) const {return SLTS;}
+            el_types slts::get_type(void) const {return el_types::SLTS;}
 
             const std::set<el_processor> slts::processors(
                slts_procs, slts_procs+slts_procs_len);
@@ -3013,12 +3013,12 @@ namespace dnvgl {
 
             namespace {
                const size_t slcb_procs_len = 1;
-               el_processor slcb_procs[slcb_procs_len] = { general };
+               el_processor slcb_procs[slcb_procs_len] = { el_processor::general };
             }
 
             long slcb::nnodes(void) const {return 3;}
 
-            el_types slcb::get_type(void) const {return SLCB;}
+            el_types slcb::get_type(void) const {return el_types::SLCB;}
 
             const std::set<el_processor> slcb::processors(
                slcb_procs, slcb_procs+slcb_procs_len);
@@ -3058,12 +3058,12 @@ namespace dnvgl {
 
             namespace {
                const size_t matr_procs_len = 3;
-               el_processor matr_procs[matr_procs_len] = { general, ADVANCE, Splice };
+               el_processor matr_procs[matr_procs_len] = { el_processor::general, el_processor::ADVANCE, el_processor::Splice };
             }
 
             long matr::nnodes(void) const {return 0;}
 
-            el_types matr::get_type(void) const {return MATR;}
+            el_types matr::get_type(void) const {return el_types::MATR;}
 
             const std::set<el_processor> matr::processors(
                matr_procs, matr_procs+matr_procs_len);
@@ -3103,12 +3103,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex100_procs_len = 2;
-               el_processor ghex100_procs[ghex100_procs_len] = { general, Sestra };
+               el_processor ghex100_procs[ghex100_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex100::nnodes(void) const {return 21;}
 
-            el_types ghex100::get_type(void) const {return GHEX100;}
+            el_types ghex100::get_type(void) const {return el_types::GHEX100;}
 
             const std::set<el_processor> ghex100::processors(
                ghex100_procs, ghex100_procs+ghex100_procs_len);
@@ -3148,12 +3148,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex101_procs_len = 2;
-               el_processor ghex101_procs[ghex101_procs_len] = { general, Sestra };
+               el_processor ghex101_procs[ghex101_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex101::nnodes(void) const {return 22;}
 
-            el_types ghex101::get_type(void) const {return GHEX101;}
+            el_types ghex101::get_type(void) const {return el_types::GHEX101;}
 
             const std::set<el_processor> ghex101::processors(
                ghex101_procs, ghex101_procs+ghex101_procs_len);
@@ -3193,12 +3193,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex102_procs_len = 2;
-               el_processor ghex102_procs[ghex102_procs_len] = { general, Sestra };
+               el_processor ghex102_procs[ghex102_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex102::nnodes(void) const {return 22;}
 
-            el_types ghex102::get_type(void) const {return GHEX102;}
+            el_types ghex102::get_type(void) const {return el_types::GHEX102;}
 
             const std::set<el_processor> ghex102::processors(
                ghex102_procs, ghex102_procs+ghex102_procs_len);
@@ -3238,12 +3238,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex103_procs_len = 2;
-               el_processor ghex103_procs[ghex103_procs_len] = { general, Sestra };
+               el_processor ghex103_procs[ghex103_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex103::nnodes(void) const {return 23;}
 
-            el_types ghex103::get_type(void) const {return GHEX103;}
+            el_types ghex103::get_type(void) const {return el_types::GHEX103;}
 
             const std::set<el_processor> ghex103::processors(
                ghex103_procs, ghex103_procs+ghex103_procs_len);
@@ -3283,12 +3283,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex104_procs_len = 2;
-               el_processor ghex104_procs[ghex104_procs_len] = { general, Sestra };
+               el_processor ghex104_procs[ghex104_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex104::nnodes(void) const {return 22;}
 
-            el_types ghex104::get_type(void) const {return GHEX104;}
+            el_types ghex104::get_type(void) const {return el_types::GHEX104;}
 
             const std::set<el_processor> ghex104::processors(
                ghex104_procs, ghex104_procs+ghex104_procs_len);
@@ -3328,12 +3328,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex105_procs_len = 2;
-               el_processor ghex105_procs[ghex105_procs_len] = { general, Sestra };
+               el_processor ghex105_procs[ghex105_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex105::nnodes(void) const {return 23;}
 
-            el_types ghex105::get_type(void) const {return GHEX105;}
+            el_types ghex105::get_type(void) const {return el_types::GHEX105;}
 
             const std::set<el_processor> ghex105::processors(
                ghex105_procs, ghex105_procs+ghex105_procs_len);
@@ -3373,12 +3373,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex106_procs_len = 2;
-               el_processor ghex106_procs[ghex106_procs_len] = { general, Sestra };
+               el_processor ghex106_procs[ghex106_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex106::nnodes(void) const {return 23;}
 
-            el_types ghex106::get_type(void) const {return GHEX106;}
+            el_types ghex106::get_type(void) const {return el_types::GHEX106;}
 
             const std::set<el_processor> ghex106::processors(
                ghex106_procs, ghex106_procs+ghex106_procs_len);
@@ -3418,12 +3418,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex107_procs_len = 2;
-               el_processor ghex107_procs[ghex107_procs_len] = { general, Sestra };
+               el_processor ghex107_procs[ghex107_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex107::nnodes(void) const {return 24;}
 
-            el_types ghex107::get_type(void) const {return GHEX107;}
+            el_types ghex107::get_type(void) const {return el_types::GHEX107;}
 
             const std::set<el_processor> ghex107::processors(
                ghex107_procs, ghex107_procs+ghex107_procs_len);
@@ -3463,12 +3463,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex108_procs_len = 2;
-               el_processor ghex108_procs[ghex108_procs_len] = { general, Sestra };
+               el_processor ghex108_procs[ghex108_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex108::nnodes(void) const {return 22;}
 
-            el_types ghex108::get_type(void) const {return GHEX108;}
+            el_types ghex108::get_type(void) const {return el_types::GHEX108;}
 
             const std::set<el_processor> ghex108::processors(
                ghex108_procs, ghex108_procs+ghex108_procs_len);
@@ -3508,12 +3508,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex109_procs_len = 2;
-               el_processor ghex109_procs[ghex109_procs_len] = { general, Sestra };
+               el_processor ghex109_procs[ghex109_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex109::nnodes(void) const {return 23;}
 
-            el_types ghex109::get_type(void) const {return GHEX109;}
+            el_types ghex109::get_type(void) const {return el_types::GHEX109;}
 
             const std::set<el_processor> ghex109::processors(
                ghex109_procs, ghex109_procs+ghex109_procs_len);
@@ -3553,12 +3553,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex110_procs_len = 2;
-               el_processor ghex110_procs[ghex110_procs_len] = { general, Sestra };
+               el_processor ghex110_procs[ghex110_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex110::nnodes(void) const {return 23;}
 
-            el_types ghex110::get_type(void) const {return GHEX110;}
+            el_types ghex110::get_type(void) const {return el_types::GHEX110;}
 
             const std::set<el_processor> ghex110::processors(
                ghex110_procs, ghex110_procs+ghex110_procs_len);
@@ -3598,12 +3598,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex111_procs_len = 2;
-               el_processor ghex111_procs[ghex111_procs_len] = { general, Sestra };
+               el_processor ghex111_procs[ghex111_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex111::nnodes(void) const {return 24;}
 
-            el_types ghex111::get_type(void) const {return GHEX111;}
+            el_types ghex111::get_type(void) const {return el_types::GHEX111;}
 
             const std::set<el_processor> ghex111::processors(
                ghex111_procs, ghex111_procs+ghex111_procs_len);
@@ -3643,12 +3643,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex112_procs_len = 2;
-               el_processor ghex112_procs[ghex112_procs_len] = { general, Sestra };
+               el_processor ghex112_procs[ghex112_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex112::nnodes(void) const {return 23;}
 
-            el_types ghex112::get_type(void) const {return GHEX112;}
+            el_types ghex112::get_type(void) const {return el_types::GHEX112;}
 
             const std::set<el_processor> ghex112::processors(
                ghex112_procs, ghex112_procs+ghex112_procs_len);
@@ -3688,12 +3688,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex113_procs_len = 2;
-               el_processor ghex113_procs[ghex113_procs_len] = { general, Sestra };
+               el_processor ghex113_procs[ghex113_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex113::nnodes(void) const {return 24;}
 
-            el_types ghex113::get_type(void) const {return GHEX113;}
+            el_types ghex113::get_type(void) const {return el_types::GHEX113;}
 
             const std::set<el_processor> ghex113::processors(
                ghex113_procs, ghex113_procs+ghex113_procs_len);
@@ -3733,12 +3733,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex114_procs_len = 2;
-               el_processor ghex114_procs[ghex114_procs_len] = { general, Sestra };
+               el_processor ghex114_procs[ghex114_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex114::nnodes(void) const {return 24;}
 
-            el_types ghex114::get_type(void) const {return GHEX114;}
+            el_types ghex114::get_type(void) const {return el_types::GHEX114;}
 
             const std::set<el_processor> ghex114::processors(
                ghex114_procs, ghex114_procs+ghex114_procs_len);
@@ -3778,12 +3778,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex115_procs_len = 2;
-               el_processor ghex115_procs[ghex115_procs_len] = { general, Sestra };
+               el_processor ghex115_procs[ghex115_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex115::nnodes(void) const {return 25;}
 
-            el_types ghex115::get_type(void) const {return GHEX115;}
+            el_types ghex115::get_type(void) const {return el_types::GHEX115;}
 
             const std::set<el_processor> ghex115::processors(
                ghex115_procs, ghex115_procs+ghex115_procs_len);
@@ -3823,12 +3823,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex116_procs_len = 2;
-               el_processor ghex116_procs[ghex116_procs_len] = { general, Sestra };
+               el_processor ghex116_procs[ghex116_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex116::nnodes(void) const {return 22;}
 
-            el_types ghex116::get_type(void) const {return GHEX116;}
+            el_types ghex116::get_type(void) const {return el_types::GHEX116;}
 
             const std::set<el_processor> ghex116::processors(
                ghex116_procs, ghex116_procs+ghex116_procs_len);
@@ -3868,12 +3868,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex117_procs_len = 2;
-               el_processor ghex117_procs[ghex117_procs_len] = { general, Sestra };
+               el_processor ghex117_procs[ghex117_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex117::nnodes(void) const {return 23;}
 
-            el_types ghex117::get_type(void) const {return GHEX117;}
+            el_types ghex117::get_type(void) const {return el_types::GHEX117;}
 
             const std::set<el_processor> ghex117::processors(
                ghex117_procs, ghex117_procs+ghex117_procs_len);
@@ -3913,12 +3913,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex118_procs_len = 2;
-               el_processor ghex118_procs[ghex118_procs_len] = { general, Sestra };
+               el_processor ghex118_procs[ghex118_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex118::nnodes(void) const {return 23;}
 
-            el_types ghex118::get_type(void) const {return GHEX118;}
+            el_types ghex118::get_type(void) const {return el_types::GHEX118;}
 
             const std::set<el_processor> ghex118::processors(
                ghex118_procs, ghex118_procs+ghex118_procs_len);
@@ -3958,12 +3958,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex119_procs_len = 2;
-               el_processor ghex119_procs[ghex119_procs_len] = { general, Sestra };
+               el_processor ghex119_procs[ghex119_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex119::nnodes(void) const {return 24;}
 
-            el_types ghex119::get_type(void) const {return GHEX119;}
+            el_types ghex119::get_type(void) const {return el_types::GHEX119;}
 
             const std::set<el_processor> ghex119::processors(
                ghex119_procs, ghex119_procs+ghex119_procs_len);
@@ -4003,12 +4003,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex120_procs_len = 2;
-               el_processor ghex120_procs[ghex120_procs_len] = { general, Sestra };
+               el_processor ghex120_procs[ghex120_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex120::nnodes(void) const {return 23;}
 
-            el_types ghex120::get_type(void) const {return GHEX120;}
+            el_types ghex120::get_type(void) const {return el_types::GHEX120;}
 
             const std::set<el_processor> ghex120::processors(
                ghex120_procs, ghex120_procs+ghex120_procs_len);
@@ -4048,12 +4048,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex121_procs_len = 2;
-               el_processor ghex121_procs[ghex121_procs_len] = { general, Sestra };
+               el_processor ghex121_procs[ghex121_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex121::nnodes(void) const {return 24;}
 
-            el_types ghex121::get_type(void) const {return GHEX121;}
+            el_types ghex121::get_type(void) const {return el_types::GHEX121;}
 
             const std::set<el_processor> ghex121::processors(
                ghex121_procs, ghex121_procs+ghex121_procs_len);
@@ -4093,12 +4093,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex122_procs_len = 2;
-               el_processor ghex122_procs[ghex122_procs_len] = { general, Sestra };
+               el_processor ghex122_procs[ghex122_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex122::nnodes(void) const {return 24;}
 
-            el_types ghex122::get_type(void) const {return GHEX122;}
+            el_types ghex122::get_type(void) const {return el_types::GHEX122;}
 
             const std::set<el_processor> ghex122::processors(
                ghex122_procs, ghex122_procs+ghex122_procs_len);
@@ -4138,12 +4138,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex123_procs_len = 2;
-               el_processor ghex123_procs[ghex123_procs_len] = { general, Sestra };
+               el_processor ghex123_procs[ghex123_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex123::nnodes(void) const {return 25;}
 
-            el_types ghex123::get_type(void) const {return GHEX123;}
+            el_types ghex123::get_type(void) const {return el_types::GHEX123;}
 
             const std::set<el_processor> ghex123::processors(
                ghex123_procs, ghex123_procs+ghex123_procs_len);
@@ -4183,12 +4183,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex124_procs_len = 2;
-               el_processor ghex124_procs[ghex124_procs_len] = { general, Sestra };
+               el_processor ghex124_procs[ghex124_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex124::nnodes(void) const {return 23;}
 
-            el_types ghex124::get_type(void) const {return GHEX124;}
+            el_types ghex124::get_type(void) const {return el_types::GHEX124;}
 
             const std::set<el_processor> ghex124::processors(
                ghex124_procs, ghex124_procs+ghex124_procs_len);
@@ -4228,12 +4228,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex125_procs_len = 2;
-               el_processor ghex125_procs[ghex125_procs_len] = { general, Sestra };
+               el_processor ghex125_procs[ghex125_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex125::nnodes(void) const {return 24;}
 
-            el_types ghex125::get_type(void) const {return GHEX125;}
+            el_types ghex125::get_type(void) const {return el_types::GHEX125;}
 
             const std::set<el_processor> ghex125::processors(
                ghex125_procs, ghex125_procs+ghex125_procs_len);
@@ -4273,12 +4273,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex126_procs_len = 2;
-               el_processor ghex126_procs[ghex126_procs_len] = { general, Sestra };
+               el_processor ghex126_procs[ghex126_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex126::nnodes(void) const {return 24;}
 
-            el_types ghex126::get_type(void) const {return GHEX126;}
+            el_types ghex126::get_type(void) const {return el_types::GHEX126;}
 
             const std::set<el_processor> ghex126::processors(
                ghex126_procs, ghex126_procs+ghex126_procs_len);
@@ -4318,12 +4318,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex127_procs_len = 2;
-               el_processor ghex127_procs[ghex127_procs_len] = { general, Sestra };
+               el_processor ghex127_procs[ghex127_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex127::nnodes(void) const {return 25;}
 
-            el_types ghex127::get_type(void) const {return GHEX127;}
+            el_types ghex127::get_type(void) const {return el_types::GHEX127;}
 
             const std::set<el_processor> ghex127::processors(
                ghex127_procs, ghex127_procs+ghex127_procs_len);
@@ -4363,12 +4363,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex128_procs_len = 2;
-               el_processor ghex128_procs[ghex128_procs_len] = { general, Sestra };
+               el_processor ghex128_procs[ghex128_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex128::nnodes(void) const {return 24;}
 
-            el_types ghex128::get_type(void) const {return GHEX128;}
+            el_types ghex128::get_type(void) const {return el_types::GHEX128;}
 
             const std::set<el_processor> ghex128::processors(
                ghex128_procs, ghex128_procs+ghex128_procs_len);
@@ -4408,12 +4408,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex129_procs_len = 2;
-               el_processor ghex129_procs[ghex129_procs_len] = { general, Sestra };
+               el_processor ghex129_procs[ghex129_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex129::nnodes(void) const {return 25;}
 
-            el_types ghex129::get_type(void) const {return GHEX129;}
+            el_types ghex129::get_type(void) const {return el_types::GHEX129;}
 
             const std::set<el_processor> ghex129::processors(
                ghex129_procs, ghex129_procs+ghex129_procs_len);
@@ -4453,12 +4453,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex130_procs_len = 2;
-               el_processor ghex130_procs[ghex130_procs_len] = { general, Sestra };
+               el_processor ghex130_procs[ghex130_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex130::nnodes(void) const {return 25;}
 
-            el_types ghex130::get_type(void) const {return GHEX130;}
+            el_types ghex130::get_type(void) const {return el_types::GHEX130;}
 
             const std::set<el_processor> ghex130::processors(
                ghex130_procs, ghex130_procs+ghex130_procs_len);
@@ -4498,12 +4498,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex131_procs_len = 2;
-               el_processor ghex131_procs[ghex131_procs_len] = { general, Sestra };
+               el_processor ghex131_procs[ghex131_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex131::nnodes(void) const {return 26;}
 
-            el_types ghex131::get_type(void) const {return GHEX131;}
+            el_types ghex131::get_type(void) const {return el_types::GHEX131;}
 
             const std::set<el_processor> ghex131::processors(
                ghex131_procs, ghex131_procs+ghex131_procs_len);
@@ -4543,12 +4543,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex132_procs_len = 2;
-               el_processor ghex132_procs[ghex132_procs_len] = { general, Sestra };
+               el_processor ghex132_procs[ghex132_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex132::nnodes(void) const {return 22;}
 
-            el_types ghex132::get_type(void) const {return GHEX132;}
+            el_types ghex132::get_type(void) const {return el_types::GHEX132;}
 
             const std::set<el_processor> ghex132::processors(
                ghex132_procs, ghex132_procs+ghex132_procs_len);
@@ -4588,12 +4588,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex133_procs_len = 2;
-               el_processor ghex133_procs[ghex133_procs_len] = { general, Sestra };
+               el_processor ghex133_procs[ghex133_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex133::nnodes(void) const {return 23;}
 
-            el_types ghex133::get_type(void) const {return GHEX133;}
+            el_types ghex133::get_type(void) const {return el_types::GHEX133;}
 
             const std::set<el_processor> ghex133::processors(
                ghex133_procs, ghex133_procs+ghex133_procs_len);
@@ -4633,12 +4633,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex134_procs_len = 2;
-               el_processor ghex134_procs[ghex134_procs_len] = { general, Sestra };
+               el_processor ghex134_procs[ghex134_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex134::nnodes(void) const {return 23;}
 
-            el_types ghex134::get_type(void) const {return GHEX134;}
+            el_types ghex134::get_type(void) const {return el_types::GHEX134;}
 
             const std::set<el_processor> ghex134::processors(
                ghex134_procs, ghex134_procs+ghex134_procs_len);
@@ -4678,12 +4678,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex135_procs_len = 2;
-               el_processor ghex135_procs[ghex135_procs_len] = { general, Sestra };
+               el_processor ghex135_procs[ghex135_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex135::nnodes(void) const {return 24;}
 
-            el_types ghex135::get_type(void) const {return GHEX135;}
+            el_types ghex135::get_type(void) const {return el_types::GHEX135;}
 
             const std::set<el_processor> ghex135::processors(
                ghex135_procs, ghex135_procs+ghex135_procs_len);
@@ -4723,12 +4723,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex136_procs_len = 2;
-               el_processor ghex136_procs[ghex136_procs_len] = { general, Sestra };
+               el_processor ghex136_procs[ghex136_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex136::nnodes(void) const {return 23;}
 
-            el_types ghex136::get_type(void) const {return GHEX136;}
+            el_types ghex136::get_type(void) const {return el_types::GHEX136;}
 
             const std::set<el_processor> ghex136::processors(
                ghex136_procs, ghex136_procs+ghex136_procs_len);
@@ -4768,12 +4768,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex137_procs_len = 2;
-               el_processor ghex137_procs[ghex137_procs_len] = { general, Sestra };
+               el_processor ghex137_procs[ghex137_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex137::nnodes(void) const {return 24;}
 
-            el_types ghex137::get_type(void) const {return GHEX137;}
+            el_types ghex137::get_type(void) const {return el_types::GHEX137;}
 
             const std::set<el_processor> ghex137::processors(
                ghex137_procs, ghex137_procs+ghex137_procs_len);
@@ -4813,12 +4813,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex138_procs_len = 2;
-               el_processor ghex138_procs[ghex138_procs_len] = { general, Sestra };
+               el_processor ghex138_procs[ghex138_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex138::nnodes(void) const {return 24;}
 
-            el_types ghex138::get_type(void) const {return GHEX138;}
+            el_types ghex138::get_type(void) const {return el_types::GHEX138;}
 
             const std::set<el_processor> ghex138::processors(
                ghex138_procs, ghex138_procs+ghex138_procs_len);
@@ -4858,12 +4858,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex139_procs_len = 2;
-               el_processor ghex139_procs[ghex139_procs_len] = { general, Sestra };
+               el_processor ghex139_procs[ghex139_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex139::nnodes(void) const {return 25;}
 
-            el_types ghex139::get_type(void) const {return GHEX139;}
+            el_types ghex139::get_type(void) const {return el_types::GHEX139;}
 
             const std::set<el_processor> ghex139::processors(
                ghex139_procs, ghex139_procs+ghex139_procs_len);
@@ -4903,12 +4903,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex140_procs_len = 2;
-               el_processor ghex140_procs[ghex140_procs_len] = { general, Sestra };
+               el_processor ghex140_procs[ghex140_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex140::nnodes(void) const {return 23;}
 
-            el_types ghex140::get_type(void) const {return GHEX140;}
+            el_types ghex140::get_type(void) const {return el_types::GHEX140;}
 
             const std::set<el_processor> ghex140::processors(
                ghex140_procs, ghex140_procs+ghex140_procs_len);
@@ -4948,12 +4948,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex141_procs_len = 2;
-               el_processor ghex141_procs[ghex141_procs_len] = { general, Sestra };
+               el_processor ghex141_procs[ghex141_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex141::nnodes(void) const {return 24;}
 
-            el_types ghex141::get_type(void) const {return GHEX141;}
+            el_types ghex141::get_type(void) const {return el_types::GHEX141;}
 
             const std::set<el_processor> ghex141::processors(
                ghex141_procs, ghex141_procs+ghex141_procs_len);
@@ -4993,12 +4993,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex142_procs_len = 2;
-               el_processor ghex142_procs[ghex142_procs_len] = { general, Sestra };
+               el_processor ghex142_procs[ghex142_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex142::nnodes(void) const {return 24;}
 
-            el_types ghex142::get_type(void) const {return GHEX142;}
+            el_types ghex142::get_type(void) const {return el_types::GHEX142;}
 
             const std::set<el_processor> ghex142::processors(
                ghex142_procs, ghex142_procs+ghex142_procs_len);
@@ -5038,12 +5038,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex143_procs_len = 2;
-               el_processor ghex143_procs[ghex143_procs_len] = { general, Sestra };
+               el_processor ghex143_procs[ghex143_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex143::nnodes(void) const {return 25;}
 
-            el_types ghex143::get_type(void) const {return GHEX143;}
+            el_types ghex143::get_type(void) const {return el_types::GHEX143;}
 
             const std::set<el_processor> ghex143::processors(
                ghex143_procs, ghex143_procs+ghex143_procs_len);
@@ -5083,12 +5083,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex144_procs_len = 2;
-               el_processor ghex144_procs[ghex144_procs_len] = { general, Sestra };
+               el_processor ghex144_procs[ghex144_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex144::nnodes(void) const {return 24;}
 
-            el_types ghex144::get_type(void) const {return GHEX144;}
+            el_types ghex144::get_type(void) const {return el_types::GHEX144;}
 
             const std::set<el_processor> ghex144::processors(
                ghex144_procs, ghex144_procs+ghex144_procs_len);
@@ -5128,12 +5128,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex145_procs_len = 2;
-               el_processor ghex145_procs[ghex145_procs_len] = { general, Sestra };
+               el_processor ghex145_procs[ghex145_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex145::nnodes(void) const {return 25;}
 
-            el_types ghex145::get_type(void) const {return GHEX145;}
+            el_types ghex145::get_type(void) const {return el_types::GHEX145;}
 
             const std::set<el_processor> ghex145::processors(
                ghex145_procs, ghex145_procs+ghex145_procs_len);
@@ -5173,12 +5173,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex146_procs_len = 2;
-               el_processor ghex146_procs[ghex146_procs_len] = { general, Sestra };
+               el_processor ghex146_procs[ghex146_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex146::nnodes(void) const {return 25;}
 
-            el_types ghex146::get_type(void) const {return GHEX146;}
+            el_types ghex146::get_type(void) const {return el_types::GHEX146;}
 
             const std::set<el_processor> ghex146::processors(
                ghex146_procs, ghex146_procs+ghex146_procs_len);
@@ -5218,12 +5218,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex147_procs_len = 2;
-               el_processor ghex147_procs[ghex147_procs_len] = { general, Sestra };
+               el_processor ghex147_procs[ghex147_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex147::nnodes(void) const {return 26;}
 
-            el_types ghex147::get_type(void) const {return GHEX147;}
+            el_types ghex147::get_type(void) const {return el_types::GHEX147;}
 
             const std::set<el_processor> ghex147::processors(
                ghex147_procs, ghex147_procs+ghex147_procs_len);
@@ -5263,12 +5263,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex148_procs_len = 2;
-               el_processor ghex148_procs[ghex148_procs_len] = { general, Sestra };
+               el_processor ghex148_procs[ghex148_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex148::nnodes(void) const {return 23;}
 
-            el_types ghex148::get_type(void) const {return GHEX148;}
+            el_types ghex148::get_type(void) const {return el_types::GHEX148;}
 
             const std::set<el_processor> ghex148::processors(
                ghex148_procs, ghex148_procs+ghex148_procs_len);
@@ -5308,12 +5308,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex149_procs_len = 2;
-               el_processor ghex149_procs[ghex149_procs_len] = { general, Sestra };
+               el_processor ghex149_procs[ghex149_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex149::nnodes(void) const {return 24;}
 
-            el_types ghex149::get_type(void) const {return GHEX149;}
+            el_types ghex149::get_type(void) const {return el_types::GHEX149;}
 
             const std::set<el_processor> ghex149::processors(
                ghex149_procs, ghex149_procs+ghex149_procs_len);
@@ -5353,12 +5353,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex150_procs_len = 2;
-               el_processor ghex150_procs[ghex150_procs_len] = { general, Sestra };
+               el_processor ghex150_procs[ghex150_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex150::nnodes(void) const {return 24;}
 
-            el_types ghex150::get_type(void) const {return GHEX150;}
+            el_types ghex150::get_type(void) const {return el_types::GHEX150;}
 
             const std::set<el_processor> ghex150::processors(
                ghex150_procs, ghex150_procs+ghex150_procs_len);
@@ -5398,12 +5398,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex151_procs_len = 2;
-               el_processor ghex151_procs[ghex151_procs_len] = { general, Sestra };
+               el_processor ghex151_procs[ghex151_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex151::nnodes(void) const {return 25;}
 
-            el_types ghex151::get_type(void) const {return GHEX151;}
+            el_types ghex151::get_type(void) const {return el_types::GHEX151;}
 
             const std::set<el_processor> ghex151::processors(
                ghex151_procs, ghex151_procs+ghex151_procs_len);
@@ -5443,12 +5443,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex152_procs_len = 2;
-               el_processor ghex152_procs[ghex152_procs_len] = { general, Sestra };
+               el_processor ghex152_procs[ghex152_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex152::nnodes(void) const {return 24;}
 
-            el_types ghex152::get_type(void) const {return GHEX152;}
+            el_types ghex152::get_type(void) const {return el_types::GHEX152;}
 
             const std::set<el_processor> ghex152::processors(
                ghex152_procs, ghex152_procs+ghex152_procs_len);
@@ -5488,12 +5488,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex153_procs_len = 2;
-               el_processor ghex153_procs[ghex153_procs_len] = { general, Sestra };
+               el_processor ghex153_procs[ghex153_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex153::nnodes(void) const {return 25;}
 
-            el_types ghex153::get_type(void) const {return GHEX153;}
+            el_types ghex153::get_type(void) const {return el_types::GHEX153;}
 
             const std::set<el_processor> ghex153::processors(
                ghex153_procs, ghex153_procs+ghex153_procs_len);
@@ -5533,12 +5533,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex154_procs_len = 2;
-               el_processor ghex154_procs[ghex154_procs_len] = { general, Sestra };
+               el_processor ghex154_procs[ghex154_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex154::nnodes(void) const {return 25;}
 
-            el_types ghex154::get_type(void) const {return GHEX154;}
+            el_types ghex154::get_type(void) const {return el_types::GHEX154;}
 
             const std::set<el_processor> ghex154::processors(
                ghex154_procs, ghex154_procs+ghex154_procs_len);
@@ -5578,12 +5578,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex155_procs_len = 2;
-               el_processor ghex155_procs[ghex155_procs_len] = { general, Sestra };
+               el_processor ghex155_procs[ghex155_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex155::nnodes(void) const {return 26;}
 
-            el_types ghex155::get_type(void) const {return GHEX155;}
+            el_types ghex155::get_type(void) const {return el_types::GHEX155;}
 
             const std::set<el_processor> ghex155::processors(
                ghex155_procs, ghex155_procs+ghex155_procs_len);
@@ -5623,12 +5623,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex156_procs_len = 2;
-               el_processor ghex156_procs[ghex156_procs_len] = { general, Sestra };
+               el_processor ghex156_procs[ghex156_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex156::nnodes(void) const {return 24;}
 
-            el_types ghex156::get_type(void) const {return GHEX156;}
+            el_types ghex156::get_type(void) const {return el_types::GHEX156;}
 
             const std::set<el_processor> ghex156::processors(
                ghex156_procs, ghex156_procs+ghex156_procs_len);
@@ -5668,12 +5668,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex157_procs_len = 2;
-               el_processor ghex157_procs[ghex157_procs_len] = { general, Sestra };
+               el_processor ghex157_procs[ghex157_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex157::nnodes(void) const {return 25;}
 
-            el_types ghex157::get_type(void) const {return GHEX157;}
+            el_types ghex157::get_type(void) const {return el_types::GHEX157;}
 
             const std::set<el_processor> ghex157::processors(
                ghex157_procs, ghex157_procs+ghex157_procs_len);
@@ -5713,12 +5713,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex158_procs_len = 2;
-               el_processor ghex158_procs[ghex158_procs_len] = { general, Sestra };
+               el_processor ghex158_procs[ghex158_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex158::nnodes(void) const {return 25;}
 
-            el_types ghex158::get_type(void) const {return GHEX158;}
+            el_types ghex158::get_type(void) const {return el_types::GHEX158;}
 
             const std::set<el_processor> ghex158::processors(
                ghex158_procs, ghex158_procs+ghex158_procs_len);
@@ -5758,12 +5758,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex159_procs_len = 2;
-               el_processor ghex159_procs[ghex159_procs_len] = { general, Sestra };
+               el_processor ghex159_procs[ghex159_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex159::nnodes(void) const {return 26;}
 
-            el_types ghex159::get_type(void) const {return GHEX159;}
+            el_types ghex159::get_type(void) const {return el_types::GHEX159;}
 
             const std::set<el_processor> ghex159::processors(
                ghex159_procs, ghex159_procs+ghex159_procs_len);
@@ -5803,12 +5803,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex160_procs_len = 2;
-               el_processor ghex160_procs[ghex160_procs_len] = { general, Sestra };
+               el_processor ghex160_procs[ghex160_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex160::nnodes(void) const {return 25;}
 
-            el_types ghex160::get_type(void) const {return GHEX160;}
+            el_types ghex160::get_type(void) const {return el_types::GHEX160;}
 
             const std::set<el_processor> ghex160::processors(
                ghex160_procs, ghex160_procs+ghex160_procs_len);
@@ -5848,12 +5848,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex161_procs_len = 2;
-               el_processor ghex161_procs[ghex161_procs_len] = { general, Sestra };
+               el_processor ghex161_procs[ghex161_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex161::nnodes(void) const {return 26;}
 
-            el_types ghex161::get_type(void) const {return GHEX161;}
+            el_types ghex161::get_type(void) const {return el_types::GHEX161;}
 
             const std::set<el_processor> ghex161::processors(
                ghex161_procs, ghex161_procs+ghex161_procs_len);
@@ -5893,12 +5893,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex162_procs_len = 2;
-               el_processor ghex162_procs[ghex162_procs_len] = { general, Sestra };
+               el_processor ghex162_procs[ghex162_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex162::nnodes(void) const {return 26;}
 
-            el_types ghex162::get_type(void) const {return GHEX162;}
+            el_types ghex162::get_type(void) const {return el_types::GHEX162;}
 
             const std::set<el_processor> ghex162::processors(
                ghex162_procs, ghex162_procs+ghex162_procs_len);
@@ -5938,12 +5938,12 @@ namespace dnvgl {
 
             namespace {
                const size_t ghex163_procs_len = 2;
-               el_processor ghex163_procs[ghex163_procs_len] = { general, Sestra };
+               el_processor ghex163_procs[ghex163_procs_len] = { el_processor::general, el_processor::Sestra };
             }
 
             long ghex163::nnodes(void) const {return 27;}
 
-            el_types ghex163::get_type(void) const {return GHEX163;}
+            el_types ghex163::get_type(void) const {return el_types::GHEX163;}
 
             const std::set<el_processor> ghex163::processors(
                ghex163_procs, ghex163_procs+ghex163_procs_len);

@@ -22,7 +22,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_test_fem_elements[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -66,12 +66,12 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    std::vector<long> nodes({ 6, 7 });
-   gelmnt1 data1(1, 2, elements::TESS, nodes);
+   gelmnt1 data1(1, 2, elements::el_types::TESS, nodes);
 
    SECTION("check values") {
       CHECK(data1.ELNOX == 1);
       CHECK(data1.ELNO == 2);
-      CHECK(data1.ELTYP == elements::TESS);
+      CHECK(data1.ELTYP == elements::el_types::TESS);
       CHECK(data1.NODIN.size() == 2);
       CHECK(data1.NODIN[0] == 6);
       CHECK(data1.NODIN[1] == 7);
@@ -79,7 +79,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
 
    SECTION("check copy") {
       tess probe1(&data1);
-      CHECK(probe1.get_type() == elements::TESS);
+      CHECK(probe1.get_type() == elements::el_types::TESS);
       CHECK(probe1.nnodes() == 2);
       CHECK(probe1.nodes.size() == 2);
       CHECK(probe1.nodes[0] == 6);
@@ -89,7 +89,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    SECTION("check downcast") {
       std::unique_ptr<elements::__base::elem> probe2;
       dispatch(probe2, &data1);
-      CHECK(probe2->get_type() == TESS);
+      CHECK(probe2->get_type() == elements::el_types::TESS);
       CHECK(static_cast<tess*>(probe2.get())->nnodes() == 2);
    }
 }
@@ -98,7 +98,7 @@ TEST_CASE("FEM BEPS element definitions.", "[fem_element_beps]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = BEPS;
+   el_types const ELTYP = elements::el_types::BEPS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -129,7 +129,7 @@ TEST_CASE("FEM BEPS element definitions.", "[fem_element_beps]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, ADVANCE }));
+               el_processor::general, el_processor::Preframe, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -189,7 +189,7 @@ TEST_CASE("FEM CSTA element definitions.", "[fem_element_csta]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CSTA;
+   el_types const ELTYP = elements::el_types::CSTA;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -220,7 +220,7 @@ TEST_CASE("FEM CSTA element definitions.", "[fem_element_csta]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -280,7 +280,7 @@ TEST_CASE("FEM RPBQ element definitions.", "[fem_element_rpbq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = RPBQ;
+   el_types const ELTYP = elements::el_types::RPBQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -311,7 +311,7 @@ TEST_CASE("FEM RPBQ element definitions.", "[fem_element_rpbq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -371,7 +371,7 @@ TEST_CASE("FEM ILST element definitions.", "[fem_element_ilst]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = ILST;
+   el_types const ELTYP = elements::el_types::ILST;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -402,7 +402,7 @@ TEST_CASE("FEM ILST element definitions.", "[fem_element_ilst]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -463,7 +463,7 @@ TEST_CASE("FEM IQQE element definitions.", "[fem_element_iqqe]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = IQQE;
+   el_types const ELTYP = elements::el_types::IQQE;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -494,7 +494,7 @@ TEST_CASE("FEM IQQE element definitions.", "[fem_element_iqqe]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -555,7 +555,7 @@ TEST_CASE("FEM LQUA element definitions.", "[fem_element_lqua]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = LQUA;
+   el_types const ELTYP = elements::el_types::LQUA;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -586,7 +586,7 @@ TEST_CASE("FEM LQUA element definitions.", "[fem_element_lqua]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE, Poseidon }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -646,7 +646,7 @@ TEST_CASE("FEM TESS element definitions.", "[fem_element_tess]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = TESS;
+   el_types const ELTYP = elements::el_types::TESS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -677,7 +677,7 @@ TEST_CASE("FEM TESS element definitions.", "[fem_element_tess]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Prefem, Sestra, ADVANCE, Poseidon }));
+               el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -737,7 +737,7 @@ TEST_CASE("FEM GMAS element definitions.", "[fem_element_gmas]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GMAS;
+   el_types const ELTYP = elements::el_types::GMAS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN (1, 100);
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -768,7 +768,7 @@ TEST_CASE("FEM GMAS element definitions.", "[fem_element_gmas]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, Poseidon }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -828,7 +828,7 @@ TEST_CASE("FEM GLMA element definitions.", "[fem_element_glma]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GLMA;
+   el_types const ELTYP = elements::el_types::GLMA;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -859,7 +859,7 @@ TEST_CASE("FEM GLMA element definitions.", "[fem_element_glma]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -919,7 +919,7 @@ TEST_CASE("FEM GLDA element definitions.", "[fem_element_glda]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GLDA;
+   el_types const ELTYP = elements::el_types::GLDA;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -950,7 +950,7 @@ TEST_CASE("FEM GLDA element definitions.", "[fem_element_glda]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1010,7 +1010,7 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = BEAS;
+   el_types const ELTYP = elements::el_types::BEAS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1041,7 +1041,7 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Prefem, Sestra, ADVANCE, Framework, Launch, Platework, Pretube, Wadam, Poseidon }));
+               el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Launch, el_processor::Platework, el_processor::Pretube, el_processor::Wadam, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1101,7 +1101,7 @@ TEST_CASE("FEM AXIS element definitions.", "[fem_element_axis]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = AXIS;
+   el_types const ELTYP = elements::el_types::AXIS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1132,7 +1132,7 @@ TEST_CASE("FEM AXIS element definitions.", "[fem_element_axis]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Prefem, Sestra, ADVANCE, Framework, Poseidon }));
+               el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1192,7 +1192,7 @@ TEST_CASE("FEM AXDA element definitions.", "[fem_element_axda]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = AXDA;
+   el_types const ELTYP = elements::el_types::AXDA;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1223,7 +1223,7 @@ TEST_CASE("FEM AXDA element definitions.", "[fem_element_axda]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Prefem, Sestra, Poseidon }));
+               el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1283,7 +1283,7 @@ TEST_CASE("FEM GSPR element definitions.", "[fem_element_gspr]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GSPR;
+   el_types const ELTYP = elements::el_types::GSPR;
    long const ELTYAD = 2;
    std::vector<long> const NODIN (1, 100);
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1314,7 +1314,7 @@ TEST_CASE("FEM GSPR element definitions.", "[fem_element_gspr]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Prefem, Sestra, ADVANCE, Framework, Poseidon }));
+               el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1374,7 +1374,7 @@ TEST_CASE("FEM GDAM element definitions.", "[fem_element_gdam]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GDAM;
+   el_types const ELTYP = elements::el_types::GDAM;
    long const ELTYAD = 2;
    std::vector<long> const NODIN (1, 100);
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1405,7 +1405,7 @@ TEST_CASE("FEM GDAM element definitions.", "[fem_element_gdam]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Prefem, Sestra, Poseidon }));
+               el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1465,7 +1465,7 @@ TEST_CASE("FEM IHEX element definitions.", "[fem_element_ihex]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = IHEX;
+   el_types const ELTYP = elements::el_types::IHEX;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1496,7 +1496,7 @@ TEST_CASE("FEM IHEX element definitions.", "[fem_element_ihex]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE, Framework }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1560,7 +1560,7 @@ TEST_CASE("FEM LHEX element definitions.", "[fem_element_lhex]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = LHEX;
+   el_types const ELTYP = elements::el_types::LHEX;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1591,7 +1591,7 @@ TEST_CASE("FEM LHEX element definitions.", "[fem_element_lhex]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE, Framework }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1652,7 +1652,7 @@ TEST_CASE("FEM SECB element definitions.", "[fem_element_secb]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = SECB;
+   el_types const ELTYP = elements::el_types::SECB;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1683,7 +1683,7 @@ TEST_CASE("FEM SECB element definitions.", "[fem_element_secb]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1743,7 +1743,7 @@ TEST_CASE("FEM BTSS element definitions.", "[fem_element_btss]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = BTSS;
+   el_types const ELTYP = elements::el_types::BTSS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1774,7 +1774,7 @@ TEST_CASE("FEM BTSS element definitions.", "[fem_element_btss]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, Platework, Pretube }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1834,7 +1834,7 @@ TEST_CASE("FEM FQUS_FFQ element definitions.", "[fem_element_fqus_ffq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = FQUS_FFQ;
+   el_types const ELTYP = elements::el_types::FQUS_FFQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1865,7 +1865,7 @@ TEST_CASE("FEM FQUS_FFQ element definitions.", "[fem_element_fqus_ffq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE, Platework, Pretube, Poseidon }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Platework, el_processor::Pretube, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -1925,7 +1925,7 @@ TEST_CASE("FEM FTRS_FFTR element definitions.", "[fem_element_ftrs_fftr]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = FTRS_FFTR;
+   el_types const ELTYP = elements::el_types::FTRS_FFTR;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -1956,7 +1956,7 @@ TEST_CASE("FEM FTRS_FFTR element definitions.", "[fem_element_ftrs_fftr]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE, Platework, Poseidon }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Platework, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2016,7 +2016,7 @@ TEST_CASE("FEM SCTS element definitions.", "[fem_element_scts]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = SCTS;
+   el_types const ELTYP = elements::el_types::SCTS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2047,7 +2047,7 @@ TEST_CASE("FEM SCTS element definitions.", "[fem_element_scts]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, Platework }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2108,7 +2108,7 @@ TEST_CASE("FEM MCTS element definitions.", "[fem_element_mcts]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = MCTS;
+   el_types const ELTYP = elements::el_types::MCTS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2139,7 +2139,7 @@ TEST_CASE("FEM MCTS element definitions.", "[fem_element_mcts]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2200,7 +2200,7 @@ TEST_CASE("FEM SCQS element definitions.", "[fem_element_scqs]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = SCQS;
+   el_types const ELTYP = elements::el_types::SCQS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2231,7 +2231,7 @@ TEST_CASE("FEM SCQS element definitions.", "[fem_element_scqs]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, Platework, Pretube }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2292,7 +2292,7 @@ TEST_CASE("FEM MCQS element definitions.", "[fem_element_mcqs]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = MCQS;
+   el_types const ELTYP = elements::el_types::MCQS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2323,7 +2323,7 @@ TEST_CASE("FEM MCQS element definitions.", "[fem_element_mcqs]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2384,7 +2384,7 @@ TEST_CASE("FEM IPRI element definitions.", "[fem_element_ipri]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = IPRI;
+   el_types const ELTYP = elements::el_types::IPRI;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2415,7 +2415,7 @@ TEST_CASE("FEM IPRI element definitions.", "[fem_element_ipri]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2478,7 +2478,7 @@ TEST_CASE("FEM ITET element definitions.", "[fem_element_itet]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = ITET;
+   el_types const ELTYP = elements::el_types::ITET;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2509,7 +2509,7 @@ TEST_CASE("FEM ITET element definitions.", "[fem_element_itet]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2571,7 +2571,7 @@ TEST_CASE("FEM TPRI element definitions.", "[fem_element_tpri]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = TPRI;
+   el_types const ELTYP = elements::el_types::TPRI;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2602,7 +2602,7 @@ TEST_CASE("FEM TPRI element definitions.", "[fem_element_tpri]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, Platework }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2663,7 +2663,7 @@ TEST_CASE("FEM TETR element definitions.", "[fem_element_tetr]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = TETR;
+   el_types const ELTYP = elements::el_types::TETR;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2694,7 +2694,7 @@ TEST_CASE("FEM TETR element definitions.", "[fem_element_tetr]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2754,7 +2754,7 @@ TEST_CASE("FEM LCTS element definitions.", "[fem_element_lcts]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = LCTS;
+   el_types const ELTYP = elements::el_types::LCTS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2785,7 +2785,7 @@ TEST_CASE("FEM LCTS element definitions.", "[fem_element_lcts]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2846,7 +2846,7 @@ TEST_CASE("FEM LCQS element definitions.", "[fem_element_lcqs]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = LCQS;
+   el_types const ELTYP = elements::el_types::LCQS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2877,7 +2877,7 @@ TEST_CASE("FEM LCQS element definitions.", "[fem_element_lcqs]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -2938,7 +2938,7 @@ TEST_CASE("FEM TRS1 element definitions.", "[fem_element_trs1]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = TRS1;
+   el_types const ELTYP = elements::el_types::TRS1;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -2969,7 +2969,7 @@ TEST_CASE("FEM TRS1 element definitions.", "[fem_element_trs1]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra, Pretube }));
+               el_processor::general, el_processor::Sestra, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3033,7 +3033,7 @@ TEST_CASE("FEM TRS2 element definitions.", "[fem_element_trs2]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = TRS2;
+   el_types const ELTYP = elements::el_types::TRS2;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3064,7 +3064,7 @@ TEST_CASE("FEM TRS2 element definitions.", "[fem_element_trs2]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra, Pretube }));
+               el_processor::general, el_processor::Sestra, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3127,7 +3127,7 @@ TEST_CASE("FEM TRS3 element definitions.", "[fem_element_trs3]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = TRS3;
+   el_types const ELTYP = elements::el_types::TRS3;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3158,7 +3158,7 @@ TEST_CASE("FEM TRS3 element definitions.", "[fem_element_trs3]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra, Pretube }));
+               el_processor::general, el_processor::Sestra, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3220,7 +3220,7 @@ TEST_CASE("FEM GLSH element definitions.", "[fem_element_glsh]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GLSH;
+   el_types const ELTYP = elements::el_types::GLSH;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3251,7 +3251,7 @@ TEST_CASE("FEM GLSH element definitions.", "[fem_element_glsh]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, Sestra, Poseidon }));
+               el_processor::general, el_processor::Preframe, el_processor::Sestra, el_processor::Poseidon }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3311,7 +3311,7 @@ TEST_CASE("FEM AXCS element definitions.", "[fem_element_axcs]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = AXCS;
+   el_types const ELTYP = elements::el_types::AXCS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3342,7 +3342,7 @@ TEST_CASE("FEM AXCS element definitions.", "[fem_element_axcs]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3402,7 +3402,7 @@ TEST_CASE("FEM AXLQ element definitions.", "[fem_element_axlq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = AXLQ;
+   el_types const ELTYP = elements::el_types::AXLQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3433,7 +3433,7 @@ TEST_CASE("FEM AXLQ element definitions.", "[fem_element_axlq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra, ADVANCE }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3493,7 +3493,7 @@ TEST_CASE("FEM AXLS element definitions.", "[fem_element_axls]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = AXLS;
+   el_types const ELTYP = elements::el_types::AXLS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3524,7 +3524,7 @@ TEST_CASE("FEM AXLS element definitions.", "[fem_element_axls]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3585,7 +3585,7 @@ TEST_CASE("FEM AXQQ element definitions.", "[fem_element_axqq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = AXQQ;
+   el_types const ELTYP = elements::el_types::AXQQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3616,7 +3616,7 @@ TEST_CASE("FEM AXQQ element definitions.", "[fem_element_axqq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Sestra }));
+               el_processor::general, el_processor::Prefem, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3677,7 +3677,7 @@ TEST_CASE("FEM PILS element definitions.", "[fem_element_pils]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = PILS;
+   el_types const ELTYP = elements::el_types::PILS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN (1, 100);
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3708,7 +3708,7 @@ TEST_CASE("FEM PILS element definitions.", "[fem_element_pils]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, ADVANCE }));
+               el_processor::general, el_processor::Preframe, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3768,7 +3768,7 @@ TEST_CASE("FEM PCAB element definitions.", "[fem_element_pcab]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = PCAB;
+   el_types const ELTYP = elements::el_types::PCAB;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3799,7 +3799,7 @@ TEST_CASE("FEM PCAB element definitions.", "[fem_element_pcab]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, ADVANCE }));
+               el_processor::general, el_processor::Preframe, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3859,7 +3859,7 @@ TEST_CASE("FEM PSPR element definitions.", "[fem_element_pspr]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = PSPR;
+   el_types const ELTYP = elements::el_types::PSPR;
    long const ELTYAD = 2;
    std::vector<long> const NODIN (1, 100);
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3890,7 +3890,7 @@ TEST_CASE("FEM PSPR element definitions.", "[fem_element_pspr]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Preframe, ADVANCE }));
+               el_processor::general, el_processor::Preframe, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -3950,7 +3950,7 @@ TEST_CASE("FEM ADVA_4 element definitions.", "[fem_element_adva_4]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = ADVA_4;
+   el_types const ELTYP = elements::el_types::ADVA_4;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -3981,7 +3981,7 @@ TEST_CASE("FEM ADVA_4 element definitions.", "[fem_element_adva_4]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, ADVANCE }));
+               el_processor::general, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4041,7 +4041,7 @@ TEST_CASE("FEM ADVA_2 element definitions.", "[fem_element_adva_2]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = ADVA_2;
+   el_types const ELTYP = elements::el_types::ADVA_2;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4072,7 +4072,7 @@ TEST_CASE("FEM ADVA_2 element definitions.", "[fem_element_adva_2]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, ADVANCE }));
+               el_processor::general, el_processor::ADVANCE }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4132,7 +4132,7 @@ TEST_CASE("FEM CTCP element definitions.", "[fem_element_ctcp]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTCP;
+   el_types const ELTYP = elements::el_types::CTCP;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4163,7 +4163,7 @@ TEST_CASE("FEM CTCP element definitions.", "[fem_element_ctcp]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4223,7 +4223,7 @@ TEST_CASE("FEM CTCL element definitions.", "[fem_element_ctcl]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTCL;
+   el_types const ELTYP = elements::el_types::CTCL;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4254,7 +4254,7 @@ TEST_CASE("FEM CTCL element definitions.", "[fem_element_ctcl]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4314,7 +4314,7 @@ TEST_CASE("FEM CTAL element definitions.", "[fem_element_ctal]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTAL;
+   el_types const ELTYP = elements::el_types::CTAL;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4345,7 +4345,7 @@ TEST_CASE("FEM CTAL element definitions.", "[fem_element_ctal]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4405,7 +4405,7 @@ TEST_CASE("FEM CTCC element definitions.", "[fem_element_ctcc]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTCC;
+   el_types const ELTYP = elements::el_types::CTCC;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4436,7 +4436,7 @@ TEST_CASE("FEM CTCC element definitions.", "[fem_element_ctcc]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4497,7 +4497,7 @@ TEST_CASE("FEM CTAQ element definitions.", "[fem_element_ctaq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTAQ;
+   el_types const ELTYP = elements::el_types::CTAQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4528,7 +4528,7 @@ TEST_CASE("FEM CTAQ element definitions.", "[fem_element_ctaq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem }));
+               el_processor::general, el_processor::Prefem }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4589,7 +4589,7 @@ TEST_CASE("FEM CTLQ element definitions.", "[fem_element_ctlq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTLQ;
+   el_types const ELTYP = elements::el_types::CTLQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4620,7 +4620,7 @@ TEST_CASE("FEM CTLQ element definitions.", "[fem_element_ctlq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Pretube }));
+               el_processor::general, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4681,7 +4681,7 @@ TEST_CASE("FEM CTCQ element definitions.", "[fem_element_ctcq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTCQ;
+   el_types const ELTYP = elements::el_types::CTCQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4712,7 +4712,7 @@ TEST_CASE("FEM CTCQ element definitions.", "[fem_element_ctcq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Pretube }));
+               el_processor::general, el_processor::Prefem, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4775,7 +4775,7 @@ TEST_CASE("FEM CTMQ element definitions.", "[fem_element_ctmq]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = CTMQ;
+   el_types const ELTYP = elements::el_types::CTMQ;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4806,7 +4806,7 @@ TEST_CASE("FEM CTMQ element definitions.", "[fem_element_ctmq]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Pretube }));
+               el_processor::general, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4870,7 +4870,7 @@ TEST_CASE("FEM HCQS element definitions.", "[fem_element_hcqs]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = HCQS;
+   el_types const ELTYP = elements::el_types::HCQS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4901,7 +4901,7 @@ TEST_CASE("FEM HCQS element definitions.", "[fem_element_hcqs]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Prefem, Pretube }));
+               el_processor::general, el_processor::Prefem, el_processor::Pretube }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -4963,7 +4963,7 @@ TEST_CASE("FEM SLQS element definitions.", "[fem_element_slqs]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = SLQS;
+   el_types const ELTYP = elements::el_types::SLQS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -4994,7 +4994,7 @@ TEST_CASE("FEM SLQS element definitions.", "[fem_element_slqs]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5055,7 +5055,7 @@ TEST_CASE("FEM SLTS element definitions.", "[fem_element_slts]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = SLTS;
+   el_types const ELTYP = elements::el_types::SLTS;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5086,7 +5086,7 @@ TEST_CASE("FEM SLTS element definitions.", "[fem_element_slts]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5147,7 +5147,7 @@ TEST_CASE("FEM SLCB element definitions.", "[fem_element_slcb]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = SLCB;
+   el_types const ELTYP = elements::el_types::SLCB;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5178,7 +5178,7 @@ TEST_CASE("FEM SLCB element definitions.", "[fem_element_slcb]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general }));
+               el_processor::general }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5238,7 +5238,7 @@ TEST_CASE("FEM MATR element definitions.", "[fem_element_matr]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = MATR;
+   el_types const ELTYP = elements::el_types::MATR;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5269,7 +5269,7 @@ TEST_CASE("FEM MATR element definitions.", "[fem_element_matr]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, ADVANCE, Splice }));
+               el_processor::general, el_processor::ADVANCE, el_processor::Splice }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5346,7 +5346,7 @@ TEST_CASE("FEM GHEX100 element definitions.", "[fem_element_ghex100]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX100;
+   el_types const ELTYP = elements::el_types::GHEX100;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5377,7 +5377,7 @@ TEST_CASE("FEM GHEX100 element definitions.", "[fem_element_ghex100]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5442,7 +5442,7 @@ TEST_CASE("FEM GHEX101 element definitions.", "[fem_element_ghex101]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX101;
+   el_types const ELTYP = elements::el_types::GHEX101;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5473,7 +5473,7 @@ TEST_CASE("FEM GHEX101 element definitions.", "[fem_element_ghex101]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5538,7 +5538,7 @@ TEST_CASE("FEM GHEX102 element definitions.", "[fem_element_ghex102]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX102;
+   el_types const ELTYP = elements::el_types::GHEX102;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5569,7 +5569,7 @@ TEST_CASE("FEM GHEX102 element definitions.", "[fem_element_ghex102]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5634,7 +5634,7 @@ TEST_CASE("FEM GHEX103 element definitions.", "[fem_element_ghex103]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX103;
+   el_types const ELTYP = elements::el_types::GHEX103;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5665,7 +5665,7 @@ TEST_CASE("FEM GHEX103 element definitions.", "[fem_element_ghex103]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5730,7 +5730,7 @@ TEST_CASE("FEM GHEX104 element definitions.", "[fem_element_ghex104]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX104;
+   el_types const ELTYP = elements::el_types::GHEX104;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5761,7 +5761,7 @@ TEST_CASE("FEM GHEX104 element definitions.", "[fem_element_ghex104]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5826,7 +5826,7 @@ TEST_CASE("FEM GHEX105 element definitions.", "[fem_element_ghex105]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX105;
+   el_types const ELTYP = elements::el_types::GHEX105;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5857,7 +5857,7 @@ TEST_CASE("FEM GHEX105 element definitions.", "[fem_element_ghex105]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -5922,7 +5922,7 @@ TEST_CASE("FEM GHEX106 element definitions.", "[fem_element_ghex106]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX106;
+   el_types const ELTYP = elements::el_types::GHEX106;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -5953,7 +5953,7 @@ TEST_CASE("FEM GHEX106 element definitions.", "[fem_element_ghex106]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6018,7 +6018,7 @@ TEST_CASE("FEM GHEX107 element definitions.", "[fem_element_ghex107]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX107;
+   el_types const ELTYP = elements::el_types::GHEX107;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6049,7 +6049,7 @@ TEST_CASE("FEM GHEX107 element definitions.", "[fem_element_ghex107]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6114,7 +6114,7 @@ TEST_CASE("FEM GHEX108 element definitions.", "[fem_element_ghex108]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX108;
+   el_types const ELTYP = elements::el_types::GHEX108;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6145,7 +6145,7 @@ TEST_CASE("FEM GHEX108 element definitions.", "[fem_element_ghex108]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6210,7 +6210,7 @@ TEST_CASE("FEM GHEX109 element definitions.", "[fem_element_ghex109]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX109;
+   el_types const ELTYP = elements::el_types::GHEX109;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6241,7 +6241,7 @@ TEST_CASE("FEM GHEX109 element definitions.", "[fem_element_ghex109]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6306,7 +6306,7 @@ TEST_CASE("FEM GHEX110 element definitions.", "[fem_element_ghex110]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX110;
+   el_types const ELTYP = elements::el_types::GHEX110;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6337,7 +6337,7 @@ TEST_CASE("FEM GHEX110 element definitions.", "[fem_element_ghex110]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6402,7 +6402,7 @@ TEST_CASE("FEM GHEX111 element definitions.", "[fem_element_ghex111]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX111;
+   el_types const ELTYP = elements::el_types::GHEX111;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6433,7 +6433,7 @@ TEST_CASE("FEM GHEX111 element definitions.", "[fem_element_ghex111]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6498,7 +6498,7 @@ TEST_CASE("FEM GHEX112 element definitions.", "[fem_element_ghex112]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX112;
+   el_types const ELTYP = elements::el_types::GHEX112;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6529,7 +6529,7 @@ TEST_CASE("FEM GHEX112 element definitions.", "[fem_element_ghex112]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6594,7 +6594,7 @@ TEST_CASE("FEM GHEX113 element definitions.", "[fem_element_ghex113]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX113;
+   el_types const ELTYP = elements::el_types::GHEX113;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6625,7 +6625,7 @@ TEST_CASE("FEM GHEX113 element definitions.", "[fem_element_ghex113]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6690,7 +6690,7 @@ TEST_CASE("FEM GHEX114 element definitions.", "[fem_element_ghex114]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX114;
+   el_types const ELTYP = elements::el_types::GHEX114;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6721,7 +6721,7 @@ TEST_CASE("FEM GHEX114 element definitions.", "[fem_element_ghex114]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6786,7 +6786,7 @@ TEST_CASE("FEM GHEX115 element definitions.", "[fem_element_ghex115]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX115;
+   el_types const ELTYP = elements::el_types::GHEX115;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6817,7 +6817,7 @@ TEST_CASE("FEM GHEX115 element definitions.", "[fem_element_ghex115]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6883,7 +6883,7 @@ TEST_CASE("FEM GHEX116 element definitions.", "[fem_element_ghex116]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX116;
+   el_types const ELTYP = elements::el_types::GHEX116;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -6914,7 +6914,7 @@ TEST_CASE("FEM GHEX116 element definitions.", "[fem_element_ghex116]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -6979,7 +6979,7 @@ TEST_CASE("FEM GHEX117 element definitions.", "[fem_element_ghex117]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX117;
+   el_types const ELTYP = elements::el_types::GHEX117;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7010,7 +7010,7 @@ TEST_CASE("FEM GHEX117 element definitions.", "[fem_element_ghex117]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7075,7 +7075,7 @@ TEST_CASE("FEM GHEX118 element definitions.", "[fem_element_ghex118]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX118;
+   el_types const ELTYP = elements::el_types::GHEX118;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7106,7 +7106,7 @@ TEST_CASE("FEM GHEX118 element definitions.", "[fem_element_ghex118]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7171,7 +7171,7 @@ TEST_CASE("FEM GHEX119 element definitions.", "[fem_element_ghex119]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX119;
+   el_types const ELTYP = elements::el_types::GHEX119;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7202,7 +7202,7 @@ TEST_CASE("FEM GHEX119 element definitions.", "[fem_element_ghex119]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7267,7 +7267,7 @@ TEST_CASE("FEM GHEX120 element definitions.", "[fem_element_ghex120]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX120;
+   el_types const ELTYP = elements::el_types::GHEX120;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7298,7 +7298,7 @@ TEST_CASE("FEM GHEX120 element definitions.", "[fem_element_ghex120]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7363,7 +7363,7 @@ TEST_CASE("FEM GHEX121 element definitions.", "[fem_element_ghex121]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX121;
+   el_types const ELTYP = elements::el_types::GHEX121;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7394,7 +7394,7 @@ TEST_CASE("FEM GHEX121 element definitions.", "[fem_element_ghex121]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7459,7 +7459,7 @@ TEST_CASE("FEM GHEX122 element definitions.", "[fem_element_ghex122]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX122;
+   el_types const ELTYP = elements::el_types::GHEX122;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7490,7 +7490,7 @@ TEST_CASE("FEM GHEX122 element definitions.", "[fem_element_ghex122]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7555,7 +7555,7 @@ TEST_CASE("FEM GHEX123 element definitions.", "[fem_element_ghex123]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX123;
+   el_types const ELTYP = elements::el_types::GHEX123;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7586,7 +7586,7 @@ TEST_CASE("FEM GHEX123 element definitions.", "[fem_element_ghex123]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7652,7 +7652,7 @@ TEST_CASE("FEM GHEX124 element definitions.", "[fem_element_ghex124]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX124;
+   el_types const ELTYP = elements::el_types::GHEX124;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7683,7 +7683,7 @@ TEST_CASE("FEM GHEX124 element definitions.", "[fem_element_ghex124]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7748,7 +7748,7 @@ TEST_CASE("FEM GHEX125 element definitions.", "[fem_element_ghex125]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX125;
+   el_types const ELTYP = elements::el_types::GHEX125;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7779,7 +7779,7 @@ TEST_CASE("FEM GHEX125 element definitions.", "[fem_element_ghex125]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7844,7 +7844,7 @@ TEST_CASE("FEM GHEX126 element definitions.", "[fem_element_ghex126]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX126;
+   el_types const ELTYP = elements::el_types::GHEX126;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7875,7 +7875,7 @@ TEST_CASE("FEM GHEX126 element definitions.", "[fem_element_ghex126]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -7940,7 +7940,7 @@ TEST_CASE("FEM GHEX127 element definitions.", "[fem_element_ghex127]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX127;
+   el_types const ELTYP = elements::el_types::GHEX127;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -7971,7 +7971,7 @@ TEST_CASE("FEM GHEX127 element definitions.", "[fem_element_ghex127]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8037,7 +8037,7 @@ TEST_CASE("FEM GHEX128 element definitions.", "[fem_element_ghex128]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX128;
+   el_types const ELTYP = elements::el_types::GHEX128;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8068,7 +8068,7 @@ TEST_CASE("FEM GHEX128 element definitions.", "[fem_element_ghex128]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8133,7 +8133,7 @@ TEST_CASE("FEM GHEX129 element definitions.", "[fem_element_ghex129]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX129;
+   el_types const ELTYP = elements::el_types::GHEX129;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8164,7 +8164,7 @@ TEST_CASE("FEM GHEX129 element definitions.", "[fem_element_ghex129]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8230,7 +8230,7 @@ TEST_CASE("FEM GHEX130 element definitions.", "[fem_element_ghex130]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX130;
+   el_types const ELTYP = elements::el_types::GHEX130;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8261,7 +8261,7 @@ TEST_CASE("FEM GHEX130 element definitions.", "[fem_element_ghex130]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8327,7 +8327,7 @@ TEST_CASE("FEM GHEX131 element definitions.", "[fem_element_ghex131]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX131;
+   el_types const ELTYP = elements::el_types::GHEX131;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8358,7 +8358,7 @@ TEST_CASE("FEM GHEX131 element definitions.", "[fem_element_ghex131]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8424,7 +8424,7 @@ TEST_CASE("FEM GHEX132 element definitions.", "[fem_element_ghex132]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX132;
+   el_types const ELTYP = elements::el_types::GHEX132;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8455,7 +8455,7 @@ TEST_CASE("FEM GHEX132 element definitions.", "[fem_element_ghex132]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8520,7 +8520,7 @@ TEST_CASE("FEM GHEX133 element definitions.", "[fem_element_ghex133]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX133;
+   el_types const ELTYP = elements::el_types::GHEX133;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8551,7 +8551,7 @@ TEST_CASE("FEM GHEX133 element definitions.", "[fem_element_ghex133]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8616,7 +8616,7 @@ TEST_CASE("FEM GHEX134 element definitions.", "[fem_element_ghex134]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX134;
+   el_types const ELTYP = elements::el_types::GHEX134;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8647,7 +8647,7 @@ TEST_CASE("FEM GHEX134 element definitions.", "[fem_element_ghex134]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8712,7 +8712,7 @@ TEST_CASE("FEM GHEX135 element definitions.", "[fem_element_ghex135]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX135;
+   el_types const ELTYP = elements::el_types::GHEX135;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8743,7 +8743,7 @@ TEST_CASE("FEM GHEX135 element definitions.", "[fem_element_ghex135]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8808,7 +8808,7 @@ TEST_CASE("FEM GHEX136 element definitions.", "[fem_element_ghex136]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX136;
+   el_types const ELTYP = elements::el_types::GHEX136;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8839,7 +8839,7 @@ TEST_CASE("FEM GHEX136 element definitions.", "[fem_element_ghex136]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -8904,7 +8904,7 @@ TEST_CASE("FEM GHEX137 element definitions.", "[fem_element_ghex137]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX137;
+   el_types const ELTYP = elements::el_types::GHEX137;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -8935,7 +8935,7 @@ TEST_CASE("FEM GHEX137 element definitions.", "[fem_element_ghex137]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9000,7 +9000,7 @@ TEST_CASE("FEM GHEX138 element definitions.", "[fem_element_ghex138]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX138;
+   el_types const ELTYP = elements::el_types::GHEX138;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9031,7 +9031,7 @@ TEST_CASE("FEM GHEX138 element definitions.", "[fem_element_ghex138]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9096,7 +9096,7 @@ TEST_CASE("FEM GHEX139 element definitions.", "[fem_element_ghex139]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX139;
+   el_types const ELTYP = elements::el_types::GHEX139;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9127,7 +9127,7 @@ TEST_CASE("FEM GHEX139 element definitions.", "[fem_element_ghex139]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9193,7 +9193,7 @@ TEST_CASE("FEM GHEX140 element definitions.", "[fem_element_ghex140]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX140;
+   el_types const ELTYP = elements::el_types::GHEX140;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9224,7 +9224,7 @@ TEST_CASE("FEM GHEX140 element definitions.", "[fem_element_ghex140]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9289,7 +9289,7 @@ TEST_CASE("FEM GHEX141 element definitions.", "[fem_element_ghex141]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX141;
+   el_types const ELTYP = elements::el_types::GHEX141;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9320,7 +9320,7 @@ TEST_CASE("FEM GHEX141 element definitions.", "[fem_element_ghex141]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9385,7 +9385,7 @@ TEST_CASE("FEM GHEX142 element definitions.", "[fem_element_ghex142]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX142;
+   el_types const ELTYP = elements::el_types::GHEX142;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9416,7 +9416,7 @@ TEST_CASE("FEM GHEX142 element definitions.", "[fem_element_ghex142]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9481,7 +9481,7 @@ TEST_CASE("FEM GHEX143 element definitions.", "[fem_element_ghex143]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX143;
+   el_types const ELTYP = elements::el_types::GHEX143;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9512,7 +9512,7 @@ TEST_CASE("FEM GHEX143 element definitions.", "[fem_element_ghex143]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9578,7 +9578,7 @@ TEST_CASE("FEM GHEX144 element definitions.", "[fem_element_ghex144]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX144;
+   el_types const ELTYP = elements::el_types::GHEX144;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9609,7 +9609,7 @@ TEST_CASE("FEM GHEX144 element definitions.", "[fem_element_ghex144]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9674,7 +9674,7 @@ TEST_CASE("FEM GHEX145 element definitions.", "[fem_element_ghex145]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX145;
+   el_types const ELTYP = elements::el_types::GHEX145;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9705,7 +9705,7 @@ TEST_CASE("FEM GHEX145 element definitions.", "[fem_element_ghex145]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9771,7 +9771,7 @@ TEST_CASE("FEM GHEX146 element definitions.", "[fem_element_ghex146]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX146;
+   el_types const ELTYP = elements::el_types::GHEX146;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9802,7 +9802,7 @@ TEST_CASE("FEM GHEX146 element definitions.", "[fem_element_ghex146]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9868,7 +9868,7 @@ TEST_CASE("FEM GHEX147 element definitions.", "[fem_element_ghex147]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX147;
+   el_types const ELTYP = elements::el_types::GHEX147;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9899,7 +9899,7 @@ TEST_CASE("FEM GHEX147 element definitions.", "[fem_element_ghex147]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -9965,7 +9965,7 @@ TEST_CASE("FEM GHEX148 element definitions.", "[fem_element_ghex148]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX148;
+   el_types const ELTYP = elements::el_types::GHEX148;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -9996,7 +9996,7 @@ TEST_CASE("FEM GHEX148 element definitions.", "[fem_element_ghex148]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10061,7 +10061,7 @@ TEST_CASE("FEM GHEX149 element definitions.", "[fem_element_ghex149]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX149;
+   el_types const ELTYP = elements::el_types::GHEX149;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10092,7 +10092,7 @@ TEST_CASE("FEM GHEX149 element definitions.", "[fem_element_ghex149]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10157,7 +10157,7 @@ TEST_CASE("FEM GHEX150 element definitions.", "[fem_element_ghex150]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX150;
+   el_types const ELTYP = elements::el_types::GHEX150;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10188,7 +10188,7 @@ TEST_CASE("FEM GHEX150 element definitions.", "[fem_element_ghex150]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10253,7 +10253,7 @@ TEST_CASE("FEM GHEX151 element definitions.", "[fem_element_ghex151]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX151;
+   el_types const ELTYP = elements::el_types::GHEX151;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10284,7 +10284,7 @@ TEST_CASE("FEM GHEX151 element definitions.", "[fem_element_ghex151]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10350,7 +10350,7 @@ TEST_CASE("FEM GHEX152 element definitions.", "[fem_element_ghex152]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX152;
+   el_types const ELTYP = elements::el_types::GHEX152;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10381,7 +10381,7 @@ TEST_CASE("FEM GHEX152 element definitions.", "[fem_element_ghex152]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10446,7 +10446,7 @@ TEST_CASE("FEM GHEX153 element definitions.", "[fem_element_ghex153]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX153;
+   el_types const ELTYP = elements::el_types::GHEX153;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10477,7 +10477,7 @@ TEST_CASE("FEM GHEX153 element definitions.", "[fem_element_ghex153]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10543,7 +10543,7 @@ TEST_CASE("FEM GHEX154 element definitions.", "[fem_element_ghex154]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX154;
+   el_types const ELTYP = elements::el_types::GHEX154;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10574,7 +10574,7 @@ TEST_CASE("FEM GHEX154 element definitions.", "[fem_element_ghex154]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10640,7 +10640,7 @@ TEST_CASE("FEM GHEX155 element definitions.", "[fem_element_ghex155]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX155;
+   el_types const ELTYP = elements::el_types::GHEX155;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10671,7 +10671,7 @@ TEST_CASE("FEM GHEX155 element definitions.", "[fem_element_ghex155]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10737,7 +10737,7 @@ TEST_CASE("FEM GHEX156 element definitions.", "[fem_element_ghex156]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX156;
+   el_types const ELTYP = elements::el_types::GHEX156;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10768,7 +10768,7 @@ TEST_CASE("FEM GHEX156 element definitions.", "[fem_element_ghex156]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10833,7 +10833,7 @@ TEST_CASE("FEM GHEX157 element definitions.", "[fem_element_ghex157]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX157;
+   el_types const ELTYP = elements::el_types::GHEX157;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10864,7 +10864,7 @@ TEST_CASE("FEM GHEX157 element definitions.", "[fem_element_ghex157]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -10930,7 +10930,7 @@ TEST_CASE("FEM GHEX158 element definitions.", "[fem_element_ghex158]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX158;
+   el_types const ELTYP = elements::el_types::GHEX158;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -10961,7 +10961,7 @@ TEST_CASE("FEM GHEX158 element definitions.", "[fem_element_ghex158]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -11027,7 +11027,7 @@ TEST_CASE("FEM GHEX159 element definitions.", "[fem_element_ghex159]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX159;
+   el_types const ELTYP = elements::el_types::GHEX159;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -11058,7 +11058,7 @@ TEST_CASE("FEM GHEX159 element definitions.", "[fem_element_ghex159]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -11124,7 +11124,7 @@ TEST_CASE("FEM GHEX160 element definitions.", "[fem_element_ghex160]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX160;
+   el_types const ELTYP = elements::el_types::GHEX160;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -11155,7 +11155,7 @@ TEST_CASE("FEM GHEX160 element definitions.", "[fem_element_ghex160]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -11221,7 +11221,7 @@ TEST_CASE("FEM GHEX161 element definitions.", "[fem_element_ghex161]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX161;
+   el_types const ELTYP = elements::el_types::GHEX161;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -11252,7 +11252,7 @@ TEST_CASE("FEM GHEX161 element definitions.", "[fem_element_ghex161]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -11318,7 +11318,7 @@ TEST_CASE("FEM GHEX162 element definitions.", "[fem_element_ghex162]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX162;
+   el_types const ELTYP = elements::el_types::GHEX162;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -11349,7 +11349,7 @@ TEST_CASE("FEM GHEX162 element definitions.", "[fem_element_ghex162]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);
@@ -11415,7 +11415,7 @@ TEST_CASE("FEM GHEX163 element definitions.", "[fem_element_ghex163]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
-   el_types const ELTYP = GHEX163;
+   el_types const ELTYP = elements::el_types::GHEX163;
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -11446,7 +11446,7 @@ TEST_CASE("FEM GHEX163 element definitions.", "[fem_element_ghex163]") {
    SECTION("check members") {
 
       CHECK(probe.processors == std::set<el_processor> ({
-               general, Sestra }));
+               el_processor::general, el_processor::Sestra }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
       CHECK(probe.el_add == ELTYAD);

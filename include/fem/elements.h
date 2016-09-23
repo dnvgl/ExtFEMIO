@@ -36,7 +36,7 @@ namespace dnvgl {
       namespace fem {
          namespace elements {
 
-            typedef enum {
+            enum class el_types {
                BEPS = 2,
                CSTA = 3,
                RPBQ = 5,
@@ -158,12 +158,13 @@ namespace dnvgl {
                GHEX161 = 161,
                GHEX162 = 162,
                GHEX163 = 163,
-               INVALID=-1, UNDEFINED=-2} el_types;
+               INVALID=-1, UNDEFINED=-2};
 
-            typedef enum {general, Preframe, Prefem, Sestra, ADVANCE,
-                          Framework, Launch, Platework, Pretube,
-                          Splice, Wadam, Wajac,
-                          Poseidon} el_processor;
+            enum class el_processor {
+               general, Preframe, Prefem, Sestra, ADVANCE,
+               Framework, Launch, Platework, Pretube,
+               Splice, Wadam, Wajac,
+               Poseidon};
 
             namespace __base {
             /** Base class for FEM element representation.

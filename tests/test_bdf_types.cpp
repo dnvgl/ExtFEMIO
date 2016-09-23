@@ -54,31 +54,31 @@ TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
    entry_type<std::complex<double> > obj_cplx("d_cplx");
 
    SECTION("Checking 'entry_type<long>.type' against 'Int'") {
-      CHECK(entry_type<long>("dummy idiot").type() == Int);
+      CHECK(entry_type<long>("dummy idiot").type() == bdf_types::Int);
    }
 
    SECTION("Checking 'entry_type<long>->type' against 'Int'") {
-      CHECK(obj_int.type() == Int);
+      CHECK(obj_int.type() == bdf_types::Int);
    }
 
    SECTION("Checking 'entry_type<double>.type' against 'Float'") {
-      CHECK(entry_type<double>("dummy float").type() == Float);
+      CHECK(entry_type<double>("dummy float").type() == bdf_types::Float);
    }
 
    SECTION("Checking 'entry_type<double>->type' against 'Float'") {
-      CHECK(obj_float.type() == Float);
+      CHECK(obj_float.type() == bdf_types::Float);
    }
 
    SECTION("Checking 'bdf_list.type' against 'List'") {
-      CHECK(entry_type<std::list<int> >("dummy").type() == List);
+      CHECK(entry_type<std::list<int> >("dummy").type() == bdf_types::List);
    }
 
    SECTION("Checking 'bdf_list->type' against 'List'") {
-      CHECK(obj_list.type() == List);
+      CHECK(obj_list.type() == bdf_types::List);
    }
 
    SECTION("Checking 'bdf_complex->type' against 'Complex'") {
-      CHECK(obj_cplx.type() == Complex);
+      CHECK(obj_cplx.type() == bdf_types::Complex);
    }
 
    SECTION("Comparing 'entry_type<long>' with 'entry_type<double>'") {

@@ -24,7 +24,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_elements[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -55,18 +55,18 @@ namespace dnvgl {
                std::unique_ptr<__base::elem> &res, const cards::gelmnt1 *data) {
 
                switch (data->ELTYP) {
-{% for e in enum %}               case {{ e[0]|upper() }}: res = std::make_unique<{{ e[0]|lower() }}>(data); break;
-{% endfor %}               case UNDEFINED: res = std::make_unique<undef>(); break;
-               case INVALID: throw errors::parse_error(
+{% for e in enum %}               case el_types::{{ e[0]|upper() }}: res = std::make_unique<{{ e[0]|lower() }}>(data); break;
+{% endfor %}               case el_types::UNDEFINED: res = std::make_unique<undef>(); break;
+               case el_types::INVALID: throw errors::parse_error(
                   "GELMNT1", "invalid element type"); break;
                };
             }
 
             std::string name_elem(el_types const &type) {
                switch (type) {
-{% for e in enum %}               case {{ e[0]|upper() }}: return "{{ e[0]|upper() }}";
-{% endfor %}               case UNDEFINED: return "UNDEFINED";
-               case INVALID: return "INVALID";
+{% for e in enum %}               case el_types::{{ e[0]|upper() }}: return "{{ e[0]|upper() }}";
+{% endfor %}               case el_types::UNDEFINED: return "UNDEFINED";
+               case el_types::INVALID: return "INVALID";
                }
                return "";
             };
@@ -75,7 +75,7 @@ namespace dnvgl {
 
             long undef::nnodes(void) const {return -1;}
 
-            el_types undef::get_type(void) const {return UNDEFINED;}
+            el_types undef::get_type(void) const {return el_types::UNDEFINED;}
 
             namespace __base {
 
@@ -303,7 +303,7 @@ namespace dnvgl {
 
             long {{ elem }}::nnodes(void) const {return {{ vals.nnodes }};}
 
-            el_types {{ elem }}::get_type(void) const {return {{ elem|upper() }};}
+            el_types {{ elem }}::get_type(void) const {return el_types::{{ elem|upper() }};}
 
             const std::set<el_processor> {{ elem }}::processors(
                {{ elem }}_procs, {{ elem }}_procs+{{ elem }}_procs_len);

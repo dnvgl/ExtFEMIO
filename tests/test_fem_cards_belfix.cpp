@@ -56,7 +56,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
       belfix probe(lines);
 
       CHECK(probe.FIXNO == 23047);
-      CHECK(probe.OPT == belfix::FIXATION);
+      CHECK(probe.OPT == belfix::n_opt::FIXATION);
       CHECK(probe.TRANO == 0);
       CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
    }
@@ -73,7 +73,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
       belfix probe(lines);
 
       CHECK(probe.FIXNO == 23047);
-      CHECK(probe.OPT == belfix::SPRING);
+      CHECK(probe.OPT == belfix::n_opt::SPRING);
       CHECK(probe.TRANO == 0);
       CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
    }
@@ -90,7 +90,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
       belfix probe(lines);
 
       CHECK(probe.FIXNO == 23047);
-      CHECK(probe.OPT == belfix::FIXATION_END);
+      CHECK(probe.OPT == belfix::n_opt::FIXATION_END);
       CHECK(probe.TRANO == 0);
       CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
    }
@@ -107,7 +107,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
       belfix probe(lines);
 
       CHECK(probe.FIXNO == 23047);
-      CHECK(probe.OPT == belfix::SPRING_END);
+      CHECK(probe.OPT == belfix::n_opt::SPRING_END);
       CHECK(probe.TRANO == 0);
       CHECK(probe.A == std::vector<double>({1., 1., 1., 1., 1., 0.}));
    }
@@ -128,7 +128,7 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
       std::ostringstream test;
 
       long FIXNO(1);
-      belfix::n_opt OPT(belfix::FIXATION);
+      belfix::n_opt OPT(belfix::n_opt::FIXATION);
       long TRANO(1);
       std::vector<double> A({1., 0., .5, 1., 1., 1.});
 
@@ -144,7 +144,7 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
    SECTION("write (const)") {
       std::ostringstream test;
 
-      belfix probe(1, belfix::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
+      belfix probe(1, belfix::n_opt::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
       test << probe;
 
       CHECK(test.str() ==
@@ -169,7 +169,7 @@ TEST_CASE("FEM BELFIX conversion from own output.", "[fem_belfix,in/out]") {
       belfix probe(lines);
 
       CHECK(probe.FIXNO == 1);
-      CHECK(probe.OPT == belfix::FIXATION);
+      CHECK(probe.OPT == belfix::n_opt::FIXATION);
       CHECK(probe.TRANO == 1);
       CHECK(probe.A == std::vector<double>({1., 0., .5, 1., 1., 1.}));
    }
@@ -178,17 +178,17 @@ TEST_CASE("FEM BELFIX conversion from own output.", "[fem_belfix,in/out]") {
 TEST_CASE("FEM BELFIX conversion to Poseidon BEAM dofs.", "[fem_belfix,fixation]") {
 
    SECTION("first test") {
-      belfix probe(1, belfix::FIXATION, 1, {1., 0., 1., 0., 1., 0.});
+      belfix probe(1, belfix::n_opt::FIXATION, 1, {1., 0., 1., 0., 1., 0.});
       CHECK(probe.pos_string() == "101010");
    }
 
    SECTION("Invalid fixation values") {
-      belfix probe(1, belfix::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
+      belfix probe(1, belfix::n_opt::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
       CHECK_THROWS(probe.pos_string());
    }
 
    SECTION("Invalid spring values") {
-      belfix probe(1, belfix::SPRING, 1, {1., 0., 0., 1., 1., 1.});
+      belfix probe(1, belfix::n_opt::SPRING, 1, {1., 0., 0., 1., 1., 1.});
       CHECK_THROWS(probe.pos_string());
    }
 }

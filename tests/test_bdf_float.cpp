@@ -170,7 +170,7 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
    entry_value<double> lval(1.), mlval(-1.);
 
    SECTION("SHORT") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       std::string res(obj.format(lval));
       CHECK(obj.format(lval).size() == 8);
       CHECK(obj.format(lval) == "1.000+00");
@@ -179,14 +179,14 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
    }
 
    SECTION("SHORT (nullptr)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
 
    SECTION("SHORT (void)") {
       double *lval = new double(1.);
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(*lval == 1.);
       CHECK(obj.format(lval).size() == 8);
       CHECK(obj.format(lval) == "1.000+00");
@@ -202,7 +202,7 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
    }
 
    SECTION("SHORT (nullptr, void)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 8);
       CHECK(obj.format(nullptr) == "        ");
    }
@@ -245,18 +245,18 @@ TEST_CASE("BDF double types output.", "[bdf_types]" ) {
    }
 
    SECTION("LONG") {
-      bdf::types::base::out_form = bdf::types::LONG;
+      bdf::types::base::out_form = bdf::types::out_form_type::LONG;
       CHECK(obj.format(lval).size() == 16);
       CHECK(obj.format(lval) == "1.00000000000+00");
    }
 
    SECTION("FREE") {
-      bdf::types::base::out_form = bdf::types::FREE;
+      bdf::types::base::out_form = bdf::types::out_form_type::FREE;
       CHECK(obj.format(lval) == "1.000000+00");
    }
 
    SECTION("FREE 2") {
-      bdf::types::base::out_form = bdf::types::FREE;
+      bdf::types::base::out_form = bdf::types::out_form_type::FREE;
       CHECK(obj.format(33) == "3.300000+01");
    }
 }
@@ -267,14 +267,14 @@ TEST_CASE("Exception, mkoe 2015-12-17", "[bdf_types]" ) {
 
    SECTION("SHORT") {
       const double lval(-11.1);
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(lval).size() == 8);
       CHECK(obj.format(lval) == "-1.11+01");
    }
 
    SECTION("LONG") {
       const double lval(-11.104650284500055);
-      bdf::types::base::out_form = bdf::types::LONG;
+      bdf::types::base::out_form = bdf::types::out_form_type::LONG;
       CHECK(obj.format(lval).size() == 16);
       CHECK(obj.format(lval) == "-1.1104650285+01");
    }
@@ -286,14 +286,14 @@ TEST_CASE("Negative zero", "[bdf_types]") {
 
    SECTION("SHORT") {
       const double lval(-0.);
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(lval).size() == 8);
       CHECK(obj.format(lval) == "-0.00+00");
    }
 
    SECTION("LONG") {
       const double lval(-0.);
-      bdf::types::base::out_form = bdf::types::LONG;
+      bdf::types::base::out_form = bdf::types::out_form_type::LONG;
       CHECK(obj.format(lval).size() == 16);
       CHECK(obj.format(lval) == "-0.0000000000+00");
    }

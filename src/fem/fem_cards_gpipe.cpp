@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_gpipe[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -88,7 +88,7 @@ namespace dnvgl {
                NCIR(NCIR), NRAD(NRAD) {}
 
             const dnvgl::extfem::fem::cards::types
-            gpipe::card_type(void) const {return GPIPE;}
+            gpipe::card_type(void) const {return types::GPIPE;}
 
             std::ostream &gpipe::put(std::ostream& os) const {
                if (this->GEONO == -1) return os;

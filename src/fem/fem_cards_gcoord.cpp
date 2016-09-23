@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_gcoord[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -72,7 +72,7 @@ namespace dnvgl {
                XCOORD(XCOORD), YCOORD(YCOORD), ZCOORD(ZCOORD) {}
 
             const dnvgl::extfem::fem::cards::types
-            gcoord::card_type(void) const {return GCOORD;}
+            gcoord::card_type(void) const {return types::GCOORD;}
 
             std::ostream &gcoord::put(std::ostream& os) const {
                if (this->NODENO == -1) return os;

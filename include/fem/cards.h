@@ -59,7 +59,7 @@ namespace dnvgl {
             /**
                \brief Name the different cards.
             */
-            typedef enum types {
+            enum class types {
                UNKNOWN,
                /// Date and Program Information
                DATE,
@@ -138,7 +138,7 @@ namespace dnvgl {
                HIERARCH,
                /// Elements with Surface Loads
                BEUSLO
-            } types;
+            };
 
             namespace __base {
                class card : public extfem::__base::outline {
@@ -460,8 +460,7 @@ system, unless a local nodal coordinate system is specified (see the
 
             public:
 
-               typedef enum {DIM_2D=2, DIM_3D=3, INVALID=-1} mod_type;
-
+               enum class mod_type{DIM_2D=2, DIM_3D=3, INVALID=-1};
 
                /** Superelement level.
 
@@ -1533,10 +1532,10 @@ record may be on the interface.
 
             public:
 
-               typedef enum n_opt {
+               enum class n_opt {
                   INVALID = -1,
                   FIXATION = 1, SPRING = 2,
-                  FIXATION_END = 3, SPRING_END = 4} n_opt;
+                  FIXATION_END = 3, SPRING_END = 4}_opt;
 
                /** Fixation number to a node.
 
@@ -2125,14 +2124,14 @@ records.
 
                /** Define the possible set types.
                */
-               typedef enum types {
+               enum class types {
                   NODE_SET = 1, ELEM_SET = 2, UNDEF_TYPE=-999
-               } types;
+               };
                /** Dfine the possible set origins
                */
-               typedef enum origins {
+               enum class origins {
                   UNDEF_ORIGIN = 0, POINT_ORIGIN = 1, LINE_OR_CURVE_ORIGIN = 2, SURFACE_ORIGIN = 3, BODY_ORIGIN = 4
-               } origins;
+               };
 
             private:
 

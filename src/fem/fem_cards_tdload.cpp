@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_tdload[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -162,7 +162,7 @@ namespace dnvgl {
             }
 
             const dnvgl::extfem::fem::cards::types
-            tdload::card_type(void) const { return TDLOAD; };
+            tdload::card_type(void) const { return types::TDLOAD; };
 
             std::ostream &tdload::put(std::ostream& os) const {
                if (this->ILREF == -1) return os;

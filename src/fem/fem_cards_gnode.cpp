@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_gnode[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -81,7 +81,7 @@ namespace dnvgl {
                gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
 
             const dnvgl::extfem::fem::cards::types
-            gnode::card_type(void) const {return GNODE;}
+            gnode::card_type(void) const {return types::GNODE;}
 
             std::ostream &gnode::put(std::ostream& os) const {
                if (this->NODEX == -1) return os;

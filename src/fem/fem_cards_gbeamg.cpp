@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_gbeamg[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -104,7 +104,7 @@ namespace dnvgl {
                SZ(SZ) {}
 
             const dnvgl::extfem::fem::cards::types
-            gbeamg::card_type(void) const {return GBEAMG;}
+            gbeamg::card_type(void) const {return types::GBEAMG;}
 
             std::ostream &gbeamg::put(std::ostream& os) const {
                if (this->GEONO == -1) return os;

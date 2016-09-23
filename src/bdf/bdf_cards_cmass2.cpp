@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char cID[]
+   const char cID_bdf_cards_cmass2[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -45,8 +45,8 @@ namespace dnvgl {
 
          namespace cards {
 
-            const entry_type<long> cmass2::form_EID(
-               "EID", bdf::type_bounds::bound<long>(&cl1));
+            // const entry_type<long> cmass2::form_EID(
+            //    "EID", bdf::type_bounds::bound<long>(&cl1));
             const entry_type<double> cmass2::form_M("M");
             const entry_type<long> cmass2::form_G1(
                "G1", bound<long>(nullptr, nullptr, nullptr, true));
@@ -56,20 +56,20 @@ namespace dnvgl {
             const entry_type<std::list<int> > cmass2::form_C2("C2");
 
             cmass2::cmass2(void) :
-               card(),
-               EID(nullptr), M(nullptr), G1(nullptr), C1(nullptr),
+               element(nullptr),
+               M(nullptr), G1(nullptr), C1(nullptr),
                G2(nullptr), C2(nullptr) {}
 
             cmass2::cmass2(std::list<std::string> const &inp) :
-               card(inp) {
+               element(inp) {
                this->read(inp);
             }
 
             cmass2::cmass2(long const *EID, double const *M,
                            long const *G1, std::list<int> const *C1,
                            long const *G2/*=nullptr*/, std::list<int> const *C2/*=nullptr*/) :
-               card(),
-               EID(EID), M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
+               element(EID),
+               M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
                if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
                   throw errors::error("CMASS2", "EID not in valid range");
                if (this->G1 && this->C1.value.size() == 0)
@@ -129,7 +129,7 @@ namespace dnvgl {
             }
 
             const types cmass2::card_type(void) const {
-               return CMASS2;
+               return types::CMASS2;
             }
 
             void cmass2::collect_outdata(

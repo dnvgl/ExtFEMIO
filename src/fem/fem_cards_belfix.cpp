@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_belfix[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -54,7 +54,7 @@ namespace dnvgl {
             const fem::types::entry_type<double> belfix::_form_A("A");
 
             belfix::belfix() :
-               belfix(-1, belfix::INVALID, 0,
+               belfix(-1, belfix::n_opt::INVALID, 0,
                       {0., 0., 0., 0., 0., 0.}) {}
 
             belfix::belfix(const std::list<std::string> &inp) :
@@ -70,15 +70,15 @@ namespace dnvgl {
                FIXNO = _form_FIXNO(*(pos++));
                long tmp(_form_OPT(*(pos++)));
                if (tmp == 1)
-                  OPT = FIXATION;
+                  OPT = n_opt::FIXATION;
                else if (tmp == 2)
-                  OPT = SPRING;
+                  OPT = n_opt::SPRING;
                else if (tmp == 3)
-                  OPT = FIXATION_END;
+                  OPT = n_opt::FIXATION_END;
                else if (tmp == 4)
-                  OPT = SPRING_END;
+                  OPT = n_opt::SPRING_END;
                else {
-                  OPT = INVALID;
+                  OPT = n_opt::INVALID;
                   std::ostringstream msg(
                      "BELFIX: OPT allows only 1, 2, 3, or 4, got ",
                      std::ostringstream::ate);
@@ -98,13 +98,13 @@ namespace dnvgl {
                card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 
             const dnvgl::extfem::fem::cards::types
-            belfix::card_type(void) const {return BELFIX;}
+            belfix::card_type(void) const {return types::BELFIX;}
 
             std::ostream &belfix::put(std::ostream &os) const {
-               if (this->OPT == belfix::INVALID) return os;
+               if (this->OPT == belfix::n_opt::INVALID) return os;
                os << belfix::head.format()
                   << this->_form_FIXNO.format(this->FIXNO)
-                  << this->_form_OPT.format(this->OPT)
+                  << this->_form_OPT.format(static_cast<long>(this->OPT))
                   << this->_form_TRANO.format(this->TRANO)
                   << this->empty.format()
                   << std::endl << fem::types::card("").format()
@@ -120,7 +120,7 @@ namespace dnvgl {
 
             std::string belfix::pos_string(void) const {
                std::ostringstream res;
-               if (OPT != FIXATION)
+               if (OPT != n_opt::FIXATION)
                   throw errors::types_error(
                   "Only BELFIX records with OPT==1 can be transformed to Poseidon BEAM DOFs.");
                for (double a : A) {

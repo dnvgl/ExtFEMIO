@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_header_case_control_spcforces[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -40,7 +40,7 @@ namespace dnvgl {
 
                spcforces::spcforces(
                   std::list<describer*> const &describers, long const &res) :
-                  spcforces(describers, spcforces::n, res) {}
+                  spcforces(describers, spcforces::restype::n, res) {}
 
                std::ostream &spcforces::put(std::ostream &os) const {
                   os << "SPCFORCES";
@@ -57,13 +57,13 @@ namespace dnvgl {
                      os << ")";
                   }
                   switch (this->res) {
-                  case spcforces::n:
+                  case spcforces::restype::n:
                      os << " = " << this->res_n;
                      break;
-                  case spcforces::ALL:
+                  case spcforces::restype::ALL:
                      os << " = ALL";
                      break;
-                  case spcforces::NONE:
+                  case spcforces::restype::NONE:
                      os << " = NONE";
                      break;
                   }
@@ -138,5 +138,5 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

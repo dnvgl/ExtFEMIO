@@ -113,7 +113,7 @@ TEST_CASE("BDF std::complex<double> types output.", "[bdf_types]" ) {
    }
 
    SECTION("SHORT") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       std::string res(obj.format(lval));
       CHECK(res == "1.000+001.000+00");
       CHECK(obj.format(lval).size() == 16);
@@ -123,14 +123,14 @@ TEST_CASE("BDF std::complex<double> types output.", "[bdf_types]" ) {
    }
 
    SECTION("SHORT (nullptr)") {
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(obj.format(nullptr).size() == 16);
       CHECK(obj.format(nullptr) == "                ");
    }
 
    SECTION("SHORT (void)") {
       std::complex<double> *lval = new std::complex<double>(1.);
-      bdf::types::base::out_form = bdf::types::SHORT;
+      bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
       CHECK(*lval == 1.);
       CHECK(obj.format(lval).size() == 16);
       CHECK(obj.format(lval) == "1.000+000.000+00");
@@ -181,18 +181,18 @@ TEST_CASE("BDF std::complex<double> types output.", "[bdf_types]" ) {
    }
 
    SECTION("LONG") {
-      bdf::types::base::out_form = bdf::types::LONG;
+      bdf::types::base::out_form = bdf::types::out_form_type::LONG;
       CHECK(obj.format(lval).size() == 32);
       CHECK(obj.format(lval) == "1.00000000000+001.00000000000+00");
    }
 
    SECTION("FREE") {
-      bdf::types::base::out_form = bdf::types::FREE;
+      bdf::types::base::out_form = bdf::types::out_form_type::FREE;
       CHECK(obj.format(lval) == "1.000000+00,1.000000+00");
    }
 
    SECTION("FREE 2") {
-      bdf::types::base::out_form = bdf::types::FREE;
+      bdf::types::base::out_form = bdf::types::out_form_type::FREE;
       CHECK(obj.format(33) == "3.300000+01,0.000000+00");
    }
 }

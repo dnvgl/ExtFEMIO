@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_glsec[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -88,7 +88,7 @@ namespace dnvgl {
                K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
             const dnvgl::extfem::fem::cards::types
-            glsec::card_type(void) const {return GLSEC;}
+            glsec::card_type(void) const {return types::GLSEC;}
 
             std::ostream &glsec::put(std::ostream& os) const {
                if (this->GEONO == -1) return os;

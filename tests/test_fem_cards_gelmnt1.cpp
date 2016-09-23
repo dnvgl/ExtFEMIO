@@ -58,7 +58,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
 
       CHECK(probe.ELNOX == 11316);
       CHECK(probe.ELNO == 1);
-      CHECK(probe.ELTYP == 15);
+      CHECK(probe.ELTYP == elements::el_types::BEAS);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({10, 11}));
    }
@@ -73,7 +73,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 6);
-      CHECK(probe.ELTYP == 24);
+      CHECK(probe.ELTYP == elements::el_types::FQUS_FFQ);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({1, 6, 4, 2}));
    }
@@ -87,7 +87,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 1);
-      CHECK(probe.ELTYP == 15);
+      CHECK(probe.ELTYP == elements::el_types::BEAS);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({1, 2}));
    }
@@ -101,7 +101,7 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 1);
-      CHECK(probe.ELTYP == 15);
+      CHECK(probe.ELTYP == elements::el_types::BEAS);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({1, 2}));
    }
@@ -119,11 +119,11 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
 
    SECTION("GELMNT1 OUT (FQUS, const)") {
       long ELNOX(1), ELNO(6);
-      elements::el_types ELTYP(elements::FQUS_FFQ);
+      elements::el_types ELTYP(elements::el_types::FQUS_FFQ);
       long ELTYAD(0);
       std::vector<long> NODIN({1, 6, 4, 2});
 
-      gelmnt1 probe(1, 6, elements::FQUS_FFQ, 0, {1, 6, 4, 2});
+      gelmnt1 probe(1, 6, elements::el_types::FQUS_FFQ, 0, {1, 6, 4, 2});
       test << probe;
       CHECK(test.str() ==
             "GELMNT1 +1.000000000e+00+6.000000000e+00+2.400000000e+01+0.000000000e+00\n"
@@ -132,7 +132,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
 
    SECTION("GELMNT1 OUT (FQUS)") {
       long ELNOX(1), ELNO(6);
-      elements::el_types ELTYP(elements::FQUS_FFQ);
+      elements::el_types ELTYP(elements::el_types::FQUS_FFQ);
       long ELTYAD(0);
       std::vector<long> NODIN({1, 6, 4, 2});
 
@@ -145,7 +145,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
 
    SECTION("GELMNT1 OUT (FTRS)") {
       long ELNOX(1), ELNO(6);
-      elements::el_types ELTYP(elements::FTRS_FFTR);
+      elements::el_types ELTYP(elements::el_types::FTRS_FFTR);
       long ELTYAD(0);
       std::vector<long> NODIN({1, 6, 4});
 
@@ -158,7 +158,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
 
    SECTION("GELMNT1 OUT (ILST)") {
       long ELNOX(12), ELNO(36);
-      elements::el_types ELTYP(elements::ILST);
+      elements::el_types ELTYP(elements::el_types::ILST);
       long ELTYAD(0);
       std::vector<long> NODIN({1, 6, 4, 2, 13, 22});
 
@@ -172,7 +172,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
 
    SECTION("GELMNT1 OUT (BEAS)") {
       long ELNOX(12), ELNO(36);
-      elements::el_types ELTYP(elements::BEAS);
+      elements::el_types ELTYP(elements::el_types::BEAS);
       long ELTYAD(0);
       std::vector<long> NODIN({1, 6});
 
@@ -185,7 +185,7 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
 
    SECTION("GELMNT1 OUT (BEAS) (ELTYAD default)") {
       long ELNOX(12), ELNO(36);
-      elements::el_types ELTYP(elements::BEAS);
+      elements::el_types ELTYP(elements::el_types::BEAS);
       std::vector<long> NODIN({1, 6});
 
       gelmnt1 probe(ELNOX, ELNO, ELTYP, NODIN);
@@ -210,7 +210,7 @@ TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 6);
-      CHECK(probe.ELTYP == elements::FQUS_FFQ);
+      CHECK(probe.ELTYP == elements::el_types::FQUS_FFQ);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({1, 6, 4, 2}));
    }
@@ -225,7 +225,7 @@ TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 6);
-      CHECK(probe.ELTYP == elements::FTRS_FFTR);
+      CHECK(probe.ELTYP == elements::el_types::FTRS_FFTR);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({1, 6, 4}));
 }
@@ -241,7 +241,7 @@ TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
 
       CHECK(probe.ELNOX == 12);
       CHECK(probe.ELNO == 36);
-      CHECK(probe.ELTYP == elements::ILST);
+      CHECK(probe.ELTYP == elements::el_types::ILST);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({1, 6, 4, 2, 13, 22}));
    }
@@ -256,7 +256,7 @@ TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
 
       CHECK(probe.ELNOX == 12);
       CHECK(probe.ELNO == 36);
-      CHECK(probe.ELTYP == elements::BEAS);
+      CHECK(probe.ELTYP == elements::el_types::BEAS);
       CHECK(probe.ELTYAD == 0);
       CHECK(probe.NODIN == std::vector<long>({1, 6}));
    }

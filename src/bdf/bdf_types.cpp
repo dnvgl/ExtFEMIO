@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_types[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -42,19 +42,19 @@ namespace dnvgl {
 
             base::~base(void) {}
 
-            out_form_type base::out_form = SHORT;
+            out_form_type base::out_form = out_form_type::SHORT;
 
             imbue_helper::imbue_helper(const std::locale &loc) : base("") {
                conv.imbue(loc);
             }
 
-            bdf_types imbue_helper::type(void) const { return None; }
+            bdf_types imbue_helper::type(void) const { return bdf_types::None; }
 
             std::string imbue_helper::format(const void*) const { return "";}
 
             card::card(const std::string &name) : base(name) {}
 
-            bdf_types card::type(void) const {return None;}
+            bdf_types card::type(void) const {return bdf_types::None;}
 
             /// std::set input and output locale for conv and outp
             static imbue_helper _imbue_helper(std::locale::classic());
@@ -64,15 +64,15 @@ namespace dnvgl {
 
                outp << std::resetiosflags(std::ios::adjustfield);
                switch (out_form) {
-               case LONG:
+               case out_form_type::LONG:
                   outp << std::setiosflags(std::ios::left) << std::setfill(' ')
                        << std::setw(8) << (name + "*");
                   break;
-               case SHORT:
+               case out_form_type::SHORT:
                   outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
                        << std::setw(8) << name;
                   break;
-               case FREE:
+               case out_form_type::FREE:
                   outp << name;
                   break;
                }
@@ -82,17 +82,17 @@ namespace dnvgl {
 
             empty::empty(void) : base("<empty>") {}
 
-            bdf_types empty::type(void) const { return None; };
+            bdf_types empty::type(void) const { return bdf_types::None; };
 
             std::string empty::format(const void* d) const {
                std::ostringstream outp;
 
                switch (out_form) {
-               case LONG:
-               case SHORT:
-                  outp << std::setfill(' ') << std::setw(out_form) << " ";
+               case out_form_type::LONG:
+               case out_form_type::SHORT:
+                  outp << std::setfill(' ') << std::setw(long(out_form)) << " ";
                   break;
-               case FREE:
+               case out_form_type::FREE:
                   break;
                }
                return outp.str();

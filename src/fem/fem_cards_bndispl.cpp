@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_bndispl[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -117,7 +117,7 @@ namespace dnvgl {
                        RDISP, IDISP) {}
 
             const dnvgl::extfem::fem::cards::types
-            bndispl::card_type(void) const {return BNDISPL;}
+            bndispl::card_type(void) const {return types::BNDISPL;}
 
             std::ostream &bndispl::put(std::ostream& os) const {
                if (this->LLC == -1) return os;

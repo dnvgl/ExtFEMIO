@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_header_exec_control_cend[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif

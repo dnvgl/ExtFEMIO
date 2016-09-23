@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_cards_crod[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -39,14 +39,14 @@ namespace dnvgl {
 
          namespace cards {
 
-            const entry_type<long> crod::form_EID(
-               "EID", bdf::type_bounds::bound<long>(&cl1));
+            // const entry_type<long> crod::form_EID(
+            //    "EID", bdf::type_bounds::bound<long>(&cl1));
             const entry_type<long> crod::form_PID("PID");
             const entry_type<long> crod::form_G1("G1");
             const entry_type<long> crod::form_G2("G2");
 
             crod::crod(std::list<std::string> const &inp) :
-               __base::card(inp) {
+               __base::element(inp) {
                this->read(inp);
             }
 
@@ -66,7 +66,7 @@ namespace dnvgl {
                   form_G2.set_value(G2, *(pos++));
                   form_G1.set_value(G1, *(pos++));
                   form_PID.set_value(PID, *(pos++));
-                  form_EID.set_value(EID, *pos);
+                  // form_EID.set_value(EID, *pos);
                   break;
                default:
                   throw errors::parse_error(

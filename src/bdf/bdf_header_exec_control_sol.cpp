@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_bdf_header_exec_control_sol[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -48,60 +48,60 @@ namespace dnvgl {
                            Linear Steady State Heat Transfer
                            Alternate Reduction
                            Inertia Relief */
-                  case 101: return SESTATIC;
+                  case 101: return sol_no_type::SESTATIC;
                      /// Normal Modes
-                  case 103: return SEMODES;
+                  case 103: return sol_no_type::SEMODES;
                      /** Buckling with options:
                            Static Analysis
                            Alternate Reduction
                            Inertia Relief */
-                  case 105: return SEBUCKL;
+                  case 105: return sol_no_type::SEBUCKL;
                      /// Nonlinear or Linear Statics
-                  case 106: return NLSTATIC;
+                  case 106: return sol_no_type::NLSTATIC;
                      /// Direct Complex Eigenvalues
-                  case 107: return SEDCEIG;
+                  case 107: return sol_no_type::SEDCEIG;
                      /// Direct Frequency Response
-                  case 108: return SEDFREQ;
+                  case 108: return sol_no_type::SEDFREQ;
                      /// Direct Transient Response
-                  case 109: return SEDTRAN;
+                  case 109: return sol_no_type::SEDTRAN;
                      /// Modal Complex Eigenvalues
-                  case 110: return SEMCEIG;
+                  case 110: return sol_no_type::SEMCEIG;
                      /// Modal Frequency Response
-                  case 111: return SEMFREQ;
+                  case 111: return sol_no_type::SEMFREQ;
                      /// Modal Transient Response
-                  case 112: return SEMTRAN;
+                  case 112: return sol_no_type::SEMTRAN;
                      /** Cyclic Statics with Option:
                            Alternate Reduction */
-                  case 114: return CYCSTATX;
+                  case 114: return sol_no_type::CYCSTATX;
                      /// Cyclic Normal Modes
-                  case 115: return CYCMODE;
+                  case 115: return sol_no_type::CYCMODE;
                      /// Cyclic Buckling
-                  case 116: return CYCBUCKL;
+                  case 116: return sol_no_type::CYCBUCKL;
                      /// Cyclic Direct Frequency Response
-                  case 118: return CYCFREQ;
+                  case 118: return sol_no_type::CYCFREQ;
                      /// Nonlinear or Linear Transient Response
-                  case 129: return NLTRAN;
+                  case 129: return sol_no_type::NLTRAN;
                      /// Static Aeroelastic Response
-                  case 144: return AESTAT;
+                  case 144: return sol_no_type::AESTAT;
                      /// Aerodynamic Flutter
-                  case 145: return SEFLUTTR;
+                  case 145: return sol_no_type::SEFLUTTR;
                      /// Aeroelastic Response
-                  case 146: return SEAERO;
+                  case 146: return sol_no_type::SEAERO;
                      /** Static Structural and/or Steady State Heat Transfer Analysis
                          with Options:
                            Linear or Nonlinear Analysis */
-                  case 153: return NLSCSH;
+                  case 153: return sol_no_type::NLSCSH;
                      /** Transient Structural and/or Transient Heat Transfer Analysis
                          with Options:
                            Linear or Nonlinear Analysis */
-                  case 159: return NLTCSH;
+                  case 159: return sol_no_type::NLTCSH;
                      /** Database Transfer, “Output Description” on page 373 of the
                          MSC.Nastran Reference Guide. */
-                  case 190: return DBTRANS;
+                  case 190: return sol_no_type::DBTRANS;
                      /// Design Optimization
-                  case 200: return DESOPT;
+                  case 200: return sol_no_type::DESOPT;
                      /// Nonlinear static and transient analysis
-                  case 400: return NONLIN;
+                  case 400: return sol_no_type::NONLIN;
                   default:
                      {
                         std::ostringstream msg("invalid solution value ",
@@ -114,7 +114,7 @@ namespace dnvgl {
                }
 
                long sol::sol_no_type_conv::to_long(sol::sol_no_type const &inp) {
-                  return +inp;
+                  return long(inp);
                }
             }
          }

@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   const char cID_fem_cards_date[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -103,7 +103,7 @@ namespace dnvgl {
             }
 
             const types
-            date::card_type(void) const { return DATE; };
+            date::card_type(void) const { return types::DATE; };
 
             std::ostream &date::put(std::ostream& os) const {
                if (this->TYPE == -1) return os;
