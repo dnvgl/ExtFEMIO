@@ -184,6 +184,56 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n"
             "        \n");
    }
+
+   SECTION("call (simple)") {
+      tdload probe;
+      test << *probe(4, 123, 122, "1234567890123456789012");
+      CHECK(test.str() ==
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
+            "        1234567890123456789012\n");
+   }
+
+   SECTION("call (calc internal values)") {
+      tdload probe;
+      test << *probe(123, "1234567890123456789012");
+      CHECK(test.str() ==
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
+            "        1234567890123456789012\n");
+   }
+
+   SECTION("call (with comment)") {
+      std::vector<std::string> comments(2);
+      comments[0] = "test";
+      comments[1] = "123456789112345678921234567893123";
+      tdload probe;
+      test << *probe(4, 123, 122, 233, "1234567890123456789012", comments);
+      CHECK(test.str() ==
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
+            "        1234567890123456789012\n"
+            "        test                             \n"
+            "        123456789112345678921234567893123\n");
+   }
+
+   SECTION("call (with comment (calc internal values))") {
+      std::vector<std::string> comments(2);
+      comments[0] = "test";
+      comments[1] = "123456789112345678921234567893123";
+      tdload probe;
+      test << *probe(123, "1234567890123456789012", comments);
+      CHECK(test.str() ==
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
+            "        1234567890123456789012\n"
+            "        test                             \n"
+            "        123456789112345678921234567893123\n");
+   }
+
+   SECTION("call (empty comment (calc internal values))") {
+      tdload probe;
+      test << *probe(123, "");
+      CHECK(test.str() ==
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n"
+            "        \n");
+   }
 }
 
 TEST_CASE("FEM TDLOAD conversion from own output.", "[fem_tdload,in/out]") {

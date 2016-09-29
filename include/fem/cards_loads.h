@@ -129,15 +129,31 @@ namespace dnvgl {
 
                tdload(long const &ILREF,
                       std::string const &SET_NAME,
-                      std::vector<std::string> const &CONT);
+                      std::vector<std::string> const &CONT={});
 
                tdload(long const &NFIELD,
                       long const &ILREF,
                       long const &CODNAM,
                       std::string const &SET_NAME);
 
-               tdload(long const &ILREF,
-                      std::string const &SET_NAME);
+               __base::card *operator() (
+                  long const &NFIELD,
+                  long const &ILREF,
+                  long const &CODNAM,
+                  long const &CODTXT,
+                  std::string const &SET_NAME,
+                  std::vector<std::string> const &CONT);
+
+               __base::card *operator() (
+                  long const &ILREF,
+                  std::string const &SET_NAME,
+                  std::vector<std::string> const &CONT={});
+
+               __base::card *operator() (
+                  long const &NFIELD,
+                  long const &ILREF,
+                  long const &CODNAM,
+                  std::string const &SET_NAME);
 
                const dnvgl::extfem::fem::cards::types
                card_type(void) const;
