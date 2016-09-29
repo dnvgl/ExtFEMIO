@@ -77,12 +77,8 @@ namespace dnvgl {
                this->S = *S;
                if (Si)
                   copy(Si->begin(), Si->end(), back_inserter(this->Si));
-               else
-                  this->Si.clear();
                if (Li)
                   copy(Li->begin(), Li->end(), back_inserter(this->Li));
-               else
-                  this->Li.clear();
                return this;
             }
 
