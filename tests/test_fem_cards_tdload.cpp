@@ -237,6 +237,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
 
    SECTION("call (combined)") {
       tdload probe;
+      test << probe;
       test << *probe(4, 123, 122, "1234567890123456789012");
       test << *probe(123, "1234567890123456789012");
       std::vector<std::string> comments(2);
@@ -245,6 +246,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       test << *probe(4, 123, 122, 233, "1234567890123456789012", comments);
       test << *probe(123, "1234567890123456789012", comments);
       test << *probe(123, "");
+      test << probe;
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
             "        1234567890123456789012\n"
@@ -258,6 +260,8 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
             "        1234567890123456789012\n"
             "        test                             \n"
             "        123456789112345678921234567893123\n"
+            "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n"
+            "        \n"
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n"
             "        \n");
    }

@@ -138,6 +138,58 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
          "        Input  : \\test_01.bdt                           \n"
          "        Log    : \\test_01.txt                           \n");
    }
+
+   SECTION("call (simple)") {
+      text probe;
+      test << *probe(0, 0, 4, 72, CONT);
+      CHECK(test.str() ==
+         //        1         2         3         4         5         6         7
+         // 3456789012345678901234567890123456789012345678901234567890123456789012
+         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
+         "        CONVERSION DETAILS:                                             \n"
+         "        Msc Nastran File Format -> Sesam Interface File.                \n"
+         "        Input  : \\test_01.bdt                                           \n"
+         "        Log    : \\test_01.txt                                           \n");
+   }
+
+   SECTION("call (simple (auto dim))") {
+      text probe;
+      test << *probe(0, 0, CONT);
+      CHECK(test.str() ==
+         //        1         2         3         4         5         6         7
+         // 3456789012345678901234567890123456789012345678901234567890123456789012
+         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+         "        CONVERSION DETAILS:                             \n"
+         "        Msc Nastran File Format -> Sesam Interface File.\n"
+         "        Input  : \\test_01.bdt                           \n"
+         "        Log    : \\test_01.txt                           \n");
+   }
+
+   SECTION("call (multiple)") {
+      text probe;
+      test << probe;
+      test << *probe(0, 0, 4, 72, CONT);
+      test << *probe(0, 0, CONT);
+      test << probe;
+      CHECK(test.str() ==
+         //        1         2         3         4         5         6         7
+         // 3456789012345678901234567890123456789012345678901234567890123456789012
+         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
+         "        CONVERSION DETAILS:                                             \n"
+         "        Msc Nastran File Format -> Sesam Interface File.                \n"
+         "        Input  : \\test_01.bdt                                           \n"
+         "        Log    : \\test_01.txt                                           \n"
+         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+         "        CONVERSION DETAILS:                             \n"
+         "        Msc Nastran File Format -> Sesam Interface File.\n"
+         "        Input  : \\test_01.bdt                           \n"
+         "        Log    : \\test_01.txt                           \n"
+         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+         "        CONVERSION DETAILS:                             \n"
+         "        Msc Nastran File Format -> Sesam Interface File.\n"
+         "        Input  : \\test_01.bdt                           \n"
+         "        Log    : \\test_01.txt                           \n");
+   }
 }
 
 TEST_CASE("FEM TEXT conversion from own output.", "[fem_text,in/out]") {

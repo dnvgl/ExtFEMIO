@@ -2855,6 +2855,15 @@ per record.
                text(long const &TYPE, long const &SUBTYPE,
                     std::vector<std::string> const &CONT);
 
+               __base::card const *operator() (
+                  long const &TYPE, long const &SUBTYPE,
+                  long const &NRECS, long const &NBYTE,
+                  std::vector<std::string> const &CONT);
+
+               __base::card const *operator() (
+                  long const &TYPE, long const &SUBTYPE,
+                  std::vector<std::string> const &CONT);
+
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 

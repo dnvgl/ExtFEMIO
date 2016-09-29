@@ -83,6 +83,7 @@ namespace dnvgl {
             text::text(const long &TYPE, const long &SUBTYPE,
                        const long &NRECS, const long &NBYTE,
                        const std::vector<std::string> &CONT) :
+               card(),
                TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
                NBYTE(NBYTE), CONT(CONT) {
                for (auto &p : this->CONT)
@@ -100,6 +101,36 @@ namespace dnvgl {
                for (auto &p : this->CONT)
                   p.resize(NBYTE, ' ');
                NBYTE += 8;
+            }
+
+            __base::card const *text::operator() (
+               const long &TYPE, const long &SUBTYPE,
+               const long &NRECS, const long &NBYTE,
+               const std::vector<std::string> &CONT) {
+               this->TYPE = TYPE;
+               this->SUBTYPE = SUBTYPE;
+               this->NRECS = NRECS;
+               this->NBYTE = NBYTE;
+               this->CONT = CONT;
+               for (auto &p : this->CONT)
+                  p.resize(NBYTE-8, ' ');
+               return this;
+            }
+
+            __base::card const *text::operator() (
+               const long &TYPE, const long &SUBTYPE,
+               const std::vector<std::string> &CONT) {
+               this->TYPE = TYPE;
+               this->SUBTYPE = SUBTYPE;
+               this->CONT = CONT;
+               NRECS = static_cast<long>(this->CONT.size());
+               NBYTE = 0;
+               for (auto &p : this->CONT)
+                  NBYTE = std::max(NBYTE, (long)p.size());
+               for (auto &p : this->CONT)
+                  p.resize(NBYTE, ' ');
+               NBYTE += 8;
+               return this;
             }
 
             const types
