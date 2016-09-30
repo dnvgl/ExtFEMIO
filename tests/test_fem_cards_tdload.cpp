@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_fem_cards_tdload[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -187,7 +187,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
 
    SECTION("call (simple)") {
       tdload probe;
-      test << *probe(4, 123, 122, "1234567890123456789012");
+      test << probe(4, 123, 122, "1234567890123456789012");
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
             "        1234567890123456789012\n");
@@ -195,7 +195,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
 
    SECTION("call (calc internal values)") {
       tdload probe;
-      test << *probe(123, "1234567890123456789012");
+      test << probe(123, "1234567890123456789012");
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"
             "        1234567890123456789012\n");
@@ -206,7 +206,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdload probe;
-      test << *probe(4, 123, 122, 233, "1234567890123456789012", comments);
+      test << probe(4, 123, 122, 233, "1234567890123456789012", comments);
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
             "        1234567890123456789012\n"
@@ -219,7 +219,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
       tdload probe;
-      test << *probe(123, "1234567890123456789012", comments);
+      test << probe(123, "1234567890123456789012", comments);
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n"
             "        1234567890123456789012\n"
@@ -229,7 +229,7 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
 
    SECTION("call (empty comment (calc internal values))") {
       tdload probe;
-      test << *probe(123, "");
+      test << probe(123, "");
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.000000000e+02+0.000000000e+00\n"
             "        \n");
@@ -238,14 +238,14 @@ TEST_CASE("FEM TDLOAD types output.", "[fem_tdload,out]" ) {
    SECTION("call (combined)") {
       tdload probe;
       test << probe;
-      test << *probe(4, 123, 122, "1234567890123456789012");
-      test << *probe(123, "1234567890123456789012");
+      test << probe(4, 123, 122, "1234567890123456789012");
+      test << probe(123, "1234567890123456789012");
       std::vector<std::string> comments(2);
       comments[0] = "test";
       comments[1] = "123456789112345678921234567893123";
-      test << *probe(4, 123, 122, 233, "1234567890123456789012", comments);
-      test << *probe(123, "1234567890123456789012", comments);
-      test << *probe(123, "");
+      test << probe(4, 123, 122, 233, "1234567890123456789012", comments);
+      test << probe(123, "1234567890123456789012", comments);
+      test << probe(123, "");
       test << probe;
       CHECK(test.str() ==
             "TDLOAD  +4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n"

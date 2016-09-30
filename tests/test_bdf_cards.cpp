@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_bdf_cards[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif

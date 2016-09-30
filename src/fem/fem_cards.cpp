@@ -11,7 +11,7 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards[]
+   char const cID_fem_cards[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -25,24 +25,24 @@ namespace {
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
+char static THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   const char initVals[3] = { '+', '*', ',' };
+   char const initVals[3] = { '+', '*', ',' };
 
-   const void _stderr_report(std::string const &msg) {
+   void const _stderr_report(std::string const &msg) {
       std::cerr << msg << std::endl;
    }
 
-   const void _stdout_report(std::string const &msg) {
+   void const _stdout_report(std::string const &msg) {
       std::cout << msg << std::endl;
    }
 
    using namespace dnvgl::extfem::fem;
 
-   const size_t map_pair_entries = 37;
-   const std::pair<std::string, cards::types> map_pairs[map_pair_entries] = {
+   size_t const map_pair_entries = 37;
+   std::pair<std::string, cards::types> const map_pairs[map_pair_entries] = {
       // UNKNOWN,
       std::pair<std::string, cards::types>("DATE", cards::types::DATE),
       std::pair<std::string, cards::types>("GCOORD", cards::types::GCOORD),
@@ -84,208 +84,204 @@ namespace {
    };
 }
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
+using namespace dnvgl::extfem;
+using namespace fem;
+using namespace cards;
 
-            const void(*note_report)(std::string const &) = &_stdout_report;
-            const void(*info_report)(std::string const &) = &_stderr_report;
-            const void(*warn_report)(std::string const &) = &_stderr_report;
-            const void(*error_report)(std::string const &) = &_stderr_report;
+void const (*cards::note_report)(std::string const &) = &_stdout_report;
+void const (*cards::info_report)(std::string const &) = &_stderr_report;
+void const (*cards::warn_report)(std::string const &) = &_stderr_report;
+void const (*cards::error_report)(std::string const &) = &_stderr_report;
 
-            unknown::unknown(std::list<std::string> const &inp) :
-               __base::card(inp), content(inp) {};
+unknown::unknown(std::list<std::string> const &inp) :
+   cards::__base::card(inp), content(inp) {};
 
-            const types
-            unknown::card_type(void) const { return types::UNKNOWN; }
+cards::types const
+unknown::card_type(void) const { return cards::types::UNKNOWN; }
 
-            std::ostream &unknown::put(std::ostream &os) const {
-               throw errors::error("can't write UNKNOWN.");
-               return os;
-            }
+std::ostream &unknown::put(std::ostream &os) const {
+   throw errors::error("can't write UNKNOWN.");
+   return os;
+}
 
-            const std::map<std::string, types>
-               cardtype_map(map_pairs, map_pairs + map_pair_entries);
+std::map<std::string, cards::types> const
+cardtype_map(map_pairs, map_pairs + map_pair_entries);
 
-            namespace __base {
-               card::card(std::list<std::string> const &inp) {}
-
-               card::card() {}
-
-               fem::types::empty const card::empty = fem::types::empty();
-
-               fem::types::card const card::head = fem::types::card("<DUMMY>");
+cards::__base::card::card(std::list<std::string> const &inp) {}
 
 
-               void
-               card::card_split(std::list<std::string> const &inp, std::list<std::string> &res) {
-                  std::string head;
+cards::__base::card::card() {}
 
-                  bool first = true;
+fem::types::empty const cards::__base::card::empty = fem::types::empty();
 
-                  res.clear();
+fem::types::card const cards::__base::card::head = fem::types::card("<DUMMY>");
 
-                  for (auto &pos : inp) {
-                     head = extfem::string::string(pos.substr(0, 8)).trim();
-                     if (first)
-                        res.push_back(string::string(head).trim("\t\n"));
-                     std::string tmp(string::string(pos).trim("\t\n"));
-                     tmp.resize(80, ' ');
-                     tmp = tmp.substr(8);
-                     for (int i=0; i<4; ++i)
-                        res.push_back(tmp.substr(i*16, 16));
-                     first = false;
-                  }
-               }
 
-               __base::beam_prop::beam_prop(std::list<std::string> const &inp) :
-                  card(inp) {}
+void cards::__base::card::card_split(
+   std::list<std::string> const &inp, std::list<std::string> &res) {
+   std::string head;
 
-               __base::beam_prop::beam_prop() :
-                  __base::beam_prop(-1) {}
+   bool first = true;
 
-               __base::beam_prop::beam_prop(long const &GEONO) :
-                  card(), GEONO(GEONO) {}
+   res.clear();
 
-               const dnvgl::extfem::fem::types::entry_type<long> __base::beam_prop::_form_GEONO("GEONO");
-
-               __base::material::material(std::list<std::string> const &inp) :
-                  card(inp) {}
-
-               __base::material::material() :
-                  __base::material(-1) {}
-
-               __base::material::material(long const &MATNO) :
-                  card(), MATNO(MATNO) {}
-
-               const dnvgl::extfem::fem::types::entry_type<long> __base::material::_form_MATNO("MATNO");
-            }
-
-            void
-            dispatch(std::list<std::string> const &inp, std::unique_ptr<__base::card> &res) {
-
-               try {
-                  std::string key(inp.front());
-                  switch (cardtype_map.at(key)) {
-                  case types::DATE:
-                     res = std::make_unique<fem::cards::date>(inp);
-                     break;
-                  case types::GCOORD:
-                     res = std::make_unique<fem::cards::gcoord>(inp);
-                     break;
-                  case types::GNODE:
-                     res = std::make_unique<fem::cards::gnode>(inp);
-                     break;
-                  case types::GBARM:
-                     res = std::make_unique<fem::cards::gbarm>(inp);
-                     break;
-                  case types::GBEAMG:
-                     res = std::make_unique<fem::cards::gbeamg>(inp);
-                     break;
-                  case types::GECCEN:
-                     res = std::make_unique<fem::cards::geccen>(inp);
-                     break;
-                  case types::GELTH:
-                     res = std::make_unique<fem::cards::gelth>(inp);
-                     break;
-                  case types::GIORH:
-                     res = std::make_unique<fem::cards::giorh>(inp);
-                     break;
-                  case types::GLSEC:
-                     res = std::make_unique<fem::cards::glsec>(inp);
-                     break;
-                  case types::GPIPE:
-                     res = std::make_unique<fem::cards::gpipe>(inp);
-                     break;
-                  case types::GUSYI:
-                     res = std::make_unique<fem::cards::gusyi>(inp);
-                     break;
-                  case types::BELFIX:
-                     res = std::make_unique<fem::cards::belfix>(inp);
-                     break;
-                  case types::IDENT:
-                     res = std::make_unique<fem::cards::ident>(inp);
-                     break;
-                  case types::IEND:
-                     res = std::make_unique<fem::cards::iend>(inp);
-                     break;
-                  case types::GELMNT1:
-                     res = std::make_unique<fem::cards::gelmnt1>(inp);
-                     break;
-                  case types::GELREF1:
-                     res = std::make_unique<fem::cards::gelref1>(inp);
-                     break;
-                  case types::BLDEP:
-                     res = std::make_unique<fem::cards::bldep>(inp);
-                     break;
-                  case types::BNBCD:
-                     res = std::make_unique<fem::cards::bnbcd>(inp);
-                     break;
-                  case types::BNDISPL:
-                     res = std::make_unique<fem::cards::bndispl>(inp);
-                     break;
-                  case types::BNLOAD:
-                     res = std::make_unique<fem::cards::bnload>(inp);
-                     break;
-                  case types::MGSPRNG:
-                     res = std::make_unique<fem::cards::mgsprng>(inp);
-                     break;
-                  case types::GSETMEMB:
-                     res = std::make_unique<fem::cards::gsetmemb>(inp);
-                     break;
-                  case types::GUNIVEC:
-                     res = std::make_unique<fem::cards::gunivec>(inp);
-                     break;
-                  case types::MISOSEL:
-                     res = std::make_unique<fem::cards::misosel>(inp);
-                     break;
-                  case types::MORSMEL:
-                     res = std::make_unique<fem::cards::morsmel>(inp);
-                     break;
-                  case types::TEXT:
-                     res = std::make_unique<fem::cards::text>(inp);
-                     break;
-                  case types::TDSETNAM:
-                     res = std::make_unique<fem::cards::tdsetnam>(inp);
-                     break;
-                  case types::TDSUPNAM:
-                     res = std::make_unique<fem::cards::tdsupnam>(inp);
-                     break;
-                  case types::TDLOAD:
-                     res = std::make_unique<fem::cards::tdload>(inp);
-                     break;
-                  case types::BSELL:
-                     res = std::make_unique<fem::cards::bsell>(inp);
-                     break;
-                  case types::GELMNT2:
-                     res = std::make_unique<fem::cards::gelmnt2>(inp);
-                     break;
-                  case types::HSUPSTAT:
-                     res = std::make_unique<fem::cards::hsupstat>(inp);
-                     break;
-                  case types::HSUPTRAN:
-                     res = std::make_unique<fem::cards::hsuptran>(inp);
-                     break;
-                  case types::HIERARCH:
-                     res = std::make_unique<fem::cards::hierarch>(inp);
-                     break;
-                  case types::BEUSLO:
-                     res = std::make_unique<fem::cards::beuslo>(inp);
-                     break;
-                     // These are not real card types, they can't be returned
-                  case types::UNKNOWN:
-                     res = std::make_unique<fem::cards::unknown>(inp);
-                  }
-               } catch (std::out_of_range) {
-                  res = std::make_unique<fem::cards::unknown>(inp);
-               }
-            }
-         }
-      }
+   for (auto &pos : inp) {
+      head = extfem::string::string(pos.substr(0, 8)).trim();
+      if (first)
+         res.push_back(string::string(head).trim("\t\n"));
+      std::string tmp(string::string(pos).trim("\t\n"));
+      tmp.resize(80, ' ');
+      tmp = tmp.substr(8);
+      for (int i=0; i<4; ++i)
+         res.push_back(tmp.substr(i*16, 16));
+      first = false;
    }
 }
 
+cards::__base::beam_prop::beam_prop(std::list<std::string> const &inp) :
+   card(inp) {}
+
+cards::__base::beam_prop::beam_prop() :
+   __base::beam_prop(-1) {}
+
+cards::__base::beam_prop::beam_prop(long const &GEONO) :
+   card(), GEONO(GEONO) {}
+
+dnvgl::extfem::fem::types::entry_type<long> const
+cards::__base::beam_prop::_form_GEONO("GEONO");
+
+cards::__base::material::material(std::list<std::string> const &inp) :
+   card(inp) {}
+
+cards::__base::material::material() :
+   __base::material(-1) {}
+
+cards::__base::material::material(long const &MATNO) :
+   card(), MATNO(MATNO) {}
+
+dnvgl::extfem::fem::types::entry_type<long> const
+cards::__base::material::_form_MATNO("MATNO");
+
+void
+cards::dispatch(std::list<std::string> const &inp,
+                std::unique_ptr<cards::__base::card> &res) {
+
+   try {
+      std::string key(inp.front());
+      switch (cardtype_map.at(key)) {
+      case cards::types::DATE:
+         res = std::make_unique<fem::cards::date>(inp);
+         break;
+      case cards::types::GCOORD:
+         res = std::make_unique<fem::cards::gcoord>(inp);
+         break;
+      case cards::types::GNODE:
+         res = std::make_unique<fem::cards::gnode>(inp);
+         break;
+      case cards::types::GBARM:
+         res = std::make_unique<fem::cards::gbarm>(inp);
+         break;
+      case cards::types::GBEAMG:
+         res = std::make_unique<fem::cards::gbeamg>(inp);
+         break;
+      case cards::types::GECCEN:
+         res = std::make_unique<fem::cards::geccen>(inp);
+         break;
+      case cards::types::GELTH:
+         res = std::make_unique<fem::cards::gelth>(inp);
+         break;
+      case cards::types::GIORH:
+         res = std::make_unique<fem::cards::giorh>(inp);
+         break;
+      case cards::types::GLSEC:
+         res = std::make_unique<fem::cards::glsec>(inp);
+         break;
+      case cards::types::GPIPE:
+         res = std::make_unique<fem::cards::gpipe>(inp);
+         break;
+      case cards::types::GUSYI:
+         res = std::make_unique<fem::cards::gusyi>(inp);
+         break;
+      case cards::types::BELFIX:
+         res = std::make_unique<fem::cards::belfix>(inp);
+         break;
+      case cards::types::IDENT:
+         res = std::make_unique<fem::cards::ident>(inp);
+         break;
+      case cards::types::IEND:
+         res = std::make_unique<fem::cards::iend>(inp);
+         break;
+      case cards::types::GELMNT1:
+         res = std::make_unique<fem::cards::gelmnt1>(inp);
+         break;
+      case cards::types::GELREF1:
+         res = std::make_unique<fem::cards::gelref1>(inp);
+         break;
+      case cards::types::BLDEP:
+         res = std::make_unique<fem::cards::bldep>(inp);
+         break;
+      case cards::types::BNBCD:
+         res = std::make_unique<fem::cards::bnbcd>(inp);
+         break;
+      case cards::types::BNDISPL:
+         res = std::make_unique<fem::cards::bndispl>(inp);
+         break;
+      case cards::types::BNLOAD:
+         res = std::make_unique<fem::cards::bnload>(inp);
+         break;
+      case cards::types::MGSPRNG:
+         res = std::make_unique<fem::cards::mgsprng>(inp);
+         break;
+      case cards::types::GSETMEMB:
+         res = std::make_unique<fem::cards::gsetmemb>(inp);
+         break;
+      case cards::types::GUNIVEC:
+         res = std::make_unique<fem::cards::gunivec>(inp);
+         break;
+      case cards::types::MISOSEL:
+         res = std::make_unique<fem::cards::misosel>(inp);
+         break;
+      case cards::types::MORSMEL:
+         res = std::make_unique<fem::cards::morsmel>(inp);
+         break;
+      case cards::types::TEXT:
+         res = std::make_unique<fem::cards::text>(inp);
+         break;
+      case cards::types::TDSETNAM:
+         res = std::make_unique<fem::cards::tdsetnam>(inp);
+         break;
+      case cards::types::TDSUPNAM:
+         res = std::make_unique<fem::cards::tdsupnam>(inp);
+         break;
+      case cards::types::TDLOAD:
+         res = std::make_unique<fem::cards::tdload>(inp);
+         break;
+      case cards::types::BSELL:
+         res = std::make_unique<fem::cards::bsell>(inp);
+         break;
+      case cards::types::GELMNT2:
+         res = std::make_unique<fem::cards::gelmnt2>(inp);
+         break;
+      case cards::types::HSUPSTAT:
+         res = std::make_unique<fem::cards::hsupstat>(inp);
+         break;
+      case cards::types::HSUPTRAN:
+         res = std::make_unique<fem::cards::hsuptran>(inp);
+         break;
+      case cards::types::HIERARCH:
+         res = std::make_unique<fem::cards::hierarch>(inp);
+         break;
+      case cards::types::BEUSLO:
+         res = std::make_unique<fem::cards::beuslo>(inp);
+         break;
+         // These are not real card types, they can't be returned
+      case cards::types::UNKNOWN:
+         res = std::make_unique<fem::cards::unknown>(inp);
+      }
+   } catch (std::out_of_range) {
+      res = std::make_unique<fem::cards::unknown>(inp);
+   }
+}
 
 // Local Variables:
 // mode: c++

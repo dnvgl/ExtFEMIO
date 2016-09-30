@@ -62,6 +62,12 @@ namespace dnvgl {
                      std::vector<long> const &LLC,
                      std::vector<double> const &FACT);
 
+               __base::card const &operator()(
+                  long const &LC,
+                  long const &SUBNO,
+                  std::vector<long> const &LLC,
+                  std::vector<double> const &FACT);
+
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
@@ -230,7 +236,7 @@ bsell(
                        double const &T34,
                        std::vector<long> const &NOD);
 
-               const dnvgl::extfem::fem::cards::types
+               dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
                virtual std::ostream &put(std::ostream&) const;
@@ -317,7 +323,7 @@ through the superelement type number (`ISELTY`).
                         long const &RELOADC,
                         long const &COMPLC);
 
-               const dnvgl::extfem::fem::cards::types
+               dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
                virtual std::ostream &put(std::ostream&) const;
@@ -441,8 +447,7 @@ superelement transformation reference number, `ITREF`.
                hsuptran(long const &NFIELD,
                         long const &ITREF,
                         double const T[4][4]);
-
-               const dnvgl::extfem::fem::cards::types
+               dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
                virtual std::ostream &put(std::ostream&) const;
@@ -570,7 +575,7 @@ superelement transformation reference number, `ITREF`.
                         long const &IHPREF,
                         std::vector<long> const &IHSREF);
 
-               const dnvgl::extfem::fem::cards::types
+               dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
                virtual std::ostream &put(std::ostream&) const;
@@ -586,6 +591,6 @@ superelement transformation reference number, `ITREF`.
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // coding: utf-8
 // End:

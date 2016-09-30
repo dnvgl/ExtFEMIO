@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_bdf_cards_grav[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -69,9 +69,9 @@ TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
    std::ostringstream test;
 
    SECTION("reverse") {
-      long SID(2), CID(6), MB(1);
-      double A(2.9), N1(0.), N2(1.9), N3(0.);
-      grav probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+      long const SID(2), CID(6), MB(1);
+      double const A(2.9), N1(0.), N2(1.9), N3(0.);
+      grav const probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
       test << probe;
       CHECK(test.str() ==
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
@@ -79,9 +79,9 @@ TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
    }
 
    SECTION("reverse part") {
-      long SID(2), CID(6);
-      double A(2.9);
-      std::vector<double> N({0., 1.8, 0.});
+      long const SID(2), CID(6);
+      double const A(2.9);
+      std::vector<double> const N({0., 1.8, 0.});
       grav probe(&SID, &CID, &A, &N);
       test << probe;
       CHECK(test.str() ==
@@ -90,8 +90,8 @@ TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
    }
 
    SECTION("failed part") {
-      long SID(2), CID(6);
-      double A(2.9);
+      long const SID(2), CID(6);
+      double const A(2.9);
       std::vector<double> N({0., 1.8, 0., 4.});
       CHECK_THROWS(
          grav probe(&SID, &CID, &A, &N));
@@ -102,22 +102,25 @@ TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
       double A(3.), N1(4.), N2(5), N3(6.);
       std::vector<double> N({8., 9., 10.});
       grav probe;
-      test << *probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+      test << probe;
+      test << probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
       SID++;
       CID++;
       A += 4.;
-      test << *probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+      test << probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
       SID++;
-      test << *probe(&SID, &CID, &A, &N1, &N2, &N3);
+      test << probe(&SID, &CID, &A, &N1, &N2, &N3);
       SID++;
-      test << *probe(&SID, &CID, &A, &N);
+      test << probe(&SID, &CID, &A, &N);
       SID++;
-      test << *probe(&SID, &CID, &A, &N, &MB);
+      test << probe(&SID, &CID, &A, &N, &MB);
+      test << probe;
       CHECK(test.str() ==
             "GRAV           1       23.000+004.000+005.000+006.000+00       7\n"
             "GRAV           2       37.000+004.000+005.000+006.000+00       7\n"
             "GRAV           3       37.000+004.000+005.000+006.000+00\n"
             "GRAV           4       37.000+008.000+009.000+001.000+01\n"
+            "GRAV           5       37.000+008.000+009.000+001.000+01       7\n"
             "GRAV           5       37.000+008.000+009.000+001.000+01       7\n");
    }
 

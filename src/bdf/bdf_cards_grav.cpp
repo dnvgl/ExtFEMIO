@@ -10,7 +10,7 @@
 
 // ID:
 namespace {
-   const char cID_bdf_cards_grav[]
+   char const cID_bdf_cards_grav[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -30,144 +30,139 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   static const long cl0 = 0;
-   static const long cl1 = 1;
+   long static const cl0 = 0;
+   long static const cl1 = 1;
 }
 
 using dnvgl::extfem::bdf::types::entry_type;
 using dnvgl::extfem::bdf::types::entry_value;
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace cards {
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace cards;
 
-            const entry_type<long> grav::form_SID(
-               "SID", bdf::type_bounds::bound<long>(&cl1));
-            const entry_type<long> grav::form_CID(
-               "CID", bdf::type_bounds::bound<long>(&cl0));
-            const entry_type<double> grav::form_A("A");
-            const entry_type<double> grav::form_Ni("Ni");
-            const entry_type<long> grav::form_MB(
-               "MB",
-               bdf::type_bounds::bound<long>(nullptr, nullptr, &cl0));
+entry_type<long> const grav::form_SID(
+   "SID", bdf::type_bounds::bound<long>(&cl1));
+entry_type<long> const grav::form_CID(
+   "CID", bdf::type_bounds::bound<long>(&cl0));
+entry_type<double> const grav::form_A("A");
+entry_type<double> const grav::form_Ni("Ni");
+entry_type<long> const grav::form_MB(
+   "MB",
+   bdf::type_bounds::bound<long>(nullptr, nullptr, &cl0));
 
-            grav::grav(std::list<std::string> const &inp) :
-               card(inp) {
-               this->read(inp);
-            }
+grav::grav(std::list<std::string> const &inp) :
+   card(inp) {
+   this->read(inp);
+}
 
-            grav::grav() :
-               card(),
-               SID(), CID(), A(), N1(), N2(), N3(), MB() {}
+grav::grav() :
+   card(),
+   SID(), CID(), A(), N1(), N2(), N3(), MB() {}
 
-            grav::grav(const long *SID, const long *CID, const double *A,
-                       const double *N1, const double *N2, const double *N3,
-                       const long *MB/*=nullptr*/) :
-               card(),
-               SID(SID), CID(CID), A(A), N1(N1), N2(N2), N3(N3), MB(MB) {}
+grav::grav(long const *SID, long const *CID, double const *A,
+           double const *N1, double const *N2, double const *N3,
+           long const *MB/*=nullptr*/) :
+   card(),
+   SID(SID), CID(CID), A(A), N1(N1), N2(N2), N3(N3), MB(MB) {}
 
-            grav::grav(const long *SID, const long *CID, const double *A,
-                       const std::vector<double> *N,
-                       const long *MB/*=nullptr*/) :
-               grav(SID, CID, A, &(*N)[0], &(*N)[1], &(*N)[2], MB) {
-               if (N->size() != 3)
-                  throw errors::error("GRAV", "N requires 3 entries.");
-            }
+grav::grav(long const *SID, long const *CID, double const *A,
+           std::vector<double> const *N,
+           long const *MB/*=nullptr*/) :
+   grav(SID, CID, A, &(*N)[0], &(*N)[1], &(*N)[2], MB) {
+   if (N->size() != 3)
+      throw errors::error("GRAV", "N requires 3 entries.");
+}
 
-            __base::card const *grav::operator() (
-               long const *SID, long const *CID,
-               double const *A,
-               std::vector<double> const *N,
-               long const *MB/*=nullptr*/) {
-               this->SID = *SID;
-               this->CID = *CID;
-               this->A = *A;
-               this->N1 = (*N)[0];
-               if (N->size() > 1)
-                  this->N2 = (*N)[1];
-               else
-                  this->N2 = nullptr;
-               if (N->size() > 2)
-                  this->N3 = (*N)[2];
-               else
-                  this->N3 = nullptr;
-               if (MB)
-                  this->MB = *MB;
-               else
-                  this->MB = nullptr;
-               return this;
-            }
+cards::__base::card const &grav::operator() (
+   long const *SID, long const *CID,
+   double const *A,
+   std::vector<double> const *N,
+   long const *MB/*=nullptr*/) {
+   this->SID = *SID;
+   this->CID = *CID;
+   this->A = *A;
+   this->N1 = (*N)[0];
+   if (N->size() > 1)
+      this->N2 = (*N)[1];
+   else
+      this->N2 = nullptr;
+   if (N->size() > 2)
+      this->N3 = (*N)[2];
+   else
+      this->N3 = nullptr;
+   if (MB)
+      this->MB = *MB;
+   else
+      this->MB = nullptr;
+   return *this;
+}
 
-            __base::card const *grav::operator() (
-               long const *SID, long const *CID,
-               double const *A,
-               double const *N1, double const*N2, double const *N3,
-               long const *MB/*=nullptr*/) {
-               this->SID = *SID;
-               this->CID = *CID;
-               this->A = *A;
-               this->N1 = *N1;
-               this->N2 = *N2;
-               this->N3 = *N3;
-               if (MB)
-                  this->MB = *MB;
-               else
-                  this->MB = nullptr;
-               return this;
-            }
+cards::__base::card const &grav::operator() (
+   long const *SID, long const *CID,
+   double const *A,
+   double const *N1, double const*N2, double const *N3,
+   long const *MB/*=nullptr*/) {
+   this->SID = *SID;
+   this->CID = *CID;
+   this->A = *A;
+   this->N1 = *N1;
+   this->N2 = *N2;
+   this->N3 = *N3;
+   if (MB)
+      this->MB = *MB;
+   else
+      this->MB = nullptr;
+   return *this;
+}
 
-            bdf::types::card grav::head = bdf::types::card("GRAV");
+bdf::types::card grav::head = bdf::types::card("GRAV");
 
-            void grav::read(std::list<std::string> const &inp) {
-               auto pos = inp.begin();
+void grav::read(std::list<std::string> const &inp) {
+   auto pos = inp.begin();
 
-               if (pos == inp.end()) goto invalid;
-               ++pos;
-               if (pos == inp.end()) goto invalid;
-               form_SID.set_value(SID, *(pos++));
-               if (pos == inp.end()) goto invalid;
-               form_CID.set_value(CID, *(pos++));
-               if (pos == inp.end()) goto invalid;
-               form_A.set_value(A, *(pos++));
-               if (pos == inp.end()) goto invalid;
-               form_Ni.set_value(N1, *(pos++));
-               if (pos == inp.end()) goto invalid;
-               form_Ni.set_value(N2, *(pos++));
-               if (pos == inp.end()) goto invalid;
-               form_Ni.set_value(N3, *(pos++));
-               if (pos == inp.end()) goto invalid;
-               form_MB.set_value(MB, *(pos++));
-               goto end;
+   if (pos == inp.end()) goto invalid;
+   ++pos;
+   if (pos == inp.end()) goto invalid;
+   form_SID.set_value(SID, *(pos++));
+   if (pos == inp.end()) goto invalid;
+   form_CID.set_value(CID, *(pos++));
+   if (pos == inp.end()) goto invalid;
+   form_A.set_value(A, *(pos++));
+   if (pos == inp.end()) goto invalid;
+   form_Ni.set_value(N1, *(pos++));
+   if (pos == inp.end()) goto invalid;
+   form_Ni.set_value(N2, *(pos++));
+   if (pos == inp.end()) goto invalid;
+   form_Ni.set_value(N3, *(pos++));
+   if (pos == inp.end()) goto invalid;
+   form_MB.set_value(MB, *(pos++));
+   goto end;
 
-            invalid:
-               throw errors::parse_error("GRAV", "Illegal number of entries.");
-            end: ;
-            }
+ invalid:
+   throw errors::parse_error("GRAV", "Illegal number of entries.");
+ end: ;
+}
 
-            const types grav::card_type(void) const {
-               return types::GRAV;
-            }
+cards::types const grav::card_type(void) const {
+   return types::GRAV;
+}
 
-            void grav::collect_outdata(
-               std::list<std::unique_ptr<format_entry> > &res) const {
+void grav::collect_outdata(
+   std::list<std::unique_ptr<format_entry> > &res) const {
+   if (static_cast<long>(SID) <= 0) return;
+   res.push_back(format(grav::head));
 
-               res.push_back(format(grav::head));
+   res.push_back(format<long>(form_SID, SID));
+   res.push_back(format<long>(form_CID, CID));
+   res.push_back(format<double>(form_A, A));
+   res.push_back(format<double>(form_Ni, N1));
+   res.push_back(format<double>(form_Ni, N2));
+   res.push_back(format<double>(form_Ni, N3));
+   if (MB)
+      res.push_back(format<long>(form_MB, MB));
 
-               res.push_back(format<long>(form_SID, SID));
-               res.push_back(format<long>(form_CID, CID));
-               res.push_back(format<double>(form_A, A));
-               res.push_back(format<double>(form_Ni, N1));
-               res.push_back(format<double>(form_Ni, N2));
-               res.push_back(format<double>(form_Ni, N3));
-               if (MB)
-                  res.push_back(format<long>(form_MB, MB));
-
-               return;
-            }
-         }
-      }
-   }
+   return;
 }
 
 // Local Variables:

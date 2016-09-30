@@ -158,7 +158,7 @@ namespace dnvgl {
 
                protected:
 
-                  card const *operator() (
+                  __base::card const &operator() (
                      long const *EID, long const *PID,
                      long const *G1, long const *G2,
                      long const *G3, long const *G4,
@@ -168,7 +168,7 @@ namespace dnvgl {
                      double const *T1, double const *T2,
                      double const *T3, double const *T4);
 
-                  card const *operator() (
+                  __base::card const &operator() (
                      long const *EID, long const *PID,
                      long const *G1, long const *G2,
                      long const *G3, long const *G4,
@@ -202,14 +202,14 @@ namespace dnvgl {
 
             public:
 
-               ctria3(const std::list<std::string> &);
+               ctria3(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
-               virtual void read(const std::list<std::string> &);
+               virtual void read(std::list<std::string> const&);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *G1, long const *G2, long const *G3,
                   double const *THETA=nullptr,
@@ -218,7 +218,7 @@ namespace dnvgl {
                   double const *T1=nullptr, double const *T2=nullptr,
                   double const *T3=nullptr, double const *T4=nullptr);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *G1, long const *G2, long const *G3,
                   long const *MCID,
@@ -256,14 +256,14 @@ namespace dnvgl {
 
             public:
 
-               cquad4(const std::list<std::string> &);
+               cquad4(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
-               virtual void read(const std::list<std::string> &);
+               virtual void read(std::list<std::string> const&);
 
-               const card *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *G1, long const *G2,
                   long const *G3, long const *G4,
@@ -273,7 +273,7 @@ namespace dnvgl {
                   double const *T1=nullptr, double const *T2=nullptr,
                   double const *T3=nullptr, double const *T4=nullptr);
 
-               const card *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *G1, long const *G2,
                   long const *G3, long const *G4,
@@ -485,12 +485,12 @@ namespace dnvgl {
 
                cbeam(std::list<std::string> const &inp);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const { return types::CBEAM; };
 
-               virtual void read(const std::list<std::string> &);
+               virtual void read(std::list<std::string> const&);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   double const *X1,
@@ -503,7 +503,7 @@ namespace dnvgl {
                   double const *W2B=nullptr, double const *W3B=nullptr,
                   long const *SA=nullptr, long const *SB=nullptr);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   double const *X1,
@@ -516,7 +516,7 @@ namespace dnvgl {
                   double const *W2B=nullptr, double const *W3B=nullptr,
                   long const *SA=nullptr, long const *SB=nullptr);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   long const *G0,
@@ -527,7 +527,7 @@ namespace dnvgl {
                   double const *W2B=nullptr, double const *W3B=nullptr,
                   long const *SA=nullptr, long const *SB=nullptr);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   long const *G0,
@@ -591,9 +591,7 @@ namespace dnvgl {
 
             public:
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const {
-                  return types::CBAR;
-               };
+               dnvgl::extfem::bdf::cards::types const card_type(void) const;
 
                /** Flag to store whether direction node or direction
                    vector was std::set for cross section direction.
@@ -730,46 +728,49 @@ namespace dnvgl {
                */
                entry_value<double> W3B;
 
-               cbar(const std::list<std::string> &inp);
+               cbar(std::list<std::string> const &inp);
 
                cbar(
-                  const long *EID, const long *PID,
-                  const long *GA, const long *GB,
-                  const double *X1, const double *X2, const double *X3,
-                  const std::string *OFFT = nullptr,
-                  const std::list<int> *PA = nullptr,
-                  const std::list<int> *PB = nullptr,
-                  const double *W1A = nullptr, const double *W2A = nullptr,
-                  const double *W3A = nullptr, const double *W1B = nullptr,
-                  const double *W2B = nullptr, const double *W3B = nullptr);
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB,
+                  double const *X1, double const *X2, double const *X3,
+                  std::string const *OFFT = nullptr,
+                  std::list<int> const *PA = nullptr,
+                  std::list<int> const *PB = nullptr,
+                  double const *W1A = nullptr, double const *W2A = nullptr,
+                  double const *W3A = nullptr, double const *W1B = nullptr,
+                  double const *W2B = nullptr, double const *W3B = nullptr);
 
                cbar(
-                  const long *EID, const long *PID,
-                  const long *GA, const long *GB, const long *G0,
-                  const std::string *OFFT = nullptr,
-                  const std::list<int> *PA = nullptr, const std::list<int> *PB = nullptr,
-                  const double *W1A = nullptr, const double *W2A = nullptr,
-                  const double *W3A = nullptr, const double *W1B = nullptr,
-                  const double *W2B = nullptr, const double *W3B = nullptr);
+                  long const *EID, long const *PID,
+                  long const *GA, long const *GB, long const *G0,
+                  std::string const *OFFT = nullptr,
+                  std::list<int> const *PA = nullptr,
+                  std::list<int> const *PB = nullptr,
+                  double const *W1A = nullptr, double const *W2A = nullptr,
+                  double const *W3A = nullptr, double const *W1B = nullptr,
+                  double const *W2B = nullptr, double const *W3B = nullptr);
 
-               virtual void read(const std::list<std::string> &);
+               virtual void read(std::list<std::string> const &);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   long const *G0,
                   std::string const *OFFT=nullptr,
-                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  std::list<int> const *PA=nullptr,
+                  std::list<int> const *PB=nullptr,
                   double const *W1A=nullptr, double const *W2A=nullptr,
                   double const *W3A=nullptr, double const *W1B=nullptr,
                   double const *W2B=nullptr, double const *W3B=nullptr);
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *EID, long const *PID,
                   long const *GA, long const *GB,
                   double const *X1, double const *X2,double const *X3,
                   std::string const *OFFT=nullptr,
-                  std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                  std::list<int> const *PA=nullptr,
+                  std::list<int> const *PB=nullptr,
                   double const *W1A=nullptr, double const *W2A=nullptr,
                   double const *W3A=nullptr, double const *W1B=nullptr,
                   double const *W2B=nullptr, double const *W3B=nullptr);
@@ -820,15 +821,16 @@ namespace dnvgl {
                */
                entry_value<long> G2;
 
-               crod(const std::list<std::string> &inp);
+               crod(std::list<std::string> const &inp);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const { return types::CROD; };
 
-               virtual void read(const std::list<std::string> &);
+               virtual void read(std::list<std::string> const &);
 
-               const card *operator() (long const *EID, long const *PID,
-                                       long const *G1, long const *G2);
+               __base::card const &operator() (
+                  long const *EID, long const *PID,
+                  long const *G1, long const *G2);
 
             private:
 

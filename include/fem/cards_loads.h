@@ -136,7 +136,7 @@ namespace dnvgl {
                       long const &CODNAM,
                       std::string const &SET_NAME);
 
-               __base::card *operator() (
+               __base::card const &operator() (
                   long const &NFIELD,
                   long const &ILREF,
                   long const &CODNAM,
@@ -144,18 +144,18 @@ namespace dnvgl {
                   std::string const &SET_NAME,
                   std::vector<std::string> const &CONT);
 
-               __base::card *operator() (
+               __base::card const &operator() (
                   long const &ILREF,
                   std::string const &SET_NAME,
                   std::vector<std::string> const &CONT={});
 
-               __base::card *operator() (
+               __base::card const &operator() (
                   long const &NFIELD,
                   long const &ILREF,
                   long const &CODNAM,
                   std::string const &SET_NAME);
 
-               const dnvgl::extfem::fem::cards::types
+               dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
                virtual std::ostream &put(std::ostream&) const;
@@ -344,7 +344,7 @@ pressure in the local /z/-direction.
                       std::vector<double> const &RLOAD,
                       std::vector<double> const &ILOAD = {});
 
-               const dnvgl::extfem::fem::cards::types
+               dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
                virtual std::ostream &put(std::ostream&) const;

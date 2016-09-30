@@ -24,7 +24,7 @@
 
 // ID:
 namespace {
-   const char cID_fem_elements[]
+   char const cID_fem_elements[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -52,7 +52,7 @@ namespace dnvgl {
          namespace elements {
 
             void dispatch(
-               std::unique_ptr<__base::elem> &res, const cards::gelmnt1 *data) {
+               std::unique_ptr<__base::elem> &res, cards::gelmnt1 const *data) {
 
                switch (data->ELTYP) {
 {% for e in enum %}               case el_types::{{ e[0]|upper() }}: res = std::make_unique<{{ e[0]|lower() }}>(data); break;
@@ -177,11 +177,12 @@ namespace dnvgl {
                }
 
                cards::gelmnt1 elem::gelmnt1(void) const {
-                  return cards::gelmnt1(this->eleno,   // ELNOX
-                                        this->elident, // ELNO
-                                        this->get_type(),
-                                        this->el_add,  // ELTYAD
-                                        this->nodes);  // NODIN
+                  return cards::gelmnt1(
+                     this->eleno,   // ELNOX
+                     this->elident, // ELNO
+                     this->get_type(),
+                     this->el_add,  // ELTYAD
+                     this->nodes);  // NODIN
                }
 
                cards::gelref1 elem::gelref1(void) const {
@@ -243,7 +244,8 @@ namespace dnvgl {
                __base::elem(data) {}
 
             namespace __base {
-               std::ostream &operator<<(std::ostream &os, __base::elem const &data) {
+               std::ostream &operator<<(
+                  std::ostream &os, __base::elem const &data) {
                   if (data.elident < 0) return os;
                   os << data.gelmnt1();
                   os << data.gelref1();
@@ -298,14 +300,16 @@ namespace dnvgl {
 
             namespace {
                const size_t {{ elem }}_procs_len = {{ vals.procs|length() }};
-               el_processor {{ elem }}_procs[{{ elem }}_procs_len] = { {{ vals.procs|join(', ') }} };
+               el_processor {{ elem }}_procs[{{ elem }}_procs_len] = {
+                  {{ vals.procs|join(', ') }}
+               };
             }
 
             long {{ elem }}::nnodes(void) const {return {{ vals.nnodes }};}
 
             el_types {{ elem }}::get_type(void) const {return el_types::{{ elem|upper() }};}
 
-            const std::set<el_processor> {{ elem }}::processors(
+            std::set<el_processor> const {{ elem }}::processors(
                {{ elem }}_procs, {{ elem }}_procs+{{ elem }}_procs_len);
 
             {{ elem }}::{{ elem }}(void) : {{ vals.base }}() {}
@@ -331,11 +335,11 @@ namespace dnvgl {
                      strpoint_ref, section, fixations, eccentrities,
                      csys) {}
 
-            {{ elem }}::{{ elem }}(const cards::gelmnt1 *data) : {{ vals.base }}(data) {}
+            {{ elem }}::{{ elem }}(cards::gelmnt1 const *data) : {{ vals.base }}(data) {}
 
-            {{ elem }}::{{ elem }}(const cards::gelref1 *data) : {{ vals.base }}(data) {}
+            {{ elem }}::{{ elem }}(cards::gelref1 const *data) : {{ vals.base }}(data) {}
 
-            {{ elem }}::{{ elem }}(const __base::elem *data) : __base::{{ vals.base }}(data) {}{% endfor %}
+            {{ elem }}::{{ elem }}(__base::elem const *data) : __base::{{ vals.base }}(data) {}{% endfor %}
          }
       }
    }

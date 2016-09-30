@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_fem_cards_text[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -141,7 +141,7 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
 
    SECTION("call (simple)") {
       text probe;
-      test << *probe(0, 0, 4, 72, CONT);
+      test << probe(0, 0, 4, 72, CONT);
       CHECK(test.str() ==
          //        1         2         3         4         5         6         7
          // 3456789012345678901234567890123456789012345678901234567890123456789012
@@ -154,7 +154,7 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
 
    SECTION("call (simple (auto dim))") {
       text probe;
-      test << *probe(0, 0, CONT);
+      test << probe(0, 0, CONT);
       CHECK(test.str() ==
          //        1         2         3         4         5         6         7
          // 3456789012345678901234567890123456789012345678901234567890123456789012
@@ -168,8 +168,8 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
    SECTION("call (multiple)") {
       text probe;
       test << probe;
-      test << *probe(0, 0, 4, 72, CONT);
-      test << *probe(0, 0, CONT);
+      test << probe(0, 0, 4, 72, CONT);
+      test << probe(0, 0, CONT);
       test << probe;
       CHECK(test.str() ==
          //        1         2         3         4         5         6         7

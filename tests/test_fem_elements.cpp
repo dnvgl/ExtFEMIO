@@ -11513,5 +11513,5 @@ TEST_CASE("Output for GHEX163 elements.", "[fem_element_ghex163]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

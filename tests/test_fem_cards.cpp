@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_fem_cards[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -1131,8 +1131,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
                          38835, std::vector<long>({4, 4, 4, 4, 4, 4})));
       cards.push_back(std::make_unique<beuslo>(
                          1, 1, 0, 1, 0, 2,
-                         std::vector<double>({1.66046816e4, 3.86669189e3,
-                                  3.86368091e3, 1.62054932e4})));
+                         std::vector<double>(
+                            {1.66046816e4, 3.86669189e3,
+                             3.86368091e3, 1.62054932e4})));
       cards.push_back(std::make_unique<bnload>(
                          1, 0, 1, std::vector<double>({1.1, 1.2, 1.3})));
       cards.push_back(std::make_unique<tdsupnam>(

@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_bdf_cards_load[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -111,11 +111,14 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]" ) {
       std::list<long> Li({3, 0});
       Li.resize(1);
       load probe;
-      test << *probe(&SID, &S, &Si, &Li);
+      test << probe;
+      test << probe(&SID, &S, &Si, &Li);
       SID++;
-      test << *probe(&SID, &S, &Si, &Li);
+      test << probe(&SID, &S, &Si, &Li);
+      test << probe;
       CHECK(test.str() ==
             "LOAD           22.900+003.000+00       3\n"
+            "LOAD           32.900+003.000+00       3\n"
             "LOAD           32.900+003.000+00       3\n");
    }
 }

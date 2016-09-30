@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_bdf_cards_cmass2[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -140,12 +140,15 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
       double M(2.9);
       std::list<int> C1({1, 2, 3});
       cmass2 probe;
-      test << *probe(&EID, &M, &S1, &C1);
+      test << probe;
+      test << probe(&EID, &M, &S1, &C1);
       EID++;
-      test << *probe(&EID, &M, &S1, &C1);
+      test << probe(&EID, &M, &S1, &C1);
+      test << probe;
       CHECK(test.str() ==
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "CMASS2         22.900+00       6     123\n"
+            "CMASS2         32.900+00       6     123\n"
             "CMASS2         32.900+00       6     123\n");
    }
 }

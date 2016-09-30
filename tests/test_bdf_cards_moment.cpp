@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_bdf_cards_moment[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -101,20 +101,23 @@ TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]" ) {
       long SID(2), G(5), CID(6);
       double F(2.9), N1(0.), N2(1.9), N3(0.);
       moment probe;
-      test << *probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+      test << probe;
+      test << probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
       SID++;
       G++;
       CID++;
       F += 4.;
-      test << *probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+      test << probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
       SID++;
-      test << *probe(&SID, &G, &CID, &F, &N1, &N2);
+      test << probe(&SID, &G, &CID, &F, &N1, &N2);
       SID++;
-      test << *probe(&SID, &G, &CID, &F, &N1);
+      test << probe(&SID, &G, &CID, &F, &N1);
+      test << probe;
       CHECK(test.str() ==
             "MOMENT         2       5       62.900+00 0.00+001.900+00 0.00+00\n"
             "MOMENT         3       6       76.900+00 0.00+001.900+00 0.00+00\n"
             "MOMENT         4       6       76.900+00 0.00+001.900+00\n"
+            "MOMENT         5       6       76.900+00 0.00+00\n"
             "MOMENT         5       6       76.900+00 0.00+00\n");
    }
 }

@@ -78,7 +78,7 @@ namespace dnvgl {
 
                   virtual std::unique_ptr<format_entry> get_head(void) const = 0;
 
-                  __base::card const *operator() (
+                  __base::card const &operator() (
                      const long *SID, const long *G, const long *CID,
                      const double *F,
                      const double *N1, const double *N2=nullptr, const double *N3=nullptr);
@@ -283,7 +283,7 @@ Defines a scalar mass element without reference to a property entry.
                       long const *G1, std::list<int> const *C1,
                       long const *G2=nullptr, std::list<int> const *C2=nullptr);
 
-               __base::card const *operator() (
+               __base::card const &operator() (
                   long const *EID, double const *M,
                   long const *G1, std::list<int> const *C1,
                   long const *G2=nullptr, std::list<int> const *C2=nullptr);
@@ -371,7 +371,7 @@ reference to a property entry.
                cmass4(long const *EID, double const *M,
                       long const *S1, long const *S2=nullptr);
 
-               __base::card const *operator() (
+               __base::card const &operator() (
                   long const *EID, double const *M,
                   long const *S1, long const *S2=nullptr);
 
@@ -511,13 +511,13 @@ Defines acceleration vectors for gravity or other acceleration loading.
                     std::vector<double> const *N,
                     long const *MB=nullptr);
 
-               __base::card const *operator() (
+               __base::card const &operator() (
                   long const *SID, long const *CID,
                   double const *A,
                   std::vector<double> const *N,
                   long const *MB=nullptr);
 
-               __base::card const *operator() (
+               __base::card const &operator() (
                   long const *SID, long const *CID,
                   double const *A,
                   double const *N1, double const*N2, double const *N3,
@@ -583,7 +583,7 @@ Defines a static load as a linear combination of load std::sets defined via
                     const std::list<double> *Si,
                     const std::list<long> *Li);
 
-               __base::card const *operator() (
+               __base::card const &operator() (
                   const long *SID, const double *S,
                   const std::list<double> *Si,
                   const std::list<long> *Li);

@@ -39,17 +39,17 @@ properties of thin shell elements.
 
             private:
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_T;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_12I_T__3; // 12 I / T**3
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID3;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_TS_T; // TS / T
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_Z1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_Z2;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID4;
+               dnvgl::extfem::bdf::types::entry_type<long> static const form_PID;
+               dnvgl::extfem::bdf::types::entry_type<long> static const form_MID1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_T;
+               dnvgl::extfem::bdf::types::entry_type<long> static const form_MID2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_12I_T__3; // 12 I / T**3
+               dnvgl::extfem::bdf::types::entry_type<long> static const form_MID3;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_TS_T; // TS / T
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSM;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_Z1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_Z2;
+               dnvgl::extfem::bdf::types::entry_type<long> static const form_MID4;
 
             public:
 
@@ -114,12 +114,12 @@ properties of thin shell elements.
                */
                dnvgl::extfem::bdf::types::entry_value<long> MID4;
 
-               pshell(const std::list<std::string> &);
+               pshell(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
-               card const *operator() (
+               __base::card const &operator() (
                   long const *PID, long const *MID1, double const *T=nullptr,
                   long const *MID2=nullptr, double const *x12I_T__3=nullptr, // 12 I / T**3
                   long const *MID3=nullptr,
@@ -128,7 +128,7 @@ properties of thin shell elements.
                   double const *Z1=nullptr, double const *Z2=nullptr,
                   long const *MID4=nullptr);
 
-               virtual void read(std::list<std::string> const &);
+               virtual void read(std::list<std::string> const&);
 
             private:
 
@@ -141,17 +141,17 @@ properties of thin shell elements.
 
                protected:
 
-                  static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-                  static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+                  dnvgl::extfem::bdf::types::entry_type<long> static const form_PID;
+                  dnvgl::extfem::bdf::types::entry_type<long> static const form_MID;
 
-                  beam_base(const std::list<std::string> &inp);
+                  beam_base(std::list<std::string> const&);
 
                public:
 
                   dnvgl::extfem::bdf::types::entry_value<long> PID;
                   dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-                  const dnvgl::extfem::bdf::cards::types
+                  dnvgl::extfem::bdf::cards::types const
                   card_type(void) const;
                };
 
@@ -159,11 +159,11 @@ properties of thin shell elements.
                   // base class for beam property classes.
                protected:
 
-                  beam_prop(const std::list<std::string> &inp);
+                  beam_prop(std::list<std::string> const&);
 
                public:
 
-                  const dnvgl::extfem::bdf::cards::types
+                  dnvgl::extfem::bdf::cards::types const
                   card_type(void) const;
                };
             }
@@ -203,38 +203,38 @@ The last two continuations are:
 
             private:
 
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_I1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_I2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_I12;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_J;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_C1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_C2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_D1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_D2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_E1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_E2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_F1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_F2;
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_SO;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X_XB;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_K1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_K2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_S1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_S2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSI_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSI_B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_CW_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_CW_B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_M1_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_M2_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_M1_B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_M2_B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_N1_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_N2_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_N1_B;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_N2_B;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_I1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_I2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_I12;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_J;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSM;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_C1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_C2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_D1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_D2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_E1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_E2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_F1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_F2;
+               dnvgl::extfem::bdf::types::entry_type<std::string> static const form_SO;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_X_XB;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_K1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_K2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_S1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_S2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSI_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSI_B;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_CW_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_CW_B;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_M1_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_M2_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_M1_B;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_M2_B;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_N1_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_N2_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_N1_B;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_N2_B;
 
             public:
 
@@ -392,9 +392,9 @@ The last two continuations are:
                 */
                dnvgl::extfem::bdf::types::entry_value<double> N2_B;
 
-               pbeam(const std::list<std::string> &);
+               pbeam(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
                virtual void read(std::list<std::string> const &);
@@ -412,13 +412,13 @@ The last two continuations are:
 
                   l_geom ();
 
-                  static const std::set<std::string> dimnum1;
-                  static const std::set<std::string> dimnum2;
-                  static const std::set<std::string> dimnum3;
-                  static const std::set<std::string> dimnum4;
-                  static const std::set<std::string> dimnum5;
-                  static const std::set<std::string> dimnum6;
-                  static const std::set<std::string> dimnum10;
+                  std::set<std::string> static const dimnum1;
+                  std::set<std::string> static const dimnum2;
+                  std::set<std::string> static const dimnum3;
+                  std::set<std::string> static const dimnum4;
+                  std::set<std::string> static const dimnum5;
+                  std::set<std::string> static const dimnum6;
+                  std::set<std::string> static const dimnum10;
                };
             }
 
@@ -446,12 +446,12 @@ dimensions.
 
             private:
 
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_GROUP;
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_TYPE;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_DIM;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_SO;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_X_XB;
+               dnvgl::extfem::bdf::types::entry_type<std::string> static const form_GROUP;
+               dnvgl::extfem::bdf::types::entry_type<std::string> static const form_TYPE;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_DIM;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSM;
+               dnvgl::extfem::bdf::types::entry_type<std::string> static const form_SO;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_X_XB;
 
             public:
                /** Cross-section group. (Character; Default =
@@ -491,9 +491,9 @@ dimensions.
                */
                std::vector<double> X_XB;
 
-               pbeaml(const std::list<std::string> &);
+               pbeaml(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
                virtual void read(std::list<std::string> const &);
@@ -509,8 +509,8 @@ dimensions.
                class bar_prop : public card {
 
                protected:
-                  static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-                  static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
+                  dnvgl::extfem::bdf::types::entry_type<long> static const form_PID;
+                  dnvgl::extfem::bdf::types::entry_type<long> static const form_MID;
 
                public:
 
@@ -521,9 +521,9 @@ dimensions.
                   /// 0)
                   dnvgl::extfem::bdf::types::entry_value<long> MID;
 
-                  bar_prop(const std::list<std::string> &inp);
+                  bar_prop(std::list<std::string> const&);
 
-                  const dnvgl::extfem::bdf::cards::types
+                  dnvgl::extfem::bdf::cards::types const
                   card_type(void) const;
                };
             }
@@ -549,22 +549,22 @@ stations)
 
             private:
 
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_I1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_I2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_J;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_C1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_C2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_D1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_D2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_E1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_E2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_F1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_F2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_K1;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_K2;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_I12;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_I1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_I2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_J;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSM;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_C1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_C2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_D1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_D2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_E1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_E2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_F1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_F2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_K1;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_K2;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_I12;
 
             public:
 
@@ -621,9 +621,9 @@ stations)
                */
                dnvgl::extfem::bdf::types::entry_value<double> I12;
 
-               pbar(const std::list<std::string> &);
+               pbar(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
                virtual void read(std::list<std::string> const &);
@@ -654,10 +654,10 @@ cross-sectional dimensions.
 
             private:
 
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_GROUP;
-               static const dnvgl::extfem::bdf::types::entry_type<std::string> form_TYPE;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_DIM;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
+               dnvgl::extfem::bdf::types::entry_type<std::string> static const form_GROUP;
+               dnvgl::extfem::bdf::types::entry_type<std::string> static const form_TYPE;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_DIM;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSM;
 
             public:
 
@@ -681,9 +681,9 @@ cross-sectional dimensions.
                */
                dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               pbarl(const std::list<std::string> &);
+               pbarl(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
                virtual void read(std::list<std::string> const &);
@@ -709,12 +709,12 @@ Defines the properties of a rod element (`CROD` entry).
 
             private:
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_PID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_J;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_C;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_NSM;
+               dnvgl::extfem::bdf::types::entry_type<long> static const form_PID;
+               dnvgl::extfem::bdf::types::entry_type<long> static const form_MID;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_A;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_J;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_C;
+               dnvgl::extfem::bdf::types::entry_type<double> static const form_NSM;
 
             public:
 
@@ -739,9 +739,9 @@ Defines the properties of a rod element (`CROD` entry).
                 */
                dnvgl::extfem::bdf::types::entry_value<double> NSM;
 
-               prod(const std::list<std::string> &);
+               prod(std::list<std::string> const&);
 
-               const dnvgl::extfem::bdf::cards::types
+               dnvgl::extfem::bdf::cards::types const
                card_type(void) const;
 
                virtual void read(std::list<std::string> const &);

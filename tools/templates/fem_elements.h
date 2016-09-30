@@ -52,7 +52,7 @@ namespace dnvgl {
                class elem {
 
                protected:
-                  static const el_types type;
+                  el_types static const type;
                   elem(void);
                   elem(long const elno,
                        long const elident,
@@ -71,9 +71,9 @@ namespace dnvgl {
                        std::vector<long> const csys);
 
                public:
-                  elem(const dnvgl::extfem::fem::cards::gelmnt1*);
-                  elem(const dnvgl::extfem::fem::cards::gelref1*);
-                  elem(const elem*);
+                  elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                  elem(dnvgl::extfem::fem::cards::gelref1 const*);
+                  elem(elem const*);
 
                   dnvgl::extfem::fem::cards::gelmnt1 gelmnt1(void) const;
                   dnvgl::extfem::fem::cards::gelref1 gelref1(void) const;
@@ -162,31 +162,32 @@ namespace dnvgl {
                class fem_thin_shell : public __base::elem {
                public:
                   fem_thin_shell(void);
-                  fem_thin_shell(long const elno,
-                                 long const elident,
-                                 long const el_add,
-                                 std::vector<long> const nodes,
-                                 long const matref,
-                                 long const add_no,
-                                 long const intno,
-                                 long const mass_intno,
-                                 long const i_strain_ref,
-                                 long const i_stressef,
-                                 long const strpoint_ref,
-                                 std::vector<long> const sections,
-                                 std::vector<long> const fixations,
-                                 std::vector<long> const eccentrities,
-                                 std::vector<long> const csys);
-                  fem_thin_shell(const dnvgl::extfem::fem::cards::gelmnt1*);
-                  fem_thin_shell(const dnvgl::extfem::fem::cards::gelref1*);
-                  fem_thin_shell(const __base::elem*);
+                  fem_thin_shell(
+                     long const elno,
+                     long const elident,
+                     long const el_add,
+                     std::vector<long> const nodes,
+                     long const matref,
+                     long const add_no,
+                     long const intno,
+                     long const mass_intno,
+                     long const i_strain_ref,
+                     long const i_stressef,
+                     long const strpoint_ref,
+                     std::vector<long> const sections,
+                     std::vector<long> const fixations,
+                     std::vector<long> const eccentrities,
+                     std::vector<long> const csys);
+                  fem_thin_shell(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                  fem_thin_shell(dnvgl::extfem::fem::cards::gelref1 const*);
+                  fem_thin_shell(__base::elem const*);
                };
             }
 
             class undef : public __base::elem {
             public:
                undef (void);
-               undef(const dnvgl::extfem::fem::cards::gelref1*);
+               undef(dnvgl::extfem::fem::cards::gelref1 const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
             };
@@ -212,18 +213,18 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               {{ elem }}(const dnvgl::extfem::fem::cards::gelmnt1*);
-               {{ elem }}(const dnvgl::extfem::fem::cards::gelref1*);
-               {{ elem }}(const __base::elem*);
+               {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
+               {{ elem }}( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 {% endfor %}
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base::elem>&,
-               const cards::gelmnt1 *data);
+               cards::gelmnt1 const *data);
 
             /** Match element type id to element type name.
              */

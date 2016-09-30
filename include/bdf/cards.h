@@ -369,7 +369,7 @@ namespace dnvgl {
                   virtual void collect_outdata(
                      std::list<std::unique_ptr<format_entry> >&) const = 0;
 
-                  virtual card const *operator() (std::list<std::string> const &);
+                  virtual card const &operator() (std::list<std::string> const &);
 
                   virtual void read(std::list<std::string> const &) = 0;
 
@@ -561,8 +561,9 @@ displacement, and its permanent single-point constraints.
 
                virtual void read(const std::list<std::string> &);
 
-               const card *operator() (long const &ID, long const &CP,
-                                       double const &X1, double const &X2, double const &X3);
+               __base::card const &operator() (
+                  long const &ID, long const &CP,
+                  double const &X1, double const &X2, double const &X3);
 
             private:
 

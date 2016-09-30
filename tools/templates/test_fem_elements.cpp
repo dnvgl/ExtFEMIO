@@ -94,7 +94,8 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    }
 }
 
-{% for elem, vals in elements %}TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }}]") {
+{% for elem, vals in elements -%}
+TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }}]") {
 
    long const ELNOX = 11316;
    long const ELNO = 1;
@@ -182,10 +183,11 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
    }
 }
 
-{% endfor %}// Local Variables:
+{% endfor -%}
+// Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

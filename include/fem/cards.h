@@ -51,10 +51,10 @@ namespace dnvgl {
       namespace fem {
          namespace cards {
 
-            extern const void(*note_report)(std::string const &);
-            extern const void(*info_report)(std::string const &);
-            extern const void(*warn_report)(std::string const &);
-            extern const void(*error_report)(std::string const &);
+            void extern const (*note_report)(std::string const &);
+            void extern const (*info_report)(std::string const &);
+            void extern const (*warn_report)(std::string const &);
+            void extern const (*error_report)(std::string const &);
 
             /**
                \brief Name the different cards.
@@ -2855,12 +2855,12 @@ per record.
                text(long const &TYPE, long const &SUBTYPE,
                     std::vector<std::string> const &CONT);
 
-               __base::card const *operator() (
+               __base::card const &operator() (
                   long const &TYPE, long const &SUBTYPE,
                   long const &NRECS, long const &NBYTE,
                   std::vector<std::string> const &CONT);
 
-               __base::card const *operator() (
+               __base::card const &operator() (
                   long const &TYPE, long const &SUBTYPE,
                   std::vector<std::string> const &CONT);
 

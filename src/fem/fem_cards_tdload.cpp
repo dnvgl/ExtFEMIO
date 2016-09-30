@@ -147,7 +147,7 @@ tdload::tdload(long const &NFIELD,
                std::string const &SET_NAME) :
    tdload(NFIELD, ILREF, CODNAM, 0, SET_NAME, {}) {}
 
-cards::__base::card *tdload::operator() (
+cards::__base::card const &tdload::operator() (
    long const &NFIELD,
    long const &ILREF,
    long const &CODNAM,
@@ -166,10 +166,10 @@ cards::__base::card *tdload::operator() (
    div_val = ldiv(CODTXT, 100);
    nltxt = div_val.quot;
    nctxt = div_val.rem;
-   return this;
+   return *this;
 }
 
-cards::__base::card *tdload::operator() (
+cards::__base::card const &tdload::operator() (
    long const &ILREF,
    std::string const &SET_NAME,
    std::vector<std::string> const &CONT/*={}*/) {
@@ -188,7 +188,7 @@ cards::__base::card *tdload::operator() (
    return (*this)(4, ILREF, 100 + ncnam, CODTXT, SET_NAME, CONT);
 }
 
-cards::__base::card *tdload::operator() (
+cards::__base::card const &tdload::operator() (
    long const &NFIELD,
    long const &ILREF,
    long const &CODNAM,

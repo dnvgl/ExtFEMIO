@@ -172,7 +172,7 @@ namespace dnvgl {
                class elem {
 
                protected:
-                  static const el_types type;
+                  el_types static const type;
                   elem(void);
                   elem(long const elno,
                        long const elident,
@@ -191,9 +191,9 @@ namespace dnvgl {
                        std::vector<long> const csys);
 
                public:
-                  elem(const dnvgl::extfem::fem::cards::gelmnt1*);
-                  elem(const dnvgl::extfem::fem::cards::gelref1*);
-                  elem(const elem*);
+                  elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                  elem(dnvgl::extfem::fem::cards::gelref1 const*);
+                  elem(elem const*);
 
                   dnvgl::extfem::fem::cards::gelmnt1 gelmnt1(void) const;
                   dnvgl::extfem::fem::cards::gelref1 gelref1(void) const;
@@ -282,31 +282,32 @@ namespace dnvgl {
                class fem_thin_shell : public __base::elem {
                public:
                   fem_thin_shell(void);
-                  fem_thin_shell(long const elno,
-                                 long const elident,
-                                 long const el_add,
-                                 std::vector<long> const nodes,
-                                 long const matref,
-                                 long const add_no,
-                                 long const intno,
-                                 long const mass_intno,
-                                 long const i_strain_ref,
-                                 long const i_stressef,
-                                 long const strpoint_ref,
-                                 std::vector<long> const sections,
-                                 std::vector<long> const fixations,
-                                 std::vector<long> const eccentrities,
-                                 std::vector<long> const csys);
-                  fem_thin_shell(const dnvgl::extfem::fem::cards::gelmnt1*);
-                  fem_thin_shell(const dnvgl::extfem::fem::cards::gelref1*);
-                  fem_thin_shell(const __base::elem*);
+                  fem_thin_shell(
+                     long const elno,
+                     long const elident,
+                     long const el_add,
+                     std::vector<long> const nodes,
+                     long const matref,
+                     long const add_no,
+                     long const intno,
+                     long const mass_intno,
+                     long const i_strain_ref,
+                     long const i_stressef,
+                     long const strpoint_ref,
+                     std::vector<long> const sections,
+                     std::vector<long> const fixations,
+                     std::vector<long> const eccentrities,
+                     std::vector<long> const csys);
+                  fem_thin_shell(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                  fem_thin_shell(dnvgl::extfem::fem::cards::gelref1 const*);
+                  fem_thin_shell(__base::elem const*);
                };
             }
 
             class undef : public __base::elem {
             public:
                undef (void);
-               undef(const dnvgl::extfem::fem::cards::gelref1*);
+               undef(dnvgl::extfem::fem::cards::gelref1 const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
             };
@@ -332,12 +333,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               beps(const dnvgl::extfem::fem::cards::gelmnt1*);
-               beps(const dnvgl::extfem::fem::cards::gelref1*);
-               beps(const __base::elem*);
+               beps(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               beps(dnvgl::extfem::fem::cards::gelref1 const*);
+               beps( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Plane Constant Strain Triangle
@@ -360,12 +361,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               csta(const dnvgl::extfem::fem::cards::gelmnt1*);
-               csta(const dnvgl::extfem::fem::cards::gelref1*);
-               csta(const __base::elem*);
+               csta(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               csta(dnvgl::extfem::fem::cards::gelref1 const*);
+               csta( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Rect. Plate. Bending Modes
@@ -388,12 +389,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               rpbq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               rpbq(const dnvgl::extfem::fem::cards::gelref1*);
-               rpbq(const __base::elem*);
+               rpbq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               rpbq(dnvgl::extfem::fem::cards::gelref1 const*);
+               rpbq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Plane Lin. Strain Triangle
@@ -416,12 +417,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ilst(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ilst(const dnvgl::extfem::fem::cards::gelref1*);
-               ilst(const __base::elem*);
+               ilst(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ilst(dnvgl::extfem::fem::cards::gelref1 const*);
+               ilst( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Plane Quadrilateral Membrane Element
@@ -444,12 +445,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               iqqe(const dnvgl::extfem::fem::cards::gelmnt1*);
-               iqqe(const dnvgl::extfem::fem::cards::gelref1*);
-               iqqe(const __base::elem*);
+               iqqe(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               iqqe(dnvgl::extfem::fem::cards::gelref1 const*);
+               iqqe( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Plane Quadrilateral Membrane Element
@@ -472,12 +473,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               lqua(const dnvgl::extfem::fem::cards::gelmnt1*);
-               lqua(const dnvgl::extfem::fem::cards::gelref1*);
-               lqua(const __base::elem*);
+               lqua(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               lqua(dnvgl::extfem::fem::cards::gelref1 const*);
+               lqua( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Truss Element
@@ -500,12 +501,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               tess(const dnvgl::extfem::fem::cards::gelmnt1*);
-               tess(const dnvgl::extfem::fem::cards::gelref1*);
-               tess(const __base::elem*);
+               tess(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               tess(dnvgl::extfem::fem::cards::gelref1 const*);
+               tess( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 1-Noded Mass-Matrix
@@ -528,12 +529,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               gmas(const dnvgl::extfem::fem::cards::gelmnt1*);
-               gmas(const dnvgl::extfem::fem::cards::gelref1*);
-               gmas(const __base::elem*);
+               gmas(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               gmas(dnvgl::extfem::fem::cards::gelref1 const*);
+               gmas( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 2-Noded Mass-Matrix
@@ -556,12 +557,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               glma(const dnvgl::extfem::fem::cards::gelmnt1*);
-               glma(const dnvgl::extfem::fem::cards::gelref1*);
-               glma(const __base::elem*);
+               glma(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               glma(dnvgl::extfem::fem::cards::gelref1 const*);
+               glma( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 2-Noded Damping-Matrix
@@ -584,12 +585,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               glda(const dnvgl::extfem::fem::cards::gelmnt1*);
-               glda(const dnvgl::extfem::fem::cards::gelref1*);
-               glda(const __base::elem*);
+               glda(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               glda(dnvgl::extfem::fem::cards::gelref1 const*);
+               glda( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 3-D, 2 Node Beam
@@ -612,12 +613,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               beas(const dnvgl::extfem::fem::cards::gelmnt1*);
-               beas(const dnvgl::extfem::fem::cards::gelref1*);
-               beas(const __base::elem*);
+               beas(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               beas(dnvgl::extfem::fem::cards::gelref1 const*);
+               beas( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Axial Spring
@@ -640,12 +641,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               axis(const dnvgl::extfem::fem::cards::gelmnt1*);
-               axis(const dnvgl::extfem::fem::cards::gelref1*);
-               axis(const __base::elem*);
+               axis(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               axis(dnvgl::extfem::fem::cards::gelref1 const*);
+               axis( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Axial Damper
@@ -668,12 +669,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               axda(const dnvgl::extfem::fem::cards::gelmnt1*);
-               axda(const dnvgl::extfem::fem::cards::gelref1*);
-               axda(const __base::elem*);
+               axda(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               axda(dnvgl::extfem::fem::cards::gelref1 const*);
+               axda( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Spring to Ground
@@ -696,12 +697,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               gspr(const dnvgl::extfem::fem::cards::gelmnt1*);
-               gspr(const dnvgl::extfem::fem::cards::gelref1*);
-               gspr(const __base::elem*);
+               gspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               gspr(dnvgl::extfem::fem::cards::gelref1 const*);
+               gspr( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Damper to Ground
@@ -724,12 +725,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               gdam(const dnvgl::extfem::fem::cards::gelmnt1*);
-               gdam(const dnvgl::extfem::fem::cards::gelref1*);
-               gdam(const __base::elem*);
+               gdam(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               gdam(dnvgl::extfem::fem::cards::gelref1 const*);
+               gdam( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Isoparametric Hexahedron
@@ -752,12 +753,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ihex(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ihex(const dnvgl::extfem::fem::cards::gelref1*);
-               ihex(const __base::elem*);
+               ihex(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ihex(dnvgl::extfem::fem::cards::gelref1 const*);
+               ihex( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Linear Hexahedron
@@ -780,12 +781,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               lhex(const dnvgl::extfem::fem::cards::gelmnt1*);
-               lhex(const dnvgl::extfem::fem::cards::gelref1*);
-               lhex(const __base::elem*);
+               lhex(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               lhex(dnvgl::extfem::fem::cards::gelref1 const*);
+               lhex( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Subparametric Curved Beam
@@ -808,12 +809,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               secb(const dnvgl::extfem::fem::cards::gelmnt1*);
-               secb(const dnvgl::extfem::fem::cards::gelref1*);
-               secb(const __base::elem*);
+               secb(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               secb(dnvgl::extfem::fem::cards::gelref1 const*);
+               secb( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Curved Beam
@@ -836,12 +837,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               btss(const dnvgl::extfem::fem::cards::gelmnt1*);
-               btss(const dnvgl::extfem::fem::cards::gelref1*);
-               btss(const __base::elem*);
+               btss(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               btss(dnvgl::extfem::fem::cards::gelref1 const*);
+               btss( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell
@@ -864,12 +865,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               fqus_ffq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               fqus_ffq(const dnvgl::extfem::fem::cards::gelref1*);
-               fqus_ffq(const __base::elem*);
+               fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const*);
+               fqus_ffq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /**  Flat Triangular Thin Shell / Free Formulation Triangular Shell
@@ -892,12 +893,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ftrs_fftr(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ftrs_fftr(const dnvgl::extfem::fem::cards::gelref1*);
-               ftrs_fftr(const __base::elem*);
+               ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const*);
+               ftrs_fftr( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Subparametric Curved Triangular Thick Shell
@@ -920,12 +921,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               scts(const dnvgl::extfem::fem::cards::gelmnt1*);
-               scts(const dnvgl::extfem::fem::cards::gelref1*);
-               scts(const __base::elem*);
+               scts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               scts(dnvgl::extfem::fem::cards::gelref1 const*);
+               scts( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Subparam. Curved Triang. Thick Sandwich Elem.
@@ -948,12 +949,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               mcts(const dnvgl::extfem::fem::cards::gelmnt1*);
-               mcts(const dnvgl::extfem::fem::cards::gelref1*);
-               mcts(const __base::elem*);
+               mcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               mcts(dnvgl::extfem::fem::cards::gelref1 const*);
+               mcts( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Subparametric Curved Quadrilateral Thick Shell
@@ -976,12 +977,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               scqs(const dnvgl::extfem::fem::cards::gelmnt1*);
-               scqs(const dnvgl::extfem::fem::cards::gelref1*);
-               scqs(const __base::elem*);
+               scqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               scqs(dnvgl::extfem::fem::cards::gelref1 const*);
+               scqs( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Subparam. Curved Quadr. Thick Sandwich Elem.
@@ -1004,12 +1005,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               mcqs(const dnvgl::extfem::fem::cards::gelmnt1*);
-               mcqs(const dnvgl::extfem::fem::cards::gelref1*);
-               mcqs(const __base::elem*);
+               mcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               mcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+               mcqs( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Isoparametric Triangular Prism
@@ -1032,12 +1033,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ipri(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ipri(const dnvgl::extfem::fem::cards::gelref1*);
-               ipri(const __base::elem*);
+               ipri(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ipri(dnvgl::extfem::fem::cards::gelref1 const*);
+               ipri( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Isoparametric Tetrahedron
@@ -1060,12 +1061,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               itet(const dnvgl::extfem::fem::cards::gelmnt1*);
-               itet(const dnvgl::extfem::fem::cards::gelref1*);
-               itet(const __base::elem*);
+               itet(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               itet(dnvgl::extfem::fem::cards::gelref1 const*);
+               itet( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Triangular Prism
@@ -1088,12 +1089,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               tpri(const dnvgl::extfem::fem::cards::gelmnt1*);
-               tpri(const dnvgl::extfem::fem::cards::gelref1*);
-               tpri(const __base::elem*);
+               tpri(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               tpri(dnvgl::extfem::fem::cards::gelref1 const*);
+               tpri( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Tetrahedron
@@ -1116,12 +1117,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               tetr(const dnvgl::extfem::fem::cards::gelmnt1*);
-               tetr(const dnvgl::extfem::fem::cards::gelref1*);
-               tetr(const __base::elem*);
+               tetr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               tetr(dnvgl::extfem::fem::cards::gelref1 const*);
+               tetr( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Subparam. Layered Curved Triangular Thick Shell
@@ -1144,12 +1145,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               lcts(const dnvgl::extfem::fem::cards::gelmnt1*);
-               lcts(const dnvgl::extfem::fem::cards::gelref1*);
-               lcts(const __base::elem*);
+               lcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               lcts(dnvgl::extfem::fem::cards::gelref1 const*);
+               lcts( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Subparam. Layered Curved Quadrilat. Thick Shell
@@ -1172,12 +1173,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               lcqs(const dnvgl::extfem::fem::cards::gelmnt1*);
-               lcqs(const dnvgl::extfem::fem::cards::gelref1*);
-               lcqs(const __base::elem*);
+               lcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               lcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+               lcqs( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
@@ -1200,12 +1201,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               trs1(const dnvgl::extfem::fem::cards::gelmnt1*);
-               trs1(const dnvgl::extfem::fem::cards::gelref1*);
-               trs1(const __base::elem*);
+               trs1(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               trs1(dnvgl::extfem::fem::cards::gelref1 const*);
+               trs1( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
@@ -1228,12 +1229,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               trs2(const dnvgl::extfem::fem::cards::gelmnt1*);
-               trs2(const dnvgl::extfem::fem::cards::gelref1*);
-               trs2(const __base::elem*);
+               trs2(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               trs2(dnvgl::extfem::fem::cards::gelref1 const*);
+               trs2( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
@@ -1256,12 +1257,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               trs3(const dnvgl::extfem::fem::cards::gelmnt1*);
-               trs3(const dnvgl::extfem::fem::cards::gelref1*);
-               trs3(const __base::elem*);
+               trs3(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               trs3(dnvgl::extfem::fem::cards::gelref1 const*);
+               trs3( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Spring / Shim Element
@@ -1284,12 +1285,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               glsh(const dnvgl::extfem::fem::cards::gelmnt1*);
-               glsh(const dnvgl::extfem::fem::cards::gelref1*);
-               glsh(const __base::elem*);
+               glsh(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               glsh(dnvgl::extfem::fem::cards::gelref1 const*);
+               glsh( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Axisymmetric Constant Strain Triangle
@@ -1312,12 +1313,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               axcs(const dnvgl::extfem::fem::cards::gelmnt1*);
-               axcs(const dnvgl::extfem::fem::cards::gelref1*);
-               axcs(const __base::elem*);
+               axcs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               axcs(dnvgl::extfem::fem::cards::gelref1 const*);
+               axcs( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Axisymmetric Quadrilateral
@@ -1340,12 +1341,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               axlq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               axlq(const dnvgl::extfem::fem::cards::gelref1*);
-               axlq(const __base::elem*);
+               axlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               axlq(dnvgl::extfem::fem::cards::gelref1 const*);
+               axlq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Axisymmetric Linear Strain Triangle
@@ -1368,12 +1369,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               axls(const dnvgl::extfem::fem::cards::gelmnt1*);
-               axls(const dnvgl::extfem::fem::cards::gelref1*);
-               axls(const __base::elem*);
+               axls(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               axls(dnvgl::extfem::fem::cards::gelref1 const*);
+               axls( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Axisymmetric Linear Strain Quadrilateral
@@ -1396,12 +1397,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               axqq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               axqq(const dnvgl::extfem::fem::cards::gelref1*);
-               axqq(const __base::elem*);
+               axqq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               axqq(dnvgl::extfem::fem::cards::gelref1 const*);
+               axqq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Pile / Soil
@@ -1424,12 +1425,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               pils(const dnvgl::extfem::fem::cards::gelmnt1*);
-               pils(const dnvgl::extfem::fem::cards::gelref1*);
-               pils(const __base::elem*);
+               pils(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               pils(dnvgl::extfem::fem::cards::gelref1 const*);
+               pils( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Plane Cable-Bar Element
@@ -1452,12 +1453,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               pcab(const dnvgl::extfem::fem::cards::gelmnt1*);
-               pcab(const dnvgl::extfem::fem::cards::gelref1*);
-               pcab(const __base::elem*);
+               pcab(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               pcab(dnvgl::extfem::fem::cards::gelref1 const*);
+               pcab( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Plane Spring Element
@@ -1480,12 +1481,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               pspr(const dnvgl::extfem::fem::cards::gelmnt1*);
-               pspr(const dnvgl::extfem::fem::cards::gelref1*);
-               pspr(const __base::elem*);
+               pspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               pspr(dnvgl::extfem::fem::cards::gelref1 const*);
+               pspr( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 4-node Contact Element with triangular Shape
@@ -1508,12 +1509,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               adva_4(const dnvgl::extfem::fem::cards::gelmnt1*);
-               adva_4(const dnvgl::extfem::fem::cards::gelref1*);
-               adva_4(const __base::elem*);
+               adva_4(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               adva_4(dnvgl::extfem::fem::cards::gelref1 const*);
+               adva_4( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 2-Noded Link Element
@@ -1536,12 +1537,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               adva_2(const dnvgl::extfem::fem::cards::gelmnt1*);
-               adva_2(const dnvgl::extfem::fem::cards::gelref1*);
-               adva_2(const __base::elem*);
+               adva_2(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               adva_2(dnvgl::extfem::fem::cards::gelref1 const*);
+               adva_2( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 2-Noded Contact Element
@@ -1564,12 +1565,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctcp(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctcp(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcp(const __base::elem*);
+               ctcp(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctcp(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctcp( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 4-Noded Contact Element
@@ -1592,12 +1593,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctcl(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctcl(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcl(const __base::elem*);
+               ctcl(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctcl(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctcl( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 4-Noded Axisymmetric Contact Element
@@ -1620,12 +1621,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctal(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctal(const dnvgl::extfem::fem::cards::gelref1*);
-               ctal(const __base::elem*);
+               ctal(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctal(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctal( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 6-Noded Contact Element
@@ -1648,12 +1649,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctcc(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctcc(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcc(const __base::elem*);
+               ctcc(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctcc(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctcc( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 6-Noded (3+3) Axisymmetric Contact Element
@@ -1676,12 +1677,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctaq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctaq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctaq(const __base::elem*);
+               ctaq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctaq(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctaq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 8-Noded (4+4) Contact Element
@@ -1704,12 +1705,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctlq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctlq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctlq(const __base::elem*);
+               ctlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctlq(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctlq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 16-Noded (8+8) Contact Element
@@ -1732,12 +1733,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctcq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctcq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctcq(const __base::elem*);
+               ctcq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctcq(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctcq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 18-Noded (9+9) Contact Element
@@ -1760,12 +1761,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ctmq(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ctmq(const dnvgl::extfem::fem::cards::gelref1*);
-               ctmq(const __base::elem*);
+               ctmq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ctmq(dnvgl::extfem::fem::cards::gelref1 const*);
+               ctmq( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** 9-Noded Shell Element
@@ -1788,12 +1789,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               hcqs(const dnvgl::extfem::fem::cards::gelmnt1*);
-               hcqs(const dnvgl::extfem::fem::cards::gelref1*);
-               hcqs(const __base::elem*);
+               hcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               hcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+               hcqs( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
@@ -1816,12 +1817,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               slqs(const dnvgl::extfem::fem::cards::gelmnt1*);
-               slqs(const dnvgl::extfem::fem::cards::gelref1*);
-               slqs(const __base::elem*);
+               slqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               slqs(dnvgl::extfem::fem::cards::gelref1 const*);
+               slqs( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
@@ -1844,12 +1845,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               slts(const dnvgl::extfem::fem::cards::gelmnt1*);
-               slts(const dnvgl::extfem::fem::cards::gelref1*);
-               slts(const __base::elem*);
+               slts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               slts(dnvgl::extfem::fem::cards::gelref1 const*);
+               slts( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Semiloof Curved Beam (11 d.o.fs)
@@ -1872,12 +1873,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               slcb(const dnvgl::extfem::fem::cards::gelmnt1*);
-               slcb(const dnvgl::extfem::fem::cards::gelref1*);
-               slcb(const __base::elem*);
+               slcb(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               slcb(dnvgl::extfem::fem::cards::gelref1 const*);
+               slcb( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Matrix Element with arbitrary no. of nodes (/n/)
@@ -1900,12 +1901,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               matr(const dnvgl::extfem::fem::cards::gelmnt1*);
-               matr(const dnvgl::extfem::fem::cards::gelref1*);
-               matr(const __base::elem*);
+               matr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               matr(dnvgl::extfem::fem::cards::gelref1 const*);
+               matr( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
@@ -1932,12 +1933,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex100(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex100(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex100(const __base::elem*);
+               ghex100(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex100(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex100( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 27 and node 27 present.
@@ -1965,12 +1966,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex101(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex101(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex101(const __base::elem*);
+               ghex101(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex101(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex101( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 27 and node 27 present.
@@ -1998,12 +1999,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex102(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex102(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex102(const __base::elem*);
+               ghex102(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex102(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex102( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 27 and node 27 present.
@@ -2032,12 +2033,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex103(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex103(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex103(const __base::elem*);
+               ghex103(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex103(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex103( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 27 and node 27 present.
@@ -2065,12 +2066,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex104(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex104(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex104(const __base::elem*);
+               ghex104(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex104(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex104( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 27 and node 27 present.
@@ -2099,12 +2100,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex105(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex105(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex105(const __base::elem*);
+               ghex105(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex105(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex105( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 27 and node 27 present.
@@ -2133,12 +2134,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex106(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex106(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex106(const __base::elem*);
+               ghex106(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex106(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex106( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 27 and node 27 present.
@@ -2168,12 +2169,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex107(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex107(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex107(const __base::elem*);
+               ghex107(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex107(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex107( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 27 and node 27 present.
@@ -2201,12 +2202,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex108(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex108(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex108(const __base::elem*);
+               ghex108(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex108(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex108( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 27 and node 27 present.
@@ -2235,12 +2236,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex109(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex109(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex109(const __base::elem*);
+               ghex109(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex109(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex109( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 27 and node 27 present.
@@ -2269,12 +2270,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex110(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex110(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex110(const __base::elem*);
+               ghex110(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex110(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex110( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 27 and node 27 present.
@@ -2304,12 +2305,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex111(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex111(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex111(const __base::elem*);
+               ghex111(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex111(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex111( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 27 and node 27 present.
@@ -2338,12 +2339,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex112(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex112(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex112(const __base::elem*);
+               ghex112(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex112(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex112( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 27 and node 27 present.
@@ -2373,12 +2374,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex113(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex113(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex113(const __base::elem*);
+               ghex113(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex113(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex113( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 27 and node 27 present.
@@ -2408,12 +2409,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex114(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex114(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex114(const __base::elem*);
+               ghex114(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex114(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex114( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 27 and node 27 present.
@@ -2444,12 +2445,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex115(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex115(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex115(const __base::elem*);
+               ghex115(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex115(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex115( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 25, node 27 and node 27 present.
@@ -2477,12 +2478,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex116(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex116(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex116(const __base::elem*);
+               ghex116(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex116(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex116( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 27 and node 27 present.
@@ -2511,12 +2512,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex117(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex117(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex117(const __base::elem*);
+               ghex117(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex117(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex117( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 27 and node 27 present.
@@ -2545,12 +2546,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex118(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex118(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex118(const __base::elem*);
+               ghex118(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex118(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex118( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 27 and node 27 present.
@@ -2580,12 +2581,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex119(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex119(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex119(const __base::elem*);
+               ghex119(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex119(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex119( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 27 and node 27 present.
@@ -2614,12 +2615,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex120(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex120(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex120(const __base::elem*);
+               ghex120(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex120(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex120( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 27 and node 27 present.
@@ -2649,12 +2650,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex121(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex121(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex121(const __base::elem*);
+               ghex121(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex121(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex121( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 27 and node 27 present.
@@ -2684,12 +2685,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex122(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex122(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex122(const __base::elem*);
+               ghex122(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex122(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex122( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 27 and node 27 present.
@@ -2720,12 +2721,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex123(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex123(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex123(const __base::elem*);
+               ghex123(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex123(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex123( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 27 and node 27 present.
@@ -2754,12 +2755,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex124(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex124(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex124(const __base::elem*);
+               ghex124(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex124(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex124( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 27 and node 27 present.
@@ -2789,12 +2790,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex125(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex125(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex125(const __base::elem*);
+               ghex125(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex125(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex125( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 27 and node 27 present.
@@ -2824,12 +2825,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex126(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex126(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex126(const __base::elem*);
+               ghex126(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex126(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex126( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 27 and node 27 present.
@@ -2860,12 +2861,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex127(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex127(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex127(const __base::elem*);
+               ghex127(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex127(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex127( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 27 and node 27 present.
@@ -2895,12 +2896,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex128(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex128(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex128(const __base::elem*);
+               ghex128(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex128(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex128( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 27 and node 27 present.
@@ -2931,12 +2932,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex129(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex129(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex129(const __base::elem*);
+               ghex129(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex129(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex129( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 27 and node 27 present.
@@ -2967,12 +2968,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex130(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex130(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex130(const __base::elem*);
+               ghex130(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex130(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex130( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 27 and node 27 present.
@@ -3004,12 +3005,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex131(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex131(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex131(const __base::elem*);
+               ghex131(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex131(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex131( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 26, node 27 and node 27 present.
@@ -3037,12 +3038,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex132(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex132(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex132(const __base::elem*);
+               ghex132(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex132(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex132( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 26, node 27 and node 27 present.
@@ -3071,12 +3072,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex133(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex133(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex133(const __base::elem*);
+               ghex133(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex133(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex133( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 26, node 27 and node 27 present.
@@ -3105,12 +3106,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex134(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex134(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex134(const __base::elem*);
+               ghex134(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex134(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex134( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 26, node 27 and node 27 present.
@@ -3140,12 +3141,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex135(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex135(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex135(const __base::elem*);
+               ghex135(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex135(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex135( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 26, node 27 and node 27 present.
@@ -3174,12 +3175,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex136(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex136(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex136(const __base::elem*);
+               ghex136(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex136(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex136( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 26, node 27 and node 27 present.
@@ -3209,12 +3210,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex137(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex137(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex137(const __base::elem*);
+               ghex137(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex137(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex137( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 26, node 27 and node 27 present.
@@ -3244,12 +3245,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex138(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex138(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex138(const __base::elem*);
+               ghex138(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex138(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex138( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 26, node 27 and node 27 present.
@@ -3280,12 +3281,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex139(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex139(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex139(const __base::elem*);
+               ghex139(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex139(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex139( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 26, node 27 and node 27 present.
@@ -3314,12 +3315,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex140(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex140(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex140(const __base::elem*);
+               ghex140(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex140(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex140( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 26, node 27 and node 27 present.
@@ -3349,12 +3350,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex141(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex141(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex141(const __base::elem*);
+               ghex141(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex141(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex141( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 26, node 27 and node 27 present.
@@ -3384,12 +3385,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex142(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex142(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex142(const __base::elem*);
+               ghex142(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex142(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex142( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 26, node 27 and node 27 present.
@@ -3420,12 +3421,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex143(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex143(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex143(const __base::elem*);
+               ghex143(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex143(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex143( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 26, node 27 and node 27 present.
@@ -3455,12 +3456,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex144(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex144(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex144(const __base::elem*);
+               ghex144(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex144(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex144( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 26, node 27 and node 27 present.
@@ -3491,12 +3492,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex145(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex145(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex145(const __base::elem*);
+               ghex145(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex145(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex145( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 26, node 27 and node 27 present.
@@ -3527,12 +3528,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex146(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex146(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex146(const __base::elem*);
+               ghex146(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex146(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex146( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 26, node 27 and node 27 present.
@@ -3564,12 +3565,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex147(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex147(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex147(const __base::elem*);
+               ghex147(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex147(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex147( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 25, node 26, node 27 and node 27 present.
@@ -3598,12 +3599,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex148(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex148(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex148(const __base::elem*);
+               ghex148(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex148(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex148( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 26, node 27 and node 27 present.
@@ -3633,12 +3634,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex149(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex149(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex149(const __base::elem*);
+               ghex149(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex149(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex149( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 26, node 27 and node 27 present.
@@ -3668,12 +3669,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex150(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex150(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex150(const __base::elem*);
+               ghex150(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex150(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex150( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 26, node 27 and node 27 present.
@@ -3704,12 +3705,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex151(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex151(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex151(const __base::elem*);
+               ghex151(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex151(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex151( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 26, node 27 and node 27 present.
@@ -3739,12 +3740,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex152(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex152(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex152(const __base::elem*);
+               ghex152(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex152(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex152( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 26, node 27 and node 27 present.
@@ -3775,12 +3776,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex153(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex153(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex153(const __base::elem*);
+               ghex153(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex153(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex153( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 26, node 27 and node 27 present.
@@ -3811,12 +3812,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex154(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex154(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex154(const __base::elem*);
+               ghex154(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex154(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex154( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 26, node 27 and node 27 present.
@@ -3848,12 +3849,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex155(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex155(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex155(const __base::elem*);
+               ghex155(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex155(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex155( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 26, node 27 and node 27 present.
@@ -3883,12 +3884,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex156(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex156(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex156(const __base::elem*);
+               ghex156(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex156(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex156( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 26, node 27 and node 27 present.
@@ -3919,12 +3920,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex157(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex157(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex157(const __base::elem*);
+               ghex157(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex157(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex157( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 26, node 27 and node 27 present.
@@ -3955,12 +3956,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex158(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex158(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex158(const __base::elem*);
+               ghex158(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex158(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex158( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 26, node 27 and node 27 present.
@@ -3992,12 +3993,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex159(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex159(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex159(const __base::elem*);
+               ghex159(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex159(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex159( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 26, node 27 and node 27 present.
@@ -4028,12 +4029,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex160(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex160(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex160(const __base::elem*);
+               ghex160(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex160(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex160( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 26, node 27 and node 27 present.
@@ -4065,12 +4066,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex161(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex161(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex161(const __base::elem*);
+               ghex161(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex161(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex161( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
@@ -4102,12 +4103,12 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex162(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex162(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex162(const __base::elem*);
+               ghex162(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex162(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex162( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
@@ -4140,18 +4141,18 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
-               ghex163(const dnvgl::extfem::fem::cards::gelmnt1*);
-               ghex163(const dnvgl::extfem::fem::cards::gelref1*);
-               ghex163(const __base::elem*);
+               ghex163(dnvgl::extfem::fem::cards::gelmnt1 const*);
+               ghex163(dnvgl::extfem::fem::cards::gelref1 const*);
+               ghex163( __base::elem const*);
                virtual long nnodes(void) const;
                el_types get_type(void) const;
-               static const std::set<el_processor> processors;
+               std::set<el_processor> static const processors;
             };
 
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base::elem>&,
-               const cards::gelmnt1 *data);
+               cards::gelmnt1 const *data);
 
             /** Match element type id to element type name.
              */

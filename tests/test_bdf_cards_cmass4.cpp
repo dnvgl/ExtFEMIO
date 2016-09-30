@@ -9,7 +9,7 @@
 
 // ID:
 namespace {
-   const char  cID[]
+   char const cID_test_bdf_cards_cmass4[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
@@ -102,12 +102,15 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
       long EID(1), S1(2);
       double M(3.);
       cmass4 probe;
-      test << *probe(&EID, &M, &S1);
+      test << probe;
+      test << probe(&EID, &M, &S1);
       EID++;
-      test << *probe(&EID, &M, &S1);
+      test << probe(&EID, &M, &S1);
+      test << probe;
       CHECK(test.str() ==
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "CMASS4         13.000+00       2\n"
+            "CMASS4         23.000+00       2\n"
             "CMASS4         23.000+00       2\n");
    }
 }
