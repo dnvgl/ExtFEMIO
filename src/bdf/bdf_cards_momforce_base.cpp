@@ -37,7 +37,7 @@ using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
 
-using types::entry_type;
+using bdf::types::entry_type;
 using namespace type_bounds;
 
 entry_type<long> const cards::__base::momforce::form_SID(

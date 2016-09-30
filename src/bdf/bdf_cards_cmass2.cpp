@@ -41,7 +41,7 @@ using namespace bdf;
 using namespace type_bounds;
 using namespace cards;
 
-using types::entry_type;
+using bdf::types::entry_type;
 
 // entry_type<long> const cmass2::form_EID(
 //    "EID", bdf::type_bounds::bound<long>(&cl1));
