@@ -113,6 +113,36 @@ TEST_CASE("FEM GCOORD types output.", "[fem_gcoord,out]" ) {
       CHECK(test.str() ==
             "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
    }
+
+   SECTION("reuse (const)") {
+      gcoord probe;
+      test << probe(1, 1., 3., 134.);
+      CHECK(test.str() ==
+            "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
+   }
+
+   SECTION("resue (simple)") {
+      gcoord probe;
+      test << probe(NODENO, XCOORD, YCOORD, ZCOORD);
+      CHECK(test.str() ==
+            "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
+   }
+
+   SECTION("reuse (multiple)") {
+      gcoord probe;
+      test << probe;
+      test << probe(1, 1., 3., 134.);
+      test << probe(NODENO, XCOORD, YCOORD, ZCOORD);
+      NODENO++;
+      XCOORD += 5.;
+      test << probe(NODENO, XCOORD, YCOORD, ZCOORD);
+      test << probe;
+      CHECK(test.str() ==
+            "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"
+            "GCOORD  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"
+            "GCOORD  +2.000000000e+00+6.000000000e+00+3.000000000e+00+1.340000000e+02\n"
+            "GCOORD  +2.000000000e+00+6.000000000e+00+3.000000000e+00+1.340000000e+02\n");
+   }
 }
 
 TEST_CASE("FEM GCOORD conversion from own output.", "[fem_gcoord,in/out]") {

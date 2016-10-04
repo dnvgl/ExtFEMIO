@@ -370,10 +370,20 @@ DATE      0.100000000e+01 0.000000000e+00 0.400000000e+01 0.72000000E+02
                   long const &NODENO,
                   double const &XCOORD, double const &YCOORD, double const &ZCOORD);
 
+               __base::card const &operator() (std::list<std::string> const&);
+
+               __base::card const &operator() (
+                  long const &NODENO,
+                  double const &XCOORD, double const &YCOORD, double const &ZCOORD);
+
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
                virtual std::ostream &put(std::ostream&) const;
+
+            protected:
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
@@ -434,6 +444,15 @@ system, unless a local nodal coordinate system is specified (see the
                   long const &NODEX, long const &NODENO,
                   std::vector<int> const &ODOF);
 
+               __base::card const &operator() (std::list<std::string> const&);
+
+               __base::card const &operator() (
+                  long const &NODEX, long const &NODENO,
+                  long const &NDOF, std::vector<int> const &ODOF);
+
+               __base::card const &operator() (
+                  long const &NODEX, long const &NODENO,
+                  std::vector<int> const &ODOF);
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
@@ -1793,6 +1812,22 @@ according to the increasing order of their internal node number.
                      std::vector<long> const &FIX);
 
                bnbcd(long const &NODENO,
+                     long const &FIX1, long const &FIX2, long const &FIX3,
+                     long const &FIX4, long const &FIX5, long const &FIX6);
+
+               __base::card const &operator() (std::list<std::string> const&);
+
+               __base::card const &operator() (
+                  long const &NODENO,
+                  long const &NDOF,
+                  std::vector<long> const &FIX);
+
+               __base::card const &operator() (
+                  long const &NODENO,
+                  std::vector<long> const &FIX);
+
+               __base::card const &operator() (
+                  long const &NODENO,
                      long const &FIX1, long const &FIX2, long const &FIX3,
                      long const &FIX4, long const &FIX5, long const &FIX6);
 
