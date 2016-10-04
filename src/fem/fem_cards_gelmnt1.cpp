@@ -33,6 +33,7 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem;
 using namespace fem;
+using namespace cards;
 using namespace types;
 
 namespace {
@@ -163,93 +164,121 @@ namespace {
       std::pair<long, elements::el_types>(163, elements::el_types::GHEX163)};
 }
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
+const std::map<long, dnvgl::extfem::fem::elements::el_types>
+gelmnt1::eltyp_map(tmp_elmap, tmp_elmap+tmp_elmap_len);
 
-            const std::map<long, dnvgl::extfem::fem::elements::el_types>
-            gelmnt1::eltyp_map(tmp_elmap, tmp_elmap+tmp_elmap_len);
+const fem::types::card gelmnt1::head("GELMNT1");
 
-            const fem::types::card gelmnt1::head("GELMNT1");
+const entry_type<long> gelmnt1::_form_ELNOX("ELNOX");
+const entry_type<long> gelmnt1::_form_ELNO("ELNO");
+const entry_type<long> gelmnt1::_form_ELTYP("ELTYP");
+const entry_type<long> gelmnt1::_form_ELTYAD("ELTYAD");
+const entry_type<long> gelmnt1::_form_NODIN("NODIN");
 
-            const entry_type<long> gelmnt1::_form_ELNOX("ELNOX");
-            const entry_type<long> gelmnt1::_form_ELNO("ELNO");
-            const entry_type<long> gelmnt1::_form_ELTYP("ELTYP");
-            const entry_type<long> gelmnt1::_form_ELTYAD("ELTYAD");
-            const entry_type<long> gelmnt1::_form_NODIN("NODIN");
+gelmnt1::gelmnt1(const std::list<std::string> &inp) :
+   card(inp) {
+   this->read(inp);
+}
 
-            gelmnt1::gelmnt1(const std::list<std::string> &inp) :
-               card(inp) {
+void gelmnt1::read(const std::list<std::string> &inp) {
+   if (inp.size() < 6)
+      throw errors::parse_error(
+         "GELMNT1", "Illegal number of entries.");
 
-               if (inp.size() < 6)
-                  throw errors::parse_error(
-                     "GELMNT1", "Illegal number of entries.");
+   auto pos = inp.begin();
 
-               auto pos = inp.begin();
+   long tmp;
 
-               long tmp;
+   ++pos;
 
-               ++pos;
-
-               ELNOX = _form_ELNOX(*(pos++));
-               ELNO = _form_ELNO(*(pos++));
-               tmp = _form_ELTYP(*(pos++));
-               try {
-                  ELTYP = eltyp_map.at(tmp);
-               } catch (std::out_of_range) {
-                  dnvgl::extfem::fem::errors::parse_error(
-                     "gelmnt1", "wrong element type");
-               }
-               ELTYAD = _form_ELTYAD(*(pos++));
-               while (pos != inp.end() && *pos != "                ") {
-                  tmp = _form_NODIN(*(pos++));
-                  if (tmp == 0) break;
-                  NODIN.push_back(tmp);
-               }
-            }
-
-            gelmnt1::gelmnt1(void) :
-               gelmnt1(-1, 0, elements::el_types::INVALID, {}) {}
-
-            gelmnt1::gelmnt1(long const &ELNOX,
-                             long const &ELNO,
-                             elements::el_types const &ELTYP,
-                             long const &ELTYAD,
-                             std::vector<long> const &NODIN) :
-               card(),
-               ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
-               NODIN(NODIN) {}
-
-            gelmnt1::gelmnt1(long const &ELNOX,
-                             long const &ELNO,
-                             elements::el_types const &ELTYP,
-                             std::vector<long> const &NODIN) :
-               gelmnt1(ELNOX, ELNO, ELTYP, 0, NODIN) {}
-
-            const dnvgl::extfem::fem::cards::types
-            gelmnt1::card_type(void) const { return types::GELMNT1; }
-
-            std::ostream &gelmnt1::put(std::ostream& os) const {
-               if (this->ELTYP == elements::el_types::INVALID) return os;
-               os << gelmnt1::head.format()
-                  << this->_form_ELNOX.format(this->ELNOX)
-                  << this->_form_ELNO.format(this->ELNO)
-                  << this->_form_ELTYP.format(static_cast<long>(this->ELTYP))
-                  << this->_form_ELTYAD.format(this->ELTYAD);
-               size_t i = 5;
-               for (auto p : this->NODIN) {
-                  if (i++ >= 4) {
-                     i = 1;
-                     os << std::endl << dnvgl::extfem::fem::types::card().format();
-                  }
-                  os << this->_form_NODIN.format(p);
-               }
-               return os << std::endl;
-            }
-         }
-      }
+   ELNOX = _form_ELNOX(*(pos++));
+   ELNO = _form_ELNO(*(pos++));
+   tmp = _form_ELTYP(*(pos++));
+   try {
+      ELTYP = eltyp_map.at(tmp);
+   } catch (std::out_of_range) {
+      dnvgl::extfem::fem::errors::parse_error(
+         "gelmnt1", "wrong element type");
    }
+   ELTYAD = _form_ELTYAD(*(pos++));
+   while (pos != inp.end() && *pos != "                ") {
+      tmp = _form_NODIN(*(pos++));
+      if (tmp == 0) break;
+      NODIN.push_back(tmp);
+   }
+}
+
+gelmnt1::gelmnt1(void) :
+   gelmnt1(-1, 0, elements::el_types::INVALID, {}) {}
+
+gelmnt1::gelmnt1(long const &ELNOX,
+                 long const &ELNO,
+                 elements::el_types const &ELTYP,
+                 long const &ELTYAD,
+                 std::vector<long> const &NODIN) :
+   card(),
+   ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
+   NODIN(NODIN) {}
+
+gelmnt1::gelmnt1(long const &ELNOX,
+                 long const &ELNO,
+                 elements::el_types const &ELTYP,
+                 std::vector<long> const &NODIN) :
+   gelmnt1(ELNOX, ELNO, ELTYP, 0, NODIN) {}
+
+cards::__base::card const &gelmnt1::operator() (
+   std::list<std::string> const &inp) {
+   this->read(inp);
+   return *this;
+}
+
+cards::__base::card const &gelmnt1::operator() (
+   long const &ELNOX,
+   long const &ELNO,
+   elements::el_types const &ELTYP,
+   long const &ELTYAD,
+   std::vector<long> const &NODIN) {
+   this->ELNOX = ELNOX;
+   this->ELNO = ELNO;
+   this->ELTYP = ELTYP;
+   this->ELTYAD = ELTYAD;
+   this->NODIN = NODIN;
+   return *this;
+}
+
+cards::__base::card const &gelmnt1::operator() (
+   long const &ELNOX,
+   long const &ELNO,
+   elements::el_types const &ELTYP,
+   std::vector<long> const &NODIN) {
+   return (*this)(ELNOX, ELNO, ELTYP, 0, NODIN);
+}
+
+cards::__base::card const &gelmnt1::operator() (
+   long const &ELNOX, long const &ELNO,
+   dnvgl::extfem::fem::elements::el_types const &ELTYP,
+   long const &ELTYAD,
+   std::vector<long> const &NODIN);
+
+const dnvgl::extfem::fem::cards::types
+gelmnt1::card_type(void) const { return types::GELMNT1; }
+
+std::ostream &gelmnt1::put(std::ostream& os) const {
+   if (this->ELTYP == elements::el_types::INVALID) return os;
+   os << gelmnt1::head.format()
+      << this->_form_ELNOX.format(this->ELNOX)
+      << this->_form_ELNO.format(this->ELNO)
+      << this->_form_ELTYP.format(static_cast<long>(this->ELTYP))
+      << this->_form_ELTYAD.format(this->ELTYAD);
+   size_t i = 5;
+   for (auto p : this->NODIN) {
+      if (i++ >= 4) {
+         i = 1;
+         os << std::endl << dnvgl::extfem::fem::types::card().format();
+      }
+      os << this->_form_NODIN.format(p);
+   }
+   return os << std::endl;
 }
 
 // Local Variables:

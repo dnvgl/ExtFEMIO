@@ -31,6 +31,8 @@
 
 #include <set>
 
+#line 35 "tools/templates/fem_elements.h"
+
 namespace dnvgl {
    namespace extfem {
       namespace fem {
@@ -159,7 +161,7 @@ namespace dnvgl {
                GHEX162 = 162,
                GHEX163 = 163,
                INVALID=-1, UNDEFINED=-2};
-
+#line 45
             enum class el_processor {
                general, Preframe, Prefem, Sestra, ADVANCE,
                Framework, Launch, Platework, Pretube,
@@ -170,6 +172,11 @@ namespace dnvgl {
             /** Base class for FEM element representation.
              */
                class elem {
+
+               private:
+
+                  static cards::gelmnt1 d_gelmnt1;
+                  static cards::gelref1 d_gelref1;
 
                protected:
                   el_types static const type;
@@ -189,14 +196,30 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+                  __base::elem const &operator() (
+                     long const elno,
+                     long const elident,
+                     long const el_add,
+                     std::vector<long> const nodes,
+                     long const matref,
+                     long const add_no,
+                     long const intno,
+                     long const mass_intno,
+                     long const i_strain_ref,
+                     long const i_stressef,
+                     long const strpoint_ref,
+                     std::vector<long> const sections,
+                     std::vector<long> const fixations,
+                     std::vector<long> const eccentrities,
+                     std::vector<long> const csys);
 
                public:
                   elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
                   elem(dnvgl::extfem::fem::cards::gelref1 const*);
                   elem(elem const*);
 
-                  dnvgl::extfem::fem::cards::gelmnt1 gelmnt1(void) const;
-                  dnvgl::extfem::fem::cards::gelref1 gelref1(void) const;
+                  cards::__base::card const &gelmnt1(void) const;
+                  cards::__base::card const &gelref1(void) const;
 
 
                   /** Element number ->
@@ -301,6 +324,7 @@ namespace dnvgl {
                   fem_thin_shell(dnvgl::extfem::fem::cards::gelmnt1 const*);
                   fem_thin_shell(dnvgl::extfem::fem::cards::gelref1 const*);
                   fem_thin_shell(__base::elem const*);
+                  using elem::operator();
                };
             }
 
@@ -313,6 +337,7 @@ namespace dnvgl {
             };
 
 
+#line 220
             /** 2-D, 2 Node Beam
              */
             class beps : public __base::elem {
@@ -333,6 +358,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                beps(dnvgl::extfem::fem::cards::gelmnt1 const*);
                beps(dnvgl::extfem::fem::cards::gelref1 const*);
                beps( __base::elem const*);
@@ -341,6 +367,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Plane Constant Strain Triangle
              */
             class csta : public __base::elem {
@@ -361,6 +388,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                csta(dnvgl::extfem::fem::cards::gelmnt1 const*);
                csta(dnvgl::extfem::fem::cards::gelref1 const*);
                csta( __base::elem const*);
@@ -369,6 +397,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Rect. Plate. Bending Modes
              */
             class rpbq : public __base::elem {
@@ -389,6 +418,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                rpbq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                rpbq(dnvgl::extfem::fem::cards::gelref1 const*);
                rpbq( __base::elem const*);
@@ -397,6 +427,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Plane Lin. Strain Triangle
              */
             class ilst : public __base::elem {
@@ -417,6 +448,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ilst(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ilst(dnvgl::extfem::fem::cards::gelref1 const*);
                ilst( __base::elem const*);
@@ -425,6 +457,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Plane Quadrilateral Membrane Element
              */
             class iqqe : public __base::elem {
@@ -445,6 +478,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                iqqe(dnvgl::extfem::fem::cards::gelmnt1 const*);
                iqqe(dnvgl::extfem::fem::cards::gelref1 const*);
                iqqe( __base::elem const*);
@@ -453,6 +487,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Plane Quadrilateral Membrane Element
              */
             class lqua : public __base::elem {
@@ -473,6 +508,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                lqua(dnvgl::extfem::fem::cards::gelmnt1 const*);
                lqua(dnvgl::extfem::fem::cards::gelref1 const*);
                lqua( __base::elem const*);
@@ -481,6 +517,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Truss Element
              */
             class tess : public __base::elem {
@@ -501,6 +538,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                tess(dnvgl::extfem::fem::cards::gelmnt1 const*);
                tess(dnvgl::extfem::fem::cards::gelref1 const*);
                tess( __base::elem const*);
@@ -509,6 +547,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 1-Noded Mass-Matrix
              */
             class gmas : public __base::elem {
@@ -529,6 +568,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                gmas(dnvgl::extfem::fem::cards::gelmnt1 const*);
                gmas(dnvgl::extfem::fem::cards::gelref1 const*);
                gmas( __base::elem const*);
@@ -537,6 +577,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 2-Noded Mass-Matrix
              */
             class glma : public __base::elem {
@@ -557,6 +598,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                glma(dnvgl::extfem::fem::cards::gelmnt1 const*);
                glma(dnvgl::extfem::fem::cards::gelref1 const*);
                glma( __base::elem const*);
@@ -565,6 +607,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 2-Noded Damping-Matrix
              */
             class glda : public __base::elem {
@@ -585,6 +628,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                glda(dnvgl::extfem::fem::cards::gelmnt1 const*);
                glda(dnvgl::extfem::fem::cards::gelref1 const*);
                glda( __base::elem const*);
@@ -593,6 +637,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 3-D, 2 Node Beam
              */
             class beas : public __base::elem {
@@ -613,6 +658,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                beas(dnvgl::extfem::fem::cards::gelmnt1 const*);
                beas(dnvgl::extfem::fem::cards::gelref1 const*);
                beas( __base::elem const*);
@@ -621,6 +667,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Axial Spring
              */
             class axis : public __base::elem {
@@ -641,6 +688,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                axis(dnvgl::extfem::fem::cards::gelmnt1 const*);
                axis(dnvgl::extfem::fem::cards::gelref1 const*);
                axis( __base::elem const*);
@@ -649,6 +697,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Axial Damper
              */
             class axda : public __base::elem {
@@ -669,6 +718,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                axda(dnvgl::extfem::fem::cards::gelmnt1 const*);
                axda(dnvgl::extfem::fem::cards::gelref1 const*);
                axda( __base::elem const*);
@@ -677,6 +727,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Spring to Ground
              */
             class gspr : public __base::elem {
@@ -697,6 +748,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                gspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                gspr(dnvgl::extfem::fem::cards::gelref1 const*);
                gspr( __base::elem const*);
@@ -705,6 +757,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Damper to Ground
              */
             class gdam : public __base::elem {
@@ -725,6 +778,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                gdam(dnvgl::extfem::fem::cards::gelmnt1 const*);
                gdam(dnvgl::extfem::fem::cards::gelref1 const*);
                gdam( __base::elem const*);
@@ -733,6 +787,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Isoparametric Hexahedron
              */
             class ihex : public __base::elem {
@@ -753,6 +808,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ihex(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ihex(dnvgl::extfem::fem::cards::gelref1 const*);
                ihex( __base::elem const*);
@@ -761,6 +817,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Linear Hexahedron
              */
             class lhex : public __base::elem {
@@ -781,6 +838,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                lhex(dnvgl::extfem::fem::cards::gelmnt1 const*);
                lhex(dnvgl::extfem::fem::cards::gelref1 const*);
                lhex( __base::elem const*);
@@ -789,6 +847,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Subparametric Curved Beam
              */
             class secb : public __base::elem {
@@ -809,6 +868,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                secb(dnvgl::extfem::fem::cards::gelmnt1 const*);
                secb(dnvgl::extfem::fem::cards::gelref1 const*);
                secb( __base::elem const*);
@@ -817,6 +877,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Curved Beam
              */
             class btss : public __base::elem {
@@ -837,6 +898,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                btss(dnvgl::extfem::fem::cards::gelmnt1 const*);
                btss(dnvgl::extfem::fem::cards::gelref1 const*);
                btss( __base::elem const*);
@@ -845,6 +907,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell
              */
             class fqus_ffq : public __base::fem_thin_shell {
@@ -865,6 +928,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using fem_thin_shell::operator();
                fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const*);
                fqus_ffq( __base::elem const*);
@@ -873,6 +937,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /**  Flat Triangular Thin Shell / Free Formulation Triangular Shell
              */
             class ftrs_fftr : public __base::fem_thin_shell {
@@ -893,6 +958,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using fem_thin_shell::operator();
                ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const*);
                ftrs_fftr( __base::elem const*);
@@ -901,6 +967,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Subparametric Curved Triangular Thick Shell
              */
             class scts : public __base::elem {
@@ -921,6 +988,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                scts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                scts(dnvgl::extfem::fem::cards::gelref1 const*);
                scts( __base::elem const*);
@@ -929,6 +997,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Subparam. Curved Triang. Thick Sandwich Elem.
              */
             class mcts : public __base::elem {
@@ -949,6 +1018,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                mcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                mcts(dnvgl::extfem::fem::cards::gelref1 const*);
                mcts( __base::elem const*);
@@ -957,6 +1027,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Subparametric Curved Quadrilateral Thick Shell
              */
             class scqs : public __base::elem {
@@ -977,6 +1048,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                scqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                scqs(dnvgl::extfem::fem::cards::gelref1 const*);
                scqs( __base::elem const*);
@@ -985,6 +1057,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Subparam. Curved Quadr. Thick Sandwich Elem.
              */
             class mcqs : public __base::elem {
@@ -1005,6 +1078,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                mcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                mcqs(dnvgl::extfem::fem::cards::gelref1 const*);
                mcqs( __base::elem const*);
@@ -1013,6 +1087,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Isoparametric Triangular Prism
              */
             class ipri : public __base::elem {
@@ -1033,6 +1108,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ipri(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ipri(dnvgl::extfem::fem::cards::gelref1 const*);
                ipri( __base::elem const*);
@@ -1041,6 +1117,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Isoparametric Tetrahedron
              */
             class itet : public __base::elem {
@@ -1061,6 +1138,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                itet(dnvgl::extfem::fem::cards::gelmnt1 const*);
                itet(dnvgl::extfem::fem::cards::gelref1 const*);
                itet( __base::elem const*);
@@ -1069,6 +1147,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Triangular Prism
              */
             class tpri : public __base::elem {
@@ -1089,6 +1168,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                tpri(dnvgl::extfem::fem::cards::gelmnt1 const*);
                tpri(dnvgl::extfem::fem::cards::gelref1 const*);
                tpri( __base::elem const*);
@@ -1097,6 +1177,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Tetrahedron
              */
             class tetr : public __base::elem {
@@ -1117,6 +1198,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                tetr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                tetr(dnvgl::extfem::fem::cards::gelref1 const*);
                tetr( __base::elem const*);
@@ -1125,6 +1207,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Subparam. Layered Curved Triangular Thick Shell
              */
             class lcts : public __base::elem {
@@ -1145,6 +1228,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                lcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                lcts(dnvgl::extfem::fem::cards::gelref1 const*);
                lcts( __base::elem const*);
@@ -1153,6 +1237,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Subparam. Layered Curved Quadrilat. Thick Shell
              */
             class lcqs : public __base::elem {
@@ -1173,6 +1258,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                lcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                lcqs(dnvgl::extfem::fem::cards::gelref1 const*);
                lcqs( __base::elem const*);
@@ -1181,6 +1267,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
             class trs1 : public __base::elem {
@@ -1201,6 +1288,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                trs1(dnvgl::extfem::fem::cards::gelmnt1 const*);
                trs1(dnvgl::extfem::fem::cards::gelref1 const*);
                trs1( __base::elem const*);
@@ -1209,6 +1297,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
             class trs2 : public __base::elem {
@@ -1229,6 +1318,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                trs2(dnvgl::extfem::fem::cards::gelmnt1 const*);
                trs2(dnvgl::extfem::fem::cards::gelref1 const*);
                trs2( __base::elem const*);
@@ -1237,6 +1327,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 2nd Order Hexahed. Transition Elem., Solid / Shell
              */
             class trs3 : public __base::elem {
@@ -1257,6 +1348,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                trs3(dnvgl::extfem::fem::cards::gelmnt1 const*);
                trs3(dnvgl::extfem::fem::cards::gelref1 const*);
                trs3( __base::elem const*);
@@ -1265,6 +1357,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Spring / Shim Element
              */
             class glsh : public __base::elem {
@@ -1285,6 +1378,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                glsh(dnvgl::extfem::fem::cards::gelmnt1 const*);
                glsh(dnvgl::extfem::fem::cards::gelref1 const*);
                glsh( __base::elem const*);
@@ -1293,6 +1387,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Axisymmetric Constant Strain Triangle
              */
             class axcs : public __base::elem {
@@ -1313,6 +1408,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                axcs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                axcs(dnvgl::extfem::fem::cards::gelref1 const*);
                axcs( __base::elem const*);
@@ -1321,6 +1417,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Axisymmetric Quadrilateral
              */
             class axlq : public __base::elem {
@@ -1341,6 +1438,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                axlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                axlq(dnvgl::extfem::fem::cards::gelref1 const*);
                axlq( __base::elem const*);
@@ -1349,6 +1447,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Axisymmetric Linear Strain Triangle
              */
             class axls : public __base::elem {
@@ -1369,6 +1468,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                axls(dnvgl::extfem::fem::cards::gelmnt1 const*);
                axls(dnvgl::extfem::fem::cards::gelref1 const*);
                axls( __base::elem const*);
@@ -1377,6 +1477,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Axisymmetric Linear Strain Quadrilateral
              */
             class axqq : public __base::elem {
@@ -1397,6 +1498,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                axqq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                axqq(dnvgl::extfem::fem::cards::gelref1 const*);
                axqq( __base::elem const*);
@@ -1405,6 +1507,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Pile / Soil
              */
             class pils : public __base::elem {
@@ -1425,6 +1528,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                pils(dnvgl::extfem::fem::cards::gelmnt1 const*);
                pils(dnvgl::extfem::fem::cards::gelref1 const*);
                pils( __base::elem const*);
@@ -1433,6 +1537,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Plane Cable-Bar Element
              */
             class pcab : public __base::elem {
@@ -1453,6 +1558,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                pcab(dnvgl::extfem::fem::cards::gelmnt1 const*);
                pcab(dnvgl::extfem::fem::cards::gelref1 const*);
                pcab( __base::elem const*);
@@ -1461,6 +1567,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Plane Spring Element
              */
             class pspr : public __base::elem {
@@ -1481,6 +1588,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                pspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                pspr(dnvgl::extfem::fem::cards::gelref1 const*);
                pspr( __base::elem const*);
@@ -1489,6 +1597,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 4-node Contact Element with triangular Shape
              */
             class adva_4 : public __base::elem {
@@ -1509,6 +1618,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                adva_4(dnvgl::extfem::fem::cards::gelmnt1 const*);
                adva_4(dnvgl::extfem::fem::cards::gelref1 const*);
                adva_4( __base::elem const*);
@@ -1517,6 +1627,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 2-Noded Link Element
              */
             class adva_2 : public __base::elem {
@@ -1537,6 +1648,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                adva_2(dnvgl::extfem::fem::cards::gelmnt1 const*);
                adva_2(dnvgl::extfem::fem::cards::gelref1 const*);
                adva_2( __base::elem const*);
@@ -1545,6 +1657,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 2-Noded Contact Element
              */
             class ctcp : public __base::elem {
@@ -1565,6 +1678,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctcp(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctcp(dnvgl::extfem::fem::cards::gelref1 const*);
                ctcp( __base::elem const*);
@@ -1573,6 +1687,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 4-Noded Contact Element
              */
             class ctcl : public __base::elem {
@@ -1593,6 +1708,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctcl(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctcl(dnvgl::extfem::fem::cards::gelref1 const*);
                ctcl( __base::elem const*);
@@ -1601,6 +1717,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 4-Noded Axisymmetric Contact Element
              */
             class ctal : public __base::elem {
@@ -1621,6 +1738,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctal(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctal(dnvgl::extfem::fem::cards::gelref1 const*);
                ctal( __base::elem const*);
@@ -1629,6 +1747,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 6-Noded Contact Element
              */
             class ctcc : public __base::elem {
@@ -1649,6 +1768,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctcc(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctcc(dnvgl::extfem::fem::cards::gelref1 const*);
                ctcc( __base::elem const*);
@@ -1657,6 +1777,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 6-Noded (3+3) Axisymmetric Contact Element
              */
             class ctaq : public __base::elem {
@@ -1677,6 +1798,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctaq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctaq(dnvgl::extfem::fem::cards::gelref1 const*);
                ctaq( __base::elem const*);
@@ -1685,6 +1807,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 8-Noded (4+4) Contact Element
              */
             class ctlq : public __base::elem {
@@ -1705,6 +1828,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctlq(dnvgl::extfem::fem::cards::gelref1 const*);
                ctlq( __base::elem const*);
@@ -1713,6 +1837,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 16-Noded (8+8) Contact Element
              */
             class ctcq : public __base::elem {
@@ -1733,6 +1858,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctcq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctcq(dnvgl::extfem::fem::cards::gelref1 const*);
                ctcq( __base::elem const*);
@@ -1741,6 +1867,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 18-Noded (9+9) Contact Element
              */
             class ctmq : public __base::elem {
@@ -1761,6 +1888,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ctmq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ctmq(dnvgl::extfem::fem::cards::gelref1 const*);
                ctmq( __base::elem const*);
@@ -1769,6 +1897,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** 9-Noded Shell Element
              */
             class hcqs : public __base::elem {
@@ -1789,6 +1918,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                hcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                hcqs(dnvgl::extfem::fem::cards::gelref1 const*);
                hcqs( __base::elem const*);
@@ -1797,6 +1927,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
              */
             class slqs : public __base::elem {
@@ -1817,6 +1948,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                slqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                slqs(dnvgl::extfem::fem::cards::gelref1 const*);
                slqs( __base::elem const*);
@@ -1825,6 +1957,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
              */
             class slts : public __base::elem {
@@ -1845,6 +1978,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                slts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                slts(dnvgl::extfem::fem::cards::gelref1 const*);
                slts( __base::elem const*);
@@ -1853,6 +1987,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** Semiloof Curved Beam (11 d.o.fs)
              */
             class slcb : public __base::elem {
@@ -1873,6 +2008,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                slcb(dnvgl::extfem::fem::cards::gelmnt1 const*);
                slcb(dnvgl::extfem::fem::cards::gelref1 const*);
                slcb( __base::elem const*);
@@ -1881,6 +2017,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Matrix Element with arbitrary no. of nodes (/n/)
              */
             class matr : public __base::elem {
@@ -1901,6 +2038,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                matr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                matr(dnvgl::extfem::fem::cards::gelref1 const*);
                matr( __base::elem const*);
@@ -1909,6 +2047,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -1933,6 +2072,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex100(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex100(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex100( __base::elem const*);
@@ -1941,6 +2081,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -1966,6 +2107,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex101(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex101(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex101( __base::elem const*);
@@ -1974,6 +2116,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -1999,6 +2142,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex102(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex102(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex102( __base::elem const*);
@@ -2007,6 +2151,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2033,6 +2178,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex103(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex103(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex103( __base::elem const*);
@@ -2041,6 +2187,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2066,6 +2213,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex104(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex104(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex104( __base::elem const*);
@@ -2074,6 +2222,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2100,6 +2249,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex105(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex105(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex105( __base::elem const*);
@@ -2108,6 +2258,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2134,6 +2285,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex106(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex106(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex106( __base::elem const*);
@@ -2142,6 +2294,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2169,6 +2322,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex107(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex107(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex107( __base::elem const*);
@@ -2177,6 +2331,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2202,6 +2357,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex108(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex108(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex108( __base::elem const*);
@@ -2210,6 +2366,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2236,6 +2393,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex109(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex109(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex109( __base::elem const*);
@@ -2244,6 +2402,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2270,6 +2429,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex110(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex110(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex110( __base::elem const*);
@@ -2278,6 +2438,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2305,6 +2466,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex111(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex111(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex111( __base::elem const*);
@@ -2313,6 +2475,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2339,6 +2502,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex112(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex112(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex112( __base::elem const*);
@@ -2347,6 +2511,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2374,6 +2539,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex113(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex113(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex113( __base::elem const*);
@@ -2382,6 +2548,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2409,6 +2576,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex114(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex114(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex114( __base::elem const*);
@@ -2417,6 +2585,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2445,6 +2614,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex115(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex115(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex115( __base::elem const*);
@@ -2453,6 +2623,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2478,6 +2649,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex116(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex116(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex116( __base::elem const*);
@@ -2486,6 +2658,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2512,6 +2685,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex117(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex117(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex117( __base::elem const*);
@@ -2520,6 +2694,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2546,6 +2721,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex118(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex118(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex118( __base::elem const*);
@@ -2554,6 +2730,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2581,6 +2758,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex119(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex119(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex119( __base::elem const*);
@@ -2589,6 +2767,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2615,6 +2794,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex120(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex120(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex120( __base::elem const*);
@@ -2623,6 +2803,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2650,6 +2831,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex121(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex121(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex121( __base::elem const*);
@@ -2658,6 +2840,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2685,6 +2868,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex122(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex122(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex122( __base::elem const*);
@@ -2693,6 +2877,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2721,6 +2906,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex123(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex123(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex123( __base::elem const*);
@@ -2729,6 +2915,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2755,6 +2942,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex124(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex124(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex124( __base::elem const*);
@@ -2763,6 +2951,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2790,6 +2979,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex125(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex125(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex125( __base::elem const*);
@@ -2798,6 +2988,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2825,6 +3016,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex126(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex126(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex126( __base::elem const*);
@@ -2833,6 +3025,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2861,6 +3054,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex127(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex127(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex127( __base::elem const*);
@@ -2869,6 +3063,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2896,6 +3091,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex128(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex128(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex128( __base::elem const*);
@@ -2904,6 +3100,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2932,6 +3129,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex129(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex129(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex129( __base::elem const*);
@@ -2940,6 +3138,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -2968,6 +3167,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex130(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex130(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex130( __base::elem const*);
@@ -2976,6 +3176,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3005,6 +3206,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex131(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex131(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex131( __base::elem const*);
@@ -3013,6 +3215,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3038,6 +3241,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex132(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex132(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex132( __base::elem const*);
@@ -3046,6 +3250,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3072,6 +3277,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex133(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex133(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex133( __base::elem const*);
@@ -3080,6 +3286,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3106,6 +3313,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex134(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex134(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex134( __base::elem const*);
@@ -3114,6 +3322,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3141,6 +3350,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex135(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex135(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex135( __base::elem const*);
@@ -3149,6 +3359,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3175,6 +3386,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex136(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex136(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex136( __base::elem const*);
@@ -3183,6 +3395,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3210,6 +3423,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex137(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex137(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex137( __base::elem const*);
@@ -3218,6 +3432,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3245,6 +3460,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex138(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex138(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex138( __base::elem const*);
@@ -3253,6 +3469,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3281,6 +3498,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex139(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex139(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex139( __base::elem const*);
@@ -3289,6 +3507,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3315,6 +3534,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex140(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex140(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex140( __base::elem const*);
@@ -3323,6 +3543,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3350,6 +3571,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex141(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex141(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex141( __base::elem const*);
@@ -3358,6 +3580,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3385,6 +3608,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex142(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex142(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex142( __base::elem const*);
@@ -3393,6 +3617,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3421,6 +3646,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex143(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex143(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex143( __base::elem const*);
@@ -3429,6 +3655,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3456,6 +3683,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex144(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex144(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex144( __base::elem const*);
@@ -3464,6 +3692,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3492,6 +3721,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex145(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex145(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex145( __base::elem const*);
@@ -3500,6 +3730,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3528,6 +3759,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex146(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex146(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex146( __base::elem const*);
@@ -3536,6 +3768,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3565,6 +3798,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex147(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex147(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex147( __base::elem const*);
@@ -3573,6 +3807,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3599,6 +3834,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex148(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex148(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex148( __base::elem const*);
@@ -3607,6 +3843,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3634,6 +3871,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex149(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex149(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex149( __base::elem const*);
@@ -3642,6 +3880,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3669,6 +3908,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex150(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex150(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex150( __base::elem const*);
@@ -3677,6 +3917,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3705,6 +3946,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex151(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex151(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex151( __base::elem const*);
@@ -3713,6 +3955,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3740,6 +3983,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex152(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex152(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex152( __base::elem const*);
@@ -3748,6 +3992,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3776,6 +4021,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex153(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex153(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex153( __base::elem const*);
@@ -3784,6 +4030,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3812,6 +4059,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex154(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex154(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex154( __base::elem const*);
@@ -3820,6 +4068,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3849,6 +4098,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex155(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex155(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex155( __base::elem const*);
@@ -3857,6 +4107,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3884,6 +4135,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex156(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex156(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex156( __base::elem const*);
@@ -3892,6 +4144,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3920,6 +4173,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex157(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex157(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex157( __base::elem const*);
@@ -3928,6 +4182,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3956,6 +4211,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex158(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex158(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex158( __base::elem const*);
@@ -3964,6 +4220,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3993,6 +4250,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex159(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex159(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex159( __base::elem const*);
@@ -4001,6 +4259,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4029,6 +4288,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex160(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex160(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex160( __base::elem const*);
@@ -4037,6 +4297,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4066,6 +4327,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex161(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex161(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex161( __base::elem const*);
@@ -4074,6 +4336,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4103,6 +4366,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex162(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex162(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex162( __base::elem const*);
@@ -4111,6 +4375,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 220
             /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4141,6 +4406,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using elem::operator();
                ghex163(dnvgl::extfem::fem::cards::gelmnt1 const*);
                ghex163(dnvgl::extfem::fem::cards::gelref1 const*);
                ghex163( __base::elem const*);
@@ -4149,6 +4415,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 
+#line 265
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base::elem>&,

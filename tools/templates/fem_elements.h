@@ -31,6 +31,8 @@
 
 #include <set>
 
+#line 35 "tools/templates/fem_elements.h"
+
 namespace dnvgl {
    namespace extfem {
       namespace fem {
@@ -39,7 +41,7 @@ namespace dnvgl {
             enum class el_types {
                {% for name, val in enums %}{{ name }} = {{ val }},
                {% endfor %}INVALID=-1, UNDEFINED=-2};
-
+#line 45
             enum class el_processor {
                general, Preframe, Prefem, Sestra, ADVANCE,
                Framework, Launch, Platework, Pretube,
@@ -50,6 +52,11 @@ namespace dnvgl {
             /** Base class for FEM element representation.
              */
                class elem {
+
+               private:
+
+                  static cards::gelmnt1 d_gelmnt1;
+                  static cards::gelref1 d_gelref1;
 
                protected:
                   el_types static const type;
@@ -69,14 +76,30 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+                  __base::elem const &operator() (
+                     long const elno,
+                     long const elident,
+                     long const el_add,
+                     std::vector<long> const nodes,
+                     long const matref,
+                     long const add_no,
+                     long const intno,
+                     long const mass_intno,
+                     long const i_strain_ref,
+                     long const i_stressef,
+                     long const strpoint_ref,
+                     std::vector<long> const sections,
+                     std::vector<long> const fixations,
+                     std::vector<long> const eccentrities,
+                     std::vector<long> const csys);
 
                public:
                   elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
                   elem(dnvgl::extfem::fem::cards::gelref1 const*);
                   elem(elem const*);
 
-                  dnvgl::extfem::fem::cards::gelmnt1 gelmnt1(void) const;
-                  dnvgl::extfem::fem::cards::gelref1 gelref1(void) const;
+                  cards::__base::card const &gelmnt1(void) const;
+                  cards::__base::card const &gelref1(void) const;
 
 
                   /** Element number ->
@@ -181,6 +204,7 @@ namespace dnvgl {
                   fem_thin_shell(dnvgl::extfem::fem::cards::gelmnt1 const*);
                   fem_thin_shell(dnvgl::extfem::fem::cards::gelref1 const*);
                   fem_thin_shell(__base::elem const*);
+                  using elem::operator();
                };
             }
 
@@ -193,6 +217,7 @@ namespace dnvgl {
             };
 
 {% for elem, vals in elements %}
+#line 220
             /** {{ vals.doc }}
              */
             class {{ elem }} : public __base::{{ vals.base }} {
@@ -213,6 +238,7 @@ namespace dnvgl {
                        std::vector<long> const fixations,
                        std::vector<long> const eccentrities,
                        std::vector<long> const csys);
+               using {{ vals.base }}::operator();
                {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
                {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
                {{ elem }}( __base::elem const*);
@@ -221,6 +247,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 {% endfor %}
+#line 265
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base::elem>&,

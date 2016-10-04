@@ -34,6 +34,8 @@ namespace {
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
+#line 38 "tools/templates/test_fem_elements.cpp"
+
 #include <limits>
 
 #include <iostream>
@@ -177,6 +179,28 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
 
    SECTION("check output") {
       test << probe;
+      CHECK(test.str() ==
+            {{ gelmnt1(*([1, 2, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
+            {{ gelref1(2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
+   }
+
+   SECTION("reuse (check output)") {
+      {{ elem }} probe;
+      test << probe(1,                         // elnox
+                    2,                         // elno
+                    3,                         // eltyad
+                    std::vector<long>({{ list_init_form(100, 100+vals.nnodes) }}), // nodin
+                    6,                         // matno
+                    7,                         // addno
+                    8,                         // intno
+                    9,                         // mintno
+                    10,                        // strano
+                    11,                        // streno
+                    12,                        // strepono
+                    std::vector<long>(1, 13),  // geono_opt
+                    std::vector<long>(1, 14),  // fixno_opt
+                    std::vector<long>(1, 15),  // eccno_opt
+                    std::vector<long>(1, 16)); // transno_opt
       CHECK(test.str() ==
             {{ gelmnt1(*([1, 2, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
             {{ gelref1(2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});

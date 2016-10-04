@@ -34,6 +34,9 @@ namespace dnvgl {
    namespace extfem {
       namespace fem {
          namespace cards {
+            namespace __base {
+               class card;
+            }
             class gelmnt1;
             class gelref1;
             class gbeamg;
@@ -662,10 +665,24 @@ Defines end of a superelement.
 
                gelmnt1(
                   long const &ELNOX, long const &ELNO,
-                  dnvgl::extfem::fem::elements::el_types const &ELTYP, long const &ELTYAD,
+                  dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                  long const &ELTYAD,
                   std::vector<long> const &NODIN);
 
                gelmnt1(
+                  long const &ELNOX, long const &ELNO,
+                  dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                  std::vector<long> const &NODIN);
+
+               __base::card const &operator() (std::list<std::string> const&);
+
+               __base::card const &operator() (
+                  long const &ELNOX, long const &ELNO,
+                  dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                  long const &ELTYAD,
+                  std::vector<long> const &NODIN);
+
+               __base::card const &operator() (
                   long const &ELNOX, long const &ELNO,
                   dnvgl::extfem::fem::elements::el_types const &ELTYP,
                   std::vector<long> const &NODIN);
@@ -842,6 +859,20 @@ Shortest version:
                gelref1(void);
 
                gelref1(
+                  long const &ELNO, long const &MATNO,
+                  long const &ADDNO, long const &INTNO,
+                  long const &MINTNO, long const &STRANO,
+                  long const &STRENO, long const &STREPONO,
+                  long const &GEONO_OPT, long const &FIXNO_OPT,
+                  long const &ECCNO_OPT, long const &TRANSNO_OPT,
+                  std::vector<long> const &GEONO={},
+                  std::vector<long> const &FIXNO={},
+                  std::vector<long> const &ECCNO={},
+                  std::vector<long> const &TRANSNO={});
+
+               __base::card const &operator() (std::list<std::string> const&);
+
+               __base::card const &operator() (
                   long const &ELNO, long const &MATNO,
                   long const &ADDNO, long const &INTNO,
                   long const &MINTNO, long const &STRANO,
