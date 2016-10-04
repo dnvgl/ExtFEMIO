@@ -91,6 +91,22 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
       CHECK(probe.ODOF[1] == 3);
       CHECK(probe.ODOF[2] == 6);
    }
+
+   SECTION("reuse (GNODE)") {
+      std::list<std::string> data({
+         "GNODE    1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
+      __base::card::card_split(data, lines);
+      gnode probe;
+      probe(lines);
+
+      CHECK(probe.NODEX == 1);
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.NDOF == 3);
+      CHECK(probe.ODOF.size() == 3);
+      CHECK(probe.ODOF[0] == 1);
+      CHECK(probe.ODOF[1] == 3);
+      CHECK(probe.ODOF[2] == 4);
+   }
 }
 
 TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
@@ -124,6 +140,41 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
       gnode probe(NODEX, NODENO, ODOF);
       test << probe;
       CHECK(test.str() ==
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
+   }
+
+   SECTION("reuse (const)") {
+      gnode probe;
+      test << probe(1, 222, 3, {2, 6, 3});
+      CHECK(test.str() ==
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
+   }
+
+   SECTION("reuse (simple)") {
+      gnode probe;
+      test << probe(NODEX, NODENO, NDOF, ODOF);
+      CHECK(test.str() ==
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
+   }
+
+   SECTION("reuse (simple (2))") {
+      gnode probe;
+      test << probe(NODEX, NODENO, ODOF);
+      CHECK(test.str() ==
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
+   }
+
+   SECTION("reuse (multiple)") {
+      gnode probe;
+      test << probe;
+      test << probe(1, 222, 3, {2, 6, 3});
+      test << probe(NODEX, NODENO, NDOF, ODOF);
+      test << probe(NODEX, NODENO, ODOF);
+      test << probe;
+      CHECK(test.str() ==
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"
+            "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"
             "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n");
    }
 }

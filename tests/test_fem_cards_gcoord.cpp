@@ -85,6 +85,21 @@ TEST_CASE("FEM GCOORD definitions.", "[fem_gcoord]" ) {
       CHECK(probe.YCOORD == 3.);
       CHECK(probe.ZCOORD == 134.);
    }
+
+   SECTION("reuse (GCOORD)") {
+      std::list<std::string> data({
+         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+         "GCOORD   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
+      __base::card::card_split(data, lines);
+      gcoord probe;
+      probe(lines);
+
+      CHECK(probe.NODENO == 1);
+      CHECK(probe.XCOORD == 1.);
+      CHECK(probe.YCOORD == 3.);
+      CHECK(probe.ZCOORD == 134.);
+   }
+
 }
 
 TEST_CASE("FEM GCOORD types output.", "[fem_gcoord,out]" ) {
