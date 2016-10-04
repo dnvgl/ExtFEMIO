@@ -232,7 +232,11 @@ namespace dnvgl {
 
                std::list<std::string> content;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `DATE`: Date and Program Information
@@ -325,7 +329,11 @@ DATE      0.100000000e+01 0.000000000e+00 0.400000000e+01 0.72000000E+02
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GCOORD`: Nodal Coordinates
@@ -379,9 +387,9 @@ DATE      0.100000000e+01 0.000000000e+00 0.400000000e+01 0.72000000E+02
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
-               virtual std::ostream &put(std::ostream&) const;
-
             protected:
+
+               virtual std::ostream &put(std::ostream&) const;
 
                void read(const std::list<std::string>&);
             };
@@ -515,7 +523,11 @@ system, unless a local nodal coordinate system is specified (see the
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `IEND`: End of a Superelement
@@ -559,7 +571,11 @@ Defines end of a superelement.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GELMNT1`: Element Data Definition
@@ -657,7 +673,11 @@ Defines end of a superelement.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
             /// `GELREF1`: Reference to Element Data
@@ -836,7 +856,11 @@ Shortest version:
                dnvgl::extfem::fem::cards::types const
                   card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GBARM`: Cross Section Type Massive Bar
@@ -924,7 +948,11 @@ Shortest version:
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GBEAMG`: General Beam Element Data
@@ -1028,7 +1056,11 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GECCEN`: Eccentricities
@@ -1088,7 +1120,11 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GELTH`: Thickness of Two-dimensional Elements
@@ -1133,7 +1169,11 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GIORH`: Cross Section Type I or H Beam
@@ -1234,7 +1274,11 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GLSEC`: Cross Section Type I or H Beam
@@ -1336,7 +1380,11 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GPIPE`: Cross Section Type Tube
@@ -1418,7 +1466,11 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GUSYI`: Cross Section Type Unsymmetrical I-Beam
@@ -1529,7 +1581,11 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `BELFIX`: Flexible Joint/Hinge
@@ -1633,9 +1689,13 @@ record may be on the interface.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+               std::string pos_string(void) const;
+
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
 
-               std::string pos_string(void) const;
+               void read(const std::list<std::string>&);
             };
 
 /// `BLDEP`: Nodes with Linear Dependence
@@ -1744,7 +1804,11 @@ be specified on one BQDP record.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `BNBCD`: Nodes with Boundary Conditions
@@ -1838,7 +1902,11 @@ according to the increasing order of their internal node number.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(std::list<std::string> const&);
             };
 
 /// `BNDISPL`: Nodes with Prescribed Displacements and Accelerations
@@ -1948,7 +2016,11 @@ If phase shift is not specified, the fields or positions
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `BNLOAD`: Nodes with Loads
@@ -2058,7 +2130,11 @@ out.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `MGSPRNG`: Element to Ground
@@ -2118,7 +2194,11 @@ the *j*’th d.o.f.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GSETMEMB`: set (group) of Nodes or Elements (Members)
@@ -2266,7 +2346,11 @@ Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `GUNIVEC`: Specification of Local Element Coordinate System
@@ -2330,7 +2414,11 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
@@ -2400,7 +2488,11 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `MORSMEL`: Anisotropy, Linear Elastic Structural Analysis,
@@ -2553,7 +2645,11 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `TDSETNAM`: Name and Description of a set (group)
@@ -2685,7 +2781,11 @@ This record together with the set of nodes or elements record(s)
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `TDSUPNAM`: Name and Description of a Super-Element
@@ -2820,7 +2920,11 @@ super-element hierarchy.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `TEXT`: User supplied Text
@@ -2906,7 +3010,11 @@ per record.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
          }
       }

@@ -82,6 +82,19 @@ TEST_CASE("FEM BNBCD definitions.", "[fem_bnbcd]" ) {
       CHECK(probe.NDOF == 3);
       CHECK(probe.FIX == std::vector<long>({1, 2, 3}));
    }
+
+   SECTION("reuse (BNBCD)") {
+      std::list<std::string> data({
+         "BNBCD    8.31700000e+003 6.00000000e+000 1.00000000e+000 1.00000000e+000\n",
+         "         1.00000000e+000 1.00000000e+000 0.00000000e+000 1.00000000e+000\n"});
+      __base::card::card_split(data, lines);
+      bnbcd probe;
+      probe(lines);
+
+      CHECK(probe.NODENO == 8317);
+      CHECK(probe.NDOF == 6);
+      CHECK(probe.FIX == std::vector<long>({1, 1, 1, 1, 0, 1}));
+   }
 }
 
 TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
@@ -139,6 +152,80 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,out]" ) {
       bnbcd probe(1, true, false, true, false, true, false);
       test << probe;
       CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n");
+   }
+
+   SECTION("reuse (simple)") {
+      bnbcd probe;
+      test << probe(1, 6, std::vector<long>(inp_fix, inp_fix + 6));
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+   }
+
+   SECTION("reuse (simple (const))") {
+      bnbcd probe;
+      test << probe(1, 6, {1, 2, 3, 4, 5, 6});
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+   }
+
+   SECTION("reuse (simple (2))") {
+      bnbcd probe;
+      test << probe(1, 3, std::vector<long>(inp_fix, inp_fix + 3));
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00\n");
+   }
+
+   SECTION("reuse (calc ndof)") {
+      bnbcd probe;
+      test << probe(1, std::vector<long>(inp_fix, inp_fix + 6));
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+   }
+
+   SECTION("reuse (calc ndof (2))") {
+      bnbcd probe;
+      test << probe(1, std::vector<long>(inp_fix, inp_fix + 3));
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00\n");
+   }
+   SECTION("reuse (calc ndof (2))") {
+      bnbcd probe;
+      test << probe(1, true, false, true, false, true, false);
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n");
+   }
+
+   SECTION("reuse (multiple)") {
+      bnbcd probe;
+      test << probe;
+      test << probe(1, 6, std::vector<long>(inp_fix, inp_fix + 6));
+      test << probe(1, 6, {1, 2, 3, 4, 5, 6});
+      test << probe(1, 3, std::vector<long>(inp_fix, inp_fix + 3));
+      test << probe(1, std::vector<long>(inp_fix, inp_fix + 6));
+      test << probe(1, std::vector<long>(inp_fix, inp_fix + 3));
+      test << probe(1, true, false, true, false, true, false);
+      test << probe;
+      CHECK(test.str() ==
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
+            "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00\n"
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
+            "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+            "        +3.000000000e+00\n"
+            "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+0.000000000e+00\n"
+            "        +1.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n"
             "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+0.000000000e+00\n"
             "        +1.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n");
    }

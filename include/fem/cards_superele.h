@@ -71,7 +71,11 @@ namespace dnvgl {
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 
@@ -239,7 +243,11 @@ bsell(
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `HSUPSTAT`: Superelement Statistical Information
@@ -326,7 +334,11 @@ through the superelement type number (`ISELTY`).
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `HSUPTRAN`: Superelement Transformations
@@ -450,7 +462,11 @@ superelement transformation reference number, `ITREF`.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `HIERARCH`: Superelement Hierarchy Description
@@ -578,7 +594,11 @@ superelement transformation reference number, `ITREF`.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
          }
       }

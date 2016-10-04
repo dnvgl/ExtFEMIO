@@ -158,7 +158,11 @@ namespace dnvgl {
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
 
 /// `BEUSLO`: Elements with Surface Loads
@@ -347,7 +351,11 @@ pressure in the local /z/-direction.
                dnvgl::extfem::fem::cards::types const
                card_type(void) const;
 
+            protected:
+
                virtual std::ostream &put(std::ostream&) const;
+
+               void read(const std::list<std::string>&);
             };
          }
       }
