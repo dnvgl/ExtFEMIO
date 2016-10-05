@@ -254,12 +254,6 @@ cards::__base::card const &gelmnt1::operator() (
    return (*this)(ELNOX, ELNO, ELTYP, 0, NODIN);
 }
 
-cards::__base::card const &gelmnt1::operator() (
-   long const &ELNOX, long const &ELNO,
-   dnvgl::extfem::fem::elements::el_types const &ELTYP,
-   long const &ELTYAD,
-   std::vector<long> const &NODIN);
-
 const dnvgl::extfem::fem::cards::types
 gelmnt1::card_type(void) const { return types::GELMNT1; }
 
