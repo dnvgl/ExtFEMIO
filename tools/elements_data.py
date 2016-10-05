@@ -9,6 +9,11 @@ from __future__ import (
 # Standard libraries.
 import itertools
 
+# Third party libraries.
+import py
+import jinja2.ext
+import jinja2.nodes
+
 # ID: $Id$
 __date__ = "$Date::                            $"[7:-1]
 __scm_version__ = "$Revision$"[10:-1]
@@ -232,6 +237,32 @@ def list_init_form(start, stop):
         return "{{{}}}".format(", ".join("{}".format(i) for i in data))
     else:
         return "1, {:d}".format(start)
+
+
+TEMPLATE_PATH = "{}".format(py.path.local(__file__).dirpath().join(
+    'templates'))
+
+
+class LineExtension(jinja2.ext.Extension):
+
+    r""" Adds a {% line %} tag to Jinja. """
+
+    tags = set(['line'])
+    template = u'#line {} "{}"'
+
+    def parse(self, parser):
+        lineno = next(parser.stream).lineno
+        filename = parser.filename
+        ctx_ref = jinja2.nodes.ContextReference()
+        args = [ctx_ref]
+        args.append(jinja2.nodes.Const(lineno + 1))
+        args.append(jinja2.nodes.Const(filename))
+        node = self.call_method(
+            '_render_line', args, lineno=lineno)
+        return jinja2.nodes.CallBlock(node, [], [], [], lineno=lineno)
+
+    def _render_line(self, context, lineno, filename, caller):
+        return jinja2.Markup(self.template.format(lineno, filename))
 
 # Local Variables:
 # mode: python

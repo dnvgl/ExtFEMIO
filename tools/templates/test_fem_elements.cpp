@@ -34,7 +34,7 @@ namespace {
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
-#line 38 "tools/templates/test_fem_elements.cpp"
+{% line %}
 
 #include <limits>
 

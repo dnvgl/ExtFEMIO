@@ -13,7 +13,7 @@ import functools
 from jinja2 import Environment, FileSystemLoader
 
 # DNV GL libraries.
-from elements_data import ELEMENTS, list_init, list_init_form
+from elements_data import *
 
 # ID: $Id$
 __date__ = "$Date::                            $"[7:-1]
@@ -41,11 +41,12 @@ gelref1 = functools.partial(fem_format, "GELREF1")
 
 if __name__ == '__main__':
 
-    env = Environment(loader=FileSystemLoader('tools/templates'))
-    test_tmpl = env.get_template('test_fem_elements.cpp')
+    ENV = Environment(loader=FileSystemLoader(
+        TEMPLATE_PATH), extensions=[LineExtension])
+    TEST_TMPL = ENV.get_template('test_fem_elements.cpp')
 
-    with open("tests/test_fem_elements.cpp", "w") as test:
-        test.write(test_tmpl.render(
+    with open("tests/test_feqm_elements.cpp", "w") as TEST:
+        TEST.write(TEST_TMPL.render(
             list_init_form=list_init_form, list_init=list_init,
             gelmnt1=gelmnt1, gelref1=gelref1, elements=ELEMENTS))
 

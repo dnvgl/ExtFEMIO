@@ -21,11 +21,12 @@ __copyright__ = "Copyright © 2016 by DNV GL SE"
 
 if __name__ == '__main__':
 
-    env = Environment(loader=FileSystemLoader('tools/templates'))
-    head_tmpl = env.get_template('fem_elements.h')
+    ENV = Environment(loader=FileSystemLoader(
+        TEMPLATE_PATH), extensions=[LineExtension])
+    HEAD_TMPL = ENV.get_template('fem_elements.h')
 
-    with open("include/fem/elements.h", "w") as head:
-        head.write(head_tmpl.render(elements=ELEMENTS, enums=ENUMS))
+    with open("include/fem/elements.h", "w") as HEAD:
+        HEAD.write(HEAD_TMPL.render(elements=ELEMENTS, enums=ENUMS))
 
 # Local Variables:
 # mode: python

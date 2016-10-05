@@ -31,7 +31,7 @@
 
 #include <set>
 
-#line 35 "tools/templates/fem_elements.h"
+{% line %}
 
 namespace dnvgl {
    namespace extfem {
@@ -41,7 +41,7 @@ namespace dnvgl {
             enum class el_types {
                {% for name, val in enums %}{{ name }} = {{ val }},
                {% endfor %}INVALID=-1, UNDEFINED=-2};
-#line 45
+{% line %}
             enum class el_processor {
                general, Preframe, Prefem, Sestra, ADVANCE,
                Framework, Launch, Platework, Pretube,
@@ -217,7 +217,7 @@ namespace dnvgl {
             };
 
 {% for elem, vals in elements %}
-#line 220
+{% line %}
             /** {{ vals.doc }}
              */
             class {{ elem }} : public __base::{{ vals.base }} {
@@ -247,7 +247,7 @@ namespace dnvgl {
                std::set<el_processor> static const processors;
             };
 {% endfor %}
-#line 265
+{% line %}
             /** Dispatch element class instance for `id`
              */
             void dispatch(std::unique_ptr<__base::elem>&,

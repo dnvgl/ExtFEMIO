@@ -22,7 +22,7 @@
 
 #include "StdAfx.h"
 
-#line 26 "tools/templates/fem_elements.cpp"
+{% line %}
 
 // ID:
 namespace {
@@ -58,14 +58,14 @@ void elements::dispatch(
    case el_types::INVALID: throw errors::parse_error(
       "GELMNT1", "invalid element type"); break;
    };
-#line 62
+{% line %}
 }
 
 std::string name_elem(el_types const &type) {
    switch (type) {
 {% for e in enum %}   case el_types::{{ e[0]|upper() }}: return "{{ e[0]|upper() }}";
 {% endfor %}   case el_types::UNDEFINED: return "UNDEFINED";
-#line 69
+{% line %}
    case el_types::INVALID: return "INVALID";
    }
    return "";
@@ -341,7 +341,7 @@ elements::__base::fem_thin_shell::fem_thin_shell(__base::elem const *data) :
 
    {{ doc }}
 */
-#line 345
+{% line %}
 
 namespace {
    const size_t {{ elem }}_procs_len = {{ vals.procs|length() }};
@@ -384,7 +384,8 @@ std::set<el_processor> const {{ elem }}::processors(
 
 {{ elem }}::{{ elem }}(cards::gelref1 const *data) : {{ vals.base }}(data) {}
 
-{{ elem }}::{{ elem }}(__base::elem const *data) : __base::{{ vals.base }}(data) {}{% endfor %}
+{{ elem }}::{{ elem }}(elements::__base::elem const *data) :
+  __base::{{ vals.base }}(data) {}{% endfor %}
 
 // Local Variables:
 // mode: c++

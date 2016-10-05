@@ -10,7 +10,7 @@ from __future__ import (
 from jinja2 import Environment, FileSystemLoader
 
 # DNV GL libraries.
-from elements_data import ENUMS, ELEMENTS
+from elements_data import *
 
 # ID: $Id$
 __date__ = "$Date::                            $"[7:-1]
@@ -21,11 +21,15 @@ __copyright__ = "Copyright © 2016 by DNV GL SE"
 
 if __name__ == '__main__':
 
-    env = Environment(loader=FileSystemLoader('tools/templates'))
-    code_tmpl = env.get_template('fem_elements.cpp')
+    ENV = Environment(loader=FileSystemLoader(
+        TEMPLATE_PATH), extensions=[LineExtension])
+    CODE_TMPL = ENV.get_template('fem_elements.cpp')
 
-    with open("src/fem/fem_elements.cpp", "w") as code:
-        code.write(code_tmpl.render(enum=ENUMS, elements=ELEMENTS))
+    print(dir(CODE_TMPL))
+
+    with open("src/fem/fem_elements.cpp", "w") as CODE:
+        CODE.write(CODE_TMPL.render(
+            enum=ENUMS, elements=ELEMENTS))
 
 # Local Variables:
 # mode: python
