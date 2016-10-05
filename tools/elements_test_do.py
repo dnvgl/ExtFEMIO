@@ -45,7 +45,7 @@ if __name__ == '__main__':
         TEMPLATE_PATH), extensions=[LineExtension])
     TEST_TMPL = ENV.get_template('test_fem_elements.cpp')
 
-    with open("tests/test_feqm_elements.cpp", "w") as TEST:
+    with open("tests/test_fem_elements.cpp", "w") as TEST:
         TEST.write(TEST_TMPL.render(
             list_init_form=list_init_form, list_init=list_init,
             gelmnt1=gelmnt1, gelref1=gelref1, elements=ELEMENTS))
