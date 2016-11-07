@@ -45,10 +45,17 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#if _MSC_VER < 1700
+#define NOEXCEPT noexcept
+#else
+#define NOEXCEPT
+#endif
+
+
 class NotImplemented : public std::logic_error {
 protected:
     std::string what_arg;
-    virtual const char *what() const noexcept {
+    virtual const char *what() const NOEXCEPT {
         return what_arg.c_str();
     };
 public:
@@ -63,7 +70,7 @@ public:
 class NoUsed : public std::invalid_argument {
 protected:
     std::string what_arg;
-    virtual const char *what() const noexcept {
+    virtual const char *what() const NOEXCEPT {
         return what_arg.c_str();
     };
 public:
@@ -77,7 +84,7 @@ public:
 class IdUsed : public std::invalid_argument {
 protected:
     std::string what_arg;
-    virtual const char *what() const noexcept {
+    virtual const char *what() const NOEXCEPT {
         return what_arg.c_str();
     };
 public:
@@ -91,7 +98,7 @@ public:
 class DataNotMatchingId : public std::invalid_argument {
 protected:
     std::string what_arg;
-    virtual const char *what() const noexcept {
+    virtual const char *what() const NOEXCEPT {
         return what_arg.c_str();
     };
 public:
