@@ -45,7 +45,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#if defined(_MSC_VER) && _MSC_VER < 1700
+#if defined(_MSC_VER) && _MSC_VER < 1900
 #define NOEXCEPT
 #else
 #define NOEXCEPT noexcept
