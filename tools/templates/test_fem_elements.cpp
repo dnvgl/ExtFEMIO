@@ -34,8 +34,6 @@ namespace {
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
-{% line %}
-
 #include <limits>
 
 #include <iostream>
@@ -55,8 +53,6 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
-using namespace dnvgl::extfem::fem::elements;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return ex();
@@ -67,12 +63,13 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 }
 
 TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
+   elements::__base::elem::reset();
    std::vector<long> nodes({ 6, 7 });
-   gelmnt1 data1(1, 2, elements::el_types::TESS, nodes);
+   cards::gelmnt1 data1(19999, 29999, elements::el_types::TESS, nodes);
 
    SECTION("check values") {
-      CHECK(data1.ELNOX == 1);
-      CHECK(data1.ELNO == 2);
+      CHECK(data1.ELNOX == 19999);
+      CHECK(data1.ELNO == 29999);
       CHECK(data1.ELTYP == elements::el_types::TESS);
       CHECK(data1.NODIN.size() == 2);
       CHECK(data1.NODIN[0] == 6);
@@ -80,7 +77,7 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    }
 
    SECTION("check copy") {
-      tess probe1(&data1);
+      elements::tess probe1(&data1);
       CHECK(probe1.get_type() == elements::el_types::TESS);
       CHECK(probe1.nnodes() == 2);
       CHECK(probe1.nodes.size() == 2);
@@ -89,19 +86,34 @@ TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    }
 
    SECTION("check downcast") {
+      elements::__base::elem::reset();
       std::unique_ptr<elements::__base::elem> probe2;
-      dispatch(probe2, &data1);
+      elements::dispatch(probe2, &data1);
       CHECK(probe2->get_type() == elements::el_types::TESS);
-      CHECK(static_cast<tess*>(probe2.get())->nnodes() == 2);
+      CHECK(static_cast<elements::tess*>(probe2.get())->nnodes() == 2);
    }
+}
+
+TEST_CASE("Mapping of element types to names.", "[fem_element]") {
+    {% for name, _ in enums %}SECTION("{{ name }}") {
+        CHECK(name_elem(elements::el_types::{{ name }}) == "{{ name }}");
+    }
+    {% endfor %}
+    SECTION("INVALID") {
+        CHECK(name_elem(elements::el_types::INVALID) == "INVALID");
+    }
+
+    SECTION("UNDEFINED") {
+        CHECK(name_elem(elements::el_types::UNDEFINED) == "UNDEFINED");
+    }
 }
 
 {% for elem, vals in elements -%}
 TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }}]") {
 
-   long const ELNOX = 11316;
-   long const ELNO = 1;
-   el_types const ELTYP = elements::el_types::{{ elem|upper() }};
+   long const ELNOX = {{ loop.index0 * 7 + 1 }};
+   long const ELNO = {{ loop.index0 * 7 + 2 }};
+   elements::el_types const ELTYP = elements::el_types::{{ elem|upper() }};
    long const ELTYAD = 2;
    std::vector<long> const NODIN ({{ list_init_form(100, 100+vals.nnodes) }});
    std::unique_ptr<cards::gelmnt1> gelmnt1_data(
@@ -126,12 +138,12 @@ TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }
                          STRANO, STRENO, STREPONO, GEONO_OPT,
                          FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
 
-   {{ elem }} probe(gelmnt1_data.get());
+   elements::{{ elem }} probe(gelmnt1_data.get());
    probe.add(gelref1_data.get());
 
    SECTION("check members") {
 
-      CHECK(probe.processors == std::set<el_processor> ({
+      CHECK(probe.processors == std::set<elements::el_processor> ({
                {{ vals.procs|join(', ') }} }));
       CHECK(probe.eleno == ELNOX);
       CHECK(probe.elident == ELNO);
@@ -155,8 +167,15 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
 
    std::stringstream test;
 
-   {{ elem }} probe(1,                         // elnox
-              2,                         // elno
+   SECTION("simple (empty)") {
+      elements::{{ elem }} probe;
+      test << probe;
+      CHECK(test.str() == "");
+   }
+
+   SECTION("check output") {
+   elements::{{ elem }} probe({{loop.index0 * 7 + 3}},                         // elnox
+              {{loop.index0 * 7 + 4}},                         // elno
               3,                         // eltyad
               std::vector<long>({{ list_init_form(100, 100+vals.nnodes) }}), // nodin
               6,                         // matno
@@ -171,23 +190,16 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
               std::vector<long>(1, 15),  // eccno_opt
               std::vector<long>(1, 16)); // transno_opt
 
-   SECTION("simple (empty)") {
-      {{ elem }} probe;
-      test << probe;
-      CHECK(test.str() == "");
-   }
-
-   SECTION("check output") {
       test << probe;
       CHECK(test.str() ==
-            {{ gelmnt1(*([1, 2, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
-            {{ gelref1(2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
+            {{ gelmnt1(*([loop.index0 * 7 + 3, loop.index0 * 7 + 4 , vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
+            {{ gelref1(loop.index0 * 7 + 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
    }
 
    SECTION("reuse (check output)") {
-      {{ elem }} probe;
-      test << probe(1,                         // elnox
-                    2,                         // elno
+      elements::{{ elem }} probe;
+      test << probe({{loop.index0 * 7 + 7}},                         // elnox
+                    {{loop.index0 * 7 + 7}},                         // elno
                     3,                         // eltyad
                     std::vector<long>({{ list_init_form(100, 100+vals.nnodes) }}), // nodin
                     6,                         // matno
@@ -202,8 +214,8 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
                     std::vector<long>(1, 15),  // eccno_opt
                     std::vector<long>(1, 16)); // transno_opt
       CHECK(test.str() ==
-            {{ gelmnt1(*([1, 2, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
-            {{ gelref1(2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
+            {{ gelmnt1(*([loop.index0 * 7 + 7, loop.index0 * 7 + 7, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
+            {{ gelref1(loop.index0 * 7 + 7, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
    }
 }
 

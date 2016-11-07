@@ -10,7 +10,7 @@ from __future__ import (
 from jinja2 import Environment, FileSystemLoader
 
 # DNV GL libraries.
-from elements_data import *
+from elements_data import ENUMS, ELEMENTS, TEMPLATE_PATH, LineExtension
 
 # ID: $Id$
 __date__ = "$Date::                            $"[7:-1]

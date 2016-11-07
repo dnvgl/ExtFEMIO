@@ -176,7 +176,8 @@ target_link_libraries(test_fem_cards ${EXTFEM_FEM_LIBS})
 my_add_test(test_fem_cards)
 
 add_executable(test_fem_elements
-  test_fem_elements.cpp)
+  test_fem_elements.cpp
+  test_fem_more_elements.cpp)
 target_link_libraries(test_fem_elements ${EXTFEM_FEM_LIBS})
 my_add_test(test_fem_elements)
 
@@ -187,7 +188,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/tests/test_fem_elements.cpp
     COMMAND
       cd ${CMAKE_SOURCE_DIR} && python3 tools/elements_test_do.py ||
-      svn revert ${CMAKE_SOURCE_DIR}/include/fem/test_fem_element_*.cpp.cpp
+      svn revert ${CMAKE_SOURCE_DIR}/include/fem/test_fem_elements.cpp
     DEPENDS
       ${CMAKE_SOURCE_DIR}/tools/elements_test_do.py
       ${CMAKE_SOURCE_DIR}/tools/elements_data.py
