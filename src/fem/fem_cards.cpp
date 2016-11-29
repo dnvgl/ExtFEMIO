@@ -138,7 +138,7 @@ void cards::__base::card::card_split(
     }
 }
 
-types::entry_type<long> const
+fem::types::entry_type<long> const
 cards::__base::geoprop::_form_GEONO("GEONO");
 
 set<long> cards::__base::geoprop::used_geono;
@@ -200,7 +200,7 @@ cards::__base::material::material() :
 cards::__base::material::material(long const &MATNO) :
         card(), MATNO(MATNO) {}
 
-types::entry_type<long> const
+fem::types::entry_type<long> const
 cards::__base::material::_form_MATNO("MATNO");
 
 void
