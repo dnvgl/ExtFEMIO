@@ -33,7 +33,7 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
-using namespace dnvgl::extfem::types;
+using namespace dnvgl::extfem::fem::types;
 
 const fem::types::card gbeamg::head("GBEAMG");
 
@@ -92,12 +92,14 @@ gbeamg::gbeamg(
     const double &SHARY, const double &SHARZ,
     const double &SHCENY, const double &SHCENZ,
     const double &SY, const double &SZ) :
-        __base::beam_prop(), GEONO(GEONO),
+        __base::beam_prop(),
         AREA(AREA), IX(IX), IY(IY), IZ(IZ), IYZ(IYZ),
         WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
         SHARY(SHARY), SHARZ(SHARZ),
-    SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
-    SZ(SZ) {}
+        SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
+        SZ(SZ) {
+    this->GEONO = GEONO;
+}
 
 const dnvgl::extfem::fem::cards::types
 gbeamg::card_type(void) const {return types::GBEAMG;}
