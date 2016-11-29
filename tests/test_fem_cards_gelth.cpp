@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   const char  cID[]
+    const char  cID[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -36,117 +36,157 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex();
+    return ex();
 }
 
 CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+    return ex;
 }
 
 TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
 
-   std::list<std::string> lines;
+    std::list<std::string> lines;
 
-   SECTION("GELTH (1)") {
-      std::list<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      gelth probe(lines);
+    __base::geoprop::reset_geono();
 
-      CHECK(probe.GEONO == 654394);
-      CHECK(probe.TH == .1);
-      CHECK(probe.NINT == 0);
-   }
+    SECTION("GELTH (1)") {
+        std::list<std::string> data(
+            // 2345678|234567890123456|234567890123456|234567890123456|234567890123456
+            {"GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000\n"});
+        __base::card::card_split(data, lines);
+        gelth probe(lines);
 
-   SECTION("GELTH (2)") {
-      std::list<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "GELTH    6.54394000e+05  1.00000000e-01  0.000000000e+00 0.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      gelth probe(lines);
+        CHECK(probe.GEONO == 654394);
+        CHECK(probe.TH == .1);
+        CHECK(probe.NINT == 0);
+    }
 
-      CHECK(probe.GEONO == 654394);
-      CHECK(probe.TH == .1);
-      CHECK(probe.NINT == 0);
-   }
+    SECTION("GELTH (2)") {
+        std::list<std::string> data(
+            // 2345678|234567890123456|234567890123456|234567890123456|234567890123456
+            {"GELTH    6.54394000e+05  1.00000000e-01  0.000000000e+00 0.000000000e+00\n"});
+        __base::card::card_split(data, lines);
+        gelth probe(lines);
+
+        CHECK(probe.GEONO == 654394);
+        CHECK(probe.TH == .1);
+        CHECK(probe.NINT == 0);
+    }
 }
 
 TEST_CASE("FEMIO-24: Failing to import line from SESAM GeniE FEM file") {
 
-   std::list<std::string> lines;
+    std::list<std::string> lines;
 
-   SECTION("Failing card") {
-      std::list<std::string> data({
-            "GELTH     1.00000000E+00  2.99999993E-02\n"});
-      __base::card::card_split(data, lines);
-      gelth probe(lines);
+    __base::geoprop::reset_geono();
 
-      CHECK(probe.GEONO == 1);
-      CHECK(probe.TH == 2.99999993e-02);
-      CHECK(probe.NINT == 0);
-   }
+    SECTION("Failing card") {
+        std::list<std::string> data(
+            {"GELTH     1.00000000E+00  2.99999993E-02\n"});
+        __base::card::card_split(data, lines);
+        gelth probe(lines);
+
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.TH == 2.99999993e-02);
+        CHECK(probe.NINT == 0);
+    }
 }
 
 TEST_CASE("FEM GELTH types output.", "[fem_gelth,out]" ) {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("empty") {
-      gelth probe;
-      test << probe;
-      CHECK(test.str() == "");
-   }
+    __base::geoprop::reset_geono();
 
-   SECTION("simple") {
-      gelth probe(1, 2., 3);
-      test << probe;
-      CHECK(test.str() ==
-            "GELTH   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
-   }
+    SECTION("empty") {
+        gelth probe;
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
-   SECTION("simple NINT default") {
-      gelth probe(1, 2.);
-      test << probe;
-      CHECK(test.str() ==
-            "GELTH   +1.000000000e+00+2.000000000e+00\n");
-   }
+    SECTION("simple") {
+        gelth probe(1, 2., 3);
+        test << probe;
+        CHECK(test.str() ==
+              "GELTH   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
+    }
 
-   SECTION("simple NINT default (2)") {
-      gelth probe(1, 2., 0);
-      test << probe;
-      CHECK(test.str() ==
-            "GELTH   +1.000000000e+00+2.000000000e+00\n");
-   }
+    SECTION("simple NINT default") {
+        gelth probe(1, 2.);
+        test << probe;
+        CHECK(test.str() ==
+              "GELTH   +1.000000000e+00+2.000000000e+00\n");
+    }
+
+    SECTION("simple NINT default (2)") {
+        gelth probe(1, 2., 0);
+        test << probe;
+        CHECK(test.str() ==
+              "GELTH   +1.000000000e+00+2.000000000e+00\n");
+    }
+
+    SECTION("simple GEONO default (1)") {
+        gelth probe;
+        test << probe(2.);
+        test << probe(3.);
+        CHECK(test.str() ==
+              "GELTH   +1.000000000e+00+2.000000000e+00\n"
+              "GELTH   +2.000000000e+00+3.000000000e+00\n");
+    }
+
+    SECTION("simple GEONO default (2)") {
+        gelth probe;
+        test << probe(2.);
+        test << probe(3.);
+
+        CHECK(test.str() ==
+              "GELTH   +1.000000000e+00+2.000000000e+00\n"
+              "GELTH   +2.000000000e+00+3.000000000e+00\n");
+    }
+
+    SECTION("simple GEONO default (3)") {
+        gelth probe;
+        test << probe(3, 2.);
+        test << probe(4, 3.);
+        test << probe(5.);
+        test << probe(6.);
+        CHECK(test.str() ==
+              "GELTH   +3.000000000e+00+2.000000000e+00\n"
+              "GELTH   +4.000000000e+00+3.000000000e+00\n"
+              "GELTH   +1.000000000e+00+5.000000000e+00\n"
+              "GELTH   +2.000000000e+00+6.000000000e+00\n");
+    }
 }
 
 TEST_CASE("FEM GELTH conversion from own output.", "[fem_gelth,in/out]") {
 
-   std::list<std::string> lines;
+    std::list<std::string> lines;
 
-   SECTION("GELTH (1)") {
-      std::list<std::string> data({
-            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-            "GELTH   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      gelth probe(lines);
+    __base::geoprop::reset_geono();
 
-      CHECK(probe.GEONO == 1);
-      CHECK(probe.TH == 2.);
-      CHECK(probe.NINT == 3);
-   }
+    SECTION("GELTH (1)") {
+        std::list<std::string> data(
+            // 2345678|234567890123456|234567890123456|234567890123456|234567890123456
+            {"GELTH   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
+        __base::card::card_split(data, lines);
+        gelth probe(lines);
 
-   SECTION("GELTH (2)") {
-      std::list<std::string> data({
-            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-            "GELTH   +1.000000000e+00+2.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      gelth probe(lines);
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.TH == 2.);
+        CHECK(probe.NINT == 3);
+    }
 
-      CHECK(probe.GEONO == 1);
-      CHECK(probe.TH == 2.);
-      CHECK(probe.NINT == 0);
-   }
+    SECTION("GELTH (2)") {
+        std::list<std::string> data(
+            // 2345678|234567890123456|234567890123456|234567890123456|234567890123456
+            {"GELTH   +1.000000000e+00+2.000000000e+00\n"});
+        __base::card::card_split(data, lines);
+        gelth probe(lines);
+
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.TH == 2.);
+        CHECK(probe.NINT == 0);
+    }
 }
 
 // Local Variables:

@@ -47,109 +47,113 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
 
    std::list<std::string> lines;
 
-   SECTION("GUSYI (1)") {
-      std::list<std::string> data({
-         "GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n",
-         "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n",
-         "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
-         "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      gusyi probe(lines);
+    __base::geoprop::reset_geono();
 
-      CHECK(probe.GEONO == 5);
-      CHECK(probe.HZ == 466.);
-      CHECK(probe.TY == 14.5);
-      CHECK(probe.BT == 125.);
-      CHECK(probe.B1 == 16.);
-      CHECK(probe.TT == 14.5);
-      CHECK(probe.BB == 16.);
-      CHECK(probe.B2 == 1);
-      CHECK(probe.TB == 1.);
-      CHECK(probe.SFY == 0.);
-      CHECK(probe.SFZ == 0.);
-      CHECK(probe.NLOBYT == 0);
-      CHECK(probe.NLOBYB == 1);
-      CHECK(probe.NLOBZ == 0);
-   }
+    SECTION("GUSYI (1)") {
+        std::list<std::string> data(
+            {"GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n",
+             "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n",
+             "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
+             "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
+        __base::card::card_split(data, lines);
+        gusyi probe(lines);
 
-   SECTION("GUSYI (2)") {
-      std::list<std::string> data({
-         "GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
-         "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
-         "         1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
-         "         1.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      gusyi probe(lines);
+        CHECK(probe.GEONO == 5);
+        CHECK(probe.HZ == 466.);
+        CHECK(probe.TY == 14.5);
+        CHECK(probe.BT == 125.);
+        CHECK(probe.B1 == 16.);
+        CHECK(probe.TT == 14.5);
+        CHECK(probe.BB == 16.);
+        CHECK(probe.B2 == 1);
+        CHECK(probe.TB == 1.);
+        CHECK(probe.SFY == 0.);
+        CHECK(probe.SFZ == 0.);
+        CHECK(probe.NLOBYT == 0);
+        CHECK(probe.NLOBYB == 1);
+        CHECK(probe.NLOBZ == 0);
+    }
 
-      CHECK(probe.GEONO == 5);
-      CHECK(probe.HZ == 466.);
-      CHECK(probe.TY == 14.5);
-      CHECK(probe.BT == 125.);
-      CHECK(probe.B1 == 16.);
-      CHECK(probe.TT == 14.5);
-      CHECK(probe.BB == 16.);
-      CHECK(probe.B2 == 1.);
-      CHECK(probe.TB == 1.);
-      CHECK(probe.SFY == 0.);
-      CHECK(probe.SFZ == 0.);
-      CHECK(probe.NLOBYT == 0);
-      CHECK(probe.NLOBYB == 1);
-      CHECK(probe.NLOBZ == 0);
-   }
+    SECTION("GUSYI (2)") {
+        std::list<std::string> data(
+            {"GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
+             "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
+             "         1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
+             "         1.00000000e+00  0.00000000e+00 \n"});
+        __base::card::card_split(data, lines);
+        gusyi probe(lines);
 
-   SECTION("GUSYI (3)") {
-      std::list<std::string> data({
-         "GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
-         "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
-         "         1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      gusyi probe(lines);
+        CHECK(probe.GEONO == 5);
+        CHECK(probe.HZ == 466.);
+        CHECK(probe.TY == 14.5);
+        CHECK(probe.BT == 125.);
+        CHECK(probe.B1 == 16.);
+        CHECK(probe.TT == 14.5);
+        CHECK(probe.BB == 16.);
+        CHECK(probe.B2 == 1.);
+        CHECK(probe.TB == 1.);
+        CHECK(probe.SFY == 0.);
+        CHECK(probe.SFZ == 0.);
+        CHECK(probe.NLOBYT == 0);
+        CHECK(probe.NLOBYB == 1);
+        CHECK(probe.NLOBZ == 0);
+    }
 
-      CHECK(probe.GEONO == 5);
-      CHECK(probe.HZ == 466.);
-      CHECK(probe.TY == 14.5);
-      CHECK(probe.BT == 125.);
-      CHECK(probe.B1 == 16.);
-      CHECK(probe.TT == 14.5);
-      CHECK(probe.BB == 16.);
-      CHECK(probe.B2 == 1.);
-      CHECK(probe.TB == 1.);
-      CHECK(probe.SFY == 0.);
-      CHECK(probe.SFZ == 0.);
-      CHECK(probe.NLOBYT == 0);
-      CHECK(probe.NLOBYB == 0);
-      CHECK(probe.NLOBZ == 0);
-   }
+    SECTION("GUSYI (3)") {
+        std::list<std::string> data(
+            {"GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
+             "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
+             "         1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
+        __base::card::card_split(data, lines);
+        gusyi probe(lines);
+
+        CHECK(probe.GEONO == 5);
+        CHECK(probe.HZ == 466.);
+        CHECK(probe.TY == 14.5);
+        CHECK(probe.BT == 125.);
+        CHECK(probe.B1 == 16.);
+        CHECK(probe.TT == 14.5);
+        CHECK(probe.BB == 16.);
+        CHECK(probe.B2 == 1.);
+        CHECK(probe.TB == 1.);
+        CHECK(probe.SFY == 0.);
+        CHECK(probe.SFZ == 0.);
+        CHECK(probe.NLOBYT == 0);
+        CHECK(probe.NLOBYB == 0);
+        CHECK(probe.NLOBZ == 0);
+    }
 }
 
 TEST_CASE("FEM GUSYI conversion from own output.", "[fem_gusyi,out]" ) {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("empty") {
-      gusyi probe;
-      test << probe;
-      CHECK(test.str() == "");
-  }
+    __base::geoprop::reset_geono();
 
-   SECTION("simple") {
-      gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11, 12, 13, 14);
-      test << probe;
-      CHECK(test.str() ==
-            "GUSYI   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
-            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
-            "        +1.300000000e+01+1.400000000e+01\n");
-  }
+    SECTION("empty") {
+        gusyi probe;
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
-   SECTION("simple (default N*)") {
-      gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11);
-      test << probe;
-      CHECK(test.str() ==
-            "GUSYI   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-            "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
-            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01\n");
-  }
+    SECTION("simple") {
+        gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11, 12, 13, 14);
+        test << probe;
+        CHECK(test.str() ==
+              "GUSYI   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+              "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+              "        +1.300000000e+01+1.400000000e+01\n");
+    }
+
+    SECTION("simple (default N*)") {
+        gusyi probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11);
+        test << probe;
+        CHECK(test.str() ==
+              "GUSYI   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+              "        +9.000000000e+00+1.000000000e+01+1.100000000e+01\n");
+    }
 }
 
 // Local Variables:

@@ -30,84 +30,78 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
-using namespace fem;
-using namespace types;
+using namespace dnvgl::extfem::fem;
+using namespace dnvgl::extfem::fem::cards;
+using namespace dnvgl::extfem::fem::types;
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
+const fem::types::card gbarm::head("GBARM");
 
-            const fem::types::card gbarm::head("GBARM");
+const entry_type<double> gbarm::_form_HZ("HZ");
+const entry_type<double> gbarm::_form_BT("BT");
+const entry_type<double> gbarm::_form_BB("BB");
+const entry_type<double> gbarm::_form_SFY("SFY");
+const entry_type<double> gbarm::_form_SFZ("SFZ");
+const entry_type<long> gbarm::_form_NLOBY("NLOBY");
+const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
-            const entry_type<double> gbarm::_form_HZ("HZ");
-            const entry_type<double> gbarm::_form_BT("BT");
-            const entry_type<double> gbarm::_form_BB("BB");
-            const entry_type<double> gbarm::_form_SFY("SFY");
-            const entry_type<double> gbarm::_form_SFZ("SFZ");
-            const entry_type<long> gbarm::_form_NLOBY("NLOBY");
-            const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
+gbarm::gbarm(const list<std::string> &inp) :
+        __base::beam_prop(inp), NLOBY(0), NLOBZ(0) {
 
-            gbarm::gbarm(const std::list<std::string> &inp) :
-               __base::beam_prop(inp), NLOBY(0), NLOBZ(0) {
+    if (inp.size() < 9)
+        throw errors::parse_error(
+            "GBARM", "Illegal number of entries.");
 
-               if (inp.size() < 9)
-                  throw errors::parse_error(
-                     "GBARM", "Illegal number of entries.");
+    auto pos = inp.begin();
 
-               auto pos = inp.begin();
+    ++(++pos);
+    // GEONO = _form_GEONO(*(pos++));
+    HZ = _form_HZ(*(pos++));
+    BT = _form_BT(*(pos++));
+    BB = _form_BB(*(pos++));
+    SFY = _form_SFY(*(pos++));
+    SFZ = _form_SFZ(*(pos++));
+    if (pos == inp.end()) return;
+    if (*pos != "                ")
+        NLOBY = _form_NLOBY(*(pos++));
+    else
+        pos++;
+    if (pos == inp.end()) return;
+    if (*pos != "                ")
+        NLOBZ = _form_NLOBZ(*(pos++));
+}
 
-               ++pos;
-               GEONO = _form_GEONO(*(pos++));
-               HZ = _form_HZ(*(pos++));
-               BT = _form_BT(*(pos++));
-               BB = _form_BB(*(pos++));
-               SFY = _form_SFY(*(pos++));
-               SFZ = _form_SFZ(*(pos++));
-               if (pos == inp.end()) return;
-               if (*pos != "                ")
-                  NLOBY = _form_NLOBY(*(pos++));
-               else
-                  pos++;
-               if (pos == inp.end()) return;
-               if (*pos != "                ")
-                  NLOBZ = _form_NLOBZ(*(pos++));
-            }
+gbarm::gbarm(void) :
+        gbarm(-1, 0, 0, 0, 0, 0, 0, 0) {}
 
-            gbarm::gbarm(void) :
-               gbarm(-1, 0, 0, 0, 0, 0, 0, 0) {}
+gbarm::gbarm(
+    const long &GEONO,
+    const double &HZ, const double &BT, const double &BB,
+    const double &SFY, const double &SFZ,
+    const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
+        __base::beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
+        SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
-            gbarm::gbarm(
-               const long &GEONO,
-               const double &HZ, const double &BT, const double &BB,
-               const double &SFY, const double &SFZ,
-               const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
-               __base::beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
-               SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+const dnvgl::extfem::fem::cards::types
+gbarm::card_type(void) const {return types::GBARM;}
 
-            const dnvgl::extfem::fem::cards::types
-            gbarm::card_type(void) const {return types::GBARM;}
-
-            std::ostream &gbarm::put(std::ostream& os) const {
-               if (this->GEONO == -1) return os;
-               os << gbarm::head.format()
-                  << this->_form_GEONO.format(this->GEONO)
-                  << this->_form_HZ.format(this->HZ)
-                  << this->_form_BT.format(this->BT)
-                  << this->_form_BB.format(this->BB)
-                  << std::endl << fem::types::card("").format()
-                  << this->_form_SFY.format(this->SFY)
-                  << this->_form_SFZ.format(this->SFZ);
-               if ((this->NLOBY || this->NLOBZ))
-                  os << this->_form_NLOBY.format(this->NLOBY)
-                     << this->_form_NLOBZ.format(this->NLOBZ);
-               os << std::endl;
-               return os;
-            }
-         }
-      }
-   }
+ostream &gbarm::put(ostream& os) const {
+    if (this->GEONO == -1) return os;
+    os << gbarm::head.format()
+       << this->_form_GEONO.format(this->GEONO)
+       << this->_form_HZ.format(this->HZ)
+       << this->_form_BT.format(this->BT)
+       << this->_form_BB.format(this->BB)
+       << endl << fem::types::card("").format()
+       << this->_form_SFY.format(this->SFY)
+       << this->_form_SFZ.format(this->SFZ);
+    if ((this->NLOBY || this->NLOBZ))
+        os << this->_form_NLOBY.format(this->NLOBY)
+           << this->_form_NLOBZ.format(this->NLOBZ);
+    os << endl;
+    return os;
 }
 
 // Local Variables:
