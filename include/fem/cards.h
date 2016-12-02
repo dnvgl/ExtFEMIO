@@ -2557,6 +2557,16 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                             double const &DUMMY=0.,
                             double const &YIELD=0.);
 
+                    __base::card const &operator() (
+                        long const &MATNO,
+                        double const &YOUNG,
+                        double const &POISS,
+                        double const &RHO,
+                        double const &DAMP,
+                        double const &ALPHA,
+                        double const &DUMMY=0.,
+                        double const &YIELD=0.);
+
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
