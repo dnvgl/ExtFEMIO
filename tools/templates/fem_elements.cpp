@@ -39,20 +39,21 @@ namespace {
 #include "fem/cards.h"
 #include "fem/elements.h"
 
-#if defined(__AFX_H__) && defined(_DEBUG)
+#if defined(__AFX_H__) & defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
 
-#if defined(_MSC_VER) && _MSC_VER < 1900
+#if defined(_MSC_VER) & _MSC_VER < 1900
 #define NOEXCEPT
 #else
 #define NOEXCEPT noexcept
 #endif
 
+using namespace std;
 
-class NotImplemented : public std::logic_error {
+class NotImplemented : public logic_error {
 protected:
     std::string what_arg;
     virtual const char *what() const NOEXCEPT {
@@ -60,42 +61,42 @@ protected:
     };
 public:
     NotImplemented(std::string const &fname, long const &line) :
-        std::logic_error("") {
-        std::ostringstream res;
-        res << "Not implemented yet " << fname << ":" << line << std::endl;
+        logic_error("") {
+        ostringstream res;
+        res << "Not implemented yet " << fname << ":" << line << endl;
         this->what_arg = res.str();
     };
 };
 
-class NoUsed : public std::invalid_argument {
+class NoUsed : public invalid_argument {
 protected:
     std::string what_arg;
     virtual const char *what() const NOEXCEPT {
         return what_arg.c_str();
     };
 public:
-    NoUsed(long const &no) : std::invalid_argument("") {
-        std::ostringstream res;
-        res << "Element number " << no << " already used." << std::endl;
+    NoUsed(long const &no) : invalid_argument("") {
+        ostringstream res;
+        res << "Element number " << no << " already used." << endl;
         this->what_arg = res.str();
     };
 };
 
-class IdUsed : public std::invalid_argument {
+class IdUsed : public invalid_argument {
 protected:
     std::string what_arg;
     virtual const char *what() const NOEXCEPT {
         return what_arg.c_str();
     };
 public:
-    IdUsed(long const &id) : std::invalid_argument("") {
-        std::ostringstream res;
-        res << "Element id " << id << " already used." << std::endl;
+    IdUsed(long const &id) : invalid_argument("") {
+        ostringstream res;
+        res << "Element id " << id << " already used." << endl;
         this->what_arg = res.str();
     };
 };
 
-class DataNotMatchingId : public std::invalid_argument {
+class DataNotMatchingId : public invalid_argument {
 protected:
     std::string what_arg;
     virtual const char *what() const NOEXCEPT {
@@ -103,10 +104,10 @@ protected:
     };
 public:
     DataNotMatchingId(long const &id_ex, long const &id_new) :
-        std::invalid_argument("") {
-        std::ostringstream res;
+        invalid_argument("") {
+        ostringstream res;
         res << "Element id already set to " << id_ex
-            << " with attempt to set to " << id_new << "."<< std::endl;
+            << " with attempt to set to " << id_new << "."<< endl;
         this->what_arg = res.str();
     };
 };
@@ -116,13 +117,13 @@ using namespace fem;
 using namespace elements;
 
 void elements::dispatch(
-    std::unique_ptr<elements::__base::elem> &res, cards::gelmnt1 const *data) {
+    unique_ptr<elements::__base::elem> &res, cards::gelmnt1 const *data) {
 
     switch (data->ELTYP) {
         {% for e in enum -%}
     case el_types::{{ e[0]|upper() }}:
-    res = std::make_unique<{{ e[0]|lower() }}>(data); break;
-    {% endfor %}   case el_types::UNDEFINED: res = std::make_unique<undef>(); break;
+    res = make_unique<{{ e[0]|lower() }}>(data); break;
+    {% endfor %}   case el_types::UNDEFINED: res = make_unique<undef>(); break;
     case el_types::INVALID: throw errors::parse_error(
         "GELMNT1", "invalid element type"); break;
     };
@@ -139,7 +140,7 @@ std::string dnvgl::extfem::fem::elements::name_elem(el_types const &type) {
     return "";
 };
 
-undef::undef (void) {}
+undef::undef(void) {}
 
 long undef::nnodes(void) const {return -1;}
 
@@ -151,21 +152,21 @@ elements::__base::elem::elem(void) :
     strpoint_ref(-1), section({}), fixations({}), eccentrities({}),
     csys({}) {}
 
-elements::__base::elem::elem(long const eleno,
-                             long const elident,
-                             long const el_add,
-                             std::vector<long> const nodes,
-                             long const matref,
-                             long const add_no,
-                             long const intno,
-                             long const mass_intno,
-                             long const i_strain_ref,
-                             long const i_stress_ref,
-                             long const strpoint_ref,
-                             std::vector<long> const section,
-                             std::vector<long> const fixations,
-                             std::vector<long> const eccentrities,
-                             std::vector<long> const csys) :
+elements::__base::elem::elem(long const &eleno,
+                             long const &elident,
+                             long const &el_add,
+                             vector<long> const &nodes,
+                             long const &matref,
+                             long const &add_no,
+                             long const &intno,
+                             long const &mass_intno,
+                             long const &i_strain_ref,
+                             long const &i_stress_ref,
+                             long const &strpoint_ref,
+                             vector<long> const &section,
+                             vector<long> const &fixations,
+                             vector<long> const &eccentrities,
+                             vector<long> const &csys) :
     eleno(eleno), elident(elident), el_add(el_add),
     nodes(nodes), matref(matref), add_no(add_no),
     intno(intno), mass_intno(mass_intno),
@@ -179,6 +180,42 @@ elements::__base::elem::elem(long const eleno,
     if (!used_ids.insert(elident).second)
         throw IdUsed(elident);
 }
+
+elements::__base::elem::elem(long const &eleno,
+                             long const &el_add,
+                             vector<long> const &nodes,
+                             long const &matref,
+                             long const &add_no,
+                             long const &intno,
+                             long const &mass_intno,
+                             long const &i_strain_ref,
+                             long const &i_stress_ref,
+                             long const &strpoint_ref,
+                             vector<long> const &section,
+                             vector<long> const &fixations,
+                             vector<long> const &eccentrities,
+                             vector<long> const &csys) :
+        elem(eleno, get_elident(), el_add, nodes, matref, add_no, intno,
+             mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+             section, fixations, eccentrities, csys) {
+}
+
+elements::__base::elem::elem(long const &el_add,
+                             vector<long> const &nodes,
+                             long const &matref,
+                             long const &add_no,
+                             long const &intno,
+                             long const &mass_intno,
+                             long const &i_strain_ref,
+                             long const &i_stress_ref,
+                             long const &strpoint_ref,
+                             vector<long> const &section,
+                             vector<long> const &fixations,
+                             vector<long> const &eccentrities,
+                             vector<long> const &csys) :
+        elem(get_eleno(), el_add, nodes, matref, add_no, intno,
+             mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+             section, fixations, eccentrities, csys) {}
 
 elements::__base::elem::elem(cards::gelmnt1 const *data) :
     eleno(0), elident(0), matref(-1), add_no(0),
@@ -213,21 +250,21 @@ elements::__base::elem::elem(elem const *data) {
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const eleno,
-    long const elident,
-    long const el_add,
-    std::vector<long> const nodes,
-    long const matref,
-    long const add_no,
-    long const intno,
-    long const mass_intno,
-    long const i_strain_ref,
-    long const i_stress_ref,
-    long const strpoint_ref,
-    std::vector<long> const section,
-    std::vector<long> const fixations,
-    std::vector<long> const eccentrities,
-    std::vector<long> const csys) {
+    long const &eleno,
+    long const &elident,
+    long const &el_add,
+    vector<long> const &nodes,
+    long const &matref,
+    long const &add_no,
+    long const &intno,
+    long const &mass_intno,
+    long const &i_strain_ref,
+    long const &i_stress_ref,
+    long const &strpoint_ref,
+    vector<long> const &section,
+    vector<long> const &fixations,
+    vector<long> const &eccentrities,
+    vector<long> const &csys) {
     if (!used_nos.insert(eleno).second)
         throw NoUsed(eleno);
     this->eleno = eleno;
@@ -251,38 +288,78 @@ elements::__base::elem const &elements::__base::elem::operator() (
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const elno,
-    std::vector<long> const nodes,
-    long const matref,
-    std::vector<long> const sections/*={}*/,
-    long const el_add/*=0*/,
-    long const add_no/*=0*/,
-    long const intno/*=0*/,
-    long const mass_intno/*=0*/,
-    long const i_strain_ref/*=0*/,
-    long const i_stressef/*=0*/,
-    long const strpoint_ref/*=0*/,
-    std::vector<long> const fixations/*={}*/,
-    std::vector<long> const eccentrities/*={}*/,
-    std::vector<long> const csys/*={}*/) {
+    long const &eleno,
+    long const &el_add,
+    vector<long> const &nodes,
+    long const &matref,
+    long const &add_no,
+    long const &intno,
+    long const &mass_intno,
+    long const &i_strain_ref,
+    long const &i_stress_ref,
+    long const &strpoint_ref,
+    vector<long> const &section,
+    vector<long> const &fixations,
+    vector<long> const &eccentrities,
+    vector<long> const &csys) {
+    long id(get_elident());
+    return (*this)(eleno, id, el_add, nodes, matref, add_no, intno,
+                   mass_intno, i_strain_ref, i_stress_ref, strpoint_ref, section,
+                   fixations, eccentrities, csys);
+}
+
+elements::__base::elem const &elements::__base::elem::operator() (
+    long const &eleno,
+    vector<long> const &nodes,
+    long const &matref,
+    long const &add_no,
+    long const &intno,
+    long const &mass_intno,
+    long const &i_strain_ref,
+    long const &i_stress_ref,
+    long const &strpoint_ref,
+    vector<long> const &section,
+    vector<long> const &fixations,
+    vector<long> const &eccentrities,
+    vector<long> const &csys) {
+    return (*this)(eleno, get_elident(), 0, nodes, matref, add_no,
+                   intno, mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+                   section, fixations, eccentrities, csys);
+}
+
+elements::__base::elem const &elements::__base::elem::operator() (
+    long const &elno,
+    vector<long> const &nodes,
+    long const &matref,
+    vector<long> const &sections/*={}*/,
+    long const &el_add/*=0*/,
+    long const &add_no/*=0*/,
+    long const &intno/*=0*/,
+    long const &mass_intno/*=0*/,
+    long const &i_strain_ref/*=0*/,
+    long const &i_stressef/*=0*/,
+    long const &strpoint_ref/*=0*/,
+    vector<long> const &fixations/*={}*/,
+    vector<long> const &eccentrities/*={}*/,
+    vector<long> const &csys/*={}*/) {
     throw NotImplemented(__FILE__, __LINE__);
     return *this;
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    std::vector<long> const nodes,
-    long const matref,
-    std::vector<long> const sections/*={}*/,
-    std::vector<long> const fixations/*={}*/,
-    std::vector<long> const eccentrities/*={}*/,
-    long const el_add/*=0*/,
-    long const add_no/*=0*/,
-    long const intno/*=0*/,
-    long const mass_intno/*=0*/,
-    long const i_strain_ref/*=0*/,
-    long const i_stressef/*=0*/,
-    long const strpoint_ref/*=0*/,
-    std::vector<long> const csys/*={}*/) {
+    vector<long> const &nodes,
+    long const &matref,
+    vector<long> const &sections/*={}*/,
+    vector<long> const &fixations/*={}*/,
+    vector<long> const &eccentrities/*={}*/,
+    long const &el_add/*=0*/,
+    long const &add_no/*=0*/,
+    long const &intno/*=0*/,
+    long const &mass_intno/*=0*/,
+    long const &i_strain_ref/*=0*/,
+    long const &i_stressef/*=0*/,
+    long const &strpoint_ref/*=0*/,
+    vector<long> const &csys/*={}*/) {
     this->eleno = get_eleno();
     this->elident = get_elident();
     this->elident = elident;
@@ -302,22 +379,18 @@ elements::__base::elem const &elements::__base::elem::operator() (
     return *this;
 }
 
-long elements::__base::elem::get_eleno(long const &eleno) {
-    long res(eleno);
-    res = eleno == 0 ? max_no : eleno;
-    if (res == 0 || !used_ids.insert(res).second)
-        do {} while (!used_ids.insert(++res).second);
-    max_no = res;
-    return res;
+long const &elements::__base::elem::get_eleno(long const &eleno) {
+    max_no = eleno == 0 ? max_no : eleno;
+    if (max_no == 0)
+        do {;} while (used_ids.find(++max_no) != used_ids.end());
+    return max_no;
 }
 
-long elements::__base::elem::get_elident(long const &elident) {
-    long res;
-    res = elident == 0 ? max_id : elident;
-    if (res == 0 || !used_nos.insert(res).second)
-        do {} while (!used_nos.insert(++res).second);
-    max_id = res;
-    return res;
+long const &elements::__base::elem::get_elident(long const &elident) {
+    max_id = elident == 0 ? max_id : elident;
+    if (max_id == 0)
+        do {;} while (used_nos.find(++max_id) != used_nos.end());
+    return max_id;
 }
 
 void elements::__base::elem::add(cards::gelmnt1 const *data) {
@@ -424,10 +497,10 @@ cards::__base::card const &elements::__base::elem::gelref1(void) const {
         fixno_opt,
         eccno_opt,
         transno_opt,
-        this->section.size() > 1 ? this->section : std::vector<long>({}),
-        this->fixations.size() > 1 ? this->fixations : std::vector<long>({}),
-        this->eccentrities.size() > 1 ? this->eccentrities : std::vector<long>({}),
-        this->csys.size() > 1 ? this->csys : std::vector<long>({}));
+        this->section.size() > 1 ? this->section : vector<long>({}),
+        this->fixations.size() > 1 ? this->fixations : vector<long>({}),
+        this->eccentrities.size() > 1 ? this->eccentrities : vector<long>({}),
+        this->csys.size() > 1 ? this->csys : vector<long>({}));
 }
 
 void elements::__base::elem::reset(void) {
@@ -439,12 +512,12 @@ void elements::__base::elem::reset(void) {
 
 cards::gelmnt1 elements::__base::elem::d_gelmnt1;
 cards::gelref1 elements::__base::elem::d_gelref1;
-std::set<long> elements::__base::elem::used_ids;
+set<long> elements::__base::elem::used_ids;
 long elements::__base::elem::max_id(0);
-std::set<long> elements::__base::elem::used_nos;
+set<long> elements::__base::elem::used_nos;
 long elements::__base::elem::max_no(0);
 
-undef::undef(const cards::gelref1 *data) :
+undef::undef(cards::gelref1 const *data) :
     __base::elem(data) {}
 
 namespace dnvgl {
@@ -452,8 +525,8 @@ namespace dnvgl {
         namespace fem {
             namespace elements {
                 namespace __base {
-                    std::ostream &operator<<(
-                        std::ostream &os, elements::__base::elem const &data) {
+                    ostream &operator<<(
+                        ostream &os, elements::__base::elem const &data) {
                         if (data.elident < 0) return os;
                         os << data.gelmnt1();
                         os << data.gelref1();
@@ -476,25 +549,64 @@ elements::__base::fem_thin_shell::fem_thin_shell(void) :
     elem() {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
-    long const elno,
-    long const elident,
-    long const el_add,
-    std::vector<long> const nodes,
-    long const matref,
-    long const add_no,
-    long const intno,
-    long const mass_intno,
-    long const i_strain_ref,
-    long const i_stressef,
-    long const strpoint_ref,
-    std::vector<long> const sections,
-    std::vector<long> const fixations,
-    std::vector<long> const eccentrities,
-    std::vector<long> const csys) :
-    elem (elno, elident, el_add, nodes, matref, add_no,
-          intno, mass_intno, i_strain_ref, i_stressef,
-          strpoint_ref, sections, fixations,
-          eccentrities, csys) {}
+    long const &elno,
+    long const &elident,
+    long const &el_add,
+    vector<long> const &nodes,
+    long const &matref,
+    long const &add_no,
+    long const &intno,
+    long const &mass_intno,
+    long const &i_strain_ref,
+    long const &i_stressef,
+    long const &strpoint_ref,
+    vector<long> const &sections,
+    vector<long> const &fixations,
+    vector<long> const &eccentrities,
+    vector<long> const &csys) :
+    elem(elno, elident, el_add, nodes, matref, add_no,
+         intno, mass_intno, i_strain_ref, i_stressef,
+         strpoint_ref, sections, fixations,
+         eccentrities, csys) {}
+
+elements::__base::fem_thin_shell::fem_thin_shell(
+    long const &elno,
+    long const &el_add,
+    vector<long> const &nodes,
+    long const &matref,
+    long const &add_no,
+    long const &intno,
+    long const &mass_intno,
+    long const &i_strain_ref,
+    long const &i_stressef,
+    long const &strpoint_ref,
+    vector<long> const &sections,
+    vector<long> const &fixations,
+    vector<long> const &eccentrities,
+    vector<long> const &csys) :
+    fem_thin_shell(elno, get_elident(), el_add, nodes, matref, add_no,
+                   intno, mass_intno, i_strain_ref, i_stressef,
+                   strpoint_ref, sections, fixations,
+                   eccentrities, csys) {}
+
+elements::__base::fem_thin_shell::fem_thin_shell(
+    long const &el_add,
+    vector<long> const &nodes,
+    long const &matref,
+    long const &add_no,
+    long const &intno,
+    long const &mass_intno,
+    long const &i_strain_ref,
+    long const &i_stressef,
+    long const &strpoint_ref,
+    vector<long> const &sections,
+    vector<long> const &fixations,
+    vector<long> const &eccentrities,
+    vector<long> const &csys) :
+        fem_thin_shell(get_eleno(), el_add, nodes, matref, add_no,
+                       intno, mass_intno, i_strain_ref, i_stressef,
+                       strpoint_ref, sections, fixations,
+                       eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(cards::gelmnt1 const *data) :
     elem(data) {}
@@ -514,7 +626,7 @@ elements::__base::fem_thin_shell::fem_thin_shell(__base::elem const *data) :
 {% line %}
 
 namespace {
-    const size_t {{ elem }}_procs_len = {{ vals.procs|length() }};
+    size_t const {{ elem }}_procs_len = {{ vals.procs|length() }};
     el_processor {{ elem }}_procs[{{ elem }}_procs_len] = {
         {{ vals.procs|join(', ') }}
     };
@@ -524,28 +636,67 @@ long {{ elem }}::nnodes(void) const {return {{ vals.nnodes }};}
 
 el_types {{ elem }}::get_type(void) const {return el_types::{{ elem|upper() }};}
 
-std::set<el_processor> const {{ elem }}::processors(
+set<el_processor> const {{ elem }}::processors(
     {{ elem }}_procs, {{ elem }}_procs+{{ elem }}_procs_len);
 
 {{ elem }}::{{ elem }}(void) : {{ vals.base }}() {}
 
-{{ elem }}::{{ elem }}(long const eleno,
-                       long const elident,
-                       long const el_add,
-                       std::vector<long> const nodes,
-                       long const matref,
-                       long const add_no,
-                       long const intno,
-                       long const mass_intno,
-                       long const i_strain_ref,
-                       long const i_stress_ref,
-                       long const strpoint_ref,
-                       std::vector<long> const section,
-                       std::vector<long> const fixations,
-                       std::vector<long> const eccentrities,
-                       std::vector<long> const csys) :
+{{ elem }}::{{ elem }}(long const &eleno,
+                       long const &elident,
+                       long const &el_add,
+                       vector<long> const &nodes,
+                       long const &matref,
+                       long const &add_no,
+                       long const &intno,
+                       long const &mass_intno,
+                       long const &i_strain_ref,
+                       long const &i_stress_ref,
+                       long const &strpoint_ref,
+                       vector<long> const &section,
+                       vector<long> const &fixations,
+                       vector<long> const &eccentrities,
+                       vector<long> const &csys) :
 {{ vals.base }}(
     eleno, elident, el_add, nodes, matref, add_no,
+    intno, mass_intno, i_strain_ref, i_stress_ref,
+    strpoint_ref, section, fixations, eccentrities,
+    csys) {}
+
+{{ elem }}::{{ elem }}(long const &eleno,
+                       long const &el_add,
+                       vector<long> const &nodes,
+                       long const &matref,
+                       long const &add_no,
+                       long const &intno,
+                       long const &mass_intno,
+                       long const &i_strain_ref,
+                       long const &i_stressef,
+                       long const &strpoint_ref,
+                       vector<long> const &sections,
+                       vector<long> const &fixations,
+                       vector<long> const &eccentrities,
+                       vector<long> const &csys) :
+{{ elem }}(
+    eleno, get_elident(), el_add, nodes, matref, add_no,
+    intno, mass_intno, i_strain_ref, i_stress_ref,
+    strpoint_ref, sections, fixations, eccentrities,
+    csys) {}
+
+{{ elem }}::{{ elem }}(long const &el_add,
+                       vector<long> const &nodes,
+                       long const &matref,
+                       long const &add_no,
+                       long const &intno,
+                       long const &mass_intno,
+                       long const &i_strain_ref,
+                       long const &i_stressef,
+                       long const &strpoint_ref,
+                       vector<long> const &sections,
+                       vector<long> const &fixations,
+                       vector<long> const &eccentrities,
+                       vector<long> const &csys) :
+{{ elem }}(
+    get_eleno(), el_add, nodes, matref, add_no,
     intno, mass_intno, i_strain_ref, i_stress_ref,
     strpoint_ref, section, fixations, eccentrities,
     csys) {}
