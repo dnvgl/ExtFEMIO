@@ -696,7 +696,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     long const &intno/*=0*/,
     long const &mass_intno/*=0*/,
     long const &i_strain_ref/*=0*/,
-    long const &i_stressef/*=0*/,
+    long const &i_stress_ref/*=0*/,
     long const &strpoint_ref/*=0*/,
     vector<long> const &fixations/*={}*/,
     vector<long> const &eccentrities/*={}*/,
@@ -716,7 +716,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     long const &intno/*=0*/,
     long const &mass_intno/*=0*/,
     long const &i_strain_ref/*=0*/,
-    long const &i_stressef/*=0*/,
+    long const &i_stress_ref/*=0*/,
     long const &strpoint_ref/*=0*/,
     vector<long> const &csys/*={}*/) {
     this->eleno = get_eleno();
@@ -917,16 +917,16 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &intno,
     long const &mass_intno,
     long const &i_strain_ref,
-    long const &i_stressef,
+    long const &i_stress_ref,
     long const &strpoint_ref,
     vector<long> const &sections,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-    elem(elno, elident, el_add, nodes, matref, add_no,
-         intno, mass_intno, i_strain_ref, i_stressef,
-         strpoint_ref, sections, fixations,
-         eccentrities, csys) {}
+        elem(elno, elident, el_add, nodes, matref, add_no,
+             intno, mass_intno, i_strain_ref, i_stress_ref,
+             strpoint_ref, sections, fixations,
+             eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
     long const &elno,
@@ -937,16 +937,16 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &intno,
     long const &mass_intno,
     long const &i_strain_ref,
-    long const &i_stressef,
+    long const &i_stress_ref,
     long const &strpoint_ref,
     vector<long> const &sections,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-    fem_thin_shell(elno, get_elident(), el_add, nodes, matref, add_no,
-                   intno, mass_intno, i_strain_ref, i_stressef,
-                   strpoint_ref, sections, fixations,
-                   eccentrities, csys) {}
+        fem_thin_shell(elno, get_elident(), el_add, nodes, matref, add_no,
+                       intno, mass_intno, i_strain_ref, i_stress_ref,
+                       strpoint_ref, sections, fixations,
+                       eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
     long const &el_add,
@@ -956,14 +956,14 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &intno,
     long const &mass_intno,
     long const &i_strain_ref,
-    long const &i_stressef,
+    long const &i_stress_ref,
     long const &strpoint_ref,
     vector<long> const &sections,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
         fem_thin_shell(get_eleno(), el_add, nodes, matref, add_no,
-                       intno, mass_intno, i_strain_ref, i_stressef,
+                       intno, mass_intno, i_strain_ref, i_stress_ref,
                        strpoint_ref, sections, fixations,
                        eccentrities, csys) {}
 
@@ -1014,11 +1014,11 @@ beps::beps(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 beps::beps(long const &eleno,
                        long const &el_add,
@@ -1028,17 +1028,17 @@ beps::beps(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-beps(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        beps(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 beps::beps(long const &el_add,
                        vector<long> const &nodes,
@@ -1047,17 +1047,17 @@ beps::beps(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-beps(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        beps(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 beps::beps(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1104,11 +1104,11 @@ csta::csta(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 csta::csta(long const &eleno,
                        long const &el_add,
@@ -1118,17 +1118,17 @@ csta::csta(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-csta(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        csta(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 csta::csta(long const &el_add,
                        vector<long> const &nodes,
@@ -1137,17 +1137,17 @@ csta::csta(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-csta(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        csta(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 csta::csta(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1194,11 +1194,11 @@ rpbq::rpbq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 rpbq::rpbq(long const &eleno,
                        long const &el_add,
@@ -1208,17 +1208,17 @@ rpbq::rpbq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-rpbq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        rpbq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 rpbq::rpbq(long const &el_add,
                        vector<long> const &nodes,
@@ -1227,17 +1227,17 @@ rpbq::rpbq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-rpbq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        rpbq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 rpbq::rpbq(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1284,11 +1284,11 @@ ilst::ilst(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ilst::ilst(long const &eleno,
                        long const &el_add,
@@ -1298,17 +1298,17 @@ ilst::ilst(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ilst(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ilst(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ilst::ilst(long const &el_add,
                        vector<long> const &nodes,
@@ -1317,17 +1317,17 @@ ilst::ilst(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ilst(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ilst(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ilst::ilst(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1374,11 +1374,11 @@ iqqe::iqqe(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 iqqe::iqqe(long const &eleno,
                        long const &el_add,
@@ -1388,17 +1388,17 @@ iqqe::iqqe(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-iqqe(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        iqqe(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 iqqe::iqqe(long const &el_add,
                        vector<long> const &nodes,
@@ -1407,17 +1407,17 @@ iqqe::iqqe(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-iqqe(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        iqqe(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 iqqe::iqqe(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1464,11 +1464,11 @@ lqua::lqua(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lqua::lqua(long const &eleno,
                        long const &el_add,
@@ -1478,17 +1478,17 @@ lqua::lqua(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lqua(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        lqua(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 lqua::lqua(long const &el_add,
                        vector<long> const &nodes,
@@ -1497,17 +1497,17 @@ lqua::lqua(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lqua(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        lqua(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lqua::lqua(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1554,11 +1554,11 @@ tess::tess(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 tess::tess(long const &eleno,
                        long const &el_add,
@@ -1568,17 +1568,17 @@ tess::tess(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-tess(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        tess(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 tess::tess(long const &el_add,
                        vector<long> const &nodes,
@@ -1587,17 +1587,17 @@ tess::tess(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-tess(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        tess(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 tess::tess(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1644,11 +1644,11 @@ gmas::gmas(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 gmas::gmas(long const &eleno,
                        long const &el_add,
@@ -1658,17 +1658,17 @@ gmas::gmas(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-gmas(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        gmas(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 gmas::gmas(long const &el_add,
                        vector<long> const &nodes,
@@ -1677,17 +1677,17 @@ gmas::gmas(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-gmas(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        gmas(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 gmas::gmas(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1734,11 +1734,11 @@ glma::glma(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 glma::glma(long const &eleno,
                        long const &el_add,
@@ -1748,17 +1748,17 @@ glma::glma(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-glma(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        glma(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 glma::glma(long const &el_add,
                        vector<long> const &nodes,
@@ -1767,17 +1767,17 @@ glma::glma(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-glma(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        glma(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 glma::glma(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1824,11 +1824,11 @@ glda::glda(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 glda::glda(long const &eleno,
                        long const &el_add,
@@ -1838,17 +1838,17 @@ glda::glda(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-glda(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        glda(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 glda::glda(long const &el_add,
                        vector<long> const &nodes,
@@ -1857,17 +1857,17 @@ glda::glda(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-glda(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        glda(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 glda::glda(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -1914,11 +1914,11 @@ beas::beas(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 beas::beas(long const &eleno,
                        long const &el_add,
@@ -1928,17 +1928,17 @@ beas::beas(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-beas(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        beas(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 beas::beas(long const &el_add,
                        vector<long> const &nodes,
@@ -1947,17 +1947,17 @@ beas::beas(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-beas(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        beas(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 beas::beas(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2004,11 +2004,11 @@ axis::axis(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axis::axis(long const &eleno,
                        long const &el_add,
@@ -2018,17 +2018,17 @@ axis::axis(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axis(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        axis(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 axis::axis(long const &el_add,
                        vector<long> const &nodes,
@@ -2037,17 +2037,17 @@ axis::axis(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axis(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        axis(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axis::axis(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2094,11 +2094,11 @@ axda::axda(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axda::axda(long const &eleno,
                        long const &el_add,
@@ -2108,17 +2108,17 @@ axda::axda(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axda(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        axda(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 axda::axda(long const &el_add,
                        vector<long> const &nodes,
@@ -2127,17 +2127,17 @@ axda::axda(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axda(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        axda(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axda::axda(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2184,11 +2184,11 @@ gspr::gspr(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 gspr::gspr(long const &eleno,
                        long const &el_add,
@@ -2198,17 +2198,17 @@ gspr::gspr(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-gspr(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        gspr(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 gspr::gspr(long const &el_add,
                        vector<long> const &nodes,
@@ -2217,17 +2217,17 @@ gspr::gspr(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-gspr(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        gspr(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 gspr::gspr(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2274,11 +2274,11 @@ gdam::gdam(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 gdam::gdam(long const &eleno,
                        long const &el_add,
@@ -2288,17 +2288,17 @@ gdam::gdam(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-gdam(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        gdam(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 gdam::gdam(long const &el_add,
                        vector<long> const &nodes,
@@ -2307,17 +2307,17 @@ gdam::gdam(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-gdam(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        gdam(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 gdam::gdam(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2364,11 +2364,11 @@ ihex::ihex(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ihex::ihex(long const &eleno,
                        long const &el_add,
@@ -2378,17 +2378,17 @@ ihex::ihex(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ihex(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ihex(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ihex::ihex(long const &el_add,
                        vector<long> const &nodes,
@@ -2397,17 +2397,17 @@ ihex::ihex(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ihex(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ihex(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ihex::ihex(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2454,11 +2454,11 @@ lhex::lhex(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lhex::lhex(long const &eleno,
                        long const &el_add,
@@ -2468,17 +2468,17 @@ lhex::lhex(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lhex(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        lhex(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 lhex::lhex(long const &el_add,
                        vector<long> const &nodes,
@@ -2487,17 +2487,17 @@ lhex::lhex(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lhex(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        lhex(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lhex::lhex(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2544,11 +2544,11 @@ secb::secb(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 secb::secb(long const &eleno,
                        long const &el_add,
@@ -2558,17 +2558,17 @@ secb::secb(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-secb(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        secb(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 secb::secb(long const &el_add,
                        vector<long> const &nodes,
@@ -2577,17 +2577,17 @@ secb::secb(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-secb(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        secb(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 secb::secb(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2634,11 +2634,11 @@ btss::btss(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 btss::btss(long const &eleno,
                        long const &el_add,
@@ -2648,17 +2648,17 @@ btss::btss(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-btss(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        btss(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 btss::btss(long const &el_add,
                        vector<long> const &nodes,
@@ -2667,17 +2667,17 @@ btss::btss(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-btss(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        btss(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 btss::btss(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2724,11 +2724,11 @@ fqus_ffq::fqus_ffq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-fem_thin_shell(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        fem_thin_shell(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 fqus_ffq::fqus_ffq(long const &eleno,
                        long const &el_add,
@@ -2738,17 +2738,17 @@ fqus_ffq::fqus_ffq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-fqus_ffq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        fqus_ffq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 fqus_ffq::fqus_ffq(long const &el_add,
                        vector<long> const &nodes,
@@ -2757,17 +2757,17 @@ fqus_ffq::fqus_ffq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-fqus_ffq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        fqus_ffq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 fqus_ffq::fqus_ffq(cards::gelmnt1 const *data) : fem_thin_shell(data) {}
 
@@ -2814,11 +2814,11 @@ ftrs_fftr::ftrs_fftr(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-fem_thin_shell(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        fem_thin_shell(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ftrs_fftr::ftrs_fftr(long const &eleno,
                        long const &el_add,
@@ -2828,17 +2828,17 @@ ftrs_fftr::ftrs_fftr(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ftrs_fftr(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ftrs_fftr(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ftrs_fftr::ftrs_fftr(long const &el_add,
                        vector<long> const &nodes,
@@ -2847,17 +2847,17 @@ ftrs_fftr::ftrs_fftr(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ftrs_fftr(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ftrs_fftr(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ftrs_fftr::ftrs_fftr(cards::gelmnt1 const *data) : fem_thin_shell(data) {}
 
@@ -2904,11 +2904,11 @@ scts::scts(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 scts::scts(long const &eleno,
                        long const &el_add,
@@ -2918,17 +2918,17 @@ scts::scts(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-scts(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        scts(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 scts::scts(long const &el_add,
                        vector<long> const &nodes,
@@ -2937,17 +2937,17 @@ scts::scts(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-scts(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        scts(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 scts::scts(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -2994,11 +2994,11 @@ mcts::mcts(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 mcts::mcts(long const &eleno,
                        long const &el_add,
@@ -3008,17 +3008,17 @@ mcts::mcts(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-mcts(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        mcts(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 mcts::mcts(long const &el_add,
                        vector<long> const &nodes,
@@ -3027,17 +3027,17 @@ mcts::mcts(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-mcts(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        mcts(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 mcts::mcts(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3084,11 +3084,11 @@ scqs::scqs(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 scqs::scqs(long const &eleno,
                        long const &el_add,
@@ -3098,17 +3098,17 @@ scqs::scqs(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-scqs(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        scqs(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 scqs::scqs(long const &el_add,
                        vector<long> const &nodes,
@@ -3117,17 +3117,17 @@ scqs::scqs(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-scqs(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        scqs(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 scqs::scqs(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3174,11 +3174,11 @@ mcqs::mcqs(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 mcqs::mcqs(long const &eleno,
                        long const &el_add,
@@ -3188,17 +3188,17 @@ mcqs::mcqs(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-mcqs(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        mcqs(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 mcqs::mcqs(long const &el_add,
                        vector<long> const &nodes,
@@ -3207,17 +3207,17 @@ mcqs::mcqs(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-mcqs(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        mcqs(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 mcqs::mcqs(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3264,11 +3264,11 @@ ipri::ipri(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ipri::ipri(long const &eleno,
                        long const &el_add,
@@ -3278,17 +3278,17 @@ ipri::ipri(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ipri(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ipri(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ipri::ipri(long const &el_add,
                        vector<long> const &nodes,
@@ -3297,17 +3297,17 @@ ipri::ipri(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ipri(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ipri(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ipri::ipri(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3354,11 +3354,11 @@ itet::itet(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 itet::itet(long const &eleno,
                        long const &el_add,
@@ -3368,17 +3368,17 @@ itet::itet(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-itet(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        itet(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 itet::itet(long const &el_add,
                        vector<long> const &nodes,
@@ -3387,17 +3387,17 @@ itet::itet(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-itet(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        itet(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 itet::itet(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3444,11 +3444,11 @@ tpri::tpri(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 tpri::tpri(long const &eleno,
                        long const &el_add,
@@ -3458,17 +3458,17 @@ tpri::tpri(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-tpri(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        tpri(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 tpri::tpri(long const &el_add,
                        vector<long> const &nodes,
@@ -3477,17 +3477,17 @@ tpri::tpri(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-tpri(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        tpri(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 tpri::tpri(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3534,11 +3534,11 @@ tetr::tetr(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 tetr::tetr(long const &eleno,
                        long const &el_add,
@@ -3548,17 +3548,17 @@ tetr::tetr(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-tetr(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        tetr(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 tetr::tetr(long const &el_add,
                        vector<long> const &nodes,
@@ -3567,17 +3567,17 @@ tetr::tetr(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-tetr(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        tetr(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 tetr::tetr(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3624,11 +3624,11 @@ lcts::lcts(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lcts::lcts(long const &eleno,
                        long const &el_add,
@@ -3638,17 +3638,17 @@ lcts::lcts(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lcts(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        lcts(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 lcts::lcts(long const &el_add,
                        vector<long> const &nodes,
@@ -3657,17 +3657,17 @@ lcts::lcts(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lcts(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        lcts(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lcts::lcts(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3714,11 +3714,11 @@ lcqs::lcqs(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lcqs::lcqs(long const &eleno,
                        long const &el_add,
@@ -3728,17 +3728,17 @@ lcqs::lcqs(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lcqs(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        lcqs(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 lcqs::lcqs(long const &el_add,
                        vector<long> const &nodes,
@@ -3747,17 +3747,17 @@ lcqs::lcqs(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-lcqs(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        lcqs(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 lcqs::lcqs(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3804,11 +3804,11 @@ trs1::trs1(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 trs1::trs1(long const &eleno,
                        long const &el_add,
@@ -3818,17 +3818,17 @@ trs1::trs1(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-trs1(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        trs1(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 trs1::trs1(long const &el_add,
                        vector<long> const &nodes,
@@ -3837,17 +3837,17 @@ trs1::trs1(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-trs1(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        trs1(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 trs1::trs1(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3894,11 +3894,11 @@ trs2::trs2(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 trs2::trs2(long const &eleno,
                        long const &el_add,
@@ -3908,17 +3908,17 @@ trs2::trs2(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-trs2(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        trs2(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 trs2::trs2(long const &el_add,
                        vector<long> const &nodes,
@@ -3927,17 +3927,17 @@ trs2::trs2(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-trs2(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        trs2(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 trs2::trs2(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -3984,11 +3984,11 @@ trs3::trs3(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 trs3::trs3(long const &eleno,
                        long const &el_add,
@@ -3998,17 +3998,17 @@ trs3::trs3(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-trs3(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        trs3(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 trs3::trs3(long const &el_add,
                        vector<long> const &nodes,
@@ -4017,17 +4017,17 @@ trs3::trs3(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-trs3(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        trs3(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 trs3::trs3(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4074,11 +4074,11 @@ glsh::glsh(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 glsh::glsh(long const &eleno,
                        long const &el_add,
@@ -4088,17 +4088,17 @@ glsh::glsh(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-glsh(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        glsh(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 glsh::glsh(long const &el_add,
                        vector<long> const &nodes,
@@ -4107,17 +4107,17 @@ glsh::glsh(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-glsh(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        glsh(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 glsh::glsh(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4164,11 +4164,11 @@ axcs::axcs(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axcs::axcs(long const &eleno,
                        long const &el_add,
@@ -4178,17 +4178,17 @@ axcs::axcs(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axcs(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        axcs(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 axcs::axcs(long const &el_add,
                        vector<long> const &nodes,
@@ -4197,17 +4197,17 @@ axcs::axcs(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axcs(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        axcs(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axcs::axcs(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4254,11 +4254,11 @@ axlq::axlq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axlq::axlq(long const &eleno,
                        long const &el_add,
@@ -4268,17 +4268,17 @@ axlq::axlq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axlq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        axlq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 axlq::axlq(long const &el_add,
                        vector<long> const &nodes,
@@ -4287,17 +4287,17 @@ axlq::axlq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axlq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        axlq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axlq::axlq(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4344,11 +4344,11 @@ axls::axls(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axls::axls(long const &eleno,
                        long const &el_add,
@@ -4358,17 +4358,17 @@ axls::axls(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axls(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        axls(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 axls::axls(long const &el_add,
                        vector<long> const &nodes,
@@ -4377,17 +4377,17 @@ axls::axls(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axls(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        axls(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axls::axls(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4434,11 +4434,11 @@ axqq::axqq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axqq::axqq(long const &eleno,
                        long const &el_add,
@@ -4448,17 +4448,17 @@ axqq::axqq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axqq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        axqq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 axqq::axqq(long const &el_add,
                        vector<long> const &nodes,
@@ -4467,17 +4467,17 @@ axqq::axqq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-axqq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        axqq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 axqq::axqq(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4524,11 +4524,11 @@ pils::pils(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 pils::pils(long const &eleno,
                        long const &el_add,
@@ -4538,17 +4538,17 @@ pils::pils(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-pils(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        pils(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 pils::pils(long const &el_add,
                        vector<long> const &nodes,
@@ -4557,17 +4557,17 @@ pils::pils(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-pils(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        pils(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 pils::pils(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4614,11 +4614,11 @@ pcab::pcab(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 pcab::pcab(long const &eleno,
                        long const &el_add,
@@ -4628,17 +4628,17 @@ pcab::pcab(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-pcab(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        pcab(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 pcab::pcab(long const &el_add,
                        vector<long> const &nodes,
@@ -4647,17 +4647,17 @@ pcab::pcab(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-pcab(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        pcab(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 pcab::pcab(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4704,11 +4704,11 @@ pspr::pspr(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 pspr::pspr(long const &eleno,
                        long const &el_add,
@@ -4718,17 +4718,17 @@ pspr::pspr(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-pspr(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        pspr(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 pspr::pspr(long const &el_add,
                        vector<long> const &nodes,
@@ -4737,17 +4737,17 @@ pspr::pspr(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-pspr(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        pspr(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 pspr::pspr(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4794,11 +4794,11 @@ adva_4::adva_4(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 adva_4::adva_4(long const &eleno,
                        long const &el_add,
@@ -4808,17 +4808,17 @@ adva_4::adva_4(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-adva_4(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        adva_4(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 adva_4::adva_4(long const &el_add,
                        vector<long> const &nodes,
@@ -4827,17 +4827,17 @@ adva_4::adva_4(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-adva_4(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        adva_4(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 adva_4::adva_4(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4884,11 +4884,11 @@ adva_2::adva_2(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 adva_2::adva_2(long const &eleno,
                        long const &el_add,
@@ -4898,17 +4898,17 @@ adva_2::adva_2(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-adva_2(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        adva_2(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 adva_2::adva_2(long const &el_add,
                        vector<long> const &nodes,
@@ -4917,17 +4917,17 @@ adva_2::adva_2(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-adva_2(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        adva_2(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 adva_2::adva_2(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -4974,11 +4974,11 @@ ctcp::ctcp(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcp::ctcp(long const &eleno,
                        long const &el_add,
@@ -4988,17 +4988,17 @@ ctcp::ctcp(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcp(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctcp(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctcp::ctcp(long const &el_add,
                        vector<long> const &nodes,
@@ -5007,17 +5007,17 @@ ctcp::ctcp(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcp(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctcp(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcp::ctcp(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5064,11 +5064,11 @@ ctcl::ctcl(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcl::ctcl(long const &eleno,
                        long const &el_add,
@@ -5078,17 +5078,17 @@ ctcl::ctcl(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcl(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctcl(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctcl::ctcl(long const &el_add,
                        vector<long> const &nodes,
@@ -5097,17 +5097,17 @@ ctcl::ctcl(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcl(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctcl(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcl::ctcl(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5154,11 +5154,11 @@ ctal::ctal(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctal::ctal(long const &eleno,
                        long const &el_add,
@@ -5168,17 +5168,17 @@ ctal::ctal(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctal(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctal(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctal::ctal(long const &el_add,
                        vector<long> const &nodes,
@@ -5187,17 +5187,17 @@ ctal::ctal(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctal(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctal(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctal::ctal(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5244,11 +5244,11 @@ ctcc::ctcc(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcc::ctcc(long const &eleno,
                        long const &el_add,
@@ -5258,17 +5258,17 @@ ctcc::ctcc(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcc(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctcc(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctcc::ctcc(long const &el_add,
                        vector<long> const &nodes,
@@ -5277,17 +5277,17 @@ ctcc::ctcc(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcc(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctcc(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcc::ctcc(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5334,11 +5334,11 @@ ctaq::ctaq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctaq::ctaq(long const &eleno,
                        long const &el_add,
@@ -5348,17 +5348,17 @@ ctaq::ctaq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctaq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctaq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctaq::ctaq(long const &el_add,
                        vector<long> const &nodes,
@@ -5367,17 +5367,17 @@ ctaq::ctaq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctaq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctaq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctaq::ctaq(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5424,11 +5424,11 @@ ctlq::ctlq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctlq::ctlq(long const &eleno,
                        long const &el_add,
@@ -5438,17 +5438,17 @@ ctlq::ctlq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctlq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctlq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctlq::ctlq(long const &el_add,
                        vector<long> const &nodes,
@@ -5457,17 +5457,17 @@ ctlq::ctlq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctlq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctlq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctlq::ctlq(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5514,11 +5514,11 @@ ctcq::ctcq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcq::ctcq(long const &eleno,
                        long const &el_add,
@@ -5528,17 +5528,17 @@ ctcq::ctcq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctcq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctcq::ctcq(long const &el_add,
                        vector<long> const &nodes,
@@ -5547,17 +5547,17 @@ ctcq::ctcq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctcq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctcq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctcq::ctcq(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5604,11 +5604,11 @@ ctmq::ctmq(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctmq::ctmq(long const &eleno,
                        long const &el_add,
@@ -5618,17 +5618,17 @@ ctmq::ctmq(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctmq(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ctmq(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ctmq::ctmq(long const &el_add,
                        vector<long> const &nodes,
@@ -5637,17 +5637,17 @@ ctmq::ctmq(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ctmq(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ctmq(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ctmq::ctmq(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5694,11 +5694,11 @@ hcqs::hcqs(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 hcqs::hcqs(long const &eleno,
                        long const &el_add,
@@ -5708,17 +5708,17 @@ hcqs::hcqs(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-hcqs(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        hcqs(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 hcqs::hcqs(long const &el_add,
                        vector<long> const &nodes,
@@ -5727,17 +5727,17 @@ hcqs::hcqs(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-hcqs(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        hcqs(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 hcqs::hcqs(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5784,11 +5784,11 @@ slqs::slqs(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 slqs::slqs(long const &eleno,
                        long const &el_add,
@@ -5798,17 +5798,17 @@ slqs::slqs(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-slqs(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        slqs(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 slqs::slqs(long const &el_add,
                        vector<long> const &nodes,
@@ -5817,17 +5817,17 @@ slqs::slqs(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-slqs(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        slqs(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 slqs::slqs(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5874,11 +5874,11 @@ slts::slts(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 slts::slts(long const &eleno,
                        long const &el_add,
@@ -5888,17 +5888,17 @@ slts::slts(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-slts(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        slts(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 slts::slts(long const &el_add,
                        vector<long> const &nodes,
@@ -5907,17 +5907,17 @@ slts::slts(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-slts(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        slts(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 slts::slts(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -5964,11 +5964,11 @@ slcb::slcb(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 slcb::slcb(long const &eleno,
                        long const &el_add,
@@ -5978,17 +5978,17 @@ slcb::slcb(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-slcb(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        slcb(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 slcb::slcb(long const &el_add,
                        vector<long> const &nodes,
@@ -5997,17 +5997,17 @@ slcb::slcb(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-slcb(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        slcb(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 slcb::slcb(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6054,11 +6054,11 @@ matr::matr(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 matr::matr(long const &eleno,
                        long const &el_add,
@@ -6068,17 +6068,17 @@ matr::matr(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-matr(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        matr(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 matr::matr(long const &el_add,
                        vector<long> const &nodes,
@@ -6087,17 +6087,17 @@ matr::matr(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-matr(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        matr(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 matr::matr(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6144,11 +6144,11 @@ ghex100::ghex100(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex100::ghex100(long const &eleno,
                        long const &el_add,
@@ -6158,17 +6158,17 @@ ghex100::ghex100(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex100(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex100(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex100::ghex100(long const &el_add,
                        vector<long> const &nodes,
@@ -6177,17 +6177,17 @@ ghex100::ghex100(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex100(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex100(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex100::ghex100(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6234,11 +6234,11 @@ ghex101::ghex101(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex101::ghex101(long const &eleno,
                        long const &el_add,
@@ -6248,17 +6248,17 @@ ghex101::ghex101(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex101(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex101(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex101::ghex101(long const &el_add,
                        vector<long> const &nodes,
@@ -6267,17 +6267,17 @@ ghex101::ghex101(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex101(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex101(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex101::ghex101(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6324,11 +6324,11 @@ ghex102::ghex102(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex102::ghex102(long const &eleno,
                        long const &el_add,
@@ -6338,17 +6338,17 @@ ghex102::ghex102(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex102(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex102(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex102::ghex102(long const &el_add,
                        vector<long> const &nodes,
@@ -6357,17 +6357,17 @@ ghex102::ghex102(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex102(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex102(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex102::ghex102(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6414,11 +6414,11 @@ ghex103::ghex103(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex103::ghex103(long const &eleno,
                        long const &el_add,
@@ -6428,17 +6428,17 @@ ghex103::ghex103(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex103(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex103(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex103::ghex103(long const &el_add,
                        vector<long> const &nodes,
@@ -6447,17 +6447,17 @@ ghex103::ghex103(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex103(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex103(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex103::ghex103(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6504,11 +6504,11 @@ ghex104::ghex104(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex104::ghex104(long const &eleno,
                        long const &el_add,
@@ -6518,17 +6518,17 @@ ghex104::ghex104(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex104(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex104(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex104::ghex104(long const &el_add,
                        vector<long> const &nodes,
@@ -6537,17 +6537,17 @@ ghex104::ghex104(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex104(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex104(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex104::ghex104(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6594,11 +6594,11 @@ ghex105::ghex105(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex105::ghex105(long const &eleno,
                        long const &el_add,
@@ -6608,17 +6608,17 @@ ghex105::ghex105(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex105(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex105(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex105::ghex105(long const &el_add,
                        vector<long> const &nodes,
@@ -6627,17 +6627,17 @@ ghex105::ghex105(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex105(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex105(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex105::ghex105(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6684,11 +6684,11 @@ ghex106::ghex106(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex106::ghex106(long const &eleno,
                        long const &el_add,
@@ -6698,17 +6698,17 @@ ghex106::ghex106(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex106(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex106(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex106::ghex106(long const &el_add,
                        vector<long> const &nodes,
@@ -6717,17 +6717,17 @@ ghex106::ghex106(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex106(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex106(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex106::ghex106(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6774,11 +6774,11 @@ ghex107::ghex107(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex107::ghex107(long const &eleno,
                        long const &el_add,
@@ -6788,17 +6788,17 @@ ghex107::ghex107(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex107(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex107(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex107::ghex107(long const &el_add,
                        vector<long> const &nodes,
@@ -6807,17 +6807,17 @@ ghex107::ghex107(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex107(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex107(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex107::ghex107(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6864,11 +6864,11 @@ ghex108::ghex108(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex108::ghex108(long const &eleno,
                        long const &el_add,
@@ -6878,17 +6878,17 @@ ghex108::ghex108(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex108(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex108(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex108::ghex108(long const &el_add,
                        vector<long> const &nodes,
@@ -6897,17 +6897,17 @@ ghex108::ghex108(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex108(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex108(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex108::ghex108(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -6954,11 +6954,11 @@ ghex109::ghex109(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex109::ghex109(long const &eleno,
                        long const &el_add,
@@ -6968,17 +6968,17 @@ ghex109::ghex109(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex109(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex109(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex109::ghex109(long const &el_add,
                        vector<long> const &nodes,
@@ -6987,17 +6987,17 @@ ghex109::ghex109(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex109(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex109(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex109::ghex109(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7044,11 +7044,11 @@ ghex110::ghex110(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex110::ghex110(long const &eleno,
                        long const &el_add,
@@ -7058,17 +7058,17 @@ ghex110::ghex110(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex110(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex110(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex110::ghex110(long const &el_add,
                        vector<long> const &nodes,
@@ -7077,17 +7077,17 @@ ghex110::ghex110(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex110(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex110(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex110::ghex110(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7134,11 +7134,11 @@ ghex111::ghex111(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex111::ghex111(long const &eleno,
                        long const &el_add,
@@ -7148,17 +7148,17 @@ ghex111::ghex111(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex111(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex111(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex111::ghex111(long const &el_add,
                        vector<long> const &nodes,
@@ -7167,17 +7167,17 @@ ghex111::ghex111(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex111(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex111(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex111::ghex111(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7224,11 +7224,11 @@ ghex112::ghex112(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex112::ghex112(long const &eleno,
                        long const &el_add,
@@ -7238,17 +7238,17 @@ ghex112::ghex112(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex112(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex112(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex112::ghex112(long const &el_add,
                        vector<long> const &nodes,
@@ -7257,17 +7257,17 @@ ghex112::ghex112(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex112(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex112(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex112::ghex112(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7314,11 +7314,11 @@ ghex113::ghex113(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex113::ghex113(long const &eleno,
                        long const &el_add,
@@ -7328,17 +7328,17 @@ ghex113::ghex113(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex113(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex113(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex113::ghex113(long const &el_add,
                        vector<long> const &nodes,
@@ -7347,17 +7347,17 @@ ghex113::ghex113(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex113(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex113(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex113::ghex113(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7404,11 +7404,11 @@ ghex114::ghex114(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex114::ghex114(long const &eleno,
                        long const &el_add,
@@ -7418,17 +7418,17 @@ ghex114::ghex114(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex114(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex114(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex114::ghex114(long const &el_add,
                        vector<long> const &nodes,
@@ -7437,17 +7437,17 @@ ghex114::ghex114(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex114(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex114(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex114::ghex114(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7494,11 +7494,11 @@ ghex115::ghex115(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex115::ghex115(long const &eleno,
                        long const &el_add,
@@ -7508,17 +7508,17 @@ ghex115::ghex115(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex115(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex115(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex115::ghex115(long const &el_add,
                        vector<long> const &nodes,
@@ -7527,17 +7527,17 @@ ghex115::ghex115(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex115(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex115(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex115::ghex115(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7584,11 +7584,11 @@ ghex116::ghex116(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex116::ghex116(long const &eleno,
                        long const &el_add,
@@ -7598,17 +7598,17 @@ ghex116::ghex116(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex116(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex116(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex116::ghex116(long const &el_add,
                        vector<long> const &nodes,
@@ -7617,17 +7617,17 @@ ghex116::ghex116(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex116(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex116(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex116::ghex116(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7674,11 +7674,11 @@ ghex117::ghex117(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex117::ghex117(long const &eleno,
                        long const &el_add,
@@ -7688,17 +7688,17 @@ ghex117::ghex117(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex117(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex117(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex117::ghex117(long const &el_add,
                        vector<long> const &nodes,
@@ -7707,17 +7707,17 @@ ghex117::ghex117(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex117(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex117(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex117::ghex117(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7764,11 +7764,11 @@ ghex118::ghex118(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex118::ghex118(long const &eleno,
                        long const &el_add,
@@ -7778,17 +7778,17 @@ ghex118::ghex118(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex118(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex118(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex118::ghex118(long const &el_add,
                        vector<long> const &nodes,
@@ -7797,17 +7797,17 @@ ghex118::ghex118(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex118(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex118(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex118::ghex118(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7854,11 +7854,11 @@ ghex119::ghex119(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex119::ghex119(long const &eleno,
                        long const &el_add,
@@ -7868,17 +7868,17 @@ ghex119::ghex119(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex119(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex119(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex119::ghex119(long const &el_add,
                        vector<long> const &nodes,
@@ -7887,17 +7887,17 @@ ghex119::ghex119(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex119(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex119(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex119::ghex119(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -7944,11 +7944,11 @@ ghex120::ghex120(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex120::ghex120(long const &eleno,
                        long const &el_add,
@@ -7958,17 +7958,17 @@ ghex120::ghex120(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex120(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex120(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex120::ghex120(long const &el_add,
                        vector<long> const &nodes,
@@ -7977,17 +7977,17 @@ ghex120::ghex120(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex120(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex120(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex120::ghex120(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8034,11 +8034,11 @@ ghex121::ghex121(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex121::ghex121(long const &eleno,
                        long const &el_add,
@@ -8048,17 +8048,17 @@ ghex121::ghex121(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex121(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex121(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex121::ghex121(long const &el_add,
                        vector<long> const &nodes,
@@ -8067,17 +8067,17 @@ ghex121::ghex121(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex121(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex121(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex121::ghex121(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8124,11 +8124,11 @@ ghex122::ghex122(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex122::ghex122(long const &eleno,
                        long const &el_add,
@@ -8138,17 +8138,17 @@ ghex122::ghex122(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex122(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex122(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex122::ghex122(long const &el_add,
                        vector<long> const &nodes,
@@ -8157,17 +8157,17 @@ ghex122::ghex122(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex122(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex122(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex122::ghex122(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8214,11 +8214,11 @@ ghex123::ghex123(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex123::ghex123(long const &eleno,
                        long const &el_add,
@@ -8228,17 +8228,17 @@ ghex123::ghex123(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex123(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex123(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex123::ghex123(long const &el_add,
                        vector<long> const &nodes,
@@ -8247,17 +8247,17 @@ ghex123::ghex123(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex123(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex123(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex123::ghex123(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8304,11 +8304,11 @@ ghex124::ghex124(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex124::ghex124(long const &eleno,
                        long const &el_add,
@@ -8318,17 +8318,17 @@ ghex124::ghex124(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex124(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex124(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex124::ghex124(long const &el_add,
                        vector<long> const &nodes,
@@ -8337,17 +8337,17 @@ ghex124::ghex124(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex124(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex124(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex124::ghex124(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8394,11 +8394,11 @@ ghex125::ghex125(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex125::ghex125(long const &eleno,
                        long const &el_add,
@@ -8408,17 +8408,17 @@ ghex125::ghex125(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex125(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex125(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex125::ghex125(long const &el_add,
                        vector<long> const &nodes,
@@ -8427,17 +8427,17 @@ ghex125::ghex125(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex125(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex125(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex125::ghex125(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8484,11 +8484,11 @@ ghex126::ghex126(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex126::ghex126(long const &eleno,
                        long const &el_add,
@@ -8498,17 +8498,17 @@ ghex126::ghex126(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex126(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex126(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex126::ghex126(long const &el_add,
                        vector<long> const &nodes,
@@ -8517,17 +8517,17 @@ ghex126::ghex126(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex126(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex126(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex126::ghex126(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8574,11 +8574,11 @@ ghex127::ghex127(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex127::ghex127(long const &eleno,
                        long const &el_add,
@@ -8588,17 +8588,17 @@ ghex127::ghex127(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex127(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex127(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex127::ghex127(long const &el_add,
                        vector<long> const &nodes,
@@ -8607,17 +8607,17 @@ ghex127::ghex127(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex127(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex127(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex127::ghex127(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8664,11 +8664,11 @@ ghex128::ghex128(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex128::ghex128(long const &eleno,
                        long const &el_add,
@@ -8678,17 +8678,17 @@ ghex128::ghex128(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex128(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex128(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex128::ghex128(long const &el_add,
                        vector<long> const &nodes,
@@ -8697,17 +8697,17 @@ ghex128::ghex128(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex128(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex128(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex128::ghex128(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8754,11 +8754,11 @@ ghex129::ghex129(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex129::ghex129(long const &eleno,
                        long const &el_add,
@@ -8768,17 +8768,17 @@ ghex129::ghex129(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex129(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex129(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex129::ghex129(long const &el_add,
                        vector<long> const &nodes,
@@ -8787,17 +8787,17 @@ ghex129::ghex129(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex129(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex129(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex129::ghex129(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8844,11 +8844,11 @@ ghex130::ghex130(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex130::ghex130(long const &eleno,
                        long const &el_add,
@@ -8858,17 +8858,17 @@ ghex130::ghex130(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex130(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex130(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex130::ghex130(long const &el_add,
                        vector<long> const &nodes,
@@ -8877,17 +8877,17 @@ ghex130::ghex130(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex130(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex130(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex130::ghex130(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -8934,11 +8934,11 @@ ghex131::ghex131(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex131::ghex131(long const &eleno,
                        long const &el_add,
@@ -8948,17 +8948,17 @@ ghex131::ghex131(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex131(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex131(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex131::ghex131(long const &el_add,
                        vector<long> const &nodes,
@@ -8967,17 +8967,17 @@ ghex131::ghex131(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex131(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex131(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex131::ghex131(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9024,11 +9024,11 @@ ghex132::ghex132(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex132::ghex132(long const &eleno,
                        long const &el_add,
@@ -9038,17 +9038,17 @@ ghex132::ghex132(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex132(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex132(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex132::ghex132(long const &el_add,
                        vector<long> const &nodes,
@@ -9057,17 +9057,17 @@ ghex132::ghex132(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex132(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex132(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex132::ghex132(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9114,11 +9114,11 @@ ghex133::ghex133(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex133::ghex133(long const &eleno,
                        long const &el_add,
@@ -9128,17 +9128,17 @@ ghex133::ghex133(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex133(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex133(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex133::ghex133(long const &el_add,
                        vector<long> const &nodes,
@@ -9147,17 +9147,17 @@ ghex133::ghex133(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex133(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex133(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex133::ghex133(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9204,11 +9204,11 @@ ghex134::ghex134(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex134::ghex134(long const &eleno,
                        long const &el_add,
@@ -9218,17 +9218,17 @@ ghex134::ghex134(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex134(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex134(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex134::ghex134(long const &el_add,
                        vector<long> const &nodes,
@@ -9237,17 +9237,17 @@ ghex134::ghex134(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex134(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex134(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex134::ghex134(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9294,11 +9294,11 @@ ghex135::ghex135(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex135::ghex135(long const &eleno,
                        long const &el_add,
@@ -9308,17 +9308,17 @@ ghex135::ghex135(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex135(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex135(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex135::ghex135(long const &el_add,
                        vector<long> const &nodes,
@@ -9327,17 +9327,17 @@ ghex135::ghex135(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex135(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex135(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex135::ghex135(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9384,11 +9384,11 @@ ghex136::ghex136(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex136::ghex136(long const &eleno,
                        long const &el_add,
@@ -9398,17 +9398,17 @@ ghex136::ghex136(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex136(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex136(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex136::ghex136(long const &el_add,
                        vector<long> const &nodes,
@@ -9417,17 +9417,17 @@ ghex136::ghex136(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex136(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex136(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex136::ghex136(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9474,11 +9474,11 @@ ghex137::ghex137(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex137::ghex137(long const &eleno,
                        long const &el_add,
@@ -9488,17 +9488,17 @@ ghex137::ghex137(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex137(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex137(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex137::ghex137(long const &el_add,
                        vector<long> const &nodes,
@@ -9507,17 +9507,17 @@ ghex137::ghex137(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex137(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex137(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex137::ghex137(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9564,11 +9564,11 @@ ghex138::ghex138(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex138::ghex138(long const &eleno,
                        long const &el_add,
@@ -9578,17 +9578,17 @@ ghex138::ghex138(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex138(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex138(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex138::ghex138(long const &el_add,
                        vector<long> const &nodes,
@@ -9597,17 +9597,17 @@ ghex138::ghex138(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex138(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex138(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex138::ghex138(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9654,11 +9654,11 @@ ghex139::ghex139(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex139::ghex139(long const &eleno,
                        long const &el_add,
@@ -9668,17 +9668,17 @@ ghex139::ghex139(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex139(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex139(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex139::ghex139(long const &el_add,
                        vector<long> const &nodes,
@@ -9687,17 +9687,17 @@ ghex139::ghex139(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex139(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex139(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex139::ghex139(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9744,11 +9744,11 @@ ghex140::ghex140(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex140::ghex140(long const &eleno,
                        long const &el_add,
@@ -9758,17 +9758,17 @@ ghex140::ghex140(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex140(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex140(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex140::ghex140(long const &el_add,
                        vector<long> const &nodes,
@@ -9777,17 +9777,17 @@ ghex140::ghex140(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex140(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex140(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex140::ghex140(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9834,11 +9834,11 @@ ghex141::ghex141(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex141::ghex141(long const &eleno,
                        long const &el_add,
@@ -9848,17 +9848,17 @@ ghex141::ghex141(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex141(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex141(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex141::ghex141(long const &el_add,
                        vector<long> const &nodes,
@@ -9867,17 +9867,17 @@ ghex141::ghex141(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex141(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex141(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex141::ghex141(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -9924,11 +9924,11 @@ ghex142::ghex142(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex142::ghex142(long const &eleno,
                        long const &el_add,
@@ -9938,17 +9938,17 @@ ghex142::ghex142(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex142(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex142(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex142::ghex142(long const &el_add,
                        vector<long> const &nodes,
@@ -9957,17 +9957,17 @@ ghex142::ghex142(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex142(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex142(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex142::ghex142(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10014,11 +10014,11 @@ ghex143::ghex143(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex143::ghex143(long const &eleno,
                        long const &el_add,
@@ -10028,17 +10028,17 @@ ghex143::ghex143(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex143(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex143(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex143::ghex143(long const &el_add,
                        vector<long> const &nodes,
@@ -10047,17 +10047,17 @@ ghex143::ghex143(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex143(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex143(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex143::ghex143(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10104,11 +10104,11 @@ ghex144::ghex144(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex144::ghex144(long const &eleno,
                        long const &el_add,
@@ -10118,17 +10118,17 @@ ghex144::ghex144(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex144(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex144(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex144::ghex144(long const &el_add,
                        vector<long> const &nodes,
@@ -10137,17 +10137,17 @@ ghex144::ghex144(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex144(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex144(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex144::ghex144(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10194,11 +10194,11 @@ ghex145::ghex145(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex145::ghex145(long const &eleno,
                        long const &el_add,
@@ -10208,17 +10208,17 @@ ghex145::ghex145(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex145(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex145(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex145::ghex145(long const &el_add,
                        vector<long> const &nodes,
@@ -10227,17 +10227,17 @@ ghex145::ghex145(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex145(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex145(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex145::ghex145(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10284,11 +10284,11 @@ ghex146::ghex146(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex146::ghex146(long const &eleno,
                        long const &el_add,
@@ -10298,17 +10298,17 @@ ghex146::ghex146(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex146(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex146(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex146::ghex146(long const &el_add,
                        vector<long> const &nodes,
@@ -10317,17 +10317,17 @@ ghex146::ghex146(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex146(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex146(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex146::ghex146(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10374,11 +10374,11 @@ ghex147::ghex147(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex147::ghex147(long const &eleno,
                        long const &el_add,
@@ -10388,17 +10388,17 @@ ghex147::ghex147(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex147(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex147(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex147::ghex147(long const &el_add,
                        vector<long> const &nodes,
@@ -10407,17 +10407,17 @@ ghex147::ghex147(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex147(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex147(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex147::ghex147(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10464,11 +10464,11 @@ ghex148::ghex148(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex148::ghex148(long const &eleno,
                        long const &el_add,
@@ -10478,17 +10478,17 @@ ghex148::ghex148(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex148(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex148(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex148::ghex148(long const &el_add,
                        vector<long> const &nodes,
@@ -10497,17 +10497,17 @@ ghex148::ghex148(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex148(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex148(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex148::ghex148(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10554,11 +10554,11 @@ ghex149::ghex149(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex149::ghex149(long const &eleno,
                        long const &el_add,
@@ -10568,17 +10568,17 @@ ghex149::ghex149(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex149(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex149(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex149::ghex149(long const &el_add,
                        vector<long> const &nodes,
@@ -10587,17 +10587,17 @@ ghex149::ghex149(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex149(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex149(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex149::ghex149(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10644,11 +10644,11 @@ ghex150::ghex150(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex150::ghex150(long const &eleno,
                        long const &el_add,
@@ -10658,17 +10658,17 @@ ghex150::ghex150(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex150(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex150(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex150::ghex150(long const &el_add,
                        vector<long> const &nodes,
@@ -10677,17 +10677,17 @@ ghex150::ghex150(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex150(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex150(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex150::ghex150(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10734,11 +10734,11 @@ ghex151::ghex151(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex151::ghex151(long const &eleno,
                        long const &el_add,
@@ -10748,17 +10748,17 @@ ghex151::ghex151(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex151(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex151(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex151::ghex151(long const &el_add,
                        vector<long> const &nodes,
@@ -10767,17 +10767,17 @@ ghex151::ghex151(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex151(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex151(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex151::ghex151(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10824,11 +10824,11 @@ ghex152::ghex152(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex152::ghex152(long const &eleno,
                        long const &el_add,
@@ -10838,17 +10838,17 @@ ghex152::ghex152(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex152(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex152(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex152::ghex152(long const &el_add,
                        vector<long> const &nodes,
@@ -10857,17 +10857,17 @@ ghex152::ghex152(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex152(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex152(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex152::ghex152(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -10914,11 +10914,11 @@ ghex153::ghex153(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex153::ghex153(long const &eleno,
                        long const &el_add,
@@ -10928,17 +10928,17 @@ ghex153::ghex153(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex153(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex153(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex153::ghex153(long const &el_add,
                        vector<long> const &nodes,
@@ -10947,17 +10947,17 @@ ghex153::ghex153(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex153(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex153(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex153::ghex153(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11004,11 +11004,11 @@ ghex154::ghex154(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex154::ghex154(long const &eleno,
                        long const &el_add,
@@ -11018,17 +11018,17 @@ ghex154::ghex154(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex154(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex154(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex154::ghex154(long const &el_add,
                        vector<long> const &nodes,
@@ -11037,17 +11037,17 @@ ghex154::ghex154(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex154(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex154(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex154::ghex154(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11094,11 +11094,11 @@ ghex155::ghex155(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex155::ghex155(long const &eleno,
                        long const &el_add,
@@ -11108,17 +11108,17 @@ ghex155::ghex155(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex155(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex155(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex155::ghex155(long const &el_add,
                        vector<long> const &nodes,
@@ -11127,17 +11127,17 @@ ghex155::ghex155(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex155(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex155(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex155::ghex155(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11184,11 +11184,11 @@ ghex156::ghex156(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex156::ghex156(long const &eleno,
                        long const &el_add,
@@ -11198,17 +11198,17 @@ ghex156::ghex156(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex156(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex156(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex156::ghex156(long const &el_add,
                        vector<long> const &nodes,
@@ -11217,17 +11217,17 @@ ghex156::ghex156(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex156(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex156(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex156::ghex156(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11274,11 +11274,11 @@ ghex157::ghex157(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex157::ghex157(long const &eleno,
                        long const &el_add,
@@ -11288,17 +11288,17 @@ ghex157::ghex157(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex157(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex157(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex157::ghex157(long const &el_add,
                        vector<long> const &nodes,
@@ -11307,17 +11307,17 @@ ghex157::ghex157(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex157(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex157(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex157::ghex157(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11364,11 +11364,11 @@ ghex158::ghex158(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex158::ghex158(long const &eleno,
                        long const &el_add,
@@ -11378,17 +11378,17 @@ ghex158::ghex158(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex158(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex158(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex158::ghex158(long const &el_add,
                        vector<long> const &nodes,
@@ -11397,17 +11397,17 @@ ghex158::ghex158(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex158(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex158(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex158::ghex158(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11454,11 +11454,11 @@ ghex159::ghex159(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex159::ghex159(long const &eleno,
                        long const &el_add,
@@ -11468,17 +11468,17 @@ ghex159::ghex159(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex159(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex159(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex159::ghex159(long const &el_add,
                        vector<long> const &nodes,
@@ -11487,17 +11487,17 @@ ghex159::ghex159(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex159(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex159(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex159::ghex159(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11544,11 +11544,11 @@ ghex160::ghex160(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex160::ghex160(long const &eleno,
                        long const &el_add,
@@ -11558,17 +11558,17 @@ ghex160::ghex160(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex160(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex160(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex160::ghex160(long const &el_add,
                        vector<long> const &nodes,
@@ -11577,17 +11577,17 @@ ghex160::ghex160(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex160(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex160(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex160::ghex160(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11634,11 +11634,11 @@ ghex161::ghex161(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex161::ghex161(long const &eleno,
                        long const &el_add,
@@ -11648,17 +11648,17 @@ ghex161::ghex161(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex161(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex161(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex161::ghex161(long const &el_add,
                        vector<long> const &nodes,
@@ -11667,17 +11667,17 @@ ghex161::ghex161(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex161(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex161(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex161::ghex161(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11724,11 +11724,11 @@ ghex162::ghex162(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex162::ghex162(long const &eleno,
                        long const &el_add,
@@ -11738,17 +11738,17 @@ ghex162::ghex162(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex162(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex162(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex162::ghex162(long const &el_add,
                        vector<long> const &nodes,
@@ -11757,17 +11757,17 @@ ghex162::ghex162(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex162(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex162(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex162::ghex162(cards::gelmnt1 const *data) : elem(data) {}
 
@@ -11814,11 +11814,11 @@ ghex163::ghex163(long const &eleno,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-elem(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        elem(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex163::ghex163(long const &eleno,
                        long const &el_add,
@@ -11828,17 +11828,17 @@ ghex163::ghex163(long const &eleno,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex163(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        ghex163(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 ghex163::ghex163(long const &el_add,
                        vector<long> const &nodes,
@@ -11847,17 +11847,17 @@ ghex163::ghex163(long const &el_add,
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-ghex163(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        ghex163(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 ghex163::ghex163(cards::gelmnt1 const *data) : elem(data) {}
 
