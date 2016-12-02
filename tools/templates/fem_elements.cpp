@@ -337,7 +337,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     long const &intno/*=0*/,
     long const &mass_intno/*=0*/,
     long const &i_strain_ref/*=0*/,
-    long const &i_stressef/*=0*/,
+    long const &i_stress_ref/*=0*/,
     long const &strpoint_ref/*=0*/,
     vector<long> const &fixations/*={}*/,
     vector<long> const &eccentrities/*={}*/,
@@ -357,7 +357,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     long const &intno/*=0*/,
     long const &mass_intno/*=0*/,
     long const &i_strain_ref/*=0*/,
-    long const &i_stressef/*=0*/,
+    long const &i_stress_ref/*=0*/,
     long const &strpoint_ref/*=0*/,
     vector<long> const &csys/*={}*/) {
     this->eleno = get_eleno();
@@ -558,16 +558,16 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &intno,
     long const &mass_intno,
     long const &i_strain_ref,
-    long const &i_stressef,
+    long const &i_stress_ref,
     long const &strpoint_ref,
     vector<long> const &sections,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-    elem(elno, elident, el_add, nodes, matref, add_no,
-         intno, mass_intno, i_strain_ref, i_stressef,
-         strpoint_ref, sections, fixations,
-         eccentrities, csys) {}
+        elem(elno, elident, el_add, nodes, matref, add_no,
+             intno, mass_intno, i_strain_ref, i_stress_ref,
+             strpoint_ref, sections, fixations,
+             eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
     long const &elno,
@@ -578,16 +578,16 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &intno,
     long const &mass_intno,
     long const &i_strain_ref,
-    long const &i_stressef,
+    long const &i_stress_ref,
     long const &strpoint_ref,
     vector<long> const &sections,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-    fem_thin_shell(elno, get_elident(), el_add, nodes, matref, add_no,
-                   intno, mass_intno, i_strain_ref, i_stressef,
-                   strpoint_ref, sections, fixations,
-                   eccentrities, csys) {}
+        fem_thin_shell(elno, get_elident(), el_add, nodes, matref, add_no,
+                       intno, mass_intno, i_strain_ref, i_stress_ref,
+                       strpoint_ref, sections, fixations,
+                       eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
     long const &el_add,
@@ -597,14 +597,14 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &intno,
     long const &mass_intno,
     long const &i_strain_ref,
-    long const &i_stressef,
+    long const &i_stress_ref,
     long const &strpoint_ref,
     vector<long> const &sections,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
         fem_thin_shell(get_eleno(), el_add, nodes, matref, add_no,
-                       intno, mass_intno, i_strain_ref, i_stressef,
+                       intno, mass_intno, i_strain_ref, i_stress_ref,
                        strpoint_ref, sections, fixations,
                        eccentrities, csys) {}
 
@@ -656,11 +656,11 @@ set<el_processor> const {{ elem }}::processors(
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-{{ vals.base }}(
-    eleno, elident, el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        {{ vals.base }}(
+            eleno, elident, el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 {{ elem }}::{{ elem }}(long const &eleno,
                        long const &el_add,
@@ -670,17 +670,17 @@ set<el_processor> const {{ elem }}::processors(
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-{{ elem }}(
-    eleno, get_elident(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, sections, fixations, eccentrities,
-    csys) {}
+        {{ elem }}(
+            eleno, get_elident(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, sections, fixations, eccentrities,
+            csys) {}
 
 {{ elem }}::{{ elem }}(long const &el_add,
                        vector<long> const &nodes,
@@ -689,17 +689,17 @@ set<el_processor> const {{ elem }}::processors(
                        long const &intno,
                        long const &mass_intno,
                        long const &i_strain_ref,
-                       long const &i_stressef,
+                       long const &i_stress_ref,
                        long const &strpoint_ref,
                        vector<long> const &sections,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-{{ elem }}(
-    get_eleno(), el_add, nodes, matref, add_no,
-    intno, mass_intno, i_strain_ref, i_stress_ref,
-    strpoint_ref, section, fixations, eccentrities,
-    csys) {}
+        {{ elem }}(
+            get_eleno(), el_add, nodes, matref, add_no,
+            intno, mass_intno, i_strain_ref, i_stress_ref,
+            strpoint_ref, section, fixations, eccentrities,
+            csys) {}
 
 {{ elem }}::{{ elem }}(cards::gelmnt1 const *data) : {{ vals.base }}(data) {}
 
