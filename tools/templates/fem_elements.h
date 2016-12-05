@@ -64,8 +64,10 @@ namespace dnvgl {
 
                     protected:
 
-                        long static const &get_eleno(long const &eleno=0);
-                        long static const &get_elident(long const &elident=0);
+                        long static const &get_eleno(void);
+                        long static const &get_eleno(long const &eleno);
+                        long static const &get_elident();
+                        long static const &get_elident(long const &elident);
 
                         el_types static const type;
                         elem(void);
@@ -162,6 +164,7 @@ namespace dnvgl {
                             std::vector<long> const &fixations,
                             std::vector<long> const &eccentrities,
                             std::vector<long> const &csys);
+
                         __base::elem const &operator() (
                             std::vector<long> const &nodes,
                             long const &matref,
@@ -176,6 +179,20 @@ namespace dnvgl {
                             long const &i_stressef=0,
                             long const &strpoint_ref=0,
                             std::vector<long> const &csys={});
+
+                        __base::elem const &set_values(
+                            long const &elno, long const &elident,
+                            long const &el_add,
+                            std::vector<long> const &nodes,
+                            long const &matref,
+                            long const &add_no, long const &intno,
+                            long const &mass_intno, long const &i_strain_ref,
+                            long const &i_stressef, long const &strpoint_ref,
+                            std::vector<long> const &sections,
+                            std::vector<long> const &fixations,
+                            std::vector<long> const &eccentrities,
+                            std::vector<long> const &csys);
+
 
                     public:
                         elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
