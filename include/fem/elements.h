@@ -304,8 +304,10 @@ namespace dnvgl {
 
                     protected:
 
-                        long static const &get_eleno(long const &eleno=0);
-                        long static const &get_elident(long const &elident=0);
+                        long static const &get_eleno(void);
+                        long static const &get_eleno(long const &eleno);
+                        long static const &get_elident();
+                        long static const &get_elident(long const &elident);
 
                         el_types static const type;
                         elem(void);
@@ -402,6 +404,7 @@ namespace dnvgl {
                             std::vector<long> const &fixations,
                             std::vector<long> const &eccentrities,
                             std::vector<long> const &csys);
+
                         __base::elem const &operator() (
                             std::vector<long> const &nodes,
                             long const &matref,
@@ -416,6 +419,20 @@ namespace dnvgl {
                             long const &i_stressef=0,
                             long const &strpoint_ref=0,
                             std::vector<long> const &csys={});
+
+                        __base::elem const &set_values(
+                            long const &elno, long const &elident,
+                            long const &el_add,
+                            std::vector<long> const &nodes,
+                            long const &matref,
+                            long const &add_no, long const &intno,
+                            long const &mass_intno, long const &i_strain_ref,
+                            long const &i_stressef, long const &strpoint_ref,
+                            std::vector<long> const &sections,
+                            std::vector<long> const &fixations,
+                            std::vector<long> const &eccentrities,
+                            std::vector<long> const &csys);
+
 
                     public:
                         elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
@@ -571,7 +588,7 @@ namespace dnvgl {
                     el_types get_type(void) const;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-D, 2 Node Beam
                  */
                 class beps : public __base::elem {
@@ -628,7 +645,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Constant Strain Triangle
                  */
                 class csta : public __base::elem {
@@ -685,7 +702,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Rect. Plate. Bending Modes
                  */
                 class rpbq : public __base::elem {
@@ -742,7 +759,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Lin. Strain Triangle
                  */
                 class ilst : public __base::elem {
@@ -799,7 +816,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class iqqe : public __base::elem {
@@ -856,7 +873,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class lqua : public __base::elem {
@@ -913,7 +930,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Truss Element
                  */
                 class tess : public __base::elem {
@@ -970,7 +987,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 1-Noded Mass-Matrix
                  */
                 class gmas : public __base::elem {
@@ -1027,7 +1044,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Mass-Matrix
                  */
                 class glma : public __base::elem {
@@ -1084,7 +1101,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Damping-Matrix
                  */
                 class glda : public __base::elem {
@@ -1141,7 +1158,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 3-D, 2 Node Beam
                  */
                 class beas : public __base::elem {
@@ -1198,7 +1215,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Spring
                  */
                 class axis : public __base::elem {
@@ -1255,7 +1272,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Damper
                  */
                 class axda : public __base::elem {
@@ -1312,7 +1329,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Spring to Ground
                  */
                 class gspr : public __base::elem {
@@ -1369,7 +1386,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Damper to Ground
                  */
                 class gdam : public __base::elem {
@@ -1426,7 +1443,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Hexahedron
                  */
                 class ihex : public __base::elem {
@@ -1483,7 +1500,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Linear Hexahedron
                  */
                 class lhex : public __base::elem {
@@ -1540,7 +1557,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Beam
                  */
                 class secb : public __base::elem {
@@ -1597,7 +1614,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Curved Beam
                  */
                 class btss : public __base::elem {
@@ -1654,7 +1671,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell
                  */
                 class fqus_ffq : public __base::fem_thin_shell {
@@ -1711,7 +1728,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /**  Flat Triangular Thin Shell / Free Formulation Triangular Shell
                  */
                 class ftrs_fftr : public __base::fem_thin_shell {
@@ -1768,7 +1785,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Triangular Thick Shell
                  */
                 class scts : public __base::elem {
@@ -1825,7 +1842,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Triang. Thick Sandwich Elem.
                  */
                 class mcts : public __base::elem {
@@ -1882,7 +1899,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Quadrilateral Thick Shell
                  */
                 class scqs : public __base::elem {
@@ -1939,7 +1956,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Quadr. Thick Sandwich Elem.
                  */
                 class mcqs : public __base::elem {
@@ -1996,7 +2013,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Triangular Prism
                  */
                 class ipri : public __base::elem {
@@ -2053,7 +2070,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Tetrahedron
                  */
                 class itet : public __base::elem {
@@ -2110,7 +2127,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Triangular Prism
                  */
                 class tpri : public __base::elem {
@@ -2167,7 +2184,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Tetrahedron
                  */
                 class tetr : public __base::elem {
@@ -2224,7 +2241,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Triangular Thick Shell
                  */
                 class lcts : public __base::elem {
@@ -2281,7 +2298,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Quadrilat. Thick Shell
                  */
                 class lcqs : public __base::elem {
@@ -2338,7 +2355,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs1 : public __base::elem {
@@ -2395,7 +2412,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs2 : public __base::elem {
@@ -2452,7 +2469,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs3 : public __base::elem {
@@ -2509,7 +2526,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Spring / Shim Element
                  */
                 class glsh : public __base::elem {
@@ -2566,7 +2583,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Constant Strain Triangle
                  */
                 class axcs : public __base::elem {
@@ -2623,7 +2640,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Quadrilateral
                  */
                 class axlq : public __base::elem {
@@ -2680,7 +2697,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Triangle
                  */
                 class axls : public __base::elem {
@@ -2737,7 +2754,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Quadrilateral
                  */
                 class axqq : public __base::elem {
@@ -2794,7 +2811,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Pile / Soil
                  */
                 class pils : public __base::elem {
@@ -2851,7 +2868,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Cable-Bar Element
                  */
                 class pcab : public __base::elem {
@@ -2908,7 +2925,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Spring Element
                  */
                 class pspr : public __base::elem {
@@ -2965,7 +2982,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-node Contact Element with triangular Shape
                  */
                 class adva_4 : public __base::elem {
@@ -3022,7 +3039,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Link Element
                  */
                 class adva_2 : public __base::elem {
@@ -3079,7 +3096,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Contact Element
                  */
                 class ctcp : public __base::elem {
@@ -3136,7 +3153,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Contact Element
                  */
                 class ctcl : public __base::elem {
@@ -3193,7 +3210,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Axisymmetric Contact Element
                  */
                 class ctal : public __base::elem {
@@ -3250,7 +3267,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded Contact Element
                  */
                 class ctcc : public __base::elem {
@@ -3307,7 +3324,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded (3+3) Axisymmetric Contact Element
                  */
                 class ctaq : public __base::elem {
@@ -3364,7 +3381,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 8-Noded (4+4) Contact Element
                  */
                 class ctlq : public __base::elem {
@@ -3421,7 +3438,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 16-Noded (8+8) Contact Element
                  */
                 class ctcq : public __base::elem {
@@ -3478,7 +3495,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 18-Noded (9+9) Contact Element
                  */
                 class ctmq : public __base::elem {
@@ -3535,7 +3552,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 9-Noded Shell Element
                  */
                 class hcqs : public __base::elem {
@@ -3592,7 +3609,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
                  */
                 class slqs : public __base::elem {
@@ -3649,7 +3666,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
                  */
                 class slts : public __base::elem {
@@ -3706,7 +3723,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Curved Beam (11 d.o.fs)
                  */
                 class slcb : public __base::elem {
@@ -3763,7 +3780,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Matrix Element with arbitrary no. of nodes (/n/)
                  */
                 class matr : public __base::elem {
@@ -3820,7 +3837,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3881,7 +3898,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3943,7 +3960,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4005,7 +4022,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4068,7 +4085,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4130,7 +4147,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4193,7 +4210,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4256,7 +4273,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4320,7 +4337,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4382,7 +4399,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4445,7 +4462,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4508,7 +4525,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4572,7 +4589,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4635,7 +4652,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4699,7 +4716,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4763,7 +4780,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4828,7 +4845,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4890,7 +4907,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4953,7 +4970,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5016,7 +5033,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5080,7 +5097,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5143,7 +5160,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5207,7 +5224,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5271,7 +5288,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5336,7 +5353,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5399,7 +5416,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5463,7 +5480,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5527,7 +5544,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5592,7 +5609,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5656,7 +5673,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5721,7 +5738,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5786,7 +5803,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5852,7 +5869,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5914,7 +5931,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5977,7 +5994,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6040,7 +6057,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6104,7 +6121,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6167,7 +6184,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6231,7 +6248,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6295,7 +6312,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6360,7 +6377,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6423,7 +6440,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6487,7 +6504,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6551,7 +6568,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6616,7 +6633,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6680,7 +6697,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6745,7 +6762,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6810,7 +6827,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6876,7 +6893,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6939,7 +6956,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7003,7 +7020,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7067,7 +7084,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7132,7 +7149,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7196,7 +7213,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7261,7 +7278,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7326,7 +7343,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7392,7 +7409,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7456,7 +7473,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7521,7 +7538,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7586,7 +7603,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7652,7 +7669,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7717,7 +7734,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7783,7 +7800,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7849,7 +7866,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 335 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 352 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7916,7 +7933,7 @@ namespace dnvgl {
                     std::set<el_processor> static const processors;
                 };
 
-#line 392 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 409 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Dispatch element class instance for `id`
                  */
                 void dispatch(std::unique_ptr<__base::elem>&,

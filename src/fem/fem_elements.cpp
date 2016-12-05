@@ -526,19 +526,14 @@ elements::__base::elem::elem(long const &eleno,
                              vector<long> const &fixations,
                              vector<long> const &eccentrities,
                              vector<long> const &csys) :
-    eleno(eleno), elident(elident), el_add(el_add),
-    nodes(nodes), matref(matref), add_no(add_no),
-    intno(intno), mass_intno(mass_intno),
-    i_strain_ref(i_strain_ref),
-    i_stress_ref(i_stress_ref),
-    strpoint_ref(strpoint_ref),
-    section(section), fixations(fixations),
-    eccentrities(eccentrities), csys(csys) {
-    if (!used_nos.insert(eleno).second)
-        throw NoUsed(eleno);
-    if (!used_ids.insert(elident).second)
-        throw IdUsed(elident);
-}
+        eleno(get_eleno(eleno)), elident(get_elident(elident)), el_add(el_add),
+        nodes(nodes), matref(matref), add_no(add_no),
+        intno(intno), mass_intno(mass_intno),
+        i_strain_ref(i_strain_ref),
+        i_stress_ref(i_stress_ref),
+        strpoint_ref(strpoint_ref),
+        section(section), fixations(fixations),
+        eccentrities(eccentrities), csys(csys) { }
 
 elements::__base::elem::elem(long const &eleno,
                              long const &el_add,
@@ -554,10 +549,9 @@ elements::__base::elem::elem(long const &eleno,
                              vector<long> const &fixations,
                              vector<long> const &eccentrities,
                              vector<long> const &csys) :
-        elem(eleno, get_elident(), el_add, nodes, matref, add_no, intno,
-             mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
-             section, fixations, eccentrities, csys) {
-}
+        elem(eleno, 0, el_add, nodes, matref, add_no,
+             intno, mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+             section, fixations, eccentrities, csys) { }
 
 elements::__base::elem::elem(long const &el_add,
                              vector<long> const &nodes,
@@ -572,7 +566,7 @@ elements::__base::elem::elem(long const &el_add,
                              vector<long> const &fixations,
                              vector<long> const &eccentrities,
                              vector<long> const &csys) :
-        elem(get_eleno(), el_add, nodes, matref, add_no, intno,
+        elem(0, 0, el_add, nodes, matref, add_no, intno,
              mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
              section, fixations, eccentrities, csys) {}
 
@@ -624,11 +618,31 @@ elements::__base::elem const &elements::__base::elem::operator() (
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) {
-    if (!used_nos.insert(eleno).second)
-        throw NoUsed(eleno);
+    return set_values(get_eleno(eleno), get_elident(elident), el_add, nodes,
+                      matref, add_no, intno, mass_intno, i_strain_ref, i_stress_ref,
+                      strpoint_ref, section, fixations, eccentrities, csys);
+}
+
+/** Set attribute values for new element representation. No value
+    checking.
+ */
+elements::__base::elem const &elements::__base::elem::set_values(
+    long const &eleno,
+    long const &elident,
+    long const &el_add,
+    vector<long> const &nodes,
+    long const &matref,
+    long const &add_no,
+    long const &intno,
+    long const &mass_intno,
+    long const &i_strain_ref,
+    long const &i_stress_ref,
+    long const &strpoint_ref,
+    vector<long> const &section,
+    vector<long> const &fixations,
+    vector<long> const &eccentrities,
+    vector<long> const &csys) {
     this->eleno = eleno;
-    if (!used_ids.insert(elident).second)
-        throw IdUsed(elident);
     this->elident = elident;
     this->el_add = el_add;
     this->nodes = nodes;
@@ -661,10 +675,9 @@ elements::__base::elem const &elements::__base::elem::operator() (
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) {
-    long id(get_elident());
-    return (*this)(eleno, id, el_add, nodes, matref, add_no, intno,
-                   mass_intno, i_strain_ref, i_stress_ref, strpoint_ref, section,
-                   fixations, eccentrities, csys);
+    return (*this)(eleno, 0, el_add, nodes, matref, add_no, intno,
+                   mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+                   section, fixations, eccentrities, csys);
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
@@ -681,8 +694,8 @@ elements::__base::elem const &elements::__base::elem::operator() (
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) {
-    return (*this)(eleno, get_elident(), 0, nodes, matref, add_no,
-                   intno, mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+    return (*this)(eleno, 0, 0, nodes, matref, add_no, intno, mass_intno,
+                   i_strain_ref, i_stress_ref, strpoint_ref,
                    section, fixations, eccentrities, csys);
 }
 
@@ -690,7 +703,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     long const &elno,
     vector<long> const &nodes,
     long const &matref,
-    vector<long> const &sections/*={}*/,
+    vector<long> const &section/*={}*/,
     long const &el_add/*=0*/,
     long const &add_no/*=0*/,
     long const &intno/*=0*/,
@@ -708,7 +721,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
 elements::__base::elem const &elements::__base::elem::operator() (
     vector<long> const &nodes,
     long const &matref,
-    vector<long> const &sections/*={}*/,
+    vector<long> const &section/*={}*/,
     vector<long> const &fixations/*={}*/,
     vector<long> const &eccentrities/*={}*/,
     long const &el_add/*=0*/,
@@ -719,59 +732,51 @@ elements::__base::elem const &elements::__base::elem::operator() (
     long const &i_stress_ref/*=0*/,
     long const &strpoint_ref/*=0*/,
     vector<long> const &csys/*={}*/) {
-    this->eleno = get_eleno();
-    this->elident = get_elident();
-    this->elident = elident;
-    this->el_add = el_add;
-    this->nodes = nodes;
-    this->matref = matref;
-    this->add_no = add_no;
-    this->intno = intno;
-    this->mass_intno = mass_intno;
-    this->i_strain_ref = i_strain_ref;
-    this->i_stress_ref = i_stress_ref;
-    this->strpoint_ref = strpoint_ref;
-    this->section = section;
-    this->fixations = fixations;
-    this->eccentrities = eccentrities;
-    this->csys = csys;
-    return *this;
+    return (*this)(0, 0, el_add, nodes, matref, add_no,
+                   intno, mass_intno, i_strain_ref, i_stress_ref,
+                   strpoint_ref, section, fixations, eccentrities, csys);
 }
 
 long const &elements::__base::elem::get_eleno(long const &eleno) {
-    max_no = eleno == 0 ? max_no : eleno;
-    if (max_no == 0)
-        do {;} while (used_ids.find(++max_no) != used_ids.end());
+    if (eleno == 0) return get_eleno();
+    if (!used_nos.insert(eleno).second)
+        throw NoUsed(eleno);
+    return eleno;
+}
+
+long const &elements::__base::elem::get_eleno(void) {
+    do {;} while (used_nos.find(++max_no) != used_nos.end());
+    used_nos.insert(max_no);
     return max_no;
 }
 
 long const &elements::__base::elem::get_elident(long const &elident) {
-    max_id = elident == 0 ? max_id : elident;
-    if (max_id == 0)
-        do {;} while (used_nos.find(++max_id) != used_nos.end());
+    if (elident == 0) return get_elident();
+    if (!used_ids.insert(elident).second)
+        throw IdUsed(elident);
+    return elident;
+}
+
+long const &elements::__base::elem::get_elident(void) {
+    do {;} while (used_ids.find(++max_id) != used_ids.end());
+    used_ids.insert(max_id);
     return max_id;
 }
 
 void elements::__base::elem::add(cards::gelmnt1 const *data) {
-    if (!used_nos.insert(data->ELNOX).second)
-        throw NoUsed(data->ELNOX);
-    this->eleno = data->ELNOX;
-    if (this->elident == 0) {
-        if (!used_ids.insert(data->ELNO).second)
-            throw IdUsed(data->ELNO);
-        this->elident = data->ELNO;
-    } else if (this->elident != data->ELNO)
+    this->eleno = get_eleno(data->ELNOX);
+    if (this->elident == 0)
+        this->elident = get_elident(data->ELNO);
+    else if (this->elident != data->ELNO)
         throw DataNotMatchingId(this->elident, data->ELNO);
     this->el_add = data->ELTYAD;
     this->nodes = data->NODIN;
 }
 
 void elements::__base::elem::add(cards::gelref1 const *data) {
-    if (this->elident == 0) {
-        if (!used_ids.insert(data->ELNO).second)
-            throw IdUsed(data->ELNO);
-        this->elident = data->ELNO;
-    } else if (this->elident != data->ELNO)
+    if (this->elident == 0)
+        this->elident = get_elident(data->ELNO);
+    else if (this->elident != data->ELNO)
         throw DataNotMatchingId(this->elident, data->ELNO);
     this->elident = data->ELNO;
     this->matref = data->MATNO;
@@ -919,13 +924,13 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &i_strain_ref,
     long const &i_stress_ref,
     long const &strpoint_ref,
-    vector<long> const &sections,
+    vector<long> const &section,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
         elem(elno, elident, el_add, nodes, matref, add_no,
              intno, mass_intno, i_strain_ref, i_stress_ref,
-             strpoint_ref, sections, fixations,
+             strpoint_ref, section, fixations,
              eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
@@ -939,13 +944,13 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &i_strain_ref,
     long const &i_stress_ref,
     long const &strpoint_ref,
-    vector<long> const &sections,
+    vector<long> const &section,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-        fem_thin_shell(elno, get_elident(), el_add, nodes, matref, add_no,
+        fem_thin_shell(elno, 0, el_add, nodes, matref, add_no,
                        intno, mass_intno, i_strain_ref, i_stress_ref,
-                       strpoint_ref, sections, fixations,
+                       strpoint_ref, section, fixations,
                        eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
@@ -958,13 +963,13 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     long const &i_strain_ref,
     long const &i_stress_ref,
     long const &strpoint_ref,
-    vector<long> const &sections,
+    vector<long> const &section,
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-        fem_thin_shell(get_eleno(), el_add, nodes, matref, add_no,
+        fem_thin_shell(0, el_add, nodes, matref, add_no,
                        intno, mass_intno, i_strain_ref, i_stress_ref,
-                       strpoint_ref, sections, fixations,
+                       strpoint_ref, section, fixations,
                        eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(cards::gelmnt1 const *data) :
@@ -981,7 +986,7 @@ elements::__base::fem_thin_shell::fem_thin_shell(__base::elem const *data) :
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const beps_procs_len = 3;
@@ -1030,14 +1035,14 @@ beps::beps(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        beps(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 beps::beps(long const &el_add,
@@ -1049,12 +1054,12 @@ beps::beps(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        beps(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1071,7 +1076,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const csta_procs_len = 4;
@@ -1120,14 +1125,14 @@ csta::csta(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        csta(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 csta::csta(long const &el_add,
@@ -1139,12 +1144,12 @@ csta::csta(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        csta(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1161,7 +1166,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const rpbq_procs_len = 1;
@@ -1210,14 +1215,14 @@ rpbq::rpbq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        rpbq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 rpbq::rpbq(long const &el_add,
@@ -1229,12 +1234,12 @@ rpbq::rpbq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        rpbq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1251,7 +1256,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ilst_procs_len = 3;
@@ -1300,14 +1305,14 @@ ilst::ilst(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ilst(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ilst::ilst(long const &el_add,
@@ -1319,12 +1324,12 @@ ilst::ilst(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ilst(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1341,7 +1346,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const iqqe_procs_len = 3;
@@ -1390,14 +1395,14 @@ iqqe::iqqe(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        iqqe(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 iqqe::iqqe(long const &el_add,
@@ -1409,12 +1414,12 @@ iqqe::iqqe(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        iqqe(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1431,7 +1436,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const lqua_procs_len = 5;
@@ -1480,14 +1485,14 @@ lqua::lqua(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lqua(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 lqua::lqua(long const &el_add,
@@ -1499,12 +1504,12 @@ lqua::lqua(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lqua(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1521,7 +1526,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const tess_procs_len = 6;
@@ -1570,14 +1575,14 @@ tess::tess(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        tess(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 tess::tess(long const &el_add,
@@ -1589,12 +1594,12 @@ tess::tess(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        tess(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1611,7 +1616,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const gmas_procs_len = 4;
@@ -1660,14 +1665,14 @@ gmas::gmas(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        gmas(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 gmas::gmas(long const &el_add,
@@ -1679,12 +1684,12 @@ gmas::gmas(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        gmas(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1701,7 +1706,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const glma_procs_len = 2;
@@ -1750,14 +1755,14 @@ glma::glma(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        glma(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 glma::glma(long const &el_add,
@@ -1769,12 +1774,12 @@ glma::glma(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        glma(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1791,7 +1796,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const glda_procs_len = 1;
@@ -1840,14 +1845,14 @@ glda::glda(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        glda(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 glda::glda(long const &el_add,
@@ -1859,12 +1864,12 @@ glda::glda(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        glda(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1881,7 +1886,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const beas_procs_len = 11;
@@ -1930,14 +1935,14 @@ beas::beas(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        beas(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 beas::beas(long const &el_add,
@@ -1949,12 +1954,12 @@ beas::beas(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        beas(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -1971,7 +1976,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const axis_procs_len = 7;
@@ -2020,14 +2025,14 @@ axis::axis(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axis(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 axis::axis(long const &el_add,
@@ -2039,12 +2044,12 @@ axis::axis(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axis(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2061,7 +2066,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const axda_procs_len = 5;
@@ -2110,14 +2115,14 @@ axda::axda(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axda(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 axda::axda(long const &el_add,
@@ -2129,12 +2134,12 @@ axda::axda(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axda(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2151,7 +2156,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const gspr_procs_len = 7;
@@ -2200,14 +2205,14 @@ gspr::gspr(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        gspr(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 gspr::gspr(long const &el_add,
@@ -2219,12 +2224,12 @@ gspr::gspr(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        gspr(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2241,7 +2246,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const gdam_procs_len = 5;
@@ -2290,14 +2295,14 @@ gdam::gdam(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        gdam(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 gdam::gdam(long const &el_add,
@@ -2309,12 +2314,12 @@ gdam::gdam(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        gdam(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2331,7 +2336,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ihex_procs_len = 5;
@@ -2380,14 +2385,14 @@ ihex::ihex(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ihex(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ihex::ihex(long const &el_add,
@@ -2399,12 +2404,12 @@ ihex::ihex(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ihex(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2421,7 +2426,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const lhex_procs_len = 5;
@@ -2470,14 +2475,14 @@ lhex::lhex(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lhex(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 lhex::lhex(long const &el_add,
@@ -2489,12 +2494,12 @@ lhex::lhex(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lhex(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2511,7 +2516,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const secb_procs_len = 1;
@@ -2560,14 +2565,14 @@ secb::secb(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        secb(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 secb::secb(long const &el_add,
@@ -2579,12 +2584,12 @@ secb::secb(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        secb(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2601,7 +2606,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const btss_procs_len = 5;
@@ -2650,14 +2655,14 @@ btss::btss(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        btss(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 btss::btss(long const &el_add,
@@ -2669,12 +2674,12 @@ btss::btss(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        btss(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2691,7 +2696,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const fqus_ffq_procs_len = 7;
@@ -2740,14 +2745,14 @@ fqus_ffq::fqus_ffq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        fqus_ffq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        fem_thin_shell(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 fqus_ffq::fqus_ffq(long const &el_add,
@@ -2759,12 +2764,12 @@ fqus_ffq::fqus_ffq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        fqus_ffq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        fem_thin_shell(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2781,7 +2786,7 @@ __base::fem_thin_shell(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ftrs_fftr_procs_len = 6;
@@ -2830,14 +2835,14 @@ ftrs_fftr::ftrs_fftr(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ftrs_fftr(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        fem_thin_shell(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ftrs_fftr::ftrs_fftr(long const &el_add,
@@ -2849,12 +2854,12 @@ ftrs_fftr::ftrs_fftr(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ftrs_fftr(
-            get_eleno(), el_add, nodes, matref, add_no,
+        fem_thin_shell(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2871,7 +2876,7 @@ __base::fem_thin_shell(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const scts_procs_len = 4;
@@ -2920,14 +2925,14 @@ scts::scts(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        scts(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 scts::scts(long const &el_add,
@@ -2939,12 +2944,12 @@ scts::scts(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        scts(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -2961,7 +2966,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const mcts_procs_len = 3;
@@ -3010,14 +3015,14 @@ mcts::mcts(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        mcts(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 mcts::mcts(long const &el_add,
@@ -3029,12 +3034,12 @@ mcts::mcts(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        mcts(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3051,7 +3056,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const scqs_procs_len = 5;
@@ -3100,14 +3105,14 @@ scqs::scqs(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        scqs(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 scqs::scqs(long const &el_add,
@@ -3119,12 +3124,12 @@ scqs::scqs(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        scqs(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3141,7 +3146,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const mcqs_procs_len = 3;
@@ -3190,14 +3195,14 @@ mcqs::mcqs(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        mcqs(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 mcqs::mcqs(long const &el_add,
@@ -3209,12 +3214,12 @@ mcqs::mcqs(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        mcqs(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3231,7 +3236,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ipri_procs_len = 4;
@@ -3280,14 +3285,14 @@ ipri::ipri(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ipri(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ipri::ipri(long const &el_add,
@@ -3299,12 +3304,12 @@ ipri::ipri(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ipri(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3321,7 +3326,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const itet_procs_len = 2;
@@ -3370,14 +3375,14 @@ itet::itet(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        itet(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 itet::itet(long const &el_add,
@@ -3389,12 +3394,12 @@ itet::itet(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        itet(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3411,7 +3416,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const tpri_procs_len = 4;
@@ -3460,14 +3465,14 @@ tpri::tpri(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        tpri(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 tpri::tpri(long const &el_add,
@@ -3479,12 +3484,12 @@ tpri::tpri(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        tpri(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3501,7 +3506,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const tetr_procs_len = 2;
@@ -3550,14 +3555,14 @@ tetr::tetr(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        tetr(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 tetr::tetr(long const &el_add,
@@ -3569,12 +3574,12 @@ tetr::tetr(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        tetr(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3591,7 +3596,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const lcts_procs_len = 3;
@@ -3640,14 +3645,14 @@ lcts::lcts(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lcts(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 lcts::lcts(long const &el_add,
@@ -3659,12 +3664,12 @@ lcts::lcts(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lcts(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3681,7 +3686,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const lcqs_procs_len = 3;
@@ -3730,14 +3735,14 @@ lcqs::lcqs(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lcqs(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 lcqs::lcqs(long const &el_add,
@@ -3749,12 +3754,12 @@ lcqs::lcqs(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        lcqs(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3771,7 +3776,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const trs1_procs_len = 3;
@@ -3820,14 +3825,14 @@ trs1::trs1(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        trs1(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 trs1::trs1(long const &el_add,
@@ -3839,12 +3844,12 @@ trs1::trs1(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        trs1(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3861,7 +3866,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const trs2_procs_len = 3;
@@ -3910,14 +3915,14 @@ trs2::trs2(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        trs2(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 trs2::trs2(long const &el_add,
@@ -3929,12 +3934,12 @@ trs2::trs2(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        trs2(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -3951,7 +3956,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const trs3_procs_len = 3;
@@ -4000,14 +4005,14 @@ trs3::trs3(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        trs3(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 trs3::trs3(long const &el_add,
@@ -4019,12 +4024,12 @@ trs3::trs3(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        trs3(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4041,7 +4046,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const glsh_procs_len = 4;
@@ -4090,14 +4095,14 @@ glsh::glsh(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        glsh(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 glsh::glsh(long const &el_add,
@@ -4109,12 +4114,12 @@ glsh::glsh(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        glsh(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4131,7 +4136,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const axcs_procs_len = 4;
@@ -4180,14 +4185,14 @@ axcs::axcs(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axcs(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 axcs::axcs(long const &el_add,
@@ -4199,12 +4204,12 @@ axcs::axcs(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axcs(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4221,7 +4226,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const axlq_procs_len = 4;
@@ -4270,14 +4275,14 @@ axlq::axlq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axlq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 axlq::axlq(long const &el_add,
@@ -4289,12 +4294,12 @@ axlq::axlq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axlq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4311,7 +4316,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const axls_procs_len = 3;
@@ -4360,14 +4365,14 @@ axls::axls(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axls(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 axls::axls(long const &el_add,
@@ -4379,12 +4384,12 @@ axls::axls(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axls(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4401,7 +4406,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const axqq_procs_len = 3;
@@ -4450,14 +4455,14 @@ axqq::axqq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axqq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 axqq::axqq(long const &el_add,
@@ -4469,12 +4474,12 @@ axqq::axqq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        axqq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4491,7 +4496,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const pils_procs_len = 3;
@@ -4540,14 +4545,14 @@ pils::pils(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        pils(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 pils::pils(long const &el_add,
@@ -4559,12 +4564,12 @@ pils::pils(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        pils(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4581,7 +4586,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const pcab_procs_len = 3;
@@ -4630,14 +4635,14 @@ pcab::pcab(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        pcab(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 pcab::pcab(long const &el_add,
@@ -4649,12 +4654,12 @@ pcab::pcab(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        pcab(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4671,7 +4676,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const pspr_procs_len = 3;
@@ -4720,14 +4725,14 @@ pspr::pspr(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        pspr(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 pspr::pspr(long const &el_add,
@@ -4739,12 +4744,12 @@ pspr::pspr(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        pspr(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4761,7 +4766,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const adva_4_procs_len = 2;
@@ -4810,14 +4815,14 @@ adva_4::adva_4(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        adva_4(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 adva_4::adva_4(long const &el_add,
@@ -4829,12 +4834,12 @@ adva_4::adva_4(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        adva_4(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4851,7 +4856,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const adva_2_procs_len = 2;
@@ -4900,14 +4905,14 @@ adva_2::adva_2(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        adva_2(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 adva_2::adva_2(long const &el_add,
@@ -4919,12 +4924,12 @@ adva_2::adva_2(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        adva_2(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -4941,7 +4946,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctcp_procs_len = 1;
@@ -4990,14 +4995,14 @@ ctcp::ctcp(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcp(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctcp::ctcp(long const &el_add,
@@ -5009,12 +5014,12 @@ ctcp::ctcp(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcp(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5031,7 +5036,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctcl_procs_len = 1;
@@ -5080,14 +5085,14 @@ ctcl::ctcl(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcl(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctcl::ctcl(long const &el_add,
@@ -5099,12 +5104,12 @@ ctcl::ctcl(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcl(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5121,7 +5126,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctal_procs_len = 1;
@@ -5170,14 +5175,14 @@ ctal::ctal(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctal(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctal::ctal(long const &el_add,
@@ -5189,12 +5194,12 @@ ctal::ctal(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctal(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5211,7 +5216,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctcc_procs_len = 1;
@@ -5260,14 +5265,14 @@ ctcc::ctcc(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcc(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctcc::ctcc(long const &el_add,
@@ -5279,12 +5284,12 @@ ctcc::ctcc(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcc(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5301,7 +5306,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctaq_procs_len = 2;
@@ -5350,14 +5355,14 @@ ctaq::ctaq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctaq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctaq::ctaq(long const &el_add,
@@ -5369,12 +5374,12 @@ ctaq::ctaq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctaq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5391,7 +5396,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctlq_procs_len = 2;
@@ -5440,14 +5445,14 @@ ctlq::ctlq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctlq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctlq::ctlq(long const &el_add,
@@ -5459,12 +5464,12 @@ ctlq::ctlq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctlq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5481,7 +5486,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctcq_procs_len = 3;
@@ -5530,14 +5535,14 @@ ctcq::ctcq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctcq::ctcq(long const &el_add,
@@ -5549,12 +5554,12 @@ ctcq::ctcq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctcq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5571,7 +5576,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ctmq_procs_len = 2;
@@ -5620,14 +5625,14 @@ ctmq::ctmq(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctmq(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ctmq::ctmq(long const &el_add,
@@ -5639,12 +5644,12 @@ ctmq::ctmq(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ctmq(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5661,7 +5666,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const hcqs_procs_len = 3;
@@ -5710,14 +5715,14 @@ hcqs::hcqs(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        hcqs(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 hcqs::hcqs(long const &el_add,
@@ -5729,12 +5734,12 @@ hcqs::hcqs(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        hcqs(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5751,7 +5756,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const slqs_procs_len = 1;
@@ -5800,14 +5805,14 @@ slqs::slqs(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        slqs(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 slqs::slqs(long const &el_add,
@@ -5819,12 +5824,12 @@ slqs::slqs(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        slqs(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5841,7 +5846,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const slts_procs_len = 1;
@@ -5890,14 +5895,14 @@ slts::slts(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        slts(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 slts::slts(long const &el_add,
@@ -5909,12 +5914,12 @@ slts::slts(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        slts(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -5931,7 +5936,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const slcb_procs_len = 1;
@@ -5980,14 +5985,14 @@ slcb::slcb(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        slcb(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 slcb::slcb(long const &el_add,
@@ -5999,12 +6004,12 @@ slcb::slcb(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        slcb(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6021,7 +6026,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const matr_procs_len = 3;
@@ -6070,14 +6075,14 @@ matr::matr(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        matr(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 matr::matr(long const &el_add,
@@ -6089,12 +6094,12 @@ matr::matr(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        matr(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6111,7 +6116,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex100_procs_len = 2;
@@ -6160,14 +6165,14 @@ ghex100::ghex100(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex100(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex100::ghex100(long const &el_add,
@@ -6179,12 +6184,12 @@ ghex100::ghex100(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex100(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6201,7 +6206,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex101_procs_len = 2;
@@ -6250,14 +6255,14 @@ ghex101::ghex101(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex101(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex101::ghex101(long const &el_add,
@@ -6269,12 +6274,12 @@ ghex101::ghex101(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex101(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6291,7 +6296,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex102_procs_len = 2;
@@ -6340,14 +6345,14 @@ ghex102::ghex102(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex102(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex102::ghex102(long const &el_add,
@@ -6359,12 +6364,12 @@ ghex102::ghex102(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex102(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6381,7 +6386,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex103_procs_len = 2;
@@ -6430,14 +6435,14 @@ ghex103::ghex103(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex103(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex103::ghex103(long const &el_add,
@@ -6449,12 +6454,12 @@ ghex103::ghex103(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex103(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6471,7 +6476,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex104_procs_len = 2;
@@ -6520,14 +6525,14 @@ ghex104::ghex104(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex104(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex104::ghex104(long const &el_add,
@@ -6539,12 +6544,12 @@ ghex104::ghex104(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex104(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6561,7 +6566,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex105_procs_len = 2;
@@ -6610,14 +6615,14 @@ ghex105::ghex105(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex105(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex105::ghex105(long const &el_add,
@@ -6629,12 +6634,12 @@ ghex105::ghex105(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex105(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6651,7 +6656,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex106_procs_len = 2;
@@ -6700,14 +6705,14 @@ ghex106::ghex106(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex106(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex106::ghex106(long const &el_add,
@@ -6719,12 +6724,12 @@ ghex106::ghex106(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex106(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6741,7 +6746,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex107_procs_len = 2;
@@ -6790,14 +6795,14 @@ ghex107::ghex107(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex107(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex107::ghex107(long const &el_add,
@@ -6809,12 +6814,12 @@ ghex107::ghex107(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex107(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6831,7 +6836,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex108_procs_len = 2;
@@ -6880,14 +6885,14 @@ ghex108::ghex108(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex108(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex108::ghex108(long const &el_add,
@@ -6899,12 +6904,12 @@ ghex108::ghex108(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex108(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -6921,7 +6926,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex109_procs_len = 2;
@@ -6970,14 +6975,14 @@ ghex109::ghex109(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex109(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex109::ghex109(long const &el_add,
@@ -6989,12 +6994,12 @@ ghex109::ghex109(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex109(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7011,7 +7016,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex110_procs_len = 2;
@@ -7060,14 +7065,14 @@ ghex110::ghex110(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex110(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex110::ghex110(long const &el_add,
@@ -7079,12 +7084,12 @@ ghex110::ghex110(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex110(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7101,7 +7106,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex111_procs_len = 2;
@@ -7150,14 +7155,14 @@ ghex111::ghex111(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex111(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex111::ghex111(long const &el_add,
@@ -7169,12 +7174,12 @@ ghex111::ghex111(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex111(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7191,7 +7196,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex112_procs_len = 2;
@@ -7240,14 +7245,14 @@ ghex112::ghex112(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex112(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex112::ghex112(long const &el_add,
@@ -7259,12 +7264,12 @@ ghex112::ghex112(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex112(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7281,7 +7286,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex113_procs_len = 2;
@@ -7330,14 +7335,14 @@ ghex113::ghex113(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex113(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex113::ghex113(long const &el_add,
@@ -7349,12 +7354,12 @@ ghex113::ghex113(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex113(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7371,7 +7376,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex114_procs_len = 2;
@@ -7420,14 +7425,14 @@ ghex114::ghex114(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex114(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex114::ghex114(long const &el_add,
@@ -7439,12 +7444,12 @@ ghex114::ghex114(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex114(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7461,7 +7466,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex115_procs_len = 2;
@@ -7510,14 +7515,14 @@ ghex115::ghex115(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex115(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex115::ghex115(long const &el_add,
@@ -7529,12 +7534,12 @@ ghex115::ghex115(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex115(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7551,7 +7556,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex116_procs_len = 2;
@@ -7600,14 +7605,14 @@ ghex116::ghex116(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex116(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex116::ghex116(long const &el_add,
@@ -7619,12 +7624,12 @@ ghex116::ghex116(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex116(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7641,7 +7646,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex117_procs_len = 2;
@@ -7690,14 +7695,14 @@ ghex117::ghex117(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex117(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex117::ghex117(long const &el_add,
@@ -7709,12 +7714,12 @@ ghex117::ghex117(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex117(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7731,7 +7736,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex118_procs_len = 2;
@@ -7780,14 +7785,14 @@ ghex118::ghex118(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex118(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex118::ghex118(long const &el_add,
@@ -7799,12 +7804,12 @@ ghex118::ghex118(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex118(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7821,7 +7826,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex119_procs_len = 2;
@@ -7870,14 +7875,14 @@ ghex119::ghex119(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex119(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex119::ghex119(long const &el_add,
@@ -7889,12 +7894,12 @@ ghex119::ghex119(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex119(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -7911,7 +7916,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex120_procs_len = 2;
@@ -7960,14 +7965,14 @@ ghex120::ghex120(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex120(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex120::ghex120(long const &el_add,
@@ -7979,12 +7984,12 @@ ghex120::ghex120(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex120(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8001,7 +8006,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex121_procs_len = 2;
@@ -8050,14 +8055,14 @@ ghex121::ghex121(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex121(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex121::ghex121(long const &el_add,
@@ -8069,12 +8074,12 @@ ghex121::ghex121(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex121(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8091,7 +8096,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex122_procs_len = 2;
@@ -8140,14 +8145,14 @@ ghex122::ghex122(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex122(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex122::ghex122(long const &el_add,
@@ -8159,12 +8164,12 @@ ghex122::ghex122(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex122(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8181,7 +8186,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex123_procs_len = 2;
@@ -8230,14 +8235,14 @@ ghex123::ghex123(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex123(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex123::ghex123(long const &el_add,
@@ -8249,12 +8254,12 @@ ghex123::ghex123(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex123(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8271,7 +8276,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex124_procs_len = 2;
@@ -8320,14 +8325,14 @@ ghex124::ghex124(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex124(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex124::ghex124(long const &el_add,
@@ -8339,12 +8344,12 @@ ghex124::ghex124(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex124(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8361,7 +8366,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex125_procs_len = 2;
@@ -8410,14 +8415,14 @@ ghex125::ghex125(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex125(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex125::ghex125(long const &el_add,
@@ -8429,12 +8434,12 @@ ghex125::ghex125(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex125(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8451,7 +8456,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex126_procs_len = 2;
@@ -8500,14 +8505,14 @@ ghex126::ghex126(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex126(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex126::ghex126(long const &el_add,
@@ -8519,12 +8524,12 @@ ghex126::ghex126(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex126(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8541,7 +8546,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex127_procs_len = 2;
@@ -8590,14 +8595,14 @@ ghex127::ghex127(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex127(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex127::ghex127(long const &el_add,
@@ -8609,12 +8614,12 @@ ghex127::ghex127(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex127(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8631,7 +8636,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex128_procs_len = 2;
@@ -8680,14 +8685,14 @@ ghex128::ghex128(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex128(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex128::ghex128(long const &el_add,
@@ -8699,12 +8704,12 @@ ghex128::ghex128(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex128(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8721,7 +8726,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex129_procs_len = 2;
@@ -8770,14 +8775,14 @@ ghex129::ghex129(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex129(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex129::ghex129(long const &el_add,
@@ -8789,12 +8794,12 @@ ghex129::ghex129(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex129(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8811,7 +8816,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex130_procs_len = 2;
@@ -8860,14 +8865,14 @@ ghex130::ghex130(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex130(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex130::ghex130(long const &el_add,
@@ -8879,12 +8884,12 @@ ghex130::ghex130(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex130(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8901,7 +8906,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex131_procs_len = 2;
@@ -8950,14 +8955,14 @@ ghex131::ghex131(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex131(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex131::ghex131(long const &el_add,
@@ -8969,12 +8974,12 @@ ghex131::ghex131(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex131(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -8991,7 +8996,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex132_procs_len = 2;
@@ -9040,14 +9045,14 @@ ghex132::ghex132(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex132(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex132::ghex132(long const &el_add,
@@ -9059,12 +9064,12 @@ ghex132::ghex132(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex132(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9081,7 +9086,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex133_procs_len = 2;
@@ -9130,14 +9135,14 @@ ghex133::ghex133(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex133(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex133::ghex133(long const &el_add,
@@ -9149,12 +9154,12 @@ ghex133::ghex133(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex133(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9171,7 +9176,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex134_procs_len = 2;
@@ -9220,14 +9225,14 @@ ghex134::ghex134(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex134(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex134::ghex134(long const &el_add,
@@ -9239,12 +9244,12 @@ ghex134::ghex134(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex134(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9261,7 +9266,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex135_procs_len = 2;
@@ -9310,14 +9315,14 @@ ghex135::ghex135(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex135(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex135::ghex135(long const &el_add,
@@ -9329,12 +9334,12 @@ ghex135::ghex135(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex135(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9351,7 +9356,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex136_procs_len = 2;
@@ -9400,14 +9405,14 @@ ghex136::ghex136(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex136(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex136::ghex136(long const &el_add,
@@ -9419,12 +9424,12 @@ ghex136::ghex136(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex136(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9441,7 +9446,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex137_procs_len = 2;
@@ -9490,14 +9495,14 @@ ghex137::ghex137(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex137(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex137::ghex137(long const &el_add,
@@ -9509,12 +9514,12 @@ ghex137::ghex137(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex137(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9531,7 +9536,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex138_procs_len = 2;
@@ -9580,14 +9585,14 @@ ghex138::ghex138(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex138(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex138::ghex138(long const &el_add,
@@ -9599,12 +9604,12 @@ ghex138::ghex138(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex138(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9621,7 +9626,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex139_procs_len = 2;
@@ -9670,14 +9675,14 @@ ghex139::ghex139(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex139(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex139::ghex139(long const &el_add,
@@ -9689,12 +9694,12 @@ ghex139::ghex139(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex139(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9711,7 +9716,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex140_procs_len = 2;
@@ -9760,14 +9765,14 @@ ghex140::ghex140(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex140(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex140::ghex140(long const &el_add,
@@ -9779,12 +9784,12 @@ ghex140::ghex140(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex140(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9801,7 +9806,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex141_procs_len = 2;
@@ -9850,14 +9855,14 @@ ghex141::ghex141(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex141(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex141::ghex141(long const &el_add,
@@ -9869,12 +9874,12 @@ ghex141::ghex141(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex141(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9891,7 +9896,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex142_procs_len = 2;
@@ -9940,14 +9945,14 @@ ghex142::ghex142(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex142(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex142::ghex142(long const &el_add,
@@ -9959,12 +9964,12 @@ ghex142::ghex142(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex142(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -9981,7 +9986,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex143_procs_len = 2;
@@ -10030,14 +10035,14 @@ ghex143::ghex143(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex143(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex143::ghex143(long const &el_add,
@@ -10049,12 +10054,12 @@ ghex143::ghex143(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex143(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10071,7 +10076,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex144_procs_len = 2;
@@ -10120,14 +10125,14 @@ ghex144::ghex144(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex144(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex144::ghex144(long const &el_add,
@@ -10139,12 +10144,12 @@ ghex144::ghex144(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex144(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10161,7 +10166,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex145_procs_len = 2;
@@ -10210,14 +10215,14 @@ ghex145::ghex145(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex145(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex145::ghex145(long const &el_add,
@@ -10229,12 +10234,12 @@ ghex145::ghex145(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex145(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10251,7 +10256,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex146_procs_len = 2;
@@ -10300,14 +10305,14 @@ ghex146::ghex146(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex146(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex146::ghex146(long const &el_add,
@@ -10319,12 +10324,12 @@ ghex146::ghex146(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex146(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10341,7 +10346,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex147_procs_len = 2;
@@ -10390,14 +10395,14 @@ ghex147::ghex147(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex147(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex147::ghex147(long const &el_add,
@@ -10409,12 +10414,12 @@ ghex147::ghex147(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex147(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10431,7 +10436,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex148_procs_len = 2;
@@ -10480,14 +10485,14 @@ ghex148::ghex148(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex148(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex148::ghex148(long const &el_add,
@@ -10499,12 +10504,12 @@ ghex148::ghex148(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex148(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10521,7 +10526,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex149_procs_len = 2;
@@ -10570,14 +10575,14 @@ ghex149::ghex149(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex149(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex149::ghex149(long const &el_add,
@@ -10589,12 +10594,12 @@ ghex149::ghex149(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex149(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10611,7 +10616,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex150_procs_len = 2;
@@ -10660,14 +10665,14 @@ ghex150::ghex150(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex150(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex150::ghex150(long const &el_add,
@@ -10679,12 +10684,12 @@ ghex150::ghex150(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex150(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10701,7 +10706,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex151_procs_len = 2;
@@ -10750,14 +10755,14 @@ ghex151::ghex151(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex151(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex151::ghex151(long const &el_add,
@@ -10769,12 +10774,12 @@ ghex151::ghex151(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex151(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10791,7 +10796,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex152_procs_len = 2;
@@ -10840,14 +10845,14 @@ ghex152::ghex152(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex152(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex152::ghex152(long const &el_add,
@@ -10859,12 +10864,12 @@ ghex152::ghex152(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex152(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10881,7 +10886,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex153_procs_len = 2;
@@ -10930,14 +10935,14 @@ ghex153::ghex153(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex153(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex153::ghex153(long const &el_add,
@@ -10949,12 +10954,12 @@ ghex153::ghex153(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex153(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -10971,7 +10976,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex154_procs_len = 2;
@@ -11020,14 +11025,14 @@ ghex154::ghex154(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex154(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex154::ghex154(long const &el_add,
@@ -11039,12 +11044,12 @@ ghex154::ghex154(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex154(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11061,7 +11066,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex155_procs_len = 2;
@@ -11110,14 +11115,14 @@ ghex155::ghex155(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex155(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex155::ghex155(long const &el_add,
@@ -11129,12 +11134,12 @@ ghex155::ghex155(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex155(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11151,7 +11156,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex156_procs_len = 2;
@@ -11200,14 +11205,14 @@ ghex156::ghex156(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex156(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex156::ghex156(long const &el_add,
@@ -11219,12 +11224,12 @@ ghex156::ghex156(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex156(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11241,7 +11246,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex157_procs_len = 2;
@@ -11290,14 +11295,14 @@ ghex157::ghex157(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex157(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex157::ghex157(long const &el_add,
@@ -11309,12 +11314,12 @@ ghex157::ghex157(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex157(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11331,7 +11336,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex158_procs_len = 2;
@@ -11380,14 +11385,14 @@ ghex158::ghex158(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex158(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex158::ghex158(long const &el_add,
@@ -11399,12 +11404,12 @@ ghex158::ghex158(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex158(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11421,7 +11426,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex159_procs_len = 2;
@@ -11470,14 +11475,14 @@ ghex159::ghex159(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex159(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex159::ghex159(long const &el_add,
@@ -11489,12 +11494,12 @@ ghex159::ghex159(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex159(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11511,7 +11516,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex160_procs_len = 2;
@@ -11560,14 +11565,14 @@ ghex160::ghex160(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex160(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex160::ghex160(long const &el_add,
@@ -11579,12 +11584,12 @@ ghex160::ghex160(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex160(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11601,7 +11606,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex161_procs_len = 2;
@@ -11650,14 +11655,14 @@ ghex161::ghex161(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex161(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex161::ghex161(long const &el_add,
@@ -11669,12 +11674,12 @@ ghex161::ghex161(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex161(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11691,7 +11696,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex162_procs_len = 2;
@@ -11740,14 +11745,14 @@ ghex162::ghex162(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex162(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex162::ghex162(long const &el_add,
@@ -11759,12 +11764,12 @@ ghex162::ghex162(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex162(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
@@ -11781,7 +11786,7 @@ __base::elem(data) {}
 
    
 */
-#line 627 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 632 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 namespace {
     size_t const ghex163_procs_len = 2;
@@ -11830,14 +11835,14 @@ ghex163::ghex163(long const &eleno,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex163(
-            eleno, get_elident(), el_add, nodes, matref, add_no,
+        elem(
+            eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, sections, fixations, eccentrities,
+            strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
 ghex163::ghex163(long const &el_add,
@@ -11849,12 +11854,12 @@ ghex163::ghex163(long const &el_add,
                        long const &i_strain_ref,
                        long const &i_stress_ref,
                        long const &strpoint_ref,
-                       vector<long> const &sections,
+                       vector<long> const &section,
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        ghex163(
-            get_eleno(), el_add, nodes, matref, add_no,
+        elem(
+            el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
