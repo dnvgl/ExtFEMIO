@@ -577,8 +577,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
         CHECK(static_cast<bnbcd*>(current.get())->NODENO == 23047);
         CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
-        CHECK(static_cast<bnbcd*>(current.get())->FIX == vector<long>(
-                  {1, 1, 1, 1, 1, 1}));
+        CHECK(static_cast<bnbcd*>(current.get())->FIX == vector<bnbcd::fix_key>(
+                  6, bnbcd::fix_key::DISPL_FIX));
     }
 
     SECTION("Checking dispatch [belfix].") {
@@ -956,7 +956,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         CHECK(static_cast<bnbcd*>(current.get())->NODENO == 38835);
         CHECK(static_cast<bnbcd*>(current.get())->NDOF == 6);
         CHECK(static_cast<bnbcd*>(current.get())->FIX ==
-              vector<long>({4, 4, 4, 4, 4, 4}));
+              vector<bnbcd::fix_key>(6, bnbcd::fix_key::RETAINED));
     }
 
     SECTION("Checking dispatch [beuslo].") {
@@ -1085,8 +1085,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
                 vector<double>({1., 2.27000996e+4, 9.07859961e+3,
                             1., -9.07859961e+3, 0.,
                             1., 0., -2.27000996e+4})));
-        cards.push_back(make_unique<bnbcd>(
-                            23047, vector<long>({1, 1, 1, 1, 1, 1})));
+        cards.push_back(
+            make_unique<bnbcd>(
+                23047, vector<bnbcd::fix_key>(6, bnbcd::fix_key::DISPL_FIX)));
         cards.push_back(make_unique<belfix>(
                             23047, belfix::n_opt::FIXATION, 0,
                             vector<double>({1., 1., 1., 1., 1., 0.})));
@@ -1135,8 +1136,9 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         cards.push_back(make_unique<bsell>(
                             1, 1, vector<long>({1, 2}),
                             vector<double>({1., -1.})));
-        cards.push_back(make_unique<bnbcd>(
-                            38835, vector<long>({4, 4, 4, 4, 4, 4})));
+        cards.push_back(
+            make_unique<bnbcd>(
+                38835, vector<bnbcd::fix_key>(6, bnbcd::fix_key::RETAINED)));
         cards.push_back(
             make_unique<beuslo>(
                 1, 1, 0, 1, 0, 2,

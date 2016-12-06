@@ -1914,6 +1914,21 @@ Example of format of `DATE` record as used in SESAM:
 */
                 class bnbcd : public __base::card {
 
+                public:
+
+                    enum class fix_key : int {
+                        INVALID = -1,
+                        /// free to stay
+                        FREE = 0,
+                        /// fixed at zero displacement, temperature, etc.
+                        DISPL_FIX = 1,
+                        /// prescribed displacement, temperature, different from zero
+                        PRESCRIBED = 2,
+                        /// linearly dependent
+                        LINDEP = 3,
+                        /// restrained degree of freedom
+                        RETAINED = 4};
+
                 private:
 
                     dnvgl::extfem::fem::types::card static const head;
@@ -1921,6 +1936,10 @@ Example of format of `DATE` record as used in SESAM:
                     dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
                     dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
                     dnvgl::extfem::fem::types::entry_type<long> static const _form_FIX;
+
+                    fix_key const fix_key_conv(long const &) const;
+                    fix_key const fix_key_conv(bool const &) const;
+                    long const fix_key_conv(fix_key const &) const;
 
                 public:
 
@@ -1934,7 +1953,7 @@ Example of format of `DATE` record as used in SESAM:
                     /** Specification of boundary condition codes of
                         relevant degrees of freedom.
                     */
-                    std::vector<long> FIX;
+                    std::vector<fix_key> FIX;
 
                     bnbcd(std::list<std::string> const&);
 
@@ -1942,30 +1961,44 @@ Example of format of `DATE` record as used in SESAM:
 
                     bnbcd(long const &NODENO,
                           long const &NDOF,
-                          std::vector<long> const &FIX);
+                          std::vector<fix_key> const &FIX);
 
                     bnbcd(long const &NODENO,
-                          std::vector<long> const &FIX);
+                          std::vector<fix_key> const &FIX);
 
                     bnbcd(long const &NODENO,
-                          long const &FIX1, long const &FIX2, long const &FIX3,
-                          long const &FIX4, long const &FIX5, long const &FIX6);
+                          fix_key const &FIX1, fix_key const &FIX2,
+                          fix_key const &FIX3, fix_key const &FIX4,
+                          fix_key const &FIX5, fix_key const &FIX6);
 
-                    __base::card const &operator() (std::list<std::string> const&);
+                    bnbcd(long const &NODENO,
+                          bool const &FIX1, bool const &FIX2,
+                          bool const &FIX3, bool const &FIX4,
+                          bool const &FIX5, bool const &FIX6);
+
+                    __base::card const &operator() (
+                        std::list<std::string> const&);
 
                     __base::card const &operator() (
                         long const &NODENO,
                         long const &NDOF,
-                        std::vector<long> const &FIX);
+                        std::vector<fix_key> const &FIX);
 
                     __base::card const &operator() (
                         long const &NODENO,
-                        std::vector<long> const &FIX);
+                        std::vector<fix_key> const &FIX);
 
                     __base::card const &operator() (
                         long const &NODENO,
-                        long const &FIX1, long const &FIX2, long const &FIX3,
-                        long const &FIX4, long const &FIX5, long const &FIX6);
+                        fix_key const &FIX1, fix_key const &FIX2,
+                        fix_key const &FIX3, fix_key const &FIX4,
+                        fix_key const &FIX5, fix_key const &FIX6);
+
+                    __base::card const &operator() (
+                        long const &NODENO,
+                        bool const &FIX1, bool const &FIX2,
+                        bool const &FIX3, bool const &FIX4,
+                        bool const &FIX5, bool const &FIX6);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;

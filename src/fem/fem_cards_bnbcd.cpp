@@ -63,7 +63,7 @@ void bnbcd::read(const std::list<std::string> &inp) {
    NDOF = _form_NDOF(*(pos++));
 
    for (long i = 0; i < NDOF; i++)
-      FIX.push_back(_form_FIX(*(pos++)));
+       FIX.push_back(fix_key_conv(_form_FIX(*(pos++))));
 }
 
 bnbcd::bnbcd(void) :
@@ -71,19 +71,26 @@ bnbcd::bnbcd(void) :
 
 bnbcd::bnbcd(const long &NODENO,
              const long &NDOF,
-             const std::vector<long> &FIX) :
+             const std::vector<fix_key> &FIX) :
    card(), NODENO(NODENO), NDOF(NDOF), FIX(FIX) {}
 
 bnbcd::bnbcd(
    const long &NODENO,
-   const std::vector<long> &FIX) :
+   const std::vector<fix_key> &FIX) :
    bnbcd(NODENO, (long)FIX.size(), FIX) {}
 
 bnbcd::bnbcd(long const &NODENO,
-             long const &FIX1, long const &FIX2, long const &FIX3,
-             long const &FIX4, long const &FIX5, long const &FIX6) :
-   bnbcd(NODENO, 6, std::vector<long>({
+             fix_key const &FIX1, fix_key const &FIX2, fix_key const &FIX3,
+             fix_key const &FIX4, fix_key const &FIX5, fix_key const &FIX6) :
+   bnbcd(NODENO, 6, std::vector<fix_key>({
             FIX1, FIX2, FIX3, FIX4, FIX5, FIX6})) {}
+
+bnbcd::bnbcd(long const &NODENO,
+             bool const &FIX1, bool const &FIX2, bool const &FIX3,
+             bool const &FIX4, bool const &FIX5, bool const &FIX6) :
+   bnbcd(NODENO, 6, std::vector<fix_key>({
+               fix_key_conv(FIX1), fix_key_conv(FIX2), fix_key_conv(FIX3),
+               fix_key_conv(FIX4), fix_key_conv(FIX5), fix_key_conv(FIX6)})) {}
 
 const dnvgl::extfem::fem::cards::types
 bnbcd::card_type(void) const {return types::BNBCD;}
@@ -99,7 +106,7 @@ std::ostream &bnbcd::put(std::ostream& os) const {
          os << std::endl << dnvgl::extfem::fem::types::card().format();
          cnt = 0;
       }
-      os << this->_form_FIX.format(this->FIX[i]);
+      os << this->_form_FIX.format(fix_key_conv(this->FIX[i]));
       cnt += 1;
    }
    os << std::endl;
@@ -114,7 +121,7 @@ cards::__base::card const &bnbcd::operator() (std::list<std::string> const &inp)
 cards::__base::card const &bnbcd::operator() (
    long const &NODENO,
    long const &NDOF,
-   std::vector<long> const &FIX) {
+   std::vector<fix_key> const &FIX) {
    this->NODENO = NODENO;
    this->NDOF = NDOF;
    this->FIX = FIX;
@@ -123,16 +130,54 @@ cards::__base::card const &bnbcd::operator() (
 
 cards::__base::card const &bnbcd::operator() (
    long const &NODENO,
-   std::vector<long> const &FIX) {
+   std::vector<fix_key> const &FIX) {
    return (*this)(NODENO, (long)FIX.size(), FIX);
 }
 
 cards::__base::card const &bnbcd::operator() (
    long const &NODENO,
-   long const &FIX1, long const &FIX2, long const &FIX3,
-   long const &FIX4, long const &FIX5, long const &FIX6) {
-   return (*this)(NODENO, 6, std::vector<long>({
+   fix_key const &FIX1, fix_key const &FIX2, fix_key const &FIX3,
+   fix_key const &FIX4, fix_key const &FIX5, fix_key const &FIX6) {
+   return (*this)(NODENO, 6, std::vector<fix_key>({
             FIX1, FIX2, FIX3, FIX4, FIX5, FIX6}));
+}
+
+cards::__base::card const &bnbcd::operator() (
+   long const &NODENO,
+   bool const &FIX1, bool const &FIX2, bool const &FIX3,
+   bool const &FIX4, bool const &FIX5, bool const &FIX6) {
+   return (*this)(NODENO, 6, std::vector<fix_key>({
+               fix_key_conv(FIX1), fix_key_conv(FIX2), fix_key_conv(FIX3),
+               fix_key_conv(FIX4), fix_key_conv(FIX5), fix_key_conv(FIX6)}));
+}
+
+bnbcd::fix_key const bnbcd::fix_key_conv(long const &inp) const {
+    if (0 <= inp && inp <= 4)
+        return bnbcd::fix_key(inp);
+    else
+        return bnbcd::fix_key::INVALID;
+}
+
+bnbcd::fix_key const bnbcd::fix_key_conv(bool const &inp) const {
+    return inp ? bnbcd::fix_key::DISPL_FIX : bnbcd::fix_key::FREE;
+}
+
+long const bnbcd::fix_key_conv(bnbcd::fix_key const &inp) const {
+    switch (inp) {
+    case bnbcd::fix_key::FREE:
+        return 0;
+    case bnbcd::fix_key::DISPL_FIX:
+        return 1;
+    case bnbcd::fix_key::PRESCRIBED:
+        return 2;
+    case bnbcd::fix_key::LINDEP:
+        return 3;
+    case bnbcd::fix_key::RETAINED:
+        return 4;
+    case bnbcd::fix_key::INVALID:
+        break;
+    }
+    return -1;
 }
 
 // Local Variables:
