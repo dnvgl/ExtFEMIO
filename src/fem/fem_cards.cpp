@@ -46,48 +46,6 @@ namespace {
     void const _stdout_report(std::string const &msg) {
         cout << msg << endl;
     }
-
-    size_t const map_pair_entries = 37;
-    pair<std::string, cards::types> const map_pairs[map_pair_entries] = {
-        // UNKNOWN,
-        pair<std::string, cards::types>("DATE", cards::types::DATE),
-        pair<std::string, cards::types>("GCOORD", cards::types::GCOORD),
-        pair<std::string, cards::types>("GNODE", cards::types::GNODE),
-        pair<std::string, cards::types>("IDENT", cards::types::IDENT),
-        pair<std::string, cards::types>("IEND", cards::types::IEND),
-        pair<std::string, cards::types>("GELMNT1", cards::types::GELMNT1),
-        pair<std::string, cards::types>("GELREF1", cards::types::GELREF1),
-        pair<std::string, cards::types>("GBARM", cards::types::GBARM),
-        pair<std::string, cards::types>("GBEAMG", cards::types::GBEAMG),
-        pair<std::string, cards::types>("GECCEN", cards::types::GECCEN),
-        pair<std::string, cards::types>("GELTH", cards::types::GELTH),
-        pair<std::string, cards::types>("GIORH", cards::types::GIORH),
-        pair<std::string, cards::types>("GLSEC", cards::types::GLSEC),
-        pair<std::string, cards::types>("GPIPE", cards::types::GPIPE),
-        pair<std::string, cards::types>("GUSYI", cards::types::GUSYI),
-        pair<std::string, cards::types>("BELFIX", cards::types::BELFIX),
-        pair<std::string, cards::types>("BLDEP", cards::types::BLDEP),
-        pair<std::string, cards::types>("BNBCD", cards::types::BNBCD),
-        pair<std::string, cards::types>("BNDISPL", cards::types::BNDISPL),
-        pair<std::string, cards::types>("BNLOAD", cards::types::BNLOAD),
-        pair<std::string, cards::types>("MGSPRNG", cards::types::MGSPRNG),
-        pair<std::string, cards::types>("GSETMEMB", cards::types::GSETMEMB),
-        pair<std::string, cards::types>("GUNIVEC", cards::types::GUNIVEC),
-        pair<std::string, cards::types>("MISOSEL", cards::types::MISOSEL),
-        pair<std::string, cards::types>("MORSMEL", cards::types::MORSMEL),
-        pair<std::string, cards::types>("TDSETNAM", cards::types::TDSETNAM),
-        pair<std::string, cards::types>("TDSUPNAM", cards::types::TDSUPNAM),
-        pair<std::string, cards::types>("TEXT", cards::types::TEXT),
-        pair<std::string, cards::types>("TDSETNAM", cards::types::TDSETNAM),
-        pair<std::string, cards::types>("TDSUPNAM", cards::types::TDSUPNAM),
-        pair<std::string, cards::types>("TDLOAD", cards::types::TDLOAD),
-        pair<std::string, cards::types>("BSELL", cards::types::BSELL),
-        pair<std::string, cards::types>("GELMNT2", cards::types::GELMNT2),
-        pair<std::string, cards::types>("HSUPSTAT", cards::types::HSUPSTAT),
-        pair<std::string, cards::types>("HSUPTRAN", cards::types::HSUPTRAN),
-        pair<std::string, cards::types>("HIERARCH", cards::types::HIERARCH),
-        pair<std::string, cards::types>("BEUSLO", cards::types::BEUSLO)
-    };
 }
 
 void const (*cards::note_report)(std::string const &) = &_stdout_report;
@@ -106,8 +64,45 @@ ostream &unknown::put(ostream &os) const {
     return os;
 }
 
-map<std::string, cards::types> const
-cardtype_map(map_pairs, map_pairs + map_pair_entries);
+map<std::string, cards::types> const cardtype_map({
+        // UNKNOWN,
+        {"DATE", cards::types::DATE},
+        {"GCOORD", cards::types::GCOORD},
+        {"GNODE", cards::types::GNODE},
+        {"IDENT", cards::types::IDENT},
+        {"IEND", cards::types::IEND},
+        {"GELMNT1", cards::types::GELMNT1},
+        {"GELREF1", cards::types::GELREF1},
+        {"GBARM", cards::types::GBARM},
+        {"GBEAMG", cards::types::GBEAMG},
+        {"GECCEN", cards::types::GECCEN},
+        {"GELTH", cards::types::GELTH},
+        {"GIORH", cards::types::GIORH},
+        {"GLSEC", cards::types::GLSEC},
+        {"GPIPE", cards::types::GPIPE},
+        {"GUSYI", cards::types::GUSYI},
+        {"BELFIX", cards::types::BELFIX},
+        {"BLDEP", cards::types::BLDEP},
+        {"BNBCD", cards::types::BNBCD},
+        {"BNDISPL", cards::types::BNDISPL},
+        {"BNLOAD", cards::types::BNLOAD},
+        {"MGSPRNG", cards::types::MGSPRNG},
+        {"GSETMEMB", cards::types::GSETMEMB},
+        {"GUNIVEC", cards::types::GUNIVEC},
+        {"MISOSEL", cards::types::MISOSEL},
+        {"MORSMEL", cards::types::MORSMEL},
+        {"TDSETNAM", cards::types::TDSETNAM},
+        {"TDSUPNAM", cards::types::TDSUPNAM},
+        {"TEXT", cards::types::TEXT},
+        {"TDSETNAM", cards::types::TDSETNAM},
+        {"TDSUPNAM", cards::types::TDSUPNAM},
+        {"TDLOAD", cards::types::TDLOAD},
+        {"BSELL", cards::types::BSELL},
+        {"GELMNT2", cards::types::GELMNT2},
+        {"HSUPSTAT", cards::types::HSUPSTAT},
+        {"HSUPTRAN", cards::types::HSUPTRAN},
+        {"HIERARCH", cards::types::HIERARCH},
+        {"BEUSLO", cards::types::BEUSLO}});
 
 cards::__base::card::card(list<std::string> const &inp) {}
 
