@@ -127,14 +127,14 @@ void elements::dispatch(
     case el_types::INVALID: throw errors::parse_error(
         "GELMNT1", "invalid element type"); break;
     };
-    {% line %}
+{% line %}
 }
 
 std::string dnvgl::extfem::fem::elements::name_elem(el_types const &type) {
     switch (type) {
         {% for e in enum %}   case el_types::{{ e[0]|upper() }}: return "{{ e[0]|upper() }}";
         {% endfor %}   case el_types::UNDEFINED: return "UNDEFINED";
-        {% line %}
+{% line %}
     case el_types::INVALID: return "INVALID";
     }
     return "";
