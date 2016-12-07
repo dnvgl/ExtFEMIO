@@ -1,11 +1,11 @@
 /*
-   #####     #    #     # #######   ###   ####### #     #   ###
-  #     #   # #   #     #    #       #    #     # ##    #   ###
-  #        #   #  #     #    #       #    #     # # #   #   ###
-  #       #     # #     #    #       #    #     # #  #  #    #
-  #       ####### #     #    #       #    #     # #   # #
-  #     # #     # #     #    #       #    #     # #    ##   ###
-   #####  #     #  #####     #      ###   ####### #     #   ###
+   #####     #    #     # ####### ### ####### #     # ###
+  #     #   # #   #     #    #     #  #     # ##    # ###
+  #        #   #  #     #    #     #  #     # # #   # ###
+  #       #     # #     #    #     #  #     # #  #  #  #
+  #       ####### #     #    #     #  #     # #   # #
+  #     # #     # #     #    #     #  #     # #    ## ###
+   #####  #     #  #####     #    ### ####### #     # ###
 
    Automatically generated source file. Contact author if changes are
    required.
@@ -630,19 +630,13 @@ elements::__base::fem_thin_shell::fem_thin_shell(__base::elem const *data) :
 */
 {% line %}
 
-namespace {
-    size_t const {{ elem }}_procs_len = {{ vals.procs|length() }};
-    el_processor {{ elem }}_procs[{{ elem }}_procs_len] = {
-        {{ vals.procs|join(', ') }}
-    };
-}
-
 long {{ elem }}::nnodes(void) const {return {{ vals.nnodes }};}
 
 el_types {{ elem }}::get_type(void) const {return el_types::{{ elem|upper() }};}
 
-set<el_processor> const {{ elem }}::processors(
-    {{ elem }}_procs, {{ elem }}_procs+{{ elem }}_procs_len);
+set<el_processor> const {{ elem }}::processors{
+        {{ vals.procs|join(', ') }}
+    };
 
 {{ elem }}::{{ elem }}(void) : {{ vals.base }}() {}
 
