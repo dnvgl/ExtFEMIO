@@ -1112,6 +1112,21 @@ Example of format of `DATE` record as used in SESAM:
                         double const &SHCENY, double const &SHCENZ,
                         double const &SY, double const &SZ);
 
+                    gbeamg(double const &AREA);
+
+                    __base::card const &operator() (std::list<std::string> const&);
+
+                    __base::card const &operator() (
+                        long const &GEONO,
+                        double const &AREA,
+                        double const &IX, double const &IY, double const &IZ, double const &IYZ,
+                        double const &WXMIN, double const &WYMIN, double const &WZMIN,
+                        double const &SHARY, double const &SHARZ,
+                        double const &SHCENY, double const &SHCENZ,
+                        double const &SY, double const &SZ);
+
+                    __base::card const &operator() (double const &AREA);
+
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 

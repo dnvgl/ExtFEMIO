@@ -140,15 +140,21 @@ set<long> cards::__base::geoprop::used_geono;
 long cards::__base::geoprop::geono_maxset = 0;
 
 void cards::__base::geoprop::set_geono(long const &GEONO/*=0*/) {
-    if (!GEONO) {
+    if (GEONO < 0) {
+        this->GEONO = GEONO;
+        return;
+    }
+    if (GEONO == 0) {
         for (long i = geono_maxset + 1; i < numeric_limits<long>::max(); i++) {
             if (!used_geono.count(i)) {
                 geono_maxset = i;
+                used_geono.insert(GEONO);
                 this->GEONO = i;
                 return;
             }
         }
-    } else if (used_geono.count(GEONO)) {
+    }
+    if (used_geono.count(GEONO)) {
         ostringstream msg("GEONO ", ostringstream::ate);
         msg << GEONO << " value used twice.";
             throw errors::usage_error("GEONO", msg.str());

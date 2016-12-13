@@ -101,6 +101,58 @@ gbeamg::gbeamg(
     this->GEONO = GEONO;
 }
 
+gbeamg::gbeamg(double const &AREA) :
+    __base::beam_prop(0), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
+    WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
+    SY{0}, SZ{0} {}
+
+cards::__base::card const &gbeamg::operator() (
+    long const &GEONO,
+    double const &AREA,
+    double const &IX, double const &IY, double const &IZ, double const &IYZ,
+    double const &WXMIN, double const &WYMIN, double const &WZMIN,
+    double const &SHARY, double const &SHARZ,
+    double const &SHCENY, double const &SHCENZ,
+    double const &SY, double const &SZ) {
+    set_geono(GEONO);
+    this->AREA = AREA;
+    this->IX = IX;
+    this->IY = IY;
+    this->IZ = IZ;
+    this->IYZ = IYZ;
+    this->WXMIN = WXMIN;
+    this->WYMIN = WYMIN;
+    this->WZMIN = WZMIN;
+    this->SHARY = SHARY;
+    this->SHARZ = SHARZ;
+    this->SHCENY = SHCENY;
+    this->SHCENZ = SHCENZ;
+    this->SY = SY;
+    this->SZ = SZ;
+    return *this;
+}
+
+cards::__base::card const &gbeamg::operator() (double const &AREA) {
+    set_geono();
+    this->AREA = AREA;
+    this->IX = {0};
+    this->IY = {0};
+    this->IZ = {0};
+    this->IYZ = {0};
+    this->WXMIN = {0};
+    this->WYMIN = {0};
+    this->WZMIN = {0};
+    this->SHARY = {0};
+    this->SHARZ = {0};
+    this->SHCENY = {0};
+    this->SHCENZ = {0};
+    this->SY = {0};
+    this->SZ = {0};
+    return *this;
+
+}
+
+
 const dnvgl::extfem::fem::cards::types
 gbeamg::card_type(void) const {return types::GBEAMG;}
 
