@@ -53,9 +53,11 @@ const entry_type<double> gbeamg::_form_SY("SY");
 const entry_type<double> gbeamg::_form_SZ("SZ");
 
 gbeamg::gbeamg(const std::list<std::string> &inp) :
-        __base::beam_prop() {
+        __base::beam_prop(), IX{0}, IY{0}, IZ{0}, IYZ{0},
+        WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
+        SY{0}, SZ{0} {
 
-    if (inp.size() < 17)
+    if (inp.size() != 17 && inp.size() != 5)
         throw errors::parse_error(
             "GBEAMG", "Illegal number of entries.");
 
@@ -65,19 +67,21 @@ gbeamg::gbeamg(const std::list<std::string> &inp) :
     GEONO = _form_GEONO(*(pos++));
     ++pos;
     AREA = _form_AREA(*(pos++));
-    IX = _form_IX(*(pos++));
-    IY = _form_IY(*(pos++));
-    IZ = _form_IZ(*(pos++));
-    IYZ = _form_IYZ(*(pos++));
-    WXMIN = _form_WXMIN(*(pos++));
-    WYMIN = _form_WYMIN(*(pos++));
-    WZMIN = _form_WZMIN(*(pos++));
-    SHARY = _form_SHARY(*(pos++));
-    SHARZ = _form_SHARZ(*(pos++));
-    SHCENY = _form_SHCENY(*(pos++));
-    SHCENZ = _form_SHCENZ(*(pos++));
-    SY = _form_SY(*(pos++));
-    SZ = _form_SZ(*(pos++));
+    if (inp.size() == 17) {
+        IX = _form_IX(*(pos++));
+        IY = _form_IY(*(pos++));
+        IZ = _form_IZ(*(pos++));
+        IYZ = _form_IYZ(*(pos++));
+        WXMIN = _form_WXMIN(*(pos++));
+        WYMIN = _form_WYMIN(*(pos++));
+        WZMIN = _form_WZMIN(*(pos++));
+        SHARY = _form_SHARY(*(pos++));
+        SHARZ = _form_SHARZ(*(pos++));
+        SHCENY = _form_SHCENY(*(pos++));
+        SHCENZ = _form_SHCENZ(*(pos++));
+        SY = _form_SY(*(pos++));
+        SZ = _form_SZ(*(pos++));
+    }
 }
 
 gbeamg::gbeamg(void) :
@@ -162,8 +166,15 @@ std::ostream &gbeamg::put(std::ostream& os) const {
        << this->_form_GEONO.format(this->GEONO)
        << this->empty.format()
        << this->_form_AREA.format(this->AREA)
-       << this->_form_IX.format(this->IX)
-       << std::endl << fem::types::card("").format()
+       << this->_form_IX.format(this->IX) << std::endl;
+
+    if (IX == 0. && IY == 0. && IZ == 0. && IYZ == 0. &&
+        WXMIN == 0. && WYMIN == 0. && WZMIN == 0. &&
+        SHARY == 0. && SHARZ == 0. && SHCENY == 0. && SHCENZ == 0. &&
+        SY == 0. && SZ == 0.)
+        return os; // Only area value given for ELTYP 10 (truss element)
+
+    os << fem::types::card("").format()
        << this->_form_IY.format(this->IY)
        << this->_form_IZ.format(this->IZ)
        << this->_form_IYZ.format(this->IYZ)
