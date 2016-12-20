@@ -33,6 +33,10 @@ elem_info::elem_info(long const &id, long const &nnodes,
         id(id), nnodes(nnodes), napa_obj(napa_obj), func_name(func_name),
         grade(grade), yield(yield) {}
 
+double const &grp_info::yield(long const &id) {
+    return (*this)[id].yield;
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

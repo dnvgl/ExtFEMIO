@@ -59,7 +59,7 @@ namespace dnvgl {
 
                 public:
 
-                    double yield(const long &id);
+                    double const &yield(const long &id);
 
                     inline void add_elem(
                         long const &id,

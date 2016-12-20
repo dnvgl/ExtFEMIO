@@ -81,6 +81,7 @@ TEST_CASE("processing input stream",
         CHECK(probe[1].func_name == "G1");
         CHECK(probe[1].grade == "A");
         CHECK(probe[1].yield == 235.);
+        CHECK(probe.yield(1) == 235.);
     }
 
     SECTION("second entry") {
@@ -90,6 +91,7 @@ TEST_CASE("processing input stream",
         CHECK(probe[2601].func_name == "G3");
         CHECK(probe[2601].grade == "A");
         CHECK(probe[2601].yield == 235.);
+        CHECK(probe.yield(2601) == 235.);
     }
 
     SECTION("third entry") {
@@ -99,6 +101,7 @@ TEST_CASE("processing input stream",
         CHECK(probe[4132].func_name == "G4");
         CHECK(probe[4132].grade == "A");
         CHECK(probe[4132].yield == 240.);
+        CHECK(probe.yield(4132) == 240.);
     }
 }
 
