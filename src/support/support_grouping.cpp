@@ -8,6 +8,8 @@
    Detailed description
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    char const cID_support_grouping[]
