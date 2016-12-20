@@ -51,13 +51,11 @@ namespace dnvgl {
                 };
 
                 /// Process additional information for FE file import.
-                class grp_info {
+                class grp_info : public std::map<long, elem_info> {
 
                 protected:
 
                     long lastID;
-
-                    std::map<long, elem_info> idmap;
 
                 public:
 
@@ -70,12 +68,12 @@ namespace dnvgl {
                         std::string const &func_name,
                         std::string const &grade,
                         double const &yield) {
-                        idmap[id] = elem_info(
+                        (*this)[id] = elem_info(
                             id, nnodes, napa_obj, func_name, grade, yield);
                     };
 
                     inline void add_elem(long const &id) {
-                        idmap[id] = elem_info(id);
+                        (*this)[id] = elem_info(id);
                     };
                 };
 
@@ -83,7 +81,7 @@ namespace dnvgl {
 
                 public:
 
-                    CSV(const std::string &iPath);
+                    CSV(std::istream &);
 
                 protected:
 
@@ -94,7 +92,7 @@ namespace dnvgl {
 
                 public:
 
-                    Session(const std::string &iPath);
+                    Session(std::istream const &);
 
                 protected:
 

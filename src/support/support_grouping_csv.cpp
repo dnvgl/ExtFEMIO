@@ -22,48 +22,62 @@ namespace {
 #include "support/grouping.h"
 #include "support/errors.h"
 
+using namespace std;
 using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
-void CSV::process_line(std::string const &line,
-                       dnvgl::extfem::support::GroupInfo::elem_info *data) {
-    std::istringstream inp(line);
-    std::istringstream proc;
-    std::string segment;
+CSV::CSV(std::istream &inp) {
+    string line;
+    elem_info info;
 
-    if (std::getline(inp, segment, ';')) {
+    while (getline(inp, line)) {
+        try {
+            process_line(line, &info);
+            (*this)[info.id] = info;
+        } catch (errors::unreadable_error) {
+        }
+    }
+}
+
+void CSV::process_line(string const &line,
+                       dnvgl::extfem::support::GroupInfo::elem_info *data) {
+    istringstream inp(line);
+    istringstream proc;
+    string segment;
+
+    if (getline(inp, segment, ';')) {
         proc.str(segment);
         proc >> data->id;
     } else
         throw errors::unreadable_error(
             "Read CSV",
             "Can't read line """ + line + """");
-    if (std::getline(inp, segment, ';')) {
+    if (getline(inp, segment, ';')) {
         proc.str(segment);
         proc.seekg(0) >> data->nnodes;
     } else
         throw errors::unreadable_error(
             "Read CSV",
             "Can't read line """ + line + """");
-    if (std::getline(inp, segment, ';')) {
+    if (getline(inp, segment, ';')) {
         proc.str(segment);
         proc.seekg(0) >> data->napa_obj;
     } else
         throw errors::unreadable_error(
             "Read CSV",
             "Can't read line """ + line + """");
-    if (std::getline(inp, segment, ';')) {
+    if (getline(inp, segment, ';')) {
         proc.str(segment);
         proc.seekg(0) >> data->func_name;
     } else
         throw errors::unreadable_error(
             "Read CSV",
             "Can't read line """ + line + """");
-    if (std::getline(inp, segment, ';')) {
+    if (getline(inp, segment, ';')) {
         proc.str(segment);
         proc.seekg(0) >> data->grade;
     }
-    if (std::getline(inp, segment, ';')) {
+    if (getline(inp, segment, ';')) {
         proc.str(segment);
         proc.seekg(0) >> data->yield;
     }
