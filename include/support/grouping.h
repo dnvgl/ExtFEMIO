@@ -88,6 +88,8 @@ namespace dnvgl {
 
                 protected:
 
+                    CSV(void) {};
+
                     static void process_line(std::string const &, elem_info *);
                 };
 
