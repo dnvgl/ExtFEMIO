@@ -13,7 +13,7 @@ set(LIBEXTFEMIO_SUPPORT_SOURCES
   support_grouping.cpp
   support_grouping_csv.cpp
   support_errors.cpp
-)
+  support_grouping_ses.cpp)
 
 set(LIBEXTFEMIO_FEM_HEADERS
   ../../include/support/grouping.h
