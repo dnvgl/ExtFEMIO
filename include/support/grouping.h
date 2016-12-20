@@ -99,7 +99,7 @@ namespace dnvgl {
                 protected:
 
                     static void process_range(
-                        str::string const &, std::vector<long> *);
+                        std::string const &, std::vector<long> *);
                 };
             }
         }
