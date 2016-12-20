@@ -29,7 +29,7 @@ using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
 CSV::CSV(std::istream &inp) {
-    string line;
+    std::string line;
     elem_info info;
 
     while (getline(inp, line)) {
@@ -45,7 +45,7 @@ void CSV::process_line(string const &line,
                        dnvgl::extfem::support::GroupInfo::elem_info *data) {
     istringstream inp(line);
     istringstream proc;
-    string segment;
+    std::string segment;
 
     if (getline(inp, segment, ';')) {
         proc.str(segment);
