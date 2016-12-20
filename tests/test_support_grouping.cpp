@@ -34,6 +34,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
@@ -41,7 +43,7 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
    return Catch::toString( ex() );
 }
 
-TEST_CASE("Process Grouping information.", "[support_grouping]" ) {
+TEST_CASE("Process Grouping information.", "[support_grouping]") {
 
     SECTION("simple") {
         elem_info probe(1, 2, "AA", "TEST", "HIGH", {230});
@@ -52,6 +54,30 @@ TEST_CASE("Process Grouping information.", "[support_grouping]" ) {
         CHECK(probe.func_name == "TEST");
         CHECK(probe.grade == "HIGH");
         CHECK(probe.yield == 230.);
+    }
+}
+
+TEST_CASE("Testing element comparison", "[support_grouping]") {
+    elem_info probe_1(1, 2, "AA", "TEST", "HIGH", {230});
+    elem_info probe_2(2, 2, "AA", "TEST", "HIGH", {230});
+    elem_info probe_3(1, 2, "AA", "TEST", "HIGH", {230});
+
+    SECTION("eq") {
+        CHECK(probe_1 == probe_3);
+    }
+
+    SECTION("ne") {
+        CHECK(probe_1 != probe_2);
+    }
+
+    SECTION("lt") {
+        CHECK(probe_1 < probe_2);
+        CHECK(probe_1 <= probe_3);
+    }
+
+    SECTION("gt") {
+        CHECK(probe_2 > probe_1);
+        CHECK(probe_1 >= probe_3);
     }
 }
 

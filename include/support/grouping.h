@@ -15,6 +15,9 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <utility>
+
+using namespace std::rel_ops;
 
 namespace dnvgl {
     namespace extfem {
@@ -41,11 +44,11 @@ namespace dnvgl {
                         double const &yield);
                     elem_info(long const &id);
 
-                    inline bool operator== (const elem_info &other) {
+                    inline bool operator== (const elem_info &other) const {
                         return (id == other.id);
                     };
 
-                    inline bool operator< (const elem_info &other) {
+                    inline bool operator< (const elem_info &other) const {
                         return (id < other.id);
                     };
                 };
