@@ -29,6 +29,7 @@ endif()
 set (EXTFEM_LIBS extfemio_bdf extfemio ${BOOST_LIBS})
 set (EXTFEM_BDF_LIBS extfemio_bdf extfemio ${BOOST_LIBS})
 set (EXTFEM_FEM_LIBS extfemio_fem extfemio ${BOOST_LIBS})
+set (EXTFEM_SUPPORT_LIBS extfemio_support extfemio ${BOOST_LIBS})
 
 link_directories(
   ${PROJECT_BINARY_DIR}/src
@@ -180,6 +181,13 @@ add_executable(test_fem_elements
   test_fem_more_elements.cpp)
 target_link_libraries(test_fem_elements ${EXTFEM_FEM_LIBS})
 my_add_test(test_fem_elements)
+
+add_executable(test_support_grouping
+  test_support_grouping.cpp
+  test_support_grouping_csv.cpp
+  test_support_grouping_ses.cpp)
+target_link_libraries(test_support_grouping ${EXTFEM_SUPPORT_LIBS})
+my_add_test(test_support_grouping)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
   # add the commands to generate the source code

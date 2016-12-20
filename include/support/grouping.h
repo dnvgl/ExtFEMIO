@@ -1,0 +1,117 @@
+/**
+  \file grouping.h
+  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+  \copyright Copyright © 2016 by DNV GL SE
+  \brief Classes for processing external grouping information for FE files.
+
+  Detailed description
+*/
+
+// ID: $Id$
+
+#ifndef _SUPPORT_GROUPING_H_
+#define _SUPPORT_GROUPING_H_
+
+#include <string>
+#include <map>
+#include <vector>
+
+namespace dnvgl {
+    namespace extfem {
+        namespace support {
+            namespace GroupInfo {
+
+                /// Store extra information on elements.
+                class elem_info {
+                public:
+                    long id;
+                    long nnodes;
+
+                    std::string napa_obj;
+                    std::string func_name;
+                    std::string grade;
+                    double yield;
+
+                    elem_info();
+                    elem_info(
+                        long const &id, long const &nnodes,
+                        std::string const &napa_obj,
+                        std::string const &func_name,
+                        std::string const &grade,
+                        double const &yield);
+                    elem_info(long const &id);
+
+                    inline bool operator== (const elem_info &other) {
+                        return (id == other.id);
+                    };
+
+                    inline bool operator< (const elem_info &other) {
+                        return (id < other.id);
+                    };
+                };
+
+                /// Process additional information for FE file import.
+                class grp_info {
+
+                protected:
+
+                    long lastID;
+
+                    std::map<long, elem_info> idmap;
+
+                public:
+
+                    double yield(const long &id);
+
+                    inline void add_elem(
+                        long const &id,
+                        long const &nnodes,
+                        std::string const &napa_obj,
+                        std::string const &func_name,
+                        std::string const &grade,
+                        double const &yield) {
+                        idmap[id] = elem_info(
+                            id, nnodes, napa_obj, func_name, grade, yield);
+                    };
+
+                    inline void add_elem(long const &id) {
+                        idmap[id] = elem_info(id);
+                    };
+                };
+
+                class CSV : public grp_info {
+
+                public:
+
+                    CSV(const std::string &iPath);
+
+                protected:
+
+                    static void process_line(std::string const &, elem_info *);
+                };
+
+                class Session : public grp_info {
+
+                public:
+
+                    Session(const std::string &iPath);
+
+                protected:
+
+                    static void process_range(
+                        str::string const &, std::vector<long> *);
+                };
+            }
+        }
+    }
+}
+
+#endif // _SUPPORT_GROUPING_H_
+
+// Local Variables:
+// mode: c++
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// End:

@@ -34,6 +34,7 @@ set_target_properties(extfemio PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE
 
 add_subdirectory(bdf)
 add_subdirectory(fem)
+add_subdirectory(support)
 
 # bin_PROGRAMS=bdf2bdf fem2fem
 
