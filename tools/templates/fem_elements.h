@@ -65,13 +65,13 @@ namespace dnvgl {
                     protected:
 
                         long static const &get_eleno(void);
-                        long static const &get_eleno(long const &eleno);
+                        long static get_eleno(long const &eleno);
                         long static const &get_elident();
-                        long static const &get_elident(long const &elident);
+                        long static get_elident(long const &elident);
 
                         el_types static const type;
                         elem(void);
-                        elem(long const &elno, long const &elident,
+                        elem(long const &eleno, long const &elident,
                              long const &el_add,
                              std::vector<long> const &nodes,
                              long const &matref,
@@ -82,7 +82,7 @@ namespace dnvgl {
                              std::vector<long> const &fixations={},
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
-                        elem(long const &elno, long const &el_add,
+                        elem(long const &eleno, long const &el_add,
                              std::vector<long> const &nodes,
                              long const &matref,
                              long const &add_no=0, long const &intno=0,
@@ -103,7 +103,7 @@ namespace dnvgl {
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
                         __base::elem const &operator() (
-                            long const &elno, long const &elident,
+                            long const &eleno, long const &elident,
                             long const &el_add,
                             std::vector<long> const &nodes,
                             long const &matref,
@@ -115,7 +115,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
                         __base::elem const &operator() (
-                            long const &elno, long const &el_add,
+                            long const &eleno, long const &el_add,
                             std::vector<long> const &nodes,
                             long const &matref,
                             long const &add_no=0, long const &intno=0,
@@ -136,7 +136,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
                         __base::elem const &operator() (
-                            long const &elno,
+                            long const &eleno,
                             std::vector<long> const &nodes,
                             long const &matref,
                             std::vector<long> const &sections={},
@@ -181,7 +181,7 @@ namespace dnvgl {
                             std::vector<long> const &csys={});
 
                         __base::elem const &set_values(
-                            long const &elno, long const &elident,
+                            long const &eleno, long const &elident,
                             long const &el_add,
                             std::vector<long> const &nodes,
                             long const &matref,
@@ -289,7 +289,7 @@ namespace dnvgl {
                     public:
                         fem_thin_shell(void);
                         fem_thin_shell(
-                            long const &elno,
+                            long const &eleno,
                             long const &elident,
                             long const &el_add,
                             std::vector<long> const &nodes,
@@ -305,7 +305,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities,
                             std::vector<long> const &csys);
                         fem_thin_shell(
-                            long const &elno,
+                            long const &eleno,
                             long const &el_add,
                             std::vector<long> const &nodes,
                             long const &matref,
@@ -354,7 +354,7 @@ namespace dnvgl {
                 class {{ elem }} : public __base::{{ vals.base }} {
                 public:
                     {{ elem }}(void);
-                    {{ elem }}(long const &elno,
+                    {{ elem }}(long const &eleno,
                          long const &elident,
                          long const &el_add,
                          std::vector<long> const &nodes,
@@ -369,7 +369,7 @@ namespace dnvgl {
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    {{ elem }}(long const &elno,
+                    {{ elem }}(long const &eleno,
                          long const &el_add,
                          std::vector<long> const &nodes,
                          long const &matref,

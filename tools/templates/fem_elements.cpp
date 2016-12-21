@@ -341,7 +341,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const &elno,
+    long const &eleno,
     vector<long> const &nodes,
     long const &matref,
     vector<long> const &section/*={}*/,
@@ -378,11 +378,11 @@ elements::__base::elem const &elements::__base::elem::operator() (
                    strpoint_ref, section, fixations, eccentrities, csys);
 }
 
-long const &elements::__base::elem::get_eleno(long const &eleno) {
-    if (eleno == 0) return get_eleno();
-    if (!used_nos.insert(eleno).second)
-        throw NoUsed(eleno);
-    return eleno;
+long elements::__base::elem::get_eleno(long const &eleno) {
+    long res{eleno};
+    if (eleno == 0 || !used_nos.insert(eleno).second)
+        res = get_eleno();
+    return res;
 }
 
 long const &elements::__base::elem::get_eleno(void) {
@@ -391,11 +391,11 @@ long const &elements::__base::elem::get_eleno(void) {
     return max_no;
 }
 
-long const &elements::__base::elem::get_elident(long const &elident) {
-    if (elident == 0) return get_elident();
-    if (!used_ids.insert(elident).second)
-        throw IdUsed(elident);
-    return elident;
+long elements::__base::elem::get_elident(long const &elident) {
+    long res{elident};
+    if (elident == 0 || !used_ids.insert(elident).second)
+        res = get_elident();
+    return res;
 }
 
 long const &elements::__base::elem::get_elident(void) {
@@ -554,7 +554,7 @@ elements::__base::fem_thin_shell::fem_thin_shell(void) :
     elem() {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
-    long const &elno,
+    long const &eleno,
     long const &elident,
     long const &el_add,
     vector<long> const &nodes,
@@ -569,13 +569,13 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-        elem(elno, elident, el_add, nodes, matref, add_no,
+        elem(eleno, elident, el_add, nodes, matref, add_no,
              intno, mass_intno, i_strain_ref, i_stress_ref,
              strpoint_ref, section, fixations,
              eccentrities, csys) {}
 
 elements::__base::fem_thin_shell::fem_thin_shell(
-    long const &elno,
+    long const &eleno,
     long const &el_add,
     vector<long> const &nodes,
     long const &matref,
@@ -589,7 +589,7 @@ elements::__base::fem_thin_shell::fem_thin_shell(
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) :
-        fem_thin_shell(elno, 0, el_add, nodes, matref, add_no,
+        fem_thin_shell(eleno, 0, el_add, nodes, matref, add_no,
                        intno, mass_intno, i_strain_ref, i_stress_ref,
                        strpoint_ref, section, fixations,
                        eccentrities, csys) {}
