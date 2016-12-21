@@ -80,7 +80,7 @@ namespace dnvgl {
                     };
                 };
 
-                class CSV : public grp_info {
+                class CSV : public virtual grp_info {
 
                 public:
 

@@ -41,11 +41,12 @@ CSV::CSV(std::istream &inp) {
     }
 }
 
-void CSV::process_line(string const &line,
+void CSV::process_line(std::string const &line,
                        dnvgl::extfem::support::GroupInfo::elem_info *data) {
     istringstream inp(line);
     istringstream proc;
     std::string segment;
+    proc.imbue(std::locale::classic());
 
     if (getline(inp, segment, ';')) {
         proc.str(segment);
