@@ -190,8 +190,8 @@ elements::__base::elem::elem(long const &eleno,
                              vector<long> const &fixations,
                              vector<long> const &eccentrities,
                              vector<long> const &csys) :
-        elem(eleno, 0, el_add, nodes, matref, add_no,
-             intno, mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+        elem(eleno, 0, el_add, nodes, matref, add_no, intno,
+             mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
              section, fixations, eccentrities, csys) { }
 
 elements::__base::elem::elem(long const &el_add,
@@ -322,7 +322,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const &eleno,
+    long const &el_add,
     vector<long> const &nodes,
     long const &matref,
     long const &add_no,
@@ -335,7 +335,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     vector<long> const &fixations,
     vector<long> const &eccentrities,
     vector<long> const &csys) {
-    return (*this)(eleno, 0, 0, nodes, matref, add_no, intno, mass_intno,
+    return (*this)(0, 0, el_add, nodes, matref, add_no, intno, mass_intno,
                    i_strain_ref, i_stress_ref, strpoint_ref,
                    section, fixations, eccentrities, csys);
 }
@@ -408,7 +408,7 @@ void elements::__base::elem::add(cards::gelmnt1 const *data) {
     this->eleno = get_eleno(data->ELNOX);
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
-    else if (this->elident != data->ELNO)
+    else if (this->elident > 0 && this->elident != data->ELNO)
         throw DataNotMatchingId(this->elident, data->ELNO);
     this->el_add = data->ELTYAD;
     this->nodes = data->NODIN;
@@ -417,9 +417,8 @@ void elements::__base::elem::add(cards::gelmnt1 const *data) {
 void elements::__base::elem::add(cards::gelref1 const *data) {
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
-    else if (this->elident != data->ELNO)
+    else if (this->elident > 0 && this->elident != data->ELNO)
         throw DataNotMatchingId(this->elident, data->ELNO);
-    this->elident = data->ELNO;
     this->matref = data->MATNO;
     this->add_no = data->ADDNO;
     this->intno = data->INTNO;
@@ -543,84 +542,6 @@ namespace dnvgl {
     }
 }
 
-/**
-   \brief FEM element definition for fem_thin_shell.
-
-   Flat Quadrilateral/Triangular Thin Shell / Free Formulation
-   Quadrilateral/Triangular Shell
-*/
-
-elements::__base::fem_thin_shell::fem_thin_shell(void) :
-    elem() {}
-
-elements::__base::fem_thin_shell::fem_thin_shell(
-    long const &eleno,
-    long const &elident,
-    long const &el_add,
-    vector<long> const &nodes,
-    long const &matref,
-    long const &add_no,
-    long const &intno,
-    long const &mass_intno,
-    long const &i_strain_ref,
-    long const &i_stress_ref,
-    long const &strpoint_ref,
-    vector<long> const &section,
-    vector<long> const &fixations,
-    vector<long> const &eccentrities,
-    vector<long> const &csys) :
-        elem(eleno, elident, el_add, nodes, matref, add_no,
-             intno, mass_intno, i_strain_ref, i_stress_ref,
-             strpoint_ref, section, fixations,
-             eccentrities, csys) {}
-
-elements::__base::fem_thin_shell::fem_thin_shell(
-    long const &eleno,
-    long const &el_add,
-    vector<long> const &nodes,
-    long const &matref,
-    long const &add_no,
-    long const &intno,
-    long const &mass_intno,
-    long const &i_strain_ref,
-    long const &i_stress_ref,
-    long const &strpoint_ref,
-    vector<long> const &section,
-    vector<long> const &fixations,
-    vector<long> const &eccentrities,
-    vector<long> const &csys) :
-        fem_thin_shell(eleno, 0, el_add, nodes, matref, add_no,
-                       intno, mass_intno, i_strain_ref, i_stress_ref,
-                       strpoint_ref, section, fixations,
-                       eccentrities, csys) {}
-
-elements::__base::fem_thin_shell::fem_thin_shell(
-    long const &el_add,
-    vector<long> const &nodes,
-    long const &matref,
-    long const &add_no,
-    long const &intno,
-    long const &mass_intno,
-    long const &i_strain_ref,
-    long const &i_stress_ref,
-    long const &strpoint_ref,
-    vector<long> const &section,
-    vector<long> const &fixations,
-    vector<long> const &eccentrities,
-    vector<long> const &csys) :
-        fem_thin_shell(0, el_add, nodes, matref, add_no,
-                       intno, mass_intno, i_strain_ref, i_stress_ref,
-                       strpoint_ref, section, fixations,
-                       eccentrities, csys) {}
-
-elements::__base::fem_thin_shell::fem_thin_shell(cards::gelmnt1 const *data) :
-    elem(data) {}
-
-elements::__base::fem_thin_shell::fem_thin_shell(cards::gelref1 const *data) :
-    elem(data) {}
-
-elements::__base::fem_thin_shell::fem_thin_shell(__base::elem const *data) :
-    elem(data) {}
 {%- for elem, vals in elements %}
 
 /**
@@ -655,7 +576,7 @@ set<el_processor> const {{ elem }}::processors{
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        {{ vals.base }}(
+        __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -675,7 +596,7 @@ set<el_processor> const {{ elem }}::processors{
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        {{ vals.base }}(
+        __base::elem(
             eleno, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -694,18 +615,18 @@ set<el_processor> const {{ elem }}::processors{
                        vector<long> const &fixations,
                        vector<long> const &eccentrities,
                        vector<long> const &csys) :
-        {{ vals.base }}(
+        __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-{{ elem }}::{{ elem }}(cards::gelmnt1 const *data) : {{ vals.base }}(data) {}
+{{ elem }}::{{ elem }}(cards::gelmnt1 const *data) : __base::elem(data) {}
 
-{{ elem }}::{{ elem }}(cards::gelref1 const *data) : {{ vals.base }}(data) {}
+{{ elem }}::{{ elem }}(cards::gelref1 const *data) : __base::elem(data) {}
 
 {{ elem }}::{{ elem }}(elements::__base::elem const *data) :
-__base::{{ vals.base }}(data) {}{% endfor %}
+         __base::elem(data) {}{% endfor %}
 
 // Local Variables:
 // mode: c++

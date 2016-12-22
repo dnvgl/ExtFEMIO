@@ -151,7 +151,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
                         __base::elem const &operator() (
-                            long const &eleno,
+                            long const &el_add,
                             std::vector<long> const &nodes,
                             long const &matref,
                             long const &add_no,
@@ -283,61 +283,12 @@ namespace dnvgl {
                         friend std::ostream &operator<<(std::ostream&, elem const &);
                     };
 
-                    /** Base thin shell element definitions
-                     */
-                    class fem_thin_shell : public __base::elem {
-                    public:
-                        fem_thin_shell(void);
-                        fem_thin_shell(
-                            long const &eleno,
-                            long const &elident,
-                            long const &el_add,
-                            std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no,
-                            long const &intno,
-                            long const &mass_intno,
-                            long const &i_strain_ref,
-                            long const &i_stressef,
-                            long const &strpoint_ref,
-                            std::vector<long> const &sections,
-                            std::vector<long> const &fixations,
-                            std::vector<long> const &eccentrities,
-                            std::vector<long> const &csys);
-                        fem_thin_shell(
-                            long const &eleno,
-                            long const &el_add,
-                            std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no,
-                            long const &intno,
-                            long const &mass_intno,
-                            long const &i_strain_ref,
-                            long const &i_stressef,
-                            long const &strpoint_ref,
-                            std::vector<long> const &sections,
-                            std::vector<long> const &fixations,
-                            std::vector<long> const &eccentrities,
-                            std::vector<long> const &csys);
-                        fem_thin_shell(
-                            long const &el_add,
-                            std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no,
-                            long const &intno,
-                            long const &mass_intno,
-                            long const &i_strain_ref,
-                            long const &i_stressef,
-                            long const &strpoint_ref,
-                            std::vector<long> const &sections,
-                            std::vector<long> const &fixations,
-                            std::vector<long> const &eccentrities,
-                            std::vector<long> const &csys);
-                        fem_thin_shell(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                        fem_thin_shell(dnvgl::extfem::fem::cards::gelref1 const*);
-                        fem_thin_shell(__base::elem const*);
-                        using elem::operator();
-                    };
+/**    \brief FEM element definition for fem_thin_shell.
+
+   Flat Quadrilateral/Triangular Thin Shell / Free Formulation
+   Quadrilateral/Triangular Shell
+                    */
+                    class fem_thin_shell : public virtual __base::elem {};
                 }
 
                 class undef : public __base::elem {
@@ -396,13 +347,14 @@ namespace dnvgl {
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    using {{ vals.base }}::operator();
                     {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
-                    {{ elem }}( __base::elem const*);
+                    {{ elem }}(__base::elem const*);
                     virtual long nnodes(void) const;
                     el_types get_type(void) const;
                     std::set<el_processor> static const processors;
+                    using elem::operator();
+                    using elem::add;
                 };
 {% endfor %}
 {% line %}
