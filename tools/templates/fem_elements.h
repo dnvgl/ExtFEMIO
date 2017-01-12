@@ -283,10 +283,11 @@ namespace dnvgl {
                         friend std::ostream &operator<<(std::ostream&, elem const &);
                     };
 
-/**    \brief FEM element definition for fem_thin_shell.
+                    /**
+                       \brief FEM element definition for fem_thin_shell.
 
-   Flat Quadrilateral/Triangular Thin Shell / Free Formulation
-   Quadrilateral/Triangular Shell
+                       Flat Quadrilateral/Triangular Thin Shell / Free
+                       Formulation Quadrilateral/Triangular Shell
                     */
                     class fem_thin_shell : public virtual __base::elem {};
                 }

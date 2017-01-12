@@ -38,6 +38,7 @@ namespace {
 #include "my_c++14.h"
 #include "fem/cards.h"
 #include "fem/elements.h"
+#include "fem/errors.h"
 
 #if defined(__AFX_H__) & defined(_DEBUG)
 #define new DEBUG_NEW
@@ -53,64 +54,6 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace std;
 
-class NotImplemented : public logic_error {
-protected:
-    std::string what_arg;
-    virtual const char *what() const NOEXCEPT {
-        return what_arg.c_str();
-    };
-public:
-    NotImplemented(std::string const &fname, long const &line) :
-        logic_error("") {
-        ostringstream res;
-        res << "Not implemented yet " << fname << ":" << line << endl;
-        this->what_arg = res.str();
-    };
-};
-
-class NoUsed : public invalid_argument {
-protected:
-    std::string what_arg;
-    virtual const char *what() const NOEXCEPT {
-        return what_arg.c_str();
-    };
-public:
-    NoUsed(long const &no) : invalid_argument("") {
-        ostringstream res;
-        res << "Element number " << no << " already used." << endl;
-        this->what_arg = res.str();
-    };
-};
-
-class IdUsed : public invalid_argument {
-protected:
-    std::string what_arg;
-    virtual const char *what() const NOEXCEPT {
-        return what_arg.c_str();
-    };
-public:
-    IdUsed(long const &id) : invalid_argument("") {
-        ostringstream res;
-        res << "Element id " << id << " already used." << endl;
-        this->what_arg = res.str();
-    };
-};
-
-class DataNotMatchingId : public invalid_argument {
-protected:
-    std::string what_arg;
-    virtual const char *what() const NOEXCEPT {
-        return what_arg.c_str();
-    };
-public:
-    DataNotMatchingId(long const &id_ex, long const &id_new) :
-        invalid_argument("") {
-        ostringstream res;
-        res << "Element id already set to " << id_ex
-            << " with attempt to set to " << id_new << "."<< endl;
-        this->what_arg = res.str();
-    };
-};
 
 using namespace dnvgl::extfem;
 using namespace fem;
@@ -355,7 +298,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     vector<long> const &fixations/*={}*/,
     vector<long> const &eccentrities/*={}*/,
     vector<long> const &csys/*={}*/) {
-    throw NotImplemented(__FILE__, __LINE__);
+    throw not_implemented(__FILE__, __LINE__);
     return *this;
 }
 
@@ -409,7 +352,7 @@ void elements::__base::elem::add(cards::gelmnt1 const *data) {
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
     else if (this->elident > 0 && this->elident != data->ELNO)
-        throw DataNotMatchingId(this->elident, data->ELNO);
+        throw dnvgl::extfem::fem::errors::data_not_matching_id(this->elident, data->ELNO);
     this->el_add = data->ELTYAD;
     this->nodes = data->NODIN;
 }
@@ -418,7 +361,7 @@ void elements::__base::elem::add(cards::gelref1 const *data) {
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
     else if (this->elident > 0 && this->elident != data->ELNO)
-        throw DataNotMatchingId(this->elident, data->ELNO);
+        throw dnvgl::extfem::fem::errors::data_not_matching_id(this->elident, data->ELNO);
     this->matref = data->MATNO;
     this->add_no = data->ADDNO;
     this->intno = data->INTNO;
