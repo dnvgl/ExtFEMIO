@@ -11,11 +11,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_errors[]
+    const char cID_fem_errors[]
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+       = "@(#) $Id$";
 }
 
 #include <string>
@@ -28,72 +28,97 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace errors {
+using namespace std;
 
-            error::error(
-               const std::string &msg, const std::string &err_class) :
-               msg(msg), name(""), err_class(err_class) {}
+using namespace dnvgl::extfem::fem::errors;
 
+error::error(
+    const std::string &msg, const std::string &err_class) :
+        msg(msg), name(""), err_class(err_class) {}
 
-            error::error(
-               const std::string &name, const std::string &msg,
-               const std::string &err_class) :
-               msg(msg), name(name), err_class(err_class) {};
+error::error(
+    const std::string &name, const std::string &msg,
+    const std::string &err_class) :
+        msg(msg), name(name), err_class(err_class) {};
 
-            std::string error::get_msg(void) const {
-               if (name.length())
-                  return err_class + ":" + name + ":" + msg;
-               return err_class + ":" + msg;
-            }
+std::string error::get_msg(void) const {
+    if (name.length())
+        return err_class + ":" + name + ":" + msg;
+    return err_class + ":" + msg;
+}
 
-            std::string error::operator() (void) const {
-               return this->get_msg() + "\n";
-            }
+std::string error::operator() (void) const {
+    return this->get_msg() + "\n";
+}
 
-            types_error::types_error(const std::string &msg) :
-               error("", msg, "types_error") {}
+types_error::types_error(const std::string &msg) :
+        error("", msg, "types_error") {}
 
-            float_error::float_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "float_error") {}
+float_error::float_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "float_error") {}
 
-            int_error::int_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "int_error") {}
+int_error::int_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "int_error") {}
 
-            bool_error::bool_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "bool_error") {}
+bool_error::bool_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "bool_error") {}
 
-            output_error::output_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "output_error") {}
+output_error::output_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "output_error") {}
 
-            list_error::list_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "list_error") {}
+list_error::list_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "list_error") {}
 
-            str_error::str_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "str_error") {};
+str_error::str_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "str_error") {};
 
-            string_error::string_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "string_error") {};
+string_error::string_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "string_error") {};
 
-            parse_error::parse_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "parse_error") {}
+parse_error::parse_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "parse_error") {}
 
-            usage_error::usage_error(
-               const std::string &name, const std::string &msg) :
-               error(name, msg, "usage_error") {}
-         }
-      }
-   }
+usage_error::usage_error(
+    const std::string &name, const std::string &msg) :
+        error(name, msg, "usage_error") {}
+
+dnvgl::extfem::fem::errors::not_implemented::not_implemented(
+    std::string const &fname, long const &line)
+        : std::not_implemented(""), error("not_implemented", "") {
+    ostringstream res;
+    res << "Not implemented yet " << fname << ":" << line << endl;
+    msg = res.str();
+}
+
+no_used::no_used(long const &no) :
+        invalid_argument(""), error("no_used", "") {
+    ostringstream res;
+    res << "Element number " << no << " already used." << endl;
+    msg = res.str();
+}
+
+id_used::id_used(long const &id) :
+        invalid_argument(""), error("id_used", "") {
+    ostringstream res;
+    res << "Element id " << id << " already used." << endl;
+    msg = res.str();
+}
+
+data_not_matching_id::data_not_matching_id(
+    long const &id_ex, long const &id_new) :
+        invalid_argument(""), error("data_not_matching_id") {
+    ostringstream res;
+    res << "Element id already set to " << id_ex
+        << " with attempt to set to " << id_new << "."<< endl;
+    msg = res.str();
 }
 
 // Local Variables:
