@@ -108,6 +108,8 @@ cards::__base::card::card(list<std::string> const &inp) {}
 
 cards::__base::card::card() {}
 
+cards::__base::card::~card(void) {}
+
 fem::types::empty const cards::__base::card::empty = fem::types::empty();
 
 fem::types::card const cards::__base::card::head = fem::types::card("<DUMMY>");

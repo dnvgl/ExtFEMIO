@@ -26,6 +26,8 @@ namespace dnvgl {
       namespace __base {
          outline::outline(void) {}
 
+         outline::~outline(void) {}
+
          std::ostream &outline::operator<<(std::ostream &os) {
             return this->put(os);
          }

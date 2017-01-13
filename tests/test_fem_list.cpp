@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   const char  cID[]
+    const char  cID[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <limits>
@@ -42,44 +42,47 @@ using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::type_bounds;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex() );
+    return Catch::toString( ex() );
 }
 
 TEST_CASE("FEM list types parsing.", "[fem_types]" ) {
 
-   entry_type<std::vector<int> > probe("dummy");
+    entry_type<std::vector<int> > probe("dummy");
+    std::vector<int> res;
 
-   SECTION("' 1.34000000e+02 '") {
-      CHECK(*probe(" 1.34000000e+02 ") == std::vector<int>({ 1, 3, 4 }));
-   }
+    SECTION("' 1.34000000e+02 '") {
+        probe(res, " 1.34000000e+02 ");
+        CHECK(res == std::vector<int>({ 1, 3, 4 }));
+    }
 
-   SECTION("' 1.23600000e+03 '") {
-      CHECK(*probe(" 1.23600000e+03 ") == std::vector<int>({ 1, 2, 3, 6 }));
-   }
+    SECTION("' 1.23600000e+03 '") {
+        probe(res, " 1.23600000e+03 ");
+        CHECK(res == std::vector<int>({ 1, 2, 3, 6 }));
+    }
 
-   SECTION("' 1.236000000e+03'") {
-      std::vector<int> ref({ 1, 2, 3, 6 });
-      CHECK(*probe(" 1.236000000e+03") == std::vector<int>({ 1, 2, 3, 6 }));
-   }
+    SECTION("' 1.236000000e+03'") {
+        probe(res, " 1.236000000e+03");
+        CHECK(res == std::vector<int>({ 1, 2, 3, 6 }));
+    }
 
-   SECTION("' 1a3b   '") {
-      CHECK_THROWS(probe(" 1a3b   "));
-   }
+    SECTION("' 1a3b   '") {
+        CHECK_THROWS(probe(res, " 1a3b   "));
+    }
 }
 
 TEST_CASE("FEM list of int types output.", "[fem_types]" ) {
 
-   entry_type<std::vector<int> > obj("dummy");
+    entry_type<std::vector<int> > obj("dummy");
 
-   std::vector<int> lval({ 1, 2, 3, 4 });
+    std::vector<int> lval({ 1, 2, 3, 4 });
 
-   std::ostringstream stream(std::ostringstream::ate);
+    std::ostringstream stream(std::ostringstream::ate);
 
-   SECTION("Output") {
-      std::string res(obj.format(lval));
-      CHECK(res.size() == 16);
-      CHECK(res == " 1.234000000e+03");
-   }
+    SECTION("Output") {
+        std::string res(obj.format(lval));
+        CHECK(res.size() == 16);
+        CHECK(res == " 1.234000000e+03");
+    }
 }
 
 // Local Variables:

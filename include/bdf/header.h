@@ -1,10 +1,10 @@
 /**
-  \file header.h
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2016 by DNV GL SE
-  \brief classes for defining NASTAN header
+   \file header.h
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2016 by DNV GL SE
+   \brief classes for defining NASTAN header
 
-  Detailed description
+   Detailed description
 */
 
 /* ID: $Id\$
@@ -21,239 +21,239 @@
 #include "extfem_misc.h"
 
 namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace __base {
-               class entry : public extfem::__base::outline {
-               public:
-                  entry(void);
-               };
-            }
+    namespace extfem {
+        namespace bdf {
+            namespace header {
+                namespace __base {
+                    class entry : public extfem::__base::outline {
+                    public:
+                        entry(void);
+                    };
+                }
 
-            /// Executive Control Statements
-            namespace executive_control {
+                /// Executive Control Statements
+                namespace executive_control {
 
 /**
-# `SOL`: Execute a Solution Sequence
+   # `SOL`: Execute a Solution Sequence
 
-Specifies the solution sequence or main subDMAP to be executed.
+   Specifies the solution sequence or main subDMAP to be executed.
 
-## Format:
+   ## Format:
 
-\f[
-\text{\texttt{SOL}} \left\{
-\begin{array}{c}
-n\\
-\text{subDMAP-name}
-\end{array}
-\right\}
-\left[ \text{\texttt{SOLIN}} = \text{obj-DBset} \text{NOEXE} \right]
-\f]
+   \f[
+   \text{\texttt{SOL}} \left\{
+   \begin{array}{c}
+   n\\
+   \text{subDMAP-name}
+   \end{array}
+   \right\}
+   \left[ \text{\texttt{SOLIN}} = \text{obj-DBset} \text{NOEXE} \right]
+   \f]
 
-## Remarks:
+   ## Remarks:
 
-1. If `SOLIN` keyword is not given and if there are no `LINK`
+   1. If `SOLIN` keyword is not given and if there are no `LINK`
    statements within the input data, the program will perform an
    automatic link. The program will first collect the objects created
    in the current run by the `COMPILE` statement and the remaining
    objects stored in the MSCOBJ DBset. The program will then perform
    an automatic link of the collected objects.
 
-2. If the `SOLIN` keyword is not given but a LINK statement is
+   2. If the `SOLIN` keyword is not given but a LINK statement is
    provided, the `SOLIN` default will be obtained from the `SOLOUT`
    keyword on the `LINK` statement.
 
-3. The `OSCAR` (Operation Sequence Control ARray) defines the problem
+   3. The `OSCAR` (Operation Sequence Control ARray) defines the problem
    solution sequence. The `OSCAR` consists of a sequence of entries
    with each entry containing all of the information needed to execute
    one step of the problem solution. The `OSCAR` is generated from
    information supplied by the user’s entries in the Executive Control
    Section.
 
-4. The `SOLIN` keyword will skip the automatic link and execute the
+   4. The `SOLIN` keyword will skip the automatic link and execute the
    `OSCAR` on the specified DBset.
 
-5. The `DOMAINSOLVER` may be used in conjunction with Solution
+   5. The `DOMAINSOLVER` may be used in conjunction with Solution
    Sequences 101, 103, 108, and 111 to select domain decomposition
    solution methods.
 
-6. Only `SOL <n>` is currently supported.
+   6. Only `SOL <n>` is currently supported.
 */
 
-               class sol : public __base::entry {
-               public:
-                  enum class sol_no_type {
-                     /** Statics with Options:
-                           Linear Steady State Heat Transfer
-                           Alternate Reduction
-                           Inertia Relief */
-                     SESTATIC=101,
-                     /// Normal Modes
-                     SEMODES =103,
-                     /** Buckling with options:
-                           Static Analysis
-                           Alternate Reduction
-                           Inertia Relief */
-                     SEBUCKL =105,
-                     /// Nonlinear or Linear Statics
-                     NLSTATIC=106,
-                     /// Direct Complex Eigenvalues
-                     SEDCEIG =107,
-                     /// Direct Frequency Response
-                     SEDFREQ =108,
-                     /// Direct Transient Response
-                     SEDTRAN =109,
-                     /// Modal Complex Eigenvalues
-                     SEMCEIG =110,
-                     /// Modal Frequency Response
-                     SEMFREQ =111,
-                     /// Modal Transient Response
-                     SEMTRAN =112,
-                     /** Cyclic Statics with Option:
-                         Alternate Reduction */
-                     CYCSTATX=114,
-                     /// Cyclic Normal Modes
-                     CYCMODE =115,
-                     /// Cyclic Buckling
-                     CYCBUCKL=116,
-                     /// Cyclic Direct Frequency Response
-                     CYCFREQ =118,
-                     /// Nonlinear or Linear Transient Response
-                     NLTRAN  =129,
-                     /// Static Aeroelastic Response
-                     AESTAT  =144,
-                     /// Aerodynamic Flutter
-                     SEFLUTTR=145,
-                     /// Aeroelastic Response
-                     SEAERO  =146,
-                     /** Static Structural and/or Steady State Heat
-                         Transfer Analysis with Options:
-                           Linear or Nonlinear Analysis */
-                     NLSCSH  =153,
-                     /** Transient Structural and/or Transient Heat
-                         Transfer Analysis with Options:
-                           Linear or Nonlinear Analysis */
-                     NLTCSH  =159,
-                     /** Database Transfer, “Output Description” on
-                         page 373 of the MSC.Nastran Reference
-                         Guide. */
-                     DBTRANS =190,
-                     /// Design Optimization
-                     DESOPT  =200,
-                     /// Nonlinear static and transient analysis
-                     NONLIN  =400};
-                  sol_no_type sol_no;
-                  sol(sol_no_type const &sol_no=sol_no_type::SESTATIC);
-                  sol(long const&);
+                    class sol : public __base::entry {
+                    public:
+                        enum class sol_no_type {
+/** Statics with Options:
+    Linear Steady State Heat Transfer
+    Alternate Reduction
+    Inertia Relief */
+                            SESTATIC=101,
+/// Normal Modes
+                            SEMODES =103,
+/** Buckling with options:
+    Static Analysis
+    Alternate Reduction
+    Inertia Relief */
+                            SEBUCKL =105,
+/// Nonlinear or Linear Statics
+                            NLSTATIC=106,
+/// Direct Complex Eigenvalues
+                            SEDCEIG =107,
+/// Direct Frequency Response
+                            SEDFREQ =108,
+/// Direct Transient Response
+                            SEDTRAN =109,
+/// Modal Complex Eigenvalues
+                            SEMCEIG =110,
+/// Modal Frequency Response
+                            SEMFREQ =111,
+/// Modal Transient Response
+                            SEMTRAN =112,
+/** Cyclic Statics with Option:
+    Alternate Reduction */
+                            CYCSTATX=114,
+/// Cyclic Normal Modes
+                            CYCMODE =115,
+/// Cyclic Buckling
+                            CYCBUCKL=116,
+/// Cyclic Direct Frequency Response
+                            CYCFREQ =118,
+/// Nonlinear or Linear Transient Response
+                            NLTRAN  =129,
+/// Static Aeroelastic Response
+                            AESTAT  =144,
+/// Aerodynamic Flutter
+                            SEFLUTTR=145,
+/// Aeroelastic Response
+                            SEAERO  =146,
+/** Static Structural and/or Steady State Heat
+    Transfer Analysis with Options:
+    Linear or Nonlinear Analysis */
+                            NLSCSH  =153,
+/** Transient Structural and/or Transient Heat
+    Transfer Analysis with Options:
+    Linear or Nonlinear Analysis */
+                            NLTCSH  =159,
+/** Database Transfer, “Output Description” on
+    page 373 of the MSC.Nastran Reference
+    Guide. */
+                            DBTRANS =190,
+/// Design Optimization
+                            DESOPT  =200,
+/// Nonlinear static and transient analysis
+                            NONLIN  =400};
+                        sol_no_type sol_no;
+                        sol(sol_no_type const &sol_no=sol_no_type::SESTATIC);
+                        sol(long const&);
 
-               private:
+                    private:
 
-                  std::ostream &put(std::ostream&) const;
-                  class sol_no_type_conv {
-                  public:
-                     static sol_no_type from_long(long const&);
-                     static long to_long (sol_no_type const&);
-                  };
-               };
+                        std::ostream &put(std::ostream&) const;
+                        class sol_no_type_conv {
+                        public:
+                            static sol_no_type from_long(long const&);
+                            static long to_long (sol_no_type const&);
+                        };
+                    };
 
 /**
 
-# `CEND`: End of Executive Control Delimiter
+   # `CEND`: End of Executive Control Delimiter
 
-Designates the end of the Executive Control Section.
+   Designates the end of the Executive Control Section.
 
-## Format:
+   ## Format:
 
-`CEND?
+   `CEND?
 
-## Remark:
+   ## Remark:
 
-1. `CEND` is an optional statement. If CEND is not specified, then the
+   1. `CEND` is an optional statement. If CEND is not specified, then the
    program will automatically insert one.
 */
-               class cend : public __base::entry {
-               public:
-                  cend(void);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
-            };
+                    class cend : public __base::entry {
+                    public:
+                        cend(void);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
+                };
 
-            namespace case_control {
+                namespace case_control {
 /**
-# `TITLE`: Output Title
+   # `TITLE`: Output Title
 
-Defines a character string that will appear on the first heading line
-of each page of MSC.Nastran printer output.
+   Defines a character string that will appear on the first heading line
+   of each page of MSC.Nastran printer output.
 
-## Format:
+   ## Format:
 
-  `TITLE=title`
+   `TITLE=title`
 
-## Remarks:
+   ## Remarks:
 
-1. If this command appears under a `SUBCASE` command, then the title
+   1. If this command appears under a `SUBCASE` command, then the title
    appears in the output for that subcase only.
 
-2. If this command appears before all `SUBCASE` commands, then the
+   2. If this command appears before all `SUBCASE` commands, then the
    title is used in all subcases without a `TITLE` command.
 
-3. If no `TITLE` command is present, then the title line will contain
+   3. If no `TITLE` command is present, then the title line will contain
    data and page numbers only.
 
-4. The title also appears on plotter output.
+   4. The title also appears on plotter output.
 */
-               class title : public __base::entry {
-               public:
-                  std::string name;
-                  title(std::string const&);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+                    class title : public __base::entry {
+                    public:
+                        std::string name;
+                        title(std::string const&);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 /**
 
-# `ECHO`: Bulk Data Echo Request
+   # `ECHO`: Bulk Data Echo Request
 
-Controls echo (i.e., printout) of the Bulk Data.
+   Controls echo (i.e., printout) of the Bulk Data.
 
-## Format:
+   ## Format:
 
-\f[
-\text{\texttt{ECHO}} = \left\{
-\begin{array}{c}
-\left[\text{\texttt{SORT}} \left(\left[\text{\texttt{EXCEPT}}\right]\text{cdni}, \dots\right)\right]\\
-\text{\texttt{UNSORT}}\\
-\text{\texttt{BOTH}}\\
-\text{\texttt{NONE}}\\
-\text{\texttt{FILE}}
-\end{array}, \text{\texttt{PUNCH}}\left[\left(
-\begin{array}{c}
-\text{\texttt{SORT}}\\
-\text{\texttt{BOTH}}\\
-\text{\texttt{NEWBULK}}
-\end{array} \right)\right]\right\}
-\f]
+   \f[
+   \text{\texttt{ECHO}} = \left\{
+   \begin{array}{c}
+   \left[\text{\texttt{SORT}} \left(\left[\text{\texttt{EXCEPT}}\right]\text{cdni}, \dots\right)\right]\\
+   \text{\texttt{UNSORT}}\\
+   \text{\texttt{BOTH}}\\
+   \text{\texttt{NONE}}\\
+   \text{\texttt{FILE}}
+   \end{array}, \text{\texttt{PUNCH}}\left[\left(
+   \begin{array}{c}
+   \text{\texttt{SORT}}\\
+   \text{\texttt{BOTH}}\\
+   \text{\texttt{NEWBULK}}
+   \end{array} \right)\right]\right\}
+   \f]
 
-## Examples:
+   ## Examples:
 
-\code{.unparsed}
-ECHO=UNSORT
-ECHO=BOTH
-ECHO=PUNCH, SORT (MAT1, PARAM)
-ECHO=SORT (EXCEPT DMI, DMIG)
-ECHO=BOTH,PUNCH,FILE
-\endcode
+   \code{.unparsed}
+   ECHO=UNSORT
+   ECHO=BOTH
+   ECHO=PUNCH, SORT (MAT1, PARAM)
+   ECHO=SORT (EXCEPT DMI, DMIG)
+   ECHO=BOTH,PUNCH,FILE
+   \endcode
 
-## Remarks:
+   ## Remarks:
 
-1. If no `ECHO` command appears, a sorted Bulk Data will be printed.
+   1. If no `ECHO` command appears, a sorted Bulk Data will be printed.
 
-2. Comments will appear at the front of the sorted file if
+   2. Comments will appear at the front of the sorted file if
    `ECHO=PUNCH`.
 
-3. Portions of the unsorted Bulk Data can be selectively echoed by
+   3. Portions of the unsorted Bulk Data can be selectively echoed by
    including the commands `ECHOON` and `ECHOOFF` at various places
    within the Bulk Data. `ECHOOFF` stops the unsorted echo until an
    `ECHOON` command is encountered. Many such pairs of commands may be
@@ -262,250 +262,247 @@ ECHO=BOTH,PUNCH,FILE
    be the first entry and continuation entries are not handled
    correctly.
 
-4. If the `SORT` (cdni,...) is specified in a restart in `SOL`s 101
+   4. If the `SORT` (cdni,...) is specified in a restart in `SOL`s 101
    through 200, then the continuation entries will not be printed.
 
-5. If the `SORT` (cdni,...) describer is used, then it must appear as
+   5. If the `SORT` (cdni,...) describer is used, then it must appear as
    the last describer, as in the example above.
 
-6. If `EXCEPT` is specified then it must be specified before all cdni.
+   6. If `EXCEPT` is specified then it must be specified before all cdni.
    All Bulk Data entry types will be listed except those given for
    cdn1, cdn2, etc. If `EXCEPT` is not specified, then only those Bulk
    Data entry types listed under `cdn1`, `cdn2`, etc. will be listed.
 */
-               class echo : public __base::entry {
-               public:
-                  class describer {
-                  protected:
-                     describer(void);
-                  public:
-                     virtual std::string const str(void) const = 0;
-                  };
+                    class echo : public __base::entry {
+                    public:
+                        class describer {
+                        protected:
+                            describer(void);
+                        public:
+                            virtual ~describer(void);
+                            virtual std::string const str(void) const = 0;
+                        };
 
-                  /** The unsorted Bulk Data will be printed. If
-                      `SORT` is not also specified, the sorted Bulk
-                      Data will not be printed.
-                  */
-                  class unsort : public describer {
-                  public:
-                     unsort(void);
-                     virtual std::string const str(void) const;
-                  };
+/** The unsorted Bulk Data will be printed. If `SORT` is not also
+    specified, the sorted Bulk Data will not be printed.
+*/
+                        class unsort : public describer {
+                        public:
+                            unsort(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** The sorted (arranged in alphanumeric order) Bulk
-                      Data will be printed.
-                  */
-                  class sort : public describer {
-                  public:
-                     class cdni_entry {
-                     private:
-                        std::string name;
-                        bool except;
+/** The sorted (arranged in alphanumeric order) Bulk Data will be
+    printed.
+*/
+                        class sort : public describer {
+                        public:
+                            class cdni_entry {
+                            private:
+                                std::string name;
+                                bool except;
 
-                     public:
-                     /* cdni, \f$ \dots \f$
+                            public:
+/* cdni, \f$ \dots \f$
 
-                        Bulk Data entry names to be included, or
-                        excluded by `EXCEPT`, in the sorted echo
-                        printout. The `PUNCH` file is not affected by
-                        *cdni*.
+   Bulk Data entry names to be included, or
+   excluded by `EXCEPT`, in the sorted echo
+   printout. The `PUNCH` file is not affected by
+   *cdni*.
 
-                        `EXCEPT`
+   `EXCEPT`
 
-                        Exclude cdni Bulk Data entries from sorted
-                        echo printout. See Remark 6.
-                     */
-                        cdni_entry(
-                           std::string const &name, bool const except=false);
-                        virtual std::string const str(void) const;
-                     };
+   Exclude cdni Bulk Data entries from sorted
+   echo printout. See Remark 6.
+*/
+                                cdni_entry(
+                                    std::string const &name, bool const except=false);
 
-                  private:
-                     std::list<cdni_entry> cdni;
+                                virtual ~cdni_entry(void);
 
-                  public:
-                     sort(std::list<cdni_entry> const &);
-                     virtual std::string const str(void) const;
-                  };
+                                virtual std::string const str(void) const;
+                            };
 
-                  /** Both sorted and unsorted Bulk Data will be
-                      printed. This is equivalent to `ECHO=SORT,
-                      UNSORT`.
-                  */
-                  class both : public describer {
-                  public:
-                     both(void);
-                     virtual std::string const str(void) const;
-                  };
+                        private:
+                            std::list<cdni_entry> cdni;
 
-                  /** Neither sorted nor unsorted Bulk Data will be
-                      printed.
-                   */
-                  class none : public describer {
-                  public:
-                     none(void);
-                     virtual std::string const str(void) const;
-                  };
+                        public:
+                            sort(std::list<cdni_entry> const &);
+                            virtual ~sort(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /**
-                     The entire Bulk Data will be written to the punch file.
-                  */
-                  class punch : public describer {
-                  public:
-                     enum class option_type{
-                        SORT,
-                        BOTH,
-                        /** In `SOL 200`, a comlete unsorted Bulk Data
-                            file is written to the punch file with
-                            updated design model entries.
-                        */
-                        NEWBULK};
+/** Both sorted and unsorted Bulk Data will be printed. This is
+    equivalent to `ECHO=SORT, UNSORT`.
+*/
+                        class both : public describer {
+                        public:
+                            both(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  private:
-                     std::list<option_type> options;
+/// Neither sorted nor unsorted Bulk Data will be printed.
+                        class none : public describer {
+                        public:
+                            none(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  public:
-                     punch(std::list<option_type> const &options={});
-                     virtual std::string const str(void) const;
-                  };
+/// The entire Bulk Data will be written to the punch file.
+                        class punch : public describer {
+                        public:
+                            enum class option_type{
+                                SORT,
+                                BOTH,
+/** In `SOL 200`, a comlete unsorted Bulk Data file is written to the
+    punch file with updated design model entries.
+*/
+                                NEWBULK};
 
-                  /** The entire Bulk Data Echo will be written to
-                      the separate file with a default suffix of
-                      `.BECHO` in `*.f06` form. User-defined
-                      filename must be specified in `ASSIGN`
-                      statement.
-                   */
-                  class file : public describer {
-                  public:
-                     file(void);
-                     virtual std::string const str(void) const;
-                  };
+                        private:
+                            std::list<option_type> options;
 
-               private:
-                  std::list<std::unique_ptr<describer> > oper;
+                        public:
+                            punch(std::list<option_type> const &options={});
+                            virtual std::string const str(void) const;
+                        };
 
-               public:
-                  echo(std::list<describer*> const &oper={});
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+/** The entire Bulk Data Echo will be written to the separate file
+    with a default suffix of `.BECHO` in `*.f06` form. User-defined
+    filename must be specified in `ASSIGN` statement.
+*/
+                        class file : public describer {
+                        public:
+                            file(void);
+                            virtual std::string const str(void) const;
+                        };
+
+                    private:
+                        std::list<describer*> oper;
+
+                    public:
+                        echo(std::list<describer*> const &oper={});
+                        virtual ~echo();
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 /**
-# `DISPLACEMENT`: Displacement Output Request
+   # `DISPLACEMENT`: Displacement Output Request
 
-Requests the form and type of displacement or pressure vector output.
-Note: `PRESSURE` and `VECTOR` are equivalent commands.
+   Requests the form and type of displacement or pressure vector output.
+   Note: `PRESSURE` and `VECTOR` are equivalent commands.
 
-## Format:
+   ## Format:
 
-\f[
-\begin{split}
-\text{\texttt{DISPLACEMENT}}
-\left[(\left[
-\begin{array}{c}
-\text{\texttt{SORT1}}\\
-\text{\texttt{SORT2}}
-\end{array}\right],
-\left[
-\begin{array}{c}
-\text{\texttt{PRINT}, \texttt{PUNCH}}\\
-\text{\texttt{PLOT}}
-\end{array}\right],
-\left[
-\begin{array}{c}
-\text{\texttt{REAL} or \texttt{IMAG}}\\
-\text{\texttt{PHASE}}
-\end{array}\right]
-\left[
-\begin{array}{c}
-\text{\texttt{PSDF}, \texttt{ATOC}, \texttt{CRMS}}\\
-\text{\texttt{RALL}}
-\end{array}\right],\right.\\\left.
-\left[\begin{array}{c}
-\text{\texttt{RPRINT}}\\
-\text{\texttt{NORPRINT}}
-\end{array}, \text{\texttt{RPUNCH}}\right] , [ \text{\texttt{CID}}],
-\left[\begin{array}{c}
-\text{\texttt{TM}} = f\\
-\text{\texttt{T1}} = f, \text{\texttt{T2}} = f, \text{\texttt{T3}} = f
-\end{array}\right],
-\left[\begin{array}{c}
-\text{\texttt{RM}} = f\\
-\text{\texttt{R1}} = f, \text{\texttt{R2}} = f, \text{\texttt{R3}} = f
-\end{array}\right])\right] =
-\left\{\begin{array}{c}
-\text{\texttt{ALL}}\\
-n\\
-\text{\texttt{NONE}}
-\end{array}
-\right\}
-\end{split}
-\f]
+   \f[
+   \begin{split}
+   \text{\texttt{DISPLACEMENT}}
+   \left[(\left[
+   \begin{array}{c}
+   \text{\texttt{SORT1}}\\
+   \text{\texttt{SORT2}}
+   \end{array}\right],
+   \left[
+   \begin{array}{c}
+   \text{\texttt{PRINT}, \texttt{PUNCH}}\\
+   \text{\texttt{PLOT}}
+   \end{array}\right],
+   \left[
+   \begin{array}{c}
+   \text{\texttt{REAL} or \texttt{IMAG}}\\
+   \text{\texttt{PHASE}}
+   \end{array}\right]
+   \left[
+   \begin{array}{c}
+   \text{\texttt{PSDF}, \texttt{ATOC}, \texttt{CRMS}}\\
+   \text{\texttt{RALL}}
+   \end{array}\right],\right.\\\left.
+   \left[\begin{array}{c}
+   \text{\texttt{RPRINT}}\\
+   \text{\texttt{NORPRINT}}
+   \end{array}, \text{\texttt{RPUNCH}}\right] , [ \text{\texttt{CID}}],
+   \left[\begin{array}{c}
+   \text{\texttt{TM}} = f\\
+   \text{\texttt{T1}} = f, \text{\texttt{T2}} = f, \text{\texttt{T3}} = f
+   \end{array}\right],
+   \left[\begin{array}{c}
+   \text{\texttt{RM}} = f\\
+   \text{\texttt{R1}} = f, \text{\texttt{R2}} = f, \text{\texttt{R3}} = f
+   \end{array}\right])\right] =
+   \left\{\begin{array}{c}
+   \text{\texttt{ALL}}\\
+   n\\
+   \text{\texttt{NONE}}
+   \end{array}
+   \right\}
+   \end{split}
+   \f]
 
-## Examples:
+   ## Examples:
 
-\code{.unparsed}
-DISPLACEMENT=5
-DISPLACEMENTS(REAL)=ALL
-DISPLACEMENT(SORT2, PUNCH, REAL)=ALL
-DISPLACEMENT(SORT2, PRINT, PSDF, CRMS, RPUNCH)=20
-DISPLACEMENT(PRINT, RALL, NORPRINT)=ALL
-DISP (T1=1.-3, T3=1.-2) = ALL
-DISP (TM=1.-3, PRINT,PLOT) = ALL
-DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
-\endcode
+   \code{.unparsed}
+   DISPLACEMENT=5
+   DISPLACEMENTS(REAL)=ALL
+   DISPLACEMENT(SORT2, PUNCH, REAL)=ALL
+   DISPLACEMENT(SORT2, PRINT, PSDF, CRMS, RPUNCH)=20
+   DISPLACEMENT(PRINT, RALL, NORPRINT)=ALL
+   DISP (T1=1.-3, T3=1.-2) = ALL
+   DISP (TM=1.-3, PRINT,PLOT) = ALL
+   DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
+   \endcode
 
-## Remarks:
+   ## Remarks:
 
-1. Both `PRINT` and `PUNCH` may be requested.
+   1. Both `PRINT` and `PUNCH` may be requested.
 
-2. The defaults for `SORT1` and `SORT2` depend on the type of analysis:
+   2. The defaults for `SORT1` and `SORT2` depend on the type of analysis:
 
-  - `SORT1` is the default in static analysis, frequency response,
-    steady state heat transfer analysis, real and complex eigenvalue
-    analysis, flutter analysis, and buckling analysis.
+   - `SORT1` is the default in static analysis, frequency response,
+   steady state heat transfer analysis, real and complex eigenvalue
+   analysis, flutter analysis, and buckling analysis.
 
-  - `SORT2` is the default in transient response analysis (structural
-    and heat transfer). `SORT2` is not available for real eigenvalue
-    (including buckling), complex eigenvalue, or flutter analysis. If
-    `SORT1` is selected in a transient solution for one or more of the
-    commands `ACCE`, `DISP`, `ENTH`, `FORC`, `HDOT`, `MPCF`, `OLOA`,
-    `SPCF`, `STRA`, `STRE`, and `VELO` then the remaining commands
-    will also be output in `SORT1` format. If `SORT2` is selected in a
-    frequency response solution for one or more of the commands
-    `ACCE`, `DISP`, `FORC`, `MPCF`, `OLOA`, `SPCF`, `STRA`, `STRE`,
-    and `VELO` then the remaining commands will also be output in
-    `SORT2` format.
+   - `SORT2` is the default in transient response analysis (structural
+   and heat transfer). `SORT2` is not available for real eigenvalue
+   (including buckling), complex eigenvalue, or flutter analysis. If
+   `SORT1` is selected in a transient solution for one or more of the
+   commands `ACCE`, `DISP`, `ENTH`, `FORC`, `HDOT`, `MPCF`, `OLOA`,
+   `SPCF`, `STRA`, `STRE`, and `VELO` then the remaining commands
+   will also be output in `SORT1` format. If `SORT2` is selected in a
+   frequency response solution for one or more of the commands
+   `ACCE`, `DISP`, `FORC`, `MPCF`, `OLOA`, `SPCF`, `STRA`, `STRE`,
+   and `VELO` then the remaining commands will also be output in
+   `SORT2` format.
 
-  - `XY` plot requests forces `SORT2` and overrides `SORT1` requests!
+   - `XY` plot requests forces `SORT2` and overrides `SORT1` requests!
 
-3. `VECTOR` and `PRESSURE` are alternate forms and are entirely
-    equivalent to ` DISPLACEMENT`.
+   3. `VECTOR` and `PRESSURE` are alternate forms and are entirely
+   equivalent to ` DISPLACEMENT`.
 
-4. `DISPLACEMENT=NONE` overrides an overall output request.
+   4. `DISPLACEMENT=NONE` overrides an overall output request.
 
-5. The `PLOT` option is used when curve plots are desired in the
+   5. The `PLOT` option is used when curve plots are desired in the
    magnitude/phase representation and no printer output request is
    present for magnitude/phase representation.
 
-6. The units of translation are the same as the units of length of the
+   6. The units of translation are the same as the units of length of the
    model. Rotations are in units of radians.
 
-7. Displacement results are output in the global coordinate system
+   7. Displacement results are output in the global coordinate system
    (see field `CD` on the `GRID` Bulk Data entry).
 
-8. The option of` PSDF`, `ATOC`, `CRMS`, and `RALL`, or any
+   8. The option of` PSDF`, `ATOC`, `CRMS`, and `RALL`, or any
    combination of them, can be selected for random analysis. The
    results can be either printed in the `.f06? file or punched in the
    punch file, or output in both files.
 
-9. Note that the `CID` keyword affects only grid point related output,
+   9. Note that the `CID` keyword affects only grid point related output,
    such as `DISPlacement`, `VELOcity`, `ACCEleration`, `OLOAD`,
    `SPCForce` and `MPCForce`. In addition, `CID` keyword needs to
    appear only once in a grid related output request anywhere in the
    Case Control Section to turn on the printing algorithm.
 
-10. Displacement components may be selected to control filtering to
+   10. Displacement components may be selected to control filtering to
    reduce the amount of output produced. When magnitudes are selected,
    the component values are ignored. Only a single positive value for
    f can be supplied and comparisons are performed in the global
@@ -516,7 +513,7 @@ DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
    for the filters. Complex vector magnitudes follow a derivation
    using a deterministic interpretation for frequency response.
 
-11. When using filters the compound usage of the verbs` PRINT, PLOT`
+   11. When using filters the compound usage of the verbs` PRINT, PLOT`
    is allowed. The entries in the printed output are the entries that
    exceed any threshold, while the remaining entries within the SET
    are marked as plot to allow for post-processing operations. When
@@ -525,330 +522,300 @@ DISP (TM=1.-3,PRINT,PLOT,SORT2) = 20
    is above the threshold, all values for time or frequency will be
    printed for the grid.
 */
-               class displacement : public __base::entry {
-               public:
-                  class describer {
-                  protected:
-                     describer(void);
-                  public:
-                     virtual std::string const str(void) const = 0;
-                  };
+                    class displacement : public __base::entry {
+                    public:
+                        class describer {
+                        protected:
+                            describer(void);
+                        public:
+                            virtual std::string const str(void) const = 0;
+                        };
 
-                  /** Output will be presented as a tabular listing of
-                      grid points for each load, frequency,
-                      eigenvalue, or time, depending on the solution
-                      sequence.
-                  */
-                  class sort1 : public describer {
-                  public:
-                     sort1(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Output will be presented as a tabular listing of grid points for
+    each load, frequency, eigenvalue, or time, depending on the
+    solution sequence.
+*/
+                        class sort1 : public describer {
+                        public:
+                            sort1(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Output will be presented as a tabular listing of
-                      load, frequency or time for each grid point.
-                   */
-                  class sort2 : public describer {
-                  public:
-                     sort2(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Output will be presented as a tabular listing of load, frequency
+    or time for each grid point.
+*/
+                        class sort2 : public describer {
+                        public:
+                            sort2(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** The printer will be the output medium.
-                   */
-                  class print : public describer {
-                  public:
-                     print(void);
-                     virtual std::string const str(void) const;
-                  };
+/// The printer will be the output medium.
+                        class print : public describer {
+                        public:
+                            print(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** The punch file will be the output medium.
-                   */
-                  class punch : public describer {
-                  public:
-                     punch(void);
-                     virtual std::string const str(void) const;
-                  };
+/// The punch file will be the output medium.
+                        class punch : public describer {
+                        public:
+                            punch(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Generates, but does not print, displacement
-                      data.
-                  */
-                  class plot : public describer {
-                  public:
-                     plot(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Generates, but does not print, displacement data.
+                        class plot : public describer {
+                        public:
+                            plot(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests rectangular format (real and imaginary)
-                      of complex output. Use of either `REAL` or
-                      `IMAG` yields the same output.
-                  */
-                  class real : public describer {
-                  public:
-                     real(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests rectangular format (real and imaginary) of complex
+    output. Use of either `REAL` or `IMAG` yields the same output.
+*/
+                        class real : public describer {
+                        public:
+                            real(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests rectangular format (real and imaginary) of
-                      complex output. Use of either `REAL` or `IMAG` yields
-                      the same output.
-                  */
-                  class imag : public describer {
-                  public:
-                     imag(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests rectangular format (real and imaginary) of complex
+    output. Use of either `REAL` or `IMAG` yields the same output.
+*/
+                        class imag : public describer {
+                        public:
+                            imag(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests polar format (magnitude and phase) of
-                      complex output. Phase output is in degrees.
-                  */
-                  class phase : public describer {
-                  public:
-                     phase(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests polar format (magnitude and phase) of complex output.
+    Phase output is in degrees.
+*/
+                        class phase : public describer {
+                        public:
+                            phase(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests the power spectral density function be
-                      calculated for random analysis post-processing.
-                      Request must be made above the subcase level and
-                      `RANDOM` must be selected in the Case Control.
-                      See Remark 8.
-                  */
-                  class psdf : public describer {
-                  public:
-                     psdf(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests the power spectral density function be calculated for
+    random analysis post-processing. Request must be made above the
+    subcase level and `RANDOM` must be selected in the Case Control.
+    See Remark 8.
+*/
+                        class psdf : public describer {
+                        public:
+                            psdf(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests the autocorrelation function be
-                      calculated for random analysis post-processing.
-                      Request must be made above the subcase level and
-                      `RANDOM` must be selected in the Case Control.
-                      See Remark 8.
-                  */
-                  class atoc : public describer {
-                  public:
-                     atoc(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests the autocorrelation function be calculated for random
+    analysis post-processing. Request must be made above the subcase
+    level and `RANDOM` must be selected in the Case Control. See
+    Remark 8.
+*/
+                        class atoc : public describer {
+                        public:
+                            atoc(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests the cumulative root mean square
-                      function be calculated for random analysis
-                      post-processing. Request must be made above the
-                      subcase level and `RANDOM` must be selected in
-                      the Case Control. See Remark 8.
-                  */
-                  class crms : public describer {
-                  public:
-                     crms(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests the cumulative root mean square function be calculated
+    for random analysis post-processing. Request must be made above
+    the subcase level and `RANDOM` must be selected in the Case
+    Control. See Remark 8.
+*/
+                        class crms : public describer {
+                        public:
+                            crms(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Request all of `PSDF`, `ATOC` and `CRMS` be
-                      calculated for random analysis post-processing.
-                      Request must be made above the subcase level and
-                      `RANDOM` must be selected in the Case Control.
-                      See Remark 8.
-                  */
-                  class rall : public describer {
-                  public:
-                     rall(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Request all of `PSDF`, `ATOC` and `CRMS` be calculated for random
+    analysis post-processing. Request must be made above the subcase
+    level and `RANDOM` must be selected in the Case Control. See
+    Remark 8.
+*/
+                        class rall : public describer {
+                        public:
+                            rall(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Writes random analysis results in the print file
-                      (Default)
-                  */
-                  class rprint : public describer {
-                  public:
-                     rprint(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Writes random analysis results in the print file (Default)
+                        class rprint : public describer {
+                        public:
+                            rprint(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Disables the writing of random analysis results
-                      in the print file.
-                  */
-                  class noprint : public describer {
-                  public:
-                     noprint(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Disables the writing of random analysis results in the print file.
+                        class noprint : public describer {
+                        public:
+                            noprint(void);
+                            virtual std::string const str(void) const;
+                        };
 
 
-                  /** Writes random analysis results in the punch
-                      file.
-                  */
-                  class rpunch : public describer {
-                  public:
-                     rpunch(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Writes random analysis results in the punch file.
+                        class rpunch : public describer {
+                        public:
+                            rpunch(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Request to print output coordinate system ID in
-                      printed output file, `F06` file.
-                  */
-                  class cid : public describer {
-                  public:
-                     cid(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Request to print output coordinate system ID in printed output
+    file, `F06` file.
+*/
+                        class cid : public describer {
+                        public:
+                            cid(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Translational Magnitude Filter
-                   */
-                  class tm : public describer {
-                  private:
-                     double value;
-                  public:
-                     tm(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Translational Magnitude Filter
+                        class tm : public describer {
+                        private:
+                            double value;
+                        public:
+                            tm(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Translational Component Filters
-                   */
-                  class t1 : public describer {
-                  private:
-                     double value;
-                  public:
-                     t1(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Translational Component Filters
+                        class t1 : public describer {
+                        private:
+                            double value;
+                        public:
+                            t1(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Translational Component Filters
-                   */
-                  class t2 : public describer {
-                  private:
-                     double value;
-                  public:
-                     t2(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Translational Component Filters
+                        class t2 : public describer {
+                        private:
+                            double value;
+                        public:
+                            t2(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Translational Component Filters
-                   */
-                  class t3 : public describer {
-                  private:
-                     double value;
-                  public:
-                     t3(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Translational Component Filters
+                        class t3 : public describer {
+                        private:
+                            double value;
+                        public:
+                            t3(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Rotational Magnitude Filters
-                   */
-                  class rm : public describer {
-                  private:
-                     double value;
-                  public:
-                     rm(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Rotational Magnitude Filters
+                        class rm : public describer {
+                        private:
+                            double value;
+                        public:
+                            rm(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Rotational Component Filters
-                   */
-                  class r1 : public describer {
-                  private:
-                     double value;
-                  public:
-                     r1(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Rotational Component Filters
+                        class r1 : public describer {
+                        private:
+                            double value;
+                        public:
+                            r1(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Rotational Component Filters
-                   */
-                  class r2 : public describer {
-                  private:
-                     double value;
-                  public:
-                     r2(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Rotational Component Filters
+                        class r2 : public describer {
+                        private:
+                            double value;
+                        public:
+                            r2(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Rotational Component Filters
-                   */
-                  class r3 : public describer {
-                  private:
-                     double value;
-                  public:
-                     r3(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Rotational Component Filters
+                        class r3 : public describer {
+                        private:
+                            double value;
+                        public:
+                            r3(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Filter value (Real > 0.0)
-                   */
-                  class f : public describer {
-                  private:
-                     double value;
-                  public:
-                     f(double &);
-                     virtual std::string const str(void) const;
-                  };
+/// Filter value (Real > 0.0)
+                        class f : public describer {
+                        private:
+                            double value;
+                        public:
+                            f(double &);
+                            virtual std::string const str(void) const;
+                        };
 
-                  enum class restype{
-                     /** Displacements for all points will be output.
-                      */
-                     ALL,
-                     /** Displacement for no points will be output.
-                      */
-                     NONE,
-                     /** Set identification of a previously appearing
-                         `SET` command. Only displacements of points
-                         with identification numbers that appear on
-                         this `SET` command will be output.
-                         (Integer>0)
-                      */
-                     n};
-               private:
-                  std::list<std::unique_ptr<describer> > describers;
-                  restype res;
-                  long res_n;
-                  displacement(std::list<describer*> const &, restype const &res, long const &);
-               public:
-                  displacement(std::list<describer*> const &, restype const &res=restype::NONE);
-                  displacement(std::list<describer*> const &, long const &);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+                        enum class restype{
+/// Displacements for all points will be output.
+                            ALL,
+/// Displacement for no points will be output.
+                            NONE,
+/** Set identification of a previously appearing `SET` command. Only
+    displacements of points with identification numbers that appear on
+    this `SET` command will be output. (Integer>0)
+*/
+                            n};
+                    private:
+                        std::list<std::unique_ptr<describer> > describers;
+                        restype res;
+                        long res_n;
+                        displacement(std::list<describer*> const &, restype const &res, long const &);
+                    public:
+                        displacement(std::list<describer*> const &, restype const &res=restype::NONE);
+                        displacement(std::list<describer*> const &, long const &);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 /**
 
-# `SPCFORCES`: Single-Point Forces of Constraint Output Request
+   # `SPCFORCES`: Single-Point Forces of Constraint Output Request
 
 
-Requests the form and type of single-point force of constraint vector
-output.
+   Requests the form and type of single-point force of constraint vector
+   output.
 
-## Format:
+   ## Format:
 
-\f[
-\begin{split}
-\text{\texttt{SPFORCES}} \left[ ( \left[
-\begin{array}{c}
-\text{\texttt{SORT1}}\\
-\text{\texttt{SORT2}}
-\end{array}\right],
-\left[
-\begin{array}{c}
-\text{\texttt{PRINT}}, \text{\texttt{PUNCH}}\\
-\text{\texttt{PLOT}}
-\end{array}\right],
-\left[
-\begin{array}{c}
-\text{\texttt{REAL} or \texttt{NOZPRINT}}\\
-\text{\texttt{PHASE}}
-\end{array}\right]
-\left[
-\begin{array}{c}
-\text{\texttt{PSDF}, \texttt{ATOC}, \texttt{CRMS}}\\
-\text{or \texttt{RALL}}
-\end{array}\right]\right.\\\left.
-\left[
-\begin{array}{c}
-\text{\texttt{RPRINT}}\\
-\text{\texttt{NORPRINT}}
-\end{array}, \text{\texttt{RPUNCH}}\right],
-\left[\text{\texttt{CID}}\right])\right] =
-\left\{
-\begin{array}{c}
+   \f[
+   \begin{split}
+   \text{\texttt{SPFORCES}} \left[ ( \left[
+   \begin{array}{c}
+   \text{\texttt{SORT1}}\\
+   \text{\texttt{SORT2}}
+   \end{array}\right],
+   \left[
+   \begin{array}{c}
+   \text{\texttt{PRINT}}, \text{\texttt{PUNCH}}\\
+   \text{\texttt{PLOT}}
+   \end{array}\right],
+   \left[
+   \begin{array}{c}
+   \text{\texttt{REAL} or \texttt{NOZPRINT}}\\
+   \text{\texttt{PHASE}}
+   \end{array}\right]
+   \left[
+   \begin{array}{c}
+   \text{\texttt{PSDF}, \texttt{ATOC}, \texttt{CRMS}}\\
+   \text{or \texttt{RALL}}
+   \end{array}\right]\right.\\\left.
+   \left[
+   \begin{array}{c}
+   \text{\texttt{RPRINT}}\\
+   \text{\texttt{NORPRINT}}
+   \end{array}, \text{\texttt{RPUNCH}}\right],
+   \left[\text{\texttt{CID}}\right])\right] =
+   \left\{
+   \begin{array}{c}
 \text{\texttt{ALL}}\\
 n\\
 \text{\texttt{NONE}}
@@ -919,247 +886,233 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
    needs to appear only once in a grid related output request anywhere
    in the Case Control Section to turn on the printing algorithm.
 */
-               class spcforces : public __base::entry {
-               public:
-                  class describer {
-                  protected:
-                     describer(void);
-                  public:
-                     virtual std::string const str(void) const = 0;
-                  };
+                    class spcforces : public __base::entry {
+                    public:
+                        class describer {
+                        protected:
+                            describer(void);
+                        public:
+                            virtual std::string const str(void) const = 0;
+                        };
 
+/** Output will be presented as a tabular listing of grid points for
+    each load, frequency, eigenvalue, or time, depending on the
+    solution sequence.
+*/
+                        class sort1 : public describer {
+                        public:
+                            sort1(void);
+                            virtual std::string const str(void) const;
+                        };
 
-               /** Output will be presented as a tabular listing of
-                   grid points for each load, frequency, eigenvalue,
-                   or time, depending on the solution sequence.
-               */
-                  class sort1 : public describer {
-                  public:
-                     sort1(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Output will be presented as a tabular listing of frequency or time
+    for each grid point.
+*/
+                        class sort2 : public describer {
+                        public:
+                            sort2(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Output will be presented as a tabular listing of
-                      frequency or time for each grid point.
-                  */
-                  class sort2 : public describer {
-                  public:
-                     sort2(void);
-                     virtual std::string const str(void) const;
-                  };
+/// The printer will be the output medium.
+                        class print : public describer {
+                        public:
+                            print(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** The printer will be the output medium.
-                   */
-                  class print : public describer {
-                  public:
-                     print(void);
-                     virtual std::string const str(void) const;
-                  };
+/// The punch file will be the output medium.
+                        class punch : public describer {
+                        public:
+                            punch(void);
+                            virtual std::string const str(void) const;
+                        };
+/// Generates, but does not print, single-point forces of constraint.
+                        class plot : public describer {
+                        public:
+                            plot(void);
+                            virtual std::string const str(void) const;
+                        };
+/** Requests rectangular format (real and imaginary) of complex
+    output. Use of either `REAL` or `IMAG` yields the same output.
+*/
+                        class real : public describer {
+                        public:
+                            real(void);
+                            virtual std::string const str(void) const;
+                        };
+/** Requests rectangular format (real and imaginary) of complex
+    output. Use of either `REAL` or `IMAG` yields the same output.
+*/
+                        class imag : public describer {
+                        public:
+                            imag(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** The punch file will be the output medium.
-                   */
-                  class punch : public describer {
-                  public:
-                     punch(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Generates, but does not print, single-point
-                      forces of constraint.
-                   */
-                  class plot : public describer {
-                  public:
-                     plot(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Requests rectangular format (real and imaginary)
-                      of complex output. Use of either `REAL` or
-                      `IMAG` yields the same output.
-                  */
-                  class real : public describer {
-                  public:
-                     real(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Requests rectangular format (real and imaginary)
-                      of complex output. Use of either `REAL` or
-                      `IMAG` yields the same output.
-                   */
-                  class imag : public describer {
-                  public:
-                     imag(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Requests polar format (magnitude and phase) of
-                      complex output. Phase output is in degrees.
-                  */
-                  class phase : public describer {
-                  public:
-                     phase(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Print only non-zero SPCForces appearing in
-                      `SORT2` output. This keyword does not affect
-                      `SORT1` output.
-                   */
-                  class nozprint : public describer {
-                  public:
-                     nozprint(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Requests the power spectral density function be
-                      calculated and stored in the database for random
-                      analysis post-processing. Request must be made
-                      above the subcase level and `RANDOM` must be
-                      selected in the Case Control.
-                  */
-                  class psdf : public describer {
-                  public:
-                     psdf(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Requests the autocorrelation function be
-                      calculated and stored in the database for random
-                      analysis post-processing. Request must be made
-                      above the subcase level and `RANDOM` must be
-                      selected in the Case Control.
-                  */
-                  class atoc : public describer {
-                  public:
-                     atoc(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Requests the cumulative root mean square
-                      function be calculated for random analysis
-                      post-processing. Request must be made above the
-                      subcase level and `RANDOM` must be selected in the
-                      Case Control.
-                  */
-                  class crms : public describer {
-                  public:
-                     crms(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Requests all of `PSDF`, `ATOC` and `CRMS` be
-                      calculated for random analysis post-processing.
-                      Request must be made above the subcase level and
-                      `RANDOM` must be selected in the Case Control.
-                  */
-                  class rall : public describer {
-                  public:
-                     rall(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Writes random analysis results in the print
-                      file. (Default)
-                  */
-                  class rprint : public describer {
-                  public:
-                     rprint(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Disables the writing of random analysis results
-                      in the print file.
+/** Requests polar format (magnitude and phase) of
+    complex output. Phase output is in degrees.
+*/
+                        class phase : public describer {
+                        public:
+                            phase(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                   */
-                  class norprint : public describer {
-                  public:
-                     norprint(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Writes random analysis results in the punch
-                      file.
+/** Print only non-zero SPCForces appearing in `SORT2` output. This
+    keyword does not affect `SORT1` output.
+*/
+                        class nozprint : public describer {
+                        public:
+                            nozprint(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                   */
-                  class rpunch : public describer {
-                  public:
-                     rpunch(void);
-                     virtual std::string const str(void) const;
-                  };
-                  /** Request to print output coordinate system ID in
-                      printed output file, `F06` file.
-                  */
-                  class cid : public describer {
-                  public:
-                     cid(void);
-                     virtual std::string const str(void) const;
-                  };
-                  enum class restype{
-                     /** Single-point forces of constraint for all
-                         points will be output. See Remarks 2. and 5.
-                     */
-                     ALL,
-                     /** Single-point forces of constraint for no
-                         points will be output.
-                     */
-                     NONE,
-                     /** Set identification of a previously appearing
-                         `SET` command. Only single-point forces
-                         constraint for points with identification
-                         numbers that appear on this SET command will
-                         be output. (Integer>0)
-                     */
-                     n};
-               private:
-                  std::list<std::unique_ptr<describer> > describers;
-                  restype res;
-                  long res_n;
-                  spcforces(std::list<describer*> const &, restype const &res, long const &);
-               public:
-                  spcforces(std::list<describer*> const &, restype const &res=restype::NONE);
-                  spcforces(std::list<describer*> const &, long const &res);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+/** Requests the power spectral density function be calculated and
+    stored in the database for random analysis post-processing.
+    Request must be made above the subcase level and `RANDOM` must be
+    selected in the Case Control.
+*/
+                        class psdf : public describer {
+                        public:
+                            psdf(void);
+                            virtual std::string const str(void) const;
+                        };
+
+/** Requests the autocorrelation function be calculated and stored in
+    the database for random analysis post-processing. Request must be
+    made above the subcase level and `RANDOM` must be selected in the
+    Case Control.
+*/
+                        class atoc : public describer {
+                        public:
+                            atoc(void);
+                            virtual std::string const str(void) const;
+                        };
+
+/** Requests the cumulative root mean square function be calculated
+    for random analysis post-processing. Request must be made above
+    the subcase level and `RANDOM` must be selected in the Case
+    Control.
+*/
+                        class crms : public describer {
+                        public:
+                            crms(void);
+                            virtual std::string const str(void) const;
+                        };
+
+/** Requests all of `PSDF`, `ATOC` and `CRMS` be calculated for random
+    analysis post-processing. Request must be made above the subcase
+    level and `RANDOM` must be selected in the Case Control.
+*/
+                        class rall : public describer {
+                        public:
+                            rall(void);
+                            virtual std::string const str(void) const;
+                        };
+
+/// Writes random analysis results in the print file. (Default)
+                        class rprint : public describer {
+                        public:
+                            rprint(void);
+                            virtual std::string const str(void) const;
+                        };
+
+/// Disables the writing of random analysis results in the print file.
+                        class norprint : public describer {
+                        public:
+                            norprint(void);
+                            virtual std::string const str(void) const;
+                        };
+
+/// Writes random analysis results in the punch file.
+                        class rpunch : public describer {
+                        public:
+                            rpunch(void);
+                            virtual std::string const str(void) const;
+                        };
+/** Request to print output coordinate system ID in printed output
+    file, `F06` file.
+*/
+                        class cid : public describer {
+                        public:
+                            cid(void);
+                            virtual std::string const str(void) const;
+                        };
+                        enum class restype{
+/** Single-point forces of constraint for all points will be output.
+    See Remarks 2. and 5.
+*/
+                            ALL,
+/// Single-point forces of constraint for no points will be output.
+                            NONE,
+/** Set identification of a previously appearing `SET` command. Only
+    single-point forces constraint for points with identification
+    numbers that appear on this SET command will be output.
+    (Integer>0)
+*/
+                            n};
+                    private:
+                        std::list<std::unique_ptr<describer> > describers;
+                        restype res;
+                        long res_n;
+                        spcforces(std::list<describer*> const &, restype const &res, long const &);
+                    public:
+                        spcforces(std::list<describer*> const &, restype const &res=restype::NONE);
+                        spcforces(std::list<describer*> const &, long const &res);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 /** # `STRESS`: Element Stress Output Request
 
-Requests the form and type of element stress output. Note: `ELSTRESS`
-is an equivalent command.
+    Requests the form and type of element stress output. Note: `ELSTRESS`
+    is an equivalent command.
 
-## Format:
+    ## Format:
 
-\f[
-\begin{split}
-\text{\texttt{STRESS}} \left[ ( \left[
-\begin{array}{c}
-\text{\texttt{SORT1}}\\
-\text{\texttt{SORT2}}
-\end{array}\right], \left[
-\begin{array}{c}
-\text{\texttt{PRINT}, \texttt{PUNCH}}\\
-\text{\texttt{PLOT}}
-\end{array}\right], \left[
-\begin{array}{c}
-\text{\texttt{REAL} or \texttt{IMAG}}\\
-\text{\texttt{PHASE}}
-\end{array}\right], \left[
-\begin{array}{c}
-\text{\texttt{VONMISES}}\\
-\text{\texttt{MAXS} or \texttt{SHEAR}}
-\end{array}\right], \right.\\
-\left.\left[
-\begin{array}{c}
-\text{\texttt{CENTER}}\\
-\text{\texttt{CUBIC}}\\
-\text{\texttt{SGAGE}}\\
-\text{\texttt{CORNER} or \texttt{BILIN}}
-\end{array}\right], \left[
-\begin{array}{c}\text{\texttt{PSDF}, \texttt{ATOC}, \texttt{CRMS}}\\
-\text{or \texttt{RALL}}
-\end{array}\right], \left[
-\begin{array}{c}
-\text{\texttt{RPRINT}}\\
-\text{\texttt{NORPRINT}}
-\end{array}\text{, \texttt{RPUNCH}}\right])\right] = \left\{
-\begin{array}{c}
-\text{\texttt{ALL}}\\
-n\\
-\text{\texttt{NONE}}
-\end{array}\right\}
-\end{split}
-\f]
+    \f[
+    \begin{split}
+        \text{\texttt{STRESS}} \left[ ( \left[
+        \begin{array}{c}
+            \text{\texttt{SORT1}}\\
+            \text{\texttt{SORT2}}
+        \end{array}\right], \left[
+        \begin{array}{c}
+            \text{\texttt{PRINT}, \texttt{PUNCH}}\      \
+            \text{\texttt{PLOT}}
+        \end{array}\right], \left[
+        \begin{array}{c}
+            \text{\texttt{REAL} or \texttt{IMAG}}\      \
+            \text{\texttt{PHASE}}
+        \end{array}\right], \left[
+        \begin{array}{c}
+            \text{\texttt{VONMISES}}\                                  \
+            \text{\texttt{MAXS} or \texttt{SHEAR}}
+        \end{array}\right], \right.\           \
+        \left.\left[
+        \begin{array}{c}
+            \text{\texttt{CENTER}}\                     \
+            \text{\texttt{CUBIC}}\                      \
+            \text{\texttt{SGAGE}}\                                  \
+            \text{\texttt{CORNER} or \texttt{BILIN}}
+        \end{array}\right], \left[
+        \begin{array}{c}\text{\texttt{PSDF}, \texttt{ATOC}, \texttt{CRMS}}\ \
+            \text{or \texttt{RALL}}
+        \end{array}\right], \left[
+        \begin{array}{c}
+            \text{\texttt{RPRINT}}\                     \
+            \text{\texttt{NORPRINT}}
+        \end{array}\text{, \texttt{RPUNCH}}\right])\right] = \left\{
+        \begin{array}{c}
+            \text{\texttt{ALL}}\                        \
+            n\                                          \
+            \text{\texttt{NONE}}
+        \end{array}\right\}
+    \end{split}
+    \f]
 
-Examples:
+    Examples:
 
 \code{.unparsed}
 DISPLACEMENT=5
@@ -1216,266 +1169,240 @@ Remarks:
     results can be either printed in the .f06 file or punched in the
     punch file, or output in both files.
 */
-               class stress : public __base::entry {
+                    class stress : public __base::entry {
 
-                                 public:
-                  class describer {
-                  protected:
-                     describer(void);
-                  public:
-                     virtual std::string const str(void) const = 0;
-                  };
+                    public:
+                        class describer {
+                        protected:
+                            describer(void);
+                        public:
+                            virtual std::string const str(void) const = 0;
+                        };
 
-                  /** Output will be presented as a tabular listing of
-                      elements for each load, frequency, eigenvalue,
-                      or time, depending on the solution sequence.
-                  */
-                  class sort1 : public describer {
-                  public:
-                     sort1(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Output will be presented as a tabular listing of elements for each
+    load, frequency, eigenvalue, or time, depending on the solution
+    sequence.
+*/
+                        class sort1 : public describer {
+                        public:
+                            sort1(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Output will be presented as a tabular listing of
-                      frequency or time for each element type.
-                  */
-                  class sort2 : public describer {
-                  public:
-                     sort2(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Output will be presented as a tabular listing of frequency or time
+    for each element type.
+*/
+                        class sort2 : public describer {
+                        public:
+                            sort2(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** The printer will be the output medium.
-                  */
-                  class print : public describer {
-                  public:
-                     print(void);
-                     virtual std::string const str(void) const;
-                  };
+/// The printer will be the output medium.
+                        class print : public describer {
+                        public:
+                            print(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** The punch file will be the output medium.
-                  */
-                  class punch : public describer {
-                  public:
-                     punch(void);
-                     virtual std::string const str(void) const;
-                  };
+/// The punch file will be the output medium.
+                        class punch : public describer {
+                        public:
+                            punch(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Generates stresses for requested set but no
-                      printer output.
-                  */
-                  class plot : public describer {
-                  public:
-                     plot(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Generates stresses for requested set but no printer output.
+                        class plot : public describer {
+                        public:
+                            plot(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests rectangular format (real and imaginary)
-                      of complex output. Use of either `REAL` or
-                      `IMAG` yields the same output.
-                  */
-                  class real : public describer {
-                  public:
-                     real(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests rectangular format (real and imaginary) of complex
+    output. Use of either `REAL` or `IMAG` yields the same output.
+*/
+                        class real : public describer {
+                        public:
+                            real(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests rectangular format (real and imaginary)
-                      of complex output. Use of either `REAL` or
-                      `IMAG` yields the same output.
-                  */
-                  class imag : public describer {
-                  public:
-                     imag(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests rectangular format (real and imaginary) of complex
+    output. Use of either `REAL` or `IMAG` yields the same output.
+*/
+                        class imag : public describer {
+                        public:
+                            imag(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests polar format (magnitude and phase) of
-                      complex output. Phase output is in degrees.
-                  */
-                  class phase : public describer {
-                  public:
-                     phase(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests polar format (magnitude and phase) of complex output.
+    Phase output is in degrees.
+*/
+                        class phase : public describer {
+                        public:
+                            phase(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests the power spectral density function be
-                      calculated and stored in the database for random
-                      analysis post-processing. Request must be made
-                      above the subcase level and `RANDOM` must be
-                      selected in the Case Control.
-                  */
-                  class psdf : public describer {
-                  public:
-                     psdf(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests the power spectral density function be calculated and
+    stored in the database for random analysis post-processing.
+    Request must be made above the subcase level and `RANDOM` must be
+    selected in the Case Control.
+    */
+                        class psdf : public describer {
+                        public:
+                            psdf(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests the autocorrelation function be
-                      calculated and stored in the database for random
-                      analysis post-processing. Request must be made
-                      above the subcase level and `RANDOM` must be
-                      selected in the Case Control.
-                  */
-                  class atoc : public describer {
-                  public:
-                     atoc(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests the autocorrelation function be calculated and stored in
+    the database for random analysis post-processing. Request must be
+    made above the subcase level and `RANDOM` must be selected in the
+    Case Control.
+*/
+                        class atoc : public describer {
+                        public:
+                            atoc(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests the cumulative root mean square
-                      function be calculated for random analysis
-                      post-processing. Request must be made above the
-                      subcase level and `RANDOM` must be selected in
-                      the Case Control.
-                  */
-                  class crms : public describer {
-                  public:
-                     crms(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests the cumulative root mean square function be calculated
+    for random analysis post-processing. Request must be made above
+    the subcase level and `RANDOM` must be selected in the Case
+    Control.
+*/
+                        class crms : public describer {
+                        public:
+                            crms(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests all of `PSDF`, `ATOC`, and `CRMS` be
-                      calculated for random analysis post-processing.
-                      Request must be made above the subcase level and
-                      `RANDOM` must be selected in the Case Control.
-                  */
-                  class rall : public describer {
-                  public:
-                     rall(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests all of `PSDF`, `ATOC`, and `CRMS` be calculated for
+    random analysis post-processing. Request must be made above the
+    subcase level and `RANDOM` must be selected in the Case Control.
+*/
+                        class rall : public describer {
+                        public:
+                            rall(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests von Mises stress.
-                  */
-                  class vonmises : public describer {
-                  public:
-                     vonmises(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Requests von Mises stress.
+                        class vonmises : public describer {
+                        public:
+                            vonmises(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests maximum shear in the plane for shell
-                      elements and octahedral stress for solid
-                      elements.
-                  */
-                  class maxs : public describer {
-                  public:
-                     maxs(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests maximum shear in the plane for shell elements and
+    octahedral stress for solid elements.
+*/
+                        class maxs : public describer {
+                        public:
+                            maxs(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests maximum shear in the plane for shell
-                      elements and octahedral stress for solid
-                      elements.
-                  */
-                  class shear : public describer {
-                  public:
-                     shear(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests maximum shear in the plane for shell elements and
+    octahedral stress for solid elements.
+*/
+                        class shear : public describer {
+                        public:
+                            shear(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests `CQUAD4`, `QUADR` and `TRIAR` element
-                      stresses at the center only. The default for
-                      `QUAD4` is `CENTER`. The default for ?QUADR` and
-                      `TRIAR` is `CORNER`.
-                  */
-                  class center : public describer {
-                  public:
-                     center(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests `CQUAD4`, `QUADR` and `TRIAR` element stresses at the
+    center only. The default for `QUAD4` is `CENTER`. The default for
+    ?QUADR` and `TRIAR` is `CORNER`.
+*/
+                        class center : public describer {
+                        public:
+                            center(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests `CQUAD4` element stresses at the center
-                      and grid points using strain gage approach with
-                      cubic bending correction.
-                  */
-                  class cubic : public describer {
-                  public:
-                     cubic(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests `CQUAD4` element stresses at the center and grid points
+using strain gage approach with cubic bending correction.
+*/
+                        class cubic : public describer {
+                        public:
+                            cubic(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests `CQUAD4` element stresses at center and
-                      grid points using strain gage approach.
-                  */
-                  class sgage : public describer {
-                  public:
-                     sgage(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests `CQUAD4` element stresses at center and grid points using
+    strain gage approach.
+*/
+                        class sgage : public describer {
+                        public:
+                            sgage(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests `CQUAD4`, `QUADR`, amd `TRIAR` element
-                      stresses at center and grid points using
-                      bilinear extrapolation.
-                  */
-                  class corner : public describer {
-                  public:
-                     corner(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests `CQUAD4`, `QUADR`, amd `TRIAR` element stresses at center
+    and grid points using bilinear extrapolation.
+*/
+                        class corner : public describer {
+                        public:
+                            corner(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Requests `CQUAD4`, `QUADR`, amd `TRIAR` element
-                      stresses at center and grid points using
-                      bilinear extrapolation.
-                  */
-                  class bilin : public describer {
-                  public:
-                     bilin(void);
-                     virtual std::string const str(void) const;
-                  };
+/** Requests `CQUAD4`, `QUADR`, amd `TRIAR` element stresses at center
+    and grid points using bilinear extrapolation.
+*/
+                        class bilin : public describer {
+                        public:
+                            bilin(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Writes random analysis results in the print
-                      file. (Default)
-                  */
-                  class rprint : public describer {
-                  public:
-                     rprint(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Writes random analysis results in the print file. (Default)
+                        class rprint : public describer {
+                        public:
+                            rprint(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Disables the writing of random analysis results
-                      in the print file.
-                  */
-                  class norprint : public describer {
-                  public:
-                     norprint(void);
-                     virtual std::string const str(void) const;
-                  };
+/// Disables the writing of random analysis results in the print file.
+                        class norprint : public describer {
+                        public:
+                            norprint(void);
+                            virtual std::string const str(void) const;
+                        };
 
-                  /** Writes random analysis results in the punch
-                      file.
-                  */
-                  class rpunch : public describer {
-                  public:
-                        rpunch(void);
-                     virtual std::string const str(void) const;
-                     };
+/// Writes random analysis results in the punch file.
+                        class rpunch : public describer {
+                        public:
+                            rpunch(void);
+                            virtual std::string const str(void) const;
+                        };
 
-               public:
-                  enum class restype{
-                     /** Stresses for all elements will be output.
-                      */
-                     ALL,
-                     /** Set identification of a previously appearing
-                         SET command. Only stresses for elements with
-                         identification numbers that appear on this
-                         SET command will be output. (Integer >0)
-                     */
-                     n,
-                     /** No element stress will be output.
-                      */
-                     NONE};
-               private:
-                  std::list<std::unique_ptr<describer> > describers;
-                  restype res;
-                  long res_n;
-                  stress(std::list<describer*> const &, restype const &, long const &);
-               public:
-                  stress(std::list<describer*> const &, restype const &res=restype::NONE);
-                  stress(std::list<describer*> const &, long const &);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+                    public:
+                        enum class restype{
+/// Stresses for all elements will be output.
+                            ALL,
+/** Set identification of a previously appearing SET command. Only
+    stresses for elements with identification numbers that appear on
+    this SET command will be output. (Integer >0)
+*/
+                            n,
+/// No element stress will be output.
+                            NONE};
+                    private:
+                        std::list<std::unique_ptr<describer> > describers;
+                        restype res;
+                        long res_n;
+                        stress(std::list<describer*> const &, restype const &, long const &);
+                    public:
+                        stress(std::list<describer*> const &, restype const &res=restype::NONE);
+                        stress(std::list<describer*> const &, long const &);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 /**
 
@@ -1510,25 +1437,23 @@ LOAD=15
 
 4. Static, thermal, and element deformation loads should have unique
    set identification numbers.
-                  */
-             class load : public __base::entry {
-             private:
-                /** Set identification of at least one external load
-                    Bulk Data entry. The set identification must
-                    appear on at least one `FORCE`, `FORCE1`,
-                    `FORCE2`, `FORCEAX`, `GRAV`, `MOMAX`, `MOMENT`,
-                    `MOMENT1`, `MOMENT2`, `LOAD`, `PLOAD`, `PLOAD1`,
-                    `PLOAD2`, `PLOAD4`, `PLOADX`, `QVOL`, `QVECT`,
-                    `QHBDY`, `QBDY1`, `QBDY2`, `QBDY3`, `PRESAX`,
-                    `RFORCE`, `SPCD`, or `SLOAD` entry. (Integer>0)
-                */
-                long n;
+*/
+                    class load : public __base::entry {
+                    private:
+/** Set identification of at least one external load Bulk Data entry.
+    The set identification must appear on at least one `FORCE`,
+    `FORCE1`, `FORCE2`, `FORCEAX`, `GRAV`, `MOMAX`, `MOMENT`,
+    `MOMENT1`, `MOMENT2`, `LOAD`, `PLOAD`, `PLOAD1`, `PLOAD2`,
+    `PLOAD4`, `PLOADX`, `QVOL`, `QVECT`, `QHBDY`, `QBDY1`, `QBDY2`,
+    `QBDY3`, `PRESAX`, `RFORCE`, `SPCD`, or `SLOAD` entry. (Integer>0)
+*/
+                        long n;
 
-             public:
-                load(long const &);
-             private:
-                std::ostream &put(std::ostream&) const;
-             };
+                    public:
+                        load(long const &);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 
 /** ## `SUBTITLE`: Output Subtitle
@@ -1565,16 +1490,16 @@ Any character string.
    blank.
 
 4. The subtitle also appears on plotter output.
-                  */
-               class subtitle : public __base::entry {
-               private:
-                  std::string title;
+*/
+                    class subtitle : public __base::entry {
+                    private:
+                        std::string title;
 
-               public:
-                  subtitle(std::string const &);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+                    public:
+                        subtitle(std::string const &);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 /**
 # `SUBCASE`: Subcase Delimiter
@@ -1605,24 +1530,24 @@ SUBCASE=101
    comment will appear in the subcase label in the upper right-hand
    corner of the output.
 */
-               class subcase : public __base::entry {
-               private:
-                  /** Subcase identification number. (Integer>0)
-                   */
-                  long n;
-                  std::string subtitle;
+                    class subcase : public __base::entry {
+                    private:
+                        /** Subcase identification number. (Integer>0)
+                         */
+                        long n;
+                        std::string subtitle;
 
-               private:
-                  /// Maximum n used yet, use for automatic selection of n
-                  long static max_n;
+                    private:
+                        /// Maximum n used yet, use for automatic selection of n
+                        long static max_n;
 
-               public:
+                    public:
 
-                  subcase(void);
-                  subcase(long const &);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+                        subcase(void);
+                        subcase(long const &);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
 /** # `BEGIN BULK`: Case Control and Bulk Data Delimiter
 
@@ -1687,18 +1612,18 @@ Superelement identification number. (Integer>0)
 4. The `BEGIN SUPER` or `BEGIN AUXMODEL` Bulk Data must lie between
    `BEGIN BULK` and `ENDDATA` entries.
 
-                */
-               class begin_bulk : public __base::entry {
-               public:
-                  begin_bulk(void);
-               private:
-                  std::ostream &put(std::ostream&) const;
-               };
+*/
+                    class begin_bulk : public __base::entry {
+                    public:
+                        begin_bulk(void);
+                    private:
+                        std::ostream &put(std::ostream&) const;
+                    };
 
-            };
-         }
-      }
-   }
+                };
+            }
+        }
+    }
 }
 
 #endif // _HEADER_H_

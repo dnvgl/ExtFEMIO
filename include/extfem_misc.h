@@ -16,53 +16,54 @@
 
 namespace std {
 
-   class not_implemented : public std::exception {
+    class not_implemented : public std::exception {
 
-   public:
+    public:
 
-      // Construct with given error message:
-      not_implemented(const std::string &error=std::string("Functionality not yet implemented!")) {
-         errorMessage = error;
-      }
+        // Construct with given error message:
+        not_implemented(const std::string &error=std::string("Functionality not yet implemented!")) {
+            errorMessage = error;
+        }
 
-      not_implemented(const std::string &fname, const size_t &line) {
-         std::ostringstream msg("", std::ostringstream::ate);
-         msg << fname << ":" << line << ":"
-             <<"Functionality not yet implemented!";
-         errorMessage = msg.str();
-      }
+        not_implemented(const std::string &fname, const size_t &line) {
+            std::ostringstream msg("", std::ostringstream::ate);
+            msg << fname << ":" << line << ":"
+                <<"Functionality not yet implemented!";
+            errorMessage = msg.str();
+        }
 
-      // Provided for compatibility with std::exception.
+        // Provided for compatibility with std::exception.
+        const char *what() const
 #if __GNUC__
-      const char *what() const noexcept {
-#else
-      const char *what() const {
+            noexcept
 #endif
-         return errorMessage.c_str();
-      }
+        {
+            return errorMessage.c_str();
+        }
 
-   private:
+    private:
 
-      std::string errorMessage;
-   };
+        std::string errorMessage;
+    };
 }
 
 namespace dnvgl {
-   namespace extfem {
-      namespace __base {
-         class outline {
-         protected:
-            outline(void);
-         public:
-            std::ostream &operator<<(std::ostream&);
-            friend std::ostream &operator<<(std::ostream&, outline const &);
-         protected:
-            virtual std::ostream &put(std::ostream&) const = 0;
-         };
-      }
-      std::string version(void);
-      std::string build_data(void);
-   }
+    namespace extfem {
+        namespace __base {
+            class outline {
+            protected:
+                outline(void);
+                virtual ~outline(void);
+            public:
+                std::ostream &operator<<(std::ostream&);
+                friend std::ostream &operator<<(std::ostream&, outline const &);
+            protected:
+                virtual std::ostream &put(std::ostream&) const = 0;
+            };
+        }
+        std::string version(void);
+        std::string build_data(void);
+    }
 }
 
 #endif // _EXTFEM_MISC_H_

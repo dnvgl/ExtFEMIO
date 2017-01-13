@@ -175,7 +175,9 @@ void const (*cards::error_report)(std::string const &) = &_stderr_report;
 
 cards::__base::card::card(std::list<std::string> const &inp) {}
 
-cards::__base::card::card() {}
+cards::__base::card::card(void) {}
+
+cards::__base::card::~card(void) {}
 
 bdf::types::empty cards::__base::card::empty = bdf::types::empty();
 

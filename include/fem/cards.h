@@ -39,9 +39,6 @@ namespace dnvgl {
                 }
                 class gelmnt1;
                 class gelref1;
-                class gbeamg;
-                class misosel;
-                // class beiste;
             }
         }
     }
@@ -54,10 +51,10 @@ namespace dnvgl {
         namespace fem {
             namespace cards {
 
-                void extern const (*note_report)(std::string const &);
-                void extern const (*info_report)(std::string const &);
-                void extern const (*warn_report)(std::string const &);
-                void extern const (*error_report)(std::string const &);
+                void extern const(*note_report)(std::string const &);
+                void extern const(*info_report)(std::string const &);
+                void extern const(*warn_report)(std::string const &);
+                void extern const(*error_report)(std::string const &);
 
                 /**
                    \brief Name the different cards.
@@ -109,7 +106,7 @@ namespace dnvgl {
                     BNLOAD,
                     /// Element to Ground
                     MGSPRNG,
-                    /// set (group) of Nodes or Elements (Members)
+                    /// set(group) of Nodes or Elements(Members)
                     GSETMEMB,
                     /// Specification of Local Element Coordinate
                     /// System
@@ -119,7 +116,7 @@ namespace dnvgl {
                     /// Anisotropy, Linear Elastic Structural Analysis,
                     /// 2-D Membrane Elements and 2-D Thin Shell Elements
                     MORSMEL,
-                    /// Name and Description of a set (group)
+                    /// Name and Description of a set(group)
                     TDSETNAM,
                     /// Name and Description of a Super-Element.
                     TDSUPNAM,
@@ -165,8 +162,9 @@ namespace dnvgl {
                         void static
                         card_split(std::list<std::string> const&, std::list<std::string>&);
 
-                        card (std::list<std::string> const&);
-                        card ();
+                        card(std::list<std::string> const&);
+                        card(void);
+                        virtual ~card(void);
 
                         virtual dnvgl::extfem::fem::cards::types const
                         card_type(void) const = 0;
@@ -195,7 +193,7 @@ namespace dnvgl {
 
                         /** Geometry type number, i.e. reference number used
                             for element data definition of geometry properties
-                            (Cross sectional properties) of beams.
+                           (Cross sectional properties) of beams.
                         */
                         long GEONO;
 
@@ -210,7 +208,7 @@ namespace dnvgl {
 
                     protected:
 
-                        beam_prop();
+                        beam_prop(void);
 
                         beam_prop(long const &GEONO);
 
@@ -226,7 +224,7 @@ namespace dnvgl {
                     class material : public card {
                     private:
 
-                        material();
+                        material(void);
 
                     protected:
 
@@ -315,14 +313,14 @@ Example of format of `DATE` record as used in SESAM:
                         - = 1 Text concerning current superelement.
 
                         - = 2 Text concerning children of current superelement
-                        (not implemented).
+                       (not implemented).
                     */
                     long TYPE;
                     /**
-                       - = 0 If current superelement (TYPE = 1).
+                       - = 0 If current superelement(TYPE = 1).
 
                        - > 0 Subelement no. referring to the current
-                       superelement (only if TYPE = 2).
+                       superelement(only if TYPE = 2).
                     */
                     long SUBTYPE;
                     /** Number of records to be read in A-format, `NRECS` ≥ 1.
@@ -383,7 +381,7 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Program defined (internal) node number
+                    /** Program defined(internal) node number
                      */
                     long NODENO;
                     /** Cartesian *X*-coordinates of node `NODENO`.
@@ -404,9 +402,9 @@ Example of format of `DATE` record as used in SESAM:
                         long const &NODENO,
                         double const &XCOORD, double const &YCOORD, double const &ZCOORD);
 
-                    __base::card const &operator() (std::list<std::string> const&);
+                    __base::card const &operator()(std::list<std::string> const&);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &NODENO,
                         double const &XCOORD, double const &YCOORD, double const &ZCOORD);
 
@@ -434,7 +432,7 @@ Example of format of `DATE` record as used in SESAM:
 
    Example: `NDOF`=3, `ODOF`=135 means 3 degrees of freedom in *x*, *z*
    and *Ry* direction respectively in the superelement’s coordinate
-   system, unless a local nodal coordinate system is specified (see the
+   system, unless a local nodal coordinate system is specified(see the
    `BNDOF` and `BNTRCOS` record).
 */
                 class gnode : public __base::card {
@@ -450,10 +448,10 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** External node number (specified or controlled by user).
+                    /** External node number(specified or controlled by user).
                      */
                     long NODEX;
-                    /** Internal node number defined by the program (may be
+                    /** Internal node number defined by the program(may be
                         generated by internal node numbering optimalizer). The
                         internal node numbers range from 1 up to number of
                         nodes.
@@ -478,13 +476,15 @@ Example of format of `DATE` record as used in SESAM:
                         long const &NODEX, long const &NODENO,
                         std::vector<int> const &ODOF);
 
-                    __base::card const &operator() (std::list<std::string> const&);
+                    ~gnode(void);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(std::list<std::string> const&);
+
+                    __base::card const &operator()(
                         long const &NODEX, long const &NODENO,
                         long const &NDOF, std::vector<int> const &ODOF);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &NODEX, long const &NODENO,
                         std::vector<int> const &ODOF);
                     dnvgl::extfem::fem::cards::types const
@@ -522,7 +522,7 @@ Example of format of `DATE` record as used in SESAM:
                     /** Superelement level.
 
                         The level of a superelement is defined as the highest
-                        level number among its subelements plus 1. (Basic
+                        level number among its subelements plus 1.(Basic
                         elements, i.e. beams, shells, springs, etc. have level
                         zero.)
                     */
@@ -578,7 +578,7 @@ Example of format of `DATE` record as used in SESAM:
 
                     /** Superelement level.
 
-                        - = 0 (Default). This is also end of the file.
+                        - = 0(Default). This is also end of the file.
 
                         - = 1 The superelements are concatenated on one file.
                         More superelements follows.
@@ -630,15 +630,15 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** External element number (specified or controlled by
+                    /** External element number(specified or controlled by
                         user). */
                     long ELNOX;
-                    /** Internal element number (generated by program)
+                    /** Internal element number(generated by program)
                      */
                     long ELNO;
                     /** Element type number. Refer to chapter 5 in file format
                         documentation for description of legal type no. For
-                        element type no. 70 (’matrix element’) all relevant
+                        element type no. 70(’matrix element’) all relevant
                         element data are stored as stiffness, mass, damping
                         matrices a.s.o. See the AMATRIX record for more
                         information.
@@ -660,7 +660,7 @@ Example of format of `DATE` record as used in SESAM:
 
                         =1: Non structural beam
 
-                        - For general matrix element (elem. type 70) used to
+                        - For general matrix element(elem. type 70) used to
                         specify number of nodes
 
                         = `NNOD` Number of nodes on the matrix element
@@ -697,15 +697,15 @@ Example of format of `DATE` record as used in SESAM:
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
 
-                    __base::card const &operator() (std::list<std::string> const&);
+                    __base::card const &operator()(std::list<std::string> const&);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &ELNOX, long const &ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         long const &ELTYAD,
                         std::vector<long> const &NODIN);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &ELNOX, long const &ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
@@ -767,7 +767,7 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Internal element number (generated by the program).
+                    /** Internal element number(generated by the program).
                      */
                     long ELNO;
                     /** Material number
@@ -787,7 +787,7 @@ Example of format of `DATE` record as used in SESAM:
                         as:
 
                         - an assembly of integration points over a cross section
-                        of a 1-dimensional (beam or bar) element,
+                        of a 1-dimensional(beam or bar) element,
 
                         - an assembly of integration points on a line through
                         the thickness of a 2-dimensional element,
@@ -824,7 +824,7 @@ Example of format of `DATE` record as used in SESAM:
                         reference number specified later in this record
                         sequence.
 
-                            - >0: The geometry reference number (the
+                            - >0: The geometry reference number(the
                                   same for all nodes in the element).
                                   `GEONO`(1), ..., `GEONO`(*N*) will
                                   not be specified.
@@ -865,7 +865,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<long> GEONO;
                     /** Number referring to the specification of degree of
-                        fixation (Data type `BELFIX`). `FIXNO`[0] is the reference
+                        fixation(Data type `BELFIX`). `FIXNO`[0] is the reference
                         number for the 1st local node of the element, FIXNO[*i*-1]
                         will be the reference number for the *i*’th local node.
                     */
@@ -898,9 +898,9 @@ Example of format of `DATE` record as used in SESAM:
                         std::vector<long> const &ECCNO={},
                         std::vector<long> const &TRANSNO={});
 
-                    __base::card const &operator() (std::list<std::string> const&);
+                    __base::card const &operator()(std::list<std::string> const&);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &ELNO, long const &MATNO,
                         long const &ADDNO, long const &INTNO,
                         long const &MINTNO, long const &STRANO,
@@ -970,7 +970,7 @@ Example of format of `DATE` record as used in SESAM:
                         SHARY(MOD) = SHARY(PROG) · SFY
                         \f]
 
-                        (The shear area on `GBEAMG` is SHARY(MOD)).
+                       (The shear area on `GBEAMG` is SHARY(MOD)).
 
                     */
                     double SFY;
@@ -982,15 +982,15 @@ Example of format of `DATE` record as used in SESAM:
                         SHARZ(MOD) = SHARZ(PROG) · SFZ
                         \f]
 
-                        (The shear area on `GBEAMG` is SHARZ(MOD)).
+                       (The shear area on `GBEAMG` is SHARZ(MOD)).
                     */
                     double SFZ;
                     /** Number of integration points in Y’ direction
-                        (optional)
+                       (optional)
                     */
                     long NLOBY;
                     /** Number of integration points in Z’ direction
-                        (optional)
+                       (optional)
                     */
                     long NLOBZ;
 
@@ -1027,7 +1027,7 @@ Example of format of `DATE` record as used in SESAM:
 
    The succeding data concern the cross section at a specific local node.
 
-   If `GBEAMG` is used for `ELTYP` 10 (Truss element) only the first
+   If `GBEAMG` is used for `ELTYP` 10(Truss element) only the first
    record may be on the interface.
 */
                 class gbeamg : public __base::beam_prop {
@@ -1069,7 +1069,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     double IYZ;
                     /** Minimum torsional section modulus about shear
-                        center (=IX/rmax for a PIPE element).
+                        center(=IX/rmax for a PIPE element).
                     */
                     double WXMIN;
                     /** Minimum sectionmodulus about *y* axis \f$= IY/zmax\f$.
@@ -1114,9 +1114,9 @@ Example of format of `DATE` record as used in SESAM:
 
                     gbeamg(double const &AREA);
 
-                    __base::card const &operator() (std::list<std::string> const&);
+                    __base::card const &operator()(std::list<std::string> const&);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &GEONO,
                         double const &AREA,
                         double const &IX, double const &IY, double const &IZ, double const &IYZ,
@@ -1125,7 +1125,7 @@ Example of format of `DATE` record as used in SESAM:
                         double const &SHCENY, double const &SHCENZ,
                         double const &SY, double const &SZ);
 
-                    __base::card const &operator() (double const &AREA);
+                    __base::card const &operator()(double const &AREA);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1245,11 +1245,11 @@ Example of format of `DATE` record as used in SESAM:
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &GEONO, double const &TH,
                         long const &NINT=0);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         double const &TH, long const &NINT=0);
 
                 protected:
@@ -1318,7 +1318,7 @@ Example of format of `DATE` record as used in SESAM:
                         SHARY(MOD) = SHARY(PROG) · SFY
                         \f]
 
-                        (The shear areas on `GBEAMG` are SHARY(MOD)).
+                       (The shear areas on `GBEAMG` are SHARY(MOD)).
                     */
                     double SFY;
                     /** Factor modifying the shear area calculated by the
@@ -1329,17 +1329,17 @@ Example of format of `DATE` record as used in SESAM:
                         SHARZ(MOD) = SHARZ(PROG) · SFZ
                         \f]
 
-                        (The shear areas on `GBEAMG` are SHARZ(MOD)).
+                       (The shear areas on `GBEAMG` are SHARZ(MOD)).
                     */
                     double SFZ;
                     /** Number of integration points in top flange
-                        (optional) */
+                       (optional) */
                     long NLOBYT;
                     /** Number of integration points in bottom flange
-                        (optional)
+                       (optional)
                     */
                     long NLOBYB;
-                    /** Number of integration points in beam web (optional)
+                    /** Number of integration points in beam web(optional)
                      */
                     long NLOBZ;
 
@@ -1415,7 +1415,7 @@ Example of format of `DATE` record as used in SESAM:
                         SHARY(MOD) = SHARY(PROG) · SFY
                         \f]
 
-                        (The shear area on `GBEAMG` os SHARY(MOD)).
+                       (The shear area on `GBEAMG` os SHARY(MOD)).
                     */
                     double SFY;
                     /** Factor modifying the shear area calculated by the
@@ -1426,25 +1426,25 @@ Example of format of `DATE` record as used in SESAM:
                         SHARZ(MOD) = SHARZ(PROG) · SFZ
                         \f]
 
-                        (The shear area on `GBEAMG` os SHARZ(MOD)).
+                       (The shear area on `GBEAMG` os SHARZ(MOD)).
                     */
                     double SFZ;
                     /** Web orientation:
 
                         =0: web located in the negative local *y*-direction
-                        (and consequently flange in the
+                       (and consequently flange in the
                         positive *y*’-direction)
 
                         =1: web located in the positive local *y*-direction
-                        (and consequently flange in the
+                       (and consequently flange in the
                         negative *y*’-direction)
                             */
                     bool K;
                     /** Number of integration points in beam flange
-                        (optional)
+                       (optional)
                     */
                     long NLOBY;
-                    /** Number of integration points in beam web (optional)
+                    /** Number of integration points in beam web(optional)
                      */
                     long NLOBZ;
 
@@ -1501,10 +1501,10 @@ Example of format of `DATE` record as used in SESAM:
                     /** Inner diameter of tube.
                      */
                     double DI;
-                    /** Outer diameter of tube (mandatory).
+                    /** Outer diameter of tube(mandatory).
                      */
                     double DY;
-                    /** Thickness of tube (not necessary if DI is given).
+                    /** Thickness of tube(not necessary if DI is given).
                      */
                     double T;
                     /** Factor modifying the shear area calculated by the
@@ -1515,7 +1515,7 @@ Example of format of `DATE` record as used in SESAM:
                         SHARY(MOD) = SHARY(PROG) · SFY
                         \f]
 
-                        (The shear area on `GBEAMG` os SHARY(MOD)).
+                       (The shear area on `GBEAMG` os SHARY(MOD)).
                     */
                     double SFY;
                     /** Factor modifying the shear area calculated by the
@@ -1526,13 +1526,13 @@ Example of format of `DATE` record as used in SESAM:
                         SHARZ(MOD) = SHARZ(PROG) · SFZ
                         \f]
 
-                        (The shear area on `GBEAMG` os SHARZ(MOD)).
+                       (The shear area on `GBEAMG` os SHARZ(MOD)).
                     */
                     double SFZ;
-                    /** Number of integration points in circumferential direction (optional)
+                    /** Number of integration points in circumferential direction(optional)
                      */
                     long NCIR;
-                    /** Number of integration points in radial direction (optional)
+                    /** Number of integration points in radial direction(optional)
                      */
                     long NRAD;
 
@@ -1625,7 +1625,7 @@ Example of format of `DATE` record as used in SESAM:
                         SHARY(MOD) = SHARY(PROG) · SFY
                         \f]
 
-                        (The shear area on `GBEAMG` os SHARY(MOD)).
+                       (The shear area on `GBEAMG` os SHARY(MOD)).
                     */
                     double SFY;
                     /** Factor modifying the shear area calculated by the
@@ -1636,16 +1636,16 @@ Example of format of `DATE` record as used in SESAM:
                         SHARZ(MOD) = SHARZ(PROG) · SFZ
                         \f]
 
-                        (The shear area on `GBEAMG` os SHARZ(MOD)).
+                       (The shear area on `GBEAMG` os SHARZ(MOD)).
                     */
                     double SFZ;
-                    /** Number of integration points in top flange (optional)
+                    /** Number of integration points in top flange(optional)
                      */
                     long NLOBYT;
-                    /** Number of integration points in bottom flange (optional)
+                    /** Number of integration points in bottom flange(optional)
                      */
                     long NLOBYB;
-                    /** Number of integration points in beam web (optional)
+                    /** Number of integration points in beam web(optional)
                      */
                     long NLOBZ;
 
@@ -1708,7 +1708,7 @@ Example of format of `DATE` record as used in SESAM:
                     /**
                        =FIXATION: A(i) = ai is a value between 0 and 1, and
                        gives the degree of fixation
-                       (connectivity) to degree of freedom
+                      (connectivity) to degree of freedom
                        number i in the node. The extreme values
                        of a is described by:
 
@@ -1720,10 +1720,10 @@ Example of format of `DATE` record as used in SESAM:
                        spring stiffness to degree of freedom number
                        i in the node. The degrees of freedom which
                        are neither flexible nor free will be given
-                       Ci = -1 (instead of Ci = ∞). The relation
+                       Ci = -1(instead of Ci = ∞). The relation
                        between Ci and ai is
 
-                       ai = Ci / ( kii + Ci) ≥ 0.0
+                       ai = Ci /( kii + Ci) ≥ 0.0
 
                        where kii is the diagonal term of the
                        element stiffness matrix corresponding to
@@ -1743,7 +1743,7 @@ Example of format of `DATE` record as used in SESAM:
                     n_opt OPT;
                     /**
 
-                       = -1: The fixation/flexibility (=A(i)) is given in
+                       = -1: The fixation/flexibility(=A(i)) is given in
                        the superelement coordinate system.
 
                        =0: A(i) is given in the local element coordinate
@@ -1756,7 +1756,7 @@ Example of format of `DATE` record as used in SESAM:
                        transformation from global to local system.
                        */
                     long TRANO;
-                    /** See above (under the explanation of `OPT`).
+                    /** See above(under the explanation of `OPT`).
                      */
                     std::vector<double> A;
 
@@ -1796,8 +1796,8 @@ Example of format of `DATE` record as used in SESAM:
    Each line specifies one dependent degree of freedom which is dependent
    on the independent node’s specified degree of freedom with the
    factor *b<sub>i,j</sub>*. The degrees of freedom must also be specified on
-   `BNBCD`-records as linear dependent (3) for the dependent node, and as
-   retained (4) for the independent node.
+   `BNBCD`-records as linear dependent(3) for the dependent node, and as
+   retained(4) for the independent node.
 
    A node may be dependent on many nodes. For each combination of
    `NODENO` and `CNOD` a new record, starting with the identifier
@@ -1809,10 +1809,10 @@ Example of format of `DATE` record as used in SESAM:
    implied in the linear dependence, the degrees of freedom refers to the
    transformed local coordinate system.
 
-   Multipoint constraints (2nd and higher order dependence) may be
+   Multipoint constraints(2nd and higher order dependence) may be
    specifed through more `BLDEP` records with the same linear dependent
    node and different independent nodes. The factors *b<sub>i,j</sub>*
-   may be found as Lagrange multiplicators or coefficients (Lagrange
+   may be found as Lagrange multiplicators or coefficients(Lagrange
    interpolation polynomial). For 2nd order dependence this may as well
    be specified on one BQDP record.
 */
@@ -1920,11 +1920,11 @@ Example of format of `DATE` record as used in SESAM:
    degree of freedom. Whether it is displacement, first time derivative
    of the displacement etc. is defined on the `BNDISPL` record. Degrees
    of freedom with `FIX` = 2 which are not defined on the `BNDISPL`
-   record will be fixed (have zero displacement, velocity and
+   record will be fixed(have zero displacement, velocity and
    acceleration).
 
-   The nodes (degrees of freedom) with `FIX` = 4 are called supernodes
-   (super degrees of freedom). The supernode sequence numbering is
+   The nodes(degrees of freedom) with `FIX` = 4 are called supernodes
+  (super degrees of freedom). The supernode sequence numbering is
    according to the increasing order of their internal node number.
 */
                 class bnbcd : public __base::card {
@@ -1991,25 +1991,25 @@ Example of format of `DATE` record as used in SESAM:
                           bool const &FIX3, bool const &FIX4,
                           bool const &FIX5, bool const &FIX6);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         std::list<std::string> const&);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &NODENO,
                         long const &NDOF,
                         std::vector<fix_key> const &FIX);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &NODENO,
                         std::vector<fix_key> const &FIX);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &NODENO,
                         fix_key const &FIX1, fix_key const &FIX2,
                         fix_key const &FIX3, fix_key const &FIX4,
                         fix_key const &FIX5, fix_key const &FIX6);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &NODENO,
                         bool const &FIX1, bool const &FIX2,
                         bool const &FIX3, bool const &FIX4,
@@ -2064,7 +2064,7 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Local load case number (positive integer number).
+                    /** Local load case number(positive integer number).
                     */
                     long LLC;
                     /** Type of boundary condition.
@@ -2175,7 +2175,7 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Local load case number (positive integer number).
+                    /** Local load case number(positive integer number).
                      */
                     long LLC;
                     /** Load type at node `NODENO`. Usually not of interest
@@ -2207,7 +2207,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<double> RLOAD;
                     /** The imaginary part of the load with respect to the
-                        rspt. degree of freedom. (Only if `COMPLX` == true).
+                        rspt. degree of freedom.(Only if `COMPLX` == true).
                     */
                     std::vector<double> ILOAD;
 
@@ -2264,7 +2264,7 @@ Example of format of `DATE` record as used in SESAM:
    |           | `K(3, 2)` | ...    | ...          | `K(NDOF, 2)`    |
    |           | `K(3, 3)` | ...    | ...          | `K(NDOF, NDOF)` |
 
-   The (*i*, *j*)’th element of the stiffness matrix corresponds to the
+   The(*i*, *j*)’th element of the stiffness matrix corresponds to the
    force to be given in the *i*’th d.o.f. to get a unit displacement in
    the *j*’th d.o.f.
 */
@@ -2287,11 +2287,11 @@ Example of format of `DATE` record as used in SESAM:
                     /** Number of degrees of freedom of the node.
                      */
                     long NDOF;
-                    /** Elements of the stiffness matrix (only elements on
+                    /** Elements of the stiffness matrix(only elements on
                         and below the main diagonal are stored, i.e.
                         symmetric stiffness matrix assumed). The elements
                         are referred to a local coordinate system if
-                        defined (by `TRANSNO` on `GELREF1`), otherwise to
+                        defined(by `TRANSNO` on `GELREF1`), otherwise to
                         the global coordinate system of the superelement.
                     */
                     std::vector<std::vector<double> > K;
@@ -2317,7 +2317,7 @@ Example of format of `DATE` record as used in SESAM:
                     void read(const std::list<std::string>&);
                 };
 
-/// `GSETMEMB`: set (group) of Nodes or Elements (Members)
+/// `GSETMEMB`: set(group) of Nodes or Elements(Members)
 /**
    ## Format:
 
@@ -2327,31 +2327,31 @@ Example of format of `DATE` record as used in SESAM:
    |            | `ISORIG`               | `IRMEMB`<sub>`1`</sub> | `IRMEMB`<sub>`2`</sub>     | `IRMEMB`<sub>`3`</sub> |
    |            | `IRMEMB`<sub>`4`</sub> | ...                    | `IRMEMB`<sub>`NMEMB`</sub> |                        |
 
-   This record together with the name and description of a set record (TDSETNAM) constitutes the set (group)
+   This record together with the name and description of a set record(TDSETNAM) constitutes the set(group)
    datatype.
 
    ### Comments:
 
 The set datatype consists of one name and description of set record
-(`TDSETNAM`) and one or more set member records (`GSETMEMB`).
+(`TDSETNAM`) and one or more set member records(`GSETMEMB`).
 
 It should be noted that a set may have its set members distributed
-over several set member records (`GSETMEMB`) all having the same set
-identification number (`ISREF`) and consequently also the same
+over several set member records(`GSETMEMB`) all having the same set
+identification number(`ISREF`) and consequently also the same
 `TDSETNAM` record. The total number of set members will then be the
-sum of the number of set members (`NMEMB`) for each of the set
+sum of the number of set members(`NMEMB`) for each of the set
 records.
 
 ### Restrictions:
 
-  - Only one set type (ISTYPE) for same set identification number
-    (`ISREF`) is allowed.
+  - Only one set type(ISTYPE) for same set identification number
+   (`ISREF`) is allowed.
 
   - If several records for the same set identification number
-    (`ISREF`), record numbering must be strictly sequential; 1 <
+   (`ISREF`), record numbering must be strictly sequential; 1 <
     `INDEX` < `NINDEX`, where `NINDEX` is number of records per set.
 
-  - A set member (number) should only be included once in the list.
+  - A set member(number) should only be included once in the list.
 */
                 class gsetmemb : public __base::card {
 
@@ -2390,21 +2390,21 @@ records.
 
                 public:
 
-                    /** Number of data fields on this record (maximum is
+                    /** Number of data fields on this record(maximum is
                         1024)
                     */
                     long NFIELD;
                     /** Internal set identification number as defined on
                         the name and description of a set record
-                        (`TDSETNAM`).
+                       (`TDSETNAM`).
                     */
                     long ISREF;
-                    /** Sequential record number for current set (`ISREF`).
+                    /** Sequential record number for current set(`ISREF`).
                         Each set may consist of one or more `GSETMEMB`
                         records with same set identification number
-                        (`ISREF`). `INDEX` must be strictly increasing from
+                       (`ISREF`). `INDEX` must be strictly increasing from
                         1 and upwards till number of `GSETMEMB` records for
-                        this set of members (nodes or elements).
+                        this set of members(nodes or elements).
                     */
                     long INDEX;
                     /** set type
@@ -2413,12 +2413,12 @@ records.
 
                           =2: , set of elements
 
-                        Set Type (`ISTYPE`) and interpretation of set Member Number (`IRMEMB`)
+                        Set Type(`ISTYPE`) and interpretation of set Member Number(`IRMEMB`)
 
                         | `ISTYPE` | Description     | Interpretation of `IRMEMB`        |
                         | -------: | --------------- | --------------------------------- |
-                        | 1        | set of Nodes    | Internal Node Number (`IINOD`)    |
-                        | 2        | set of Elements | Internal Element Number (`IELNO`) |
+                        | 1        | set of Nodes    | Internal Node Number(`IINOD`)    |
+                        | 2        | set of Elements | Internal Element Number(`IELNO`) |
                     */
                     types ISTYPE;
                     /** set origin type
@@ -2427,7 +2427,7 @@ records.
 
                         = 1:, point
 
-                        = 2:, line (or curve)
+                        = 2:, line(or curve)
 
                         = 3:, surface
 
@@ -2485,7 +2485,7 @@ The `GUNIVEC` records are used for beam elements only, i.e. basic
 element types 2, 15 and 23. Other basic element types may refer to
 `BNTRCOS` records. No ambiguity thus exists if both a `GUNIVEC` and
 `BNTRCOS` record have same `TRANSNO`, but they should preferably have
-separate numbering (`TRANSNO`) to avoid possible program problems.
+separate numbering(`TRANSNO`) to avoid possible program problems.
 */
                 class gunivec : public __base::card {
 
@@ -2504,19 +2504,19 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                      */
                     long TRANSNO;
                     /** *x* component of Unit vector given in superelement
-                        coordinate system along the local z-axis (reference
+                        coordinate system along the local z-axis(reference
                         axis in z-direction) of the element in the
                         particular node.
                     */
                     double UNIX;
                     /** *y* component of Unit vector given in superelement
-                        coordinate system along the local z-axis (reference
+                        coordinate system along the local z-axis(reference
                         axis in z-direction) of the element in the
                         particular node.
                     */
                     double UNIY;
                     /** *z* component of Unit vector given in superelement
-                        coordinate system along the local z-axis (reference
+                        coordinate system along the local z-axis(reference
                         axis in z-direction) of the element in the
                         particular node.
                     */
@@ -2605,7 +2605,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                             double const &DUMMY=0.,
                             double const &YIELD=0.);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &MATNO,
                         double const &YOUNG,
                         double const &POISS,
@@ -2718,18 +2718,18 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                     */
                     double D33;
                     /** Only given for plane strain situation. The stress
-                        normal to the membrane plane (sn) is calculated as
+                        normal to the membrane plane(sn) is calculated as
                         follows: sn = PS1·s1 + PS2·s2
 
-                        (For an isotropic material PS1 and PS2 equal
+                       (For an isotropic material PS1 and PS2 equal
                         Poisson’s ratio)
                     */
                     double PS1;
                     /** Only given for plane strain situation. The stress
-                        normal to the membrane plane (sn) is calculated as
+                        normal to the membrane plane(sn) is calculated as
                         follows: sn = PS1·s1 + PS2·s2
 
-                        (For an isotropic material PS1 and PS2 equal
+                       (For an isotropic material PS1 and PS2 equal
                         Poisson’s ratio)
                     */
                     double PS2;
@@ -2782,7 +2782,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                     void read(const std::list<std::string>&);
                 };
 
-/// `TDSETNAM`: Name and Description of a set (group)
+/// `TDSETNAM`: Name and Description of a set(group)
 /**
    ## Format
 
@@ -2795,7 +2795,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
    |            | \<text line\>                      | | | |
 
    This record together with the set of nodes or elements record(s)
-   (`GSETMEMB`) constitutes the set (group) datatype.
+  (`GSETMEMB`) constitutes the set(group) datatype.
 */
                 class tdsetnam : public __base::card {
 
@@ -2818,15 +2818,15 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                 public:
 
                     /** Number of numeric data fields on this record before
-                     * text data (MAX = 1024).
+                     * text data(MAX = 1024).
                      */
                     long NFIELD;
                     /** Internal set identification number. Legal range [1,
                         `NSET`], where `NSET` is number of sets which is
                         equeal to number of "Name and Description of a set"
-                        records (`TDSETNAM`). Two `TDSETNAM` records may
+                        records(`TDSETNAM`). Two `TDSETNAM` records may
                         not have identical set identification numbers
-                        (`ISREF`).
+                       (`ISREF`).
                     */
                     long ISREF;
                     /** Coded dimension of set name:
@@ -2846,13 +2846,13 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
                         - = 1, name is defined
 
-                        `NLNAM` = integer part of (`CODNAM` / 100)
+                        `NLNAM` = integer part of(`CODNAM` / 100)
 
                             - `NCNAM` - number of characters in set name.
 
                             Legal range = [0,64]
 
-                            `NCNAM` = remaindering of (`CODNAM` / 100)
+                            `NCNAM` = remaindering of(`CODNAM` / 100)
                             */
                     long CODNAM;
                     /** Coded dimension of set description text:
@@ -2872,13 +2872,13 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                         - ≥ 1, number of physical records with
                         description text
 
-                        `NLTXT` = integer part of (`CODTXT` / 100)
+                        `NLTXT` = integer part of(`CODTXT` / 100)
 
 
                         - `NCTXT` - number of characters per physical set
                         description text record. Legal range = [0,64]
 
-                        `NCTXT` = remaindering of (`CODTXT` / 100)
+                        `NCTXT` = remaindering of(`CODTXT` / 100)
                     */
                     long CODTXT;
 
@@ -2954,14 +2954,14 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                 public:
 
                     /** Number of numeric data fields on this record before
-                     * text data (MAX = 1024).
+                     * text data(MAX = 1024).
                      */
                     long NFIELD;
                     /** Hierarchy reference number. Number 1 is reserved
                         for the top level superelement. In SESAM, PRESEL
-                        (super-element pre-processor) is writing the
+                       (super-element pre-processor) is writing the
                         HIERARCH records and defining a unique number
-                        (IHREF) for each appearance of the differenet
+                       (IHREF) for each appearance of the differenet
                         superelements.
 
                         \image latex tdsupnam.eps "Superelement hierarchy with 3 levels."
@@ -2985,13 +2985,13 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
 
                         - = 1, name is defined
 
-                        `NLNAM` = integer part of (`CODNAM` / 100)
+                        `NLNAM` = integer part of(`CODNAM` / 100)
 
                         - `NCNAM` - number of characters in set name.
 
                         Legal range = [0,64]
 
-                        `NCNAM` = remaindering of (`CODNAM` / 100)
+                        `NCNAM` = remaindering of(`CODNAM` / 100)
                     */
                     long CODNAM;
                     /** Coded dimension of set description text:
@@ -3011,13 +3011,13 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                         - ≥ 1, number of physical records with
                         description text
 
-                        `NLTXT` = integer part of (`CODTXT` / 100)
+                        `NLTXT` = integer part of(`CODTXT` / 100)
 
 
                             - `NCTXT` - number of characters per physical set
                             description text record. Legal range = [0,64]
 
-                            `NCTXT` = remaindering of (`CODTXT` / 100)
+                            `NCTXT` = remaindering of(`CODTXT` / 100)
                             */
                     long CODTXT;
 
@@ -3106,7 +3106,7 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                         `NRECS` ≥ 1
                     */
                     long NRECS;
-                    /** Number of significant bytes (characters) on the
+                    /** Number of significant bytes(characters) on the
                         following `NRECS` records. 1 ≤ `NBYTE` ≤ 72
                     */
                     long NBYTE;
@@ -3128,12 +3128,12 @@ separate numbering (`TRANSNO`) to avoid possible program problems.
                     text(long const &TYPE, long const &SUBTYPE,
                          std::vector<std::string> const &CONT);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &TYPE, long const &SUBTYPE,
                         long const &NRECS, long const &NBYTE,
                         std::vector<std::string> const &CONT);
 
-                    __base::card const &operator() (
+                    __base::card const &operator()(
                         long const &TYPE, long const &SUBTYPE,
                         std::vector<std::string> const &CONT);
 

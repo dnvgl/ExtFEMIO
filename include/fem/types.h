@@ -41,485 +41,485 @@
 #include "fem/errors.h"
 
 namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace types {
+    namespace extfem {
+        namespace fem {
+            namespace types {
 
-            enum class fem_types {
-               /// Indicates class not suitable for end use.
-               None,
-               // /// comment cell
-               // Comment,
-               /// Integer value cell
-               Int,
-               /// Floating point value cell
-               Float,
-               /// Character string cell
-               Str,
-               /// empty cell
-               Blank,
-               /// list of integers
-               List
-            };
+                enum class fem_types {
+                    /// Indicates class not suitable for end use.
+                    None,
+                    // /// comment cell
+                    // Comment,
+                    /// Integer value cell
+                    Int,
+                    /// Floating point value cell
+                    Float,
+                    /// Character string cell
+                    Str,
+                    /// empty cell
+                    Blank,
+                    /// list of integers
+                    List
+                };
 
-            namespace __base {
-               class b_type {
+                namespace __base {
+                    class b_type {
 
-               protected:
+                    protected:
 
-                  static const fem_types _type;
-                  std::string name;
-                  static std::istringstream conv;
+                        static const fem_types _type;
+                        std::string name;
+                        static std::istringstream conv;
 
-               public:
+                    public:
 
-                  b_type(const std::string&);
+                        b_type(const std::string&);
 
-                  virtual ~b_type() {};
+                        virtual ~b_type() {};
 
-                  virtual fem_types type() const = 0;
+                        virtual fem_types type() const = 0;
 
-               };
+                    };
 
-               // Helper class to std::set conv locale for all
-               // classes derived from base.
-               class imbue_helper : public b_type {
-               public:
+                    // Helper class to std::set conv locale for all
+                    // classes derived from base.
+                    class imbue_helper : public b_type {
+                    public:
 
-                  imbue_helper(const std::locale &loc) : b_type("") {
-                     conv.imbue(loc);
-                  };
+                        imbue_helper(const std::locale &loc) : b_type("") {
+                            conv.imbue(loc);
+                        };
 
-                  fem_types type(void) const {
-                     return fem_types::None;
-                  };
+                        fem_types type(void) const {
+                            return fem_types::None;
+                        };
 
-                  std::string format(const void*) const {
-                     return "";
-                  };
-               };
+                        std::string format(const void*) const {
+                            return "";
+                        };
+                    };
 
-            }
+                }
 
-            class card : public __base::b_type {
-            public:
+                class card : public __base::b_type {
+                public:
 
-               card(const std::string &name) : __base::b_type(name) {};
+                    card(const std::string &name) : __base::b_type(name) {};
 
-               card(void) : __base::b_type("") {};
+                    card(void) : __base::b_type("") {};
 
-               fem_types type(void) const {return fem_types::None;};
+                    fem_types type(void) const {return fem_types::None;};
 
-               std::string format() const;
-            };
+                    std::string format() const;
+                };
 
-            class empty : public __base::b_type {
+                class empty : public __base::b_type {
 
-            public:
+                public:
 
-               empty(void) : __base::b_type("") {};
+                    empty(void) : __base::b_type("") {};
 
-               fem_types type(void) const {return fem_types::None;};
+                    fem_types type(void) const {return fem_types::None;};
 
-               std::string format() const;
-            };
+                    std::string format() const;
+                };
 
-            template <class _Ty>
-            class entry_type : public __base::b_type {
+                template <class _Ty>
+                class entry_type : public __base::b_type {
 
-            public:
-               virtual std::string format(const _Ty &d) const = 0;
-            };
+                public:
+                    virtual std::string format(const _Ty &d) const = 0;
+                };
 
 
-            extern const
+                extern const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+                boost::regex
 #else
-            std::regex
+                std::regex
 #endif
-            int_re;
+                int_re;
 
-            template <>
-            class entry_type<long> : public __base::b_type {
+                template <>
+                class entry_type<long> : public __base::b_type {
 
-               // Integer value.
+                    // Integer value.
 
-            private:
+                private:
 
-               dnvgl::extfem::fem::type_bounds::bound<long> bounds;
+                    dnvgl::extfem::fem::type_bounds::bound<long> bounds;
 
-            protected:
+                protected:
 
-               static const fem_types _type = fem_types::Int;
+                    static const fem_types _type = fem_types::Int;
 
-            public:
+                public:
 
-               entry_type(const std::string &name) :
-                  fem::types::__base::b_type(name), bounds() {};
+                    entry_type(const std::string &name) :
+                            fem::types::__base::b_type(name), bounds() {};
 
 
-               entry_type(
-                  const std::string &name,
-                  const fem::type_bounds::bound<long> &bounds) :
-                  fem::types::__base::b_type(name), bounds(bounds) {};
+                    entry_type(
+                        const std::string &name,
+                        const fem::type_bounds::bound<long> &bounds) :
+                            fem::types::__base::b_type(name), bounds(bounds) {};
 
 /// Convert string to long
-               long operator() (const std::string &inp) const {
-                  double value;
+                    long operator() (const std::string &inp) const {
+                        double value;
 
-                  if (inp.length() == 0) {
-                     if (!this->bounds.has_default())
-                        throw errors::int_error(name, "empty entry without default");
-                     return this->bounds.get_default();
-                  } else {
-                     if (! regex_match(inp, int_re)) {
-                        std::string msg("illegal input (""");
-                        throw errors::int_error(name, msg + inp + """), no integer!");
-                     }
+                        if (inp.length() == 0) {
+                            if (!this->bounds.has_default())
+                                throw errors::int_error(name, "empty entry without default");
+                            return this->bounds.get_default();
+                        } else {
+                            if (! regex_match(inp, int_re)) {
+                                std::string msg("illegal input (""");
+                                throw errors::int_error(name, msg + inp + """), no integer!");
+                            }
 
-                     conv.str(inp);
-                     conv.seekg(0);
-                     conv >> value;
-                  }
-                  if (!this->bounds.in_bounds(long(value))) {
-                     std::string msg("boundary condition violated (");
-                     throw errors::int_error(
-                        name, msg + name + ")\n(""" + inp + """)");
-                  }
-                  return long(value);
-               };
+                            conv.str(inp);
+                            conv.seekg(0);
+                            conv >> value;
+                        }
+                        if (!this->bounds.in_bounds(long(value))) {
+                            std::string msg("boundary condition violated (");
+                            throw errors::int_error(
+                                name, msg + name + ")\n(""" + inp + """)");
+                        }
+                        return long(value);
+                    };
 
-               fem_types type() const { return _type; };
+                    fem_types type() const { return _type; };
 
-               std::string format(const long &inp) const {
+                    std::string format(const long &inp) const {
 
-                  std::ostringstream res;
-                  res.imbue(std::locale::classic());
-
-#ifdef _MSC_VER
-                  // std::set output to two digit exponential format.
-                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
-#endif
-
-                  res.setf(std::ios_base::showpos);
-                  res.setf(std::ios_base::scientific, std::ios_base::floatfield);
-                  res.setf(std::ios_base::adjustfield, std::ios::left);
-
-                  res.precision(9);
-                  res.width(16);
-                  res.fill(' ');
-
-                  res << double(inp);
-                  std::string out(res.str());
-                  if (out.size() != 16) {
-                     std::ostringstream msg("output string for value ", std::ostringstream::ate);
-                     msg << double(inp) << " of incorrect size, got length of " << out.size()
-                         << " instead of allowed length of 16." << out;
-                     throw errors::int_error(name, msg.str());
-                  }
+                        std::ostringstream res;
+                        res.imbue(std::locale::classic());
 
 #ifdef _MSC_VER
-                  // Reset exponetial format to former std::settings.
-                  _set_output_format(ext_exp_format);
+                        // std::set output to two digit exponential format.
+                        unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-                  return out;
-               };
-            };
+                        res.setf(std::ios_base::showpos);
+                        res.setf(std::ios_base::scientific, std::ios_base::floatfield);
+                        res.setf(std::ios_base::adjustfield, std::ios::left);
 
-            /// Boolean value.
-            extern const
+                        res.precision(9);
+                        res.width(16);
+                        res.fill(' ');
+
+                        res << double(inp);
+                        std::string out(res.str());
+                        if (out.size() != 16) {
+                            std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                            msg << double(inp) << " of incorrect size, got length of " << out.size()
+                                << " instead of allowed length of 16." << out;
+                            throw errors::int_error(name, msg.str());
+                        }
+
+#ifdef _MSC_VER
+                        // Reset exponetial format to former std::settings.
+                        _set_output_format(ext_exp_format);
+#endif
+
+                        return out;
+                    };
+                };
+
+                /// Boolean value.
+                extern const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+                boost::regex
 #else
-            std::regex
+                std::regex
 #endif
-            bool_re;
+                bool_re;
 
-            template <>
-            class entry_type<bool> : public __base::b_type {
+                template <>
+                class entry_type<bool> : public __base::b_type {
 
-            private:
+                private:
 
-               dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
+                    dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
 
-            protected:
+                protected:
 
-               static const fem_types _type = fem_types::Int;
+                    static const fem_types _type = fem_types::Int;
 
-            public:
+                public:
 
-               entry_type(const std::string &name) :
-                  fem::types::__base::b_type(name), bounds() {}
-
-
-               bool operator() (const std::string &inp) const {
-                  double value;
-
-                  if (inp.length() == 0) {
-                     if (!this->bounds.has_default())
-                        throw errors::bool_error(name, "empty entry without default");
-                     return this->bounds.get_default();
-                  }
-                  else {
-                     if (!regex_match(inp, bool_re)) {
-                        std::string msg("illegal input (""");
-                        throw errors::bool_error(name, msg + inp + """), no bool!");
-                     }
-
-                     conv.str(inp);
-                     conv.seekg(0);
-                     conv >> value;
-                  }
-                  if (value == 1.) return true;
-                  else if (value == 0.) return false;
-                  else {
-                     std::string msg("boundary condition violated (");
-                     throw errors::bool_error(
-                        name, msg + name + ")\n(""" + inp + """)");
-                  }
-               }
+                    entry_type(const std::string &name) :
+                            fem::types::__base::b_type(name), bounds() {}
 
 
-               fem_types type() const { return _type; };
+                    bool operator() (const std::string &inp) const {
+                        double value;
 
-               std::string format(const bool &inp) const {
-                  if (inp) return "           +1.00";
-                  else return "           +0.00";
-               }
-            };
+                        if (inp.length() == 0) {
+                            if (!this->bounds.has_default())
+                                throw errors::bool_error(name, "empty entry without default");
+                            return this->bounds.get_default();
+                        }
+                        else {
+                            if (!regex_match(inp, bool_re)) {
+                                std::string msg("illegal input (""");
+                                throw errors::bool_error(name, msg + inp + """), no bool!");
+                            }
 
-            extern const
+                            conv.str(inp);
+                            conv.seekg(0);
+                            conv >> value;
+                        }
+                        if (value == 1.) return true;
+                        else if (value == 0.) return false;
+                        else {
+                            std::string msg("boundary condition violated (");
+                            throw errors::bool_error(
+                                name, msg + name + ")\n(""" + inp + """)");
+                        }
+                    }
+
+
+                    fem_types type() const { return _type; };
+
+                    std::string format(const bool &inp) const {
+                        if (inp) return "           +1.00";
+                        else return "           +0.00";
+                    }
+                };
+
+                extern const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+                boost::regex
 #else
-            std::regex
+                std::regex
 #endif
-            float_re;
+                float_re;
 
-            template <>
-            class entry_type<double> : public __base::b_type {
+                template <>
+                class entry_type<double> : public __base::b_type {
 
-               /// Real value.
+                    /// Real value.
 
-            private:
+                private:
 
-               dnvgl::extfem::fem::type_bounds::bound<double> bounds;
+                    dnvgl::extfem::fem::type_bounds::bound<double> bounds;
 
-            protected:
+                protected:
 
-               static const fem_types _type = fem_types::Float;
+                    static const fem_types _type = fem_types::Float;
 
-            public:
+                public:
 
-               entry_type(const std::string &name) :
-                  __base::b_type(name), bounds() {};
+                    entry_type(const std::string &name) :
+                            __base::b_type(name), bounds() {};
 
 
-               entry_type(
-                  const std::string &name,
-                  const fem::type_bounds::bound<double> &bounds) :
-                  fem::types::__base::b_type(name), bounds(bounds) {};
+                    entry_type(
+                        const std::string &name,
+                        const fem::type_bounds::bound<double> &bounds) :
+                            fem::types::__base::b_type(name), bounds(bounds) {};
 
-               /// Convert string to double
-               double operator() (const std::string &inp) const {
-                  double value;
+                    /// Convert string to double
+                    double operator() (const std::string &inp) const {
+                        double value;
 
-                  if (inp.length() == 0) {
-                     if (!this->bounds.has_default())
-                        throw errors::float_error(name, "empty entry without default");
-                     value = this->bounds.get_default();
-                  }
-                  else {
-                     if (!regex_match(inp, float_re)) {
-                        std::string msg("illegal input, (""");
-                        throw errors::float_error(name, msg + inp + """), no float!");
-                     }
+                        if (inp.length() == 0) {
+                            if (!this->bounds.has_default())
+                                throw errors::float_error(name, "empty entry without default");
+                            value = this->bounds.get_default();
+                        }
+                        else {
+                            if (!regex_match(inp, float_re)) {
+                                std::string msg("illegal input, (""");
+                                throw errors::float_error(name, msg + inp + """), no float!");
+                            }
 
-                     conv.str(inp);
-                     conv.seekg(0);
-                     conv >> value;
-                  }
-                  if (!this->bounds.in_bounds(value)) {
-                     std::string msg("boundary condition violated (");
-                     throw errors::float_error(
-                        name, msg + name + ")\n(""" + inp + """)");
-                  }
-                  return value;
-               };
+                            conv.str(inp);
+                            conv.seekg(0);
+                            conv >> value;
+                        }
+                        if (!this->bounds.in_bounds(value)) {
+                            std::string msg("boundary condition violated (");
+                            throw errors::float_error(
+                                name, msg + name + ")\n(""" + inp + """)");
+                        }
+                        return value;
+                    };
 
-               fem_types type() const {return _type;};
+                    fem_types type() const {return _type;};
 
-               std::string format(const double &inp) const {
+                    std::string format(const double &inp) const {
 
-                  std::ostringstream res;
-                  res.imbue(std::locale::classic());
+                        std::ostringstream res;
+                        res.imbue(std::locale::classic());
 
 #ifdef _MSC_VER
-                  // std::set output to two digit exponetial format.
-                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+                        // std::set output to two digit exponetial format.
+                        unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-                  res.setf(std::ios_base::showpos);
-                  res.setf(std::ios_base::scientific, std::ios::floatfield);
-                  res.setf(std::ios_base::adjustfield, std::ios::left);
+                        res.setf(std::ios_base::showpos);
+                        res.setf(std::ios_base::scientific, std::ios::floatfield);
+                        res.setf(std::ios_base::adjustfield, std::ios::left);
 
-                  res.precision(9);
-                  res.width(16);
-                  res.fill(' ');
+                        res.precision(9);
+                        res.width(16);
+                        res.fill(' ');
 
-                  res << inp;
-                  std::string out(res.str());
-                  if (out.size() != 16) {
-                     std::ostringstream msg("output string for value ", std::ostringstream::ate);
-                     msg << inp << " of incorrect size, got length of " << out.size()
-                         << " instead of allowed length of 16.";
-                     throw errors::output_error(name, msg.str());
-                  }
+                        res << inp;
+                        std::string out(res.str());
+                        if (out.size() != 16) {
+                            std::ostringstream msg("output string for value ", std::ostringstream::ate);
+                            msg << inp << " of incorrect size, got length of " << out.size()
+                                << " instead of allowed length of 16.";
+                            throw errors::output_error(name, msg.str());
+                        }
 
 #ifdef _MSC_VER
-                  // Reset exponetial format to former std::settings.
-                  _set_output_format(ext_exp_format);
+                        // Reset exponetial format to former std::settings.
+                        _set_output_format(ext_exp_format);
 #endif
 
-                  return out;
-               };
-            };
+                        return out;
+                    };
+                };
 
-            template <>
-            class entry_type<std::string> : public __base::b_type {
+                template <>
+                class entry_type<std::string> : public __base::b_type {
 
-               // String value.
+                    // String value.
 
-            private:
+                private:
 
-               dnvgl::extfem::fem::type_bounds::bound<std::string> bounds;
+                    dnvgl::extfem::fem::type_bounds::bound<std::string> bounds;
 
-            protected:
+                protected:
 
-               static const fem_types _type = fem_types::Str;
+                    static const fem_types _type = fem_types::Str;
 
-            public:
+                public:
 
-               entry_type(const std::string&);
+                    entry_type(const std::string&);
 
-               entry_type(
-                  const std::string&,
-                  const dnvgl::extfem::fem::type_bounds::bound<std::string>&);
+                    entry_type(
+                        const std::string&,
+                        const dnvgl::extfem::fem::type_bounds::bound<std::string>&);
 
-               std::string operator() (const std::string&, const std::string&, const std::string&, const std::string&) const;
+                    std::string operator() (const std::string&, const std::string&, const std::string&, const std::string&) const;
 
-               fem_types type() const {
-                  return _type;
-               }
+                    fem_types type() const {
+                        return _type;
+                    }
 
-               std::string format(
-                  const std::string&, const size_t &len=72) const;
-            };
+                    std::string format(
+                        const std::string&, const size_t &len=72) const;
+                };
 
-            extern const
+                extern const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+                boost::regex
 #else
-            std::regex
+                std::regex
 #endif
-            list_int_re;
+                list_int_re;
 
 
-            template <>
-            class entry_type<std::vector<int> > : public __base::b_type {
+                template <>
+                class entry_type<std::vector<int> > : public __base::b_type {
 
-               // List of integers.
+                    // List of integers.
 
-            protected:
+                protected:
 
-               static const fem_types _type = fem_types::List;
+                    static const fem_types _type = fem_types::List;
 
-            public:
+                public:
 
-               entry_type(
-                  const std::string &name) :
-                  __base::b_type(name) {};
+                    entry_type(
+                        const std::string &name) :
+                            __base::b_type(name) {};
 
-               std::vector<int>* operator() (const std::string &inp) const {
-                  auto *value =  new std::vector<int>();
+                    void operator() (
+                        std::vector<int> &value, const std::string &inp) const {
 
-                  double tmp_d;
-                  std::list<int> tmp_l;
-                  long tmp;
+                        double tmp_d;
+                        std::list<int> tmp_l;
+                        long tmp;
 
-                  if (! regex_match(inp, int_re)) {
-                     std::string msg("illegal input (""");
-                     throw errors::int_error(name, msg + inp + """), no integer!");
-                  }
+                        if (! regex_match(inp, int_re)) {
+                            std::string msg("illegal input (""");
+                            throw errors::int_error(name, msg + inp + """), no integer!");
+                        }
 
-                  conv.str(inp);
-                  conv.seekg(0);
-                  conv >> tmp_d;
-                  tmp = (long)tmp_d;
+                        conv.str(inp);
+                        conv.seekg(0);
+                        conv >> tmp_d;
+                        tmp = (long)tmp_d;
 
-                  while (tmp) {
-                     ldiv_t divmod = std::div(tmp, (long)10);
-                     value->push_back(divmod.rem);
-                     tmp /= 10;
-                  }
-                  std::sort(value->begin(), value->end());
+                        while (tmp) {
+                            ldiv_t divmod = std::div(tmp, (long)10);
+                            value.push_back(divmod.rem);
+                            tmp /= 10;
+                        }
+                        std::sort(value.begin(), value.end());
 
-                  return value;
-               };
+                        return;
+                    };
 
-               inline fem_types type() const {return _type;};
+                    inline fem_types type() const {return _type;};
 
-               std::string format(
-                  const std::vector<int> &inp) const {
+                    std::string format(
+                        const std::vector<int> &inp) const {
 
-                  std::ostringstream res, res2;
-                  res.imbue(std::locale::classic());
-                  res2.imbue(std::locale::classic());
+                        std::ostringstream res, res2;
+                        res.imbue(std::locale::classic());
+                        res2.imbue(std::locale::classic());
 
-                  double value = 0;
-                  for (auto &p : inp) {
-                     value *= 10.;
-                     value += p;
-                  }
+                        double value = 0;
+                        for (auto &p : inp) {
+                            value *= 10.;
+                            value += p;
+                        }
 
 #ifdef _MSC_VER
-                  // std::set output to two digit exponetial format.
-                  unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+                        // std::set output to two digit exponetial format.
+                        unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-                  res.setf(std::ios_base::scientific, std::ios::floatfield);
-                  res.setf(std::ios_base::adjustfield, std::ios::left);
+                        res.setf(std::ios_base::scientific, std::ios::floatfield);
+                        res.setf(std::ios_base::adjustfield, std::ios::left);
 
-                  res << " ";
-                  res.precision(9);
-                  res.width(15);
-                  res.fill(' ');
+                        res << " ";
+                        res.precision(9);
+                        res.width(15);
+                        res.fill(' ');
 
-                  res << value;
-                  std::string out(res.str());
-                  if (out.size() != 16) {
-                     std::ostringstream msg("output string for value ",
-                                            std::ostringstream::ate);
-                     std::copy(inp.begin(), inp.end(),
-                               std::ostream_iterator<int>(msg, ", "));
-                     msg << " of incorrect size, got length of " << out.size()
-                         << " instead of allowed length of 16. " << "!" << out << "!";
-                     throw errors::output_error(name, msg.str());
-                  }
+                        res << value;
+                        std::string out(res.str());
+                        if (out.size() != 16) {
+                            std::ostringstream msg("output string for value ",
+                                                   std::ostringstream::ate);
+                            std::copy(inp.begin(), inp.end(),
+                                      std::ostream_iterator<int>(msg, ", "));
+                            msg << " of incorrect size, got length of " << out.size()
+                                << " instead of allowed length of 16. " << "!" << out << "!";
+                            throw errors::output_error(name, msg.str());
+                        }
 
 #ifdef _MSC_VER
-                  // Reset exponetial format to former std::settings.
-                  _set_output_format(ext_exp_format);
+                        // Reset exponetial format to former std::settings.
+                        _set_output_format(ext_exp_format);
 #endif
 
-                  return out;
-               };
-            };
-         }
-      }
-   }
+                        return out;
+                    };
+                };
+            }
+        }
+    }
 }
 
 #endif // _FEM_TYPES_H_

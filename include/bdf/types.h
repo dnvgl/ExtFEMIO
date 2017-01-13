@@ -15,19 +15,17 @@
 #define _BDF_TYPES_H_
 
 #include <cmath>
-#include <string>
 #include <complex>
-#include <list>
-#include <set>
+#include <cstdlib>
+#include <iomanip>
 #include <iostream>
-#include <iomanip>
-#include <typeinfo>
 #include <limits>
+#include <list>
 #include <memory>
+#include <set>
 #include <sstream>
-#include <iomanip>
+#include <string>
 #include <typeinfo>
-#include <limits>
 
 #ifdef __GNUC__
 #include "config.h"
@@ -94,7 +92,7 @@ namespace dnvgl {
 
                base(const std::string&);
 
-               ~base(void);
+               virtual ~base(void);
 
                virtual bdf_types type(void) const = 0;
 
@@ -446,10 +444,10 @@ namespace dnvgl {
                         auto pos = sval.find('.');
                         sval.insert(pos, 1, '0');
                      }
-
-                     conv.str(sval);
-                     conv.seekg(0);
-                     conv >> val.value;
+                     val.value = std::atof(sval.c_str());
+                     // conv.str(sval);
+                     // conv.seekg(0);
+                     // conv >> val.value;
                   }
                   if (!this->bounds.in_bounds(val))
                      throw errors::float_error(name, "boundary condition violated");

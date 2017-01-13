@@ -54,6 +54,7 @@ TEST_CASE("Testing cdni_entry", "bdf_header,echo,cdni_entry") {
       case_control::echo::sort::cdni_entry* probe;
       probe = new case_control::echo::sort::cdni_entry("ABC");
       CHECK(probe->str() == "ABC");
+      delete probe;
    }
 
    SECTION("except") {
@@ -67,7 +68,7 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
    std::ostringstream test;
 
    SECTION("ECHO = NONE") {
-      case_control::echo probe({new case_control::echo::none()});
+      case_control::echo probe({new case_control::echo::none});
       test << probe;
       CHECK(test.str() == "ECHO = NONE\n");
    }
@@ -87,9 +88,10 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
    SECTION("ECHO = PUNCH, SORT (MAT1, PARAM)") {
       case_control::echo probe(
          {new case_control::echo::punch(),
-         new case_control::echo::sort(std::list<case_control::echo::sort::cdni_entry>(
-             {case_control::echo::sort::cdni_entry("MAT1"),
-              case_control::echo::sort::cdni_entry("PARAM")}))});
+          new case_control::echo::sort(
+              std::list<case_control::echo::sort::cdni_entry>(
+                  {case_control::echo::sort::cdni_entry("MAT1"),
+                   case_control::echo::sort::cdni_entry("PARAM")}))});
       test << probe;
       CHECK(test.str() == "ECHO = PUNCH, SORT(MAT1, PARAM)\n");
    }
@@ -105,9 +107,9 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
 
    SECTION("ECHO=BOTH,PUNCH,FILE") {
       case_control::echo probe(
-         {new case_control::echo::both,
-          new case_control::echo::punch,
-          new case_control::echo::file});
+          {new case_control::echo::both,
+           new case_control::echo::punch,
+           new case_control::echo::file});
       test << probe;
       CHECK(test.str() == "ECHO = BOTH, PUNCH, FILE\n");
    }

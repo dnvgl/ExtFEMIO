@@ -48,6 +48,10 @@ gnode::gnode(const std::list<std::string> &inp) :
    this->read(inp);
 }
 
+gnode::~gnode(void) {
+    ODOF.clear();
+}
+
 void gnode::read(const std::list<std::string> &inp) {
    if (inp.size() < 5)
       throw errors::parse_error(
@@ -59,7 +63,7 @@ void gnode::read(const std::list<std::string> &inp) {
    NODEX = _form_NODEX(*(pos++));
    NODENO = _form_NODENO(*(pos++));
    NDOF = _form_NDOF(*(pos++));
-   ODOF = std::vector<int>(*_form_ODOF(*(pos++)));
+   _form_ODOF(ODOF, *(pos++));
 }
 
 gnode::gnode(void) :

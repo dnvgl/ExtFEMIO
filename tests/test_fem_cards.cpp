@@ -826,6 +826,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         CHECK(static_cast<gelmnt2*>(current.get())->NNOD == 1);
         CHECK(static_cast<gelmnt2*>(current.get())->NOD ==
               vector<long>(1, 1));
+        current.reset();
     }
 
     SECTION("Checking dispatch [hsupstat].") {
@@ -848,6 +849,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         CHECK(static_cast<hsupstat*>(current.get())->LINDEP == 0);
         CHECK(static_cast<hsupstat*>(current.get())->RELOADC == 2);
         CHECK(static_cast<hsupstat*>(current.get())->COMPLC == -1);
+        current.reset();
     }
 
     SECTION("Checking dispatch [hsuptran].") {
@@ -881,6 +883,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         CHECK(static_cast<hsuptran*>(current.get())->T[3][1] == 0.);
         CHECK(static_cast<hsuptran*>(current.get())->T[3][2] == 0.);
         CHECK(static_cast<hsuptran*>(current.get())->T[3][3] == 1.);
+        current.reset();
     }
 
     SECTION("Checking dispatch [hierarch].") {
@@ -904,6 +907,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         CHECK(static_cast<hierarch*>(current.get())->NSUB == 1);
         CHECK(static_cast<hierarch*>(current.get())->IHSREFi ==
               vector<long>(1, 2));
+        current.reset();
     }
 
     SECTION("Checking dispatch [tdload].") {
@@ -923,6 +927,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         CHECK(static_cast<tdload*>(current.get())->SET_NAME == "LC_1");
         CHECK(static_cast<tdload*>(current.get())->CONT ==
               vector<string>(0));
+        current.reset();
     }
 
     SECTION("Checking dispatch [bsell].") {
@@ -941,6 +946,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
               vector<long>({1, 2}));
         CHECK(static_cast<bsell*>(current.get())->FACT ==
               vector<double>({1., -1.}));
+        current.reset();
     }
 
     SECTION("Checking dispatch [bnbcd].") {
@@ -983,6 +989,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
                           3.86368091e3, 1.62054932e4}));
         CHECK(static_cast<beuslo*>(current.get())->ILOADi ==
               vector<double>(0));
+        current.reset();
     }
 
     SECTION("Checking dispatch [bnload].") {
@@ -1005,6 +1012,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
               vector<double>({1.1, 1.2, 1.3}));
         CHECK(static_cast<bnload*>(current.get())->ILOAD ==
               vector<double>(0));
+        current.reset();
     }
 
     SECTION("Checking dispatch [iend].") {
@@ -1018,6 +1026,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
         CHECK(static_cast<iend*>(current.get())->CONT == 0);
+        current.reset();
     }
 
     SECTION("Testing writing.") {
@@ -1153,6 +1162,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         for (auto const &card : cards)
             test << *card;
 
+        cards.clear();
+
         CHECK("IDENT   +1.000000000e+00+1.000000000e+00+3.000000000e+00\n"
               "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
               "        CONVERSION DETAILS:                             \n"
@@ -1262,7 +1273,6 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
               "TDSUPNAM+4.000000000e+00+1.660000000e+02+1.130000000e+02+0.000000000e+00\n"
               "        KEY_HOLE_ROOF\n"
               "IEND    +0.000000000e+00            0.00            0.00            0.00\n"
-
               == test.str());
     }
 }

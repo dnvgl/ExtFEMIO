@@ -32,7 +32,7 @@ namespace dnvgl {
 
                protected:
 
-                  ~type_bound ();
+                  virtual ~type_bound ();
 
                   bool has_min() const;
 
@@ -64,7 +64,7 @@ namespace dnvgl {
 
             public:
 
-               ~bound() {};
+               virtual ~bound() {};
 
                bound(const _Ty *_min=nullptr,
                      const _Ty *_max=nullptr,
