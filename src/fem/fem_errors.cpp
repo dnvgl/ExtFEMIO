@@ -90,14 +90,6 @@ usage_error::usage_error(
     const std::string &name, const std::string &msg) :
         error(name, msg, "usage_error") {}
 
-dnvgl::extfem::fem::errors::not_implemented::not_implemented(
-    std::string const &fname, long const &line)
-        : std::not_implemented(""), error("not_implemented", "") {
-    ostringstream res;
-    res << "Not implemented yet " << fname << ":" << line << endl;
-    msg = res.str();
-}
-
 no_used::no_used(long const &no) :
         invalid_argument(""), error("no_used", "") {
     ostringstream res;

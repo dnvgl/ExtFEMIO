@@ -114,13 +114,6 @@ namespace dnvgl {
                     usage_error(const std::string &name, const std::string &msg);
                 };
 
-                class not_implemented : public error, public virtual std::not_implemented {
-
-                public:
-
-                    not_implemented(std::string const &fname, long const &line);
-                };
-
                 class no_used : public error, public virtual std::invalid_argument {
 
                 public:
