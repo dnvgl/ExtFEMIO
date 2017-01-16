@@ -198,6 +198,7 @@ namespace dnvgl {
                         elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
                         elem(dnvgl::extfem::fem::cards::gelref1 const*);
                         elem(elem const*);
+                        virtual ~elem(void);
 
                         cards::__base::card const &gelmnt1(void) const;
                         cards::__base::card const &gelref1(void) const;

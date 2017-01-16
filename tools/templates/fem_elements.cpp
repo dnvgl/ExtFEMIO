@@ -207,6 +207,13 @@ elements::__base::elem const &elements::__base::elem::operator() (
                       strpoint_ref, section, fixations, eccentrities, csys);
 }
 
+elements::__base::elem::~elem(void) {
+    section.clear();
+    fixations.clear();
+    eccentrities.clear();
+    csys.clear();
+}
+
 /** Set attribute values for new element representation. No value
     checking.
  */
