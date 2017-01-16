@@ -30,7 +30,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-       = "@(#) $Id: fem_elements.cpp 528 2017-01-12 16:58:27Z berhol $";
+       = "@(#) $Id: fem_elements.cpp 532 2017-01-16 10:25:03Z berhol $";
 }
 
 #include <memory>
@@ -566,6 +566,13 @@ elements::__base::elem const &elements::__base::elem::operator() (
                       strpoint_ref, section, fixations, eccentrities, csys);
 }
 
+elements::__base::elem::~elem(void) {
+    section.clear();
+    fixations.clear();
+    eccentrities.clear();
+    csys.clear();
+}
+
 /** Set attribute values for new element representation. No value
     checking.
  */
@@ -849,7 +856,7 @@ namespace dnvgl {
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long beps::nnodes(void) const {return 2;}
 
@@ -933,7 +940,7 @@ beps::beps(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long csta::nnodes(void) const {return 3;}
 
@@ -1017,7 +1024,7 @@ csta::csta(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long rpbq::nnodes(void) const {return 4;}
 
@@ -1101,7 +1108,7 @@ rpbq::rpbq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ilst::nnodes(void) const {return 6;}
 
@@ -1185,7 +1192,7 @@ ilst::ilst(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long iqqe::nnodes(void) const {return 8;}
 
@@ -1269,7 +1276,7 @@ iqqe::iqqe(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lqua::nnodes(void) const {return 4;}
 
@@ -1353,7 +1360,7 @@ lqua::lqua(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long tess::nnodes(void) const {return 2;}
 
@@ -1437,7 +1444,7 @@ tess::tess(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long gmas::nnodes(void) const {return 1;}
 
@@ -1521,7 +1528,7 @@ gmas::gmas(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long glma::nnodes(void) const {return 2;}
 
@@ -1605,7 +1612,7 @@ glma::glma(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long glda::nnodes(void) const {return 2;}
 
@@ -1689,7 +1696,7 @@ glda::glda(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long beas::nnodes(void) const {return 2;}
 
@@ -1773,7 +1780,7 @@ beas::beas(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axis::nnodes(void) const {return 2;}
 
@@ -1857,7 +1864,7 @@ axis::axis(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axda::nnodes(void) const {return 2;}
 
@@ -1941,7 +1948,7 @@ axda::axda(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long gspr::nnodes(void) const {return 1;}
 
@@ -2025,7 +2032,7 @@ gspr::gspr(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long gdam::nnodes(void) const {return 1;}
 
@@ -2109,7 +2116,7 @@ gdam::gdam(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ihex::nnodes(void) const {return 20;}
 
@@ -2193,7 +2200,7 @@ ihex::ihex(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lhex::nnodes(void) const {return 8;}
 
@@ -2277,7 +2284,7 @@ lhex::lhex(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long secb::nnodes(void) const {return 3;}
 
@@ -2361,7 +2368,7 @@ secb::secb(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long btss::nnodes(void) const {return 3;}
 
@@ -2445,7 +2452,7 @@ btss::btss(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long fqus_ffq::nnodes(void) const {return 4;}
 
@@ -2529,7 +2536,7 @@ fqus_ffq::fqus_ffq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ftrs_fftr::nnodes(void) const {return 3;}
 
@@ -2613,7 +2620,7 @@ ftrs_fftr::ftrs_fftr(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long scts::nnodes(void) const {return 6;}
 
@@ -2697,7 +2704,7 @@ scts::scts(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long mcts::nnodes(void) const {return 6;}
 
@@ -2781,7 +2788,7 @@ mcts::mcts(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long scqs::nnodes(void) const {return 8;}
 
@@ -2865,7 +2872,7 @@ scqs::scqs(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long mcqs::nnodes(void) const {return 8;}
 
@@ -2949,7 +2956,7 @@ mcqs::mcqs(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ipri::nnodes(void) const {return 15;}
 
@@ -3033,7 +3040,7 @@ ipri::ipri(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long itet::nnodes(void) const {return 10;}
 
@@ -3117,7 +3124,7 @@ itet::itet(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long tpri::nnodes(void) const {return 6;}
 
@@ -3201,7 +3208,7 @@ tpri::tpri(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long tetr::nnodes(void) const {return 4;}
 
@@ -3285,7 +3292,7 @@ tetr::tetr(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lcts::nnodes(void) const {return 6;}
 
@@ -3369,7 +3376,7 @@ lcts::lcts(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lcqs::nnodes(void) const {return 8;}
 
@@ -3453,7 +3460,7 @@ lcqs::lcqs(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long trs1::nnodes(void) const {return 18;}
 
@@ -3537,7 +3544,7 @@ trs1::trs1(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long trs2::nnodes(void) const {return 15;}
 
@@ -3621,7 +3628,7 @@ trs2::trs2(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long trs3::nnodes(void) const {return 12;}
 
@@ -3705,7 +3712,7 @@ trs3::trs3(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long glsh::nnodes(void) const {return 2;}
 
@@ -3789,7 +3796,7 @@ glsh::glsh(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axcs::nnodes(void) const {return 3;}
 
@@ -3873,7 +3880,7 @@ axcs::axcs(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axlq::nnodes(void) const {return 4;}
 
@@ -3957,7 +3964,7 @@ axlq::axlq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axls::nnodes(void) const {return 6;}
 
@@ -4041,7 +4048,7 @@ axls::axls(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axqq::nnodes(void) const {return 8;}
 
@@ -4125,7 +4132,7 @@ axqq::axqq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long pils::nnodes(void) const {return 1;}
 
@@ -4209,7 +4216,7 @@ pils::pils(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long pcab::nnodes(void) const {return 2;}
 
@@ -4293,7 +4300,7 @@ pcab::pcab(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long pspr::nnodes(void) const {return 1;}
 
@@ -4377,7 +4384,7 @@ pspr::pspr(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long adva_4::nnodes(void) const {return 4;}
 
@@ -4461,7 +4468,7 @@ adva_4::adva_4(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long adva_2::nnodes(void) const {return 2;}
 
@@ -4545,7 +4552,7 @@ adva_2::adva_2(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcp::nnodes(void) const {return 2;}
 
@@ -4629,7 +4636,7 @@ ctcp::ctcp(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcl::nnodes(void) const {return 4;}
 
@@ -4713,7 +4720,7 @@ ctcl::ctcl(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctal::nnodes(void) const {return 4;}
 
@@ -4797,7 +4804,7 @@ ctal::ctal(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcc::nnodes(void) const {return 6;}
 
@@ -4881,7 +4888,7 @@ ctcc::ctcc(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctaq::nnodes(void) const {return 6;}
 
@@ -4965,7 +4972,7 @@ ctaq::ctaq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctlq::nnodes(void) const {return 8;}
 
@@ -5049,7 +5056,7 @@ ctlq::ctlq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcq::nnodes(void) const {return 16;}
 
@@ -5133,7 +5140,7 @@ ctcq::ctcq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctmq::nnodes(void) const {return 18;}
 
@@ -5217,7 +5224,7 @@ ctmq::ctmq(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long hcqs::nnodes(void) const {return 9;}
 
@@ -5301,7 +5308,7 @@ hcqs::hcqs(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long slqs::nnodes(void) const {return 8;}
 
@@ -5385,7 +5392,7 @@ slqs::slqs(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long slts::nnodes(void) const {return 6;}
 
@@ -5469,7 +5476,7 @@ slts::slts(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long slcb::nnodes(void) const {return 3;}
 
@@ -5553,7 +5560,7 @@ slcb::slcb(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long matr::nnodes(void) const {return 0;}
 
@@ -5637,7 +5644,7 @@ matr::matr(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex100::nnodes(void) const {return 21;}
 
@@ -5721,7 +5728,7 @@ ghex100::ghex100(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex101::nnodes(void) const {return 22;}
 
@@ -5805,7 +5812,7 @@ ghex101::ghex101(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex102::nnodes(void) const {return 22;}
 
@@ -5889,7 +5896,7 @@ ghex102::ghex102(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex103::nnodes(void) const {return 23;}
 
@@ -5973,7 +5980,7 @@ ghex103::ghex103(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex104::nnodes(void) const {return 22;}
 
@@ -6057,7 +6064,7 @@ ghex104::ghex104(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex105::nnodes(void) const {return 23;}
 
@@ -6141,7 +6148,7 @@ ghex105::ghex105(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex106::nnodes(void) const {return 23;}
 
@@ -6225,7 +6232,7 @@ ghex106::ghex106(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex107::nnodes(void) const {return 24;}
 
@@ -6309,7 +6316,7 @@ ghex107::ghex107(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex108::nnodes(void) const {return 22;}
 
@@ -6393,7 +6400,7 @@ ghex108::ghex108(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex109::nnodes(void) const {return 23;}
 
@@ -6477,7 +6484,7 @@ ghex109::ghex109(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex110::nnodes(void) const {return 23;}
 
@@ -6561,7 +6568,7 @@ ghex110::ghex110(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex111::nnodes(void) const {return 24;}
 
@@ -6645,7 +6652,7 @@ ghex111::ghex111(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex112::nnodes(void) const {return 23;}
 
@@ -6729,7 +6736,7 @@ ghex112::ghex112(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex113::nnodes(void) const {return 24;}
 
@@ -6813,7 +6820,7 @@ ghex113::ghex113(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex114::nnodes(void) const {return 24;}
 
@@ -6897,7 +6904,7 @@ ghex114::ghex114(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex115::nnodes(void) const {return 25;}
 
@@ -6981,7 +6988,7 @@ ghex115::ghex115(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex116::nnodes(void) const {return 22;}
 
@@ -7065,7 +7072,7 @@ ghex116::ghex116(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex117::nnodes(void) const {return 23;}
 
@@ -7149,7 +7156,7 @@ ghex117::ghex117(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex118::nnodes(void) const {return 23;}
 
@@ -7233,7 +7240,7 @@ ghex118::ghex118(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex119::nnodes(void) const {return 24;}
 
@@ -7317,7 +7324,7 @@ ghex119::ghex119(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex120::nnodes(void) const {return 23;}
 
@@ -7401,7 +7408,7 @@ ghex120::ghex120(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex121::nnodes(void) const {return 24;}
 
@@ -7485,7 +7492,7 @@ ghex121::ghex121(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex122::nnodes(void) const {return 24;}
 
@@ -7569,7 +7576,7 @@ ghex122::ghex122(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex123::nnodes(void) const {return 25;}
 
@@ -7653,7 +7660,7 @@ ghex123::ghex123(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex124::nnodes(void) const {return 23;}
 
@@ -7737,7 +7744,7 @@ ghex124::ghex124(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex125::nnodes(void) const {return 24;}
 
@@ -7821,7 +7828,7 @@ ghex125::ghex125(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex126::nnodes(void) const {return 24;}
 
@@ -7905,7 +7912,7 @@ ghex126::ghex126(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex127::nnodes(void) const {return 25;}
 
@@ -7989,7 +7996,7 @@ ghex127::ghex127(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex128::nnodes(void) const {return 24;}
 
@@ -8073,7 +8080,7 @@ ghex128::ghex128(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex129::nnodes(void) const {return 25;}
 
@@ -8157,7 +8164,7 @@ ghex129::ghex129(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex130::nnodes(void) const {return 25;}
 
@@ -8241,7 +8248,7 @@ ghex130::ghex130(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex131::nnodes(void) const {return 26;}
 
@@ -8325,7 +8332,7 @@ ghex131::ghex131(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex132::nnodes(void) const {return 22;}
 
@@ -8409,7 +8416,7 @@ ghex132::ghex132(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex133::nnodes(void) const {return 23;}
 
@@ -8493,7 +8500,7 @@ ghex133::ghex133(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex134::nnodes(void) const {return 23;}
 
@@ -8577,7 +8584,7 @@ ghex134::ghex134(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex135::nnodes(void) const {return 24;}
 
@@ -8661,7 +8668,7 @@ ghex135::ghex135(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex136::nnodes(void) const {return 23;}
 
@@ -8745,7 +8752,7 @@ ghex136::ghex136(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex137::nnodes(void) const {return 24;}
 
@@ -8829,7 +8836,7 @@ ghex137::ghex137(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex138::nnodes(void) const {return 24;}
 
@@ -8913,7 +8920,7 @@ ghex138::ghex138(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex139::nnodes(void) const {return 25;}
 
@@ -8997,7 +9004,7 @@ ghex139::ghex139(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex140::nnodes(void) const {return 23;}
 
@@ -9081,7 +9088,7 @@ ghex140::ghex140(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex141::nnodes(void) const {return 24;}
 
@@ -9165,7 +9172,7 @@ ghex141::ghex141(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex142::nnodes(void) const {return 24;}
 
@@ -9249,7 +9256,7 @@ ghex142::ghex142(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex143::nnodes(void) const {return 25;}
 
@@ -9333,7 +9340,7 @@ ghex143::ghex143(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex144::nnodes(void) const {return 24;}
 
@@ -9417,7 +9424,7 @@ ghex144::ghex144(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex145::nnodes(void) const {return 25;}
 
@@ -9501,7 +9508,7 @@ ghex145::ghex145(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex146::nnodes(void) const {return 25;}
 
@@ -9585,7 +9592,7 @@ ghex146::ghex146(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex147::nnodes(void) const {return 26;}
 
@@ -9669,7 +9676,7 @@ ghex147::ghex147(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex148::nnodes(void) const {return 23;}
 
@@ -9753,7 +9760,7 @@ ghex148::ghex148(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex149::nnodes(void) const {return 24;}
 
@@ -9837,7 +9844,7 @@ ghex149::ghex149(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex150::nnodes(void) const {return 24;}
 
@@ -9921,7 +9928,7 @@ ghex150::ghex150(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex151::nnodes(void) const {return 25;}
 
@@ -10005,7 +10012,7 @@ ghex151::ghex151(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex152::nnodes(void) const {return 24;}
 
@@ -10089,7 +10096,7 @@ ghex152::ghex152(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex153::nnodes(void) const {return 25;}
 
@@ -10173,7 +10180,7 @@ ghex153::ghex153(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex154::nnodes(void) const {return 25;}
 
@@ -10257,7 +10264,7 @@ ghex154::ghex154(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex155::nnodes(void) const {return 26;}
 
@@ -10341,7 +10348,7 @@ ghex155::ghex155(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex156::nnodes(void) const {return 24;}
 
@@ -10425,7 +10432,7 @@ ghex156::ghex156(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex157::nnodes(void) const {return 25;}
 
@@ -10509,7 +10516,7 @@ ghex157::ghex157(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex158::nnodes(void) const {return 25;}
 
@@ -10593,7 +10600,7 @@ ghex158::ghex158(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex159::nnodes(void) const {return 26;}
 
@@ -10677,7 +10684,7 @@ ghex159::ghex159(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex160::nnodes(void) const {return 25;}
 
@@ -10761,7 +10768,7 @@ ghex160::ghex160(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex161::nnodes(void) const {return 26;}
 
@@ -10845,7 +10852,7 @@ ghex161::ghex161(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex162::nnodes(void) const {return 26;}
 
@@ -10929,7 +10936,7 @@ ghex162::ghex162(elements::__base::elem const *data) :
 
    
 */
-#line 496 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 503 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex163::nnodes(void) const {return 27;}
 
