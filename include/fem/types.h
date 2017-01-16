@@ -485,7 +485,7 @@ namespace dnvgl {
                         }
 
 #ifdef _MSC_VER
-                        // std::set output to two digit exponetial format.
+                        // std::set output to two digit exponential format.
                         unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
@@ -510,7 +510,7 @@ namespace dnvgl {
                         }
 
 #ifdef _MSC_VER
-                        // Reset exponetial format to former std::settings.
+                        // Reset exponential output format to former std::settings.
                         _set_output_format(ext_exp_format);
 #endif
 
