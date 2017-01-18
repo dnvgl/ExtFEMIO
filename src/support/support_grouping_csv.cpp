@@ -50,17 +50,17 @@ void CSV::process_line(std::string const &line,
     proc.imbue(std::locale::classic());
 
     if (getline(inp, segment, ';')) {
-        data->id = std::atol(segment.c_str());
-        // proc.str(segment);
-        // proc >> data->id;
+        // data->id = std::atol(segment.c_str());
+        proc.str(segment);
+        proc >> data->id;
     } else
         throw errors::unreadable_error(
             "Read CSV",
             "Can't read line """ + line + """");
     if (getline(inp, segment, ';')) {
-        data->nnodes = std::atol(segment.c_str());
-        // proc.str(segment);
-        // proc.seekg(0) >> data->nnodes;
+        // data->nnodes = std::atol(segment.c_str());
+        proc.str(segment);
+        proc.seekg(0) >> data->nnodes;
     } else
         throw errors::unreadable_error(
             "Read CSV",
@@ -87,9 +87,9 @@ void CSV::process_line(std::string const &line,
         // proc.seekg(0) >> data->grade;
     }
     if (getline(inp, segment, ';')) {
-        data->yield = atof(segment.c_str());
-        // proc.str(segment);
-        // proc.seekg(0) >> data->yield;
+        //data->yield = std::atof(segment.c_str());
+        proc.str(segment);
+        proc.seekg(0) >> data->yield;
     }
 }
 

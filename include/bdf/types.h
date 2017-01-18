@@ -444,10 +444,10 @@ namespace dnvgl {
                         auto pos = sval.find('.');
                         sval.insert(pos, 1, '0');
                      }
-                     val.value = std::atof(sval.c_str());
-                     // conv.str(sval);
-                     // conv.seekg(0);
-                     // conv >> val.value;
+                     // val.value = std::atol(sval.c_str());
+                     conv.str(sval);
+                     conv.seekg(0);
+                     conv >> val.value;
                   }
                   if (!this->bounds.in_bounds(val))
                      throw errors::float_error(name, "boundary condition violated");
