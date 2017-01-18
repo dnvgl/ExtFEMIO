@@ -47,9 +47,9 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
-#define NOEXCEPT
+#define _EXTFEMIO_NOEXCEPT
 #else
-#define NOEXCEPT noexcept
+#define _EXTFEMIO_NOEXCEPT noexcept
 #endif
 
 using namespace std;

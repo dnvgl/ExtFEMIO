@@ -80,9 +80,11 @@ set_target_properties(extfemio_fem PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${C
 
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(fem2fem
-  fem2fem.cpp fem2fem_args.c)
-target_link_libraries(fem2fem ${EXTFEM_FEM_LIBS})
+IF(NOT MSVC)
+  add_executable(fem2fem
+    fem2fem.cpp fem2fem_args.c)
+  target_link_libraries(fem2fem ${EXTFEM_FEM_LIBS})
+ENDIF()
 
 CONFIGURE_FILE(
   ${CMAKE_CURRENT_SOURCE_DIR}/fem2fem_args.ggo.in

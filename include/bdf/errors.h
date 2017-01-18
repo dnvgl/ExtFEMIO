@@ -17,9 +17,9 @@
 #include "extfem_misc.h"
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
-#define NOEXCEPT
+#define _EXTFEMIO_NOEXCEPT
 #else
-#define NOEXCEPT noexcept
+#define _EXTFEMIO_NOEXCEPT noexcept
 #endif
 
 namespace dnvgl {
@@ -43,7 +43,7 @@ namespace dnvgl {
                   const std::string&, const std::string &msg,
                   const std::string &err_class="bdf_error");
 
-               char const *what(void) const noexcept;
+               char const *what(void) const _EXTFEMIO_NOEXCEPT;
             };
 
             class types_error : public error {

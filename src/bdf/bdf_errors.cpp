@@ -38,7 +38,7 @@ std::string error::get_msg(void) const {
    return err_class + ":" + msg;
 }
 
-char const *error::what(void) const noexcept {
+char const *error::what(void) const _EXTFEMIO_NOEXCEPT {
     return (this->get_msg() + "\n").c_str();
 }
 

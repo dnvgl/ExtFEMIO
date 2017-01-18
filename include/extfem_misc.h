@@ -14,6 +14,12 @@
 
 #include <sstream>
 
+#if defined(_MSC_VER) & _MSC_VER < 1900
+#define _EXTFEMIO_NOEXCEPT
+#else
+#define _EXTFEMIO_NOEXCEPT noexcept
+#endif
+
 namespace std {
 
     class not_implemented : public std::exception {
@@ -33,11 +39,7 @@ namespace std {
         }
 
         // Provided for compatibility with std::exception.
-        const char *what() const
-#if __GNUC__
-            noexcept
-#endif
-        {
+        const char *what() const _EXTFEMIO_NOEXCEPT {
             return errorMessage.c_str();
         }
 
