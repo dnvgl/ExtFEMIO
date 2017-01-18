@@ -11,11 +11,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_types_float[]
+    const char cID_fem_types_float[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <sstream>
@@ -43,29 +43,25 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace types {
+using namespace dnvgl::extfem::fem::types;
 
-            const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+boost::regex
 #else
-            std::regex
+std::regex
 #endif
-            float_re(
-               "([[:space:]]*[[:space:]+-]?[[:digit:]][.][[:digit:]]+[eE][\\+-][[:digit:]]{2,3}[[:space:]]*)",
+const entry_type<double>::float_re(
+    "([[:space:]]*[[:space:]+-]?"
+    "[[:digit:]][.][[:digit:]]+[eE][\\+-][[:digit:]]{2,3}"
+    "[[:space:]]*)",
 #ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex_constants::ECMAScript
+    boost::regex_constants::ECMAScript
 #else
-               std::regex_constants::ECMAScript
+    std::regex_constants::ECMAScript
 #endif
-               );
-         }
-      }
-   }
-}
+    );
+
+fem_types const entry_type<double>::_type = fem_types::Float;
 
 // Local Variables:
 // mode: c++

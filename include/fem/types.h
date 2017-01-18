@@ -48,14 +48,14 @@ namespace dnvgl {
                 enum class fem_types {
                     /// Indicates class not suitable for end use.
                     None,
-                    // /// comment cell
-                    // Comment,
                     /// Integer value cell
                     Int,
                     /// Floating point value cell
                     Float,
                     /// Character string cell
                     Str,
+                    /// cell with true/false value
+                    Bool,
                     /// empty cell
                     Blank,
                     /// list of integers
@@ -67,17 +67,17 @@ namespace dnvgl {
 
                     protected:
 
-                        static const fem_types _type;
+                        fem_types static const _type;
                         std::string name;
-                        static std::istringstream conv;
+                        std::istringstream static conv;
 
                     public:
 
-                        b_type(const std::string&);
+                        b_type(std::string const&);
 
-                        virtual ~b_type() {};
+                        virtual ~b_type(void) {};
 
-                        virtual fem_types type() const = 0;
+                        virtual fem_types type(void) const = 0;
 
                     };
 
@@ -86,15 +86,15 @@ namespace dnvgl {
                     class imbue_helper : public b_type {
                     public:
 
-                        imbue_helper(const std::locale &loc) : b_type("") {
+                        imbue_helper(std::locale const &loc) : b_type("") {
                             conv.imbue(loc);
                         };
 
-                        fem_types type(void) const {
+                        virtual fem_types type(void) const {
                             return fem_types::None;
                         };
 
-                        std::string format(const void*) const {
+                        std::string format(void const*) const {
                             return "";
                         };
                     };
@@ -104,13 +104,13 @@ namespace dnvgl {
                 class card : public __base::b_type {
                 public:
 
-                    card(const std::string &name) : __base::b_type(name) {};
+                    card(std::string const &name) : __base::b_type(name) {};
 
                     card(void) : __base::b_type("") {};
 
-                    fem_types type(void) const {return fem_types::None;};
+                    virtual fem_types type(void) const {return fem_types::None;};
 
-                    std::string format() const;
+                    std::string format(void) const;
                 };
 
                 class empty : public __base::b_type {
@@ -119,26 +119,18 @@ namespace dnvgl {
 
                     empty(void) : __base::b_type("") {};
 
-                    fem_types type(void) const {return fem_types::None;};
+                    virtual fem_types type(void) const {return fem_types::None;};
 
-                    std::string format() const;
+                    std::string format(void) const;
                 };
 
                 template <class _Ty>
                 class entry_type : public __base::b_type {
 
                 public:
-                    virtual std::string format(const _Ty &d) const = 0;
+                    virtual std::string format(_Ty const &d) const = 0;
                 };
 
-
-                extern const
-#ifdef HAVE_BOOST_REGEX_HPP
-                boost::regex
-#else
-                std::regex
-#endif
-                int_re;
 
                 template <>
                 class entry_type<long> : public __base::b_type {
@@ -151,92 +143,31 @@ namespace dnvgl {
 
                 protected:
 
-                    static const fem_types _type = fem_types::Int;
+                    fem_types static const _type;
+
+#ifdef HAVE_BOOST_REGEX_HPP
+                    boost::regex static const int_re;
+#else
+                    std::regex static const int_re;
+#endif
 
                 public:
 
-                    entry_type(const std::string &name) :
-                            fem::types::__base::b_type(name), bounds() {};
-
+                    entry_type(std::string const &name);
 
                     entry_type(
-                        const std::string &name,
-                        const fem::type_bounds::bound<long> &bounds) :
-                            fem::types::__base::b_type(name), bounds(bounds) {};
+                        std::string const &name,
+                        fem::type_bounds::bound<long> const &bounds);
 
 /// Convert string to long
-                    long operator() (const std::string &inp) const {
-                        double value;
+                    long operator() (std::string const &inp) const;
 
-                        if (inp.length() == 0) {
-                            if (!this->bounds.has_default())
-                                throw errors::int_error(name, "empty entry without default");
-                            return this->bounds.get_default();
-                        } else {
-                            if (! regex_match(inp, int_re)) {
-                                std::string msg("illegal input (""");
-                                throw errors::int_error(name, msg + inp + """), no integer!");
-                            }
+                    virtual fem_types type(void) const;
 
-                            conv.str(inp);
-                            conv.seekg(0);
-                            conv >> value;
-                        }
-                        if (!this->bounds.in_bounds(long(value))) {
-                            std::string msg("boundary condition violated (");
-                            throw errors::int_error(
-                                name, msg + name + ")\n(""" + inp + """)");
-                        }
-                        return long(value);
-                    };
-
-                    fem_types type() const { return _type; };
-
-                    std::string format(const long &inp) const {
-
-                        std::ostringstream res;
-                        res.imbue(std::locale::classic());
-
-#ifdef _MSC_VER
-                        // std::set output to two digit exponential format.
-                        unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
-#endif
-
-                        res.setf(std::ios_base::showpos);
-                        res.setf(std::ios_base::scientific, std::ios_base::floatfield);
-                        res.setf(std::ios_base::adjustfield, std::ios::left);
-
-                        res.precision(9);
-                        res.width(16);
-                        res.fill(' ');
-
-                        res << double(inp);
-                        std::string out(res.str());
-                        if (out.size() != 16) {
-                            std::ostringstream msg("output string for value ", std::ostringstream::ate);
-                            msg << double(inp) << " of incorrect size, got length of " << out.size()
-                                << " instead of allowed length of 16." << out;
-                            throw errors::int_error(name, msg.str());
-                        }
-
-#ifdef _MSC_VER
-                        // Reset exponetial format to former std::settings.
-                        _set_output_format(ext_exp_format);
-#endif
-
-                        return out;
-                    };
+                    std::string format(long const &inp) const;
                 };
 
                 /// Boolean value.
-                extern const
-#ifdef HAVE_BOOST_REGEX_HPP
-                boost::regex
-#else
-                std::regex
-#endif
-                bool_re;
-
                 template <>
                 class entry_type<bool> : public __base::b_type {
 
@@ -246,15 +177,22 @@ namespace dnvgl {
 
                 protected:
 
-                    static const fem_types _type = fem_types::Int;
+#ifdef HAVE_BOOST_REGEX_HPP
+                    boost::regex
+#else
+                    std::regex
+#endif
+                    static const bool_re;
+
+                    fem_types static const _type;
 
                 public:
 
-                    entry_type(const std::string &name) :
+                    entry_type(std::string const &name) :
                             fem::types::__base::b_type(name), bounds() {}
 
 
-                    bool operator() (const std::string &inp) const {
+                    bool operator() (std::string const &inp) const {
                         double value;
 
                         if (inp.length() == 0) {
@@ -282,21 +220,13 @@ namespace dnvgl {
                     }
 
 
-                    fem_types type() const { return _type; };
+                    virtual fem_types type(void) const { return _type; };
 
-                    std::string format(const bool &inp) const {
+                    std::string format(bool const &inp) const {
                         if (inp) return "           +1.00";
                         else return "           +0.00";
                     }
                 };
-
-                extern const
-#ifdef HAVE_BOOST_REGEX_HPP
-                boost::regex
-#else
-                std::regex
-#endif
-                float_re;
 
                 template <>
                 class entry_type<double> : public __base::b_type {
@@ -309,21 +239,28 @@ namespace dnvgl {
 
                 protected:
 
-                    static const fem_types _type = fem_types::Float;
+#ifdef HAVE_BOOST_REGEX_HPP
+                    boost::regex
+#else
+                    std::regex
+#endif
+                    static const float_re;
+
+                    fem_types static const _type;
 
                 public:
 
-                    entry_type(const std::string &name) :
+                    entry_type(std::string const &name) :
                             __base::b_type(name), bounds() {};
 
 
                     entry_type(
-                        const std::string &name,
-                        const fem::type_bounds::bound<double> &bounds) :
+                        std::string const &name,
+                        fem::type_bounds::bound<double> const &bounds) :
                             fem::types::__base::b_type(name), bounds(bounds) {};
 
                     /// Convert string to double
-                    double operator() (const std::string &inp) const {
+                    double operator() (std::string const &inp) const {
                         double value;
 
                         if (inp.length() == 0) {
@@ -349,9 +286,9 @@ namespace dnvgl {
                         return value;
                     };
 
-                    fem_types type() const {return _type;};
+                    virtual fem_types type(void) const {return _type;};
 
-                    std::string format(const double &inp) const {
+                    std::string format(double const &inp) const {
 
                         std::ostringstream res;
                         res.imbue(std::locale::classic());
@@ -398,34 +335,27 @@ namespace dnvgl {
 
                 protected:
 
-                    static const fem_types _type = fem_types::Str;
+                    fem_types static const _type;
 
                 public:
 
-                    entry_type(const std::string&);
+                    entry_type(std::string const&);
 
                     entry_type(
-                        const std::string&,
-                        const dnvgl::extfem::fem::type_bounds::bound<std::string>&);
+                        std::string const&,
+                        dnvgl::extfem::fem::type_bounds::bound<std::string> const&);
 
-                    std::string operator() (const std::string&, const std::string&, const std::string&, const std::string&) const;
+                    std::string operator() (
+                        std::string const&, std::string const&,
+                        std::string const&, std::string const&) const;
 
-                    fem_types type() const {
+                    virtual fem_types type(void) const {
                         return _type;
                     }
 
                     std::string format(
-                        const std::string&, const size_t &len=72) const;
+                        std::string const&, size_t const &len=72) const;
                 };
-
-                extern const
-#ifdef HAVE_BOOST_REGEX_HPP
-                boost::regex
-#else
-                std::regex
-#endif
-                list_int_re;
-
 
                 template <>
                 class entry_type<std::vector<int> > : public __base::b_type {
@@ -434,24 +364,32 @@ namespace dnvgl {
 
                 protected:
 
-                    static const fem_types _type = fem_types::List;
+#ifdef HAVE_BOOST_REGEX_HPP
+                    boost::regex
+#else
+                    std::regex
+#endif
+                    static const list_int_re;
+
+                    fem_types static const _type;
 
                 public:
 
                     entry_type(
-                        const std::string &name) :
+                        std::string const &name) :
                             __base::b_type(name) {};
 
                     void operator() (
-                        std::vector<int> &value, const std::string &inp) const {
+                        std::vector<int> &value, std::string const &inp) const {
 
                         double tmp_d;
                         std::list<int> tmp_l;
                         long tmp;
 
-                        if (! regex_match(inp, int_re)) {
+                        if (! regex_match(inp, list_int_re)) {
                             std::string msg("illegal input (""");
-                            throw errors::int_error(name, msg + inp + """), no integer!");
+                            throw errors::int_error(
+                                name, msg + inp + """), no integer list!");
                         }
 
                         conv.str(inp);
@@ -469,10 +407,10 @@ namespace dnvgl {
                         return;
                     };
 
-                    inline fem_types type() const {return _type;};
+                    virtual inline fem_types type(void) const {return _type;};
 
                     std::string format(
-                        const std::vector<int> &inp) const {
+                        std::vector<int> const &inp) const {
 
                         std::ostringstream res, res2;
                         res.imbue(std::locale::classic());
@@ -500,10 +438,12 @@ namespace dnvgl {
                         res << value;
                         std::string out(res.str());
                         if (out.size() != 16) {
-                            std::ostringstream msg("output string for value ",
-                                                   std::ostringstream::ate);
-                            std::copy(inp.begin(), inp.end(),
-                                      std::ostream_iterator<int>(msg, ", "));
+                            std::ostringstream msg(
+                                "output string for value ",
+                                std::ostringstream::ate);
+                            std::copy(
+                                inp.begin(), inp.end(),
+                                std::ostream_iterator<int>(msg, ", "));
                             msg << " of incorrect size, got length of " << out.size()
                                 << " instead of allowed length of 16. " << "!" << out << "!";
                             throw errors::output_error(name, msg.str());

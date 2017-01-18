@@ -37,29 +37,27 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace types {
+using namespace dnvgl::extfem::fem::types;
 
-            const
+const
 #ifdef HAVE_BOOST_REGEX_HPP
-            boost::regex
+boost::regex
 #else
-            std::regex
+std::regex
 #endif
-            list_int_re(
-               "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]]",
+entry_type<std::vector<int> >::list_int_re(
+    "(            0.00)|"
+    "([[:space:]][[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2})|"
+    "([[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2}[[:digit:][:space:]])|"
+    "([[:space:]\\+-][[:digit:]][.][[:digit:]]{9}[eE][\\+-][[:digit:]]{2})",
 #ifdef HAVE_BOOST_REGEX_HPP
-               boost::regex_constants::ECMAScript
+    boost::regex_constants::ECMAScript
 #else
-               std::regex_constants::ECMAScript
+    std::regex_constants::ECMAScript
 #endif
-               );
-         }
-      }
-   }
-}
+    );
+
+fem_types const entry_type<std::vector<int> >::_type = fem_types::List;
 
 // Local Variables:
 // mode: c++
