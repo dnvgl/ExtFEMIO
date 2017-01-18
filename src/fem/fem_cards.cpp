@@ -94,8 +94,6 @@ map<std::string, cards::types> const cardtype_map({
         {"TDSETNAM", cards::types::TDSETNAM},
         {"TDSUPNAM", cards::types::TDSUPNAM},
         {"TEXT", cards::types::TEXT},
-        {"TDSETNAM", cards::types::TDSETNAM},
-        {"TDSUPNAM", cards::types::TDSUPNAM},
         {"TDLOAD", cards::types::TDLOAD},
         {"BSELL", cards::types::BSELL},
         {"GELMNT2", cards::types::GELMNT2},
