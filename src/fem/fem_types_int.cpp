@@ -39,6 +39,7 @@ using namespace boost;
 using namespace std;
 #endif
 
+using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
 
 regex const entry_type<long>::int_re(
@@ -58,8 +59,8 @@ entry_type<long>::entry_type(std::string const &name) :
 
 entry_type<long>::entry_type(
     std::string const &name,
-    fem::type_bounds::bound<long> const &bounds) :
-        fem::types::__base::b_type(name), bounds(bounds) {}
+    type_bounds::bound<long> const &bounds) :
+        types::__base::b_type(name), bounds(bounds) {}
 
 long entry_type<long>::operator() (std::string const &inp) const {
     double value;
