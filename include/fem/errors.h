@@ -21,7 +21,7 @@ namespace dnvgl {
         namespace fem {
             namespace errors {
 
-                class error {
+                class error : public std::exception {
 
                 protected:
 
@@ -41,7 +41,7 @@ namespace dnvgl {
                         const std::string&, const std::string &msg,
                         const std::string &err_class);
 
-                    std::string operator() (void) const;
+                    virtual char const *what(void) const;
                 };
 
                 class types_error : public error {

@@ -47,8 +47,8 @@ std::string error::get_msg(void) const {
     return err_class + ":" + msg;
 }
 
-std::string error::operator() (void) const {
-    return this->get_msg() + "\n";
+const char *error::what(void) const {
+    return (this->get_msg() + "\n").c_str();
 }
 
 types_error::types_error(const std::string &msg) :
