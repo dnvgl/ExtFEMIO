@@ -29,39 +29,50 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace types {
-            namespace __base {
+using namespace dnvgl::extfem::fem::types;
 
-               b_type::b_type(const std::string &name) : name(name) {};
+__base::b_type::b_type(const std::string &name) : name(name) {}
 
-               std::istringstream b_type::conv;
+std::istringstream __base::b_type::conv;
 
-               /// std::set input and output locale for conv
-               static imbue_helper _imbue_helper(std::locale::classic());
-            }
+/// std::set input and output locale for conv
+static __base::imbue_helper _imbue_helper(std::locale::classic());
 
-            std::string card::format() const {
-               std::ostringstream res;
-               res.setf(std::ios_base::left, std::ios_base::adjustfield);
-               res.fill(' ');
-               res.width(8);
-               res << name;
-               return res.str();
-            }
+__base::imbue_helper::imbue_helper(std::locale const &loc) : b_type("") {
+    conv.imbue(loc);
+}
 
-            std::string empty::format() const {
-               std::ostringstream res;
-               res.fill(' ');
-               res.width(16);
-               res << "            0.00";
-               return res.str();
-            }
-         }
-      }
-   }
+fem_types __base::imbue_helper::type(void) const {
+    return fem_types::None;
+}
+
+std::string __base::imbue_helper::format(void const*) const {
+    return "";
+}
+
+card::card(std::string const &name) : __base::b_type(name) {}
+
+card::card(void) : __base::b_type("") {}
+
+std::string card::format() const {
+    std::ostringstream res;
+    res.setf(std::ios_base::left, std::ios_base::adjustfield);
+    res.fill(' ');
+    res.width(8);
+    res << name;
+    return res.str();
+}
+
+empty::empty(void) : __base::b_type("") {}
+
+fem_types empty::type(void) const {return fem_types::None;}
+
+std::string empty::format() const {
+    std::ostringstream res;
+    res.fill(' ');
+    res.width(16);
+    res << "            0.00";
+    return res.str();
 }
 
 // Local Variables:

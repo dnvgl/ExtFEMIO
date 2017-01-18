@@ -27,21 +27,55 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#ifdef HAVE_BOOST_REGEX_HPP
+using namespace boost;
+#else
+using namespace std;
+#endif
+
 using namespace dnvgl::extfem::fem::types;
 
-#ifdef HAVE_BOOST_REGEX_HPP
-boost::regex
-#else
-std::regex
-#endif
-const entry_type<bool>::bool_re(
+regex const entry_type<bool>::bool_re(
     "([[:space:]]*[[:space:]\\+-]?[01][.][0]*([eE][\\+-][[:digit:]]{2,3})?[[:space:]]*)",
-#ifdef HAVE_BOOST_REGEX_HPP
-    boost::regex_constants::ECMAScript
-#else
-    std::regex_constants::ECMAScript
-#endif
+    regex_constants::ECMAScript
     );
+
+entry_type<bool>::entry_type(std::string const &name) :
+        fem::types::__base::b_type(name), bounds() {}
+
+bool entry_type<bool>::operator() (std::string const &inp) const {
+    double value;
+
+    if (inp.length() == 0) {
+        if (!this->bounds.has_default())
+            throw errors::bool_error(name, "empty entry without default");
+        return this->bounds.get_default();
+    }
+    else {
+        if (!regex_match(inp, bool_re)) {
+            std::string msg("illegal input (""");
+            throw errors::bool_error(name, msg + inp + """), no bool!");
+        }
+
+        conv.str(inp);
+        conv.seekg(0);
+        conv >> value;
+    }
+    if (value == 1.) return true;
+    else if (value == 0.) return false;
+    else {
+        std::string msg("boundary condition violated (");
+        throw errors::bool_error(
+            name, msg + name + ")\n(""" + inp + """)");
+    }
+}
+
+fem_types entry_type<bool>::type(void) const { return _type; }
+
+std::string entry_type<bool>::format(bool const &inp) const {
+    if (inp) return "           +1.00";
+    else return "           +0.00";
+}
 
 fem_types const entry_type<bool>::_type = fem_types::Bool;
 

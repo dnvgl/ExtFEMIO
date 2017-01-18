@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem::type_bounds;
 using namespace dnvgl::extfem::fem::types;
 

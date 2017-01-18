@@ -86,17 +86,11 @@ namespace dnvgl {
                     class imbue_helper : public b_type {
                     public:
 
-                        imbue_helper(std::locale const &loc) : b_type("") {
-                            conv.imbue(loc);
-                        };
+                        imbue_helper(std::locale const &loc);
 
-                        virtual fem_types type(void) const {
-                            return fem_types::None;
-                        };
+                        virtual fem_types type(void) const;
 
-                        std::string format(void const*) const {
-                            return "";
-                        };
+                        std::string format(void const*) const;
                     };
 
                 }
@@ -104,9 +98,9 @@ namespace dnvgl {
                 class card : public __base::b_type {
                 public:
 
-                    card(std::string const &name) : __base::b_type(name) {};
+                    card(std::string const &name);
 
-                    card(void) : __base::b_type("") {};
+                    card(void);
 
                     virtual fem_types type(void) const {return fem_types::None;};
 
@@ -117,9 +111,9 @@ namespace dnvgl {
 
                 public:
 
-                    empty(void) : __base::b_type("") {};
+                    empty(void);
 
-                    virtual fem_types type(void) const {return fem_types::None;};
+                    virtual fem_types type(void) const;
 
                     std::string format(void) const;
                 };
@@ -178,54 +172,22 @@ namespace dnvgl {
                 protected:
 
 #ifdef HAVE_BOOST_REGEX_HPP
-                    boost::regex
+                    boost::regex static const bool_re;
 #else
-                    std::regex
+                    std::regex static const bool_re;
 #endif
-                    static const bool_re;
 
                     fem_types static const _type;
 
                 public:
 
-                    entry_type(std::string const &name) :
-                            fem::types::__base::b_type(name), bounds() {}
+                    entry_type(std::string const &name);
 
+                    bool operator() (std::string const &inp) const;
 
-                    bool operator() (std::string const &inp) const {
-                        double value;
+                    virtual fem_types type(void) const;
 
-                        if (inp.length() == 0) {
-                            if (!this->bounds.has_default())
-                                throw errors::bool_error(name, "empty entry without default");
-                            return this->bounds.get_default();
-                        }
-                        else {
-                            if (!regex_match(inp, bool_re)) {
-                                std::string msg("illegal input (""");
-                                throw errors::bool_error(name, msg + inp + """), no bool!");
-                            }
-
-                            conv.str(inp);
-                            conv.seekg(0);
-                            conv >> value;
-                        }
-                        if (value == 1.) return true;
-                        else if (value == 0.) return false;
-                        else {
-                            std::string msg("boundary condition violated (");
-                            throw errors::bool_error(
-                                name, msg + name + ")\n(""" + inp + """)");
-                        }
-                    }
-
-
-                    virtual fem_types type(void) const { return _type; };
-
-                    std::string format(bool const &inp) const {
-                        if (inp) return "           +1.00";
-                        else return "           +0.00";
-                    }
+                    std::string format(bool const &inp) const;
                 };
 
                 template <>
@@ -240,88 +202,27 @@ namespace dnvgl {
                 protected:
 
 #ifdef HAVE_BOOST_REGEX_HPP
-                    boost::regex
+                    boost::regex static const float_re;
 #else
-                    std::regex
+                    std::regex static const float_re;
 #endif
-                    static const float_re;
 
                     fem_types static const _type;
 
                 public:
 
-                    entry_type(std::string const &name) :
-                            __base::b_type(name), bounds() {};
-
+                    entry_type(std::string const &name);
 
                     entry_type(
                         std::string const &name,
-                        fem::type_bounds::bound<double> const &bounds) :
-                            fem::types::__base::b_type(name), bounds(bounds) {};
+                        fem::type_bounds::bound<double> const &bounds);
 
                     /// Convert string to double
-                    double operator() (std::string const &inp) const {
-                        double value;
+                    double operator() (std::string const &inp) const;
 
-                        if (inp.length() == 0) {
-                            if (!this->bounds.has_default())
-                                throw errors::float_error(name, "empty entry without default");
-                            value = this->bounds.get_default();
-                        }
-                        else {
-                            if (!regex_match(inp, float_re)) {
-                                std::string msg("illegal input, (""");
-                                throw errors::float_error(name, msg + inp + """), no float!");
-                            }
+                    virtual fem_types type(void) const;
 
-                            conv.str(inp);
-                            conv.seekg(0);
-                            conv >> value;
-                        }
-                        if (!this->bounds.in_bounds(value)) {
-                            std::string msg("boundary condition violated (");
-                            throw errors::float_error(
-                                name, msg + name + ")\n(""" + inp + """)");
-                        }
-                        return value;
-                    };
-
-                    virtual fem_types type(void) const {return _type;};
-
-                    std::string format(double const &inp) const {
-
-                        std::ostringstream res;
-                        res.imbue(std::locale::classic());
-
-#ifdef _MSC_VER
-                        // std::set output to two digit exponetial format.
-                        unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
-#endif
-
-                        res.setf(std::ios_base::showpos);
-                        res.setf(std::ios_base::scientific, std::ios::floatfield);
-                        res.setf(std::ios_base::adjustfield, std::ios::left);
-
-                        res.precision(9);
-                        res.width(16);
-                        res.fill(' ');
-
-                        res << inp;
-                        std::string out(res.str());
-                        if (out.size() != 16) {
-                            std::ostringstream msg("output string for value ", std::ostringstream::ate);
-                            msg << inp << " of incorrect size, got length of " << out.size()
-                                << " instead of allowed length of 16.";
-                            throw errors::output_error(name, msg.str());
-                        }
-
-#ifdef _MSC_VER
-                        // Reset exponetial format to former std::settings.
-                        _set_output_format(ext_exp_format);
-#endif
-
-                        return out;
-                    };
+                    std::string format(double const &inp) const;
                 };
 
                 template <>
@@ -365,97 +266,24 @@ namespace dnvgl {
                 protected:
 
 #ifdef HAVE_BOOST_REGEX_HPP
-                    boost::regex
+                    boost::regex static const list_int_re;
 #else
-                    std::regex
+                    std::regex static const list_int_re;
 #endif
-                    static const list_int_re;
 
                     fem_types static const _type;
 
                 public:
 
-                    entry_type(
-                        std::string const &name) :
-                            __base::b_type(name) {};
+                    entry_type(std::string const &name);
 
                     void operator() (
-                        std::vector<int> &value, std::string const &inp) const {
+                        std::vector<int> &value, std::string const &inp) const;
 
-                        double tmp_d;
-                        std::list<int> tmp_l;
-                        long tmp;
-
-                        if (! regex_match(inp, list_int_re)) {
-                            std::string msg("illegal input (""");
-                            throw errors::int_error(
-                                name, msg + inp + """), no integer list!");
-                        }
-
-                        conv.str(inp);
-                        conv.seekg(0);
-                        conv >> tmp_d;
-                        tmp = (long)tmp_d;
-
-                        while (tmp) {
-                            ldiv_t divmod = std::div(tmp, (long)10);
-                            value.push_back(divmod.rem);
-                            tmp /= 10;
-                        }
-                        std::sort(value.begin(), value.end());
-
-                        return;
-                    };
-
-                    virtual inline fem_types type(void) const {return _type;};
+                    fem_types type(void) const;
 
                     std::string format(
-                        std::vector<int> const &inp) const {
-
-                        std::ostringstream res, res2;
-                        res.imbue(std::locale::classic());
-                        res2.imbue(std::locale::classic());
-
-                        double value = 0;
-                        for (auto &p : inp) {
-                            value *= 10.;
-                            value += p;
-                        }
-
-#ifdef _MSC_VER
-                        // std::set output to two digit exponential format.
-                        unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
-#endif
-
-                        res.setf(std::ios_base::scientific, std::ios::floatfield);
-                        res.setf(std::ios_base::adjustfield, std::ios::left);
-
-                        res << " ";
-                        res.precision(9);
-                        res.width(15);
-                        res.fill(' ');
-
-                        res << value;
-                        std::string out(res.str());
-                        if (out.size() != 16) {
-                            std::ostringstream msg(
-                                "output string for value ",
-                                std::ostringstream::ate);
-                            std::copy(
-                                inp.begin(), inp.end(),
-                                std::ostream_iterator<int>(msg, ", "));
-                            msg << " of incorrect size, got length of " << out.size()
-                                << " instead of allowed length of 16. " << "!" << out << "!";
-                            throw errors::output_error(name, msg.str());
-                        }
-
-#ifdef _MSC_VER
-                        // Reset exponential output format to former std::settings.
-                        _set_output_format(ext_exp_format);
-#endif
-
-                        return out;
-                    };
+                        std::vector<int> const &inp) const;
                 };
             }
         }
