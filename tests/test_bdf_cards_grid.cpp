@@ -37,7 +37,7 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex() );
+   return Catch::toString( ex.what() );
 }
 
 TEST_CASE("BDF GRID definitions. (Small Field Format)",

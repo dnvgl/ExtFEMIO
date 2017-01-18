@@ -39,7 +39,7 @@ using namespace dnvgl::extfem;
 using namespace bdf::types;
 
 CATCH_TRANSLATE_EXCEPTION( bdf::errors::error& ex ) {
-   return Catch::toString( ex() );
+   return Catch::toString( ex.what() );
 }
 
 namespace {

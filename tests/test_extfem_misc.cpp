@@ -33,7 +33,7 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl;
 
 CATCH_TRANSLATE_EXCEPTION( extfem::bdf::errors::error& ex ) {
-   return Catch::toString( ex() );
+   return Catch::toString( ex.what() );
 }
 
 TEST_CASE("Checking misc functions", "[extfem::misc]") {

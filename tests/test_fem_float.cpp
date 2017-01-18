@@ -43,7 +43,7 @@ using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::type_bounds;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex() );
+   return Catch::toString( ex.what() );
 }
 
 namespace {

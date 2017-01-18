@@ -16,6 +16,12 @@
 
 #include "extfem_misc.h"
 
+#if defined(_MSC_VER) & _MSC_VER < 1900
+#define NOEXCEPT
+#else
+#define NOEXCEPT noexcept
+#endif
+
 namespace dnvgl {
     namespace extfem {
         namespace fem {
@@ -41,7 +47,7 @@ namespace dnvgl {
                         const std::string&, const std::string &msg,
                         const std::string &err_class);
 
-                    virtual char const *what(void) const;
+                    virtual char const *what(void) const noexcept;
                 };
 
                 class types_error : public error {

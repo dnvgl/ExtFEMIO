@@ -11,6 +11,8 @@
 #if !defined _BDF_TYPE_BOUNDS_H_
 #define _BDF_TYPE_BOUNDS_H_
 
+#include <set>
+
 #include "bdf/errors.h"
 
 namespace dnvgl {

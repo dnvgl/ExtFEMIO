@@ -38,8 +38,8 @@ std::string error::get_msg(void) const {
    return err_class + ":" + msg;
 }
 
-std::string error::operator() (void) const {
-   return this->get_msg() + "\n";
+char const *error::what(void) const noexcept {
+    return (this->get_msg() + "\n").c_str();
 }
 
 types_error::types_error(const std::string &msg) :

@@ -45,7 +45,7 @@ using namespace dnvgl::extfem::bdf::cards;
 using namespace dnvgl::extfem::bdf::input;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-    return Catch::toString( ex() );
+    return Catch::toString( ex.what() );
 }
 
 TEST_CASE("BDF file reader.", "[bdf_cards]" ) {

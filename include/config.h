@@ -19,7 +19,7 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#define ExtFEMIO_VERSION "0.4.1"
+#define ExtFEMIO_VERSION "0.4.2"
 
 #endif // _CONFIG_H_
 
@@ -28,7 +28,7 @@
   mode: c
   c-file-style: "dnvgl"
   indent-tabs-mode: nil
-  compile-command: "make -C ../../cbuild -j8 all_unity&&make -C ../../cbuild test"
+  compile-command: "make -C ../cbuild -j8 all_unity&&make -C ../cbuild test"
   coding: utf-8
   End:
  */

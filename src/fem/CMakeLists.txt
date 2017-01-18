@@ -80,6 +80,14 @@ set_target_properties(extfemio_fem PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${C
 
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
+add_executable(fem2fem
+  fem2fem.cpp fem2fem_args.c)
+target_link_libraries(fem2fem ${EXTFEM_FEM_LIBS})
+
+CONFIGURE_FILE(
+  ${CMAKE_CURRENT_SOURCE_DIR}/fem2fem_args.ggo.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/fem2fem_args.ggo)
+
 if(CMAKE_COMPILER_IS_GNUCXX)
   # add the commands to generate the source code
   add_custom_command (
@@ -102,6 +110,15 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       ${CMAKE_SOURCE_DIR}/tools/elements_h_do.py
       ${CMAKE_SOURCE_DIR}/tools/elements_data.py
       ${CMAKE_SOURCE_DIR}/tools/templates/fem_elements.h)
+  add_custom_command (
+    OUTPUT
+      ${CMAKE_CURRENT_SOURCE_DIR}/fem2fem_args.c
+    COMMAND
+      cd ${CMAKE_CURRENT_SOURCE_DIR} &&
+        gengetopt --input=fem2fem_args.ggo --file-name=fem2fem_args --header-output-dir=../../include/ --src-output-dir=. --unamed-opts ||
+        svn revert ${CMAKE_SOURCE_DIR}/fem2fem_args.c;
+    DEPENDS
+      ${CMAKE_CURRENT_SOURCE_DIR}/fem2fem_args.ggo)
 endif()
 
 # Local Variables:

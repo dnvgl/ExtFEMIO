@@ -48,7 +48,7 @@ using namespace dnvgl::extfem::fem::cards;
 using namespace dnvgl::extfem::fem::input;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-    return Catch::toString( ex() );
+    return Catch::toString( ex.what() );
 }
 
 

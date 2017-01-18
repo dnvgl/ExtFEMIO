@@ -1,9 +1,10 @@
 # $Id$
-## Task      Command line options for fem2fem.	
+## Task      Command line options for fem2fem.
 
 ## Author    Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
-package "fem2fem (@PACKAGE_NAME@)"
+package "fem2fem (@PROJECT_NAME@)"
+version "@PROJECT_VERSION@"
 
 # gengetopt input file.  See the info entry for directions.
 

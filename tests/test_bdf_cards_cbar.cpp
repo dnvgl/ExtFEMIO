@@ -36,7 +36,7 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-    return ex();
+    return ex.what();
 }
 
 CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {

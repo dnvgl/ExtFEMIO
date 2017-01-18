@@ -44,7 +44,7 @@ using namespace dnvgl::extfem::bdf::types;
 using namespace dnvgl::extfem::bdf::type_bounds;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex() );
+   return Catch::toString( ex.what() );
 }
 
 namespace {
