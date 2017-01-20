@@ -18,7 +18,7 @@ FUNCTION(my_add_test inp)
       PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
   endif()
   add_test(NAME ${NAME}
-    COMMAND ${COMMAND} --reporter junit --out ${COMMAND}_junit.xml)
+    COMMAND ${COMMAND} --break --reporter junit --out ${COMMAND}_junit.xml)
 ENDFUNCTION()
 
 if(DEFINED ENV{TEAMCITY_VERSION})
