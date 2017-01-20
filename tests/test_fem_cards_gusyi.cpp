@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,18 +47,18 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
 
-   std::list<std::string> lines;
-
+   vector<std::string> lines;
+   size_t len;
     __base::geoprop::reset_geono();
 
     SECTION("GUSYI (1)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002\n",
              "         1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000\n",
              "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
              "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-        __base::card::card_split(data, lines);
-        gusyi probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gusyi probe(lines, len);
 
         CHECK(probe.GEONO == 5);
         CHECK(probe.HZ == 466.);
@@ -75,13 +77,13 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
     }
 
     SECTION("GUSYI (2)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
              "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
              "         1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
              "         1.00000000e+00  0.00000000e+00 \n"});
-        __base::card::card_split(data, lines);
-        gusyi probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gusyi probe(lines, len);
 
         CHECK(probe.GEONO == 5);
         CHECK(probe.HZ == 466.);
@@ -100,12 +102,12 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
     }
 
     SECTION("GUSYI (3)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
              "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
              "         1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
-        __base::card::card_split(data, lines);
-        gusyi probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gusyi probe(lines, len);
 
         CHECK(probe.GEONO == 5);
         CHECK(probe.HZ == 466.);

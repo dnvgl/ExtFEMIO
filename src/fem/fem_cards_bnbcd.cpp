@@ -45,13 +45,12 @@ const entry_type<long> bnbcd::_form_NODENO("NODENO");
 const entry_type<long> bnbcd::_form_NDOF("NDOF");
 const entry_type<long> bnbcd::_form_FIX("FIX");
 
-bnbcd::bnbcd(const std::list<std::string> &inp) :
-   card(inp) {
-   this->read(inp);
+bnbcd::bnbcd(const std::vector<std::string> &inp, size_t const &len) {
+    this->read(inp, len);
 }
 
-void bnbcd::read(const std::list<std::string> &inp) {
-   if (inp.size() < 4)
+void bnbcd::read(const std::vector<std::string> &inp, size_t const &len) {
+   if (len < 4)
       throw errors::parse_error(
          "BNBCD", "Illegal number of entries.");
 
@@ -113,8 +112,9 @@ std::ostream &bnbcd::put(std::ostream& os) const {
    return os;
 }
 
-cards::__base::card const &bnbcd::operator() (std::list<std::string> const &inp) {
-   this->read(inp);
+cards::__base::card const &bnbcd::operator() (
+    std::vector<std::string> const &inp, size_t const &len) {
+    this->read(inp, len);
    return *this;
 }
 

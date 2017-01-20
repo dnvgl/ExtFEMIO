@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,13 +47,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GECCEN (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GECCEN   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
-      __base::card::card_split(data, lines);
-      geccen probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      geccen probe(lines, len);
 
       CHECK(probe.ECCNO == 1);
       CHECK(probe.EX == 1.);
@@ -60,10 +63,10 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
    }
 
    SECTION("GECCEN (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GECCEN   1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
-      __base::card::card_split(data, lines);
-      geccen probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      geccen probe(lines, len);
 
       CHECK(probe.ECCNO == 1);
       CHECK(probe.EX == 1.);
@@ -72,10 +75,10 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]" ) {
    }
 
    SECTION("GECCEN (3)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
-      __base::card::card_split(data, lines);
-      geccen probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      geccen probe(lines, len);
 
       CHECK(probe.ECCNO == 1);
       CHECK(probe.EX == 1.);
@@ -121,13 +124,14 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]" ) {
 
 TEST_CASE("FEM GECCEN conversion from own output.", "[fem_geccen,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GECCEN") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
-      __base::card::card_split(data, lines);
-      geccen probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      geccen probe(lines, len);
 
       CHECK(probe.ECCNO == 1);
       CHECK(probe.EX == 1.);

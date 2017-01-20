@@ -30,6 +30,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace cards;
@@ -43,17 +45,16 @@ const entry_type<long> gnode::_form_NODENO("NODENO");
 const entry_type<long> gnode::_form_NDOF("NDOF");
 const entry_type<std::vector<int> > gnode::_form_ODOF("ODOF");
 
-gnode::gnode(const std::list<std::string> &inp) :
-   card(inp) {
-   this->read(inp);
+gnode::gnode(const vector<std::string> &inp, size_t const &len) {
+    this->read(inp, len);
 }
 
 gnode::~gnode(void) {
     ODOF.clear();
 }
 
-void gnode::read(const std::list<std::string> &inp) {
-   if (inp.size() < 5)
+void gnode::read(const vector<std::string> &inp, size_t const &len) {
+   if (len < 5)
       throw errors::parse_error(
          "GNODE", "Illegal number of entries.");
 
@@ -99,8 +100,8 @@ std::ostream &gnode::put(std::ostream& os) const {
 }
 
 cards::__base::card const &gnode::operator() (
-   std::list<std::string> const &inp) {
-   this->read(inp);
+    vector<std::string> const &inp, size_t const &len) {
+    this->read(inp, len);
    return *this;
 }
 

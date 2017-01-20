@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -47,17 +49,18 @@ TEST_CASE("FEM MORSMEL definitions.", "[fem_morsmel]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
    std::list<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("MORSMEL (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "MORSMEL   8.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n",
             "          0.00000000E+00  1.07820425E+11  3.14079724E+10  1.41541114E+11\n",
             "          0.00000000E+00  0.00000000E+00  3.26140006E+10  2.21900001E-01\n",
             "          2.91298896E-01  2.99999993E-02  2.99999993E-02  1.20000004E-05\n",
             "          1.20000004E-05\n"});
-      __base::card::card_split(data, lines);
-      morsmel probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      morsmel probe(lines, len);
 
       CHECK(probe.MATNO == 8);
       CHECK(probe.Q1 == 0.);
@@ -79,14 +82,14 @@ TEST_CASE("FEM MORSMEL definitions.", "[fem_morsmel]" ) {
    }
 
    SECTION("MORSMEL (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "MORSMEL   1.30000000E+01  0.00000000E+00  1.00000000E+00  0.00000000E+00\n",
             "          0.00000000E+00  5.21928417E+10  7.03282944E+09  6.01096520E+10\n",
             "          0.00000000E+00  0.00000000E+00  2.18899994E+09  1.16999999E-01\n",
             "          1.34747013E-01  2.99999993E-02  2.99999993E-02  1.20000004E-05\n",
             "          1.20000004E-05  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-      __base::card::card_split(data, lines);
-      morsmel probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      morsmel probe(lines, len);
 
       CHECK(probe.MATNO == 13);
       CHECK(probe.Q1 == 0.);
@@ -133,17 +136,18 @@ TEST_CASE("FEM MORSMEL types output.", "[fem_morsmel,out]" ) {
 
 TEST_CASE("FEM MORSMEL conversion from own output.", "[fem_morsmel,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("MORSMEL (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "MORSMEL +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n",
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n",
             "        +1.700000000e+01\n"});
-      __base::card::card_split(data, lines);
-      morsmel probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      morsmel probe(lines, len);
 
       CHECK(probe.MATNO == 1);
       CHECK(probe.Q1 == 2.);

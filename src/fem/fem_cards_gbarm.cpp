@@ -47,10 +47,18 @@ const entry_type<double> gbarm::_form_SFZ("SFZ");
 const entry_type<long> gbarm::_form_NLOBY("NLOBY");
 const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
 
-gbarm::gbarm(const list<std::string> &inp) :
-        __base::beam_prop(inp), NLOBY(0), NLOBZ(0) {
+gbarm::gbarm(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-    if (inp.size() < 9)
+void gbarm::read(const vector<std::string> &inp, size_t const &len) {
+    std::string static const empty{"                "};
+
+    __base::beam_prop::read(inp, len);
+    NLOBY = {0};
+    NLOBZ = {0};
+
+    if (len < 9)
         throw errors::parse_error(
             "GBARM", "Illegal number of entries.");
 
@@ -63,13 +71,16 @@ gbarm::gbarm(const list<std::string> &inp) :
     BB = _form_BB(*(pos++));
     SFY = _form_SFY(*(pos++));
     SFZ = _form_SFZ(*(pos++));
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    size_t i{7};
+    if (++i < len) return;
+    if (*pos != empty)
         NLOBY = _form_NLOBY(*(pos++));
     else
         pos++;
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    i++;
+
+    if (i >= len) return;
+    if (*pos != empty)
         NLOBZ = _form_NLOBZ(*(pos++));
 }
 

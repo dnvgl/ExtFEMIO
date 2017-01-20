@@ -11,11 +11,11 @@
 
 // ID:
 namespace {
-   char const cID_fem_cards_bsell[]
+    char const cID_fem_cards_bsell[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <memory>
@@ -42,78 +42,80 @@ entry_type<long> const bsell::_form_SUBNO("SUBNO");
 entry_type<long> const bsell::_form_LLC("LLC");
 entry_type<double> const bsell::_form_FACT("FACT");
 
-bsell::bsell(std::list<std::string> const &inp) :
-   card(inp) {
+bsell::bsell(std::vector<std::string> const &inp, size_t const &len) {
 
-   long tmp;
+    static const std::string empty(16, ' ');
 
-   if (inp.size() < 7)
-      throw errors::parse_error(
-         "BSELL", "Illegal number of entries.");
+    long tmp;
 
-   auto pos = inp.begin();
+    if (len < 7)
+        throw errors::parse_error(
+            "BSELL", "Illegal number of entries.");
 
-   ++pos;
+    auto pos = inp.begin();
 
-   LC = _form_LC(*(pos++));
-   SUBNO = _form_SUBNO(*(pos++));
+    ++pos;
 
-   pos++;
-   pos++;
-   while (pos != inp.end()) {
-      if (*pos == "                ")
-         break;
-      tmp = _form_LLC(*pos++);
-      if (tmp == 0) break;
-      LLC.push_back(tmp);
-      FACT.push_back(_form_FACT(*(pos++)));
-   }
+    LC = _form_LC(*(pos++));
+    SUBNO = _form_SUBNO(*(pos++));
+
+    pos++;
+    pos++;
+    size_t i{5};
+    while (++(++i) < len) {
+        if (*pos == empty)
+            break;
+        tmp = _form_LLC(*pos++);
+        if (tmp == 0) break;
+        LLC.push_back(tmp);
+        FACT.push_back(_form_FACT(*(pos++)));
+    }
 }
 
 bsell::bsell(void) :
-   bsell(-1, 0, {}, {}) {}
+        bsell(-1, 0, {}, {}) {}
 
 bsell::bsell(long const &LC,
              long const &SUBNO,
              std::vector<long> const &LLC,
              std::vector<double> const &FACT) :
-   card(), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
+        card(), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
 
 cards::__base::card const &bsell::operator()(
-   long const &LC,
-   long const &SUBNO,
-   std::vector<long> const &LLC,
-   std::vector<double> const &FACT) {
-   this->LC = LC;
-   this->SUBNO = SUBNO;
-   this->LLC = LLC;
-   this->FACT = FACT;
-   return *this;
+    long const &LC,
+    long const &SUBNO,
+    std::vector<long> const &LLC,
+    std::vector<double> const &FACT) {
+    this->LC = LC;
+    this->SUBNO = SUBNO;
+    this->LLC = LLC;
+    this->FACT = FACT;
+    return *this;
 }
 
 dnvgl::extfem::fem::cards::types const
 bsell::card_type(void) const {
-   return types::BSELL;
+    return types::BSELL;
 }
 
 std::ostream &bsell::put(std::ostream& os) const {
-   if (this->LC == -1) return os;
-   os << bsell::head.format()
-      << this->_form_LC.format(this->LC)
-      << this->_form_SUBNO.format(this->SUBNO)
-      << this->empty.format()
-      << this->empty.format()
-      << std::endl;
-   for (size_t i = 0; i < this->LLC.size(); i+=2) {
-      os << dnvgl::extfem::fem::types::card().format()
-         << this->_form_LLC.format(this->LLC[i])
-         << this->_form_FACT.format(this->FACT[i]);
-      if (i+1 < this->LLC.size())
-         os << this->_form_LLC.format(this->LLC[i+1])
-            << this->_form_FACT.format(this->FACT[i+1]);
-      os << std::endl;
-   }
-   return os;
+    if (this->LC == -1) return os;
+    os << bsell::head.format()
+       << this->_form_LC.format(this->LC)
+       << this->_form_SUBNO.format(this->SUBNO)
+       << this->empty.format()
+       << this->empty.format()
+       << std::endl;
+    for (size_t i = 0; i < this->LLC.size(); i+=2) {
+        os << dnvgl::extfem::fem::types::card().format()
+           << this->_form_LLC.format(this->LLC[i])
+           << this->_form_FACT.format(this->FACT[i]);
+        if (i+1 < this->LLC.size())
+            os << this->_form_LLC.format(this->LLC[i+1])
+               << this->_form_FACT.format(this->FACT[i+1]);
+        os << std::endl;
+    }
+    return os;
 }
 
 // Local Variables:

@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -54,18 +56,19 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
    }
    ref_K[1][1] = 1e8;
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("MGSPRNG (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "MGSPRNG  7.00000000e+001 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         1.00000000e+008 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      mgsprng probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      mgsprng probe(lines, len);
 
       CHECK(probe.MATNO == 70);
       CHECK(probe.NDOF == 6);
@@ -76,15 +79,15 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
    }
 
    SECTION("MGSPRNG (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "MGSPRNG  7.00000000e+01  6.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
          "         1.00000000e+08  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n",
          "         0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      mgsprng probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      mgsprng probe(lines, len);
 
       CHECK(probe.MATNO == 70);
       CHECK(probe.NDOF == 6);
@@ -104,15 +107,15 @@ TEST_CASE("FEM MGSPRNG definitions.", "[fem_mgsprng]" ) {
       ref_K[4] = std::vector<double>({5., 10., 14., 17., 19., 20.});
       ref_K[5] = std::vector<double>({6., 11., 15., 18., 20., 21.});
 
-      std::list<std::string> data({
+      vector<std::string> data({
          "MGSPRNG  7.00000000e+01  6.00000000e+00  1.00000000e+00  2.00000000e+00 \n",
          "         3.00000000e+00  4.00000000e+00  5.00000000e+00  6.00000000e+00 \n",
          "         7.00000000e+00  8.00000000e+00  9.00000000e+00  1.00000000e+01 \n",
          "         1.10000000e+01  1.20000000e+01  1.30000000e+01  1.40000000e+01 \n",
          "         1.50000000e+01  1.60000000e+01  1.70000000e+01  1.80000000e+01 \n",
          "         1.90000000e+01  2.00000000e+01  2.10000000e+01  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      mgsprng probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      mgsprng probe(lines, len);
 
       CHECK(probe.MATNO == 70);
       CHECK(probe.NDOF == 6);
@@ -188,18 +191,19 @@ TEST_CASE("FEM MGSPRNG types output.", "[fem_mgsprng,out]" ) {
 
 TEST_CASE("FEM MGSPRNG conversion from own output.", "[fem_mgsprng,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("MGSPRNG (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "MGSPRNG +1.000000000e+00+6.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +9.990000000e+02+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +0.000000000e+00+0.000000000e+00+0.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      mgsprng probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      mgsprng probe(lines, len);
 
       CHECK(probe.MATNO == 1);
       CHECK(probe.NDOF == 6);
@@ -215,15 +219,15 @@ TEST_CASE("FEM MGSPRNG conversion from own output.", "[fem_mgsprng,in/out]") {
    }
 
    SECTION("MGSPRNG (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "MGSPRNG +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
             "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
             "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
             "        +1.500000000e+01+1.600000000e+01+1.700000000e+01+1.800000000e+01\n",
             "        +1.900000000e+01+2.000000000e+01+2.100000000e+01\n"});
-      __base::card::card_split(data, lines);
-      mgsprng probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      mgsprng probe(lines, len);
 
       CHECK(probe.MATNO == 1);
       CHECK(probe.NDOF == 6);

@@ -27,7 +27,7 @@ namespace dnvgl {
         namespace fem {
             namespace errors {
 
-                class error : public std::exception {
+                class error : public virtual std::exception {
 
                 protected:
 
@@ -120,21 +120,24 @@ namespace dnvgl {
                     usage_error(const std::string &name, const std::string &msg);
                 };
 
-                class no_used : public error, public virtual std::invalid_argument {
+                class no_used :
+                    public virtual error {
 
                 public:
 
                     no_used(long const &no);
                 };
 
-                class id_used : public error, public virtual std::invalid_argument {
+                class id_used :
+                    public virtual error {
 
                 public:
 
                     id_used(long const &id);
                 };
 
-                class data_not_matching_id : public error, public virtual std::invalid_argument {
+                class data_not_matching_id :
+                    public virtual error {
 
                 public:
 

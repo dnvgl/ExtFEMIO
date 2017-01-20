@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -47,13 +49,14 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
 
    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
    std::list<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GUNIVEC (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      gunivec probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gunivec probe(lines, len);
 
       CHECK(probe.TRANSNO == 534);
       CHECK(probe.UNIX == 0.);
@@ -62,10 +65,10 @@ TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
    }
 
    SECTION("GUNIVEC (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GUNIVEC  5.34000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      gunivec probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gunivec probe(lines, len);
 
       CHECK(probe.TRANSNO == 534);
       CHECK(probe.UNIX == 0.);
@@ -94,13 +97,14 @@ TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
 
 TEST_CASE("FEM GUNIVEC conversion from own output.", "[fem_gunivec,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GUNIVEC (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      gunivec probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gunivec probe(lines, len);
 
       CHECK(probe.TRANSNO == 1);
       CHECK(probe.UNIX == 2.);

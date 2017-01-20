@@ -44,7 +44,7 @@ namespace dnvgl {
 
                fem_file(std::istream&);
 
-               void get(std::list<std::string>&);
+               size_t get(std::vector<std::string>&);
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)

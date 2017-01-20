@@ -29,6 +29,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
@@ -41,10 +43,18 @@ const fem::types::card gelth::head("GELTH");
 const entry_type<double> gelth::_form_TH("TH");
 const entry_type<long> gelth::_form_NINT("NINT");
 
-gelth::gelth(const std::list<std::string> &inp) :
-        geoprop(inp), NINT(0) {
+gelth::gelth(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-    if (inp.size() < 4)
+void gelth::read(const vector<std::string> &inp, size_t const &len) {
+    std::string static const empty{"                "};
+
+    NINT = {0};
+
+    geoprop::read(inp, len);
+
+    if (len < 4)
         throw errors::parse_error(
             "GELTH", "Illegal number of entries.");
 
@@ -54,7 +64,7 @@ gelth::gelth(const std::list<std::string> &inp) :
 
     GEONO = _form_GEONO(*(pos++));
     TH = _form_TH(*(pos++));
-    if (*pos != "                ")
+    if (len >= 4 && *pos != empty)
         NINT = _form_NINT(*pos);
 }
 

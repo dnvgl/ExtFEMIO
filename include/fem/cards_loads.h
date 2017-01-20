@@ -116,7 +116,7 @@ namespace dnvgl {
                std::string SET_NAME;
                std::vector<std::string> CONT;
 
-               tdload(std::list<std::string> const &);
+               tdload(std::vector<std::string> const&, size_t const&);
 
                tdload(void);
 
@@ -306,7 +306,7 @@ pressure in the local /z/-direction.
 
                beuslo(void);
 
-               beuslo(std::list<std::string> const &);
+               beuslo(std::vector<std::string> const&, size_t const&);
 
                beuslo(long const &LLC,
                       long const &LOTYP,

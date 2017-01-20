@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,16 +47,17 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
 
-    std::list<std::string> lines;
+    vector<std::string> lines;
+    size_t len;
 
     __base::geoprop::reset_geono();
 
     SECTION("GPIPE (1)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GPIPE    6.54357000e+005 0.00000000e+000 5.90218891e-002 2.95109446e-002\n",
              "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-        __base::card::card_split(data, lines);
-        gpipe probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gpipe probe(lines, len);
 
         CHECK(probe.GEONO == 654357);
         CHECK(probe.DI == 0.);
@@ -67,11 +70,11 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
     }
 
     SECTION("GPIPE (2)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GPIPE    6.54357000e+05  0.000000000e+00 5.90218891e-02  2.95109446e-02 \n",
              "         1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        gpipe probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gpipe probe(lines, len);
 
         CHECK(probe.GEONO == 654357);
         CHECK(probe.DI == 0.);
@@ -86,16 +89,16 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
 
 TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file") {
 
-    std::list<std::string> lines;
-
+    vector<std::string> lines;
+    size_t len;
     __base::geoprop::reset_geono();
 
     SECTION("Failing card") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GPIPE     1.80000000E+01  1.49100006E-01  2.19100013E-01  3.50000001E-02\n",
              "          1.00000000E+00  1.00000000E+00\n"});
-        __base::card::card_split(data, lines);
-        gpipe probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gpipe probe(lines, len);
 
         CHECK(probe.GEONO == 18);
         CHECK(probe.DI == 1.49100006e-1);
@@ -139,16 +142,17 @@ TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
 
 TEST_CASE("FEM GPIPE conversion from own output.", "[fem_gpipe,in/out]") {
 
-    std::list<std::string> lines;
+    vector<std::string> lines;
+    size_t len;
 
     __base::geoprop::reset_geono();
 
     SECTION("GPIPE (1)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        gpipe probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gpipe probe(lines, len);
 
         CHECK(probe.GEONO == 1);
         CHECK(probe.DI == 2.);
@@ -161,11 +165,11 @@ TEST_CASE("FEM GPIPE conversion from own output.", "[fem_gpipe,in/out]") {
     }
 
     SECTION("GPIPE (2)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
              "        +5.000000000e+00+6.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        gpipe probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gpipe probe(lines, len);
 
         CHECK(probe.GEONO == 1);
         CHECK(probe.DI == 2.);

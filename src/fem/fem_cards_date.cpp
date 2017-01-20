@@ -11,11 +11,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards_date[]
+    const char cID_fem_cards_date[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #ifdef max
@@ -36,91 +36,85 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
+using namespace dnvgl::extfem::fem::cards;
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
+const fem::types::card date::head("DATE");
 
-            const fem::types::card date::head("DATE");
+const entry_type<long> date::_form_TYPE("TYPE");
+const entry_type<long> date::_form_SUBTYPE("SUBTYPE");
+const entry_type<long> date::_form_NRECS("NRECS");
+const entry_type<long> date::_form_NBYTE("NBYTE");
+const entry_type<std::string> date::_form_CONT("CONT");
 
-            const entry_type<long> date::_form_TYPE("TYPE");
-            const entry_type<long> date::_form_SUBTYPE("SUBTYPE");
-            const entry_type<long> date::_form_NRECS("NRECS");
-            const entry_type<long> date::_form_NBYTE("NBYTE");
-            const entry_type<std::string> date::_form_CONT("CONT");
+date::date(const std::vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-            date::date(const std::list<std::string> &inp) :
-               card(inp) {
+void date::read(const std::vector<std::string> &inp, size_t const &len) {
+    if (len < 8)
+        throw errors::parse_error(
+            "DATE", "Illegal number of entries.");
 
-               if (inp.size() < 8)
-                  throw errors::parse_error(
-                     "DATE", "Illegal number of entries.");
+    auto pos = inp.begin();
 
-               auto pos = inp.begin();
+    ++pos;
+    TYPE = _form_TYPE(*(pos++));
+    SUBTYPE = _form_SUBTYPE(*(pos++));
+    NRECS = _form_NRECS(*(pos++));
+    NBYTE = _form_NBYTE(*(pos++));
 
-               ++pos;
-               TYPE = _form_TYPE(*(pos++));
-               SUBTYPE = _form_SUBTYPE(*(pos++));
-               NRECS = _form_NRECS(*(pos++));
-               NBYTE = _form_NBYTE(*(pos++));
+    for (int i = 0; i < NRECS; i++) {
+        auto pos_0 = *pos++;
+        auto pos_1 = *pos++;
+        auto pos_2 = *pos++;
+        auto pos_3 = *pos++;
+        std::string cont = _form_CONT(
+            pos_0, pos_1, pos_2, pos_3);
+        cont.resize(NBYTE, ' ');
+        CONT.push_back(cont);
+    }
+}
 
-               for (int i = 0; i < NRECS; i++) {
-                  auto pos_0 = *pos++;
-                  auto pos_1 = *pos++;
-                  auto pos_2 = *pos++;
-                  auto pos_3 = *pos++;
-                  std::string cont = _form_CONT(
-                     pos_0, pos_1, pos_2, pos_3);
-                  cont.resize(NBYTE, ' ');
-                  CONT.push_back(cont);
-            }
-            }
+date::date() :
+        date(-1, 0, 0, 0, {}) {}
 
-            date::date() :
-               date(-1, 0, 0, 0, {}) {}
+date::date(const long &TYPE, const long &SUBTYPE,
+           const long &NRECS, const long &NBYTE,
+           const std::vector<std::string> &CONT) :
+        TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
+        NBYTE(NBYTE), CONT(CONT) {
+    for (auto &p : this->CONT)
+        p.resize(NBYTE-8, ' ');
+}
 
-            date::date(const long &TYPE, const long &SUBTYPE,
-                       const long &NRECS, const long &NBYTE,
-                       const std::vector<std::string> &CONT) :
-               TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
-               NBYTE(NBYTE), CONT(CONT) {
-               for (auto &p : this->CONT)
-                  p.resize(NBYTE-8, ' ');
-            }
+date::date(const long &TYPE, const long &SUBTYPE,
+           const std::vector<std::string> &CONT) :
+        card(),
+        TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
+    NRECS = static_cast<long>(this->CONT.size());
+    NBYTE = 0;
+    for (auto &p : this->CONT)
+        NBYTE = std::max(NBYTE, (long)p.size());
+    for (auto &p : this->CONT)
+        p.resize(NBYTE, ' ');
+    NBYTE += 8;
+}
 
-            date::date(const long &TYPE, const long &SUBTYPE,
-                       const std::vector<std::string> &CONT) :
-               card(),
-               TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
-               NRECS = static_cast<long>(this->CONT.size());
-               NBYTE = 0;
-               for (auto &p : this->CONT)
-                  NBYTE = std::max(NBYTE, (long)p.size());
-               for (auto &p : this->CONT)
-                  p.resize(NBYTE, ' ');
-               NBYTE += 8;
-            }
+const cards::types
+date::card_type(void) const { return types::DATE; };
 
-            const types
-            date::card_type(void) const { return types::DATE; };
-
-            std::ostream &date::put(std::ostream& os) const {
-               if (this->TYPE == -1) return os;
-               os << date::head.format()
-                  << this->_form_TYPE.format(this->TYPE)
-                  << this->_form_SUBTYPE.format(this->SUBTYPE)
-                  << this->_form_NRECS.format(this->NRECS)
-                  << this->_form_NBYTE.format(this->NBYTE) << std::endl;
-               for (auto p : this->CONT)
-                  os << dnvgl::extfem::fem::types::card().format()
-                     << this->_form_CONT.format(p, this->NBYTE)
-                     << std::endl;
-               return os;
-            }
-         }
-      }
-   }
+std::ostream &date::put(std::ostream& os) const {
+    if (this->TYPE == -1) return os;
+    os << date::head.format()
+       << this->_form_TYPE.format(this->TYPE)
+       << this->_form_SUBTYPE.format(this->SUBTYPE)
+       << this->_form_NRECS.format(this->NRECS)
+       << this->_form_NBYTE.format(this->NBYTE) << std::endl;
+    for (auto p : this->CONT)
+        os << dnvgl::extfem::fem::types::card().format()
+           << this->_form_CONT.format(p, this->NBYTE)
+           << std::endl;
+    return os;
 }
 
 // Local Variables:

@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,10 +47,11 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("TEXT (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
                "        CONVERSION DETAILS:",
@@ -56,8 +59,8 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
                "        Input  : \\test_01.bdt",
                "        Log    : \\test_01.txt"});
 
-      __base::card::card_split(data, lines);
-      text probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      text probe(lines, len);
 
       CHECK(probe.TYPE == 0);
       CHECK(probe.SUBTYPE == 0);
@@ -73,7 +76,7 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
    }
 
    SECTION("TEXT (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TEXT     0.000000000e+00 0.000000000e+00 4.000000000e+00 7.200000000e+01",
             "        CONVERSION DETAILS:",
@@ -81,8 +84,8 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
             "        Input  : \\test_01.bdt",
             "        Log    : \\test_01.txt"});
 
-      __base::card::card_split(data, lines);
-      text probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      text probe(lines, len);
 
       CHECK(probe.TYPE == 0);
       CHECK(probe.SUBTYPE == 0);
@@ -194,18 +197,19 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
 
 TEST_CASE("FEM TEXT conversion from own output.", "[fem_text,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("TEXT (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n",
             "        CONVERSION DETAILS:                             \n",
             "        Msc Nastran File Format -> Sesam Interface File.\n",
             "        Input  : \\test_01.bdt                           \n",
             "        Log    : \\test_01.txt                           \n"});
-      __base::card::card_split(data, lines);
-      text probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      text probe(lines, len);
 
       CHECK(probe.TYPE == 0);
       CHECK(probe.SUBTYPE == 0);

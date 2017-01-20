@@ -10,11 +10,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards_gunivec[]
+    const char cID_fem_cards_gunivec[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <memory>
@@ -29,64 +29,60 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
+using namespace dnvgl::extfem::fem::cards;
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
+const fem::types::card gunivec::head("GUNIVEC");
 
-            const fem::types::card gunivec::head("GUNIVEC");
+const entry_type<long> gunivec::_form_TRANSNO("TRANSNO");
+const entry_type<double> gunivec::_form_UNIX("UNIX");
+const entry_type<double> gunivec::_form_UNIY("UNIY");
+const entry_type<double> gunivec::_form_UNIZ("UNIZ");
 
-            const entry_type<long> gunivec::_form_TRANSNO("TRANSNO");
-            const entry_type<double> gunivec::_form_UNIX("UNIX");
-            const entry_type<double> gunivec::_form_UNIY("UNIY");
-            const entry_type<double> gunivec::_form_UNIZ("UNIZ");
+gunivec::gunivec(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-            gunivec::gunivec(const std::list<std::string> &inp) :
-               card(inp) {
+void gunivec::read(const vector<std::string> &inp, size_t const &len) {
+    if (len < 5)
+        throw errors::parse_error(
+            "GUNIVEC", "Illegal number of entries.");
 
-               if (inp.size() < 5)
-                  throw errors::parse_error(
-                     "GUNIVEC", "Illegal number of entries.");
+    auto pos = inp.begin();
 
-               auto pos = inp.begin();
+    ++pos;
+    TRANSNO = _form_TRANSNO(*(pos++));
+    UNIX = _form_UNIX(*(pos++));
+    UNIY = _form_UNIY(*(pos++));
+    UNIZ = _form_UNIZ(*(pos++));
+}
 
-               ++pos;
-               TRANSNO = _form_TRANSNO(*(pos++));
-               UNIX = _form_UNIX(*(pos++));
-               UNIY = _form_UNIY(*(pos++));
-               UNIZ = _form_UNIZ(*(pos++));
-            }
+gunivec::gunivec(void) :
+        gunivec(-1, 0., 0., 0.) {}
 
-            gunivec::gunivec(void) :
-               gunivec(-1, 0., 0., 0.) {}
+gunivec::gunivec(const long &TRANSNO,
+                 const double &UNIX,
+                 const double &UNIY,
+                 const double &UNIZ) :
+        card(), TRANSNO(TRANSNO),
+        UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
-            gunivec::gunivec(const long &TRANSNO,
-                             const double &UNIX,
-                             const double &UNIY,
-                             const double &UNIZ) :
-               card(), TRANSNO(TRANSNO),
-               UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
+const dnvgl::extfem::fem::cards::types
+gunivec::card_type(void) const {return types::GUNIVEC;}
 
-            const dnvgl::extfem::fem::cards::types
-            gunivec::card_type(void) const {return types::GUNIVEC;}
-
-            std::ostream &gunivec::put(std::ostream& os) const {
-               if (this->TRANSNO == -1) return os;
-               os << gunivec::head.format()
-                  << this->_form_TRANSNO.format(this->TRANSNO)
-                  << this->_form_UNIX.format(this->UNIX)
-                  << this->_form_UNIY.format(this->UNIY)
-                  << this->_form_UNIZ.format(this->UNIZ)
-                  << std::endl;
-               return os;
-            }
-         }
-      }
-   }
+std::ostream &gunivec::put(std::ostream& os) const {
+    if (this->TRANSNO == -1) return os;
+    os << gunivec::head.format()
+       << this->_form_TRANSNO.format(this->TRANSNO)
+       << this->_form_UNIX.format(this->UNIX)
+       << this->_form_UNIY.format(this->UNIY)
+       << this->_form_UNIZ.format(this->UNIZ)
+       << std::endl;
+    return os;
 }
 
 // Local Variables:

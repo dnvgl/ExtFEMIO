@@ -53,7 +53,7 @@ namespace dnvgl {
                */
                std::vector<double> FACT;
 
-               bsell(std::list<std::string> const &);
+               bsell(std::vector<std::string> const&, size_t const&);
 
                bsell(void);
 
@@ -184,7 +184,7 @@ bsell(
                */
                std::vector<long> NOD;
 
-               gelmnt2(std::list<std::string> const &);
+               gelmnt2(std::vector<std::string> const&, size_t const&);
 
                gelmnt2(void);
 
@@ -317,7 +317,7 @@ through the superelement type number (`ISELTY`).
                 */
                long COMPLC;
 
-               hsupstat(std::list<std::string> const &);
+               hsupstat(std::vector<std::string> const&, size_t const&);
 
                hsupstat(void);
 
@@ -433,7 +433,7 @@ superelement transformation reference number, `ITREF`.
                 */
                double T[4][4];
 
-               hsuptran(std::list<std::string> const &);
+               hsuptran(std::vector<std::string> const&, size_t const&);
 
                hsuptran(void);
 
@@ -568,7 +568,7 @@ superelement transformation reference number, `ITREF`.
                 */
                std::vector<long> IHSREFi;
 
-               hierarch(std::list<std::string> const &);
+               hierarch(std::vector<std::string> const&, size_t const&);
 
                hierarch(void);
 

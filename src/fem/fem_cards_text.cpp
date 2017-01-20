@@ -33,6 +33,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -46,10 +48,12 @@ entry_type<long> const text::_form_NRECS("NRECS");
 entry_type<long> const text::_form_NBYTE("NBYTE");
 entry_type<std::string> const text::_form_CONT("CONT");
 
-text::text(std::list<std::string> const &inp) :
-   card(inp) {
+text::text(vector<std::string> const &inp, size_t const &len) {
+    read(inp, len);
+}
 
-   if (inp.size() < 9)
+void text::read(vector<std::string> const &inp, size_t const &len) {
+    if (len < 9)
       throw errors::parse_error(
          "TEXT", "Illegal number of entries.");
 

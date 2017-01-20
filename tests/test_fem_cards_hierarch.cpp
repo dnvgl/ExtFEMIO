@@ -33,6 +33,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,14 +47,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 }
 
 TEST_CASE("FEM HIERARCH definitions. (Small Field Format)", "[fem_hierarch]" ) {
-   std::list<std::string> data({
+   vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "HIERARCH  9.00000000E+00  1.00000000E+00  2.00000000E+00  1.00000000E+00\n",
          "          2.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n",
          "          2.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   hierarch probe(lines);
+   vector<std::string> lines;
+   size_t len = __base::card::card_split(data, data.size(), lines);
+   hierarch probe(lines, len);
 
    SECTION("first moment") {
 
@@ -132,16 +134,17 @@ TEST_CASE("FEM HIERARCH types output.", "[fem_hierarch,out]" ) {
 
 TEST_CASE("FEM HIERARCH conversion from own output.", "[fem_hierarch,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("HIERARCH") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "HIERARCH+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n",
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"});
-      __base::card::card_split(data, lines);
-      hierarch probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      hierarch probe(lines, len);
 
       CHECK(probe.NFIELD == 1);
       CHECK(probe.IHREF == 2);
@@ -155,13 +158,13 @@ TEST_CASE("FEM HIERARCH conversion from own output.", "[fem_hierarch,in/out]") {
    }
 
    SECTION("HIERARCH (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "HIERARCH+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+6.000000000e+00\n",
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n",
             "        +1.300000000e+01+1.400000000e+01\n"});
-      __base::card::card_split(data, lines);
-      hierarch probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      hierarch probe(lines, len);
 
       CHECK(probe.NFIELD == 1);
       CHECK(probe.IHREF == 2);

@@ -24,11 +24,12 @@ add_library (extfemio_support STATIC
   ${LIBEXTFEMIO_SUPPORT_SOURCES}
   ${LIBEXTFEMIO_SUPPORT_HEADERS})
 
-cotire(extfemio_support)
-
-set_target_properties(
-  extfemio_support
-  PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
+if (COMMAND cotire)
+  cotire(extfemio_support)
+  set_target_properties(
+    extfemio_support
+    PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
+endif()
 
 target_include_directories (extfemio_support PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

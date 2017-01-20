@@ -7,7 +7,7 @@
    Detailed description
 */
 
-#include "StdAfx.h"
+ // #include "StdAfx.h"
 
 // ID:
 namespace {
@@ -91,14 +91,14 @@ usage_error::usage_error(
         error(name, msg, "usage_error") {}
 
 no_used::no_used(long const &no) :
-        invalid_argument(""), error("no_used", "") {
+        error("no_used", "") {
     ostringstream res;
     res << "Element number " << no << " already used." << endl;
     msg = res.str();
 }
 
 id_used::id_used(long const &id) :
-        invalid_argument(""), error("id_used", "") {
+        error("id_used", "") {
     ostringstream res;
     res << "Element id " << id << " already used." << endl;
     msg = res.str();
@@ -106,7 +106,7 @@ id_used::id_used(long const &id) :
 
 data_not_matching_id::data_not_matching_id(
     long const &id_ex, long const &id_new) :
-        invalid_argument(""), error("data_not_matching_id") {
+        error("data_not_matching_id") {
     ostringstream res;
     res << "Element id already set to " << id_ex
         << " with attempt to set to " << id_new << "."<< endl;

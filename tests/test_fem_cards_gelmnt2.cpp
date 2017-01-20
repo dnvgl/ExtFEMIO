@@ -33,6 +33,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -46,16 +48,16 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GELMNT2 definitions. (Small Field Format)", "[fem_gelmnt2]" ) {
 
-   std::list<std::string> data({
+   vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GELMNT2   1.00000000E+00  1.00000000E+00  1.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   gelmnt2 probe(lines);
+   vector<std::string> lines;
+   size_t len{__base::card::card_split(data, data.size(), lines)};
+   gelmnt2 probe(lines, len);
 
    SECTION("first moment") {
       CHECK(probe.SUBNO == 1);
@@ -169,7 +171,7 @@ TEST_CASE("FEM GELMNT2 types output.", "[fem_gelmnt2,out]" ) {
 TEST_CASE("FEM GELMNT2 conversion from own output.", "[fem_gelmnt2,in/out]") {
 
    SECTION("GELMNT2") {
-   std::list<std::string> data({
+   vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "GELMNT2 +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
          "        +1.100000000e+01+2.100000000e+01+3.100000000e+01+1.200000000e+01\n",
@@ -177,9 +179,9 @@ TEST_CASE("FEM GELMNT2 conversion from own output.", "[fem_gelmnt2,in/out]") {
          "        +3.300000000e+01+1.400000000e+01+2.400000000e+01+3.400000000e+01\n",
          "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
          "        +9.000000000e+00+1.000000000e+01\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   gelmnt2 probe(lines);
+   vector<std::string> lines;
+   size_t len{__base::card::card_split(data, data.size(), lines)};
+   gelmnt2 probe(lines, len);
 
       CHECK(probe.SUBNO == 1);
       CHECK(probe.SLEVEL == 2);

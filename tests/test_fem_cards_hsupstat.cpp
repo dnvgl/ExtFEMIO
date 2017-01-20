@@ -33,6 +33,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -46,14 +48,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM HSUPSTAT definitions. (Small Field Format)", "[fem_hsupstat]" ) {
 
-   std::list<std::string> data({
+   vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "HSUPSTAT  9.00000000E+00  2.00000000E+00  6.00000000E+00  0.00000000E+00\n",
          "          5.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "         -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   hsupstat probe(lines);
+   vector<std::string> lines;
+   size_t len = __base::card::card_split(data, data.size(), lines);
+   hsupstat probe(lines, len);
 
    SECTION("first moment") {
       CHECK(probe.NFIELD == 9);
@@ -112,19 +114,20 @@ TEST_CASE("FEM HSUPSTAT types output.", "[fem_hsupstat,out]" ) {
 
 TEST_CASE("FEM HSUPSTAT conversion from own output.", "[fem_hsupstat,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("HSUPSTAT") {
 
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "HSUPSTAT+1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
             "        +9.000000000e+00\n"});
 
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      hsupstat probe(lines);
+      vector<std::string> lines;
+      len = __base::card::card_split(data, data.size(), lines);
+      hsupstat probe(lines, len);
 
       CHECK(probe.NFIELD == 1);
       CHECK(probe.ISELTY == 2);

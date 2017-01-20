@@ -29,6 +29,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
@@ -49,10 +51,20 @@ entry_type<long> const giorh::_form_NLOBYB("NLOBYB");
 entry_type<long> const giorh::_form_NLOBZ("NLOBZ");
 
 
-giorh::giorh(std::list<std::string> const &inp) :
-        __base::beam_prop(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
+giorh::giorh(vector<std::string> const &inp, size_t const &len) {
+    read(inp, len);
+}
 
-    if (inp.size() < 10)
+void giorh::read(vector<std::string> const &inp, size_t const &len) {
+    std::string static const empty("                ");
+
+    NLOBYT = {0};
+    NLOBYB = {0};
+    NLOBZ = {0};
+
+    __base::beam_prop::read(inp, len);
+
+    if (len < 10)
         throw errors::parse_error(
             "GIORH", "Illegal number of entries.");
 
@@ -68,18 +80,19 @@ giorh::giorh(std::list<std::string> const &inp) :
     TB = _form_TB(*(pos++));
     SFY = _form_SFY(*(pos++));
     SFZ = _form_SFZ(*(pos++));
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    size_t i{10};
+    if (i >= len) return;
+    if (*pos != empty)
         NLOBYT = _form_NLOBYT(*(pos++));
     else
         pos++;
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    if (++i >= len) return;
+    if (*pos != empty)
         NLOBYB = _form_NLOBYB(*(pos++));
     else
         pos++;
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    if (++i >= len) return;
+    if (*pos != empty)
         NLOBZ = _form_NLOBZ(*pos);
 }
 

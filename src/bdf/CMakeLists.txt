@@ -78,10 +78,12 @@ set(LIBEXTFEMIO_BDF_HEADERS
 add_library (extfemio_bdf STATIC
   ${LIBEXTFEMIO_BDF_SOURCES}
   ${LIBEXTFEMIO_BDF_HEADERS})
-cotire(extfemio_bdf)
-set_target_properties(extfemio_bdf
-  PROPERTIES
-  COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
+if (COMMAND cotire)
+  cotire(extfemio_bdf)
+  set_target_properties(extfemio_bdf
+    PROPERTIES
+    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
+endif()
 
 target_include_directories (extfemio_bdf PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)

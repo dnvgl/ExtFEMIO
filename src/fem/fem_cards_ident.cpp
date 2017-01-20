@@ -11,11 +11,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards_ident[]
+    const char cID_fem_cards_ident[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <memory>
@@ -30,67 +30,64 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
+using namespace dnvgl::extfem::fem::cards;
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
+const fem::types::card ident::head("IDENT");
 
-            const fem::types::card ident::head("IDENT");
+const entry_type<long> ident::_form_SLEVEL("SLEVEL");
+const entry_type<long> ident::_form_SELTYP("SELTYP");
+const entry_type<long> ident::_form_SELMOD("SELMOD");
 
-            const entry_type<long> ident::_form_SLEVEL("SLEVEL");
-            const entry_type<long> ident::_form_SELTYP("SELTYP");
-            const entry_type<long> ident::_form_SELMOD("SELMOD");
+ident::ident(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-            ident::ident(const std::list<std::string> &inp) :
-               card(inp) {
+void ident::read(const vector<std::string> &inp, size_t const &len) {
+    if (len < 5)
+        throw errors::parse_error(
+            "IDENT", "Illegal number of entries.");
 
-               if (inp.size() < 5)
-                  throw errors::parse_error(
-                     "IDENT", "Illegal number of entries.");
+    auto pos = inp.begin();
 
-               auto pos = inp.begin();
+    ++pos;
+    SLEVEL = _form_SLEVEL(*(pos++));
+    SELTYP = _form_SELTYP(*(pos++));
+    switch (_form_SELMOD(*(pos++))) {
+    case 0:
+    case 3:
+        SELMOD = mod_type::DIM_3D;
+        break;
+    case 2:
+        SELMOD = mod_type::DIM_2D;
+        break;
+    default:
+        throw dnvgl::extfem::fem::errors::parse_error(
+            "IDENT", "Error in selmod, value not 0, 2, or 3.");
+    }
+}
 
-               ++pos;
-               SLEVEL = _form_SLEVEL(*(pos++));
-               SELTYP = _form_SELTYP(*(pos++));
-               switch (_form_SELMOD(*(pos++))) {
-               case 0:
-               case 3:
-                  SELMOD = mod_type::DIM_3D;
-                  break;
-               case 2:
-                  SELMOD = mod_type::DIM_2D;
-                  break;
-               default:
-                  throw dnvgl::extfem::fem::errors::parse_error("IDENT", "Error in selmod, value not 0, 2, or 3.");
-               }
-            }
+ident::ident(void) :
+        ident(-1, 0, ident::mod_type::INVALID) {}
 
-            ident::ident(void) :
-               ident(-1, 0, ident::mod_type::INVALID) {}
+ident::ident(const long &SLEVEL, const long &SELTYP,
+             const ident::mod_type &SELMOD) :
+        SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
 
-            ident::ident(const long &SLEVEL, const long &SELTYP,
-                         const ident::mod_type &SELMOD) :
-               SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
+const cards::types
+ident::card_type(void) const { return types::IDENT; };
 
-            const types
-            ident::card_type(void) const { return types::IDENT; };
-
-            std::ostream &ident::put(std::ostream& os) const {
-               if (this->SELMOD == ident::mod_type::INVALID) return os;
-               os << ident::head.format()
-                  << this->_form_SLEVEL.format(this->SLEVEL)
-                  << this->_form_SELTYP.format(this->SELTYP)
-                  << this->_form_SELMOD.format(static_cast<long>(this->SELMOD));
-               return os << std::endl;
-            }
-         }
-      }
-   }
+std::ostream &ident::put(std::ostream& os) const {
+    if (this->SELMOD == ident::mod_type::INVALID) return os;
+    os << ident::head.format()
+       << this->_form_SLEVEL.format(this->SLEVEL)
+       << this->_form_SELTYP.format(this->SELTYP)
+       << this->_form_SELMOD.format(static_cast<long>(this->SELMOD));
+    return os << std::endl;
 }
 
 // Local Variables:

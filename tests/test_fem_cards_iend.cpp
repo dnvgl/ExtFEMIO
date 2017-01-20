@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,40 +47,41 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM IEND definitions.", "[fem_iend]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("IEND (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IEND     1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      iend probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      iend probe(lines, len);
 
       CHECK(probe.CONT == 1);
    }
 
    SECTION("IEND (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IEND    +1.00000000e+000+0.00000000e+000+0.00000000e+000+0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      iend probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      iend probe(lines, len);
 
       CHECK(probe.CONT == 1);
    }
 
    SECTION("IEND (3)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IEND     1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      iend probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      iend probe(lines, len);
 
       CHECK(probe.CONT == 1);
    }
 
    SECTION("IEND (4)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IEND                0.00            0.00            0.00            0.00\n"});
-      __base::card::card_split(data, lines);
-      iend probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      iend probe(lines, len);
 
       CHECK(probe.CONT == 0);
    }
@@ -103,13 +106,14 @@ TEST_CASE("FEM IEND types output.", "[fem_iend,out]" ) {
 
 TEST_CASE("FEM IEND conversion from own output.", "[fem_iend,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("IEND (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "IEND    +3.000000000e+00            0.00            0.00            0.00\n"});
-      __base::card::card_split(data, lines);
-      iend probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      iend probe(lines, len);
 
       CHECK(probe.CONT == 3);
    }

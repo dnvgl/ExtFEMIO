@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,16 +47,17 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
 
-   std::vector<double> ref_rdisp({0., 0., 0., 0., 0., 0.});
-   std::list<std::string> lines;
+   vector<double> ref_rdisp({0., 0., 0., 0., 0., 0.});
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("BNDISPL (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "BNDISPL  1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         2.30470000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      bndispl probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bndispl probe(lines, len);
 
       CHECK(probe.LLC == 1);
       CHECK(probe.DTYPE == 1);
@@ -62,16 +65,16 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
       CHECK(probe.NODENO == 23047);
       CHECK(probe.NDOF == 6);
       CHECK(probe.RDISP == ref_rdisp);
-      CHECK(probe.IDISP == std::vector<double>({}));
+      CHECK(probe.IDISP == vector<double>({}));
    }
 
    SECTION("BNDISPL (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "BNDISPL  1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n",
          "         2.30470000e+04  6.000000000e+00 0.000000000e+00 0.000000000e+00\n",
          "         0.000000000e+00 0.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      bndispl probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bndispl probe(lines, len);
 
       CHECK(probe.LLC == 1);
       CHECK(probe.DTYPE == 1);
@@ -79,7 +82,7 @@ TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]" ) {
       CHECK(probe.NODENO == 23047);
       CHECK(probe.NDOF == 6);
       CHECK(probe.RDISP == ref_rdisp);
-      CHECK(probe.IDISP == std::vector<double>({}));
+      CHECK(probe.IDISP == vector<double>({}));
    }
 }
 
@@ -169,77 +172,78 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]" ) {
 
 TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("BNDISPL (own output) (1)") {
-       std::list<std::string> data({
+       vector<std::string> data({
             "BNDISPL +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
             "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      bndispl probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bndispl probe(lines, len);
 
       CHECK(probe.LLC == 1);
       CHECK(probe.DTYPE == 1);
       CHECK(probe.COMPLX);
       CHECK(probe.NODENO == 4);
       CHECK(probe.NDOF == 6);
-      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5., 6.}));
-      CHECK(probe.IDISP == std::vector<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.RDISP == vector<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.IDISP == vector<double>({1., 2., 3., 4., 5., 6.}));
    }
 
    SECTION("BNDISPL (own output) (2)") {
-       std::list<std::string> data({
+       vector<std::string> data({
              "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      bndispl probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bndispl probe(lines, len);
 
       CHECK(probe.LLC == 1);
       CHECK(probe.DTYPE == 1);
       CHECK_FALSE(probe.COMPLX);
       CHECK(probe.NODENO == 4);
       CHECK(probe.NDOF == 6);
-      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5., 6.}));
-      CHECK(probe.IDISP == std::vector<double>({}));
+      CHECK(probe.RDISP == vector<double>({1., 2., 3., 4., 5., 6.}));
+      CHECK(probe.IDISP == vector<double>({}));
    }
 
    SECTION("BNDISPL (own output) (3)") {
-       std::list<std::string> data({
+       vector<std::string> data({
             "BNDISPL +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+1.000000000e+00\n",
             "        +2.000000000e+00+3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      bndispl probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bndispl probe(lines, len);
 
       CHECK(probe.LLC == 1);
       CHECK(probe.DTYPE == 1);
       CHECK(probe.COMPLX);
       CHECK(probe.NODENO == 4);
       CHECK(probe.NDOF == 5);
-      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5.}));
-      CHECK(probe.IDISP == std::vector<double>({1., 2., 3., 4., 5.}));
+      CHECK(probe.RDISP == vector<double>({1., 2., 3., 4., 5.}));
+      CHECK(probe.IDISP == vector<double>({1., 2., 3., 4., 5.}));
    }
 
    SECTION("BNDISPL (own output) (4)") {
-       std::list<std::string> data({
+       vector<std::string> data({
              "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
              "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      bndispl probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bndispl probe(lines, len);
 
       CHECK(probe.LLC == 1);
       CHECK(probe.DTYPE == 1);
       CHECK_FALSE(probe.COMPLX);
       CHECK(probe.NODENO == 4);
       CHECK(probe.NDOF == 5);
-      CHECK(probe.RDISP == std::vector<double>({1., 2., 3., 4., 5.}));
-      CHECK(probe.IDISP == std::vector<double>({}));
+      CHECK(probe.RDISP == vector<double>({1., 2., 3., 4., 5.}));
+      CHECK(probe.IDISP == vector<double>({}));
    }
 }
 // Local Variables:

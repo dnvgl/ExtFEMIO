@@ -32,6 +32,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,16 +46,17 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GELREF1 (sample 1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELREF1  1.80000000e+001 3.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
 
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 18);
       CHECK(probe.MATNO == 3);
@@ -75,13 +77,13 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
    }
 
    SECTION("GELREF1 (sample 2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELREF1  1.70000000e+001 3.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n",
          "         1.03005000e+005 0.00000000e+000-1.00000000e+000 1.70000000e+001\n",
          "         3.30000000e+001 3.40000000e+001 0.00000000e+000 0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 17);
       CHECK(probe.MATNO == 3);
@@ -103,13 +105,13 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
 
 
    SECTION("GELREF1 (sample 3)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        +1.03005000e+05 +0.00000000e+00 -1.00000000e+00 +1.70000000e+01 \n",
          "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 18);
       CHECK(probe.MATNO == 3);
@@ -130,13 +132,13 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
    }
 
    SECTION("GELREF1 (sample 4)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        -1.00000000e+00 +0.00000000e+00 +1.03005000e+05 +1.70000000e+01 \n",
          "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 18);
       CHECK(probe.MATNO == 3);
@@ -159,13 +161,13 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
    }
 
    SECTION("GELREF1 (sample 5") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        +1.03005000e+05 -1.00000000e+00 +1.00000000e+00 +1.70000000e+01 \n",
          "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 18);
       CHECK(probe.MATNO == 3);
@@ -188,13 +190,13 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
    }
 
    SECTION("GELREF1 (sample 6") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELREF1 +1.80000000e+01 +3.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 +0.00000000e+00 \n",
          "        +1.03005000e+05 +0.00000000e+00 +1.00000000e+00 -1.00000000e+00 \n",
          "        +3.30000000e+01 +3.40000000e+01  0.00000000e+00  0.00000000e+00 \n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 18);
       CHECK(probe.MATNO == 3);
@@ -219,16 +221,17 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]" ) {
 
 TEST_CASE("FEMIO-28: Failing to import GELREF1 card from SESAM GeniE FEM file") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("Failing card") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELREF1   5.61680000E+04  3.00000000E+00  0.00000000E+00  0.00000000E+00\n",
             "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
             "          1.10000000E+01  0.00000000E+00 -1.00000000E+00  6.00000000E+00\n",
             "          1.80000000E+01  1.90000000E+01\n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 56168);
       CHECK(probe.MATNO == 3);
@@ -378,15 +381,16 @@ TEST_CASE("FEM GELREF1 types output.", "[fem_gelref1,out]" ) {
 
 TEST_CASE("FEM GELREF1 conversion from own output.", "[fem_gelref1,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GELREF1 (sample 1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELREF1 +1.800000000e+01+3.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +1.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 18);
       CHECK(probe.MATNO == 3);
@@ -407,13 +411,13 @@ TEST_CASE("FEM GELREF1 conversion from own output.", "[fem_gelref1,in/out]") {
    }
 
    SECTION("GELREF1 (sample 2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELREF1 +1.800000000e+01+3.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +0.000000000e+00+0.000000000e+00+0.000000000e+00+0.000000000e+00\n",
             "        +1.030050000e+05+0.000000000e+00-1.000000000e+00+1.700000000e+01\n",
             "        +3.300000000e+01+3.400000000e+01\n"});
-      __base::card::card_split(data, lines);
-      gelref1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelref1 probe(lines, len);
 
       CHECK(probe.ELNO == 18);
       CHECK(probe.MATNO == 3);

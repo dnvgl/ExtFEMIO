@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,18 +47,18 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
 
-    std::list<std::string> lines;
-
+    vector<std::string> lines;
+    size_t len;
     __base::geoprop::reset_geono();
 
     SECTION("GLSEC (1)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSEC    2.20000000e+001 7.00000000e+002 1.20000000e+001 1.50000000e+002\n",
                     "         1.20000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
                     "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-        __base::card::card_split(data, lines);
-        glsec probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        glsec probe(lines, len);
 
         CHECK(probe.GEONO == 22);
         CHECK(probe.HZ == 700.);
@@ -71,13 +73,13 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
     }
 
     SECTION("GLSEC (2)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSEC    2.200000000e+01 7.00000000e+02  1.200000000e+01 1.50000000e+02 \n",
                     "         1.200000000e+01 1.000000000e+00 1.000000000e+00 1.000000000e+00\n",
                     "         0.000000000e+00 0.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        glsec probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        glsec probe(lines, len);
 
         CHECK(probe.GEONO == 22);
         CHECK(probe.HZ == 700.);
@@ -92,12 +94,12 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
    }
 
    SECTION("GLSEC (2)") {
-       std::list<std::string> data({
+       vector<std::string> data({
                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                "GLSEC     1.60000000E+02  1.50000006E-01  9.00000054E-03  9.00000036E-02\n",
                    "          9.00000054E-03 1.000000000e+00 1.000000000e+00 1.00000000E+00 \n"});
-       __base::card::card_split(data, lines);
-       glsec probe(lines);
+       len = __base::card::card_split(data, data.size(), lines);
+       glsec probe(lines, len);
 
        CHECK(probe.GEONO == 160);
        CHECK(probe.HZ == .150000006);
@@ -144,18 +146,18 @@ TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
 
 TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
 
-    std::list<std::string> lines;
-
+    vector<std::string> lines;
+    size_t len;
     __base::geoprop::reset_geono();
 
     SECTION("GLSEC (1)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
                     "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n",
                     "        +9.000000000e+00+1.000000000e+01\n"});
-        __base::card::card_split(data, lines);
-        glsec probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        glsec probe(lines, len);
 
         CHECK(probe.GEONO == 1);
         CHECK(probe.HZ == 2.);
@@ -170,12 +172,12 @@ TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
     }
 
     SECTION("GLSEC (2)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
                     "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n"});
-        __base::card::card_split(data, lines);
-        glsec probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        glsec probe(lines, len);
 
         CHECK(probe.GEONO == 1);
         CHECK(probe.HZ == 2.);

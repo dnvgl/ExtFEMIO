@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,16 +47,17 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GELMNT1 (BEAS)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELMNT1  1.13160000e+004 1.00000000e+000 1.50000000e+001 0.00000000e+000\n",
          "         1.00000000e+001 1.10000000e+001 0.00000000e+000 0.00000000e+000\n"});
 
 
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 11316);
       CHECK(probe.ELNO == 1);
@@ -64,12 +67,12 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
    }
 
    SECTION("GELMNT1 (FQUS)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GELMNT1  1.00000000e+000 6.00000000e+000 2.40000000e+001 0.00000000e+000\n",
          "         1.00000000e+000 6.00000000e+000 4.00000000e+000 2.00000000e+000\n"});
 
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 6);
@@ -79,11 +82,11 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
    }
 
    SECTION("GELMNT1 (BEAS)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELMNT1   1.00000000E+00  1.00000000E+00  1.50000000E+01  0.00000000E+00\n",
             "          1.00000000E+00  2.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 1);
@@ -93,11 +96,11 @@ TEST_CASE("FEM GELMNT1 definitions.", "[fem_gelmnt1]" ) {
    }
 
    SECTION("GELMNT1 (BEAS) (empty fields)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELMNT1   1.00000000E+00  1.00000000E+00  1.50000000E+01  0.00000000E+00\n",
             "          1.00000000E+00  2.00000000E+00\n"});
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 1);
@@ -198,15 +201,16 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
 
 TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GELMNT1 (FQUS)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELMNT1 +1.000000000e+00+6.000000000e+00+2.400000000e+01+0.000000000e+00\n",
             "        +1.000000000e+00+6.000000000e+00+4.000000000e+00+2.000000000e+00\n"});
 
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 6);
@@ -216,12 +220,12 @@ TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
    }
 
    SECTION("GELMNT1 (FTRS)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELMNT1 +1.000000000e+00+6.000000000e+00+2.500000000e+01+0.000000000e+00\n",
             "        +1.000000000e+00+6.000000000e+00+4.000000000e+00\n"});
 
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 1);
       CHECK(probe.ELNO == 6);
@@ -231,13 +235,13 @@ TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
 }
 
    SECTION("GELMNT1 (ILST)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELMNT1 +1.200000000e+01+3.600000000e+01+6.000000000e+00+0.000000000e+00\n",
             "        +1.000000000e+00+6.000000000e+00+4.000000000e+00+2.000000000e+00\n",
             "        +1.300000000e+01+2.200000000e+01\n"});
 
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 12);
       CHECK(probe.ELNO == 36);
@@ -247,12 +251,12 @@ TEST_CASE("FEM GELMNT1 conversion from own output.", "[fem_gelmnt1,in/out]") {
    }
 
    SECTION("GELMNT1 (BEAS)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GELMNT1 +1.200000000e+01+3.600000000e+01+1.500000000e+01+0.000000000e+00\n",
             "        +1.000000000e+00+6.000000000e+00\n"});
 
-      __base::card::card_split(data, lines);
-      gelmnt1 probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gelmnt1 probe(lines, len);
 
       CHECK(probe.ELNOX == 12);
       CHECK(probe.ELNO == 36);

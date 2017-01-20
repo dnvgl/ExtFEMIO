@@ -12,9 +12,11 @@
 FUNCTION(my_add_test inp)
   string(TOUPPER ${inp} NAME)
   string(TOLOWER ${inp} COMMAND)
-  cotire(${inp})
-  set_target_properties(${inp}
-    PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
+  if (COMMAND cotire)
+    cotire(${inp})
+    set_target_properties(${inp}
+      PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
+  endif()
   add_test(NAME ${NAME}
     COMMAND ${COMMAND} --reporter junit --out ${COMMAND}_junit.xml)
 ENDFUNCTION()

@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,16 +47,17 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("TDSUPNAM (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDSUPNAM 4.00000000e+000 1.80000000e+002 1.21000000e+002 0.00000000e+000\n",
             "        PLAN_No6_STR(5445A/B)\n"});
 
-      __base::card::card_split(data, lines);
-      tdsupnam probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      tdsupnam probe(lines, len);
 
       CHECK(probe.NFIELD == 4);
       CHECK(probe.IHREF == 180);
@@ -65,13 +68,13 @@ TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
    }
 
    SECTION("TDSUPNAM (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDSUPNAM 4.000000000e+00 1.80000000e+02  1.21000000e+02  0.000000000e+00\n",
             "        PLAN_No6_STR(5445A/B)\n"});
 
-      __base::card::card_split(data, lines);
-      tdsupnam probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      tdsupnam probe(lines, len);
 
       CHECK(probe.NFIELD == 4);
       CHECK(probe.IHREF == 180);
@@ -82,15 +85,15 @@ TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]" ) {
    }
 
    SECTION("TDSUPNAM (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "TDSUPNAM 4.000000000e+00 1.80000000e+02  1.21000000e+02  2.64000000e+02 \n",
          "        PLAN_No6_STR(5445A/B)\n",
          "        Meaningles comment.\n",
          "        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+\n"});
 
-      __base::card::card_split(data, lines);
-      tdsupnam probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      tdsupnam probe(lines, len);
 
       CHECK(probe.NFIELD == 4);
       CHECK(probe.IHREF == 180);
@@ -159,15 +162,16 @@ TEST_CASE("FEM TDSUPNAM types output.", "[fem_tdsupnam,out]" ) {
 
 TEST_CASE("FEM TDSUPNAM conversion from own output.", "[fem_tdsupnam,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("TDSUPNAM (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDSUPNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+0.000000000e+00\n",
             "        1234567890123456789012\n"});
-      __base::card::card_split(data, lines);
-      tdsupnam probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      tdsupnam probe(lines, len);
 
       CHECK(probe.NFIELD == 4);
       CHECK(probe.IHREF == 123);
@@ -178,14 +182,14 @@ TEST_CASE("FEM TDSUPNAM conversion from own output.", "[fem_tdsupnam,in/out]") {
    }
 
    SECTION("TDSUPNAM (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDSUPNAM+4.000000000e+00+1.230000000e+02+1.220000000e+02+2.330000000e+02\n",
             "        1234567890123456789012\n",
             "        test                             \n",
             "        123456789112345678921234567893123\n"});
-      __base::card::card_split(data, lines);
-      tdsupnam probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      tdsupnam probe(lines, len);
 
       CHECK(probe.NFIELD == 4);
       CHECK(probe.IHREF == 123);

@@ -2,7 +2,7 @@
    \file fem/cards.h
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
-   \brief Classes for the differen Sesame FEM cards.
+   \brief Classes for the different Sesame FEM cards.
 
    Detailed description
 */
@@ -14,11 +14,10 @@
 #if !defined _FEM_CARDS_H_
 #define _FEM_CARDS_H_
 
-#include <list>
 #include <vector>
 #include <string>
 #include <set>
-#include <map>
+#include <unordered_map>
 #include <utility>
 #include <memory>
 
@@ -145,11 +144,7 @@ namespace dnvgl {
 
                     private:
 
-                        /// two character strings for continuation lines in Free Form
-                        /// Format cards.
-                        std::set<char> static const free_form_cont;
-
-                        std::map<std::string, types> static const cardtype_map;
+                        std::unordered_map<std::string, types> static const cardtype_map;
 
                     protected:
 
@@ -159,11 +154,13 @@ namespace dnvgl {
 
                     public:
 
-                        void static
-                        card_split(std::list<std::string> const&, std::list<std::string>&);
+                        size_t static card_split(
+                            std::vector<std::string> const&, size_t const&,
+                            std::vector<std::string>&);
 
-                        card(std::list<std::string> const&);
+                        card(std::vector<std::string> const&, const size_t&);
                         card(void);
+
                         virtual ~card(void);
 
                         virtual dnvgl::extfem::fem::cards::types const
@@ -174,8 +171,8 @@ namespace dnvgl {
                     class geoprop : public card {
                     private:
 
-                        static std::set<long> used_geono;
-                        static long geono_maxset;
+                        std::set<long> static used_geono;
+                        long static geono_maxset;
 
                     protected:
 
@@ -184,10 +181,11 @@ namespace dnvgl {
                         dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
 
                         geoprop(void);
-
                         geoprop(long const &GEONO);
+                        geoprop(std::vector<std::string> const&, size_t const&);
 
-                        geoprop(std::list<std::string> const&);
+                        virtual void read(
+                            const std::vector<std::string>&, size_t const&);
 
                     public:
 
@@ -209,10 +207,10 @@ namespace dnvgl {
                     protected:
 
                         beam_prop(void);
-
                         beam_prop(long const &GEONO);
+                        beam_prop(std::vector<std::string> const&, size_t const&);
 
-                        beam_prop(std::list<std::string> const&);
+                        using geoprop::read;
 
                     public:
 
@@ -222,16 +220,16 @@ namespace dnvgl {
 
 /// Base class for material cards.
                     class material : public card {
-                    private:
-
-                        material(void);
-
                     protected:
 
                         dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
 
+                        material(void);
                         material(long const &MATNO);
-                        material(std::list<std::string> const&);
+                        material(std::vector<std::string> const&, size_t const&);
+
+                        virtual void read(
+                            std::vector<std::string> const&, size_t const&);
 
                     public:
 
@@ -249,18 +247,19 @@ namespace dnvgl {
 
                 public:
 
-                    unknown(std::list<std::string> const&);
+                    unknown(std::vector<std::string> const&, size_t const&);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
-                    std::list<std::string> content;
+                    std::vector<std::string> content;
 
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `DATE`: Date and Program Information
@@ -337,7 +336,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<std::string> CONT;
 
-                    date(std::list<std::string> const&);
+                    date(std::vector<std::string> const&, size_t const&);
 
                     date(void);
 
@@ -357,7 +356,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GCOORD`: Nodal Coordinates
@@ -394,7 +394,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     double ZCOORD;
 
-                    gcoord(std::list<std::string> const&);
+                    gcoord(std::vector<std::string> const&, size_t const&);
 
                     gcoord(void);
 
@@ -402,7 +402,7 @@ Example of format of `DATE` record as used in SESAM:
                         long const &NODENO,
                         double const &XCOORD, double const &YCOORD, double const &ZCOORD);
 
-                    __base::card const &operator()(std::list<std::string> const&);
+                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
 
                     __base::card const &operator()(
                         long const &NODENO,
@@ -415,7 +415,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
@@ -464,7 +465,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     std::vector<int> ODOF;
 
-                    gnode(std::list<std::string> const&);
+                    gnode(std::vector<std::string> const&, size_t const&);
 
                     gnode(void);
 
@@ -478,7 +479,7 @@ Example of format of `DATE` record as used in SESAM:
 
                     ~gnode(void);
 
-                    __base::card const &operator()(std::list<std::string> const&);
+                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
 
                     __base::card const &operator()(
                         long const &NODEX, long const &NODENO,
@@ -494,7 +495,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `IDENT`: Identification of Superelements
@@ -538,7 +540,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     mod_type SELMOD;
 
-                    ident(std::list<std::string> const&);
+                    ident(std::vector<std::string> const&, size_t const&);
 
                     ident(void);
 
@@ -553,7 +555,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `IEND`: End of a Superelement
@@ -588,7 +591,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     long CONT;
 
-                    iend(std::list<std::string> const&);
+                    iend(std::vector<std::string> const&, size_t const&);
 
                     iend(void);
 
@@ -601,7 +604,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GELMNT1`: Element Data Definition
@@ -626,7 +630,7 @@ Example of format of `DATE` record as used in SESAM:
                     dnvgl::extfem::fem::types::entry_type<long> static const _form_ELTYAD;
                     dnvgl::extfem::fem::types::entry_type<long> static const _form_NODIN;
 
-                    std::map<long, dnvgl::extfem::fem::elements::el_types> static const eltyp_map;
+                    std::unordered_map<long, dnvgl::extfem::fem::elements::el_types> static const eltyp_map;
 
                 public:
 
@@ -682,7 +686,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<long> NODIN;
 
-                    gelmnt1(std::list<std::string> const&);
+                    gelmnt1(std::vector<std::string> const&, size_t const&);
 
                     gelmnt1(void);
 
@@ -697,7 +701,7 @@ Example of format of `DATE` record as used in SESAM:
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
 
-                    __base::card const &operator()(std::list<std::string> const&);
+                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
 
                     __base::card const &operator()(
                         long const &ELNOX, long const &ELNO,
@@ -717,7 +721,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GELREF1`: Reference to Element Data
@@ -882,7 +887,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<long> TRANSNO;
 
-                    gelref1(std::list<std::string> const&);
+                    gelref1(std::vector<std::string> const&, size_t const&);
 
                     gelref1(void);
 
@@ -898,7 +903,7 @@ Example of format of `DATE` record as used in SESAM:
                         std::vector<long> const &ECCNO={},
                         std::vector<long> const &TRANSNO={});
 
-                    __base::card const &operator()(std::list<std::string> const&);
+                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
 
                     __base::card const &operator()(
                         long const &ELNO, long const &MATNO,
@@ -919,7 +924,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GBARM`: Cross Section Type Massive Bar
@@ -994,7 +1000,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     long NLOBZ;
 
-                    gbarm(std::list<std::string> const&);
+                    gbarm(std::vector<std::string> const&, size_t const&);
 
                     gbarm(void);
 
@@ -1011,7 +1017,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GBEAMG`: General Beam Element Data
@@ -1099,7 +1106,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     double SZ;
 
-                    gbeamg(std::list<std::string> const&);
+                    gbeamg(std::vector<std::string> const&, size_t const&);
 
                     gbeamg(void);
 
@@ -1114,7 +1121,7 @@ Example of format of `DATE` record as used in SESAM:
 
                     gbeamg(double const &AREA);
 
-                    __base::card const &operator()(std::list<std::string> const&);
+                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
 
                     __base::card const &operator()(
                         long const &GEONO,
@@ -1134,7 +1141,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GECCEN`: Eccentricities
@@ -1180,7 +1188,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     double EZ;
 
-                    geccen(std::list<std::string> const&);
+                    geccen(std::vector<std::string> const&, size_t const&);
 
                     geccen(void);
 
@@ -1198,7 +1206,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GELTH`: Thickness of Two-dimensional Elements
@@ -1233,7 +1242,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     long NINT;
 
-                    gelth(std::list<std::string> const&);
+                    gelth(std::vector<std::string> const&, size_t const&);
 
                     gelth(void);
 
@@ -1256,7 +1265,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GIORH`: Cross Section Type I or H Beam
@@ -1343,7 +1353,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     long NLOBZ;
 
-                    giorh(std::list<std::string> const&);
+                    giorh(std::vector<std::string> const&, size_t const&);
 
                     giorh(void);
 
@@ -1361,7 +1371,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GLSEC`: Cross Section Type I or H Beam
@@ -1448,7 +1459,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     long NLOBZ;
 
-                    glsec(std::list<std::string> const&);
+                    glsec(std::vector<std::string> const&, size_t const&);
 
                     glsec(void);
 
@@ -1467,7 +1478,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GPIPE`: Cross Section Type Tube
@@ -1536,7 +1548,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     long NRAD;
 
-                    gpipe(std::list<std::string> const&);
+                    gpipe(std::vector<std::string> const&, size_t const&);
 
                     gpipe(void);
 
@@ -1553,7 +1565,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GUSYI`: Cross Section Type Unsymmetrical I-Beam
@@ -1649,7 +1662,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     long NLOBZ;
 
-                    gusyi(std::list<std::string> const&);
+                    gusyi(std::vector<std::string> const&, size_t const&);
 
                     gusyi(void);
 
@@ -1668,7 +1681,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `BELFIX`: Flexible Joint/Hinge
@@ -1760,7 +1774,7 @@ Example of format of `DATE` record as used in SESAM:
                      */
                     std::vector<double> A;
 
-                    belfix(std::list<std::string> const&);
+                    belfix(std::vector<std::string> const&, size_t const&);
 
                     belfix(void);
 
@@ -1778,7 +1792,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `BLDEP`: Nodes with Linear Dependence
@@ -1859,7 +1874,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<double> b;
 
-                    bldep(std::list<std::string> const&);
+                    bldep(std::vector<std::string> const&, size_t const&);
 
                     bldep(void);
 
@@ -1891,7 +1906,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `BNBCD`: Nodes with Boundary Conditions
@@ -1970,7 +1986,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<fix_key> FIX;
 
-                    bnbcd(std::list<std::string> const&);
+                    bnbcd(std::vector<std::string> const&, size_t const&);
 
                     bnbcd(void);
 
@@ -1992,7 +2008,7 @@ Example of format of `DATE` record as used in SESAM:
                           bool const &FIX5, bool const &FIX6);
 
                     __base::card const &operator()(
-                        std::list<std::string> const&);
+                        std::vector<std::string> const&, size_t const&);
 
                     __base::card const &operator()(
                         long const &NODENO,
@@ -2022,7 +2038,7 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(std::list<std::string> const&);
+                    void read(std::vector<std::string> const&, size_t const&);
                 };
 
 /// `BNDISPL`: Nodes with Prescribed Displacements and Accelerations
@@ -2097,7 +2113,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<double> IDISP;
 
-                    bndispl(std::list<std::string> const&);
+                    bndispl(std::vector<std::string> const&, size_t const&);
 
                     bndispl(void);
 
@@ -2136,7 +2152,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `BNLOAD`: Nodes with Loads
@@ -2211,7 +2228,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<double> ILOAD;
 
-                    bnload(std::list<std::string> const&);
+                    bnload(std::vector<std::string> const&, size_t const&);
 
                     bnload(void);
 
@@ -2250,7 +2267,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `MGSPRNG`: Element to Ground
@@ -2296,7 +2314,7 @@ Example of format of `DATE` record as used in SESAM:
                     */
                     std::vector<std::vector<double> > K;
 
-                    mgsprng(std::list<std::string> const&);
+                    mgsprng(std::vector<std::string> const&, size_t const&);
 
                     mgsprng(void);
 
@@ -2314,7 +2332,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GSETMEMB`: set(group) of Nodes or Elements(Members)
@@ -2362,7 +2381,7 @@ records.
                     enum class types {
                         NODE_SET = 1, ELEM_SET = 2, UNDEF_TYPE=-999
                     };
-                    /** Dfine the possible set origins
+                    /** Define the possible set origins
                      */
                     enum class origins {
                         UNDEF_ORIGIN = 0,
@@ -2383,9 +2402,9 @@ records.
                     dnvgl::extfem::fem::types::entry_type<long> static const _form_ISORIG;
                     dnvgl::extfem::fem::types::entry_type<long> static const _form_IRMEMB;
 
-                    std::map<long, types> static const types_map;
+                    std::unordered_map<long, types> static const types_map;
                     types static to_types(long const&);
-                    std::map<long, origins> static const origins_map;
+                    std::unordered_map<long, origins> static const origins_map;
                     origins static to_origins(long const&);
 
                 public:
@@ -2441,7 +2460,7 @@ records.
                     */
                     std::vector<long> IRMEMB;
 
-                    gsetmemb(std::list<std::string> const&);
+                    gsetmemb(std::vector<std::string> const&, size_t const&);
 
                     gsetmemb(void);
 
@@ -2470,7 +2489,8 @@ records.
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `GUNIVEC`: Specification of Local Element Coordinate System
@@ -2522,7 +2542,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     */
                     double UNIZ;
 
-                    gunivec(std::list<std::string> const&);
+                    gunivec(std::vector<std::string> const&, size_t const&);
 
                     gunivec(void);
 
@@ -2538,7 +2558,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
@@ -2592,7 +2613,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                      */
                     double YIELD;
 
-                    misosel(std::list<std::string> const&);
+                    misosel(std::vector<std::string> const&, size_t const&);
 
                     misosel(void);
 
@@ -2622,7 +2643,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `MORSMEL`: Anisotropy, Linear Elastic Structural Analysis,
@@ -2750,7 +2772,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     */
                     double ALPHA2;
 
-                    morsmel(std::list<std::string> const&);
+                    morsmel(std::vector<std::string> const&, size_t const&);
 
                     morsmel(void);
 
@@ -2779,7 +2801,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const&);
                 };
 
 /// `TDSETNAM`: Name and Description of a set(group)
@@ -2885,7 +2908,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     std::string SET_NAME;
                     std::vector<std::string> CONT;
 
-                    tdsetnam(std::list<std::string> const&);
+                    tdsetnam(std::vector<std::string> const&, size_t const&);
 
                     tdsetnam(void);
 
@@ -2915,7 +2938,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `TDSUPNAM`: Name and Description of a Super-Element
@@ -3024,7 +3048,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     std::string SUP_NAME;
                     std::vector<std::string> CONT;
 
-                    tdsupnam(std::list<std::string> const&);
+                    tdsupnam(std::vector<std::string> const&, size_t const&);
 
                     tdsupnam(void);
 
@@ -3054,7 +3078,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
 
 /// `TEXT`: User supplied Text
@@ -3117,7 +3142,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     */
                     std::vector<std::string> CONT;
 
-                    text(std::list<std::string> const&);
+                    text(std::vector<std::string> const&, size_t const&);
 
                     text(void);
 
@@ -3144,7 +3169,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(const std::list<std::string>&);
+                    virtual void read(
+                        const std::vector<std::string>&, size_t const&);
                 };
             }
         }
@@ -3161,7 +3187,8 @@ namespace dnvgl {
         namespace fem {
             namespace cards {
                 void dispatch(
-                    std::list<std::string> const&,
+                    std::vector<std::string> const&,
+                    size_t entries,
                     std::unique_ptr<__base::card>&);
             }
         }

@@ -10,11 +10,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards_gsetmemb[]
+    const char cID_fem_cards_gsetmemb[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <memory>
@@ -33,6 +33,8 @@ static char THIS_FILE[] = __FILE__;
 #undef min
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
@@ -47,10 +49,12 @@ const entry_type<long> gsetmemb::_form_ISTYPE("ISTYPE");
 const entry_type<long> gsetmemb::_form_ISORIG("ISORIG");
 const entry_type<long> gsetmemb::_form_IRMEMB("IRMEMB");
 
-gsetmemb::gsetmemb(const std::list<std::string> &inp) :
-        card(inp) {
+gsetmemb::gsetmemb(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-    if (inp.size() < 7)
+void gsetmemb::read(const vector<std::string> &inp, size_t const &len) {
+    if (len < 7)
         throw errors::parse_error(
             "GSETMEMB", "Illegal number of entries.");
 
@@ -136,12 +140,12 @@ std::ostream &gsetmemb::put(std::ostream& os) const {
     return os;
 }
 
-std::map<long, gsetmemb::types> const
+std::unordered_map<long, gsetmemb::types> const
 gsetmemb::types_map({
         {1, gsetmemb::types::NODE_SET},
         {2, gsetmemb::types::ELEM_SET}});
 
-std::map<long, gsetmemb::origins> const
+std::unordered_map<long, gsetmemb::origins> const
 gsetmemb::origins_map({
         {0, gsetmemb::origins::UNDEF_ORIGIN},
         {1, gsetmemb::origins::POINT_ORIGIN},

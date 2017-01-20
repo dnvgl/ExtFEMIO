@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,13 +47,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GNODE (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GNODE    1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
-      __base::card::card_split(data, lines);
-      gnode probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gnode probe(lines, len);
 
       CHECK(probe.NODEX == 1);
       CHECK(probe.NODENO == 1);
@@ -63,10 +66,10 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    }
 
    SECTION("GNODE (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GNODE    1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
-      __base::card::card_split(data, lines);
-      gnode probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gnode probe(lines, len);
 
       CHECK(probe.NODEX == 1);
       CHECK(probe.NODENO == 1);
@@ -78,10 +81,10 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    }
 
    SECTION("GNODE (3)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"});
-      __base::card::card_split(data, lines);
-      gnode probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gnode probe(lines, len);
 
       CHECK(probe.NODEX == 1);
       CHECK(probe.NODENO == 222);
@@ -93,11 +96,11 @@ TEST_CASE("FEM GNODE definitions.", "[fem_gnode]" ) {
    }
 
    SECTION("reuse (GNODE)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "GNODE    1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
-      __base::card::card_split(data, lines);
+      len = __base::card::card_split(data, data.size(), lines);
       gnode probe;
-      probe(lines);
+      probe(lines, len);
 
       CHECK(probe.NODEX == 1);
       CHECK(probe.NODENO == 1);
@@ -181,13 +184,14 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]" ) {
 
 TEST_CASE("FEM GNODE conversion from own output.", "[fem_gnode,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("GNODE (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"});
-      __base::card::card_split(data, lines);
-      gnode probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      gnode probe(lines, len);
 
       CHECK(probe.NODEX == 1);
       CHECK(probe.NODENO == 222);

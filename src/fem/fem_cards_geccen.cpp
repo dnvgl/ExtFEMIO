@@ -10,11 +10,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards_geccen[]
+    const char cID_fem_cards_geccen[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <memory>
@@ -30,73 +30,69 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
+using namespace dnvgl::extfem::fem::cards;
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
-
-            const fem::types::card geccen::head("GECCEN");
+const fem::types::card geccen::head("GECCEN");
 
 
-            const entry_type<long> geccen::_form_ECCNO("ECCNO");
-            const entry_type<double> geccen::_form_EX("EX");
-            const entry_type<double> geccen::_form_EY("EY");
-            const entry_type<double> geccen::_form_EZ("EZ");
+const entry_type<long> geccen::_form_ECCNO("ECCNO");
+const entry_type<double> geccen::_form_EX("EX");
+const entry_type<double> geccen::_form_EY("EY");
+const entry_type<double> geccen::_form_EZ("EZ");
 
-            geccen::geccen(void) : geccen(-1, 0., 0., 0.) {}
+geccen::geccen(void) : geccen(-1, 0., 0., 0.) {}
 
-            geccen::geccen(geccen const *that) :
-               geccen(that->ECCNO, that->EX, that->EY, that->EZ) {}
+geccen::geccen(geccen const *that) :
+        geccen(that->ECCNO, that->EX, that->EY, that->EZ) {}
 
-            geccen::geccen(const std::list<std::string> &inp) :
-               card(inp) {
+geccen::geccen(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-               if (inp.size() < 5)
-                  throw errors::parse_error(
-                     "GECCEN", "Illegal number of entries.");
+void geccen::read(const vector<std::string> &inp, size_t const &len) {
+    if (len < 5)
+        throw errors::parse_error(
+            "GECCEN", "Illegal number of entries.");
 
-               auto pos = inp.begin();
+    auto pos = inp.begin();
 
-               ++pos;
-               ECCNO = _form_ECCNO(*(pos++));
-               EX = _form_EX(*(pos++));
-               EY = _form_EY(*(pos++));
-               EZ = _form_EZ(*(pos++));
-            }
+    ++pos;
+    ECCNO = _form_ECCNO(*(pos++));
+    EX = _form_EX(*(pos++));
+    EY = _form_EY(*(pos++));
+    EZ = _form_EZ(*(pos++));
+}
 
-            geccen::geccen(
-               long const &ECCNO,
-               double const &EX, double const &EY, double const &EZ) :
-               card(), ECCNO(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
+geccen::geccen(
+    long const &ECCNO,
+    double const &EX, double const &EY, double const &EZ) :
+        card(), ECCNO(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
 
-            geccen::geccen(long const &ECCNO,
-                           std::vector<double> const &pos) :
-               card(), ECCNO(ECCNO), EX(0.), EY(0.), EZ(0.) {
-               assert(pos.size() == 3);
-               EX = pos[0];
-               EY = pos[1];
-               EZ = pos[2];
-            }
+geccen::geccen(long const &ECCNO,
+               std::vector<double> const &pos) :
+        card(), ECCNO(ECCNO), EX(0.), EY(0.), EZ(0.) {
+    assert(pos.size() == 3);
+    EX = pos[0];
+    EY = pos[1];
+    EZ = pos[2];
+}
 
-            const dnvgl::extfem::fem::cards::types
-            geccen::card_type(void) const {return types::GECCEN;}
+const dnvgl::extfem::fem::cards::types
+geccen::card_type(void) const {return types::GECCEN;}
 
-            std::ostream &geccen::put(std::ostream& os) const {
-               if (this->ECCNO == -1) return os;
-               os << geccen::head.format()
-                  << this->_form_ECCNO.format(this->ECCNO)
-                  << this->_form_EX.format(this->EX)
-                  << this->_form_EY.format(this->EY)
-                  << this->_form_EZ.format(this->EZ);
-               return os << std::endl;
-            }
-         }
-      }
-   }
+std::ostream &geccen::put(std::ostream& os) const {
+    if (this->ECCNO == -1) return os;
+    os << geccen::head.format()
+       << this->_form_ECCNO.format(this->ECCNO)
+       << this->_form_EX.format(this->EX)
+       << this->_form_EY.format(this->EY)
+       << this->_form_EZ.format(this->EZ);
+    return os << std::endl;
 }
 
 // Local Variables:

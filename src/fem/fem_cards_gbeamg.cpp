@@ -30,6 +30,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
@@ -52,12 +54,27 @@ const entry_type<double> gbeamg::_form_SHCENZ("SHCENZ");
 const entry_type<double> gbeamg::_form_SY("SY");
 const entry_type<double> gbeamg::_form_SZ("SZ");
 
-gbeamg::gbeamg(const std::list<std::string> &inp) :
-        __base::beam_prop(), IX{0}, IY{0}, IZ{0}, IYZ{0},
-        WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
-        SY{0}, SZ{0} {
+gbeamg::gbeamg(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-    if (inp.size() != 17 && inp.size() != 5)
+void gbeamg::read(const vector<std::string> &inp, size_t const &len) {
+    __base::beam_prop::read(inp, len);
+    IX = {0};
+    IY = {0};
+    IZ = {0};
+    IYZ = {0};
+    WXMIN = {0};
+    WYMIN = {0};
+    WZMIN = {0};
+    SHARY = {0};
+    SHARZ = {0};
+    SHCENY = {0};
+    SHCENZ = {0};
+    SY = {0};
+    SZ = {0};
+
+    if (len != 17 && len != 5)
         throw errors::parse_error(
             "GBEAMG", "Illegal number of entries.");
 
@@ -67,7 +84,7 @@ gbeamg::gbeamg(const std::list<std::string> &inp) :
     GEONO = _form_GEONO(*(pos++));
     ++pos;
     AREA = _form_AREA(*(pos++));
-    if (inp.size() == 17) {
+    if (len == 17) {
         IX = _form_IX(*(pos++));
         IY = _form_IY(*(pos++));
         IZ = _form_IZ(*(pos++));

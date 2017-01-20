@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,10 +47,11 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("DATE (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
          "        DATE TIME:  11/03/2015 09:46:08",
@@ -56,8 +59,8 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]" ) {
          "        COMPUTER: HAML130185",
          "        USER: berhol"});
 
-      __base::card::card_split(data, lines);
-      date probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      date probe(lines, len);
 
       CHECK(probe.TYPE == 0);
       CHECK(probe.SUBTYPE == 0);

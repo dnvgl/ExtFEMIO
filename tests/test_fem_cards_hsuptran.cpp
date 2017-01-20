@@ -33,6 +33,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,16 +47,16 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 }
 
 TEST_CASE("FEM HSUPTRAN definitions. (Small Field Format)", "[fem_hsuptran]" ) {
-   std::list<std::string> data({
+   vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00\n",
          "          0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n",
          "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
          "          0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   hsuptran probe(lines);
+   vector<std::string> lines;
+   size_t len = __base::card::card_split(data, data.size(), lines);
+   hsuptran probe(lines, len);
 
    SECTION("first moment") {
 
@@ -152,19 +154,20 @@ SECTION("write (1)") {
 
 TEST_CASE("FEM HSUPTRAN conversion from own output.", "[fem_hsuptran,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("HSUPTRAN") {
 
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "HSUPTRAN+1.000000000e+00+2.000000000e+00+1.100000000e+01+2.100000000e+01\n",
             "        +3.100000000e+01+0.000000000e+00+1.200000000e+01+2.200000000e+01\n",
             "        +3.200000000e+01+0.000000000e+00+1.300000000e+01+3.300000000e+01\n",
             "        +3.300000000e+01+0.000000000e+00+1.400000000e+01+2.400000000e+01\n",
             "        +3.400000000e+01+1.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      hsuptran probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      hsuptran probe(lines, len);
 
       CHECK(probe.NFIELD == 1);
       CHECK(probe.ITREF == 2);

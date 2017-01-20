@@ -10,11 +10,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards_misosel[]
+    const char cID_fem_cards_misosel[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <memory>
@@ -28,6 +28,8 @@ namespace {
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+using namespace std;
 
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
@@ -46,10 +48,17 @@ const entry_type<double> misosel::_form_ALPHA("ALPHA");
 const entry_type<double> misosel::_form_DUMMY("DUMMY");
 const entry_type<double> misosel::_form_YIELD("YIELD");
 
-misosel::misosel(const std::list<std::string> &inp) :
-        __base::material(inp), DUMMY(0.), YIELD(0.) {
+misosel::misosel(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-    if (inp.size() < 7)
+void misosel::read(const vector<std::string> &inp, size_t const &len) {
+    __base::material::read(inp, len);
+    std::string static const empty{"                "};
+
+    DUMMY = {0.};
+    YIELD = {0.};
+    if (len < 7)
         throw errors::parse_error(
             "MISOSEL", "Illegal number of entries.");
 
@@ -62,13 +71,14 @@ misosel::misosel(const std::list<std::string> &inp) :
     RHO = _form_RHO(*(pos++));
     DAMP = _form_DAMP(*(pos++));
     ALPHA = _form_ALPHA(*(pos++));
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    size_t i{7};
+    if (++i > len) return;
+    if (*pos != empty)
         DUMMY = _form_DUMMY(*(pos++));
     else
         pos++;
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    if (++i > len) return;
+    if (*pos != empty)
         YIELD = _form_YIELD(*pos);
 }
 

@@ -33,6 +33,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -46,14 +48,16 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]" ) {
 
+    size_t len;
+
    SECTION("BSELL (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          // 345678|234567890123456|234567890123456|234567890123456|234567890123456
          "BSELL    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00\n",
          "         1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00\n"});
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      bsell probe(lines);
+      vector<std::string> lines;
+      len = __base::card::card_split(data, data.size(), lines);
+      bsell probe(lines, len);
 
       CHECK((long)probe.LC == 1);
       CHECK((double)probe.SUBNO == 1);
@@ -172,18 +176,19 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
 
 TEST_CASE("FEM BSELL conversion from own output.", "[fem_bsell,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("BSELL (own output)" ) {
 
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
             "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
             "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
             "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      bsell probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bsell probe(lines, len);
 
       CHECK((long)probe.LC == 2);
       CHECK((double)probe.SUBNO == 29);
@@ -193,14 +198,14 @@ TEST_CASE("FEM BSELL conversion from own output.", "[fem_bsell,in/out]") {
 
    SECTION("BSELL (less)" ) {
 
-      std::list<std::string> data({
+      vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
             "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
             "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
             "        +5.000000000e+00+5.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      bsell probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      bsell probe(lines, len);
 
       CHECK((long)probe.LC == 2);
       CHECK((double)probe.SUBNO == 29);

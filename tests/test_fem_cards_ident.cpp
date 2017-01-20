@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,13 +47,14 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("IDENT (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      ident probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      ident probe(lines, len);
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
@@ -59,10 +62,10 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (2)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IDENT   +1.00000000e+000+1.00000000e+000+3.00000000e+000+0.00000000e+000\n"});
-      __base::card::card_split(data, lines);
-      ident probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      ident probe(lines, len);
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
@@ -70,10 +73,10 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (3)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00 0.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      ident probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      ident probe(lines, len);
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
@@ -81,10 +84,10 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
    }
 
    SECTION("IDENT (4)") {
-      std::list<std::string> data({
+      vector<std::string> data({
          "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      ident probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      ident probe(lines, len);
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 1);
@@ -121,13 +124,14 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
 
 TEST_CASE("FEM IDENT conversion from own output.", "[fem_ident,in/out]") {
 
-   std::list<std::string> lines;
+   vector<std::string> lines;
+   size_t len;
 
    SECTION("IDENT (1)") {
-      std::list<std::string> data({
+      vector<std::string> data({
             "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
-      __base::card::card_split(data, lines);
-      ident probe(lines);
+      len = __base::card::card_split(data, data.size(), lines);
+      ident probe(lines, len);
 
       CHECK(probe.SLEVEL == 1);
       CHECK(probe.SELTYP == 2);

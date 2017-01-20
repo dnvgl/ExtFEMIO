@@ -11,11 +11,11 @@
 
 // ID:
 namespace {
-   const char cID_fem_cards_iend[]
+    const char cID_fem_cards_iend[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include <memory>
@@ -29,52 +29,48 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
+using namespace dnvgl::extfem::fem::cards;
 
-namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace cards {
+const fem::types::card iend::head("IEND");
 
-            const fem::types::card iend::head("IEND");
+const entry_type<long> iend::_form_CONT("SLEVEL");
 
-            const entry_type<long> iend::_form_CONT("SLEVEL");
+iend::iend(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-            iend::iend(const std::list<std::string> &inp) :
-               card(inp) {
+void iend::read(const vector<std::string> &inp, size_t const &len) {
+    if (len < 2)
+        throw errors::parse_error(
+            "IEND", "Illegal number of entries.");
 
-               if (inp.size() < 1)
-                  throw errors::parse_error(
-                     "IEND", "Illegal number of entries.");
+    auto pos = inp.begin();
 
-               auto pos = inp.begin();
+    ++pos;
+    CONT = _form_CONT(*(pos));
+}
 
-               ++pos;
-               CONT = _form_CONT(*(pos));
-            }
+iend::iend(void) : iend(-1) {}
 
-            iend::iend(void) : iend(-1) {}
+iend::iend(const long &CONT) : CONT(CONT) {}
 
-            iend::iend(const long &CONT) : CONT(CONT) {}
+const cards::types
+iend::card_type(void) const { return types::IEND; };
 
-            const types
-            iend::card_type(void) const { return types::IEND; };
+std::ostream &iend::put(std::ostream& os) const {
+    if (this->CONT == -1) return os;
+    os << iend::head.format()
+       << this->_form_CONT.format(this->CONT)
+       << iend::empty.format()
+       << iend::empty.format()
+       << iend::empty.format() << std::endl;
 
-            std::ostream &iend::put(std::ostream& os) const {
-               if (this->CONT == -1) return os;
-               os << iend::head.format()
-                  << this->_form_CONT.format(this->CONT)
-                  << iend::empty.format()
-                  << iend::empty.format()
-                  << iend::empty.format() << std::endl;
-
-               return os;
-            }
-         }
-      }
-   }
+    return os;
 }
 
 // Local Variables:

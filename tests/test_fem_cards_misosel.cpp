@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -47,14 +49,15 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 
     double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
     std::list<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-    std::list<std::string> lines;
+    vector<std::string> lines;
+    size_t len;
 
     SECTION("MISOSEL (1)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "MISOSEL  4.10000000e+001 2.06000000e+008 3.00032000e-001 7.80000000e+000\n",
                     "         0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-        __base::card::card_split(data, lines);
-        misosel probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        misosel probe(lines, len);
 
         CHECK(probe.MATNO == 41);
         CHECK(probe.YOUNG == 2.06e8);
@@ -67,11 +70,11 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
     }
 
     SECTION("MISOSEL (2)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "MISOSEL  4.10000000e+01  2.06000000e+08  3.00032000e-01  7.80000000e+00 \n",
                     "         0.00000000e+00  0.00000000e+00  1.00000000e+00  2.34000000e+02 \n"});
-        __base::card::card_split(data, lines);
-        misosel probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        misosel probe(lines, len);
 
         CHECK(probe.MATNO == 41);
         CHECK(probe.YOUNG == 2.06e8);
@@ -86,14 +89,15 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 
 TEST_CASE("FEMIO-27: Failing to import MISOEL card from SESAM GeniE FEM file") {
 
-    std::list<std::string> lines;
+    vector<std::string> lines;
+    size_t len;
 
     SECTION("Failing card") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "MISOSEL  1.00000000e+000 2.06000000e+008 3.00000012e-001 7.84999990e+000\n",
                     "         0.00000000e+000 0.00000000e+000\n"});
-        __base::card::card_split(data, lines);
-        misosel probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        misosel probe(lines, len);
 
         CHECK(probe.MATNO == 1);
         CHECK(probe.YOUNG == 2.06e8);
@@ -162,14 +166,15 @@ TEST_CASE("FEM MISOSEL types output.", "[fem_misosel,out]" ) {
 
 TEST_CASE("FEM MISOSEL conversion from own output.", "[fem_misosel,in/out]") {
 
-    std::list<std::string> lines;
+    vector<std::string> lines;
+    size_t len;
 
     SECTION("MISOEL (1)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "MISOSEL +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
                     "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        misosel probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        misosel probe(lines, len);
 
         CHECK(probe.MATNO == 1);
         CHECK(probe.YOUNG == 2.);
@@ -182,11 +187,11 @@ TEST_CASE("FEM MISOSEL conversion from own output.", "[fem_misosel,in/out]") {
     }
 
     SECTION("MISOEL (2)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "MISOSEL +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
                     "        +5.000000000e+00+6.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        misosel probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        misosel probe(lines, len);
 
         CHECK(probe.MATNO == 1);
         CHECK(probe.YOUNG == 2.);

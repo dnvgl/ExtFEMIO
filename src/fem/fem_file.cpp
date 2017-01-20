@@ -31,6 +31,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem::input;
 
 fem_file::fem_file(std::istream &inp) :
@@ -38,43 +40,48 @@ fem_file::fem_file(std::istream &inp) :
 }
 
 // Return all input file lines belonging to next FEM card.
-void fem_file::get(std::list<std::string> &res) {
-   res.clear();
-   while (cur_line.length() == 0)
-      std::getline(data, cur_line);
-   do {
-      // if line not empty and not comment line add line to result std::set.
-      if (cur_line.length() > 0)
-         res.push_back(cur_line);
-   // if not EOF, read next line
-   // loop while no next card starts and file has still content.
-   } while (std::getline(this->data, this->cur_line) &&
-            (res.size() == 0 || cur_line[0] == ' '));
+size_t fem_file::get(vector<std::string> &res) {
+    size_t i{0};
+    while (cur_line.length() == 0)
+        std::getline(data, cur_line);
+    do {
+        // if line not empty and not comment line add line to result std::set.
+        if (cur_line.length() > 0)
+            try {
+                res.at(i++).assign(cur_line);
+            } catch (out_of_range) {
+                res.emplace_back(cur_line);
+            }
+        // if not EOF, read next line
+        // loop while no next card starts and file has still content.
+    } while (std::getline(this->data, this->cur_line) &&
+             (i == 0 || cur_line[0] == ' '));
+    return i;
 }
 
 // Return size of input FEM file.
 std::streampos fem_file::size(void) {
-   // save current position in file
-   auto cur_pos = data.tellg();
+    // save current position in file
+    auto cur_pos = data.tellg();
 
-   // jump to end of file
-   data.seekg(0, std::ios::end);
-   // determine position if file as file size
-   auto fileSize = data.tellg();
+    // jump to end of file
+    data.seekg(0, std::ios::end);
+    // determine position if file as file size
+    auto fileSize = data.tellg();
 
-   // jump back to original position if file
-   data.seekg(cur_pos);
+    // jump back to original position if file
+    data.seekg(cur_pos);
 
-   return fileSize;
+    return fileSize;
 }
 
 // Return position in input FEM file.
 std::streampos fem_file::pos(void) {
-   return data.tellg();
+    return data.tellg();
 }
 
 bool fem_file::eof(void) {
-   return data.eof();
+    return data.eof();
 }
 
 // Local Variables:

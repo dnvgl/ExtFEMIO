@@ -32,6 +32,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
@@ -45,16 +47,16 @@ CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
 
 TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
 
-    std::list<std::string> lines;
-
+    vector<std::string> lines;
     __base::geoprop::reset_geono();
+    size_t len;
 
     SECTION("GBARM (1)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001\n",
              "         1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000\n"});
-        __base::card::card_split(data, lines);
-        gbarm probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gbarm probe(lines, len);
 
         CHECK(probe.GEONO == 2);
         CHECK(probe.HZ == 250.);
@@ -67,11 +69,11 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
     }
 
     SECTION("GBARM (2)") {
-        std::list<std::string> data(
+        vector<std::string> data(
             {"GBARM    2.000000000e+00 2.50000000e+02  3.200000000e+01 3.200000000e+01\n",
              "         1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        gbarm probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gbarm probe(lines, len);
 
         CHECK(probe.GEONO == 2);
         CHECK(probe.HZ == 250.);
@@ -86,16 +88,16 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
 
 TEST_CASE("FEMIO-37: Failing to import GBARM record from SESAM GeniE FEM file") {
 
-    std::list<std::string> lines;
-
+    vector<std::string> lines;
     __base::geoprop::reset_geono();
+    size_t len;
 
     SECTION("Failing card") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "GBARM     2.80000000E+01  1.50000006E-01  1.20000001E-02  1.20000001E-02\n",
                     "          1.00000000E+00  1.00000000E+00\n"});
-        __base::card::card_split(data, lines);
-        gbarm probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gbarm probe(lines, len);
 
         CHECK(probe.GEONO == 28);
         CHECK(probe.HZ == .150000006);
@@ -139,16 +141,16 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
 
 TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
 
-    std::list<std::string> lines;
-
+    vector<std::string> lines;
     __base::geoprop::reset_geono();
+    size_t len;
 
     SECTION("GBARM (1)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
                     "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        gbarm probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gbarm probe(lines, len);
 
         CHECK(probe.GEONO == 1);
         CHECK(probe.HZ == 2.);
@@ -161,11 +163,11 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
     }
 
     SECTION("GBARM (2)") {
-        std::list<std::string> data({
+        vector<std::string> data({
                 "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
                     "        +5.000000000e+00+6.000000000e+00\n"});
-        __base::card::card_split(data, lines);
-        gbarm probe(lines);
+        len = __base::card::card_split(data, data.size(), lines);
+        gbarm probe(lines, len);
 
         CHECK(probe.GEONO == 1);
         CHECK(probe.HZ == 2.);

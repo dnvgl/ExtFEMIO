@@ -51,6 +51,13 @@ CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
     return Catch::toString( ex.what() );
 }
 
+CATCH_TRANSLATE_EXCEPTION( exception& ex ) {
+    return Catch::toString( ex.what() );
+}
+
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
+   return ex;
+}
 
 TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
@@ -170,20 +177,22 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
     istringstream ist(s);
     fem_file probe(ist);
-    list<string> l;
+    vector<string> l;
     vector<string> ref;
-    list<string> entries;
+    vector<string> entries;
+
+    size_t len;
 
     unique_ptr<cards::__base::card> current;
 
     __base::geoprop::reset_geono();
 
     SECTION("Checking dispatch [ident].") {
-        probe.get(l);
+        len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::IDENT);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000
@@ -193,12 +202,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [text].") {
-        for (int i = 0; i < 2; i++) probe.get(l);
+        for (int i = 0; i < 2; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::TEXT);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456|2
         // TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
@@ -220,12 +229,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [date].") {
-        for (int i = 0; i < 3; i++) probe.get(l);
+        for (int i = 0; i < 3; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::DATE);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // DATE     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001
@@ -247,12 +256,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdload].") {
-        for (int i = 0; i < 4; i++) probe.get(l);
+        for (int i = 0; i < 4; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         // CHECK(current->card_type() == cards::TDLOAD);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // TDLOAD   4.00000000e+000 1.00000000e+000 1.07000000e+002 0.00000000e+000
@@ -269,12 +278,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gnode].") {
-        for (int i = 0; i < 5; i++) probe.get(l);
+        for (int i = 0; i < 5; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GNODE);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GNODE    1.00000000e+000 1.00000000e+000 6.00000000e+000 1.23456000e+005
@@ -286,12 +295,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gcoord].") {
-        for (int i = 0; i < 6; i++) probe.get(l);
+        for (int i = 0; i < 6; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GCOORD);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GCOORD   1.00000000e+000 1.11525000e+005 1.80000000e+004 2.10000000e+004
@@ -302,13 +311,14 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gelmnt1].") {
-        for (int i = 0; i < 7; i++) probe.get(l);
+        for (int i = 0; i < 7; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GELMNT1);
+        gelmnt1 *cur = static_cast<gelmnt1*>(current.get());
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000
         //          6.08000000e+002 6.18000000e+002 5.71000000e+002 5.65000000e+002
@@ -321,12 +331,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gelref1].") {
-        for (int i = 0; i < 8; i++) probe.get(l);
+        for (int i = 0; i < 8; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GELREF1);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GELREF1  4.64000000e+002 3.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -351,12 +361,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gbarm].") {
-        for (int i = 0; i < 9; i++) probe.get(l);
+        for (int i = 0; i < 9; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GBARM);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GBARM    2.00000000e+000 2.50000000e+002 3.20000000e+001 3.20000000e+001
@@ -372,12 +382,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gbeamg].") {
-        for (int i = 0; i < 10; i++) probe.get(l);
+        for (int i = 0; i < 10; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GBEAMG);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GBEAMG   1.68500000e+003 0.00000000e+000 1.11500000e+004 1.00000000e-008
@@ -402,12 +412,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [geccen].") {
-        for (int i = 0; i < 11; i++) probe.get(l);
+        for (int i = 0; i < 11; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GECCEN);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GECCEN   1.37200000e+003 0.00000000e+000-2.48199365e+002-9.05288207e+000
@@ -418,12 +428,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gelth].") {
-        for (int i = 0; i < 12; i++) probe.get(l);
+        for (int i = 0; i < 12; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GELTH);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GELTH    6.54394000e+005 1.00000000e-001 0.00000000e+000 0.00000000e+000
@@ -434,12 +444,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
 
     SECTION("Checking dispatch [giorh].") {
-        for (int i = 0; i < 13; i++) probe.get(l);
+        for (int i = 0; i < 13; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GIORH);
         // GIORH    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002
         //          1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000
@@ -459,12 +469,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gusyi].") {
-        for (int i = 0; i < 14; i++) probe.get(l);
+        for (int i = 0; i < 14; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GUSYI);
         // GUSYI    5.00000000e+000 4.66000000e+002 1.45000000e+001 1.25000000e+002
         //          1.60000000e+001 1.45000000e+001 1.60000000e+001 1.00000000e+000
@@ -487,12 +497,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [glsec].") {
-        for (int i = 0; i < 15; i++) probe.get(l);
+        for (int i = 0; i < 15; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GLSEC);
         // GLSEC    1.90000000e+001 2.00000000e+002 1.00000000e+001 9.00000000e+001
         //          1.40000000e+001 1.00000000e+000 1.00000000e+000 1.00000000e+000
@@ -510,12 +520,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gpipe].") {
-        for (int i = 0; i < 16; i++) probe.get(l);
+        for (int i = 0; i < 16; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GPIPE);
         // GPIPE    6.54391000e+005 0.00000000e+000 3.12094257e-001 1.56047128e-001
         //          1.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -530,12 +540,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bldep].") {
-        for (int i = 0; i < 17; i++) probe.get(l);
+        for (int i = 0; i < 17; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BLDEP);
         // BLDEP    1.11140000e+004 2.30470000e+004 6.00000000e+000 9.00000000e+000
         //          1.00000000e+000 1.00000000e+000 1.00000000e+000 0.00000000e+000
@@ -566,12 +576,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnbcd].") {
-        for (int i = 0; i < 18; i++) probe.get(l);
+        for (int i = 0; i < 18; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BNBCD);
         // BNBCD    2.30470000e+004 6.00000000e+000 1.00000000e+000 1.00000000e+000
         //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
@@ -582,12 +592,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [belfix].") {
-        for (int i = 0; i < 19; i++) probe.get(l);
+        for (int i = 0; i < 19; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BELFIX);
         // BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000
         //          1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000
@@ -600,12 +610,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bndispl].") {
-        for (int i = 0; i < 20; i++) probe.get(l);
+        for (int i = 0; i < 20; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BNDISPL);
         // BNDISPL  2.00000000e+000 1.00000000e+000 0.00000000e+000 0.00000000e+000
         //          2.30460000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -622,12 +632,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnload].") {
-        for (int i = 0; i < 21; i++) probe.get(l);
+        for (int i = 0; i < 21; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BNLOAD);
         // BNLOAD   1.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
         //          1.52200000e+004 6.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -644,12 +654,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [mgsprng].") {
-        for (int i = 0; i < 22; i++) probe.get(l);
+        for (int i = 0; i < 22; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::MGSPRNG);
         // MGSPRNG  6.90000000e+001 6.00000000e+000 1.00000000e+008 0.00000000e+000
         //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -669,12 +679,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gsetmemb].") {
-        for (int i = 0; i < 23; i++) probe.get(l);
+        for (int i = 0; i < 23; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GSETMEMB);
         // GSETMEMB 5.00000000e+000 1.74000000e+002 1.00000000e+000 2.00000000e+000
         //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -688,12 +698,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gunivec].") {
-        for (int i = 0; i < 24; i++) probe.get(l);
+        for (int i = 0; i < 24; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GUNIVEC);
         // GUNIVEC  5.17000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000
         CHECK(static_cast<gunivec*>(current.get())->TRANSNO == 517);
@@ -703,12 +713,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [misosel].") {
-        for (int i = 0; i < 25; i++) probe.get(l);
+        for (int i = 0; i < 25; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::MISOSEL);
         // MISOSEL  6.60000000e+001 2.06000000e+008 3.00036000e-001 7.80000000e+000
         //          0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000
@@ -721,12 +731,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [morsmel].") {
-        for (int i = 0; i < 26; i++) probe.get(l);
+        for (int i = 0; i < 26; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::MORSMEL);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // MORSMEL   8.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00
@@ -755,12 +765,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdsetnam].") {
-        for (int i = 0; i < 27; i++) probe.get(l);
+        for (int i = 0; i < 27; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::TDSETNAM);
         // TDSETNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000
         //         KEY_HOLE_ROOF
@@ -775,12 +785,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdsupnam].") {
-        for (int i = 0; i < 28; i++) probe.get(l);
+        for (int i = 0; i < 28; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::TDSUPNAM);
         // TDSUPNAM 4.00000000e+000 1.66000000e+002 1.13000000e+002 0.00000000e+000
         //         KEY_HOLE_ROOF
@@ -795,12 +805,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gelmnt2].") {
-        for (int i = 0; i < 29; i++) probe.get(l);
+        for (int i = 0; i < 29; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::GELMNT2);
         // GELMNT2   1.000000000e+00 1.000000000e+00 1.000000000e+00 0.00000000E+00
         //           1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000E+00
@@ -830,12 +840,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [hsupstat].") {
-        for (int i = 0; i < 30; i++) probe.get(l);
+        for (int i = 0; i < 30; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::HSUPSTAT);
         // HSUPSTAT  9.000000000e+00 1.000000000e+00 2.32998000E+05  6.00000000E+00
         //           2.30333000E+05  1.26810000E+05  0.000000000e+00 2.00000000E+00
@@ -853,12 +863,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [hsuptran].") {
-        for (int i = 0; i < 31; i++) probe.get(l);
+        for (int i = 0; i < 31; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::HSUPTRAN);
         // HSUPTRAN  1.800000000e+01 2.000000000e+00 1.000000000e+00 0.00000000E+00
         //           0.000000000e+00 0.000000000e+00 0.000000000e+00 1.00000000E+00
@@ -887,12 +897,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [hierarch].") {
-        for (int i = 0; i < 32; i++) probe.get(l);
+        for (int i = 0; i < 32; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::HIERARCH);
         // HIERARCH  9.000000000e+00 1.000000000e+00 2.000000000e+00 1.00000000E+00
         //           2.000000000e+00 0.000000000e+00 0.000000000e+00 1.00000000E+00
@@ -911,12 +921,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdload].") {
-        for (int i = 0; i < 33; i++) probe.get(l);
+        for (int i = 0; i < 33; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::TDLOAD);
         // TDLOAD    4.000000000e+00 1.000000000e+00 1.04000000E+02  0.00000000E+00
         //         LC_1
@@ -931,12 +941,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bsell].") {
-        for (int i = 0; i < 34; i++) probe.get(l);
+        for (int i = 0; i < 34; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BSELL);
         // BSELL     1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
         //           1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00
@@ -950,12 +960,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnbcd].") {
-        for (int i = 0; i < 35; i++) probe.get(l);
+        for (int i = 0; i < 35; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BNBCD);
         // BNBCD     3.88350000E+04  6.000000000e+00 4.000000000e+00 4.00000000E+00
         //           4.000000000e+00 4.000000000e+00 4.000000000e+00 4.00000000E+00
@@ -966,12 +976,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [beuslo].") {
-        for (int i = 0; i < 36; i++) probe.get(l);
+        for (int i = 0; i < 36; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BEUSLO);
         // BEUSLO    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00
         //           1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00
@@ -993,12 +1003,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnload].") {
-        for (int i = 0; i < 37; i++) probe.get(l);
+        for (int i = 0; i < 37; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::BNLOAD);
         // BNLOAD    1.000000000e+00 0.000000000e+00 0.000000000e+00 0.00000000e+00
         //           1.000000000e+00 3.000000000e+00 1.100000000e+00 1.20000000e+00
@@ -1016,12 +1026,12 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [iend].") {
-        for (int i = 0; i < 38; i++) probe.get(l);
+        for (int i = 0; i < 38; i++) len = probe.get(l);
         string msg;
         for (auto p : l) msg += p + "\n";
         CAPTURE(msg);
-        __base::card::card_split(l, entries);
-        cards::dispatch(entries, current);
+        len = __base::card::card_split(l, len, entries);
+        cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::IEND);
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // IEND     0.00000000e+000 0.00000000e+000 0.00000000e+000 0.00000000e+000

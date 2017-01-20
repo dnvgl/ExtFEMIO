@@ -34,6 +34,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -49,10 +51,9 @@ entry_type<std::string> const tdload::_form_SET_NAME(
    "SET_NAME", type_bounds::bound<std::string>(""));
 entry_type<std::string> const tdload::_form_CONT("CONT");
 
-tdload::tdload(std::list<std::string> const &inp) :
-   card(inp) {
+tdload::tdload(vector<std::string> const &inp, size_t const &len) {
 
-   if (inp.size() < 5)
+   if (len < 5)
       throw errors::parse_error(
          "TDLOAD", "Illegal number of entries.");
 

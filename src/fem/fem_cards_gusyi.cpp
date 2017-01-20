@@ -30,6 +30,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
@@ -52,10 +54,20 @@ entry_type<long> const gusyi::_form_NLOBYT("NLOBYT");
 entry_type<long> const gusyi::_form_NLOBYB("NLOBYB");
 entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
-gusyi::gusyi(const std::list<std::string> &inp) :
-        __base::beam_prop(inp), NLOBYT(0), NLOBYB(0), NLOBZ(0) {
+gusyi::gusyi(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
-    if (inp.size() < 12)
+void gusyi::read(const vector<std::string> &inp, size_t const &len) {
+    std::string static const empty{"                "};
+
+    NLOBYT = {0};
+    NLOBYB = {0};
+    NLOBZ = {0};
+
+    __base::beam_prop::read(inp, len);
+
+    if (len < 12)
         throw errors::parse_error(
             "GUSYU", "Illegal number of entries.");
 
@@ -73,18 +85,19 @@ gusyi::gusyi(const std::list<std::string> &inp) :
     TB = _form_TB(*(pos++));
     SFY = _form_SFY(*(pos++));
     SFZ = _form_SFZ(*(pos++));
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    size_t i{12};
+    if (i++ < len) return;
+    if (*pos != empty)
         NLOBYT = _form_NLOBYT(*(pos++));
     else
         pos++;
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    if (i++ < len) return;
+    if (*pos != empty)
         NLOBYB = _form_NLOBYB(*(pos++));
     else
         pos++;
-    if (pos == inp.end()) return;
-    if (*pos != "                ")
+    if (i++ < len) return;
+    if (*pos != empty)
         NLOBZ = _form_NLOBZ(*(pos++));
 }
 
