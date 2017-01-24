@@ -171,35 +171,31 @@ const entry_type<long> gelmnt1::_form_ELTYAD("ELTYAD");
 const entry_type<long> gelmnt1::_form_NODIN("NODIN");
 
 gelmnt1::gelmnt1(const vector<std::string> &inp, size_t const &len) {
-    this->read(inp, len);
+    read(inp, len);
 }
 
 void gelmnt1::read(const vector<std::string> &inp, size_t const &len) {
-    std::string static const empty{"                "};
+    std::string static const empty(16, ' ');
 
     if (len < 6)
         throw errors::parse_error(
             "GELMNT1", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
     long tmp;
 
-    ++pos;
-
-    ELNOX = _form_ELNOX(*(pos++));
-    ELNO = _form_ELNO(*(pos++));
-    tmp = _form_ELTYP(*(pos++));
+    ELNOX = _form_ELNOX(inp.at(1));
+    ELNO = _form_ELNO(inp.at(2));
+    tmp = _form_ELTYP(inp.at(3));
     try {
         ELTYP = eltyp_map.at(tmp);
     } catch (std::out_of_range) {
         dnvgl::extfem::fem::errors::parse_error(
             "gelmnt1", "wrong element type");
     }
-    ELTYAD = _form_ELTYAD(*(pos++));
-    size_t i{5};
-    while (++i < len && *pos != empty) {
-        tmp = _form_NODIN(*(pos++));
+    ELTYAD = _form_ELTYAD(inp.at(4));
+    size_t i{4};
+    while (++i < len && inp.at(i) != empty) {
+        tmp = _form_NODIN(inp[i]);
         if (tmp == 0) break;
         NODIN.push_back(tmp);
     }

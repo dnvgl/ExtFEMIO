@@ -50,7 +50,10 @@ const entry_type<double> beuslo::_form_RLOAD("RLOAD");
 const entry_type<double> beuslo::_form_ILOAD("ILOAD");
 
 beuslo::beuslo(std::vector<std::string> const &inp, size_t const &len) {
+    read(inp, len);
+}
 
+void beuslo::read(std::vector<std::string> const &inp, size_t const &len) {
     if (inp.size() < 10)
         throw errors::parse_error(
             "BEUSLO", "Illegal number of entries.");
@@ -72,7 +75,7 @@ beuslo::beuslo(std::vector<std::string> const &inp, size_t const &len) {
     if (COMPLX)
         for (int i = 0; i < NDOF; i++)
             ILOADi.push_back(_form_ILOAD(*(pos++)));
-};
+}
 
 beuslo::beuslo() :
         beuslo(-1, 0, 0, 0, 0, 0, 0, 0, {}, {}) {}

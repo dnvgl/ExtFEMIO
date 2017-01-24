@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   const char  cID[]
+    const char  cID[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -38,17 +38,17 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+    return ex.what();
 }
 
 CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+    return ex;
 }
 
 TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
     __base::geoprop::reset_geono();
 
     SECTION("GUSYI (1)") {

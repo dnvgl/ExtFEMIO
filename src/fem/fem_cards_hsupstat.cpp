@@ -50,7 +50,10 @@ const entry_type<long> hsupstat::_form_RELOADC("RELOADC");
 const entry_type<long> hsupstat::_form_COMPLC("COMPLC");
 
 hsupstat::hsupstat(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
+void hsupstat::read(const vector<std::string> &inp, size_t const &len) {
     if (len < 10)
         throw errors::parse_error(
             "HSUPSTAT", "Illegal number of entries.");

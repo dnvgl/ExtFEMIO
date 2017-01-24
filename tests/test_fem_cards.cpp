@@ -190,7 +190,8 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [ident].") {
         len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
+        CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
         CHECK(current->card_type() == cards::types::IDENT);
@@ -204,7 +205,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [text].") {
         for (int i = 0; i < 2; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -231,7 +232,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [date].") {
         for (int i = 0; i < 3; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -258,7 +259,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [tdload].") {
         for (int i = 0; i < 4; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -280,7 +281,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gnode].") {
         for (int i = 0; i < 5; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -297,7 +298,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gcoord].") {
         for (int i = 0; i < 6; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -313,7 +314,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gelmnt1].") {
         for (int i = 0; i < 7; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -333,7 +334,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gelref1].") {
         for (int i = 0; i < 8; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -363,7 +364,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gbarm].") {
         for (int i = 0; i < 9; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -384,7 +385,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gbeamg].") {
         for (int i = 0; i < 10; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -414,7 +415,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [geccen].") {
         for (int i = 0; i < 11; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -430,7 +431,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gelth].") {
         for (int i = 0; i < 12; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -446,7 +447,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [giorh].") {
         for (int i = 0; i < 13; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -471,7 +472,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gusyi].") {
         for (int i = 0; i < 14; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -499,7 +500,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [glsec].") {
         for (int i = 0; i < 15; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -522,7 +523,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gpipe].") {
         for (int i = 0; i < 16; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -542,7 +543,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [bldep].") {
         for (int i = 0; i < 17; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -578,7 +579,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [bnbcd].") {
         for (int i = 0; i < 18; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -594,7 +595,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [belfix].") {
         for (int i = 0; i < 19; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -612,7 +613,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [bndispl].") {
         for (int i = 0; i < 20; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -634,7 +635,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [bnload].") {
         for (int i = 0; i < 21; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -656,7 +657,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [mgsprng].") {
         for (int i = 0; i < 22; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -681,7 +682,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gsetmemb].") {
         for (int i = 0; i < 23; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -700,7 +701,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gunivec].") {
         for (int i = 0; i < 24; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -715,7 +716,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [misosel].") {
         for (int i = 0; i < 25; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -733,7 +734,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [morsmel].") {
         for (int i = 0; i < 26; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -767,7 +768,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [tdsetnam].") {
         for (int i = 0; i < 27; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -787,7 +788,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [tdsupnam].") {
         for (int i = 0; i < 28; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -807,7 +808,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [gelmnt2].") {
         for (int i = 0; i < 29; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -842,7 +843,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [hsupstat].") {
         for (int i = 0; i < 30; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -865,7 +866,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [hsuptran].") {
         for (int i = 0; i < 31; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -899,7 +900,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [hierarch].") {
         for (int i = 0; i < 32; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -923,7 +924,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [tdload].") {
         for (int i = 0; i < 33; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -943,7 +944,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [bsell].") {
         for (int i = 0; i < 34; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -962,7 +963,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [bnbcd].") {
         for (int i = 0; i < 35; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -978,7 +979,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [beuslo].") {
         for (int i = 0; i < 36; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -1005,7 +1006,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [bnload].") {
         for (int i = 0; i < 37; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
@@ -1028,7 +1029,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     SECTION("Checking dispatch [iend].") {
         for (int i = 0; i < 38; i++) len = probe.get(l);
         string msg;
-        for (auto p : l) msg += p + "\n";
+        for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);

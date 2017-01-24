@@ -74,10 +74,10 @@ void glsec::read(const vector<std::string> &inp, size_t const &len) {
     SFY = _form_SFY(*(pos++));
     SFZ = _form_SFZ(*(pos++));
     K = _form_K(*(pos++));
-    size_t i{9};
-    if (++i < len) return;
+    size_t i{10};
+    if (len < i++) return;
     NLOBY = _form_NLOBY(*(pos++));
-    if (++i < len) return;
+    if (len < i) return;
     NLOBZ = _form_NLOBZ(*pos);
 }
 

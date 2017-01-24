@@ -2038,7 +2038,7 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    void read(std::vector<std::string> const&, size_t const&);
+                    virtual void read(std::vector<std::string> const&, size_t const&);
                 };
 
 /// `BNDISPL`: Nodes with Prescribed Displacements and Accelerations

@@ -71,15 +71,13 @@ void gbarm::read(const vector<std::string> &inp, size_t const &len) {
     BB = _form_BB(*(pos++));
     SFY = _form_SFY(*(pos++));
     SFZ = _form_SFZ(*(pos++));
-    size_t i{7};
-    if (++i < len) return;
+    size_t i{8};
+    if (len < i++) return;
     if (*pos != empty)
         NLOBY = _form_NLOBY(*(pos++));
     else
         pos++;
-    i++;
-
-    if (i >= len) return;
+    if (len < i) return;
     if (*pos != empty)
         NLOBZ = _form_NLOBZ(*(pos++));
 }

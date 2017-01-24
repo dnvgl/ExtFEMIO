@@ -51,7 +51,10 @@ const entry_type<long> hierarch::_form_NSUB("NSUB");
 const entry_type<long> hierarch::_form_IHSREF("IHSREF");
 
 hierarch::hierarch(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
+void hierarch::read(const vector<std::string> &inp, size_t const &len) {
     if (len < 10)
         throw errors::parse_error(
             "HIERARCH", "Illegal number of entries.");

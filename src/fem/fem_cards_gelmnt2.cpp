@@ -48,7 +48,10 @@ const entry_type<long> gelmnt2::_form_NNOD("NNOD");
 const entry_type<long> gelmnt2::_form_NOD("NOD");
 
 gelmnt2::gelmnt2(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
+void gelmnt2::read(const vector<std::string> &inp, size_t const &len) {
     if (len < 18)
         throw errors::parse_error(
             "GELMNT2", "Illegal number of entries.");

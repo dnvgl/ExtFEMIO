@@ -69,36 +69,27 @@ void gusyi::read(const vector<std::string> &inp, size_t const &len) {
 
     if (len < 12)
         throw errors::parse_error(
-            "GUSYU", "Illegal number of entries.");
+            "GUSYI", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++(++pos);
-
-    HZ = _form_HZ(*(pos++));
-    TY = _form_TY(*(pos++));
-    BT = _form_BT(*(pos++));
-    B1 = _form_B1(*(pos++));
-    TT = _form_TT(*(pos++));
-    BB = _form_BB(*(pos++));
-    B2 = _form_B2(*(pos++));
-    TB = _form_TB(*(pos++));
-    SFY = _form_SFY(*(pos++));
-    SFZ = _form_SFZ(*(pos++));
-    size_t i{12};
-    if (i++ < len) return;
-    if (*pos != empty)
-        NLOBYT = _form_NLOBYT(*(pos++));
-    else
-        pos++;
-    if (i++ < len) return;
-    if (*pos != empty)
-        NLOBYB = _form_NLOBYB(*(pos++));
-    else
-        pos++;
-    if (i++ < len) return;
-    if (*pos != empty)
-        NLOBZ = _form_NLOBZ(*(pos++));
+    HZ = _form_HZ(inp.at(2));
+    TY = _form_TY(inp.at(3));
+    BT = _form_BT(inp.at(4));
+    B1 = _form_B1(inp.at(5));
+    TT = _form_TT(inp.at(6));
+    BB = _form_BB(inp.at(7));
+    B2 = _form_B2(inp.at(8));
+    TB = _form_TB(inp.at(9));
+    SFY = _form_SFY(inp.at(10));
+    SFZ = _form_SFZ(inp.at(11));
+    if (len < 13) return;
+    if (inp.at(12) != empty)
+        NLOBYT = _form_NLOBYT(inp[12]);
+    if (len < 14) return;
+    if (inp.at(13) != empty)
+        NLOBYB = _form_NLOBYB(inp[13]);
+    if (len < 15) return;
+    if (inp.at(14) != empty)
+        NLOBZ = _form_NLOBZ(inp[14]);
 }
 
 gusyi::gusyi(void) :

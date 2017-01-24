@@ -117,30 +117,35 @@ fem::types::card const cards::__base::card::head = fem::types::card("<DUMMY>");
 size_t cards::__base::card::card_split(
     vector<std::string> const &inp, size_t const &ilen,
     vector<std::string> &res) {
-    std::string static head;
-    std::string static tmp;
+    std::string static head(8, '\0');
+    std::string static tmp(80, '\0');
     bool first = true;
     size_t olen{0};
+    size_t i{0};
 
     for (auto &pos : inp) {
+        if (++i > ilen) break;
+
         head.assign(extfem::string::string(pos.substr(0, 8)).trim());
         if (first) {
             first = false;
             try {
-                res.at(++olen).assign(string::string(head).trim("\t\n"));
+                res.at(olen).assign(string::string(head).trim("\t\n"));
             } catch (out_of_range) {
                 res.emplace_back(string::string(head).trim("\t\n"));
             }
+            ++olen;
         }
         tmp.assign(string::string(pos).trim("\t\n"));
         tmp.resize(80, ' ');
         tmp.assign(tmp.substr(8));
         for (size_t i=0; i<4; ++i) {
             try {
-                res.at(++olen).assign(tmp.substr(i*16, 16));
+                res.at(olen).assign(tmp.substr(i*16, 16));
             } catch (out_of_range) {
                 res.emplace_back(tmp.substr(i*16, 16));
             }
+            ++olen;
         }
     }
     return olen;

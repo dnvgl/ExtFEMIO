@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   char const cID_test_fem_cards_text[]
+    char const cID_test_fem_cards_text[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -37,192 +37,192 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+CATCH_TRANSLATE_EXCEPTION( exception& ex ) {
+    return ex.what();
 }
 
 CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+    return ex;
 }
 
 TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("TEXT (1)") {
-      vector<std::string> data({
-            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-            "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
-               "        CONVERSION DETAILS:",
-               "        Msc Nastran File Format -> Sesam Interface File.",
-               "        Input  : \\test_01.bdt",
-               "        Log    : \\test_01.txt"});
+    SECTION("TEXT (1)") {
+        vector<std::string> data({
+                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+                "TEXT     0.00000000e+000 0.00000000e+000 4.00000000e+000 7.20000000e+001",
+                "        CONVERSION DETAILS:",
+                "        Msc Nastran File Format -> Sesam Interface File.",
+                "        Input  : \\test_01.bdt",
+                "        Log    : \\test_01.txt"});
 
-      len = __base::card::card_split(data, data.size(), lines);
-      text probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        text probe(lines, len);
 
-      CHECK(probe.TYPE == 0);
-      CHECK(probe.SUBTYPE == 0);
-      CHECK(probe.NRECS == 4);
-      CHECK(probe.NBYTE == 72);
-      CHECK(probe.CONT == std::vector<std::string>({
-               //        1         2         3         4         5         6         7
-               // 3456789012345678901234567890123456789012345678901234567890123456789012
-               "CONVERSION DETAILS:                                                     ",
-               "Msc Nastran File Format -> Sesam Interface File.                        ",
-               "Input  : \\test_01.bdt                                                   ",
-               "Log    : \\test_01.txt                                                   "}));
-   }
+        CHECK(probe.TYPE == 0);
+        CHECK(probe.SUBTYPE == 0);
+        CHECK(probe.NRECS == 4);
+        CHECK(probe.NBYTE == 72);
+        CHECK(probe.CONT == std::vector<std::string>({
+                    //        1         2         3         4         5         6         7
+                    // 3456789012345678901234567890123456789012345678901234567890123456789012
+                    "CONVERSION DETAILS:                                                     ",
+                    "Msc Nastran File Format -> Sesam Interface File.                        ",
+                    "Input  : \\test_01.bdt                                                   ",
+                    "Log    : \\test_01.txt                                                   "}));
+    }
 
-   SECTION("TEXT (2)") {
-      vector<std::string> data({
-            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-            "TEXT     0.000000000e+00 0.000000000e+00 4.000000000e+00 7.200000000e+01",
-            "        CONVERSION DETAILS:",
-            "        Msc Nastran File Format -> Sesam Interface File.",
-            "        Input  : \\test_01.bdt",
-            "        Log    : \\test_01.txt"});
+    SECTION("TEXT (2)") {
+        vector<std::string> data({
+                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+                "TEXT     0.000000000e+00 0.000000000e+00 4.000000000e+00 7.200000000e+01",
+                "        CONVERSION DETAILS:",
+                "        Msc Nastran File Format -> Sesam Interface File.",
+                "        Input  : \\test_01.bdt",
+                "        Log    : \\test_01.txt"});
 
-      len = __base::card::card_split(data, data.size(), lines);
-      text probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        text probe(lines, len);
 
-      CHECK(probe.TYPE == 0);
-      CHECK(probe.SUBTYPE == 0);
-      CHECK(probe.NRECS == 4);
-      CHECK(probe.NBYTE == 72);
-      CHECK(probe.CONT == std::vector<std::string>({
-               //        1         2         3         4         5         6         7
-               // 3456789012345678901234567890123456789012345678901234567890123456789012
-               "CONVERSION DETAILS:                                                     ",
-               "Msc Nastran File Format -> Sesam Interface File.                        ",
-               "Input  : \\test_01.bdt                                                   ",
-               "Log    : \\test_01.txt                                                   "}));
-   }
+        CHECK(probe.TYPE == 0);
+        CHECK(probe.SUBTYPE == 0);
+        CHECK(probe.NRECS == 4);
+        CHECK(probe.NBYTE == 72);
+        CHECK(probe.CONT == std::vector<std::string>({
+                    //        1         2         3         4         5         6         7
+                    // 3456789012345678901234567890123456789012345678901234567890123456789012
+                    "CONVERSION DETAILS:                                                     ",
+                    "Msc Nastran File Format -> Sesam Interface File.                        ",
+                    "Input  : \\test_01.bdt                                                   ",
+                    "Log    : \\test_01.txt                                                   "}));
+    }
 }
 
 TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
 
-   std::stringstream test;
-   std::vector<std::string> CONT({
-         "CONVERSION DETAILS:",
-         "Msc Nastran File Format -> Sesam Interface File.",
-         "Input  : \\test_01.bdt",
-         "Log    : \\test_01.txt"});
+    std::stringstream test;
+    std::vector<std::string> CONT({
+            "CONVERSION DETAILS:",
+            "Msc Nastran File Format -> Sesam Interface File.",
+            "Input  : \\test_01.bdt",
+            "Log    : \\test_01.txt"});
 
-   SECTION("simple (empty)") {
-      text probe;
-      test << probe;
-      CHECK(test.str() == "");
-   }
+    SECTION("simple (empty)") {
+        text probe;
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
-   SECTION("simple") {
-      text probe(0, 0, 4, 72, CONT);
-      test << probe;
-      CHECK(test.str() ==
-         //        1         2         3         4         5         6         7
-         // 3456789012345678901234567890123456789012345678901234567890123456789012
-         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
-         "        CONVERSION DETAILS:                                             \n"
-         "        Msc Nastran File Format -> Sesam Interface File.                \n"
-         "        Input  : \\test_01.bdt                                           \n"
-         "        Log    : \\test_01.txt                                           \n");
-   }
+    SECTION("simple") {
+        text probe(0, 0, 4, 72, CONT);
+        test << probe;
+        CHECK(test.str() ==
+              //        1         2         3         4         5         6         7
+              // 3456789012345678901234567890123456789012345678901234567890123456789012
+              "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
+              "        CONVERSION DETAILS:                                             \n"
+              "        Msc Nastran File Format -> Sesam Interface File.                \n"
+              "        Input  : \\test_01.bdt                                           \n"
+              "        Log    : \\test_01.txt                                           \n");
+    }
 
-   SECTION("simple (auto dim)") {
-      text probe(0, 0, CONT);
-      test << probe;
-      CHECK(test.str() ==
-         //        1         2         3         4         5         6         7
-         // 3456789012345678901234567890123456789012345678901234567890123456789012
-         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
-         "        CONVERSION DETAILS:                             \n"
-         "        Msc Nastran File Format -> Sesam Interface File.\n"
-         "        Input  : \\test_01.bdt                           \n"
-         "        Log    : \\test_01.txt                           \n");
-   }
+    SECTION("simple (auto dim)") {
+        text probe(0, 0, CONT);
+        test << probe;
+        CHECK(test.str() ==
+              //        1         2         3         4         5         6         7
+              // 3456789012345678901234567890123456789012345678901234567890123456789012
+              "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+              "        CONVERSION DETAILS:                             \n"
+              "        Msc Nastran File Format -> Sesam Interface File.\n"
+              "        Input  : \\test_01.bdt                           \n"
+              "        Log    : \\test_01.txt                           \n");
+    }
 
-   SECTION("call (simple)") {
-      text probe;
-      test << probe(0, 0, 4, 72, CONT);
-      CHECK(test.str() ==
-         //        1         2         3         4         5         6         7
-         // 3456789012345678901234567890123456789012345678901234567890123456789012
-         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
-         "        CONVERSION DETAILS:                                             \n"
-         "        Msc Nastran File Format -> Sesam Interface File.                \n"
-         "        Input  : \\test_01.bdt                                           \n"
-         "        Log    : \\test_01.txt                                           \n");
-   }
+    SECTION("call (simple)") {
+        text probe;
+        test << probe(0, 0, 4, 72, CONT);
+        CHECK(test.str() ==
+              //        1         2         3         4         5         6         7
+              // 3456789012345678901234567890123456789012345678901234567890123456789012
+              "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
+              "        CONVERSION DETAILS:                                             \n"
+              "        Msc Nastran File Format -> Sesam Interface File.                \n"
+              "        Input  : \\test_01.bdt                                           \n"
+              "        Log    : \\test_01.txt                                           \n");
+    }
 
-   SECTION("call (simple (auto dim))") {
-      text probe;
-      test << probe(0, 0, CONT);
-      CHECK(test.str() ==
-         //        1         2         3         4         5         6         7
-         // 3456789012345678901234567890123456789012345678901234567890123456789012
-         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
-         "        CONVERSION DETAILS:                             \n"
-         "        Msc Nastran File Format -> Sesam Interface File.\n"
-         "        Input  : \\test_01.bdt                           \n"
-         "        Log    : \\test_01.txt                           \n");
-   }
+    SECTION("call (simple (auto dim))") {
+        text probe;
+        test << probe(0, 0, CONT);
+        CHECK(test.str() ==
+              //        1         2         3         4         5         6         7
+              // 3456789012345678901234567890123456789012345678901234567890123456789012
+              "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+              "        CONVERSION DETAILS:                             \n"
+              "        Msc Nastran File Format -> Sesam Interface File.\n"
+              "        Input  : \\test_01.bdt                           \n"
+              "        Log    : \\test_01.txt                           \n");
+    }
 
-   SECTION("call (multiple)") {
-      text probe;
-      test << probe;
-      test << probe(0, 0, 4, 72, CONT);
-      test << probe(0, 0, CONT);
-      test << probe;
-      CHECK(test.str() ==
-         //        1         2         3         4         5         6         7
-         // 3456789012345678901234567890123456789012345678901234567890123456789012
-         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
-         "        CONVERSION DETAILS:                                             \n"
-         "        Msc Nastran File Format -> Sesam Interface File.                \n"
-         "        Input  : \\test_01.bdt                                           \n"
-         "        Log    : \\test_01.txt                                           \n"
-         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
-         "        CONVERSION DETAILS:                             \n"
-         "        Msc Nastran File Format -> Sesam Interface File.\n"
-         "        Input  : \\test_01.bdt                           \n"
-         "        Log    : \\test_01.txt                           \n"
-         "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
-         "        CONVERSION DETAILS:                             \n"
-         "        Msc Nastran File Format -> Sesam Interface File.\n"
-         "        Input  : \\test_01.bdt                           \n"
-         "        Log    : \\test_01.txt                           \n");
-   }
+    SECTION("call (multiple)") {
+        text probe;
+        test << probe;
+        test << probe(0, 0, 4, 72, CONT);
+        test << probe(0, 0, CONT);
+        test << probe;
+        CHECK(test.str() ==
+              //        1         2         3         4         5         6         7
+              // 3456789012345678901234567890123456789012345678901234567890123456789012
+              "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+7.200000000e+01\n"
+              "        CONVERSION DETAILS:                                             \n"
+              "        Msc Nastran File Format -> Sesam Interface File.                \n"
+              "        Input  : \\test_01.bdt                                           \n"
+              "        Log    : \\test_01.txt                                           \n"
+              "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+              "        CONVERSION DETAILS:                             \n"
+              "        Msc Nastran File Format -> Sesam Interface File.\n"
+              "        Input  : \\test_01.bdt                           \n"
+              "        Log    : \\test_01.txt                           \n"
+              "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n"
+              "        CONVERSION DETAILS:                             \n"
+              "        Msc Nastran File Format -> Sesam Interface File.\n"
+              "        Input  : \\test_01.bdt                           \n"
+              "        Log    : \\test_01.txt                           \n");
+    }
 }
 
 TEST_CASE("FEM TEXT conversion from own output.", "[fem_text,in/out]") {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("TEXT (1)") {
-      vector<std::string> data({
-            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-            "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n",
-            "        CONVERSION DETAILS:                             \n",
-            "        Msc Nastran File Format -> Sesam Interface File.\n",
-            "        Input  : \\test_01.bdt                           \n",
-            "        Log    : \\test_01.txt                           \n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      text probe(lines, len);
+    SECTION("TEXT (1)") {
+        vector<std::string> data({
+                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+                "TEXT    +0.000000000e+00+0.000000000e+00+4.000000000e+00+5.600000000e+01\n",
+                "        CONVERSION DETAILS:                             \n",
+                "        Msc Nastran File Format -> Sesam Interface File.\n",
+                "        Input  : \\test_01.bdt                           \n",
+                "        Log    : \\test_01.txt                           \n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        text probe(lines, len);
 
-      CHECK(probe.TYPE == 0);
-      CHECK(probe.SUBTYPE == 0);
-      CHECK(probe.NRECS == 4);
-      CHECK(probe.NBYTE == 56);
-      CHECK(probe.CONT == std::vector<std::string>({
-               //        1         2         3         4         5         6         7
-               // 3456789012345678901234567890123456789012345678901234567890123456789012
-               "CONVERSION DETAILS:                                     ",
-               "Msc Nastran File Format -> Sesam Interface File.        ",
-               "Input  : \\test_01.bdt                                   ",
-               "Log    : \\test_01.txt                                   "}));
-   }
+        CHECK(probe.TYPE == 0);
+        CHECK(probe.SUBTYPE == 0);
+        CHECK(probe.NRECS == 4);
+        CHECK(probe.NBYTE == 56);
+        CHECK(probe.CONT == std::vector<std::string>({
+                    //        1         2         3         4         5         6         7
+                    // 3456789012345678901234567890123456789012345678901234567890123456789012
+                    "CONVERSION DETAILS:                                     ",
+                    "Msc Nastran File Format -> Sesam Interface File.        ",
+                    "Input  : \\test_01.bdt                                   ",
+                    "Log    : \\test_01.txt                                   "}));
+    }
 }
 
 // Local Variables:

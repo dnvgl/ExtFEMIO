@@ -73,12 +73,12 @@ void gpipe::read(vector<std::string> const &inp, size_t const &len) {
     SFY = _form_SFY(*(pos++));
     SFZ = _form_SFZ(*(pos++));
     size_t i{7};
-    if (i++ < len) return;
+    if (len < i++) return;
     if (*pos != empty)
         NCIR = _form_NCIR(*(pos++));
     else
         pos++;
-    if (i < len) return;
+    if (len < i) return;
     if (*pos != empty)
         NRAD = _form_NRAD(*pos);
 }

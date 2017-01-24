@@ -52,7 +52,10 @@ entry_type<std::string> const tdload::_form_SET_NAME(
 entry_type<std::string> const tdload::_form_CONT("CONT");
 
 tdload::tdload(vector<std::string> const &inp, size_t const &len) {
+    read(inp, len);
+}
 
+void tdload::read(vector<std::string> const &inp, size_t const &len) {
    if (len < 5)
       throw errors::parse_error(
          "TDLOAD", "Illegal number of entries.");

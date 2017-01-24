@@ -94,14 +94,14 @@ no_used::no_used(long const &no) :
         error("no_used", "") {
     ostringstream res;
     res << "Element number " << no << " already used." << endl;
-    msg = res.str();
+    msg.assign(res.str());
 }
 
 id_used::id_used(long const &id) :
         error("id_used", "") {
     ostringstream res;
     res << "Element id " << id << " already used." << endl;
-    msg = res.str();
+    msg.assign(res.str());
 }
 
 data_not_matching_id::data_not_matching_id(
@@ -110,7 +110,7 @@ data_not_matching_id::data_not_matching_id(
     ostringstream res;
     res << "Element id already set to " << id_ex
         << " with attempt to set to " << id_new << "."<< endl;
-    msg = res.str();
+    msg.assign(res.str());
 }
 
 // Local Variables:

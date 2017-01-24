@@ -43,7 +43,10 @@ entry_type<long> const bsell::_form_LLC("LLC");
 entry_type<double> const bsell::_form_FACT("FACT");
 
 bsell::bsell(std::vector<std::string> const &inp, size_t const &len) {
+    read(inp, len);
+}
 
+void bsell::read(std::vector<std::string> const &inp, size_t const &len) {
     static const std::string empty(16, ' ');
 
     long tmp;
@@ -62,7 +65,8 @@ bsell::bsell(std::vector<std::string> const &inp, size_t const &len) {
     pos++;
     pos++;
     size_t i{5};
-    while (++(++i) < len) {
+    while (len > i) {
+        i += 2;
         if (*pos == empty)
             break;
         tmp = _form_LLC(*pos++);

@@ -44,7 +44,10 @@ const entry_type<long> hsuptran::_form_ITREF("ITREF");
 const entry_type<double> hsuptran::_form_T("T");
 
 hsuptran::hsuptran(const vector<std::string> &inp, size_t const &len) {
+    read(inp, len);
+}
 
+void hsuptran::read(const vector<std::string> &inp, size_t const &len) {
     if (len < 15)
         throw errors::parse_error(
             "HSUPTRAN", "Illegal number of entries.");
