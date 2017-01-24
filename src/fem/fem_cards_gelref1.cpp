@@ -92,20 +92,20 @@ void gelref1::read(const vector<std::string> &inp, size_t const &len) {
     if (TRANSNO_OPT == -1) nvals += 1;
 
     size_t i{12};
-    size_t num_vals;
+    size_t num_vals{0};
     while (++i < len && inp.at(i) != empty) {
         tmp = lval(inp[i]);
         if (tmp == 0) break;
         try {
             node_vals.at(num_vals).assign(inp[i]);
-        }catch (out_of_range) {
+        } catch (out_of_range) {
             node_vals.emplace_back(inp[i]);
         }
         num_vals++;
     };
 
     if (num_vals > 0) {
-        divmod = ldiv((long)num_vals, nvals);
+        divmod = ldiv(static_cast<long>(num_vals), static_cast<long>(nvals));
         if (divmod.rem != 0)
             throw dnvgl::extfem::fem::errors::parse_error(
                 "GELREF1", "Number of node values is not "
