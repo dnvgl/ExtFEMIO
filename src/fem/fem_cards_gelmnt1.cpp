@@ -220,12 +220,6 @@ gelmnt1::gelmnt1(long const &ELNOX,
         gelmnt1(ELNOX, ELNO, ELTYP, 0, NODIN) {}
 
 cards::__base::card const &gelmnt1::operator() (
-    vector<std::string> const &inp, size_t const &len) {
-    this->read(inp, len);
-    return *this;
-}
-
-cards::__base::card const &gelmnt1::operator() (
     long const &ELNOX,
     long const &ELNO,
     elements::el_types const &ELTYP,
@@ -251,19 +245,17 @@ const dnvgl::extfem::fem::cards::types
 gelmnt1::card_type(void) const { return types::GELMNT1; }
 
 std::ostream &gelmnt1::put(std::ostream& os) const {
-    if (this->ELTYP == elements::el_types::INVALID) return os;
+    if (ELTYP == elements::el_types::INVALID) return os;
     os << gelmnt1::head.format()
-       << this->_form_ELNOX.format(this->ELNOX)
-       << this->_form_ELNO.format(this->ELNO)
-       << this->_form_ELTYP.format(static_cast<long>(this->ELTYP))
-       << this->_form_ELTYAD.format(this->ELTYAD);
-    size_t i = 5;
-    for (auto p : this->NODIN) {
-        if (i++ >= 4) {
-            i = 1;
+       << _form_ELNOX.format(ELNOX)
+       << _form_ELNO.format(ELNO)
+       << _form_ELTYP.format(static_cast<long>(ELTYP))
+       << _form_ELTYAD.format(ELTYAD);
+    long i = 0;
+    for (auto p : NODIN) {
+        if (!(i++ % 4))
             os << std::endl << dnvgl::extfem::fem::types::card().format();
-        }
-        os << this->_form_NODIN.format(p);
+        os << _form_NODIN.format(p);
     }
     return os << std::endl;
 }

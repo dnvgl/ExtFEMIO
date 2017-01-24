@@ -58,40 +58,15 @@ void text::read(vector<std::string> const &inp, size_t const &len) {
             "TEXT", "Illegal number of entries.");
 
     TYPE = _form_TYPE(inp.at(1));
-    SUBTYPE = _form_SUBTYPE(inp.at(1));
+    SUBTYPE = _form_SUBTYPE(inp.at(2));
     NRECS = _form_NRECS(inp.at(3));
     NBYTE = _form_NBYTE(inp.at(4));
 
-    std::string pos_0;
-    std::string pos_1;
-    std::string pos_2;
-    std::string pos_3;
-    size_t index;
-    index = 4;
-    for (long i = 0; i < NRECS; i++) {
-        try {
-            if (++index < len)
-                pos_0.assign(inp.at(index));
-            else
-                pos_0.assign(8, ' ');
-            if (++index < len)
-                pos_1.assign(inp.at(index));
-            else
-                pos_1.assign(8, ' ');
-            if (++index < len)
-                pos_2.assign(inp.at(index));
-            else
-                pos_2.assign(8, ' ');
-            if (++index < len)
-                pos_3.assign(inp.at(index));
-            else
-                pos_3.assign(8, ' ');
-        } catch (std::out_of_range) {
-        }
-        std::string cont = _form_CONT(
-            pos_0, pos_1, pos_2, pos_3);
-        cont.resize(NBYTE, ' ');
-        CONT.push_back(cont);
+    for (size_t i = 0; i < static_cast<size_t>(NRECS * 4); i += 4) {
+        CONT.push_back(_form_CONT(
+                           inp.at(5 + i), inp.at(6 + i),
+                           inp.at(7 + i), inp.at(8 + i)));
+        CONT.back().resize(NBYTE, ' ');
     }
 }
 
@@ -100,7 +75,7 @@ text::text(void) :
 
 text::text(long const &TYPE, long const &SUBTYPE,
            long const &NRECS, long const &NBYTE,
-           std::vector<std::string> const &CONT) :
+           vector<std::string> const &CONT) :
         card(),
         TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
         NBYTE(NBYTE), CONT(CONT) {
@@ -109,13 +84,13 @@ text::text(long const &TYPE, long const &SUBTYPE,
 }
 
 text::text(long const &TYPE, long const &SUBTYPE,
-           std::vector<std::string> const &CONT) :
+           vector<std::string> const &CONT) :
         card(),
         TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
     NRECS = static_cast<long>(this->CONT.size());
     NBYTE = 0;
     for (auto &p : this->CONT)
-        NBYTE = std::max(NBYTE, (long)p.size());
+        NBYTE = max(NBYTE, (long)p.size());
     for (auto &p : this->CONT)
         p.resize(NBYTE, ' ');
     NBYTE += 8;
@@ -124,7 +99,7 @@ text::text(long const &TYPE, long const &SUBTYPE,
 cards::__base::card const &text::operator() (
     long const &TYPE, long const &SUBTYPE,
     long const &NRECS, long const &NBYTE,
-    std::vector<std::string> const &CONT) {
+    vector<std::string> const &CONT) {
     this->TYPE = TYPE;
     this->SUBTYPE = SUBTYPE;
     this->NRECS = NRECS;
@@ -137,14 +112,14 @@ cards::__base::card const &text::operator() (
 
 cards::__base::card const &text::operator() (
     long const &TYPE, long const &SUBTYPE,
-    std::vector<std::string> const &CONT) {
+    vector<std::string> const &CONT) {
     this->TYPE = TYPE;
     this->SUBTYPE = SUBTYPE;
     this->CONT = CONT;
     NRECS = static_cast<long>(this->CONT.size());
     NBYTE = 0;
     for (auto &p : this->CONT)
-        NBYTE = std::max(NBYTE, (long)p.size());
+        NBYTE = max(NBYTE, (long)p.size());
     for (auto &p : this->CONT)
         p.resize(NBYTE, ' ');
     NBYTE += 8;
@@ -154,17 +129,14 @@ cards::__base::card const &text::operator() (
 cards::types const
 text::card_type(void) const { return types::TEXT; };
 
-std::ostream &text::put(std::ostream& os) const {
-    if (this->TYPE == -1) return os;
+ostream &text::put(ostream& os) const {
+    if (TYPE == -1) return os;
     os << text::head.format()
-       << this->_form_TYPE.format(this->TYPE)
-       << this->_form_SUBTYPE.format(this->SUBTYPE)
-       << this->_form_NRECS.format(this->NRECS)
-       << this->_form_NBYTE.format(this->NBYTE) << std::endl;
-    for (auto p : this->CONT)
+       << _form_TYPE.format(TYPE) << _form_SUBTYPE.format(SUBTYPE)
+       << _form_NRECS.format(NRECS) << _form_NBYTE.format(NBYTE) << endl;
+    for (auto p : CONT)
         os << dnvgl::extfem::fem::types::card().format()
-           << this->_form_CONT.format(p, this->NBYTE)
-           << std::endl;
+           << _form_CONT.format(p, NBYTE) << endl;
     return os;
 }
 

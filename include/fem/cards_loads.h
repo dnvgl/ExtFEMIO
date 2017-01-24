@@ -136,6 +136,8 @@ namespace dnvgl {
                            long const &CODNAM,
                            std::string const &SET_NAME);
 
+                    using __base::card::operator();
+
                     __base::card const &operator() (
                         long const &NFIELD,
                         long const &ILREF,

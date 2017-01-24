@@ -51,27 +51,21 @@ date::date(const std::vector<std::string> &inp, size_t const &len) {
 }
 
 void date::read(const std::vector<std::string> &inp, size_t const &len) {
-    if (len < 8)
+
+    if (len < 9)
         throw errors::parse_error(
             "DATE", "Illegal number of entries.");
 
-    auto pos = inp.begin();
+    TYPE = _form_TYPE(inp.at(1));
+    SUBTYPE = _form_SUBTYPE(inp.at(2));
+    NRECS = _form_NRECS(inp.at(3));
+    NBYTE = _form_NBYTE(inp.at(4));
 
-    ++pos;
-    TYPE = _form_TYPE(*(pos++));
-    SUBTYPE = _form_SUBTYPE(*(pos++));
-    NRECS = _form_NRECS(*(pos++));
-    NBYTE = _form_NBYTE(*(pos++));
-
-    for (int i = 0; i < NRECS; i++) {
-        auto pos_0 = *pos++;
-        auto pos_1 = *pos++;
-        auto pos_2 = *pos++;
-        auto pos_3 = *pos++;
-        std::string cont = _form_CONT(
-            pos_0, pos_1, pos_2, pos_3);
-        cont.resize(NBYTE, ' ');
-        CONT.push_back(cont);
+    for (size_t i = 0; i < static_cast<size_t>(NRECS * 4); i += 4) {
+        CONT.push_back(_form_CONT(
+                           inp.at(5 + i), inp.at(6 + i),
+                           inp.at(7 + i), inp.at(8 + i)));
+        CONT.back().resize(NBYTE, ' ');
     }
 }
 
@@ -104,15 +98,15 @@ const cards::types
 date::card_type(void) const { return types::DATE; };
 
 std::ostream &date::put(std::ostream& os) const {
-    if (this->TYPE == -1) return os;
+    if (TYPE == -1) return os;
     os << date::head.format()
-       << this->_form_TYPE.format(this->TYPE)
-       << this->_form_SUBTYPE.format(this->SUBTYPE)
-       << this->_form_NRECS.format(this->NRECS)
-       << this->_form_NBYTE.format(this->NBYTE) << std::endl;
-    for (auto p : this->CONT)
+       << _form_TYPE.format(TYPE)
+       << _form_SUBTYPE.format(SUBTYPE)
+       << _form_NRECS.format(NRECS)
+       << _form_NBYTE.format(NBYTE) << std::endl;
+    for (auto p : CONT)
         os << dnvgl::extfem::fem::types::card().format()
-           << this->_form_CONT.format(p, this->NBYTE)
+           << _form_CONT.format(p, NBYTE)
            << std::endl;
     return os;
 }

@@ -54,50 +54,48 @@ const entry_type<double> gbeamg::_form_SHCENZ("SHCENZ");
 const entry_type<double> gbeamg::_form_SY("SY");
 const entry_type<double> gbeamg::_form_SZ("SZ");
 
-gbeamg::gbeamg(const vector<std::string> &inp, size_t const &len) {
+gbeamg::gbeamg(const vector<std::string> &inp, size_t const &len) :
+        __base::beam_prop(inp, len) {
     read(inp, len);
 }
 
 void gbeamg::read(const vector<std::string> &inp, size_t const &len) {
-    __base::beam_prop::read(inp, len);
-    IX = {0};
-    IY = {0};
-    IZ = {0};
-    IYZ = {0};
-    WXMIN = {0};
-    WYMIN = {0};
-    WZMIN = {0};
-    SHARY = {0};
-    SHARZ = {0};
-    SHCENY = {0};
-    SHCENZ = {0};
-    SY = {0};
-    SZ = {0};
 
     if (len != 17 && len != 5)
         throw errors::parse_error(
             "GBEAMG", "Illegal number of entries.");
 
-    auto pos = inp.begin();
+     // GEONO = _form_GEONO(inp.at(1));
 
-    ++pos;
-    GEONO = _form_GEONO(*(pos++));
-    ++pos;
-    AREA = _form_AREA(*(pos++));
+    AREA = _form_AREA(inp.at(3));
     if (len == 17) {
-        IX = _form_IX(*(pos++));
-        IY = _form_IY(*(pos++));
-        IZ = _form_IZ(*(pos++));
-        IYZ = _form_IYZ(*(pos++));
-        WXMIN = _form_WXMIN(*(pos++));
-        WYMIN = _form_WYMIN(*(pos++));
-        WZMIN = _form_WZMIN(*(pos++));
-        SHARY = _form_SHARY(*(pos++));
-        SHARZ = _form_SHARZ(*(pos++));
-        SHCENY = _form_SHCENY(*(pos++));
-        SHCENZ = _form_SHCENZ(*(pos++));
-        SY = _form_SY(*(pos++));
-        SZ = _form_SZ(*(pos++));
+        IX = _form_IX(inp.at(4));
+        IY = _form_IY(inp.at(5));
+        IZ = _form_IZ(inp.at(6));
+        IYZ = _form_IYZ(inp.at(7));
+        WXMIN = _form_WXMIN(inp.at(8));
+        WYMIN = _form_WYMIN(inp.at(9));
+        WZMIN = _form_WZMIN(inp.at(10));
+        SHARY = _form_SHARY(inp.at(11));
+        SHARZ = _form_SHARZ(inp.at(12));
+        SHCENY = _form_SHCENY(inp.at(13));
+        SHCENZ = _form_SHCENZ(inp.at(14));
+        SY = _form_SY(inp.at(15));
+        SZ = _form_SZ(inp.at(16));
+    } else {
+        IX = {0};
+        IY = {0};
+        IZ = {0};
+        IYZ = {0};
+        WXMIN = {0};
+        WYMIN = {0};
+        WZMIN = {0};
+        SHARY = {0};
+        SHARZ = {0};
+        SHCENY = {0};
+        SHCENZ = {0};
+        SY = {0};
+        SZ = {0};
     }
 }
 
@@ -113,14 +111,12 @@ gbeamg::gbeamg(
     const double &SHARY, const double &SHARZ,
     const double &SHCENY, const double &SHCENZ,
     const double &SY, const double &SZ) :
-        __base::beam_prop(),
+        __base::beam_prop(GEONO),
         AREA(AREA), IX(IX), IY(IY), IZ(IZ), IYZ(IYZ),
         WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
         SHARY(SHARY), SHARZ(SHARZ),
         SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
-        SZ(SZ) {
-    this->GEONO = GEONO;
-}
+        SZ(SZ) {}
 
 gbeamg::gbeamg(double const &AREA) :
     __base::beam_prop(0), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
@@ -173,17 +169,16 @@ cards::__base::card const &gbeamg::operator() (double const &AREA) {
 
 }
 
-
 const dnvgl::extfem::fem::cards::types
 gbeamg::card_type(void) const {return types::GBEAMG;}
 
 std::ostream &gbeamg::put(std::ostream& os) const {
-    if (this->GEONO == -1) return os;
+    if (GEONO == -1) return os;
     os << gbeamg::head.format()
-       << this->_form_GEONO.format(this->GEONO)
-       << this->empty.format()
-       << this->_form_AREA.format(this->AREA)
-       << this->_form_IX.format(this->IX) << std::endl;
+       << _form_GEONO.format(GEONO)
+       << empty.format()
+       << _form_AREA.format(AREA)
+       << _form_IX.format(IX) << std::endl;
 
     if (IX == 0. && IY == 0. && IZ == 0. && IYZ == 0. &&
         WXMIN == 0. && WYMIN == 0. && WZMIN == 0. &&
@@ -192,20 +187,20 @@ std::ostream &gbeamg::put(std::ostream& os) const {
         return os; // Only area value given for ELTYP 10 (truss element)
 
     os << fem::types::card("").format()
-       << this->_form_IY.format(this->IY)
-       << this->_form_IZ.format(this->IZ)
-       << this->_form_IYZ.format(this->IYZ)
-       << this->_form_WXMIN.format(this->WXMIN)
+       << _form_IY.format(IY)
+       << _form_IZ.format(IZ)
+       << _form_IYZ.format(IYZ)
+       << _form_WXMIN.format(WXMIN)
        << std::endl << fem::types::card("").format()
-       << this->_form_WYMIN.format(this->WYMIN)
-       << this->_form_WZMIN.format(this->WZMIN)
-       << this->_form_SHARY.format(this->SHARY)
-       << this->_form_SHARZ.format(this->SHARZ)
+       << _form_WYMIN.format(WYMIN)
+       << _form_WZMIN.format(WZMIN)
+       << _form_SHARY.format(SHARY)
+       << _form_SHARZ.format(SHARZ)
        << std::endl << fem::types::card("").format()
-       << this->_form_SHCENY.format(this->SHCENY)
-       << this->_form_SHCENZ.format(this->SHCENZ)
-       << this->_form_SY.format(this->SY)
-       << this->_form_SZ.format(this->SZ) << std::endl;
+       << _form_SHCENY.format(SHCENY)
+       << _form_SHCENZ.format(SHCENZ)
+       << _form_SY.format(SY)
+       << _form_SZ.format(SZ) << std::endl;
     return os;
 }
 

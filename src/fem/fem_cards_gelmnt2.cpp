@@ -60,19 +60,19 @@ void gelmnt2::read(const vector<std::string> &inp, size_t const &len) {
 
     ++pos;
 
-    SUBNO = _form_SUBNO(*(pos++));
-    SLEVEL = _form_SLEVEL(*(pos++));
-    STYPE = _form_STYPE(*(pos++));
-    ADDNO = _form_ADDNO(*(pos++));
-    for (size_t i = 0; i<4; i++)
-        for (size_t j = 0; j<3; j++)
-            T[i][j] = _form_T(*(pos++));
-    for (size_t i = 0; i<3; i++)
+    SUBNO = _form_SUBNO(inp.at(1));
+    SLEVEL = _form_SLEVEL(inp.at(2));
+    STYPE = _form_STYPE(inp.at(3));
+    ADDNO = _form_ADDNO(inp.at(4));
+    for (size_t i{0}; i<4; i++)
+        for (size_t j{0}; j<3; j++)
+            T[i][j] = _form_T(inp.at(5 + i * 3 + j));
+    for (size_t i{0}; i<3; i++)
         T[i][3] = 0.;
     T[3][3] = 1.;
-    NNOD = _form_NNOD(*(pos++));
-    for (size_t i = 0; i < static_cast<size_t>(NNOD); i++)
-        NOD.push_back(_form_NOD(*(pos++)));
+    NNOD = _form_NNOD(inp.at(17));
+    for (size_t i{0}; i<static_cast<size_t>(NNOD); i++)
+        NOD.push_back(_form_NOD(inp.at(18 + i)));
 }
 
 gelmnt2::gelmnt2(void) :
@@ -165,7 +165,7 @@ gelmnt2::gelmnt2(const long &SUBNO,
                  const std::vector<long> &NOD) :
         card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NOD(NOD) {
-    this->NNOD = long(this->NOD.size());
+    NNOD = long(this->NOD.size());
     T[0][0] = T11;
     T[1][0] = T21;
     T[2][0] = T31;
@@ -190,42 +190,39 @@ gelmnt2::card_type(void) const {
 }
 
 std::ostream &gelmnt2::put(std::ostream& os) const {
-    if (this->SUBNO == -1) return os;
+    if (SUBNO == -1) return os;
     os << gelmnt2::head.format()
-       << this->_form_SUBNO.format(this->SUBNO)
-       << this->_form_SLEVEL.format(this->SLEVEL)
-       << this->_form_STYPE.format(this->STYPE)
-       << this->_form_ADDNO.format(this->ADDNO)
+       << _form_SUBNO.format(SUBNO)
+       << _form_SLEVEL.format(SLEVEL)
+       << _form_STYPE.format(STYPE)
+       << _form_ADDNO.format(ADDNO)
        << std::endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_T.format(this->T[0][0])
-       << this->_form_T.format(this->T[1][0])
-       << this->_form_T.format(this->T[2][0])
-       << this->_form_T.format(this->T[0][1])
+       << _form_T.format(T[0][0])
+       << _form_T.format(T[1][0])
+       << _form_T.format(T[2][0])
+       << _form_T.format(T[0][1])
        << std::endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_T.format(this->T[1][1])
-       << this->_form_T.format(this->T[2][1])
-       << this->_form_T.format(this->T[0][2])
-       << this->_form_T.format(this->T[1][2])
+       << _form_T.format(T[1][1])
+       << _form_T.format(T[2][1])
+       << _form_T.format(T[0][2])
+       << _form_T.format(T[1][2])
        << std::endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_T.format(this->T[2][2])
-       << this->_form_T.format(this->T[0][3])
-       << this->_form_T.format(this->T[1][3])
-       << this->_form_T.format(this->T[2][3])
+       << _form_T.format(T[2][2])
+       << _form_T.format(T[0][3])
+       << _form_T.format(T[1][3])
+       << _form_T.format(T[2][3])
        << std::endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_NNOD.format(this->NNOD);
+       << _form_NNOD.format(NNOD);
     size_t num = 1;
-    for (int i = 0; i<this->NNOD; i++) {
-        if (num == 4) {
-            num = 0;
+    for (int i = 0; i<NNOD; i++) {
+        if (!(num++ % 4))
             os << std::endl
                << dnvgl::extfem::fem::types::card().format();
-        }
-        num++;
-        os << this->_form_NOD.format(this->NOD[i]);
+        os << _form_NOD.format(NOD[i]);
     }
     return os << std::endl;
 }

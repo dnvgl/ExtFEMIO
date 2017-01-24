@@ -54,27 +54,23 @@ beuslo::beuslo(std::vector<std::string> const &inp, size_t const &len) {
 }
 
 void beuslo::read(std::vector<std::string> const &inp, size_t const &len) {
-    if (inp.size() < 10)
+    if (len < 10)
         throw errors::parse_error(
             "BEUSLO", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    LLC = _form_LLC(*(pos++));
-    LOTYP = _form_LOTYP(*(pos++));
-    COMPLX = _form_COMPLX(*(pos++));
-    LAYER = _form_LAYER(*(pos++));
-    ELNO = _form_ELNO(*(pos++));
-    NDOF = _form_NDOF(*(pos++));
-    INTNO = _form_INTNO(*(pos++));
-    SIDE = _form_SIDE(*(pos++));
-    for (int i = 0; i < NDOF; i++)
-        RLOADi.push_back(_form_RLOAD(*(pos++)));
+    LLC = _form_LLC(inp.at(1));
+    LOTYP = _form_LOTYP(inp.at(2));
+    COMPLX = _form_COMPLX(inp.at(3));
+    LAYER = _form_LAYER(inp.at(4));
+    ELNO = _form_ELNO(inp.at(5));
+    NDOF = _form_NDOF(inp.at(6));
+    INTNO = _form_INTNO(inp.at(7));
+    SIDE = _form_SIDE(inp.at(8));
+    for (size_t i{0}; i < static_cast<size_t>(NDOF); i++)
+        RLOADi.push_back(_form_RLOAD(inp.at(9 + i)));
     if (COMPLX)
-        for (int i = 0; i < NDOF; i++)
-            ILOADi.push_back(_form_ILOAD(*(pos++)));
+        for (size_t i{0}; i < static_cast<size_t>(NDOF); i++)
+            ILOADi.push_back(_form_ILOAD(inp.at(9 + NDOF + i)));
 }
 
 beuslo::beuslo() :
@@ -140,48 +136,41 @@ beuslo::beuslo(const long &LLC,
                const long &SIDE,
                const std::vector<double> &RLOAD,
                const std::vector<double> &ILOAD) :
-        beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, static_cast<long>(RLOAD.size()),
-               INTNO, SIDE, RLOAD, ILOAD) {}
+        beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO,
+               static_cast<long>(RLOAD.size()), INTNO, SIDE, RLOAD, ILOAD) {}
 
 const dnvgl::extfem::fem::cards::types
 beuslo::card_type(void) const {
     return types::BEUSLO;
-};
+}
 
 std::ostream &beuslo::put(std::ostream &os) const {
-    if (this->LLC == -1) return os;
+    if (LLC == -1) return os;
     os << beuslo::head.format()
-       << this->_form_LLC.format(this->LLC)
-       << this->_form_LOTYP.format(this->LOTYP)
-       << this->_form_COMPLX.format(this->COMPLX)
-       << this->_form_LAYER.format(this->LAYER)
+       << _form_LLC.format(LLC)
+       << _form_LOTYP.format(LOTYP)
+       << _form_COMPLX.format(COMPLX)
+       << _form_LAYER.format(LAYER)
        << std::endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_ELNO.format(this->ELNO)
-       << this->_form_NDOF.format(this->NDOF)
-       << this->_form_INTNO.format(this->INTNO)
-       << this->_form_SIDE.format(this->SIDE)
+       << _form_ELNO.format(ELNO)
+       << _form_NDOF.format(NDOF)
+       << _form_INTNO.format(INTNO)
+       << _form_SIDE.format(SIDE)
        << std::endl
        << dnvgl::extfem::fem::types::card().format();
-    size_t num = 0;
-    for (int i = 0; i<this->NDOF; i++) {
-        if (num == 4) {
-            num = 0;
+    size_t num{0};
+    for (int i{0}; i<NDOF; i++) {
+        if (!(num++ % 4) && num != 1)
             os << std::endl
                << dnvgl::extfem::fem::types::card().format();
-        }
-        num++;
-        os << this->_form_RLOAD.format(this->RLOADi[i]);
+        os << _form_RLOAD.format(RLOADi.at(i));
     }
-    if (this->COMPLX) {
-        for (int i = 0; i<this->NDOF; i++) {
-            if (num == 4) {
-                num = 0;
-                os << std::endl
-                   << dnvgl::extfem::fem::types::card().format();
-            }
-            num++;
-            os << this->_form_ILOAD.format(this->ILOADi[i]);
+    if (COMPLX) {
+        for (size_t i{0}; i < static_cast<size_t>(NDOF); i++) {
+            if (!(num++ % 4))
+                os << std::endl << dnvgl::extfem::fem::types::card().format();
+            os << _form_ILOAD.format(ILOADi.at(i));
         }
     }
     os << std::endl;

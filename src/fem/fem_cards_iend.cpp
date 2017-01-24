@@ -52,7 +52,7 @@ void iend::read(const vector<std::string> &inp, size_t const &len) {
     auto pos = inp.begin();
 
     ++pos;
-    CONT = _form_CONT(*(pos));
+    CONT = _form_CONT(inp.at(1));
 }
 
 iend::iend(void) : iend(-1) {}
@@ -62,13 +62,11 @@ iend::iend(const long &CONT) : CONT(CONT) {}
 const cards::types
 iend::card_type(void) const { return types::IEND; };
 
-std::ostream &iend::put(std::ostream& os) const {
-    if (this->CONT == -1) return os;
+ostream &iend::put(ostream& os) const {
+    if (CONT == -1) return os;
     os << iend::head.format()
-       << this->_form_CONT.format(this->CONT)
-       << iend::empty.format()
-       << iend::empty.format()
-       << iend::empty.format() << std::endl;
+       << _form_CONT.format(CONT) << iend::empty.format()
+       << iend::empty.format() << iend::empty.format() << endl;
 
     return os;
 }

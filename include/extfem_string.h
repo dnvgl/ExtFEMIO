@@ -20,22 +20,24 @@
 #include "extfem_misc.h"
 
 namespace dnvgl {
-   namespace extfem {
-      namespace string {
+    namespace extfem {
+        namespace string {
 
-         class string : public std::string {
-         public:
-            string(const std::string& in);
+            class string : public std::string {
+            public:
+                string(void);
+                string(const std::string& in);
+                string(size_t, char);
 
-            // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-            string trim(const std::string &whitespace = " \t");
+// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
+                string trim(const std::string &whitespace = " \t");
 
-            string upper();
+                string upper();
 
-            string lower();
-         };
-      }
-   }
+                string lower();
+            };
+        }
+    }
 }
 
 #endif // _EXTFEM_STRING_H_

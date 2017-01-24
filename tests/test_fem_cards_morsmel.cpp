@@ -109,6 +109,37 @@ TEST_CASE("FEM MORSMEL definitions.", "[fem_morsmel]" ) {
       CHECK(probe.ALPHA1 == 1.20000004e-5);
       CHECK(probe.ALPHA2 == 1.20000004e-5);
    }
+
+   SECTION("MORSMEL (call)") {
+      vector<std::string> data({
+            "MORSMEL   8.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n",
+            "          0.00000000E+00  1.07820425E+11  3.14079724E+10  1.41541114E+11\n",
+            "          0.00000000E+00  0.00000000E+00  3.26140006E+10  2.21900001E-01\n",
+            "          2.91298896E-01  2.99999993E-02  2.99999993E-02  1.20000004E-05\n",
+            "          1.20000004E-05\n"});
+      len = __base::card::card_split(data, data.size(), lines);
+      morsmel probe;
+      probe(lines, len);
+
+      CHECK(probe.MATNO == 8);
+      CHECK(probe.Q1 == 0.);
+      CHECK(probe.Q2 == 0.);
+      CHECK(probe.Q3 == 1.);
+      CHECK(probe.RHO == 0.);
+      CHECK(probe.D11 == 1.07820425e+11);
+      CHECK(probe.D21 == 3.14079724e+10);
+      CHECK(probe.D22 == 1.41541114e+11);
+      CHECK(probe.D31 == 0.);
+      CHECK(probe.D32 == 0.);
+      CHECK(probe.D33 == 3.26140006e+10);
+      CHECK(probe.PS1 == 2.21900001e-1);
+      CHECK(probe.PS2 == 2.91298896e-1);
+      CHECK(probe.DAMP1 == 2.99999993e-2);
+      CHECK(probe.DAMP2 == 2.99999993e-2);
+      CHECK(probe.ALPHA1 == 1.20000004e-5);
+      CHECK(probe.ALPHA2 == 1.20000004e-5);
+   }
+
 }
 
 TEST_CASE("FEM MORSMEL types output.", "[fem_morsmel,out]" ) {

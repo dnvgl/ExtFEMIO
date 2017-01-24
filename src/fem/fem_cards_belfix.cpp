@@ -59,15 +59,12 @@ belfix::belfix(const std::vector<std::string> &inp, size_t const &len) {
 
 void belfix::read(const std::vector<std::string> &inp, size_t const &len) {
     A.resize(6);
-    if (inp.size() < 11)
+    if (len < 11)
         throw errors::parse_error(
             "BELFIX", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    FIXNO = _form_FIXNO(*(pos++));
-    long tmp(_form_OPT(*(pos++)));
+    FIXNO = _form_FIXNO(inp.at(1));
+    long tmp(_form_OPT(inp.at(2)));
     if (tmp == 1)
         OPT = n_opt::FIXATION;
     else if (tmp == 2)
@@ -84,10 +81,9 @@ void belfix::read(const std::vector<std::string> &inp, size_t const &len) {
         msg << tmp << ".";
         error_report(msg.str());
     }
-    TRANO = _form_TRANO(*(pos++));
-    pos++;
-    for (int i=0; i<6; i++)
-        A[i] = _form_A(*(pos++));
+    TRANO = _form_TRANO(inp.at(3));
+    for (size_t i{0}; i<6; i++)
+        A[i] = _form_A(inp.at(i + 5));
 }
 
 belfix::belfix(long const &FIXNO,
@@ -100,20 +96,20 @@ const dnvgl::extfem::fem::cards::types
 belfix::card_type(void) const {return types::BELFIX;}
 
 std::ostream &belfix::put(std::ostream &os) const {
-    if (this->OPT == belfix::n_opt::INVALID) return os;
+    if (OPT == belfix::n_opt::INVALID) return os;
     os << belfix::head.format()
-       << this->_form_FIXNO.format(this->FIXNO)
-       << this->_form_OPT.format(static_cast<long>(this->OPT))
-       << this->_form_TRANO.format(this->TRANO)
-       << this->empty.format()
+       << _form_FIXNO.format(FIXNO)
+       << _form_OPT.format(static_cast<long>(OPT))
+       << _form_TRANO.format(TRANO)
+       << empty.format()
        << std::endl << fem::types::card("").format()
-       << this->_form_A.format(this->A[0])
-       << this->_form_A.format(this->A[1])
-       << this->_form_A.format(this->A[2])
-       << this->_form_A.format(this->A[3])
+       << _form_A.format(A.at(0))
+       << _form_A.format(A.at(1))
+       << _form_A.format(A.at(2))
+       << _form_A.format(A.at(3))
        << std::endl << fem::types::card("").format()
-       << this->_form_A.format(this->A[4])
-       << this->_form_A.format(this->A[5]);
+       << _form_A.format(A.at(4))
+       << _form_A.format(A.at(5));
     return os << std::endl;;
 }
 

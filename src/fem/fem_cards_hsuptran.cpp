@@ -52,28 +52,24 @@ void hsuptran::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "HSUPTRAN", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    NFIELD = _form_NFIELD(*(pos++));
-    ITREF = _form_ITREF(*(pos++));
-    T[0][0] = _form_T(*(pos++));
-    T[0][1] = _form_T(*(pos++));
-    T[0][2] = _form_T(*(pos++));
-    T[0][3] = _form_T(*(pos++));
-    T[1][0] = _form_T(*(pos++));
-    T[1][1] = _form_T(*(pos++));
-    T[1][2] = _form_T(*(pos++));
-    T[1][3] = _form_T(*(pos++));
-    T[2][0] = _form_T(*(pos++));
-    T[2][1] = _form_T(*(pos++));
-    T[2][2] = _form_T(*(pos++));
-    T[2][3] = _form_T(*(pos++));
-    T[3][0] = _form_T(*(pos++));
-    T[3][1] = _form_T(*(pos++));
-    T[3][2] = _form_T(*(pos++));
-    T[3][3] = _form_T(*(pos++));
+    NFIELD = _form_NFIELD(inp.at(1));
+    ITREF = _form_ITREF(inp.at(2));
+    T[0][0] = _form_T(inp.at(3));
+    T[0][1] = _form_T(inp.at(4));
+    T[0][2] = _form_T(inp.at(5));
+    T[0][3] = _form_T(inp.at(6));
+    T[1][0] = _form_T(inp.at(7));
+    T[1][1] = _form_T(inp.at(8));
+    T[1][2] = _form_T(inp.at(9));
+    T[1][3] = _form_T(inp.at(10));
+    T[2][0] = _form_T(inp.at(11));
+    T[2][1] = _form_T(inp.at(12));
+    T[2][2] = _form_T(inp.at(13));
+    T[2][3] = _form_T(inp.at(14));
+    T[3][0] = _form_T(inp.at(15));
+    T[3][1] = _form_T(inp.at(16));
+    T[3][2] = _form_T(inp.at(17));
+    T[3][3] = _form_T(inp.at(18));
 }
 
 hsuptran::hsuptran(void) :
@@ -133,32 +129,22 @@ hsuptran::card_type(void) const {
     return types::HSUPTRAN;
 }
 
-std::ostream &hsuptran::put(std::ostream& os) const {
-    if (this->NFIELD == -1) return os;
+ostream &hsuptran::put(ostream& os) const {
+    if (NFIELD == -1) return os;
     os << hsuptran::head.format()
-       << this->_form_NFIELD.format(this->NFIELD)
-       << this->_form_ITREF.format(this->ITREF)
-       << this->_form_T.format(this->T[0][0])
-       << this->_form_T.format(this->T[0][1]) << std::endl
+       << _form_NFIELD.format(NFIELD) << _form_ITREF.format(ITREF)
+       << _form_T.format(T[0][0]) << _form_T.format(T[0][1]) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_T.format(this->T[0][2])
-       << this->_form_T.format(this->T[0][3])
-       << this->_form_T.format(this->T[1][0])
-       << this->_form_T.format(this->T[1][1]) << std::endl
+       << _form_T.format(T[0][2]) << _form_T.format(T[0][3])
+       << _form_T.format(T[1][0]) << _form_T.format(T[1][1]) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_T.format(this->T[1][2])
-       << this->_form_T.format(this->T[1][3])
-       << this->_form_T.format(this->T[2][0])
-       << this->_form_T.format(this->T[2][1]) << std::endl
+       << _form_T.format(T[1][2]) << _form_T.format(T[1][3])
+       << _form_T.format(T[2][0]) << _form_T.format(T[2][1]) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_T.format(this->T[2][2])
-       << this->_form_T.format(this->T[2][3])
-       << this->_form_T.format(this->T[3][0])
-       << this->_form_T.format(this->T[3][1]) << std::endl
+       << _form_T.format(T[2][2]) << _form_T.format(T[2][3])
+       << _form_T.format(T[3][0]) << _form_T.format(T[3][1]) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_T.format(this->T[3][2])
-       << this->_form_T.format(this->T[3][3])
-       << std::endl;
+       << _form_T.format(T[3][2]) << _form_T.format(T[3][3]) << endl;
     return os;
 }
 

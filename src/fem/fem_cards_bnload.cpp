@@ -54,21 +54,16 @@ void bnload::read(const std::vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "BNLOAD", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    LLC = _form_LLC(*(pos++));
-    LOTYP = _form_LOTYP (*(pos++));
-    COMPLX = _form_COMPLX(*(pos++));
-    ++pos;
-    NODENO = _form_NODENO(*(pos++));
-    NDOF = _form_NDOF(*(pos++));
-    for (long i = 0; i < NDOF; i++)
-        RLOAD.push_back(_form_RLOAD(*(pos++)));
+    LLC = _form_LLC(inp.at(1));
+    LOTYP = _form_LOTYP(inp.at(2));
+    COMPLX = _form_COMPLX(inp.at(3));
+    NODENO = _form_NODENO(inp.at(5));
+    NDOF = _form_NDOF(inp.at(6));
+    for (size_t i{0}; i < static_cast<size_t>(NDOF); i++)
+        RLOAD.push_back(_form_RLOAD(inp.at(7 + i)));
     if (COMPLX)
-        for (long i = 0; i < NDOF; i++)
-            ILOAD.push_back(_form_ILOAD(*(pos++)));
+        for (size_t i{0}; i < static_cast<size_t>(NDOF); i++)
+            ILOAD.push_back(_form_ILOAD(inp.at(7 + NDOF + i)));
 }
 
 bnload::bnload(void) :
@@ -132,21 +127,15 @@ std::ostream &bnload::put(std::ostream& os) const {
        << this->_form_NDOF.format(this->NDOF);
     long cnt = 2;
     for (long i = 0; i < this->NDOF; i++) {
-        if (cnt == 4) {
+        if (!(cnt++ % 4))
             os << std::endl << dnvgl::extfem::fem::types::card().format();
-            cnt = 0;
-        }
-        os << this->_form_RLOAD.format(this->RLOAD[i]);
-        cnt += 1;
+        os << this->_form_RLOAD.format(this->RLOAD.at(i));
     }
     if (this->COMPLX)
         for (long i = 0; i < this->NDOF; i++) {
-            if (cnt == 4) {
+            if (!(cnt++ % 4))
                 os << std::endl << dnvgl::extfem::fem::types::card().format();
-                cnt = 0;
-            }
-            os << this->_form_ILOAD.format(this->ILOAD[i]);
-            cnt += 1;
+            os << this->_form_ILOAD.format(this->ILOAD.at(i));
         }
     os << std::endl;
     return os;

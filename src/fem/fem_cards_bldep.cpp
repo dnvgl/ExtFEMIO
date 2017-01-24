@@ -51,25 +51,20 @@ bldep::bldep(const std::vector<std::string> &inp, size_t const &len) {
 }
 
 void bldep::read(const std::vector<std::string> &inp, size_t const &len) {
-    if (inp.size() < 9)
+    if (len < 9)
         throw errors::parse_error(
             "BLDEP", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    NODENO = _form_NODENO(*(pos++));
-    CNOD = _form_CNOD(*(pos++));
-    NDDOF = _form_NDDOF(*(pos++));
-    NDEP = _form_NDEP(*(pos++));
+    NODENO = _form_NODENO(inp.at(1));
+    CNOD = _form_CNOD(inp.at(2));
+    NDDOF = _form_NDDOF(inp.at(3));
+    NDEP = _form_NDEP(inp.at(4));
     if (NDDOF == 0) NDDOF = NDEP;
 
-    for (long i = 0; i < NDEP; i++) {
-        DEPDOF.push_back(_form_DEPDOF(*(pos++)));
-        INDEPDOF.push_back(_form_INDEPDOF(*(pos++)));
-        b.push_back(_form_b(*(pos++)));
-        pos++;
+    for (long i{0}; i < NDEP * 4; i += 4) {
+        DEPDOF.push_back(_form_DEPDOF(inp.at(i + 5)));
+        INDEPDOF.push_back(_form_INDEPDOF(inp.at(i + 6)));
+        b.push_back(_form_b(inp.at(i + 7)));
     }
 }
 
@@ -112,22 +107,24 @@ bldep::bldep(
               DEPDOF, INDEPDOF, b) {}
 
 const dnvgl::extfem::fem::cards::types
-bldep::card_type(void) const {return types::BLDEP;}
+bldep::card_type(void) const {
+    return types::BLDEP;
+}
 
 std::ostream &bldep::put(std::ostream& os) const {
-    if (this->NODENO == -1) return os;
+    if (NODENO == -1) return os;
     os << bldep::head.format()
-       << this->_form_NODENO.format(this->NODENO)
-       << this->_form_CNOD.format(this->CNOD)
-       << this->_form_NDDOF.format(this->NDDOF)
-       << this->_form_NDEP.format(this->NDEP)
+       << _form_NODENO.format(NODENO)
+       << _form_CNOD.format(CNOD)
+       << _form_NDDOF.format(NDDOF)
+       << _form_NDEP.format(NDEP)
        << std::endl;
-    for (long i = 0; i < this->NDEP; i++)
+    for (size_t i{0}; i < static_cast<size_t>(NDEP); i++)
         os << dnvgl::extfem::fem::types::card().format()
-           << this->_form_DEPDOF.format(this->DEPDOF[i])
-           << this->_form_INDEPDOF.format(this->INDEPDOF[i])
-           << this->_form_b.format(this->b[i])
-           << this->empty.format()
+           << _form_DEPDOF.format(DEPDOF.at(i))
+           << _form_INDEPDOF.format(INDEPDOF.at(i))
+           << _form_b.format(b.at(i))
+           << empty.format()
            << std::endl;
     return os;
 }

@@ -61,9 +61,6 @@ gusyi::gusyi(const vector<std::string> &inp, size_t const &len) {
 void gusyi::read(const vector<std::string> &inp, size_t const &len) {
     std::string static const empty{"                "};
 
-    NLOBYT = {0};
-    NLOBYB = {0};
-    NLOBZ = {0};
 
     __base::beam_prop::read(inp, len);
 
@@ -81,15 +78,18 @@ void gusyi::read(const vector<std::string> &inp, size_t const &len) {
     TB = _form_TB(inp.at(9));
     SFY = _form_SFY(inp.at(10));
     SFZ = _form_SFZ(inp.at(11));
-    if (len < 13) return;
-    if (inp.at(12) != empty)
+    if (len >= 13 && inp.at(12) != empty)
         NLOBYT = _form_NLOBYT(inp[12]);
-    if (len < 14) return;
-    if (inp.at(13) != empty)
+    else
+        NLOBYT = {0};
+    if (len >= 14 && inp.at(13) != empty)
         NLOBYB = _form_NLOBYB(inp[13]);
-    if (len < 15) return;
-    if (inp.at(14) != empty)
+    else
+        NLOBYB = {0};
+    if (len >= 15 && inp.at(14) != empty)
         NLOBZ = _form_NLOBZ(inp[14]);
+    else
+        NLOBZ = {0};
 }
 
 gusyi::gusyi(void) :
@@ -113,26 +113,26 @@ const dnvgl::extfem::fem::cards::types
 gusyi::card_type(void) const {return types::GUSYI;}
 
 std::ostream &gusyi::put(std::ostream& os) const {
-    if (this->GEONO == -1) return os;
+    if (GEONO == -1) return os;
     os << gusyi::head.format()
-       << this->_form_GEONO.format(this->GEONO)
-       << this->_form_HZ.format(this->HZ)
-       << this->_form_TY.format(this->TY)
-       << this->_form_BT.format(this->BT)
+       << _form_GEONO.format(GEONO)
+       << _form_HZ.format(HZ)
+       << _form_TY.format(TY)
+       << _form_BT.format(BT)
        << std::endl << dnvgl::extfem::fem::types::card().format()
-       << this->_form_B1.format(this->B1)
-       << this->_form_TT.format(this->TT)
-       << this->_form_BB.format(this->BB)
-       << this->_form_B2.format(this->B2)
+       << _form_B1.format(B1)
+       << _form_TT.format(TT)
+       << _form_BB.format(BB)
+       << _form_B2.format(B2)
        << std::endl << dnvgl::extfem::fem::types::card().format()
-       << this->_form_TB.format(this->TB)
-       << this->_form_SFY.format(this->SFY)
-       << this->_form_SFZ.format(this->SFZ);
-    if ((this->NLOBYT || this->NLOBYB || this->NLOBZ))
-        os << this->_form_NLOBYT.format(this->NLOBYT)
+       << _form_TB.format(TB)
+       << _form_SFY.format(SFY)
+       << _form_SFZ.format(SFZ);
+    if ((NLOBYT || NLOBYB || NLOBZ))
+        os << _form_NLOBYT.format(NLOBYT)
            << std::endl << dnvgl::extfem::fem::types::card().format()
-           << this->_form_NLOBYB.format(this->NLOBYB)
-           << this->_form_NLOBZ.format(this->NLOBZ);
+           << _form_NLOBYB.format(NLOBYB)
+           << _form_NLOBZ.format(NLOBZ);
     os << std::endl;
     return os;
 }

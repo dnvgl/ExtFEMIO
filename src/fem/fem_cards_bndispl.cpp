@@ -55,22 +55,17 @@ void bndispl::read(const std::vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "BNDISPL", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    LLC = _form_LLC(*(pos++));
-    DTYPE = _form_DTYPE (*(pos++));
-    COMPLX = _form_COMPLX(*(pos++));
-    ++pos;
-    NODENO = _form_NODENO(*(pos++));
-    NDOF = _form_NDOF(*(pos++));
-    for (long i = 0; i < NDOF; i++)
-        RDISP.push_back(_form_RDISP(*(pos++)));
+    LLC = _form_LLC(inp.at(1));
+    DTYPE = _form_DTYPE (inp.at(2));
+    COMPLX = _form_COMPLX(inp.at(3));
+    NODENO = _form_NODENO(inp.at(5));
+    NDOF = _form_NDOF(inp.at(6));
+    for (size_t i{0}; i < static_cast<size_t>(NDOF); i++)
+        RDISP.push_back(_form_RDISP(inp.at(7 + i)));
 
     if (COMPLX)
-        for (long i = 0; i < NDOF; i++)
-            IDISP.push_back(_form_IDISP(*(pos++)));
+        for (size_t i{0}; i < static_cast<size_t>(NDOF); i++)
+            IDISP.push_back(_form_IDISP(inp.at(7 + NDOF + i)));
 }
 
 bndispl::bndispl(void) :
@@ -128,24 +123,18 @@ std::ostream &bndispl::put(std::ostream& os) const {
        << dnvgl::extfem::fem::types::card().format()
        << this->_form_NODENO.format(this->NODENO)
        << this->_form_NDOF.format(this->NDOF);
-    long cnt = 2;
+    long cnt{2};
     for (long i = 0; i < this->NDOF; i++) {
-        if (cnt == 4) {
+        if (!(cnt++ % 4))
             os << std::endl << dnvgl::extfem::fem::types::card().format();
-            cnt = 0;
-        }
-        os << this->_form_RDISP.format(this->RDISP[i]);
-        cnt += 1;
+        os << this->_form_RDISP.format(this->RDISP.at(i));
     }
     if (this->COMPLX) {
-        assert(this->IDISP.size() == (size_t)this->NDOF);
+        assert(this->IDISP.size() == static_cast<size_t>(this->NDOF));
         for (long i = 0; i < this->NDOF; i++) {
-            if (cnt == 4) {
+            if (!(cnt++ % 4))
                 os << std::endl << dnvgl::extfem::fem::types::card().format();
-                cnt = 0;
-            }
-            os << this->_form_IDISP.format(this->IDISP[i]);
-            cnt += 1;
+            os << this->_form_IDISP.format(this->IDISP.at(i));
         }
     }
     os << std::endl;

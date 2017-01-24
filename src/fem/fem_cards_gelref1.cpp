@@ -67,62 +67,67 @@ void gelref1::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "GELREF1", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    std::vector<std::string> node_vals;
+    std::vector<std::string> static node_vals;
     entry_type<long> static const lval("lval");
 
-    long tmp, nvals{0}, ind_offset{0};
+    long tmp;
+    size_t nvals{0}, ind_offset{0};
     ldiv_t divmod;
 
-    ++pos;
-    ELNO = _form_ELNO(*(pos++));
-    MATNO = _form_MATNO(*(pos++));
-    ADDNO = _form_ADDNO(*(pos++));
-    INTNO = _form_INTNO(*(pos++));
-    MINTNO = _form_MINTNO(*(pos++));
-    STRANO = _form_STRANO(*(pos++));
-    STRENO = _form_STRENO(*(pos++));
-    STREPONO = _form_STREPONO(*(pos++));
-    GEONO_OPT = _form_GEONO_OPT(*(pos++));
+    ELNO = _form_ELNO(inp.at(1));
+    MATNO = _form_MATNO(inp.at(2));
+    ADDNO = _form_ADDNO(inp.at(3));
+    INTNO = _form_INTNO(inp.at(4));
+    MINTNO = _form_MINTNO(inp.at(5));
+    STRANO = _form_STRANO(inp.at(6));
+    STRENO = _form_STRENO(inp.at(7));
+    STREPONO = _form_STREPONO(inp.at(8));
+    GEONO_OPT = _form_GEONO_OPT(inp.at(9));
     if (GEONO_OPT == -1) nvals += 1;
-    FIXNO_OPT = _form_FIXNO_OPT(*(pos++));
+    FIXNO_OPT = _form_FIXNO_OPT(inp.at(10));
     if (FIXNO_OPT == -1) nvals += 1;
-    ECCNO_OPT = _form_ECCNO_OPT(*(pos++));
+    ECCNO_OPT = _form_ECCNO_OPT(inp.at(11));
     if (ECCNO_OPT == -1) nvals += 1;
-    TRANSNO_OPT = _form_TRANSNO_OPT(*(pos++));
+    TRANSNO_OPT = _form_TRANSNO_OPT(inp.at(12));
     if (TRANSNO_OPT == -1) nvals += 1;
 
-    size_t i{13};
-    while (i++ < len && *pos != empty) {
-        tmp = lval(*pos);
+    size_t i{12};
+    size_t num_vals;
+    while (++i < len && inp.at(i) != empty) {
+        tmp = lval(inp[i]);
         if (tmp == 0) break;
-        node_vals.push_back(*(pos++));
-    }
-    if (node_vals.size() != 0) {
-        divmod = ldiv((long)node_vals.size(), nvals);
+        try {
+            node_vals.at(num_vals).assign(inp[i]);
+        }catch (out_of_range) {
+            node_vals.emplace_back(inp[i]);
+        }
+        num_vals++;
+    };
+
+    if (num_vals > 0) {
+        divmod = ldiv((long)num_vals, nvals);
         if (divmod.rem != 0)
             throw dnvgl::extfem::fem::errors::parse_error(
                 "GELREF1", "Number of node values is not "
                 "as required.");
 
         if (GEONO_OPT == -1) {
-            for (long i=0; i < divmod.quot; i++)
+            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
                 GEONO.push_back(_form_GEONO(node_vals[i]));
             ind_offset = nvals;
         }
         if (FIXNO_OPT == -1) {
-            for (long i=0; i < divmod.quot; i++)
+            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
                 FIXNO.push_back(_form_FIXNO(node_vals[i+ind_offset]));
             ind_offset += nvals;
         }
         if (ECCNO_OPT == -1) {
-            for (long i=0; i < divmod.quot; i++)
+            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
                 ECCNO.push_back(_form_ECCNO(node_vals[i+ind_offset]));
             ind_offset += nvals;
         }
         if (TRANSNO_OPT == -1) {
-            for (long i=0; i < divmod.quot; i++)
+            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
                 TRANSNO.push_back(_form_TRANSNO(node_vals[i+ind_offset]));
             ind_offset += nvals;
         }
@@ -279,54 +284,48 @@ cards::__base::card const &gelref1::operator() (
 }
 
 const dnvgl::extfem::fem::cards::types
-gelref1::card_type(void) const { return types::GELREF1; }
+gelref1::card_type(void) const {
+    return types::GELREF1;
+}
 
 std::ostream &gelref1::put(std::ostream& os) const {
-    if (this->ELNO == -1) return os;
+    if (ELNO == -1) return os;
     os << gelref1::head.format()
-       << this->_form_ELNO.format(this->ELNO)
-       << this->_form_MATNO.format(this->MATNO)
-       << this->_form_ADDNO.format(this->ADDNO)
-       << this->_form_INTNO.format(this->INTNO) << std::endl
+       << _form_ELNO.format(ELNO)
+       << _form_MATNO.format(MATNO)
+       << _form_ADDNO.format(ADDNO)
+       << _form_INTNO.format(INTNO) << std::endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_MINTNO.format(this->MINTNO)
-       << this->_form_STRANO.format(this->STRANO)
-       << this->_form_STRENO.format(this->STRENO)
-       << this->_form_STREPONO.format(this->STREPONO) << std::endl
+       << _form_MINTNO.format(MINTNO)
+       << _form_STRANO.format(STRANO)
+       << _form_STRENO.format(STRENO)
+       << _form_STREPONO.format(STREPONO) << std::endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_GEONO_OPT.format(this->GEONO_OPT)
-       << this->_form_FIXNO_OPT.format(this->FIXNO_OPT)
-       << this->_form_ECCNO_OPT.format(this->ECCNO_OPT)
-       << this->_form_TRANSNO_OPT.format(this->TRANSNO_OPT);
+       << _form_GEONO_OPT.format(GEONO_OPT)
+       << _form_FIXNO_OPT.format(FIXNO_OPT)
+       << _form_ECCNO_OPT.format(ECCNO_OPT)
+       << _form_TRANSNO_OPT.format(TRANSNO_OPT);
 
-    size_t i = 5;
-    for (auto p : this->GEONO) {
-        if (i++ >= 4) {
-            i = 1;
+    size_t i = 0;
+    for (auto p : GEONO) {
+        if (!(i++ % 4))
             os << std::endl << fem::types::card().format();
-        }
-        os << this->_form_GEONO.format(p);
+        os << _form_GEONO.format(p);
     }
-    for (auto p : this->FIXNO) {
-        if (i++ >= 4) {
-            i = 1;
+    for (auto p : FIXNO) {
+        if (!(i++ % 4))
             os << std::endl << ::fem::types::card().format();
-        }
-        os << this->_form_FIXNO.format(p);
+        os << _form_FIXNO.format(p);
     }
-    for (auto p : this->ECCNO) {
-        if (i++ >= 4) {
-            i = 1;
+    for (auto p : ECCNO) {
+        if (!(i++ % 4))
             os << std::endl << dnvgl::extfem::fem::types::card().format();
-        }
-        os << this->_form_ECCNO.format(p);
+        os << _form_ECCNO.format(p);
     }
-    for (auto p : this->TRANSNO) {
-        if (i++ >= 4) {
-            i = 1;
+    for (auto p : TRANSNO) {
+        if (!(i++ % 4))
             os << std::endl << dnvgl::extfem::fem::types::card().format();
-        }
-        os << this->_form_TRANSNO.format(p);
+        os << _form_TRANSNO.format(p);
     }
     return os << std::endl;
 }

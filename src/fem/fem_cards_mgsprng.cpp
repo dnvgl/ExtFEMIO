@@ -51,21 +51,18 @@ void mgsprng::read(vector<std::string> const &inp, size_t const &len) {
         throw errors::parse_error(
             "MGSPRNG", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    MATNO = _form_MATNO(*(pos++));
-    NDOF = _form_NDOF (*(pos++));
+    MATNO = _form_MATNO(inp.at(1));
+    NDOF = _form_NDOF (inp.at(2));
     K.resize(NDOF);
-    for (long i = 0; i < NDOF; i++) {
-        K[i] = std::vector<double>(NDOF);
+    size_t k{3};
+    for (size_t i = 0; i < static_cast<size_t>(NDOF); i++) {
+        K[i] = vector<double>(NDOF);
         if (i > 0) {
-            for (long j = 0; j < i; j++)
+            for (size_t j = 0; j < i; j++)
                 K[i][j] = K[j][i];
         }
-        for (long j = i; j < NDOF; j++)
-            K[i][j] = _form_K(*(pos++));
+        for (size_t j = i; j < static_cast<size_t>(NDOF); j++)
+            K[i][j] = _form_K(inp.at(k++));
     }
 }
 
@@ -74,33 +71,30 @@ mgsprng::mgsprng(void) :
 
 mgsprng::mgsprng(long const &MATNO,
                  long const &NDOF,
-                 std::vector<std::vector<double> > const &K) :
+                 vector<vector<double> > const &K) :
         card(), MATNO(MATNO), NDOF(NDOF), K(K) {}
 
 mgsprng::mgsprng(long const &MATNO,
-                 std::vector<std::vector<double> > const &K) :
+                 vector<vector<double> > const &K) :
         card(), MATNO(MATNO), NDOF((long)K.size()), K(K) {}
 
 const dnvgl::extfem::fem::cards::types
 mgsprng::card_type(void) const {return types::MGSPRNG;}
 
-std::ostream &mgsprng::put(std::ostream& os) const {
-    if (this->MATNO == -1) return os;
+ostream &mgsprng::put(ostream& os) const {
+    if (MATNO == -1) return os;
     os << mgsprng::head.format()
-       << this->_form_MATNO.format(this->MATNO)
-       << this->_form_NDOF.format(this->NDOF);
-    long cnt = 2;
-    for (long i = 0; i < this->NDOF; i++) {
-        for (long j = i; j < this->NDOF; j++) {
-            if (cnt == 4) {
-                os << std::endl << dnvgl::extfem::fem::types::card().format();
-                cnt = 0;
-            }
-            os << this->_form_K.format(this->K[i][j]);
-            cnt += 1;
+       << _form_MATNO.format(MATNO)
+       << _form_NDOF.format(NDOF);
+    long cnt = 1;
+    for (size_t i = 0; i < static_cast<size_t>(NDOF); i++) {
+        for (size_t j = i; j < static_cast<size_t>(NDOF); j++) {
+            if (!(++cnt % 4))
+                os << endl << dnvgl::extfem::fem::types::card().format();
+            os << _form_K.format(K[i][j]);
         }
     }
-    os << std::endl;
+    os << endl;
     return os;
 }
 

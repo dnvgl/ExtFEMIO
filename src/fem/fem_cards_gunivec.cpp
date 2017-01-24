@@ -52,13 +52,10 @@ void gunivec::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "GUNIVEC", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    TRANSNO = _form_TRANSNO(*(pos++));
-    UNIX = _form_UNIX(*(pos++));
-    UNIY = _form_UNIY(*(pos++));
-    UNIZ = _form_UNIZ(*(pos++));
+    TRANSNO = _form_TRANSNO(inp.at(1));
+    UNIX = _form_UNIX(inp.at(2));
+    UNIY = _form_UNIY(inp.at(3));
+    UNIZ = _form_UNIZ(inp.at(4));
 }
 
 gunivec::gunivec(void) :
@@ -75,12 +72,12 @@ const dnvgl::extfem::fem::cards::types
 gunivec::card_type(void) const {return types::GUNIVEC;}
 
 std::ostream &gunivec::put(std::ostream& os) const {
-    if (this->TRANSNO == -1) return os;
+    if (TRANSNO == -1) return os;
     os << gunivec::head.format()
-       << this->_form_TRANSNO.format(this->TRANSNO)
-       << this->_form_UNIX.format(this->UNIX)
-       << this->_form_UNIY.format(this->UNIY)
-       << this->_form_UNIZ.format(this->UNIZ)
+       << _form_TRANSNO.format(TRANSNO)
+       << _form_UNIX.format(UNIX)
+       << _form_UNIY.format(UNIY)
+       << _form_UNIZ.format(UNIZ)
        << std::endl;
     return os;
 }

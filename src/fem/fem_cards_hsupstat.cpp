@@ -58,19 +58,15 @@ void hsupstat::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "HSUPSTAT", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    NFIELD = _form_NFIELD(*(pos++));
-    ISELTY = _form_ISELTY(*(pos++));
-    NIDOF = _form_NIDOF(*(pos++));
-    NRDOF = _form_NRDOF(*(pos++));
-    NBAND = _form_NBAND(*(pos++));
-    NELT = _form_NELT(*(pos++));
-    LINDEP = _form_LINDEP(*(pos++));
-    RELOADC = _form_RELOADC(*(pos++));
-    COMPLC = _form_COMPLC(*(pos++));
+    NFIELD = _form_NFIELD(inp.at(1));
+    ISELTY = _form_ISELTY(inp.at(2));
+    NIDOF = _form_NIDOF(inp.at(3));
+    NRDOF = _form_NRDOF(inp.at(4));
+    NBAND = _form_NBAND(inp.at(5));
+    NELT = _form_NELT(inp.at(6));
+    LINDEP = _form_LINDEP(inp.at(7));
+    RELOADC = _form_RELOADC(inp.at(8));
+    COMPLC = _form_COMPLC(inp.at(9));
 }
 
 hsupstat::hsupstat(void) :
@@ -95,21 +91,21 @@ hsupstat::card_type(void) const {
     return types::HSUPSTAT;
 }
 
-std::ostream &hsupstat::put(std::ostream& os) const {
-    if (this->NFIELD == -1) return os;
+ostream &hsupstat::put(ostream& os) const {
+    if (NFIELD == -1) return os;
     os << hsupstat::head.format()
-       << this->_form_NFIELD.format(this->NFIELD)
-       << this->_form_ISELTY.format(this->ISELTY)
-       << this->_form_NIDOF.format(this->NIDOF)
-       << this->_form_NRDOF.format(this->NRDOF) << std::endl
+       << _form_NFIELD.format(NFIELD)
+       << _form_ISELTY.format(ISELTY)
+       << _form_NIDOF.format(NIDOF)
+       << _form_NRDOF.format(NRDOF) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_NBAND.format(this->NBAND)
-       << this->_form_NELT.format(this->NELT)
-       << this->_form_LINDEP.format(this->LINDEP)
-       << this->_form_RELOADC.format(this->RELOADC) << std::endl
+       << _form_NBAND.format(NBAND)
+       << _form_NELT.format(NELT)
+       << _form_LINDEP.format(LINDEP)
+       << _form_RELOADC.format(RELOADC) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_COMPLC.format(this->COMPLC)
-       << std::endl;
+       << _form_COMPLC.format(COMPLC)
+       << endl;
     return os;
 }
 

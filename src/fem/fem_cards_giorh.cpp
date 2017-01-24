@@ -51,49 +51,38 @@ entry_type<long> const giorh::_form_NLOBYB("NLOBYB");
 entry_type<long> const giorh::_form_NLOBZ("NLOBZ");
 
 
-giorh::giorh(vector<std::string> const &inp, size_t const &len) {
+giorh::giorh(vector<std::string> const &inp, size_t const &len) :
+        __base::beam_prop(inp, len) {
     read(inp, len);
 }
 
 void giorh::read(vector<std::string> const &inp, size_t const &len) {
     std::string static const empty("                ");
 
-    NLOBYT = {0};
-    NLOBYB = {0};
-    NLOBZ = {0};
-
-    __base::beam_prop::read(inp, len);
-
     if (len < 10)
         throw errors::parse_error(
             "GIORH", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    GEONO = _form_GEONO(*(pos++));
-    HZ = _form_HZ(*(pos++));
-    TY = _form_TY(*(pos++));
-    BT = _form_BT(*(pos++));
-    TT = _form_TT(*(pos++));
-    BB = _form_BB(*(pos++));
-    TB = _form_TB(*(pos++));
-    SFY = _form_SFY(*(pos++));
-    SFZ = _form_SFZ(*(pos++));
-    size_t i{10};
-    if (i >= len) return;
-    if (*pos != empty)
-        NLOBYT = _form_NLOBYT(*(pos++));
+    HZ = _form_HZ(inp.at(2));
+    TY = _form_TY(inp.at(3));
+    BT = _form_BT(inp.at(4));
+    TT = _form_TT(inp.at(5));
+    BB = _form_BB(inp.at(6));
+    TB = _form_TB(inp.at(7));
+    SFY = _form_SFY(inp.at(8));
+    SFZ = _form_SFZ(inp.at(9));
+    if (len > 10 && inp.at(10) != empty)
+        NLOBYT = _form_NLOBYT(inp[10]);
     else
-        pos++;
-    if (++i >= len) return;
-    if (*pos != empty)
-        NLOBYB = _form_NLOBYB(*(pos++));
+        NLOBYT = {0};
+    if (len > 11 && inp.at(11) != empty)
+        NLOBYB = _form_NLOBYB(inp[11]);
     else
-        pos++;
-    if (++i >= len) return;
-    if (*pos != empty)
-        NLOBZ = _form_NLOBZ(*pos);
+        NLOBYB = {0};
+    if (len > 12 && inp.at(12) != empty)
+        NLOBZ = _form_NLOBZ(inp[12]);
+    else
+        NLOBZ = {0};
 }
 
 giorh::giorh(void) :
@@ -117,23 +106,23 @@ dnvgl::extfem::fem::cards::types const
 giorh::card_type(void) const {return types::GIORH;}
 
 std::ostream &giorh::put(std::ostream& os) const {
-    if (this->GEONO == -1) return os;
+    if (GEONO == -1) return os;
     os << giorh::head.format()
-       << this->_form_GEONO.format(this->GEONO)
-       << this->_form_HZ.format(this->HZ)
-       << this->_form_TY.format(this->TY)
-       << this->_form_BT.format(this->BT)
+       << _form_GEONO.format(GEONO)
+       << _form_HZ.format(HZ)
+       << _form_TY.format(TY)
+       << _form_BT.format(BT)
        << std::endl << dnvgl::extfem::fem::types::card().format()
-       << this->_form_TT.format(this->TT)
-       << this->_form_BB.format(this->BB)
-       << this->_form_TB.format(this->TB)
-       << this->_form_SFY.format(this->SFY)
+       << _form_TT.format(TT)
+       << _form_BB.format(BB)
+       << _form_TB.format(TB)
+       << _form_SFY.format(SFY)
        << std::endl << dnvgl::extfem::fem::types::card().format()
-       << this->_form_SFZ.format(this->SFZ);
-    if ((this->NLOBYT || this->NLOBYB || this->NLOBZ))
-        os << this->_form_NLOBYT.format(this->NLOBYT)
-           << this->_form_NLOBYB.format(this->NLOBYB)
-           << this->_form_NLOBZ.format(this->NLOBZ);
+       << _form_SFZ.format(SFZ);
+    if ((NLOBYT || NLOBYB || NLOBZ))
+        os << _form_NLOBYT.format(NLOBYT)
+           << _form_NLOBYB.format(NLOBYB)
+           << _form_NLOBZ.format(NLOBZ);
     return os << std::endl;
 }
 

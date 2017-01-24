@@ -55,24 +55,15 @@ void bsell::read(std::vector<std::string> const &inp, size_t const &len) {
         throw errors::parse_error(
             "BSELL", "Illegal number of entries.");
 
-    auto pos = inp.begin();
+    LC = _form_LC(inp.at(1));
+    SUBNO = _form_SUBNO(inp.at(2));
 
-    ++pos;
-
-    LC = _form_LC(*(pos++));
-    SUBNO = _form_SUBNO(*(pos++));
-
-    pos++;
-    pos++;
-    size_t i{5};
-    while (len > i) {
-        i += 2;
-        if (*pos == empty)
-            break;
-        tmp = _form_LLC(*pos++);
+    for (size_t i{5}; i < len; i += 2) {
+        if (inp.at(i) == empty) break;
+        tmp = _form_LLC(inp.at(i));
         if (tmp == 0) break;
         LLC.push_back(tmp);
-        FACT.push_back(_form_FACT(*(pos++)));
+        FACT.push_back(_form_FACT(inp.at(i + 1)));
     }
 }
 
@@ -103,20 +94,20 @@ bsell::card_type(void) const {
 }
 
 std::ostream &bsell::put(std::ostream& os) const {
-    if (this->LC == -1) return os;
+    if (LC == -1) return os;
     os << bsell::head.format()
-       << this->_form_LC.format(this->LC)
-       << this->_form_SUBNO.format(this->SUBNO)
-       << this->empty.format()
-       << this->empty.format()
+       << _form_LC.format(LC)
+       << _form_SUBNO.format(SUBNO)
+       << empty.format()
+       << empty.format()
        << std::endl;
-    for (size_t i = 0; i < this->LLC.size(); i+=2) {
+    for (size_t i{0}; i < LLC.size(); i += 2) {
         os << dnvgl::extfem::fem::types::card().format()
-           << this->_form_LLC.format(this->LLC[i])
-           << this->_form_FACT.format(this->FACT[i]);
-        if (i+1 < this->LLC.size())
-            os << this->_form_LLC.format(this->LLC[i+1])
-               << this->_form_FACT.format(this->FACT[i+1]);
+           << _form_LLC.format(LLC.at(i))
+           << _form_FACT.format(FACT.at(i));
+        if (i+1 < LLC.size())
+            os << _form_LLC.format(LLC.at(i+1))
+               << _form_FACT.format(FACT.at(i+1));
         os << std::endl;
     }
     return os;

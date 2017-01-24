@@ -59,13 +59,10 @@ void geccen::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "GECCEN", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    ECCNO = _form_ECCNO(*(pos++));
-    EX = _form_EX(*(pos++));
-    EY = _form_EY(*(pos++));
-    EZ = _form_EZ(*(pos++));
+    ECCNO = _form_ECCNO(inp.at(1));
+    EX = _form_EX(inp.at(2));
+    EY = _form_EY(inp.at(3));
+    EZ = _form_EZ(inp.at(4));
 }
 
 geccen::geccen(
@@ -86,12 +83,12 @@ const dnvgl::extfem::fem::cards::types
 geccen::card_type(void) const {return types::GECCEN;}
 
 std::ostream &geccen::put(std::ostream& os) const {
-    if (this->ECCNO == -1) return os;
+    if (ECCNO == -1) return os;
     os << geccen::head.format()
-       << this->_form_ECCNO.format(this->ECCNO)
-       << this->_form_EX.format(this->EX)
-       << this->_form_EY.format(this->EY)
-       << this->_form_EZ.format(this->EZ);
+       << _form_ECCNO.format(ECCNO)
+       << _form_EX.format(EX)
+       << _form_EY.format(EY)
+       << _form_EZ.format(EZ);
     return os << std::endl;
 }
 

@@ -59,21 +59,18 @@ void tdsupnam::read(vector<std::string> const &inp, size_t const &len) {
         throw errors::parse_error(
             "TDSUPNAM", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    NFIELD = _form_NFIELD(*(pos++));
+    NFIELD = _form_NFIELD(inp.at(1));
     if (NFIELD != 4) {
-        std::ostringstream msg(
+        ostringstream msg(
             "Only NFIELD values of 4 are supported, "
             "but got value of ",
-            std::ostringstream::ate);
+            ostringstream::ate);
         msg << NFIELD;
         errors::parse_error("TDSUPNAM", msg.str());
     }
-    IHREF = _form_IHREF(*(pos++));
-    CODNAM = _form_CODNAM(*(pos++));
-    CODTXT = _form_CODTXT(*(pos++));
+    IHREF = _form_IHREF(inp.at(2));
+    CODNAM = _form_CODNAM(inp.at(3));
+    CODTXT = _form_CODTXT(inp.at(4));
 
     auto div_val = ldiv(CODNAM, 100);
     nlnam = div_val.quot != 0;
@@ -83,23 +80,15 @@ void tdsupnam::read(vector<std::string> const &inp, size_t const &len) {
     nctxt = div_val.rem;
 
     if (nlnam) {
-        auto pos_0 = *pos++;
-        auto pos_1 = *pos++;
-        auto pos_2 = *pos++;
-        auto pos_3 = *pos++;
         SUP_NAME = _form_SUP_NAME(
-            pos_0, pos_1, pos_2, pos_3);
+            inp.at(5), inp.at(6), inp.at(7), inp.at(8));
         SUP_NAME.resize(ncnam, ' ');
-    } else (((pos++)++)++)++;
-    for (long i=0; i < nltxt; i++) {
-        auto pos_0 = *pos++;
-        auto pos_1 = *pos++;
-        auto pos_2 = *pos++;
-        auto pos_3 = *pos++;
-        std::string cont = _form_CONT(
-            pos_0, pos_1, pos_2, pos_3);
-        cont.resize(nctxt, ' ');
-        CONT.push_back(cont);
+    }
+    for (long i=0; i < (nltxt * 4); i += 4) {
+        CONT.push_back(_form_CONT(
+                           inp.at(i + 9), inp.at(i + 10),
+                           inp.at(i + 11), inp.at(i + 12)));
+        CONT.back().resize(nctxt, ' ');
     }
 }
 
@@ -111,7 +100,7 @@ tdsupnam::tdsupnam(const long &NFIELD,
                    const long &CODNAM,
                    const long &CODTXT,
                    const std::string &SUP_NAME,
-                   const std::vector<std::string> &CONT) :
+                   const vector<std::string> &CONT) :
         card(), NFIELD(NFIELD), IHREF(IHREF),
         CODNAM(CODNAM), CODTXT(CODTXT),
         SUP_NAME(SUP_NAME), CONT(CONT) {
@@ -125,7 +114,7 @@ tdsupnam::tdsupnam(const long &NFIELD,
 
 tdsupnam::tdsupnam(const long &IHREF,
                    const std::string &SUP_NAME,
-                   const std::vector<std::string> &CONT) :
+                   const vector<std::string> &CONT) :
         card(), NFIELD(4), IHREF(IHREF),
         SUP_NAME(SUP_NAME), CONT(CONT) {
 
@@ -135,7 +124,7 @@ tdsupnam::tdsupnam(const long &IHREF,
     nltxt = (long)CONT.size();
     nctxt = 0;
     for (auto &p : CONT)
-        nctxt = std::max(nctxt, (long)p.size());
+        nctxt = max(nctxt, (long)p.size());
     for (auto &p : this->CONT)
         p.resize(nctxt, ' ');
     CODTXT = (100 * nltxt) + nctxt;
@@ -170,22 +159,17 @@ tdsupnam::tdsupnam(const long &IHREF,
 const dnvgl::extfem::fem::cards::types
 tdsupnam::card_type(void) const { return types::TDSUPNAM; };
 
-std::ostream &tdsupnam::put(std::ostream& os) const {
-    if (this->NFIELD == -1) return os;
+ostream &tdsupnam::put(ostream& os) const {
+    if (NFIELD == -1) return os;
     os << tdsupnam::head.format()
-       << this->_form_NFIELD.format(this->NFIELD)
-       << this->_form_IHREF.format(this->IHREF)
-       << this->_form_CODNAM.format(this->CODNAM)
-       << this->_form_CODTXT.format(this->CODTXT)
-       << std::endl;
-    if (this->nlnam)
+       << _form_NFIELD.format(NFIELD) << _form_IHREF.format(IHREF)
+       << _form_CODNAM.format(CODNAM) << _form_CODTXT.format(CODTXT) << endl;
+    if (nlnam)
         os << dnvgl::extfem::fem::types::card().format()
-           << this->_form_SUP_NAME.format(this->SUP_NAME, this->ncnam+8)
-           << std::endl;
-    for (auto p : this->CONT)
+           << _form_SUP_NAME.format(SUP_NAME, ncnam+8) <<endl;
+    for (auto p : CONT)
         os << dnvgl::extfem::fem::types::card().format()
-           << this->_form_CONT.format(p, this->nctxt+8)
-           << std::endl;
+           << _form_CONT.format(p, nctxt+8) << endl;
     return os;
 }
 

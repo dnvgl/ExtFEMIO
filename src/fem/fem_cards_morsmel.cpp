@@ -57,37 +57,32 @@ entry_type<double> const morsmel::_form_DAMP2("DAMP2");
 entry_type<double> const morsmel::_form_ALPHA1("ALPHA1");
 entry_type<double> const morsmel::_form_ALPHA2("ALPHA2");
 
-morsmel::morsmel(vector<std::string> const &inp, size_t const &len) {
+morsmel::morsmel(vector<std::string> const &inp, size_t const &len) :
+        __base::material(inp, len) {
     read(inp, len);
 }
 
 void morsmel::read(vector<std::string> const &inp, size_t const &len) {
-    __base::material::read(inp, len);
-
     if (len < 17)
         throw errors::parse_error(
             "MORSMEL", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    MATNO = _form_MATNO(*(pos++));
-    Q1 = _form_Q1(*(pos++));
-    Q2 = _form_Q2(*(pos++));
-    Q3 = _form_Q3(*(pos++));
-    RHO = _form_RHO(*(pos++));
-    D11 = _form_D11(*(pos++));
-    D21 = _form_D21(*(pos++));
-    D22 = _form_D22(*(pos++));
-    D31 = _form_D31(*(pos++));
-    D32 = _form_D32(*(pos++));
-    D33 = _form_D33(*(pos++));
-    PS1 = _form_PS1(*(pos++));
-    PS2 = _form_PS2(*(pos++));
-    DAMP1 = _form_DAMP1(*(pos++));
-    DAMP2 = _form_DAMP2(*(pos++));
-    ALPHA1 = _form_ALPHA1(*(pos++));
-    ALPHA2 = _form_ALPHA2(*pos);
+    Q1 = _form_Q1(inp.at(2));
+    Q2 = _form_Q2(inp.at(3));
+    Q3 = _form_Q3(inp.at(4));
+    RHO = _form_RHO(inp.at(5));
+    D11 = _form_D11(inp.at(6));
+    D21 = _form_D21(inp.at(7));
+    D22 = _form_D22(inp.at(8));
+    D31 = _form_D31(inp.at(9));
+    D32 = _form_D32(inp.at(10));
+    D33 = _form_D33(inp.at(11));
+    PS1 = _form_PS1(inp.at(12));
+    PS2 = _form_PS2(inp.at(13));
+    DAMP1 = _form_DAMP1(inp.at(14));
+    DAMP2 = _form_DAMP2(inp.at(15));
+    ALPHA1 = _form_ALPHA1(inp.at(16));
+    ALPHA2 = _form_ALPHA2(inp.at(17));
 }
 
 morsmel::morsmel(void) :
@@ -122,35 +117,22 @@ morsmel::morsmel(long const &MATNO,
 const dnvgl::extfem::fem::cards::types
 morsmel::card_type(void) const {return types::MORSMEL;}
 
-std::ostream &morsmel::put(std::ostream& os) const {
-    if (this->MATNO == -1) return os;
+ostream &morsmel::put(ostream& os) const {
+    if (MATNO == -1) return os;
     os << morsmel::head.format()
-       << this->_form_MATNO.format(this->MATNO)
-       << this->_form_Q1.format(this->Q1)
-       << this->_form_Q2.format(this->Q2)
-       << this->_form_Q3.format(this->Q3)
-       << std::endl
+       << _form_MATNO.format(MATNO) << _form_Q1.format(Q1)
+       << _form_Q2.format(Q2) << _form_Q3.format(Q3) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_RHO.format(this->RHO)
-       << this->_form_D11.format(this->D11)
-       << this->_form_D21.format(this->D21)
-       << this->_form_D22.format(this->D22)
-       << std::endl
+       << _form_RHO.format(RHO) << _form_D11.format(D11)
+       << _form_D21.format(D21) << _form_D22.format(D22) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_D31.format(this->D31)
-       << this->_form_D32.format(this->D32)
-       << this->_form_D33.format(this->D33)
-       << this->_form_PS1.format(this->PS1)
-       << std::endl
+       << _form_D31.format(D31) << _form_D32.format(D32)
+       << _form_D33.format(D33) << _form_PS1.format(PS1) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_PS2.format(this->PS2)
-       << this->_form_DAMP1.format(this->DAMP1)
-       << this->_form_DAMP2.format(this->DAMP2)
-       << this->_form_ALPHA1.format(this->ALPHA1)
-       << std::endl
+       << _form_PS2.format(PS2) << _form_DAMP1.format(DAMP1)
+       << _form_DAMP2.format(DAMP2) << _form_ALPHA1.format(ALPHA1) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_ALPHA2.format(this->ALPHA2)
-       << std::endl;
+       << _form_ALPHA2.format(ALPHA2) << endl;
     return os;
 }
 

@@ -52,13 +52,17 @@ entry_type<std::string>::operator() (
     const std::string &inp1, const std::string &inp2,
     const std::string &inp3, const std::string &inp4) const {
 
-    std::string sval = extfem::string::string(
-        inp1 + inp2 + inp3 + inp4).trim();
+    extfem::string::string static sval;
 
-    if (sval.length() == 0)
-        sval = bounds.get_default();
+    sval.assign(72, ' ');
 
-    return sval;
+    sval.insert(0, inp1).insert(16, inp2).insert(32, inp3).insert(48, inp4);
+
+    std::string res(sval.trim());
+
+    if (res.length() == 0)
+        res.assign(bounds.get_default());
+    return res;
 }
 
 std::string entry_type<std::string>::format(

@@ -62,6 +62,8 @@ namespace dnvgl {
                           std::vector<long> const &LLC,
                           std::vector<double> const &FACT);
 
+                    using __base::card::operator();
+
                     __base::card const &operator()(
                         long const &LC,
                         long const &SUBNO,

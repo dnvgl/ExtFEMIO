@@ -47,7 +47,8 @@ const entry_type<double> gpipe::_form_SFZ("SFZ");
 const entry_type<long> gpipe::_form_NCIR("NCIR");
 const entry_type<long> gpipe::_form_NRAD("NRAD");
 
-gpipe::gpipe(vector<std::string> const &inp, size_t const &len) {
+gpipe::gpipe(vector<std::string> const &inp, size_t const &len) :
+        __base::beam_prop(inp, len) {
     read(inp, len);
 }
 
@@ -58,29 +59,20 @@ void gpipe::read(vector<std::string> const &inp, size_t const &len) {
         throw errors::parse_error(
             "GPIPE", "Illegal number of entries.");
 
-    NCIR = {0};
-    NRAD = {0};
-
-    __base::beam_prop::read(inp, len);
-
-    auto pos = inp.begin();
-
-    ++pos;
-    GEONO = _form_GEONO(*(pos++));
-    DI = _form_DI(*(pos++));
-    DY = _form_DY(*(pos++));
-    T = _form_T(*(pos++));
-    SFY = _form_SFY(*(pos++));
-    SFZ = _form_SFZ(*(pos++));
-    size_t i{7};
-    if (len < i++) return;
-    if (*pos != empty)
-        NCIR = _form_NCIR(*(pos++));
+    DI = _form_DI(inp.at(2));
+    DY = _form_DY(inp.at(3));
+    T = _form_T(inp.at(4));
+    SFY = _form_SFY(inp.at(5));
+    SFZ = _form_SFZ(inp.at(6));
+    if (len > 7 && inp.at(7) != empty)
+        NCIR = _form_NCIR(inp[7]);
     else
-        pos++;
-    if (len < i) return;
-    if (*pos != empty)
-        NRAD = _form_NRAD(*pos);
+        NCIR = {0};
+
+    if (len > 8 && inp.at(8) != empty)
+        NRAD = _form_NRAD(inp[8]);
+    else
+        NRAD = {0};
 }
 
 gpipe::gpipe(void) :
@@ -100,18 +92,18 @@ const dnvgl::extfem::fem::cards::types
 gpipe::card_type(void) const {return types::GPIPE;}
 
 std::ostream &gpipe::put(std::ostream& os) const {
-    if (this->GEONO == -1) return os;
+    if (GEONO == -1) return os;
     os << gpipe::head.format()
-       << this->_form_GEONO.format(this->GEONO)
-       << this->_form_DI.format(this->DI)
-       << this->_form_DY.format(this->DY)
-       << this->_form_T.format(this->T)
+       << _form_GEONO.format(GEONO)
+       << _form_DI.format(DI)
+       << _form_DY.format(DY)
+       << _form_T.format(T)
        << std::endl << dnvgl::extfem::fem::types::card().format()
-       << this->_form_SFY.format(this->SFY)
-       << this->_form_SFZ.format(this->SFZ);
-    if ((this->NCIR || this->NRAD))
-        os << this->_form_NCIR.format(this->NCIR)
-           << this->_form_NRAD.format(this->NRAD);
+       << _form_SFY.format(SFY)
+       << _form_SFZ.format(SFZ);
+    if ((NCIR || NRAD))
+        os << _form_NCIR.format(NCIR)
+           << _form_NRAD.format(NRAD);
     os << std::endl;
     return os;
 }

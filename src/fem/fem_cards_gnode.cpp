@@ -46,7 +46,7 @@ const entry_type<long> gnode::_form_NDOF("NDOF");
 const entry_type<std::vector<int> > gnode::_form_ODOF("ODOF");
 
 gnode::gnode(const vector<std::string> &inp, size_t const &len) {
-    this->read(inp, len);
+    read(inp, len);
 }
 
 gnode::~gnode(void) {
@@ -58,13 +58,10 @@ void gnode::read(const vector<std::string> &inp, size_t const &len) {
       throw errors::parse_error(
          "GNODE", "Illegal number of entries.");
 
-   auto pos = inp.begin();
-
-   ++pos;
-   NODEX = _form_NODEX(*(pos++));
-   NODENO = _form_NODENO(*(pos++));
-   NDOF = _form_NDOF(*(pos++));
-   _form_ODOF(ODOF, *(pos++));
+   NODEX = _form_NODEX(inp.at(1));
+   NODENO = _form_NODENO(inp.at(2));
+   NDOF = _form_NDOF(inp.at(3));
+   _form_ODOF(ODOF, inp.at(4));
 }
 
 gnode::gnode(void) :
@@ -86,23 +83,19 @@ gnode::gnode(const long &NODEX,
    gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
 
 const dnvgl::extfem::fem::cards::types
-gnode::card_type(void) const {return types::GNODE;}
-
-std::ostream &gnode::put(std::ostream& os) const {
-   if (this->NODEX == -1) return os;
-   os << gnode::head.format()
-      << this->_form_NODEX.format(this->NODEX)
-      << this->_form_NODENO.format(this->NODENO)
-      << this->_form_NDOF.format(this->NDOF)
-      << this->_form_ODOF.format(this->ODOF) << std::endl;
-
-   return os;
+gnode::card_type(void) const {
+    return types::GNODE;
 }
 
-cards::__base::card const &gnode::operator() (
-    vector<std::string> const &inp, size_t const &len) {
-    this->read(inp, len);
-   return *this;
+std::ostream &gnode::put(std::ostream& os) const {
+   if (NODEX == -1) return os;
+   os << gnode::head.format()
+      << _form_NODEX.format(NODEX)
+      << _form_NODENO.format(NODENO)
+      << _form_NDOF.format(NDOF)
+      << _form_ODOF.format(this->ODOF) << std::endl;
+
+   return os;
 }
 
 cards::__base::card const &gnode::operator() (

@@ -144,7 +144,8 @@ namespace dnvgl {
 
                     private:
 
-                        std::unordered_map<std::string, types> static const cardtype_map;
+                        std::unordered_map<std::string, types>
+                        static const cardtype_map;
 
                     protected:
 
@@ -163,6 +164,12 @@ namespace dnvgl {
 
                         virtual ~card(void);
 
+                        virtual void read(
+                            const std::vector<std::string>&, size_t const&) = 0;
+
+                        virtual __base::card const &operator() (
+                            std::vector<std::string> const&, size_t const&);
+
                         virtual dnvgl::extfem::fem::cards::types const
                         card_type(void) const = 0;
                     };
@@ -178,13 +185,17 @@ namespace dnvgl {
 
                         void set_geono(long const &GEONO=0);
 
-                        dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
+                        dnvgl::extfem::fem::types::entry_type<long>
+                        static const _form_GEONO;
 
                         geoprop(void);
                         geoprop(long const &GEONO);
                         geoprop(std::vector<std::string> const&, size_t const&);
 
                         virtual void read(
+                            const std::vector<std::string>&, size_t const&);
+
+                        virtual __base::card const &operator() (
                             const std::vector<std::string>&, size_t const&);
 
                     public:
@@ -201,16 +212,18 @@ namespace dnvgl {
                         card_type(void) const = 0;
                     };
 
-                    /// Base class for FEM beam property describing classes.
+/// Base class for FEM beam property describing classes.
                     class beam_prop : public geoprop {
 
                     protected:
 
                         beam_prop(void);
                         beam_prop(long const &GEONO);
-                        beam_prop(std::vector<std::string> const&, size_t const&);
+                        beam_prop(
+                            std::vector<std::string> const&, size_t const&);
 
                         using geoprop::read;
+                        using geoprop::operator();
 
                     public:
 
@@ -222,14 +235,19 @@ namespace dnvgl {
                     class material : public card {
                     protected:
 
-                        dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
+                        dnvgl::extfem::fem::types::entry_type<long>
+                        static const _form_MATNO;
 
                         material(void);
                         material(long const &MATNO);
-                        material(std::vector<std::string> const&, size_t const&);
+                        material(
+                            std::vector<std::string> const&, size_t const&);
 
                         virtual void read(
                             std::vector<std::string> const&, size_t const&);
+
+                        virtual __base::card const &operator() (
+                        std::vector<std::string> const&, size_t const&);
 
                     public:
 
@@ -240,6 +258,7 @@ namespace dnvgl {
 
                         virtual dnvgl::extfem::fem::cards::types const
                         card_type(void) const = 0;
+
                     };
                 }
 
@@ -299,11 +318,16 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_TYPE;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_SUBTYPE;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NRECS;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NBYTE;
-                    dnvgl::extfem::fem::types::entry_type<std::string> static const _form_CONT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_TYPE;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_SUBTYPE;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NRECS;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NBYTE;
+                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    static const _form_CONT;
 
                 public:
 
@@ -374,10 +398,14 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_XCOORD;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_YCOORD;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_ZCOORD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODENO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_XCOORD;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_YCOORD;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_ZCOORD;
 
                 public:
 
@@ -398,15 +426,17 @@ Example of format of `DATE` record as used in SESAM:
 
                     gcoord(void);
 
+                    using __base::card::operator();
+
                     gcoord(
                         long const &NODENO,
-                        double const &XCOORD, double const &YCOORD, double const &ZCOORD);
-
-                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
+                        double const &XCOORD, double const &YCOORD,
+                        double const &ZCOORD);
 
                     __base::card const &operator()(
                         long const &NODENO,
-                        double const &XCOORD, double const &YCOORD, double const &ZCOORD);
+                        double const &XCOORD, double const &YCOORD,
+                        double const &ZCOORD);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -479,7 +509,7 @@ Example of format of `DATE` record as used in SESAM:
 
                     ~gnode(void);
 
-                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
+                    using __base::card::operator();
 
                     __base::card const &operator()(
                         long const &NODEX, long const &NODENO,
@@ -701,7 +731,7 @@ Example of format of `DATE` record as used in SESAM:
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
 
-                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
+                    using __base::card::operator();
 
                     __base::card const &operator()(
                         long const &ELNOX, long const &ELNO,
@@ -903,7 +933,7 @@ Example of format of `DATE` record as used in SESAM:
                         std::vector<long> const &ECCNO={},
                         std::vector<long> const &TRANSNO={});
 
-                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
+                    using __base::card::operator();
 
                     __base::card const &operator()(
                         long const &ELNO, long const &MATNO,
@@ -947,13 +977,20 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_BB;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBY;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
 
                 public:
 
@@ -1013,6 +1050,8 @@ Example of format of `DATE` record as used in SESAM:
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
+                    using __base::beam_prop::operator();
+
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
@@ -1043,20 +1082,34 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_AREA;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_IX;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_IY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_IZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_IYZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_WXMIN;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_WYMIN;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_WZMIN;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SHARY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SHARZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SHCENY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SHCENZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_AREA;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_IX;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_IY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_IZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_IYZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_WXMIN;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_WYMIN;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_WZMIN;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SHARY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SHARZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SHCENY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SHCENZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SZ;
 
                 public:
 
@@ -1113,15 +1166,17 @@ Example of format of `DATE` record as used in SESAM:
                     gbeamg(
                         long const &GEONO,
                         double const &AREA,
-                        double const &IX, double const &IY, double const &IZ, double const &IYZ,
-                        double const &WXMIN, double const &WYMIN, double const &WZMIN,
+                        double const &IX, double const &IY, double const &IZ,
+                        double const &IYZ,
+                        double const &WXMIN, double const &WYMIN,
+                        double const &WZMIN,
                         double const &SHARY, double const &SHARZ,
                         double const &SHCENY, double const &SHCENZ,
                         double const &SY, double const &SZ);
 
                     gbeamg(double const &AREA);
 
-                    __base::card const &operator()(std::vector<std::string> const&, size_t const&);
+                    using __base::beam_prop::operator();
 
                     __base::card const &operator()(
                         long const &GEONO,
@@ -1254,6 +1309,8 @@ Example of format of `DATE` record as used in SESAM:
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
+                    using __base::geoprop::operator();
+
                     __base::card const &operator()(
                         long const &GEONO, double const &TH,
                         long const &NINT=0);
@@ -1367,6 +1424,8 @@ Example of format of `DATE` record as used in SESAM:
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
+                    using __base::beam_prop::operator();
+
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
@@ -1474,6 +1533,8 @@ Example of format of `DATE` record as used in SESAM:
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
+                    using __base::beam_prop::operator();
+
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
@@ -1560,6 +1621,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
+
+                    using __base::beam_prop::operator();
 
                 protected:
 
@@ -1676,6 +1739,8 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
+
+                    using __base::beam_prop::operator();
 
                 protected:
 
@@ -2007,8 +2072,7 @@ Example of format of `DATE` record as used in SESAM:
                           bool const &FIX3, bool const &FIX4,
                           bool const &FIX5, bool const &FIX6);
 
-                    __base::card const &operator()(
-                        std::vector<std::string> const&, size_t const&);
+                    using __base::card::operator();
 
                     __base::card const &operator()(
                         long const &NODENO,
@@ -2626,6 +2690,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                             double const &DUMMY=0.,
                             double const &YIELD=0.);
 
+                    using material::operator();
+
                     __base::card const &operator()(
                         long const &MATNO,
                         double const &YOUNG,
@@ -2668,7 +2734,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    // dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
+                    // dnvgl::extfem::fem::types::entry_type<long>
+                    //  static const _form_MATNO;
                     dnvgl::extfem::fem::types::entry_type<double> static const _form_Q1;
                     dnvgl::extfem::fem::types::entry_type<double> static const _form_Q2;
                     dnvgl::extfem::fem::types::entry_type<double> static const _form_Q3;
@@ -2796,6 +2863,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
+
+                    using material::operator();
 
                 protected:
 
@@ -3152,6 +3221,8 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     text(long const &TYPE, long const &SUBTYPE,
                          std::vector<std::string> const &CONT);
+
+                    using __base::card::operator();
 
                     __base::card const &operator()(
                         long const &TYPE, long const &SUBTYPE,

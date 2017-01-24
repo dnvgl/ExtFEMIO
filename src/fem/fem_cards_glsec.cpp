@@ -48,37 +48,31 @@ const entry_type<bool> glsec::_form_K("K");
 const entry_type<long> glsec::_form_NLOBY("NLOBY");
 const entry_type<long> glsec::_form_NLOBZ("NLOBZ");
 
-glsec::glsec(const vector<std::string> &inp, size_t const &len) {
+glsec::glsec(const vector<std::string> &inp, size_t const &len) :
+        __base::beam_prop(inp, len) {
     read(inp, len);
 }
 
 void glsec::read(const vector<std::string> &inp, size_t const &len) {
-
     if (len < 9)
         throw errors::parse_error(
             "GLSEC", "Illegal number of entries.");
 
-    NLOBY = {0};
-    NLOBZ = {0};
-
-    __base::beam_prop::read(inp, len);
-
-    auto pos = inp.begin();
-
-    ++pos;
-    GEONO = _form_GEONO(*(pos++));
-    HZ = _form_HZ(*(pos++));
-    TY = _form_TY(*(pos++));
-    BY = _form_BY(*(pos++));
-    TZ = _form_TZ(*(pos++));
-    SFY = _form_SFY(*(pos++));
-    SFZ = _form_SFZ(*(pos++));
-    K = _form_K(*(pos++));
-    size_t i{10};
-    if (len < i++) return;
-    NLOBY = _form_NLOBY(*(pos++));
-    if (len < i) return;
-    NLOBZ = _form_NLOBZ(*pos);
+    HZ = _form_HZ(inp.at(2));
+    TY = _form_TY(inp.at(3));
+    BY = _form_BY(inp.at(4));
+    TZ = _form_TZ(inp.at(5));
+    SFY = _form_SFY(inp.at(6));
+    SFZ = _form_SFZ(inp.at(7));
+    K = _form_K(inp.at(8));
+    if (len > 9)
+        NLOBY = _form_NLOBY(inp.at(9));
+    else
+        NLOBY = {0};
+    if (len > 10)
+        NLOBZ = _form_NLOBZ(inp.at(10));
+    else
+        NLOBZ = {0};
 }
 
 glsec::glsec(void) :
@@ -98,23 +92,23 @@ const dnvgl::extfem::fem::cards::types
 glsec::card_type(void) const {return types::GLSEC;}
 
 std::ostream &glsec::put(std::ostream& os) const {
-    if (this->GEONO == -1) return os;
+    if (GEONO == -1) return os;
     os << glsec::head.format()
-       << this->_form_GEONO.format(this->GEONO)
-       << this->_form_HZ.format(this->HZ)
-       << this->_form_TY.format(this->TY)
-       << this->_form_BY.format(this->BY)
+       << _form_GEONO.format(GEONO)
+       << _form_HZ.format(HZ)
+       << _form_TY.format(TY)
+       << _form_BY.format(BY)
        << std::endl << dnvgl::extfem::fem::types::card().format()
-       << this->_form_TZ.format(this->TZ)
-       << this->_form_SFY.format(this->SFY)
-       << this->_form_SFZ.format(this->SFZ)
-       << this->_form_K.format(this->K)
+       << _form_TZ.format(TZ)
+       << _form_SFY.format(SFY)
+       << _form_SFZ.format(SFZ)
+       << _form_K.format(K)
        << std::endl;
-    if (!(this->NLOBY || this->NLOBZ))
+    if (!(NLOBY || NLOBZ))
         return os;
     os << dnvgl::extfem::fem::types::card().format()
-       << this->_form_NLOBY.format(this->NLOBY)
-       << this->_form_NLOBZ.format(this->NLOBZ)
+       << _form_NLOBY.format(NLOBY)
+       << _form_NLOBZ.format(NLOBZ)
        << std::endl;
     return os;
 }

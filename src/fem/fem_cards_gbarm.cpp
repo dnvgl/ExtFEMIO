@@ -58,28 +58,22 @@ void gbarm::read(const vector<std::string> &inp, size_t const &len) {
     NLOBY = {0};
     NLOBZ = {0};
 
-    if (len < 9)
+    if (len < 7)
         throw errors::parse_error(
             "GBARM", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++(++pos);
-    // GEONO = _form_GEONO(*(pos++));
-    HZ = _form_HZ(*(pos++));
-    BT = _form_BT(*(pos++));
-    BB = _form_BB(*(pos++));
-    SFY = _form_SFY(*(pos++));
-    SFZ = _form_SFZ(*(pos++));
-    size_t i{8};
-    if (len < i++) return;
-    if (*pos != empty)
-        NLOBY = _form_NLOBY(*(pos++));
-    else
-        pos++;
-    if (len < i) return;
-    if (*pos != empty)
-        NLOBZ = _form_NLOBZ(*(pos++));
+    // GEONO = _form_GEONO(inp.at(1));
+    HZ = _form_HZ(inp.at(2));
+    BT = _form_BT(inp.at(3));
+    BB = _form_BB(inp.at(4));
+    SFY = _form_SFY(inp.at(5));
+    SFZ = _form_SFZ(inp.at(6));
+    size_t i{7};
+    if (i >= len) return;
+    if (inp.at(i) != empty)
+        NLOBY = _form_NLOBY(inp.at(i));
+    if (++i < len && inp.at(i) != empty)
+        NLOBZ = _form_NLOBZ(inp.at(i));
 }
 
 gbarm::gbarm(void) :
@@ -97,18 +91,18 @@ const dnvgl::extfem::fem::cards::types
 gbarm::card_type(void) const {return types::GBARM;}
 
 ostream &gbarm::put(ostream& os) const {
-    if (this->GEONO == -1) return os;
+    if (GEONO == -1) return os;
     os << gbarm::head.format()
-       << this->_form_GEONO.format(this->GEONO)
-       << this->_form_HZ.format(this->HZ)
-       << this->_form_BT.format(this->BT)
-       << this->_form_BB.format(this->BB)
+       << _form_GEONO.format(GEONO)
+       << _form_HZ.format(HZ)
+       << _form_BT.format(BT)
+       << _form_BB.format(BB)
        << endl << fem::types::card("").format()
-       << this->_form_SFY.format(this->SFY)
-       << this->_form_SFZ.format(this->SFZ);
-    if ((this->NLOBY || this->NLOBZ))
-        os << this->_form_NLOBY.format(this->NLOBY)
-           << this->_form_NLOBZ.format(this->NLOBZ);
+       << _form_SFY.format(SFY)
+       << _form_SFZ.format(SFZ);
+    if ((NLOBY || NLOBZ))
+        os << _form_NLOBY.format(NLOBY)
+           << _form_NLOBZ.format(NLOBZ);
     os << endl;
     return os;
 }

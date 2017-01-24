@@ -11,11 +11,11 @@
 
 // ID:
 namespace {
-   const char cID_extfem_string[]
+    const char cID_extfem_string[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #include "extfem_string.h"
@@ -26,32 +26,37 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
+using namespace dnvgl::extfem::string;
 
-   extfem::string::string::string(const std::string& in) :
-      std::string(in) {}
+string::string(void) :
+        std::string() {}
 
-   /// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-   extfem::string::string extfem::string::string::trim(const std::string &whitespace) {
-      const auto strBegin = this->find_first_not_of(whitespace);
-      if (strBegin == std::string::npos)
-         return extfem::string::string(""); // no content
+string::string(const std::string& in) :
+        std::string(in) {}
 
-      const auto strEnd = this->find_last_not_of(whitespace);
-      const auto strRange = strEnd - strBegin + 1;
+string::string(size_t num, char in) :
+        std::string(num, in) {}
 
-      return this->substr(strBegin, strRange);
-   }
+/// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
+string string::trim(const std::string &whitespace) {
+    const auto strBegin = this->find_first_not_of(whitespace);
+    if (strBegin == std::string::npos)
+        return string(""); // no content
 
-   extfem::string::string extfem::string::string::upper() {
-      transform(this->begin(), this->end(), this->begin(), ::toupper);
-      return *this;
-   }
+    const auto strEnd = this->find_last_not_of(whitespace);
+    const auto strRange = strEnd - strBegin + 1;
 
-   extfem::string::string extfem::string::string::lower() {
-      transform(this->begin(), this->end(), this->begin(), ::tolower);
-      return *this;
-   }
+    return this->substr(strBegin, strRange);
+}
+
+string string::upper() {
+    transform(this->begin(), this->end(), this->begin(), ::toupper);
+    return *this;
+}
+
+string string::lower() {
+    transform(this->begin(), this->end(), this->begin(), ::tolower);
+    return *this;
 }
 
 // Local Variables:

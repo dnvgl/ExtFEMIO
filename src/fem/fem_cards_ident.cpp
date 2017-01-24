@@ -52,12 +52,9 @@ void ident::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "IDENT", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    SLEVEL = _form_SLEVEL(*(pos++));
-    SELTYP = _form_SELTYP(*(pos++));
-    switch (_form_SELMOD(*(pos++))) {
+    SLEVEL = _form_SLEVEL(inp.at(1));
+    SELTYP = _form_SELTYP(inp.at(2));
+    switch (_form_SELMOD(inp.at(3))) {
     case 0:
     case 3:
         SELMOD = mod_type::DIM_3D;
@@ -81,13 +78,13 @@ ident::ident(const long &SLEVEL, const long &SELTYP,
 const cards::types
 ident::card_type(void) const { return types::IDENT; };
 
-std::ostream &ident::put(std::ostream& os) const {
-    if (this->SELMOD == ident::mod_type::INVALID) return os;
+ostream &ident::put(ostream& os) const {
+    if (SELMOD == ident::mod_type::INVALID) return os;
     os << ident::head.format()
-       << this->_form_SLEVEL.format(this->SLEVEL)
-       << this->_form_SELTYP.format(this->SELTYP)
-       << this->_form_SELMOD.format(static_cast<long>(this->SELMOD));
-    return os << std::endl;
+       << _form_SLEVEL.format(SLEVEL)
+       << _form_SELTYP.format(SELTYP)
+       << _form_SELMOD.format(static_cast<long>(SELMOD));
+    return os << endl;
 }
 
 // Local Variables:

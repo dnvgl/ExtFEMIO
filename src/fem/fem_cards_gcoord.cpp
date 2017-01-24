@@ -53,13 +53,10 @@ void gcoord::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "GCOORD", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    NODENO = _form_NODENO(*(pos++));
-    XCOORD = _form_XCOORD(*(pos++));
-    YCOORD = _form_YCOORD(*(pos++));
-    ZCOORD = _form_ZCOORD(*(pos++));
+    NODENO = _form_NODENO(inp.at(1));
+    XCOORD = _form_XCOORD(inp.at(2));
+    YCOORD = _form_YCOORD(inp.at(3));
+    ZCOORD = _form_ZCOORD(inp.at(4));
 }
 
 gcoord::gcoord(void) :
@@ -75,19 +72,13 @@ const dnvgl::extfem::fem::cards::types
 gcoord::card_type(void) const {return types::GCOORD;}
 
 std::ostream &gcoord::put(std::ostream& os) const {
-    if (this->NODENO == -1) return os;
+    if (NODENO == -1) return os;
     os << gcoord::head.format()
-       << this->_form_NODENO.format(this->NODENO)
-       << this->_form_XCOORD.format(this->XCOORD)
-       << this->_form_YCOORD.format(this->YCOORD)
-       << this->_form_ZCOORD.format(this->ZCOORD);
+       << _form_NODENO.format(NODENO)
+       << _form_XCOORD.format(XCOORD)
+       << _form_YCOORD.format(YCOORD)
+       << _form_ZCOORD.format(ZCOORD);
     return os << std::endl;
-}
-
-cards::__base::card const &gcoord::operator() (
-    vector<std::string> const &inp, size_t const &len) {
-    this->read(inp, len);
-    return *this;
 }
 
 cards::__base::card const &gcoord::operator() (

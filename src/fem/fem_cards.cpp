@@ -121,12 +121,11 @@ size_t cards::__base::card::card_split(
     std::string static tmp(80, '\0');
     bool first = true;
     size_t olen{0};
-    size_t i{0};
+    ;
 
-    for (auto &pos : inp) {
-        if (++i > ilen) break;
+    for (size_t i{0}; i < ilen; i++) {
 
-        head.assign(extfem::string::string(pos.substr(0, 8)).trim());
+        head.assign(extfem::string::string(inp.at(i).substr(0, 8)).trim());
         if (first) {
             first = false;
             try {
@@ -136,7 +135,7 @@ size_t cards::__base::card::card_split(
             }
             ++olen;
         }
-        tmp.assign(string::string(pos).trim("\t\n"));
+        tmp.assign(string::string(inp.at(i)).trim("\t\n"));
         tmp.resize(80, ' ');
         tmp.assign(tmp.substr(8));
         for (size_t i=0; i<4; ++i) {
@@ -151,6 +150,11 @@ size_t cards::__base::card::card_split(
     return olen;
 }
 
+cards::__base::card const &cards::__base::card::operator() (
+    vector<std::string> const &inp, size_t const &len) {
+    this->read(inp, len);
+    return *this;
+}
 fem::types::entry_type<long> const
 cards::__base::geoprop::_form_GEONO("GEONO");
 
@@ -200,15 +204,20 @@ void cards::__base::geoprop::read(
         throw errors::parse_error(
             "CARD", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-    set_geono(_form_GEONO(*(++pos)));
+    set_geono(_form_GEONO(inp.at(1)));
+}
+
+cards::__base::card const &cards::__base::geoprop::operator() (
+    std::vector<std::string> const &inp, size_t const &len) {
+    read(inp, len);
+    this->read(inp, len);
+    return *this;
 }
 
 void cards::__base::geoprop::reset_geono(void) {
     geono_maxset = 0;
     used_geono.clear();
 }
-
 
 cards::__base::beam_prop::beam_prop(vector<std::string> const &inp, size_t const &len) {
     read(inp, len);
@@ -225,18 +234,27 @@ cards::__base::material::material(
     read(inp, len);
 }
 
-void cards::__base::material::read(
-    vector<std::string> const &inp, size_t const &len) {
-}
-
-cards::__base::material::material() :
-        __base::material(-1) {}
-
 cards::__base::material::material(long const &MATNO) :
         card(), MATNO(MATNO) {}
 
 fem::types::entry_type<long> const
 cards::__base::material::_form_MATNO("MATNO");
+
+void cards::__base::material::read(
+    vector<std::string> const &inp, size_t const &len) {
+    if (len < 2)
+        throw errors::parse_error(
+            "material", "Illegal number of entries.");
+
+    MATNO = _form_MATNO(inp.at(1));
+}
+
+cards::__base::card const &cards::__base::material::operator() (
+    std::vector<std::string> const &inp, size_t const &len) {
+    material::read(inp, len);
+    this->read(inp, len);
+    return *this;
+}
 
 void
 cards::dispatch(vector<std::string> const &inp, size_t const len,

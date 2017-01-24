@@ -59,20 +59,16 @@ void hierarch::read(const vector<std::string> &inp, size_t const &len) {
         throw errors::parse_error(
             "HIERARCH", "Illegal number of entries.");
 
-    auto pos(inp.begin());
-
-    ++pos;
-
-    NFIELD = _form_NFIELD(*(pos++));
-    IHREF = _form_IHREF(*(pos++));
-    ISELTY = _form_ISELTY(*(pos++));
-    INDSEL = _form_INDSEL(*(pos++));
-    ISLEVL = _form_ISLEVL(*(pos++));
-    ITREF = _form_ITREF(*(pos++));
-    IHPREF = _form_IHPREF(*(pos++));
-    NSUB = _form_NSUB(*(pos++));
+    NFIELD = _form_NFIELD(inp.at(1));
+    IHREF = _form_IHREF(inp.at(2));
+    ISELTY = _form_ISELTY(inp.at(3));
+    INDSEL = _form_INDSEL(inp.at(4));
+    ISLEVL = _form_ISLEVL(inp.at(5));
+    ITREF = _form_ITREF(inp.at(6));
+    IHPREF = _form_IHPREF(inp.at(7));
+    NSUB = _form_NSUB(inp.at(8));
     for (long i = 0; i < NSUB; i++)
-        IHSREFi.push_back(_form_IHSREF(*(pos++)));
+        IHSREFi.push_back(_form_IHSREF(inp.at(9 + i)));
 }
 
 hierarch::hierarch(void) :
@@ -86,7 +82,7 @@ hierarch::hierarch(long const &NFIELD,
                    long const &ITREF,
                    long const &IHPREF,
                    long const &NSUB,
-                   std::vector<long> const &IHSREF) :
+                   vector<long> const &IHSREF) :
         card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
         INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
         IHPREF(IHPREF), NSUB(NSUB), IHSREFi(IHSREF) {
@@ -102,7 +98,7 @@ hierarch::hierarch(const long &NFIELD,
                    const long &ISLEVL,
                    const long &ITREF,
                    const long &IHPREF,
-                   const std::vector<long> &IHSREF) :
+                   const vector<long> &IHSREF) :
         card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
         INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
         IHPREF(IHPREF), IHSREFi(IHSREF) {
@@ -114,32 +110,26 @@ hierarch::card_type(void) const {
     return types::HIERARCH;
 }
 
-std::ostream &hierarch::put(std::ostream& os) const {
-    if (this->NFIELD == -1) return os;
+ostream &hierarch::put(ostream& os) const {
+    if (NFIELD == -1) return os;
     os << hierarch::head.format()
-       << this->_form_NFIELD.format(this->NFIELD)
-       << this->_form_IHREF.format(this->IHREF)
-       << this->_form_ISELTY.format(this->ISELTY)
-       << this->_form_INDSEL.format(this->INDSEL)
-       << std::endl
+       << _form_NFIELD.format(NFIELD)
+       << _form_IHREF.format(IHREF)
+       << _form_ISELTY.format(ISELTY)
+       << _form_INDSEL.format(INDSEL)
+       << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_ISLEVL.format(this->ISLEVL)
-       << this->_form_ITREF.format(this->ITREF)
-       << this->_form_IHPREF.format(this->IHPREF)
-       << this->_form_NSUB.format(this->NSUB)
-       << std::endl
-       << dnvgl::extfem::fem::types::card().format();
-    size_t num = 0;
-    for (int i = 0; i<this->NSUB; i++) {
-        if (num == 4) {
-            num = 0;
-            os << std::endl
+       << _form_ISLEVL.format(ISLEVL)
+       << _form_ITREF.format(ITREF)
+       << _form_IHPREF.format(IHPREF)
+       << _form_NSUB.format(NSUB);
+    for (int i = 0; i<NSUB; i++) {
+        if (!(i % 4))
+            os << endl
                << dnvgl::extfem::fem::types::card().format();
-        }
-        num++;
-        os << this->_form_IHSREF.format(this->IHSREFi[i]);
+        os << _form_IHSREF.format(IHSREFi[i]);
     }
-    os << std::endl;
+    os << endl;
     return os;
 }
 

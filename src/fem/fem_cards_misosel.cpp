@@ -48,7 +48,8 @@ const entry_type<double> misosel::_form_ALPHA("ALPHA");
 const entry_type<double> misosel::_form_DUMMY("DUMMY");
 const entry_type<double> misosel::_form_YIELD("YIELD");
 
-misosel::misosel(const vector<std::string> &inp, size_t const &len) {
+misosel::misosel(const vector<std::string> &inp, size_t const &len) :
+        material(inp, len) {
     read(inp, len);
 }
 
@@ -56,31 +57,24 @@ void misosel::read(const vector<std::string> &inp, size_t const &len) {
     __base::material::read(inp, len);
     std::string static const empty{"                "};
 
-    DUMMY = {0.};
-    YIELD = {0.};
     if (len < 7)
         throw errors::parse_error(
             "MISOSEL", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-    MATNO = _form_MATNO(*(pos++));
-    YOUNG = _form_YOUNG(*(pos++));
-    POISS = _form_POISS(*(pos++));
-    RHO = _form_RHO(*(pos++));
-    DAMP = _form_DAMP(*(pos++));
-    ALPHA = _form_ALPHA(*(pos++));
-    size_t i{7};
-    if (++i > len) return;
-    if (*pos != empty)
-        DUMMY = _form_DUMMY(*(pos++));
+    MATNO = _form_MATNO(inp.at(1));
+    YOUNG = _form_YOUNG(inp.at(2));
+    POISS = _form_POISS(inp.at(3));
+    RHO = _form_RHO(inp.at(4));
+    DAMP = _form_DAMP(inp.at(5));
+    ALPHA = _form_ALPHA(inp.at(6));
+    if (len > 7 && inp.at(7) != empty)
+        DUMMY = _form_DUMMY(inp[7]);
     else
-        pos++;
-    if (++i > len) return;
-    if (*pos != empty)
-        YIELD = _form_YIELD(*pos);
-}
+        DUMMY = {0.};
+    if (len > 8 && inp.at(8) != empty)
+        YIELD = _form_YIELD(inp[8]);
+    else
+        YIELD = {0.};}
 
 misosel::misosel(void) :
         misosel(-1, 0., 0., 0., 0., 0.) {}
@@ -120,21 +114,16 @@ cards::__base::card const &misosel::operator() (
 const dnvgl::extfem::fem::cards::types
 misosel::card_type(void) const {return types::MISOSEL;}
 
-std::ostream &misosel::put(std::ostream& os) const {
-    if (this->MATNO == -1) return os;
+ostream &misosel::put(ostream& os) const {
+    if (MATNO == -1) return os;
     os << misosel::head.format()
-       << this->_form_MATNO.format(this->MATNO)
-       << this->_form_YOUNG.format(this->YOUNG)
-       << this->_form_POISS.format(this->POISS)
-       << this->_form_RHO.format(this->RHO)
-       << std::endl
+       << _form_MATNO.format(MATNO) << _form_YOUNG.format(YOUNG)
+       << _form_POISS.format(POISS) << _form_RHO.format(RHO) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << this->_form_DAMP.format(this->DAMP)
-       << this->_form_ALPHA.format(this->ALPHA);
-    if ((this->DUMMY || this->YIELD))
-        os << this->_form_DUMMY.format(this->DUMMY)
-           << this->_form_YIELD.format(this->YIELD);
-    os << std::endl;
+       << _form_DAMP.format(DAMP) << _form_ALPHA.format(ALPHA);
+    if ((DUMMY || YIELD))
+        os << _form_DUMMY.format(DUMMY) << _form_YIELD.format(YIELD);
+    os << endl;
     return os;
 }
 

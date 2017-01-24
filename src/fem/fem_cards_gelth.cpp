@@ -43,29 +43,23 @@ const fem::types::card gelth::head("GELTH");
 const entry_type<double> gelth::_form_TH("TH");
 const entry_type<long> gelth::_form_NINT("NINT");
 
-gelth::gelth(const vector<std::string> &inp, size_t const &len) {
+gelth::gelth(const vector<std::string> &inp, size_t const &len) :
+        geoprop(inp, len) {
     read(inp, len);
 }
 
 void gelth::read(const vector<std::string> &inp, size_t const &len) {
     std::string static const empty{"                "};
 
-    NINT = {0};
-
-    geoprop::read(inp, len);
-
     if (len < 4)
         throw errors::parse_error(
             "GELTH", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
-    GEONO = _form_GEONO(*(pos++));
-    TH = _form_TH(*(pos++));
-    if (len >= 4 && *pos != empty)
-        NINT = _form_NINT(*pos);
+    TH = _form_TH(inp.at(2));
+    if (len > 3 && inp.at(3) != empty)
+        NINT = _form_NINT(inp[3]);
+    else
+        NINT = {0};
 }
 
 gelth::gelth(void) :
@@ -98,12 +92,12 @@ const dnvgl::extfem::fem::cards::types
 gelth::card_type(void) const {return types::GELTH;}
 
 std::ostream &gelth::put(std::ostream& os) const {
-    if (this->GEONO == -1) return os;
+    if (GEONO == -1) return os;
     os << gelth::head.format()
-       << this->_form_GEONO.format(this->GEONO)
-       << this->_form_TH.format(this->TH);
-    if (this->NINT)
-        os << this->_form_NINT.format(this->NINT);
+       << _form_GEONO.format(GEONO)
+       << _form_TH.format(TH);
+    if (NINT)
+        os << _form_NINT.format(NINT);
     os << std::endl;
     return os;
 }
