@@ -7,7 +7,7 @@
    Detailed description
 */
 
- // #include "StdAfx.h"
+#include "StdAfx.h"
 
 // ID:
 namespace {
