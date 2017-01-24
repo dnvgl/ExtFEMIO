@@ -1,6 +1,6 @@
 /*
    #####     #    #     # ####### ### ####### #     # ###
-  #     #   # #   #     #    #     #  #     # ##    # ###
+   #     #   # #   #     #    #     #  #     # ##    # ###
   #        #   #  #     #    #     #  #     # # #   # ###
   #       #     # #     #    #     #  #     # #  #  #  #
   #       ####### #     #    #     #  #     # #   # #
@@ -63,20 +63,21 @@ void elements::dispatch(
     unique_ptr<elements::__base::elem> &res, cards::gelmnt1 const *data) {
 
     switch (data->ELTYP) {
-        {% for e in enum -%}
+    {% for e in enum -%}
     case el_types::{{ e[0]|upper() }}:
-    res = make_unique<{{ e[0]|lower() }}>(data); break;
-    {% endfor %}   case el_types::UNDEFINED: res = make_unique<undef>(); break;
-    case el_types::INVALID: throw errors::parse_error(
-        "GELMNT1", "invalid element type"); break;
+        res = make_unique<{{ e[0]|lower() }}>(data); break;
+    {% endfor %}case el_types::UNDEFINED:
+        res = make_unique<undef>(); break;
+    case el_types::INVALID:
+        throw errors::parse_error("GELMNT1", "invalid element type"); break;
     };
 {% line %}
 }
 
 std::string dnvgl::extfem::fem::elements::name_elem(el_types const &type) {
     switch (type) {
-        {% for e in enum %}   case el_types::{{ e[0]|upper() }}: return "{{ e[0]|upper() }}";
-        {% endfor %}   case el_types::UNDEFINED: return "UNDEFINED";
+    {% for e in enum %}case el_types::{{ e[0]|upper() }}: return "{{ e[0]|upper() }}";
+    {% endfor %}case el_types::UNDEFINED: return "UNDEFINED";
 {% line %}
     case el_types::INVALID: return "INVALID";
     }
