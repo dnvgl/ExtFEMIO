@@ -51,11 +51,11 @@ entry_type<std::string> const tdload::_form_SET_NAME(
     "SET_NAME", type_bounds::bound<std::string>(""));
 entry_type<std::string> const tdload::_form_CONT("CONT");
 
-tdload::tdload(vector<std::string> const &inp, size_t const &len) {
+tdload::tdload(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void tdload::read(vector<std::string> const &inp, size_t const &len) {
+void tdload::read(vector<std::string> const &inp, size_t const len) {
     if (len < 5)
         throw errors::parse_error(
             "TDLOAD", "Illegal number of entries.");
@@ -96,11 +96,8 @@ void tdload::read(vector<std::string> const &inp, size_t const &len) {
 tdload::tdload(void) :
         tdload(0, -1, 0, {}) {}
 
-tdload::tdload(long const &NFIELD,
-               long const &ILREF,
-               long const &CODNAM,
-               long const &CODTXT,
-               std::string const &SET_NAME,
+tdload::tdload(long const NFIELD, long const ILREF, long const CODNAM,
+               long const CODTXT, std::string const &SET_NAME,
                vector<std::string> const &CONT) :
         card(), NFIELD(NFIELD), ILREF(ILREF),
         CODNAM(CODNAM), CODTXT(CODTXT),
@@ -113,8 +110,7 @@ tdload::tdload(long const &NFIELD,
     nctxt = div_val.rem;
 }
 
-tdload::tdload(long const &ILREF,
-               std::string const &SET_NAME,
+tdload::tdload(long const ILREF, std::string const &SET_NAME,
                vector<std::string> const &CONT/*={}*/) :
         card(), NFIELD(4), ILREF(ILREF),
         SET_NAME(SET_NAME), CONT(CONT) {
@@ -133,19 +129,13 @@ tdload::tdload(long const &ILREF,
     CODTXT = (100 * nltxt) + nctxt;
 }
 
-tdload::tdload(long const &NFIELD,
-               long const &ILREF,
-               long const &CODNAM,
+tdload::tdload(long const NFIELD, long const ILREF, long const CODNAM,
                std::string const &SET_NAME) :
         tdload(NFIELD, ILREF, CODNAM, 0, SET_NAME, {}) {}
 
 cards::__base::card const &tdload::operator() (
-    long const &NFIELD,
-    long const &ILREF,
-    long const &CODNAM,
-    long const &CODTXT,
-    std::string const &SET_NAME,
-    vector<std::string> const &CONT) {
+    long const NFIELD, long const ILREF, long const CODNAM, long const CODTXT,
+    std::string const &SET_NAME, vector<std::string> const &CONT) {
     this->NFIELD = NFIELD;
     this->ILREF = ILREF;
     this->CODNAM = CODNAM;
@@ -162,8 +152,7 @@ cards::__base::card const &tdload::operator() (
 }
 
 cards::__base::card const &tdload::operator() (
-    long const &ILREF,
-    std::string const &SET_NAME,
+    long const ILREF, std::string const &SET_NAME,
     vector<std::string> const &CONT/*={}*/) {
     nlnam = true;
     ncnam = (long)SET_NAME.size();
@@ -181,9 +170,7 @@ cards::__base::card const &tdload::operator() (
 }
 
 cards::__base::card const &tdload::operator() (
-    long const &NFIELD,
-    long const &ILREF,
-    long const &CODNAM,
+    long const NFIELD, long const ILREF, long const CODNAM,
     std::string const &SET_NAME) {
     return (*this)(NFIELD, ILREF, CODNAM, 0, SET_NAME, {});
 }

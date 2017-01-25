@@ -51,12 +51,12 @@ entry_type<long> const giorh::_form_NLOBYB("NLOBYB");
 entry_type<long> const giorh::_form_NLOBZ("NLOBZ");
 
 
-giorh::giorh(vector<std::string> const &inp, size_t const &len) :
+giorh::giorh(vector<std::string> const &inp, size_t const len) :
         __base::beam_prop(inp, len) {
     read(inp, len);
 }
 
-void giorh::read(vector<std::string> const &inp, size_t const &len) {
+void giorh::read(vector<std::string> const &inp, size_t const len) {
     std::string static const empty("                ");
 
     if (len < 10)
@@ -90,13 +90,13 @@ giorh::giorh(void) :
         HZ(), TY(), BT(), TT(), BB(), TB(), SFY(), SFZ(),
         NLOBYT(), NLOBYB(), NLOBZ() {}
 
-giorh::giorh(long const &GEONO, double const &HZ,
-             double const &TY, double const &BT,
-             double const &TT, double const &BB,
-             double const &TB, double const &SFY,
-             double const &SFZ,
-             long const &NLOBYT/*=0*/, long const &NLOBYB/*=0*/,
-             long const &NLOBZ/*=0*/) :
+giorh::giorh(long const GEONO, double const HZ,
+             double const TY, double const BT,
+             double const TT, double const BB,
+             double const TB, double const SFY,
+             double const SFZ,
+             long const NLOBYT/*=0*/, long const NLOBYB/*=0*/,
+             long const NLOBZ/*=0*/) :
         __base::beam_prop(GEONO),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
         SFY(SFY), SFZ(SFZ),

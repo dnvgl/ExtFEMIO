@@ -48,11 +48,11 @@ entry_type<long> const text::_form_NRECS("NRECS");
 entry_type<long> const text::_form_NBYTE("NBYTE");
 entry_type<std::string> const text::_form_CONT("CONT");
 
-text::text(vector<std::string> const &inp, size_t const &len) {
+text::text(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void text::read(vector<std::string> const &inp, size_t const &len) {
+void text::read(vector<std::string> const &inp, size_t const len) {
     if (len < 9)
         throw errors::parse_error(
             "TEXT", "Illegal number of entries.");
@@ -73,8 +73,8 @@ void text::read(vector<std::string> const &inp, size_t const &len) {
 text::text(void) :
         text(-1, 0, 0, 0, {}) {}
 
-text::text(long const &TYPE, long const &SUBTYPE,
-           long const &NRECS, long const &NBYTE,
+text::text(long const TYPE, long const SUBTYPE,
+           long const NRECS, long const NBYTE,
            vector<std::string> const &CONT) :
         card(),
         TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
@@ -83,7 +83,7 @@ text::text(long const &TYPE, long const &SUBTYPE,
         p.resize(NBYTE-8, ' ');
 }
 
-text::text(long const &TYPE, long const &SUBTYPE,
+text::text(long const TYPE, long const SUBTYPE,
            vector<std::string> const &CONT) :
         card(),
         TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
@@ -97,8 +97,8 @@ text::text(long const &TYPE, long const &SUBTYPE,
 }
 
 cards::__base::card const &text::operator() (
-    long const &TYPE, long const &SUBTYPE,
-    long const &NRECS, long const &NBYTE,
+    long const TYPE, long const SUBTYPE,
+    long const NRECS, long const NBYTE,
     vector<std::string> const &CONT) {
     this->TYPE = TYPE;
     this->SUBTYPE = SUBTYPE;
@@ -111,7 +111,7 @@ cards::__base::card const &text::operator() (
 }
 
 cards::__base::card const &text::operator() (
-    long const &TYPE, long const &SUBTYPE,
+    long const TYPE, long const SUBTYPE,
     vector<std::string> const &CONT) {
     this->TYPE = TYPE;
     this->SUBTYPE = SUBTYPE;
@@ -126,8 +126,9 @@ cards::__base::card const &text::operator() (
     return *this;
 }
 
-cards::types const
-text::card_type(void) const { return types::TEXT; };
+cards::types const text::card_type(void) const {
+    return types::TEXT;
+}
 
 ostream &text::put(ostream& os) const {
     if (TYPE == -1) return os;

@@ -37,17 +37,17 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card ident::head("IDENT");
+fem::types::card const ident::head("IDENT");
 
-const entry_type<long> ident::_form_SLEVEL("SLEVEL");
-const entry_type<long> ident::_form_SELTYP("SELTYP");
-const entry_type<long> ident::_form_SELMOD("SELMOD");
+entry_type<long> const ident::_form_SLEVEL("SLEVEL");
+entry_type<long> const ident::_form_SELTYP("SELTYP");
+entry_type<long> const ident::_form_SELMOD("SELMOD");
 
-ident::ident(const vector<std::string> &inp, size_t const &len) {
+ident::ident(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void ident::read(const vector<std::string> &inp, size_t const &len) {
+void ident::read(const vector<std::string> &inp, size_t const len) {
     if (len < 5)
         throw errors::parse_error(
             "IDENT", "Illegal number of entries.");
@@ -71,12 +71,13 @@ void ident::read(const vector<std::string> &inp, size_t const &len) {
 ident::ident(void) :
         ident(-1, 0, ident::mod_type::INVALID) {}
 
-ident::ident(const long &SLEVEL, const long &SELTYP,
-             const ident::mod_type &SELMOD) :
+ident::ident(long const SLEVEL, long const SELTYP,
+             ident::mod_type const SELMOD) :
         SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
 
-const cards::types
-ident::card_type(void) const { return types::IDENT; };
+cards::types const ident::card_type(void) const {
+    return types::IDENT;
+}
 
 ostream &ident::put(ostream& os) const {
     if (SELMOD == ident::mod_type::INVALID) return os;

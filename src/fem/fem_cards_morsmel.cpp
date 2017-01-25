@@ -57,12 +57,12 @@ entry_type<double> const morsmel::_form_DAMP2("DAMP2");
 entry_type<double> const morsmel::_form_ALPHA1("ALPHA1");
 entry_type<double> const morsmel::_form_ALPHA2("ALPHA2");
 
-morsmel::morsmel(vector<std::string> const &inp, size_t const &len) :
+morsmel::morsmel(vector<std::string> const &inp, size_t const len) :
         __base::material(inp, len) {
     read(inp, len);
 }
 
-void morsmel::read(vector<std::string> const &inp, size_t const &len) {
+void morsmel::read(vector<std::string> const &inp, size_t const len) {
     if (len < 17)
         throw errors::parse_error(
             "MORSMEL", "Illegal number of entries.");
@@ -89,23 +89,14 @@ morsmel::morsmel(void) :
         morsmel(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                 0., 0., 0., 0., 0.) {}
 
-morsmel::morsmel(long const &MATNO,
-                 double const &Q1,
-                 double const &Q2,
-                 double const &Q3,
-                 double const &RHO,
-                 double const &D11,
-                 double const &D21,
-                 double const &D22,
-                 double const &D31,
-                 double const &D32,
-                 double const &D33,
-                 double const &PS1,
-                 double const &PS2,
-                 double const &DAMP1,
-                 double const &DAMP2,
-                 double const &ALPHA1,
-                 double const &ALPHA2) :
+morsmel::morsmel(long const MATNO,
+                 double const Q1, double const Q2, double const Q3,
+                 double const RHO,
+                 double const D11, double const D21, double const D22,
+                 double const D31, double const D32, double const D33,
+                 double const PS1, double const PS2,
+                 double const DAMP1, double const DAMP2,
+                 double const ALPHA1, double const ALPHA2) :
         __base::material(MATNO), Q1(Q1), Q2(Q2), Q3(Q3),
     RHO(RHO),
     D11(D11), D21(D21), D22(D22), D31(D31), D32(D32),
@@ -114,8 +105,16 @@ morsmel::morsmel(long const &MATNO,
     DAMP1(DAMP1), DAMP2(DAMP2),
     ALPHA1(ALPHA1), ALPHA2(ALPHA2) {}
 
-const dnvgl::extfem::fem::cards::types
-morsmel::card_type(void) const {return types::MORSMEL;}
+fem::cards::__base::card const &morsmel::operator() (
+    vector<std::string> const &inp, size_t const len) {
+    __base::material::read(inp, len);
+    read(inp, len);
+    return *this;
+}
+
+fem::cards::types const morsmel::card_type(void) const {
+    return types::MORSMEL;
+}
 
 ostream &morsmel::put(ostream& os) const {
     if (MATNO == -1) return os;

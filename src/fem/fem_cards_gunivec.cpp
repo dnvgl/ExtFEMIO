@@ -36,18 +36,18 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card gunivec::head("GUNIVEC");
+fem::types::card const gunivec::head("GUNIVEC");
 
-const entry_type<long> gunivec::_form_TRANSNO("TRANSNO");
-const entry_type<double> gunivec::_form_UNIX("UNIX");
-const entry_type<double> gunivec::_form_UNIY("UNIY");
-const entry_type<double> gunivec::_form_UNIZ("UNIZ");
+entry_type<long> const gunivec::_form_TRANSNO("TRANSNO");
+entry_type<double> const gunivec::_form_UNIX("UNIX");
+entry_type<double> const gunivec::_form_UNIY("UNIY");
+entry_type<double> const gunivec::_form_UNIZ("UNIZ");
 
-gunivec::gunivec(const vector<std::string> &inp, size_t const &len) {
+gunivec::gunivec(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void gunivec::read(const vector<std::string> &inp, size_t const &len) {
+void gunivec::read(const vector<std::string> &inp, size_t const len) {
     if (len < 5)
         throw errors::parse_error(
             "GUNIVEC", "Illegal number of entries.");
@@ -61,14 +61,14 @@ void gunivec::read(const vector<std::string> &inp, size_t const &len) {
 gunivec::gunivec(void) :
         gunivec(-1, 0., 0., 0.) {}
 
-gunivec::gunivec(const long &TRANSNO,
-                 const double &UNIX,
-                 const double &UNIY,
-                 const double &UNIZ) :
+gunivec::gunivec(long const TRANSNO,
+                 double const UNIX,
+                 double const UNIY,
+                 double const UNIZ) :
         card(), TRANSNO(TRANSNO),
         UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
-const dnvgl::extfem::fem::cards::types
+dnvgl::extfem::fem::cards::types const
 gunivec::card_type(void) const {return types::GUNIVEC;}
 
 std::ostream &gunivec::put(std::ostream& os) const {

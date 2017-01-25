@@ -50,11 +50,11 @@ geccen::geccen(void) : geccen(-1, 0., 0., 0.) {}
 geccen::geccen(geccen const *that) :
         geccen(that->ECCNO, that->EX, that->EY, that->EZ) {}
 
-geccen::geccen(const vector<std::string> &inp, size_t const &len) {
+geccen::geccen(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void geccen::read(const vector<std::string> &inp, size_t const &len) {
+void geccen::read(const vector<std::string> &inp, size_t const len) {
     if (len < 5)
         throw errors::parse_error(
             "GECCEN", "Illegal number of entries.");
@@ -66,11 +66,11 @@ void geccen::read(const vector<std::string> &inp, size_t const &len) {
 }
 
 geccen::geccen(
-    long const &ECCNO,
-    double const &EX, double const &EY, double const &EZ) :
+    long const ECCNO,
+    double const EX, double const EY, double const EZ) :
         card(), ECCNO(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
 
-geccen::geccen(long const &ECCNO,
+geccen::geccen(long const ECCNO,
                std::vector<double> const &pos) :
         card(), ECCNO(ECCNO), EX(0.), EY(0.), EZ(0.) {
     assert(pos.size() == 3);

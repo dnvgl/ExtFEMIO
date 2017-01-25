@@ -38,23 +38,23 @@ using namespace types;
 
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card hierarch::head("HIERARCH");
+fem::types::card const hierarch::head("HIERARCH");
 
-const entry_type<long> hierarch::_form_NFIELD("NFIELD");
-const entry_type<long> hierarch::_form_IHREF("IHREF");
-const entry_type<long> hierarch::_form_ISELTY("ISELTY");
-const entry_type<long> hierarch::_form_INDSEL("INDSEL");
-const entry_type<long> hierarch::_form_ISLEVL("ISLEVL");
-const entry_type<long> hierarch::_form_ITREF("ITREF");
-const entry_type<long> hierarch::_form_IHPREF("IHPREF");
-const entry_type<long> hierarch::_form_NSUB("NSUB");
-const entry_type<long> hierarch::_form_IHSREF("IHSREF");
+entry_type<long> const hierarch::_form_NFIELD("NFIELD");
+entry_type<long> const hierarch::_form_IHREF("IHREF");
+entry_type<long> const hierarch::_form_ISELTY("ISELTY");
+entry_type<long> const hierarch::_form_INDSEL("INDSEL");
+entry_type<long> const hierarch::_form_ISLEVL("ISLEVL");
+entry_type<long> const hierarch::_form_ITREF("ITREF");
+entry_type<long> const hierarch::_form_IHPREF("IHPREF");
+entry_type<long> const hierarch::_form_NSUB("NSUB");
+entry_type<long> const hierarch::_form_IHSREF("IHSREF");
 
-hierarch::hierarch(const vector<std::string> &inp, size_t const &len) {
+hierarch::hierarch(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void hierarch::read(const vector<std::string> &inp, size_t const &len) {
+void hierarch::read(vector<std::string> const &inp, size_t const len) {
     if (len < 10)
         throw errors::parse_error(
             "HIERARCH", "Illegal number of entries.");
@@ -74,14 +74,14 @@ void hierarch::read(const vector<std::string> &inp, size_t const &len) {
 hierarch::hierarch(void) :
         hierarch(-1, 0, 0, 0, 0, 0, 0, {}) {}
 
-hierarch::hierarch(long const &NFIELD,
-                   long const &IHREF,
-                   long const &ISELTY,
-                   long const &INDSEL,
-                   long const &ISLEVL,
-                   long const &ITREF,
-                   long const &IHPREF,
-                   long const &NSUB,
+hierarch::hierarch(long const NFIELD,
+                   long const IHREF,
+                   long const ISELTY,
+                   long const INDSEL,
+                   long const ISLEVL,
+                   long const ITREF,
+                   long const IHPREF,
+                   long const NSUB,
                    vector<long> const &IHSREF) :
         card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
         INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
@@ -91,22 +91,21 @@ hierarch::hierarch(long const &NFIELD,
             "HIERARCH", "IHSREF not of size NSUB");
 }
 
-hierarch::hierarch(const long &NFIELD,
-                   const long &IHREF,
-                   const long &ISELTY,
-                   const long &INDSEL,
-                   const long &ISLEVL,
-                   const long &ITREF,
-                   const long &IHPREF,
-                   const vector<long> &IHSREF) :
+hierarch::hierarch(long const NFIELD,
+                   long const IHREF,
+                   long const ISELTY,
+                   long const INDSEL,
+                   long const ISLEVL,
+                   long const ITREF,
+                   long const IHPREF,
+                   vector<long> const &IHSREF) :
         card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
         INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
         IHPREF(IHPREF), IHSREFi(IHSREF) {
     this->NSUB = long(this->IHSREFi.size());
 }
 
-const dnvgl::extfem::fem::cards::types
-hierarch::card_type(void) const {
+cards::types const hierarch::card_type(void) const {
     return types::HIERARCH;
 }
 

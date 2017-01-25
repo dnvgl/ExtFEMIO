@@ -54,13 +54,12 @@ const entry_type<double> gbeamg::_form_SHCENZ("SHCENZ");
 const entry_type<double> gbeamg::_form_SY("SY");
 const entry_type<double> gbeamg::_form_SZ("SZ");
 
-gbeamg::gbeamg(const vector<std::string> &inp, size_t const &len) :
-        __base::beam_prop(inp, len) {
+gbeamg::gbeamg(const vector<std::string> &inp, size_t const len) :
+        __base::beam_prop(inp, len, true) {
     read(inp, len);
 }
 
-void gbeamg::read(const vector<std::string> &inp, size_t const &len) {
-
+void gbeamg::read(const vector<std::string> &inp, size_t const len) {
     if (len != 17 && len != 5)
         throw errors::parse_error(
             "GBEAMG", "Illegal number of entries.");
@@ -104,34 +103,46 @@ gbeamg::gbeamg(void) :
                0., 0., 0.) {}
 
 gbeamg::gbeamg(
-    const long &GEONO,
-    const double &AREA,
-    const double &IX, const double &IY, const double &IZ, const double &IYZ,
-    const double &WXMIN, const double &WYMIN, const double &WZMIN,
-    const double &SHARY, const double &SHARZ,
-    const double &SHCENY, const double &SHCENZ,
-    const double &SY, const double &SZ) :
-        __base::beam_prop(GEONO),
+    long const GEONO,
+    double const AREA,
+    double const IX, double const IY, double const IZ, double const IYZ,
+    double const WXMIN, double const WYMIN, double const WZMIN,
+    double const SHARY, double const SHARZ,
+    double const SHCENY, double const SHCENZ,
+    double const SY, double const SZ) :
+        __base::beam_prop(GEONO, true),
         AREA(AREA), IX(IX), IY(IY), IZ(IZ), IYZ(IYZ),
         WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
         SHARY(SHARY), SHARZ(SHARZ),
         SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
         SZ(SZ) {}
 
-gbeamg::gbeamg(double const &AREA) :
+gbeamg::gbeamg(long const GEONO, double const AREA) :
+        __base::beam_prop(GEONO, true), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
+    WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
+    SY{0}, SZ{0} {}
+
+gbeamg::gbeamg(double const AREA) :
     __base::beam_prop(0), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
     WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
     SY{0}, SZ{0} {}
 
 cards::__base::card const &gbeamg::operator() (
-    long const &GEONO,
-    double const &AREA,
-    double const &IX, double const &IY, double const &IZ, double const &IYZ,
-    double const &WXMIN, double const &WYMIN, double const &WZMIN,
-    double const &SHARY, double const &SHARZ,
-    double const &SHCENY, double const &SHCENZ,
-    double const &SY, double const &SZ) {
-    set_geono(GEONO);
+    vector<std::string> const &inp, size_t const len) {
+    cards::__base::beam_prop::read(inp, len);
+    read(inp, len);
+    return *this;
+}
+
+cards::__base::card const &gbeamg::operator() (
+    long const GEONO,
+    double const AREA,
+    double const IX, double const IY, double const IZ, double const IYZ,
+    double const WXMIN, double const WYMIN, double const WZMIN,
+    double const SHARY, double const SHARZ,
+    double const SHCENY, double const SHCENZ,
+    double const SY, double const SZ) {
+    set_geono(GEONO, true);
     this->AREA = AREA;
     this->IX = IX;
     this->IY = IY;
@@ -149,8 +160,29 @@ cards::__base::card const &gbeamg::operator() (
     return *this;
 }
 
-cards::__base::card const &gbeamg::operator() (double const &AREA) {
-    set_geono();
+cards::__base::card const &gbeamg::operator() (double const AREA) {
+    cards::__base::geoprop::set_geono();
+    this->AREA = AREA;
+    this->IX = {0};
+    this->IY = {0};
+    this->IZ = {0};
+    this->IYZ = {0};
+    this->WXMIN = {0};
+    this->WYMIN = {0};
+    this->WZMIN = {0};
+    this->SHARY = {0};
+    this->SHARZ = {0};
+    this->SHCENY = {0};
+    this->SHCENZ = {0};
+    this->SY = {0};
+    this->SZ = {0};
+    return *this;
+
+}
+
+cards::__base::card const &gbeamg::operator() (
+    long const GEONO, double const AREA) {
+    set_geono(GEONO, true);
     this->AREA = AREA;
     this->IX = {0};
     this->IY = {0};

@@ -37,22 +37,22 @@ using namespace types;
 
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card gpipe::head("GPIPE");
+fem::types::card const gpipe::head("GPIPE");
 
-const entry_type<double> gpipe::_form_DI("DI");
-const entry_type<double> gpipe::_form_DY("DY");
-const entry_type<double> gpipe::_form_T("T");
-const entry_type<double> gpipe::_form_SFY("SFY");
-const entry_type<double> gpipe::_form_SFZ("SFZ");
-const entry_type<long> gpipe::_form_NCIR("NCIR");
-const entry_type<long> gpipe::_form_NRAD("NRAD");
+entry_type<double> const gpipe::_form_DI("DI");
+entry_type<double> const gpipe::_form_DY("DY");
+entry_type<double> const gpipe::_form_T("T");
+entry_type<double> const gpipe::_form_SFY("SFY");
+entry_type<double> const gpipe::_form_SFZ("SFZ");
+entry_type<long> const gpipe::_form_NCIR("NCIR");
+entry_type<long> const gpipe::_form_NRAD("NRAD");
 
-gpipe::gpipe(vector<std::string> const &inp, size_t const &len) :
+gpipe::gpipe(vector<std::string> const &inp, size_t const len) :
         __base::beam_prop(inp, len) {
     read(inp, len);
 }
 
-void gpipe::read(vector<std::string> const &inp, size_t const &len) {
+void gpipe::read(vector<std::string> const &inp, size_t const len) {
     std::string static const empty{"                "};
 
     if (len < 7)
@@ -78,18 +78,20 @@ void gpipe::read(vector<std::string> const &inp, size_t const &len) {
 gpipe::gpipe(void) :
         gpipe(-1, 0., 0., 0., 0., 0.) {}
 
-gpipe::gpipe(const long &GEONO, const double &DI,
-             const double &DY,
-             const double &T, const double &SFY,
-             const double &SFZ,
-             const long &NCIR/*=0*/, const long &NRAD/*=0*/) :
+gpipe::gpipe(long const GEONO, double const DI,
+             double const DY,
+             double const T, double const SFY,
+             double const SFZ,
+             long const NCIR/*=0*/, long const NRAD/*=0*/) :
         __base::beam_prop(GEONO),
         DI(DI), DY(DY), T(T),
         SFY(SFY), SFZ(SFZ),
         NCIR(NCIR), NRAD(NRAD) {}
 
-const dnvgl::extfem::fem::cards::types
-gpipe::card_type(void) const {return types::GPIPE;}
+dnvgl::extfem::fem::cards::types const
+gpipe::card_type(void) const {
+    return types::GPIPE;
+}
 
 std::ostream &gpipe::put(std::ostream& os) const {
     if (GEONO == -1) return os;

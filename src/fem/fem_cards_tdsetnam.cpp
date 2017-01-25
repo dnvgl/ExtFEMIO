@@ -41,20 +41,20 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card tdsetnam::head("TDSETNAM");
+fem::types::card const tdsetnam::head("TDSETNAM");
 
-const entry_type<long> tdsetnam::_form_NFIELD("NFIELD");
-const entry_type<long> tdsetnam::_form_ISREF("ISREF");
-const entry_type<long> tdsetnam::_form_CODNAM("CODNAM");
-const entry_type<long> tdsetnam::_form_CODTXT("CODTXT");
-const entry_type<std::string> tdsetnam::_form_SET_NAME("SET_NAME");
-const entry_type<std::string> tdsetnam::_form_CONT("CONT");
+entry_type<long> const tdsetnam::_form_NFIELD("NFIELD");
+entry_type<long> const tdsetnam::_form_ISREF("ISREF");
+entry_type<long> const tdsetnam::_form_CODNAM("CODNAM");
+entry_type<long> const tdsetnam::_form_CODTXT("CODTXT");
+entry_type<std::string> const tdsetnam::_form_SET_NAME("SET_NAME");
+entry_type<std::string> const tdsetnam::_form_CONT("CONT");
 
-tdsetnam::tdsetnam(vector<std::string> const &inp, size_t const &len) {
+tdsetnam::tdsetnam(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void tdsetnam::read(vector<std::string> const &inp, size_t const &len) {
+void tdsetnam::read(vector<std::string> const &inp, size_t const len) {
     if (len < 9)
         throw errors::parse_error(
             "TDSETNAM", "Illegal number of entries.");
@@ -95,12 +95,12 @@ void tdsetnam::read(vector<std::string> const &inp, size_t const &len) {
 tdsetnam::tdsetnam(void) :
         tdsetnam(-1, 0, 0, 0, "", {}) {}
 
-tdsetnam::tdsetnam(const long &NFIELD,
-                   const long &ISREF,
-                   const long &CODNAM,
-                   const long &CODTXT,
-                   const std::string &SET_NAME,
-                   const vector<std::string> &CONT) :
+tdsetnam::tdsetnam(long const NFIELD,
+                   long const ISREF,
+                   long const CODNAM,
+                   long const CODTXT,
+                   std::string const &SET_NAME,
+                   vector<std::string> const &CONT) :
         card(), NFIELD(NFIELD), ISREF(ISREF),
         CODNAM(CODNAM), CODTXT(CODTXT),
         SET_NAME(SET_NAME), CONT(CONT) {
@@ -112,9 +112,9 @@ tdsetnam::tdsetnam(const long &NFIELD,
     nctxt = div_val.rem;
 }
 
-tdsetnam::tdsetnam(const long &ISREF,
-                   const std::string &SET_NAME,
-                   const vector<std::string> &CONT) :
+tdsetnam::tdsetnam(long const ISREF,
+                   std::string const &SET_NAME,
+                   vector<std::string> const &CONT) :
         card(), NFIELD(4), ISREF(ISREF),
         SET_NAME(SET_NAME), CONT(CONT) {
 
@@ -130,10 +130,10 @@ tdsetnam::tdsetnam(const long &ISREF,
     CODTXT = (100 * nltxt) + nctxt;
 }
 
-tdsetnam::tdsetnam(const long &NFIELD,
-                   const long &ISREF,
-                   const long &CODNAM,
-                   const std::string &SET_NAME) :
+tdsetnam::tdsetnam(long const NFIELD,
+                   long const ISREF,
+                   long const CODNAM,
+                   std::string const &SET_NAME) :
         card() , NFIELD(NFIELD), ISREF(ISREF),
         CODNAM(CODNAM), CODTXT(0),
         SET_NAME(SET_NAME), CONT() {
@@ -144,8 +144,8 @@ tdsetnam::tdsetnam(const long &NFIELD,
     nctxt = 0;
 }
 
-tdsetnam::tdsetnam(const long &ISREF,
-                   const std::string &SET_NAME) :
+tdsetnam::tdsetnam(long const ISREF,
+                   std::string const &SET_NAME) :
         card() , NFIELD(4), ISREF(ISREF),
         CODTXT(0),
         SET_NAME(SET_NAME), CONT() {
@@ -156,8 +156,9 @@ tdsetnam::tdsetnam(const long &ISREF,
     nctxt = 0;
 }
 
-const dnvgl::extfem::fem::cards::types
-tdsetnam::card_type(void) const { return types::TDSETNAM; };
+fem::cards::types const tdsetnam::card_type(void) const {
+    return types::TDSETNAM;
+};
 
 ostream &tdsetnam::put(ostream& os) const {
     if (NFIELD == -1) return os;

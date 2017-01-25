@@ -42,11 +42,11 @@ entry_type<long> const bsell::_form_SUBNO("SUBNO");
 entry_type<long> const bsell::_form_LLC("LLC");
 entry_type<double> const bsell::_form_FACT("FACT");
 
-bsell::bsell(std::vector<std::string> const &inp, size_t const &len) {
+bsell::bsell(std::vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void bsell::read(std::vector<std::string> const &inp, size_t const &len) {
+void bsell::read(std::vector<std::string> const &inp, size_t const len) {
     static const std::string empty(16, ' ');
 
     long tmp;
@@ -70,15 +70,15 @@ void bsell::read(std::vector<std::string> const &inp, size_t const &len) {
 bsell::bsell(void) :
         bsell(-1, 0, {}, {}) {}
 
-bsell::bsell(long const &LC,
-             long const &SUBNO,
+bsell::bsell(long const LC,
+             long const SUBNO,
              std::vector<long> const &LLC,
              std::vector<double> const &FACT) :
         card(), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
 
 cards::__base::card const &bsell::operator()(
-    long const &LC,
-    long const &SUBNO,
+    long const LC,
+    long const SUBNO,
     std::vector<long> const &LLC,
     std::vector<double> const &FACT) {
     this->LC = LC;

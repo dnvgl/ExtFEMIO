@@ -46,11 +46,11 @@ const entry_type<long> bndispl::_form_NDOF("NDOF");
 const entry_type<double> bndispl::_form_RDISP("RDISP");
 const entry_type<double> bndispl::_form_IDISP("IDISP");
 
-bndispl::bndispl(const std::vector<std::string> &inp, size_t const &len) {
+bndispl::bndispl(const std::vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void bndispl::read(const std::vector<std::string> &inp, size_t const &len) {
+void bndispl::read(const std::vector<std::string> &inp, size_t const len) {
     if (len < 8)
         throw errors::parse_error(
             "BNDISPL", "Illegal number of entries.");
@@ -71,11 +71,11 @@ void bndispl::read(const std::vector<std::string> &inp, size_t const &len) {
 bndispl::bndispl(void) :
         bndispl(-1, 0, false, 0, {}) {}
 
-bndispl::bndispl(const long &LLC,
-                 const long &DTYPE,
-                 const bool &COMPLX,
-                 const long &NODENO,
-                 const long &NDOF,
+bndispl::bndispl(const long LLC,
+                 const long DTYPE,
+                 const bool COMPLX,
+                 const long NODENO,
+                 const long NDOF,
                  const std::vector<double> &RDISP,
                  const std::vector<double> &IDISP) :
         card(), LLC(LLC), DTYPE(DTYPE), COMPLX(COMPLX),
@@ -83,28 +83,28 @@ bndispl::bndispl(const long &LLC,
         RDISP(RDISP), IDISP(IDISP) {}
 
 
-bndispl::bndispl(const long &LLC,
-                 const long &DTYPE,
-                 const bool &COMPLX,
-                 const long &NODENO,
+bndispl::bndispl(const long LLC,
+                 const long DTYPE,
+                 const bool COMPLX,
+                 const long NODENO,
                  const std::vector<double> &RDISP,
                  const std::vector<double> &IDISP) :
         bndispl(LLC, DTYPE, COMPLX, NODENO, (long)RDISP.size(),
                 RDISP, IDISP) {}
 
-bndispl::bndispl(const long &LLC,
-                 const long &DTYPE,
-                 const long &NODENO,
-                 const long &NDOF,
+bndispl::bndispl(const long LLC,
+                 const long DTYPE,
+                 const long NODENO,
+                 const long NDOF,
                  const std::vector<double> &RDISP,
                  const std::vector<double> &IDISP) :
         bndispl(LLC, DTYPE, IDISP.size() > 0, NODENO, NDOF,
                 RDISP, IDISP) {}
 
 
-bndispl::bndispl(const long &LLC,
-                 const long &DTYPE,
-                 const long &NODENO,
+bndispl::bndispl(const long LLC,
+                 const long DTYPE,
+                 const long NODENO,
                  const std::vector<double> &RDISP,
                  const std::vector<double> &IDISP) :
         bndispl(LLC, DTYPE, NODENO, (long)RDISP.size(),

@@ -16,7 +16,7 @@
 
 #include <vector>
 #include <string>
-#include <set>
+#include <unordered_set>
 #include <unordered_map>
 #include <utility>
 #include <memory>
@@ -50,92 +50,88 @@ namespace dnvgl {
         namespace fem {
             namespace cards {
 
-                void extern const(*note_report)(std::string const &);
-                void extern const(*info_report)(std::string const &);
-                void extern const(*warn_report)(std::string const &);
-                void extern const(*error_report)(std::string const &);
+                void extern const(*note_report)(std::string const&);
+                void extern const(*info_report)(std::string const&);
+                void extern const(*warn_report)(std::string const&);
+                void extern const(*error_report)(std::string const&);
 
-                /**
-                   \brief Name the different cards.
-                */
+/**
+   \brief Name the different cards.
+*/
                 enum class types {
                     UNKNOWN,
-                    /// Date and Program Information
+/// Date and Program Information
                     DATE,
-                    /// Nodal Coordinates
+/// Nodal Coordinates
                     GCOORD,
-                    /// Correspondence between External and Internal
-                    /// Node Numbering, and Number of Degrees of
-                    /// Freedom of Each Node
+/// Correspondence between External and Internal Node Numbering, and
+/// Number of Degrees of Freedom of Each Node
                     GNODE,
-                    /// Identification of Superelements
+/// Identification of Superelements
                     IDENT,
-                    /// End of a Superelement
+/// End of a Superelement
                     IEND,
-                    /// Element Data Definition
+/// Element Data Definition
                     GELMNT1,
-                    /// Reference to Element Data
+/// Reference to Element Data
                     GELREF1,
-                    /// Cross Section Type Massive Bar
+/// Cross Section Type Massive Bar
                     GBARM,
-                    /// General Beam Element Data
+/// General Beam Element Data
                     GBEAMG,
-                    /// Eccentricities
+/// Eccentricities
                     GECCEN,
-                    /// Thickness of Two-dimensional Elements
+/// Thickness of Two-dimensional Elements
                     GELTH,
-                    /// Cross Section Type I or H Beam
+/// Cross Section Type I or H Beam
                     GIORH,
-                    /// Cross Section Type L-Section
+/// Cross Section Type L-Section
                     GLSEC,
-                    /// Cross Section Type Tube
+/// Cross Section Type Tube
                     GPIPE,
-                    /// Cross Section Type Unsymmetrical I-Beam
+/// Cross Section Type Unsymmetrical I-Beam
                     GUSYI,
-                    /// Flexible Joint/Hinge
+/// Flexible Joint/Hinge
                     BELFIX,
-                    /// Nodes with Linear Dependence
+/// Nodes with Linear Dependence
                     BLDEP,
-                    /// Nodes with Boundary Conditions
+/// Nodes with Boundary Conditions
                     BNBCD,
-                    /// Nodes with Prescribed Displacements and
-                    /// Accelerations
+/// Nodes with Prescribed Displacements and Accelerations
                     BNDISPL,
-                    /// Nodes with Loads
+/// Nodes with Loads
                     BNLOAD,
-                    /// Element to Ground
+/// Element to Ground
                     MGSPRNG,
-                    /// set(group) of Nodes or Elements(Members)
+/// set(group) of Nodes or Elements(Members)
                     GSETMEMB,
-                    /// Specification of Local Element Coordinate
-                    /// System
+/// Specification of Local Element Coordinate System
                     GUNIVEC,
-                    /// Isotropy, Linear Elastic Structural Analysis
+/// Isotropy, Linear Elastic Structural Analysis
                     MISOSEL,
-                    /// Anisotropy, Linear Elastic Structural Analysis,
-                    /// 2-D Membrane Elements and 2-D Thin Shell Elements
+/// Anisotropy, Linear Elastic Structural Analysis, 2-D Membrane
+/// Elements and 2-D Thin Shell Elements
                     MORSMEL,
-                    /// Name and Description of a set(group)
+/// Name and Description of a set(group)
                     TDSETNAM,
-                    /// Name and Description of a Super-Element.
+/// Name and Description of a Super-Element.
                     TDSUPNAM,
-                    /// User supplied Text
+/// User supplied Text
                     TEXT,
-                    /// Name of Load
+/// Name of Load
                     TDLOAD,
-                    /// Subelement Load Description
+/// Subelement Load Description
                     BSELL,
-                    /// Subelement Description with Simple Correspondence
-                    /// between Degrees of Freedom of Subelement and
-                    /// Relevant Assembly
+/// Subelement Description with Simple Correspondence between Degrees
+/// of Freedom of Subelement and Relevant Assembly
                     GELMNT2,
-                    /// Superelement Statistical Information
+/// Superelement Statistical Information
                     HSUPSTAT,
-                    /// Superelement Transformations
+/// Superelement Transformations
                     HSUPTRAN,
-                    /// Superelement Hierarchy Description
+/// Superelement Hierarchy Description
                     HIERARCH,
-                    /// Elements with Surface Loads
+/// Elements with Surface Loads
                     BEUSLO
                 };
 
@@ -156,54 +152,54 @@ namespace dnvgl {
                     public:
 
                         size_t static card_split(
-                            std::vector<std::string> const&, size_t const&,
+                            std::vector<std::string> const&, size_t const,
                             std::vector<std::string>&);
 
-                        card(std::vector<std::string> const&, const size_t&);
+                        card(std::vector<std::string> const&, size_t const);
                         card(void);
 
                         virtual ~card(void);
 
                         virtual void read(
-                            const std::vector<std::string>&, size_t const&) = 0;
+                            std::vector<std::string> const&, size_t const) = 0;
 
                         virtual __base::card const &operator() (
-                            std::vector<std::string> const&, size_t const&);
+                            std::vector<std::string> const&, size_t const);
 
                         virtual dnvgl::extfem::fem::cards::types const
                         card_type(void) const = 0;
                     };
 
-                    /// Base class for geometric properties.
+/// Base class for geometric properties.
                     class geoprop : public card {
                     private:
 
-                        std::set<long> static used_geono;
+                        std::unordered_set<long> static used_geono;
                         long static geono_maxset;
 
                     protected:
 
-                        void set_geono(long const &GEONO=0);
+                        void set_geono(long const GEONO=0);
 
                         dnvgl::extfem::fem::types::entry_type<long>
                         static const _form_GEONO;
 
                         geoprop(void);
-                        geoprop(long const &GEONO);
-                        geoprop(std::vector<std::string> const&, size_t const&);
+                        geoprop(long const GEONO);
+                        geoprop(std::vector<std::string> const&, size_t const);
 
                         virtual void read(
-                            const std::vector<std::string>&, size_t const&);
+                            std::vector<std::string> const&, size_t const);
 
                         virtual __base::card const &operator() (
-                            const std::vector<std::string>&, size_t const&);
+                            std::vector<std::string> const&, size_t const);
 
                     public:
 
-                        /** Geometry type number, i.e. reference number used
-                            for element data definition of geometry properties
-                           (Cross sectional properties) of beams.
-                        */
+/** Geometry type number, i.e. reference number used for element data
+    definition of geometry properties (Cross sectional properties) of
+    beams.
+*/
                         long GEONO;
 
                         static void reset_geono(void);
@@ -215,17 +211,33 @@ namespace dnvgl {
 /// Base class for FEM beam property describing classes.
                     class beam_prop : public geoprop {
 
+                    private:
+
+                        std::unordered_set<long> static used_gbeamg;
+                        std::unordered_set<long> static used_cross_desc;
+
                     protected:
 
                         beam_prop(void);
-                        beam_prop(long const &GEONO);
+                        beam_prop(long const GEONO, bool const=false);
                         beam_prop(
-                            std::vector<std::string> const&, size_t const&);
+                            std::vector<std::string> const&, size_t const);
+                        beam_prop(
+                            std::vector<std::string> const&, size_t const,
+                            bool const);
+
+                        void set_geono(long const GEONO, bool const);
 
                         using geoprop::read;
+                        void read(
+                            std::vector<std::string> const &, size_t const,
+                            bool const);
+
                         using geoprop::operator();
 
                     public:
+
+                        static void reset_geono(void);
 
                         virtual dnvgl::extfem::fem::cards::types const
                         card_type(void) const = 0;
@@ -239,21 +251,21 @@ namespace dnvgl {
                         static const _form_MATNO;
 
                         material(void);
-                        material(long const &MATNO);
+                        material(long const MATNO);
                         material(
-                            std::vector<std::string> const&, size_t const&);
+                            std::vector<std::string> const&, size_t const);
 
                         virtual void read(
-                            std::vector<std::string> const&, size_t const&);
+                            std::vector<std::string> const&, size_t const);
 
                         virtual __base::card const &operator() (
-                        std::vector<std::string> const&, size_t const&);
+                            std::vector<std::string> const&, size_t const);
 
                     public:
 
-                        /** Material number, i.e. reference number referenced
-                            to by the element specification.
-                        */
+/** Material number, i.e. reference number referenced to by the
+    element specification.
+*/
                         long MATNO;
 
                         virtual dnvgl::extfem::fem::cards::types const
@@ -266,7 +278,7 @@ namespace dnvgl {
 
                 public:
 
-                    unknown(std::vector<std::string> const&, size_t const&);
+                    unknown(std::vector<std::string> const&, size_t const);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -278,7 +290,7 @@ namespace dnvgl {
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `DATE`: Date and Program Information
@@ -295,9 +307,9 @@ namespace dnvgl {
    Interface File.
 
    The following NRECS records must be read in A format, 72 characters
-per record.
+   per record.
 
-Example of format of `DATE` record as used in SESAM:
+   Example of format of `DATE` record as used in SESAM:
 
    ~~~{txt}
    DATE      0.100000000e+01 0.000000000e+00 0.400000000e+01 0.72000000E+02
@@ -311,7 +323,7 @@ Example of format of `DATE` record as used in SESAM:
    1         2         3         4         5         6         7
    ------------------------------------------------------------------------
    ~~~
-   */
+*/
                 class date : public __base::card {
 
                 private:
@@ -331,46 +343,46 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Value giving information on how to use this text.
+/** Value giving information on how to use this text.
 
-                        - = 1 Text concerning current superelement.
+      - = 1 Text concerning current superelement.
 
-                        - = 2 Text concerning children of current superelement
-                       (not implemented).
+      - = 2 Text concerning children of current superelement (not
+        implemented).
                     */
                     long TYPE;
-                    /**
-                       - = 0 If current superelement(TYPE = 1).
+/**
+     - = 0 If current superelement(TYPE = 1).
 
-                       - > 0 Subelement no. referring to the current
-                       superelement(only if TYPE = 2).
-                    */
+     - > 0 Subelement no. referring to the current superelement(only
+       if TYPE = 2).
+*/
                     long SUBTYPE;
-                    /** Number of records to be read in A-format, `NRECS` ≥ 1.
-                     */
+/** Number of records to be read in A-format, `NRECS` ≥ 1.
+ */
                     long NRECS;
-                    /** Number of significant bytes on the text records, 1 ≤
-                        `NBYTE` ≤ 72.
-                    */
+/** Number of significant bytes on the text records, 1 ≤
+    `NBYTE` ≤ 72.
+*/
                     long NBYTE;
-                    /** Text lines
+/** Text lines
 
-                        The eight first bytes on the text records shall be
-                        filled with blanks.
-                    */
+    The eight first bytes on the text records shall be filled with
+    blanks.
+*/
                     std::vector<std::string> CONT;
 
-                    date(std::vector<std::string> const&, size_t const&);
+                    date(std::vector<std::string> const&, size_t const);
 
                     date(void);
 
                     date(
-                        long const &TYPE, long const &SUBTYPE,
-                        long const &NRECS, long const &NBYTE,
+                        long const TYPE, long const SUBTYPE,
+                        long const NRECS, long const NBYTE,
                         std::vector<std::string> const &CONT);
 
                     date(
-                        long const &TYPE, long const &SUBTYPE,
+                        long const TYPE, long const SUBTYPE,
                         std::vector<std::string> const &CONT);
 
                     dnvgl::extfem::fem::cards::types const
@@ -381,7 +393,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GCOORD`: Nodal Coordinates
@@ -409,34 +421,34 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Program defined(internal) node number
-                     */
+/** Program defined(internal) node number
+ */
                     long NODENO;
-                    /** Cartesian *X*-coordinates of node `NODENO`.
-                     */
+/** Cartesian *X*-coordinates of node `NODENO`.
+ */
                     double XCOORD;
-                    /** Cartesian *Y*-coordinates of node `NODENO`.
-                     */
+/** Cartesian *Y*-coordinates of node `NODENO`.
+ */
                     double YCOORD;
-                    /** Cartesian `Z`-coordinates of node `NODENO`.
-                     */
+/** Cartesian `Z`-coordinates of node `NODENO`.
+ */
                     double ZCOORD;
 
-                    gcoord(std::vector<std::string> const&, size_t const&);
+                    gcoord(std::vector<std::string> const&, size_t const);
 
                     gcoord(void);
 
                     using __base::card::operator();
 
                     gcoord(
-                        long const &NODENO,
-                        double const &XCOORD, double const &YCOORD,
-                        double const &ZCOORD);
+                        long const NODENO,
+                        double const XCOORD, double const YCOORD,
+                        double const ZCOORD);
 
                     __base::card const &operator()(
-                        long const &NODENO,
-                        double const &XCOORD, double const &YCOORD,
-                        double const &ZCOORD);
+                        long const NODENO,
+                        double const XCOORD, double const YCOORD,
+                        double const ZCOORD);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -446,10 +458,11 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
-/// `GNODE`: Correspondence between External and Internal Node Numbering and Number of Degrees of Freedom of Each Node
+/// `GNODE`: Correspondence between External and Internal Node
+/// Numbering and Number of Degrees of Freedom of Each Node
 /**
    ## Format
 
@@ -472,39 +485,42 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODEX;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<std::vector<int> > static const _form_ODOF;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODEX;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODENO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NDOF;
+                    dnvgl::extfem::fem::types::entry_type<std::vector<int> >
+                    static const _form_ODOF;
 
                 public:
 
-                    /** External node number(specified or controlled by user).
-                     */
+/** External node number(specified or controlled by user).
+ */
                     long NODEX;
-                    /** Internal node number defined by the program(may be
-                        generated by internal node numbering optimalizer). The
-                        internal node numbers range from 1 up to number of
-                        nodes.
-                    */
+/** Internal node number defined by the program(may be generated by
+    internal node numbering optimalizer). The internal node numbers
+    range from 1 up to number of nodes.
+*/
                     long NODENO;
-                    /** Number of degrees of freedom of nodal point `NODENO`.
-                     */
+/** Number of degrees of freedom of nodal point `NODENO`.
+ */
                     long NDOF;
-                    /** Order of degrees of freedom. `NDOF` digits.
-                     */
+/** Order of degrees of freedom. `NDOF` digits.
+ */
                     std::vector<int> ODOF;
 
-                    gnode(std::vector<std::string> const&, size_t const&);
+                    gnode(std::vector<std::string> const&, size_t const);
 
                     gnode(void);
 
                     gnode(
-                        long const &NODEX, long const &NODENO,
-                        long const &NDOF, std::vector<int> const &ODOF);
+                        long const NODEX, long const NODENO,
+                        long const NDOF, std::vector<int> const &ODOF);
 
                     gnode(
-                        long const &NODEX, long const &NODENO,
+                        long const NODEX, long const NODENO,
                         std::vector<int> const &ODOF);
 
                     ~gnode(void);
@@ -512,11 +528,11 @@ Example of format of `DATE` record as used in SESAM:
                     using __base::card::operator();
 
                     __base::card const &operator()(
-                        long const &NODEX, long const &NODENO,
-                        long const &NDOF, std::vector<int> const &ODOF);
+                        long const NODEX, long const NODENO,
+                        long const NDOF, std::vector<int> const &ODOF);
 
                     __base::card const &operator()(
-                        long const &NODEX, long const &NODENO,
+                        long const NODEX, long const NODENO,
                         std::vector<int> const &ODOF);
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -526,7 +542,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `IDENT`: Identification of Superelements
@@ -543,40 +559,42 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_SLEVEL;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_SELTYP;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_SELMOD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_SLEVEL;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_SELTYP;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_SELMOD;
 
                 public:
 
                     enum class mod_type{DIM_2D=2, DIM_3D=3, INVALID=-1};
 
-                    /** Superelement level.
+/** Superelement level.
 
-                        The level of a superelement is defined as the highest
-                        level number among its subelements plus 1.(Basic
-                        elements, i.e. beams, shells, springs, etc. have level
-                        zero.)
-                    */
+    The level of a superelement is defined as the highest level number
+    among its subelements plus 1.(Basic elements, i.e. beams, shells,
+    springs, etc. have level zero.)
+*/
                     long SLEVEL;
-                    /** Superelement type number.
-                     */
+/** Superelement type number.
+ */
                     long SELTYP;
-                    /** Superelement model dimension
+/** Superelement model dimension
 
-                    - = 2,      2-dimensional model
+      - = 2,      2-dimensional model
 
-                    - = 0 or 3, 3-dimensional model.
-                    */
+      - = 0 or 3, 3-dimensional model.
+*/
                     mod_type SELMOD;
 
-                    ident(std::vector<std::string> const&, size_t const&);
+                    ident(std::vector<std::string> const&, size_t const);
 
                     ident(void);
 
                     ident(
-                        long const &SLEVEL, long const &SELTYP,
-                        mod_type const &SELMOD);
+                        long const SLEVEL, long const SELTYP,
+                        mod_type const SELMOD);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -586,7 +604,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `IEND`: End of a Superelement
@@ -605,27 +623,27 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_CONT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_CONT;
 
                 public:
 
-                    /** Superelement level.
+/** Superelement level.
 
-                        - = 0(Default). This is also end of the file.
+      - = 0(Default). This is also end of the file.
 
-                        - = 1 The superelements are concatenated on one file.
-                        More superelements follows.
+      - = 1 The superelements are concatenated on one file. More
+        superelements follows.
 
-                        - = 2 Last superelement in a structure for a
-                        concatenated file.
-                    */
+      - = 2 Last superelement in a structure for a concatenated file.
+*/
                     long CONT;
 
-                    iend(std::vector<std::string> const&, size_t const&);
+                    iend(std::vector<std::string> const&, size_t const);
 
                     iend(void);
 
-                    iend(long const &CONT);
+                    iend(long const CONT);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -635,7 +653,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GELMNT1`: Element Data Definition
@@ -654,93 +672,98 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ELNOX;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ELNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ELTYP;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ELTYAD;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODIN;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ELNOX;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ELNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ELTYP;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ELTYAD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODIN;
 
-                    std::unordered_map<long, dnvgl::extfem::fem::elements::el_types> static const eltyp_map;
+                    std::unordered_map<
+                        long, dnvgl::extfem::fem::elements::el_types>
+                    static const eltyp_map;
 
                 public:
 
-                    /** External element number(specified or controlled by
-                        user). */
+/** External element number(specified or controlled by user).
+ */
                     long ELNOX;
-                    /** Internal element number(generated by program)
-                     */
+/** Internal element number(generated by program)
+ */
                     long ELNO;
-                    /** Element type number. Refer to chapter 5 in file format
-                        documentation for description of legal type no. For
-                        element type no. 70(’matrix element’) all relevant
-                        element data are stored as stiffness, mass, damping
-                        matrices a.s.o. See the AMATRIX record for more
-                        information.
-                    */
+/** Element type number. Refer to chapter 5 in file format
+    documentation for description of legal type no. For element type
+    no. 70(’matrix element’) all relevant element data are stored as
+    stiffness, mass, damping matrices a.s.o. See the AMATRIX record
+    for more information.
+*/
                     dnvgl::extfem::fem::elements::el_types ELTYP;
-                    /** Additional information related to element type.
+/** Additional information related to element type.
 
-                        - For membrane elements used to specify plane stress /
-                        plane strain conditions
+      - For membrane elements used to specify plane stress / plane
+         strain conditions
 
-                        =0: Plane stress
+           =0: Plane stress
 
-                        =1: Plane strain
+           =1: Plane strain
 
-                        - For two noded beam elements used to specify
-                        structural / non-structural elements:
+      - For two noded beam elements used to specify structural /
+        non-structural elements:
 
-                        =0: Structural beam
+          =0: Structural beam
 
-                        =1: Non structural beam
+          =1: Non structural beam
 
-                        - For general matrix element(elem. type 70) used to
-                        specify number of nodes
+     - For general matrix element(elem. type 70) used to specify
+       number of nodes
 
-                        = `NNOD` Number of nodes on the matrix element
-                    */
+         = `NNOD` Number of nodes on the matrix element
+*/
                     long ELTYAD;
-                    /** Internal node numbers in the assembly, to which this
-                        element is connected.
+/** Internal node numbers in the assembly, to which this element is
+    connected.
 
-                        The sequence of the node numbers is in accordance with the
-                        local node numbering of the basic element.
+    The sequence of the node numbers is in accordance with the local
+    node numbering of the basic element.
 
-                        By ’internal node numbers’ is meant the node numbering of
-                        the entire superelement of which the element `ELNOX` is a
-                        part. The internal node number refers to the node number
-                        generated by the program. The program-defined element
-                        number ranges from 1 up to number of elements. The sequence
-                        of the records will correspond to the program-defined
-                        element numbering, `ELNO`.
-                    */
+    By ’internal node numbers’ is meant the node numbering of the
+    entire superelement of which the element `ELNOX` is a part. The
+    internal node number refers to the node number generated by the
+    program. The program-defined element number ranges from 1 up to
+    number of elements. The sequence of the records will correspond to
+    the program-defined element numbering, `ELNO`.
+*/
                     std::vector<long> NODIN;
 
-                    gelmnt1(std::vector<std::string> const&, size_t const&);
+                    gelmnt1(std::vector<std::string> const&, size_t const);
 
                     gelmnt1(void);
 
                     gelmnt1(
-                        long const &ELNOX, long const &ELNO,
+                        long const ELNOX, long const ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
-                        long const &ELTYAD,
+                        long const ELTYAD,
                         std::vector<long> const &NODIN);
 
                     gelmnt1(
-                        long const &ELNOX, long const &ELNO,
+                        long const ELNOX, long const ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
 
                     using __base::card::operator();
 
                     __base::card const &operator()(
-                        long const &ELNOX, long const &ELNO,
+                        long const ELNOX, long const ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
-                        long const &ELTYAD,
+                        long const ELTYAD,
                         std::vector<long> const &NODIN);
 
                     __base::card const &operator()(
-                        long const &ELNOX, long const &ELNO,
+                        long const ELNOX, long const ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
 
@@ -752,7 +775,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GELREF1`: Reference to Element Data
@@ -783,151 +806,152 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ELNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ADDNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_INTNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_MINTNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_STRANO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_STRENO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_STREPONO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_FIXNO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ECCNO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_TRANSNO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_FIXNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ECCNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_TRANSNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ELNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_MATNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ADDNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_INTNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_MINTNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_STRANO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_STRENO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_STREPONO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_GEONO_OPT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_FIXNO_OPT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ECCNO_OPT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_TRANSNO_OPT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_GEONO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_FIXNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ECCNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_TRANSNO;
 
                 public:
-
-                    /** Internal element number(generated by the program).
-                     */
+/** Internal element number(generated by the program).
+ */
                     long ELNO;
-                    /** Material number
+/** Material number
 
-                        - =0 no material data attached to the element
-                    */
+      - =0 no material data attached to the element
+*/
                     long MATNO;
-                    /** Additional data type number, i.e. number referring to
-                        additional data specification
+/** Additional data type number, i.e. number referring to additional
+    data specification
 
-                        - =0 no additional data attached to the element
-                    */
+      - =0 no additional data attached to the element
+*/
                     long ADDNO;
-                    /** Integration station reference number for stiffness
-                        matrix, i.e. number referring to the specification of
-                        integration stations. An integration station is defined
-                        as:
+/** Integration station reference number for stiffness matrix, i.e.
+    number referring to the specification of integration stations. An
+    integration station is defined as:
 
-                        - an assembly of integration points over a cross section
-                        of a 1-dimensional(beam or bar) element,
+      - an assembly of integration points over a cross section of a
+        1-dimensional(beam or bar) element,
 
-                        - an assembly of integration points on a line through
-                        the thickness of a 2-dimensional element,
+      - an assembly of integration points on a line through the
+        thickness of a 2-dimensional element,
 
-                        - one single integration point for a 3-dimensional
-                        element. For further explanation see record `GELINT`.
+        - one single integration point for a 3-dimensional element.
+          For further explanation see record `GELINT`.
 
-                        `INTNO` = 0: Default values of the analysis program are
-                        employed.
-                    */
+    `INTNO` = 0: Default values of the analysis program are employed.
+*/
                     long INTNO;
-                    /** Integration station reference number for mass and
-                        damping matrices. Integration station, see `INTNO`.
+/** Integration station reference number for mass and damping
+    matrices. Integration station, see `INTNO`.
 
-                        `MINTNO` = 0: Default values of the analysis program are
-                        employed.
-                    */
+    `MINTNO` = 0: Default values of the analysis program are employed.
+*/
                     long MINTNO;
-                    /** Initial strain number, i.e. number referring to the
-                        specification of initial strains. The data type
-                        containing these data is not yet defined.
-                    */
+/** Initial strain number, i.e. number referring to the specification
+    of initial strains. The data type containing these data is not yet
+    defined.
+*/
                     long STRANO;
-                    /** Initial stress number, i.e. number referring to the
-                        specification of initial stresses. The data type
-                        containing these data is not yet defined.
-                    */
+/** Initial stress number, i.e. number referring to the specification
+    of initial stresses. The data type containing these data is not
+    yet defined.
+*/
                     long STRENO;
-                    /** Stresspoint specification reference number. See record
-                        `GELSTRP` for further information.
-                    */
+/** Stresspoint specification reference number. See record `GELSTRP`
+    for further information.
+*/
                     long STREPONO;
-                    /** Geometry reference number or option for geometry
-                        reference number specified later in this record
-                        sequence.
+/** Geometry reference number or option for geometry reference number
+    specified later in this record sequence.
 
-                            - >0: The geometry reference number(the
-                                  same for all nodes in the element).
-                                  `GEONO`(1), ..., `GEONO`(*N*) will
-                                  not be specified.
+    - >0: The geometry reference number(the same for all nodes in the
+      element). `GEONO`(1), ..., `GEONO`(*N*) will not be specified.
 
-                            - =0: No geometry data is given, i.e.
-                                  neither here nor on `GEONO`(1), ...,
-                                  `GEONO`(*N*).
+    - =0: No geometry data is given, i.e. neither here nor on
+      `GEONO`(1), ..., `GEONO`(*N*).
 
-                            - =-1: Reference numbers to geometry data
-                                  are specified later in this record
-                                  sequence for all nodes, i.e. all
-                                  `GEONO`(1), ..., `GEONO`(*N*) will
-                                  be given.
-                    */
+    - =-1: Reference numbers to geometry data are specified later in
+      this record sequence for all nodes, i.e. all `GEONO`(1), ...,
+      `GEONO`(*N*) will be given.
+*/
                     long GEONO_OPT;
-                    /** Fixation reference number or option for fixation
-                        reference numbers specified later in this record
-                        sequence. The meaning assigned to the values of
-                        `FIXNO_OPT` corresponds to those for `GEONO_OPT`.
-                    */
+/** Fixation reference number or option for fixation reference numbers
+    specified later in this record sequence. The meaning assigned to
+    the values of `FIXNO_OPT` corresponds to those for `GEONO_OPT`.
+*/
                     long FIXNO_OPT;
-                    /** Eccentricity reference number or option for eccentricity
-                        reference numbers specified later in this record
-                        sequence. The meaning assigned to the values of
-                        `ECCNO_OPT` corresponds to those for `GEONO_OPT`.
-                    */
+/** Eccentricity reference number or option for eccentricity reference
+    numbers specified later in this record sequence. The meaning
+    assigned to the values of `ECCNO_OPT` corresponds to those for
+    `GEONO_OPT`.
+*/
                     long ECCNO_OPT;
-                    /** Reference number for local coordinate system
-                        specification or option for specification of local nodal
-                        coordinate systems later in this record sequence. Refers
-                        to `GUNIVEC` or `BNTRCOS` record. The meaning assigned
-                        to the values of `TRANSNO_OPT` corresponds to those for
-                        `GEONO_OPT`.
-                    */
+/** Reference number for local coordinate system specification or
+    option for specification of local nodal coordinate systems later
+    in this record sequence. Refers to `GUNIVEC` or `BNTRCOS` record.
+    The meaning assigned to the values of `TRANSNO_OPT` corresponds to
+    those for `GEONO_OPT`.
+*/
                     long TRANSNO_OPT;
-                    /** Geometry reference number for the local nodes of the
-                        element.
-                    */
+/** Geometry reference number for the local nodes of the element.
+ */
                     std::vector<long> GEONO;
-                    /** Number referring to the specification of degree of
-                        fixation(Data type `BELFIX`). `FIXNO`[0] is the reference
-                        number for the 1st local node of the element, FIXNO[*i*-1]
-                        will be the reference number for the *i*’th local node.
-                    */
+/** Number referring to the specification of degree of fixation(Data
+    type `BELFIX`). `FIXNO`[0] is the reference number for the 1st
+    local node of the element, FIXNO[*i*-1] will be the reference
+    number for the *i*’th local node.
+*/
                     std::vector<long> FIXNO;
-                    /** Eccentricity number for the local nodes of the element,
-                        i.e. number referring to the specification of
-                        eccentricities.
-                    */
+/** Eccentricity number for the local nodes of the element, i.e.
+    number referring to the specification of eccentricities.
+*/
                     std::vector<long> ECCNO;
-                    /** Number referring to the specification of the local
-                        element coordinate system for the local nodes of the
-                        element. Refers to `BNTRCOS` or `GUNIVEC` record
-                        depending on element type.
-                    */
+/** Number referring to the specification of the local element
+    coordinate system for the local nodes of the element. Refers to
+    `BNTRCOS` or `GUNIVEC` record depending on element type.
+*/
                     std::vector<long> TRANSNO;
 
-                    gelref1(std::vector<std::string> const&, size_t const&);
+                    gelref1(std::vector<std::string> const&, size_t const);
 
                     gelref1(void);
 
                     gelref1(
-                        long const &ELNO, long const &MATNO,
-                        long const &ADDNO, long const &INTNO,
-                        long const &MINTNO, long const &STRANO,
-                        long const &STRENO, long const &STREPONO,
-                        long const &GEONO_OPT, long const &FIXNO_OPT,
-                        long const &ECCNO_OPT, long const &TRANSNO_OPT,
+                        long const ELNO, long const MATNO,
+                        long const ADDNO, long const INTNO,
+                        long const MINTNO, long const STRANO,
+                        long const STRENO, long const STREPONO,
+                        long const GEONO_OPT, long const FIXNO_OPT,
+                        long const ECCNO_OPT, long const TRANSNO_OPT,
                         std::vector<long> const &GEONO={},
                         std::vector<long> const &FIXNO={},
                         std::vector<long> const &ECCNO={},
@@ -936,12 +960,12 @@ Example of format of `DATE` record as used in SESAM:
                     using __base::card::operator();
 
                     __base::card const &operator()(
-                        long const &ELNO, long const &MATNO,
-                        long const &ADDNO, long const &INTNO,
-                        long const &MINTNO, long const &STRANO,
-                        long const &STRENO, long const &STREPONO,
-                        long const &GEONO_OPT, long const &FIXNO_OPT,
-                        long const &ECCNO_OPT, long const &TRANSNO_OPT,
+                        long const ELNO, long const MATNO,
+                        long const ADDNO, long const INTNO,
+                        long const MINTNO, long const STRANO,
+                        long const STRENO, long const STREPONO,
+                        long const GEONO_OPT, long const FIXNO_OPT,
+                        long const ECCNO_OPT, long const TRANSNO_OPT,
                         std::vector<long> const &GEONO={},
                         std::vector<long> const &FIXNO={},
                         std::vector<long> const &ECCNO={},
@@ -955,7 +979,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GBARM`: Cross Section Type Massive Bar
@@ -994,58 +1018,53 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Height of beam.
-                     */
+/** Height of beam.
+ */
                     double HZ;
-                    /** Width of bar at top. For massive bars which are not
-                    able to have different widths at top and bottom
-                    this variable is used as the width of the beam.
-                    */
+/** Width of bar at top. For massive bars which are not able to have
+    different widths at top and bottom this variable is used as the
+    width of the beam.
+*/
                     double BT;
-                    /** Width of bar at bottom.
-                     */
+/** Width of bar at bottom.
+ */
                     double BB;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARY(MOD) = SHARY(PROG) · SFY
-                        \f]
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
 
-                       (The shear area on `GBEAMG` is SHARY(MOD)).
-
-                    */
+    (The shear area on `GBEAMG` is SHARY(MOD)).
+*/
                     double SFY;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARZ(MOD) = SHARZ(PROG) · SFZ
-                        \f]
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
 
-                       (The shear area on `GBEAMG` is SHARZ(MOD)).
-                    */
+    (The shear area on `GBEAMG` is SHARZ(MOD)).
+*/
                     double SFZ;
-                    /** Number of integration points in Y’ direction
-                       (optional)
-                    */
+/** Number of integration points in Y’ direction (optional)
+ */
                     long NLOBY;
-                    /** Number of integration points in Z’ direction
-                       (optional)
-                    */
+/** Number of integration points in Z’ direction (optional)
+ */
                     long NLOBZ;
 
-                    gbarm(std::vector<std::string> const&, size_t const&);
+                    gbarm(std::vector<std::string> const&, size_t const);
 
                     gbarm(void);
 
                     gbarm(
-                        long const &GEONO,
-                        double const &HZ, double const &BT, double const &BB,
-                        double const &SFY, double const &SFZ,
-                        long const &NLOBY=0, long const &NLOBZ=0);
+                        long const GEONO,
+                        double const HZ, double const BT, double const BB,
+                        double const SFY, double const SFZ,
+                        long const NLOBY=0, long const NLOBZ=0);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1057,7 +1076,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GBEAMG`: General Beam Element Data
@@ -1113,81 +1132,89 @@ Example of format of `DATE` record as used in SESAM:
 
                 public:
 
-                    /** Cross section area.
-                     */
+/** Cross section area.
+ */
                     double AREA;
-                    /** Torsional moment of inertia about the shear center.
-                     */
+/** Torsional moment of inertia about the shear center.
+ */
                     double IX;
-                    /** Moment of inertia about the *y* axis \f$= ∫z² dA\f$.
-                     */
+/** Moment of inertia about the *y* axis \f$= ∫z² dA\f$.
+ */
                     double IY;
-                    /** Moment of inertia about the *z* axis \f$= ∫y² dA\f$.
-                     */
+/** Moment of inertia about the *z* axis \f$= ∫y² dA\f$.
+ */
                     double IZ;
-                    /** Product of inertia about *y* and *z* axis \f$= ∫yz dA\f$.
-                     */
+/** Product of inertia about *y* and *z* axis \f$= ∫yz dA\f$.
+ */
                     double IYZ;
-                    /** Minimum torsional section modulus about shear
-                        center(=IX/rmax for a PIPE element).
-                    */
+/** Minimum torsional section modulus about shear center(=IX/rmax for
+    a PIPE element).
+*/
                     double WXMIN;
-                    /** Minimum sectionmodulus about *y* axis \f$= IY/zmax\f$.
-                     */
+/** Minimum sectionmodulus about *y* axis \f$= IY/zmax\f$.
+ */
                     double WYMIN;
-                    /** Minimum sectionmodulus about *z* axis = \f$IZ/ymax\f$.
-                     */
+/** Minimum sectionmodulus about *z* axis = \f$IZ/ymax\f$.
+ */
                     double WZMIN;
-                    /** Shear area in the direction of *y* axis. If zero,
-                        shear is not included.
-                    */
+/** Shear area in the direction of *y* axis. If zero, shear is not
+    included.
+ */
                     double SHARY;
-                    /** Shear area in the direction of *z* axis. If zero,
-                        shear is not included.
-                    */
+/** Shear area in the direction of *z* axis. If zero, shear is not
+    included.
+*/
                     double SHARZ;
-                    /** Shear center location *y* component.
-                     */
+/** Shear center location *y* component.
+ */
                     double SHCENY;
-                    /** Shear center location *z* component
-                     */
+/** Shear center location *z* component
+ */
                     double SHCENZ;
-                    /** Static area moment about *y*-axis \f$= ∫z dA\f$.
-                     */
+/** Static area moment about *y*-axis \f$= ∫z dA\f$.
+ */
                     double SY;
-                    /** Static area moment about *z*-axis \f$= ∫y dA\f$
-                     */
+/** Static area moment about *z*-axis \f$= ∫y dA\f$
+ */
                     double SZ;
 
-                    gbeamg(std::vector<std::string> const&, size_t const&);
+                    gbeamg(std::vector<std::string> const&, size_t const);
 
                     gbeamg(void);
 
                     gbeamg(
-                        long const &GEONO,
-                        double const &AREA,
-                        double const &IX, double const &IY, double const &IZ,
-                        double const &IYZ,
-                        double const &WXMIN, double const &WYMIN,
-                        double const &WZMIN,
-                        double const &SHARY, double const &SHARZ,
-                        double const &SHCENY, double const &SHCENZ,
-                        double const &SY, double const &SZ);
+                        long const GEONO,
+                        double const AREA,
+                        double const IX, double const IY, double const IZ,
+                        double const IYZ,
+                        double const WXMIN, double const WYMIN,
+                        double const WZMIN,
+                        double const SHARY, double const SHARZ,
+                        double const SHCENY, double const SHCENZ,
+                        double const SY, double const SZ);
 
-                    gbeamg(double const &AREA);
+                    gbeamg(long const GEONO, double const AREA);
 
-                    using __base::beam_prop::operator();
+                    gbeamg(double const AREA);
+
+                    __base::card const &operator() (
+                        std::vector<std::string> const&, size_t const);
 
                     __base::card const &operator()(
-                        long const &GEONO,
-                        double const &AREA,
-                        double const &IX, double const &IY, double const &IZ, double const &IYZ,
-                        double const &WXMIN, double const &WYMIN, double const &WZMIN,
-                        double const &SHARY, double const &SHARZ,
-                        double const &SHCENY, double const &SHCENZ,
-                        double const &SY, double const &SZ);
+                        long const GEONO,
+                        double const AREA,
+                        double const IX, double const IY, double const IZ,
+                        double const IYZ,
+                        double const WXMIN, double const WYMIN,
+                        double const WZMIN,
+                        double const SHARY, double const SHARZ,
+                        double const SHCENY, double const SHCENZ,
+                        double const SY, double const SZ);
 
-                    __base::card const &operator()(double const &AREA);
+                    __base::card const &operator()(
+                        long const GEONO, double const AREA);
+
+                    __base::card const &operator()(double const AREA);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1197,7 +1224,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GECCEN`: Eccentricities
@@ -1214,43 +1241,43 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ECCNO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_EX;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_EY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_EZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ECCNO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_EX;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_EY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_EZ;
 
                 public:
-                    /** Eccentricity number, referenced to on record
-                        `GELREF1`.
-                    */
+/** Eccentricity number, referenced to on record `GELREF1`.
+ */
                     long ECCNO;
-                    /** *x* component of eccentricity vector given in
-                        superelement coordinate system, the vector points
-                        from the global node towards the local element
-                        node.
-                    */
+/** *x* component of eccentricity vector given in superelement
+    coordinate system, the vector points from the global node towards
+    the local element node.
+*/
                     double EX;
-                    /** *y* component of eccentricity vector given in
-                        superelement coordinate system, the vector points
-                        from the global node towards the local element
-                        node.
-                    */
+/** *y* component of eccentricity vector given in superelement
+    coordinate system, the vector points from the global node towards
+    the local element node.
+*/
                     double EY;
-                    /** *z* component of eccentricity vector given in
-                        superelement coordinate system, the vector points
-                        from the global node towards the local element
-                        node.
-                    */
+/** *z* component of eccentricity vector given in superelement
+    coordinate system, the vector points from the global node towards
+    the local element node.
+*/
                     double EZ;
 
-                    geccen(std::vector<std::string> const&, size_t const&);
+                    geccen(std::vector<std::string> const&, size_t const);
 
                     geccen(void);
 
-                    geccen(long const &ECCNO,
-                           double const &EX, double const &EY, double const &EZ);
+                    geccen(long const ECCNO,
+                           double const EX, double const EY, double const EZ);
 
-                    geccen(long const &ECCNO, std::vector<double> const &pos);
+                    geccen(long const ECCNO, std::vector<double> const &pos);
 
                     geccen(geccen const*);
 
@@ -1262,7 +1289,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GELTH`: Thickness of Two-dimensional Elements
@@ -1279,32 +1306,33 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    //  dnvgl::extfem::fem::types::entry_type<long> static const _form_GEONO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TH;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NINT;
+                    // dnvgl::extfem::fem::types::entry_type<long>
+                    // static const _form_GEONO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TH;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NINT;
 
                 public:
 
-                    // /** Geometry type number, i.e. referenced to by
-                    //     `GELREF1`.
-                    // */
-                    // long GEONO;
-                    /** Thickness of the element, measured in a specific
-                        node.
-                    */
+// /** Geometry type number, i.e. referenced to by `GELREF1`.
+//  */
+//                     long GEONO;
+/** Thickness of the element, measured in a specific node.
+ */
                     double TH;
-                    /** Number of integration points through thickness.
-                     */
+/** Number of integration points through thickness.
+ */
                     long NINT;
 
-                    gelth(std::vector<std::string> const&, size_t const&);
+                    gelth(std::vector<std::string> const&, size_t const);
 
                     gelth(void);
 
-                    gelth(long const &GEONO, double const &TH,
-                          long const &NINT=0);
+                    gelth(long const GEONO, double const TH,
+                          long const NINT=0);
 
-                    gelth(double const &TH, long const &NINT=0);
+                    gelth(double const TH, long const NINT=0);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1312,18 +1340,18 @@ Example of format of `DATE` record as used in SESAM:
                     using __base::geoprop::operator();
 
                     __base::card const &operator()(
-                        long const &GEONO, double const &TH,
-                        long const &NINT=0);
+                        long const GEONO, double const TH,
+                        long const NINT=0);
 
                     __base::card const &operator()(
-                        double const &TH, long const &NINT=0);
+                        double const TH, long const NINT=0);
 
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GIORH`: Cross Section Type I or H Beam
@@ -1345,81 +1373,89 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_BB;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TB;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBYT;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBYB;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYB;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
 
                 public:
 
-                    /** Height of beam at current location
-                     */
+/** Height of beam at current location
+ */
                     double HZ;
-                    /** Thickness of beam web
-                     */
+/** Thickness of beam web
+ */
                     double TY;
-                    /** Width of top flange
-                     */
+/** Width of top flange
+ */
                     double BT;
-                    /** Thickness of top flange
-                     */
+/** Thickness of top flange
+ */
                     double TT;
-                    /** Width of bottom flange
-                     */
+/** Width of bottom flange
+ */
                     double BB;
-                    /** Thickness of bottom flange
-                     */
+/** Thickness of bottom flange
+ */
                     double TB;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARY(MOD) = SHARY(PROG) · SFY
-                        \f]
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
 
-                       (The shear areas on `GBEAMG` are SHARY(MOD)).
-                    */
+    (The shear areas on `GBEAMG` are SHARY(MOD)).
+*/
                     double SFY;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARZ(MOD) = SHARZ(PROG) · SFZ
-                        \f]
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
 
-                       (The shear areas on `GBEAMG` are SHARZ(MOD)).
-                    */
+    (The shear areas on `GBEAMG` are SHARZ(MOD)).
+*/
                     double SFZ;
-                    /** Number of integration points in top flange
-                       (optional) */
+/** Number of integration points in top flange (optional)
+ */
                     long NLOBYT;
-                    /** Number of integration points in bottom flange
-                       (optional)
-                    */
+/** Number of integration points in bottom flange (optional)
+ */
                     long NLOBYB;
-                    /** Number of integration points in beam web(optional)
-                     */
+/** Number of integration points in beam web(optional)
+ */
                     long NLOBZ;
 
-                    giorh(std::vector<std::string> const&, size_t const&);
+                    giorh(std::vector<std::string> const&, size_t const);
 
                     giorh(void);
 
                     giorh(
-                        long const &GEONO,
-                        double const &HZ, double const &TY, double const &BT,
-                        double const &TT, double const &BB, double const &TB,
-                        double const &SFY, double const &SFZ,
-                        long const &NLOBYT=0, long const &NLOBYB=0, long const &NLOBZ=0);
+                        long const GEONO,
+                        double const HZ, double const TY, double const BT,
+                        double const TT, double const BB, double const TB,
+                        double const SFY, double const SFZ,
+                        long const NLOBYT=0, long const NLOBYB=0, long const NLOBZ=0);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1431,7 +1467,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GLSEC`: Cross Section Type I or H Beam
@@ -1453,82 +1489,86 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_BY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<bool> static const _form_K;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<bool>
+                    static const _form_K;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBY;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
 
                 public:
 
-                    /** Height of beam at current location.
-                     */
+/** Height of beam at current location.
+ */
                     double HZ;
-                    /** Thickness of beam web.
-                     */
+/** Thickness of beam web.
+ */
                     double TY;
-                    /** Width of flange.
-                     */
+/** Width of flange.
+ */
                     double BY;
-                    /** Thickness of flange.
-                     */
+/** Thickness of flange.
+ */
                     double TZ;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARY(MOD) = SHARY(PROG) · SFY
-                        \f]
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
 
-                       (The shear area on `GBEAMG` os SHARY(MOD)).
-                    */
+    (The shear area on `GBEAMG` os SHARY(MOD)).
+*/
                     double SFY;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARZ(MOD) = SHARZ(PROG) · SFZ
-                        \f]
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
 
-                       (The shear area on `GBEAMG` os SHARZ(MOD)).
-                    */
+    (The shear area on `GBEAMG` os SHARZ(MOD)).
+*/
                     double SFZ;
-                    /** Web orientation:
+/** Web orientation:
 
-                        =0: web located in the negative local *y*-direction
-                       (and consequently flange in the
-                        positive *y*’-direction)
+      =0: web located in the negative local *y*-direction (and
+          consequently flange in the positive *y*’-direction)
 
-                        =1: web located in the positive local *y*-direction
-                       (and consequently flange in the
-                        negative *y*’-direction)
-                            */
+      =1: web located in the positive local *y*-direction (and
+          consequently flange in the negative *y*’-direction)
+*/
                     bool K;
-                    /** Number of integration points in beam flange
-                       (optional)
-                    */
+/** Number of integration points in beam flange (optional)
+ */
                     long NLOBY;
-                    /** Number of integration points in beam web(optional)
-                     */
+/** Number of integration points in beam web(optional)
+ */
                     long NLOBZ;
 
-                    glsec(std::vector<std::string> const&, size_t const&);
+                    glsec(std::vector<std::string> const&, size_t const);
 
                     glsec(void);
 
                     glsec(
-                        long const &GEONO,
-                        double const &HZ, double const &TY, double const &BY,
-                        double const &TZ,
-                        double const &SFY, double const &SFZ,
-                        bool const &K,
-                        long const &NLOBY=0, long const &NLOBZ=0);
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ,
+                        double const SFY, double const SFZ,
+                        bool const K,
+                        long const NLOBY=0, long const NLOBZ=0);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1540,7 +1580,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GPIPE`: Cross Section Type Tube
@@ -1561,63 +1601,69 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_DI;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_DY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_T;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NCIR;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NRAD;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_DI;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_DY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_T;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NCIR;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NRAD;
 
                 public:
 
-                    /** Inner diameter of tube.
-                     */
+/** Inner diameter of tube.
+ */
                     double DI;
-                    /** Outer diameter of tube(mandatory).
-                     */
+/** Outer diameter of tube(mandatory).
+ */
                     double DY;
-                    /** Thickness of tube(not necessary if DI is given).
-                     */
+/** Thickness of tube(not necessary if DI is given).
+ */
                     double T;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the
+    preprocessor program such that the modified shear
+    area is
 
-                        \f[
-                        SHARY(MOD) = SHARY(PROG) · SFY
-                        \f]
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
 
-                       (The shear area on `GBEAMG` os SHARY(MOD)).
-                    */
+    (The shear area on `GBEAMG` os SHARY(MOD)).
+*/
                     double SFY;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARZ(MOD) = SHARZ(PROG) · SFZ
-                        \f]
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
 
-                       (The shear area on `GBEAMG` os SHARZ(MOD)).
-                    */
+    (The shear area on `GBEAMG` os SHARZ(MOD)).
+*/
                     double SFZ;
-                    /** Number of integration points in circumferential direction(optional)
-                     */
+/** Number of integration points in circumferential direction(optional)
+ */
                     long NCIR;
-                    /** Number of integration points in radial direction(optional)
-                     */
+/** Number of integration points in radial direction(optional)
+ */
                     long NRAD;
 
-                    gpipe(std::vector<std::string> const&, size_t const&);
+                    gpipe(std::vector<std::string> const&, size_t const);
 
                     gpipe(void);
 
                     gpipe(
-                        long const &GEONO,
-                        double const &DI, double const &DY, double const &T,
-                        double const &SFY, double const &SFZ,
-                        long const &NDIR=0, long const &NRAD=0);
+                        long const GEONO,
+                        double const DI, double const DY, double const T,
+                        double const SFY, double const SFZ,
+                        long const NDIR=0, long const NRAD=0);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1629,7 +1675,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GUSYI`: Cross Section Type Unsymmetrical I-Beam
@@ -1652,90 +1698,101 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_B1;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_BB;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_B2;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_TB;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBYT;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBYB;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NLOBZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_B1;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_B2;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYB;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
 
 
                 public:
 
-                    /** Height of beam
-                     */
+/** Height of beam
+ */
                     double HZ;
-                    /** Thickness of beam web
-                     */
+/** Thickness of beam web
+ */
                     double TY;
-                    /** Width of top flange
-                     */
+/** Width of top flange
+ */
                     double BT;
-                    /** Width of half top-flange in positive local y-direction
-                     */
+/** Width of half top-flange in positive local y-direction
+ */
                     double B1;
-                    /** Thickness of top flange
-                     */
+/** Thickness of top flange
+ */
                     double TT;
-                    /** Width of bottom flange
-                     */
+/** Width of bottom flange
+ */
                     double BB;
-                    /** Width of half bottom-flange in positive local y-direction
-                     */
+/** Width of half bottom-flange in positive local y-direction
+ */
                     double B2;
-                    /** Thickness of bottom flange
-                     */
+/** Thickness of bottom flange
+ */
                     double TB;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARY(MOD) = SHARY(PROG) · SFY
-                        \f]
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
 
-                       (The shear area on `GBEAMG` os SHARY(MOD)).
-                    */
+    (The shear area on `GBEAMG` os SHARY(MOD)).
+*/
                     double SFY;
-                    /** Factor modifying the shear area calculated by the
-                        preprocessor program such that the modified shear
-                        area is
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
 
-                        \f[
-                        SHARZ(MOD) = SHARZ(PROG) · SFZ
-                        \f]
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
 
-                       (The shear area on `GBEAMG` os SHARZ(MOD)).
-                    */
+    (The shear area on `GBEAMG` os SHARZ(MOD)).
+*/
                     double SFZ;
-                    /** Number of integration points in top flange(optional)
-                     */
+/** Number of integration points in top flange(optional)
+ */
                     long NLOBYT;
-                    /** Number of integration points in bottom flange(optional)
-                     */
+/** Number of integration points in bottom flange(optional)
+ */
                     long NLOBYB;
-                    /** Number of integration points in beam web(optional)
-                     */
+/** Number of integration points in beam web(optional)
+ */
                     long NLOBZ;
 
-                    gusyi(std::vector<std::string> const&, size_t const&);
+                    gusyi(std::vector<std::string> const&, size_t const);
 
                     gusyi(void);
 
                     gusyi(
-                        long const &GEONO,
-                        double const &HZ, double const &TY,
-                        double const &BT, double const &B1, double const &TT,
-                        double const &BB, double const &B2, double const &TB,
-                        double const &SFY, double const &SFZ,
-                        long const &NLOBYT=0, long const &NLOBYB=0, long const &NLOBZ=0);
+                        long const GEONO,
+                        double const HZ, double const TY,
+                        double const BT, double const B1, double const TT,
+                        double const BB, double const B2, double const TB,
+                        double const SFY, double const SFZ,
+                        long const NLOBYT=0, long const NLOBYB=0, long const NLOBZ=0);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -1747,7 +1804,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `BELFIX`: Flexible Joint/Hinge
@@ -1759,17 +1816,21 @@ Example of format of `DATE` record as used in SESAM:
    | `BELFIX` | `FIXNO` | `OPT`  | `TRANO` | *void* |
    |          | `A(1)`  | `A(2)` | `A(3)`  | `A(4)` |
    |          | `A(5)`  | `A(6)` |         |        |
-   */
+*/
                 class belfix : public __base::card {
 
                 private:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_FIXNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_TRANO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_A;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_FIXNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_OPT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_TRANO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_A;
 
                 public:
 
@@ -1778,74 +1839,65 @@ Example of format of `DATE` record as used in SESAM:
                         FIXATION = 1, SPRING = 2,
                         FIXATION_END = 3, SPRING_END = 4}_opt;
 
-                    /** Fixation number to a node.
+/** Fixation number to a node.
 
-                        =FIXNO= is referenced to from =GELREF=.
-                    */
+    =FIXNO= is referenced to from =GELREF=.
+*/
                     long FIXNO;
+/**
+      =FIXATION: A(i) = ai is a value between 0 and 1, and gives the
+          degree of fixation (connectivity) to degree of freedom
+          number i in the node. The extreme values of a is described
+          by:
 
-                    /**
-                       =FIXATION: A(i) = ai is a value between 0 and 1, and
-                       gives the degree of fixation
-                      (connectivity) to degree of freedom
-                       number i in the node. The extreme values
-                       of a is described by:
+            a = 0, fully released
 
-                       a = 0, fully released
+            a = 1, fully connected
 
-                       a = 1, fully connected
+      =SPRING: A(i) = Ci is the interelement elastic spring stiffness
+          to degree of freedom number i in the node. The degrees of
+          freedom which are neither flexible nor free will be given Ci
+          = -1(instead of Ci = ∞). The relation between Ci and ai is
 
-                       =SPRING: A(i) = Ci is the interelement elastic
-                       spring stiffness to degree of freedom number
-                       i in the node. The degrees of freedom which
-                       are neither flexible nor free will be given
-                       Ci = -1(instead of Ci = ∞). The relation
-                       between Ci and ai is
+            ai = Ci /( kii + Ci) ≥ 0.0
 
-                       ai = Ci /( kii + Ci) ≥ 0.0
+          where kii is the diagonal term of the element stiffness
+          matrix corresponding to degree of freedom number i of the
+          current node.
 
-                       where kii is the diagonal term of the
-                       element stiffness matrix corresponding to
-                       degree of freedom number i of the current
-                       node.
+      =FIXATION_END: As =OPT=FIXATION=, where the hinge is located at
+          the end of the beam — and not at the node as for
+          =OPT=FIXATION=. This option is thus relevant for eccentric
+          beams.
 
-                       =FIXATION_END: As =OPT=FIXATION=, where the hinge is
-                       located at the end of the beam — and not at
-                       the node as for =OPT=FIXATION=. This option
-                       is thus relevant for eccentric beams.
-
-                       =SPRING_END: As =OPT=SPRING=, where the hinge is
-                       located at the end of the beam — and not at
-                       the node as for =OPT=SPRING=. This option
-                       is thus relevant for eccentric beams.
-                    */
+      =SPRING_END: As =OPT=SPRING=, where the hinge is located at the
+          end of the beam — and not at the node as for =OPT=SPRING=.
+          This option is thus relevant for eccentric beams.
+*/
                     n_opt OPT;
-                    /**
+/**
+      = -1: The fixation/flexibility(=A(i)) is given in the
+          superelement coordinate system.
 
-                       = -1: The fixation/flexibility(=A(i)) is given in
-                       the superelement coordinate system.
+      =0: A(i) is given in the local element coordinate system
 
-                       =0: A(i) is given in the local element coordinate
-                       system
-
-                       >0: A(i) is given in a local coordinate system
-                       defined by `TRANO`, which refers to a
-                       transformation matrix given on record `BNTRCOS`.
-                       The transformation matrix is defined by
-                       transformation from global to local system.
-                       */
+      >0: A(i) is given in a local coordinate system defined by
+          `TRANO`, which refers to a transformation matrix given on
+          record `BNTRCOS`. The transformation matrix is defined by
+          transformation from global to local system.
+*/
                     long TRANO;
-                    /** See above(under the explanation of `OPT`).
-                     */
+/** See above(under the explanation of `OPT`).
+ */
                     std::vector<double> A;
 
-                    belfix(std::vector<std::string> const&, size_t const&);
+                    belfix(std::vector<std::string> const&, size_t const);
 
                     belfix(void);
 
-                    belfix(long const &FIXNO,
-                           n_opt const &OPT,
-                           long const &TRANO,
+                    belfix(long const FIXNO,
+                           n_opt const OPT,
+                           long const TRANO,
                            std::vector<double> const &A);
 
                     dnvgl::extfem::fem::cards::types const
@@ -1858,7 +1910,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `BLDEP`: Nodes with Linear Dependence
@@ -1902,64 +1954,70 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_CNOD;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NDDOF;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NDEP;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_DEPDOF;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_INDEPDOF;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_b;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODENO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_CNOD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NDDOF;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NDEP;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_DEPDOF;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_INDEPDOF;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_b;
 
                 public:
 
-                    /** Internal node number of the dependent node.
-                     */
+/** Internal node number of the dependent node.
+ */
                     long NODENO;
-                    /** Internal node number of an independent node.
-                     */
+/** Internal node number of an independent node.
+ */
                     long CNOD;
-                    /** Number of dependent degrees of freedom of node
-                        `NODENO`. When not specified, `NDDOF` is equal to
-                        `NDEP`.
-                    */
+/** Number of dependent degrees of freedom of node `NODENO`. When not
+    specified, `NDDOF` is equal to `NDEP`.
+*/
                     long NDDOF;
-                    /** Number of triplets with `DEPDOF`, `INDEPDOF` and
-                        `b`<sub>*i,j*</sub>
-                    */
+/** Number of triplets with `DEPDOF`, `INDEPDOF` and
+    `b`<sub>*i,j*</sub>
+*/
                     long NDEP;
-                    /** Dependent node’s degree of freedom.
-                     */
+/** Dependent node’s degree of freedom.
+ */
                     std::vector<long> DEPDOF;
-                    /** Independent node’s degree of freedom.
-                     */
+/** Independent node’s degree of freedom.
+ */
                     std::vector<long> INDEPDOF;
-                    /** The contribution of the *j*’th degree of freedom of
-                        the independent node to the *i*’th degree of
-                        freedom of the dependent node.
-                    */
+ /** The contribution of the *j*’th degree of freedom of the
+     independent node to the *i*’th degree of freedom of the dependent
+     node.
+ */
                     std::vector<double> b;
 
-                    bldep(std::vector<std::string> const&, size_t const&);
+                    bldep(std::vector<std::string> const&, size_t const);
 
                     bldep(void);
 
-                    bldep(long const &NODENO,
-                          long const &CNOD,
-                          long const &NDDOF,
-                          long const &NDEP,
+                    bldep(long const NODENO,
+                          long const CNOD,
+                          long const NDDOF,
+                          long const NDEP,
                           std::vector<long> const &DEPDOF,
                           std::vector<long> const &INDEPDOF,
                           std::vector<double> const &b);
 
-                    bldep(long const &NODENO,
-                          long const &CNOD,
-                          long const &NDDOF,
+                    bldep(long const NODENO,
+                          long const CNOD,
+                          long const NDDOF,
                           std::vector<long> const &DEPDOF,
                           std::vector<long> const &INDEPDOF,
                           std::vector<double> const &b);
 
-                    bldep(long const &NODENO,
-                          long const &CNOD,
+                    bldep(long const NODENO,
+                          long const CNOD,
                           std::vector<long> const &DEPDOF,
                           std::vector<long> const &INDEPDOF,
                           std::vector<double> const &b);
@@ -1972,7 +2030,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `BNBCD`: Nodes with Boundary Conditions
@@ -2005,7 +2063,7 @@ Example of format of `DATE` record as used in SESAM:
    acceleration).
 
    The nodes(degrees of freedom) with `FIX` = 4 are called supernodes
-  (super degrees of freedom). The supernode sequence numbering is
+   (super degrees of freedom). The supernode sequence numbering is
    according to the increasing order of their internal node number.
 */
                 class bnbcd : public __base::card {
@@ -2014,86 +2072,88 @@ Example of format of `DATE` record as used in SESAM:
 
                     enum class fix_key : int {
                         INVALID = -1,
-                        /// free to stay
+/// free to stay
                         FREE = 0,
-                        /// fixed at zero displacement, temperature, etc.
+/// fixed at zero displacement, temperature, etc.
                         DISPL_FIX = 1,
-                        /// prescribed displacement, temperature, different from zero
+/// prescribed displacement, temperature, different from zero
                         PRESCRIBED = 2,
-                        /// linearly dependent
+/// linearly dependent
                         LINDEP = 3,
-                        /// restrained degree of freedom
+/// restrained degree of freedom
                         RETAINED = 4};
 
                 private:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_FIX;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODENO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NDOF;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_FIX;
 
-                    fix_key const fix_key_conv(long const &) const;
-                    fix_key const fix_key_conv(bool const &) const;
-                    long const fix_key_conv(fix_key const &) const;
+                    fix_key const fix_key_conv(long const) const;
+                    fix_key const fix_key_conv(bool const) const;
+                    long const fix_key_conv(fix_key const) const;
 
                 public:
 
-                    /** Internal node number of nodes with specified
-                        boundary condition.
-                    */
+/** Internal node number of nodes with specified boundary condition.
+ */
                     long NODENO;
-                    /** Number of degrees of freedom.
-                     */
+/** Number of degrees of freedom.
+ */
                     long NDOF;
-                    /** Specification of boundary condition codes of
-                        relevant degrees of freedom.
-                    */
+/** Specification of boundary condition codes of relevant degrees of
+    freedom.
+*/
                     std::vector<fix_key> FIX;
 
-                    bnbcd(std::vector<std::string> const&, size_t const&);
+                    bnbcd(std::vector<std::string> const&, size_t const);
 
                     bnbcd(void);
 
-                    bnbcd(long const &NODENO,
-                          long const &NDOF,
+                    bnbcd(long const NODENO,
+                          long const NDOF,
                           std::vector<fix_key> const &FIX);
 
-                    bnbcd(long const &NODENO,
+                    bnbcd(long const NODENO,
                           std::vector<fix_key> const &FIX);
 
-                    bnbcd(long const &NODENO,
-                          fix_key const &FIX1, fix_key const &FIX2,
-                          fix_key const &FIX3, fix_key const &FIX4,
-                          fix_key const &FIX5, fix_key const &FIX6);
+                    bnbcd(long const NODENO,
+                          fix_key const FIX1, fix_key const FIX2,
+                          fix_key const FIX3, fix_key const FIX4,
+                          fix_key const FIX5, fix_key const FIX6);
 
-                    bnbcd(long const &NODENO,
-                          bool const &FIX1, bool const &FIX2,
-                          bool const &FIX3, bool const &FIX4,
-                          bool const &FIX5, bool const &FIX6);
+                    bnbcd(long const NODENO,
+                          bool const FIX1, bool const FIX2,
+                          bool const FIX3, bool const FIX4,
+                          bool const FIX5, bool const FIX6);
 
                     using __base::card::operator();
 
                     __base::card const &operator()(
-                        long const &NODENO,
-                        long const &NDOF,
+                        long const NODENO,
+                        long const NDOF,
                         std::vector<fix_key> const &FIX);
 
                     __base::card const &operator()(
-                        long const &NODENO,
+                        long const NODENO,
                         std::vector<fix_key> const &FIX);
 
                     __base::card const &operator()(
-                        long const &NODENO,
-                        fix_key const &FIX1, fix_key const &FIX2,
-                        fix_key const &FIX3, fix_key const &FIX4,
-                        fix_key const &FIX5, fix_key const &FIX6);
+                        long const NODENO,
+                        fix_key const FIX1, fix_key const FIX2,
+                        fix_key const FIX3, fix_key const FIX4,
+                        fix_key const FIX5, fix_key const FIX6);
 
                     __base::card const &operator()(
-                        long const &NODENO,
-                        bool const &FIX1, bool const &FIX2,
-                        bool const &FIX3, bool const &FIX4,
-                        bool const &FIX5, bool const &FIX6);
+                        long const NODENO,
+                        bool const FIX1, bool const FIX2,
+                        bool const FIX3, bool const FIX4,
+                        bool const FIX5, bool const FIX6);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -2102,7 +2162,7 @@ Example of format of `DATE` record as used in SESAM:
 
                     virtual std::ostream &put(std::ostream&) const;
 
-                    virtual void read(std::vector<std::string> const&, size_t const&);
+                    virtual void read(std::vector<std::string> const&, size_t const);
                 };
 
 /// `BNDISPL`: Nodes with Prescribed Displacements and Accelerations
@@ -2134,78 +2194,84 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_LLC;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_DTYPE;
-                    dnvgl::extfem::fem::types::entry_type<bool> static const _form_COMPLX;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_RDISP;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_IDISP;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_LLC;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_DTYPE;
+                    dnvgl::extfem::fem::types::entry_type<bool>
+                    static const _form_COMPLX;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODENO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NDOF;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_RDISP;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_IDISP;
 
                 public:
 
-                    /** Local load case number(positive integer number).
-                    */
+/** Local load case number(positive integer number).
+ */
                     long LLC;
-                    /** Type of boundary condition.
+/** Type of boundary condition.
 
-                        =1: specified displacement
+      =1: specified displacement
 
-                        =3: specified acceleration
-                    */
+      =3: specified acceleration
+*/
                     long DTYPE;
-                    /** Phase shift definition.
+/** Phase shift definition.
 
-                        =false: no phase shift
+      =false: no phase shift
 
-                        =true: phase shift
-                    */
+      =true: phase shift
+*/
                     bool COMPLX;
-                    /** Program defined node number.
-                     */
+/** Program defined node number.
+ */
                     long NODENO;
-                    /** Number of degrees of freedom at the node NODENO.
-                     */
+/** Number of degrees of freedom at the node NODENO.
+ */
                     long NDOF;
-                    /** The real part of the specified boundary condition
-                        with respect to the rspt. degree of freedom.
-                    */
+/** The real part of the specified boundary condition with respect to
+    the rspt. degree of freedom.
+*/
                     std::vector<double> RDISP;
-                    /** The imagenary part of the specified boundary
-                        condition with respect to the rspt. degree of
-                        freedom.
-                    */
+/** The imagenary part of the specified boundary condition with
+    respect to the rspt. degree of freedom.
+*/
                     std::vector<double> IDISP;
 
-                    bndispl(std::vector<std::string> const&, size_t const&);
+                    bndispl(std::vector<std::string> const&, size_t const);
 
                     bndispl(void);
 
-                    bndispl(long const &LLC,
-                            long const &DTYPE,
-                            bool const &COMPLX,
-                            long const &NODENO,
-                            long const &NDOF,
+                    bndispl(long const LLC,
+                            long const DTYPE,
+                            bool const COMPLX,
+                            long const NODENO,
+                            long const NDOF,
                             std::vector<double> const &RDISP,
                             std::vector<double> const &IDISP={});
 
-                    bndispl(long const &LLC,
-                            long const &DTYPE,
-                            bool const &COMPLX,
-                            long const &NODENO,
+                    bndispl(long const LLC,
+                            long const DTYPE,
+                            bool const COMPLX,
+                            long const NODENO,
                             std::vector<double> const &RDISP,
                             std::vector<double> const &IDISP={});
 
-                    bndispl(long const &LLC,
-                            long const &DTYPE,
-                            long const &NODENO,
-                            long const &NDOF,
+                    bndispl(long const LLC,
+                            long const DTYPE,
+                            long const NODENO,
+                            long const NDOF,
                             std::vector<double> const &RDISP,
                             std::vector<double> const &IDISP={});
 
-                    bndispl(long const &LLC,
-                            long const &DTYPE,
-                            long const &NODENO,
+                    bndispl(long const LLC,
+                            long const DTYPE,
+                            long const NODENO,
                             std::vector<double> const &RDISP,
                             std::vector<double> const &IDISP={});
 
@@ -2217,7 +2283,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `BNLOAD`: Nodes with Loads
@@ -2246,81 +2312,87 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_LLC;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_LOTYP;
-                    dnvgl::extfem::fem::types::entry_type<bool> static const _form_COMPLX;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_RLOAD;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_ILOAD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_LLC;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_LOTYP;
+                    dnvgl::extfem::fem::types::entry_type<bool>
+                    static const _form_COMPLX;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NODENO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NDOF;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_RLOAD;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_ILOAD;
 
                 public:
 
-                    /** Local load case number(positive integer number).
-                     */
+/** Local load case number(positive integer number).
+ */
                     long LLC;
-                    /** Load type at node `NODENO`. Usually not of interest
-                        to linear programs.
+/** Load type at node `NODENO`. Usually not of interest to linear
+    programs.
 
-                        =0: not decided whether conservative or
-                        non-conservative load
+      =0: not decided whether conservative or non-conservative load
 
-                        =1: conservative load
+      =1: conservative load
 
-                        =-1: non-conservative load
-                    */
+      =-1: non-conservative load
+*/
                     long LOTYP;
-                    /** Phase shift definition.
+/** Phase shift definition.
 
-                        =false: no phase shift
+      =false: no phase shift
 
-                        =true: phase shift
-                    */
+      =true: phase shift
+*/
                     bool COMPLX;
-                    /** Program defined node number.
-                     */
+/** Program defined node number.
+ */
                     long NODENO;
-                    /** Number of degrees of freedom at the node NODENO.
-                     */
+/** Number of degrees of freedom at the node NODENO.
+ */
                     long NDOF;
-                    /** The real part of the load with respect to the rspt.
-                        degree of freedom.
-                    */
+/** The real part of the load with respect to the rspt. degree of
+    freedom.
+*/
                     std::vector<double> RLOAD;
-                    /** The imaginary part of the load with respect to the
-                        rspt. degree of freedom.(Only if `COMPLX` == true).
-                    */
+/** The imaginary part of the load with respect to the rspt. degree of
+    freedom.(Only if `COMPLX` == true).
+*/
                     std::vector<double> ILOAD;
 
-                    bnload(std::vector<std::string> const&, size_t const&);
+                    bnload(std::vector<std::string> const&, size_t const);
 
                     bnload(void);
 
-                    bnload(long const &LLC,
-                           long const &LOTYP,
-                           bool const &COMPLX,
-                           long const &NODENO,
-                           long const &NDOF,
+                    bnload(long const LLC,
+                           long const LOTYP,
+                           bool const COMPLX,
+                           long const NODENO,
+                           long const NDOF,
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD={});
 
-                    bnload(long const &LLC,
-                           long const &LOTYP,
-                           bool const &COMPLX,
-                           long const &NODENO,
+                    bnload(long const LLC,
+                           long const LOTYP,
+                           bool const COMPLX,
+                           long const NODENO,
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD={});
 
-                    bnload(long const &LLC,
-                           long const &LOTYP,
-                           long const &NODENO,
-                           long const &NDOF,
+                    bnload(long const LLC,
+                           long const LOTYP,
+                           long const NODENO,
+                           long const NDOF,
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD={});
 
-                    bnload(long const &LLC,
-                           long const &LOTYP,
-                           long const &NODENO,
+                    bnload(long const LLC,
+                           long const LOTYP,
+                           long const NODENO,
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD={});
 
@@ -2332,7 +2404,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `MGSPRNG`: Element to Ground
@@ -2356,37 +2428,39 @@ Example of format of `DATE` record as used in SESAM:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_K;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_MATNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NDOF;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_K;
 
                 public:
 
-                    /** Material number, i.e. reference number referenced
-                        to by the element specification.
-                    */
+/** Material number, i.e. reference number referenced to by the
+    element specification.
+*/
                     long MATNO;
-                    /** Number of degrees of freedom of the node.
-                     */
+/** Number of degrees of freedom of the node.
+ */
                     long NDOF;
-                    /** Elements of the stiffness matrix(only elements on
-                        and below the main diagonal are stored, i.e.
-                        symmetric stiffness matrix assumed). The elements
-                        are referred to a local coordinate system if
-                        defined(by `TRANSNO` on `GELREF1`), otherwise to
-                        the global coordinate system of the superelement.
-                    */
+/** Elements of the stiffness matrix(only elements on and below the
+    main diagonal are stored, i.e. symmetric stiffness matrix
+    assumed). The elements are referred to a local coordinate system
+    if defined(by `TRANSNO` on `GELREF1`), otherwise to the global
+    coordinate system of the superelement.
+*/
                     std::vector<std::vector<double> > K;
 
-                    mgsprng(std::vector<std::string> const&, size_t const&);
+                    mgsprng(std::vector<std::string> const&, size_t const);
 
                     mgsprng(void);
 
-                    mgsprng(long const &MATNO,
-                            long const &NDOF,
+                    mgsprng(long const MATNO,
+                            long const NDOF,
                             std::vector<std::vector<double> > const &K);
 
-                    mgsprng(long const &MATNO,
+                    mgsprng(long const MATNO,
                             std::vector<std::vector<double> > const &K);
 
                     dnvgl::extfem::fem::cards::types const
@@ -2397,7 +2471,7 @@ Example of format of `DATE` record as used in SESAM:
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GSETMEMB`: set(group) of Nodes or Elements(Members)
@@ -2415,38 +2489,38 @@ Example of format of `DATE` record as used in SESAM:
 
    ### Comments:
 
-The set datatype consists of one name and description of set record
-(`TDSETNAM`) and one or more set member records(`GSETMEMB`).
+   The set datatype consists of one name and description of set record
+   (`TDSETNAM`) and one or more set member records(`GSETMEMB`).
 
-It should be noted that a set may have its set members distributed
-over several set member records(`GSETMEMB`) all having the same set
-identification number(`ISREF`) and consequently also the same
-`TDSETNAM` record. The total number of set members will then be the
-sum of the number of set members(`NMEMB`) for each of the set
-records.
+   It should be noted that a set may have its set members distributed
+   over several set member records(`GSETMEMB`) all having the same set
+   identification number(`ISREF`) and consequently also the same
+   `TDSETNAM` record. The total number of set members will then be the
+   sum of the number of set members(`NMEMB`) for each of the set
+   records.
 
-### Restrictions:
+   ### Restrictions:
 
-  - Only one set type(ISTYPE) for same set identification number
+   - Only one set type(ISTYPE) for same set identification number
    (`ISREF`) is allowed.
 
-  - If several records for the same set identification number
+   - If several records for the same set identification number
    (`ISREF`), record numbering must be strictly sequential; 1 <
-    `INDEX` < `NINDEX`, where `NINDEX` is number of records per set.
+   `INDEX` < `NINDEX`, where `NINDEX` is number of records per set.
 
-  - A set member(number) should only be included once in the list.
+   - A set member(number) should only be included once in the list.
 */
                 class gsetmemb : public __base::card {
 
                 public:
 
-                    /** Define the possible set types.
-                     */
+/** Define the possible set types.
+ */
                     enum class types {
                         NODE_SET = 1, ELEM_SET = 2, UNDEF_TYPE=-999
                     };
-                    /** Define the possible set origins
-                     */
+/** Define the possible set origins
+ */
                     enum class origins {
                         UNDEF_ORIGIN = 0,
                         POINT_ORIGIN = 1,
@@ -2459,91 +2533,94 @@ records.
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ISREF;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_INDEX;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ISTYPE;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ISORIG;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_IRMEMB;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NFIELD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ISREF;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_INDEX;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ISTYPE;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ISORIG;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_IRMEMB;
 
                     std::unordered_map<long, types> static const types_map;
-                    types static to_types(long const&);
+                    types static to_types(long const);
                     std::unordered_map<long, origins> static const origins_map;
-                    origins static to_origins(long const&);
+                    origins static to_origins(long const);
 
                 public:
 
-                    /** Number of data fields on this record(maximum is
-                        1024)
-                    */
+/** Number of data fields on this record(maximum is 1024)
+ */
                     long NFIELD;
-                    /** Internal set identification number as defined on
-                        the name and description of a set record
-                       (`TDSETNAM`).
-                    */
+/** Internal set identification number as defined on the name and
+    description of a set record (`TDSETNAM`).
+ */
                     long ISREF;
-                    /** Sequential record number for current set(`ISREF`).
-                        Each set may consist of one or more `GSETMEMB`
-                        records with same set identification number
-                       (`ISREF`). `INDEX` must be strictly increasing from
-                        1 and upwards till number of `GSETMEMB` records for
-                        this set of members(nodes or elements).
-                    */
+/** Sequential record number for current set(`ISREF`). Each set may
+    consist of one or more `GSETMEMB` records with same set
+    identification number (`ISREF`). `INDEX` must be strictly
+    increasing from 1 and upwards till number of `GSETMEMB` records
+    for this set of members(nodes or elements).
+*/
                     long INDEX;
-                    /** set type
+/** set type
 
-                          =1: , set of nodes
+      =1: , set of nodes
 
-                          =2: , set of elements
+      =2: , set of elements
 
-                        Set Type(`ISTYPE`) and interpretation of set Member Number(`IRMEMB`)
+    Set Type(`ISTYPE`) and interpretation of set Member Number(`IRMEMB`)
 
-                        | `ISTYPE` | Description     | Interpretation of `IRMEMB`        |
-                        | -------: | --------------- | --------------------------------- |
-                        | 1        | set of Nodes    | Internal Node Number(`IINOD`)    |
-                        | 2        | set of Elements | Internal Element Number(`IELNO`) |
-                    */
+      | `ISTYPE` | Description     | Interpretation of `IRMEMB`        |
+      | -------: | --------------- | --------------------------------- |
+      | 1        | set of Nodes    | Internal Node Number(`IINOD`)    |
+      | 2        | set of Elements | Internal Element Number(`IELNO`) |
+*/
                     types ISTYPE;
-                    /** set origin type
+/** set origin type
 
-                        = 0:, undefined origin
+      = 0:, undefined origin
 
-                        = 1:, point
+      = 1:, point
 
-                        = 2:, line(or curve)
+      = 2:, line(or curve)
 
-                        = 3:, surface
+      = 3:, surface
 
-                        = 4:, body
-                    */
+      = 4:, body
+*/
                     origins ISORIG;
-                    /** `NMEMB` set member numbers on this record.
+/** `NMEMB` set member numbers on this record.
 
-                        `NMEMB` is number of set members on the current
-                        record. `NMEMB` = `NFIELD` - 5
-                    */
+    `NMEMB` is number of set members on the current record. `NMEMB` =
+    `NFIELD` - 5
+*/
                     std::vector<long> IRMEMB;
 
-                    gsetmemb(std::vector<std::string> const&, size_t const&);
+                    gsetmemb(std::vector<std::string> const&, size_t const);
 
                     gsetmemb(void);
 
-                    gsetmemb(long const &NFIELD,
-                             long const &ISREF,
-                             long const &INDEX,
-                             types const &ISTYPE,
-                             origins const &ISORIG,
+                    gsetmemb(long const NFIELD,
+                             long const ISREF,
+                             long const INDEX,
+                             types const ISTYPE,
+                             origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
 
-                    gsetmemb(long const &ISREF,
-                             long const &INDEX,
-                             types const &ISTYPE,
-                             origins const &ISORIG,
+                    gsetmemb(long const ISREF,
+                             long const INDEX,
+                             types const ISTYPE,
+                             origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
 
-                    gsetmemb(long const &ISREF,
-                             types const &ISTYPE,
-                             origins const &ISORIG,
+                    gsetmemb(long const ISREF,
+                             types const ISTYPE,
+                             origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
 
                     dnvgl::extfem::fem::cards::types const
@@ -2554,22 +2631,22 @@ records.
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `GUNIVEC`: Specification of Local Element Coordinate System
 /**
-## Format:
+   ## Format:
 
-|           |           |        |        |        |
-| --------- | --------- | ------ | ------ | ------ |
-| `GUNIVEC` | `TRANSNO` | `UNIX` | `UNIY` | `UNIZ` |
+   |           |           |        |        |        |
+   | --------- | --------- | ------ | ------ | ------ |
+   | `GUNIVEC` | `TRANSNO` | `UNIX` | `UNIY` | `UNIZ` |
 
-The `GUNIVEC` records are used for beam elements only, i.e. basic
-element types 2, 15 and 23. Other basic element types may refer to
-`BNTRCOS` records. No ambiguity thus exists if both a `GUNIVEC` and
-`BNTRCOS` record have same `TRANSNO`, but they should preferably have
-separate numbering(`TRANSNO`) to avoid possible program problems.
+   The `GUNIVEC` records are used for beam elements only, i.e. basic
+   element types 2, 15 and 23. Other basic element types may refer to
+   `BNTRCOS` records. No ambiguity thus exists if both a `GUNIVEC` and
+   `BNTRCOS` record have same `TRANSNO`, but they should preferably have
+   separate numbering(`TRANSNO`) to avoid possible program problems.
 */
                 class gunivec : public __base::card {
 
@@ -2577,43 +2654,44 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_TRANSNO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_UNIX;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_UNIY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_UNIZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_TRANSNO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_UNIX;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_UNIY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_UNIZ;
 
                 public:
 
-                    /** Unit vector number, referenced to on record `GELREF1`.
-                     */
+/** Unit vector number, referenced to on record `GELREF1`.
+ */
                     long TRANSNO;
-                    /** *x* component of Unit vector given in superelement
-                        coordinate system along the local z-axis(reference
-                        axis in z-direction) of the element in the
-                        particular node.
-                    */
+/** *x* component of Unit vector given in superelement coordinate
+    system along the local z-axis(reference axis in z-direction) of
+    the element in the particular node.
+*/
                     double UNIX;
-                    /** *y* component of Unit vector given in superelement
-                        coordinate system along the local z-axis(reference
-                        axis in z-direction) of the element in the
-                        particular node.
-                    */
+ /** *y* component of Unit vector given in superelement coordinate
+     system along the local z-axis(reference axis in z-direction) of
+     the element in the particular node.
+ */
                     double UNIY;
-                    /** *z* component of Unit vector given in superelement
-                        coordinate system along the local z-axis(reference
-                        axis in z-direction) of the element in the
-                        particular node.
-                    */
+/** *z* component of Unit vector given in superelement coordinate
+    system along the local z-axis(reference axis in z-direction) of
+    the element in the particular node.
+*/
                     double UNIZ;
 
-                    gunivec(std::vector<std::string> const&, size_t const&);
+                    gunivec(std::vector<std::string> const&, size_t const);
 
                     gunivec(void);
 
-                    gunivec(long const &TRANSNO,
-                            double const &UNIX,
-                            double const &UNIY,
-                            double const &UNIZ);
+                    gunivec(long const TRANSNO,
+                            double const UNIX,
+                            double const UNIY,
+                            double const UNIZ);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -2623,7 +2701,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
@@ -2634,73 +2712,84 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
    | --------- | ------- | ------- | ------- | ------- |
    | `MISOSEL` | `MATNO` | `YOUNG` | `POISS` | `RHO`   |
    |           | `DAMP`  | `ALPHA` | `DUMMY` | `YIELD` |
-   */
+*/
                 class misosel : public  __base::material {
 
                 private:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    // dnvgl::extfem::fem::types::entry_type<long> static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_YOUNG;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_POISS;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_RHO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_DAMP;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_ALPHA;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_DUMMY;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_YIELD;
+                    // dnvgl::extfem::fem::types::entry_type<long>
+                    // static const _form_MATNO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_YOUNG;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_POISS;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_RHO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_DAMP;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_ALPHA;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_DUMMY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_YIELD;
 
                 public:
-                    /* Material number, i.e. reference number referenced
-                       to by the element specification.
-                    */
-                    // long MATNO;
-                    /** Young’s modulus.
-                     */
+// /* Material number, i.e. reference number referenced to by the element
+//    specification.
+// */
+//                     long MATNO;
+/** Young’s modulus.
+ */
                     double YOUNG;
-                    /** Poisson’s ratio.
-                     */
+/** Poisson’s ratio.
+ */
                     double POISS;
-                    /** Density.
-                     */
+/** Density.
+ */
                     double RHO;
-                    /** Specific damping.
-                     */
+/** Specific damping.
+ */
                     double DAMP;
-                    /** Thermal expansion coefficient.
-                     */
+/** Thermal expansion coefficient.
+ */
                     double ALPHA;
-                    /** *Unknown value, not documented!!*
-                     */
+/** *Unknown value, not documented!!*
+ */
                     double DUMMY;
-                    /** Yield stress value for this material.
-                     */
+/** Yield stress value for this material.
+ */
                     double YIELD;
 
-                    misosel(std::vector<std::string> const&, size_t const&);
+                    misosel(std::vector<std::string> const&, size_t const);
 
                     misosel(void);
 
-                    misosel(long const &MATNO,
-                            double const &YOUNG,
-                            double const &POISS,
-                            double const &RHO,
-                            double const &DAMP,
-                            double const &ALPHA,
-                            double const &DUMMY=0.,
-                            double const &YIELD=0.);
+                    misosel(long const MATNO,
+                            double const YOUNG,
+                            double const POISS,
+                            double const RHO,
+                            double const DAMP,
+                            double const ALPHA,
+                            double const DUMMY=0.,
+                            double const YIELD=0.);
 
                     using material::operator();
 
+                    virtual __base::card const &operator() (
+                        std::vector<std::string> const&, size_t const);
+
                     __base::card const &operator()(
-                        long const &MATNO,
-                        double const &YOUNG,
-                        double const &POISS,
-                        double const &RHO,
-                        double const &DAMP,
-                        double const &ALPHA,
-                        double const &DUMMY=0.,
-                        double const &YIELD=0.);
+                        long const MATNO,
+                        double const YOUNG,
+                        double const POISS,
+                        double const RHO,
+                        double const DAMP,
+                        double const ALPHA,
+                        double const DUMMY=0.,
+                        double const YIELD=0.);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -2710,7 +2799,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `MORSMEL`: Anisotropy, Linear Elastic Structural Analysis,
@@ -2735,143 +2824,150 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     dnvgl::extfem::fem::types::card static const head;
 
                     // dnvgl::extfem::fem::types::entry_type<long>
-                    //  static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_Q1;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_Q2;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_Q3;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_RHO;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_D11;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_D21;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_D22;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_D31;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_D32;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_D33;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_PS1;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_PS2;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_DAMP1;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_DAMP2;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_ALPHA1;
-                    dnvgl::extfem::fem::types::entry_type<double> static const _form_ALPHA2;
+                    // static const _form_MATNO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_Q1;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_Q2;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_Q3;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_RHO;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_D11;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_D21;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_D22;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_D31;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_D32;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_D33;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_PS1;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_PS2;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_DAMP1;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_DAMP2;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_ALPHA1;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_ALPHA2;
 
                 public:
 
-                    /* Material number. Reference number referenced to by
-                       the element specification. */
-                    // long MATNO;
-                    /** First component of global components of a vector Q
-                        indicating axes of anisotropy. The first principal
-                        axis of anisotropy is referred to the projection of
-                        Q on the membrane plane.
-                    */
+// /* Material number. Reference number referenced to by the element
+//    specification. */
+//                     long MATNO;
+/** First component of global components of a vector Q indicating axes
+    of anisotropy. The first principal axis of anisotropy is referred
+    to the projection of Q on the membrane plane.
+*/
                     double Q1;
-                    /** Second component of global components of a vector Q
-                        indicating axes of anisotropy. The first principal
-                        axis of anisotropy is referred to the projection of
-                        Q on the membrane plane.
-                    */
+/** Second component of global components of a vector Q indicating
+    axes of anisotropy. The first principal axis of anisotropy is
+    referred to the projection of Q on the membrane plane.
+*/
                     double Q2;
-                    /** Third component of global components of a vector Q
-                        indicating axes of anisotropy. The first principal
-                        axis of anisotropy is referred to the projection of
-                        Q on the membrane plane.
-                    */
+/** Third component of global components of a vector Q indicating axes
+    of anisotropy. The first principal axis of anisotropy is referred
+    to the projection of Q on the membrane plane.
+*/
                     double Q3;
-                    /** Density
-                     */
+/** Density
+ */
                     double RHO;
-                    /** Component of the lower triangular part of the
-                        general anisotropic elasticity matrix.
+/** Component of the lower triangular part of the general anisotropic
+    elasticity matrix.
 
-                        In case of orthotropy, only D11, D21, D22 and D33
-                        are nonzero.
-                    */
+    In case of orthotropy, only D11, D21, D22 and D33 are nonzero.
+*/
                     double D11;
-                    /** Component of the lower triangular part of the
-                        general anisotropic elasticity matrix.
-                    */
+/** Component of the lower triangular part of the general anisotropic
+    elasticity matrix.
+*/
                     double D21;
-                    /** Component of the lower triangular part of the
-                        general anisotropic elasticity matrix.
-                    */
+/** Component of the lower triangular part of the general anisotropic
+    elasticity matrix.
+*/
                     double D22;
-                    /** Component of the lower triangular part of the
-                        general anisotropic elasticity matrix.
-                    */
+/** Component of the lower triangular part of the general anisotropic
+    elasticity matrix.
+*/
                     double D31;
-                    /** Component of the lower triangular part of the
-                        general anisotropic elasticity matrix.
-                    */
+/** Component of the lower triangular part of the general anisotropic
+    elasticity matrix.
+*/
                     double D32;
-                    /** Component of the lower triangular part of the
-                        general anisotropic elasticity matrix.
-                    */
+/** Component of the lower triangular part of the general anisotropic
+    elasticity matrix.
+*/
                     double D33;
-                    /** Only given for plane strain situation. The stress
-                        normal to the membrane plane(sn) is calculated as
-                        follows: sn = PS1·s1 + PS2·s2
+/** Only given for plane strain situation. The stress normal to the
+    membrane plane(sn) is calculated as follows: sn = PS1·s1 + PS2·s2
 
-                       (For an isotropic material PS1 and PS2 equal
-                        Poisson’s ratio)
-                    */
+    (For an isotropic material PS1 and PS2 equal Poisson’s ratio)
+*/
                     double PS1;
-                    /** Only given for plane strain situation. The stress
-                        normal to the membrane plane(sn) is calculated as
-                        follows: sn = PS1·s1 + PS2·s2
+/** Only given for plane strain situation. The stress normal to the
+    membrane plane(sn) is calculated as follows: sn = PS1·s1 + PS2·s2
 
-                       (For an isotropic material PS1 and PS2 equal
-                        Poisson’s ratio)
-                    */
+    (For an isotropic material PS1 and PS2 equal Poisson’s ratio)
+*/
                     double PS2;
-                    /** Specific damping along the 1. principal axis of
-                        anisotropy.
-                    */
+/** Specific damping along the 1. principal axis of anisotropy.
+ */
                     double DAMP1;
-                    /** Specific damping along the 2. principal axis of
-                        anisotropy.
-                    */
+/** Specific damping along the 2. principal axis of anisotropy.
+ */
                     double DAMP2;
-                    /** Thermal expansion coefficients along the 1.
-                        principal axis of anisotropy.
-                    */
+/** Thermal expansion coefficients along the 1. principal axis of
+    anisotropy.
+*/
                     double ALPHA1;
-                    /** Thermal expansion coefficients along the 1.
-                        principal axis of anisotropy.
+/** Thermal expansion coefficients along the 1. principal axis of
+    anisotropy.
                     */
                     double ALPHA2;
 
-                    morsmel(std::vector<std::string> const&, size_t const&);
+                    morsmel(std::vector<std::string> const&, size_t const);
 
                     morsmel(void);
 
-                    morsmel(long const &MATNO,
-                            double const &Q1,
-                            double const &Q2,
-                            double const &Q3,
-                            double const &RHO,
-                            double const &D11,
-                            double const &D21,
-                            double const &D22,
-                            double const &D31,
-                            double const &D32,
-                            double const &D33,
-                            double const &PS1,
-                            double const &PS2,
-                            double const &DAMP1,
-                            double const &DAMP2,
-                            double const &ALPHA1,
-                            double const &ALPHA2);
+                    morsmel(long const MATNO,
+                            double const Q1,
+                            double const Q2,
+                            double const Q3,
+                            double const RHO,
+                            double const D11,
+                            double const D21,
+                            double const D22,
+                            double const D31,
+                            double const D32,
+                            double const D33,
+                            double const PS1,
+                            double const PS2,
+                            double const DAMP1,
+                            double const DAMP2,
+                            double const ALPHA1,
+                            double const ALPHA2);
+
+                    virtual __base::card const &operator() (
+                        std::vector<std::string> const&, size_t const);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
-
-                    using material::operator();
 
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        std::vector<std::string> const&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `TDSETNAM`: Name and Description of a set(group)
@@ -2887,7 +2983,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
    |            | \<text line\>                      | | | |
 
    This record together with the set of nodes or elements record(s)
-  (`GSETMEMB`) constitutes the set(group) datatype.
+   (`GSETMEMB`) constitutes the set(group) datatype.
 */
                 class tdsetnam : public __base::card {
 
@@ -2895,12 +2991,18 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_ISREF;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_CODNAM;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_CODTXT;
-                    dnvgl::extfem::fem::types::entry_type<std::string> static const _form_SET_NAME;
-                    dnvgl::extfem::fem::types::entry_type<std::string> static const _form_CONT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NFIELD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_ISREF;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_CODNAM;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_CODTXT;
+                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    static const _form_SET_NAME;
+                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    static const _form_CONT;
 
                     bool nlnam;
                     long ncnam;
@@ -2909,95 +3011,90 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                 public:
 
-                    /** Number of numeric data fields on this record before
-                     * text data(MAX = 1024).
-                     */
+/** Number of numeric data fields on this record before text data (MAX
+    = 1024).
+*/
                     long NFIELD;
-                    /** Internal set identification number. Legal range [1,
-                        `NSET`], where `NSET` is number of sets which is
-                        equeal to number of "Name and Description of a set"
-                        records(`TDSETNAM`). Two `TDSETNAM` records may
-                        not have identical set identification numbers
-                       (`ISREF`).
-                    */
+/** Internal set identification number. Legal range [1, `NSET`], where
+    `NSET` is number of sets which is equeal to number of "Name and
+    Description of a set" records(`TDSETNAM`). Two `TDSETNAM` records
+    may not have identical set identification numbers (`ISREF`).
+*/
                     long ISREF;
-                    /** Coded dimension of set name:
+/** Coded dimension of set name:
 
-                        \f[
-                        \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
-                        \f]
+      \f[
+      \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
+      \f]
 
-                        The inverse relation will then be
+    The inverse relation will then be
 
-                        - `NLNAM` - number of physical records used for
-                        storing of set name.
+      - `NLNAM` - number of physical records used for storing of set
+        name.
 
-                        Legal range = [0,1]
+        Legal range = [0,1]
 
-                        - = 0, no name defined
+          - = 0, no name defined
 
-                        - = 1, name is defined
+          - = 1, name is defined
 
-                        `NLNAM` = integer part of(`CODNAM` / 100)
+        `NLNAM` = integer part of(`CODNAM` / 100)
 
-                            - `NCNAM` - number of characters in set name.
+      - `NCNAM` - number of characters in set name.
 
-                            Legal range = [0,64]
+        Legal range = [0,64]
 
-                            `NCNAM` = remaindering of(`CODNAM` / 100)
-                            */
+        `NCNAM` = remaindering of(`CODNAM` / 100)
+*/
                     long CODNAM;
-                    /** Coded dimension of set description text:
+/** Coded dimension of set description text:
 
-                        \f[
-                        \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
-                        \f]
+      \f[
+      \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
+      \f]
 
-                        The inverse relation will then be:
+    The inverse relation will then be:
 
-                        - `NLTXT` - number of physical records used for
-                        storing of set description text. Legal range =
-                        [0,5]
+      - `NLTXT` - number of physical records used for storing of set
+        description text. Legal range = [0,5]
 
-                        - = 0, no description text defined
+          - = 0, no description text defined
 
-                        - ≥ 1, number of physical records with
-                        description text
+          - ≥ 1, number of physical records with description text
 
-                        `NLTXT` = integer part of(`CODTXT` / 100)
+        `NLTXT` = integer part of(`CODTXT` / 100)
 
+      - `NCTXT` - number of characters per physical set description
+        text record. Legal range = [0,64]
 
-                        - `NCTXT` - number of characters per physical set
-                        description text record. Legal range = [0,64]
-
-                        `NCTXT` = remaindering of(`CODTXT` / 100)
-                    */
+        `NCTXT` = remaindering of(`CODTXT` / 100)
+*/
                     long CODTXT;
 
                     std::string SET_NAME;
                     std::vector<std::string> CONT;
 
-                    tdsetnam(std::vector<std::string> const&, size_t const&);
+                    tdsetnam(std::vector<std::string> const&, size_t const);
 
                     tdsetnam(void);
 
-                    tdsetnam(long const &NFIELD,
-                             long const &ISREF,
-                             long const &CODNAM,
-                             long const &CODTXT,
+                    tdsetnam(long const NFIELD,
+                             long const ISREF,
+                             long const CODNAM,
+                             long const CODTXT,
                              std::string const &SET_NAME,
                              std::vector<std::string> const &CONT);
 
-                    tdsetnam(long const &ISREF,
+                    tdsetnam(long const ISREF,
                              std::string const &SET_NAME,
                              std::vector<std::string> const &CONT);
 
-                    tdsetnam(long const &NFIELD,
-                             long const &ISREF,
-                             long const &CODNAM,
+                    tdsetnam(long const NFIELD,
+                             long const ISREF,
+                             long const CODNAM,
                              std::string const &SET_NAME);
 
-                    tdsetnam(long const &ISREF,
+                    tdsetnam(long const ISREF,
                              std::string const &SET_NAME);
 
                     dnvgl::extfem::fem::cards::types const
@@ -3008,7 +3105,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `TDSUPNAM`: Name and Description of a Super-Element
@@ -3032,12 +3129,18 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_IHREF;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_CODNAM;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_CODTXT;
-                    dnvgl::extfem::fem::types::entry_type<std::string> static const _form_SUP_NAME;
-                    dnvgl::extfem::fem::types::entry_type<std::string> static const _form_CONT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NFIELD;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_IHREF;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_CODNAM;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_CODTXT;
+                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    static const _form_SUP_NAME;
+                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    static const _form_CONT;
 
                     bool nlnam;
                     long ncnam;
@@ -3046,98 +3149,95 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                 public:
 
-                    /** Number of numeric data fields on this record before
-                     * text data(MAX = 1024).
-                     */
+/** Number of numeric data fields on this record before text data(MAX
+    = 1024).
+*/
                     long NFIELD;
-                    /** Hierarchy reference number. Number 1 is reserved
-                        for the top level superelement. In SESAM, PRESEL
-                       (super-element pre-processor) is writing the
-                        HIERARCH records and defining a unique number
-                       (IHREF) for each appearance of the differenet
-                        superelements.
+/** Hierarchy reference number. Number 1 is reserved for the top level
+    superelement. In SESAM, PRESEL (super-element pre-processor) is
+    writing the HIERARCH records and defining a unique number (IHREF)
+    for each appearance of the differenet superelements.
 
-                        \image latex tdsupnam.eps "Superelement hierarchy with 3 levels."
-                        \image html tdsupnam.svg "Superelement hierarchy with 3 levels."
-                    */
+    \image latex tdsupnam.eps "Superelement hierarchy with 3 levels."
+    \image html tdsupnam.svg "Superelement hierarchy with 3 levels."
+*/
                     long IHREF;
-                    /** Coded dimension of set name:
+/** Coded dimension of set name:
 
-                        \f[
-                        \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
-                        \f]
+      \f[
+      \mathtt{CODNAM} = \mathtt{NLNAM} * 100 + \mathtt{NCNAM}.
+      \f]
 
-                        The inverse relation will then be
+    The inverse relation will then be
 
-                        - `NLNAM` - number of physical records used for
-                        storing of set name.
+      - `NLNAM` - number of physical records used for storing of set
+        name.
 
-                        Legal range = [0,1]
+        Legal range = [0,1]
 
-                        - = 0, no name defined
+          - = 0, no name defined
 
-                        - = 1, name is defined
+          - = 1, name is defined
 
-                        `NLNAM` = integer part of(`CODNAM` / 100)
+        `NLNAM` = integer part of(`CODNAM` / 100)
 
-                        - `NCNAM` - number of characters in set name.
+      - `NCNAM` - number of characters in set name.
 
-                        Legal range = [0,64]
+        Legal range = [0,64]
 
-                        `NCNAM` = remaindering of(`CODNAM` / 100)
-                    */
+        `NCNAM` = remaindering of(`CODNAM` / 100)
+*/
                     long CODNAM;
-                    /** Coded dimension of set description text:
+/** Coded dimension of set description text:
 
-                        \f[
-                        \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
-                        \f]
+      \f[
+      \mathtt{CODTXT} = \mathtt{NLTXT} * 100 + \mathtt{NCTXT}.
+      \f]
 
-                        The inverse relation will then be:
+    The inverse relation will then be:
 
-                        - `NLTXT` - number of physical records used for
-                        storing of set description text. Legal range =
-                        [0,5]
+      - `NLTXT` - number of physical records used for storing of set
+        description text.
 
-                        - = 0, no description text defined
+        Legal range = [0,5]
 
-                        - ≥ 1, number of physical records with
-                        description text
+          - = 0, no description text defined
 
-                        `NLTXT` = integer part of(`CODTXT` / 100)
+          - ≥ 1, number of physical records with description text
 
+        `NLTXT` = integer part of(`CODTXT` / 100)
 
-                            - `NCTXT` - number of characters per physical set
-                            description text record. Legal range = [0,64]
+      - `NCTXT` - number of characters per physical set description
+        text record. Legal range = [0,64]
 
-                            `NCTXT` = remaindering of(`CODTXT` / 100)
-                            */
+        `NCTXT` = remaindering of(`CODTXT` / 100)
+*/
                     long CODTXT;
 
                     std::string SUP_NAME;
                     std::vector<std::string> CONT;
 
-                    tdsupnam(std::vector<std::string> const&, size_t const&);
+                    tdsupnam(std::vector<std::string> const&, size_t const);
 
                     tdsupnam(void);
 
-                    tdsupnam(long const &NFIELD,
-                             long const &IHREF,
-                             long const &CODNAM,
-                             long const &CODTXT,
+                    tdsupnam(long const NFIELD,
+                             long const IHREF,
+                             long const CODNAM,
+                             long const CODTXT,
                              std::string const &SUP_NAME,
                              std::vector<std::string> const &CONT);
 
-                    tdsupnam(long const &IHREF,
+                    tdsupnam(long const IHREF,
                              std::string const &SUP_NAME,
                              std::vector<std::string> const &CONT);
 
-                    tdsupnam(long const &NFIELD,
-                             long const &IHREF,
-                             long const &CODNAM,
+                    tdsupnam(long const NFIELD,
+                             long const IHREF,
+                             long const CODNAM,
                              std::string const &SUP_NAME);
 
-                    tdsupnam(long const &IHREF,
+                    tdsupnam(long const IHREF,
                              std::string const &SUP_NAME);
 
                     dnvgl::extfem::fem::cards::types const
@@ -3148,7 +3248,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
 
 /// `TEXT`: User supplied Text
@@ -3170,67 +3270,70 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_TYPE;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_SUBTYPE;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NRECS;
-                    dnvgl::extfem::fem::types::entry_type<long> static const _form_NBYTE;
-                    dnvgl::extfem::fem::types::entry_type<std::string> static const _form_CONT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_TYPE;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_SUBTYPE;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NRECS;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NBYTE;
+                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    static const _form_CONT;
 
                 public:
 
-                    /** Value giving information of how to use this text
+/** Value giving information of how to use this text
 
-                        - = 1 Texts describing this analysis/global text
+      - = 1 Texts describing this analysis/global text
 
-                        - = 2 Texts concerning current superelement
+      - = 2 Texts concerning current superelement
 
-                        - = 3 Text concerning specific load cases
+      - = 3 Text concerning specific load cases
 
-                        - ≥ 4 The meaning of text to be mutually agreed on by
-                    preprosessor and analysis program
-                    */
+      - ≥ 4 The meaning of text to be mutually agreed on by
+        preprosessor and analysis program
+*/
                     long TYPE;
-                    /** Value giving additional information to `TYPE`
+/** Value giving additional information to `TYPE`
 
-                        Example: For `TYPE` = 3, `SUBTYPE` gives load case
-                        number
-                    */
+    Example: For `TYPE` = 3, `SUBTYPE` gives load case number
+*/
                     long SUBTYPE;
-                    /** Number of records following to be read in A-format.
-                        `NRECS` ≥ 1
-                    */
+/** Number of records following to be read in A-format. `NRECS` ≥ 1
+ */
                     long NRECS;
-                    /** Number of significant bytes(characters) on the
-                        following `NRECS` records. 1 ≤ `NBYTE` ≤ 72
-                    */
+/** Number of significant bytes(characters) on the following `NRECS`
+    records. 1 ≤ `NBYTE` ≤ 72
+*/
                     long NBYTE;
-                    /** Text lines
+/** Text lines
 
-                        The eight first bytes on the text records shall be
-                        filled with blanks.
-                    */
+    The eight first bytes on the text records shall be filled with
+    blanks.
+*/
                     std::vector<std::string> CONT;
 
-                    text(std::vector<std::string> const&, size_t const&);
+                    text(std::vector<std::string> const&, size_t const);
 
                     text(void);
 
-                    text(long const &TYPE, long const &SUBTYPE,
-                         long const &NRECS, long const &NBYTE,
+                    text(long const TYPE, long const SUBTYPE,
+                         long const NRECS, long const NBYTE,
                          std::vector<std::string> const &CONT);
 
-                    text(long const &TYPE, long const &SUBTYPE,
+                    text(long const TYPE, long const SUBTYPE,
                          std::vector<std::string> const &CONT);
 
                     using __base::card::operator();
 
                     __base::card const &operator()(
-                        long const &TYPE, long const &SUBTYPE,
-                        long const &NRECS, long const &NBYTE,
+                        long const TYPE, long const SUBTYPE,
+                        long const NRECS, long const NBYTE,
                         std::vector<std::string> const &CONT);
 
                     __base::card const &operator()(
-                        long const &TYPE, long const &SUBTYPE,
+                        long const TYPE, long const SUBTYPE,
                         std::vector<std::string> const &CONT);
 
                     dnvgl::extfem::fem::cards::types const
@@ -3241,7 +3344,7 @@ separate numbering(`TRANSNO`) to avoid possible program problems.
                     virtual std::ostream &put(std::ostream&) const;
 
                     virtual void read(
-                        const std::vector<std::string>&, size_t const&);
+                        std::vector<std::string> const&, size_t const);
                 };
             }
         }

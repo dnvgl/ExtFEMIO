@@ -37,21 +37,21 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 using namespace dnvgl::extfem::fem::types;
 
-const fem::types::card gbarm::head("GBARM");
+fem::types::card const gbarm::head("GBARM");
 
-const entry_type<double> gbarm::_form_HZ("HZ");
-const entry_type<double> gbarm::_form_BT("BT");
-const entry_type<double> gbarm::_form_BB("BB");
-const entry_type<double> gbarm::_form_SFY("SFY");
-const entry_type<double> gbarm::_form_SFZ("SFZ");
-const entry_type<long> gbarm::_form_NLOBY("NLOBY");
-const entry_type<long> gbarm::_form_NLOBZ("NLOBZ");
+entry_type<double> const gbarm::_form_HZ("HZ");
+entry_type<double> const gbarm::_form_BT("BT");
+entry_type<double> const gbarm::_form_BB("BB");
+entry_type<double> const gbarm::_form_SFY("SFY");
+entry_type<double> const gbarm::_form_SFZ("SFZ");
+entry_type<long> const gbarm::_form_NLOBY("NLOBY");
+entry_type<long> const gbarm::_form_NLOBZ("NLOBZ");
 
-gbarm::gbarm(const vector<std::string> &inp, size_t const &len) {
+gbarm::gbarm(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void gbarm::read(const vector<std::string> &inp, size_t const &len) {
+void gbarm::read(vector<std::string> const &inp, size_t const len) {
     std::string static const empty{"                "};
 
     __base::beam_prop::read(inp, len);
@@ -80,10 +80,10 @@ gbarm::gbarm(void) :
         gbarm(-1, 0, 0, 0, 0, 0, 0, 0) {}
 
 gbarm::gbarm(
-    const long &GEONO,
-    const double &HZ, const double &BT, const double &BB,
-    const double &SFY, const double &SFZ,
-    const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
+    long const GEONO,
+    double const HZ, double const BT, double const BB,
+    double const SFY, double const SFZ,
+    long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
         __base::beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
         SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 

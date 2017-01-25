@@ -37,31 +37,31 @@ using namespace fem;
 using namespace cards;
 using namespace types;
 
-const fem::types::card gelref1::head("GELREF1");
+fem::types::card const gelref1::head("GELREF1");
 
-const entry_type<long> gelref1::_form_ELNO("ELNO");
-const entry_type<long> gelref1::_form_MATNO("MATNO");
-const entry_type<long> gelref1::_form_ADDNO("ADDNO");
-const entry_type<long> gelref1::_form_INTNO("INTNO");
-const entry_type<long> gelref1::_form_MINTNO("MINTNO");
-const entry_type<long> gelref1::_form_STRANO("STRANO");
-const entry_type<long> gelref1::_form_STRENO("STRENO");
-const entry_type<long> gelref1::_form_STREPONO("STREPONO");
-const entry_type<long> gelref1::_form_GEONO_OPT("GEONO_OPT");
-const entry_type<long> gelref1::_form_FIXNO_OPT("FIXNO_OPT");
-const entry_type<long> gelref1::_form_ECCNO_OPT("ECCNO_OPT");
-const entry_type<long> gelref1::_form_TRANSNO_OPT("TRANSNO_OPT");
-const entry_type<long> gelref1::_form_GEONO("GEONO");
-const entry_type<long> gelref1::_form_FIXNO("FIXNO");
-const entry_type<long> gelref1::_form_ECCNO("ECCNO");
-const entry_type<long> gelref1::_form_TRANSNO("TRANSNO");
+entry_type<long> const gelref1::_form_ELNO("ELNO");
+entry_type<long> const gelref1::_form_MATNO("MATNO");
+entry_type<long> const gelref1::_form_ADDNO("ADDNO");
+entry_type<long> const gelref1::_form_INTNO("INTNO");
+entry_type<long> const gelref1::_form_MINTNO("MINTNO");
+entry_type<long> const gelref1::_form_STRANO("STRANO");
+entry_type<long> const gelref1::_form_STRENO("STRENO");
+entry_type<long> const gelref1::_form_STREPONO("STREPONO");
+entry_type<long> const gelref1::_form_GEONO_OPT("GEONO_OPT");
+entry_type<long> const gelref1::_form_FIXNO_OPT("FIXNO_OPT");
+entry_type<long> const gelref1::_form_ECCNO_OPT("ECCNO_OPT");
+entry_type<long> const gelref1::_form_TRANSNO_OPT("TRANSNO_OPT");
+entry_type<long> const gelref1::_form_GEONO("GEONO");
+entry_type<long> const gelref1::_form_FIXNO("FIXNO");
+entry_type<long> const gelref1::_form_ECCNO("ECCNO");
+entry_type<long> const gelref1::_form_TRANSNO("TRANSNO");
 
-gelref1::gelref1(const vector<std::string> &inp, size_t const &len) :
+gelref1::gelref1(const vector<std::string> &inp, size_t const len) :
         GEONO(0), FIXNO(0), ECCNO(0), TRANSNO(0) {
     this->read(inp, len);
 }
 
-void gelref1::read(const vector<std::string> &inp, size_t const &len) {
+void gelref1::read(const vector<std::string> &inp, size_t const len) {
     std::string static const empty{"                "};
     if (len < 13)
         throw errors::parse_error(
@@ -139,12 +139,12 @@ gelref1::gelref1(void) :
                 {}, {}, {}, {})  {}
 
 gelref1::gelref1(
-    const long &ELNO, const long &MATNO,
-    const long &ADDNO, const long &INTNO,
-    const long &MINTNO, const long &STRANO,
-    const long &STRENO, const long &STREPONO,
-    const long &GEONO_OPT, const long &FIXNO_OPT,
-    const long &ECCNO_OPT, const long &TRANSNO_OPT,
+    long const ELNO, long const MATNO,
+    long const ADDNO, long const INTNO,
+    long const MINTNO, long const STRANO,
+    long const STRENO, long const STREPONO,
+    long const GEONO_OPT, long const FIXNO_OPT,
+    long const ECCNO_OPT, long const TRANSNO_OPT,
     const std::vector<long> &GEONO,
     const std::vector<long> &FIXNO,
     const std::vector<long> &ECCNO,
@@ -208,12 +208,12 @@ gelref1::gelref1(
         }
 
 cards::__base::card const &gelref1::operator() (
-    long const &ELNO, long const &MATNO,
-    long const &ADDNO, long const &INTNO,
-    long const &MINTNO, long const &STRANO,
-    long const &STRENO, long const &STREPONO,
-    long const &GEONO_OPT, long const &FIXNO_OPT,
-    long const &ECCNO_OPT, long const &TRANSNO_OPT,
+    long const ELNO, long const MATNO,
+    long const ADDNO, long const INTNO,
+    long const MINTNO, long const STRANO,
+    long const STRENO, long const STREPONO,
+    long const GEONO_OPT, long const FIXNO_OPT,
+    long const ECCNO_OPT, long const TRANSNO_OPT,
     std::vector<long> const &GEONO/*={}*/,
     std::vector<long> const &FIXNO/*={}*/,
     std::vector<long> const &ECCNO/*={}*/,

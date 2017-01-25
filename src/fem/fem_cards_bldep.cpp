@@ -46,11 +46,11 @@ const entry_type<long> bldep::_form_DEPDOF("DEPDOF");
 const entry_type<long> bldep::_form_INDEPDOF("INDEPDOF");
 const entry_type<double> bldep::_form_b("b");
 
-bldep::bldep(const std::vector<std::string> &inp, size_t const &len) {
+bldep::bldep(const std::vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void bldep::read(const std::vector<std::string> &inp, size_t const &len) {
+void bldep::read(const std::vector<std::string> &inp, size_t const len) {
     if (len < 9)
         throw errors::parse_error(
             "BLDEP", "Illegal number of entries.");
@@ -72,10 +72,10 @@ bldep::bldep(void) :
         bldep(-1, 0, 0, 0, {}, {}, {}) {}
 
 bldep::bldep(
-    long const &NODENO,
-    long const &CNOD,
-    long const &NDDOF,
-    long const &NDEP,
+    long const NODENO,
+    long const CNOD,
+    long const NDDOF,
+    long const NDEP,
     std::vector<long> const &DEPDOF,
     std::vector<long> const &INDEPDOF,
     std::vector<double> const &b) :
@@ -86,9 +86,9 @@ bldep::bldep(
 }
 
 bldep::bldep(
-    long const &NODENO,
-    long const &CNOD,
-    long const &NDDOF,
+    long const NODENO,
+    long const CNOD,
+    long const NDDOF,
     std::vector<long> const &DEPDOF,
     std::vector<long> const &INDEPDOF,
     std::vector<double> const &b) :
@@ -97,8 +97,8 @@ bldep::bldep(
               DEPDOF, INDEPDOF, b) {}
 
 bldep::bldep(
-    long const &NODENO,
-    long const &CNOD,
+    long const NODENO,
+    long const CNOD,
     std::vector<long> const &DEPDOF,
     std::vector<long> const &INDEPDOF,
     std::vector<double> const &b) :

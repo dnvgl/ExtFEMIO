@@ -53,11 +53,11 @@ belfix::belfix() :
         belfix(-1, belfix::n_opt::INVALID, 0,
                {0., 0., 0., 0., 0., 0.}) {}
 
-belfix::belfix(const std::vector<std::string> &inp, size_t const &len) {
+belfix::belfix(const std::vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void belfix::read(const std::vector<std::string> &inp, size_t const &len) {
+void belfix::read(const std::vector<std::string> &inp, size_t const len) {
     A.resize(6);
     if (len < 11)
         throw errors::parse_error(
@@ -86,9 +86,9 @@ void belfix::read(const std::vector<std::string> &inp, size_t const &len) {
         A[i] = _form_A(inp.at(i + 5));
 }
 
-belfix::belfix(long const &FIXNO,
-               n_opt const &OPT,
-               long const &TRANO,
+belfix::belfix(long const FIXNO,
+               n_opt const OPT,
+               long const TRANO,
                std::vector<double> const &A) :
         card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 

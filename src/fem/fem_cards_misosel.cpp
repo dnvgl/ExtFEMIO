@@ -37,24 +37,23 @@ using namespace dnvgl::extfem::fem::types;
 
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card misosel::head("MISOSEL");
+fem::types::card const misosel::head("MISOSEL");
 
-// const entry_type<long> misosel::_form_MATNO("MATNO");
-const entry_type<double> misosel::_form_YOUNG("YOUNG");
-const entry_type<double> misosel::_form_POISS("POISS");
-const entry_type<double> misosel::_form_RHO("RHO");
-const entry_type<double> misosel::_form_DAMP("DAMP");
-const entry_type<double> misosel::_form_ALPHA("ALPHA");
-const entry_type<double> misosel::_form_DUMMY("DUMMY");
-const entry_type<double> misosel::_form_YIELD("YIELD");
+// entry_type<long> const misosel::_form_MATNO("MATNO");
+entry_type<double> const misosel::_form_YOUNG("YOUNG");
+entry_type<double> const misosel::_form_POISS("POISS");
+entry_type<double> const misosel::_form_RHO("RHO");
+entry_type<double> const misosel::_form_DAMP("DAMP");
+entry_type<double> const misosel::_form_ALPHA("ALPHA");
+entry_type<double> const misosel::_form_DUMMY("DUMMY");
+entry_type<double> const misosel::_form_YIELD("YIELD");
 
-misosel::misosel(const vector<std::string> &inp, size_t const &len) :
+misosel::misosel(vector<std::string> const &inp, size_t const len) :
         material(inp, len) {
     read(inp, len);
 }
 
-void misosel::read(const vector<std::string> &inp, size_t const &len) {
-    __base::material::read(inp, len);
+void misosel::read(vector<std::string> const &inp, size_t const len) {
     std::string static const empty{"                "};
 
     if (len < 7)
@@ -79,27 +78,25 @@ void misosel::read(const vector<std::string> &inp, size_t const &len) {
 misosel::misosel(void) :
         misosel(-1, 0., 0., 0., 0., 0.) {}
 
-misosel::misosel(const long &MATNO,
-                 const double &YOUNG,
-                 const double &POISS,
-                 const double &RHO,
-                 const double &DAMP,
-                 const double &ALPHA,
-                 const double &DUMMY/*=0.*/,
-                 const double &YIELD/*=0.*/) :
+misosel::misosel(long const MATNO, double const YOUNG,
+                 double const POISS, double const RHO,
+                 double const DAMP, double const ALPHA,
+                 double const DUMMY/*=0.*/, double const YIELD/*=0.*/) :
         __base::material(MATNO), YOUNG(YOUNG), POISS(POISS),
         RHO(RHO), DAMP(DAMP), ALPHA(ALPHA), DUMMY(DUMMY),
         YIELD(YIELD) {}
 
 cards::__base::card const &misosel::operator() (
-    long const &MATNO,
-    double const &YOUNG,
-    double const &POISS,
-    double const &RHO,
-    double const &DAMP,
-    double const &ALPHA,
-    double const &DUMMY/*=0.*/,
-    double const &YIELD/*=0.*/) {
+    vector<std::string> const &inp, size_t const len) {
+    __base::material::read(inp, len);
+    read(inp, len);
+    return *this;
+}
+
+cards::__base::card const &misosel::operator() (
+    long const MATNO, double const YOUNG, double const POISS,
+    double const RHO, double const DAMP, double const ALPHA,
+    double const DUMMY/*=0.*/, double const YIELD/*=0.*/) {
     this->MATNO = MATNO;
     this->YOUNG = YOUNG;
     this->POISS = POISS;
@@ -111,8 +108,9 @@ cards::__base::card const &misosel::operator() (
     return *this;
 }
 
-const dnvgl::extfem::fem::cards::types
-misosel::card_type(void) const {return types::MISOSEL;}
+fem::cards::types const misosel::card_type(void) const {
+    return types::MISOSEL;
+}
 
 ostream &misosel::put(ostream& os) const {
     if (MATNO == -1) return os;

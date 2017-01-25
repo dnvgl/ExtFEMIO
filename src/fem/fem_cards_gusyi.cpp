@@ -38,7 +38,7 @@ using namespace dnvgl::extfem::fem::types;
 
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card gusyi::head("GUSYI");
+fem::types::card const gusyi::head("GUSYI");
 
 entry_type<double> const gusyi::_form_HZ("HZ");
 entry_type<double> const gusyi::_form_TY("TY");
@@ -54,11 +54,11 @@ entry_type<long> const gusyi::_form_NLOBYT("NLOBYT");
 entry_type<long> const gusyi::_form_NLOBYB("NLOBYB");
 entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
-gusyi::gusyi(const vector<std::string> &inp, size_t const &len) {
+gusyi::gusyi(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void gusyi::read(const vector<std::string> &inp, size_t const &len) {
+void gusyi::read(const vector<std::string> &inp, size_t const len) {
     std::string static const empty{"                "};
 
 
@@ -96,12 +96,12 @@ gusyi::gusyi(void) :
         gusyi(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
 gusyi::gusyi(
-    long const &GEONO,
-    double const &HZ, double const &TY,
-    double const &BT, double const &B1, double const &TT,
-    double const &BB, double const &B2, double const &TB,
-    double const &SFY, double const &SFZ,
-    long const &NLOBYT, long const &NLOBYB, long const &NLOBZ) :
+    long const GEONO,
+    double const HZ, double const TY,
+    double const BT, double const B1, double const TT,
+    double const BB, double const B2, double const TB,
+    double const SFY, double const SFZ,
+    long const NLOBYT, long const NLOBYB, long const NLOBZ) :
         __base::beam_prop(GEONO),
         HZ(HZ), TY(TY),
         BT(BT), B1(B1), TT(TT),
@@ -109,8 +109,10 @@ gusyi::gusyi(
         SFY(SFY), SFZ(SFZ),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
 
-const dnvgl::extfem::fem::cards::types
-gusyi::card_type(void) const {return types::GUSYI;}
+dnvgl::extfem::fem::cards::types const
+gusyi::card_type(void) const {
+    return types::GUSYI;
+}
 
 std::ostream &gusyi::put(std::ostream& os) const {
     if (GEONO == -1) return os;

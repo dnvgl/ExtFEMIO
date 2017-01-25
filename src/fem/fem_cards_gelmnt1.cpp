@@ -170,11 +170,11 @@ const entry_type<long> gelmnt1::_form_ELTYP("ELTYP");
 const entry_type<long> gelmnt1::_form_ELTYAD("ELTYAD");
 const entry_type<long> gelmnt1::_form_NODIN("NODIN");
 
-gelmnt1::gelmnt1(const vector<std::string> &inp, size_t const &len) {
+gelmnt1::gelmnt1(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void gelmnt1::read(const vector<std::string> &inp, size_t const &len) {
+void gelmnt1::read(const vector<std::string> &inp, size_t const len) {
     std::string static const empty(16, ' ');
 
     if (len < 6)
@@ -204,26 +204,26 @@ void gelmnt1::read(const vector<std::string> &inp, size_t const &len) {
 gelmnt1::gelmnt1(void) :
         gelmnt1(-1, 0, elements::el_types::INVALID, {}) {}
 
-gelmnt1::gelmnt1(long const &ELNOX,
-                 long const &ELNO,
+gelmnt1::gelmnt1(long const ELNOX,
+                 long const ELNO,
                  elements::el_types const &ELTYP,
-                 long const &ELTYAD,
+                 long const ELTYAD,
                  std::vector<long> const &NODIN) :
         card(),
         ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
         NODIN(NODIN) {}
 
-gelmnt1::gelmnt1(long const &ELNOX,
-                 long const &ELNO,
+gelmnt1::gelmnt1(long const ELNOX,
+                 long const ELNO,
                  elements::el_types const &ELTYP,
                  std::vector<long> const &NODIN) :
         gelmnt1(ELNOX, ELNO, ELTYP, 0, NODIN) {}
 
 cards::__base::card const &gelmnt1::operator() (
-    long const &ELNOX,
-    long const &ELNO,
+    long const ELNOX,
+    long const ELNO,
     elements::el_types const &ELTYP,
-    long const &ELTYAD,
+    long const ELTYAD,
     std::vector<long> const &NODIN) {
     this->ELNOX = ELNOX;
     this->ELNO = ELNO;
@@ -234,8 +234,8 @@ cards::__base::card const &gelmnt1::operator() (
 }
 
 cards::__base::card const &gelmnt1::operator() (
-    long const &ELNOX,
-    long const &ELNO,
+    long const ELNOX,
+    long const ELNO,
     elements::el_types const &ELTYP,
     std::vector<long> const &NODIN) {
     return (*this)(ELNOX, ELNO, ELTYP, 0, NODIN);

@@ -36,24 +36,24 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card glsec::head("GLSEC");
+fem::types::card const glsec::head("GLSEC");
 
-const entry_type<double> glsec::_form_HZ("HZ");
-const entry_type<double> glsec::_form_TY("TY");
-const entry_type<double> glsec::_form_BY("BY");
-const entry_type<double> glsec::_form_TZ("TZ");
-const entry_type<double> glsec::_form_SFY("SFY");
-const entry_type<double> glsec::_form_SFZ("SFZ");
-const entry_type<bool> glsec::_form_K("K");
-const entry_type<long> glsec::_form_NLOBY("NLOBY");
-const entry_type<long> glsec::_form_NLOBZ("NLOBZ");
+entry_type<double> const glsec::_form_HZ("HZ");
+entry_type<double> const glsec::_form_TY("TY");
+entry_type<double> const glsec::_form_BY("BY");
+entry_type<double> const glsec::_form_TZ("TZ");
+entry_type<double> const glsec::_form_SFY("SFY");
+entry_type<double> const glsec::_form_SFZ("SFZ");
+entry_type<bool> const glsec::_form_K("K");
+entry_type<long> const glsec::_form_NLOBY("NLOBY");
+entry_type<long> const glsec::_form_NLOBZ("NLOBZ");
 
-glsec::glsec(const vector<std::string> &inp, size_t const &len) :
+glsec::glsec(vector<std::string> const &inp, size_t const len) :
         __base::beam_prop(inp, len) {
     read(inp, len);
 }
 
-void glsec::read(const vector<std::string> &inp, size_t const &len) {
+void glsec::read(vector<std::string> const &inp, size_t const len) {
     if (len < 9)
         throw errors::parse_error(
             "GLSEC", "Illegal number of entries.");
@@ -78,17 +78,17 @@ void glsec::read(const vector<std::string> &inp, size_t const &len) {
 glsec::glsec(void) :
         glsec(-1, 0., 0., 0., 0., 0., 0., false) {}
 
-glsec::glsec(const long &GEONO, const double &HZ,
-             const double &TY, const double &BY,
-             const double &TZ, const double &SFY,
-             const double &SFZ, const bool &K,
-             const long &NLOBY/*=0*/, const long &NLOBZ/*=0*/) :
+glsec::glsec(long const GEONO, double const HZ,
+             double const TY, double const BY,
+             double const TZ, double const SFY,
+             double const SFZ, bool const K,
+             long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
         __base::beam_prop(GEONO),
         HZ(HZ), TY(TY), BY(BY), TZ(TZ),
         SFY(SFY), SFZ(SFZ),
         K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
-const dnvgl::extfem::fem::cards::types
+dnvgl::extfem::fem::cards::types const
 glsec::card_type(void) const {return types::GLSEC;}
 
 std::ostream &glsec::put(std::ostream& os) const {

@@ -44,11 +44,11 @@ const entry_type<long> bnload::_form_NDOF("NDOF");
 const entry_type<double> bnload::_form_RLOAD("RLOAD");
 const entry_type<double> bnload::_form_ILOAD("ILOAD");
 
-bnload::bnload(const std::vector<std::string> &inp, size_t const &len) {
+bnload::bnload(const std::vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void bnload::read(const std::vector<std::string> &inp, size_t const &len) {
+void bnload::read(const std::vector<std::string> &inp, size_t const len) {
 
     if (len < 8)
         throw errors::parse_error(
@@ -69,44 +69,44 @@ void bnload::read(const std::vector<std::string> &inp, size_t const &len) {
 bnload::bnload(void) :
         bnload(-1, 0, 0, {}) {}
 
-bnload::bnload(const long &LLC,
-               const long &LOTYP,
-               const bool &COMPLX,
-               const long &NODENO,
-               const long &NDOF,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD) :
+bnload::bnload(long const LLC,
+               long const LOTYP,
+               bool const COMPLX,
+               long const NODENO,
+               long const NDOF,
+               std::vector<double> const &RLOAD,
+               std::vector<double> const &ILOAD) :
         card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
         NODENO(NODENO), NDOF(NDOF),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
 
-bnload::bnload(const long &LLC,
-               const long &LOTYP,
-               const bool &COMPLX,
-               const long &NODENO,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD):
+bnload::bnload(long const LLC,
+               long const LOTYP,
+               bool const COMPLX,
+               long const NODENO,
+               std::vector<double> const &RLOAD,
+               std::vector<double> const &ILOAD):
         card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
         NODENO(NODENO), NDOF((long)RLOAD.size()),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
 
-bnload::bnload(const long &LLC,
-               const long &LOTYP,
-               const long &NODENO,
-               const long &NDOF,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD) :
+bnload::bnload(long const LLC,
+               long const LOTYP,
+               long const NODENO,
+               long const NDOF,
+               std::vector<double> const &RLOAD,
+               std::vector<double> const &ILOAD) :
         card(), LLC(LLC), LOTYP(LOTYP),
         COMPLX(ILOAD.size() > 0),
         NODENO(NODENO), NDOF(NDOF),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
 
 
-bnload::bnload(const long &LLC,
-               const long &LOTYP,
-               const long &NODENO,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD) :
+bnload::bnload(long const LLC,
+               long const LOTYP,
+               long const NODENO,
+               std::vector<double> const &RLOAD,
+               std::vector<double> const &ILOAD) :
         card(), LLC(LLC), LOTYP(LOTYP),
         COMPLX(ILOAD.size() > 0),
         NODENO(NODENO), NDOF((long)RLOAD.size()),

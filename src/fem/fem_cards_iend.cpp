@@ -36,15 +36,15 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card iend::head("IEND");
+fem::types::card const iend::head("IEND");
 
-const entry_type<long> iend::_form_CONT("SLEVEL");
+entry_type<long> const iend::_form_CONT("SLEVEL");
 
-iend::iend(const vector<std::string> &inp, size_t const &len) {
+iend::iend(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void iend::read(const vector<std::string> &inp, size_t const &len) {
+void iend::read(vector<std::string> const &inp, size_t const len) {
     if (len < 2)
         throw errors::parse_error(
             "IEND", "Illegal number of entries.");
@@ -57,10 +57,11 @@ void iend::read(const vector<std::string> &inp, size_t const &len) {
 
 iend::iend(void) : iend(-1) {}
 
-iend::iend(const long &CONT) : CONT(CONT) {}
+iend::iend(long const CONT) : CONT(CONT) {}
 
-const cards::types
-iend::card_type(void) const { return types::IEND; };
+const fem::cards::types iend::card_type(void) const {
+    return types::IEND;
+}
 
 ostream &iend::put(ostream& os) const {
     if (CONT == -1) return os;

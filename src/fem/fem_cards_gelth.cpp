@@ -36,19 +36,18 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card gelth::head("GELTH");
-
+fem::types::card const gelth::head("GELTH");
 
 // const entry_type<long> gelth::_form_GEONO("GENO");
-const entry_type<double> gelth::_form_TH("TH");
-const entry_type<long> gelth::_form_NINT("NINT");
+entry_type<double> const gelth::_form_TH("TH");
+entry_type<long> const gelth::_form_NINT("NINT");
 
-gelth::gelth(const vector<std::string> &inp, size_t const &len) :
+gelth::gelth(const vector<std::string> &inp, size_t const len) :
         geoprop(inp, len) {
     read(inp, len);
 }
 
-void gelth::read(const vector<std::string> &inp, size_t const &len) {
+void gelth::read(const vector<std::string> &inp, size_t const len) {
     std::string static const empty{"                "};
 
     if (len < 4)
@@ -66,17 +65,17 @@ gelth::gelth(void) :
         gelth(-1, 0.) {}
 
 gelth::gelth(
-    const long &GEONO,
-    const double &TH, const long &NINT/*=0*/) :
+    long const GEONO,
+    double const TH, long const NINT/*=0*/) :
         geoprop(GEONO), TH(TH), NINT(NINT) {}
 
 gelth::gelth(
-    const double &TH, const long &NINT/*=0*/) :
+    double const TH, long const NINT/*=0*/) :
         gelth(0, TH, NINT) {}
 
 cards::__base::card const &gelth::operator() (
-    long const &GEONO, double const &TH,
-    long const &NINT/*=0*/) {
+    long const GEONO, double const TH,
+    long const NINT/*=0*/) {
     geoprop::set_geono(GEONO);
     this->TH = TH;
     this->NINT = NINT;
@@ -84,11 +83,11 @@ cards::__base::card const &gelth::operator() (
 }
 
 cards::__base::card const &gelth::operator() (
-    double const &TH, long const &NINT/*=0*/) {
+    double const TH, long const NINT/*=0*/) {
     return (*this)(0, TH, NINT);
 }
 
-const dnvgl::extfem::fem::cards::types
+dnvgl::extfem::fem::cards::types const
 gelth::card_type(void) const {return types::GELTH;}
 
 std::ostream &gelth::put(std::ostream& os) const {

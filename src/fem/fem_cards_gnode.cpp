@@ -38,14 +38,14 @@ using namespace cards;
 using namespace types;
 
 
-const fem::types::card gnode::head("GNODE");
+fem::types::card const gnode::head("GNODE");
 
-const entry_type<long> gnode::_form_NODEX("NODEX");
-const entry_type<long> gnode::_form_NODENO("NODENO");
-const entry_type<long> gnode::_form_NDOF("NDOF");
-const entry_type<std::vector<int> > gnode::_form_ODOF("ODOF");
+entry_type<long> const gnode::_form_NODEX("NODEX");
+entry_type<long> const gnode::_form_NODENO("NODENO");
+entry_type<long> const gnode::_form_NDOF("NDOF");
+entry_type<std::vector<int> > const gnode::_form_ODOF("ODOF");
 
-gnode::gnode(const vector<std::string> &inp, size_t const &len) {
+gnode::gnode(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
@@ -53,7 +53,7 @@ gnode::~gnode(void) {
     ODOF.clear();
 }
 
-void gnode::read(const vector<std::string> &inp, size_t const &len) {
+void gnode::read(const vector<std::string> &inp, size_t const len) {
    if (len < 5)
       throw errors::parse_error(
          "GNODE", "Illegal number of entries.");
@@ -67,22 +67,22 @@ void gnode::read(const vector<std::string> &inp, size_t const &len) {
 gnode::gnode(void) :
    gnode(-1, 0, {}) {}
 
-gnode::gnode(const long &NODEX,
-             const long &NODENO,
-             const long &NDOF,
-             const std::vector<int> &ODOF) :
+gnode::gnode(long const NODEX,
+             long const NODENO,
+             long const NDOF,
+             std::vector<int> const &ODOF) :
    card(),
    NODEX(NODEX), NODENO(NODENO), NDOF(NDOF),
    ODOF(ODOF.begin(), ODOF.end()) {
    std::sort(this->ODOF.begin(), this->ODOF.end());
 };
 
-gnode::gnode(const long &NODEX,
-             const long &NODENO,
-             const std::vector<int> &ODOF) :
+gnode::gnode(long const NODEX,
+             long const NODENO,
+             std::vector<int> const &ODOF) :
    gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
 
-const dnvgl::extfem::fem::cards::types
+dnvgl::extfem::fem::cards::types const
 gnode::card_type(void) const {
     return types::GNODE;
 }
@@ -99,10 +99,10 @@ std::ostream &gnode::put(std::ostream& os) const {
 }
 
 cards::__base::card const &gnode::operator() (
-   const long &NODEX,
-   const long &NODENO,
-   const long &NDOF,
-   const std::vector<int> &ODOF) {
+   long const NODEX,
+   long const NODENO,
+   long const NDOF,
+   std::vector<int> const &ODOF) {
    this->NODEX = NODEX;
    this->NODENO = NODENO;
    this->NDOF = NDOF;
@@ -112,9 +112,9 @@ cards::__base::card const &gnode::operator() (
 }
 
 cards::__base::card const &gnode::operator() (
-   const long &NODEX,
-   const long &NODENO,
-   const std::vector<int> &ODOF) {
+   long const NODEX,
+   long const NODENO,
+   std::vector<int> const &ODOF) {
    return (*this)(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF);
 }
 

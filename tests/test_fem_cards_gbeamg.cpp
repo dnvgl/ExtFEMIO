@@ -106,6 +106,11 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
     }
 
     SECTION("GBEAMG (area only)") {
+        gpipe
+#ifdef __GNUC__
+    __attribute__ ((__unused__))
+#endif
+            dummy(1685, 200., 300., 0., 1., 1.);
         vector<std::string> data(
             // 2345678|234567890123456|234567890123456|234567890123456|234567890123456
             {"GBEAMG   1.68500000e+03  0.000000000e+00 1.11500000e+04  0.00000000e-00 \n"});

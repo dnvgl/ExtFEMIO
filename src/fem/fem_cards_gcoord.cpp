@@ -44,11 +44,11 @@ const entry_type<double> gcoord::_form_XCOORD("XCOORD");
 const entry_type<double> gcoord::_form_YCOORD("YCOORD");
 const entry_type<double> gcoord::_form_ZCOORD("ZCOORD");
 
-gcoord::gcoord(const vector<std::string> &inp, size_t const &len) {
+gcoord::gcoord(const vector<std::string> &inp, size_t const len) {
     this->read(inp, len);
 }
 
-void gcoord::read(const vector<std::string> &inp, size_t const &len) {
+void gcoord::read(const vector<std::string> &inp, size_t const len) {
     if (len < 5)
         throw errors::parse_error(
             "GCOORD", "Illegal number of entries.");
@@ -63,8 +63,8 @@ gcoord::gcoord(void) :
         gcoord(-1, 0., 0., 0.) {}
 
 gcoord::gcoord(
-    const long &NODENO,
-    const double &XCOORD, const double &YCOORD, const double &ZCOORD) :
+    long const NODENO,
+    double const XCOORD, double const YCOORD, double const ZCOORD) :
         NODENO(NODENO),
         XCOORD(XCOORD), YCOORD(YCOORD), ZCOORD(ZCOORD) {}
 
@@ -82,8 +82,8 @@ std::ostream &gcoord::put(std::ostream& os) const {
 }
 
 cards::__base::card const &gcoord::operator() (
-    long const &NODENO,
-    double const &XCOORD, double const &YCOORD, double const &ZCOORD) {
+    long const NODENO,
+    double const XCOORD, double const YCOORD, double const ZCOORD) {
     this->NODENO = NODENO;
     this->XCOORD = XCOORD;
     this->YCOORD = YCOORD;

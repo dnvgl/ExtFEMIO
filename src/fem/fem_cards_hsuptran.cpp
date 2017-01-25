@@ -37,17 +37,17 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card hsuptran::head("HSUPTRAN");
+fem::types::card const hsuptran::head("HSUPTRAN");
 
-const entry_type<long> hsuptran::_form_NFIELD("NFIELD");
-const entry_type<long> hsuptran::_form_ITREF("ITREF");
-const entry_type<double> hsuptran::_form_T("T");
+entry_type<long> const hsuptran::_form_NFIELD("NFIELD");
+entry_type<long> const hsuptran::_form_ITREF("ITREF");
+entry_type<double> const hsuptran::_form_T("T");
 
-hsuptran::hsuptran(const vector<std::string> &inp, size_t const &len) {
+hsuptran::hsuptran(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void hsuptran::read(const vector<std::string> &inp, size_t const &len) {
+void hsuptran::read(const vector<std::string> &inp, size_t const len) {
     if (len < 15)
         throw errors::parse_error(
             "HSUPTRAN", "Illegal number of entries.");
@@ -76,24 +76,24 @@ hsuptran::hsuptran(void) :
         hsuptran(-1, 0, nullptr) {}
 
 
-hsuptran::hsuptran(const long &NFIELD,
-                   const long &ITREF,
-                   const double &T11,
-                   const double &T21,
-                   const double &T31,
-                   const double &T41,
-                   const double &T12,
-                   const double &T22,
-                   const double &T32,
-                   const double &T42,
-                   const double &T13,
-                   const double &T23,
-                   const double &T33,
-                   const double &T43,
-                   const double &T14,
-                   const double &T24,
-                   const double &T34,
-                   const double &T44) :
+hsuptran::hsuptran(long const NFIELD,
+                   long const ITREF,
+                   double const T11,
+                   double const T21,
+                   double const T31,
+                   double const T41,
+                   double const T12,
+                   double const T22,
+                   double const T32,
+                   double const T42,
+                   double const T13,
+                   double const T23,
+                   double const T33,
+                   double const T43,
+                   double const T14,
+                   double const T24,
+                   double const T34,
+                   double const T44) :
         card(), NFIELD(NFIELD), ITREF(ITREF) {
 
     T[0][0] = T11;
@@ -114,9 +114,9 @@ hsuptran::hsuptran(const long &NFIELD,
     T[3][3] = T44;
 }
 
-hsuptran::hsuptran(const long &NFIELD,
-                   const long &ITREF,
-                   const double T[4][4]) :
+hsuptran::hsuptran(long const NFIELD,
+                   long const ITREF,
+                   double const T[4][4]) :
         card(), NFIELD(NFIELD), ITREF(ITREF) {
     if (this->NFIELD != -1)
         for (int i=0; i<4; i++)

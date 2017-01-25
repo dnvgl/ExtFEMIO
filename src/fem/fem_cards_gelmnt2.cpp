@@ -37,21 +37,21 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card gelmnt2::head("GELMNT2");
+fem::types::card const gelmnt2::head("GELMNT2");
 
-const entry_type<long> gelmnt2::_form_SUBNO("SUBNO");
-const entry_type<long> gelmnt2::_form_SLEVEL("SLEVEL");
-const entry_type<long> gelmnt2::_form_STYPE("STYPE");
-const entry_type<long> gelmnt2::_form_ADDNO("ADDNO");
-const entry_type<double> gelmnt2::_form_T("T");
-const entry_type<long> gelmnt2::_form_NNOD("NNOD");
-const entry_type<long> gelmnt2::_form_NOD("NOD");
+entry_type<long> const gelmnt2::_form_SUBNO("SUBNO");
+entry_type<long> const gelmnt2::_form_SLEVEL("SLEVEL");
+entry_type<long> const gelmnt2::_form_STYPE("STYPE");
+entry_type<long> const gelmnt2::_form_ADDNO("ADDNO");
+entry_type<double> const gelmnt2::_form_T("T");
+entry_type<long> const gelmnt2::_form_NNOD("NNOD");
+entry_type<long> const gelmnt2::_form_NOD("NOD");
 
-gelmnt2::gelmnt2(const vector<std::string> &inp, size_t const &len) {
+gelmnt2::gelmnt2(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void gelmnt2::read(const vector<std::string> &inp, size_t const &len) {
+void gelmnt2::read(const vector<std::string> &inp, size_t const len) {
     if (len < 18)
         throw errors::parse_error(
             "GELMNT2", "Illegal number of entries.");
@@ -78,12 +78,12 @@ void gelmnt2::read(const vector<std::string> &inp, size_t const &len) {
 gelmnt2::gelmnt2(void) :
         gelmnt2(-1, 0, 0, 0, nullptr, 0, {}) {}
 
-gelmnt2::gelmnt2(const long &SUBNO,
-                 const long &SLEVEL,
-                 const long &STYPE,
-                 const long &ADDNO,
+gelmnt2::gelmnt2(long const SUBNO,
+                 long const SLEVEL,
+                 long const STYPE,
+                 long const ADDNO,
                  const double T[4][4],
-                 const long &NNOD,
+                 long const NNOD,
                  const std::vector<long> &NOD) :
         card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
@@ -96,33 +96,33 @@ gelmnt2::gelmnt2(const long &SUBNO,
                 this->T[j][i] = T[j][i];
 }
 
-gelmnt2::gelmnt2(const long &SUBNO,
-                 const long &SLEVEL,
-                 const long &STYPE,
-                 const long &ADDNO,
-                 const double T[4][4],
-                 const std::vector<long> &NOD) :
+gelmnt2::gelmnt2(long const SUBNO,
+                 long const SLEVEL,
+                 long const STYPE,
+                 long const ADDNO,
+                 double const T[4][4],
+                 std::vector<long> const &NOD) :
         gelmnt2(SUBNO, SLEVEL, STYPE, ADDNO, T,
                 static_cast<long>(NOD.size()), NOD) {}
 
-gelmnt2::gelmnt2(const long &SUBNO,
-                 const long &SLEVEL,
-                 const long &STYPE,
-                 const long &ADDNO,
-                 const double &T11,
-                 const double &T21,
-                 const double &T31,
-                 const double &T12,
-                 const double &T22,
-                 const double &T32,
-                 const double &T13,
-                 const double &T23,
-                 const double &T33,
-                 const double &T14,
-                 const double &T24,
-                 const double &T34,
-                 const long &NNOD,
-                 const std::vector<long> &NOD) :
+gelmnt2::gelmnt2(long const SUBNO,
+                 long const SLEVEL,
+                 long const STYPE,
+                 long const ADDNO,
+                 double const T11,
+                 double const T21,
+                 double const T31,
+                 double const T12,
+                 double const T22,
+                 double const T32,
+                 double const T13,
+                 double const T23,
+                 double const T33,
+                 double const T14,
+                 double const T24,
+                 double const T34,
+                 long const NNOD,
+                 std::vector<long> const &NOD) :
         card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
     if (this->NOD.size() != (size_t)this->NNOD)
@@ -146,23 +146,23 @@ gelmnt2::gelmnt2(const long &SUBNO,
     T[3][3] = 1.;
 }
 
-gelmnt2::gelmnt2(const long &SUBNO,
-                 const long &SLEVEL,
-                 const long &STYPE,
-                 const long &ADDNO,
-                 const double &T11,
-                 const double &T21,
-                 const double &T31,
-                 const double &T12,
-                 const double &T22,
-                 const double &T32,
-                 const double &T13,
-                 const double &T23,
-                 const double &T33,
-                 const double &T14,
-                 const double &T24,
-                 const double &T34,
-                 const std::vector<long> &NOD) :
+gelmnt2::gelmnt2(long const SUBNO,
+                 long const SLEVEL,
+                 long const STYPE,
+                 long const ADDNO,
+                 double const T11,
+                 double const T21,
+                 double const T31,
+                 double const T12,
+                 double const T22,
+                 double const T32,
+                 double const T13,
+                 double const T23,
+                 double const T33,
+                 double const T14,
+                 double const T24,
+                 double const T34,
+                 std::vector<long> const &NOD) :
         card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NOD(NOD) {
     NNOD = long(this->NOD.size());
@@ -184,7 +184,7 @@ gelmnt2::gelmnt2(const long &SUBNO,
     T[3][3] = 1.;
 }
 
-const dnvgl::extfem::fem::cards::types
+dnvgl::extfem::fem::cards::types const
 gelmnt2::card_type(void) const {
     return types::GELMNT2;
 }

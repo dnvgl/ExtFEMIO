@@ -38,19 +38,19 @@ using namespace fem;
 using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card date::head("DATE");
+fem::types::card const date::head("DATE");
 
-const entry_type<long> date::_form_TYPE("TYPE");
-const entry_type<long> date::_form_SUBTYPE("SUBTYPE");
-const entry_type<long> date::_form_NRECS("NRECS");
-const entry_type<long> date::_form_NBYTE("NBYTE");
-const entry_type<std::string> date::_form_CONT("CONT");
+entry_type<long> const date::_form_TYPE("TYPE");
+entry_type<long> const date::_form_SUBTYPE("SUBTYPE");
+entry_type<long> const date::_form_NRECS("NRECS");
+entry_type<long> const date::_form_NBYTE("NBYTE");
+entry_type<std::string> const date::_form_CONT("CONT");
 
-date::date(const std::vector<std::string> &inp, size_t const &len) {
+date::date(std::vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void date::read(const std::vector<std::string> &inp, size_t const &len) {
+void date::read(std::vector<std::string> const &inp, size_t const len) {
 
     if (len < 9)
         throw errors::parse_error(
@@ -72,17 +72,17 @@ void date::read(const std::vector<std::string> &inp, size_t const &len) {
 date::date() :
         date(-1, 0, 0, 0, {}) {}
 
-date::date(const long &TYPE, const long &SUBTYPE,
-           const long &NRECS, const long &NBYTE,
-           const std::vector<std::string> &CONT) :
+date::date(long const TYPE, long const SUBTYPE,
+           long const NRECS, long const NBYTE,
+           std::vector<std::string> const &CONT) :
         TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
         NBYTE(NBYTE), CONT(CONT) {
     for (auto &p : this->CONT)
         p.resize(NBYTE-8, ' ');
 }
 
-date::date(const long &TYPE, const long &SUBTYPE,
-           const std::vector<std::string> &CONT) :
+date::date(long const TYPE, long const SUBTYPE,
+           std::vector<std::string> const &CONT) :
         card(),
         TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
     NRECS = static_cast<long>(this->CONT.size());

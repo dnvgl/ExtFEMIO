@@ -40,20 +40,20 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::cards;
 
-const fem::types::card gsetmemb::head("GSETMEMB");
+fem::types::card const gsetmemb::head("GSETMEMB");
 
-const entry_type<long> gsetmemb::_form_NFIELD("NFIELD");
-const entry_type<long> gsetmemb::_form_ISREF("ISREF");
-const entry_type<long> gsetmemb::_form_INDEX("INDEX");
-const entry_type<long> gsetmemb::_form_ISTYPE("ISTYPE");
-const entry_type<long> gsetmemb::_form_ISORIG("ISORIG");
-const entry_type<long> gsetmemb::_form_IRMEMB("IRMEMB");
+entry_type<long> const gsetmemb::_form_NFIELD("NFIELD");
+entry_type<long> const gsetmemb::_form_ISREF("ISREF");
+entry_type<long> const gsetmemb::_form_INDEX("INDEX");
+entry_type<long> const gsetmemb::_form_ISTYPE("ISTYPE");
+entry_type<long> const gsetmemb::_form_ISORIG("ISORIG");
+entry_type<long> const gsetmemb::_form_IRMEMB("IRMEMB");
 
-gsetmemb::gsetmemb(const vector<std::string> &inp, size_t const &len) {
+gsetmemb::gsetmemb(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void gsetmemb::read(const vector<std::string> &inp, size_t const &len) {
+void gsetmemb::read(const vector<std::string> &inp, size_t const len) {
     if (len < 7)
         throw errors::parse_error(
             "GSETMEMB", "Illegal number of entries.");
@@ -71,26 +71,26 @@ void gsetmemb::read(const vector<std::string> &inp, size_t const &len) {
 gsetmemb::gsetmemb(void) :
         gsetmemb(-1, 0, 0, types::UNDEF_TYPE, origins::UNDEF_ORIGIN) {}
 
-gsetmemb::gsetmemb(long const &NFIELD,
-                   long const &ISREF,
-                   long const &INDEX,
-                   gsetmemb::types const &ISTYPE,
-                   gsetmemb::origins const &ISORIG,
+gsetmemb::gsetmemb(long const NFIELD,
+                   long const ISREF,
+                   long const INDEX,
+                   gsetmemb::types const ISTYPE,
+                   gsetmemb::origins const ISORIG,
                    vector<long> const &IRMEMB/*={}*/) :
         card(), NFIELD(NFIELD), ISREF(ISREF), INDEX(INDEX),
         ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(IRMEMB) {}
 
-gsetmemb::gsetmemb(long const &ISREF,
-                   long const &INDEX,
-                   gsetmemb::types const &ISTYPE,
-                   gsetmemb::origins const &ISORIG,
+gsetmemb::gsetmemb(long const ISREF,
+                   long const INDEX,
+                   gsetmemb::types const ISTYPE,
+                   gsetmemb::origins const ISORIG,
                    vector<long> const &IRMEMB/*={}*/) :
         gsetmemb((long)IRMEMB.size() + 5, ISREF, INDEX,
                  ISTYPE, ISORIG, IRMEMB) {}
 
-gsetmemb::gsetmemb(long const &ISREF,
-                   gsetmemb::types const &ISTYPE,
-                   gsetmemb::origins const &ISORIG,
+gsetmemb::gsetmemb(long const ISREF,
+                   gsetmemb::types const ISTYPE,
+                   gsetmemb::origins const ISORIG,
                    vector<long> const &IRMEMB/*={}*/) :
         gsetmemb((long)IRMEMB.size() + 5, ISREF, 1,
                  ISTYPE, ISORIG, IRMEMB) {}
@@ -150,7 +150,7 @@ gsetmemb::origins_map({
         {3, gsetmemb::origins::SURFACE_ORIGIN},
         {4, gsetmemb::origins::BODY_ORIGIN}});
 
-gsetmemb::types gsetmemb::to_types(long const &inp) {
+gsetmemb::types gsetmemb::to_types(long const inp) {
     try {
         return gsetmemb::types_map.at(inp);
     } catch (out_of_range) {
@@ -161,7 +161,7 @@ gsetmemb::types gsetmemb::to_types(long const &inp) {
     }
 }
 
-gsetmemb::origins gsetmemb::to_origins(long const &inp) {
+gsetmemb::origins gsetmemb::to_origins(long const inp) {
     try {
         return gsetmemb::origins_map.at(inp);
     } catch (out_of_range) {
