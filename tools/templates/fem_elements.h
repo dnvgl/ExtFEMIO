@@ -64,102 +64,110 @@ namespace dnvgl {
 
                     protected:
 
-                        long static const &get_eleno(void);
-                        long static get_eleno(long const &eleno);
-                        long static const &get_elident();
-                        long static get_elident(long const &elident);
-
+                        long static const get_eleno(void);
+                        long static get_eleno(long const eleno);
+                        long static const get_elident();
+                        long static get_elident(long const elident);
                         el_types static const type;
+
                         elem(void);
-                        elem(long const &eleno, long const &elident,
-                             long const &el_add,
+
+                        elem(long const eleno, long const elident,
+                             long const el_add,
                              std::vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no=0, long const &intno=0,
-                             long const &mass_intno=0, long const &i_strain_ref=0,
-                             long const &i_stressef=0, long const &strpoint_ref=0,
+                             long const matref,
+                             long const add_no=0, long const intno=0,
+                             long const mass_intno=0, long const i_strain_ref=0,
+                             long const i_stressef=0, long const strpoint_ref=0,
                              std::vector<long> const &sections={},
                              std::vector<long> const &fixations={},
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
-                        elem(long const &eleno, long const &el_add,
+
+                        elem(long const eleno, long const el_add,
                              std::vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no=0, long const &intno=0,
-                             long const &mass_intno=0, long const &i_strain_ref=0,
-                             long const &i_stressef=0, long const &strpoint_ref=0,
+                             long const matref,
+                             long const add_no=0, long const intno=0,
+                             long const mass_intno=0, long const i_strain_ref=0,
+                             long const i_stressef=0, long const strpoint_ref=0,
                              std::vector<long> const &sections={},
                              std::vector<long> const &fixations={},
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
-                        elem(long const &el_add,
+
+                        elem(long const el_add,
                              std::vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no=0, long const &intno=0,
-                             long const &mass_intno=0, long const &i_strain_ref=0,
-                             long const &i_stressef=0, long const &strpoint_ref=0,
+                             long const matref,
+                             long const add_no=0, long const intno=0,
+                             long const mass_intno=0, long const i_strain_ref=0,
+                             long const i_stressef=0, long const strpoint_ref=0,
                              std::vector<long> const &sections={},
                              std::vector<long> const &fixations={},
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &eleno, long const &elident,
-                            long const &el_add,
+                            long const eleno, long const elident,
+                            long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no=0, long const &intno=0,
-                            long const &mass_intno=0, long const &i_strain_ref=0,
-                            long const &i_stressef=0, long const &strpoint_ref=0,
+                            long const matref,
+                            long const add_no=0, long const intno=0,
+                            long const mass_intno=0, long const i_strain_ref=0,
+                            long const i_stressef=0, long const strpoint_ref=0,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &eleno, long const &el_add,
+                            long const eleno, long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no=0, long const &intno=0,
-                            long const &mass_intno=0, long const &i_strain_ref=0,
-                            long const &i_stressef=0, long const &strpoint_ref=0,
+                            long const matref,
+                            long const add_no=0, long const intno=0,
+                            long const mass_intno=0, long const i_strain_ref=0,
+                            long const i_stressef=0, long const strpoint_ref=0,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no=0, long const &intno=0,
-                            long const &mass_intno=0, long const &i_strain_ref=0,
-                            long const &i_stressef=0, long const &strpoint_ref=0,
+                            long const matref,
+                            long const add_no=0, long const intno=0,
+                            long const mass_intno=0, long const i_strain_ref=0,
+                            long const i_stressef=0, long const strpoint_ref=0,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &eleno,
+                            long const eleno,
                             std::vector<long> const &nodes,
-                            long const &matref,
+                            long const matref,
                             std::vector<long> const &sections={},
-                            long const &el_add=0,
-                            long const &add_no=0,
-                            long const &intno=0,
-                            long const &mass_intno=0,
-                            long const &i_strain_ref=0,
-                            long const &i_stressef=0,
-                            long const &strpoint_ref=0,
+                            long const el_add=0,
+                            long const add_no=0,
+                            long const intno=0,
+                            long const mass_intno=0,
+                            long const i_strain_ref=0,
+                            long const i_stressef=0,
+                            long const strpoint_ref=0,
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &el_add,
+                            long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no,
-                            long const &intno,
-                            long const &mass_intno,
-                            long const &i_strain_ref,
-                            long const &i_stress_ref,
-                            long const &strpoint_ref,
+                            long const matref,
+                            long const add_no,
+                            long const intno,
+                            long const mass_intno,
+                            long const i_strain_ref,
+                            long const i_stress_ref,
+                            long const strpoint_ref,
                             std::vector<long> const &section,
                             std::vector<long> const &fixations,
                             std::vector<long> const &eccentrities,
@@ -167,27 +175,27 @@ namespace dnvgl {
 
                         __base::elem const &operator() (
                             std::vector<long> const &nodes,
-                            long const &matref,
+                            long const matref,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
-                            long const &el_add=0,
-                            long const &add_no=0,
-                            long const &intno=0,
-                            long const &mass_intno=0,
-                            long const &i_strain_ref=0,
-                            long const &i_stressef=0,
-                            long const &strpoint_ref=0,
+                            long const el_add=0,
+                            long const add_no=0,
+                            long const intno=0,
+                            long const mass_intno=0,
+                            long const i_strain_ref=0,
+                            long const i_stressef=0,
+                            long const strpoint_ref=0,
                             std::vector<long> const &csys={});
 
                         __base::elem const &set_values(
-                            long const &eleno, long const &elident,
-                            long const &el_add,
+                            long const eleno, long const elident,
+                            long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no, long const &intno,
-                            long const &mass_intno, long const &i_strain_ref,
-                            long const &i_stressef, long const &strpoint_ref,
+                            long const matref,
+                            long const add_no, long const intno,
+                            long const mass_intno, long const i_strain_ref,
+                            long const i_stressef, long const strpoint_ref,
                             std::vector<long> const &sections,
                             std::vector<long> const &fixations,
                             std::vector<long> const &eccentrities,
@@ -307,44 +315,31 @@ namespace dnvgl {
                 class {{ elem }} : public __base::{{ vals.base }} {
                 public:
                     {{ elem }}(void);
-                    {{ elem }}(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    {{ elem }}(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    {{ elem }}(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    {{ elem }}(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    {{ elem }}(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    {{ elem }}(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -362,13 +357,13 @@ namespace dnvgl {
 {% line %}
                 /** Dispatch element class instance for `id`
                  */
-                void dispatch(std::unique_ptr<__base::elem>&,
-                              cards::gelmnt1 const *data);
+                void dispatch(
+                    std::unique_ptr<__base::elem>&, cards::gelmnt1 const *data);
 
                 /** Match element type id to element type name.
                  */
                 std::string name_elem(
-                    dnvgl::extfem::fem::elements::el_types const &);
+                    dnvgl::extfem::fem::elements::el_types const);
             }
         }
     }
