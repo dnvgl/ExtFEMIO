@@ -48,17 +48,17 @@ entry_type<long> const gpipe::_form_NCIR("NCIR");
 entry_type<long> const gpipe::_form_NRAD("NRAD");
 
 gpipe::gpipe(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len) {
+        __base::beam_prop(inp, len, false) {
     read(inp, len);
 }
 
 void gpipe::read(vector<std::string> const &inp, size_t const len) {
     std::string static const empty{"                "};
-
     if (len < 7)
         throw errors::parse_error(
             "GPIPE", "Illegal number of entries.");
 
+    // GEONO = _form_GEONO(inp.at(1));
     DI = _form_DI(inp.at(2));
     DY = _form_DY(inp.at(3));
     T = _form_T(inp.at(4));
@@ -93,20 +93,16 @@ gpipe::card_type(void) const {
     return types::GPIPE;
 }
 
-std::ostream &gpipe::put(std::ostream& os) const {
+ostream &gpipe::put(ostream& os) const {
     if (GEONO == -1) return os;
     os << gpipe::head.format()
-       << _form_GEONO.format(GEONO)
-       << _form_DI.format(DI)
-       << _form_DY.format(DY)
-       << _form_T.format(T)
-       << std::endl << dnvgl::extfem::fem::types::card().format()
-       << _form_SFY.format(SFY)
-       << _form_SFZ.format(SFZ);
+       << _form_GEONO.format(GEONO) << _form_DI.format(DI)
+       << _form_DY.format(DY) << _form_T.format(T) << endl
+       << dnvgl::extfem::fem::types::card().format()
+       << _form_SFY.format(SFY) << _form_SFZ.format(SFZ);
     if ((NCIR || NRAD))
-        os << _form_NCIR.format(NCIR)
-           << _form_NRAD.format(NRAD);
-    os << std::endl;
+        os << _form_NCIR.format(NCIR) << _form_NRAD.format(NRAD);
+    os << endl;
     return os;
 }
 

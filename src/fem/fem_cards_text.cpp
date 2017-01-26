@@ -73,9 +73,8 @@ void text::read(vector<std::string> const &inp, size_t const len) {
 text::text(void) :
         text(-1, 0, 0, 0, {}) {}
 
-text::text(long const TYPE, long const SUBTYPE,
-           long const NRECS, long const NBYTE,
-           vector<std::string> const &CONT) :
+text::text(long const TYPE, long const SUBTYPE, long const NRECS,
+           long const NBYTE, vector<std::string> const &CONT) :
         card(),
         TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
         NBYTE(NBYTE), CONT(CONT) {
@@ -97,8 +96,7 @@ text::text(long const TYPE, long const SUBTYPE,
 }
 
 cards::__base::card const &text::operator() (
-    long const TYPE, long const SUBTYPE,
-    long const NRECS, long const NBYTE,
+    long const TYPE, long const SUBTYPE, long const NRECS, long const NBYTE,
     vector<std::string> const &CONT) {
     this->TYPE = TYPE;
     this->SUBTYPE = SUBTYPE;
@@ -111,8 +109,7 @@ cards::__base::card const &text::operator() (
 }
 
 cards::__base::card const &text::operator() (
-    long const TYPE, long const SUBTYPE,
-    vector<std::string> const &CONT) {
+    long const TYPE, long const SUBTYPE, vector<std::string> const &CONT) {
     this->TYPE = TYPE;
     this->SUBTYPE = SUBTYPE;
     this->CONT = CONT;

@@ -64,8 +64,7 @@ void gbeamg::read(const vector<std::string> &inp, size_t const len) {
         throw errors::parse_error(
             "GBEAMG", "Illegal number of entries.");
 
-     // GEONO = _form_GEONO(inp.at(1));
-
+    // GEONO = _form_GEONO(inp.at(1));
     AREA = _form_AREA(inp.at(3));
     if (len == 17) {
         IX = _form_IX(inp.at(4));
@@ -161,7 +160,7 @@ cards::__base::card const &gbeamg::operator() (
 }
 
 cards::__base::card const &gbeamg::operator() (double const AREA) {
-    cards::__base::geoprop::set_geono();
+    __base::beam_prop::set_geono(0, true);
     this->AREA = AREA;
     this->IX = {0};
     this->IY = {0};
@@ -204,13 +203,11 @@ cards::__base::card const &gbeamg::operator() (
 const dnvgl::extfem::fem::cards::types
 gbeamg::card_type(void) const {return types::GBEAMG;}
 
-std::ostream &gbeamg::put(std::ostream& os) const {
+ostream &gbeamg::put(ostream& os) const {
     if (GEONO == -1) return os;
     os << gbeamg::head.format()
-       << _form_GEONO.format(GEONO)
-       << empty.format()
-       << _form_AREA.format(AREA)
-       << _form_IX.format(IX) << std::endl;
+       << _form_GEONO.format(GEONO) << empty.format()
+       << _form_AREA.format(AREA) << _form_IX.format(IX) << endl;
 
     if (IX == 0. && IY == 0. && IZ == 0. && IYZ == 0. &&
         WXMIN == 0. && WYMIN == 0. && WZMIN == 0. &&
@@ -219,20 +216,14 @@ std::ostream &gbeamg::put(std::ostream& os) const {
         return os; // Only area value given for ELTYP 10 (truss element)
 
     os << fem::types::card("").format()
-       << _form_IY.format(IY)
-       << _form_IZ.format(IZ)
-       << _form_IYZ.format(IYZ)
-       << _form_WXMIN.format(WXMIN)
-       << std::endl << fem::types::card("").format()
-       << _form_WYMIN.format(WYMIN)
-       << _form_WZMIN.format(WZMIN)
-       << _form_SHARY.format(SHARY)
-       << _form_SHARZ.format(SHARZ)
-       << std::endl << fem::types::card("").format()
-       << _form_SHCENY.format(SHCENY)
-       << _form_SHCENZ.format(SHCENZ)
-       << _form_SY.format(SY)
-       << _form_SZ.format(SZ) << std::endl;
+       << _form_IY.format(IY) << _form_IZ.format(IZ)
+       << _form_IYZ.format(IYZ) << _form_WXMIN.format(WXMIN)
+       << endl << fem::types::card("").format()
+       << _form_WYMIN.format(WYMIN) << _form_WZMIN.format(WZMIN)
+       << _form_SHARY.format(SHARY) << _form_SHARZ.format(SHARZ)
+       << endl << fem::types::card("").format()
+       << _form_SHCENY.format(SHCENY) << _form_SHCENZ.format(SHCENZ)
+       << _form_SY.format(SY) << _form_SZ.format(SZ) << endl;
     return os;
 }
 

@@ -124,6 +124,35 @@ TEST_CASE("FEM GUSYI definitions.", "[fem_gusyi]" ) {
         CHECK(probe.NLOBYB == 0);
         CHECK(probe.NLOBZ == 0);
     }
+
+    SECTION("GUSYI (4)") {
+        gbeamg
+#ifdef __GNUC__
+    __attribute__ ((__unused__))
+#endif
+            dummy(5, 100.);
+        vector<std::string> data(
+            {"GUSYI    5.00000000e+00  4.66000000e+02  1.45000000e+01  1.25000000e+02 \n",
+             "         1.60000000e+01  1.45000000e+01  1.60000000e+01  1.00000000e+00 \n",
+             "         1.00000000e+00  0.00000000e+00  0.00000000e+00 \n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        gusyi probe(lines, len);
+
+        CHECK(probe.GEONO == 5);
+        CHECK(probe.HZ == 466.);
+        CHECK(probe.TY == 14.5);
+        CHECK(probe.BT == 125.);
+        CHECK(probe.B1 == 16.);
+        CHECK(probe.TT == 14.5);
+        CHECK(probe.BB == 16.);
+        CHECK(probe.B2 == 1.);
+        CHECK(probe.TB == 1.);
+        CHECK(probe.SFY == 0.);
+        CHECK(probe.SFZ == 0.);
+        CHECK(probe.NLOBYT == 0);
+        CHECK(probe.NLOBYB == 0);
+        CHECK(probe.NLOBZ == 0);
+    }
 }
 
 TEST_CASE("FEM GUSYI conversion from own output.", "[fem_gusyi,out]" ) {

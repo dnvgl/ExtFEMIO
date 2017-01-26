@@ -178,6 +178,28 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
         CHECK(probe.NLOBY == 0);
         CHECK(probe.NLOBZ == 0);
     }
+
+    SECTION("GBARM (3)") {
+        gbeamg
+#ifdef __GNUC__
+    __attribute__ ((__unused__))
+#endif
+            dummy(1, 100.);
+        vector<std::string> data({
+                "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+                    "        +5.000000000e+00+6.000000000e+00\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        gbarm probe(lines, len);
+
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.HZ == 2.);
+        CHECK(probe.BT == 3.);
+        CHECK(probe.BB == 4.);
+        CHECK(probe.SFY == 5.);
+        CHECK(probe.SFZ == 6.);
+        CHECK(probe.NLOBY == 0);
+        CHECK(probe.NLOBZ == 0);
+    }
 }
 
 // Local Variables:

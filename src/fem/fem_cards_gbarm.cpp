@@ -47,16 +47,13 @@ entry_type<double> const gbarm::_form_SFZ("SFZ");
 entry_type<long> const gbarm::_form_NLOBY("NLOBY");
 entry_type<long> const gbarm::_form_NLOBZ("NLOBZ");
 
-gbarm::gbarm(vector<std::string> const &inp, size_t const len) {
+gbarm::gbarm(vector<std::string> const &inp, size_t const len)  :
+        __base::beam_prop(inp, len, false) {
     read(inp, len);
 }
 
 void gbarm::read(vector<std::string> const &inp, size_t const len) {
     std::string static const empty{"                "};
-
-    __base::beam_prop::read(inp, len);
-    NLOBY = {0};
-    NLOBZ = {0};
 
     if (len < 7)
         throw errors::parse_error(
@@ -72,8 +69,12 @@ void gbarm::read(vector<std::string> const &inp, size_t const len) {
     if (i >= len) return;
     if (inp.at(i) != empty)
         NLOBY = _form_NLOBY(inp.at(i));
+    else
+        NLOBY = {0};
     if (++i < len && inp.at(i) != empty)
         NLOBZ = _form_NLOBZ(inp.at(i));
+    else
+        NLOBZ = {0};
 }
 
 gbarm::gbarm(void) :
@@ -93,16 +94,12 @@ gbarm::card_type(void) const {return types::GBARM;}
 ostream &gbarm::put(ostream& os) const {
     if (GEONO == -1) return os;
     os << gbarm::head.format()
-       << _form_GEONO.format(GEONO)
-       << _form_HZ.format(HZ)
-       << _form_BT.format(BT)
-       << _form_BB.format(BB)
-       << endl << fem::types::card("").format()
-       << _form_SFY.format(SFY)
-       << _form_SFZ.format(SFZ);
+       << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
+       << _form_BT.format(BT) << _form_BB.format(BB) << endl
+       << fem::types::card("").format()
+       << _form_SFY.format(SFY) << _form_SFZ.format(SFZ);
     if ((NLOBY || NLOBZ))
-        os << _form_NLOBY.format(NLOBY)
-           << _form_NLOBZ.format(NLOBZ);
+        os << _form_NLOBY.format(NLOBY) << _form_NLOBZ.format(NLOBZ);
     os << endl;
     return os;
 }

@@ -20,7 +20,7 @@ namespace std {
 
    template<typename _Ty, typename... Args>
    std::unique_ptr<_Ty> make_unique(Args&&... args) {
-      return std::unique_ptr<_Ty>(new _Ty(std::forward<Args>(args)...));
+       return std::unique_ptr<_Ty>(new _Ty(std::forward<Args>(args)...));
    }
 
 #endif
@@ -28,15 +28,15 @@ namespace std {
 
 #if _MSC_VER && _MSC_VER <= 1700
 
-   double round(double number);
+    double round(double number);
 
 #define MAKE_UNIQUE(TEMPLATE_LIST, PADDING_LIST, LIST, COMMA, X1, X2, X3, X4) \
-   template<class _Ty COMMA LIST(_CLASS_TYPE)>                          \
-   inline std::unique_ptr<_Ty> make_unique(LIST(_TYPE_REFREF_ARG))    \
-   {                                                                    \
-      return std::unique_ptr<_Ty>(new _Ty(LIST(_FORWARD_ARG)));       \
-   }
-   _VARIADIC_EXPAND_0X(MAKE_UNIQUE, , , , )
+    template<class _Ty COMMA LIST(_CLASS_TYPE)>                         \
+    inline std::unique_ptr<_Ty> make_unique(LIST(_TYPE_REFREF_ARG))     \
+    {                                                                   \
+        return std::unique_ptr<_Ty>(new _Ty(LIST(_FORWARD_ARG)));       \
+    }
+    _VARIADIC_EXPAND_0X(MAKE_UNIQUE, , , , )
 
 #undef MAKE_UNIQUE
 

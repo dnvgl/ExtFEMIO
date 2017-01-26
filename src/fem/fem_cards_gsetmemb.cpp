@@ -71,32 +71,25 @@ void gsetmemb::read(const vector<std::string> &inp, size_t const len) {
 gsetmemb::gsetmemb(void) :
         gsetmemb(-1, 0, 0, types::UNDEF_TYPE, origins::UNDEF_ORIGIN) {}
 
-gsetmemb::gsetmemb(long const NFIELD,
-                   long const ISREF,
-                   long const INDEX,
-                   gsetmemb::types const ISTYPE,
-                   gsetmemb::origins const ISORIG,
-                   vector<long> const &IRMEMB/*={}*/) :
+gsetmemb::gsetmemb(
+    long const NFIELD, long const ISREF, long const INDEX, gsetmemb::types const ISTYPE,
+    gsetmemb::origins const ISORIG, vector<long> const &IRMEMB/*={}*/) :
         card(), NFIELD(NFIELD), ISREF(ISREF), INDEX(INDEX),
         ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(IRMEMB) {}
 
-gsetmemb::gsetmemb(long const ISREF,
-                   long const INDEX,
-                   gsetmemb::types const ISTYPE,
-                   gsetmemb::origins const ISORIG,
-                   vector<long> const &IRMEMB/*={}*/) :
+gsetmemb::gsetmemb(
+    long const ISREF, long const INDEX, gsetmemb::types const ISTYPE,
+    gsetmemb::origins const ISORIG, vector<long> const &IRMEMB/*={}*/) :
         gsetmemb((long)IRMEMB.size() + 5, ISREF, INDEX,
                  ISTYPE, ISORIG, IRMEMB) {}
 
-gsetmemb::gsetmemb(long const ISREF,
-                   gsetmemb::types const ISTYPE,
-                   gsetmemb::origins const ISORIG,
-                   vector<long> const &IRMEMB/*={}*/) :
+gsetmemb::gsetmemb(
+    long const ISREF, gsetmemb::types const ISTYPE,
+    gsetmemb::origins const ISORIG, vector<long> const &IRMEMB/*={}*/) :
         gsetmemb((long)IRMEMB.size() + 5, ISREF, 1,
                  ISTYPE, ISORIG, IRMEMB) {}
 
-const dnvgl::extfem::fem::cards::types
-gsetmemb::card_type(void) const {
+const fem::cards::types gsetmemb::card_type(void) const {
     return cards::types::GSETMEMB;
 }
 
@@ -110,17 +103,15 @@ ostream &gsetmemb::put(ostream& os) const {
     while (first || cnt < IRMEMB.size()) {
         first = false;
         if (lldiv(field, 1024).rem == 0) {
-            if (field > 1)
-                os << endl;
+            if (field > 1) os << endl;
             os << gsetmemb::head.format()
                << _form_NFIELD.format(
                    static_cast<long>(
                        min(IRMEMB.size() - cnt + 5,
                            static_cast<vector<long int>::size_type>(1024))))
-               << _form_ISREF.format(ISREF)
-               << _form_INDEX.format(index++)
-               << _form_ISTYPE.format(static_cast<long>(ISTYPE))
-               << endl << dnvgl::extfem::fem::types::card().format()
+               << _form_ISREF.format(ISREF) << _form_INDEX.format(index++)
+               << _form_ISTYPE.format(static_cast<long>(ISTYPE)) << endl
+               << dnvgl::extfem::fem::types::card().format()
                << _form_ISORIG.format(static_cast<long>(ISORIG));
             field += 5;
             pos = 1;

@@ -72,18 +72,12 @@ void hsupstat::read(const vector<std::string> &inp, size_t const len) {
 hsupstat::hsupstat(void) :
         hsupstat(-1, 0, 0, 0, 0, 0, 0, 0, 0) {}
 
-hsupstat::hsupstat(long const NFIELD,
-                   long const ISELTY,
-                   long const NIDOF,
-                   long const NRDOF,
-                   long const NBAND,
-                   long const NELT,
-                   long const LINDEP,
-                   long const RELOADC,
-                   long const COMPLC) :
-        card(), NFIELD(NFIELD), ISELTY(ISELTY), NIDOF(NIDOF),
-        NRDOF(NRDOF), NBAND(NBAND), NELT(NELT), LINDEP(LINDEP),
-        RELOADC(RELOADC), COMPLC(COMPLC) {}
+hsupstat::hsupstat(long const NFIELD, long const ISELTY, long const NIDOF,
+                   long const NRDOF, long const NBAND, long const NELT,
+                   long const LINDEP, long const RELOADC, long const COMPLC) :
+        card(), NFIELD(NFIELD), ISELTY(ISELTY), NIDOF(NIDOF), NRDOF(NRDOF),
+        NBAND(NBAND), NELT(NELT), LINDEP(LINDEP), RELOADC(RELOADC),
+        COMPLC(COMPLC) {}
 
 fem::cards::types const hsupstat::card_type(void) const {
     return types::HSUPSTAT;

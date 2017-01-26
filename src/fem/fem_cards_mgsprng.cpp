@@ -69,13 +69,11 @@ void mgsprng::read(vector<std::string> const &inp, size_t const len) {
 mgsprng::mgsprng(void) :
         mgsprng(-1, 0, {}) {}
 
-mgsprng::mgsprng(long const MATNO,
-                 long const NDOF,
+mgsprng::mgsprng(long const MATNO, long const NDOF,
                  vector<vector<double> > const &K) :
         card(), MATNO(MATNO), NDOF(NDOF), K(K) {}
 
-mgsprng::mgsprng(long const MATNO,
-                 vector<vector<double> > const &K) :
+mgsprng::mgsprng(long const MATNO, vector<vector<double> > const &K) :
         card(), MATNO(MATNO), NDOF((long)K.size()), K(K) {}
 
 fem::cards::types const mgsprng::card_type(void) const {

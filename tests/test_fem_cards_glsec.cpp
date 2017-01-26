@@ -86,32 +86,32 @@ TEST_CASE("FEM GLSEC definitions.", "[fem_glsec]" ) {
         CHECK(probe.TY == 12);
         CHECK(probe.BY == 150);
         CHECK(probe.TZ == 12.);
-      CHECK(probe.SFY == 1.);
-      CHECK(probe.SFZ == 1.);
-      CHECK(probe.K);
-      CHECK(probe.NLOBY == 0);
-      CHECK(probe.NLOBZ == 0);
-   }
+        CHECK(probe.SFY == 1.);
+        CHECK(probe.SFZ == 1.);
+        CHECK(probe.K);
+        CHECK(probe.NLOBY == 0);
+        CHECK(probe.NLOBZ == 0);
+    }
 
-   SECTION("GLSEC (2)") {
-       vector<std::string> data({
-               // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-               "GLSEC     1.60000000E+02  1.50000006E-01  9.00000054E-03  9.00000036E-02\n",
-                   "          9.00000054E-03 1.000000000e+00 1.000000000e+00 1.00000000E+00 \n"});
-       len = __base::card::card_split(data, data.size(), lines);
-       glsec probe(lines, len);
+    SECTION("GLSEC (2)") {
+        vector<std::string> data({
+                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+                "GLSEC     1.60000000E+02  1.50000006E-01  9.00000054E-03  9.00000036E-02\n",
+                    "          9.00000054E-03 1.000000000e+00 1.000000000e+00 1.00000000E+00 \n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        glsec probe(lines, len);
 
-       CHECK(probe.GEONO == 160);
-       CHECK(probe.HZ == .150000006);
-       CHECK(probe.TY == .00900000054);
-       CHECK(probe.BY == .0900000036);
-       CHECK(probe.TZ == .00900000054);
-       CHECK(probe.SFY == 1.);
-       CHECK(probe.SFZ == 1.);
-       CHECK(probe.K);
-       CHECK(probe.NLOBY == 0);
-       CHECK(probe.NLOBZ == 0);
-   }
+        CHECK(probe.GEONO == 160);
+        CHECK(probe.HZ == .150000006);
+        CHECK(probe.TY == .00900000054);
+        CHECK(probe.BY == .0900000036);
+        CHECK(probe.TZ == .00900000054);
+        CHECK(probe.SFY == 1.);
+        CHECK(probe.SFZ == 1.);
+        CHECK(probe.K);
+        CHECK(probe.NLOBY == 0);
+        CHECK(probe.NLOBZ == 0);
+    }
 }
 
 TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
@@ -172,6 +172,31 @@ TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
     }
 
     SECTION("GLSEC (2)") {
+        vector<std::string> data({
+                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+                "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+                    "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        glsec probe(lines, len);
+
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.HZ == 2.);
+        CHECK(probe.TY == 3.);
+        CHECK(probe.BY == 4.);
+        CHECK(probe.TZ == 5.);
+        CHECK(probe.SFY == 6.);
+        CHECK(probe.SFZ == 7.);
+        CHECK(probe.K);
+        CHECK(probe.NLOBY == 0);
+        CHECK(probe.NLOBZ == 0);
+    }
+
+    SECTION("GLSEC (2)") {
+        gbeamg
+#ifdef __GNUC__
+    __attribute__ ((__unused__))
+#endif
+            dummy(1, 100.);
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",

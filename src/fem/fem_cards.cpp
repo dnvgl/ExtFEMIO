@@ -66,9 +66,9 @@ ostream &unknown::put(ostream &os) const {
     return os;
 }
 
-void unknown::read(const std::vector<std::string> &inp, size_t const len) {}
+void unknown::read(const vector<std::string> &inp, size_t const len) {}
 
-map<std::string, cards::types> const cardtype_map({
+unordered_map<std::string, cards::types> const cardtype_map({
         // UNKNOWN,
         {"DATE", cards::types::DATE},
         {"GCOORD", cards::types::GCOORD},
@@ -208,7 +208,7 @@ void cards::__base::geoprop::read(
 }
 
 cards::__base::card const &cards::__base::geoprop::operator() (
-    std::vector<std::string> const &inp, size_t const len) {
+    vector<std::string> const &inp, size_t const len) {
     read(inp, len);
     this->read(inp, len);
     return *this;
@@ -220,8 +220,8 @@ void cards::__base::geoprop::reset_geono(void) {
     cards::__base::beam_prop::reset_geono();
 }
 
-std::unordered_set<long> cards::__base::beam_prop::used_gbeamg;
-std::unordered_set<long> cards::__base::beam_prop::used_cross_desc;
+unordered_set<long> cards::__base::beam_prop::used_gbeamg;
+unordered_set<long> cards::__base::beam_prop::used_cross_desc;
 
 cards::__base::beam_prop::beam_prop(
     vector<std::string> const &inp, size_t const len) {
@@ -248,8 +248,16 @@ void cards::__base::beam_prop::reset_geono(void) {
 
 void cards::__base::beam_prop::set_geono(
     long const GEONO/*=0*/, bool const is_gbeamg/*=false*/) {
-    if (GEONO <= 0) {
+    if (GEONO < 0) {
         return cards::__base::geoprop::set_geono(GEONO);
+    }
+    if (GEONO == 0) {
+        cards::__base::geoprop::set_geono(GEONO);
+        if (is_gbeamg)
+            used_gbeamg.insert(GEONO);
+        else
+            used_cross_desc.insert(GEONO);
+        return;
     }
     if (is_gbeamg) {
         if (used_cross_desc.count(GEONO)){
@@ -298,7 +306,7 @@ void cards::__base::material::read(
 }
 
 cards::__base::card const &cards::__base::material::operator() (
-    std::vector<std::string> const &inp, size_t const len) {
+    vector<std::string> const &inp, size_t const len) {
     material::read(inp, len);
     this->read(inp, len);
     return *this;

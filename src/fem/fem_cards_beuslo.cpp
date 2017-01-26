@@ -30,6 +30,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -49,11 +51,11 @@ entry_type<long> const beuslo::_form_SIDE("SIDE");
 entry_type<double> const beuslo::_form_RLOAD("RLOAD");
 entry_type<double> const beuslo::_form_ILOAD("ILOAD");
 
-beuslo::beuslo(std::vector<std::string> const &inp, size_t const len) {
+beuslo::beuslo(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void beuslo::read(std::vector<std::string> const &inp, size_t const len) {
+void beuslo::read(vector<std::string> const &inp, size_t const len) {
     if (len < 10)
         throw errors::parse_error(
             "BEUSLO", "Illegal number of entries.");
@@ -76,16 +78,10 @@ void beuslo::read(std::vector<std::string> const &inp, size_t const len) {
 beuslo::beuslo() :
         beuslo(-1, 0, 0, 0, 0, 0, 0, 0, {}, {}) {}
 
-beuslo::beuslo(long const LLC,
-               long const LOTYP,
-               bool const COMPLX,
-               long const LAYER,
-               long const ELNO,
-               long const NDOF,
-               long const INTNO,
-               long const SIDE,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD) :
+beuslo::beuslo(
+    long const LLC, long const LOTYP, bool const COMPLX, long const LAYER,
+    long const ELNO, long const NDOF, long const INTNO, long const SIDE,
+    const vector<double> &RLOAD, const vector<double> &ILOAD) :
         card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
         LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
         SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
@@ -104,76 +100,55 @@ beuslo::beuslo(long const LLC,
             "BEUSLO", "ILOAD not of size NDOF");
 }
 
-beuslo::beuslo(long const LLC,
-               long const LOTYP,
-               bool const COMPLX,
-               long const LAYER,
-               long const ELNO,
-               long const INTNO,
-               long const SIDE,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD) :
+beuslo::beuslo(
+    long const LLC, long const LOTYP, bool const COMPLX, long const LAYER,
+    long const ELNO, long const INTNO, long const SIDE,
+    const vector<double> &RLOAD, const vector<double> &ILOAD) :
         beuslo(LLC, LOTYP, COMPLX, LAYER, ELNO, static_cast<long>(RLOAD.size()),
                INTNO, SIDE, RLOAD, ILOAD) {}
 
-beuslo::beuslo(long const LLC,
-               long const LOTYP,
-               long const LAYER,
-               long const ELNO,
-               long const NDOF,
-               long const INTNO,
-               long const SIDE,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD) :
+beuslo::beuslo(
+    long const LLC, long const LOTYP, long const LAYER, long const ELNO,
+    long const NDOF, long const INTNO, long const SIDE,
+    const vector<double> &RLOAD, const vector<double> &ILOAD) :
         beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, NDOF, INTNO,
                SIDE, RLOAD, ILOAD) {}
 
-beuslo::beuslo(long const LLC,
-               long const LOTYP,
-               long const LAYER,
-               long const ELNO,
-               long const INTNO,
-               long const SIDE,
-               const std::vector<double> &RLOAD,
-               const std::vector<double> &ILOAD) :
+beuslo::beuslo(
+    long const LLC, long const LOTYP, long const LAYER, long const ELNO,
+    long const INTNO, long const SIDE, const vector<double> &RLOAD,
+    const vector<double> &ILOAD) :
         beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO,
                static_cast<long>(RLOAD.size()), INTNO, SIDE, RLOAD, ILOAD) {}
 
-const dnvgl::extfem::fem::cards::types
-beuslo::card_type(void) const {
+fem::cards::types const beuslo::card_type(void) const {
     return types::BEUSLO;
 }
 
-std::ostream &beuslo::put(std::ostream &os) const {
+ostream &beuslo::put(ostream &os) const {
     if (LLC == -1) return os;
     os << beuslo::head.format()
-       << _form_LLC.format(LLC)
-       << _form_LOTYP.format(LOTYP)
-       << _form_COMPLX.format(COMPLX)
-       << _form_LAYER.format(LAYER)
-       << std::endl
+       << _form_LLC.format(LLC) << _form_LOTYP.format(LOTYP)
+       << _form_COMPLX.format(COMPLX) << _form_LAYER.format(LAYER) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << _form_ELNO.format(ELNO)
-       << _form_NDOF.format(NDOF)
-       << _form_INTNO.format(INTNO)
-       << _form_SIDE.format(SIDE)
-       << std::endl
+       << _form_ELNO.format(ELNO) << _form_NDOF.format(NDOF)
+       << _form_INTNO.format(INTNO) << _form_SIDE.format(SIDE) << endl
        << dnvgl::extfem::fem::types::card().format();
     size_t num{0};
     for (int i{0}; i<NDOF; i++) {
         if (!(num++ % 4) && num != 1)
-            os << std::endl
+            os << endl
                << dnvgl::extfem::fem::types::card().format();
         os << _form_RLOAD.format(RLOADi.at(i));
     }
     if (COMPLX) {
         for (size_t i{0}; i < static_cast<size_t>(NDOF); i++) {
             if (!(num++ % 4))
-                os << std::endl << dnvgl::extfem::fem::types::card().format();
+                os << endl << dnvgl::extfem::fem::types::card().format();
             os << _form_ILOAD.format(ILOADi.at(i));
         }
     }
-    os << std::endl;
+    os << endl;
     return os;
 }
 

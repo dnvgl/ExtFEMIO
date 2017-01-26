@@ -52,7 +52,7 @@ entry_type<long> const giorh::_form_NLOBZ("NLOBZ");
 
 
 giorh::giorh(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len) {
+        __base::beam_prop(inp, len, false) {
     read(inp, len);
 }
 
@@ -97,7 +97,7 @@ giorh::giorh(long const GEONO, double const HZ,
              double const SFZ,
              long const NLOBYT/*=0*/, long const NLOBYB/*=0*/,
              long const NLOBZ/*=0*/) :
-        __base::beam_prop(GEONO),
+        __base::beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
         SFY(SFY), SFZ(SFZ),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
@@ -105,25 +105,20 @@ giorh::giorh(long const GEONO, double const HZ,
 dnvgl::extfem::fem::cards::types const
 giorh::card_type(void) const {return types::GIORH;}
 
-std::ostream &giorh::put(std::ostream& os) const {
+ostream &giorh::put(ostream& os) const {
     if (GEONO == -1) return os;
     os << giorh::head.format()
-       << _form_GEONO.format(GEONO)
-       << _form_HZ.format(HZ)
-       << _form_TY.format(TY)
-       << _form_BT.format(BT)
-       << std::endl << dnvgl::extfem::fem::types::card().format()
-       << _form_TT.format(TT)
-       << _form_BB.format(BB)
-       << _form_TB.format(TB)
-       << _form_SFY.format(SFY)
-       << std::endl << dnvgl::extfem::fem::types::card().format()
+       << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
+       << _form_TY.format(TY) << _form_BT.format(BT)
+       << endl << dnvgl::extfem::fem::types::card().format()
+       << _form_TT.format(TT) << _form_BB.format(BB)
+       << _form_TB.format(TB) << _form_SFY.format(SFY)
+       << endl << dnvgl::extfem::fem::types::card().format()
        << _form_SFZ.format(SFZ);
     if ((NLOBYT || NLOBYB || NLOBZ))
-        os << _form_NLOBYT.format(NLOBYT)
-           << _form_NLOBYB.format(NLOBYB)
+        os << _form_NLOBYT.format(NLOBYT) << _form_NLOBYB.format(NLOBYB)
            << _form_NLOBZ.format(NLOBZ);
-    return os << std::endl;
+    return os << endl;
 }
 
 // Local Variables:

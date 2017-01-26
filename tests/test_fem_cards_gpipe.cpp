@@ -85,6 +85,28 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
         CHECK(probe.NCIR == 0);
         CHECK(probe.NRAD == 0);
     }
+
+    SECTION("GPIPE (3)") {
+        gbeamg
+#ifdef __GNUC__
+    __attribute__ ((__unused__))
+#endif
+            dummy(654357, 100.);
+        vector<std::string> data(
+            {"GPIPE    6.54357000e+05  0.000000000e+00 5.90218891e-02  2.95109446e-02 \n",
+             "         1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        gpipe probe(lines, len);
+
+        CHECK(probe.GEONO == 654357);
+        CHECK(probe.DI == 0.);
+        CHECK(probe.DY == 5.90218891e-2);
+        CHECK(probe.T == 2.95109446e-2);
+        CHECK(probe.SFY == 1.);
+        CHECK(probe.SFZ == 1.);
+        CHECK(probe.NCIR == 0);
+        CHECK(probe.NRAD == 0);
+    }
 }
 
 TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file") {

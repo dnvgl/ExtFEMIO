@@ -30,6 +30,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -42,11 +44,11 @@ entry_type<long> const bsell::_form_SUBNO("SUBNO");
 entry_type<long> const bsell::_form_LLC("LLC");
 entry_type<double> const bsell::_form_FACT("FACT");
 
-bsell::bsell(std::vector<std::string> const &inp, size_t const len) {
+bsell::bsell(vector<std::string> const &inp, size_t const len) {
     read(inp, len);
 }
 
-void bsell::read(std::vector<std::string> const &inp, size_t const len) {
+void bsell::read(vector<std::string> const &inp, size_t const len) {
     static const std::string empty(16, ' ');
 
     long tmp;
@@ -70,17 +72,14 @@ void bsell::read(std::vector<std::string> const &inp, size_t const len) {
 bsell::bsell(void) :
         bsell(-1, 0, {}, {}) {}
 
-bsell::bsell(long const LC,
-             long const SUBNO,
-             std::vector<long> const &LLC,
-             std::vector<double> const &FACT) :
+bsell::bsell(
+    long const LC, long const SUBNO, vector<long> const &LLC,
+    vector<double> const &FACT) :
         card(), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
 
 cards::__base::card const &bsell::operator()(
-    long const LC,
-    long const SUBNO,
-    std::vector<long> const &LLC,
-    std::vector<double> const &FACT) {
+    long const LC, long const SUBNO, vector<long> const &LLC,
+    vector<double> const &FACT) {
     this->LC = LC;
     this->SUBNO = SUBNO;
     this->LLC = LLC;
@@ -88,27 +87,22 @@ cards::__base::card const &bsell::operator()(
     return *this;
 }
 
-dnvgl::extfem::fem::cards::types const
-bsell::card_type(void) const {
+fem::cards::types const bsell::card_type(void) const {
     return types::BSELL;
 }
 
-std::ostream &bsell::put(std::ostream& os) const {
+ostream &bsell::put(ostream& os) const {
     if (LC == -1) return os;
     os << bsell::head.format()
-       << _form_LC.format(LC)
-       << _form_SUBNO.format(SUBNO)
-       << empty.format()
-       << empty.format()
-       << std::endl;
+       << _form_LC.format(LC) << _form_SUBNO.format(SUBNO)
+       << empty.format() << empty.format() << endl;
     for (size_t i{0}; i < LLC.size(); i += 2) {
         os << dnvgl::extfem::fem::types::card().format()
-           << _form_LLC.format(LLC.at(i))
-           << _form_FACT.format(FACT.at(i));
+           << _form_LLC.format(LLC.at(i)) << _form_FACT.format(FACT.at(i));
         if (i+1 < LLC.size())
             os << _form_LLC.format(LLC.at(i+1))
                << _form_FACT.format(FACT.at(i+1));
-        os << std::endl;
+        os << endl;
     }
     return os;
 }

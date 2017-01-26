@@ -71,8 +71,8 @@ void ident::read(const vector<std::string> &inp, size_t const len) {
 ident::ident(void) :
         ident(-1, 0, ident::mod_type::INVALID) {}
 
-ident::ident(long const SLEVEL, long const SELTYP,
-             ident::mod_type const SELMOD) :
+ident::ident(
+    long const SLEVEL, long const SELTYP, ident::mod_type const SELMOD) :
         SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
 
 cards::types const ident::card_type(void) const {
@@ -82,10 +82,9 @@ cards::types const ident::card_type(void) const {
 ostream &ident::put(ostream& os) const {
     if (SELMOD == ident::mod_type::INVALID) return os;
     os << ident::head.format()
-       << _form_SLEVEL.format(SLEVEL)
-       << _form_SELTYP.format(SELTYP)
-       << _form_SELMOD.format(static_cast<long>(SELMOD));
-    return os << endl;
+       << _form_SLEVEL.format(SLEVEL) << _form_SELTYP.format(SELTYP)
+       << _form_SELMOD.format(static_cast<long>(SELMOD)) << endl;
+    return os;
 }
 
 // Local Variables:

@@ -67,7 +67,7 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
         throw errors::parse_error(
             "GELREF1", "Illegal number of entries.");
 
-    std::vector<std::string> static node_vals;
+    vector<std::string> static node_vals;
     entry_type<long> static const lval("lval");
 
     long tmp;
@@ -139,16 +139,12 @@ gelref1::gelref1(void) :
                 {}, {}, {}, {})  {}
 
 gelref1::gelref1(
-    long const ELNO, long const MATNO,
-    long const ADDNO, long const INTNO,
-    long const MINTNO, long const STRANO,
-    long const STRENO, long const STREPONO,
-    long const GEONO_OPT, long const FIXNO_OPT,
-    long const ECCNO_OPT, long const TRANSNO_OPT,
-    const std::vector<long> &GEONO,
-    const std::vector<long> &FIXNO,
-    const std::vector<long> &ECCNO,
-    const std::vector<long> &TRANSNO) :
+    long const ELNO, long const MATNO, long const ADDNO, long const INTNO,
+    long const MINTNO, long const STRANO, long const STRENO,
+    long const STREPONO, long const GEONO_OPT, long const FIXNO_OPT,
+    long const ECCNO_OPT, long const TRANSNO_OPT, const vector<long> &GEONO,
+    const vector<long> &FIXNO, const vector<long> &ECCNO,
+    const vector<long> &TRANSNO) :
         card(),
         ELNO(ELNO), MATNO(MATNO), ADDNO(ADDNO), INTNO(INTNO),
         MINTNO(MINTNO), STRANO(STRANO), STRENO(STRENO),
@@ -162,8 +158,8 @@ gelref1::gelref1(
     if (GEONO.size()) {
         min_max_set = true;
         lmin = lmax = GEONO.size();
-        std::copy(GEONO.begin(), GEONO.end(),
-                  std::back_inserter(this->GEONO));
+        copy(GEONO.begin(), GEONO.end(),
+                  back_inserter(this->GEONO));
     }
     if (FIXNO.size()) {
         if (min_max_set) {
@@ -173,8 +169,8 @@ gelref1::gelref1(
             min_max_set = true;
             lmin = lmax = FIXNO.size();
         }
-        std::copy(FIXNO.begin(), FIXNO.end(),
-                  std::back_inserter(this->FIXNO));
+        copy(FIXNO.begin(), FIXNO.end(),
+                  back_inserter(this->FIXNO));
     }
     if (ECCNO.size()) {
         if (min_max_set) {
@@ -184,8 +180,8 @@ gelref1::gelref1(
             min_max_set = true;
             lmin = lmax = ECCNO.size();
         }
-        std::copy(ECCNO.begin(), ECCNO.end(),
-                  std::back_inserter(this->ECCNO));
+        copy(ECCNO.begin(), ECCNO.end(),
+                  back_inserter(this->ECCNO));
     }
     if (TRANSNO.size()) {
         if (min_max_set) {
@@ -195,8 +191,8 @@ gelref1::gelref1(
             min_max_set = true;
             lmin = lmax = TRANSNO.size();
         }
-        std::copy(TRANSNO.begin(), TRANSNO.end(),
-                  std::back_inserter(this->TRANSNO));
+        copy(TRANSNO.begin(), TRANSNO.end(),
+                  back_inserter(this->TRANSNO));
     }
 
     if (lmin != lmax) {
@@ -208,16 +204,12 @@ gelref1::gelref1(
         }
 
 cards::__base::card const &gelref1::operator() (
-    long const ELNO, long const MATNO,
-    long const ADDNO, long const INTNO,
-    long const MINTNO, long const STRANO,
-    long const STRENO, long const STREPONO,
-    long const GEONO_OPT, long const FIXNO_OPT,
+    long const ELNO, long const MATNO, long const ADDNO, long const INTNO,
+    long const MINTNO, long const STRANO, long const STRENO,
+    long const STREPONO, long const GEONO_OPT, long const FIXNO_OPT,
     long const ECCNO_OPT, long const TRANSNO_OPT,
-    std::vector<long> const &GEONO/*={}*/,
-    std::vector<long> const &FIXNO/*={}*/,
-    std::vector<long> const &ECCNO/*={}*/,
-    std::vector<long> const &TRANSNO/*={}*/) {
+    vector<long> const &GEONO/*={}*/, vector<long> const &FIXNO/*={}*/,
+    vector<long> const &ECCNO/*={}*/, vector<long> const &TRANSNO/*={}*/) {
     this->ELNO = ELNO;
     this->MATNO = MATNO;
     this->ADDNO = ADDNO;
@@ -237,8 +229,8 @@ cards::__base::card const &gelref1::operator() (
     if (GEONO.size()) {
         min_max_set = true;
         lmin = lmax = GEONO.size();
-        std::copy(GEONO.begin(), GEONO.end(),
-                  std::back_inserter(this->GEONO));
+        copy(GEONO.begin(), GEONO.end(),
+                  back_inserter(this->GEONO));
     }
     if (FIXNO.size()) {
         if (min_max_set) {
@@ -248,8 +240,8 @@ cards::__base::card const &gelref1::operator() (
             min_max_set = true;
             lmin = lmax = FIXNO.size();
         }
-        std::copy(FIXNO.begin(), FIXNO.end(),
-                  std::back_inserter(this->FIXNO));
+        copy(FIXNO.begin(), FIXNO.end(),
+                  back_inserter(this->FIXNO));
     }
     if (ECCNO.size()) {
         if (min_max_set) {
@@ -259,8 +251,8 @@ cards::__base::card const &gelref1::operator() (
             min_max_set = true;
             lmin = lmax = ECCNO.size();
         }
-        std::copy(ECCNO.begin(), ECCNO.end(),
-                  std::back_inserter(this->ECCNO));
+        copy(ECCNO.begin(), ECCNO.end(),
+                  back_inserter(this->ECCNO));
     }
     if (TRANSNO.size()) {
         if (min_max_set) {
@@ -270,8 +262,8 @@ cards::__base::card const &gelref1::operator() (
             min_max_set = true;
             lmin = lmax = TRANSNO.size();
         }
-        std::copy(TRANSNO.begin(), TRANSNO.end(),
-                  std::back_inserter(this->TRANSNO));
+        copy(TRANSNO.begin(), TRANSNO.end(),
+                  back_inserter(this->TRANSNO));
     }
 
     if (lmin != lmax) {
@@ -288,46 +280,41 @@ gelref1::card_type(void) const {
     return types::GELREF1;
 }
 
-std::ostream &gelref1::put(std::ostream& os) const {
+ostream &gelref1::put(ostream& os) const {
     if (ELNO == -1) return os;
     os << gelref1::head.format()
-       << _form_ELNO.format(ELNO)
-       << _form_MATNO.format(MATNO)
-       << _form_ADDNO.format(ADDNO)
-       << _form_INTNO.format(INTNO) << std::endl
+       << _form_ELNO.format(ELNO) << _form_MATNO.format(MATNO)
+       << _form_ADDNO.format(ADDNO) << _form_INTNO.format(INTNO) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << _form_MINTNO.format(MINTNO)
-       << _form_STRANO.format(STRANO)
-       << _form_STRENO.format(STRENO)
-       << _form_STREPONO.format(STREPONO) << std::endl
+       << _form_MINTNO.format(MINTNO) << _form_STRANO.format(STRANO)
+       << _form_STRENO.format(STRENO) << _form_STREPONO.format(STREPONO) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << _form_GEONO_OPT.format(GEONO_OPT)
-       << _form_FIXNO_OPT.format(FIXNO_OPT)
+       << _form_GEONO_OPT.format(GEONO_OPT) << _form_FIXNO_OPT.format(FIXNO_OPT)
        << _form_ECCNO_OPT.format(ECCNO_OPT)
        << _form_TRANSNO_OPT.format(TRANSNO_OPT);
 
     size_t i = 0;
     for (auto p : GEONO) {
         if (!(i++ % 4))
-            os << std::endl << fem::types::card().format();
+            os << endl << fem::types::card().format();
         os << _form_GEONO.format(p);
     }
     for (auto p : FIXNO) {
         if (!(i++ % 4))
-            os << std::endl << ::fem::types::card().format();
+            os << endl << ::fem::types::card().format();
         os << _form_FIXNO.format(p);
     }
     for (auto p : ECCNO) {
         if (!(i++ % 4))
-            os << std::endl << dnvgl::extfem::fem::types::card().format();
+            os << endl << dnvgl::extfem::fem::types::card().format();
         os << _form_ECCNO.format(p);
     }
     for (auto p : TRANSNO) {
         if (!(i++ % 4))
-            os << std::endl << dnvgl::extfem::fem::types::card().format();
+            os << endl << dnvgl::extfem::fem::types::card().format();
         os << _form_TRANSNO.format(p);
     }
-    return os << std::endl;
+    return os << endl;
 }
 
 // Local Variables:

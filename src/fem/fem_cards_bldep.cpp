@@ -31,6 +31,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
@@ -46,11 +48,11 @@ const entry_type<long> bldep::_form_DEPDOF("DEPDOF");
 const entry_type<long> bldep::_form_INDEPDOF("INDEPDOF");
 const entry_type<double> bldep::_form_b("b");
 
-bldep::bldep(const std::vector<std::string> &inp, size_t const len) {
+bldep::bldep(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
 }
 
-void bldep::read(const std::vector<std::string> &inp, size_t const len) {
+void bldep::read(const vector<std::string> &inp, size_t const len) {
     if (len < 9)
         throw errors::parse_error(
             "BLDEP", "Illegal number of entries.");
@@ -72,13 +74,9 @@ bldep::bldep(void) :
         bldep(-1, 0, 0, 0, {}, {}, {}) {}
 
 bldep::bldep(
-    long const NODENO,
-    long const CNOD,
-    long const NDDOF,
-    long const NDEP,
-    std::vector<long> const &DEPDOF,
-    std::vector<long> const &INDEPDOF,
-    std::vector<double> const &b) :
+    long const NODENO, long const CNOD, long const NDDOF, long const NDEP,
+    vector<long> const &DEPDOF, vector<long> const &INDEPDOF,
+    vector<double> const &b) :
         NODENO(NODENO), CNOD(CNOD), NDDOF(NDDOF), NDEP(NDEP),
         DEPDOF(DEPDOF), INDEPDOF(INDEPDOF), b(b) {
     assert(DEPDOF.size() == INDEPDOF.size());
@@ -86,22 +84,17 @@ bldep::bldep(
 }
 
 bldep::bldep(
-    long const NODENO,
-    long const CNOD,
-    long const NDDOF,
-    std::vector<long> const &DEPDOF,
-    std::vector<long> const &INDEPDOF,
-    std::vector<double> const &b) :
+    long const NODENO, long const CNOD, long const NDDOF,
+    vector<long> const &DEPDOF, vector<long> const &INDEPDOF,
+    vector<double> const &b) :
         bldep(NODENO, CNOD, NDDOF,
               static_cast<long>(DEPDOF.size()),
               DEPDOF, INDEPDOF, b) {}
 
 bldep::bldep(
-    long const NODENO,
-    long const CNOD,
-    std::vector<long> const &DEPDOF,
-    std::vector<long> const &INDEPDOF,
-    std::vector<double> const &b) :
+    long const NODENO, long const CNOD,
+    vector<long> const &DEPDOF, vector<long> const &INDEPDOF,
+    vector<double> const &b) :
         bldep(NODENO, CNOD, static_cast<long>(DEPDOF.size()),
               static_cast<long>(DEPDOF.size()),
               DEPDOF, INDEPDOF, b) {}
@@ -111,21 +104,16 @@ bldep::card_type(void) const {
     return types::BLDEP;
 }
 
-std::ostream &bldep::put(std::ostream& os) const {
+ostream &bldep::put(ostream& os) const {
     if (NODENO == -1) return os;
     os << bldep::head.format()
-       << _form_NODENO.format(NODENO)
-       << _form_CNOD.format(CNOD)
-       << _form_NDDOF.format(NDDOF)
-       << _form_NDEP.format(NDEP)
-       << std::endl;
+       << _form_NODENO.format(NODENO) << _form_CNOD.format(CNOD)
+       << _form_NDDOF.format(NDDOF) << _form_NDEP.format(NDEP) << endl;
     for (size_t i{0}; i < static_cast<size_t>(NDEP); i++)
         os << dnvgl::extfem::fem::types::card().format()
            << _form_DEPDOF.format(DEPDOF.at(i))
            << _form_INDEPDOF.format(INDEPDOF.at(i))
-           << _form_b.format(b.at(i))
-           << empty.format()
-           << std::endl;
+           << _form_b.format(b.at(i)) << empty.format() << endl;
     return os;
 }
 

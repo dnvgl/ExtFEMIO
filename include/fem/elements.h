@@ -20,7 +20,7 @@
    Detailed description
 */
 
-// ID: $Id: fem_elements.h 532 2017-01-16 10:25:03Z berhol $
+// ID: $Id: fem_elements.h 554 2017-01-26 08:26:01Z berhol $
 
 #include "fem/cards.h"
 
@@ -304,102 +304,110 @@ namespace dnvgl {
 
                     protected:
 
-                        long static const &get_eleno(void);
-                        long static get_eleno(long const &eleno);
-                        long static const &get_elident();
-                        long static get_elident(long const &elident);
-
+                        long static const get_eleno(void);
+                        long static get_eleno(long const eleno);
+                        long static const get_elident();
+                        long static get_elident(long const elident);
                         el_types static const type;
+
                         elem(void);
-                        elem(long const &eleno, long const &elident,
-                             long const &el_add,
+
+                        elem(long const eleno, long const elident,
+                             long const el_add,
                              std::vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no=0, long const &intno=0,
-                             long const &mass_intno=0, long const &i_strain_ref=0,
-                             long const &i_stressef=0, long const &strpoint_ref=0,
+                             long const matref,
+                             long const add_no=0, long const intno=0,
+                             long const mass_intno=0, long const i_strain_ref=0,
+                             long const i_stressef=0, long const strpoint_ref=0,
                              std::vector<long> const &sections={},
                              std::vector<long> const &fixations={},
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
-                        elem(long const &eleno, long const &el_add,
+
+                        elem(long const eleno, long const el_add,
                              std::vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no=0, long const &intno=0,
-                             long const &mass_intno=0, long const &i_strain_ref=0,
-                             long const &i_stressef=0, long const &strpoint_ref=0,
+                             long const matref,
+                             long const add_no=0, long const intno=0,
+                             long const mass_intno=0, long const i_strain_ref=0,
+                             long const i_stressef=0, long const strpoint_ref=0,
                              std::vector<long> const &sections={},
                              std::vector<long> const &fixations={},
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
-                        elem(long const &el_add,
+
+                        elem(long const el_add,
                              std::vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no=0, long const &intno=0,
-                             long const &mass_intno=0, long const &i_strain_ref=0,
-                             long const &i_stressef=0, long const &strpoint_ref=0,
+                             long const matref,
+                             long const add_no=0, long const intno=0,
+                             long const mass_intno=0, long const i_strain_ref=0,
+                             long const i_stressef=0, long const strpoint_ref=0,
                              std::vector<long> const &sections={},
                              std::vector<long> const &fixations={},
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &eleno, long const &elident,
-                            long const &el_add,
+                            long const eleno, long const elident,
+                            long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no=0, long const &intno=0,
-                            long const &mass_intno=0, long const &i_strain_ref=0,
-                            long const &i_stressef=0, long const &strpoint_ref=0,
+                            long const matref,
+                            long const add_no=0, long const intno=0,
+                            long const mass_intno=0, long const i_strain_ref=0,
+                            long const i_stressef=0, long const strpoint_ref=0,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &eleno, long const &el_add,
+                            long const eleno, long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no=0, long const &intno=0,
-                            long const &mass_intno=0, long const &i_strain_ref=0,
-                            long const &i_stressef=0, long const &strpoint_ref=0,
+                            long const matref,
+                            long const add_no=0, long const intno=0,
+                            long const mass_intno=0, long const i_strain_ref=0,
+                            long const i_stressef=0, long const strpoint_ref=0,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no=0, long const &intno=0,
-                            long const &mass_intno=0, long const &i_strain_ref=0,
-                            long const &i_stressef=0, long const &strpoint_ref=0,
+                            long const matref,
+                            long const add_no=0, long const intno=0,
+                            long const mass_intno=0, long const i_strain_ref=0,
+                            long const i_stressef=0, long const strpoint_ref=0,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &eleno,
+                            long const eleno,
                             std::vector<long> const &nodes,
-                            long const &matref,
+                            long const matref,
                             std::vector<long> const &sections={},
-                            long const &el_add=0,
-                            long const &add_no=0,
-                            long const &intno=0,
-                            long const &mass_intno=0,
-                            long const &i_strain_ref=0,
-                            long const &i_stressef=0,
-                            long const &strpoint_ref=0,
+                            long const el_add=0,
+                            long const add_no=0,
+                            long const intno=0,
+                            long const mass_intno=0,
+                            long const i_strain_ref=0,
+                            long const i_stressef=0,
+                            long const strpoint_ref=0,
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
+
                         __base::elem const &operator() (
-                            long const &el_add,
+                            long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no,
-                            long const &intno,
-                            long const &mass_intno,
-                            long const &i_strain_ref,
-                            long const &i_stress_ref,
-                            long const &strpoint_ref,
+                            long const matref,
+                            long const add_no,
+                            long const intno,
+                            long const mass_intno,
+                            long const i_strain_ref,
+                            long const i_stress_ref,
+                            long const strpoint_ref,
                             std::vector<long> const &section,
                             std::vector<long> const &fixations,
                             std::vector<long> const &eccentrities,
@@ -407,27 +415,27 @@ namespace dnvgl {
 
                         __base::elem const &operator() (
                             std::vector<long> const &nodes,
-                            long const &matref,
+                            long const matref,
                             std::vector<long> const &sections={},
                             std::vector<long> const &fixations={},
                             std::vector<long> const &eccentrities={},
-                            long const &el_add=0,
-                            long const &add_no=0,
-                            long const &intno=0,
-                            long const &mass_intno=0,
-                            long const &i_strain_ref=0,
-                            long const &i_stressef=0,
-                            long const &strpoint_ref=0,
+                            long const el_add=0,
+                            long const add_no=0,
+                            long const intno=0,
+                            long const mass_intno=0,
+                            long const i_strain_ref=0,
+                            long const i_stressef=0,
+                            long const strpoint_ref=0,
                             std::vector<long> const &csys={});
 
                         __base::elem const &set_values(
-                            long const &eleno, long const &elident,
-                            long const &el_add,
+                            long const eleno, long const elident,
+                            long const el_add,
                             std::vector<long> const &nodes,
-                            long const &matref,
-                            long const &add_no, long const &intno,
-                            long const &mass_intno, long const &i_strain_ref,
-                            long const &i_stressef, long const &strpoint_ref,
+                            long const matref,
+                            long const add_no, long const intno,
+                            long const mass_intno, long const i_strain_ref,
+                            long const i_stressef, long const strpoint_ref,
                             std::vector<long> const &sections,
                             std::vector<long> const &fixations,
                             std::vector<long> const &eccentrities,
@@ -541,50 +549,37 @@ namespace dnvgl {
                     el_types get_type(void) const;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-D, 2 Node Beam
                  */
                 class beps : public __base::elem {
                 public:
                     beps(void);
-                    beps(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    beps(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    beps(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    beps(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    beps(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    beps(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -599,50 +594,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Constant Strain Triangle
                  */
                 class csta : public __base::elem {
                 public:
                     csta(void);
-                    csta(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    csta(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    csta(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    csta(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    csta(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    csta(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -657,50 +639,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Rect. Plate. Bending Modes
                  */
                 class rpbq : public __base::elem {
                 public:
                     rpbq(void);
-                    rpbq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    rpbq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    rpbq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    rpbq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    rpbq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    rpbq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -715,50 +684,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Lin. Strain Triangle
                  */
                 class ilst : public __base::elem {
                 public:
                     ilst(void);
-                    ilst(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ilst(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ilst(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ilst(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ilst(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ilst(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -773,50 +729,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class iqqe : public __base::elem {
                 public:
                     iqqe(void);
-                    iqqe(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    iqqe(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    iqqe(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    iqqe(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    iqqe(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    iqqe(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -831,50 +774,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class lqua : public __base::elem {
                 public:
                     lqua(void);
-                    lqua(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lqua(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lqua(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lqua(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lqua(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lqua(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -889,50 +819,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Truss Element
                  */
                 class tess : public __base::elem {
                 public:
                     tess(void);
-                    tess(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tess(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    tess(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tess(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    tess(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tess(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -947,50 +864,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 1-Noded Mass-Matrix
                  */
                 class gmas : public __base::elem {
                 public:
                     gmas(void);
-                    gmas(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gmas(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    gmas(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gmas(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    gmas(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gmas(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1005,50 +909,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Mass-Matrix
                  */
                 class glma : public __base::elem {
                 public:
                     glma(void);
-                    glma(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glma(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    glma(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glma(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    glma(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glma(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1063,50 +954,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Damping-Matrix
                  */
                 class glda : public __base::elem {
                 public:
                     glda(void);
-                    glda(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glda(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    glda(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glda(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    glda(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glda(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1121,50 +999,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 3-D, 2 Node Beam
                  */
                 class beas : public __base::elem {
                 public:
                     beas(void);
-                    beas(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    beas(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    beas(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    beas(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    beas(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    beas(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1179,50 +1044,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Spring
                  */
                 class axis : public __base::elem {
                 public:
                     axis(void);
-                    axis(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axis(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axis(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axis(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axis(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axis(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1237,50 +1089,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Damper
                  */
                 class axda : public __base::elem {
                 public:
                     axda(void);
-                    axda(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axda(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axda(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axda(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axda(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axda(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1295,50 +1134,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Spring to Ground
                  */
                 class gspr : public __base::elem {
                 public:
                     gspr(void);
-                    gspr(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gspr(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    gspr(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gspr(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    gspr(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gspr(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1353,50 +1179,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Damper to Ground
                  */
                 class gdam : public __base::elem {
                 public:
                     gdam(void);
-                    gdam(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gdam(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    gdam(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gdam(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    gdam(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    gdam(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1411,50 +1224,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Hexahedron
                  */
                 class ihex : public __base::elem {
                 public:
                     ihex(void);
-                    ihex(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ihex(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ihex(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ihex(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ihex(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ihex(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1469,50 +1269,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Linear Hexahedron
                  */
                 class lhex : public __base::elem {
                 public:
                     lhex(void);
-                    lhex(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lhex(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lhex(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lhex(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lhex(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lhex(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1527,50 +1314,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Beam
                  */
                 class secb : public __base::elem {
                 public:
                     secb(void);
-                    secb(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    secb(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    secb(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    secb(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    secb(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    secb(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1585,50 +1359,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Curved Beam
                  */
                 class btss : public __base::elem {
                 public:
                     btss(void);
-                    btss(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    btss(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    btss(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    btss(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    btss(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    btss(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1643,50 +1404,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell
                  */
                 class fqus_ffq : public __base::fem_thin_shell {
                 public:
                     fqus_ffq(void);
-                    fqus_ffq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    fqus_ffq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    fqus_ffq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    fqus_ffq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    fqus_ffq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    fqus_ffq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1701,50 +1449,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /**  Flat Triangular Thin Shell / Free Formulation Triangular Shell
                  */
                 class ftrs_fftr : public __base::fem_thin_shell {
                 public:
                     ftrs_fftr(void);
-                    ftrs_fftr(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ftrs_fftr(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ftrs_fftr(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ftrs_fftr(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ftrs_fftr(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ftrs_fftr(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1759,50 +1494,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Triangular Thick Shell
                  */
                 class scts : public __base::elem {
                 public:
                     scts(void);
-                    scts(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    scts(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    scts(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    scts(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    scts(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    scts(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1817,50 +1539,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Triang. Thick Sandwich Elem.
                  */
                 class mcts : public __base::elem {
                 public:
                     mcts(void);
-                    mcts(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    mcts(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    mcts(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    mcts(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    mcts(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    mcts(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1875,50 +1584,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Quadrilateral Thick Shell
                  */
                 class scqs : public __base::elem {
                 public:
                     scqs(void);
-                    scqs(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    scqs(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    scqs(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    scqs(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    scqs(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    scqs(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1933,50 +1629,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Quadr. Thick Sandwich Elem.
                  */
                 class mcqs : public __base::elem {
                 public:
                     mcqs(void);
-                    mcqs(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    mcqs(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    mcqs(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    mcqs(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    mcqs(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    mcqs(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -1991,50 +1674,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Triangular Prism
                  */
                 class ipri : public __base::elem {
                 public:
                     ipri(void);
-                    ipri(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ipri(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ipri(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ipri(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ipri(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ipri(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2049,50 +1719,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Tetrahedron
                  */
                 class itet : public __base::elem {
                 public:
                     itet(void);
-                    itet(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    itet(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    itet(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    itet(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    itet(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    itet(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2107,50 +1764,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Triangular Prism
                  */
                 class tpri : public __base::elem {
                 public:
                     tpri(void);
-                    tpri(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tpri(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    tpri(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tpri(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    tpri(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tpri(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2165,50 +1809,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Tetrahedron
                  */
                 class tetr : public __base::elem {
                 public:
                     tetr(void);
-                    tetr(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tetr(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    tetr(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tetr(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    tetr(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    tetr(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2223,50 +1854,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Triangular Thick Shell
                  */
                 class lcts : public __base::elem {
                 public:
                     lcts(void);
-                    lcts(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lcts(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lcts(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lcts(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lcts(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lcts(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2281,50 +1899,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Quadrilat. Thick Shell
                  */
                 class lcqs : public __base::elem {
                 public:
                     lcqs(void);
-                    lcqs(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lcqs(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lcqs(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lcqs(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    lcqs(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    lcqs(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2339,50 +1944,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs1 : public __base::elem {
                 public:
                     trs1(void);
-                    trs1(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs1(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    trs1(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs1(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    trs1(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs1(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2397,50 +1989,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs2 : public __base::elem {
                 public:
                     trs2(void);
-                    trs2(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs2(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    trs2(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs2(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    trs2(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs2(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2455,50 +2034,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs3 : public __base::elem {
                 public:
                     trs3(void);
-                    trs3(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs3(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    trs3(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs3(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    trs3(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    trs3(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2513,50 +2079,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Spring / Shim Element
                  */
                 class glsh : public __base::elem {
                 public:
                     glsh(void);
-                    glsh(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glsh(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    glsh(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glsh(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    glsh(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    glsh(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2571,50 +2124,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Constant Strain Triangle
                  */
                 class axcs : public __base::elem {
                 public:
                     axcs(void);
-                    axcs(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axcs(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axcs(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axcs(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axcs(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axcs(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2629,50 +2169,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Quadrilateral
                  */
                 class axlq : public __base::elem {
                 public:
                     axlq(void);
-                    axlq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axlq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axlq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axlq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axlq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axlq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2687,50 +2214,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Triangle
                  */
                 class axls : public __base::elem {
                 public:
                     axls(void);
-                    axls(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axls(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axls(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axls(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axls(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axls(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2745,50 +2259,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Quadrilateral
                  */
                 class axqq : public __base::elem {
                 public:
                     axqq(void);
-                    axqq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axqq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axqq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axqq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    axqq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    axqq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2803,50 +2304,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Pile / Soil
                  */
                 class pils : public __base::elem {
                 public:
                     pils(void);
-                    pils(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pils(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    pils(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pils(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    pils(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pils(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2861,50 +2349,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Cable-Bar Element
                  */
                 class pcab : public __base::elem {
                 public:
                     pcab(void);
-                    pcab(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pcab(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    pcab(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pcab(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    pcab(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pcab(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2919,50 +2394,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Spring Element
                  */
                 class pspr : public __base::elem {
                 public:
                     pspr(void);
-                    pspr(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pspr(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    pspr(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pspr(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    pspr(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    pspr(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -2977,50 +2439,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-node Contact Element with triangular Shape
                  */
                 class adva_4 : public __base::elem {
                 public:
                     adva_4(void);
-                    adva_4(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    adva_4(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    adva_4(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    adva_4(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    adva_4(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    adva_4(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3035,50 +2484,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Link Element
                  */
                 class adva_2 : public __base::elem {
                 public:
                     adva_2(void);
-                    adva_2(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    adva_2(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    adva_2(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    adva_2(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    adva_2(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    adva_2(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3093,50 +2529,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Contact Element
                  */
                 class ctcp : public __base::elem {
                 public:
                     ctcp(void);
-                    ctcp(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcp(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcp(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcp(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcp(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcp(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3151,50 +2574,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Contact Element
                  */
                 class ctcl : public __base::elem {
                 public:
                     ctcl(void);
-                    ctcl(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcl(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcl(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcl(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcl(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcl(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3209,50 +2619,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Axisymmetric Contact Element
                  */
                 class ctal : public __base::elem {
                 public:
                     ctal(void);
-                    ctal(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctal(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctal(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctal(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctal(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctal(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3267,50 +2664,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded Contact Element
                  */
                 class ctcc : public __base::elem {
                 public:
                     ctcc(void);
-                    ctcc(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcc(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcc(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcc(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcc(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcc(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3325,50 +2709,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded (3+3) Axisymmetric Contact Element
                  */
                 class ctaq : public __base::elem {
                 public:
                     ctaq(void);
-                    ctaq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctaq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctaq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctaq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctaq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctaq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3383,50 +2754,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 8-Noded (4+4) Contact Element
                  */
                 class ctlq : public __base::elem {
                 public:
                     ctlq(void);
-                    ctlq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctlq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctlq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctlq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctlq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctlq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3441,50 +2799,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 16-Noded (8+8) Contact Element
                  */
                 class ctcq : public __base::elem {
                 public:
                     ctcq(void);
-                    ctcq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctcq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctcq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3499,50 +2844,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 18-Noded (9+9) Contact Element
                  */
                 class ctmq : public __base::elem {
                 public:
                     ctmq(void);
-                    ctmq(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctmq(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctmq(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctmq(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ctmq(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ctmq(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3557,50 +2889,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 9-Noded Shell Element
                  */
                 class hcqs : public __base::elem {
                 public:
                     hcqs(void);
-                    hcqs(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    hcqs(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    hcqs(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    hcqs(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    hcqs(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    hcqs(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3615,50 +2934,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
                  */
                 class slqs : public __base::elem {
                 public:
                     slqs(void);
-                    slqs(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slqs(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    slqs(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slqs(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    slqs(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slqs(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3673,50 +2979,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
                  */
                 class slts : public __base::elem {
                 public:
                     slts(void);
-                    slts(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slts(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    slts(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slts(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    slts(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slts(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3731,50 +3024,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Curved Beam (11 d.o.fs)
                  */
                 class slcb : public __base::elem {
                 public:
                     slcb(void);
-                    slcb(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slcb(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    slcb(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slcb(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    slcb(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    slcb(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3789,50 +3069,37 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Matrix Element with arbitrary no. of nodes (/n/)
                  */
                 class matr : public __base::elem {
                 public:
                     matr(void);
-                    matr(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    matr(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    matr(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    matr(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    matr(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    matr(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3847,7 +3114,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3857,44 +3124,31 @@ namespace dnvgl {
                 class ghex100 : public __base::elem {
                 public:
                     ghex100(void);
-                    ghex100(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex100(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex100(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex100(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex100(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex100(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3909,7 +3163,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3920,44 +3174,31 @@ namespace dnvgl {
                 class ghex101 : public __base::elem {
                 public:
                     ghex101(void);
-                    ghex101(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex101(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex101(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex101(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex101(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex101(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -3972,7 +3213,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3983,44 +3224,31 @@ namespace dnvgl {
                 class ghex102 : public __base::elem {
                 public:
                     ghex102(void);
-                    ghex102(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex102(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex102(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex102(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex102(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex102(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4035,7 +3263,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4047,44 +3275,31 @@ namespace dnvgl {
                 class ghex103 : public __base::elem {
                 public:
                     ghex103(void);
-                    ghex103(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex103(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex103(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex103(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex103(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex103(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4099,7 +3314,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4110,44 +3325,31 @@ namespace dnvgl {
                 class ghex104 : public __base::elem {
                 public:
                     ghex104(void);
-                    ghex104(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex104(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex104(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex104(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex104(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex104(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4162,7 +3364,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4174,44 +3376,31 @@ namespace dnvgl {
                 class ghex105 : public __base::elem {
                 public:
                     ghex105(void);
-                    ghex105(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex105(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex105(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex105(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex105(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex105(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4226,7 +3415,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4238,44 +3427,31 @@ namespace dnvgl {
                 class ghex106 : public __base::elem {
                 public:
                     ghex106(void);
-                    ghex106(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex106(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex106(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex106(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex106(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex106(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4290,7 +3466,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4303,44 +3479,31 @@ namespace dnvgl {
                 class ghex107 : public __base::elem {
                 public:
                     ghex107(void);
-                    ghex107(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex107(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex107(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex107(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex107(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex107(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4355,7 +3518,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4366,44 +3529,31 @@ namespace dnvgl {
                 class ghex108 : public __base::elem {
                 public:
                     ghex108(void);
-                    ghex108(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex108(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex108(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex108(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex108(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex108(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4418,7 +3568,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4430,44 +3580,31 @@ namespace dnvgl {
                 class ghex109 : public __base::elem {
                 public:
                     ghex109(void);
-                    ghex109(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex109(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex109(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex109(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex109(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex109(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4482,7 +3619,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4494,44 +3631,31 @@ namespace dnvgl {
                 class ghex110 : public __base::elem {
                 public:
                     ghex110(void);
-                    ghex110(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex110(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex110(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex110(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex110(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex110(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4546,7 +3670,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4559,44 +3683,31 @@ namespace dnvgl {
                 class ghex111 : public __base::elem {
                 public:
                     ghex111(void);
-                    ghex111(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex111(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex111(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex111(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex111(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex111(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4611,7 +3722,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4623,44 +3734,31 @@ namespace dnvgl {
                 class ghex112 : public __base::elem {
                 public:
                     ghex112(void);
-                    ghex112(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex112(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex112(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex112(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex112(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex112(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4675,7 +3773,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4688,44 +3786,31 @@ namespace dnvgl {
                 class ghex113 : public __base::elem {
                 public:
                     ghex113(void);
-                    ghex113(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex113(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex113(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex113(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex113(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex113(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4740,7 +3825,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4753,44 +3838,31 @@ namespace dnvgl {
                 class ghex114 : public __base::elem {
                 public:
                     ghex114(void);
-                    ghex114(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex114(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex114(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex114(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex114(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex114(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4805,7 +3877,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4819,44 +3891,31 @@ namespace dnvgl {
                 class ghex115 : public __base::elem {
                 public:
                     ghex115(void);
-                    ghex115(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex115(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex115(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex115(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex115(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex115(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4871,7 +3930,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4882,44 +3941,31 @@ namespace dnvgl {
                 class ghex116 : public __base::elem {
                 public:
                     ghex116(void);
-                    ghex116(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex116(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex116(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex116(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex116(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex116(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4934,7 +3980,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4946,44 +3992,31 @@ namespace dnvgl {
                 class ghex117 : public __base::elem {
                 public:
                     ghex117(void);
-                    ghex117(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex117(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex117(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex117(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex117(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex117(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -4998,7 +4031,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5010,44 +4043,31 @@ namespace dnvgl {
                 class ghex118 : public __base::elem {
                 public:
                     ghex118(void);
-                    ghex118(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex118(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex118(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex118(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex118(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex118(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5062,7 +4082,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5075,44 +4095,31 @@ namespace dnvgl {
                 class ghex119 : public __base::elem {
                 public:
                     ghex119(void);
-                    ghex119(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex119(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex119(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex119(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex119(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex119(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5127,7 +4134,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5139,44 +4146,31 @@ namespace dnvgl {
                 class ghex120 : public __base::elem {
                 public:
                     ghex120(void);
-                    ghex120(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex120(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex120(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex120(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex120(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex120(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5191,7 +4185,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5204,44 +4198,31 @@ namespace dnvgl {
                 class ghex121 : public __base::elem {
                 public:
                     ghex121(void);
-                    ghex121(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex121(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex121(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex121(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex121(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex121(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5256,7 +4237,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5269,44 +4250,31 @@ namespace dnvgl {
                 class ghex122 : public __base::elem {
                 public:
                     ghex122(void);
-                    ghex122(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex122(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex122(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex122(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex122(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex122(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5321,7 +4289,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5335,44 +4303,31 @@ namespace dnvgl {
                 class ghex123 : public __base::elem {
                 public:
                     ghex123(void);
-                    ghex123(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex123(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex123(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex123(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex123(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex123(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5387,7 +4342,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5399,44 +4354,31 @@ namespace dnvgl {
                 class ghex124 : public __base::elem {
                 public:
                     ghex124(void);
-                    ghex124(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex124(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex124(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex124(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex124(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex124(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5451,7 +4393,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5464,44 +4406,31 @@ namespace dnvgl {
                 class ghex125 : public __base::elem {
                 public:
                     ghex125(void);
-                    ghex125(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex125(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex125(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex125(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex125(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex125(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5516,7 +4445,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5529,44 +4458,31 @@ namespace dnvgl {
                 class ghex126 : public __base::elem {
                 public:
                     ghex126(void);
-                    ghex126(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex126(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex126(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex126(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex126(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex126(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5581,7 +4497,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5595,44 +4511,31 @@ namespace dnvgl {
                 class ghex127 : public __base::elem {
                 public:
                     ghex127(void);
-                    ghex127(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex127(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex127(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex127(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex127(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex127(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5647,7 +4550,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5660,44 +4563,31 @@ namespace dnvgl {
                 class ghex128 : public __base::elem {
                 public:
                     ghex128(void);
-                    ghex128(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex128(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex128(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex128(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex128(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex128(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5712,7 +4602,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5726,44 +4616,31 @@ namespace dnvgl {
                 class ghex129 : public __base::elem {
                 public:
                     ghex129(void);
-                    ghex129(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex129(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex129(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex129(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex129(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex129(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5778,7 +4655,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5792,44 +4669,31 @@ namespace dnvgl {
                 class ghex130 : public __base::elem {
                 public:
                     ghex130(void);
-                    ghex130(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex130(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex130(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex130(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex130(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex130(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5844,7 +4708,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5859,44 +4723,31 @@ namespace dnvgl {
                 class ghex131 : public __base::elem {
                 public:
                     ghex131(void);
-                    ghex131(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex131(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex131(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex131(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex131(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex131(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5911,7 +4762,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5922,44 +4773,31 @@ namespace dnvgl {
                 class ghex132 : public __base::elem {
                 public:
                     ghex132(void);
-                    ghex132(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex132(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex132(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex132(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex132(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex132(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -5974,7 +4812,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5986,44 +4824,31 @@ namespace dnvgl {
                 class ghex133 : public __base::elem {
                 public:
                     ghex133(void);
-                    ghex133(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex133(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex133(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex133(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex133(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex133(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6038,7 +4863,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6050,44 +4875,31 @@ namespace dnvgl {
                 class ghex134 : public __base::elem {
                 public:
                     ghex134(void);
-                    ghex134(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex134(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex134(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex134(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex134(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex134(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6102,7 +4914,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6115,44 +4927,31 @@ namespace dnvgl {
                 class ghex135 : public __base::elem {
                 public:
                     ghex135(void);
-                    ghex135(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex135(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex135(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex135(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex135(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex135(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6167,7 +4966,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6179,44 +4978,31 @@ namespace dnvgl {
                 class ghex136 : public __base::elem {
                 public:
                     ghex136(void);
-                    ghex136(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex136(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex136(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex136(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex136(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex136(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6231,7 +5017,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6244,44 +5030,31 @@ namespace dnvgl {
                 class ghex137 : public __base::elem {
                 public:
                     ghex137(void);
-                    ghex137(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex137(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex137(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex137(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex137(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex137(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6296,7 +5069,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6309,44 +5082,31 @@ namespace dnvgl {
                 class ghex138 : public __base::elem {
                 public:
                     ghex138(void);
-                    ghex138(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex138(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex138(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex138(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex138(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex138(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6361,7 +5121,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6375,44 +5135,31 @@ namespace dnvgl {
                 class ghex139 : public __base::elem {
                 public:
                     ghex139(void);
-                    ghex139(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex139(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex139(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex139(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex139(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex139(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6427,7 +5174,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6439,44 +5186,31 @@ namespace dnvgl {
                 class ghex140 : public __base::elem {
                 public:
                     ghex140(void);
-                    ghex140(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex140(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex140(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex140(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex140(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex140(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6491,7 +5225,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6504,44 +5238,31 @@ namespace dnvgl {
                 class ghex141 : public __base::elem {
                 public:
                     ghex141(void);
-                    ghex141(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex141(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex141(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex141(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex141(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex141(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6556,7 +5277,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6569,44 +5290,31 @@ namespace dnvgl {
                 class ghex142 : public __base::elem {
                 public:
                     ghex142(void);
-                    ghex142(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex142(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex142(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex142(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex142(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex142(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6621,7 +5329,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6635,44 +5343,31 @@ namespace dnvgl {
                 class ghex143 : public __base::elem {
                 public:
                     ghex143(void);
-                    ghex143(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex143(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex143(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex143(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex143(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex143(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6687,7 +5382,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6700,44 +5395,31 @@ namespace dnvgl {
                 class ghex144 : public __base::elem {
                 public:
                     ghex144(void);
-                    ghex144(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex144(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex144(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex144(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex144(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex144(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6752,7 +5434,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6766,44 +5448,31 @@ namespace dnvgl {
                 class ghex145 : public __base::elem {
                 public:
                     ghex145(void);
-                    ghex145(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex145(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex145(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex145(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex145(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex145(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6818,7 +5487,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6832,44 +5501,31 @@ namespace dnvgl {
                 class ghex146 : public __base::elem {
                 public:
                     ghex146(void);
-                    ghex146(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex146(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex146(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex146(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex146(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex146(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6884,7 +5540,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6899,44 +5555,31 @@ namespace dnvgl {
                 class ghex147 : public __base::elem {
                 public:
                     ghex147(void);
-                    ghex147(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex147(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex147(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex147(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex147(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex147(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -6951,7 +5594,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6963,44 +5606,31 @@ namespace dnvgl {
                 class ghex148 : public __base::elem {
                 public:
                     ghex148(void);
-                    ghex148(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex148(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex148(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex148(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex148(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex148(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7015,7 +5645,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7028,44 +5658,31 @@ namespace dnvgl {
                 class ghex149 : public __base::elem {
                 public:
                     ghex149(void);
-                    ghex149(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex149(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex149(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex149(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex149(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex149(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7080,7 +5697,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7093,44 +5710,31 @@ namespace dnvgl {
                 class ghex150 : public __base::elem {
                 public:
                     ghex150(void);
-                    ghex150(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex150(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex150(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex150(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex150(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex150(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7145,7 +5749,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7159,44 +5763,31 @@ namespace dnvgl {
                 class ghex151 : public __base::elem {
                 public:
                     ghex151(void);
-                    ghex151(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex151(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex151(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex151(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex151(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex151(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7211,7 +5802,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7224,44 +5815,31 @@ namespace dnvgl {
                 class ghex152 : public __base::elem {
                 public:
                     ghex152(void);
-                    ghex152(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex152(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex152(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex152(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex152(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex152(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7276,7 +5854,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7290,44 +5868,31 @@ namespace dnvgl {
                 class ghex153 : public __base::elem {
                 public:
                     ghex153(void);
-                    ghex153(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex153(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex153(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex153(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex153(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex153(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7342,7 +5907,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7356,44 +5921,31 @@ namespace dnvgl {
                 class ghex154 : public __base::elem {
                 public:
                     ghex154(void);
-                    ghex154(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex154(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex154(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex154(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex154(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex154(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7408,7 +5960,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7423,44 +5975,31 @@ namespace dnvgl {
                 class ghex155 : public __base::elem {
                 public:
                     ghex155(void);
-                    ghex155(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex155(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex155(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex155(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex155(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex155(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7475,7 +6014,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7488,44 +6027,31 @@ namespace dnvgl {
                 class ghex156 : public __base::elem {
                 public:
                     ghex156(void);
-                    ghex156(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex156(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex156(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex156(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex156(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex156(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7540,7 +6066,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7554,44 +6080,31 @@ namespace dnvgl {
                 class ghex157 : public __base::elem {
                 public:
                     ghex157(void);
-                    ghex157(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex157(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex157(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex157(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex157(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex157(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7606,7 +6119,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7620,44 +6133,31 @@ namespace dnvgl {
                 class ghex158 : public __base::elem {
                 public:
                     ghex158(void);
-                    ghex158(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex158(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex158(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex158(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex158(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex158(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7672,7 +6172,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7687,44 +6187,31 @@ namespace dnvgl {
                 class ghex159 : public __base::elem {
                 public:
                     ghex159(void);
-                    ghex159(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex159(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex159(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex159(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex159(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex159(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7739,7 +6226,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7753,44 +6240,31 @@ namespace dnvgl {
                 class ghex160 : public __base::elem {
                 public:
                     ghex160(void);
-                    ghex160(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex160(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex160(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex160(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex160(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex160(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7805,7 +6279,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7820,44 +6294,31 @@ namespace dnvgl {
                 class ghex161 : public __base::elem {
                 public:
                     ghex161(void);
-                    ghex161(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex161(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex161(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex161(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex161(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex161(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7872,7 +6333,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7887,44 +6348,31 @@ namespace dnvgl {
                 class ghex162 : public __base::elem {
                 public:
                     ghex162(void);
-                    ghex162(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex162(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex162(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex162(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex162(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex162(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -7939,7 +6387,7 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 305 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 313 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -7955,44 +6403,31 @@ namespace dnvgl {
                 class ghex163 : public __base::elem {
                 public:
                     ghex163(void);
-                    ghex163(long const &eleno,
-                         long const &elident,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex163(
+                        long const eleno, long const elident, long const el_add,
+                         std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                         long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex163(long const &eleno,
-                         long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex163(
+                        long const eleno, long const el_add,
+                        std::vector<long> const &nodes, long const matref,
+                         long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
                          std::vector<long> const &csys);
-                    ghex163(long const &el_add,
-                         std::vector<long> const &nodes,
-                         long const &matref,
-                         long const &add_no,
-                         long const &intno,
-                         long const &mass_intno,
-                         long const &i_strain_ref,
-                         long const &i_stressef,
-                         long const &strpoint_ref,
+                    ghex163(
+                        long const el_add, std::vector<long> const &nodes,
+                         long const matref, long const add_no, long const intno,
+                         long const mass_intno, long const i_strain_ref,
+                        long const i_stressef, long const strpoint_ref,
                          std::vector<long> const &sections,
                          std::vector<long> const &fixations,
                          std::vector<long> const &eccentrities,
@@ -8007,16 +6442,16 @@ namespace dnvgl {
                     using elem::add;
                 };
 
-#line 363 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 358 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Dispatch element class instance for `id`
                  */
-                void dispatch(std::unique_ptr<__base::elem>&,
-                              cards::gelmnt1 const *data);
+                void dispatch(
+                    std::unique_ptr<__base::elem>&, cards::gelmnt1 const *data);
 
                 /** Match element type id to element type name.
                  */
                 std::string name_elem(
-                    dnvgl::extfem::fem::elements::el_types const &);
+                    dnvgl::extfem::fem::elements::el_types const);
             }
         }
     }

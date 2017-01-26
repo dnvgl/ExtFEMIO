@@ -95,11 +95,8 @@ void tdsetnam::read(vector<std::string> const &inp, size_t const len) {
 tdsetnam::tdsetnam(void) :
         tdsetnam(-1, 0, 0, 0, "", {}) {}
 
-tdsetnam::tdsetnam(long const NFIELD,
-                   long const ISREF,
-                   long const CODNAM,
-                   long const CODTXT,
-                   std::string const &SET_NAME,
+tdsetnam::tdsetnam(long const NFIELD, long const ISREF, long const CODNAM,
+                   long const CODTXT, std::string const &SET_NAME,
                    vector<std::string> const &CONT) :
         card(), NFIELD(NFIELD), ISREF(ISREF),
         CODNAM(CODNAM), CODTXT(CODTXT),
@@ -112,11 +109,9 @@ tdsetnam::tdsetnam(long const NFIELD,
     nctxt = div_val.rem;
 }
 
-tdsetnam::tdsetnam(long const ISREF,
-                   std::string const &SET_NAME,
+tdsetnam::tdsetnam(long const ISREF, std::string const &SET_NAME,
                    vector<std::string> const &CONT) :
-        card(), NFIELD(4), ISREF(ISREF),
-        SET_NAME(SET_NAME), CONT(CONT) {
+        card(), NFIELD(4), ISREF(ISREF), SET_NAME(SET_NAME), CONT(CONT) {
 
     nlnam = true;
     ncnam = (long)SET_NAME.size();
@@ -130,12 +125,9 @@ tdsetnam::tdsetnam(long const ISREF,
     CODTXT = (100 * nltxt) + nctxt;
 }
 
-tdsetnam::tdsetnam(long const NFIELD,
-                   long const ISREF,
-                   long const CODNAM,
+tdsetnam::tdsetnam(long const NFIELD, long const ISREF, long const CODNAM,
                    std::string const &SET_NAME) :
-        card() , NFIELD(NFIELD), ISREF(ISREF),
-        CODNAM(CODNAM), CODTXT(0),
+        card() , NFIELD(NFIELD), ISREF(ISREF), CODNAM(CODNAM), CODTXT(0),
         SET_NAME(SET_NAME), CONT() {
     auto div_val = ldiv(CODNAM, 100);
     nlnam = div_val.quot != 0;
@@ -144,11 +136,9 @@ tdsetnam::tdsetnam(long const NFIELD,
     nctxt = 0;
 }
 
-tdsetnam::tdsetnam(long const ISREF,
-                   std::string const &SET_NAME) :
-        card() , NFIELD(4), ISREF(ISREF),
-        CODTXT(0),
-        SET_NAME(SET_NAME), CONT() {
+tdsetnam::tdsetnam(long const ISREF, std::string const &SET_NAME) :
+        card() , NFIELD(4), ISREF(ISREF), CODTXT(0), SET_NAME(SET_NAME),
+        CONT() {
     nlnam = true;
     ncnam = (long)SET_NAME.size();
     CODNAM = 100 + ncnam;

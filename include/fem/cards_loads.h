@@ -126,41 +126,32 @@ namespace dnvgl {
 
                     tdload(void);
 
-                    tdload(long const NFIELD,
-                           long const ILREF,
-                           long const CODNAM,
-                           long const CODTXT,
-                           std::string const &SET_NAME,
-                           std::vector<std::string> const &CONT);
+                    tdload(
+                        long const NFIELD, long const ILREF, long const CODNAM,
+                        long const CODTXT, std::string const &SET_NAME,
+                        std::vector<std::string> const &CONT);
 
-                    tdload(long const ILREF,
-                           std::string const &SET_NAME,
-                           std::vector<std::string> const &CONT={});
+                    tdload(
+                        long const ILREF, std::string const &SET_NAME,
+                        std::vector<std::string> const &CONT={});
 
-                    tdload(long const NFIELD,
-                           long const ILREF,
-                           long const CODNAM,
-                           std::string const &SET_NAME);
+                    tdload(
+                        long const NFIELD, long const ILREF, long const CODNAM,
+                        std::string const &SET_NAME);
 
                     using __base::card::operator();
 
                     __base::card const &operator() (
-                        long const NFIELD,
-                        long const ILREF,
-                        long const CODNAM,
-                        long const CODTXT,
-                        std::string const &SET_NAME,
+                        long const NFIELD, long const ILREF, long const CODNAM,
+                        long const CODTXT, std::string const &SET_NAME,
                         std::vector<std::string> const &CONT);
 
                     __base::card const &operator() (
-                        long const ILREF,
-                        std::string const &SET_NAME,
+                        long const ILREF, std::string const &SET_NAME,
                         std::vector<std::string> const &CONT={});
 
                     __base::card const &operator() (
-                        long const NFIELD,
-                        long const ILREF,
-                        long const CODNAM,
+                        long const NFIELD, long const ILREF, long const CODNAM,
                         std::string const &SET_NAME);
 
                     dnvgl::extfem::fem::cards::types const
@@ -314,43 +305,27 @@ namespace dnvgl {
 
                     beuslo(std::vector<std::string> const&, size_t const);
 
-                    beuslo(long const LLC,
-                           long const LOTYP,
-                           bool const COMPLX,
-                           long const LAYER,
-                           long const ELNO,
-                           long const NDOF,
-                           long const INTNO,
-                           long const SIDE,
-                           std::vector<double> const &RLOAD,
+                    beuslo(
+                        long const LLC, long const LOTYP, bool const COMPLX,
+                        long const LAYER, long const ELNO, long const NDOF,
+                        long const INTNO, long const SIDE,
+                        std::vector<double> const &RLOAD,
+                        std::vector<double> const &ILOAD = {});
+
+                    beuslo(
+                        long const LLC, long const LOTYP, bool const COMPLX,
+                        long const LAYER, long const ELNO, long const INTNO,
+                        long const SIDE, std::vector<double> const &RLOAD,
+                        std::vector<double> const &ILOAD = {});
+
+                    beuslo(
+                        long const LLC, long const LOTYP, long const LAYER,
+                        long const ELNO, long const NDOF, long const INTNO,
+                           long const SIDE, std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD = {});
 
-                    beuslo(long const LLC,
-                           long const LOTYP,
-                           bool const COMPLX,
-                           long const LAYER,
-                           long const ELNO,
-                           long const INTNO,
-                           long const SIDE,
-                           std::vector<double> const &RLOAD,
-                           std::vector<double> const &ILOAD = {});
-
-                    beuslo(long const LLC,
-                           long const LOTYP,
-                           long const LAYER,
-                           long const ELNO,
-                           long const NDOF,
-                           long const INTNO,
-                           long const SIDE,
-                           std::vector<double> const &RLOAD,
-                           std::vector<double> const &ILOAD = {});
-
-                    beuslo(long const LLC,
-                           long const LOTYP,
-                           long const LAYER,
-                           long const ELNO,
-                           long const INTNO,
-                           long const SIDE,
+                    beuslo(long const LLC, long const LOTYP, long const LAYER,
+                           long const ELNO, long const INTNO, long const SIDE,
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD = {});
 

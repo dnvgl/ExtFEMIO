@@ -76,24 +76,12 @@ hsuptran::hsuptran(void) :
         hsuptran(-1, 0, nullptr) {}
 
 
-hsuptran::hsuptran(long const NFIELD,
-                   long const ITREF,
-                   double const T11,
-                   double const T21,
-                   double const T31,
-                   double const T41,
-                   double const T12,
-                   double const T22,
-                   double const T32,
-                   double const T42,
-                   double const T13,
-                   double const T23,
-                   double const T33,
-                   double const T43,
-                   double const T14,
-                   double const T24,
-                   double const T34,
-                   double const T44) :
+hsuptran::hsuptran(
+    long const NFIELD, long const ITREF,
+    double const T11, double const T21, double const T31, double const T41,
+    double const T12, double const T22, double const T32, double const T42,
+    double const T13, double const T23, double const T33, double const T43,
+    double const T14, double const T24, double const T34, double const T44) :
         card(), NFIELD(NFIELD), ITREF(ITREF) {
 
     T[0][0] = T11;
@@ -114,9 +102,8 @@ hsuptran::hsuptran(long const NFIELD,
     T[3][3] = T44;
 }
 
-hsuptran::hsuptran(long const NFIELD,
-                   long const ITREF,
-                   double const T[4][4]) :
+hsuptran::hsuptran(
+    long const NFIELD, long const ITREF, double const T[4][4]) :
         card(), NFIELD(NFIELD), ITREF(ITREF) {
     if (this->NFIELD != -1)
         for (int i=0; i<4; i++)

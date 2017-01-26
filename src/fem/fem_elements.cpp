@@ -30,7 +30,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-       = "@(#) $Id: fem_elements.cpp 551 2017-01-24 17:23:31Z berhol $";
+       = "@(#) $Id: fem_elements.cpp 554 2017-01-26 08:26:01Z berhol $";
 }
 
 #include <memory>
@@ -53,7 +53,6 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace std;
-
 
 using namespace dnvgl::extfem;
 using namespace fem;
@@ -310,10 +309,10 @@ void elements::dispatch(
     case el_types::INVALID:
         throw errors::parse_error("GELMNT1", "invalid element type"); break;
     };
-#line 75 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 74 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 }
 
-std::string dnvgl::extfem::fem::elements::name_elem(el_types const &type) {
+std::string dnvgl::extfem::fem::elements::name_elem(el_types const type) {
     switch (type) {
     case el_types::BEPS: return "BEPS";
     case el_types::CSTA: return "CSTA";
@@ -437,7 +436,7 @@ std::string dnvgl::extfem::fem::elements::name_elem(el_types const &type) {
     case el_types::GHEX162: return "GHEX162";
     case el_types::GHEX163: return "GHEX163";
     case el_types::UNDEFINED: return "UNDEFINED";
-#line 82 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 81 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
     case el_types::INVALID: return "INVALID";
     }
     return "";
@@ -455,61 +454,37 @@ elements::__base::elem::elem(void) :
     strpoint_ref(-1), section({}), fixations({}), eccentrities({}),
     csys({}) {}
 
-elements::__base::elem::elem(long const &eleno,
-                             long const &elident,
-                             long const &el_add,
-                             vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no,
-                             long const &intno,
-                             long const &mass_intno,
-                             long const &i_strain_ref,
-                             long const &i_stress_ref,
-                             long const &strpoint_ref,
-                             vector<long> const &section,
-                             vector<long> const &fixations,
-                             vector<long> const &eccentrities,
-                             vector<long> const &csys) :
+elements::__base::elem::elem(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         eleno(get_eleno(eleno)), elident(get_elident(elident)), el_add(el_add),
-        nodes(nodes), matref(matref), add_no(add_no),
-        intno(intno), mass_intno(mass_intno),
-        i_strain_ref(i_strain_ref),
-        i_stress_ref(i_stress_ref),
-        strpoint_ref(strpoint_ref),
-        section(section), fixations(fixations),
-        eccentrities(eccentrities), csys(csys) { }
+        nodes(nodes), matref(matref), add_no(add_no), intno(intno),
+        mass_intno(mass_intno), i_strain_ref(i_strain_ref),
+        i_stress_ref(i_stress_ref), strpoint_ref(strpoint_ref),
+        section(section), fixations(fixations), eccentrities(eccentrities),
+        csys(csys) { }
 
-elements::__base::elem::elem(long const &eleno,
-                             long const &el_add,
-                             vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no,
-                             long const &intno,
-                             long const &mass_intno,
-                             long const &i_strain_ref,
-                             long const &i_stress_ref,
-                             long const &strpoint_ref,
-                             vector<long> const &section,
-                             vector<long> const &fixations,
-                             vector<long> const &eccentrities,
-                             vector<long> const &csys) :
+elements::__base::elem::elem(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         elem(eleno, 0, el_add, nodes, matref, add_no, intno,
              mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
              section, fixations, eccentrities, csys) { }
 
-elements::__base::elem::elem(long const &el_add,
-                             vector<long> const &nodes,
-                             long const &matref,
-                             long const &add_no,
-                             long const &intno,
-                             long const &mass_intno,
-                             long const &i_strain_ref,
-                             long const &i_stress_ref,
-                             long const &strpoint_ref,
-                             vector<long> const &section,
-                             vector<long> const &fixations,
-                             vector<long> const &eccentrities,
-                             vector<long> const &csys) :
+elements::__base::elem::elem(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         elem(0, 0, el_add, nodes, matref, add_no, intno,
              mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
              section, fixations, eccentrities, csys) {}
@@ -547,24 +522,16 @@ elements::__base::elem::elem(elem const *data) {
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const &eleno,
-    long const &elident,
-    long const &el_add,
-    vector<long> const &nodes,
-    long const &matref,
-    long const &add_no,
-    long const &intno,
-    long const &mass_intno,
-    long const &i_strain_ref,
-    long const &i_stress_ref,
-    long const &strpoint_ref,
-    vector<long> const &section,
-    vector<long> const &fixations,
-    vector<long> const &eccentrities,
-    vector<long> const &csys) {
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) {
     return set_values(get_eleno(eleno), get_elident(elident), el_add, nodes,
-                      matref, add_no, intno, mass_intno, i_strain_ref, i_stress_ref,
-                      strpoint_ref, section, fixations, eccentrities, csys);
+                      matref, add_no, intno, mass_intno, i_strain_ref,
+                      i_stress_ref, strpoint_ref, section, fixations,
+                      eccentrities, csys);
 }
 
 elements::__base::elem::~elem(void) {
@@ -578,21 +545,12 @@ elements::__base::elem::~elem(void) {
     checking.
  */
 elements::__base::elem const &elements::__base::elem::set_values(
-    long const &eleno,
-    long const &elident,
-    long const &el_add,
-    vector<long> const &nodes,
-    long const &matref,
-    long const &add_no,
-    long const &intno,
-    long const &mass_intno,
-    long const &i_strain_ref,
-    long const &i_stress_ref,
-    long const &strpoint_ref,
-    vector<long> const &section,
-    vector<long> const &fixations,
-    vector<long> const &eccentrities,
-    vector<long> const &csys) {
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) {
     this->eleno = eleno;
     this->elident = elident;
     this->el_add = el_add;
@@ -612,19 +570,11 @@ elements::__base::elem const &elements::__base::elem::set_values(
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const &eleno,
-    long const &el_add,
-    vector<long> const &nodes,
-    long const &matref,
-    long const &add_no,
-    long const &intno,
-    long const &mass_intno,
-    long const &i_strain_ref,
-    long const &i_stress_ref,
-    long const &strpoint_ref,
-    vector<long> const &section,
-    vector<long> const &fixations,
-    vector<long> const &eccentrities,
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) {
     return (*this)(eleno, 0, el_add, nodes, matref, add_no, intno,
                    mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
@@ -632,83 +582,62 @@ elements::__base::elem const &elements::__base::elem::operator() (
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const &el_add,
-    vector<long> const &nodes,
-    long const &matref,
-    long const &add_no,
-    long const &intno,
-    long const &mass_intno,
-    long const &i_strain_ref,
-    long const &i_stress_ref,
-    long const &strpoint_ref,
-    vector<long> const &section,
-    vector<long> const &fixations,
-    vector<long> const &eccentrities,
-    vector<long> const &csys) {
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) {
     return (*this)(0, 0, el_add, nodes, matref, add_no, intno, mass_intno,
                    i_strain_ref, i_stress_ref, strpoint_ref,
                    section, fixations, eccentrities, csys);
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    long const &eleno,
-    vector<long> const &nodes,
-    long const &matref,
-    vector<long> const &section/*={}*/,
-    long const &el_add/*=0*/,
-    long const &add_no/*=0*/,
-    long const &intno/*=0*/,
-    long const &mass_intno/*=0*/,
-    long const &i_strain_ref/*=0*/,
-    long const &i_stress_ref/*=0*/,
-    long const &strpoint_ref/*=0*/,
+    long const eleno, vector<long> const &nodes, long const matref,
+    vector<long> const &section/*={}*/, long const el_add/*=0*/,
+    long const add_no/*=0*/, long const intno/*=0*/,
+    long const mass_intno/*=0*/, long const i_strain_ref/*=0*/,
+    long const i_stress_ref/*=0*/, long const strpoint_ref/*=0*/,
     vector<long> const &fixations/*={}*/,
-    vector<long> const &eccentrities/*={}*/,
-    vector<long> const &csys/*={}*/) {
+    vector<long> const &eccentrities/*={}*/, vector<long> const &csys/*={}*/) {
     throw not_implemented(__FILE__, __LINE__);
     return *this;
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
-    vector<long> const &nodes,
-    long const &matref,
-    vector<long> const &section/*={}*/,
-    vector<long> const &fixations/*={}*/,
-    vector<long> const &eccentrities/*={}*/,
-    long const &el_add/*=0*/,
-    long const &add_no/*=0*/,
-    long const &intno/*=0*/,
-    long const &mass_intno/*=0*/,
-    long const &i_strain_ref/*=0*/,
-    long const &i_stress_ref/*=0*/,
-    long const &strpoint_ref/*=0*/,
+    vector<long> const &nodes, long const matref,
+    vector<long> const &section/*={}*/, vector<long> const &fixations/*={}*/,
+    vector<long> const &eccentrities/*={}*/, long const el_add/*=0*/,
+    long const add_no/*=0*/, long const intno/*=0*/,
+    long const mass_intno/*=0*/, long const i_strain_ref/*=0*/,
+    long const i_stress_ref/*=0*/, long const strpoint_ref/*=0*/,
     vector<long> const &csys/*={}*/) {
     return (*this)(0, 0, el_add, nodes, matref, add_no,
                    intno, mass_intno, i_strain_ref, i_stress_ref,
                    strpoint_ref, section, fixations, eccentrities, csys);
 }
 
-long elements::__base::elem::get_eleno(long const &eleno) {
+long elements::__base::elem::get_eleno(long const eleno) {
     long res{eleno};
     if (eleno == 0 || !used_nos.insert(eleno).second)
         res = get_eleno();
     return res;
 }
 
-long const &elements::__base::elem::get_eleno(void) {
+long const elements::__base::elem::get_eleno(void) {
     do {;} while (used_nos.find(++max_no) != used_nos.end());
     used_nos.insert(max_no);
     return max_no;
 }
 
-long elements::__base::elem::get_elident(long const &elident) {
+long elements::__base::elem::get_elident(long const elident) {
     long res{elident};
     if (elident == 0 || !used_ids.insert(elident).second)
         res = get_elident();
     return res;
 }
 
-long const &elements::__base::elem::get_elident(void) {
+long const elements::__base::elem::get_elident(void) {
     do {;} while (used_ids.find(++max_id) != used_ids.end());
     used_ids.insert(max_id);
     return max_id;
@@ -857,7 +786,7 @@ namespace dnvgl {
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long beps::nnodes(void) const {return 2;}
 
@@ -869,60 +798,37 @@ set<el_processor> const beps::processors{
 
 beps::beps(void) : elem() {}
 
-beps::beps(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+beps::beps(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-beps::beps(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+beps::beps(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-beps::beps(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+beps::beps(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -941,7 +847,7 @@ beps::beps(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long csta::nnodes(void) const {return 3;}
 
@@ -953,60 +859,37 @@ set<el_processor> const csta::processors{
 
 csta::csta(void) : elem() {}
 
-csta::csta(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+csta::csta(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-csta::csta(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+csta::csta(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-csta::csta(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+csta::csta(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1025,7 +908,7 @@ csta::csta(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long rpbq::nnodes(void) const {return 4;}
 
@@ -1037,60 +920,37 @@ set<el_processor> const rpbq::processors{
 
 rpbq::rpbq(void) : elem() {}
 
-rpbq::rpbq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+rpbq::rpbq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-rpbq::rpbq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+rpbq::rpbq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-rpbq::rpbq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+rpbq::rpbq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1109,7 +969,7 @@ rpbq::rpbq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ilst::nnodes(void) const {return 6;}
 
@@ -1121,60 +981,37 @@ set<el_processor> const ilst::processors{
 
 ilst::ilst(void) : elem() {}
 
-ilst::ilst(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ilst::ilst(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ilst::ilst(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ilst::ilst(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ilst::ilst(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ilst::ilst(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1193,7 +1030,7 @@ ilst::ilst(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long iqqe::nnodes(void) const {return 8;}
 
@@ -1205,60 +1042,37 @@ set<el_processor> const iqqe::processors{
 
 iqqe::iqqe(void) : elem() {}
 
-iqqe::iqqe(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+iqqe::iqqe(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-iqqe::iqqe(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+iqqe::iqqe(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-iqqe::iqqe(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+iqqe::iqqe(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1277,7 +1091,7 @@ iqqe::iqqe(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lqua::nnodes(void) const {return 4;}
 
@@ -1289,60 +1103,37 @@ set<el_processor> const lqua::processors{
 
 lqua::lqua(void) : elem() {}
 
-lqua::lqua(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lqua::lqua(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lqua::lqua(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lqua::lqua(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-lqua::lqua(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lqua::lqua(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1361,7 +1152,7 @@ lqua::lqua(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long tess::nnodes(void) const {return 2;}
 
@@ -1373,60 +1164,37 @@ set<el_processor> const tess::processors{
 
 tess::tess(void) : elem() {}
 
-tess::tess(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tess::tess(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-tess::tess(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tess::tess(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-tess::tess(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tess::tess(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1445,7 +1213,7 @@ tess::tess(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long gmas::nnodes(void) const {return 1;}
 
@@ -1457,60 +1225,37 @@ set<el_processor> const gmas::processors{
 
 gmas::gmas(void) : elem() {}
 
-gmas::gmas(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gmas::gmas(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-gmas::gmas(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gmas::gmas(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-gmas::gmas(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gmas::gmas(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1529,7 +1274,7 @@ gmas::gmas(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long glma::nnodes(void) const {return 2;}
 
@@ -1541,60 +1286,37 @@ set<el_processor> const glma::processors{
 
 glma::glma(void) : elem() {}
 
-glma::glma(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glma::glma(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-glma::glma(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glma::glma(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-glma::glma(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glma::glma(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1613,7 +1335,7 @@ glma::glma(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long glda::nnodes(void) const {return 2;}
 
@@ -1625,60 +1347,37 @@ set<el_processor> const glda::processors{
 
 glda::glda(void) : elem() {}
 
-glda::glda(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glda::glda(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-glda::glda(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glda::glda(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-glda::glda(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glda::glda(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1697,7 +1396,7 @@ glda::glda(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long beas::nnodes(void) const {return 2;}
 
@@ -1709,60 +1408,37 @@ set<el_processor> const beas::processors{
 
 beas::beas(void) : elem() {}
 
-beas::beas(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+beas::beas(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-beas::beas(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+beas::beas(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-beas::beas(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+beas::beas(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1781,7 +1457,7 @@ beas::beas(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axis::nnodes(void) const {return 2;}
 
@@ -1793,60 +1469,37 @@ set<el_processor> const axis::processors{
 
 axis::axis(void) : elem() {}
 
-axis::axis(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axis::axis(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axis::axis(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axis::axis(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-axis::axis(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axis::axis(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1865,7 +1518,7 @@ axis::axis(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axda::nnodes(void) const {return 2;}
 
@@ -1877,60 +1530,37 @@ set<el_processor> const axda::processors{
 
 axda::axda(void) : elem() {}
 
-axda::axda(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axda::axda(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axda::axda(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axda::axda(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-axda::axda(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axda::axda(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -1949,7 +1579,7 @@ axda::axda(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long gspr::nnodes(void) const {return 1;}
 
@@ -1961,60 +1591,37 @@ set<el_processor> const gspr::processors{
 
 gspr::gspr(void) : elem() {}
 
-gspr::gspr(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gspr::gspr(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-gspr::gspr(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gspr::gspr(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-gspr::gspr(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gspr::gspr(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2033,7 +1640,7 @@ gspr::gspr(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long gdam::nnodes(void) const {return 1;}
 
@@ -2045,60 +1652,37 @@ set<el_processor> const gdam::processors{
 
 gdam::gdam(void) : elem() {}
 
-gdam::gdam(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gdam::gdam(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-gdam::gdam(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gdam::gdam(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-gdam::gdam(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+gdam::gdam(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2117,7 +1701,7 @@ gdam::gdam(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ihex::nnodes(void) const {return 20;}
 
@@ -2129,60 +1713,37 @@ set<el_processor> const ihex::processors{
 
 ihex::ihex(void) : elem() {}
 
-ihex::ihex(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ihex::ihex(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ihex::ihex(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ihex::ihex(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ihex::ihex(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ihex::ihex(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2201,7 +1762,7 @@ ihex::ihex(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lhex::nnodes(void) const {return 8;}
 
@@ -2213,60 +1774,37 @@ set<el_processor> const lhex::processors{
 
 lhex::lhex(void) : elem() {}
 
-lhex::lhex(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lhex::lhex(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lhex::lhex(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lhex::lhex(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-lhex::lhex(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lhex::lhex(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2285,7 +1823,7 @@ lhex::lhex(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long secb::nnodes(void) const {return 3;}
 
@@ -2297,60 +1835,37 @@ set<el_processor> const secb::processors{
 
 secb::secb(void) : elem() {}
 
-secb::secb(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+secb::secb(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-secb::secb(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+secb::secb(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-secb::secb(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+secb::secb(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2369,7 +1884,7 @@ secb::secb(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long btss::nnodes(void) const {return 3;}
 
@@ -2381,60 +1896,37 @@ set<el_processor> const btss::processors{
 
 btss::btss(void) : elem() {}
 
-btss::btss(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+btss::btss(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-btss::btss(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+btss::btss(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-btss::btss(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+btss::btss(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2453,7 +1945,7 @@ btss::btss(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long fqus_ffq::nnodes(void) const {return 4;}
 
@@ -2465,60 +1957,37 @@ set<el_processor> const fqus_ffq::processors{
 
 fqus_ffq::fqus_ffq(void) : fem_thin_shell() {}
 
-fqus_ffq::fqus_ffq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+fqus_ffq::fqus_ffq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-fqus_ffq::fqus_ffq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+fqus_ffq::fqus_ffq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-fqus_ffq::fqus_ffq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+fqus_ffq::fqus_ffq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2537,7 +2006,7 @@ fqus_ffq::fqus_ffq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ftrs_fftr::nnodes(void) const {return 3;}
 
@@ -2549,60 +2018,37 @@ set<el_processor> const ftrs_fftr::processors{
 
 ftrs_fftr::ftrs_fftr(void) : fem_thin_shell() {}
 
-ftrs_fftr::ftrs_fftr(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ftrs_fftr::ftrs_fftr(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ftrs_fftr::ftrs_fftr(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ftrs_fftr::ftrs_fftr(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ftrs_fftr::ftrs_fftr(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ftrs_fftr::ftrs_fftr(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2621,7 +2067,7 @@ ftrs_fftr::ftrs_fftr(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long scts::nnodes(void) const {return 6;}
 
@@ -2633,60 +2079,37 @@ set<el_processor> const scts::processors{
 
 scts::scts(void) : elem() {}
 
-scts::scts(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+scts::scts(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-scts::scts(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+scts::scts(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-scts::scts(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+scts::scts(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2705,7 +2128,7 @@ scts::scts(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long mcts::nnodes(void) const {return 6;}
 
@@ -2717,60 +2140,37 @@ set<el_processor> const mcts::processors{
 
 mcts::mcts(void) : elem() {}
 
-mcts::mcts(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+mcts::mcts(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-mcts::mcts(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+mcts::mcts(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-mcts::mcts(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+mcts::mcts(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2789,7 +2189,7 @@ mcts::mcts(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long scqs::nnodes(void) const {return 8;}
 
@@ -2801,60 +2201,37 @@ set<el_processor> const scqs::processors{
 
 scqs::scqs(void) : elem() {}
 
-scqs::scqs(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+scqs::scqs(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-scqs::scqs(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+scqs::scqs(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-scqs::scqs(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+scqs::scqs(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2873,7 +2250,7 @@ scqs::scqs(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long mcqs::nnodes(void) const {return 8;}
 
@@ -2885,60 +2262,37 @@ set<el_processor> const mcqs::processors{
 
 mcqs::mcqs(void) : elem() {}
 
-mcqs::mcqs(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+mcqs::mcqs(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-mcqs::mcqs(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+mcqs::mcqs(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-mcqs::mcqs(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+mcqs::mcqs(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -2957,7 +2311,7 @@ mcqs::mcqs(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ipri::nnodes(void) const {return 15;}
 
@@ -2969,60 +2323,37 @@ set<el_processor> const ipri::processors{
 
 ipri::ipri(void) : elem() {}
 
-ipri::ipri(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ipri::ipri(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ipri::ipri(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ipri::ipri(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ipri::ipri(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ipri::ipri(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3041,7 +2372,7 @@ ipri::ipri(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long itet::nnodes(void) const {return 10;}
 
@@ -3053,60 +2384,37 @@ set<el_processor> const itet::processors{
 
 itet::itet(void) : elem() {}
 
-itet::itet(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+itet::itet(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-itet::itet(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+itet::itet(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-itet::itet(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+itet::itet(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3125,7 +2433,7 @@ itet::itet(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long tpri::nnodes(void) const {return 6;}
 
@@ -3137,60 +2445,37 @@ set<el_processor> const tpri::processors{
 
 tpri::tpri(void) : elem() {}
 
-tpri::tpri(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tpri::tpri(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-tpri::tpri(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tpri::tpri(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-tpri::tpri(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tpri::tpri(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3209,7 +2494,7 @@ tpri::tpri(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long tetr::nnodes(void) const {return 4;}
 
@@ -3221,60 +2506,37 @@ set<el_processor> const tetr::processors{
 
 tetr::tetr(void) : elem() {}
 
-tetr::tetr(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tetr::tetr(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-tetr::tetr(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tetr::tetr(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-tetr::tetr(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+tetr::tetr(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3293,7 +2555,7 @@ tetr::tetr(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lcts::nnodes(void) const {return 6;}
 
@@ -3305,60 +2567,37 @@ set<el_processor> const lcts::processors{
 
 lcts::lcts(void) : elem() {}
 
-lcts::lcts(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lcts::lcts(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lcts::lcts(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lcts::lcts(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-lcts::lcts(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lcts::lcts(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3377,7 +2616,7 @@ lcts::lcts(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long lcqs::nnodes(void) const {return 8;}
 
@@ -3389,60 +2628,37 @@ set<el_processor> const lcqs::processors{
 
 lcqs::lcqs(void) : elem() {}
 
-lcqs::lcqs(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lcqs::lcqs(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lcqs::lcqs(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lcqs::lcqs(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-lcqs::lcqs(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+lcqs::lcqs(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3461,7 +2677,7 @@ lcqs::lcqs(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long trs1::nnodes(void) const {return 18;}
 
@@ -3473,60 +2689,37 @@ set<el_processor> const trs1::processors{
 
 trs1::trs1(void) : elem() {}
 
-trs1::trs1(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs1::trs1(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-trs1::trs1(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs1::trs1(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-trs1::trs1(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs1::trs1(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3545,7 +2738,7 @@ trs1::trs1(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long trs2::nnodes(void) const {return 15;}
 
@@ -3557,60 +2750,37 @@ set<el_processor> const trs2::processors{
 
 trs2::trs2(void) : elem() {}
 
-trs2::trs2(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs2::trs2(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-trs2::trs2(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs2::trs2(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-trs2::trs2(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs2::trs2(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3629,7 +2799,7 @@ trs2::trs2(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long trs3::nnodes(void) const {return 12;}
 
@@ -3641,60 +2811,37 @@ set<el_processor> const trs3::processors{
 
 trs3::trs3(void) : elem() {}
 
-trs3::trs3(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs3::trs3(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-trs3::trs3(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs3::trs3(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-trs3::trs3(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+trs3::trs3(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3713,7 +2860,7 @@ trs3::trs3(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long glsh::nnodes(void) const {return 2;}
 
@@ -3725,60 +2872,37 @@ set<el_processor> const glsh::processors{
 
 glsh::glsh(void) : elem() {}
 
-glsh::glsh(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glsh::glsh(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-glsh::glsh(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glsh::glsh(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-glsh::glsh(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+glsh::glsh(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3797,7 +2921,7 @@ glsh::glsh(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axcs::nnodes(void) const {return 3;}
 
@@ -3809,60 +2933,37 @@ set<el_processor> const axcs::processors{
 
 axcs::axcs(void) : elem() {}
 
-axcs::axcs(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axcs::axcs(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axcs::axcs(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axcs::axcs(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-axcs::axcs(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axcs::axcs(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3881,7 +2982,7 @@ axcs::axcs(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axlq::nnodes(void) const {return 4;}
 
@@ -3893,60 +2994,37 @@ set<el_processor> const axlq::processors{
 
 axlq::axlq(void) : elem() {}
 
-axlq::axlq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axlq::axlq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axlq::axlq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axlq::axlq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-axlq::axlq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axlq::axlq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -3965,7 +3043,7 @@ axlq::axlq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axls::nnodes(void) const {return 6;}
 
@@ -3977,60 +3055,37 @@ set<el_processor> const axls::processors{
 
 axls::axls(void) : elem() {}
 
-axls::axls(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axls::axls(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axls::axls(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axls::axls(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-axls::axls(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axls::axls(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4049,7 +3104,7 @@ axls::axls(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long axqq::nnodes(void) const {return 8;}
 
@@ -4061,60 +3116,37 @@ set<el_processor> const axqq::processors{
 
 axqq::axqq(void) : elem() {}
 
-axqq::axqq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axqq::axqq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axqq::axqq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axqq::axqq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-axqq::axqq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+axqq::axqq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4133,7 +3165,7 @@ axqq::axqq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long pils::nnodes(void) const {return 1;}
 
@@ -4145,60 +3177,37 @@ set<el_processor> const pils::processors{
 
 pils::pils(void) : elem() {}
 
-pils::pils(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pils::pils(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-pils::pils(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pils::pils(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-pils::pils(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pils::pils(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4217,7 +3226,7 @@ pils::pils(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long pcab::nnodes(void) const {return 2;}
 
@@ -4229,60 +3238,37 @@ set<el_processor> const pcab::processors{
 
 pcab::pcab(void) : elem() {}
 
-pcab::pcab(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pcab::pcab(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-pcab::pcab(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pcab::pcab(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-pcab::pcab(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pcab::pcab(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4301,7 +3287,7 @@ pcab::pcab(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long pspr::nnodes(void) const {return 1;}
 
@@ -4313,60 +3299,37 @@ set<el_processor> const pspr::processors{
 
 pspr::pspr(void) : elem() {}
 
-pspr::pspr(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pspr::pspr(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-pspr::pspr(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pspr::pspr(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-pspr::pspr(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+pspr::pspr(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4385,7 +3348,7 @@ pspr::pspr(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long adva_4::nnodes(void) const {return 4;}
 
@@ -4397,60 +3360,37 @@ set<el_processor> const adva_4::processors{
 
 adva_4::adva_4(void) : elem() {}
 
-adva_4::adva_4(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+adva_4::adva_4(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-adva_4::adva_4(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+adva_4::adva_4(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-adva_4::adva_4(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+adva_4::adva_4(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4469,7 +3409,7 @@ adva_4::adva_4(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long adva_2::nnodes(void) const {return 2;}
 
@@ -4481,60 +3421,37 @@ set<el_processor> const adva_2::processors{
 
 adva_2::adva_2(void) : elem() {}
 
-adva_2::adva_2(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+adva_2::adva_2(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-adva_2::adva_2(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+adva_2::adva_2(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-adva_2::adva_2(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+adva_2::adva_2(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4553,7 +3470,7 @@ adva_2::adva_2(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcp::nnodes(void) const {return 2;}
 
@@ -4565,60 +3482,37 @@ set<el_processor> const ctcp::processors{
 
 ctcp::ctcp(void) : elem() {}
 
-ctcp::ctcp(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcp::ctcp(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcp::ctcp(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcp::ctcp(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctcp::ctcp(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcp::ctcp(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4637,7 +3531,7 @@ ctcp::ctcp(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcl::nnodes(void) const {return 4;}
 
@@ -4649,60 +3543,37 @@ set<el_processor> const ctcl::processors{
 
 ctcl::ctcl(void) : elem() {}
 
-ctcl::ctcl(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcl::ctcl(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcl::ctcl(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcl::ctcl(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctcl::ctcl(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcl::ctcl(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4721,7 +3592,7 @@ ctcl::ctcl(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctal::nnodes(void) const {return 4;}
 
@@ -4733,60 +3604,37 @@ set<el_processor> const ctal::processors{
 
 ctal::ctal(void) : elem() {}
 
-ctal::ctal(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctal::ctal(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctal::ctal(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctal::ctal(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctal::ctal(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctal::ctal(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4805,7 +3653,7 @@ ctal::ctal(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcc::nnodes(void) const {return 6;}
 
@@ -4817,60 +3665,37 @@ set<el_processor> const ctcc::processors{
 
 ctcc::ctcc(void) : elem() {}
 
-ctcc::ctcc(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcc::ctcc(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcc::ctcc(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcc::ctcc(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctcc::ctcc(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcc::ctcc(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4889,7 +3714,7 @@ ctcc::ctcc(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctaq::nnodes(void) const {return 6;}
 
@@ -4901,60 +3726,37 @@ set<el_processor> const ctaq::processors{
 
 ctaq::ctaq(void) : elem() {}
 
-ctaq::ctaq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctaq::ctaq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctaq::ctaq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctaq::ctaq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctaq::ctaq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctaq::ctaq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -4973,7 +3775,7 @@ ctaq::ctaq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctlq::nnodes(void) const {return 8;}
 
@@ -4985,60 +3787,37 @@ set<el_processor> const ctlq::processors{
 
 ctlq::ctlq(void) : elem() {}
 
-ctlq::ctlq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctlq::ctlq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctlq::ctlq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctlq::ctlq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctlq::ctlq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctlq::ctlq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5057,7 +3836,7 @@ ctlq::ctlq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctcq::nnodes(void) const {return 16;}
 
@@ -5069,60 +3848,37 @@ set<el_processor> const ctcq::processors{
 
 ctcq::ctcq(void) : elem() {}
 
-ctcq::ctcq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcq::ctcq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcq::ctcq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcq::ctcq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctcq::ctcq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctcq::ctcq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5141,7 +3897,7 @@ ctcq::ctcq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ctmq::nnodes(void) const {return 18;}
 
@@ -5153,60 +3909,37 @@ set<el_processor> const ctmq::processors{
 
 ctmq::ctmq(void) : elem() {}
 
-ctmq::ctmq(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctmq::ctmq(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctmq::ctmq(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctmq::ctmq(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ctmq::ctmq(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ctmq::ctmq(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5225,7 +3958,7 @@ ctmq::ctmq(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long hcqs::nnodes(void) const {return 9;}
 
@@ -5237,60 +3970,37 @@ set<el_processor> const hcqs::processors{
 
 hcqs::hcqs(void) : elem() {}
 
-hcqs::hcqs(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+hcqs::hcqs(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-hcqs::hcqs(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+hcqs::hcqs(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-hcqs::hcqs(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+hcqs::hcqs(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5309,7 +4019,7 @@ hcqs::hcqs(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long slqs::nnodes(void) const {return 8;}
 
@@ -5321,60 +4031,37 @@ set<el_processor> const slqs::processors{
 
 slqs::slqs(void) : elem() {}
 
-slqs::slqs(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slqs::slqs(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-slqs::slqs(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slqs::slqs(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-slqs::slqs(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slqs::slqs(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5393,7 +4080,7 @@ slqs::slqs(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long slts::nnodes(void) const {return 6;}
 
@@ -5405,60 +4092,37 @@ set<el_processor> const slts::processors{
 
 slts::slts(void) : elem() {}
 
-slts::slts(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slts::slts(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-slts::slts(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slts::slts(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-slts::slts(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slts::slts(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5477,7 +4141,7 @@ slts::slts(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long slcb::nnodes(void) const {return 3;}
 
@@ -5489,60 +4153,37 @@ set<el_processor> const slcb::processors{
 
 slcb::slcb(void) : elem() {}
 
-slcb::slcb(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slcb::slcb(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-slcb::slcb(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slcb::slcb(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-slcb::slcb(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+slcb::slcb(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5561,7 +4202,7 @@ slcb::slcb(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long matr::nnodes(void) const {return 0;}
 
@@ -5573,60 +4214,37 @@ set<el_processor> const matr::processors{
 
 matr::matr(void) : elem() {}
 
-matr::matr(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+matr::matr(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-matr::matr(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+matr::matr(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-matr::matr(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+matr::matr(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5645,7 +4263,7 @@ matr::matr(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex100::nnodes(void) const {return 21;}
 
@@ -5657,60 +4275,37 @@ set<el_processor> const ghex100::processors{
 
 ghex100::ghex100(void) : elem() {}
 
-ghex100::ghex100(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex100::ghex100(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex100::ghex100(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex100::ghex100(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex100::ghex100(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex100::ghex100(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5729,7 +4324,7 @@ ghex100::ghex100(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex101::nnodes(void) const {return 22;}
 
@@ -5741,60 +4336,37 @@ set<el_processor> const ghex101::processors{
 
 ghex101::ghex101(void) : elem() {}
 
-ghex101::ghex101(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex101::ghex101(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex101::ghex101(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex101::ghex101(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex101::ghex101(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex101::ghex101(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5813,7 +4385,7 @@ ghex101::ghex101(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex102::nnodes(void) const {return 22;}
 
@@ -5825,60 +4397,37 @@ set<el_processor> const ghex102::processors{
 
 ghex102::ghex102(void) : elem() {}
 
-ghex102::ghex102(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex102::ghex102(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex102::ghex102(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex102::ghex102(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex102::ghex102(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex102::ghex102(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5897,7 +4446,7 @@ ghex102::ghex102(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex103::nnodes(void) const {return 23;}
 
@@ -5909,60 +4458,37 @@ set<el_processor> const ghex103::processors{
 
 ghex103::ghex103(void) : elem() {}
 
-ghex103::ghex103(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex103::ghex103(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex103::ghex103(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex103::ghex103(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex103::ghex103(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex103::ghex103(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -5981,7 +4507,7 @@ ghex103::ghex103(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex104::nnodes(void) const {return 22;}
 
@@ -5993,60 +4519,37 @@ set<el_processor> const ghex104::processors{
 
 ghex104::ghex104(void) : elem() {}
 
-ghex104::ghex104(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex104::ghex104(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex104::ghex104(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex104::ghex104(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex104::ghex104(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex104::ghex104(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6065,7 +4568,7 @@ ghex104::ghex104(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex105::nnodes(void) const {return 23;}
 
@@ -6077,60 +4580,37 @@ set<el_processor> const ghex105::processors{
 
 ghex105::ghex105(void) : elem() {}
 
-ghex105::ghex105(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex105::ghex105(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex105::ghex105(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex105::ghex105(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex105::ghex105(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex105::ghex105(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6149,7 +4629,7 @@ ghex105::ghex105(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex106::nnodes(void) const {return 23;}
 
@@ -6161,60 +4641,37 @@ set<el_processor> const ghex106::processors{
 
 ghex106::ghex106(void) : elem() {}
 
-ghex106::ghex106(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex106::ghex106(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex106::ghex106(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex106::ghex106(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex106::ghex106(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex106::ghex106(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6233,7 +4690,7 @@ ghex106::ghex106(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex107::nnodes(void) const {return 24;}
 
@@ -6245,60 +4702,37 @@ set<el_processor> const ghex107::processors{
 
 ghex107::ghex107(void) : elem() {}
 
-ghex107::ghex107(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex107::ghex107(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex107::ghex107(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex107::ghex107(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex107::ghex107(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex107::ghex107(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6317,7 +4751,7 @@ ghex107::ghex107(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex108::nnodes(void) const {return 22;}
 
@@ -6329,60 +4763,37 @@ set<el_processor> const ghex108::processors{
 
 ghex108::ghex108(void) : elem() {}
 
-ghex108::ghex108(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex108::ghex108(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex108::ghex108(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex108::ghex108(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex108::ghex108(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex108::ghex108(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6401,7 +4812,7 @@ ghex108::ghex108(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex109::nnodes(void) const {return 23;}
 
@@ -6413,60 +4824,37 @@ set<el_processor> const ghex109::processors{
 
 ghex109::ghex109(void) : elem() {}
 
-ghex109::ghex109(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex109::ghex109(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex109::ghex109(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex109::ghex109(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex109::ghex109(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex109::ghex109(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6485,7 +4873,7 @@ ghex109::ghex109(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex110::nnodes(void) const {return 23;}
 
@@ -6497,60 +4885,37 @@ set<el_processor> const ghex110::processors{
 
 ghex110::ghex110(void) : elem() {}
 
-ghex110::ghex110(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex110::ghex110(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex110::ghex110(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex110::ghex110(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex110::ghex110(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex110::ghex110(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6569,7 +4934,7 @@ ghex110::ghex110(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex111::nnodes(void) const {return 24;}
 
@@ -6581,60 +4946,37 @@ set<el_processor> const ghex111::processors{
 
 ghex111::ghex111(void) : elem() {}
 
-ghex111::ghex111(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex111::ghex111(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex111::ghex111(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex111::ghex111(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex111::ghex111(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex111::ghex111(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6653,7 +4995,7 @@ ghex111::ghex111(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex112::nnodes(void) const {return 23;}
 
@@ -6665,60 +5007,37 @@ set<el_processor> const ghex112::processors{
 
 ghex112::ghex112(void) : elem() {}
 
-ghex112::ghex112(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex112::ghex112(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex112::ghex112(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex112::ghex112(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex112::ghex112(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex112::ghex112(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6737,7 +5056,7 @@ ghex112::ghex112(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex113::nnodes(void) const {return 24;}
 
@@ -6749,60 +5068,37 @@ set<el_processor> const ghex113::processors{
 
 ghex113::ghex113(void) : elem() {}
 
-ghex113::ghex113(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex113::ghex113(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex113::ghex113(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex113::ghex113(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex113::ghex113(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex113::ghex113(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6821,7 +5117,7 @@ ghex113::ghex113(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex114::nnodes(void) const {return 24;}
 
@@ -6833,60 +5129,37 @@ set<el_processor> const ghex114::processors{
 
 ghex114::ghex114(void) : elem() {}
 
-ghex114::ghex114(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex114::ghex114(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex114::ghex114(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex114::ghex114(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex114::ghex114(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex114::ghex114(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6905,7 +5178,7 @@ ghex114::ghex114(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex115::nnodes(void) const {return 25;}
 
@@ -6917,60 +5190,37 @@ set<el_processor> const ghex115::processors{
 
 ghex115::ghex115(void) : elem() {}
 
-ghex115::ghex115(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex115::ghex115(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex115::ghex115(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex115::ghex115(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex115::ghex115(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex115::ghex115(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -6989,7 +5239,7 @@ ghex115::ghex115(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex116::nnodes(void) const {return 22;}
 
@@ -7001,60 +5251,37 @@ set<el_processor> const ghex116::processors{
 
 ghex116::ghex116(void) : elem() {}
 
-ghex116::ghex116(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex116::ghex116(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex116::ghex116(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex116::ghex116(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex116::ghex116(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex116::ghex116(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7073,7 +5300,7 @@ ghex116::ghex116(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex117::nnodes(void) const {return 23;}
 
@@ -7085,60 +5312,37 @@ set<el_processor> const ghex117::processors{
 
 ghex117::ghex117(void) : elem() {}
 
-ghex117::ghex117(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex117::ghex117(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex117::ghex117(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex117::ghex117(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex117::ghex117(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex117::ghex117(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7157,7 +5361,7 @@ ghex117::ghex117(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex118::nnodes(void) const {return 23;}
 
@@ -7169,60 +5373,37 @@ set<el_processor> const ghex118::processors{
 
 ghex118::ghex118(void) : elem() {}
 
-ghex118::ghex118(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex118::ghex118(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex118::ghex118(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex118::ghex118(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex118::ghex118(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex118::ghex118(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7241,7 +5422,7 @@ ghex118::ghex118(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex119::nnodes(void) const {return 24;}
 
@@ -7253,60 +5434,37 @@ set<el_processor> const ghex119::processors{
 
 ghex119::ghex119(void) : elem() {}
 
-ghex119::ghex119(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex119::ghex119(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex119::ghex119(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex119::ghex119(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex119::ghex119(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex119::ghex119(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7325,7 +5483,7 @@ ghex119::ghex119(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex120::nnodes(void) const {return 23;}
 
@@ -7337,60 +5495,37 @@ set<el_processor> const ghex120::processors{
 
 ghex120::ghex120(void) : elem() {}
 
-ghex120::ghex120(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex120::ghex120(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex120::ghex120(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex120::ghex120(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex120::ghex120(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex120::ghex120(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7409,7 +5544,7 @@ ghex120::ghex120(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex121::nnodes(void) const {return 24;}
 
@@ -7421,60 +5556,37 @@ set<el_processor> const ghex121::processors{
 
 ghex121::ghex121(void) : elem() {}
 
-ghex121::ghex121(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex121::ghex121(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex121::ghex121(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex121::ghex121(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex121::ghex121(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex121::ghex121(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7493,7 +5605,7 @@ ghex121::ghex121(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex122::nnodes(void) const {return 24;}
 
@@ -7505,60 +5617,37 @@ set<el_processor> const ghex122::processors{
 
 ghex122::ghex122(void) : elem() {}
 
-ghex122::ghex122(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex122::ghex122(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex122::ghex122(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex122::ghex122(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex122::ghex122(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex122::ghex122(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7577,7 +5666,7 @@ ghex122::ghex122(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex123::nnodes(void) const {return 25;}
 
@@ -7589,60 +5678,37 @@ set<el_processor> const ghex123::processors{
 
 ghex123::ghex123(void) : elem() {}
 
-ghex123::ghex123(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex123::ghex123(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex123::ghex123(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex123::ghex123(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex123::ghex123(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex123::ghex123(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7661,7 +5727,7 @@ ghex123::ghex123(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex124::nnodes(void) const {return 23;}
 
@@ -7673,60 +5739,37 @@ set<el_processor> const ghex124::processors{
 
 ghex124::ghex124(void) : elem() {}
 
-ghex124::ghex124(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex124::ghex124(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex124::ghex124(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex124::ghex124(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex124::ghex124(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex124::ghex124(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7745,7 +5788,7 @@ ghex124::ghex124(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex125::nnodes(void) const {return 24;}
 
@@ -7757,60 +5800,37 @@ set<el_processor> const ghex125::processors{
 
 ghex125::ghex125(void) : elem() {}
 
-ghex125::ghex125(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex125::ghex125(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex125::ghex125(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex125::ghex125(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex125::ghex125(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex125::ghex125(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7829,7 +5849,7 @@ ghex125::ghex125(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex126::nnodes(void) const {return 24;}
 
@@ -7841,60 +5861,37 @@ set<el_processor> const ghex126::processors{
 
 ghex126::ghex126(void) : elem() {}
 
-ghex126::ghex126(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex126::ghex126(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex126::ghex126(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex126::ghex126(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex126::ghex126(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex126::ghex126(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7913,7 +5910,7 @@ ghex126::ghex126(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex127::nnodes(void) const {return 25;}
 
@@ -7925,60 +5922,37 @@ set<el_processor> const ghex127::processors{
 
 ghex127::ghex127(void) : elem() {}
 
-ghex127::ghex127(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex127::ghex127(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex127::ghex127(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex127::ghex127(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex127::ghex127(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex127::ghex127(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -7997,7 +5971,7 @@ ghex127::ghex127(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex128::nnodes(void) const {return 24;}
 
@@ -8009,60 +5983,37 @@ set<el_processor> const ghex128::processors{
 
 ghex128::ghex128(void) : elem() {}
 
-ghex128::ghex128(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex128::ghex128(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex128::ghex128(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex128::ghex128(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex128::ghex128(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex128::ghex128(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8081,7 +6032,7 @@ ghex128::ghex128(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex129::nnodes(void) const {return 25;}
 
@@ -8093,60 +6044,37 @@ set<el_processor> const ghex129::processors{
 
 ghex129::ghex129(void) : elem() {}
 
-ghex129::ghex129(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex129::ghex129(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex129::ghex129(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex129::ghex129(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex129::ghex129(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex129::ghex129(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8165,7 +6093,7 @@ ghex129::ghex129(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex130::nnodes(void) const {return 25;}
 
@@ -8177,60 +6105,37 @@ set<el_processor> const ghex130::processors{
 
 ghex130::ghex130(void) : elem() {}
 
-ghex130::ghex130(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex130::ghex130(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex130::ghex130(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex130::ghex130(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex130::ghex130(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex130::ghex130(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8249,7 +6154,7 @@ ghex130::ghex130(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex131::nnodes(void) const {return 26;}
 
@@ -8261,60 +6166,37 @@ set<el_processor> const ghex131::processors{
 
 ghex131::ghex131(void) : elem() {}
 
-ghex131::ghex131(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex131::ghex131(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex131::ghex131(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex131::ghex131(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex131::ghex131(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex131::ghex131(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8333,7 +6215,7 @@ ghex131::ghex131(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex132::nnodes(void) const {return 22;}
 
@@ -8345,60 +6227,37 @@ set<el_processor> const ghex132::processors{
 
 ghex132::ghex132(void) : elem() {}
 
-ghex132::ghex132(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex132::ghex132(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex132::ghex132(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex132::ghex132(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex132::ghex132(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex132::ghex132(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8417,7 +6276,7 @@ ghex132::ghex132(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex133::nnodes(void) const {return 23;}
 
@@ -8429,60 +6288,37 @@ set<el_processor> const ghex133::processors{
 
 ghex133::ghex133(void) : elem() {}
 
-ghex133::ghex133(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex133::ghex133(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex133::ghex133(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex133::ghex133(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex133::ghex133(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex133::ghex133(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8501,7 +6337,7 @@ ghex133::ghex133(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex134::nnodes(void) const {return 23;}
 
@@ -8513,60 +6349,37 @@ set<el_processor> const ghex134::processors{
 
 ghex134::ghex134(void) : elem() {}
 
-ghex134::ghex134(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex134::ghex134(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex134::ghex134(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex134::ghex134(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex134::ghex134(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex134::ghex134(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8585,7 +6398,7 @@ ghex134::ghex134(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex135::nnodes(void) const {return 24;}
 
@@ -8597,60 +6410,37 @@ set<el_processor> const ghex135::processors{
 
 ghex135::ghex135(void) : elem() {}
 
-ghex135::ghex135(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex135::ghex135(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex135::ghex135(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex135::ghex135(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex135::ghex135(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex135::ghex135(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8669,7 +6459,7 @@ ghex135::ghex135(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex136::nnodes(void) const {return 23;}
 
@@ -8681,60 +6471,37 @@ set<el_processor> const ghex136::processors{
 
 ghex136::ghex136(void) : elem() {}
 
-ghex136::ghex136(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex136::ghex136(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex136::ghex136(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex136::ghex136(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex136::ghex136(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex136::ghex136(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8753,7 +6520,7 @@ ghex136::ghex136(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex137::nnodes(void) const {return 24;}
 
@@ -8765,60 +6532,37 @@ set<el_processor> const ghex137::processors{
 
 ghex137::ghex137(void) : elem() {}
 
-ghex137::ghex137(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex137::ghex137(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex137::ghex137(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex137::ghex137(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex137::ghex137(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex137::ghex137(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8837,7 +6581,7 @@ ghex137::ghex137(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex138::nnodes(void) const {return 24;}
 
@@ -8849,60 +6593,37 @@ set<el_processor> const ghex138::processors{
 
 ghex138::ghex138(void) : elem() {}
 
-ghex138::ghex138(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex138::ghex138(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex138::ghex138(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex138::ghex138(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex138::ghex138(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex138::ghex138(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -8921,7 +6642,7 @@ ghex138::ghex138(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex139::nnodes(void) const {return 25;}
 
@@ -8933,60 +6654,37 @@ set<el_processor> const ghex139::processors{
 
 ghex139::ghex139(void) : elem() {}
 
-ghex139::ghex139(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex139::ghex139(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex139::ghex139(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex139::ghex139(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex139::ghex139(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex139::ghex139(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9005,7 +6703,7 @@ ghex139::ghex139(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex140::nnodes(void) const {return 23;}
 
@@ -9017,60 +6715,37 @@ set<el_processor> const ghex140::processors{
 
 ghex140::ghex140(void) : elem() {}
 
-ghex140::ghex140(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex140::ghex140(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex140::ghex140(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex140::ghex140(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex140::ghex140(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex140::ghex140(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9089,7 +6764,7 @@ ghex140::ghex140(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex141::nnodes(void) const {return 24;}
 
@@ -9101,60 +6776,37 @@ set<el_processor> const ghex141::processors{
 
 ghex141::ghex141(void) : elem() {}
 
-ghex141::ghex141(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex141::ghex141(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex141::ghex141(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex141::ghex141(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex141::ghex141(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex141::ghex141(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9173,7 +6825,7 @@ ghex141::ghex141(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex142::nnodes(void) const {return 24;}
 
@@ -9185,60 +6837,37 @@ set<el_processor> const ghex142::processors{
 
 ghex142::ghex142(void) : elem() {}
 
-ghex142::ghex142(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex142::ghex142(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex142::ghex142(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex142::ghex142(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex142::ghex142(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex142::ghex142(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9257,7 +6886,7 @@ ghex142::ghex142(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex143::nnodes(void) const {return 25;}
 
@@ -9269,60 +6898,37 @@ set<el_processor> const ghex143::processors{
 
 ghex143::ghex143(void) : elem() {}
 
-ghex143::ghex143(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex143::ghex143(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex143::ghex143(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex143::ghex143(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex143::ghex143(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex143::ghex143(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9341,7 +6947,7 @@ ghex143::ghex143(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex144::nnodes(void) const {return 24;}
 
@@ -9353,60 +6959,37 @@ set<el_processor> const ghex144::processors{
 
 ghex144::ghex144(void) : elem() {}
 
-ghex144::ghex144(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex144::ghex144(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex144::ghex144(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex144::ghex144(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex144::ghex144(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex144::ghex144(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9425,7 +7008,7 @@ ghex144::ghex144(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex145::nnodes(void) const {return 25;}
 
@@ -9437,60 +7020,37 @@ set<el_processor> const ghex145::processors{
 
 ghex145::ghex145(void) : elem() {}
 
-ghex145::ghex145(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex145::ghex145(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex145::ghex145(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex145::ghex145(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex145::ghex145(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex145::ghex145(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9509,7 +7069,7 @@ ghex145::ghex145(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex146::nnodes(void) const {return 25;}
 
@@ -9521,60 +7081,37 @@ set<el_processor> const ghex146::processors{
 
 ghex146::ghex146(void) : elem() {}
 
-ghex146::ghex146(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex146::ghex146(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex146::ghex146(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex146::ghex146(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex146::ghex146(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex146::ghex146(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9593,7 +7130,7 @@ ghex146::ghex146(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex147::nnodes(void) const {return 26;}
 
@@ -9605,60 +7142,37 @@ set<el_processor> const ghex147::processors{
 
 ghex147::ghex147(void) : elem() {}
 
-ghex147::ghex147(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex147::ghex147(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex147::ghex147(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex147::ghex147(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex147::ghex147(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex147::ghex147(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9677,7 +7191,7 @@ ghex147::ghex147(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex148::nnodes(void) const {return 23;}
 
@@ -9689,60 +7203,37 @@ set<el_processor> const ghex148::processors{
 
 ghex148::ghex148(void) : elem() {}
 
-ghex148::ghex148(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex148::ghex148(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex148::ghex148(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex148::ghex148(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex148::ghex148(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex148::ghex148(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9761,7 +7252,7 @@ ghex148::ghex148(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex149::nnodes(void) const {return 24;}
 
@@ -9773,60 +7264,37 @@ set<el_processor> const ghex149::processors{
 
 ghex149::ghex149(void) : elem() {}
 
-ghex149::ghex149(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex149::ghex149(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex149::ghex149(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex149::ghex149(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex149::ghex149(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex149::ghex149(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9845,7 +7313,7 @@ ghex149::ghex149(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex150::nnodes(void) const {return 24;}
 
@@ -9857,60 +7325,37 @@ set<el_processor> const ghex150::processors{
 
 ghex150::ghex150(void) : elem() {}
 
-ghex150::ghex150(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex150::ghex150(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex150::ghex150(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex150::ghex150(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex150::ghex150(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex150::ghex150(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -9929,7 +7374,7 @@ ghex150::ghex150(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex151::nnodes(void) const {return 25;}
 
@@ -9941,60 +7386,37 @@ set<el_processor> const ghex151::processors{
 
 ghex151::ghex151(void) : elem() {}
 
-ghex151::ghex151(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex151::ghex151(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex151::ghex151(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex151::ghex151(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex151::ghex151(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex151::ghex151(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10013,7 +7435,7 @@ ghex151::ghex151(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex152::nnodes(void) const {return 24;}
 
@@ -10025,60 +7447,37 @@ set<el_processor> const ghex152::processors{
 
 ghex152::ghex152(void) : elem() {}
 
-ghex152::ghex152(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex152::ghex152(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex152::ghex152(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex152::ghex152(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex152::ghex152(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex152::ghex152(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10097,7 +7496,7 @@ ghex152::ghex152(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex153::nnodes(void) const {return 25;}
 
@@ -10109,60 +7508,37 @@ set<el_processor> const ghex153::processors{
 
 ghex153::ghex153(void) : elem() {}
 
-ghex153::ghex153(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex153::ghex153(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex153::ghex153(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex153::ghex153(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex153::ghex153(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex153::ghex153(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10181,7 +7557,7 @@ ghex153::ghex153(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex154::nnodes(void) const {return 25;}
 
@@ -10193,60 +7569,37 @@ set<el_processor> const ghex154::processors{
 
 ghex154::ghex154(void) : elem() {}
 
-ghex154::ghex154(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex154::ghex154(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex154::ghex154(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex154::ghex154(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex154::ghex154(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex154::ghex154(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10265,7 +7618,7 @@ ghex154::ghex154(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex155::nnodes(void) const {return 26;}
 
@@ -10277,60 +7630,37 @@ set<el_processor> const ghex155::processors{
 
 ghex155::ghex155(void) : elem() {}
 
-ghex155::ghex155(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex155::ghex155(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex155::ghex155(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex155::ghex155(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex155::ghex155(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex155::ghex155(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10349,7 +7679,7 @@ ghex155::ghex155(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex156::nnodes(void) const {return 24;}
 
@@ -10361,60 +7691,37 @@ set<el_processor> const ghex156::processors{
 
 ghex156::ghex156(void) : elem() {}
 
-ghex156::ghex156(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex156::ghex156(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex156::ghex156(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex156::ghex156(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex156::ghex156(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex156::ghex156(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10433,7 +7740,7 @@ ghex156::ghex156(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex157::nnodes(void) const {return 25;}
 
@@ -10445,60 +7752,37 @@ set<el_processor> const ghex157::processors{
 
 ghex157::ghex157(void) : elem() {}
 
-ghex157::ghex157(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex157::ghex157(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex157::ghex157(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex157::ghex157(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex157::ghex157(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex157::ghex157(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10517,7 +7801,7 @@ ghex157::ghex157(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex158::nnodes(void) const {return 25;}
 
@@ -10529,60 +7813,37 @@ set<el_processor> const ghex158::processors{
 
 ghex158::ghex158(void) : elem() {}
 
-ghex158::ghex158(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex158::ghex158(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex158::ghex158(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex158::ghex158(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex158::ghex158(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex158::ghex158(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10601,7 +7862,7 @@ ghex158::ghex158(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex159::nnodes(void) const {return 26;}
 
@@ -10613,60 +7874,37 @@ set<el_processor> const ghex159::processors{
 
 ghex159::ghex159(void) : elem() {}
 
-ghex159::ghex159(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex159::ghex159(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex159::ghex159(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex159::ghex159(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex159::ghex159(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex159::ghex159(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10685,7 +7923,7 @@ ghex159::ghex159(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex160::nnodes(void) const {return 25;}
 
@@ -10697,60 +7935,37 @@ set<el_processor> const ghex160::processors{
 
 ghex160::ghex160(void) : elem() {}
 
-ghex160::ghex160(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex160::ghex160(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex160::ghex160(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex160::ghex160(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex160::ghex160(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex160::ghex160(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10769,7 +7984,7 @@ ghex160::ghex160(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex161::nnodes(void) const {return 26;}
 
@@ -10781,60 +7996,37 @@ set<el_processor> const ghex161::processors{
 
 ghex161::ghex161(void) : elem() {}
 
-ghex161::ghex161(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex161::ghex161(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex161::ghex161(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex161::ghex161(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex161::ghex161(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex161::ghex161(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10853,7 +8045,7 @@ ghex161::ghex161(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex162::nnodes(void) const {return 26;}
 
@@ -10865,60 +8057,37 @@ set<el_processor> const ghex162::processors{
 
 ghex162::ghex162(void) : elem() {}
 
-ghex162::ghex162(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex162::ghex162(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex162::ghex162(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex162::ghex162(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex162::ghex162(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex162::ghex162(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
@@ -10937,7 +8106,7 @@ ghex162::ghex162(elements::__base::elem const *data) :
 
    
 */
-#line 504 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
+#line 433 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 long ghex163::nnodes(void) const {return 27;}
 
@@ -10949,60 +8118,37 @@ set<el_processor> const ghex163::processors{
 
 ghex163::ghex163(void) : elem() {}
 
-ghex163::ghex163(long const &eleno,
-                       long const &elident,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex163::ghex163(
+    long const eleno, long const elident, long const el_add,
+    vector<long> const &nodes, long const matref, long const add_no,
+    long const intno, long const mass_intno, long const i_strain_ref,
+    long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex163::ghex163(long const &eleno,
-                       long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex163::ghex163(
+    long const eleno, long const el_add, vector<long> const &nodes,
+    long const matref, long const add_no, long const intno,
+    long const mass_intno, long const i_strain_ref, long const i_stress_ref,
+    long const strpoint_ref, vector<long> const &section,
+    vector<long> const &fixations, vector<long> const &eccentrities,
+    vector<long> const &csys) :
         __base::elem(
-            eleno, el_add, nodes, matref, add_no,
-            intno, mass_intno, i_strain_ref, i_stress_ref,
-            strpoint_ref, section, fixations, eccentrities,
-            csys) {}
+            eleno, el_add, nodes, matref, add_no, intno, mass_intno,
+            i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
+            eccentrities, csys) {}
 
-ghex163::ghex163(long const &el_add,
-                       vector<long> const &nodes,
-                       long const &matref,
-                       long const &add_no,
-                       long const &intno,
-                       long const &mass_intno,
-                       long const &i_strain_ref,
-                       long const &i_stress_ref,
-                       long const &strpoint_ref,
-                       vector<long> const &section,
-                       vector<long> const &fixations,
-                       vector<long> const &eccentrities,
-                       vector<long> const &csys) :
+ghex163::ghex163(
+    long const el_add, vector<long> const &nodes, long const matref,
+    long const add_no, long const intno, long const mass_intno,
+    long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
+    vector<long> const &section, vector<long> const &fixations,
+    vector<long> const &eccentrities, vector<long> const &csys) :
         __base::elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,

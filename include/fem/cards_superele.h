@@ -61,16 +61,14 @@ namespace dnvgl {
 
                     bsell(void);
 
-                    bsell(long const LC,
-                          long const SUBNO,
+                    bsell(long const LC, long const SUBNO,
                           std::vector<long> const &LLC,
                           std::vector<double> const &FACT);
 
                     using __base::card::operator();
 
                     __base::card const &operator()(
-                        long const LC,
-                        long const SUBNO,
+                        long const LC, long const SUBNO,
                         std::vector<long> const &LLC,
                         std::vector<double> const &FACT);
 
@@ -198,57 +196,32 @@ namespace dnvgl {
 
                     gelmnt2(void);
 
-                    gelmnt2(long const SUBNO,
-                            long const SLEVEL,
-                            long const STYPE,
-                            long const ADDNO,
-                            const double T[4][4],
-                            long const NNOD,
-                            std::vector<long> const &NOD);
+                    gelmnt2(
+                        long const SUBNO, long const SLEVEL, long const STYPE,
+                        long const ADDNO, const double T[4][4], long const NNOD,
+                        std::vector<long> const &NOD);
 
-                    gelmnt2(long const SUBNO,
-                            long const SLEVEL,
-                            long const STYPE,
-                            long const ADDNO,
-                            double const T[4][4],
-                            std::vector<long> const &NOD);
+                    gelmnt2(
+                        long const SUBNO, long const SLEVEL, long const STYPE,
+                        long const ADDNO, double const T[4][4],
+                        std::vector<long> const &NOD);
 
-                    gelmnt2(long const SUBNO,
-                            long const SLEVEL,
-                            long const STYPE,
-                            long const ADDNO,
-                            double const T11,
-                            double const T21,
-                            double const T31,
-                            double const T12,
-                            double const T22,
-                            double const T32,
-                            double const T13,
-                            double const T23,
-                            double const T33,
-                            double const T14,
-                            double const T24,
-                            double const T34,
-                            long const NNOD,
-                            std::vector<long> const &NOD);
+                    gelmnt2(
+                        long const SUBNO, long const SLEVEL, long const STYPE,
+                        long const ADDNO, double const T11, double const T21,
+                        double const T31, double const T12, double const T22,
+                        double const T32, double const T13, double const T23,
+                        double const T33, double const T14, double const T24,
+                        double const T34, long const NNOD,
+                        std::vector<long> const &NOD);
 
-                    gelmnt2(long const SUBNO,
-                            long const SLEVEL,
-                            long const STYPE,
-                            long const ADDNO,
-                            double const T11,
-                            double const T21,
-                            double const T31,
-                            double const T12,
-                            double const T22,
-                            double const T32,
-                            double const T13,
-                            double const T23,
-                            double const T33,
-                            double const T14,
-                            double const T24,
-                            double const T34,
-                            std::vector<long> const &NOD);
+                    gelmnt2(
+                        long const SUBNO, long const SLEVEL, long const STYPE,
+                        long const ADDNO, double const T11, double const T21,
+                        double const T31, double const T12, double const T22,
+                        double const T32, double const T13, double const T23,
+                        double const T33, double const T14, double const T24,
+                        double const T34, std::vector<long> const &NOD);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -339,15 +312,11 @@ namespace dnvgl {
 
                     hsupstat(void);
 
-                    hsupstat(long const NFIELD,
-                             long const ISELTY,
-                             long const NIDOF,
-                             long const NRDOF,
-                             long const NBAND,
-                             long const NELT,
-                             long const LINDEP,
-                             long const RELOADC,
-                             long const COMPLC);
+                    hsupstat(
+                        long const NFIELD, long const ISELTY, long const NIDOF,
+                        long const NRDOF, long const NBAND, long const NELT,
+                        long const LINDEP, long const RELOADC,
+                        long const COMPLC);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
@@ -457,28 +426,17 @@ namespace dnvgl {
 
                     hsuptran(void);
 
-                    hsuptran(long const NFIELD,
-                             long const ITREF,
-                             double const T11,
-                             double const T21,
-                             double const T31,
-                             double const T41,
-                             double const T12,
-                             double const T22,
-                             double const T32,
-                             double const T42,
-                             double const T13,
-                             double const T23,
-                             double const T33,
-                             double const T43,
-                             double const T14,
-                             double const T24,
-                             double const T34,
-                             double const T44);
+                    hsuptran(
+                        long const NFIELD, long const ITREF, double const T11,
+                        double const T21, double const T31, double const T41,
+                        double const T12, double const T22, double const T32,
+                        double const T42, double const T13, double const T23,
+                        double const T33, double const T43, double const T14,
+                        double const T24, double const T34, double const T44);
 
-                    hsuptran(long const NFIELD,
-                             long const ITREF,
-                             double const T[4][4]);
+                    hsuptran(
+                        long const NFIELD, long const ITREF,
+                        double const T[4][4]);
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;
 
@@ -597,24 +555,16 @@ namespace dnvgl {
 
                     hierarch(void);
 
-                    hierarch(long const NFIELD,
-                             long const IHREF,
-                             long const ISELTY,
-                             long const INDSEL,
-                             long const ISLEVL,
-                             long const ITREF,
-                             long const IHPREF,
-                             long const NSUB,
-                             std::vector<long> const &IHSREF);
+                    hierarch(
+                        long const NFIELD, long const IHREF, long const ISELTY,
+                        long const INDSEL, long const ISLEVL, long const ITREF,
+                        long const IHPREF, long const NSUB,
+                        std::vector<long> const &IHSREF);
 
-                    hierarch(long const NFIELD,
-                             long const IHREF,
-                             long const ISELTY,
-                             long const INDSEL,
-                             long const ISLEVL,
-                             long const ITREF,
-                             long const IHPREF,
-                             std::vector<long> const &IHSREF);
+                    hierarch(
+                        long const NFIELD, long const IHREF, long const ISELTY,
+                        long const INDSEL, long const ISLEVL, long const ITREF,
+                        long const IHPREF, std::vector<long> const &IHSREF);
 
                     dnvgl::extfem::fem::cards::types const
                     card_type(void) const;

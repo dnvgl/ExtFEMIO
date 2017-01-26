@@ -101,8 +101,36 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]" ) {
        vector<std::string> data({
                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                "GIORH   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
-                   "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
-                   "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"});
+               "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
+               "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"});
+       len = __base::card::card_split(data, data.size(), lines);
+       giorh probe(lines, len);
+
+       CHECK(probe.GEONO == 1);
+       CHECK(probe.HZ == 2.);
+       CHECK(probe.TY == 3.);
+       CHECK(probe.BT == 4);
+       CHECK(probe.TT == 5.);
+       CHECK(probe.BB == 6.);
+       CHECK(probe.TB == 7.);
+       CHECK(probe.SFY == 8.);
+       CHECK(probe.SFZ == 9.);
+       CHECK(probe.NLOBYT == 10);
+       CHECK(probe.NLOBYB == 11);
+       CHECK(probe.NLOBZ == 12);
+   }
+
+   SECTION("GIORH (4)") {
+        gbeamg
+#ifdef __GNUC__
+    __attribute__ ((__unused__))
+#endif
+            dummy(1, 100.);
+       vector<std::string> data({
+               // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+               "GIORH   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
+               "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
+               "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"});
        len = __base::card::card_split(data, data.size(), lines);
        giorh probe(lines, len);
 

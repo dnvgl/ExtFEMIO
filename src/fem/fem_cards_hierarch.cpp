@@ -74,31 +74,22 @@ void hierarch::read(vector<std::string> const &inp, size_t const len) {
 hierarch::hierarch(void) :
         hierarch(-1, 0, 0, 0, 0, 0, 0, {}) {}
 
-hierarch::hierarch(long const NFIELD,
-                   long const IHREF,
-                   long const ISELTY,
-                   long const INDSEL,
-                   long const ISLEVL,
-                   long const ITREF,
-                   long const IHPREF,
-                   long const NSUB,
-                   vector<long> const &IHSREF) :
-        card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
-        INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
-        IHPREF(IHPREF), NSUB(NSUB), IHSREFi(IHSREF) {
+hierarch::hierarch(
+    long const NFIELD, long const IHREF, long const ISELTY, long const INDSEL,
+    long const ISLEVL, long const ITREF, long const IHPREF, long const NSUB,
+    vector<long> const &IHSREF) :
+        card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY), INDSEL(INDSEL),
+        ISLEVL(ISLEVL), ITREF(ITREF), IHPREF(IHPREF), NSUB(NSUB),
+        IHSREFi(IHSREF) {
     if (this->IHSREFi.size() != (size_t)this->NSUB)
         throw dnvgl::extfem::fem::errors::usage_error(
             "HIERARCH", "IHSREF not of size NSUB");
 }
 
-hierarch::hierarch(long const NFIELD,
-                   long const IHREF,
-                   long const ISELTY,
-                   long const INDSEL,
-                   long const ISLEVL,
-                   long const ITREF,
-                   long const IHPREF,
-                   vector<long> const &IHSREF) :
+hierarch::hierarch(
+    long const NFIELD, long const IHREF, long const ISELTY, long const INDSEL,
+    long const ISLEVL, long const ITREF, long const IHPREF,
+    vector<long> const &IHSREF) :
         card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
         INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
         IHPREF(IHPREF), IHSREFi(IHSREF) {
@@ -112,20 +103,14 @@ cards::types const hierarch::card_type(void) const {
 ostream &hierarch::put(ostream& os) const {
     if (NFIELD == -1) return os;
     os << hierarch::head.format()
-       << _form_NFIELD.format(NFIELD)
-       << _form_IHREF.format(IHREF)
-       << _form_ISELTY.format(ISELTY)
-       << _form_INDSEL.format(INDSEL)
-       << endl
+       << _form_NFIELD.format(NFIELD) << _form_IHREF.format(IHREF)
+       << _form_ISELTY.format(ISELTY) << _form_INDSEL.format(INDSEL) << endl
        << dnvgl::extfem::fem::types::card().format()
-       << _form_ISLEVL.format(ISLEVL)
-       << _form_ITREF.format(ITREF)
-       << _form_IHPREF.format(IHPREF)
-       << _form_NSUB.format(NSUB);
+       << _form_ISLEVL.format(ISLEVL) << _form_ITREF.format(ITREF)
+       << _form_IHPREF.format(IHPREF) << _form_NSUB.format(NSUB);
     for (int i = 0; i<NSUB; i++) {
         if (!(i % 4))
-            os << endl
-               << dnvgl::extfem::fem::types::card().format();
+            os << endl << dnvgl::extfem::fem::types::card().format();
         os << _form_IHSREF.format(IHSREFi[i]);
     }
     os << endl;

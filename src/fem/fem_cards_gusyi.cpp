@@ -54,16 +54,13 @@ entry_type<long> const gusyi::_form_NLOBYT("NLOBYT");
 entry_type<long> const gusyi::_form_NLOBYB("NLOBYB");
 entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
-gusyi::gusyi(const vector<std::string> &inp, size_t const len) {
+gusyi::gusyi(const vector<std::string> &inp, size_t const len) :
+        __base::beam_prop(inp, len, false) {
     read(inp, len);
 }
 
 void gusyi::read(const vector<std::string> &inp, size_t const len) {
     std::string static const empty{"                "};
-
-
-    __base::beam_prop::read(inp, len);
-
     if (len < 12)
         throw errors::parse_error(
             "GUSYI", "Illegal number of entries.");
@@ -102,7 +99,7 @@ gusyi::gusyi(
     double const BB, double const B2, double const TB,
     double const SFY, double const SFZ,
     long const NLOBYT, long const NLOBYB, long const NLOBZ) :
-        __base::beam_prop(GEONO),
+        __base::beam_prop(GEONO, false),
         HZ(HZ), TY(TY),
         BT(BT), B1(B1), TT(TT),
         BB(BB), B2(B2),TB(TB),
@@ -114,28 +111,22 @@ gusyi::card_type(void) const {
     return types::GUSYI;
 }
 
-std::ostream &gusyi::put(std::ostream& os) const {
+ostream &gusyi::put(ostream& os) const {
     if (GEONO == -1) return os;
     os << gusyi::head.format()
-       << _form_GEONO.format(GEONO)
-       << _form_HZ.format(HZ)
-       << _form_TY.format(TY)
-       << _form_BT.format(BT)
-       << std::endl << dnvgl::extfem::fem::types::card().format()
-       << _form_B1.format(B1)
-       << _form_TT.format(TT)
-       << _form_BB.format(BB)
-       << _form_B2.format(B2)
-       << std::endl << dnvgl::extfem::fem::types::card().format()
-       << _form_TB.format(TB)
-       << _form_SFY.format(SFY)
+       << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
+       << _form_TY.format(TY) << _form_BT.format(BT) << endl
+       << dnvgl::extfem::fem::types::card().format()
+       << _form_B1.format(B1) << _form_TT.format(TT)
+       << _form_BB.format(BB) << _form_B2.format(B2) << endl
+       << dnvgl::extfem::fem::types::card().format()
+       << _form_TB.format(TB) << _form_SFY.format(SFY)
        << _form_SFZ.format(SFZ);
     if ((NLOBYT || NLOBYB || NLOBZ))
-        os << _form_NLOBYT.format(NLOBYT)
-           << std::endl << dnvgl::extfem::fem::types::card().format()
-           << _form_NLOBYB.format(NLOBYB)
-           << _form_NLOBZ.format(NLOBZ);
-    os << std::endl;
+        os << _form_NLOBYT.format(NLOBYT) << endl << dnvgl
+            ::extfem::fem::types::card().format()
+           << _form_NLOBYB.format(NLOBYB) << _form_NLOBZ.format(NLOBZ);
+    os << endl;
     return os;
 }
 
