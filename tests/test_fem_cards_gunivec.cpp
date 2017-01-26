@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   const char  cID[]
+    const char  cID[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -38,79 +38,99 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+    return ex.what();
 }
 
 CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+    return ex;
 }
 
 TEST_CASE("FEM GUNIVEC definitions.", "[fem_gunivec]" ) {
 
-   double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
-   std::list<double> ref_rload(c_ref_rload, c_ref_rload + 6);
-   vector<std::string> lines;
-   size_t len;
+    double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
+    std::list<double> ref_rload(c_ref_rload, c_ref_rload + 6);
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("GUNIVEC (1)") {
-      vector<std::string> data({
-         "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      gunivec probe(lines, len);
+    SECTION("GUNIVEC (1)") {
+        vector<std::string> data({
+                "GUNIVEC  5.34000000e+002 0.00000000e+000 0.00000000e+000-1.00000000e+000\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        gunivec probe(lines, len);
 
-      CHECK(probe.TRANSNO == 534);
-      CHECK(probe.UNIX == 0.);
-      CHECK(probe.UNIY == 0.);
-      CHECK(probe.UNIZ == -1.);
-   }
+        CHECK(probe.TRANSNO == 534);
+        CHECK(probe.UNIX == 0.);
+        CHECK(probe.UNIY == 0.);
+        CHECK(probe.UNIZ == -1.);
+    }
 
-   SECTION("GUNIVEC (2)") {
-      vector<std::string> data({
-         "GUNIVEC  5.34000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      gunivec probe(lines, len);
+    SECTION("GUNIVEC (2)") {
+        vector<std::string> data({
+                "GUNIVEC  5.35000000e+02  0.00000000e+00  0.00000000e+00 -1.00000000e+00 \n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        gunivec probe(lines, len);
 
-      CHECK(probe.TRANSNO == 534);
-      CHECK(probe.UNIX == 0.);
-      CHECK(probe.UNIY == 0.);
-      CHECK(probe.UNIZ == -1.);
-   }
+        CHECK(probe.TRANSNO == 535);
+        CHECK(probe.UNIX == 0.);
+        CHECK(probe.UNIY == 0.);
+        CHECK(probe.UNIZ == -1.);
+    }
 }
 
 TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("empty") {
-      gunivec probe;
-      test << probe;
-      CHECK(test.str() == "");
-   }
+    SECTION("empty") {
+        gunivec probe;
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
-   SECTION("simple") {
-      gunivec probe(1, 2., 3., 4.);
-      test << probe;
-      CHECK(test.str() ==
-            "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n");
-   }
+    SECTION("simple") {
+        gunivec probe(1, 2., 3., 4.);
+        test << probe;
+        CHECK(test.str() ==
+              "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n");
+    }
+
+    SECTION("reuse (1)") {
+        __base::transno::reset_transno();
+        gunivec probe;
+        test << probe(1, 2., 3., 4.);
+        test << probe(5., 6., 7.);
+        CHECK(test.str() ==
+              "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "GUNIVEC +2.000000000e+00+5.000000000e+00+6.000000000e+00+7.000000000e+00\n");
+    }
+
+    SECTION("reuse (2)") {
+        __base::transno::reset_transno();
+        gunivec probe;
+        test << probe(2, 2., 3., 4.);
+        test << probe(5., 6., 7.);
+        CHECK(test.str() ==
+              "GUNIVEC +2.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "GUNIVEC +1.000000000e+00+5.000000000e+00+6.000000000e+00+7.000000000e+00\n");
+    }
 }
 
 TEST_CASE("FEM GUNIVEC conversion from own output.", "[fem_gunivec,in/out]") {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("GUNIVEC (1)") {
-      vector<std::string> data({
-            "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      gunivec probe(lines, len);
+    SECTION("GUNIVEC (1)") {
+        vector<std::string> data({
+                "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        gunivec probe(lines, len);
 
-      CHECK(probe.TRANSNO == 1);
-      CHECK(probe.UNIX == 2.);
-      CHECK(probe.UNIY == 3.);
-      CHECK(probe.UNIZ == 4.);
-   }
+        CHECK(probe.TRANSNO == 1);
+        CHECK(probe.UNIX == 2.);
+        CHECK(probe.UNIY == 3.);
+        CHECK(probe.UNIZ == 4.);
+    }
 }
 
 // Local Variables:

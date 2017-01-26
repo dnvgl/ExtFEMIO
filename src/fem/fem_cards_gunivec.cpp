@@ -38,12 +38,13 @@ using namespace dnvgl::extfem::fem::cards;
 
 fem::types::card const gunivec::head("GUNIVEC");
 
-entry_type<long> const gunivec::_form_TRANSNO("TRANSNO");
+// entry_type<long> const gunivec::_form_TRANSNO("TRANSNO");
 entry_type<double> const gunivec::_form_UNIX("UNIX");
 entry_type<double> const gunivec::_form_UNIY("UNIY");
 entry_type<double> const gunivec::_form_UNIZ("UNIZ");
 
-gunivec::gunivec(const vector<std::string> &inp, size_t const len) {
+gunivec::gunivec(const vector<std::string> &inp, size_t const len) :
+        __base::transno(inp, len) {
     read(inp, len);
 }
 
@@ -52,7 +53,7 @@ void gunivec::read(const vector<std::string> &inp, size_t const len) {
         throw errors::parse_error(
             "GUNIVEC", "Illegal number of entries.");
 
-    TRANSNO = _form_TRANSNO(inp.at(1));
+    // TRANSNO = _form_TRANSNO(inp.at(1));
     UNIX = _form_UNIX(inp.at(2));
     UNIY = _form_UNIY(inp.at(3));
     UNIZ = _form_UNIZ(inp.at(4));
@@ -61,24 +62,47 @@ void gunivec::read(const vector<std::string> &inp, size_t const len) {
 gunivec::gunivec(void) :
         gunivec(-1, 0., 0., 0.) {}
 
-gunivec::gunivec(long const TRANSNO,
-                 double const UNIX,
-                 double const UNIY,
-                 double const UNIZ) :
-        card(), TRANSNO(TRANSNO),
+gunivec::gunivec(
+    long const TRANSNO,
+    double const UNIX, double const UNIY, double const UNIZ) :
+        __base::transno(TRANSNO),
         UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
-dnvgl::extfem::fem::cards::types const
-gunivec::card_type(void) const {return types::GUNIVEC;}
+cards::__base::card const &gunivec::operator() (
+    vector<std::string> const &inp, size_t const len) {
+    __base::transno::read(inp, len);
+    this->read(inp, len);
+    return *this;
+}
 
-std::ostream &gunivec::put(std::ostream& os) const {
+cards::__base::card const &gunivec::operator() (
+    long const TRANSNO,
+    double const UNIX, double const UNIY, double const UNIZ) {
+    set_transno(TRANSNO);
+    this->UNIX = UNIX;
+    this->UNIY = UNIY;
+    this->UNIZ = UNIZ;
+    return *this;
+}
+
+cards::__base::card const &gunivec::operator() (
+    double const UNIX, double const UNIY, double const UNIZ) {
+    set_transno();
+    this->UNIX = UNIX;
+    this->UNIY = UNIY;
+    this->UNIZ = UNIZ;
+    return *this;
+}
+
+fem::cards::types const gunivec::card_type(void) const {
+    return types::GUNIVEC;
+}
+
+ostream &gunivec::put(ostream& os) const {
     if (TRANSNO == -1) return os;
     os << gunivec::head.format()
-       << _form_TRANSNO.format(TRANSNO)
-       << _form_UNIX.format(UNIX)
-       << _form_UNIY.format(UNIY)
-       << _form_UNIZ.format(UNIZ)
-       << std::endl;
+       << _form_TRANSNO.format(TRANSNO) << _form_UNIX.format(UNIX)
+       << _form_UNIY.format(UNIY) << _form_UNIZ.format(UNIZ) << endl;
     return os;
 }
 

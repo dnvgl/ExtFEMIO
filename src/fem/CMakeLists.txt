@@ -47,6 +47,10 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_cards_tdsetnam.cpp
   fem_cards_tdsupnam.cpp
   fem_cards_text.cpp
+  fem_cards_helper_beam_prop.cpp
+  fem_cards_helper_geoprop.cpp
+  fem_cards_helper_transno.cpp
+  fem_cards_helper_unknown.cpp
   fem_errors.cpp
   fem_file.cpp
   fem_type_bounds.cpp
@@ -64,8 +68,11 @@ set(LIBEXTFEMIO_FEM_HEADERS
   ../../include/resource.h
   ../../include/StdAfx.h
   ../../include/fem/cards.h
-  ../../include/fem/cards_loads.h
-  ../../include/fem/cards_properties.h
+  ../../include/fem/card_hl_node_elem.h
+  ../../include/fem/cards_bounds.h
+  ../../include/fem/cards_indent.h
+  ../../include/fem/cards_mat.h
+  ../../include/fem/cards_node_elem.h
   ../../include/fem/cards_superele.h
   ../../include/fem/elements.h
   ../../include/fem/errors.h

@@ -37,7 +37,7 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
 namespace {
-    char const initVals[3] = { '+', '*', ',' };
+     //  char const initVals[3] = { '+', '*', ',' };
 
     void const _stderr_report(std::string const &msg) {
         cerr << msg << endl;
@@ -52,21 +52,6 @@ void const (*cards::note_report)(std::string const &) = &_stdout_report;
 void const (*cards::info_report)(std::string const &) = &_stderr_report;
 void const (*cards::warn_report)(std::string const &) = &_stderr_report;
 void const (*cards::error_report)(std::string const &) = &_stderr_report;
-
-unknown::unknown(vector<std::string> const &inp, size_t const len) :
-        content(inp.begin(), inp.begin()+len) {
-    read(inp, len);
-};
-
-cards::types const
-unknown::card_type(void) const { return cards::types::UNKNOWN; }
-
-ostream &unknown::put(ostream &os) const {
-    throw errors::error("can't write UNKNOWN.");
-    return os;
-}
-
-void unknown::read(const vector<std::string> &inp, size_t const len) {}
 
 unordered_map<std::string, cards::types> const cardtype_map({
         // UNKNOWN,
@@ -154,135 +139,6 @@ cards::__base::card const &cards::__base::card::operator() (
     vector<std::string> const &inp, size_t const len) {
     this->read(inp, len);
     return *this;
-}
-fem::types::entry_type<long> const
-cards::__base::geoprop::_form_GEONO("GEONO");
-
-unordered_set<long> cards::__base::geoprop::used_geono;
-long cards::__base::geoprop::geono_maxset = 0;
-
-void cards::__base::geoprop::set_geono(long const GEONO/*=0*/) {
-    if (GEONO < 0) {
-        this->GEONO = GEONO;
-        return;
-    }
-    if (GEONO == 0) {
-        for (long i = geono_maxset + 1; i < numeric_limits<long>::max(); i++) {
-            if (!used_geono.count(i)) {
-                geono_maxset = i;
-                used_geono.insert(GEONO);
-                this->GEONO = i;
-                return;
-            }
-        }
-    }
-    if (used_geono.count(GEONO)) {
-        ostringstream msg("GEONO ", ostringstream::ate);
-        msg << GEONO << " value used twice.";
-            throw errors::usage_error("GEONO", msg.str());
-    }
-    used_geono.insert(GEONO);
-    this->GEONO = GEONO;
-}
-
-cards::__base::geoprop::geoprop(void) :
-        card(), GEONO(-1) {}
-
-cards::__base::geoprop::geoprop(long const GEONO) :
-        card() {
-    set_geono(GEONO);
-}
-
-cards::__base::geoprop::geoprop(
-    vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
-}
-
-void cards::__base::geoprop::read(
-    vector<std::string> const &inp, size_t const len) {
-    if (len < 2)
-        throw errors::parse_error(
-            "CARD", "Illegal number of entries.");
-
-    set_geono(_form_GEONO(inp.at(1)));
-}
-
-cards::__base::card const &cards::__base::geoprop::operator() (
-    vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
-    this->read(inp, len);
-    return *this;
-}
-
-void cards::__base::geoprop::reset_geono(void) {
-    geono_maxset = 0;
-    used_geono.clear();
-    cards::__base::beam_prop::reset_geono();
-}
-
-unordered_set<long> cards::__base::beam_prop::used_gbeamg;
-unordered_set<long> cards::__base::beam_prop::used_cross_desc;
-
-cards::__base::beam_prop::beam_prop(
-    vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
-}
-
-cards::__base::beam_prop::beam_prop(
-    vector<std::string> const &inp, size_t const len, bool const is_gbeamg) {
-    read(inp, len, is_gbeamg);
-}
-
-cards::__base::beam_prop::beam_prop() :
-        geoprop() {}
-
-cards::__base::beam_prop::beam_prop(
-    long const GEONO, bool const is_gbeamg/*=false*/) {
-    set_geono(GEONO, is_gbeamg);
-}
-
-void cards::__base::beam_prop::reset_geono(void) {
-    used_gbeamg.clear();
-    used_cross_desc.clear();
-}
-
-void cards::__base::beam_prop::set_geono(
-    long const GEONO/*=0*/, bool const is_gbeamg/*=false*/) {
-    if (GEONO < 0) {
-        return cards::__base::geoprop::set_geono(GEONO);
-    }
-    if (GEONO == 0) {
-        cards::__base::geoprop::set_geono(GEONO);
-        if (is_gbeamg)
-            used_gbeamg.insert(GEONO);
-        else
-            used_cross_desc.insert(GEONO);
-        return;
-    }
-    if (is_gbeamg) {
-        if (used_cross_desc.count(GEONO)){
-            this->GEONO = GEONO;
-        } else {
-            cards::__base::geoprop::set_geono(GEONO);
-        }
-        used_gbeamg.insert(GEONO);
-    } else {
-        if (used_gbeamg.count(GEONO)){
-            this->GEONO = GEONO;
-        } else {
-            cards::__base::geoprop::set_geono(GEONO);
-        }
-        used_cross_desc.insert(GEONO);;
-    }
-}
-
-void cards::__base::beam_prop::read(
-    vector<std::string> const &inp, size_t const len, bool const is_gbeamg) {
-    if (len < 2)
-        throw errors::parse_error(
-            "CARD", "Illegal number of entries.");
-
-    set_geono(_form_GEONO(inp.at(1)), is_gbeamg);
 }
 
 cards::__base::material::material(
