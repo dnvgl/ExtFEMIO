@@ -70,7 +70,7 @@ set(LIBEXTFEMIO_FEM_HEADERS
   ../../include/fem/cards.h
   ../../include/fem/card_hl_node_elem.h
   ../../include/fem/cards_bounds.h
-  ../../include/fem/cards_indent.h
+  ../../include/fem/cards_ident.h
   ../../include/fem/cards_mat.h
   ../../include/fem/cards_node_elem.h
   ../../include/fem/cards_superele.h
