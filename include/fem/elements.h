@@ -20,7 +20,7 @@
    Detailed description
 */
 
-// ID: $Id: fem_elements.h 554 2017-01-26 08:26:01Z berhol $
+// ID: $Id$
 
 #include "fem/cards.h"
 

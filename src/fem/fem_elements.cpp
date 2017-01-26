@@ -30,7 +30,7 @@ namespace {
 #ifdef __GNUC__
    __attribute__ ((__unused__))
 #endif
-       = "@(#) $Id: fem_elements.cpp 554 2017-01-26 08:26:01Z berhol $";
+       = "@(#) $Id$";
 }
 
 #include <memory>
