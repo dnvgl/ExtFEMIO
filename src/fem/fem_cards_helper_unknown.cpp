@@ -7,6 +7,8 @@
    Detailed description
 */
 
+#include "StdAfx.h"
+
 // ID:
 namespace {
    char const cID_fem_cards_helper_unknown[]
