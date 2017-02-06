@@ -10,7 +10,6 @@
 # Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
 set(LIBEXTFEMIO_FEM_SOURCES
-  fem_elements.cpp
   fem_cards.cpp
   fem_cards_belfix.cpp
   fem_cards_beuslo.cpp
@@ -22,19 +21,30 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_cards_date.cpp
   fem_cards_gbarm.cpp
   fem_cards_gbeamg.cpp
+  fem_cards_gbox.cpp
+  fem_cards_gchan.cpp
+  fem_cards_gchanr.cpp
   fem_cards_gcoord.cpp
+  fem_cards_gdobo.cpp
   fem_cards_geccen.cpp
   fem_cards_gelmnt1.cpp
   fem_cards_gelmnt2.cpp
   fem_cards_gelref1.cpp
   fem_cards_gelth.cpp
   fem_cards_giorh.cpp
+  fem_cards_giorhr.cpp
   fem_cards_glsec.cpp
+  fem_cards_glsecr.cpp
   fem_cards_gnode.cpp
   fem_cards_gpipe.cpp
   fem_cards_gsetmemb.cpp
+  fem_cards_gtonp.cpp
   fem_cards_gunivec.cpp
   fem_cards_gusyi.cpp
+  fem_cards_helper_beam_prop.cpp
+  fem_cards_helper_geoprop.cpp
+  fem_cards_helper_transno.cpp
+  fem_cards_helper_unknown.cpp
   fem_cards_hierarch.cpp
   fem_cards_hsupstat.cpp
   fem_cards_hsuptran.cpp
@@ -47,10 +57,7 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_cards_tdsetnam.cpp
   fem_cards_tdsupnam.cpp
   fem_cards_text.cpp
-  fem_cards_helper_beam_prop.cpp
-  fem_cards_helper_geoprop.cpp
-  fem_cards_helper_transno.cpp
-  fem_cards_helper_unknown.cpp
+  fem_elements.cpp
   fem_errors.cpp
   fem_file.cpp
   fem_type_bounds.cpp

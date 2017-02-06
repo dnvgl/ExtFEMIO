@@ -125,7 +125,8 @@ ostream &gusyi::put(ostream& os) const {
     if ((NLOBYT || NLOBYB || NLOBZ))
         os << _form_NLOBYT.format(NLOBYT) << endl << dnvgl
             ::extfem::fem::types::card().format()
-           << _form_NLOBYB.format(NLOBYB) << _form_NLOBZ.format(NLOBZ);
+           << _form_NLOBYB.format(NLOBYB)
+           << _form_NLOBZ.format(NLOBZ);
     os << endl;
     return os;
 }

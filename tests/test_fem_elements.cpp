@@ -56,7 +56,7 @@ using namespace std;
 
 using namespace dnvgl::extfem::fem;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
+CATCH_TRANSLATE_EXCEPTION(exception& ex ) {
    return ex.what();
 }
 

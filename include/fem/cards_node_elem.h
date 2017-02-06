@@ -96,16 +96,20 @@ namespace dnvgl {
 
                     gbarm(void);
 
-                    gbarm(
+                    gbarm(long const GEONO,
+                          double const HZ, double const BT, double const BB,
+                          double const SFY, double const SFZ,
+                          long const NLOBY=0, long const NLOBZ=0);
+
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+
+                    __base::card const &operator() (
                         long const GEONO,
                         double const HZ, double const BT, double const BB,
                         double const SFY, double const SFZ,
                         long const NLOBY=0, long const NLOBZ=0);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
-
-                    using __base::beam_prop::operator();
 
                 protected:
 
@@ -233,9 +237,9 @@ namespace dnvgl {
 
                     gbeamg(double const AREA);
 
-                    __base::card const &operator() (
-                        std::vector<std::string> const&, size_t const);
+                    virtual fem::cards::types const card_type(void) const;
 
+                    using __base::beam_prop::operator();
                     __base::card const &operator()(
                         long const GEONO,
                         double const AREA,
@@ -246,19 +250,349 @@ namespace dnvgl {
                         double const SHARY, double const SHARZ,
                         double const SHCENY, double const SHCENZ,
                         double const SY, double const SZ);
-
                     __base::card const &operator()(
                         long const GEONO, double const AREA);
-
                     __base::card const &operator()(double const AREA);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
 
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
 
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
+/// `GBOX`: Cross Section Type Box Beam
+/**
+   ## Format
+
+   |          |          |          |         |         |
+   | -------- | -------- | -------- | ------- | ------- |
+   | `GBOX`   | `GEONO`  | `HZ`     | `TY`    | `TB`    |
+   |          | `TT`     | `BY`     | `SFY`   | `SFZ`   |
+   | `NLOBY`  | `NLOBZ`  |          |         |         |
+
+   \image latex gbox.eps "Box beam"
+   \image html gbox.svg "Box beam"
+ */
+
+                class gbox : public __base::beam_prop {
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBY;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
+
+                public:
+
+// /** Geometry type number, i.e. reference number used for element
+//     data definition of geometry properties (Cross sectional
+//     properties) of beams.
+// */
+//                     long GEONO;
+/** Height of beam at current location
+ */
+                    double HZ;
+/** Thickness of vertical walls (webs) of box section
+*/
+                    double TY;
+/** Thickness of bottom flange
+*/
+                    double TB;
+/** Thickness of top flange
+ */
+                    double TT;
+/** Width of box beam
+ */
+                    double BY;
+/** Factors modifying the shear areas calculated by the preprocessor
+    program such that the modified shear areas are respectively,
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear areas on GBEAMG are SHARY(MOD) and SHARZ(MOD)).
+*/
+                    double SFY;
+/** Factors modifying the shear areas calculated by the preprocessor
+    program such that the modified shear areas are respectively,
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear areas on GBEAMG are SHARY(MOD) and SHARZ(MOD)).
+*/
+                    double SFZ;
+/* Number of integration points in each horizontal wall (flange) of
+   beam (optional)
+ */
+                    long NLOBY;
+/** Number of integration points in each vertical wall (web) of beam (optional) */
+                    long NLOBZ;
+
+                    gbox(void);
+                    gbox(std::vector<std::string> const&, size_t const);
+                    gbox(long const GEONO,
+                         double const HZ, double const TY, double const TB,
+                         double const TT, double const BY,
+                         double const SFY, double const SFZ,
+                         long const NLOBY = 0, long const NLOBZ = 0);
+
+                    virtual cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const TB,
+                        double const TT, double const BY,
+                        double const SFY, double const SFZ,
+                        long const NLOBY = 0, long const NLOBZ = 0);
+                protected:
+                    virtual std::ostream &put(std::ostream&) const;
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
+/// `GCHAN`: Cross Section Type Channel Beam
+/**
+   ## Format
+
+   |          |          |          |         |          |
+   | -------- | -------- | -------- | ------- | -------- |
+   | `GCHAN`  | `GEONO`  | `HZ`     | `TY`    | `BY`     |
+   |          | `TZ`     | `SFY`    | `SFZ`   |          |
+   |          | `K`      | `NLOBY`  | `NLOBZ` |          |
+
+
+   \image latex gchan.eps "Channel beam"
+   \image html gchan.svg "Channel beam"
+ */
+
+                class gchan : public __base::beam_prop {
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_K;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBY;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
+
+                public:
+
+
+// /** GEONO Geometry type number, i.e. reference number used for element
+//     data definition of geometry properties (cross sectional
+//     properties) of beams.
+//  */
+//                     long GEONO;
+/// Height of beam at current location.
+                    double HZ;
+/// Thickness of beam web.
+                    double TY;
+/// Width of top and bottom flange.
+                    double BY;
+/// Thickness of top and bottom flange.
+                    double TZ;
+/** Factors modifying the shear areas calculated by the preprocessor
+    program such that the modified shear areas are respectively,
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear areas on GBEAMG are SHARY(MOD) and SHARZ(MOD)).
+*/
+                    double SFY;
+/** Factors modifying the shear areas calculated by the preprocessor
+    program such that the modified shear areas are respectively,
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear areas on GBEAMG are SHARY(MOD) and SHARZ(MOD)).
+*/
+                    double SFZ;
+/** Web orientation:
+
+      =0 - web located in the negative local y-direction (and
+           consequently flange in the postitive y’-direction)
+
+      =1 - web located in the positive local y-direction (and
+           consequently flange in the negative y’-direction)
+ */
+                    long K;
+/// Number of integration points in each flange (optional)
+                    long NLOBY;
+/// Number of integration points in beam web (optional)
+                    long NLOBZ;
+
+                    gchan(void);
+                    gchan(std::vector<std::string> const&, size_t const);
+                    gchan(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TZ, double const SFY, double const SFZ,
+                          long const K, long const NLOBY = 0, long const NLOBZ = 0);
+
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ, double const SFY, double const SFZ,
+                        long const K, long const NLOBY = 0, long const NLOBZ = 0);
+                protected:
+                    virtual std::ostream &put(std::ostream&) const;
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
+/// `GCHANR`: Cross Section Type Channel Beam with Inside Curvature
+/**
+   ## Format
+
+   |          |          |          |         |          |
+   | -------- | -------- | -------- | ------- | -------- |
+   | `GCHANR` | `GEONO`  | `HZ`     | `TY`    | `BY`     |
+   |          | `TZ`     | `SFY`    | `SFZ`   |          |
+   |          | `K`      | `R`      | `NLOBY`  | `NLOBZ` |
+
+
+   \image latex gchanr.eps "Channel beam with Inside Curvature"
+   \image html gchanr.svg "Channel beam with Inside Curvature"
+ */
+
+                class gchanr : public __base::beam_prop {
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_K;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_R;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBY;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
+
+                public:
+
+// /** Geometry type number, i.e. reference number used for element data definition of geometry
+//     properties (cross sectional properties) of beams.
+// */
+//                     long GEONO;
+/// Height of beam at current location.
+                    double HZ;
+/// Thickness of beam web.
+                    double TY;
+/// Width of top and bottom flange.
+                    double BY;
+/// Thickness of top and bottom flange.
+                    double TZ;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear areas on `GBEAMG` are SHARY(MOD)).
+*/
+                    double SFY;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
+
+    (The shear areas on `GBEAMG` are SHARZ(MOD)).
+*/
+                    double SFZ;
+/** Web orientation:
+
+      =0 - web located in the negative local y-direction (and
+           consequently flange in the postitive y’-direction)
+
+      =1 - web located in the positive local y-direction (and
+           consequently flange in the negative y’-direction)
+ */
+                    long K;
+/// Radius of inside curvature.
+                    double R;
+/// Number of integration points in each flange (optional)
+                    long NLOBY;
+/// Number of integration points in beam web (optional)
+                    long NLOBZ;
+
+                    gchanr(void);
+                    gchanr(long const GEONO,
+                           double const HZ, double const TY, double const BY,
+                           double const TZ, double const SFY, double const SFZ,
+                           long const K, double const R,
+                           long const NLOBY = 0, long const NLOBZ = 0);
+                        gchanr(std::vector<std::string> const&, size_t const);
+                    virtual const cards::types card_type(void) const;
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ, double const SFY, double const SFZ,
+                        long const K, double const R,
+                        long const NLOBY = 0, long const NLOBZ = 0);
+                protected:
+                    virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
                         std::vector<std::string> const&, size_t const);
                 };
@@ -301,29 +635,131 @@ namespace dnvgl {
  */
                     double ZCOORD;
 
-                    gcoord(std::vector<std::string> const&, size_t const);
-
                     gcoord(void);
-
-                    using __base::card::operator();
-
+                    gcoord(std::vector<std::string> const&, size_t const);
                     gcoord(
                         long const NODENO,
                         double const XCOORD, double const YCOORD,
                         double const ZCOORD);
 
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::card::operator();
                     __base::card const &operator()(
                         long const NODENO,
                         double const XCOORD, double const YCOORD,
                         double const ZCOORD);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
-
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
 
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
+/// `GDOBO`: Section Type Double Bottom
+/**
+   ## Format
+
+   |          |          |          |         |          |
+   | -------- | -------- | -------- | ------- | -------- |
+   | `GDOBO`  | `GEONO`  | `HZ`     | `TY`    | `BY`     |
+   |          | `TT`     | `TB`     | `SFY`   | `SFZ`    |
+   |          | `NLOBY`  | `NLOBZ`  |         |          |
+
+
+   \image latex gdobo.eps "Double Bottom"
+   \image html gdobo.svg "Double Bottom"
+ */
+
+                class gdobo : public __base::beam_prop {
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBY;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
+
+                public:
+
+// /** Geometry type number, i.e. reference number used for element data
+//     definition of geometry properties (Cross sectional properties) of
+//     beams.
+//  */
+//                     double GEONO;
+/// Height of beam.
+                    double HZ;
+/// Thickness of beam web.
+                    double TY;
+/// Effective width of plates.
+                    double BY;
+/// Thickness of top plate.
+                    double TT;
+/// Thickness of bottom plate.
+                    double TB;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear area on `GBEAMG` is SHARY(MOD)).
+*/
+                    double SFY;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
+
+    (The shear area on `GBEAMG` is SHARZ(MOD)).
+*/
+                    double SFZ;
+/// Number of integration points in each flange (optional)
+                    long NLOBY;
+/// Number of integration points in beam web (optional)
+                    long NLOBZ;
+
+
+                    gdobo(void);
+                    gdobo(std::vector<std::string> const&, size_t const);
+                    gdobo(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TT, double const TB,
+                          double const SFY, double const SFZ,
+                          long const NLOBY=0, long const NLOBZ=0);
+
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TT, double const TB,
+                        double const SFY, double const SFZ,
+                        long const NLOBY=0, long const NLOBZ=0);
+                protected:
+                    virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
                         std::vector<std::string> const&, size_t const);
                 };
@@ -371,19 +807,21 @@ namespace dnvgl {
 */
                     double EZ;
 
-                    geccen(std::vector<std::string> const&, size_t const);
-
                     geccen(void);
-
+                    geccen(std::vector<std::string> const&, size_t const);
                     geccen(long const ECCNO,
                            double const EX, double const EY, double const EZ);
-
                     geccen(long const ECCNO, std::vector<double> const &pos);
-
                     geccen(geccen const*);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::card::operator();
+                    __base::card const &operator() (
+                        long const ECCNO,
+                        double const EX, double const EY, double const EZ);
+                    __base::card const &operator() (
+                        long const ECCNO, std::vector<double> const &pos);
 
                 protected:
 
@@ -476,36 +914,28 @@ namespace dnvgl {
 */
                     std::vector<long> NODIN;
 
-                    gelmnt1(std::vector<std::string> const&, size_t const);
-
                     gelmnt1(void);
+                    gelmnt1(std::vector<std::string> const&, size_t const);
+                    gelmnt1(long const ELNOX, long const ELNO,
+                            dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                            long const ELTYAD,
+                            std::vector<long> const &NODIN);
+                    gelmnt1(long const ELNOX, long const ELNO,
+                            dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                            std::vector<long> const &NODIN);
 
-                    gelmnt1(
-                        long const ELNOX, long const ELNO,
-                        dnvgl::extfem::fem::elements::el_types const &ELTYP,
-                        long const ELTYAD,
-                        std::vector<long> const &NODIN);
-
-                    gelmnt1(
-                        long const ELNOX, long const ELNO,
-                        dnvgl::extfem::fem::elements::el_types const &ELTYP,
-                        std::vector<long> const &NODIN);
+                    virtual fem::cards::types const card_type(void) const;
 
                     using __base::card::operator();
-
                     __base::card const &operator()(
                         long const ELNOX, long const ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         long const ELTYAD,
                         std::vector<long> const &NODIN);
-
                     __base::card const &operator()(
                         long const ELNOX, long const ELNO,
                         dnvgl::extfem::fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
 
                 protected:
 
@@ -678,24 +1108,22 @@ namespace dnvgl {
 */
                     std::vector<long> TRANSNO;
 
-                    gelref1(std::vector<std::string> const&, size_t const);
-
                     gelref1(void);
+                    gelref1(std::vector<std::string> const&, size_t const);
+                    gelref1(long const ELNO, long const MATNO,
+                            long const ADDNO, long const INTNO,
+                            long const MINTNO, long const STRANO,
+                            long const STRENO, long const STREPONO,
+                            long const GEONO_OPT, long const FIXNO_OPT,
+                            long const ECCNO_OPT, long const TRANSNO_OPT,
+                            std::vector<long> const &GEONO={},
+                            std::vector<long> const &FIXNO={},
+                            std::vector<long> const &ECCNO={},
+                            std::vector<long> const &TRANSNO={});
 
-                    gelref1(
-                        long const ELNO, long const MATNO,
-                        long const ADDNO, long const INTNO,
-                        long const MINTNO, long const STRANO,
-                        long const STRENO, long const STREPONO,
-                        long const GEONO_OPT, long const FIXNO_OPT,
-                        long const ECCNO_OPT, long const TRANSNO_OPT,
-                        std::vector<long> const &GEONO={},
-                        std::vector<long> const &FIXNO={},
-                        std::vector<long> const &ECCNO={},
-                        std::vector<long> const &TRANSNO={});
+                    virtual fem::cards::types const card_type(void) const;
 
                     using __base::card::operator();
-
                     __base::card const &operator()(
                         long const ELNO, long const MATNO,
                         long const ADDNO, long const INTNO,
@@ -707,9 +1135,6 @@ namespace dnvgl {
                         std::vector<long> const &FIXNO={},
                         std::vector<long> const &ECCNO={},
                         std::vector<long> const &TRANSNO={});
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
 
                 protected:
 
@@ -752,24 +1177,18 @@ namespace dnvgl {
  */
                     long NINT;
 
-                    gelth(std::vector<std::string> const&, size_t const);
-
                     gelth(void);
-
+                    gelth(std::vector<std::string> const&, size_t const);
                     gelth(long const GEONO, double const TH,
                           long const NINT=0);
-
                     gelth(double const TH, long const NINT=0);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    virtual fem::cards::types const card_type(void) const;
 
                     using __base::geoprop::operator();
-
                     __base::card const &operator()(
                         long const GEONO, double const TH,
                         long const NINT=0);
-
                     __base::card const &operator()(
                         double const TH, long const NINT=0);
 
@@ -873,26 +1292,153 @@ namespace dnvgl {
  */
                     long NLOBZ;
 
-                    giorh(std::vector<std::string> const&, size_t const);
-
                     giorh(void);
+                    giorh(std::vector<std::string> const&, size_t const);
+                    giorh(long const GEONO,
+                          double const HZ, double const TY, double const BT,
+                          double const TT, double const BB, double const TB,
+                          double const SFY, double const SFZ,
+                          long const NLOBYT=0, long const NLOBYB=0,
+                          long const NLOBZ=0);
 
-                    giorh(
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
                         double const SFY, double const SFZ,
-                        long const NLOBYT=0, long const NLOBYB=0, long const NLOBZ=0);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
-
-                    using __base::beam_prop::operator();
+                        long const NLOBYT=0, long const NLOBYB=0,
+                        long const NLOBZ=0);
 
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
 
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
+/// `GIORHR`: Cross Section Type I or H Beam with Inside Curvature
+/**
+   ## Format:
+
+   |          |          |         |          |          |
+   | -------- | -------- | ------- | -------- | -------- |
+   | `GIORHR` | `GEONO`  | `HZ`    | `TY`     | `BT`     |
+   |          | `TT`     | `BB`    | `TB`     | `SFY`    |
+   |          | `SFZ`    | `RT`    | `RB`     | `NLOBYT` |
+   |          | `NLOBYB` | `NLOBZ` |          |          |
+
+   \image latex giorhr.eps "I or H beam with Inside Curvature"
+   \image html giorhr.svg "I or H beam with Inside Curvature"
+*/
+                class giorhr : public __base::beam_prop {
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TB;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_RT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_RB;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYB;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
+
+                public:
+
+// /** Beam stress type number, i.e. reference number used for element
+//     data definition of cross sectional properties of beams.
+//  */
+//                     long GEONO;
+/// Height of beam at current location
+                    double HZ;
+/// Thickness of beam web
+                    double TY;
+/// Width of top flange
+                    double BT;
+/// Thickness of top flange
+                    double TT;
+/// Width of bottom flange
+                    double BB;
+/// Thickness of bottom flange
+                    double TB;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear area on `GBEAMG` os SHARY(MOD)).
+*/
+                    double SFY;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
+
+    (The shear area on `GBEAMG` os SHARZ(MOD)).
+*/
+                    double SFZ;
+/// Radius of inside curvature at top
+                    double RT;
+/// Radius of inside curvature at bottom
+                    double RB;
+/// Number of integration points in top flange (optional)
+                    long NLOBYT;
+/// Number of integration points in bottom flange (optional)
+                    long NLOBYB;
+/// Number of integration points in beam web (optional)
+                    long NLOBZ;
+
+                    giorhr(void);
+                    giorhr(std::vector<std::string> const&, size_t const);
+                    giorhr(long const GEONO,
+                           double const HZ, double const TY, double const BT,
+                           double const TT, double const BB, double const TB,
+                           double const SFY, double const SFZ,
+                           double RT, double RB,
+                           long const NLOBYT=0, long const NLOBYB=0,
+                           long const NLOBZ=0);
+
+                    virtual const cards::types card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BT,
+                        double const TT, double const BB, double const TB,
+                        double const SFY, double const SFZ,
+                        double RT, double RB,
+                        long const NLOBYT=0, long const NLOBYB=0,
+                        long const NLOBZ=0);
+                protected:
+                    virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
                         std::vector<std::string> const&, size_t const);
                 };
@@ -985,22 +1531,25 @@ namespace dnvgl {
  */
                     long NLOBZ;
 
-                    glsec(std::vector<std::string> const&, size_t const);
-
                     glsec(void);
+                    glsec(std::vector<std::string> const&, size_t const);
+                    glsec(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TZ,
+                          double const SFY, double const SFZ,
+                          bool const K,
+                          long const NLOBY=0, long const NLOBZ=0);
 
-                    glsec(
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ,
                         double const SFY, double const SFZ,
                         bool const K,
                         long const NLOBY=0, long const NLOBZ=0);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
-
-                    using __base::beam_prop::operator();
 
                 protected:
 
@@ -1009,6 +1558,125 @@ namespace dnvgl {
                     virtual void read(
                         std::vector<std::string> const&, size_t const);
                 };
+
+/// `GLSECR`: Cross Section Type I or H Beam with Inside Curvature
+/**
+   ## Format:
+
+   |          |         |         |         |      |
+   | -------- | ------- | ------- | ------- | ---- |
+   | `GLSECR` | `GEONO` | `HZ`    | `TY`    | `BY` |
+   |          | `TZ`    | `SFY`   | `SFZ`   | `K`  |
+   |          | `R`     | `NLOBY` | `NLOBZ` |      |
+
+   \image latex glsecr.eps "I or H beam with Inside Curvature"
+   \image html glsecr.svg "I or H beam with Inside Curvature"
+*/
+                class glsecr : public __base::beam_prop {
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_K;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_R;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBY;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
+
+                public:
+
+// /** Geometry type number, i.e. reference number used for element data
+//     definition of geometry properties (Cross sectional properties) of
+//     beams.
+//  */
+//                     long GEONO;
+/// Height of beam at current location.
+                    double HZ;
+/// Thickness of beam web.
+                    double TY;
+/// Width of flange.
+                    double BY;
+/// Thickness of flange.
+                    double TZ;
+/** Factor modifying the shear area calculated by the
+    preprocessor program such that the modified shear
+    area is
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear area on `GBEAMG` os SHARY(MOD)).
+*/
+                    double SFY;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
+
+    (The shear area on `GBEAMG` os SHARZ(MOD)).
+*/
+                    double SFZ;
+/* Web orientation:
+
+     = 0 - web located in the negative local y-direction (and
+           consequently flange in the postitive y’-direction)
+
+     = 1 - web located in the positive local y-direction (and
+           consequently flange in the negative y’-direction)
+ */
+                    long  K;
+/// Radius of inside curvature
+                    double R;
+/// Number of integration points in beam flange (optional)
+                    long NLOBY;
+/// Number of integration points in beam web (optional)
+                    long NLOBZ;
+
+                    glsecr(void);
+                    glsecr(std::vector<std::string> const&, size_t const);
+                    glsecr(long const GEONO,
+                           double const HZ, double const TY,
+                           double const BY, double const TZ,
+                           double const SFY, double const SFZ,
+                           long const K, double const R,
+                           long const NLOBY=0, long const NLOBZ=0);
+
+                    virtual const cards::types card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY,
+                        double const BY, double const TZ,
+                        double const SFY, double const SFZ,
+                        long const K, double const R,
+                        long const NLOBY=0, long const NLOBZ=0);
+
+                protected:
+                    virtual std::ostream &put(std::ostream&) const;
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
 
 /// `GNODE`: Correspondence between External and Internal Node
 /// Numbering and Number of Degrees of Freedom of Each Node
@@ -1060,31 +1728,23 @@ namespace dnvgl {
  */
                     std::vector<int> ODOF;
 
-                    gnode(std::vector<std::string> const&, size_t const);
-
                     gnode(void);
-
-                    gnode(
-                        long const NODEX, long const NODENO,
-                        long const NDOF, std::vector<int> const &ODOF);
-
-                    gnode(
-                        long const NODEX, long const NODENO,
-                        std::vector<int> const &ODOF);
-
+                    gnode(std::vector<std::string> const&, size_t const);
+                    gnode(long const NODEX, long const NODENO,
+                          long const NDOF, std::vector<int> const &ODOF);
+                    gnode(long const NODEX, long const NODENO,
+                          std::vector<int> const &ODOF);
                     ~gnode(void);
 
-                    using __base::card::operator();
+                    virtual fem::cards::types const card_type(void) const;
 
+                    using __base::card::operator();
                     __base::card const &operator()(
                         long const NODEX, long const NODENO,
                         long const NDOF, std::vector<int> const &ODOF);
-
                     __base::card const &operator()(
                         long const NODEX, long const NODENO,
                         std::vector<int> const &ODOF);
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
 
                 protected:
 
@@ -1166,20 +1826,21 @@ namespace dnvgl {
  */
                     long NRAD;
 
-                    gpipe(std::vector<std::string> const&, size_t const);
-
                     gpipe(void);
+                    gpipe(std::vector<std::string> const&, size_t const);
+                    gpipe(long const GEONO,
+                          double const DI, double const DY, double const T,
+                          double const SFY, double const SFZ,
+                          long const NDIR=0, long const NRAD=0);
 
-                    gpipe(
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
                         long const GEONO,
                         double const DI, double const DY, double const T,
                         double const SFY, double const SFZ,
                         long const NDIR=0, long const NRAD=0);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
-
-                    using __base::beam_prop::operator();
 
                 protected:
 
@@ -1316,35 +1977,144 @@ namespace dnvgl {
 */
                     std::vector<long> IRMEMB;
 
-                    gsetmemb(std::vector<std::string> const&, size_t const);
-
                     gsetmemb(void);
-
-                    gsetmemb(long const NFIELD,
-                             long const ISREF,
-                             long const INDEX,
-                             types const ISTYPE,
+                    gsetmemb(std::vector<std::string> const&, size_t const);
+                    gsetmemb(long const NFIELD, long const ISREF,
+                             long const INDEX, types const ISTYPE,
                              origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
-
                     gsetmemb(long const ISREF,
                              long const INDEX,
                              types const ISTYPE,
                              origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
-
                     gsetmemb(long const ISREF,
                              types const ISTYPE,
                              origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::card::operator();
+                    __base::card const &operator() (
+                        long const NFIELD, long const ISREF, long const INDEX,
+                        types const ISTYPE, origins const ISORIG,
+                        std::vector<long> const &IRMEMB={});
 
                 protected:
 
                     virtual std::ostream &put(std::ostream&) const;
 
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
+/// `GTONP`: Cross Section Type I or H Beam with Inside Curvature
+/**
+   ## Format:
+
+   |         |         |          |          |         |
+   | ------- | ------- | -------- | -------- | ------- |
+   | `GTONP` | `GEONO` | `HZ`     | `TY`     | `BT`    |
+   |         | `TT`    | `BP`     | `TP`     | `SFY`   |
+   |         | `SFZ`   | `NLOBYT` | `NLOBYB` | `NLOBZ` |
+
+   \image latex gtonp.eps "T on Plate"
+   \image html gtonp.svg "T on Plate"
+*/
+                class gtonp : public __base::beam_prop {
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_HZ;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_BP;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_TP;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_SFZ;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYT;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBYB;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_NLOBZ;
+
+                public:
+
+
+// /** Geometry type number, i.e. reference number used for element data
+//     definiton of geometry properties (Cross sectional properties) of
+//     beams.
+//  */
+//                     long GEONO;
+/// Height of beam
+                    double HZ;
+/// Thickness of beam web.
+                    double TY;
+///  Width of top flange.
+                    double BT;
+/// Thickness of top flange.
+                    double TT;
+/// Effective width of plate.
+                    double BP;
+/// Thickness of plate.
+                    double TP;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARY(MOD) = SHARY(PROG) · SFY
+      \f]
+
+    (The shear area on `GBEAMG` os SHARZ(MOD)).
+*/
+                    double SFY;
+/** Factor modifying the shear area calculated by the preprocessor
+    program such that the modified shear area is
+
+      \f[
+      SHARZ(MOD) = SHARZ(PROG) · SFZ
+      \f]
+
+    (The shear area on `GBEAMG` os SHARZ(MOD)).
+*/
+                    double SFZ;
+/// Number of integration points in top flange (optional)
+                    long NLOBYT;
+/// Number of integration points in bottom flange (optional)
+                    long NLOBYB;
+/// Number of integration points in beam web (optional)
+                    long NLOBZ;
+
+                    gtonp(void);
+                    gtonp(std::vector<std::string> const&, size_t const);
+                    gtonp(long const GEONO, double HZ, double TY, double BT,
+                          double TT, double BP, double TP, double  SFY,
+                          double SFZ, long NLOBYT = 0, long NLOBYB = 0,
+                          long NLOBZ = 0);
+
+                    virtual const cards::types card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
+                        long GEONO, double HZ, double TY, double BT,
+                        double TT, double BP, double TP, double  SFY,
+                        double SFZ, long NLOBYT = 0, long NLOBYB = 0,
+                        long NLOBZ = 0);
+                protected:
+                    virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
                         std::vector<std::string> const&, size_t const);
                 };
@@ -1400,28 +2170,23 @@ namespace dnvgl {
                     double UNIZ;
 
                     gunivec(std::vector<std::string> const&, size_t const);
-
                     gunivec(void);
+                    gunivec(long const TRANSNO, double const UNIX,
+                            double const UNIY, double const UNIZ);
+                    gunivec(double const UNIX, double const UNIY,
+                            double const UNIZ);
 
-                    gunivec(
+                    virtual cards::types const card_type(void) const;
+
+                    using __base::transno::operator();
+                    __base::card const &operator() (
                         long const TRANSNO, double const UNIX,
                         double const UNIY, double const UNIZ);
-
-                    __base::card const &operator() (
-                        std::vector<std::string> const&, size_t const);
-
-                    __base::card const &operator() (
-                        long const TRANSNO, double const UNIX,
-                        double const UNIY, double const UNIZ);
-
                     __base::card const &operator() (
                         double const UNIX, double const UNIY,
                         double const UNIZ);
 
                     void reset(void);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
 
                 protected:
 
@@ -1535,22 +2300,27 @@ namespace dnvgl {
  */
                     long NLOBZ;
 
-                    gusyi(std::vector<std::string> const&, size_t const);
-
                     gusyi(void);
+                    gusyi(std::vector<std::string> const&, size_t const);
+                    gusyi(long const GEONO, double const HZ,
+                          double const TY, double const BT,
+                          double const B1, double const TT,
+                          double const BB, double const B2,
+                          double const TB, double const SFY,
+                          double const SFZ, long const NLOBYT=0,
+                          long const NLOBYB=0, long const NLOBZ=0);
 
-                    gusyi(
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::beam_prop::operator();
+                    __base::card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BT, double const B1, double const TT,
                         double const BB, double const B2, double const TB,
                         double const SFY, double const SFZ,
-                        long const NLOBYT=0, long const NLOBYB=0, long const NLOBZ=0);
-
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
-
-                    using __base::beam_prop::operator();
+                        long const NLOBYT=0, long const NLOBYB=0,
+                        long const NLOBZ=0);
 
                 protected:
 
@@ -1571,6 +2341,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // coding: utf-8
 // End:

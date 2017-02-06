@@ -148,7 +148,7 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
     SECTION("GBARM (1)") {
         vector<std::string> data({
                 "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
-                    "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
+                "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"});
         len = __base::card::card_split(data, data.size(), lines);
         gbarm probe(lines, len);
 
@@ -165,7 +165,7 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
     SECTION("GBARM (2)") {
         vector<std::string> data({
                 "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
-                    "        +5.000000000e+00+6.000000000e+00\n"});
+                "        +5.000000000e+00+6.000000000e+00\n"});
         len = __base::card::card_split(data, data.size(), lines);
         gbarm probe(lines, len);
 
@@ -207,5 +207,7 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

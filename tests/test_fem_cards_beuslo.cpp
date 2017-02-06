@@ -1,4 +1,4 @@
-/**
+ /**
    \file tests/test_fem_cards_beuslo.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
@@ -60,17 +60,17 @@ TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
         len = __base::card::card_split(data, data.size(), lines);
         beuslo probe(lines, len);
 
-        CHECK(probe.LLC == 1);
-        CHECK(probe.LOTYP == 1);
-        CHECK(probe.COMPLX == false);
-        CHECK(probe.LAYER == 0);
-        CHECK(probe.ELNO == 1);
-        CHECK(probe.NDOF == 4);
-        CHECK(probe.INTNO == 0);
-        CHECK(probe.SIDE == 2);
-        CHECK(probe.RLOADi == std::vector<double>({
+        REQUIRE(probe.LLC == 1);
+        REQUIRE(probe.LOTYP == 1);
+        REQUIRE(probe.COMPLX == false);
+        REQUIRE(probe.LAYER == 0);
+        REQUIRE(probe.ELNO == 1);
+        REQUIRE(probe.NDOF == 4);
+        REQUIRE(probe.INTNO == 0);
+        REQUIRE(probe.SIDE == 2);
+        REQUIRE(probe.RLOADi == std::vector<double>({
                     1.66046816e+4, 3.86669189e+3, 3.86368091e+3, 1.62054932e+4}));
-        CHECK(probe.ILOADi == std::vector<double>({}));
+        REQUIRE(probe.ILOADi == std::vector<double>({}));
     }
 }
 
@@ -104,14 +104,14 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe;
 
         test << probe;
-        CHECK(test.str() == "");
+        REQUIRE(test.str() == "");
     }
 
     SECTION("write (fixed, verbose)") {
         beuslo probe(1,  2, false, 3, 4, 5, 6, 2, {7., 8., 9., 10., 11.});
 
         test << probe;
-        CHECK(test.str() == ref_r);
+        REQUIRE(test.str() == ref_r);
     }
 
     SECTION("write (real, verbose)") {
@@ -119,54 +119,54 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
                      SIDE, RLOADi);
 
         test << probe;
-        CHECK(test.str() == ref_r);
+        REQUIRE(test.str() == ref_r);
     }
 
     SECTION("write (real, verbose, fail 1)") {
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
                          SIDE, RLOADi));
     }
 
     SECTION("write (real, verbose, fail 2)") {
         COMPLX = true;
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
-                         SIDE, RLOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
+                   SIDE, RLOADi));
     }
 
     SECTION("write (real, impl. COMPLX)") {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi);
         test << probe;
-        CHECK(test.str() == ref_r);
+        REQUIRE(test.str() == ref_r);
     }
 
     SECTION("write (real, impl. COMPLX, fail)") {
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF+1, INTNO,
-                         SIDE, RLOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF+1, INTNO,
+                   SIDE, RLOADi));
     }
 
     SECTION("write (real, impl. NDOF)") {
         beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
                      SIDE, RLOADi);
         test << probe;
-        CHECK(test.str() == ref_r);
+        REQUIRE(test.str() == ref_r);
     }
 
     SECTION("write (real, impl. NDOF, fails)") {
         COMPLX = true;
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
-                         SIDE, RLOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
+                   SIDE, RLOADi));
     }
 
     SECTION("write (real, impl. NDOF, COMPLX)") {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
                      SIDE, RLOADi);
         test << probe;
-        CHECK(test.str() == ref_r);
+        REQUIRE(test.str() == ref_r);
     }
 
     SECTION("write (complex, verbose)") {
@@ -174,49 +174,49 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
-        CHECK(test.str() == ref_c);
+        REQUIRE(test.str() == ref_c);
     }
 
     SECTION("write (complex, verbose, fails 1)") {
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, verbose, fails 2)") {
         COMPLX = true;
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, verbose, fails 3)") {
         COMPLX = true;
         std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, impl. COMPLX)") {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
-        CHECK(test.str() == ref_c);
+        REQUIRE(test.str() == ref_c);
     }
 
     SECTION("write (complex, impl. COMPLX, fails 1)") {
         std::vector<double> RLOADi({12., 13., 14., 15., 16., 17.});
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, impl. COMPLX, fails 2)") {
         std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, impl. NDOF)") {
@@ -225,35 +225,35 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
                      SIDE, RLOADi, ILOADi);
 
         test << probe;
-        CHECK(test.str() == ref_c);
+        REQUIRE(test.str() == ref_c);
     }
 
     SECTION("write (complex, impl. NDOF, fails 1)") {
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, impl. NDOF, fails 1)") {
         COMPLX = true;
         std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, impl. NDOF, COMPLX)") {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
-        CHECK(test.str() == ref_c);
+        REQUIRE(test.str() == ref_c);
     }
 
     SECTION("write (complex, impl. NDOF, COMPLX, fails)") {
         std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
-        CHECK_THROWS(
-            beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
-                         SIDE, RLOADi, ILOADi));
+        REQUIRE_THROWS(
+            beuslo(LLC,  LOTYP, LAYER, ELNO, INTNO,
+                   SIDE, RLOADi, ILOADi));
     }
 }
 
@@ -272,17 +272,17 @@ TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
         len = __base::card::card_split(data, data.size(), lines);
         beuslo probe(lines, len);
 
-        CHECK(probe.LLC == 1);
-        CHECK(probe.LOTYP == 2);
-        CHECK_FALSE(probe.COMPLX);
-        CHECK(probe.LAYER == 3);
-        CHECK(probe.ELNO == 4);
-        CHECK(probe.NDOF == 5);
-        CHECK(probe.INTNO == 6);
-        CHECK(probe.SIDE == 2);
-        CHECK(probe.RLOADi.size() == 5);
-        CHECK(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
-        CHECK(probe.ILOADi.size() == 0);
+        REQUIRE(probe.LLC == 1);
+        REQUIRE(probe.LOTYP == 2);
+        REQUIRE_FALSE(probe.COMPLX);
+        REQUIRE(probe.LAYER == 3);
+        REQUIRE(probe.ELNO == 4);
+        REQUIRE(probe.NDOF == 5);
+        REQUIRE(probe.INTNO == 6);
+        REQUIRE(probe.SIDE == 2);
+        REQUIRE(probe.RLOADi.size() == 5);
+        REQUIRE(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
+        REQUIRE(probe.ILOADi.size() == 0);
     }
 
     SECTION("BEUSLO (own output, r + i)") {
@@ -297,18 +297,18 @@ TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
         len = __base::card::card_split(data, data.size(), lines);
         beuslo probe(lines, len);
 
-        CHECK(probe.LLC == 1);
-        CHECK(probe.LOTYP == 2);
-        CHECK(probe.COMPLX);
-        CHECK(probe.LAYER == 3);
-        CHECK(probe.ELNO == 4);
-        CHECK(probe.NDOF == 5);
-        CHECK(probe.INTNO == 6);
-        CHECK(probe.SIDE == 2);
-        CHECK(probe.RLOADi.size() == 5);
-        CHECK(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
-        CHECK(probe.ILOADi.size() == 5);
-        CHECK(probe.ILOADi == std::vector<double>({12., 13., 14., 15., 16.}));
+        REQUIRE(probe.LLC == 1);
+        REQUIRE(probe.LOTYP == 2);
+        REQUIRE(probe.COMPLX);
+        REQUIRE(probe.LAYER == 3);
+        REQUIRE(probe.ELNO == 4);
+        REQUIRE(probe.NDOF == 5);
+        REQUIRE(probe.INTNO == 6);
+        REQUIRE(probe.SIDE == 2);
+        REQUIRE(probe.RLOADi.size() == 5);
+        REQUIRE(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
+        REQUIRE(probe.ILOADi.size() == 5);
+        REQUIRE(probe.ILOADi == std::vector<double>({12., 13., 14., 15., 16.}));
     }
 }
 

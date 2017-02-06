@@ -83,12 +83,26 @@ namespace dnvgl {
                     GECCEN,
 /// Thickness of Two-dimensional Elements
                     GELTH,
+/// Cross Section Type Box Beam
+                    GBOX,
+/// Cross Section Type Channel Beam
+                    GCHAN,
+/// Cross Section Type Channel Beam
+                    GCHANR,
+/// Section Type Double Bottom
+                    GDOBO,
 /// Cross Section Type I or H Beam
                     GIORH,
+/// Cross Section Type I or H Beam with Inside Curvature
+                    GIORHR,
 /// Cross Section Type L-Section
                     GLSEC,
+/// Cross Section Type L-Section with Inside Curvature
+                    GLSECR,
 /// Cross Section Type Tube
                     GPIPE,
+/// Cross Section T on Plate
+                    GTONP,
 /// Cross Section Type Unsymmetrical I-Beam
                     GUSYI,
 /// Flexible Joint/Hinge
@@ -230,8 +244,7 @@ namespace dnvgl {
                         virtual void read(
                             std::vector<std::string> const&, size_t const);
 
-                        virtual __base::card const &operator() (
-                            std::vector<std::string> const&, size_t const);
+                        using __base::card::operator();
 
                     public:
 

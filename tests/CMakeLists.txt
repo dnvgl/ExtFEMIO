@@ -152,17 +152,24 @@ add_executable(test_fem_cards
   test_fem_cards_date.cpp
   test_fem_cards_gbarm.cpp
   test_fem_cards_gbeamg.cpp
+  test_fem_cards_gbox.cpp
+  test_fem_cards_gchan.cpp
+  test_fem_cards_gchanr.cpp
   test_fem_cards_gcoord.cpp
+  test_fem_cards_gdobo.cpp
   test_fem_cards_geccen.cpp
   test_fem_cards_gelmnt1.cpp
   test_fem_cards_gelmnt2.cpp
   test_fem_cards_gelref1.cpp
   test_fem_cards_gelth.cpp
   test_fem_cards_giorh.cpp
+  test_fem_cards_giorhr.cpp
   test_fem_cards_glsec.cpp
+  test_fem_cards_glsecr.cpp
   test_fem_cards_gnode.cpp
   test_fem_cards_gpipe.cpp
   test_fem_cards_gsetmemb.cpp
+  test_fem_cards_gtonp.cpp
   test_fem_cards_gunivec.cpp
   test_fem_cards_gusyi.cpp
   test_fem_cards_hierarch.cpp

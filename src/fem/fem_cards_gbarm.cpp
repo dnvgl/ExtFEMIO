@@ -65,14 +65,12 @@ void gbarm::read(vector<std::string> const &inp, size_t const len) {
     BB = _form_BB(inp.at(4));
     SFY = _form_SFY(inp.at(5));
     SFZ = _form_SFZ(inp.at(6));
-    size_t i{7};
-    if (i >= len) return;
-    if (inp.at(i) != empty)
-        NLOBY = _form_NLOBY(inp.at(i));
+    if (len > 7 && inp.at(7) != empty)
+        NLOBY = _form_NLOBY(inp.at(7));
     else
         NLOBY = {0};
-    if (++i < len && inp.at(i) != empty)
-        NLOBZ = _form_NLOBZ(inp.at(i));
+    if (len > 8 && inp.at(8) != empty)
+        NLOBZ = _form_NLOBZ(inp.at(8));
     else
         NLOBZ = {0};
 }
@@ -109,5 +107,7 @@ ostream &gbarm::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

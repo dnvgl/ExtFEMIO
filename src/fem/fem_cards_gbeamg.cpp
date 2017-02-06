@@ -126,12 +126,12 @@ gbeamg::gbeamg(double const AREA) :
     WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
     SY{0}, SZ{0} {}
 
-cards::__base::card const &gbeamg::operator() (
-    vector<std::string> const &inp, size_t const len) {
-    cards::__base::beam_prop::read(inp, len);
-    read(inp, len);
-    return *this;
-}
+// cards::__base::card const &gbeamg::operator() (
+//     vector<std::string> const &inp, size_t const len) {
+//     cards::__base::beam_prop::read(inp, len);
+//     read(inp, len);
+//     return *this;
+// }
 
 cards::__base::card const &gbeamg::operator() (
     long const GEONO,
@@ -217,11 +217,11 @@ ostream &gbeamg::put(ostream& os) const {
 
     os << fem::types::card("").format()
        << _form_IY.format(IY) << _form_IZ.format(IZ)
-       << _form_IYZ.format(IYZ) << _form_WXMIN.format(WXMIN)
-       << endl << fem::types::card("").format()
+       << _form_IYZ.format(IYZ) << _form_WXMIN.format(WXMIN) << endl
+       << fem::types::card("").format()
        << _form_WYMIN.format(WYMIN) << _form_WZMIN.format(WZMIN)
-       << _form_SHARY.format(SHARY) << _form_SHARZ.format(SHARZ)
-       << endl << fem::types::card("").format()
+       << _form_SHARY.format(SHARY) << _form_SHARZ.format(SHARZ) << endl
+       << fem::types::card("").format()
        << _form_SHCENY.format(SHCENY) << _form_SHCENZ.format(SHCENZ)
        << _form_SY.format(SY) << _form_SZ.format(SZ) << endl;
     return os;

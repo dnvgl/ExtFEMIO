@@ -64,11 +64,18 @@ unordered_map<std::string, cards::types> const cardtype_map({
         {"GELREF1", cards::types::GELREF1},
         {"GBARM", cards::types::GBARM},
         {"GBEAMG", cards::types::GBEAMG},
+        {"GBOX", cards::types::GBOX},
+        {"GCHAN", cards::types::GCHAN},
+        {"GCHANR", cards::types::GCHANR},
+        {"GDOBO", cards::types::GDOBO},
         {"GECCEN", cards::types::GECCEN},
         {"GELTH", cards::types::GELTH},
         {"GIORH", cards::types::GIORH},
+        {"GIORHR", cards::types::GIORHR},
         {"GLSEC", cards::types::GLSEC},
+        {"GLSECR", cards::types::GLSECR},
         {"GPIPE", cards::types::GPIPE},
+        {"GTONP", cards::types::GTONP},
         {"GUSYI", cards::types::GUSYI},
         {"BELFIX", cards::types::BELFIX},
         {"BLDEP", cards::types::BLDEP},
@@ -106,12 +113,11 @@ size_t cards::__base::card::card_split(
     std::string static tmp(80, '\0');
     bool first = true;
     size_t olen{0};
-    ;
 
     for (size_t i{0}; i < ilen; i++) {
 
-        head.assign(extfem::string::string(inp.at(i).substr(0, 8)).trim());
         if (first) {
+            head.assign(extfem::string::string(inp.at(i).substr(0, 8)).trim());
             first = false;
             try {
                 res.at(olen).assign(string::string(head).trim("\t\n"));
@@ -197,14 +203,35 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
         case cards::types::GELTH:
             res = make_unique<fem::cards::gelth>(inp, len);
             break;
+        case cards::types::GBOX:
+            res = make_unique<fem::cards::gbox>(inp, len);
+            break;
+        case cards::types::GCHAN:
+            res = make_unique<fem::cards::gchan>(inp, len);
+            break;
+        case cards::types::GCHANR:
+            res = make_unique<fem::cards::gchanr>(inp, len);
+            break;
+        case cards::types::GDOBO:
+            res = make_unique<fem::cards::gdobo>(inp, len);
+            break;
         case cards::types::GIORH:
             res = make_unique<fem::cards::giorh>(inp, len);
+            break;
+        case cards::types::GIORHR:
+            res = make_unique<fem::cards::giorhr>(inp, len);
             break;
         case cards::types::GLSEC:
             res = make_unique<fem::cards::glsec>(inp, len);
             break;
+        case cards::types::GLSECR:
+            res = make_unique<fem::cards::glsecr>(inp, len);
+            break;
         case cards::types::GPIPE:
             res = make_unique<fem::cards::gpipe>(inp, len);
+            break;
+        case cards::types::GTONP:
+            res = make_unique<fem::cards::gtonp>(inp, len);
             break;
         case cards::types::GUSYI:
             res = make_unique<fem::cards::gusyi>(inp, len);
@@ -295,5 +322,7 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

@@ -78,12 +78,12 @@ void cards::__base::transno::read(
     set_transno(_form_TRANSNO(inp.at(1)));
 }
 
-cards::__base::card const &cards::__base::transno::operator() (
-    vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
-    this->read(inp, len);
-    return *this;
-}
+// cards::__base::card const &cards::__base::transno::operator() (
+//     vector<std::string> const &inp, size_t const len) {
+//     read(inp, len);
+//     this->read(inp, len);
+//     return *this;
+// }
 
 void cards::__base::transno::reset_transno(void) {
     transno_maxset = 0;
@@ -95,5 +95,5 @@ void cards::__base::transno::reset_transno(void) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make test"
+// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
 // End:

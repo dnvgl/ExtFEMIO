@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   const char  cID[]
+    const char  cID[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #define NOMINMAX
@@ -39,81 +39,84 @@ using namespace dnvgl::extfem;
 using namespace bdf::types;
 
 CATCH_TRANSLATE_EXCEPTION( bdf::errors::error& ex ) {
-   return Catch::toString( ex.what() );
+    return Catch::toString( ex.what() );
 }
 
 namespace {
-   static const long cl1 = 1;
+    static const long cl1 = 1;
 }
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
 
-   entry_type<long> obj_int("d_int");
-   entry_type<double> obj_float("d_float");
-   entry_type<std::list<int> > obj_list("d_dque");
-   entry_type<std::complex<double> > obj_cplx("d_cplx");
+    entry_type<long> obj_int("d_int");
+    entry_type<double> obj_float("d_float");
+    entry_type<std::list<int> > obj_list("d_dque");
+    entry_type<std::complex<double> > obj_cplx("d_cplx");
 
-   SECTION("Checking 'entry_type<long>.type' against 'Int'") {
-      CHECK(entry_type<long>("dummy idiot").type() == bdf_types::Int);
-   }
+    SECTION("Checking 'entry_type<long>.type' against 'Int'") {
+        REQUIRE(entry_type<long>("dummy idiot").type() == bdf_types::Int);
+    }
 
-   SECTION("Checking 'entry_type<long>->type' against 'Int'") {
-      CHECK(obj_int.type() == bdf_types::Int);
-   }
+    SECTION("Checking 'entry_type<long>->type' against 'Int'") {
+        REQUIRE(obj_int.type() == bdf_types::Int);
+    }
 
-   SECTION("Checking 'entry_type<double>.type' against 'Float'") {
-      CHECK(entry_type<double>("dummy float").type() == bdf_types::Float);
-   }
+    SECTION("Checking 'entry_type<double>.type' against 'Float'") {
+        REQUIRE(entry_type<double>("dummy float").type() == bdf_types::Float);
+    }
 
-   SECTION("Checking 'entry_type<double>->type' against 'Float'") {
-      CHECK(obj_float.type() == bdf_types::Float);
-   }
+    SECTION("Checking 'entry_type<double>->type' against 'Float'") {
+        REQUIRE(obj_float.type() == bdf_types::Float);
+    }
 
-   SECTION("Checking 'bdf_list.type' against 'List'") {
-      CHECK(entry_type<std::list<int> >("dummy").type() == bdf_types::List);
-   }
+    SECTION("Checking 'bdf_list.type' against 'List'") {
+        REQUIRE(entry_type<std::list<int> >("dummy").type() == bdf_types::List);
+    }
 
-   SECTION("Checking 'bdf_list->type' against 'List'") {
-      CHECK(obj_list.type() == bdf_types::List);
-   }
+    SECTION("Checking 'bdf_list->type' against 'List'") {
+        REQUIRE(obj_list.type() == bdf_types::List);
+    }
 
-   SECTION("Checking 'bdf_complex->type' against 'Complex'") {
-      CHECK(obj_cplx.type() == bdf_types::Complex);
-   }
+    SECTION("Checking 'bdf_complex->type' against 'Complex'") {
+        REQUIRE(obj_cplx.type() == bdf_types::Complex);
+    }
 
-   SECTION("Comparing 'entry_type<long>' with 'entry_type<double>'") {
-      CHECK(entry_type<long>("dummy int") < entry_type<double>("dummy float"));
-      CHECK(entry_type<double>("dummy float") > entry_type<long>("dummy int"));
-      CHECK(entry_type<long>("dummy int") != entry_type<double>("dummy float"));
-   }
+    SECTION("Comparing 'entry_type<long>' with 'entry_type<double>'") {
+        REQUIRE(
+            entry_type<long>("dummy int") < entry_type<double>("dummy float"));
+        REQUIRE(
+            (entry_type<double>("dummy float") > entry_type<long>("dummy int")));
+        REQUIRE(
+            (entry_type<long>("dummy int") != entry_type<double>("dummy float")));
+    }
 
-   SECTION("Comparing '*entry_type<long>' with '*entry_type<double>'") {
-      CHECK(obj_int < obj_float);
-   }
+    SECTION("Comparing '*entry_type<long>' with '*entry_type<double>'") {
+        REQUIRE(obj_int < obj_float);
+    }
 }
 
 TEST_CASE("Testing bdf entry values.", "[bdf_types]" ) {
 
-   entry_type<long> obj_int("dummy1");
-   entry_type<double> obj_float("dummy2");
-   entry_type<std::list<int> > obj_list("dummy 3");
+    entry_type<long> obj_int("dummy1");
+    entry_type<double> obj_float("dummy2");
+    entry_type<std::list<int> > obj_list("dummy 3");
 
-   entry_value<long> val_int;
-   entry_value<double> val_float;
-   entry_value<std::list<int> > val_list;
+    entry_value<long> val_int;
+    entry_value<double> val_float;
+    entry_value<std::list<int> > val_list;
 
-   SECTION("Simple integer value") {
-      obj_int.set_value(val_int, "3");
-      CHECK((long)val_int == 3);
-   }
+    SECTION("Simple integer value") {
+        obj_int.set_value(val_int, "3");
+        REQUIRE((long)val_int == 3);
+    }
 
-   SECTION("Simple integer value with default") {
-      entry_type<long> obj_int(
-         "dummy1",
-         bdf::type_bounds::bound<long>(nullptr, nullptr, &cl1));
-      obj_int.set_value(val_int, "");
-      CHECK((long)val_int == 1);
-   }
+    SECTION("Simple integer value with default") {
+        entry_type<long> obj_int(
+            "dummy1",
+            bdf::type_bounds::bound<long>(nullptr, nullptr, &cl1));
+        obj_int.set_value(val_int, "");
+        REQUIRE((long)val_int == 1);
+    }
 }
 
 // Local Variables:

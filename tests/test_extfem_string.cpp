@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   const char  cID[]
+    const char  cID[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 // This tells Catch to provide a main() - only do this in one cpp file
@@ -35,37 +35,39 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl;
 
 CATCH_TRANSLATE_EXCEPTION( extfem::bdf::errors::error& ex ) {
-   return Catch::toString( ex.what() );
+    return Catch::toString( ex.what() );
 }
 
 TEST_CASE("Checking extra string functions", "[extfem::string]") {
 
-   SECTION("checking trim functionality") {
-      CHECK(extfem::string::string("   2    ").trim() == "2");
-      CHECK(extfem::string::string("        ").trim() == "");
-      CHECK(extfem::string::string(" \t      ").trim() == "");
-      CHECK(extfem::string::string(" \txxx\t ").trim() == "xxx");
-      CHECK(extfem::string::string(" \tXXX\t ").trim() == "XXX");
-      CHECK(extfem::string::string("ABCDabcd").trim() == "ABCDabcd");
-   }
+    SECTION("checking trim functionality") {
+        std::string res(extfem::string::string("   2    ").trim());
+        CHECK(res == "2");
+        CHECK(extfem::string::string("   2    ").trim() == "2");
+        CHECK(extfem::string::string("        ").trim() == "");
+        CHECK(extfem::string::string(" \t      ").trim() == "");
+        CHECK(extfem::string::string(" \txxx\t ").trim() == "xxx");
+        CHECK(extfem::string::string(" \tXXX\t ").trim() == "XXX");
+        CHECK(extfem::string::string("ABCDabcd").trim() == "ABCDabcd");
+    }
 
-   SECTION("checking lower functionality") {
-      CHECK(extfem::string::string("   2     ").lower() == "   2     ");
-      CHECK(extfem::string::string("         ").lower() == "         ");
-      CHECK(extfem::string::string(" \t      ").lower() == " \t      ");
-      CHECK(extfem::string::string(" \txxx\t ").lower() == " \txxx\t ");
-      CHECK(extfem::string::string(" \tXXX\t ").lower() == " \txxx\t ");
-      CHECK(extfem::string::string("ABCDabcd ").lower() == "abcdabcd ");
-   }
+    SECTION("checking lower functionality") {
+        CHECK(extfem::string::string("   2     ").lower() == "   2     ");
+        CHECK(extfem::string::string("         ").lower() == "         ");
+        CHECK(extfem::string::string(" \t      ").lower() == " \t      ");
+        CHECK(extfem::string::string(" \txxx\t ").lower() == " \txxx\t ");
+        CHECK(extfem::string::string(" \tXXX\t ").lower() == " \txxx\t ");
+        CHECK(extfem::string::string("ABCDabcd ").lower() == "abcdabcd ");
+    }
 
-   SECTION("checking upper functionality") {
-      CHECK(extfem::string::string("   2     ").upper() == "   2     ");
-      CHECK(extfem::string::string("         ").upper() == "         ");
-      CHECK(extfem::string::string(" \t      ").upper() == " \t      ");
-      CHECK(extfem::string::string(" \txxx\t ").upper() == " \tXXX\t ");
-      CHECK(extfem::string::string(" \tXXX\t ").upper() == " \tXXX\t ");
-      CHECK(extfem::string::string("ABCDabcd ").upper() == "ABCDABCD ");
-   }
+    SECTION("checking upper functionality") {
+        CHECK(extfem::string::string("   2     ").upper() == "   2     ");
+        CHECK(extfem::string::string("         ").upper() == "         ");
+        CHECK(extfem::string::string(" \t      ").upper() == " \t      ");
+        CHECK(extfem::string::string(" \txxx\t ").upper() == " \tXXX\t ");
+        CHECK(extfem::string::string(" \tXXX\t ").upper() == " \tXXX\t ");
+        CHECK(extfem::string::string("ABCDabcd ").upper() == "ABCDABCD ");
+    }
 }
 
 // Local Variables:

@@ -68,12 +68,12 @@ gunivec::gunivec(
         __base::transno(TRANSNO),
         UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
-cards::__base::card const &gunivec::operator() (
-    vector<std::string> const &inp, size_t const len) {
-    __base::transno::read(inp, len);
-    this->read(inp, len);
-    return *this;
-}
+// cards::__base::card const &gunivec::operator() (
+//     vector<std::string> const &inp, size_t const len) {
+//     __base::transno::read(inp, len);
+//     this->read(inp, len);
+//     return *this;
+// }
 
 cards::__base::card const &gunivec::operator() (
     long const TRANSNO,

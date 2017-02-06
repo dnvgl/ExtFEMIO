@@ -9,11 +9,11 @@
 
 // ID:
 namespace {
-   char const cID_test_bdf_cards_grav[]
+    char const cID_test_bdf_cards_grav[]
 #ifdef __GNUC__
-   __attribute__ ((__unused__))
+    __attribute__ ((__unused__))
 #endif
-      = "@(#) $Id$";
+        = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -37,92 +37,91 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
 CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+    return ex.what();
 }
 
 CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+    return ex;
 }
 
 TEST_CASE("BDF GRAV definitions. (Small Field Format)", "[bdf_grav]" ) {
 
-   std::list<std::string> data({
-      // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-      "GRAV    1       3       32.2    0.0     0.0     -1.0    0                 \n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   grav probe(lines);
+    std::list<std::string> data({
+            // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+            "GRAV    1       3       32.2    0.0     0.0     -1.0    0                 \n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    grav probe(lines);
 
-   SECTION("first grav") {
-      CHECK((long)probe.SID == 1);
-      CHECK((long)probe.CID == 3);
-      CHECK((double)probe.A == 32.2);
-      CHECK((double)probe.N1 == 0.);
-      CHECK((double)probe.N2 == 0.);
-      CHECK((double)probe.N3 == -1.);
-      CHECK((long)probe.MB == 0);
-   }
+    SECTION("first grav") {
+        REQUIRE((long)probe.SID == 1);
+        REQUIRE((long)probe.CID == 3);
+        REQUIRE((double)probe.A == 32.2);
+        REQUIRE((double)probe.N1 == 0.);
+        REQUIRE((double)probe.N2 == 0.);
+        REQUIRE((double)probe.N3 == -1.);
+        REQUIRE((long)probe.MB == 0);
+    }
 }
 
 TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("reverse") {
-      long const SID(2), CID(6), MB(1);
-      double const A(2.9), N1(0.), N2(1.9), N3(0.);
-      grav const probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
-      test << probe;
-      CHECK(test.str() ==
-            // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-            "GRAV           2       62.900+00 0.00+001.900+00 0.00+00       1\n");
-   }
+    SECTION("reverse") {
+        long const SID(2), CID(6), MB(1);
+        double const A(2.9), N1(0.), N2(1.9), N3(0.);
+        grav const probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+        test << probe;
+        REQUIRE(test.str() ==
+                // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+                "GRAV           2       62.900+00 0.00+001.900+00 0.00+00       1\n");
+    }
 
-   SECTION("reverse part") {
-      long const SID(2), CID(6);
-      double const A(2.9);
-      std::vector<double> const N({0., 1.8, 0.});
-      grav probe(&SID, &CID, &A, &N);
-      test << probe;
-      CHECK(test.str() ==
-            // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-            "GRAV           2       62.900+00 0.00+001.800+00 0.00+00\n");
-   }
+    SECTION("reverse part") {
+        long const SID(2), CID(6);
+        double const A(2.9);
+        std::vector<double> const N({0., 1.8, 0.});
+        grav probe(&SID, &CID, &A, &N);
+        test << probe;
+        REQUIRE(test.str() ==
+                // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+                "GRAV           2       62.900+00 0.00+001.800+00 0.00+00\n");
+    }
 
-   SECTION("failed part") {
-      long const SID(2), CID(6);
-      double const A(2.9);
-      std::vector<double> N({0., 1.8, 0., 4.});
-      CHECK_THROWS(
-         grav probe(&SID, &CID, &A, &N));
-   }
+    SECTION("failed part") {
+        long const SID(2), CID(6);
+        double const A(2.9);
+        std::vector<double> N({0., 1.8, 0., 4.});
+        REQUIRE_THROWS(grav(&SID, &CID, &A, &N));
+    }
 
-   SECTION("reuse") {
-      long SID(1), CID(2), MB(7);
-      double A(3.), N1(4.), N2(5), N3(6.);
-      std::vector<double> N({8., 9., 10.});
-      grav probe;
-      test << probe;
-      test << probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
-      SID++;
-      CID++;
-      A += 4.;
-      test << probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
-      SID++;
-      test << probe(&SID, &CID, &A, &N1, &N2, &N3);
-      SID++;
-      test << probe(&SID, &CID, &A, &N);
-      SID++;
-      test << probe(&SID, &CID, &A, &N, &MB);
-      test << probe;
-      CHECK(test.str() ==
-            "GRAV           1       23.000+004.000+005.000+006.000+00       7\n"
-            "GRAV           2       37.000+004.000+005.000+006.000+00       7\n"
-            "GRAV           3       37.000+004.000+005.000+006.000+00\n"
-            "GRAV           4       37.000+008.000+009.000+001.000+01\n"
-            "GRAV           5       37.000+008.000+009.000+001.000+01       7\n"
-            "GRAV           5       37.000+008.000+009.000+001.000+01       7\n");
-   }
+    SECTION("reuse") {
+        long SID(1), CID(2), MB(7);
+        double A(3.), N1(4.), N2(5), N3(6.);
+        std::vector<double> N({8., 9., 10.});
+        grav probe;
+        test << probe;
+        test << probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+        SID++;
+        CID++;
+        A += 4.;
+        test << probe(&SID, &CID, &A, &N1, &N2, &N3, &MB);
+        SID++;
+        test << probe(&SID, &CID, &A, &N1, &N2, &N3);
+        SID++;
+        test << probe(&SID, &CID, &A, &N);
+        SID++;
+        test << probe(&SID, &CID, &A, &N, &MB);
+        test << probe;
+        REQUIRE(test.str() ==
+                "GRAV           1       23.000+004.000+005.000+006.000+00       7\n"
+                "GRAV           2       37.000+004.000+005.000+006.000+00       7\n"
+                "GRAV           3       37.000+004.000+005.000+006.000+00\n"
+                "GRAV           4       37.000+008.000+009.000+001.000+01\n"
+                "GRAV           5       37.000+008.000+009.000+001.000+01       7\n"
+                "GRAV           5       37.000+008.000+009.000+001.000+01       7\n");
+    }
 
 }
 
