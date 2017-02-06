@@ -68,7 +68,7 @@ TEST_CASE("Split FEM dataset", "[datasets, split]") {
                 "          9.99999978E-03  1.00000001E-01  1.00000000E+00\n",
                 "          1.00000000E+00\n" });
         vector<string> entries;
-        long len = __base::card::card_split(data, data.size(), entries);
+        size_t len = __base::card::card_split(data, data.size(), entries);
         REQUIRE(len == 13);
         REQUIRE(entries == vector<string>({
                     "GCHAN", "  1.00000000E+00", "  1.00000001E-01",
@@ -1342,11 +1342,11 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
                 69,
                 vector<vector<double> >(
                     {vector<double>{1e8, 0., 0., 0., 0., 0.},
-                            vector<double>{0., 0., 0., 0., 0., 0.},
-                                vector<double>{0., 0., 0., 0., 0., 0.},
-                                    vector<double>{0., 0., 0., 0., 0., 0.},
-                                        vector<double>{0., 0., 0., 0., 0., 0.},
-                                            vector<double>{0., 0., 0., 0., 0., 0.}})));
+                     vector<double>{0., 0., 0., 0., 0., 0.},
+                     vector<double>{0., 0., 0., 0., 0., 0.},
+                     vector<double>{0., 0., 0., 0., 0., 0.},
+                     vector<double>{0., 0., 0., 0., 0., 0.},
+                     vector<double>{0., 0., 0., 0., 0., 0.}})));
         cards.push_back(make_unique<gsetmemb>(
                             5, 174, 1, gsetmemb::types::ELEM_SET, gsetmemb::origins::UNDEF_ORIGIN));
         cards.push_back(make_unique<gunivec>(

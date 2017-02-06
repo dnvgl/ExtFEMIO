@@ -119,7 +119,7 @@ TEST_CASE("FEM GCHAN definitions.", "[fem_gchan]" ) {
 #ifdef __GNUC__
             __attribute__ ((__unused__))
 #endif
-            dummy();
+            dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
@@ -145,7 +145,7 @@ TEST_CASE("FEM GCHAN definitions.", "[fem_gchan]" ) {
 #ifdef __GNUC__
             __attribute__ ((__unused__))
 #endif
-            dummy();
+            dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GCHAN     1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",
@@ -180,7 +180,7 @@ TEST_CASE("FEM GCHAN types output.", "[fem_gchan,out]" ) {
     }
 
     SECTION("simple") {
-        gchan probe(1, 2., 3., 4., 5., 6., 7., 8., 9, 10);
+        gchan probe(1, 2., 3., 4., 5., 6., 7., 8, 9, 10);
         test << probe;
         REQUIRE(test.str() ==
                 "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
@@ -189,7 +189,7 @@ TEST_CASE("FEM GCHAN types output.", "[fem_gchan,out]" ) {
     }
 
     SECTION("default NLOB*") {
-        gchan probe(1, 2., 3., 4., 5., 6., 7., 8.);
+        gchan probe(1, 2., 3., 4., 5., 6., 7., 8);
         test << probe;
         REQUIRE(test.str() ==
                 "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"

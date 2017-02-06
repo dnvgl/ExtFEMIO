@@ -53,7 +53,7 @@ fem::types::entry_type<long> const gchan::_form_NLOBY("NLOBY");
 fem::types::entry_type<long> const gchan::_form_NLOBZ("NLOBZ");
 
 gchan::gchan(void) :
-        gchan(-1, 0., 0., 0., 0., 0., 0., 0., 0) {}
+        gchan(-1, 0., 0., 0., 0., 0., 0., 0) {}
 
 gchan::gchan(vector<std::string> const &inp, size_t const len) :
         __base::beam_prop(inp, len, false) {

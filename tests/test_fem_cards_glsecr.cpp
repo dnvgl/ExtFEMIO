@@ -122,7 +122,7 @@ TEST_CASE("FEM GLSECR definitions.", "[fem_glsecr]" ) {
 #ifdef __GNUC__
             __attribute__ ((__unused__))
 #endif
-            dummy();
+            dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSECR  +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
@@ -149,7 +149,7 @@ TEST_CASE("FEM GLSECR definitions.", "[fem_glsecr]" ) {
 #ifdef __GNUC__
             __attribute__ ((__unused__))
 #endif
-            dummy();
+            dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSECR    1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",
@@ -184,7 +184,7 @@ TEST_CASE("FEM GLSECR types output.", "[fem_glsecr,out]" ) {
     }
 
     SECTION("simple") {
-        glsecr probe(1, 2., 3., 4., 5., 6., 7., 8., 9., 10, 11);
+        glsecr probe(1, 2., 3., 4., 5., 6., 7., 8, 9., 10, 11);
         test << probe;
         CHECK(test.str() ==
               "GLSECR  +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
@@ -193,7 +193,7 @@ TEST_CASE("FEM GLSECR types output.", "[fem_glsecr,out]" ) {
     }
 
     SECTION("default NLOB*") {
-        glsecr probe(1, 2., 3., 4., 5., 6., 7., 8., 9.);
+        glsecr probe(1, 2., 3., 4., 5., 6., 7., 8, 9.);
         test << probe;
         CHECK(test.str() ==
               "GLSECR  +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"

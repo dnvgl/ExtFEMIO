@@ -133,7 +133,7 @@ TEST_CASE("FEM GIORHR definitions.", "[fem_giorhr]" ) {
 #ifdef __GNUC__
             __attribute__ ((__unused__))
 #endif
-            dummy();
+            dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GIORHR  +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
@@ -163,7 +163,7 @@ TEST_CASE("FEM GIORHR definitions.", "[fem_giorhr]" ) {
 #ifdef __GNUC__
             __attribute__ ((__unused__))
 #endif
-            dummy();
+            dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GIORHR    1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",

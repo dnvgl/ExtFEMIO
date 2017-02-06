@@ -50,7 +50,7 @@ entry_type<long> const glsecr::_form_NLOBY("NLOBY");
 entry_type<long> const glsecr::_form_NLOBZ("NLOBZ");
 
 glsecr::glsecr(void) :
-        glsecr(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
+        glsecr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
 
 glsecr::glsecr(const vector<std::string> &inp, size_t const len) :
         __base::beam_prop(inp, len, false) {
