@@ -39,19 +39,19 @@ using namespace dnvgl::extfem::fem::cards;
 namespace {
      //  char const initVals[3] = { '+', '*', ',' };
 
-    void const _stderr_report(std::string const &msg) {
+    void _stderr_report(std::string const &msg) {
         cerr << msg << endl;
     }
 
-    void const _stdout_report(std::string const &msg) {
+    void _stdout_report(std::string const &msg) {
         cout << msg << endl;
     }
 }
 
-void const (*cards::note_report)(std::string const &) = &_stdout_report;
-void const (*cards::info_report)(std::string const &) = &_stderr_report;
-void const (*cards::warn_report)(std::string const &) = &_stderr_report;
-void const (*cards::error_report)(std::string const &) = &_stderr_report;
+void (*cards::note_report)(std::string const &) = &_stdout_report;
+void (*cards::info_report)(std::string const &) = &_stderr_report;
+void (*cards::warn_report)(std::string const &) = &_stderr_report;
+void (*cards::error_report)(std::string const &) = &_stderr_report;
 
 unordered_map<std::string, cards::types> const cardtype_map({
         // UNKNOWN,
