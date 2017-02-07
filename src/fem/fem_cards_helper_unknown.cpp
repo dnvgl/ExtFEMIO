@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-   char const cID_fem_cards_helper_unknown[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_fem_cards_helper_unknown[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "fem/cards.h"

@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-    char const cID_fem_cards[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    char const cID_fem_cards[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <limits>
@@ -37,8 +34,6 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
 namespace {
-     //  char const initVals[3] = { '+', '*', ',' };
-
     void _stderr_report(std::string const &msg) {
         cerr << msg << endl;
     }

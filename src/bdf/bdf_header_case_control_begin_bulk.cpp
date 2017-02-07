@@ -5,35 +5,24 @@
    \brief Implementation of the BDF case cotrol "BEGIN BULK" entries.
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_header_case_control_begin_bulk[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_header_case_control_begin_bulk[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/header.h"
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace case_control {
-               begin_bulk::begin_bulk() {};
+using namespace dnvgl::extfem::bdf::header::case_control;
 
-               std::ostream &begin_bulk::put(std::ostream &os) const {
-                  return os << "BEGIN BULK" << std::endl;
-               }
-            }
-         }
-      }
-   }
+begin_bulk::begin_bulk() {}
+
+std::ostream &begin_bulk::put(std::ostream &os) const {
+    return os << "BEGIN BULK" << std::endl;
 }
 
 // Local Variables:

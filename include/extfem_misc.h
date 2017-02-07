@@ -21,6 +21,13 @@
 #define _EXTFEMIO_NOEXCEPT noexcept
 #endif
 
+#ifdef __GNUC__
+#define _EXTFEMIO_UNUSED __attribute__((__unused__))
+#else
+#define _EXTFEMIO_UNUSED
+#endif
+
+
 namespace std {
 
     class not_implemented : public std::exception {

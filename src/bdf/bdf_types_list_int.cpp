@@ -10,14 +10,11 @@
 
 // ID:
 namespace {
-   const char cID_bdf_types_list_int[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_types_list_int[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
-#ifdef __GNUC__
+#ifdef HAVE_BOOST_REGEX_HPP
 #include <boost/regex.hpp>
 #else
 #include <regex>
@@ -26,8 +23,8 @@ namespace {
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
-#ifdef __GNUC__
-using ::boost::regex;
+#ifdef HAVE_BOOST_REGEX_HPP
+using boost::regex;
 #else
 using std::regex;
 #endif

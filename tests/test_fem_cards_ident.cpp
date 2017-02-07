@@ -5,15 +5,14 @@
    \brief Testing input and output for Sesam FEM `IDENT` cards.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -37,106 +36,106 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+CATCH_TRANSLATE_EXCEPTION(exception &ex) {
+    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
+    return ex;
 }
 
-TEST_CASE("FEM IDENT definitions.", "[fem_ident]" ) {
+TEST_CASE("FEM IDENT definitions.", "[fem_ident]") {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("IDENT (1)") {
-      vector<std::string> data({
-         "IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      ident probe(lines, len);
+    SECTION("IDENT (1)") {
+        vector<std::string> data({
+            "IDENT    1.00000000e+000 1.00000000e+000 3.00000000e+000 0.00000000e+000\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        ident probe(lines, len);
 
-      CHECK(probe.SLEVEL == 1);
-      CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
-   }
+        CHECK(probe.SLEVEL == 1);
+        CHECK(probe.SELTYP == 1);
+        CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
+    }
 
-   SECTION("IDENT (2)") {
-      vector<std::string> data({
-         "IDENT   +1.00000000e+000+1.00000000e+000+3.00000000e+000+0.00000000e+000\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      ident probe(lines, len);
+    SECTION("IDENT (2)") {
+        vector<std::string> data({
+            "IDENT   +1.00000000e+000+1.00000000e+000+3.00000000e+000+0.00000000e+000\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        ident probe(lines, len);
 
-      CHECK(probe.SLEVEL == 1);
-      CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
-   }
+        CHECK(probe.SLEVEL == 1);
+        CHECK(probe.SELTYP == 1);
+        CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
+    }
 
-   SECTION("IDENT (3)") {
-      vector<std::string> data({
-         "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00 0.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      ident probe(lines, len);
+    SECTION("IDENT (3)") {
+        vector<std::string> data({
+            "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00 0.000000000e+00\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        ident probe(lines, len);
 
-      CHECK(probe.SLEVEL == 1);
-      CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
-   }
+        CHECK(probe.SLEVEL == 1);
+        CHECK(probe.SELTYP == 1);
+        CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
+    }
 
-   SECTION("IDENT (4)") {
-      vector<std::string> data({
-         "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      ident probe(lines, len);
+    SECTION("IDENT (4)") {
+        vector<std::string> data({
+            "IDENT    1.000000000e+00 1.000000000e+00 3.000000000e+00\n"});
+        len = __base::card::card_split(data, data.size(), lines);
+        ident probe(lines, len);
 
-      CHECK(probe.SLEVEL == 1);
-      CHECK(probe.SELTYP == 1);
-      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
-   }
+        CHECK(probe.SLEVEL == 1);
+        CHECK(probe.SELTYP == 1);
+        CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
+    }
 }
 
-TEST_CASE("FEM IDENT types output.", "[fem_ident,out]" ) {
+TEST_CASE("FEM IDENT types output.", "[fem_ident,out]") {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("empty") {
-      ident probe;
-      test << probe;
-      CHECK(test.str() == "");
-   }
+    SECTION("empty") {
+        ident probe;
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
-   SECTION("const") {
-      ident probe(1, 2, ident::mod_type::DIM_3D);
-      test << probe;
-      CHECK(test.str() ==
-            "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
-   }
+    SECTION("const") {
+        ident probe(1, 2, ident::mod_type::DIM_3D);
+        test << probe;
+        CHECK(test.str() ==
+              "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
+    }
 
-   SECTION("simple") {
-      long SLEVEL(1), SELTYP(2);
-      ident::mod_type SELMOD(ident::mod_type::DIM_3D);
-      ident probe(SLEVEL, SELTYP, SELMOD);
-      test << probe;
-      CHECK(test.str() ==
-            "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
-   }
+    SECTION("simple") {
+        long SLEVEL(1), SELTYP(2);
+        ident::mod_type SELMOD(ident::mod_type::DIM_3D);
+        ident probe(SLEVEL, SELTYP, SELMOD);
+        test << probe;
+        CHECK(test.str() ==
+              "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
+    }
 }
 
 TEST_CASE("FEM IDENT conversion from own output.", "[fem_ident,in/out]") {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("IDENT (1)") {
-      vector<std::string> data({
+    SECTION("IDENT (1)") {
+        vector<std::string> data({
             "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      ident probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        ident probe(lines, len);
 
-      CHECK(probe.SLEVEL == 1);
-      CHECK(probe.SELTYP == 2);
-      CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
-   }
+        CHECK(probe.SLEVEL == 1);
+        CHECK(probe.SELTYP == 2);
+        CHECK(probe.SELMOD == ident::mod_type::DIM_3D);
+    }
 }
 
 // Local Variables:

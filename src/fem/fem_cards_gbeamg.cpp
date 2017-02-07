@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-    const char cID_fem_cards_gbeamg[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID_fem_cards_gbeamg[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <memory>

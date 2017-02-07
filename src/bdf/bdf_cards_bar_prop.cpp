@@ -7,14 +7,12 @@
    Detailed description
 */
 #include "StdAfx.h"
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char cID_bdf_cards_bar_prop[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+   const char cID_bdf_cards_bar_prop[] _EXTFEMIO_UNUSED =
+       "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
@@ -32,29 +30,23 @@ namespace {
    static const long cl1 = 1;
 }
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
+using namespace dnvgl::extfem::bdf;
 
-         using types::entry_type;
-         using namespace type_bounds;
+using types::entry_type;
+using namespace type_bounds;
 
-         namespace cards {
-            namespace __base {
-               const entry_type<long> bar_prop::form_PID(
-                  "PID", bound<long>(&cl1));
-               const entry_type<long> bar_prop::form_MID(
-                  "MID", bound<long>(&cl1, nullptr, nullptr, true));
+using namespace dnvgl::extfem::bdf::cards::__base;
 
-               bar_prop::bar_prop(const std::list<std::string> &inp) :
-                  card(inp) {}
+const entry_type<long> bar_prop::form_PID("PID", bound<long>(&cl1));
+const entry_type<long> bar_prop::form_MID("MID", bound<long>(
+    &cl1, nullptr, nullptr, true));
 
-               const dnvgl::extfem::bdf::cards::types
-               bar_prop::card_type(void) const { return types::BAR_PROP; }
-            }
-         }
-      }
-   }
+bar_prop::bar_prop(const std::list<std::string> &inp) :
+card(inp) {}
+
+const dnvgl::extfem::bdf::cards::types
+bar_prop::card_type(void) const {
+    return types::BAR_PROP;
 }
 
 // Local Variables:

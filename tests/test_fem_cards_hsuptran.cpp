@@ -5,15 +5,14 @@
    \brief Testing the FEM `HSUPTRAN` class.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -38,156 +37,156 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+CATCH_TRANSLATE_EXCEPTION(exception &ex) {
+    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
+    return ex;
 }
 
-TEST_CASE("FEM HSUPTRAN definitions. (Small Field Format)", "[fem_hsuptran]" ) {
-   vector<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00\n",
-         "          0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n",
-         "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
-         "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
-         "          0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
-   vector<std::string> lines;
-   size_t len = __base::card::card_split(data, data.size(), lines);
-   hsuptran probe(lines, len);
+TEST_CASE("FEM HSUPTRAN definitions. (Small Field Format)", "[fem_hsuptran]") {
+    vector<std::string> data({
+        // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+        "HSUPTRAN  1.80000000E+01  2.00000000E+00  1.00000000E+00  0.00000000E+00\n",
+        "          0.00000000E+00  0.00000000E+00  0.00000000E+00  1.00000000E+00\n",
+        "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
+        "          1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
+        "          0.00000000E+00  1.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
+    vector<std::string> lines;
+    size_t len = __base::card::card_split(data, data.size(), lines);
+    hsuptran probe(lines, len);
 
-   SECTION("first moment") {
+    SECTION("first moment") {
 
-      CHECK(probe.NFIELD == 18);
-      CHECK(probe.ITREF == 2);
-      CHECK(probe.T[0][0] == 1.);
-      CHECK(probe.T[1][0] == 0.);
-      CHECK(probe.T[2][0] == 0.);
-      CHECK(probe.T[3][0] == 0.);
-      CHECK(probe.T[0][1] == 0.);
-      CHECK(probe.T[1][1] == 1.);
-      CHECK(probe.T[2][1] == 0.);
-      CHECK(probe.T[3][1] == 0.);
-      CHECK(probe.T[0][2] == 0.);
-      CHECK(probe.T[1][2] == 0.);
-      CHECK(probe.T[2][2] == 1.);
-      CHECK(probe.T[3][2] == 0.);
-      CHECK(probe.T[0][3] == 0.);
-      CHECK(probe.T[1][3] == 0.);
-      CHECK(probe.T[2][3] == 0.);
-      CHECK(probe.T[3][3] == 1.);
-   }
+        CHECK(probe.NFIELD == 18);
+        CHECK(probe.ITREF == 2);
+        CHECK(probe.T[0][0] == 1.);
+        CHECK(probe.T[1][0] == 0.);
+        CHECK(probe.T[2][0] == 0.);
+        CHECK(probe.T[3][0] == 0.);
+        CHECK(probe.T[0][1] == 0.);
+        CHECK(probe.T[1][1] == 1.);
+        CHECK(probe.T[2][1] == 0.);
+        CHECK(probe.T[3][1] == 0.);
+        CHECK(probe.T[0][2] == 0.);
+        CHECK(probe.T[1][2] == 0.);
+        CHECK(probe.T[2][2] == 1.);
+        CHECK(probe.T[3][2] == 0.);
+        CHECK(probe.T[0][3] == 0.);
+        CHECK(probe.T[1][3] == 0.);
+        CHECK(probe.T[2][3] == 0.);
+        CHECK(probe.T[3][3] == 1.);
+    }
 }
 
-TEST_CASE("FEM HSUPTRAN types output.", "[fem_hsuptran,out]" ) {
-   std::ostringstream test;
+TEST_CASE("FEM HSUPTRAN types output.", "[fem_hsuptran,out]") {
+    std::ostringstream test;
 
-   long NFIELD(1);
-   long ITREF(2);
-   double T11(11.);
-   double T21(21.);
-   double T31(31.);
-   double T41(0.);
-   double T12(12.);
-   double T22(22.);
-   double T32(32.);
-   double T42(0.);
-   double T13(13.);
-   double T23(33.);
-   double T33(33.);
-   double T43(0.);
-   double T14(14.);
-   double T24(24.);
-   double T34(34.);
-   double T44(1.);
+    long NFIELD(1);
+    long ITREF(2);
+    double T11(11.);
+    double T21(21.);
+    double T31(31.);
+    double T41(0.);
+    double T12(12.);
+    double T22(22.);
+    double T32(32.);
+    double T42(0.);
+    double T13(13.);
+    double T23(33.);
+    double T33(33.);
+    double T43(0.);
+    double T14(14.);
+    double T24(24.);
+    double T34(34.);
+    double T44(1.);
 
-   std::string ref(
-      "HSUPTRAN+1.000000000e+00+2.000000000e+00+1.100000000e+01+2.100000000e+01\n"
-      "        +3.100000000e+01+0.000000000e+00+1.200000000e+01+2.200000000e+01\n"
-      "        +3.200000000e+01+0.000000000e+00+1.300000000e+01+3.300000000e+01\n"
-      "        +3.300000000e+01+0.000000000e+00+1.400000000e+01+2.400000000e+01\n"
-      "        +3.400000000e+01+1.000000000e+00\n");
+    std::string ref(
+        "HSUPTRAN+1.000000000e+00+2.000000000e+00+1.100000000e+01+2.100000000e+01\n"
+        "        +3.100000000e+01+0.000000000e+00+1.200000000e+01+2.200000000e+01\n"
+        "        +3.200000000e+01+0.000000000e+00+1.300000000e+01+3.300000000e+01\n"
+        "        +3.300000000e+01+0.000000000e+00+1.400000000e+01+2.400000000e+01\n"
+        "        +3.400000000e+01+1.000000000e+00\n");
 
-   SECTION("write (empty)") {
-      hsuptran probe;
+    SECTION("write (empty)") {
+        hsuptran probe;
 
-      test << probe;
-      CHECK(test.str() == "");
-   }
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
 
-      SECTION("write (const)") {
-         hsuptran probe(1, 2,
-                        11., 21., 31., 0.,
-                        12., 22., 32., 0.,
-                        13., 33., 33., 0.,
-                        14., 24., 34., 1.);
+    SECTION("write (const)") {
+        hsuptran probe(1, 2,
+                       11., 21., 31., 0.,
+                       12., 22., 32., 0.,
+                       13., 33., 33., 0.,
+                       14., 24., 34., 1.);
 
-      test << probe;
-      CHECK(test.str() == ref);
-   }
+        test << probe;
+        CHECK(test.str() == ref);
+    }
 
-SECTION("write (1)") {
-      hsuptran probe(NFIELD, ITREF,
-                     T11, T21, T31, T41,
-                     T12, T22, T32, T42,
-                     T13, T23, T33, T43,
-                     T14, T24, T34, T44);
+    SECTION("write (1)") {
+        hsuptran probe(NFIELD, ITREF,
+                       T11, T21, T31, T41,
+                       T12, T22, T32, T42,
+                       T13, T23, T33, T43,
+                       T14, T24, T34, T44);
 
-      test << probe;
-      CHECK(test.str() == ref);
-   }
+        test << probe;
+        CHECK(test.str() == ref);
+    }
 
-   SECTION("write (2)") {
-      double T[][4] = {{T11, T21, T31, T41},
-                       {T12, T22, T32, T42},
-                       {T13, T23, T33, T43},
-                       {T14, T24, T34, T44}};
-      hsuptran probe(NFIELD, ITREF, T);
+    SECTION("write (2)") {
+        double T[][4] = {{T11, T21, T31, T41},
+        {T12, T22, T32, T42},
+        {T13, T23, T33, T43},
+        {T14, T24, T34, T44}};
+        hsuptran probe(NFIELD, ITREF, T);
 
-      test << probe;
-      CHECK(test.str() == ref);
-   }
+        test << probe;
+        CHECK(test.str() == ref);
+    }
 }
 
 TEST_CASE("FEM HSUPTRAN conversion from own output.", "[fem_hsuptran,in/out]") {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("HSUPTRAN") {
+    SECTION("HSUPTRAN") {
 
-      vector<std::string> data({
+        vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "HSUPTRAN+1.000000000e+00+2.000000000e+00+1.100000000e+01+2.100000000e+01\n",
             "        +3.100000000e+01+0.000000000e+00+1.200000000e+01+2.200000000e+01\n",
             "        +3.200000000e+01+0.000000000e+00+1.300000000e+01+3.300000000e+01\n",
             "        +3.300000000e+01+0.000000000e+00+1.400000000e+01+2.400000000e+01\n",
             "        +3.400000000e+01+1.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      hsuptran probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        hsuptran probe(lines, len);
 
-      CHECK(probe.NFIELD == 1);
-      CHECK(probe.ITREF == 2);
-      CHECK(probe.T[0][0] == 11.);
-      CHECK(probe.T[1][0] == 12.);
-      CHECK(probe.T[2][0] == 13.);
-      CHECK(probe.T[3][0] == 14.);
-      CHECK(probe.T[0][1] == 21.);
-      CHECK(probe.T[1][1] == 22.);
-      CHECK(probe.T[2][1] == 33.);
-      CHECK(probe.T[3][1] == 24.);
-      CHECK(probe.T[0][2] == 31.);
-      CHECK(probe.T[1][2] == 32.);
-      CHECK(probe.T[2][2] == 33.);
-      CHECK(probe.T[3][2] == 34.);
-      CHECK(probe.T[0][3] == 0.);
-      CHECK(probe.T[1][3] == 0.);
-      CHECK(probe.T[2][3] == 0.);
-      CHECK(probe.T[3][3] == 1.);
-   }
+        CHECK(probe.NFIELD == 1);
+        CHECK(probe.ITREF == 2);
+        CHECK(probe.T[0][0] == 11.);
+        CHECK(probe.T[1][0] == 12.);
+        CHECK(probe.T[2][0] == 13.);
+        CHECK(probe.T[3][0] == 14.);
+        CHECK(probe.T[0][1] == 21.);
+        CHECK(probe.T[1][1] == 22.);
+        CHECK(probe.T[2][1] == 33.);
+        CHECK(probe.T[3][1] == 24.);
+        CHECK(probe.T[0][2] == 31.);
+        CHECK(probe.T[1][2] == 32.);
+        CHECK(probe.T[2][2] == 33.);
+        CHECK(probe.T[3][2] == 34.);
+        CHECK(probe.T[0][3] == 0.);
+        CHECK(probe.T[1][3] == 0.);
+        CHECK(probe.T[2][3] == 0.);
+        CHECK(probe.T[3][3] == 1.);
+    }
 }
 
 // Local Variables:

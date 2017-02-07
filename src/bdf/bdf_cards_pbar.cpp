@@ -5,16 +5,13 @@
    \brief Definitions for Nastran BDF PBAR cards.
 
    Detailed description
-*/
+   */
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   char const cID_bdf_cards_pbar[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_bdf_cards_pbar[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <cstdlib>
@@ -30,154 +27,150 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   double static const cd0 = 0.;
+    double static const cd0 = 0.;
 }
 
-namespace dnvgl {
-   namespace extfem  {
-      namespace bdf  {
-         namespace cards {
-            using dnvgl::extfem::bdf::types::entry_type;;
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
+using dnvgl::extfem::bdf::types::entry_type;;
 
-            entry_type<double> const pbar::form_A(
-               "A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_I1(
-               "I1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_I2(
-               "I2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_J(
-               "J", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_NSM(
-               "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_C1(
-               "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_C2(
-               "C2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_D1(
-               "D1", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_D2(
-               "D2", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_E1(
-               "E1", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_E2(
-               "E2", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_F1(
-               "F1", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_F2(
-               "F2", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, &cd0));
-            entry_type<double> const pbar::form_K1(
-               "K1", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, nullptr, true));
-            entry_type<double> const pbar::form_K2(
-               "K2", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, nullptr, true));
-            entry_type<double> const pbar::form_I12(
-               "I12", bdf::type_bounds::bound<double>(
-                  nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_A(
+    "A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_I1(
+    "I1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_I2(
+    "I2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_J(
+    "J", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_NSM(
+    "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_C1(
+    "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_C2(
+    "C2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_D1(
+    "D1", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_D2(
+    "D2", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_E1(
+    "E1", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_E2(
+    "E2", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_F1(
+    "F1", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_F2(
+    "F2", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, &cd0));
+entry_type<double> const pbar::form_K1(
+    "K1", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, nullptr, true));
+entry_type<double> const pbar::form_K2(
+    "K2", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, nullptr, true));
+entry_type<double> const pbar::form_I12(
+    "I12", bdf::type_bounds::bound<double>(
+    nullptr, nullptr, &cd0));
 
-            pbar::pbar(std::list<std::string> const &inp) :
-               bar_prop(inp) {
-               this->read(inp);
-            }
+pbar::pbar(std::list<std::string> const &inp) :
+bar_prop(inp) {
+    this->read(inp);
+}
 
-            void pbar::read(std::list<std::string> const &inp) {
+void pbar::read(std::list<std::string> const &inp) {
 
-               auto pos = inp.rbegin();
+    auto pos = inp.rbegin();
 
-               form_A.set_value(A, "");
-               form_I1.set_value(I1, "");
-               form_I2.set_value(I2, "");
-               form_J.set_value(J, "");
-               form_NSM.set_value(NSM, "");
-               form_C1.set_value(C1, "");
-               form_C2.set_value(C2, "");
-               form_D1.set_value(D1, "");
-               form_D2.set_value(D2, "");
-               form_E1.set_value(E1, "");
-               form_E2.set_value(E2, "");
-               form_F1.set_value(F1, "");
-               form_F2.set_value(F2, "");
-               form_K1.set_value(K1, "");
-               form_K2.set_value(K2, "");
-               form_I12.set_value(I12, "");
+    form_A.set_value(A, "");
+    form_I1.set_value(I1, "");
+    form_I2.set_value(I2, "");
+    form_J.set_value(J, "");
+    form_NSM.set_value(NSM, "");
+    form_C1.set_value(C1, "");
+    form_C2.set_value(C2, "");
+    form_D1.set_value(D1, "");
+    form_D2.set_value(D2, "");
+    form_E1.set_value(E1, "");
+    form_E2.set_value(E2, "");
+    form_F1.set_value(F1, "");
+    form_F2.set_value(F2, "");
+    form_K1.set_value(K1, "");
+    form_K2.set_value(K2, "");
+    form_I12.set_value(I12, "");
 
-               switch (inp.size()-1) {
-               case 24:
-                  ++pos;
-               case 23:
-                  ++pos;
-               case 22:
-                  ++pos;
-               case 21:
-                  ++pos;
-               case 20:
-                  ++pos;
-               case 19:
-                  form_I12.set_value(I12, *(pos++));
-               case 18:
-                  form_K2.set_value(K2, *(pos++));
-               case 17:
-                  form_K1.set_value(K1, *(pos++));
-               case 16:
-                  form_F2.set_value(F2, *(pos++));
-               case 15:
-                  form_F1.set_value(F1, *(pos++));
-               case 14:
-                  form_E2.set_value(E2, *(pos++));
-               case 13:
-                  form_E1.set_value(E1, *(pos++));
-               case 12:
-                  form_D2.set_value(D2, *(pos++));
-               case 11:
-                  form_D1.set_value(D1, *(pos++));
-               case 10:
-                  form_C2.set_value(C2, *(pos++));
-               case 9:
-                  form_C1.set_value(C1, *(pos++));
-               case 8:
-                  ++pos;
-               case 7:
-                  form_NSM.set_value(NSM, *(pos++));
-               case 6:
-                  form_J.set_value(J, *(pos++));
-               case 5:
-                  form_I2.set_value(I2, *(pos++));
-               case 4:
-                  form_I1.set_value(I1, *(pos++));
-               case 3:
-                  form_A.set_value(A, *(pos++));
-               case 2:
-                  form_MID.set_value(MID, *(pos++));
-                  form_PID.set_value(PID, *(pos));
-                  break;
-               default:
-                  throw errors::parse_error(
-                     "PBAR.", "Illegal number of entries.");
-               }
+    switch (inp.size() - 1) {
+    case 24:
+        ++pos;
+    case 23:
+        ++pos;
+    case 22:
+        ++pos;
+    case 21:
+        ++pos;
+    case 20:
+        ++pos;
+    case 19:
+        form_I12.set_value(I12, *(pos++));
+    case 18:
+        form_K2.set_value(K2, *(pos++));
+    case 17:
+        form_K1.set_value(K1, *(pos++));
+    case 16:
+        form_F2.set_value(F2, *(pos++));
+    case 15:
+        form_F1.set_value(F1, *(pos++));
+    case 14:
+        form_E2.set_value(E2, *(pos++));
+    case 13:
+        form_E1.set_value(E1, *(pos++));
+    case 12:
+        form_D2.set_value(D2, *(pos++));
+    case 11:
+        form_D1.set_value(D1, *(pos++));
+    case 10:
+        form_C2.set_value(C2, *(pos++));
+    case 9:
+        form_C1.set_value(C1, *(pos++));
+    case 8:
+        ++pos;
+    case 7:
+        form_NSM.set_value(NSM, *(pos++));
+    case 6:
+        form_J.set_value(J, *(pos++));
+    case 5:
+        form_I2.set_value(I2, *(pos++));
+    case 4:
+        form_I1.set_value(I1, *(pos++));
+    case 3:
+        form_A.set_value(A, *(pos++));
+    case 2:
+        form_MID.set_value(MID, *(pos++));
+        form_PID.set_value(PID, *(pos));
+        break;
+    default:
+        throw errors::parse_error(
+            "PBAR.", "Illegal number of entries.");
+    }
 
-               if (!J.is_value) {
-                  J.is_value = true;
-                  J.value = (I1.value + I2.value) / 2.;
-               }
-            }
+    if (!J.is_value) {
+        J.is_value = true;
+        J.value = (I1.value + I2.value) / 2.;
+    }
+}
 
-            dnvgl::extfem::bdf::cards::types const
-            pbar::card_type(void) const { return types::PBAR; };
+dnvgl::extfem::bdf::cards::types const
+pbar::card_type(void) const {
+    return types::PBAR;
+};
 
-            void pbar::collect_outdata(
-               std::list<std::unique_ptr<format_entry> > &res) const {
-               throw errors::error("PBAR", "can't write PBAR.");
-               return;
-            }
-         }
-      }
-   }
+void pbar::collect_outdata(
+    std::list<std::unique_ptr<format_entry> > &res) const {
+    throw errors::error("PBAR", "can't write PBAR.");
+    return;
 }
 
 // Local Variables:

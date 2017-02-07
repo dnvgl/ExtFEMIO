@@ -5,17 +5,14 @@
    \brief Processing Sesam FEM `BEUSLO` cards.
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-    const char cID_fem_cards_beuslo[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID_fem_cards_beuslo[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <memory>
@@ -58,7 +55,7 @@ beuslo::beuslo(vector<std::string> const &inp, size_t const len) {
 void beuslo::read(vector<std::string> const &inp, size_t const len) {
     if (len < 10)
         throw errors::parse_error(
-            "BEUSLO", "Illegal number of entries.");
+        "BEUSLO", "Illegal number of entries.");
 
     LLC = _form_LLC(inp.at(1));
     LOTYP = _form_LOTYP(inp.at(2));
@@ -76,50 +73,50 @@ void beuslo::read(vector<std::string> const &inp, size_t const len) {
 }
 
 beuslo::beuslo() :
-        beuslo(-1, 0, 0, 0, 0, 0, 0, 0, {}, {}) {}
+beuslo(-1, 0, 0, 0, 0, 0, 0, 0, {}, {}) {}
 
 beuslo::beuslo(
     long const LLC, long const LOTYP, bool const COMPLX, long const LAYER,
     long const ELNO, long const NDOF, long const INTNO, long const SIDE,
     const vector<double> &RLOAD, const vector<double> &ILOAD) :
-        card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
-        LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
-        SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
+    card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
+    LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
+    SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
     if (!this->COMPLX && this->ILOADi.size() > 0)
         throw dnvgl::extfem::fem::errors::usage_error(
-            "BEUSLO", "ILOAD data given with COMPLX == false");
+        "BEUSLO", "ILOAD data given with COMPLX == false");
     else if (this->COMPLX  && this->ILOADi.size() == 0)
         throw dnvgl::extfem::fem::errors::usage_error(
-            "BEUSLO", "no ILOAD data given with COMPLX == True");
+        "BEUSLO", "no ILOAD data given with COMPLX == True");
     if (this->RLOADi.size() != (size_t)this->NDOF)
         throw dnvgl::extfem::fem::errors::usage_error(
-            "BEUSLO", "RLOAD not of size NDOF");
+        "BEUSLO", "RLOAD not of size NDOF");
     if (this->ILOADi.size() > 0 &&
         this->ILOADi.size() != (size_t)this->NDOF)
         throw dnvgl::extfem::fem::errors::usage_error(
-            "BEUSLO", "ILOAD not of size NDOF");
+        "BEUSLO", "ILOAD not of size NDOF");
 }
 
 beuslo::beuslo(
     long const LLC, long const LOTYP, bool const COMPLX, long const LAYER,
     long const ELNO, long const INTNO, long const SIDE,
     const vector<double> &RLOAD, const vector<double> &ILOAD) :
-        beuslo(LLC, LOTYP, COMPLX, LAYER, ELNO, static_cast<long>(RLOAD.size()),
-               INTNO, SIDE, RLOAD, ILOAD) {}
+    beuslo(LLC, LOTYP, COMPLX, LAYER, ELNO, static_cast<long>(RLOAD.size()),
+    INTNO, SIDE, RLOAD, ILOAD) {}
 
 beuslo::beuslo(
     long const LLC, long const LOTYP, long const LAYER, long const ELNO,
     long const NDOF, long const INTNO, long const SIDE,
     const vector<double> &RLOAD, const vector<double> &ILOAD) :
-        beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, NDOF, INTNO,
-               SIDE, RLOAD, ILOAD) {}
+    beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO, NDOF, INTNO,
+    SIDE, RLOAD, ILOAD) {}
 
 beuslo::beuslo(
     long const LLC, long const LOTYP, long const LAYER, long const ELNO,
     long const INTNO, long const SIDE, const vector<double> &RLOAD,
     const vector<double> &ILOAD) :
-        beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO,
-               static_cast<long>(RLOAD.size()), INTNO, SIDE, RLOAD, ILOAD) {}
+    beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO,
+    static_cast<long>(RLOAD.size()), INTNO, SIDE, RLOAD, ILOAD) {}
 
 fem::cards::types const beuslo::card_type(void) const {
     return types::BEUSLO;
@@ -128,17 +125,17 @@ fem::cards::types const beuslo::card_type(void) const {
 ostream &beuslo::put(ostream &os) const {
     if (LLC == -1) return os;
     os << beuslo::head.format()
-       << _form_LLC.format(LLC) << _form_LOTYP.format(LOTYP)
-       << _form_COMPLX.format(COMPLX) << _form_LAYER.format(LAYER) << endl
-       << dnvgl::extfem::fem::types::card().format()
-       << _form_ELNO.format(ELNO) << _form_NDOF.format(NDOF)
-       << _form_INTNO.format(INTNO) << _form_SIDE.format(SIDE) << endl
-       << dnvgl::extfem::fem::types::card().format();
+        << _form_LLC.format(LLC) << _form_LOTYP.format(LOTYP)
+        << _form_COMPLX.format(COMPLX) << _form_LAYER.format(LAYER) << endl
+        << dnvgl::extfem::fem::types::card().format()
+        << _form_ELNO.format(ELNO) << _form_NDOF.format(NDOF)
+        << _form_INTNO.format(INTNO) << _form_SIDE.format(SIDE) << endl
+        << dnvgl::extfem::fem::types::card().format();
     size_t num{0};
-    for (int i{0}; i<NDOF; i++) {
+    for (int i{0}; i < NDOF; i++) {
         if (!(num++ % 4) && num != 1)
             os << endl
-               << dnvgl::extfem::fem::types::card().format();
+            << dnvgl::extfem::fem::types::card().format();
         os << _form_RLOAD.format(RLOADi.at(i));
     }
     if (COMPLX) {

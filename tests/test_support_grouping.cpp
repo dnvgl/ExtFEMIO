@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   char const cID_test_support_grouping[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_test_support_grouping[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -39,8 +38,8 @@ using namespace std;
 using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex() );
+CATCH_TRANSLATE_EXCEPTION(exception &ex) {
+   return Catch::toString( ex.what() );
 }
 
 TEST_CASE("Process Grouping information.", "[support_grouping]") {

@@ -11,10 +11,7 @@
 
 // ID:
 namespace {
-    const char cID_fem_cards_gelmnt2[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
+    const char cID_fem_cards_gelmnt2[] _EXTFEMIO_UNUSED
         = "@(#) $Id$";
 }
 

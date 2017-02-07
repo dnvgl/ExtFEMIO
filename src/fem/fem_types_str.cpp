@@ -13,11 +13,8 @@
 
 // ID:
 namespace {
-    const char cID_fem_types_str[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID_fem_types_str[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <sstream>

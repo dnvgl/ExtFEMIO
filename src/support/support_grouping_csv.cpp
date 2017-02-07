@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-   char const cID_support_grouping_csv[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_support_grouping_csv[] _EXTFEMIO_UNUSED = 
+        "@(#) $Id$";
 }
 
 #include <vector>

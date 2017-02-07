@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-    char const cID_fem_cards_bsell[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    char const cID_fem_cards_bsell[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <memory>

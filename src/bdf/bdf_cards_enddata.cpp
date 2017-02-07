@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-   const char cID_bdf_cards_enddata[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_cards_enddata[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
@@ -29,33 +26,26 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace cards {
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf::cards;
 
-            enddata::enddata(std::list<std::string> const &inp) :
-               __base::card(inp) {}
+enddata::enddata(std::list<std::string> const &inp) :
+__base::card(inp) {}
 
-            enddata::enddata(void) : __base::card() {}
+enddata::enddata(void) : __base::card() {}
 
-            const types enddata::card_type(void) const {
-               return types::ENDDATA;
-            }
+const types enddata::card_type(void) const {
+    return types::ENDDATA;
+}
 
-            void enddata::read(std::list<std::string> const &inp) {
-            }
+void enddata::read(std::list<std::string> const &inp) {}
 
-            bdf::types::card enddata::head = bdf::types::card("ENDDATA");
+bdf::types::card enddata::head = bdf::types::card("ENDDATA");
 
-            void enddata::collect_outdata(
-               std::list<std::unique_ptr<format_entry> > &res) const {
-               res.push_back(format(enddata::head));
-               return;
-            }
-         }
-      }
-   }
+void enddata::collect_outdata(
+    std::list<std::unique_ptr<format_entry> > &res) const {
+    res.push_back(format(enddata::head));
+    return;
 }
 
 // Local Variables:

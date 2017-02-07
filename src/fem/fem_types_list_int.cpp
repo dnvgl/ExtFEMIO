@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-   const char cID_fem_types_list_int[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_fem_types_list_int[]_EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #ifdef __GNUC__

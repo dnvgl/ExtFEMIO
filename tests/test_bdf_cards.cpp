@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-    char const cID_test_bdf_cards[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    char const cID_test_bdf_cards[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -40,11 +39,13 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 using namespace dnvgl::extfem::bdf::input;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
+CATCH_TRANSLATE_EXCEPTION(exception &ex) {
     return Catch::toString( ex.what() );
 }
 

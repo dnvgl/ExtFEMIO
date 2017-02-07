@@ -5,15 +5,14 @@
    \brief Testing BDF header ECHO entry
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -39,80 +38,80 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
+    return Catch::toString(ex.what());
 }
 
 TEST_CASE("Testing cdni_entry", "bdf_header,echo,cdni_entry") {
 
-   SECTION("first") {
-      case_control::echo::sort::cdni_entry probe("ABC");
-      CHECK(probe.str() == "ABC");
-   }
+    SECTION("first") {
+        case_control::echo::sort::cdni_entry probe("ABC");
+        CHECK(probe.str() == "ABC");
+    }
 
-   SECTION("pointer") {
-      case_control::echo::sort::cdni_entry* probe;
-      probe = new case_control::echo::sort::cdni_entry("ABC");
-      CHECK(probe->str() == "ABC");
-      delete probe;
-   }
+    SECTION("pointer") {
+        case_control::echo::sort::cdni_entry* probe;
+        probe = new case_control::echo::sort::cdni_entry("ABC");
+        CHECK(probe->str() == "ABC");
+        delete probe;
+    }
 
-   SECTION("except") {
-      case_control::echo::sort::cdni_entry probe("ABC", true);
-      CHECK(probe.str() == "EXCEPT ABC");
-   }
+    SECTION("except") {
+        case_control::echo::sort::cdni_entry probe("ABC", true);
+        CHECK(probe.str() == "EXCEPT ABC");
+    }
 }
 
 TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("ECHO = NONE") {
-      case_control::echo probe({new case_control::echo::none});
-      test << probe;
-      CHECK(test.str() == "ECHO = NONE\n");
-   }
+    SECTION("ECHO = NONE") {
+        case_control::echo probe({new case_control::echo::none});
+        test << probe;
+        CHECK(test.str() == "ECHO = NONE\n");
+    }
 
-   SECTION("ECHO=NOSORT") {
-      case_control::echo probe({new case_control::echo::unsort()});
-      test << probe;
-      CHECK(test.str() == "ECHO = UNSORT\n");
-   }
+    SECTION("ECHO=NOSORT") {
+        case_control::echo probe({new case_control::echo::unsort()});
+        test << probe;
+        CHECK(test.str() == "ECHO = UNSORT\n");
+    }
 
-   SECTION("ECHO=BOTH") {
-      case_control::echo probe({new case_control::echo::both()});
-      test << probe;
-      CHECK(test.str() == "ECHO = BOTH\n");
-   }
+    SECTION("ECHO=BOTH") {
+        case_control::echo probe({new case_control::echo::both()});
+        test << probe;
+        CHECK(test.str() == "ECHO = BOTH\n");
+    }
 
-   SECTION("ECHO = PUNCH, SORT (MAT1, PARAM)") {
-      case_control::echo probe(
-         {new case_control::echo::punch(),
-          new case_control::echo::sort(
-              std::list<case_control::echo::sort::cdni_entry>(
-                  {case_control::echo::sort::cdni_entry("MAT1"),
-                   case_control::echo::sort::cdni_entry("PARAM")}))});
-      test << probe;
-      CHECK(test.str() == "ECHO = PUNCH, SORT(MAT1, PARAM)\n");
-   }
+    SECTION("ECHO = PUNCH, SORT (MAT1, PARAM)") {
+        case_control::echo probe(
+        {new case_control::echo::punch(),
+        new case_control::echo::sort(
+        std::list<case_control::echo::sort::cdni_entry>(
+        {case_control::echo::sort::cdni_entry("MAT1"),
+        case_control::echo::sort::cdni_entry("PARAM")}))});
+        test << probe;
+        CHECK(test.str() == "ECHO = PUNCH, SORT(MAT1, PARAM)\n");
+    }
 
-   SECTION("ECHO = SORT (EXCEPT DMI, DMIG)") {
-      case_control::echo probe(
-      {new case_control::echo::sort(std::list<case_control::echo::sort::cdni_entry>(
-             {case_control::echo::sort::cdni_entry("DMI", true),
-              case_control::echo::sort::cdni_entry("DMIG")}))});
-      test << probe;
-      CHECK(test.str() == "ECHO = SORT(EXCEPT DMI, DMIG)\n");
-   }
+    SECTION("ECHO = SORT (EXCEPT DMI, DMIG)") {
+        case_control::echo probe(
+        {new case_control::echo::sort(std::list<case_control::echo::sort::cdni_entry>(
+        {case_control::echo::sort::cdni_entry("DMI", true),
+        case_control::echo::sort::cdni_entry("DMIG")}))});
+        test << probe;
+        CHECK(test.str() == "ECHO = SORT(EXCEPT DMI, DMIG)\n");
+    }
 
-   SECTION("ECHO=BOTH,PUNCH,FILE") {
-      case_control::echo probe(
-          {new case_control::echo::both,
-           new case_control::echo::punch,
-           new case_control::echo::file});
-      test << probe;
-      CHECK(test.str() == "ECHO = BOTH, PUNCH, FILE\n");
-   }
+    SECTION("ECHO=BOTH,PUNCH,FILE") {
+        case_control::echo probe(
+        {new case_control::echo::both,
+        new case_control::echo::punch,
+        new case_control::echo::file});
+        test << probe;
+        CHECK(test.str() == "ECHO = BOTH, PUNCH, FILE\n");
+    }
 }
 
 // Local Variables:

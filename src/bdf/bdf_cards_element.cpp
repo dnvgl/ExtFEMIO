@@ -10,11 +10,8 @@
 
 // ID:
 namespace {
-   char const cID_bdf_cards_element[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_bdf_cards_element[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <sstream>
@@ -31,55 +28,50 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf{
+using namespace dnvgl::extfem;
+using namespace dnvgl::extfem::bdf;
 
-         using types::entry_type;
-         using namespace type_bounds;
+using dnvgl::extfem::bdf::types::entry_type;
+using namespace dnvgl::extfem::bdf::type_bounds;
 
-         namespace cards {
-            namespace __base {
-               namespace {
-                  static const long cl1 = 1;
-               }
+using namespace dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem::bdf::cards::__base;
 
-               bdf::types::card element::head = bdf::types::card("CBAR");
+namespace {
+    static const long cl1 = 1;
+}
 
-               const entry_type<long> element::form_EID(
-                  "EID", bound<long>(&cl1));
+bdf::types::card element::head = bdf::types::card("CBAR");
 
-               element::element(std::list<std::string> const &inp) :
-                  card(inp) {
-                  this->read(inp);
-               }
+const entry_type<long> element::form_EID("EID", bound<long>(&cl1));
 
-               element::element(long const *EID) :
-                  card(), EID(EID) {}
+element::element(std::list<std::string> const &inp) :
+card(inp) {
+    this->read(inp);
+}
 
-               void element::collect_outdata(
-                  std::list<std::unique_ptr<format_entry> >&) const {
-                  throw errors::error("ELEMENT", "can't write write generic ELEMENT.");
-                  return;
-               }
+element::element(long const *EID) : card(), EID(EID) {}
 
-               void element::read(std::list<std::string> const &inp) {
-                  auto pos = inp.begin();
+void element::collect_outdata(
+    std::list<std::unique_ptr<format_entry> >&) const {
+    throw errors::error("ELEMENT", "can't write write generic ELEMENT.");
+    return;
+}
 
-                  if (inp.size() < 2)
-                     throw errors::parse_error(
-                        "ELEMENT", "Illegal number of entries.");
+void element::read(std::list<std::string> const &inp) {
+    auto pos = inp.begin();
 
-                  ++pos;
-                  form_EID.set_value(EID, *(pos++));
-               }
+    if (inp.size() < 2)
+        throw errors::parse_error(
+        "ELEMENT", "Illegal number of entries.");
 
-               const dnvgl::extfem::bdf::cards::types
-               element::card_type(void) const { return types::ELEMENT; }
-            }
-         }
-      }
-   }
+    ++pos;
+    form_EID.set_value(EID, *(pos++));
+}
+
+const dnvgl::extfem::bdf::cards::types
+element::card_type(void) const {
+    return types::ELEMENT;
 }
 
 // Local Variables:

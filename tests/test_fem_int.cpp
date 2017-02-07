@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <limits>
@@ -36,12 +35,14 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::type_bounds;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
+CATCH_TRANSLATE_EXCEPTION(exception &ex) {
    return Catch::toString( ex.what() );
 }
 

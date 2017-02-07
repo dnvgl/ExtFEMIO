@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-    const char cID_support_errors[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID_support_errors[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "support/errors.h"

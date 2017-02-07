@@ -5,15 +5,14 @@
    \brief Testing of DISPLACEMENT class for case control.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char  cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -39,29 +38,29 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
+    return Catch::toString(ex.what());
 }
 
 TEST_CASE("BDF generate 'DISPLACEMENT' header entries", "[bdf_header,displacement]") {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("first") {
-      case_control::displacement probe({}, case_control::displacement::restype::ALL);
-      test << probe;
-      CHECK(test.str() == "DISPLACEMENT = ALL\n");
-   }
+    SECTION("first") {
+        case_control::displacement probe({}, case_control::displacement::restype::ALL);
+        test << probe;
+        CHECK(test.str() == "DISPLACEMENT = ALL\n");
+    }
 
-   SECTION("bdf sample") {
-      case_control::displacement probe({
+    SECTION("bdf sample") {
+        case_control::displacement probe({
             new case_control::displacement::print,
             new case_control::displacement::punch,
             new case_control::displacement::real},
-         case_control::displacement::restype::ALL);
-      test << probe;
-      CHECK(test.str() == "DISPLACEMENT(PRINT, PUNCH, REAL) = ALL\n");
-   }
+            case_control::displacement::restype::ALL);
+        test << probe;
+        CHECK(test.str() == "DISPLACEMENT(PRINT, PUNCH, REAL) = ALL\n");
+    }
 }
 
 // Local Variables:

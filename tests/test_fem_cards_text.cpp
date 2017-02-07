@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-    char const cID_test_fem_cards_text[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    char const cID_test_fem_cards_text[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -41,7 +40,7 @@ CATCH_TRANSLATE_EXCEPTION( exception& ex ) {
     return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
     return ex;
 }
 

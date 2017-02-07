@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-    const char cID_bdf_header_case_control_echo[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID_bdf_header_case_control_echo[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <my_c++14.h>
@@ -143,7 +140,6 @@ echo::file::file() {}
 std::string const echo::file::str(void) const {
     return "FILE";
 }
-
 
 // Local Variables:
 // mode: c++

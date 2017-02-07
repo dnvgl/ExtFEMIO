@@ -5,37 +5,25 @@
    \brief Implemention of LOAD for case control.
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_header_case_control_load[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_header_case_control_load[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/header.h"
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace case_control {
-               load::load(long const &n) : n(n) {}
+using namespace dnvgl::extfem::bdf::header::case_control;
 
-               std::ostream &load::put(std::ostream &os) const {
-                  os << "LOAD = " << this->n;
-                  return os << std::endl;
-               }
+load::load(long const &n) : n(n) {}
 
-            }
-         }
-      }
-   }
+std::ostream &load::put(std::ostream &os) const {
+    os << "LOAD = " << this->n;
+    return os << std::endl;
 }
 
 // Local Variables:

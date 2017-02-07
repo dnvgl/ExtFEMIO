@@ -5,38 +5,26 @@
    \brief Implementation for CASE TITLE
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_header_case_control_title[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_header_case_control_title[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/header.h"
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace case_control {
-               title::title(std::string const &title) :
-                  name(title) {}
+using namespace dnvgl::extfem::bdf::header::case_control;
 
-               std::ostream &title::put(std::ostream &os) const {
-                  return os << "TITLE = " << this->name << std::endl;
-               }
-            }
-         }
-      }
-   }
+title::title(std::string const &title) :
+name(title) {}
+
+std::ostream &title::put(std::ostream &os) const {
+    return os << "TITLE = " << this->name << std::endl;
 }
-
 
 // Local Variables:
 // mode: c++

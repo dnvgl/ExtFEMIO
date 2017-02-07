@@ -8,13 +8,11 @@
 */
 
 #include "StdAfx.h"
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-    const char cID_extfem_string[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
+    const char cID_extfem_string[] _EXTFEMIO_UNUSED
         = "@(#) $Id$";
 }
 

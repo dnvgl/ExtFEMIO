@@ -5,15 +5,14 @@
    \brief Testing the FEM `BSELL` class.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   char const cID_test_fem_cards_bsell[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_test_fem_cards_bsell[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -38,180 +37,180 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+CATCH_TRANSLATE_EXCEPTION(exception & ex) {
+    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
+    return ex;
 }
 
-TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]" ) {
+TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]") {
 
     size_t len;
 
-   SECTION("BSELL (1)") {
-      vector<std::string> data({
-         // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-         "BSELL    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00\n",
-         "         1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00\n"});
-      vector<std::string> lines;
-      len = __base::card::card_split(data, data.size(), lines);
-      bsell probe(lines, len);
+    SECTION("BSELL (1)") {
+        vector<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "BSELL    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00\n",
+            "         1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00\n"});
+        vector<std::string> lines;
+        len = __base::card::card_split(data, data.size(), lines);
+        bsell probe(lines, len);
 
-      CHECK((long)probe.LC == 1);
-      CHECK((double)probe.SUBNO == 1);
-      CHECK(probe.LLC == std::vector<long>({1, 2}));
-      CHECK(probe.FACT == std::vector<double>({1., -1.}));
-   }
+        CHECK((long)probe.LC == 1);
+        CHECK((double)probe.SUBNO == 1);
+        CHECK(probe.LLC == std::vector<long>({1, 2}));
+        CHECK(probe.FACT == std::vector<double>({1., -1.}));
+    }
 }
 
-TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]" ) {
+TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]") {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   long LC(2);
-   long SUBNO(29);
-   std::vector<long> LLC({1, 2, 3, 4, 5, 6});
-   std::vector<double> FACT({1., -2., 3., -4., 5., -6.});
+    long LC(2);
+    long SUBNO(29);
+    std::vector<long> LLC({1, 2, 3, 4, 5, 6});
+    std::vector<double> FACT({1., -2., 3., -4., 5., -6.});
 
-   SECTION("empty") {
-      bsell probe;
-      test << probe;
-      CHECK(test.str() == "");
-   }
+    SECTION("empty") {
+        bsell probe;
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
-   SECTION("write (const)") {
-      bsell probe(2, 29, {1, 2, 3, 4, 5, 6},
-                  {1., -2., 3., -4., 5., -6.});
-      test << probe;
-      CHECK(test.str() ==
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
-   }
+    SECTION("write (const)") {
+        bsell probe(2, 29, {1, 2, 3, 4, 5, 6},
+        {1., -2., 3., -4., 5., -6.});
+        test << probe;
+        CHECK(test.str() ==
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
+    }
 
-   SECTION("write (1)") {
-      bsell probe(LC, SUBNO, LLC, FACT);
-      test << probe;
-      CHECK(test.str() ==
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
-   }
+    SECTION("write (1)") {
+        bsell probe(LC, SUBNO, LLC, FACT);
+        test << probe;
+        CHECK(test.str() ==
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
+    }
 
-   SECTION("write (less)") {
-      bsell probe(2, 29, {1, 2, 3, 4, 5},
-                  {1., -2., 3., -4., 5.});
-      test << probe;
-      CHECK(test.str() ==
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00\n");
-   }
+    SECTION("write (less)") {
+        bsell probe(2, 29, {1, 2, 3, 4, 5},
+        {1., -2., 3., -4., 5.});
+        test << probe;
+        CHECK(test.str() ==
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00\n");
+    }
 
-   SECTION("call (const)") {
-      bsell probe;
-      test << probe(2, 29, {1, 2, 3, 4, 5, 6},
-                    {1., -2., 3., -4., 5., -6.});
-      CHECK(test.str() ==
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
-   }
+    SECTION("call (const)") {
+        bsell probe;
+        test << probe(2, 29, {1, 2, 3, 4, 5, 6},
+        {1., -2., 3., -4., 5., -6.});
+        CHECK(test.str() ==
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
+    }
 
-   SECTION("call (1)") {
-      bsell probe;
-      test << probe(LC, SUBNO, LLC, FACT);
-      CHECK(test.str() ==
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
-   }
+    SECTION("call (1)") {
+        bsell probe;
+        test << probe(LC, SUBNO, LLC, FACT);
+        CHECK(test.str() ==
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n");
+    }
 
-   SECTION("write (less)") {
-      bsell probe;
-      test << probe(2, 29, {1, 2, 3, 4, 5},
-                    {1., -2., 3., -4., 5.});
-      CHECK(test.str() ==
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00\n");
-   }
+    SECTION("write (less)") {
+        bsell probe;
+        test << probe(2, 29, {1, 2, 3, 4, 5},
+        {1., -2., 3., -4., 5.});
+        CHECK(test.str() ==
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00\n");
+    }
 
-   SECTION("call (multiple)") {
-      bsell probe;
-      test << probe;
-      test << probe(2, 29, {1, 2, 3, 4, 5, 6},
-                    {1., -2., 3., -4., 5., -6.});
-      test << probe(LC, SUBNO, LLC, FACT);
-      test << probe(2, 29, {1, 2, 3, 4, 5},
-                    {1., -2., 3., -4., 5.});
-      test << probe;
-      CHECK(test.str() ==
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00\n"
-            "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
-            "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
-            "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
-            "        +5.000000000e+00+5.000000000e+00\n");
-   }
+    SECTION("call (multiple)") {
+        bsell probe;
+        test << probe;
+        test << probe(2, 29, {1, 2, 3, 4, 5, 6},
+        {1., -2., 3., -4., 5., -6.});
+        test << probe(LC, SUBNO, LLC, FACT);
+        test << probe(2, 29, {1, 2, 3, 4, 5},
+        {1., -2., 3., -4., 5.});
+        test << probe;
+        CHECK(test.str() ==
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00\n"
+              "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
+              "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n"
+              "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n"
+              "        +5.000000000e+00+5.000000000e+00\n");
+    }
 }
 
 TEST_CASE("FEM BSELL conversion from own output.", "[fem_bsell,in/out]") {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("BSELL (own output)" ) {
+    SECTION("BSELL (own output)") {
 
-      vector<std::string> data({
+        vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
             "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
             "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
             "        +5.000000000e+00+5.000000000e+00+6.000000000e+00-6.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      bsell probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        bsell probe(lines, len);
 
-      CHECK((long)probe.LC == 2);
-      CHECK((double)probe.SUBNO == 29);
-      CHECK(probe.LLC == std::vector<long>({1, 2, 3, 4, 5, 6}));
-      CHECK(probe.FACT == std::vector<double>({1., -2., 3., -4., 5., -6.}));
-   }
+        CHECK((long)probe.LC == 2);
+        CHECK((double)probe.SUBNO == 29);
+        CHECK(probe.LLC == std::vector<long>({1, 2, 3, 4, 5, 6}));
+        CHECK(probe.FACT == std::vector<double>({1., -2., 3., -4., 5., -6.}));
+    }
 
-   SECTION("BSELL (less)" ) {
+    SECTION("BSELL (less)") {
 
-      vector<std::string> data({
+        vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n",
             "        +1.000000000e+00+1.000000000e+00+2.000000000e+00-2.000000000e+00\n",
             "        +3.000000000e+00+3.000000000e+00+4.000000000e+00-4.000000000e+00\n",
             "        +5.000000000e+00+5.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      bsell probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        bsell probe(lines, len);
 
-      CHECK((long)probe.LC == 2);
-      CHECK((double)probe.SUBNO == 29);
-      CHECK(probe.LLC == std::vector<long>({1, 2, 3, 4, 5}));
-      CHECK(probe.FACT == std::vector<double>({1., -2., 3., -4., 5.}));
-   }
+        CHECK((long)probe.LC == 2);
+        CHECK((double)probe.SUBNO == 29);
+        CHECK(probe.LLC == std::vector<long>({1, 2, 3, 4, 5}));
+        CHECK(probe.FACT == std::vector<double>({1., -2., 3., -4., 5.}));
+    }
 
 }
 

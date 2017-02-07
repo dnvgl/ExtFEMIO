@@ -5,15 +5,14 @@
    \brief Testing the BDF `PSHELL` card class.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -36,65 +35,65 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
+    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
+    return ex;
 }
 
 TEST_CASE("BDF PSHELL definitions.",
           "[bdf_PSHELL]") {
 
-   SECTION("Small Field Format") {
+    SECTION("Small Field Format") {
 
-      std::list<std::string> data({
-         "PSHELL  1       4         23.00 4               4\n"});
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      pshell probe(lines);
+        std::list<std::string> data({
+            "PSHELL  1       4         23.00 4               4\n"});
+        std::list<std::string> lines;
+        __base::card::card_split(data, lines);
+        pshell probe(lines);
 
-      CHECK((long)probe.PID == 1);
-      CHECK((long)probe.MID1 == 4);
-      CHECK((double)probe.T == 23.);
-      CHECK((long)probe.MID2 == 4);
-      CHECK((double)probe.x12I_T__3 == 1.);
-      CHECK((long)probe.MID3 == 4);
-   }
+        CHECK((long)probe.PID == 1);
+        CHECK((long)probe.MID1 == 4);
+        CHECK((double)probe.T == 23.);
+        CHECK((long)probe.MID2 == 4);
+        CHECK((double)probe.x12I_T__3 == 1.);
+        CHECK((long)probe.MID3 == 4);
+    }
 
-   SECTION("Large Field Format") {
+    SECTION("Large Field Format") {
 
-      std::list<std::string> data({
-         "PSHELL* 1               4                 23.00         4               \n",
-         "*                       4  \n"});
+        std::list<std::string> data({
+            "PSHELL* 1               4                 23.00         4               \n",
+            "*                       4  \n"});
 
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      pshell probe(lines);
+        std::list<std::string> lines;
+        __base::card::card_split(data, lines);
+        pshell probe(lines);
 
-      CHECK((long)probe.PID == 1);
-      CHECK((long)probe.MID1 == 4);
-      CHECK((double)probe.T == 23.);
-      CHECK((long)probe.MID2 == 4);
-      CHECK((double)probe.x12I_T__3 == 1.);
-      CHECK((long)probe.MID3 == 4);
-   }
+        CHECK((long)probe.PID == 1);
+        CHECK((long)probe.MID1 == 4);
+        CHECK((double)probe.T == 23.);
+        CHECK((long)probe.MID2 == 4);
+        CHECK((double)probe.x12I_T__3 == 1.);
+        CHECK((long)probe.MID3 == 4);
+    }
 
-   SECTION("Comma Field Format") {
+    SECTION("Comma Field Format") {
 
-      std::list<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      pshell probe(lines);
+        std::list<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
+        std::list<std::string> lines;
+        __base::card::card_split(data, lines);
+        pshell probe(lines);
 
-      CHECK((long)probe.PID == 1);
-      CHECK((long)probe.MID1 == 4);
-      CHECK((double)probe.T == 23.);
-      CHECK((long)probe.MID2 == 4);
-      CHECK((double)probe.x12I_T__3 == 1.);
-      CHECK((long)probe.MID3 == 4);
-   }
+        CHECK((long)probe.PID == 1);
+        CHECK((long)probe.MID1 == 4);
+        CHECK((double)probe.T == 23.);
+        CHECK((long)probe.MID2 == 4);
+        CHECK((double)probe.x12I_T__3 == 1.);
+        CHECK((long)probe.MID3 == 4);
+    }
 
 }
 

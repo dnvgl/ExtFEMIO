@@ -5,15 +5,14 @@
    \brief Testing the BDF `MAT2` cards classes.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -36,88 +35,88 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
+    return Catch::toString(ex.what());
 }
 
 namespace {
-   std::string err_msg;
+    std::string err_msg;
 
-   const void _warn_res(const std::string &msg) {
-      err_msg = msg;
-   }
+    const void _warn_res(const std::string &msg) {
+        err_msg = msg;
+    }
 }
 
 TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
-          "[bdf_mat2]" ) {
+          "[bdf_mat2]") {
 
-   warn_report = &_warn_res;
+    warn_report = &_warn_res;
 
-   SECTION("first mat2") {
-      std::list<std::string> data({
-         "MAT2,1,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,"
-         "13.,14.,15.,16.,17\n"});
+    SECTION("first mat2") {
+        std::list<std::string> data({
+            "MAT2,1,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,"
+            "13.,14.,15.,16.,17\n"});
 
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      mat2 probe(lines);
+        std::list<std::string> lines;
+        __base::card::card_split(data, lines);
+        mat2 probe(lines);
 
-      CHECK((long)probe.MID == 1);
-      CHECK((double)probe.G11 == 2.);
-      CHECK((double)probe.G12 == 3.);
-      CHECK((double)probe.G13 == 4.);
-      CHECK((double)probe.G22 == 5.);
-      CHECK((double)probe.G23 == 6.);
-      CHECK((double)probe.G33 == 7.);
-      CHECK((double)probe.RHO == 8.);
-      CHECK((double)probe.A1 == 9.);
-      CHECK((double)probe.A2 == 10.);
-      CHECK((double)probe.A3 == 11.);
-      CHECK((double)probe.TREF == 12.);
-      CHECK((double)probe.GE == 13.);
-      CHECK((double)probe.ST == 14.);
-      CHECK((double)probe.SC == 15.);
-      CHECK((double)probe.SS == 16.);
-      CHECK((long)probe.MCSID == 17);
-   }
+        CHECK((long)probe.MID == 1);
+        CHECK((double)probe.G11 == 2.);
+        CHECK((double)probe.G12 == 3.);
+        CHECK((double)probe.G13 == 4.);
+        CHECK((double)probe.G22 == 5.);
+        CHECK((double)probe.G23 == 6.);
+        CHECK((double)probe.G33 == 7.);
+        CHECK((double)probe.RHO == 8.);
+        CHECK((double)probe.A1 == 9.);
+        CHECK((double)probe.A2 == 10.);
+        CHECK((double)probe.A3 == 11.);
+        CHECK((double)probe.TREF == 12.);
+        CHECK((double)probe.GE == 13.);
+        CHECK((double)probe.ST == 14.);
+        CHECK((double)probe.SC == 15.);
+        CHECK((double)probe.SS == 16.);
+        CHECK((long)probe.MCSID == 17);
+    }
 
-   SECTION("FEMIO-3") {
-      std::list<std::string> data({
-         "MAT2*    10              7.01670932+10   2.78474977+10   0.",
-         "*        1.35642948+11   0.              1.26610002+10   0.",
-         "*        .000012         .000012         .000012         0.",
-         "*        2.99999993-2    0.              0.              0.",
-         "*"});
+    SECTION("FEMIO-3") {
+        std::list<std::string> data({
+            "MAT2*    10              7.01670932+10   2.78474977+10   0.",
+            "*        1.35642948+11   0.              1.26610002+10   0.",
+            "*        .000012         .000012         .000012         0.",
+            "*        2.99999993-2    0.              0.              0.",
+            "*"});
 
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      mat2 probe(lines);
+        std::list<std::string> lines;
+        __base::card::card_split(data, lines);
+        mat2 probe(lines);
 
-      CHECK((long)probe.MID == 10);
-      CHECK((double)probe.G11 == 7.01670932e+10);
-      CHECK((double)probe.G12 == 2.78474977e+10);
-      CHECK((double)probe.G13 == 0.);
-      CHECK((double)probe.G22 == 1.35642948e+11);
-      CHECK((double)probe.G23 == 0.);
-      CHECK((double)probe.G33 == 1.26610002e+10);
-      CHECK((double)probe.RHO == 0.);
-      CHECK((double)probe.A1 == 12.e-6);
-      CHECK((double)probe.A2 == 12.e-6);
-      CHECK((double)probe.A3 == 12.e-6);
-      CHECK((double)probe.TREF == 0.);
-      CHECK((double)probe.GE == 2.99999993e-2);
-      CHECK((double)probe.ST == 0.);
-      CHECK((double)probe.SC == 0.);
-      CHECK((double)probe.SS == 0.);
-      CHECK((long)probe.MCSID == 0);
-      CHECK(err_msg ==
-            "Long Field Format: Missing continuation line for record:\n"
-            "--> MAT2*    10              7.01670932+10   2.78474977+10   0.\n"
-            "--> *        1.35642948+11   0.              1.26610002+10   0.\n"
-            "--> *        .000012         .000012         .000012         0.\n"
-            "--> *        2.99999993-2    0.              0.              0.\n"
-            "--> *\n");
-   }
+        CHECK((long)probe.MID == 10);
+        CHECK((double)probe.G11 == 7.01670932e+10);
+        CHECK((double)probe.G12 == 2.78474977e+10);
+        CHECK((double)probe.G13 == 0.);
+        CHECK((double)probe.G22 == 1.35642948e+11);
+        CHECK((double)probe.G23 == 0.);
+        CHECK((double)probe.G33 == 1.26610002e+10);
+        CHECK((double)probe.RHO == 0.);
+        CHECK((double)probe.A1 == 12.e-6);
+        CHECK((double)probe.A2 == 12.e-6);
+        CHECK((double)probe.A3 == 12.e-6);
+        CHECK((double)probe.TREF == 0.);
+        CHECK((double)probe.GE == 2.99999993e-2);
+        CHECK((double)probe.ST == 0.);
+        CHECK((double)probe.SC == 0.);
+        CHECK((double)probe.SS == 0.);
+        CHECK((long)probe.MCSID == 0);
+        CHECK(err_msg ==
+              "Long Field Format: Missing continuation line for record:\n"
+              "--> MAT2*    10              7.01670932+10   2.78474977+10   0.\n"
+              "--> *        1.35642948+11   0.              1.26610002+10   0.\n"
+              "--> *        .000012         .000012         .000012         0.\n"
+              "--> *        2.99999993-2    0.              0.              0.\n"
+              "--> *\n");
+    }
 }
 
 // Local Variables:

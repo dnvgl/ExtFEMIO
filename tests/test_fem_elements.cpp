@@ -22,11 +22,7 @@
 
 // ID:
 namespace {
-   const char cID_test_fem_elements[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+   const char cID_test_fem_elements[]       = "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -60,7 +56,7 @@ CATCH_TRANSLATE_EXCEPTION(exception& ex ) {
    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
    return ex;
 }
 

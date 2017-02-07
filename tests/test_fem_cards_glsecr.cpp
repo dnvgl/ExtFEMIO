@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   char const cID_test_fem_cards_glsecr[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_test_fem_cards_glsecr[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -37,11 +36,11 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
+CATCH_TRANSLATE_EXCEPTION(exception &ex) {
     return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
     return ex;
 }
 
@@ -118,11 +117,7 @@ TEST_CASE("FEM GLSECR definitions.", "[fem_glsecr]" ) {
     }
 
     SECTION("GLSECR (4)") {
-        gbeamg
-#ifdef __GNUC__
-            __attribute__ ((__unused__))
-#endif
-            dummy;
+        gbeamg _EXTFEMIO_UNUSED dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSECR  +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
@@ -145,11 +140,7 @@ TEST_CASE("FEM GLSECR definitions.", "[fem_glsecr]" ) {
     }
 
     SECTION("GLSECR (5)") {
-        gbeamg
-#ifdef __GNUC__
-            __attribute__ ((__unused__))
-#endif
-            dummy;
+        gbeamg _EXTFEMIO_UNUSED dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSECR    1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",

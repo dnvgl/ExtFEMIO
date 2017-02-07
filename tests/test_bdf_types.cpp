@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-    const char  cID[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX
@@ -38,7 +37,7 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem;
 using namespace bdf::types;
 
-CATCH_TRANSLATE_EXCEPTION( bdf::errors::error& ex ) {
+CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
     return Catch::toString( ex.what() );
 }
 

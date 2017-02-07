@@ -10,11 +10,8 @@
 
 // ID:
 namespace {
-   const char cID_bdf_types_int[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_types_int[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #ifdef __GNUC__
@@ -30,13 +27,13 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-const
 #ifdef HAVE_BOOST_REGEX_HPP
-boost::regex
+using boost::regex;
 #else
-std::regex
+using std::regex;
 #endif
-dnvgl::extfem::bdf::types::int_re(
+
+const regex dnvgl::extfem::bdf::types::int_re(
    "[[:space:]]*[\\+-]?[[:digit:]]+[[:space:]]*");
 
 // Local Variables:

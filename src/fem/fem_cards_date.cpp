@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-    const char cID_fem_cards_date[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID_fem_cards_date[] _EXTFEMIO_UNUSED = 
+        "@(#) $Id$";
 }
 
 #ifdef max

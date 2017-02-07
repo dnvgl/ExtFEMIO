@@ -5,15 +5,14 @@
    \brief Testing the BDF `CTRIA3` cards classes.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char  cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -37,53 +36,53 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
+    return Catch::toString(ex.what());
 }
 
 TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
-          "[bdf_ctria3]" ) {
+          "[bdf_ctria3]") {
 
-   std::list<std::string> data({
-      // 34567|1234567|1234567|1234567|1234567|1234567|
-      "CTRIA3  1       1       16      200     141\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   ctria3 probe(lines);
+    std::list<std::string> data({
+        // 34567|1234567|1234567|1234567|1234567|1234567|
+        "CTRIA3  1       1       16      200     141\n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    ctria3 probe(lines);
 
-   SECTION("first ctria3") {
-      CHECK((long)probe.EID == 1);
-      CHECK((long)probe.PID == 1);
-      CHECK((long)probe.G1 == 16);
-      CHECK((long)probe.G2 == 200);
-      CHECK((long)probe.G3 == 141);
-      CHECK(probe.choose_mcid_theta == ctria3::CHOOSE_MCID_THETA::has_THETA);
-      CHECK_FALSE(probe.MCID);
-      CHECK((double)probe.THETA == 0.0);
-   }
+    SECTION("first ctria3") {
+        CHECK((long)probe.EID == 1);
+        CHECK((long)probe.PID == 1);
+        CHECK((long)probe.G1 == 16);
+        CHECK((long)probe.G2 == 200);
+        CHECK((long)probe.G3 == 141);
+        CHECK(probe.choose_mcid_theta == ctria3::CHOOSE_MCID_THETA::has_THETA);
+        CHECK_FALSE(probe.MCID);
+        CHECK((double)probe.THETA == 0.0);
+    }
 }
 
 
 TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
-          "[bdf_ctria3]" ) {
+          "[bdf_ctria3]") {
 
-   std::list<std::string> data({
-      // 34567|123456781234567|123456781234567|123456781234567|123456781234567|
-      "CTRIA3* 2               1               16              200             *\n",
-      "*       141\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   ctria3 probe(lines);
+    std::list<std::string> data({
+        // 34567|123456781234567|123456781234567|123456781234567|123456781234567|
+        "CTRIA3* 2               1               16              200             *\n",
+        "*       141\n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    ctria3 probe(lines);
 
-   SECTION("first ctria3") {
-      CHECK((long)probe.EID == 2);
-      CHECK((long)probe.PID == 1);
-      CHECK((long)probe.G1 == 16);
-      CHECK((long)probe.G2 == 200);
-      CHECK((long)probe.G3 == 141);
-      CHECK_FALSE(probe.MCID);
-      CHECK((double)probe.THETA == 0.0);
-   }
+    SECTION("first ctria3") {
+        CHECK((long)probe.EID == 2);
+        CHECK((long)probe.PID == 1);
+        CHECK((long)probe.G1 == 16);
+        CHECK((long)probe.G2 == 200);
+        CHECK((long)probe.G3 == 141);
+        CHECK_FALSE(probe.MCID);
+        CHECK((double)probe.THETA == 0.0);
+    }
 }
 
 // Local Variables:

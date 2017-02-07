@@ -5,47 +5,46 @@
    \brief Implementation for boundaries for BDF types.
 
    Classes help ensure values in correct range.
-*/
+   */
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_type_bounds[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_type_bounds[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/type_bounds.h"
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace type_bounds {
-            namespace __base {
-               type_bound::~type_bound () {}
+using namespace dnvgl::extfem::bdf::type_bounds::__base;
 
-               bool type_bound::has_min() const { return _has_min; }
+type_bound::~type_bound() {}
 
-               void type_bound::got_min() { _has_min = true; }
+bool type_bound::has_min() const {
+    return _has_min;
+}
 
-               bool type_bound::has_max() const { return _has_max; }
+void type_bound::got_min() {
+    _has_min = true;
+}
 
-               void type_bound::got_max() { _has_max = true; }
+bool type_bound::has_max() const {
+    return _has_max;
+}
 
-               void type_bound::got_default() { _has_default = true; }
+void type_bound::got_max() {
+    _has_max = true;
+}
 
-               type_bound::type_bound() :
-                  _has_min(false), _has_max(false), _has_default(false) {}
+void type_bound::got_default() {
+    _has_default = true;
+}
 
-               bool type_bound::has_default() const {
-                  return _has_default;
-               }
-            }
-         }
-      }
-   }
+type_bound::type_bound() :
+_has_min(false), _has_max(false), _has_default(false) {}
+
+bool type_bound::has_default() const {
+    return _has_default;
 }
 
 // Local Variables:

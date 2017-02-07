@@ -5,38 +5,26 @@
    \brief Implementation for BDF SUBTILE case control entry.
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_header_case_control_subtitle[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_header_case_control_subtitle[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/header.h"
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace case_control {
+using namespace dnvgl::extfem::bdf::header::case_control;
 
-               subtitle::subtitle(std::string const &title) :
-                  title(title) {}
+subtitle::subtitle(std::string const &title) :
+title(title) {}
 
-               std::ostream &subtitle::put(std::ostream &os) const {
-                  os << "SUBTITLE = " << this->title;
-                  return os << std::endl;
-               }
-            }
-         }
-      }
-   }
+std::ostream &subtitle::put(std::ostream &os) const {
+    os << "SUBTITLE = " << this->title;
+    return os << std::endl;
 }
 
 // Local Variables:

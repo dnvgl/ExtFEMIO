@@ -6,14 +6,12 @@
 
    Detailed description
 */
+#include "extfem_string.h"
 
 // ID:
 namespace {
-   char const cID_test_fem_cards_gtonp[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_test_fem_cards_gtonp[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "fem/cards.h"
@@ -39,11 +37,11 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
+CATCH_TRANSLATE_EXCEPTION(exception &ex) {
     return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
     return ex;
 }
 
@@ -123,11 +121,7 @@ TEST_CASE("FEM GTONP definitions.", "[fem_gtonp]" ) {
     }
 
     SECTION("GTONP (4)") {
-        gbeamg
-#ifdef __GNUC__
-            __attribute__ ((__unused__))
-#endif
-            dummy;
+        gbeamg _EXTFEMIO_UNUSED dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GTONP   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
@@ -151,11 +145,7 @@ TEST_CASE("FEM GTONP definitions.", "[fem_gtonp]" ) {
     }
 
     SECTION("GTONP (5)") {
-        gbeamg
-#ifdef __GNUC__
-            __attribute__ ((__unused__))
-#endif
-            dummy;
+        gbeamg _EXTFEMIO_UNUSED dummy;
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GTONP     1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",

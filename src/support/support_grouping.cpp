@@ -12,11 +12,8 @@
 
 // ID:
 namespace {
-   char const cID_support_grouping[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_support_grouping[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "support/grouping.h"

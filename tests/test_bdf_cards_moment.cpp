@@ -5,15 +5,14 @@
    \brief Testing the BDF `MOMENT` card class.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   char const cID_test_bdf_cards_moment[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const cID_test_bdf_cards_moment[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/cards.h"
@@ -38,88 +37,88 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
+    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
+    return ex;
 }
 
 TEST_CASE("BDF MOMENT definitions. (Small Field Format)", "[bdf_moment]") {
 
-   std::list<std::string> data({
-      // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
-      "MOMENT  2       5       6       2.9     0.0     1.9     0.0               \n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   moment probe(lines);
+    std::list<std::string> data({
+        // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+        "MOMENT  2       5       6       2.9     0.0     1.9     0.0               \n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    moment probe(lines);
 
-   SECTION("first moment") {
-      CHECK((long)probe.SID == 2);
-      CHECK((long)probe.G == 5);
-      CHECK((long)probe.CID == 6);
-      CHECK((double)probe.F == 2.9);
-      CHECK((double)probe.N1 == 0.);
-      CHECK((double)probe.N2 == 1.9);
-      CHECK((double)probe.N3 == 0.);
-   }
+    SECTION("first moment") {
+        CHECK((long)probe.SID == 2);
+        CHECK((long)probe.G == 5);
+        CHECK((long)probe.CID == 6);
+        CHECK((double)probe.F == 2.9);
+        CHECK((double)probe.N1 == 0.);
+        CHECK((double)probe.N2 == 1.9);
+        CHECK((double)probe.N3 == 0.);
+    }
 }
 
-TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]" ) {
+TEST_CASE("BDF MOMENT types output.", "[bdf_moment,out]") {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("reverse") {
-      long SID(2), G(5), CID(6);
-      double F(2.9), N1(0.), N2(1.9), N3(0.);
-      moment probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
-      test << probe;
-      CHECK(test.str() ==
-            "MOMENT         2       5       62.900+00 0.00+001.900+00 0.00+00\n");
-   }
+    SECTION("reverse") {
+        long SID(2), G(5), CID(6);
+        double F(2.9), N1(0.), N2(1.9), N3(0.);
+        moment probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+        test << probe;
+        CHECK(test.str() ==
+              "MOMENT         2       5       62.900+00 0.00+001.900+00 0.00+00\n");
+    }
 
-   SECTION("reverse part") {
-      long SID(2), G(5), CID(6);
-      double F(2.9), N1(0.), N2(1.9);
-      moment probe(&SID, &G, &CID, &F, &N1, &N2);
-      test << probe;
-      CHECK(test.str() ==
-            "MOMENT         2       5       62.900+00 0.00+001.900+00\n");
-   }
+    SECTION("reverse part") {
+        long SID(2), G(5), CID(6);
+        double F(2.9), N1(0.), N2(1.9);
+        moment probe(&SID, &G, &CID, &F, &N1, &N2);
+        test << probe;
+        CHECK(test.str() ==
+              "MOMENT         2       5       62.900+00 0.00+001.900+00\n");
+    }
 
-   SECTION("reverse part (2)") {
-      long SID(2), G(5), CID(6);
-      double F(2.9), N1(1.9);
-      moment probe(&SID, &G, &CID, &F, &N1);
-      test << probe;
-      CHECK(test.str() ==
-            "MOMENT         2       5       62.900+001.900+00\n");
-   }
+    SECTION("reverse part (2)") {
+        long SID(2), G(5), CID(6);
+        double F(2.9), N1(1.9);
+        moment probe(&SID, &G, &CID, &F, &N1);
+        test << probe;
+        CHECK(test.str() ==
+              "MOMENT         2       5       62.900+001.900+00\n");
+    }
 
-   SECTION("reuse") {
-      long SID(2), G(5), CID(6);
-      double F(2.9), N1(0.), N2(1.9), N3(0.);
-      moment probe;
-      test << probe;
-      test << probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
-      SID++;
-      G++;
-      CID++;
-      F += 4.;
-      test << probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
-      SID++;
-      test << probe(&SID, &G, &CID, &F, &N1, &N2);
-      SID++;
-      test << probe(&SID, &G, &CID, &F, &N1);
-      test << probe;
-      CHECK(test.str() ==
-            "MOMENT         2       5       62.900+00 0.00+001.900+00 0.00+00\n"
-            "MOMENT         3       6       76.900+00 0.00+001.900+00 0.00+00\n"
-            "MOMENT         4       6       76.900+00 0.00+001.900+00\n"
-            "MOMENT         5       6       76.900+00 0.00+00\n"
-            "MOMENT         5       6       76.900+00 0.00+00\n");
-   }
+    SECTION("reuse") {
+        long SID(2), G(5), CID(6);
+        double F(2.9), N1(0.), N2(1.9), N3(0.);
+        moment probe;
+        test << probe;
+        test << probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+        SID++;
+        G++;
+        CID++;
+        F += 4.;
+        test << probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+        SID++;
+        test << probe(&SID, &G, &CID, &F, &N1, &N2);
+        SID++;
+        test << probe(&SID, &G, &CID, &F, &N1);
+        test << probe;
+        CHECK(test.str() ==
+              "MOMENT         2       5       62.900+00 0.00+001.900+00 0.00+00\n"
+              "MOMENT         3       6       76.900+00 0.00+001.900+00 0.00+00\n"
+              "MOMENT         4       6       76.900+00 0.00+001.900+00\n"
+              "MOMENT         5       6       76.900+00 0.00+00\n"
+              "MOMENT         5       6       76.900+00 0.00+00\n");
+    }
 }
 
 // Local Variables:

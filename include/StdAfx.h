@@ -46,6 +46,8 @@ static char THIS_FILE[] = __FILE__;
 #include <locale>
 #include <memory>
 #include <utility>
+#include <unordered_map>
+#include <unordered_set>
 
 #include <limits>
 #include <typeinfo>

@@ -5,16 +5,14 @@
    \brief Definitions for Nastran Bulk data entry types.
 
    Detailed description
-*/
+   */
+
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_types_float[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_types_float[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #ifdef __GNUC__
@@ -40,57 +38,23 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace types {
+#ifdef HAVE_BOOST_REGEX_HPP
+using namespace boost;
+using namespace boost::regex_constants;
+#else
+using namespace std;
+using namespace std::regex_constants;
+#endif
 
-            const
-#ifdef HAVE_BOOST_REGEX_HPP
-            ::boost::regex
-#else
-            std::regex
-#endif
-            float_exp_re("([\\+-]?[.0-9]+)([+-][0-9]+)",
-#ifdef HAVE_BOOST_REGEX_HPP
-                         ::boost::regex_constants::ECMAScript
-#else
-                         std::regex_constants::ECMAScript
-#endif
-               );
+const regex dnvgl::extfem::bdf::types::float_exp_re(
+    "([\\+-]?[.0-9]+)([+-][0-9]+)", ECMAScript);
 
-            const
-#ifdef HAVE_BOOST_REGEX_HPP
-            ::boost::regex
-#else
-            std::regex
-#endif
-            float_re("([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
-                     "[.][0-9]+)(((E[+-]?)|[+-])[0-9]+)?",
-#ifdef HAVE_BOOST_REGEX_HPP
-                     ::boost::regex_constants::ECMAScript
-#else
-                     std::regex_constants::ECMAScript
-#endif
-               );
+const regex dnvgl::extfem::bdf::types::float_re(
+    "([\\+-]?((0|([1-9][0-9]*))?[.][0-9]*)|"
+    "[.][0-9]+)(((E[+-]?)|[+-])[0-9]+)?", ECMAScript);
 
-            const
-#ifdef HAVE_BOOST_REGEX_HPP
-            ::boost::regex
-#else
-            std::regex
-#endif
-            float_lead_dot("^[\\+-]?[.][0-9]+",
-#ifdef HAVE_BOOST_REGEX_HPP
-                           ::boost::regex_constants::ECMAScript
-#else
-                           std::regex_constants::ECMAScript
-#endif
-               );
-         }
-      }
-   }
-}
+const regex dnvgl::extfem::bdf::types::float_lead_dot(
+    "^[\\+-]?[.][0-9]+", ECMAScript);
 
 // Local Variables:
 // mode: c++

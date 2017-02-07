@@ -5,35 +5,24 @@
    \brief Implementation for EXEC CEND
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_header_exec_control_cend[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_header_exec_control_cend[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/header.h"
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace executive_control {
-               cend::cend() {}
+using namespace dnvgl::extfem::bdf::header::executive_control;;
 
-               std::ostream &cend::put(std::ostream &os) const {
-                  return os << "CEND" << std::endl;
-               }
-            }
-         }
-      }
-   }
+cend::cend() {}
+
+std::ostream &cend::put(std::ostream &os) const {
+    return os << "CEND" << std::endl;
 }
 
 // Local Variables:

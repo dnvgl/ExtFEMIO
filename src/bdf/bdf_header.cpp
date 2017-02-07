@@ -5,32 +5,21 @@
    \brief General implentation for BDF header entries.
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_bdf_header[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_bdf_header[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include "bdf/header.h"
 
-namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace header {
-            namespace __base {
-               entry::entry(void) {}
-            }
-         }
-      }
-   }
-}
+using namespace dnvgl::extfem::bdf::header::__base;
+
+entry::entry(void) {}
 
 // Local Variables:
 // mode: c++

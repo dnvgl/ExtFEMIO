@@ -5,17 +5,14 @@
    \brief Processing Sesam FEM `BELFIX` cards.
 
    Detailed description
-*/
+   */
 
 #include "StdAfx.h"
 
 // ID:
 namespace {
-   const char cID_fem_cards_belfix[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID_fem_cards_belfix[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <memory>
@@ -37,7 +34,7 @@ using namespace types;
 using namespace dnvgl::extfem::fem::cards;
 
 namespace {
-   long m_one(-1)/*, one(1), two(2)*/;
+    long m_one(-1)/*, one(1), two(2)*/;
 }
 
 const fem::types::card belfix::head("BELFIX");
@@ -50,8 +47,8 @@ const fem::types::entry_type<long> belfix::_form_TRANO(
 const fem::types::entry_type<double> belfix::_form_A("A");
 
 belfix::belfix() :
-        belfix(-1, belfix::n_opt::INVALID, 0,
-               {0., 0., 0., 0., 0., 0.}) {}
+belfix(-1, belfix::n_opt::INVALID, 0,
+{0., 0., 0., 0., 0., 0.}) {}
 
 belfix::belfix(const std::vector<std::string> &inp, size_t const len) {
     read(inp, len);
@@ -61,7 +58,7 @@ void belfix::read(const std::vector<std::string> &inp, size_t const len) {
     A.resize(6);
     if (len < 11)
         throw errors::parse_error(
-            "BELFIX", "Illegal number of entries.");
+        "BELFIX", "Illegal number of entries.");
 
     FIXNO = _form_FIXNO(inp.at(1));
     long tmp(_form_OPT(inp.at(2)));
@@ -82,7 +79,7 @@ void belfix::read(const std::vector<std::string> &inp, size_t const len) {
         error_report(msg.str());
     }
     TRANO = _form_TRANO(inp.at(3));
-    for (size_t i{0}; i<6; i++)
+    for (size_t i{0}; i < 6; i++)
         A[i] = _form_A(inp.at(i + 5));
 }
 
@@ -90,26 +87,28 @@ belfix::belfix(long const FIXNO,
                n_opt const OPT,
                long const TRANO,
                std::vector<double> const &A) :
-        card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
+               card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 
 const dnvgl::extfem::fem::cards::types
-belfix::card_type(void) const {return types::BELFIX;}
+belfix::card_type(void) const {
+    return types::BELFIX;
+}
 
 std::ostream &belfix::put(std::ostream &os) const {
     if (OPT == belfix::n_opt::INVALID) return os;
     os << belfix::head.format()
-       << _form_FIXNO.format(FIXNO)
-       << _form_OPT.format(static_cast<long>(OPT))
-       << _form_TRANO.format(TRANO)
-       << empty.format()
-       << std::endl << fem::types::card("").format()
-       << _form_A.format(A.at(0))
-       << _form_A.format(A.at(1))
-       << _form_A.format(A.at(2))
-       << _form_A.format(A.at(3))
-       << std::endl << fem::types::card("").format()
-       << _form_A.format(A.at(4))
-       << _form_A.format(A.at(5));
+        << _form_FIXNO.format(FIXNO)
+        << _form_OPT.format(static_cast<long>(OPT))
+        << _form_TRANO.format(TRANO)
+        << empty.format()
+        << std::endl << fem::types::card("").format()
+        << _form_A.format(A.at(0))
+        << _form_A.format(A.at(1))
+        << _form_A.format(A.at(2))
+        << _form_A.format(A.at(3))
+        << std::endl << fem::types::card("").format()
+        << _form_A.format(A.at(4))
+        << _form_A.format(A.at(5));
     return os << std::endl;;
 }
 
@@ -117,11 +116,11 @@ std::string belfix::pos_string(void) const {
     std::ostringstream res;
     if (OPT != n_opt::FIXATION)
         throw errors::types_error(
-            "Only BELFIX records with OPT==1 can be transformed to Poseidon BEAM DOFs.");
+        "Only BELFIX records with OPT==1 can be transformed to Poseidon BEAM DOFs.");
     for (double a : A) {
         if (a != 0. && a != 1.)
             throw errors::types_error(
-                "Only BELFIX fixation values of 0. and 1. can be transformed to Poseidon BEAM DOFs.");
+            "Only BELFIX fixation values of 0. and 1. can be transformed to Poseidon BEAM DOFs.");
         res << static_cast<int>(a);
     }
     return res.str();

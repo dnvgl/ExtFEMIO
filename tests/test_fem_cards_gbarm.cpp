@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-    const char  cID[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -37,11 +36,11 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
+CATCH_TRANSLATE_EXCEPTION(exception &ex ) {
     return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
     return ex;
 }
 
@@ -180,11 +179,7 @@ TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {
     }
 
     SECTION("GBARM (3)") {
-        gbeamg
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-            dummy(1, 100.);
+        gbeamg _EXTFEMIO_UNUSED dummy(1, 100.);
         vector<std::string> data({
                 "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
                     "        +5.000000000e+00+6.000000000e+00\n"});

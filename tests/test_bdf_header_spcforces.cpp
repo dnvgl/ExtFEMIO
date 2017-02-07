@@ -5,15 +5,14 @@
    \brief Test of BDF SPCFORCES case control entries.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -39,81 +38,81 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
+    return Catch::toString(ex.what());
 }
 
 TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("default") {
-      case_control::spcforces probe({});
-      test << probe;
-      CHECK(test.str() == "SPCFORCES = NONE\n");
-   }
+    SECTION("default") {
+        case_control::spcforces probe({});
+        test << probe;
+        CHECK(test.str() == "SPCFORCES = NONE\n");
+    }
 
-   SECTION("first") {
-      case_control::spcforces probe({}, case_control::spcforces::restype::ALL);
-      test << probe;
-      CHECK(test.str() == "SPCFORCES = ALL\n");
-   }
+    SECTION("first") {
+        case_control::spcforces probe({}, case_control::spcforces::restype::ALL);
+        test << probe;
+        CHECK(test.str() == "SPCFORCES = ALL\n");
+    }
 
-   SECTION("NOZPRINT") {
-      case_control::spcforces probe({
+    SECTION("NOZPRINT") {
+        case_control::spcforces probe({
             new case_control::spcforces::print,
             new case_control::spcforces::nozprint
-         }, case_control::spcforces::restype::ALL);
-      test << probe;
-      CHECK(test.str() == "SPCFORCES(PRINT, NOZPRINT) = ALL\n");
-   }
+        }, case_control::spcforces::restype::ALL);
+        test << probe;
+        CHECK(test.str() == "SPCFORCES(PRINT, NOZPRINT) = ALL\n");
+    }
 
-   SECTION("num") {
-      case_control::spcforces probe({}, 5);
-      test << probe;
-      CHECK(test.str() == "SPCFORCES = 5\n");
-   }
+    SECTION("num") {
+        case_control::spcforces probe({}, 5);
+        test << probe;
+        CHECK(test.str() == "SPCFORCES = 5\n");
+    }
 
-   SECTION("IMAG") {
-      case_control::spcforces probe({
-               new case_control::spcforces::sort2,
-               new case_control::spcforces::punch,
-               new case_control::spcforces::print,
-               new case_control::spcforces::imag
-         }, case_control::spcforces::restype::ALL);
-      test << probe;
-      CHECK(test.str() == "SPCFORCES(SORT2, PUNCH, PRINT, IMAG) = ALL\n");
-   }
+    SECTION("IMAG") {
+        case_control::spcforces probe({
+            new case_control::spcforces::sort2,
+            new case_control::spcforces::punch,
+            new case_control::spcforces::print,
+            new case_control::spcforces::imag
+        }, case_control::spcforces::restype::ALL);
+        test << probe;
+        CHECK(test.str() == "SPCFORCES(SORT2, PUNCH, PRINT, IMAG) = ALL\n");
+    }
 
-   SECTION("PHASE") {
-      case_control::spcforces probe({
+    SECTION("PHASE") {
+        case_control::spcforces probe({
             new case_control::spcforces::phase
-         }, case_control::spcforces::restype::NONE);
-      test << probe;
-      CHECK(test.str() == "SPCFORCES(PHASE) = NONE\n");
-   }
+        }, case_control::spcforces::restype::NONE);
+        test << probe;
+        CHECK(test.str() == "SPCFORCES(PHASE) = NONE\n");
+    }
 
-   SECTION("SORT2") {
-      case_control::spcforces probe({
-               new case_control::spcforces::sort2,
-               new case_control::spcforces::print,
-               new case_control::spcforces::psdf,
-               new case_control::spcforces::crms,
-               new case_control::spcforces::rpunch
-         }, 20);
-      test << probe;
-      CHECK(test.str() == "SPCFORCES(SORT2, PRINT, PSDF, CRMS, RPUNCH) = 20\n");
-   }
+    SECTION("SORT2") {
+        case_control::spcforces probe({
+            new case_control::spcforces::sort2,
+            new case_control::spcforces::print,
+            new case_control::spcforces::psdf,
+            new case_control::spcforces::crms,
+            new case_control::spcforces::rpunch
+        }, 20);
+        test << probe;
+        CHECK(test.str() == "SPCFORCES(SORT2, PRINT, PSDF, CRMS, RPUNCH) = 20\n");
+    }
 
-   SECTION("PRINT") {
-      case_control::spcforces probe({
-               new case_control::spcforces::print,
-               new case_control::spcforces::rall,
-               new case_control::spcforces::norprint
-         }, case_control::spcforces::restype::ALL);
-      test << probe;
-      CHECK(test.str() == "SPCFORCES(PRINT, RALL, NORPRINT) = ALL\n");
-   }
+    SECTION("PRINT") {
+        case_control::spcforces probe({
+            new case_control::spcforces::print,
+            new case_control::spcforces::rall,
+            new case_control::spcforces::norprint
+        }, case_control::spcforces::restype::ALL);
+        test << probe;
+        CHECK(test.str() == "SPCFORCES(PRINT, RALL, NORPRINT) = ALL\n");
+    }
 
 }
 

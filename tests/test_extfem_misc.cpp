@@ -5,15 +5,14 @@
    \brief Tests for genaral helper functions.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #include <catch.hpp>
@@ -32,18 +31,18 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl;
 
-CATCH_TRANSLATE_EXCEPTION( extfem::bdf::errors::error& ex ) {
-   return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
+    return Catch::toString(ex.what());
 }
 
 TEST_CASE("Checking misc functions", "[extfem::misc]") {
 
-   SECTION("version number") {
-      CHECK(extfem::version() == "ExtFEMIO, Ver. " ExtFEMIO_VERSION);
-   }
-   SECTION("build data number") {
-      CAPTURE(extfem::build_data());
-   }
+    SECTION("version number") {
+        CHECK(extfem::version() == "ExtFEMIO, Ver. " ExtFEMIO_VERSION);
+    }
+    SECTION("build data number") {
+        CAPTURE(extfem::build_data());
+    }
 }
 
 // Local Variables:

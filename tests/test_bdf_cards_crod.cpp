@@ -5,15 +5,14 @@
    \brief Testing the BDF `CROD` card class.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -36,27 +35,27 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return ex.what();
+CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
+    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
+CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
+    return ex;
 }
 
-TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]" ) {
+TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]") {
 
-   std::list<std::string> data({"CROD,222,13,14,15\n"});
-   std::list<std::string> lines;
-   __base::card::card_split(data, lines);
-   crod probe(lines);
+    std::list<std::string> data({"CROD,222,13,14,15\n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    crod probe(lines);
 
-   SECTION("first crod") {
-      CHECK(probe.EID.value == 222);
-      CHECK(probe.PID.value == 13);
-      CHECK(probe.G1.value == 14);
-      CHECK(probe.G2.value == 15);
-   }
+    SECTION("first crod") {
+        CHECK(probe.EID.value == 222);
+        CHECK(probe.PID.value == 13);
+        CHECK(probe.G1.value == 14);
+        CHECK(probe.G2.value == 15);
+    }
 }
 
 // Local Variables:

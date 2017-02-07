@@ -7,13 +7,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-    char const cID_test_fem_cards[]
-#ifdef __GNUC__
-    __attribute__ ((__unused__))
-#endif
-        = "@(#) $Id$";
+    char const cID_test_fem_cards[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -47,15 +46,11 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 using namespace dnvgl::extfem::fem::input;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-    return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(exception& ex) {
+    return Catch::toString(ex.what());
 }
 
-CATCH_TRANSLATE_EXCEPTION( exception& ex ) {
-    return Catch::toString( ex.what() );
-}
-
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
+CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
     return ex;
 }
 

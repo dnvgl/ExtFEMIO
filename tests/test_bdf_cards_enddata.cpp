@@ -5,15 +5,14 @@
    \brief Testing the BDF `ENDDATA` card class.
 
    Detailed description
-*/
+   */
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   const char  cID[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char  cID[] _EXTFEMIO_UNUSED =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -36,33 +35,33 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION( errors::error& ex ) {
-   return Catch::toString( ex.what() );
+CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
+    return Catch::toString(ex.what());
 }
 
 TEST_CASE("BDF ENDDATA definitions. (Small Field Format)",
-          "[bdf_ENDDATA]" ) {
+          "[bdf_ENDDATA]") {
 
-   SECTION("enddata read") {
-      std::list<std::string> data({
-         "ENDDAT                                                                  \n"});
+    SECTION("enddata read") {
+        std::list<std::string> data({
+            "ENDDAT                                                                  \n"});
 
-      std::list<std::string> lines;
-      __base::card::card_split(data, lines);
-      enddata probe(lines);
-   }
+        std::list<std::string> lines;
+        __base::card::card_split(data, lines);
+        enddata probe(lines);
+    }
 }
 
-TEST_CASE("BDF ENDDATA types output.", "[bdf_enddata,out]" ) {
+TEST_CASE("BDF ENDDATA types output.", "[bdf_enddata,out]") {
 
-   std::ostringstream test;
-   // enddata probe();
-   // test << probe;
-   test << enddata();
+    std::ostringstream test;
+    // enddata probe();
+    // test << probe;
+    test << enddata();
 
-   SECTION("output") {
-      CHECK(test.str() == "ENDDATA \n");
-   }
+    SECTION("output") {
+        CHECK(test.str() == "ENDDATA \n");
+    }
 }
 
 // Local Variables:
