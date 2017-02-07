@@ -6,10 +6,9 @@
 
    Detailed description
 */
-
-// Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-
 #include "StdAfx.h"
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {

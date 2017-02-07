@@ -8,6 +8,8 @@
 */
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
     char const cID_bdf_cards_load[] _EXTFEMIO_UNUSED =
@@ -15,6 +17,7 @@ namespace {
 }
 
 #include <cassert>
+#include <utility>
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
@@ -25,6 +28,9 @@ namespace {
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+using namespace std;
+using namespace std::rel_ops;
 
 namespace {
    long static const cl1 = 1;
@@ -47,13 +53,13 @@ entry_type<long> const load::form_Li(
 load::load() :
 SID(nullptr), S(nullptr), Si(), Li() {}
 
-load::load(std::list<std::string> const &inp) :
+load::load(list<std::string> const &inp) :
 card(inp) {
     this->read(inp);
 }
 
 load::load(long const *SID, double const *S,
-           std::list<double> const *Si, std::list<long> const *Li) :
+           list<double> const *Si, list<long> const *Li) :
            SID(*SID), S(*S), Si(), Li() {
     if (Si)
         copy(Si->begin(), Si->end(), back_inserter(this->Si));
@@ -63,7 +69,7 @@ load::load(long const *SID, double const *S,
 
 cards::__base::card const &load::operator() (
     long const *SID, double const *S,
-    std::list<double> const *Si, std::list<long> const *Li) {
+    list<double> const *Si, list<long> const *Li) {
 
     this->Si.clear();
     this->Li.clear();
@@ -83,7 +89,7 @@ cards::types const load::card_type(void) const {
     return cards::types::LOAD;
 }
 
-void load::read(std::list<std::string> const &inp) {
+void load::read(list<std::string> const &inp) {
     auto pos = inp.begin();
 
     Si.clear();
@@ -96,7 +102,7 @@ void load::read(std::list<std::string> const &inp) {
     if (pos == inp.end()) goto invalid;
     form_S.set_value(S, *(pos++));
     if (pos == inp.end()) goto invalid;
-    while (pos != inp.end() && extfem::string::string(*pos) != "") {
+    while ((pos != inp.end()) && (*pos != "")) {
         Si.push_back(form_Si(*(pos++)));
         if (pos == inp.end()) goto invalid;
         Li.push_back(form_Li(*(pos++)));
@@ -109,7 +115,7 @@ end:;
 }
 
 void load::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
 
     if (static_cast<long>(SID) <= 0) return;
 

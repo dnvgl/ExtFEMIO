@@ -34,6 +34,9 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+using namespace std::rel_ops;
+
 using namespace dnvgl::extfem;
 using namespace bdf::types;
 

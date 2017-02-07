@@ -6,8 +6,9 @@
 
    Detailed description
    */
-
 #include "StdAfx.h"
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {
@@ -98,8 +99,8 @@ sol::sol_no_type_conv::from_long(long const &inp) {
     case 400: return sol_no_type::NONLIN;
     default:
         {
-            std::ostringstream msg("invalid solution value ",
-                                   std::ostringstream::ate);
+            std::ostringstream msg(
+                "invalid solution value ", std::ostringstream::ate);
             msg << inp;
             throw errors::error("HEAD", msg.str());
             break;

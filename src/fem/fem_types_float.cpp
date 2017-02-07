@@ -9,6 +9,8 @@
 
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
     const char cID_fem_types_float[] _EXTFEMIO_UNUSED =

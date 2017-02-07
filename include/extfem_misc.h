@@ -35,8 +35,9 @@ namespace std {
     public:
 
         // Construct with given error message:
-        not_implemented(const char *fname="", const size_t &line=0,
-                        const char *error = "Functionality not yet implemented!") {
+        not_implemented(
+            const char *fname="", const size_t &line=0,
+            const char *error = "Functionality not yet implemented!") {
             std::ostringstream msg("", std::ostringstream::ate);
             if (line != 0 && std::strlen(fname) > 0)
                 msg << fname << ":" << line << ":";
@@ -58,13 +59,23 @@ namespace std {
 namespace dnvgl {
     namespace extfem {
         namespace __base {
+            class outline;
+        }
+    }
+}
+std::ostream &operator<<(std::ostream&, dnvgl::extfem::__base::outline const&);
+
+namespace dnvgl {
+    namespace extfem {
+        namespace __base {
             class outline {
             protected:
                 outline(void);
                 virtual ~outline(void);
             public:
                 std::ostream &operator<<(std::ostream&);
-                friend std::ostream &operator<<(std::ostream&, outline const &);
+                friend std::ostream &::operator<<(
+                    std::ostream&, outline const&);
             protected:
                 virtual std::ostream &put(std::ostream&) const = 0;
             };

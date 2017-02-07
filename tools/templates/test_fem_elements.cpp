@@ -20,13 +20,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   const char cID_test_fem_elements[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+   const char cID_test_fem_elements[]  _EXTFEMIO_UNUSED =
+       "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"

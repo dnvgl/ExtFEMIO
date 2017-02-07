@@ -8,6 +8,8 @@
 */
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
     const char cID_fem_types_bool[] _EXTFEMIO_UNUSED =

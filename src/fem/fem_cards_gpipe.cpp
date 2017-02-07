@@ -8,9 +8,11 @@
 */
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-    const char cID_fem_cards_gpipe[] _EXTFEMIO_UNUSED =
+    char const cID_fem_cards_gpipe[] _EXTFEMIO_UNUSED =
         "@(#) $Id$";
 }
 

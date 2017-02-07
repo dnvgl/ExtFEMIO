@@ -9,6 +9,8 @@
 
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
     const char cID_bdf_header_case_control_begin_bulk[] _EXTFEMIO_UNUSED =

@@ -22,15 +22,12 @@
 
 #include "StdAfx.h"
 
-{% line %}
+#include "extfem_misc.h"
 
 // ID:
 namespace {
-   char const cID_fem_elements[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-       = "@(#) $Id$";
+   char const cID_fem_elements[] _EXTFEMIO_UNUSED =
+       "@(#) $Id$";
 }
 
 #include <memory>
@@ -289,7 +286,8 @@ void elements::__base::elem::add(cards::gelmnt1 const *data) {
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
     else if (this->elident > 0 && this->elident != data->ELNO)
-        throw dnvgl::extfem::fem::errors::data_not_matching_id(this->elident, data->ELNO);
+        throw dnvgl::extfem::fem::errors::data_not_matching_id(
+            this->elident, data->ELNO);
     this->el_add = data->ELTYAD;
     this->nodes = data->NODIN;
 }
@@ -298,7 +296,8 @@ void elements::__base::elem::add(cards::gelref1 const *data) {
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
     else if (this->elident > 0 && this->elident != data->ELNO)
-        throw dnvgl::extfem::fem::errors::data_not_matching_id(this->elident, data->ELNO);
+        throw dnvgl::extfem::fem::errors::data_not_matching_id(
+            this->elident, data->ELNO);
     this->matref = data->MATNO;
     this->add_no = data->ADDNO;
     this->intno = data->INTNO;
@@ -404,22 +403,12 @@ long elements::__base::elem::max_no(0);
 undef::undef(cards::gelref1 const *data) :
     __base::elem(data) {}
 
-namespace dnvgl {
-    namespace extfem {
-        namespace fem {
-            namespace elements {
-                namespace __base {
-                    ostream &operator<<(
-                        ostream &os, elements::__base::elem const &data) {
-                        if (data.elident < 0) return os;
-                        os << data.gelmnt1();
-                        os << data.gelref1();
-                        return os;
-                    }
-                }
-            }
-        }
-    }
+ostream &operator<<(
+    ostream &os, elements::__base::elem const &data) {
+    if (data.elident < 0) return os;
+    os << data.gelmnt1();
+    os << data.gelref1();
+    return os;
 }
 
 {%- for elem, vals in elements %}

@@ -10,6 +10,8 @@
 
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
     char const cID_support_grouping[] _EXTFEMIO_UNUSED =

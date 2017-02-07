@@ -20,9 +20,12 @@
    Detailed description
 */
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   const char cID_test_fem_elements[]       = "@(#) $Id$";
+   const char cID_test_fem_elements[]  _EXTFEMIO_UNUSED =
+       "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -56,7 +59,7 @@ CATCH_TRANSLATE_EXCEPTION(exception& ex ) {
    return ex.what();
 }
 
-CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
+CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
    return ex;
 }
 

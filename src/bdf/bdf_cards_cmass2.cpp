@@ -9,6 +9,8 @@
 
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
     char const cID_bdf_cards_cmass2[] _EXTFEMIO_UNUSED =

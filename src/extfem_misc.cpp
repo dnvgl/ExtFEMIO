@@ -8,6 +8,7 @@
 */
 
 #include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -29,7 +30,7 @@ std::ostream &outline::operator<<(std::ostream &os) {
     return this->put(os);
 }
 
-std::ostream &dnvgl::extfem::__base::operator<<(std::ostream &os, outline const &val) {
+std::ostream &operator<<(std::ostream &os, outline const &val) {
     return val.put(os);
 }
 

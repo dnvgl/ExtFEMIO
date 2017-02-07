@@ -10,6 +10,8 @@
 
 #include "StdAfx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
     const char cID_bdf_l_geom[] _EXTFEMIO_UNUSED

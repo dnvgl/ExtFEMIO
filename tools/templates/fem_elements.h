@@ -37,6 +37,21 @@ namespace dnvgl {
     namespace extfem {
         namespace fem {
             namespace elements {
+                namespace __base {
+                    class elem;
+                }
+            }
+        }
+    }
+}
+
+std::ostream &operator<<(
+    std::ostream&, dnvgl::extfem::fem::elements::__base::elem const &);
+
+namespace dnvgl {
+    namespace extfem {
+        namespace fem {
+            namespace elements {
 
                 enum class el_types {
                     {% for name, val in enums %}{{ name }} = {{ val }},
@@ -289,7 +304,7 @@ namespace dnvgl {
 
                         virtual el_types get_type(void) const = 0;
 
-                        friend std::ostream &operator<<(std::ostream&, elem const &);
+                        friend std::ostream &::operator<<(std::ostream&, elem const &);
                     };
 
                     /**

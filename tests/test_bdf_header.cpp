@@ -172,7 +172,11 @@ TEST_CASE("BDF generate 'LOAD' header entries", "[bdf_header,load]") {
     }
 }
 
-namespace ExportBDF {
+namespace ExportBDF{ class BDF_Header; }
+std::ostream&
+    operator<<(std::ostream &, const ExportBDF::BDF_Header&);
+
+namespace ExportBDF{
 
     class BDF_Header {
     private:
@@ -183,7 +187,7 @@ namespace ExportBDF {
         void add_LC(long const &lc_num, long const &id, std::string const &title);
         std::ostream const &operator<<(std::ostream&) const;
         friend std::ostream&
-        operator<<(std::ostream &, const BDF_Header&);
+        ::operator<<(std::ostream &, const BDF_Header&);
     };
 
     BDF_Header::BDF_Header(std::string const &title) {
@@ -236,13 +240,13 @@ namespace ExportBDF {
     std::ostream const &BDF_Header::operator<< (std::ostream &os) const {
         return os << this;
     }
+}
 
-    std::ostream& operator<<(std::ostream &os, const BDF_Header &entry) {
-        for (auto const &p : entry.entries)
-            os << *p;
-        os << case_control::begin_bulk();
-        return os;
-    }
+std::ostream &operator<<(std::ostream &os, const ExportBDF::BDF_Header &entry) {
+    for (auto const &p : entry.entries)
+        os << *p;
+    os << case_control::begin_bulk();
+    return os;
 }
 
 TEST_CASE("Sample Header", "[bdf_header]") {

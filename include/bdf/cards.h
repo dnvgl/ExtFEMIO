@@ -34,18 +34,45 @@ namespace dnvgl {
     namespace extfem {
         namespace bdf {
             namespace cards {
+                typedef std::pair<dnvgl::extfem::bdf::types::base*, void*>
+                format_entry;
+            }
+        }
+    }
+}
+
+std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
+format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &);
+
+std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
+format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
+
+template <class _Ty>
+std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
+format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
+       const _Ty *);
+
+template <class _Ty>
+std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
+format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
+       const dnvgl::extfem::bdf::types::entry_value<_Ty>&);
+
+namespace dnvgl {
+    namespace extfem {
+        namespace bdf {
+            namespace cards {
 
                 void extern const(*note_report)(std::string const &);
                 void extern const(*info_report)(std::string const &);
                 void extern const(*warn_report)(std::string const &);
                 void extern const(*error_report)(std::string const &);
 
-                /**
-                   \brief Unique identifier for each class representing a BDF card.
+/**
+   \brief Unique identifier for each class representing a BDF card.
 
-                   These are used to identify the classes that are returned from
-                   `dispatch` as `card` superclass.
-                */
+   These are used to identify the classes that are returned from
+   `dispatch` as `card` superclass.
+*/
                 enum class types {
                     GRID, //!< # Geometry
                     //!< ## Grid Points
@@ -336,8 +363,6 @@ namespace dnvgl {
                     //!< connects i = 2, 3, or 4 fluid points.
                     UNKNOWN, //!< undknown card
                 };
-
-                typedef std::pair<dnvgl::extfem::bdf::types::base*, void*> format_entry;
 
                 namespace __base {
 /**
