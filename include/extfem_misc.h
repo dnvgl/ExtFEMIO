@@ -27,14 +27,12 @@ namespace std {
     public:
 
         // Construct with given error message:
-        not_implemented(const std::string &error=std::string("Functionality not yet implemented!")) {
-            errorMessage = error;
-        }
-
-        not_implemented(const std::string &fname, const size_t &line) {
+        not_implemented(const char *fname="", const size_t &line=0,
+                        const char *error = "Functionality not yet implemented!") {
             std::ostringstream msg("", std::ostringstream::ate);
-            msg << fname << ":" << line << ":"
-                <<"Functionality not yet implemented!";
+            if (line != 0 && strlen(fname) > 0)
+                msg << fname << ":" << line << ":";
+            msg << "Functionality not yet implemented!";
             errorMessage = msg.str();
         }
 
