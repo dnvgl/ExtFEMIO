@@ -47,16 +47,6 @@ format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &);
 std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
 format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
 
-template <class _Ty>
-std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
-format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
-       const _Ty *);
-
-template <class _Ty>
-std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
-format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
-       const dnvgl::extfem::bdf::types::entry_value<_Ty>&);
-
 namespace dnvgl {
     namespace extfem {
         namespace bdf {
