@@ -13,6 +13,7 @@
 #define _EXTFEM_MISC_H_
 
 #include <sstream>
+#include <cstring>
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
@@ -30,7 +31,7 @@ namespace std {
         not_implemented(const char *fname="", const size_t &line=0,
                         const char *error = "Functionality not yet implemented!") {
             std::ostringstream msg("", std::ostringstream::ate);
-            if (line != 0 && strlen(fname) > 0)
+            if (line != 0 && std::strlen(fname) > 0)
                 msg << fname << ":" << line << ":";
             msg << "Functionality not yet implemented!";
             errorMessage = msg.str();
