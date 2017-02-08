@@ -31,6 +31,7 @@ namespace {
     double static const cd0 = 0.;
 }
 
+using namespace std;
 
 using namespace dnvgl::extfem;
 using namespace bdf;
@@ -55,7 +56,7 @@ entry_type<double> const cards::__base::momforce::form_N3(
 
 cards::__base::momforce::momforce(void) : card() {}
 
-cards::__base::momforce::momforce(std::list<std::string> const &inp) :
+cards::__base::momforce::momforce(list<std::string> const &inp) :
 card(inp) {
     this->read(inp);
 }
@@ -88,7 +89,7 @@ cards::__base::card const &cards::__base::momforce::operator() (
 }
 
 
-void cards::__base::momforce::read(std::list<std::string> const &inp) {
+void cards::__base::momforce::read(list<std::string> const &inp) {
 
     auto pos = inp.rbegin();
 
@@ -119,27 +120,27 @@ void cards::__base::momforce::read(std::list<std::string> const &inp) {
 }
 
 void cards::__base::momforce::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
     if (static_cast<long>(SID) <= 0) return;
 
-    res.push_back(get_head());
+    res.push_back(unique_ptr<format_entry>(get_head()));
 
-    res.push_back(format<long>(form_SID, SID));
-    res.push_back(format<long>(form_G, G));
-    res.push_back(format<long>(form_CID, CID));
-    res.push_back(format<double>(form_F, F));
-    res.push_back(format<double>(form_N1, N1));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_SID, SID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G, G)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_CID, CID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_F, F)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_N1, N1)));
     if (N2 || N3)
-        res.push_back(format<double>(form_N2, N2));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_N2, N2)));
     if (N3)
-        res.push_back(format<double>(form_N3, N3));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_N3, N3)));
     return;
 }
 
 force::force(void) :
 cards::__base::momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
 
-force::force(std::list<std::string> const &inp) :
+force::force(list<std::string> const &inp) :
 cards::__base::momforce(inp) {}
 
 force::force(
@@ -150,7 +151,7 @@ force::force(
 
 bdf::types::card force::head = bdf::types::card("FORCE");
 
-std::unique_ptr<format_entry> force::get_head(void) const {
+format_entry *force::get_head(void) const {
     return format(force::head);
 }
 
@@ -161,7 +162,7 @@ cards::types const force::card_type(void) const {
 moment::moment(void) :
 cards::__base::momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
 
-moment::moment(std::list<std::string> const &inp) :
+moment::moment(list<std::string> const &inp) :
 cards::__base::momforce(inp) {}
 
 moment::moment(
@@ -172,7 +173,7 @@ moment::moment(
 
 bdf::types::card moment::head = bdf::types::card("MOMENT");
 
-std::unique_ptr<format_entry> moment::get_head(void) const {
+format_entry *moment::get_head(void) const {
     return format(moment::head);
 }
 
@@ -185,5 +186,7 @@ cards::types const moment::card_type(void) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

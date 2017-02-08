@@ -41,11 +41,21 @@ namespace dnvgl {
     }
 }
 
-std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
-format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &);
+dnvgl::extfem::bdf::cards::format_entry
+*format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &);
 
-std::unique_ptr<dnvgl::extfem::bdf::cards::format_entry>
-format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
+dnvgl::extfem::bdf::cards::format_entry
+*format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
+
+template <class _Ty>
+dnvgl::extfem::bdf::cards::format_entry
+*format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
+        const _Ty *);
+
+template <class _Ty>
+dnvgl::extfem::bdf::cards::format_entry
+*format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
+        const dnvgl::extfem::bdf::types::entry_value<_Ty>&);
 
 namespace dnvgl {
     namespace extfem {
@@ -390,23 +400,25 @@ namespace dnvgl {
 
                     public:
 
-                        friend inline
-                        std::unique_ptr<format_entry>
-                        format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &);
+                        friend format_entry
+                        *::format(
+                            std::unique_ptr<dnvgl::extfem::bdf::types::card>
+                            const &);
 
-                        friend inline
-                        std::unique_ptr<format_entry>
-                        format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
+                        friend format_entry
+                        *::format(
+                            std::unique_ptr<
+                            dnvgl::extfem::bdf::types::empty> const&);
 
-                        template <class _Ty> friend inline
-                        std::unique_ptr<format_entry>
-                        format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
-                               const _Ty *);
+                        template <class _Ty> friend format_entry
+                        *::format(
+                            dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
+                            _Ty const*);
 
-                        template <class _Ty> friend inline
-                        std::unique_ptr<format_entry>
-                        format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
-                               const dnvgl::extfem::bdf::types::entry_value<_Ty>&);
+                        template <class _Ty> friend format_entry
+                        *::format(
+                            dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
+                            dnvgl::extfem::bdf::types::entry_value<_Ty> const&);
 
                         static void
                         card_split(std::list<std::string> const &, std::list<std::string>&);
@@ -418,38 +430,6 @@ namespace dnvgl {
                         virtual dnvgl::extfem::bdf::cards::types const card_type(void) const = 0;
                     };
                 }
-
-                using __base::format;
-
-                inline std::unique_ptr<format_entry>
-                format(dnvgl::extfem::bdf::types::card const &formatter) {
-                    return std::make_unique<format_entry>(
-                        (dnvgl::extfem::bdf::types::card*)&formatter, nullptr);
-                };
-
-                inline std::unique_ptr<format_entry>
-                format(dnvgl::extfem::bdf::types::empty const &formatter) {
-                    return std::make_unique<format_entry>(
-                        (dnvgl::extfem::bdf::types::base*)&formatter, nullptr);
-                };
-
-                template <class _Ty> inline
-                std::unique_ptr<format_entry>
-                __base::format(dnvgl::extfem::bdf::types::entry_type<_Ty> const &formatter,
-                               _Ty const *val) {
-                    return std::make_unique<format_entry>(
-                        (dnvgl::extfem::bdf::types::base*)&formatter,
-                        (void*)val);
-                };
-
-                template <class _Ty> inline
-                std::unique_ptr<format_entry>
-                __base::format(const dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
-                               const dnvgl::extfem::bdf::types::entry_value<_Ty> &val) {
-                    return std::make_unique<format_entry>(
-                        (dnvgl::extfem::bdf::types::base*)&formatter,
-                        (void*)&val);
-                };
 
                 class unknown : public __base::card {
 
@@ -468,6 +448,47 @@ namespace dnvgl {
                     virtual void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const;
                 };
+            }
+        }
+    }
+}
+
+inline dnvgl::extfem::bdf::cards::format_entry
+*format(dnvgl::extfem::bdf::types::card const &formatter) {
+    return new dnvgl::extfem::bdf::cards::format_entry(
+        (dnvgl::extfem::bdf::types::card*)&formatter, nullptr);
+}
+
+inline dnvgl::extfem::bdf::cards::format_entry
+*format(dnvgl::extfem::bdf::types::empty const &formatter) {
+    return new dnvgl::extfem::bdf::cards::format_entry(
+        (dnvgl::extfem::bdf::types::base*)&formatter, nullptr);
+}
+
+template <class _Ty> inline
+dnvgl::extfem::bdf::cards::format_entry
+*format(dnvgl::extfem::bdf::types::entry_type<_Ty> const &formatter,
+               _Ty const *val) {
+    return new dnvgl::extfem::bdf::cards::format_entry(
+        (dnvgl::extfem::bdf::types::base*)&formatter,
+        (void*)val);
+}
+
+template <class _Ty> inline
+dnvgl::extfem::bdf::cards::format_entry
+*format(const dnvgl::extfem::bdf::types::entry_type<_Ty> &formatter,
+       const dnvgl::extfem::bdf::types::entry_value<_Ty> &val) {
+    return new dnvgl::extfem::bdf::cards::format_entry(
+        (dnvgl::extfem::bdf::types::base*)&formatter,
+        (void*)&val);
+}
+
+namespace dnvgl {
+    namespace extfem {
+        namespace bdf {
+            namespace cards {
+
+
 
 /// Handle Nastran Bulk `ENDDATA` entries.
 /** # Bulk Data Delimiter
@@ -894,6 +915,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:

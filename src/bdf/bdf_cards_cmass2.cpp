@@ -35,6 +35,8 @@ namespace {
    double static const cd0 = 0.;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace type_bounds;
@@ -47,24 +49,24 @@ using bdf::types::entry_type;
 entry_type<double> const cmass2::form_M("M");
 entry_type<long> const cmass2::form_G1(
    "G1", bound<long>(nullptr, nullptr, nullptr, true));
-entry_type<std::list<int> > const cmass2::form_C1("C1");
+entry_type<list<int> > const cmass2::form_C1("C1");
 entry_type<long> const cmass2::form_G2(
    "G2", bound<long>(nullptr, nullptr, nullptr, true));
-entry_type<std::list<int> > const cmass2::form_C2("C2");
+entry_type<list<int> > const cmass2::form_C2("C2");
 
 cmass2::cmass2(void) :
    element(nullptr),
    M(nullptr), G1(nullptr), C1(nullptr),
    G2(nullptr), C2(nullptr) {}
 
-cmass2::cmass2(std::list<std::string> const &inp) :
+cmass2::cmass2(list<std::string> const &inp) :
 element(inp) {
     this->read(inp);
 }
 
 cmass2::cmass2(long const *EID, double const *M,
-               long const *G1, std::list<int> const *C1,
-               long const *G2/*=nullptr*/, std::list<int> const *C2/*=nullptr*/) :
+               long const *G1, list<int> const *C1,
+               long const *G2/*=nullptr*/, list<int> const *C2/*=nullptr*/) :
                element(EID),
                M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
     if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
@@ -77,8 +79,8 @@ cmass2::cmass2(long const *EID, double const *M,
 
 cards::__base::card const &cmass2::operator() (
     long const *EID, double const *M,
-    long const *G1, std::list<int> const *C1,
-    long const *G2/*=nullptr*/, std::list<int> const *C2/*=nullptr*/) {
+    long const *G1, list<int> const *C1,
+    long const *G2/*=nullptr*/, list<int> const *C2/*=nullptr*/) {
     this->EID = EID;
     this->M = *M;
     this->G1 = *G1;
@@ -96,7 +98,7 @@ cards::__base::card const &cmass2::operator() (
 
 bdf::types::card cmass2::head = bdf::types::card("CMASS2");
 
-void cmass2::read(std::list<std::string> const &inp) {
+void cmass2::read(list<std::string> const &inp) {
     auto pos = inp.begin();
 
     form_G1.set_value(G1, "");
@@ -130,21 +132,23 @@ bdf::cards::types const cmass2::card_type(void) const {
 }
 
 void cmass2::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
 
     if (!EID) return;
 
-    res.push_back(format(cmass2::head));
+    res.push_back(unique_ptr<format_entry>(format(cmass2::head)));
 
-    res.push_back(format<long>(form_EID, EID));
-    res.push_back(format<double>(form_M, M));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_M, M)));
     if (G1 || G2) {
-        res.push_back(format<long>(form_G1, G1));
-        res.push_back(format<std::list<int> >(form_C1, C1));
+        res.push_back(unique_ptr<format_entry>(format<long>(form_G1, G1)));
+        res.push_back(
+            unique_ptr<format_entry>(format<list<int> >(form_C1, C1)));
     }
     if (G2) {
-        res.push_back(format<long>(form_G2, G2));
-        res.push_back(format<std::list<int> >(form_C2, C2));
+        res.push_back(unique_ptr<format_entry>(format<long>(form_G2, G2)));
+        res.push_back(
+            unique_ptr<format_entry>(format<list<int> >(form_C2, C2)));
     }
 
     return;
@@ -155,5 +159,7 @@ void cmass2::collect_outdata(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

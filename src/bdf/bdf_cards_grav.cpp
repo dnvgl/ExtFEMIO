@@ -33,6 +33,8 @@ namespace {
    long static const cl1 = 1;
 }
 
+using namespace std;
+
 using dnvgl::extfem::bdf::types::entry_type;
 using dnvgl::extfem::bdf::types::entry_value;
 
@@ -50,7 +52,7 @@ entry_type<long> const grav::form_MB(
     "MB",
     bdf::type_bounds::bound<long>(nullptr, nullptr, &cl0));
 
-grav::grav(std::list<std::string> const &inp) :
+grav::grav(list<std::string> const &inp) :
 card(inp) {
     this->read(inp);
 }
@@ -66,7 +68,7 @@ grav::grav(long const *SID, long const *CID, double const *A,
            SID(SID), CID(CID), A(A), N1(N1), N2(N2), N3(N3), MB(MB) {}
 
 grav::grav(long const *SID, long const *CID, double const *A,
-           std::vector<double> const *N,
+           vector<double> const *N,
            long const *MB/*=nullptr*/) :
            grav(SID, CID, A, &(*N)[0], &(*N)[1], &(*N)[2], MB) {
     if (N->size() != 3)
@@ -76,7 +78,7 @@ grav::grav(long const *SID, long const *CID, double const *A,
 cards::__base::card const &grav::operator() (
     long const *SID, long const *CID,
     double const *A,
-    std::vector<double> const *N,
+    vector<double> const *N,
     long const *MB/*=nullptr*/) {
     this->SID = *SID;
     this->CID = *CID;
@@ -117,7 +119,7 @@ cards::__base::card const &grav::operator() (
 
 bdf::types::card grav::head = bdf::types::card("GRAV");
 
-void grav::read(std::list<std::string> const &inp) {
+void grav::read(list<std::string> const &inp) {
     auto pos = inp.begin();
 
     if (pos == inp.end()) goto invalid;
@@ -148,18 +150,18 @@ cards::types const grav::card_type(void) const {
 }
 
 void grav::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
     if (static_cast<long>(SID) <= 0) return;
-    res.push_back(format(grav::head));
+    res.push_back(unique_ptr<format_entry>(format(grav::head)));
 
-    res.push_back(format<long>(form_SID, SID));
-    res.push_back(format<long>(form_CID, CID));
-    res.push_back(format<double>(form_A, A));
-    res.push_back(format<double>(form_Ni, N1));
-    res.push_back(format<double>(form_Ni, N2));
-    res.push_back(format<double>(form_Ni, N3));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_SID, SID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_CID, CID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_Ni, N1)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_Ni, N2)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_Ni, N3)));
     if (MB)
-        res.push_back(format<long>(form_MB, MB));
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MB, MB)));
 
     return;
 }
@@ -169,5 +171,7 @@ void grav::collect_outdata(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

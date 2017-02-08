@@ -119,17 +119,17 @@ void load::collect_outdata(
 
     if (static_cast<long>(SID) <= 0) return;
 
-    res.push_back(format(load::head));
+    res.push_back(unique_ptr<format_entry>(format(load::head)));
 
-    res.push_back(format<long>(form_SID, SID));
-    res.push_back(format<double>(form_S, S));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_SID, SID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_S, S)));
 
     assert(Si.size() == Li.size());
 
     auto pS = Si.begin();
     for (auto pL = Li.begin(); pL != Li.end(); ++pL) {
-        res.push_back(format<double>(form_Si, &(*pS)));
-        res.push_back(format<long>(form_Li, &(*pL))); //
+        res.push_back(unique_ptr<format_entry>(format<double>(form_Si, &(*pS))));
+        res.push_back(unique_ptr<format_entry>(format<long>(form_Li, &(*pL))));
         ++pS;
     }
     return;
@@ -140,5 +140,7 @@ void load::collect_outdata(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

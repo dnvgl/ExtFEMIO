@@ -34,6 +34,8 @@ namespace {
     long static const cl1 = 1;
 }
 
+using namespace std;
+
 using dnvgl::extfem::bdf::types::entry_type;
 using dnvgl::extfem::bdf::types::entry_value;
 
@@ -51,7 +53,7 @@ cmass4::cmass4(void) :
 element(nullptr),
 M(nullptr), S1(nullptr), S2(nullptr) {}
 
-cmass4::cmass4(std::list<std::string> const &inp) :
+cmass4::cmass4(list<std::string> const &inp) :
 element(inp) {
     this->read(inp);
 }
@@ -79,7 +81,7 @@ cards::__base::card const &cmass4::operator() (
 
 bdf::types::card cmass4::head = bdf::types::card("CMASS4");
 
-void cmass4::read(std::list<std::string> const &inp) {
+void cmass4::read(list<std::string> const &inp) {
     auto pos = inp.begin();
 
     if (pos == inp.end()) goto invalid;
@@ -104,19 +106,19 @@ cards::types const cmass4::card_type(void) const {
 }
 
 void cmass4::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
 
     if (static_cast<long>(EID) <= 0)
         return;
 
-    res.push_back(format(cmass4::head));
+    res.push_back(unique_ptr<format_entry>(format(cmass4::head)));
 
-    res.push_back(format<long>(form_EID, EID));
-    res.push_back(format<double>(form_M, M));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_M, M)));
     if (S1 || S2)
-        res.push_back(format<long>(form_S1, S1));
-    if (S2)
-        res.push_back(format<long>(form_S2, S2));
+        res.push_back(unique_ptr<format_entry>(format<long>(form_S1, S1)));
+    if (S2) 
+        res.push_back(unique_ptr<format_entry>(format<long>(form_S2, S2)));
 
     return;
 }

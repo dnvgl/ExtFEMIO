@@ -19,6 +19,8 @@ namespace {
 
 #include "bdf/cards.h"
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::bdf::cards;
 
@@ -28,7 +30,7 @@ const bdf::types::entry_type<std::string> param::form_N("N");
 const bdf::types::entry_type<long> param::form_IVAL("IVAL");
 const bdf::types::entry_type<double> param::form_RVAL("RVAL");
 const bdf::types::entry_type<std::string> param::form_CVAL("CVAL");
-const bdf::types::entry_type<std::complex<double> > param::form_CPLXVAL("CPLXVAL");
+const bdf::types::entry_type<complex<double> > param::form_CPLXVAL("CPLXVAL");
 
 param::param() : card(), IVAL(), RVAL(), CVAL(), CPLXVAL() {}
 
@@ -54,15 +56,15 @@ param(n) {
 param::param(std::string const &n,
              double const &cplxval_r, double const &cplxval_i) :
              param(n) {
-    CPLXVAL = std::complex<double>(cplxval_r, cplxval_i);
+    CPLXVAL = complex<double>(cplxval_r, cplxval_i);
 }
 
-param::param(std::string const &n, std::complex<double> const &cplxval) :
+param::param(std::string const &n, complex<double> const &cplxval) :
 param(n) {
     CPLXVAL = cplxval;
 }
 
-param::param(std::list<std::string> const &inp) :
+param::param(list<std::string> const &inp) :
 card(inp) {
     this->read(inp);
 }
@@ -71,7 +73,7 @@ const dnvgl::extfem::bdf::cards::types param::card_type(void) const {
     return types::PARAM;
 }
 
-void param::read(std::list<std::string> const &inp) {
+void param::read(list<std::string> const &inp) {
 
     const bdf::types::entry_type<long> form_V_I("int val");
     const bdf::types::entry_type<double> form_V_R("double_val");
@@ -120,20 +122,25 @@ void param::read(std::list<std::string> const &inp) {
 }
 
 void param::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
 
-    res.push_back(format(param::head));
+    res.push_back(unique_ptr<format_entry>(format(param::head)));
 
-    res.push_back(format<std::string>(this->form_N, this->N));
+    res.push_back(unique_ptr<format_entry>(format<std::string>(form_N, N)));
 
-    if (this->IVAL)
-        res.push_back(format<long>(this->form_IVAL, this->IVAL));
-    else if (this->RVAL)
-        res.push_back(format<double>(this->form_RVAL, this->RVAL));
-    else if (this->CVAL)
-        res.push_back(format<std::string>(this->form_CVAL, this->CVAL));
-    else if (this->CPLXVAL)
-        res.push_back(format<std::complex<double> >(this->form_CPLXVAL, this->CPLXVAL));
+    if (IVAL)
+        res.push_back(
+            unique_ptr<format_entry>(format<long>(form_IVAL, IVAL)));
+    else if (RVAL)
+        res.push_back(
+            unique_ptr<format_entry>(format<double>(form_RVAL, RVAL)));
+    else if (CVAL)
+        res.push_back(
+            unique_ptr<format_entry>(format<std::string>(form_CVAL, CVAL)));
+    else if (CPLXVAL)
+        res.push_back(
+            unique_ptr<format_entry>(
+                format<complex<double>>(form_CPLXVAL, CPLXVAL)));
     else
         throw errors::output_error("PARAM", "no output value.");
 }
@@ -143,5 +150,7 @@ void param::collect_outdata(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

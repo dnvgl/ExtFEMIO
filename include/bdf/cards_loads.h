@@ -17,76 +17,80 @@
 #include <memory>
 
 namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace cards {
-            namespace __base {
+    namespace extfem {
+        namespace bdf {
+            namespace cards {
+                namespace __base {
 
 /// Base class for handling forces and moments.
-               class momforce : public __base::card {
+                    class momforce : public __base::card {
 
-               protected:
+                    protected:
 
-                  static const dnvgl::extfem::bdf::types::entry_type<long> form_SID;
-                  static const dnvgl::extfem::bdf::types::entry_type<long> form_G;
-                  static const dnvgl::extfem::bdf::types::entry_type<long> form_CID;
-                  static const dnvgl::extfem::bdf::types::entry_type<double> form_F;
-                  static const dnvgl::extfem::bdf::types::entry_type<double> form_N1;
-                  static const dnvgl::extfem::bdf::types::entry_type<double> form_N2;
-                  static const dnvgl::extfem::bdf::types::entry_type<double> form_N3;
+                        dnvgl::extfem::bdf::types::entry_type<long>
+                        static const form_SID;
+                        dnvgl::extfem::bdf::types::entry_type<long>
+                        static const form_G;
+                        dnvgl::extfem::bdf::types::entry_type<long>
+                        static const form_CID;
+                        dnvgl::extfem::bdf::types::entry_type<double>
+                        static const form_F;
+                        dnvgl::extfem::bdf::types::entry_type<double>
+                        static const form_N1;
+                        dnvgl::extfem::bdf::types::entry_type<double>
+                        static const form_N2;
+                        dnvgl::extfem::bdf::types::entry_type<double>
+                        static const form_N3;
 
-               public:
+                    public:
 
-                  /** Load std::set identification number. (Integer > 0)
-                   */
-                  dnvgl::extfem::bdf::types::entry_value<long> SID;
-                  /** Grid point identification number. (Integer > 0)
-                   */
-                  dnvgl::extfem::bdf::types::entry_value<long> G;
-                  /** Coordinate system identification number. (Integer > 0;
-                      Default = 0)
-                  */
-                  dnvgl::extfem::bdf::types::entry_value<long> CID;
-                  /** Scale factor. (Real)
-                   */
-                  dnvgl::extfem::bdf::types::entry_value<double> F;
-                  /** *x* components of a vector measured in coordinate system
-                      defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-                  */
-                  dnvgl::extfem::bdf::types::entry_value<double> N1;
-                  /** *y* components of a vector measured in coordinate system
-                      defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-                  */
-                  dnvgl::extfem::bdf::types::entry_value<double> N2;
-                  /** *z* components of a vector measured in coordinate system
-                      defined by `CID`. (Real; at least one `Ni` ≠ 0.0.)
-                  */
-                  dnvgl::extfem::bdf::types::entry_value<double> N3;
+/// Load std::set identification number. (Integer > 0)
+                        dnvgl::extfem::bdf::types::entry_value<long> SID;
+/// Grid point identification number. (Integer > 0)
+                        dnvgl::extfem::bdf::types::entry_value<long> G;
+/// Coordinate system identification number. (Integer > 0; Default = 0)
+                        dnvgl::extfem::bdf::types::entry_value<long> CID;
+///Scale factor. (Real)
+                        dnvgl::extfem::bdf::types::entry_value<double> F;
+/** *x* components of a vector measured in coordinate system defined
+    by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+*/
+                        dnvgl::extfem::bdf::types::entry_value<double> N1;
+/** *y* components of a vector measured in coordinate system defined
+    by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+*/
+                        dnvgl::extfem::bdf::types::entry_value<double> N2;
+/** *z* components of a vector measured in coordinate system defined
+    by `CID`. (Real; at least one `Ni` ≠ 0.0.)
+*/
+                        dnvgl::extfem::bdf::types::entry_value<double> N3;
 
-               protected:
+                    protected:
 
-                  virtual void read(std::list<std::string> const &);
+                        virtual void read(std::list<std::string> const &);
 
-                  momforce(void);
+                        momforce(void);
 
-                  momforce(const std::list<std::string> &inp);
+                        momforce(std::list<std::string> const &inp);
 
-                  momforce(
-                     const long *SID, const long *G, const long *CID,
-                     const double *F,
-                     const double *N1, const double *N2=nullptr, const double *N3=nullptr);
+                        momforce(
+                            long const *SID, long const *G, long const *CID,
+                            double const *F,
+                            double const *N1, double const *N2=nullptr,
+                            double const *N3=nullptr);
 
-                  virtual std::unique_ptr<format_entry> get_head(void) const = 0;
+                        virtual format_entry *get_head(void) const = 0;
 
-                  __base::card const &operator() (
-                     const long *SID, const long *G, const long *CID,
-                     const double *F,
-                     const double *N1, const double *N2=nullptr, const double *N3=nullptr);
+                        __base::card const &operator() (
+                            long const *SID, long const *G, long const *CID,
+                            double const *F,
+                            double const *N1, double const *N2=nullptr,
+                            double const *N3=nullptr);
 
-                  virtual void collect_outdata (
-                     std::list<std::unique_ptr<format_entry> > &) const;
-               };
-            }
+                        virtual void collect_outdata (
+                            std::list<std::unique_ptr<format_entry> > &) const;
+                    };
+                }
 
 /// Handle Nastran Bulk `FORCE` entries.
 /** # Static Force
@@ -100,35 +104,36 @@ vector.
 | ------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `FORCE` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class force : public __base::momforce {
-               // Handle Nastran Bulk FORCE entries.
+                class force : public __base::momforce {
 
-            private:
+                private:
 
-               static dnvgl::extfem::bdf::types::card head;
+                    static dnvgl::extfem::bdf::types::card head;
 
-            public:
+                public:
 
-               force(void);
+                    force(void);
 
-               force(const std::list<std::string> &inp);
+                    force(const std::list<std::string> &inp);
 
-               force(
-                  const long *SID, const long *G, const long *CID,
-                  const double *F,
-                  const double *N1, const double *N2=nullptr, const double *N3=nullptr);
+                    force(
+                        long const *SID, long const *G, long const *CID,
+                        double const *F,
+                        double const *N1, double const *N2=nullptr,
+                        double const *N3=nullptr);
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+                    const dnvgl::extfem::bdf::cards::types
+                    card_type(void) const;
 
-               using __base::momforce::read;
-               using momforce::operator();
+                    using __base::momforce::read;
+                    using momforce::operator();
 
-            private:
+                private:
 
-               virtual std::unique_ptr<format_entry> get_head(void) const;
+                    virtual format_entry *get_head(void) const;
 
-               using __base::momforce::collect_outdata;
-            };
+                    using __base::momforce::collect_outdata;
+                };
 
 /// Handle Nastran Bulk `MOMENT` entries.
 /** # Static Force
@@ -142,35 +147,36 @@ vector.
 | -------- | ----- | --- | ----- | --- | ---- | ---- | ---- | - | -- |
 | `MOMENT` | `SID` | `G` | `CID` | `F` | `N1` | `N2` | `N3` |   |    |
 */
-            class moment : public __base::momforce {
-               // Handle Nastran Bulk MOMENT entries.
+                class moment : public __base::momforce {
 
-            private:
+                private:
 
-               static dnvgl::extfem::bdf::types::card head;
+                    static dnvgl::extfem::bdf::types::card head;
 
-            public:
+                public:
 
-               moment(void);
+                    moment(void);
 
-               moment(const std::list<std::string> &inp);
+                    moment(const std::list<std::string> &inp);
 
-               moment(
-                  const long *SID, const long *G, const long *CID,
-                  const double *F,
-                  const double *N1, const double *N2=nullptr, const double *N3=nullptr);
+                    moment(
+                        long const *SID, long const *G, long const *CID,
+                        double const *F,
+                        double const *N1, double const *N2=nullptr,
+                        double const *N3=nullptr);
 
-               dnvgl::extfem::bdf::cards::types const card_type(void) const;
+                    dnvgl::extfem::bdf::cards::types const
+                    card_type(void) const;
 
-               using __base::momforce::read;
-               using momforce::operator();
+                    using __base::momforce::read;
+                    using momforce::operator();
 
-            private:
+                private:
 
-               virtual std::unique_ptr<format_entry> get_head(void) const;
+                    virtual format_entry *get_head(void) const;
 
-               using __base::momforce::collect_outdata;
-            };
+                    using __base::momforce::collect_outdata;
+                };
 
 /// Handle Nastran Bulk CMASS2 entries.
 /** # Parameter
@@ -235,68 +241,77 @@ Defines a scalar mass element without reference to a property entry.
 
 */
 
-            class cmass2 : public __base::element {
+                class cmass2 : public __base::element {
 
-               static dnvgl::extfem::bdf::types::card head;
-               // static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_M;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G1;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_G2;
-               static const dnvgl::extfem::bdf::types::entry_type<std::list<int> > form_C1;
-               static const dnvgl::extfem::bdf::types::entry_type<std::list<int> > form_C2;
+                    dnvgl::extfem::bdf::types::card static head;
+                    // dnvgl::extfem::bdf::types::entry_type<long>
+                    // static const form_EID;
+                    dnvgl::extfem::bdf::types::entry_type<double>
+                    static const form_M;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_G1;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_G2;
+                    dnvgl::extfem::bdf::types::entry_type<std::list<int>>
+                    static const form_C1;
+                    dnvgl::extfem::bdf::types::entry_type<std::list<int>>
+                    static const form_C2;
 
-            public:
-               // /** Unique element identification number. (0 < Integer
-               //     < 100,000,000)
-               //  */
-               // dnvgl::extfem::bdf::types::entry_value<long> EID;
-               /** Value of the scalar mass. (Real)
-                */
-               dnvgl::extfem::bdf::types::entry_value<double> M;
-               /** Geometric grid or scalar point identification
-                   number. (Integer > 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> G1;
-               /** Component number. (0 < Integer < 6; blank or zero
-                   if scalar point)
-               */
-               dnvgl::extfem::bdf::types::entry_value<std::list<int> > C1;
-               /** Geometric grid or scalar point identification
-                   number. (Integer > 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> G2;
-               /** Component number. (0 < Integer < 6; blank or zero
-                   if scalar point)
-               */
-               dnvgl::extfem::bdf::types::entry_value<std::list<int> > C2;
+                public:
+                    // /** Unique element identification number. (0 < Integer
+                    //     < 100,000,000)
+                    //  */
+                    // dnvgl::extfem::bdf::types::entry_value<long> EID;
+                    /** Value of the scalar mass. (Real)
+                     */
+                    dnvgl::extfem::bdf::types::entry_value<double> M;
+                    /** Geometric grid or scalar point identification
+                        number. (Integer > 0)
+                    */
+                    dnvgl::extfem::bdf::types::entry_value<long> G1;
+                    /** Component number. (0 < Integer < 6; blank or zero
+                        if scalar point)
+                    */
+                    dnvgl::extfem::bdf::types::entry_value<std::list<int>> C1;
+                    /** Geometric grid or scalar point identification
+                        number. (Integer > 0)
+                    */
+                    dnvgl::extfem::bdf::types::entry_value<long> G2;
+                    /** Component number. (0 < Integer < 6; blank or zero
+                        if scalar point)
+                    */
+                    dnvgl::extfem::bdf::types::entry_value<std::list<int>> C2;
 
-            private:
-               cmass2(std::string const&);
+                private:
+                    cmass2(std::string const&);
 
-            public:
+                public:
 
-               cmass2(void);
+                    cmass2(void);
 
-               cmass2(std::list<std::string> const&);
+                    cmass2(std::list<std::string> const&);
 
-               cmass2(long const *EID, double const *M,
-                      long const *G1, std::list<int> const *C1,
-                      long const *G2=nullptr, std::list<int> const *C2=nullptr);
+                    cmass2(long const *EID, double const *M,
+                           long const *G1, std::list<int> const *C1,
+                           long const *G2=nullptr,
+                           std::list<int> const *C2=nullptr);
 
-               __base::card const &operator() (
-                  long const *EID, double const *M,
-                  long const *G1, std::list<int> const *C1,
-                  long const *G2=nullptr, std::list<int> const *C2=nullptr);
+                    __base::card const &operator() (
+                        long const *EID, double const *M,
+                        long const *G1, std::list<int> const *C1,
+                        long const *G2=nullptr,
+                        std::list<int> const *C2=nullptr);
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+                    dnvgl::extfem::bdf::cards::types const
+                    card_type(void) const;
 
-               virtual void read(std::list<std::string> const &);
+                    virtual void read(std::list<std::string> const &);
 
-            private:
+                private:
 
-               virtual void collect_outdata(
-                  std::list<std::unique_ptr<format_entry> >&) const;
-            };
+                    virtual void collect_outdata(
+                        std::list<std::unique_ptr<format_entry> >&) const;
+                };
 
 /// Handle Nastran Bulk CMASS4 entries.
 /** # Parameter
@@ -336,54 +351,59 @@ reference to a property entry.
    `SPOINT` entry.
 */
 
-            class cmass4 : public __base::element {
-               static dnvgl::extfem::bdf::types::card head;
-               // static const dnvgl::extfem::bdf::types::entry_type<long> form_EID;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_M;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_S1;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_S2;
+                class cmass4 : public __base::element {
+                    dnvgl::extfem::bdf::types::card static head;
+                    // dnvgl::extfem::bdf::types::entry_type<long>
+                    // static const form_EID;
+                    dnvgl::extfem::bdf::types::entry_type<double>
+                    static const form_M;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_S1;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_S2;
 
-            public:
-               // /** Unique element identification number. (0 < Integer
-               //     < 100,000,000)
-               //  */
-               // dnvgl::extfem::bdf::types::entry_value<long> EID;
-               /** Scalar mass value. (Real)
-                */
-               dnvgl::extfem::bdf::types::entry_value<double> M;
-               /** Scalar point identification numbers. (Integer > 0;
-                   S1 ≠ S2 )
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> S1;
-               /** Scalar point identification numbers. (Integer > 0;
-                   S1 ≠ S2 )
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> S2;
-            private:
-               cmass4(std::string const&);
+                public:
+                    // /** Unique element identification number. (0 < Integer
+                    //     < 100,000,000)
+                    //  */
+                    // dnvgl::extfem::bdf::types::entry_value<long> EID;
+                    /** Scalar mass value. (Real)
+                     */
+                    dnvgl::extfem::bdf::types::entry_value<double> M;
+                    /** Scalar point identification numbers. (Integer > 0;
+                        S1 ≠ S2 )
+                    */
+                    dnvgl::extfem::bdf::types::entry_value<long> S1;
+                    /** Scalar point identification numbers. (Integer > 0;
+                        S1 ≠ S2 )
+                    */
+                    dnvgl::extfem::bdf::types::entry_value<long> S2;
+                private:
+                    cmass4(std::string const&);
 
-            public:
+                public:
 
-               cmass4(void);
+                    cmass4(void);
 
-               cmass4(std::list<std::string> const&);
+                    cmass4(std::list<std::string> const&);
 
-               cmass4(long const *EID, double const *M,
-                      long const *S1, long const *S2=nullptr);
+                    cmass4(long const *EID, double const *M,
+                           long const *S1, long const *S2=nullptr);
 
-               __base::card const &operator() (
-                  long const *EID, double const *M,
-                  long const *S1, long const *S2=nullptr);
+                    __base::card const &operator() (
+                        long const *EID, double const *M,
+                        long const *S1, long const *S2=nullptr);
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+                    dnvgl::extfem::bdf::cards::types const
+                    card_type(void) const;
 
-               virtual void read(std::list<std::string> const &);
+                    virtual void read(std::list<std::string> const &);
 
-            private:
+                private:
 
-               virtual void collect_outdata(
-                  std::list<std::unique_ptr<format_entry> >&) const;
-            };
+                    virtual void collect_outdata(
+                        std::list<std::unique_ptr<format_entry> >&) const;
+                };
 
 /// Handle Nastran Bulk GRAV entries.
 /** # Parameter
@@ -451,87 +471,91 @@ Defines acceleration vectors for gravity or other acceleration loading.
     gravity load is more conveniently defined in terms of coordinates
     which are fixed.
 */
-            class grav : public __base::card {
-               static dnvgl::extfem::bdf::types::card head;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_SID;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_CID;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_A;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_Ni;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_MB;
 
-            public:
-               /** Set identification number. (Integer > 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> SID;
-               /** Coordinate system identification number. (Integer > 0; Default = 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> CID;
-               /** Acceleration vector scale factor. (Real)
-                */
-               dnvgl::extfem::bdf::types::entry_value<double> A;
-               /** Acceleration vector components measured in coordinate system CID.
-                   (Real; at least one Ni ≠ 0.0)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> N1;
-               /** Acceleration vector components measured in coordinate system CID.
-                   (Real; at least one Ni ≠ 0.0)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> N2;
-               /** Acceleration vector components measured in coordinate system CID.
-                   (Real; at least one Ni ≠ 0.0)
-               */
-               dnvgl::extfem::bdf::types::entry_value<double> N3;
-               /** Indicates whether the CID coordinate system is
-                   defined in the main Bulk Data Section (`MB` = -1)
-                   or the partitioned superelement Bulk Data Section
-                   (`MB` = 0). Coordinate systems referenced in the
-                   main Bulk Data Section are considered stationary
-                   with respect to the assembly basic coordinate
-                   system. See Remark 10. (Integer; Default = 0)
-               */
-               dnvgl::extfem::bdf::types::entry_value<long> MB;
+                class grav : public __base::card {
 
-            private:
+                    dnvgl::extfem::bdf::types::card static head;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_SID;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_CID;
+                    dnvgl::extfem::bdf::types::entry_type<double>
+                    static const form_A;
+                    dnvgl::extfem::bdf::types::entry_type<double>
+                    static const form_Ni;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_MB;
 
-               grav(std::string const&);
+                public:
+/// Set identification number. (Integer > 0)
+                    dnvgl::extfem::bdf::types::entry_value<long> SID;
+/// Coordinate system identification number. (Integer > 0; Default = 0)
+                    dnvgl::extfem::bdf::types::entry_value<long> CID;
+/// Acceleration vector scale factor. (Real)
+                    dnvgl::extfem::bdf::types::entry_value<double> A;
+/** Acceleration vector components measured in coordinate system CID.
+    (Real; at least one Ni ≠ 0.0)
+*/
+                    dnvgl::extfem::bdf::types::entry_value<double> N1;
+/** Acceleration vector components measured in coordinate system CID.
+    (Real; at least one Ni ≠ 0.0)
+*/
+                    dnvgl::extfem::bdf::types::entry_value<double> N2;
+/** Acceleration vector components measured in coordinate system CID.
+    (Real; at least one Ni ≠ 0.0)
+*/
+                    dnvgl::extfem::bdf::types::entry_value<double> N3;
+/** Indicates whether the CID coordinate system is defined in the main
+    Bulk Data Section (`MB` = -1) or the partitioned superelement Bulk
+    Data Section (`MB` = 0). Coordinate systems referenced in the main
+    Bulk Data Section are considered stationary with respect to the
+    assembly basic coordinate system. See Remark 10. (Integer; Default
+    = 0)
+*/
+                    dnvgl::extfem::bdf::types::entry_value<long> MB;
 
-            public:
+                private:
 
-               grav(void);
+                    grav(std::string const&);
 
-               grav(std::list<std::string> const&);
+                public:
 
-               grav(long const *SID, long const *CID,
-                    double const *A,
-                    double const *N1, double const*N2, double const *N3,
-                    long const *MB=nullptr);
+                    grav(void);
 
-               grav(long const *SID, long const *CID,
-                    double const *A,
-                    std::vector<double> const *N,
-                    long const *MB=nullptr);
+                    grav(std::list<std::string> const&);
 
-               __base::card const &operator() (
-                  long const *SID, long const *CID,
-                  double const *A,
-                  std::vector<double> const *N,
-                  long const *MB=nullptr);
+                    grav(long const *SID, long const *CID,
+                         double const *A,
+                         double const *N1, double const*N2, double const *N3,
+                         long const *MB=nullptr);
 
-               __base::card const &operator() (
-                  long const *SID, long const *CID,
-                  double const *A,
-                  double const *N1, double const*N2, double const *N3,
-                  long const *MB=nullptr);
+                    grav(long const *SID, long const *CID,
+                         double const *A,
+                         std::vector<double> const *N,
+                         long const *MB=nullptr);
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+                    __base::card const &operator() (
+                        long const *SID, long const *CID,
+                        double const *A,
+                        std::vector<double> const *N,
+                        long const *MB=nullptr);
 
-               virtual void read(std::list<std::string> const &);
+                    __base::card const &operator() (
+                        long const *SID, long const *CID,
+                        double const *A,
+                        double const *N1, double const*N2, double const *N3,
+                        long const *MB=nullptr);
 
-            private:
+                    dnvgl::extfem::bdf::cards::types const
+                    card_type(void) const;
 
-               virtual void collect_outdata(
-                  std::list<std::unique_ptr<format_entry> >&) const;
-            };
+                    virtual void read(std::list<std::string> const &);
+
+                private:
+
+                    virtual void collect_outdata(
+                        std::list<std::unique_ptr<format_entry> >&) const;
+                };
 
 /// Handle Nastran Bulk `LOAD` entries.
 /** # Static Load Combination (Superposition)
@@ -548,59 +572,61 @@ Defines a static load as a linear combination of load std::sets defined via
 | `LOAD` | `SID` | `S`  | `S1`   | `L1` | `S2` | `L2` | `S3` | `L3` |    |
 |        | `S4`  | `L4` | *etc.* |      |      |      |      |      |    |
 */
-            class load : public __base::card {
 
-            private:
+                class load : public __base::card {
 
-               static dnvgl::extfem::bdf::types::card head;
+                private:
 
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_SID;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_S;
-               static const dnvgl::extfem::bdf::types::entry_type<double> form_Si;
-               static const dnvgl::extfem::bdf::types::entry_type<long> form_Li;
+                    dnvgl::extfem::bdf::types::card static head;
 
-            public:
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_SID;
+                    dnvgl::extfem::bdf::types::entry_type<double>
+                    static const form_S;
+                    dnvgl::extfem::bdf::types::entry_type<double>
+                    static const form_Si;
+                    dnvgl::extfem::bdf::types::entry_type<long>
+                    static const form_Li;
 
-               /** Load std::set identification number. (Integer > 0)
-                */
-               dnvgl::extfem::bdf::types::entry_value<long> SID;
-               /* Overall scale factor. (Real)
-                */
-               dnvgl::extfem::bdf::types::entry_value<double> S;
-               /** Scale factor on `Li`. (Real)
-                */
-               std::list<double> Si;
-               /** Load std::set identification numbers defined on entry types
-                   listed above. (Integer > 0)
-               */
-               std::list<long> Li;
+                public:
 
-               load(void);
+/// Load std::set identification number. (Integer > 0)
+                    dnvgl::extfem::bdf::types::entry_value<long> SID;
+/// Overall scale factor. (Real)
+                    dnvgl::extfem::bdf::types::entry_value<double> S;
+/// Scale factor on `Li`. (Real)
+                    std::list<double> Si;
+/** Load std::set identification numbers defined on entry types listed
+    above. (Integer > 0)
+*/
+                    std::list<long> Li;
 
-               load(const std::list<std::string> &inp);
+                    load(void);
 
-               load(const long *SID, const double *S,
-                    const std::list<double> *Si,
-                    const std::list<long> *Li);
+                    load(const std::list<std::string> &inp);
 
-               __base::card const &operator() (
-                  const long *SID, const double *S,
-                  const std::list<double> *Si,
-                  const std::list<long> *Li);
+                    load(long const *SID, double const *S,
+                         std::list<double> const *Si,
+                         std::list<long> const *Li);
 
-               const dnvgl::extfem::bdf::cards::types card_type(void) const;
+                    __base::card const &operator() (
+                        long const *SID, double const *S,
+                        std::list<double> const *Si,
+                        std::list<long> const *Li);
 
-               virtual void read(std::list<std::string> const &);
+                    dnvgl::extfem::bdf::cards::types const
+                    card_type(void) const;
 
+                    virtual void read(std::list<std::string> const &);
 
-            private:
+                private:
 
-               virtual void collect_outdata(
-                  std::list<std::unique_ptr<format_entry> > &res) const;
-            };
-         }
-      }
-   }
+                    virtual void collect_outdata(
+                        std::list<std::unique_ptr<format_entry> > &res) const;
+                };
+            }
+        }
+    }
 }
 
 #endif // _BDF_CARDS_LOADS_H_
@@ -609,6 +635,8 @@ Defines a static load as a linear combination of load std::sets defined via
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:
