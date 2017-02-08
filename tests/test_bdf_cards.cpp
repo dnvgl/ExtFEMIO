@@ -45,10 +45,6 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 using namespace dnvgl::extfem::bdf::input;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return Catch::toString( ex.what() );
-}
-
 TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
     std::string s(
@@ -1691,6 +1687,8 @@ TEST_CASE("Test partial supported element cards.", "[elem cards]") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//   (make -C ../cbuild test;
+//    ../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:

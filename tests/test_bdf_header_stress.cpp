@@ -38,10 +38,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     std::ostringstream test;
@@ -306,5 +302,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_bdf_header --use-colour no)"
 // End:

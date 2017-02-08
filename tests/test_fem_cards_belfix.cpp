@@ -35,14 +35,6 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION( exception &ex ) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
-    return ex;
-}
-
 TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
 
     size_t len;
@@ -202,5 +194,7 @@ TEST_CASE("FEM BELFIX conversion to Poseidon BEAM dofs.", "[fem_belfix,fixation]
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

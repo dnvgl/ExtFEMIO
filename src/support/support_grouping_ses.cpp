@@ -28,5 +28,7 @@ Session::Session(std::istream const &inp) : grp_info() {}
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_support_grouping --use-colour no)"
 // End:

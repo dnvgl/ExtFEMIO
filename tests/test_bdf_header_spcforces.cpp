@@ -38,10 +38,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
     std::ostringstream test;

@@ -46,14 +46,6 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 using namespace dnvgl::extfem::fem::input;
 
-CATCH_TRANSLATE_EXCEPTION(exception& ex) {
-    return Catch::toString(ex.what());
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
-    return ex;
-}
-
 TEST_CASE("Split FEM dataset", "[datasets, split]") {
 
     SECTION("Checkn icomplete lines") {

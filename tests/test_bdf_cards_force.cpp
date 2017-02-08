@@ -36,14 +36,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
-    return ex;
-}
-
 TEST_CASE("BDF FORCE definitions. (Small Field Format)", "[bdf_force]") {
 
     std::list<std::string> data({

@@ -35,10 +35,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("BDF ENDDATA definitions. (Small Field Format)",
           "[bdf_ENDDATA]") {
 

@@ -39,14 +39,6 @@ using namespace std;
 
 using namespace dnvgl::extfem::fem;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
-    return ex;
-}
-
 TEST_CASE("Output for various elements.", "[fem_element]") {
 
     elements::__base::elem::reset();
@@ -217,5 +209,7 @@ TEST_CASE("Output for various elements.", "[fem_element]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_elements --use-colour no)"
 // End:

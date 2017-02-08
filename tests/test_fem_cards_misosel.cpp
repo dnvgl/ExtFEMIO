@@ -36,14 +36,6 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
-    return ex;
-}
-
 TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 
     double c_ref_rload[6] = {0., 0., 2.e6, 0., 0., 0.};
@@ -208,5 +200,7 @@ TEST_CASE("FEM MISOSEL conversion from own output.", "[fem_misosel,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

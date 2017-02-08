@@ -40,10 +40,6 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::types;
 using namespace dnvgl::extfem::bdf::type_bounds;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("BDF complx types parsing.", "[bdf_types]") {
 
     entry_type<std::complex<double> > probe("dummy");
@@ -200,6 +196,8 @@ TEST_CASE("BDF std::complex<double> types output.", "[bdf_types]") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_bdf_header --use-colour no)"
 // coding: utf-8
 // End:

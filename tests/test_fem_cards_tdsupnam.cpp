@@ -36,14 +36,6 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
-    return ex;
-}
-
 TEST_CASE("FEM TDSUPNAM definitions.", "[fem_tdsupnam]") {
 
     vector<std::string> lines;
@@ -206,5 +198,7 @@ TEST_CASE("FEM TDSUPNAM conversion from own output.", "[fem_tdsupnam,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//   (make -C ../cbuild test;
+//    ../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

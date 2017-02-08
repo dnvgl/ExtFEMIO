@@ -38,10 +38,6 @@ using namespace std;
 using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-   return Catch::toString( ex.what() );
-}
-
 TEST_CASE("Process Grouping information.", "[support_grouping]") {
 
     SECTION("simple") {
@@ -85,5 +81,7 @@ TEST_CASE("Testing element comparison", "[support_grouping]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_support_grouping --use-colour no)"
 // End:

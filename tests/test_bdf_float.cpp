@@ -41,10 +41,6 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::types;
 using namespace dnvgl::extfem::bdf::type_bounds;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 namespace {
     static const double cd0 = 0.;
 }
@@ -301,6 +297,8 @@ TEST_CASE("Negative zero", "[bdf_types]") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_bdf_float --use-colour no)"
 // coding: utf-8
 // End:

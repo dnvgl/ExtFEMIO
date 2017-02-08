@@ -41,10 +41,6 @@ using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::types;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 namespace {
     static const long cl1 = 1, cl100 = 100, cl_1 = -1, cl0 = 0;
 }
@@ -165,6 +161,8 @@ TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_bdf_int --use-colour no)"
 // coding: utf-8
 // End:

@@ -45,10 +45,6 @@ using namespace std;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return Catch::toString( ex.what() );
-}
-
 TEST_CASE("BDF generate 'SOL' header entries", "[bdf_header,sol]") {
 
     std::ostringstream test;

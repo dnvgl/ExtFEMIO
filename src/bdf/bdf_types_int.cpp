@@ -42,6 +42,8 @@ const regex dnvgl::extfem::bdf::types::int_re(
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_types --use-colour no)"
 // coding: utf-8
 // End:

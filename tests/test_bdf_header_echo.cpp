@@ -38,10 +38,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("Testing cdni_entry", "bdf_header,echo,cdni_entry") {
 
     SECTION("first") {

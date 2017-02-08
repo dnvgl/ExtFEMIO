@@ -1,6 +1,6 @@
-# CMakeLists files in this project can
-# refer to the root source directory of the project as ${EXTFEMIO_SOURCE_DIR} and
-# to the root binary directory of the project as ${EXTFEMIO_BINARY_DIR}.
+# CMakeLists files in this project can refer to the root source
+# directory of the project as ${EXTFEMIO_SOURCE_DIR} and to the root
+# binary directory of the project as ${EXTFEMIO_BINARY_DIR}.
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT(ExtFEMIO)
 SET(PROJECT_VERSION 0.5.0)

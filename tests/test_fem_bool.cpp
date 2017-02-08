@@ -40,10 +40,6 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::type_bounds;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("FEM bool types parsing.", "[fem_types]") {
 
     entry_type<bool> probe("dummy");
@@ -110,6 +106,8 @@ TEST_CASE("FEM bool types output.", "[fem_types]") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_bool --use-colour no)"
 // coding: utf-8
 // End:

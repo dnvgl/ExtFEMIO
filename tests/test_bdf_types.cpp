@@ -40,10 +40,6 @@ using namespace std::rel_ops;
 using namespace dnvgl::extfem;
 using namespace bdf::types;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString( ex.what() );
-}
-
 namespace {
     static const long cl1 = 1;
 }
@@ -125,6 +121,8 @@ TEST_CASE("Testing bdf entry values.", "[bdf_types]" ) {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_bdf_types --use-colour no)"
 // coding: utf-8
 // End:

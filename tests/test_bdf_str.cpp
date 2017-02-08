@@ -38,10 +38,6 @@ using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::types;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("BDF str types parsing.", "[bdf_types]") {
 
     const char* _allowed[3] = {"ONE", "TWO", "THREE"};
@@ -129,5 +125,7 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_bdf_str --use-colour no)"
 // End:

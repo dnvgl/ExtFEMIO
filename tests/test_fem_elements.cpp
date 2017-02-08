@@ -55,14 +55,6 @@ using namespace std;
 
 using namespace dnvgl::extfem::fem;
 
-CATCH_TRANSLATE_EXCEPTION(exception& ex ) {
-   return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION( std::string& ex ) {
-   return ex;
-}
-
 TEST_CASE("Basic test", "[fem_elemsnts_basic]") {
    elements::__base::elem::reset();
    vector<long> nodes({ 6, 7 });
@@ -22292,5 +22284,7 @@ TEST_CASE("Output for GHEX163 elements.", "[fem_element_ghex163]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_elements --use-colour no)"
 // End:

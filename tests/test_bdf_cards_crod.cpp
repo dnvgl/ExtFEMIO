@@ -35,14 +35,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
-    return ex;
-}
-
 TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]") {
 
     std::list<std::string> data({"CROD,222,13,14,15\n"});
@@ -63,5 +55,7 @@ TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

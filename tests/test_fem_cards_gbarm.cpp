@@ -36,14 +36,6 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex ) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
-    return ex;
-}
-
 TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
 
     vector<std::string> lines;

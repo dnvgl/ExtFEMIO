@@ -33,10 +33,6 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception& ex) {
-    return Catch::toString( ex.what() );
-}
-
 TEST_CASE("Checking extra string functions", "[extfem::string]") {
 
     SECTION("checking trim functionality") {
@@ -74,5 +70,7 @@ TEST_CASE("Checking extra string functions", "[extfem::string]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_extfem_string --use-colour no)"
 // End:

@@ -36,14 +36,6 @@ using namespace std;
 using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 
-CATCH_TRANSLATE_EXCEPTION(exception& ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
-    return ex;
-}
-
 TEST_CASE("FEM BNDISPL definitions.", "[fem_bndispl]") {
 
     vector<double> ref_rdisp({0., 0., 0., 0., 0., 0.});
@@ -250,5 +242,7 @@ TEST_CASE("FEM BNDISPL conversion from own output.", "[fem_bndispl,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

@@ -42,10 +42,6 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::type_bounds;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return Catch::toString( ex.what() );
-}
-
 TEST_CASE("FEM list types parsing.", "[fem_types]" ) {
 
     entry_type<std::vector<int> > probe("dummy");
@@ -91,5 +87,7 @@ TEST_CASE("FEM list of int types output.", "[fem_types]" ) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_list --use-colour no)"
 // End:

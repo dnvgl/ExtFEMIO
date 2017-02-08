@@ -37,14 +37,6 @@ using namespace std;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string const &ex) {
-    return ex;
-}
-
 TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
 
     SECTION("Small Field Format") {

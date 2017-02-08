@@ -43,10 +43,6 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::type_bounds;
 
-CATCH_TRANSLATE_EXCEPTION(exception &ex) {
-    return Catch::toString(ex.what());
-}
-
 namespace {
     static const double dc0 = 0.;
 }
@@ -211,6 +207,8 @@ TEST_CASE("FEM double types output.", "[fem_types]") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_float --use-colour no)"
 // coding: utf-8
 // End:

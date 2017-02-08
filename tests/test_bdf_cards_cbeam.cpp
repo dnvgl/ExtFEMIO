@@ -34,16 +34,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(std::string& ex) {
-    return ex;
-}
-
-using namespace dnvgl::extfem::bdf::cards;
-
 TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]") {
 
     std::list<std::string> data({

@@ -35,10 +35,6 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
-    return Catch::toString(ex.what());
-}
-
 TEST_CASE("BDF GRID definitions. (Small Field Format)",
           "[bdf_grid]") {
 
@@ -220,6 +216,8 @@ TEST_CASE("FEMIO-43: BDF import failed") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:
