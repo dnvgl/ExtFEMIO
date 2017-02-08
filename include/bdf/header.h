@@ -31,7 +31,7 @@ namespace dnvgl {
                     };
                 }
 
-                /// Executive Control Statements
+/// Executive Control Statements
                 namespace executive_control {
 
 /**
