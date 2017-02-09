@@ -92,14 +92,33 @@ giorh::giorh(void) :
 giorh::giorh(long const GEONO, double const HZ,
              double const TY, double const BT,
              double const TT, double const BB,
-             double const TB, double const SFY,
-             double const SFZ,
-             long const NLOBYT/*=0*/, long const NLOBYB/*=0*/,
-             long const NLOBZ/*=0*/) :
+             double const TB,
+             double const SFY, double const SFZ,
+             long const NLOBYT, long const NLOBYB, long const NLOBZ) :
         __base::beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
         SFY(SFY), SFZ(SFZ),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
+
+cards::__base::card const &giorh::operator() (
+    long const GEONO, double const HZ, double const TY, double const BT,
+    double const TT, double const BB, double const TB,
+    double const SFY, double const SFZ,
+    long const NLOBYT, long const NLOBYB, long const NLOBZ) {
+    set_geono(GEONO, false);
+    this->HZ = HZ;
+    this->TY = TY;
+    this->BT = BT;
+    this->TT = TT;
+    this->BB = BB;
+    this->TB = TB;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->NLOBYT = NLOBYT;
+    this->NLOBYB = NLOBYB;
+    this->NLOBZ = NLOBZ;
+    return *this;
+}
 
 dnvgl::extfem::fem::cards::types const
 giorh::card_type(void) const {return types::GIORH;}
@@ -125,5 +144,7 @@ ostream &giorh::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

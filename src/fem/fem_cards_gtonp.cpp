@@ -89,17 +89,35 @@ gtonp::gtonp(void) :
 
 gtonp::gtonp(
     long const GEONO,
-    double const HZ, double const TY,
-    double const BT, double const TT,
+    double const HZ, double const TY, double const BT, double const TT,
     double const BP, double const TP,
     double const SFY, double const SFZ,
-    long const NLOBYT/*=0*/, long const NLOBYB/*=0*/, long const NLOBZ/*=0*/) :
+    long const NLOBYT, long const NLOBYB, long const NLOBZ) :
         __base::beam_prop(GEONO, false),
-        HZ(HZ), TY(TY),
-        BT(BT), TT(TT),
-        BP(BP), TP(TP),
+        HZ(HZ), TY(TY), BT(BT), TT(TT), BP(BP), TP(TP),
         SFY(SFY), SFZ(SFZ),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
+
+cards::__base::card const &gtonp::operator() (
+    long const GEONO,
+    double const HZ, double const TY, double const BT, double const TT,
+    double const BP, double const TP,
+    double const SFY, double const SFZ,
+    long const NLOBYT, long const NLOBYB, long const NLOBZ) {
+    set_geono(GEONO, false);
+    this->HZ = HZ;
+    this->TY = TY;
+    this->BT = BT;
+    this->TT = TT;
+    this->BP = BP;
+    this->TP = TP;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->NLOBYT = NLOBYT;
+    this->NLOBYB = NLOBYB;
+    this->NLOBZ = NLOBZ;
+    return *this;
+}
 
 dnvgl::extfem::fem::cards::types const
 gtonp::card_type(void) const {

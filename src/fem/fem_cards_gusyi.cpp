@@ -104,6 +104,30 @@ gusyi::gusyi(
         SFY(SFY), SFZ(SFZ),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
 
+cards::__base::card const &gusyi::operator() (
+    long const GEONO,
+    double const HZ, double const TY,
+    double const BT, double const B1, double const TT,
+    double const BB, double const B2, double const TB,
+    double const SFY, double const SFZ,
+    long const NLOBYT, long const NLOBYB, long const NLOBZ) {
+    set_geono(GEONO, false);
+    this->HZ = HZ;
+    this->TY = TY;
+    this->BT = BT;
+    this->B1 = B1;
+    this->TT = TT;
+    this->BB = BB;
+    this->B2 = B2;
+    this->TB = TB;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->NLOBYT = NLOBYT;
+    this->NLOBYB = NLOBYB;
+    this->NLOBZ = NLOBZ;
+    return *this;
+}
+
 dnvgl::extfem::fem::cards::types const
 gusyi::card_type(void) const {
     return types::GUSYI;

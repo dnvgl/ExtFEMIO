@@ -58,6 +58,43 @@ glsecr::glsecr(const vector<std::string> &inp, size_t const len) :
     read(inp, len);
 }
 
+glsecr::glsecr(
+    long const GEONO,
+    double const HZ, double const TY,
+    double const BY, double const TZ,
+    double const SFY, double const SFZ,
+    long const K, double const R,
+    long const NLOBY, long const NLOBZ) :
+        __base::beam_prop(GEONO, false),
+        HZ{HZ}, TY{TY}, BY{BY}, TZ{TZ}, SFY{SFY}, SFZ{SFZ}, K{K}, R{R},
+        NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
+
+dnvgl::extfem::fem::cards::types const
+glsecr::card_type(void) const {
+    return types::GLSECR;
+}
+
+cards::__base::card const &glsecr::operator() (
+    long const GEONO,
+    double const HZ, double const TY,
+    double const BY, double const TZ,
+    double const SFY, double const SFZ,
+    long const K, double const R,
+    long const NLOBY, long const NLOBZ) {
+    set_geono(GEONO, false);
+    this->HZ = HZ;
+    this->TY = TY;
+    this->BY = BY;
+    this->TZ = TZ;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->K = K;
+    this->R = R;
+    this->NLOBY = NLOBY;
+    this->NLOBZ = NLOBZ;
+    return *this;
+}
+
 void glsecr::read(const vector<std::string> &inp, size_t const len) {
     std::string static const empty{"                "};
     if (len < 10)
@@ -82,22 +119,6 @@ void glsecr::read(const vector<std::string> &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-glsecr::glsecr(
-    long const GEONO,
-    double const HZ, double const TY,
-    double const BY, double const TZ,
-    double const SFY, double const SFZ,
-    long const K, double const R,
-    long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
-        __base::beam_prop(GEONO, false),
-        HZ{HZ}, TY{TY}, BY{BY}, TZ{TZ}, SFY{SFY}, SFZ{SFZ}, K{K}, R{R},
-        NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
-
-dnvgl::extfem::fem::cards::types const
-glsecr::card_type(void) const {
-    return types::GLSECR;
-}
-
 ostream &glsecr::put(ostream& os) const {
     if (GEONO == -1) return os;
     os << glsecr::head.format()
@@ -119,7 +140,7 @@ ostream &glsecr::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
-//    (make -C ../cbuild test;
-//     ../cbuild/tests/test_fem_cards --use-colour no)"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

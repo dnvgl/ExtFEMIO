@@ -98,12 +98,36 @@ giorhr::giorhr(long const GEONO,
                double const TT, double const BB, double const TB,
                double const SFY, double const SFZ,
                double const RT, double const RB,
-               long const NLOBYT/*=0*/, long const NLOBYB/*=0*/,
-               long const NLOBZ/*=0*/) :
+               long const NLOBYT, long const NLOBYB,
+               long const NLOBZ) :
         __base::beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
         SFY(SFY), SFZ(SFZ), RT(RT), RB(RB),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
+
+cards::__base::card const &giorhr::operator() (
+    long const GEONO,
+    double const HZ, double const TY, double const BT,
+    double const TT, double const BB, double const TB,
+    double const SFY, double const SFZ,
+    double const RT, double const RB,
+    long const NLOBYT, long const NLOBYB, long const NLOBZ) {
+    set_geono(GEONO, false);
+    this->HZ = HZ;
+    this->TY = TY;
+    this->BT = BT;
+    this->TT = TT;
+    this->BB = BB;
+    this->TB = TB;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->RT = RT;
+    this->RB = RB;
+    this->NLOBYT = NLOBYT;
+    this->NLOBYB = NLOBYB;
+    this->NLOBZ = NLOBZ;
+    return *this;
+}
 
 dnvgl::extfem::fem::cards::types const
 giorhr::card_type(void) const {return types::GIORHR;}

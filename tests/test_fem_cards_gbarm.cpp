@@ -128,6 +128,38 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
               "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
               "        +5.000000000e+00+6.000000000e+00\n");
     }
+
+    SECTION("simple (default SF* and N*)") {
+        gbarm probe(1, 2., 3., 4.);
+        test << probe;
+        CHECK(test.str() ==
+              "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +1.000000000e+00+1.000000000e+00\n");
+    }
+
+    SECTION("simple (call)") {
+        gbarm probe;
+        test << probe(1, 2., 3., 4., 5., 6., 7, 8);
+        CHECK(test.str() ==
+              "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n");
+    }
+
+    SECTION("simple (default N*) (call)") {
+        gbarm probe;
+        test << probe(1, 2., 3., 4., 5., 6.);
+        CHECK(test.str() ==
+              "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00\n");
+    }
+
+    SECTION("simple (default SF* and N*) (call)") {
+        gbarm probe;
+        test << probe(1, 2., 3., 4.);
+        CHECK(test.str() ==
+              "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +1.000000000e+00+1.000000000e+00\n");
+    }
 }
 
 TEST_CASE("FEM GBARM conversion from own output.", "[fem_gbarm,in/out]") {

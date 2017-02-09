@@ -77,15 +77,30 @@ void gpipe::read(vector<std::string> const &inp, size_t const len) {
 gpipe::gpipe(void) :
         gpipe(-1, 0., 0., 0., 0., 0.) {}
 
-gpipe::gpipe(long const GEONO, double const DI,
-             double const DY,
-             double const T, double const SFY,
-             double const SFZ,
-             long const NCIR/*=0*/, long const NRAD/*=0*/) :
-        __base::beam_prop(GEONO),
+gpipe::gpipe(long const GEONO,
+             double const DI, double const DY, double const T,
+             double const SFY, double const SFZ,
+             long const NCIR, long const NRAD) :
+        __base::beam_prop(GEONO, false),
         DI(DI), DY(DY), T(T),
         SFY(SFY), SFZ(SFZ),
         NCIR(NCIR), NRAD(NRAD) {}
+
+cards::__base::card const &gpipe::operator() (
+    long const GEONO,
+    double const DI, double const DY, double const T,
+    double const SFY, double const SFZ,
+    long const NCIR, long const NRAD) {
+    set_geono(GEONO, false);
+    this->DI = DI;
+    this->DY = DY;
+    this->T = T;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->NCIR = NCIR;
+    this->NRAD = NRAD;
+    return *this;
+}
 
 dnvgl::extfem::fem::cards::types const
 gpipe::card_type(void) const {
@@ -110,5 +125,7 @@ ostream &gpipe::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

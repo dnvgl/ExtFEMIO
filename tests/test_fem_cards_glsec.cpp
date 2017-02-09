@@ -133,6 +133,39 @@ TEST_CASE("FEM GLSEC types output.", "[fem_glsec,out]" ) {
               "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
               "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n");
     }
+
+    SECTION("SF?, NLOB? default") {
+        glsec probe(1, 2., 3., 4., 5., true);
+        test << probe;
+        CHECK(test.str() ==
+              "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+1.000000000e+00+1.000000000e+00           +1.00\n");
+    }
+
+    SECTION("simple (call)") {
+        glsec probe;
+        test << probe(1, 2., 3., 4., 5., 6., 7., true, 9, 10);
+        CHECK(test.str() ==
+              "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n"
+              "        +9.000000000e+00+1.000000000e+01\n");
+    }
+
+    SECTION("NLOB? default (call)") {
+        glsec probe;
+        test << probe(1, 2., 3., 4., 5., 6., 7., true);
+        CHECK(test.str() ==
+              "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00           +1.00\n");
+    }
+
+    SECTION("SF?, NLOB? default (call)") {
+        glsec probe;
+        test << probe(1, 2., 3., 4., 5., true);
+        CHECK(test.str() ==
+              "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+1.000000000e+00+1.000000000e+00           +1.00\n");
+    }
 }
 
 TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
@@ -209,5 +242,7 @@ TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

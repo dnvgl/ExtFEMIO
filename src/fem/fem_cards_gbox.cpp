@@ -65,7 +65,7 @@ gbox::gbox(long const GEONO,
            double const HZ, double const TY, double const TB,
            double const TT, double const BY,
            double const SFY, double const SFZ,
-           long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
+           long const NLOBY, long const NLOBZ) :
         __base::beam_prop(GEONO),
         HZ{HZ}, TY{TY}, TB{TB}, TT{TT}, BY{BY}, SFY{SFY}, SFZ{SFZ},
         NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
@@ -79,7 +79,7 @@ cards::__base::card const &gbox::operator() (
     double const HZ, double const TY, double const TB,
     double const TT, double const BY,
     double const SFY, double const SFZ,
-    long const NLOBY/*=0*/, long const NLOBZ/*=0*/) {
+    long const NLOBY, long const NLOBZ) {
     set_geono(GEONO, false);
     this->HZ = HZ;
     this->TY = TY;
@@ -144,5 +144,5 @@ void gbox::read(vector<std::string> const &inp, size_t const len) {
 // indent-tabs-mode: nil
 // compile-command: "make -C ../../cbuild -j8&&
 //   (make -C ../../cbuild test;
-//    ../../cbuild/tests/test_fem_cards --use-colour no)
+//    ../../cbuild/tests/test_fem_cards --use-colour no)""
 // End:

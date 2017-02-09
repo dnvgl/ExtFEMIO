@@ -64,7 +64,7 @@ gchan::gchan(vector<std::string> const &inp, size_t const len) :
 gchan::gchan(long const GEONO,
              double const HZ, double const TY, double const BY,
              double const TZ, double const SFY, double const SFZ,
-             long const K, long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
+             long const K, long const NLOBY, long const NLOBZ) :
         __base::beam_prop(GEONO),
         HZ{HZ}, TY{TY}, BY{BY}, TZ {TZ}, SFY{SFY}, SFZ{SFZ}, K{K},
         NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
@@ -77,7 +77,7 @@ cards::__base::card const &gchan::operator() (
     long const GEONO,
     double const HZ, double const TY, double const BY,
     double const TZ, double const SFY, double const SFZ,
-    long const K, long const NLOBY/*=0*/, long const NLOBZ/*=0*/) {
+    long const K, long const NLOBY, long const NLOBZ) {
     set_geono(GEONO, false);
     this->HZ = HZ;
     this->TY = TY;

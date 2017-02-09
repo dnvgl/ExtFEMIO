@@ -1376,7 +1376,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         cards.push_back(make_unique<tdsupnam>(
                             166, "KEY_HOLE_ROOF"));
         cards.push_back(make_unique<iend>(0));
-        cards.push_back(make_unique<gbox>(11, .2, .1, .03, .03, .03, 1., 1., 0));
+        cards.push_back(make_unique<gbox>(11, .2, .1, .03, .03, .03, 1., 1.));
         cards.push_back(make_unique<gchan>(12, .2, .02, .15, .025, 1., 1., 1));
         cards.push_back(make_unique<gchanr>(13, .2, .02, .15, .025, 1., 1., 1, .005));
         cards.push_back(make_unique<gdobo>(14, 2., .04, 1.5, .05, .06, 1., 1.));

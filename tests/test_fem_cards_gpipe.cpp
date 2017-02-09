@@ -140,12 +140,44 @@ TEST_CASE("FEM GPIPE types output.", "[fem_gpipe,out]" ) {
               "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n");
     }
 
-    SECTION("NC* default") {
+    SECTION("N* default") {
         gpipe probe(1, 2., 3., 4., 5., 6.);
         test << probe;
         CHECK(test.str() ==
               "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
               "        +5.000000000e+00+6.000000000e+00\n");
+    }
+
+    SECTION("SF*,N* default") {
+        gpipe probe(1, 2., 3., 4.);
+        test << probe;
+        CHECK(test.str() ==
+              "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +1.000000000e+00+1.000000000e+00\n");
+    }
+
+    SECTION("simple (call)") {
+        gpipe probe;
+        test << probe(1, 2., 3., 4., 5., 6., 7, 8);
+        CHECK(test.str() ==
+              "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n");
+    }
+
+    SECTION("N* default (call)") {
+        gpipe probe;
+        test << probe(1, 2., 3., 4., 5., 6.);
+        CHECK(test.str() ==
+              "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00\n");
+    }
+
+    SECTION("SF*,N* default (call)") {
+        gpipe probe;
+        test << probe(1, 2., 3., 4.);
+        CHECK(test.str() ==
+              "GPIPE   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +1.000000000e+00+1.000000000e+00\n");
     }
 }
 

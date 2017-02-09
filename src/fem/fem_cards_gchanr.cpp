@@ -80,7 +80,7 @@ cards::__base::card const &gchanr::operator() (
     double const HZ, double const TY, double const BY,
     double const TZ, double const SFY, double const SFZ,
     long const K, double const R,
-    long const NLOBY/*=0*/, long const NLOBZ/*=0*/) {
+    long const NLOBY, long const NLOBZ) {
     set_geono(GEONO, false);
     this->HZ = HZ;
     this->TY = TY;

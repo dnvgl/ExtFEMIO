@@ -179,6 +179,42 @@ TEST_CASE("FEM GCHAN types output.", "[fem_gchan,out]" ) {
                 "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
                 "        +8.000000000e+00\n");
     }
+
+    SECTION("default SF*, NLOB*") {
+        gchan probe(1, 2., 3., 4., 5., 6);
+        test << probe;
+        REQUIRE(test.str() ==
+                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+                "        +5.000000000e+00+1.000000000e+00+1.000000000e+00\n"
+                "        +6.000000000e+00\n");
+    }
+
+    SECTION("simple (instance)") {
+        gchan probe;
+        test << probe(1, 2., 3., 4., 5., 6., 7., 8, 9, 10);
+        REQUIRE(test.str() ==
+                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+                "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
+                "        +8.000000000e+00+9.000000000e+00+1.000000000e+01\n");
+    }
+
+    SECTION("default NLOB* (instance)") {
+        gchan probe;
+        test << probe(1, 2., 3., 4., 5., 6., 7., 8);
+        REQUIRE(test.str() ==
+                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+                "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
+                "        +8.000000000e+00\n");
+    }
+
+    SECTION("default SF*, NLOB* (instance)") {
+        gchan probe;
+        test << probe(1, 2., 3., 4., 5., 6);
+        REQUIRE(test.str() ==
+                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+                "        +5.000000000e+00+1.000000000e+00+1.000000000e+00\n"
+                "        +6.000000000e+00\n");
+    }
 }
 
 TEST_CASE("FEM GCHAN conversion from own output.", "[fem_gchan,in/out]") {

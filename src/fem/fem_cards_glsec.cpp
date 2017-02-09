@@ -82,22 +82,29 @@ glsec::glsec(long const GEONO, double const HZ,
              double const TZ, double const SFY,
              double const SFZ, bool const K,
              long const NLOBY, long const NLOBZ) :
-             __base::beam_prop(GEONO, false),
-             HZ(HZ), TY(TY), BY(BY), TZ(TZ),
-             SFY(SFY), SFZ(SFZ),
-             K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+        __base::beam_prop(GEONO, false),
+        HZ(HZ), TY(TY), BY(BY), TZ(TZ),
+        SFY(SFY), SFZ(SFZ),
+        K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
-glsec::glsec(long const GEONO, double const HZ,
-             double const TY, double const BY,
-             double const TZ, double const SFY,
-             double const SFZ, bool const K) :
-             glsec::glsec(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0) {}
-
-glsec::glsec(long const GEONO, double const HZ,
-             double const TY, double const BY,
-             double const TZ, bool const K) :
-             glsec::glsec(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {}
-
+cards::__base::card const &glsec::operator() (
+    long const GEONO,
+    double const HZ, double const TY, double const BY, double const TZ,
+    double const SFY, double const SFZ,
+    bool const K,
+    long const NLOBY, long const NLOBZ) {
+    set_geono(GEONO, false);
+    this->HZ = HZ;
+    this->TY = TY;
+    this->BY = BY;
+    this->TZ = TZ;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->K = K;
+    this->NLOBY = NLOBY;
+    this->NLOBZ = NLOBZ;
+    return *this;
+}
 
 dnvgl::extfem::fem::cards::types const
 glsec::card_type(void) const {return types::GLSEC;}
@@ -122,5 +129,7 @@ ostream &glsec::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

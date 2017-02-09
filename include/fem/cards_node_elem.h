@@ -93,23 +93,38 @@ namespace dnvgl {
                     long NLOBZ;
 
                     gbarm(std::vector<std::string> const&, size_t const);
-
                     gbarm(void);
-
                     gbarm(long const GEONO,
                           double const HZ, double const BT, double const BB,
                           double const SFY, double const SFZ,
-                          long const NLOBY=0, long const NLOBZ=0);
+                          long const NLOBY, long const NLOBZ);
+                    gbarm(long const GEONO,
+                          double const HZ, double const BT, double const BB,
+                          double const SFY, double const SFZ) :
+                            gbarm(GEONO, HZ, BT, BB, SFY, SFZ, 0, 0) {};
+                    gbarm(long const GEONO,
+                          double const HZ, double const BT, double const BB) :
+                            gbarm(GEONO, HZ, BT, BB, 1., 1., 0, 0) {};
 
                     virtual fem::cards::types const card_type(void) const;
 
                     using __base::beam_prop::operator();
-
                     __base::card const &operator() (
                         long const GEONO,
                         double const HZ, double const BT, double const BB,
                         double const SFY, double const SFZ,
-                        long const NLOBY=0, long const NLOBZ=0);
+                        long const NLOBY, long const NLOBZ);
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const BT, double const BB,
+                        double const SFY, double const SFZ) {
+                        return (*this)(GEONO, HZ, BT, BB, SFY, SFZ, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const BT, double const BB) {
+                        return (*this)(GEONO, HZ, BT, BB, 1., 1., 0, 0);
+                    };
 
                 protected:
 
@@ -356,7 +371,16 @@ namespace dnvgl {
                          double const HZ, double const TY, double const TB,
                          double const TT, double const BY,
                          double const SFY, double const SFZ,
-                         long const NLOBY = 0, long const NLOBZ = 0);
+                         long const NLOBY, long const NLOBZ);
+                    gbox(long const GEONO,
+                         double const HZ, double const TY, double const TB,
+                         double const TT, double const BY,
+                         double const SFY, double const SFZ) :
+                            gbox(GEONO, HZ, TY, TB, TT, BY, SFY, SFZ, 0, 0) {};
+                    gbox(long const GEONO,
+                         double const HZ, double const TY, double const TB,
+                         double const TT, double const BY) :
+                            gbox(GEONO, HZ, TY, TB, TT, BY, 1., 1., 0, 0) {};
 
                     virtual cards::types const card_type(void) const;
 
@@ -366,8 +390,23 @@ namespace dnvgl {
                         double const HZ, double const TY, double const TB,
                         double const TT, double const BY,
                         double const SFY, double const SFZ,
-                        long const NLOBY = 0, long const NLOBZ = 0);
+                        long const NLOBY, long const NLOBZ);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const TB,
+                        double const TT, double const BY,
+                        double const SFY, double const SFZ) {
+                        return (*this)(GEONO, HZ, TY, TB, TT, BY, SFY, SFZ, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const TB,
+                        double const TT, double const BY) {
+                        return (*this)(GEONO, HZ, TY, TB, TT, BY, 1., 1., 0, 0);
+                    };
+
                 protected:
+
                     virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
                         std::vector<std::string> const&, size_t const);
@@ -468,7 +507,16 @@ namespace dnvgl {
                     gchan(long const GEONO,
                           double const HZ, double const TY, double const BY,
                           double const TZ, double const SFY, double const SFZ,
-                          long const K, long const NLOBY = 0, long const NLOBZ = 0);
+                          long const K, long const NLOBY, long const NLOBZ);
+                    gchan(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TZ, double const SFY, double const SFZ,
+                          long const K) :
+                            gchan(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0) {};
+                    gchan(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TZ, long const K) :
+                            gchan(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {};
 
                     virtual fem::cards::types const card_type(void) const;
 
@@ -477,7 +525,21 @@ namespace dnvgl {
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
-                        long const K, long const NLOBY = 0, long const NLOBZ = 0);
+                        long const K, long const NLOBY, long const NLOBZ);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ, double const SFY, double const SFZ,
+                        long const K) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ, long const K) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0);
+                    };
+
                 protected:
                     virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
@@ -577,12 +639,21 @@ namespace dnvgl {
                     long NLOBZ;
 
                     gchanr(void);
+                    gchanr(std::vector<std::string> const&, size_t const);
                     gchanr(long const GEONO,
                            double const HZ, double const TY, double const BY,
                            double const TZ, double const SFY, double const SFZ,
                            long const K, double const R,
-                           long const NLOBY = 0, long const NLOBZ = 0);
-                        gchanr(std::vector<std::string> const&, size_t const);
+                           long const NLOBY, long const NLOBZ);
+                    gchanr(long const GEONO,
+                           double const HZ, double const TY, double const BY,
+                           double const TZ, double const SFY, double const SFZ,
+                           long const K, double const R) :
+                            gchanr(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R, 0, 0) {};
+                    gchanr(long const GEONO,
+                           double const HZ, double const TY, double const BY,
+                           double const TZ, long const K, double const R) :
+        gchanr(GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0) {};
                     virtual const cards::types card_type(void) const;
                     using __base::beam_prop::operator();
                     __base::card const &operator() (
@@ -590,7 +661,20 @@ namespace dnvgl {
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
                         long const K, double const R,
-                        long const NLOBY = 0, long const NLOBZ = 0);
+                        long const NLOBY, long const NLOBZ);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ, double const SFY, double const SFZ,
+                        long const K, double const R) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ, long const K, double const R) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0);
+                    };
                 protected:
                     virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
@@ -747,7 +831,16 @@ namespace dnvgl {
                           double const HZ, double const TY, double const BY,
                           double const TT, double const TB,
                           double const SFY, double const SFZ,
-                          long const NLOBY=0, long const NLOBZ=0);
+                          long const NLOBY, long const NLOBZ);
+                    gdobo(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TT, double const TB,
+                          double const SFY, double const SFZ) :
+                            gdobo(GEONO, HZ, TY, BY, TT, TB, SFY, SFZ, 0, 0) {};
+                    gdobo(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TT, double const TB) :
+                            gdobo(GEONO, HZ, TY, BY, TT, TB, 1., 1., 0, 0) {};
 
                     virtual fem::cards::types const card_type(void) const;
 
@@ -757,7 +850,22 @@ namespace dnvgl {
                         double const HZ, double const TY, double const BY,
                         double const TT, double const TB,
                         double const SFY, double const SFZ,
-                        long const NLOBY=0, long const NLOBZ=0);
+                        long const NLOBY, long const NLOBZ);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TT, double const TB,
+                        double const SFY, double const SFZ) {
+                        return (*this)(GEONO, HZ, TY, BY, TT, TB, SFY, SFZ,
+                                       0, 0);
+                    };
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TT, double const TB) {
+                        return (*this)(GEONO, HZ, TY, BY, TT, TB, 1., 1., 0, 0);
+                    };
+
                 protected:
                     virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
@@ -1298,8 +1406,19 @@ namespace dnvgl {
                           double const HZ, double const TY, double const BT,
                           double const TT, double const BB, double const TB,
                           double const SFY, double const SFZ,
-                          long const NLOBYT=0, long const NLOBYB=0,
-                          long const NLOBZ=0);
+                          long const NLOBYT, long const NLOBYB,
+                          long const NLOBZ);
+                    giorh(long const GEONO,
+                          double const HZ, double const TY, double const BT,
+                          double const TT, double const BB, double const TB,
+                          double const SFY, double const SFZ) :
+                            giorh(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
+                                  0, 0, 0) {};
+                    giorh(long const GEONO,
+                          double const HZ, double const TY, double const BT,
+                          double const TT, double const BB, double const TB) :
+                            giorh(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
+                                  0, 0, 0) {};
 
                     virtual fem::cards::types const card_type(void) const;
 
@@ -1311,15 +1430,21 @@ namespace dnvgl {
                         double const SFY, double const SFZ,
                         long const NLOBYT, long const NLOBYB,
                         long const NLOBZ);
-                    __base::card const &operator() (
+                    __base::card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
-                        double const SFY, double const SFZ);
-                    __base::card const &operator() (
+                        double const SFY, double const SFZ) {
+                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
+                                       0, 0, 0);
+                    };
+                    __base::card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
-                        double const TT, double const BB, double const TB);
+                        double const TT, double const BB, double const TB) {
+                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
+                                       0, 0, 0);
+                    };
 
                 protected:
 
@@ -1432,8 +1557,21 @@ namespace dnvgl {
                            double const TT, double const BB, double const TB,
                            double const SFY, double const SFZ,
                            double RT, double RB,
-                           long const NLOBYT=0, long const NLOBYB=0,
-                           long const NLOBZ=0);
+                           long const NLOBYT, long const NLOBYB,
+                           long const NLOBZ);
+                    giorhr(long const GEONO,
+                           double const HZ, double const TY, double const BT,
+                           double const TT, double const BB, double const TB,
+                           double const SFY, double const SFZ,
+                           double RT, double RB) :
+                            giorhr(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
+                                   RT, RB, 0, 0, 0) {};
+                    giorhr(long const GEONO,
+                           double const HZ, double const TY, double const BT,
+                           double const TT, double const BB, double const TB,
+                           double RT, double RB) :
+                            giorhr(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
+                                   RT, RB, 0, 0, 0) {};
 
                     virtual const cards::types card_type(void) const;
 
@@ -1444,8 +1582,25 @@ namespace dnvgl {
                         double const TT, double const BB, double const TB,
                         double const SFY, double const SFZ,
                         double RT, double RB,
-                        long const NLOBYT=0, long const NLOBYB=0,
-                        long const NLOBZ=0);
+                        long const NLOBYT, long const NLOBYB, long const NLOBZ);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BT,
+                        double const TT, double const BB, double const TB,
+                        double const SFY, double const SFZ,
+                        double RT, double RB) {
+                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
+                                       RT, RB, 0, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BT,
+                        double const TT, double const BB, double const TB,
+                        double RT, double RB) {
+                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
+                                       RT, RB, 0, 0, 0);
+                    };
+
                 protected:
                     virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
@@ -1552,12 +1707,13 @@ namespace dnvgl {
                           double const HZ, double const TY, double const BY,
                           double const TZ,
                           double const SFY, double const SFZ,
-                          bool const K,
-                          long const NLOBY, long const NLOBZ);
+                          bool const K) :
+                            glsec(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0) {};
                     glsec(long const GEONO,
                           double const HZ, double const TY, double const BY,
                           double const TZ,
-                          bool const K);
+                          bool const K) :
+                            glsec(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {};
 
                     virtual fem::cards::types const card_type(void) const;
 
@@ -1568,18 +1724,23 @@ namespace dnvgl {
                         double const TZ,
                         double const SFY, double const SFZ,
                         bool const K,
-                        long const NLOBY = 0, long const NLOBZ = 0);
-                    __base::card const &operator() (
+                        long const NLOBY, long const NLOBZ);
+                    __base::card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ,
                         double const SFY, double const SFZ,
-                        bool const K);
-                    __base::card const &operator() (
+                        bool const K) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K,
+                                       0, 0);
+                    };
+                    __base::card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ,
-                        bool const K);
+                        bool const K) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0);
+                    };
 
                 protected:
 
@@ -1688,7 +1849,20 @@ namespace dnvgl {
                            double const BY, double const TZ,
                            double const SFY, double const SFZ,
                            long const K, double const R,
-                           long const NLOBY=0, long const NLOBZ=0);
+                           long const NLOBY, long const NLOBZ);
+                    glsecr(long const GEONO,
+                           double const HZ, double const TY,
+                           double const BY, double const TZ,
+                           double const SFY, double const SFZ,
+                           long const K, double const R) :
+                            glsecr(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R,
+                                   0, 0) {};
+                    glsecr(long const GEONO,
+                           double const HZ, double const TY,
+                           double const BY, double const TZ,
+                           long const K, double const R) :
+                            glsecr(GEONO, HZ, TY, BY, TZ, 1., 1., K, R,
+                                   0, 0) {};
 
                     virtual const cards::types card_type(void) const;
 
@@ -1699,7 +1873,24 @@ namespace dnvgl {
                         double const BY, double const TZ,
                         double const SFY, double const SFZ,
                         long const K, double const R,
-                        long const NLOBY=0, long const NLOBZ=0);
+                        long const NLOBY, long const NLOBZ);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY,
+                        double const BY, double const TZ,
+                        double const SFY, double const SFZ,
+                        long const K, double const R) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R,
+                                       0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY,
+                        double const BY, double const TZ,
+                        long const K, double const R) {
+                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, R,
+                                       0, 0);
+                    };
 
                 protected:
                     virtual std::ostream &put(std::ostream&) const;
@@ -1861,7 +2052,14 @@ namespace dnvgl {
                     gpipe(long const GEONO,
                           double const DI, double const DY, double const T,
                           double const SFY, double const SFZ,
-                          long const NDIR=0, long const NRAD=0);
+                          long const NDIR, long const NRAD);
+                    gpipe(long const GEONO,
+                          double const DI, double const DY, double const T,
+                          double const SFY, double const SFZ) :
+                            gpipe(GEONO, DI, DY, T, SFY, SFZ, 0, 0) {};
+                    gpipe(long const GEONO,
+                          double const DI, double const DY, double const T) :
+                            gpipe(GEONO, DI, DY, T, 1., 1., 0, 0) {};
 
                     virtual fem::cards::types const card_type(void) const;
 
@@ -1870,7 +2068,18 @@ namespace dnvgl {
                         long const GEONO,
                         double const DI, double const DY, double const T,
                         double const SFY, double const SFZ,
-                        long const NDIR=0, long const NRAD=0);
+                        long const NDIR, long const NRAD);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const DI, double const DY, double const T,
+                        double const SFY, double const SFZ) {
+                        return (*this)(GEONO, DI, DY, T, SFY, SFZ, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const DI, double const DY, double const T) {
+                        return (*this)(GEONO, DI, DY, T, 1., 1., 0, 0);
+                    };
 
                 protected:
 
@@ -2130,19 +2339,48 @@ namespace dnvgl {
 
                     gtonp(void);
                     gtonp(std::vector<std::string> const&, size_t const);
-                    gtonp(long const GEONO, double HZ, double TY, double BT,
-                          double TT, double BP, double TP, double  SFY,
-                          double SFZ, long NLOBYT = 0, long NLOBYB = 0,
-                          long NLOBZ = 0);
+                    gtonp(long const GEONO,
+                          double HZ, double TY, double BT, double TT,
+                          double BP, double TP,
+                          double SFY, double SFZ,
+                          long NLOBYT, long NLOBYB, long NLOBZ);
+                    gtonp(long const GEONO,
+                          double HZ, double TY, double BT, double TT,
+                          double BP, double TP,
+                          double SFY, double SFZ) :
+                            gtonp(GEONO, HZ, TY, BT, TT, BP, TP, SFY, SFZ,
+                                  0, 0, 0) {};
+                    gtonp(long const GEONO,
+                          double HZ, double TY, double BT, double TT,
+                          double BP, double TP) :
+                            gtonp(GEONO, HZ, TY, BT, TT, BP, TP, 1., 1.,
+                                  0, 0, 0) {};
 
                     virtual const cards::types card_type(void) const;
 
                     using __base::beam_prop::operator();
                     __base::card const &operator() (
-                        long GEONO, double HZ, double TY, double BT,
-                        double TT, double BP, double TP, double  SFY,
-                        double SFZ, long NLOBYT = 0, long NLOBYB = 0,
-                        long NLOBZ = 0);
+                        long GEONO,
+                        double HZ, double TY, double BT, double TT, double BP,
+                        double TP,
+                        double SFY, double SFZ,
+                        long NLOBYT, long NLOBYB, long NLOBZ);
+                    __base::card const inline &operator() (
+                        long GEONO,
+                        double HZ, double TY, double BT, double TT, double BP,
+                        double TP,
+                        double SFY, double SFZ) {
+                        return (*this)(GEONO, HZ, TY, BT, TT, BP, TP, SFY, SFZ,
+                                       0, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long GEONO,
+                        double HZ, double TY, double BT, double TT, double BP,
+                        double TP) {
+                        return (*this)(GEONO, HZ, TY, BT, TT, BP, TP, 1., 1.,
+                                       0, 0, 0);
+                    };
+
                 protected:
                     virtual std::ostream &put(std::ostream&) const;
                     virtual void read(
@@ -2332,13 +2570,25 @@ namespace dnvgl {
 
                     gusyi(void);
                     gusyi(std::vector<std::string> const&, size_t const);
-                    gusyi(long const GEONO, double const HZ,
-                          double const TY, double const BT,
-                          double const B1, double const TT,
-                          double const BB, double const B2,
-                          double const TB, double const SFY,
-                          double const SFZ, long const NLOBYT=0,
-                          long const NLOBYB=0, long const NLOBZ=0);
+                    gusyi(long const GEONO,
+                          double const HZ, double const TY, double const BT,
+                          double const B1, double const TT, double const BB,
+                          double const B2, double const TB,
+                          double const SFY, double const SFZ,
+                          long const NLOBYT, long const NLOBYB, long const NLOBZ);
+                    gusyi(long const GEONO,
+                          double const HZ, double const TY, double const BT,
+                          double const B1, double const TT, double const BB,
+                          double const B2, double const TB,
+                          double const SFY, double const SFZ) :
+                            gusyi(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+                                  SFY, SFZ, 0, 0, 0) {};
+                    gusyi(long const GEONO,
+                          double const HZ, double const TY, double const BT,
+                          double const B1, double const TT, double const BB,
+                          double const B2, double const TB) :
+                            gusyi(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+                                  1., 1., 0, 0, 0) {};
 
                     virtual fem::cards::types const card_type(void) const;
 
@@ -2349,8 +2599,25 @@ namespace dnvgl {
                         double const BT, double const B1, double const TT,
                         double const BB, double const B2, double const TB,
                         double const SFY, double const SFZ,
-                        long const NLOBYT=0, long const NLOBYB=0,
-                        long const NLOBZ=0);
+                        long const NLOBYT, long const NLOBYB,
+                        long const NLOBZ);
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY,
+                        double const BT, double const B1, double const TT,
+                        double const BB, double const B2, double const TB,
+                        double const SFY, double const SFZ) {
+                        return (*this)(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+                                       SFY, SFZ, 0, 0, 0);
+                    };
+                    __base::card const inline &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY,
+                        double const BT, double const B1, double const TT,
+                        double const BB, double const B2, double const TB) {
+                        return (*this)(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+                                       1., 1., 0, 0, 0);
+                    };
 
                 protected:
 
@@ -2375,4 +2642,5 @@ namespace dnvgl {
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // coding: utf-8
+
 // End:

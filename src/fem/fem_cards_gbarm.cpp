@@ -81,9 +81,25 @@ gbarm::gbarm(
     long const GEONO,
     double const HZ, double const BT, double const BB,
     double const SFY, double const SFZ,
-    long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
+    long const NLOBY, long const NLOBZ) :
         __base::beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
         SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+
+cards::__base::card const &gbarm::operator() (
+    long const GEONO,
+    double const HZ, double const BT, double const BB,
+    double const SFY, double const SFZ,
+    long const NLOBY, long const NLOBZ) {
+    set_geono(GEONO, false);
+    this->HZ = HZ;
+    this->BT = BT;
+    this->BB = BB;
+    this->SFY = SFY;
+    this->SFZ = SFZ;
+    this->NLOBY = NLOBY;
+    this->NLOBZ = NLOBZ;
+    return *this;
+}
 
 const dnvgl::extfem::fem::cards::types
 gbarm::card_type(void) const {return types::GBARM;}
