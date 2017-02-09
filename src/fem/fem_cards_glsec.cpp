@@ -81,11 +81,23 @@ glsec::glsec(long const GEONO, double const HZ,
              double const TY, double const BY,
              double const TZ, double const SFY,
              double const SFZ, bool const K,
-             long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
-        __base::beam_prop(GEONO, false),
-        HZ(HZ), TY(TY), BY(BY), TZ(TZ),
-        SFY(SFY), SFZ(SFZ),
-        K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+             long const NLOBY, long const NLOBZ) :
+             __base::beam_prop(GEONO, false),
+             HZ(HZ), TY(TY), BY(BY), TZ(TZ),
+             SFY(SFY), SFZ(SFZ),
+             K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+
+glsec::glsec(long const GEONO, double const HZ,
+             double const TY, double const BY,
+             double const TZ, double const SFY,
+             double const SFZ, bool const K) :
+             glsec::glsec(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0) {}
+
+glsec::glsec(long const GEONO, double const HZ,
+             double const TY, double const BY,
+             double const TZ, bool const K) :
+             glsec::glsec(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {}
+
 
 dnvgl::extfem::fem::cards::types const
 glsec::card_type(void) const {return types::GLSEC;}

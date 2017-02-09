@@ -1309,8 +1309,17 @@ namespace dnvgl {
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
                         double const SFY, double const SFZ,
-                        long const NLOBYT=0, long const NLOBYB=0,
-                        long const NLOBZ=0);
+                        long const NLOBYT, long const NLOBYB,
+                        long const NLOBZ);
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BT,
+                        double const TT, double const BB, double const TB,
+                        double const SFY, double const SFZ);
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BT,
+                        double const TT, double const BB, double const TB);
 
                 protected:
 
@@ -1538,7 +1547,17 @@ namespace dnvgl {
                           double const TZ,
                           double const SFY, double const SFZ,
                           bool const K,
-                          long const NLOBY=0, long const NLOBZ=0);
+                          long const NLOBY, long const NLOBZ);
+                    glsec(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TZ,
+                          double const SFY, double const SFZ,
+                          bool const K,
+                          long const NLOBY, long const NLOBZ);
+                    glsec(long const GEONO,
+                          double const HZ, double const TY, double const BY,
+                          double const TZ,
+                          bool const K);
 
                     virtual fem::cards::types const card_type(void) const;
 
@@ -1549,7 +1568,18 @@ namespace dnvgl {
                         double const TZ,
                         double const SFY, double const SFZ,
                         bool const K,
-                        long const NLOBY=0, long const NLOBZ=0);
+                        long const NLOBY = 0, long const NLOBZ = 0);
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ,
+                        double const SFY, double const SFZ,
+                        bool const K);
+                    __base::card const &operator() (
+                        long const GEONO,
+                        double const HZ, double const TY, double const BY,
+                        double const TZ,
+                        bool const K);
 
                 protected:
 
