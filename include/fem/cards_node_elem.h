@@ -2439,8 +2439,9 @@ namespace dnvgl {
 
                     gunivec(std::vector<std::string> const&, size_t const);
                     gunivec(void);
-                    gunivec(long const TRANSNO, double const UNIX,
-                            double const UNIY, double const UNIZ);
+                    gunivec(long const TRANSNO,
+                            double const UNIX, double const UNIY,
+                            double const UNIZ);
                     gunivec(double const UNIX, double const UNIY,
                             double const UNIZ);
 
@@ -2642,5 +2643,4 @@ namespace dnvgl {
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // coding: utf-8
-
 // End:

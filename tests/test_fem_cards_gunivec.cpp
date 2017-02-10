@@ -79,10 +79,33 @@ TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
     }
 
     SECTION("simple") {
+        __base::transno::reset_transno();
         gunivec probe(1, 2., 3., 4.);
         test << probe;
         CHECK(test.str() ==
               "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n");
+    }
+
+    SECTION("simple (2)") {
+        __base::transno::reset_transno();
+        gunivec probe(1., 2., 3.);
+        test << probe;
+        CHECK(test.str() ==
+              "GUNIVEC +1.000000000e+00+1.000000000e+00+2.000000000e+00+3.000000000e+00\n");
+    }
+
+    SECTION("simple (multiple)") {
+        __base::transno::reset_transno();
+        gunivec probe1(3, 2., 3., 4.);
+        gunivec probe2(3., 3., 4.);
+        gunivec probe3(4., 3., 4.);
+        test << probe1;
+        test << probe2;
+        test << probe3;
+        CHECK(test.str() ==
+              "GUNIVEC +3.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "GUNIVEC +1.000000000e+00+3.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "GUNIVEC +2.000000000e+00+4.000000000e+00+3.000000000e+00+4.000000000e+00\n");
     }
 
     SECTION("reuse (1)") {
@@ -129,5 +152,7 @@ TEST_CASE("FEM GUNIVEC conversion from own output.", "[fem_gunivec,in/out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//    (make -C ../cbuild test;
+//     ../.cbuild/tests/test_fem_cards --use-colour no)"
 // End:

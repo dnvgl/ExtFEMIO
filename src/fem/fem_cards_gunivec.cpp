@@ -47,17 +47,6 @@ gunivec::gunivec(const vector<std::string> &inp, size_t const len) :
     read(inp, len);
 }
 
-void gunivec::read(const vector<std::string> &inp, size_t const len) {
-    if (len < 5)
-        throw errors::parse_error(
-            "GUNIVEC", "Illegal number of entries.");
-
-    // TRANSNO = _form_TRANSNO(inp.at(1));
-    UNIX = _form_UNIX(inp.at(2));
-    UNIY = _form_UNIY(inp.at(3));
-    UNIZ = _form_UNIZ(inp.at(4));
-}
-
 gunivec::gunivec(void) :
         gunivec(-1, 0., 0., 0.) {}
 
@@ -67,12 +56,10 @@ gunivec::gunivec(
         __base::transno(TRANSNO),
         UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
-// cards::__base::card const &gunivec::operator() (
-//     vector<std::string> const &inp, size_t const len) {
-//     __base::transno::read(inp, len);
-//     this->read(inp, len);
-//     return *this;
-// }
+gunivec::gunivec(
+    double const UNIX, double const UNIY, double const UNIZ) :
+        __base::transno(0),
+        UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
 cards::__base::card const &gunivec::operator() (
     long const TRANSNO,
@@ -97,6 +84,17 @@ fem::cards::types const gunivec::card_type(void) const {
     return types::GUNIVEC;
 }
 
+void gunivec::read(const vector<std::string> &inp, size_t const len) {
+    if (len < 5)
+        throw errors::parse_error(
+            "GUNIVEC", "Illegal number of entries.");
+
+    // TRANSNO = _form_TRANSNO(inp.at(1));
+    UNIX = _form_UNIX(inp.at(2));
+    UNIY = _form_UNIY(inp.at(3));
+    UNIZ = _form_UNIZ(inp.at(4));
+}
+
 ostream &gunivec::put(ostream& os) const {
     if (TRANSNO == -1) return os;
     os << gunivec::head.format()
@@ -110,5 +108,7 @@ ostream &gunivec::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:
