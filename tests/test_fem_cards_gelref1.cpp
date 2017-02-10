@@ -18,6 +18,7 @@ namespace {
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
 #include <limits>
+#include <string>
 
 #include <catch.hpp>
 
@@ -38,7 +39,7 @@ using namespace dnvgl::extfem::fem::cards;
 TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]") {
 
     vector<std::string> lines;
-    size_t len;
+    size_t len{100};
 
     SECTION("GELREF1 (sample 1)") {
         vector<std::string> data({

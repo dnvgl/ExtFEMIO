@@ -244,9 +244,48 @@ TEST_CASE("Output for BEPS elements.", "[fem_element_beps]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::beps probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.000000000e+00+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::beps probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -262,6 +301,11 @@ TEST_CASE("Output for BEPS elements.", "[fem_element_beps]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+2.000000000e+00+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.000000000e+00+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -414,9 +458,48 @@ TEST_CASE("Output for CSTA elements.", "[fem_element_csta]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::csta probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.000000000e+00+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::csta probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({103, 104, 105}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -432,6 +515,11 @@ TEST_CASE("Output for CSTA elements.", "[fem_element_csta]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+3.000000000e+00+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.000000000e+00+3.000000000e+00\n"
+            "        +1.030000000e+02+1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -584,9 +672,48 @@ TEST_CASE("Output for RPBQ elements.", "[fem_element_rpbq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::rpbq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.000000000e+00+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::rpbq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -602,6 +729,11 @@ TEST_CASE("Output for RPBQ elements.", "[fem_element_rpbq]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+5.000000000e+00+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.000000000e+00+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -757,9 +889,49 @@ TEST_CASE("Output for ILST elements.", "[fem_element_ilst]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ilst probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+6.000000000e+00+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ilst probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -776,6 +948,12 @@ TEST_CASE("Output for ILST elements.", "[fem_element_ilst]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+6.000000000e+00+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -931,9 +1109,49 @@ TEST_CASE("Output for IQQE elements.", "[fem_element_iqqe]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::iqqe probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+8.000000000e+00+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::iqqe probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -950,6 +1168,12 @@ TEST_CASE("Output for IQQE elements.", "[fem_element_iqqe]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+8.000000000e+00+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -1102,9 +1326,48 @@ TEST_CASE("Output for LQUA elements.", "[fem_element_lqua]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::lqua probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+9.000000000e+00+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::lqua probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -1120,6 +1383,11 @@ TEST_CASE("Output for LQUA elements.", "[fem_element_lqua]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+9.000000000e+00+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+9.000000000e+00+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -1272,9 +1540,48 @@ TEST_CASE("Output for TESS elements.", "[fem_element_tess]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::tess probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.000000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::tess probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -1290,6 +1597,11 @@ TEST_CASE("Output for TESS elements.", "[fem_element_tess]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.000000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.000000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -1442,9 +1754,48 @@ TEST_CASE("Output for GMAS elements.", "[fem_element_gmas]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::gmas probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>(1, 100),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.100000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::gmas probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>(1, 100), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>(1, 101), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -1460,6 +1811,11 @@ TEST_CASE("Output for GMAS elements.", "[fem_element_gmas]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.100000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.100000000e+01+3.000000000e+00\n"
+            "        +1.010000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -1612,9 +1968,48 @@ TEST_CASE("Output for GLMA elements.", "[fem_element_glma]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::glma probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.200000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::glma probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -1630,6 +2025,11 @@ TEST_CASE("Output for GLMA elements.", "[fem_element_glma]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.200000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.200000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -1782,9 +2182,48 @@ TEST_CASE("Output for GLDA elements.", "[fem_element_glda]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::glda probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.300000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::glda probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -1800,6 +2239,11 @@ TEST_CASE("Output for GLDA elements.", "[fem_element_glda]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.300000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.300000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -1952,9 +2396,48 @@ TEST_CASE("Output for BEAS elements.", "[fem_element_beas]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::beas probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.500000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::beas probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -1970,6 +2453,11 @@ TEST_CASE("Output for BEAS elements.", "[fem_element_beas]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.500000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.500000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -2122,9 +2610,48 @@ TEST_CASE("Output for AXIS elements.", "[fem_element_axis]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::axis probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.600000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::axis probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -2140,6 +2667,11 @@ TEST_CASE("Output for AXIS elements.", "[fem_element_axis]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.600000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.600000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -2292,9 +2824,48 @@ TEST_CASE("Output for AXDA elements.", "[fem_element_axda]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::axda probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.700000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::axda probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -2310,6 +2881,11 @@ TEST_CASE("Output for AXDA elements.", "[fem_element_axda]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.700000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.700000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -2462,9 +3038,48 @@ TEST_CASE("Output for GSPR elements.", "[fem_element_gspr]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::gspr probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>(1, 100),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.800000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::gspr probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>(1, 100), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>(1, 101), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -2480,6 +3095,11 @@ TEST_CASE("Output for GSPR elements.", "[fem_element_gspr]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.800000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.800000000e+01+3.000000000e+00\n"
+            "        +1.010000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -2632,9 +3252,48 @@ TEST_CASE("Output for GDAM elements.", "[fem_element_gdam]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::gdam probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>(1, 100),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.900000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::gdam probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>(1, 100), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>(1, 101), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -2650,6 +3309,11 @@ TEST_CASE("Output for GDAM elements.", "[fem_element_gdam]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+1.900000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.900000000e+01+3.000000000e+00\n"
+            "        +1.010000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -2814,9 +3478,52 @@ TEST_CASE("Output for IHEX elements.", "[fem_element_ihex]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ihex probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.000000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ihex probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -2836,6 +3543,15 @@ TEST_CASE("Output for IHEX elements.", "[fem_element_ihex]") {
             "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.000000000e+01+3.000000000e+00\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -2991,9 +3707,49 @@ TEST_CASE("Output for LHEX elements.", "[fem_element_lhex]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::lhex probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.100000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::lhex probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -3010,6 +3766,12 @@ TEST_CASE("Output for LHEX elements.", "[fem_element_lhex]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.100000000e+01+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -3162,9 +3924,48 @@ TEST_CASE("Output for SECB elements.", "[fem_element_secb]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::secb probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.200000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::secb probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({103, 104, 105}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -3180,6 +3981,11 @@ TEST_CASE("Output for SECB elements.", "[fem_element_secb]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+2.200000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.200000000e+01+3.000000000e+00\n"
+            "        +1.030000000e+02+1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -3332,9 +4138,48 @@ TEST_CASE("Output for BTSS elements.", "[fem_element_btss]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::btss probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.300000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::btss probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({103, 104, 105}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -3350,6 +4195,11 @@ TEST_CASE("Output for BTSS elements.", "[fem_element_btss]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+2.300000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.300000000e+01+3.000000000e+00\n"
+            "        +1.030000000e+02+1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -3502,9 +4352,48 @@ TEST_CASE("Output for FQUS_FFQ elements.", "[fem_element_fqus_ffq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::fqus_ffq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.400000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::fqus_ffq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -3520,6 +4409,11 @@ TEST_CASE("Output for FQUS_FFQ elements.", "[fem_element_fqus_ffq]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+2.400000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.400000000e+01+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -3672,9 +4566,48 @@ TEST_CASE("Output for FTRS_FFTR elements.", "[fem_element_ftrs_fftr]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ftrs_fftr probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.500000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ftrs_fftr probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({103, 104, 105}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -3690,6 +4623,11 @@ TEST_CASE("Output for FTRS_FFTR elements.", "[fem_element_ftrs_fftr]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+2.500000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.500000000e+01+3.000000000e+00\n"
+            "        +1.030000000e+02+1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -3845,9 +4783,49 @@ TEST_CASE("Output for SCTS elements.", "[fem_element_scts]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::scts probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.600000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::scts probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -3864,6 +4842,12 @@ TEST_CASE("Output for SCTS elements.", "[fem_element_scts]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.600000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -4019,9 +5003,49 @@ TEST_CASE("Output for MCTS elements.", "[fem_element_mcts]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::mcts probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.700000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::mcts probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -4038,6 +5062,12 @@ TEST_CASE("Output for MCTS elements.", "[fem_element_mcts]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.700000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -4193,9 +5223,49 @@ TEST_CASE("Output for SCQS elements.", "[fem_element_scqs]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::scqs probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.800000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::scqs probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -4212,6 +5282,12 @@ TEST_CASE("Output for SCQS elements.", "[fem_element_scqs]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.800000000e+01+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -4367,9 +5443,49 @@ TEST_CASE("Output for MCQS elements.", "[fem_element_mcqs]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::mcqs probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+2.900000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::mcqs probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -4386,6 +5502,12 @@ TEST_CASE("Output for MCQS elements.", "[fem_element_mcqs]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+2.900000000e+01+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -4547,9 +5669,51 @@ TEST_CASE("Output for IPRI elements.", "[fem_element_ipri]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ipri probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.000000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ipri probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -4568,6 +5732,14 @@ TEST_CASE("Output for IPRI elements.", "[fem_element_ipri]") {
             "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
             "        +1.120000000e+02+1.130000000e+02+1.140000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.000000000e+01+3.000000000e+00\n"
+            "        +1.150000000e+02+1.160000000e+02+1.170000000e+02+1.180000000e+02\n"
+            "        +1.190000000e+02+1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -4726,9 +5898,50 @@ TEST_CASE("Output for ITET elements.", "[fem_element_itet]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::itet probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.100000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::itet probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({110, 111, 112, 113, 114, 115, 116, 117, 118, 119}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -4746,6 +5959,13 @@ TEST_CASE("Output for ITET elements.", "[fem_element_itet]") {
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "        +1.080000000e+02+1.090000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.100000000e+01+3.000000000e+00\n"
+            "        +1.100000000e+02+1.110000000e+02+1.120000000e+02+1.130000000e+02\n"
+            "        +1.140000000e+02+1.150000000e+02+1.160000000e+02+1.170000000e+02\n"
+            "        +1.180000000e+02+1.190000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -4901,9 +6121,49 @@ TEST_CASE("Output for TPRI elements.", "[fem_element_tpri]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::tpri probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.200000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::tpri probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -4920,6 +6180,12 @@ TEST_CASE("Output for TPRI elements.", "[fem_element_tpri]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.200000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -5072,9 +6338,48 @@ TEST_CASE("Output for TETR elements.", "[fem_element_tetr]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::tetr probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.300000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::tetr probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -5090,6 +6395,11 @@ TEST_CASE("Output for TETR elements.", "[fem_element_tetr]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+3.300000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.300000000e+01+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -5245,9 +6555,49 @@ TEST_CASE("Output for LCTS elements.", "[fem_element_lcts]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::lcts probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.400000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::lcts probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -5264,6 +6614,12 @@ TEST_CASE("Output for LCTS elements.", "[fem_element_lcts]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.400000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -5419,9 +6775,49 @@ TEST_CASE("Output for LCQS elements.", "[fem_element_lcqs]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::lcqs probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.500000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::lcqs probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -5438,6 +6834,12 @@ TEST_CASE("Output for LCQS elements.", "[fem_element_lcqs]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.500000000e+01+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -5602,9 +7004,52 @@ TEST_CASE("Output for TRS1 elements.", "[fem_element_trs1]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::trs1 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.600000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::trs1 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -5624,6 +7069,15 @@ TEST_CASE("Output for TRS1 elements.", "[fem_element_trs1]") {
             "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
             "        +1.160000000e+02+1.170000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.600000000e+01+3.000000000e+00\n"
+            "        +1.180000000e+02+1.190000000e+02+1.200000000e+02+1.210000000e+02\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -5785,9 +7239,51 @@ TEST_CASE("Output for TRS2 elements.", "[fem_element_trs2]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::trs2 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.700000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::trs2 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -5806,6 +7302,14 @@ TEST_CASE("Output for TRS2 elements.", "[fem_element_trs2]") {
             "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
             "        +1.120000000e+02+1.130000000e+02+1.140000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.700000000e+01+3.000000000e+00\n"
+            "        +1.150000000e+02+1.160000000e+02+1.170000000e+02+1.180000000e+02\n"
+            "        +1.190000000e+02+1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -5964,9 +7468,50 @@ TEST_CASE("Output for TRS3 elements.", "[fem_element_trs3]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::trs3 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+3.800000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::trs3 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -5984,6 +7529,13 @@ TEST_CASE("Output for TRS3 elements.", "[fem_element_trs3]") {
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+3.800000000e+01+3.000000000e+00\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -6136,9 +7688,48 @@ TEST_CASE("Output for GLSH elements.", "[fem_element_glsh]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::glsh probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.000000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::glsh probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -6154,6 +7745,11 @@ TEST_CASE("Output for GLSH elements.", "[fem_element_glsh]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.000000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.000000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -6306,9 +7902,48 @@ TEST_CASE("Output for AXCS elements.", "[fem_element_axcs]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::axcs probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.100000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::axcs probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({103, 104, 105}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -6324,6 +7959,11 @@ TEST_CASE("Output for AXCS elements.", "[fem_element_axcs]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.100000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.100000000e+01+3.000000000e+00\n"
+            "        +1.030000000e+02+1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -6476,9 +8116,48 @@ TEST_CASE("Output for AXLQ elements.", "[fem_element_axlq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::axlq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.200000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::axlq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -6494,6 +8173,11 @@ TEST_CASE("Output for AXLQ elements.", "[fem_element_axlq]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.200000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.200000000e+01+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -6649,9 +8333,49 @@ TEST_CASE("Output for AXLS elements.", "[fem_element_axls]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::axls probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.300000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::axls probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -6668,6 +8392,12 @@ TEST_CASE("Output for AXLS elements.", "[fem_element_axls]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.300000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -6823,9 +8553,49 @@ TEST_CASE("Output for AXQQ elements.", "[fem_element_axqq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::axqq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.400000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::axqq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -6842,6 +8612,12 @@ TEST_CASE("Output for AXQQ elements.", "[fem_element_axqq]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.400000000e+01+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -6994,9 +8770,48 @@ TEST_CASE("Output for PILS elements.", "[fem_element_pils]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::pils probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>(1, 100),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.500000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::pils probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>(1, 100), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>(1, 101), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -7012,6 +8827,11 @@ TEST_CASE("Output for PILS elements.", "[fem_element_pils]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.500000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.500000000e+01+3.000000000e+00\n"
+            "        +1.010000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -7164,9 +8984,48 @@ TEST_CASE("Output for PCAB elements.", "[fem_element_pcab]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::pcab probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.600000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::pcab probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -7182,6 +9041,11 @@ TEST_CASE("Output for PCAB elements.", "[fem_element_pcab]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.600000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.600000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -7334,9 +9198,48 @@ TEST_CASE("Output for PSPR elements.", "[fem_element_pspr]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::pspr probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>(1, 100),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.700000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::pspr probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>(1, 100), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>(1, 101), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -7352,6 +9255,11 @@ TEST_CASE("Output for PSPR elements.", "[fem_element_pspr]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.700000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.700000000e+01+3.000000000e+00\n"
+            "        +1.010000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -7504,9 +9412,48 @@ TEST_CASE("Output for ADVA_4 elements.", "[fem_element_adva_4]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::adva_4 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.800000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::adva_4 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -7522,6 +9469,11 @@ TEST_CASE("Output for ADVA_4 elements.", "[fem_element_adva_4]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.800000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.800000000e+01+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -7674,9 +9626,48 @@ TEST_CASE("Output for ADVA_2 elements.", "[fem_element_adva_2]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::adva_2 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+4.900000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::adva_2 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -7692,6 +9683,11 @@ TEST_CASE("Output for ADVA_2 elements.", "[fem_element_adva_2]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+4.900000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+4.900000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -7844,9 +9840,48 @@ TEST_CASE("Output for CTCP elements.", "[fem_element_ctcp]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctcp probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.100000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctcp probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({102, 103}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -7862,6 +9897,11 @@ TEST_CASE("Output for CTCP elements.", "[fem_element_ctcp]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+5.100000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.100000000e+01+3.000000000e+00\n"
+            "        +1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -8014,9 +10054,48 @@ TEST_CASE("Output for CTCL elements.", "[fem_element_ctcl]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctcl probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.200000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctcl probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -8032,6 +10111,11 @@ TEST_CASE("Output for CTCL elements.", "[fem_element_ctcl]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+5.200000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.200000000e+01+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -8184,9 +10268,48 @@ TEST_CASE("Output for CTAL elements.", "[fem_element_ctal]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctal probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.300000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctal probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({104, 105, 106, 107}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -8202,6 +10325,11 @@ TEST_CASE("Output for CTAL elements.", "[fem_element_ctal]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+5.300000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.300000000e+01+3.000000000e+00\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -8357,9 +10485,49 @@ TEST_CASE("Output for CTCC elements.", "[fem_element_ctcc]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctcc probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.400000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctcc probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -8376,6 +10544,12 @@ TEST_CASE("Output for CTCC elements.", "[fem_element_ctcc]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.400000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -8531,9 +10705,49 @@ TEST_CASE("Output for CTAQ elements.", "[fem_element_ctaq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctaq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.500000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctaq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -8550,6 +10764,12 @@ TEST_CASE("Output for CTAQ elements.", "[fem_element_ctaq]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.500000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -8705,9 +10925,49 @@ TEST_CASE("Output for CTLQ elements.", "[fem_element_ctlq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctlq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.600000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctlq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -8724,6 +10984,12 @@ TEST_CASE("Output for CTLQ elements.", "[fem_element_ctlq]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.600000000e+01+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -8885,9 +11151,51 @@ TEST_CASE("Output for CTCQ elements.", "[fem_element_ctcq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctcq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.700000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctcq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -8906,6 +11214,14 @@ TEST_CASE("Output for CTCQ elements.", "[fem_element_ctcq]") {
             "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
             "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.700000000e+01+3.000000000e+00\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -9070,9 +11386,52 @@ TEST_CASE("Output for CTMQ elements.", "[fem_element_ctmq]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ctmq probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+5.800000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ctmq probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -9092,6 +11451,15 @@ TEST_CASE("Output for CTMQ elements.", "[fem_element_ctmq]") {
             "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
             "        +1.160000000e+02+1.170000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+5.800000000e+01+3.000000000e+00\n"
+            "        +1.180000000e+02+1.190000000e+02+1.200000000e+02+1.210000000e+02\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -9250,9 +11618,50 @@ TEST_CASE("Output for HCQS elements.", "[fem_element_hcqs]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::hcqs probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+6.100000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::hcqs probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({109, 110, 111, 112, 113, 114, 115, 116, 117}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -9270,6 +11679,13 @@ TEST_CASE("Output for HCQS elements.", "[fem_element_hcqs]") {
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "        +1.080000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+6.100000000e+01+3.000000000e+00\n"
+            "        +1.090000000e+02+1.100000000e+02+1.110000000e+02+1.120000000e+02\n"
+            "        +1.130000000e+02+1.140000000e+02+1.150000000e+02+1.160000000e+02\n"
+            "        +1.170000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -9425,9 +11841,49 @@ TEST_CASE("Output for SLQS elements.", "[fem_element_slqs]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::slqs probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+6.600000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::slqs probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({108, 109, 110, 111, 112, 113, 114, 115}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -9444,6 +11900,12 @@ TEST_CASE("Output for SLQS elements.", "[fem_element_slqs]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+6.600000000e+01+3.000000000e+00\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -9599,9 +12061,49 @@ TEST_CASE("Output for SLTS elements.", "[fem_element_slts]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::slts probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+6.700000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::slts probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({106, 107, 108, 109, 110, 111}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -9618,6 +12120,12 @@ TEST_CASE("Output for SLTS elements.", "[fem_element_slts]") {
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
             "        +1.040000000e+02+1.050000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+6.700000000e+01+3.000000000e+00\n"
+            "        +1.060000000e+02+1.070000000e+02+1.080000000e+02+1.090000000e+02\n"
+            "        +1.100000000e+02+1.110000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -9770,9 +12278,48 @@ TEST_CASE("Output for SLCB elements.", "[fem_element_slcb]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::slcb probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+6.800000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::slcb probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({103, 104, 105}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -9788,6 +12335,11 @@ TEST_CASE("Output for SLCB elements.", "[fem_element_slcb]") {
             "GELMNT1 +7.000000000e+00+1.000000000e+00+6.800000000e+01+3.000000000e+00\n"
             "        +1.000000000e+02+1.010000000e+02+1.020000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+6.800000000e+01+3.000000000e+00\n"
+            "        +1.030000000e+02+1.040000000e+02+1.050000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -9991,7 +12543,63 @@ TEST_CASE("Output for MATR elements.", "[fem_element_matr]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::matr probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+7.000000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "        +1.480000000e+02+1.490000000e+02+1.500000000e+02+1.510000000e+02\n"
+            "        +1.520000000e+02+1.530000000e+02+1.540000000e+02+1.550000000e+02\n"
+            "        +1.560000000e+02+1.570000000e+02+1.580000000e+02+1.590000000e+02\n"
+            "        +1.600000000e+02+1.610000000e+02+1.620000000e+02+1.630000000e+02\n"
+            "        +1.640000000e+02+1.650000000e+02+1.660000000e+02+1.670000000e+02\n"
+            "        +1.680000000e+02+1.690000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::matr probe;
         test << probe(7,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169}), // nodin
                       6,                         // matno
@@ -10026,6 +12634,28 @@ TEST_CASE("Output for MATR elements.", "[fem_element_matr]") {
             "        +1.640000000e+02+1.650000000e+02+1.660000000e+02+1.670000000e+02\n"
             "        +1.680000000e+02+1.690000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+7.000000000e+01+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "        +1.480000000e+02+1.490000000e+02+1.500000000e+02+1.510000000e+02\n"
+            "        +1.520000000e+02+1.530000000e+02+1.540000000e+02+1.550000000e+02\n"
+            "        +1.560000000e+02+1.570000000e+02+1.580000000e+02+1.590000000e+02\n"
+            "        +1.600000000e+02+1.610000000e+02+1.620000000e+02+1.630000000e+02\n"
+            "        +1.640000000e+02+1.650000000e+02+1.660000000e+02+1.670000000e+02\n"
+            "        +1.680000000e+02+1.690000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -10193,9 +12823,53 @@ TEST_CASE("Output for GHEX100 elements.", "[fem_element_ghex100]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex100 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.000000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex100 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -10216,6 +12890,16 @@ TEST_CASE("Output for GHEX100 elements.", "[fem_element_ghex100]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.000000000e+02+3.000000000e+00\n"
+            "        +1.210000000e+02+1.220000000e+02+1.230000000e+02+1.240000000e+02\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -10383,9 +13067,53 @@ TEST_CASE("Output for GHEX101 elements.", "[fem_element_ghex101]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex101 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.010000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex101 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -10406,6 +13134,16 @@ TEST_CASE("Output for GHEX101 elements.", "[fem_element_ghex101]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.010000000e+02+3.000000000e+00\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -10573,9 +13311,53 @@ TEST_CASE("Output for GHEX102 elements.", "[fem_element_ghex102]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex102 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.020000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex102 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -10596,6 +13378,16 @@ TEST_CASE("Output for GHEX102 elements.", "[fem_element_ghex102]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.020000000e+02+3.000000000e+00\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -10763,9 +13555,53 @@ TEST_CASE("Output for GHEX103 elements.", "[fem_element_ghex103]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex103 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.030000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex103 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -10786,6 +13622,16 @@ TEST_CASE("Output for GHEX103 elements.", "[fem_element_ghex103]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.030000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -10953,9 +13799,53 @@ TEST_CASE("Output for GHEX104 elements.", "[fem_element_ghex104]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex104 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.040000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex104 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -10976,6 +13866,16 @@ TEST_CASE("Output for GHEX104 elements.", "[fem_element_ghex104]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.040000000e+02+3.000000000e+00\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -11143,9 +14043,53 @@ TEST_CASE("Output for GHEX105 elements.", "[fem_element_ghex105]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex105 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.050000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex105 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -11166,6 +14110,16 @@ TEST_CASE("Output for GHEX105 elements.", "[fem_element_ghex105]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.050000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -11333,9 +14287,53 @@ TEST_CASE("Output for GHEX106 elements.", "[fem_element_ghex106]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex106 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.060000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex106 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -11356,6 +14354,16 @@ TEST_CASE("Output for GHEX106 elements.", "[fem_element_ghex106]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.060000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -11523,9 +14531,53 @@ TEST_CASE("Output for GHEX107 elements.", "[fem_element_ghex107]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex107 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.070000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex107 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -11546,6 +14598,16 @@ TEST_CASE("Output for GHEX107 elements.", "[fem_element_ghex107]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.070000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -11713,9 +14775,53 @@ TEST_CASE("Output for GHEX108 elements.", "[fem_element_ghex108]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex108 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.080000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex108 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -11736,6 +14842,16 @@ TEST_CASE("Output for GHEX108 elements.", "[fem_element_ghex108]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.080000000e+02+3.000000000e+00\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -11903,9 +15019,53 @@ TEST_CASE("Output for GHEX109 elements.", "[fem_element_ghex109]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex109 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.090000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex109 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -11926,6 +15086,16 @@ TEST_CASE("Output for GHEX109 elements.", "[fem_element_ghex109]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.090000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -12093,9 +15263,53 @@ TEST_CASE("Output for GHEX110 elements.", "[fem_element_ghex110]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex110 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.100000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex110 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -12116,6 +15330,16 @@ TEST_CASE("Output for GHEX110 elements.", "[fem_element_ghex110]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.100000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -12283,9 +15507,53 @@ TEST_CASE("Output for GHEX111 elements.", "[fem_element_ghex111]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex111 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.110000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex111 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -12306,6 +15574,16 @@ TEST_CASE("Output for GHEX111 elements.", "[fem_element_ghex111]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.110000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -12473,9 +15751,53 @@ TEST_CASE("Output for GHEX112 elements.", "[fem_element_ghex112]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex112 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.120000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex112 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -12496,6 +15818,16 @@ TEST_CASE("Output for GHEX112 elements.", "[fem_element_ghex112]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.120000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -12663,9 +15995,53 @@ TEST_CASE("Output for GHEX113 elements.", "[fem_element_ghex113]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex113 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.130000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex113 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -12686,6 +16062,16 @@ TEST_CASE("Output for GHEX113 elements.", "[fem_element_ghex113]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.130000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -12853,9 +16239,53 @@ TEST_CASE("Output for GHEX114 elements.", "[fem_element_ghex114]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex114 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.140000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex114 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -12876,6 +16306,16 @@ TEST_CASE("Output for GHEX114 elements.", "[fem_element_ghex114]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.140000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -13046,9 +16486,54 @@ TEST_CASE("Output for GHEX115 elements.", "[fem_element_ghex115]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex115 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.150000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex115 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -13070,6 +16555,17 @@ TEST_CASE("Output for GHEX115 elements.", "[fem_element_ghex115]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.150000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -13237,9 +16733,53 @@ TEST_CASE("Output for GHEX116 elements.", "[fem_element_ghex116]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex116 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.160000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex116 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -13260,6 +16800,16 @@ TEST_CASE("Output for GHEX116 elements.", "[fem_element_ghex116]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.160000000e+02+3.000000000e+00\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -13427,9 +16977,53 @@ TEST_CASE("Output for GHEX117 elements.", "[fem_element_ghex117]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex117 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.170000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex117 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -13450,6 +17044,16 @@ TEST_CASE("Output for GHEX117 elements.", "[fem_element_ghex117]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.170000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -13617,9 +17221,53 @@ TEST_CASE("Output for GHEX118 elements.", "[fem_element_ghex118]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex118 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.180000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex118 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -13640,6 +17288,16 @@ TEST_CASE("Output for GHEX118 elements.", "[fem_element_ghex118]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.180000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -13807,9 +17465,53 @@ TEST_CASE("Output for GHEX119 elements.", "[fem_element_ghex119]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex119 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.190000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex119 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -13830,6 +17532,16 @@ TEST_CASE("Output for GHEX119 elements.", "[fem_element_ghex119]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.190000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -13997,9 +17709,53 @@ TEST_CASE("Output for GHEX120 elements.", "[fem_element_ghex120]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex120 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.200000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex120 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -14020,6 +17776,16 @@ TEST_CASE("Output for GHEX120 elements.", "[fem_element_ghex120]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.200000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -14187,9 +17953,53 @@ TEST_CASE("Output for GHEX121 elements.", "[fem_element_ghex121]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex121 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.210000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex121 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -14210,6 +18020,16 @@ TEST_CASE("Output for GHEX121 elements.", "[fem_element_ghex121]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.210000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -14377,9 +18197,53 @@ TEST_CASE("Output for GHEX122 elements.", "[fem_element_ghex122]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex122 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.220000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex122 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -14400,6 +18264,16 @@ TEST_CASE("Output for GHEX122 elements.", "[fem_element_ghex122]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.220000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -14570,9 +18444,54 @@ TEST_CASE("Output for GHEX123 elements.", "[fem_element_ghex123]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex123 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.230000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex123 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -14594,6 +18513,17 @@ TEST_CASE("Output for GHEX123 elements.", "[fem_element_ghex123]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.230000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -14761,9 +18691,53 @@ TEST_CASE("Output for GHEX124 elements.", "[fem_element_ghex124]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex124 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.240000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex124 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -14784,6 +18758,16 @@ TEST_CASE("Output for GHEX124 elements.", "[fem_element_ghex124]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.240000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -14951,9 +18935,53 @@ TEST_CASE("Output for GHEX125 elements.", "[fem_element_ghex125]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex125 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.250000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex125 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -14974,6 +19002,16 @@ TEST_CASE("Output for GHEX125 elements.", "[fem_element_ghex125]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.250000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -15141,9 +19179,53 @@ TEST_CASE("Output for GHEX126 elements.", "[fem_element_ghex126]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex126 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.260000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex126 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -15164,6 +19246,16 @@ TEST_CASE("Output for GHEX126 elements.", "[fem_element_ghex126]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.260000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -15334,9 +19426,54 @@ TEST_CASE("Output for GHEX127 elements.", "[fem_element_ghex127]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex127 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.270000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex127 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -15358,6 +19495,17 @@ TEST_CASE("Output for GHEX127 elements.", "[fem_element_ghex127]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.270000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -15525,9 +19673,53 @@ TEST_CASE("Output for GHEX128 elements.", "[fem_element_ghex128]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex128 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.280000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex128 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -15548,6 +19740,16 @@ TEST_CASE("Output for GHEX128 elements.", "[fem_element_ghex128]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.280000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -15718,9 +19920,54 @@ TEST_CASE("Output for GHEX129 elements.", "[fem_element_ghex129]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex129 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.290000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex129 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -15742,6 +19989,17 @@ TEST_CASE("Output for GHEX129 elements.", "[fem_element_ghex129]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.290000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -15912,9 +20170,54 @@ TEST_CASE("Output for GHEX130 elements.", "[fem_element_ghex130]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex130 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.300000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex130 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -15936,6 +20239,17 @@ TEST_CASE("Output for GHEX130 elements.", "[fem_element_ghex130]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.300000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -16106,9 +20420,54 @@ TEST_CASE("Output for GHEX131 elements.", "[fem_element_ghex131]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex131 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.310000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex131 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -16130,6 +20489,17 @@ TEST_CASE("Output for GHEX131 elements.", "[fem_element_ghex131]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02+1.250000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.310000000e+02+3.000000000e+00\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "        +1.460000000e+02+1.470000000e+02+1.480000000e+02+1.490000000e+02\n"
+            "        +1.500000000e+02+1.510000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -16297,9 +20667,53 @@ TEST_CASE("Output for GHEX132 elements.", "[fem_element_ghex132]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex132 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.320000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex132 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -16320,6 +20734,16 @@ TEST_CASE("Output for GHEX132 elements.", "[fem_element_ghex132]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.320000000e+02+3.000000000e+00\n"
+            "        +1.220000000e+02+1.230000000e+02+1.240000000e+02+1.250000000e+02\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -16487,9 +20911,53 @@ TEST_CASE("Output for GHEX133 elements.", "[fem_element_ghex133]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex133 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.330000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex133 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -16510,6 +20978,16 @@ TEST_CASE("Output for GHEX133 elements.", "[fem_element_ghex133]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.330000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -16677,9 +21155,53 @@ TEST_CASE("Output for GHEX134 elements.", "[fem_element_ghex134]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex134 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.340000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex134 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -16700,6 +21222,16 @@ TEST_CASE("Output for GHEX134 elements.", "[fem_element_ghex134]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.340000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -16867,9 +21399,53 @@ TEST_CASE("Output for GHEX135 elements.", "[fem_element_ghex135]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex135 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.350000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex135 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -16890,6 +21466,16 @@ TEST_CASE("Output for GHEX135 elements.", "[fem_element_ghex135]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.350000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -17057,9 +21643,53 @@ TEST_CASE("Output for GHEX136 elements.", "[fem_element_ghex136]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex136 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.360000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex136 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -17080,6 +21710,16 @@ TEST_CASE("Output for GHEX136 elements.", "[fem_element_ghex136]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.360000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -17247,9 +21887,53 @@ TEST_CASE("Output for GHEX137 elements.", "[fem_element_ghex137]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex137 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.370000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex137 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -17270,6 +21954,16 @@ TEST_CASE("Output for GHEX137 elements.", "[fem_element_ghex137]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.370000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -17437,9 +22131,53 @@ TEST_CASE("Output for GHEX138 elements.", "[fem_element_ghex138]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex138 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.380000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex138 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -17460,6 +22198,16 @@ TEST_CASE("Output for GHEX138 elements.", "[fem_element_ghex138]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.380000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -17630,9 +22378,54 @@ TEST_CASE("Output for GHEX139 elements.", "[fem_element_ghex139]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex139 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.390000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex139 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -17654,6 +22447,17 @@ TEST_CASE("Output for GHEX139 elements.", "[fem_element_ghex139]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.390000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -17821,9 +22625,53 @@ TEST_CASE("Output for GHEX140 elements.", "[fem_element_ghex140]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex140 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.400000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex140 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -17844,6 +22692,16 @@ TEST_CASE("Output for GHEX140 elements.", "[fem_element_ghex140]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.400000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -18011,9 +22869,53 @@ TEST_CASE("Output for GHEX141 elements.", "[fem_element_ghex141]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex141 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.410000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex141 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -18034,6 +22936,16 @@ TEST_CASE("Output for GHEX141 elements.", "[fem_element_ghex141]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.410000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -18201,9 +23113,53 @@ TEST_CASE("Output for GHEX142 elements.", "[fem_element_ghex142]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex142 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.420000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex142 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -18224,6 +23180,16 @@ TEST_CASE("Output for GHEX142 elements.", "[fem_element_ghex142]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.420000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -18394,9 +23360,54 @@ TEST_CASE("Output for GHEX143 elements.", "[fem_element_ghex143]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex143 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.430000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex143 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -18418,6 +23429,17 @@ TEST_CASE("Output for GHEX143 elements.", "[fem_element_ghex143]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.430000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -18585,9 +23607,53 @@ TEST_CASE("Output for GHEX144 elements.", "[fem_element_ghex144]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex144 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.440000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex144 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -18608,6 +23674,16 @@ TEST_CASE("Output for GHEX144 elements.", "[fem_element_ghex144]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.440000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -18778,9 +23854,54 @@ TEST_CASE("Output for GHEX145 elements.", "[fem_element_ghex145]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex145 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.450000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex145 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -18802,6 +23923,17 @@ TEST_CASE("Output for GHEX145 elements.", "[fem_element_ghex145]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.450000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -18972,9 +24104,54 @@ TEST_CASE("Output for GHEX146 elements.", "[fem_element_ghex146]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex146 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.460000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex146 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -18996,6 +24173,17 @@ TEST_CASE("Output for GHEX146 elements.", "[fem_element_ghex146]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.460000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -19166,9 +24354,54 @@ TEST_CASE("Output for GHEX147 elements.", "[fem_element_ghex147]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex147 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.470000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex147 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -19190,6 +24423,17 @@ TEST_CASE("Output for GHEX147 elements.", "[fem_element_ghex147]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02+1.250000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.470000000e+02+3.000000000e+00\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "        +1.460000000e+02+1.470000000e+02+1.480000000e+02+1.490000000e+02\n"
+            "        +1.500000000e+02+1.510000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -19357,9 +24601,53 @@ TEST_CASE("Output for GHEX148 elements.", "[fem_element_ghex148]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex148 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.480000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex148 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -19380,6 +24668,16 @@ TEST_CASE("Output for GHEX148 elements.", "[fem_element_ghex148]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.480000000e+02+3.000000000e+00\n"
+            "        +1.230000000e+02+1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -19547,9 +24845,53 @@ TEST_CASE("Output for GHEX149 elements.", "[fem_element_ghex149]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex149 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.490000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex149 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -19570,6 +24912,16 @@ TEST_CASE("Output for GHEX149 elements.", "[fem_element_ghex149]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.490000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -19737,9 +25089,53 @@ TEST_CASE("Output for GHEX150 elements.", "[fem_element_ghex150]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex150 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.500000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex150 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -19760,6 +25156,16 @@ TEST_CASE("Output for GHEX150 elements.", "[fem_element_ghex150]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.500000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -19930,9 +25336,54 @@ TEST_CASE("Output for GHEX151 elements.", "[fem_element_ghex151]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex151 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.510000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex151 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -19954,6 +25405,17 @@ TEST_CASE("Output for GHEX151 elements.", "[fem_element_ghex151]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.510000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -20121,9 +25583,53 @@ TEST_CASE("Output for GHEX152 elements.", "[fem_element_ghex152]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex152 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.520000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex152 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -20144,6 +25650,16 @@ TEST_CASE("Output for GHEX152 elements.", "[fem_element_ghex152]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.520000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -20314,9 +25830,54 @@ TEST_CASE("Output for GHEX153 elements.", "[fem_element_ghex153]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex153 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.530000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex153 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -20338,6 +25899,17 @@ TEST_CASE("Output for GHEX153 elements.", "[fem_element_ghex153]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.530000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -20508,9 +26080,54 @@ TEST_CASE("Output for GHEX154 elements.", "[fem_element_ghex154]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex154 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.540000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex154 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -20532,6 +26149,17 @@ TEST_CASE("Output for GHEX154 elements.", "[fem_element_ghex154]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.540000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -20702,9 +26330,54 @@ TEST_CASE("Output for GHEX155 elements.", "[fem_element_ghex155]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex155 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.550000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex155 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -20726,6 +26399,17 @@ TEST_CASE("Output for GHEX155 elements.", "[fem_element_ghex155]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02+1.250000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.550000000e+02+3.000000000e+00\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "        +1.460000000e+02+1.470000000e+02+1.480000000e+02+1.490000000e+02\n"
+            "        +1.500000000e+02+1.510000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -20893,9 +26577,53 @@ TEST_CASE("Output for GHEX156 elements.", "[fem_element_ghex156]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex156 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.560000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex156 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -20916,6 +26644,16 @@ TEST_CASE("Output for GHEX156 elements.", "[fem_element_ghex156]") {
             "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.560000000e+02+3.000000000e+00\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02+1.270000000e+02\n"
+            "        +1.280000000e+02+1.290000000e+02+1.300000000e+02+1.310000000e+02\n"
+            "        +1.320000000e+02+1.330000000e+02+1.340000000e+02+1.350000000e+02\n"
+            "        +1.360000000e+02+1.370000000e+02+1.380000000e+02+1.390000000e+02\n"
+            "        +1.400000000e+02+1.410000000e+02+1.420000000e+02+1.430000000e+02\n"
+            "        +1.440000000e+02+1.450000000e+02+1.460000000e+02+1.470000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -21086,9 +26824,54 @@ TEST_CASE("Output for GHEX157 elements.", "[fem_element_ghex157]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex157 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.570000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex157 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -21110,6 +26893,17 @@ TEST_CASE("Output for GHEX157 elements.", "[fem_element_ghex157]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.570000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -21280,9 +27074,54 @@ TEST_CASE("Output for GHEX158 elements.", "[fem_element_ghex158]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex158 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.580000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex158 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -21304,6 +27143,17 @@ TEST_CASE("Output for GHEX158 elements.", "[fem_element_ghex158]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.580000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -21474,9 +27324,54 @@ TEST_CASE("Output for GHEX159 elements.", "[fem_element_ghex159]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex159 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.590000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex159 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -21498,6 +27393,17 @@ TEST_CASE("Output for GHEX159 elements.", "[fem_element_ghex159]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02+1.250000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.590000000e+02+3.000000000e+00\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "        +1.460000000e+02+1.470000000e+02+1.480000000e+02+1.490000000e+02\n"
+            "        +1.500000000e+02+1.510000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -21668,9 +27574,54 @@ TEST_CASE("Output for GHEX160 elements.", "[fem_element_ghex160]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex160 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.600000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex160 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -21692,6 +27643,17 @@ TEST_CASE("Output for GHEX160 elements.", "[fem_element_ghex160]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.600000000e+02+3.000000000e+00\n"
+            "        +1.250000000e+02+1.260000000e+02+1.270000000e+02+1.280000000e+02\n"
+            "        +1.290000000e+02+1.300000000e+02+1.310000000e+02+1.320000000e+02\n"
+            "        +1.330000000e+02+1.340000000e+02+1.350000000e+02+1.360000000e+02\n"
+            "        +1.370000000e+02+1.380000000e+02+1.390000000e+02+1.400000000e+02\n"
+            "        +1.410000000e+02+1.420000000e+02+1.430000000e+02+1.440000000e+02\n"
+            "        +1.450000000e+02+1.460000000e+02+1.470000000e+02+1.480000000e+02\n"
+            "        +1.490000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -21862,9 +27824,54 @@ TEST_CASE("Output for GHEX161 elements.", "[fem_element_ghex161]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex161 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.610000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex161 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -21886,6 +27893,17 @@ TEST_CASE("Output for GHEX161 elements.", "[fem_element_ghex161]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02+1.250000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.610000000e+02+3.000000000e+00\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "        +1.460000000e+02+1.470000000e+02+1.480000000e+02+1.490000000e+02\n"
+            "        +1.500000000e+02+1.510000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -22056,9 +28074,54 @@ TEST_CASE("Output for GHEX162 elements.", "[fem_element_ghex162]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex162 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.620000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex162 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -22080,6 +28143,17 @@ TEST_CASE("Output for GHEX162 elements.", "[fem_element_ghex162]") {
             "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
             "        +1.240000000e+02+1.250000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.620000000e+02+3.000000000e+00\n"
+            "        +1.260000000e+02+1.270000000e+02+1.280000000e+02+1.290000000e+02\n"
+            "        +1.300000000e+02+1.310000000e+02+1.320000000e+02+1.330000000e+02\n"
+            "        +1.340000000e+02+1.350000000e+02+1.360000000e+02+1.370000000e+02\n"
+            "        +1.380000000e+02+1.390000000e+02+1.400000000e+02+1.410000000e+02\n"
+            "        +1.420000000e+02+1.430000000e+02+1.440000000e+02+1.450000000e+02\n"
+            "        +1.460000000e+02+1.470000000e+02+1.480000000e+02+1.490000000e+02\n"
+            "        +1.500000000e+02+1.510000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
@@ -22250,9 +28324,54 @@ TEST_CASE("Output for GHEX163 elements.", "[fem_element_ghex163]") {
 
     SECTION("reuse (check output) (use default elno)") {
         elements::ghex163 probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            "GELMNT1 +7.000000000e+00+1.000000000e+00+1.630000000e+02+3.000000000e+00\n"
+            "        +1.000000000e+02+1.010000000e+02+1.020000000e+02+1.030000000e+02\n"
+            "        +1.040000000e+02+1.050000000e+02+1.060000000e+02+1.070000000e+02\n"
+            "        +1.080000000e+02+1.090000000e+02+1.100000000e+02+1.110000000e+02\n"
+            "        +1.120000000e+02+1.130000000e+02+1.140000000e+02+1.150000000e+02\n"
+            "        +1.160000000e+02+1.170000000e+02+1.180000000e+02+1.190000000e+02\n"
+            "        +1.200000000e+02+1.210000000e+02+1.220000000e+02+1.230000000e+02\n"
+            "        +1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
+            "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::ghex163 probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153}), // nodin
                       6,                         // matno
                       7,                         // addno
                       8,                         // intno
@@ -22275,6 +28394,17 @@ TEST_CASE("Output for GHEX163 elements.", "[fem_element_ghex163]") {
             "        +1.240000000e+02+1.250000000e+02+1.260000000e+02\n"
             "GELREF1 +1.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
             "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
+            "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n"
+            "GELMNT1 +8.000000000e+00+2.000000000e+00+1.630000000e+02+3.000000000e+00\n"
+            "        +1.270000000e+02+1.280000000e+02+1.290000000e+02+1.300000000e+02\n"
+            "        +1.310000000e+02+1.320000000e+02+1.330000000e+02+1.340000000e+02\n"
+            "        +1.350000000e+02+1.360000000e+02+1.370000000e+02+1.380000000e+02\n"
+            "        +1.390000000e+02+1.400000000e+02+1.410000000e+02+1.420000000e+02\n"
+            "        +1.430000000e+02+1.440000000e+02+1.450000000e+02+1.460000000e+02\n"
+            "        +1.470000000e+02+1.480000000e+02+1.490000000e+02+1.500000000e+02\n"
+            "        +1.510000000e+02+1.520000000e+02+1.530000000e+02\n"
+            "GELREF1 +2.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n"
+            "        +9.000000000e+00+1.000000000e+01+1.100000000e+01+1.200000000e+01\n"
             "        +1.300000000e+01+1.400000000e+01+1.500000000e+01+1.600000000e+01\n");
     }
 }
@@ -22284,7 +28414,7 @@ TEST_CASE("Output for GHEX163 elements.", "[fem_element_ghex163]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
-//    (make -C ../cbuild test;
-//     ../cbuild/tests/test_fem_elements --use-colour no)"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_elements --use-colour no)"
 // End:

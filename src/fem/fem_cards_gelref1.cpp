@@ -156,8 +156,8 @@ gelref1::gelref1(
     if (GEONO.size()) {
         min_max_set = true;
         lmin = lmax = GEONO.size();
-        copy(GEONO.begin(), GEONO.end(),
-                  back_inserter(this->GEONO));
+        this->GEONO.resize(GEONO.size());
+        copy(GEONO.begin(), GEONO.end(), this->GEONO.begin());
     }
     if (FIXNO.size()) {
         if (min_max_set) {
@@ -167,8 +167,8 @@ gelref1::gelref1(
             min_max_set = true;
             lmin = lmax = FIXNO.size();
         }
-        copy(FIXNO.begin(), FIXNO.end(),
-                  back_inserter(this->FIXNO));
+        this->FIXNO.resize(FIXNO.size());
+        copy(FIXNO.begin(), FIXNO.end(), this->FIXNO.begin());
     }
     if (ECCNO.size()) {
         if (min_max_set) {
@@ -178,8 +178,8 @@ gelref1::gelref1(
             min_max_set = true;
             lmin = lmax = ECCNO.size();
         }
-        copy(ECCNO.begin(), ECCNO.end(),
-                  back_inserter(this->ECCNO));
+        this->ECCNO.resize(ECCNO.size());
+        copy(ECCNO.begin(), ECCNO.end(), this->ECCNO.begin());
     }
     if (TRANSNO.size()) {
         if (min_max_set) {
@@ -189,8 +189,8 @@ gelref1::gelref1(
             min_max_set = true;
             lmin = lmax = TRANSNO.size();
         }
-        copy(TRANSNO.begin(), TRANSNO.end(),
-                  back_inserter(this->TRANSNO));
+        this->TRANSNO.resize(TRANSNO.size());
+        copy(TRANSNO.begin(), TRANSNO.end(), this->TRANSNO.begin());
     }
 
     if (lmin != lmax) {
@@ -227,8 +227,8 @@ cards::__base::card const &gelref1::operator() (
     if (GEONO.size()) {
         min_max_set = true;
         lmin = lmax = GEONO.size();
-        copy(GEONO.begin(), GEONO.end(),
-                  back_inserter(this->GEONO));
+        this->GEONO.resize(GEONO.size());
+        copy(GEONO.begin(), GEONO.end(), this->GEONO.begin());
     }
     if (FIXNO.size()) {
         if (min_max_set) {
@@ -238,8 +238,8 @@ cards::__base::card const &gelref1::operator() (
             min_max_set = true;
             lmin = lmax = FIXNO.size();
         }
-        copy(FIXNO.begin(), FIXNO.end(),
-                  back_inserter(this->FIXNO));
+        this->FIXNO.resize(FIXNO.size());
+        copy(FIXNO.begin(), FIXNO.end(), this->FIXNO.begin());
     }
     if (ECCNO.size()) {
         if (min_max_set) {
@@ -249,8 +249,8 @@ cards::__base::card const &gelref1::operator() (
             min_max_set = true;
             lmin = lmax = ECCNO.size();
         }
-        copy(ECCNO.begin(), ECCNO.end(),
-                  back_inserter(this->ECCNO));
+        this->ECCNO.resize(ECCNO.size());
+        copy(ECCNO.begin(), ECCNO.end(), this->ECCNO.begin());
     }
     if (TRANSNO.size()) {
         if (min_max_set) {
@@ -260,8 +260,8 @@ cards::__base::card const &gelref1::operator() (
             min_max_set = true;
             lmin = lmax = TRANSNO.size();
         }
-        copy(TRANSNO.begin(), TRANSNO.end(),
-                  back_inserter(this->TRANSNO));
+        this->TRANSNO.resize(TRANSNO.size());
+        copy(TRANSNO.begin(), TRANSNO.end(), this->TRANSNO.begin());
     }
 
     if (lmin != lmax) {
@@ -320,5 +320,7 @@ ostream &gelref1::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:
