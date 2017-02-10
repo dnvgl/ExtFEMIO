@@ -238,8 +238,9 @@ elements::__base::elem const &elements::__base::elem::operator() (
     long const i_stress_ref/*=0*/, long const strpoint_ref/*=0*/,
     vector<long> const &fixations/*={}*/,
     vector<long> const &eccentrities/*={}*/, vector<long> const &csys/*={}*/) {
-    throw not_implemented(__FILE__, __LINE__);
-    return *this;
+    return (*this)(eleno, 0, el_add, nodes, matref, add_no, intno,
+                   mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
+                   section, fixations, eccentrities, csys);
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
@@ -308,19 +309,19 @@ void elements::__base::elem::add(cards::gelref1 const *data) {
     if (data->GEONO_OPT == -1)
         this->section = data->GEONO;
     else if (data->GEONO_OPT != 0)
-        this->section.push_back(data->GEONO_OPT);
+        this->section = {data->GEONO_OPT};
     if (data->FIXNO_OPT == -1)
         this->fixations = data->FIXNO;
     else if (data->FIXNO_OPT != 0)
-        this->fixations.push_back(data->FIXNO_OPT);
+        this->fixations = {data->FIXNO_OPT};
     if (data->ECCNO_OPT == -1)
         this->eccentrities = data->ECCNO;
     else if (data->ECCNO_OPT != 0)
-        this->eccentrities.push_back(data->ECCNO_OPT);
+        this->eccentrities = {data->ECCNO_OPT};
     if (data->TRANSNO_OPT == -1)
         this->csys = data->TRANSNO;
     else if (data->TRANSNO_OPT != 0)
-        this->csys.push_back(data->TRANSNO_OPT);
+        this->csys = {data->TRANSNO_OPT};
 }
 
 cards::__base::card const &elements::__base::elem::gelmnt1(void) const {
@@ -479,5 +480,7 @@ set<el_processor> const {{ elem }}::processors{
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_elements --use-colour no)"
 // End:

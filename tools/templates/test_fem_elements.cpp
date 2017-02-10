@@ -239,6 +239,28 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
 
     SECTION("reuse (check output) (use default elno)") {
         elements::{{ elem }} probe;
+        test << probe(7,                    //< elnox
+                      3,                    //< eltyad
+                      vector<long>({{ list_init_form(100, 100+vals.nnodes) }}),
+                      //< nodin
+                      6,                    //< matno
+                      7,                    //< addno
+                      8,                    //< intno
+                      9,                    //< mintno
+                      10,                   //< strano
+                      11,                   //< streno
+                      12,                   //< strepono
+                      vector<long>(1, 13),  //< geono_opt
+                      vector<long>(1, 14),  //< fixno_opt
+                      vector<long>(1, 15),  //< eccno_opt
+                      vector<long>(1, 16)); //< transno_opt
+        CHECK(test.str() ==
+            {{ gelmnt1(*([7, 1, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
+            {{ gelref1(1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
+    }
+
+    SECTION("reuse (check output) (use default elno) multiple calls") {
+        elements::{{ elem }} probe;
         test << probe(7,                         // elnox
                       3,                         // eltyad
                       vector<long>({{ list_init_form(100, 100+vals.nnodes) }}), // nodin
@@ -253,9 +275,29 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
                       vector<long>(1, 14),  // fixno_opt
                       vector<long>(1, 15),  // eccno_opt
                       vector<long>(1, 16)); // transno_opt
+        test << probe(8,                         // elnox
+                      3,                         // eltyad
+                      vector<long>({{ list_init_form(100+vals.nnodes,
+                                      100+(vals.nnodes*2)) }}), // nodin
+                      6,                         // matno
+                      7,                         // addno
+                      8,                         // intno
+                      9,                         // mintno
+                      10,                        // strano
+                      11,                        // streno
+                      12,                        // strepono
+                      vector<long>(1, 13),  // geono_opt
+                      vector<long>(1, 14),  // fixno_opt
+                      vector<long>(1, 15),  // eccno_opt
+                      vector<long>(1, 16)); // transno_opt
         CHECK(test.str() ==
-            {{ gelmnt1(*([7, 1, vals.eltyp, 3] + list_init(100, 100+vals.nnodes))) }}
-            {{ gelref1(1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
+            {{ gelmnt1(*([7, 1, vals.eltyp, 3] +
+                         list_init(100, 100+vals.nnodes))) }}
+            {{ gelref1(1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }}
+            {{ gelmnt1(*([8, 2, vals.eltyp, 3] +
+                         list_init(100+vals.nnodes,
+                                   100+(vals.nnodes*2)))) }}
+            {{ gelref1(2, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16) }});
     }
 }
 
@@ -265,7 +307,7 @@ TEST_CASE("Output for {{ elem|upper() }} elements.", "[fem_element_{{ elem }}]")
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
-//    (make -C ../cbuild test;
-//     ../cbuild/tests/test_fem_elements --use-colour no)"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_elements --use-colour no)"
 // End:

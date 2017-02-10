@@ -1,15 +1,15 @@
 /*
-   #####     #    #     # #######   ###   ####### #     #   ###
+  #####     #    #     # #######   ###   ####### #     #   ###
   #     #   # #   #     #    #       #    #     # ##    #   ###
   #        #   #  #     #    #       #    #     # # #   #   ###
   #       #     # #     #    #       #    #     # #  #  #    #
   #       ####### #     #    #       #    #     # #   # #
   #     # #     # #     #    #       #    #     # #    ##   ###
-   #####  #     #  #####     #      ###   ####### #     #   ###
+  #####  #     #  #####     #      ###   ####### #     #   ###
 
-   Automatically generated source file. Contact author if changes are
-   required.
- */
+  Automatically generated source file. Contact author if changes are
+  required.
+*/
 
 /**
    \file fem/elements.h
@@ -55,7 +55,7 @@ namespace dnvgl {
 
                 enum class el_types {
                     {% for name, val in enums %}{{ name }} = {{ val }},
-{% line %}
+                    {% line %}
                     {% endfor %}INVALID=-1, UNDEFINED=-2};
                 enum class el_processor {
                     general, Preframe, Prefem, Sestra, ADVANCE,
@@ -183,10 +183,10 @@ namespace dnvgl {
                             long const i_strain_ref,
                             long const i_stress_ref,
                             long const strpoint_ref,
-                            std::vector<long> const &section,
-                            std::vector<long> const &fixations,
-                            std::vector<long> const &eccentrities,
-                            std::vector<long> const &csys);
+                            std::vector<long> const &section={},
+                            std::vector<long> const &fixations={},
+                            std::vector<long> const &eccentrities={},
+                            std::vector<long> const &csys={});
 
                         __base::elem const &operator() (
                             std::vector<long> const &nodes,
@@ -211,10 +211,10 @@ namespace dnvgl {
                             long const add_no, long const intno,
                             long const mass_intno, long const i_strain_ref,
                             long const i_stressef, long const strpoint_ref,
-                            std::vector<long> const &sections,
-                            std::vector<long> const &fixations,
-                            std::vector<long> const &eccentrities,
-                            std::vector<long> const &csys);
+                            std::vector<long> const &sections={},
+                            std::vector<long> const &fixations={},
+                            std::vector<long> const &eccentrities={},
+                            std::vector<long> const &csys={});
 
 
                     public:
@@ -323,7 +323,7 @@ namespace dnvgl {
                     virtual long nnodes(void) const;
                     el_types get_type(void) const;
                 };
-{% for elem, vals in elements %}
+                {% for elem, vals in elements %}
 {% line %}
                 /** {{ vals.doc }}
                  */
@@ -332,33 +332,33 @@ namespace dnvgl {
                     {{ elem }}(void);
                     {{ elem }}(
                         long const eleno, long const elident, long const el_add,
-                         std::vector<long> const &nodes, long const matref,
-                         long const add_no, long const intno,
+                        std::vector<long> const &nodes, long const matref,
+                        long const add_no, long const intno,
                         long const mass_intno, long const i_strain_ref,
-                         long const i_stressef, long const strpoint_ref,
-                         std::vector<long> const &sections,
-                         std::vector<long> const &fixations,
-                         std::vector<long> const &eccentrities,
-                         std::vector<long> const &csys);
+                        long const i_stressef, long const strpoint_ref,
+                        std::vector<long> const &sections={},
+                        std::vector<long> const &fixations={},
+                        std::vector<long> const &eccentrities={},
+                        std::vector<long> const &csys={});
                     {{ elem }}(
                         long const eleno, long const el_add,
                         std::vector<long> const &nodes, long const matref,
-                         long const add_no, long const intno,
+                        long const add_no, long const intno,
                         long const mass_intno, long const i_strain_ref,
                         long const i_stressef, long const strpoint_ref,
-                         std::vector<long> const &sections,
-                         std::vector<long> const &fixations,
-                         std::vector<long> const &eccentrities,
-                         std::vector<long> const &csys);
+                        std::vector<long> const &sections={},
+                        std::vector<long> const &fixations={},
+                        std::vector<long> const &eccentrities={},
+                        std::vector<long> const &csys={});
                     {{ elem }}(
                         long const el_add, std::vector<long> const &nodes,
-                         long const matref, long const add_no, long const intno,
-                         long const mass_intno, long const i_strain_ref,
+                        long const matref, long const add_no, long const intno,
+                        long const mass_intno, long const i_strain_ref,
                         long const i_stressef, long const strpoint_ref,
-                         std::vector<long> const &sections,
-                         std::vector<long> const &fixations,
-                         std::vector<long> const &eccentrities,
-                         std::vector<long> const &csys);
+                        std::vector<long> const &sections={},
+                        std::vector<long> const &fixations={},
+                        std::vector<long> const &eccentrities={},
+                        std::vector<long> const &csys={});
                     {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
                     {{ elem }}(__base::elem const*);
@@ -368,7 +368,7 @@ namespace dnvgl {
                     using elem::operator();
                     using elem::add;
                 };
-{% endfor %}
+                {% endfor %}
 {% line %}
                 /** Dispatch element class instance for `id`
                  */
@@ -391,5 +391,7 @@ namespace dnvgl {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_elements --use-colour no)"
 // End:
