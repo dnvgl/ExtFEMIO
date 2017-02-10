@@ -39,7 +39,7 @@ using namespace dnvgl::extfem::fem::cards;
 const fem::types::card geccen::head("GECCEN");
 
 
-const entry_type<long> geccen::_form_ECCNO("ECCNO");
+// const entry_type<long> geccen::_form_ECCNO("ECCNO");
 const entry_type<double> geccen::_form_EX("EX");
 const entry_type<double> geccen::_form_EY("EY");
 const entry_type<double> geccen::_form_EZ("EZ");
@@ -54,11 +54,12 @@ geccen::geccen(const vector<std::string> &inp, size_t const len) {
 }
 
 void geccen::read(const vector<std::string> &inp, size_t const len) {
+    eccno::read(inp, len);
     if (len < 5)
         throw errors::parse_error(
             "GECCEN", "Illegal number of entries.");
 
-    ECCNO = _form_ECCNO(inp.at(1));
+    // ECCNO = _form_ECCNO(inp.at(1));
     EX = _form_EX(inp.at(2));
     EY = _form_EY(inp.at(3));
     EZ = _form_EZ(inp.at(4));
@@ -67,11 +68,23 @@ void geccen::read(const vector<std::string> &inp, size_t const len) {
 geccen::geccen(
     long const ECCNO,
     double const EX, double const EY, double const EZ) :
-        card(), ECCNO(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
+        eccno(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
+
+geccen::geccen(
+    double const EX, double const EY, double const EZ) :
+        eccno(0), EX(EX), EY(EY), EZ(EZ) {}
 
 geccen::geccen(long const ECCNO,
                std::vector<double> const &pos) :
-        card(), ECCNO(ECCNO), EX(0.), EY(0.), EZ(0.) {
+        eccno(ECCNO), EX(0.), EY(0.), EZ(0.) {
+    assert(pos.size() == 3);
+    EX = pos[0];
+    EY = pos[1];
+    EZ = pos[2];
+}
+
+geccen::geccen(std::vector<double> const &pos) :
+        eccno(0), EX(0.), EY(0.), EZ(0.) {
     assert(pos.size() == 3);
     EX = pos[0];
     EY = pos[1];
@@ -96,5 +109,7 @@ std::ostream &geccen::put(std::ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

@@ -880,14 +880,14 @@ namespace dnvgl {
    |--------- | ------- | ---- | ---- | ---- |
    | `GECCEN` | `ECCNO` | `EX` | `EY` | `EZ` |
 */
-                class geccen : public __base::card {
+                class geccen : public __base::eccno {
 
                 private:
 
                     dnvgl::extfem::fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
-                    static const _form_ECCNO;
+                    // dnvgl::extfem::fem::types::entry_type<long>
+                    // static const _form_ECCNO;
                     dnvgl::extfem::fem::types::entry_type<double>
                     static const _form_EX;
                     dnvgl::extfem::fem::types::entry_type<double>
@@ -896,9 +896,9 @@ namespace dnvgl {
                     static const _form_EZ;
 
                 public:
-/** Eccentricity number, referenced to on record `GELREF1`.
- */
-                    long ECCNO;
+// /** Eccentricity number, referenced to on record `GELREF1`.
+//  */
+//                     long ECCNO;
 /** *x* component of eccentricity vector given in superelement
     coordinate system, the vector points from the global node towards
     the local element node.
@@ -920,6 +920,8 @@ namespace dnvgl {
                     geccen(long const ECCNO,
                            double const EX, double const EY, double const EZ);
                     geccen(long const ECCNO, std::vector<double> const &pos);
+                    geccen(double const EX, double const EY, double const EZ);
+                    geccen(std::vector<double> const &pos);
                     geccen(geccen const*);
 
                     virtual fem::cards::types const card_type(void) const;
@@ -930,6 +932,10 @@ namespace dnvgl {
                         double const EX, double const EY, double const EZ);
                     __base::card const &operator() (
                         long const ECCNO, std::vector<double> const &pos);
+                    __base::card const &operator() (
+                        double const EX, double const EY, double const EZ);
+                    __base::card const &operator() (
+                        std::vector<double> const &pos);
 
                 protected:
 

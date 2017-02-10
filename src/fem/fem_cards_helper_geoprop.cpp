@@ -88,6 +88,7 @@ void cards::__base::geoprop::reset_geono(void) {
     used_geono.clear();
     cards::__base::beam_prop::reset_geono();
     cards::__base::transno::reset_transno();
+    cards::__base::eccno::reset_eccno();
 }
 
 // Local Variables:

@@ -42,6 +42,7 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_cards_gunivec.cpp
   fem_cards_gusyi.cpp
   fem_cards_helper_beam_prop.cpp
+  fem_cards_helper_eccno.cpp
   fem_cards_helper_geoprop.cpp
   fem_cards_helper_transno.cpp
   fem_cards_helper_unknown.cpp

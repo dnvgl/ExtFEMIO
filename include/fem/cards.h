@@ -260,6 +260,41 @@ namespace dnvgl {
                         card_type(void) const = 0;
                     };
 
+/// Base class for cards describing eccentrities (GECC, GECCEN).
+                    class eccno : public card {
+                    private:
+
+                        std::unordered_set<long> static used_eccno;
+                        long static eccno_maxset;
+
+                    protected:
+
+                        void set_eccno(long const ECCNO=0);
+
+                        dnvgl::extfem::fem::types::entry_type<long>
+                        static const _form_ECCNO;
+
+                        eccno(void);
+                        eccno(long const ECCNO);
+                        eccno(std::vector<std::string> const&, size_t const);
+
+                        virtual void read(
+                            std::vector<std::string> const&, size_t const);
+
+                        using __base::card::operator();
+
+                    public:
+
+/** Eccentricity number, referenced to on record `GELREF1`.
+ */
+                        long ECCNO;
+
+                        static void reset_eccno(void);
+
+                        virtual dnvgl::extfem::fem::cards::types const
+                        card_type(void) const = 0;
+                    };
+
 /// Base class for FEM beam property describing classes.
                     class beam_prop : public geoprop {
 
