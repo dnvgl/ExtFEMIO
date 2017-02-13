@@ -70,38 +70,17 @@ geccen::geccen(
     double const EX, double const EY, double const EZ) :
         eccno(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
 
-geccen::geccen(
-    double const EX, double const EY, double const EZ) :
-        eccno(0), EX(EX), EY(EY), EZ(EZ) {}
-
-geccen::geccen(long const ECCNO,
-               std::vector<double> const &pos) :
-        eccno(ECCNO), EX(0.), EY(0.), EZ(0.) {
-    assert(pos.size() == 3);
-    EX = pos[0];
-    EY = pos[1];
-    EZ = pos[2];
-}
-
-geccen::geccen(std::vector<double> const &pos) :
-        eccno(0), EX(0.), EY(0.), EZ(0.) {
-    assert(pos.size() == 3);
-    EX = pos[0];
-    EY = pos[1];
-    EZ = pos[2];
-}
-
 const dnvgl::extfem::fem::cards::types
 geccen::card_type(void) const {return types::GECCEN;}
 
-std::ostream &geccen::put(std::ostream& os) const {
+ostream &geccen::put(ostream& os) const {
     if (ECCNO == -1) return os;
     os << geccen::head.format()
        << _form_ECCNO.format(ECCNO)
        << _form_EX.format(EX)
        << _form_EY.format(EY)
        << _form_EZ.format(EZ);
-    return os << std::endl;
+    return os << endl;
 }
 
 // Local Variables:

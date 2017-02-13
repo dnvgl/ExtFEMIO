@@ -65,6 +65,7 @@ unordered_map<std::string, cards::types> const cardtype_map({
         {"GCHAN", cards::types::GCHAN},
         {"GCHANR", cards::types::GCHANR},
         {"GDOBO", cards::types::GDOBO},
+        {"GECC", cards::types::GECC},
         {"GECCEN", cards::types::GECCEN},
         {"GELTH", cards::types::GELTH},
         {"GIORH", cards::types::GIORH},
@@ -193,6 +194,9 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
             break;
         case cards::types::GBEAMG:
             res = make_unique<fem::cards::gbeamg>(inp, len);
+            break;
+        case cards::types::GECC:
+            res = make_unique<fem::cards::gecc>(inp, len);
             break;
         case cards::types::GECCEN:
             res = make_unique<fem::cards::geccen>(inp, len);

@@ -26,6 +26,7 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_cards_gchanr.cpp
   fem_cards_gcoord.cpp
   fem_cards_gdobo.cpp
+  fem_cards_gecc.cpp
   fem_cards_geccen.cpp
   fem_cards_gelmnt1.cpp
   fem_cards_gelmnt2.cpp

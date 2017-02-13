@@ -872,6 +872,130 @@ namespace dnvgl {
                         std::vector<std::string> const&, size_t const);
                 };
 
+/// `GECC`: Eccentricities
+/**
+   ## Format:
+
+   |        |         |        |         |        |
+   |------- | ------- | ------ | ------- | ------ |
+   | `GECC` | `ECCNO` | `IOPT` | `EX/EZ` | `(EY)` |
+   |        | `(EZ)`  |        |         |        |
+*/
+                class gecc : public __base::eccno {
+                public:
+/// Define ECC input.
+                    enum class ecc_opt {
+                        Z_ONLY= 1, XYZ = 2, UNDEF_TYPE=-999
+                    };
+
+                private:
+
+                    dnvgl::extfem::fem::types::card static const head;
+
+                    // dnvgl::extfem::fem::types::entry_type<long>
+                    // static const _form_ECCNO;
+                    dnvgl::extfem::fem::types::entry_type<long>
+                    static const _form_IOPT;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_EX;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_EY;
+                    dnvgl::extfem::fem::types::entry_type<double>
+                    static const _form_EZ;
+
+                public:
+// /** Eccentricity number, referenced to on record `GELREF1`.
+//  */
+//                     long ECCNO;
+/** Option for number of eccentricity components specified.
+
+      = 1: Only local Z-component of eccentricity specified. X and Y
+           components are 0.0
+
+      = 2: Local X, Y and Z component of eccentricity specified.
+*/
+                    ecc_opt IOPT;
+/** *x* component of eccentricity vector given in superelement
+    coordinate system, the vector points from the global node towards
+    the local element node.
+*/
+                    double EX;
+/** *y* component of eccentricity vector given in superelement
+    coordinate system, the vector points from the global node towards
+    the local element node.
+*/
+                    double EY;
+/** *z* component of eccentricity vector given in superelement
+    coordinate system, the vector points from the global node towards
+    the local element node.
+*/
+                    double EZ;
+
+                    gecc(void);
+                    gecc(std::vector<std::string> const&, size_t const);
+                    gecc(long const ECCNO, ecc_opt IOPT,
+                         double const EX, double const EY, double const EZ);
+                    gecc(long const ECCNO,
+                         double const EX, double const EY, double const EZ) :
+                            gecc(ECCNO, ecc_opt::XYZ, EX, EY, EZ) {};
+                    gecc(long const ECCNO, std::vector<double> const &pos) :
+                            gecc(ECCNO, ecc_opt::XYZ,
+                                 pos.at(0), pos.at(1), pos.at(2)) {};
+                    gecc(double const EX, double const EY, double const EZ) :
+                            gecc(0, ecc_opt::XYZ, EX, EY, EZ) {};
+                    gecc(std::vector<double> const &pos) :
+                            gecc(0, ecc_opt::XYZ,
+                                 pos.at(0), pos.at(1), pos.at(2)) {};
+                    gecc(long const ECCNO, double const EZ) :
+                            gecc(ECCNO, ecc_opt::Z_ONLY, 0., 0., EZ) {};
+                    gecc(double const EZ) :
+                            gecc(0, ecc_opt::Z_ONLY, 0., 0., EZ) {};
+                    gecc(gecc const *that) :
+                            gecc(that->ECCNO, that->IOPT,
+                                 that->EX, that->EY, that->EZ) {};
+
+                    virtual fem::cards::types const card_type(void) const;
+
+                    using __base::card::operator();
+                    __base::card const &operator() (
+                        long const ECCNO, ecc_opt IOPT,
+                        double const EX, double const EY, double const EZ);
+                    __base::card const &operator() (
+                        long const ECCNO,
+                        double const EX, double const EY, double const EZ) {
+                        return (*this)(ECCNO, ecc_opt::XYZ, EX, EY, EZ);
+                    };
+                    __base::card const &operator() (
+                        long const ECCNO, std::vector<double> const &pos) {
+                        return (*this)(
+                            ECCNO, ecc_opt::XYZ,
+                            pos.at(0), pos.at(1), pos.at(2));
+                    };
+                    __base::card const &operator() (
+                        double const EX, double const EY, double const EZ) {
+                        return (*this)(0, ecc_opt::XYZ, EX, EY, EZ);
+                    };
+                    __base::card const &operator() (
+                        std::vector<double> const &pos) {
+                        return (*this)(
+                            0, ecc_opt::XYZ, pos.at(0), pos.at(1), pos.at(2));
+                    };
+                    __base::card const &operator() (
+                        long const ECCNO, double const EZ) {
+                        return (*this)(ECCNO, ecc_opt::Z_ONLY, 0., 0., EZ);
+                    };
+                    __base::card const &operator() (double const EZ) {
+                        return (*this)(0, ecc_opt::Z_ONLY, 0., 0., EZ);
+                    };
+
+                protected:
+
+                    virtual std::ostream &put(std::ostream&) const;
+
+                    virtual void read(
+                        std::vector<std::string> const&, size_t const);
+                };
+
 /// `GECCEN`: Eccentricities
 /**
    ## Format:
@@ -919,9 +1043,12 @@ namespace dnvgl {
                     geccen(std::vector<std::string> const&, size_t const);
                     geccen(long const ECCNO,
                            double const EX, double const EY, double const EZ);
-                    geccen(long const ECCNO, std::vector<double> const &pos);
-                    geccen(double const EX, double const EY, double const EZ);
-                    geccen(std::vector<double> const &pos);
+                    geccen(long const ECCNO, std::vector<double> const &pos) :
+                            geccen(ECCNO, pos.at(0), pos.at(1), pos.at(2)) {};
+                    geccen(double const EX, double const EY, double const EZ) :
+                            geccen(0, EX, EY, EZ) {};
+                    geccen(std::vector<double> const &pos) :
+                            geccen(0, pos.at(0), pos.at(1), pos.at(2)) {};
                     geccen(geccen const*);
 
                     virtual fem::cards::types const card_type(void) const;

@@ -92,7 +92,7 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]") {
 TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]") {
 
     __base::eccno::reset_eccno();
-    std::ostringstream test;
+    ostringstream test;
 
     long ECCNO(1);
     double EX(1.), EY(3.), EZ(134.);
@@ -118,7 +118,7 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]") {
     }
 
     SECTION("vector") {
-        geccen probe(ECCNO, std::vector<double>({EX, EY, EZ}));
+        geccen probe(ECCNO, vector<double>({EX, EY, EZ}));
         test << probe;
         REQUIRE(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
@@ -139,19 +139,36 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]") {
     }
 
     SECTION("vector (default eccno)") {
-        geccen probe(std::vector<double>({EX, EY, EZ}));
+        geccen probe(vector<double>({EX, EY, EZ}));
         test << probe;
         REQUIRE(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
     }
 
     SECTION("multiple") {
-        geccen probe1(std::vector<double>({1., 0., 0.}));
-        geccen probe2(std::vector<double>({0., 1., 0.}));
-        geccen probe3(std::vector<double>({0., 0., 1.}));
-        geccen probe4(std::vector<double>({-1., 0., 0.}));
-        geccen probe5(std::vector<double>({0., -1., 0.}));
-        geccen probe6(std::vector<double>({0., 0., -1.}));
+        geccen probe1(vector<double>({1., 0., 0.}));
+        geccen probe2(vector<double>({0., 1., 0.}));
+        geccen probe3(vector<double>({0., 0., 1.}));
+        geccen probe4(vector<double>({-1., 0., 0.}));
+        geccen probe5(vector<double>({0., -1., 0.}));
+        geccen probe6(vector<double>({0., 0., -1.}));
+        test << probe1 << probe2 << probe3 << probe4 << probe5 << probe6;
+        REQUIRE(test.str() ==
+              "GECCEN  +1.000000000e+00+1.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+              "GECCEN  +2.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n"
+              "GECCEN  +3.000000000e+00+0.000000000e+00+0.000000000e+00+1.000000000e+00\n"
+              "GECCEN  +4.000000000e+00-1.000000000e+00+0.000000000e+00+0.000000000e+00\n"
+              "GECCEN  +5.000000000e+00+0.000000000e+00-1.000000000e+00+0.000000000e+00\n"
+              "GECCEN  +6.000000000e+00+0.000000000e+00+0.000000000e+00-1.000000000e+00\n");
+    }
+
+    SECTION("multiple (2)") {
+        geccen probe1(1., 0., 0.);
+        geccen probe2(0., 1., 0.);
+        geccen probe3(0., 0., 1.);
+        geccen probe4(-1., 0., 0.);
+        geccen probe5(0., -1., 0.);
+        geccen probe6(0., 0., -1.);
         test << probe1 << probe2 << probe3 << probe4 << probe5 << probe6;
         REQUIRE(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+0.000000000e+00+0.000000000e+00\n"

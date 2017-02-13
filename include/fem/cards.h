@@ -79,6 +79,8 @@ namespace dnvgl {
                     GBARM,
 /// General Beam Element Data
                     GBEAMG,
+/// Local Eccentricities
+                    GECC,
 /// Eccentricities
                     GECCEN,
 /// Thickness of Two-dimensional Elements

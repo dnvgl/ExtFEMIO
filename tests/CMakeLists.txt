@@ -157,6 +157,7 @@ add_executable(test_fem_cards
   test_fem_cards_gchanr.cpp
   test_fem_cards_gcoord.cpp
   test_fem_cards_gdobo.cpp
+  test_fem_cards_gecc.cpp
   test_fem_cards_geccen.cpp
   test_fem_cards_gelmnt1.cpp
   test_fem_cards_gelmnt2.cpp
