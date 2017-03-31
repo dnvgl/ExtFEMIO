@@ -2,19 +2,12 @@
   \file config.h
   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
   \copyright Copyright © 2016 by DNV GL SE
-  \brief Brief description
+  \brief config defines from CMake.
 
   Detailed description
 */
 
-/*
-  Purpose: config defines from CMake.
-
-  Author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
- */
-
-/* ID: $Id\$
- */
+//* ID: $Id$
 
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
@@ -23,12 +16,11 @@
 
 #endif // _CONFIG_H_
 
-/*
-  Local Variables:
-  mode: c
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C ../cbuild -j8 all_unity&&make -C ../cbuild test"
-  coding: utf-8
-  End:
- */
+// Local Variables:
+// mode: c++
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../cbuild -j10 &&
+//                   make -C ../cbuild test"
+// coding: utf-8
+// End:

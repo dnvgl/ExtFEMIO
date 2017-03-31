@@ -55,7 +55,7 @@ void gecc::read(const vector<std::string> &inp, size_t const len) {
     eccno::read(inp, len);
     if (len < 4)
         throw errors::parse_error(
-            "GECC", "Illegal number of entries. AA");
+            "GECC", "Illegal number of entries.");
 
     // ECCNO = _form_ECCNO(inp.at(1));
     long tmp = _form_IOPT(inp.at(2));
@@ -71,7 +71,7 @@ void gecc::read(const vector<std::string> &inp, size_t const len) {
     } else if (IOPT == gecc::ecc_opt::XYZ) {
         if (len < 6)
             throw errors::parse_error(
-                "GECC", "Illegal number of entries. BB");
+                "GECC", "Illegal number of entries.");
         EX = _form_EX(inp.at(3));
         EY = _form_EY(inp.at(4));
         EZ = _form_EZ(inp.at(5));
