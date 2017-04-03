@@ -319,13 +319,13 @@ namespace dnvgl {
 
                     protected:
 
-                        long static const get_eleno(void);
+                        long static const get_eleno();
                         long static get_eleno(long const eleno);
                         long static const get_elident();
                         long static get_elident(long const elident);
                         el_types static const type;
 
-                        elem(void);
+                        elem();
 
                         elem(long const eleno, long const elident,
                              long const el_add,
@@ -461,13 +461,13 @@ namespace dnvgl {
                         elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
                         elem(dnvgl::extfem::fem::cards::gelref1 const*);
                         elem(elem const*);
-                        virtual ~elem(void);
+                        virtual ~elem();
 
-                        cards::__base::card const &gelmnt1(void) const;
-                        cards::__base::card const &gelref1(void) const;
+                        cards::__base::card const &gelmnt1() const;
+                        cards::__base::card const &gelref1() const;
 
                         /** Reset static values for id and no check */
-                        void static reset(void);
+                        void static reset();
 
                         /** Element number ->
                             dnvgl::extfem::fem::cards::gelmnt1::ELNOX
@@ -540,9 +540,9 @@ namespace dnvgl {
                         virtual void add(dnvgl::extfem::fem::cards::gelref1 const*);
                         virtual void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
 
-                        virtual long nnodes(void) const = 0;
+                        virtual long nnodes() const = 0;
 
-                        virtual el_types get_type(void) const = 0;
+                        virtual el_types get_type() const = 0;
 
                         friend std::ostream &::operator<<(std::ostream&, elem const &);
                     };
@@ -558,10 +558,10 @@ namespace dnvgl {
 
                 class undef : public __base::elem {
                 public:
-                    undef (void);
+                    undef ();
                     undef(dnvgl::extfem::fem::cards::gelref1 const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                 };
                 
 #line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
@@ -569,7 +569,7 @@ namespace dnvgl {
                  */
                 class beps : public __base::elem {
                 public:
-                    beps(void);
+                    beps();
                     beps(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -602,8 +602,8 @@ namespace dnvgl {
                     beps(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     beps(dnvgl::extfem::fem::cards::gelref1 const*);
                     beps(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -614,7 +614,7 @@ namespace dnvgl {
                  */
                 class csta : public __base::elem {
                 public:
-                    csta(void);
+                    csta();
                     csta(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -647,8 +647,8 @@ namespace dnvgl {
                     csta(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     csta(dnvgl::extfem::fem::cards::gelref1 const*);
                     csta(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -659,7 +659,7 @@ namespace dnvgl {
                  */
                 class rpbq : public __base::elem {
                 public:
-                    rpbq(void);
+                    rpbq();
                     rpbq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -692,8 +692,8 @@ namespace dnvgl {
                     rpbq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     rpbq(dnvgl::extfem::fem::cards::gelref1 const*);
                     rpbq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -704,7 +704,7 @@ namespace dnvgl {
                  */
                 class ilst : public __base::elem {
                 public:
-                    ilst(void);
+                    ilst();
                     ilst(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -737,8 +737,8 @@ namespace dnvgl {
                     ilst(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ilst(dnvgl::extfem::fem::cards::gelref1 const*);
                     ilst(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -749,7 +749,7 @@ namespace dnvgl {
                  */
                 class iqqe : public __base::elem {
                 public:
-                    iqqe(void);
+                    iqqe();
                     iqqe(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -782,8 +782,8 @@ namespace dnvgl {
                     iqqe(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     iqqe(dnvgl::extfem::fem::cards::gelref1 const*);
                     iqqe(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -794,7 +794,7 @@ namespace dnvgl {
                  */
                 class lqua : public __base::elem {
                 public:
-                    lqua(void);
+                    lqua();
                     lqua(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -827,8 +827,8 @@ namespace dnvgl {
                     lqua(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     lqua(dnvgl::extfem::fem::cards::gelref1 const*);
                     lqua(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -839,7 +839,7 @@ namespace dnvgl {
                  */
                 class tess : public __base::elem {
                 public:
-                    tess(void);
+                    tess();
                     tess(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -872,8 +872,8 @@ namespace dnvgl {
                     tess(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     tess(dnvgl::extfem::fem::cards::gelref1 const*);
                     tess(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -884,7 +884,7 @@ namespace dnvgl {
                  */
                 class gmas : public __base::elem {
                 public:
-                    gmas(void);
+                    gmas();
                     gmas(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -917,8 +917,8 @@ namespace dnvgl {
                     gmas(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     gmas(dnvgl::extfem::fem::cards::gelref1 const*);
                     gmas(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -929,7 +929,7 @@ namespace dnvgl {
                  */
                 class glma : public __base::elem {
                 public:
-                    glma(void);
+                    glma();
                     glma(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -962,8 +962,8 @@ namespace dnvgl {
                     glma(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     glma(dnvgl::extfem::fem::cards::gelref1 const*);
                     glma(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -974,7 +974,7 @@ namespace dnvgl {
                  */
                 class glda : public __base::elem {
                 public:
-                    glda(void);
+                    glda();
                     glda(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1007,8 +1007,8 @@ namespace dnvgl {
                     glda(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     glda(dnvgl::extfem::fem::cards::gelref1 const*);
                     glda(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1019,7 +1019,7 @@ namespace dnvgl {
                  */
                 class beas : public __base::elem {
                 public:
-                    beas(void);
+                    beas();
                     beas(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1052,8 +1052,8 @@ namespace dnvgl {
                     beas(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     beas(dnvgl::extfem::fem::cards::gelref1 const*);
                     beas(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1064,7 +1064,7 @@ namespace dnvgl {
                  */
                 class axis : public __base::elem {
                 public:
-                    axis(void);
+                    axis();
                     axis(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1097,8 +1097,8 @@ namespace dnvgl {
                     axis(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     axis(dnvgl::extfem::fem::cards::gelref1 const*);
                     axis(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1109,7 +1109,7 @@ namespace dnvgl {
                  */
                 class axda : public __base::elem {
                 public:
-                    axda(void);
+                    axda();
                     axda(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1142,8 +1142,8 @@ namespace dnvgl {
                     axda(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     axda(dnvgl::extfem::fem::cards::gelref1 const*);
                     axda(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1154,7 +1154,7 @@ namespace dnvgl {
                  */
                 class gspr : public __base::elem {
                 public:
-                    gspr(void);
+                    gspr();
                     gspr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1187,8 +1187,8 @@ namespace dnvgl {
                     gspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     gspr(dnvgl::extfem::fem::cards::gelref1 const*);
                     gspr(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1199,7 +1199,7 @@ namespace dnvgl {
                  */
                 class gdam : public __base::elem {
                 public:
-                    gdam(void);
+                    gdam();
                     gdam(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1232,8 +1232,8 @@ namespace dnvgl {
                     gdam(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     gdam(dnvgl::extfem::fem::cards::gelref1 const*);
                     gdam(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1244,7 +1244,7 @@ namespace dnvgl {
                  */
                 class ihex : public __base::elem {
                 public:
-                    ihex(void);
+                    ihex();
                     ihex(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1277,8 +1277,8 @@ namespace dnvgl {
                     ihex(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ihex(dnvgl::extfem::fem::cards::gelref1 const*);
                     ihex(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1289,7 +1289,7 @@ namespace dnvgl {
                  */
                 class lhex : public __base::elem {
                 public:
-                    lhex(void);
+                    lhex();
                     lhex(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1322,8 +1322,8 @@ namespace dnvgl {
                     lhex(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     lhex(dnvgl::extfem::fem::cards::gelref1 const*);
                     lhex(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1334,7 +1334,7 @@ namespace dnvgl {
                  */
                 class secb : public __base::elem {
                 public:
-                    secb(void);
+                    secb();
                     secb(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1367,8 +1367,8 @@ namespace dnvgl {
                     secb(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     secb(dnvgl::extfem::fem::cards::gelref1 const*);
                     secb(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1379,7 +1379,7 @@ namespace dnvgl {
                  */
                 class btss : public __base::elem {
                 public:
-                    btss(void);
+                    btss();
                     btss(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1412,8 +1412,8 @@ namespace dnvgl {
                     btss(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     btss(dnvgl::extfem::fem::cards::gelref1 const*);
                     btss(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1424,7 +1424,7 @@ namespace dnvgl {
                  */
                 class fqus_ffq : public __base::fem_thin_shell {
                 public:
-                    fqus_ffq(void);
+                    fqus_ffq();
                     fqus_ffq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1457,8 +1457,8 @@ namespace dnvgl {
                     fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const*);
                     fqus_ffq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1469,7 +1469,7 @@ namespace dnvgl {
                  */
                 class ftrs_fftr : public __base::fem_thin_shell {
                 public:
-                    ftrs_fftr(void);
+                    ftrs_fftr();
                     ftrs_fftr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1502,8 +1502,8 @@ namespace dnvgl {
                     ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const*);
                     ftrs_fftr(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1514,7 +1514,7 @@ namespace dnvgl {
                  */
                 class scts : public __base::elem {
                 public:
-                    scts(void);
+                    scts();
                     scts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1547,8 +1547,8 @@ namespace dnvgl {
                     scts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     scts(dnvgl::extfem::fem::cards::gelref1 const*);
                     scts(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1559,7 +1559,7 @@ namespace dnvgl {
                  */
                 class mcts : public __base::elem {
                 public:
-                    mcts(void);
+                    mcts();
                     mcts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1592,8 +1592,8 @@ namespace dnvgl {
                     mcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     mcts(dnvgl::extfem::fem::cards::gelref1 const*);
                     mcts(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1604,7 +1604,7 @@ namespace dnvgl {
                  */
                 class scqs : public __base::elem {
                 public:
-                    scqs(void);
+                    scqs();
                     scqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1637,8 +1637,8 @@ namespace dnvgl {
                     scqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     scqs(dnvgl::extfem::fem::cards::gelref1 const*);
                     scqs(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1649,7 +1649,7 @@ namespace dnvgl {
                  */
                 class mcqs : public __base::elem {
                 public:
-                    mcqs(void);
+                    mcqs();
                     mcqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1682,8 +1682,8 @@ namespace dnvgl {
                     mcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     mcqs(dnvgl::extfem::fem::cards::gelref1 const*);
                     mcqs(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1694,7 +1694,7 @@ namespace dnvgl {
                  */
                 class ipri : public __base::elem {
                 public:
-                    ipri(void);
+                    ipri();
                     ipri(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1727,8 +1727,8 @@ namespace dnvgl {
                     ipri(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ipri(dnvgl::extfem::fem::cards::gelref1 const*);
                     ipri(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1739,7 +1739,7 @@ namespace dnvgl {
                  */
                 class itet : public __base::elem {
                 public:
-                    itet(void);
+                    itet();
                     itet(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1772,8 +1772,8 @@ namespace dnvgl {
                     itet(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     itet(dnvgl::extfem::fem::cards::gelref1 const*);
                     itet(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1784,7 +1784,7 @@ namespace dnvgl {
                  */
                 class tpri : public __base::elem {
                 public:
-                    tpri(void);
+                    tpri();
                     tpri(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1817,8 +1817,8 @@ namespace dnvgl {
                     tpri(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     tpri(dnvgl::extfem::fem::cards::gelref1 const*);
                     tpri(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1829,7 +1829,7 @@ namespace dnvgl {
                  */
                 class tetr : public __base::elem {
                 public:
-                    tetr(void);
+                    tetr();
                     tetr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1862,8 +1862,8 @@ namespace dnvgl {
                     tetr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     tetr(dnvgl::extfem::fem::cards::gelref1 const*);
                     tetr(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1874,7 +1874,7 @@ namespace dnvgl {
                  */
                 class lcts : public __base::elem {
                 public:
-                    lcts(void);
+                    lcts();
                     lcts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1907,8 +1907,8 @@ namespace dnvgl {
                     lcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     lcts(dnvgl::extfem::fem::cards::gelref1 const*);
                     lcts(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1919,7 +1919,7 @@ namespace dnvgl {
                  */
                 class lcqs : public __base::elem {
                 public:
-                    lcqs(void);
+                    lcqs();
                     lcqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1952,8 +1952,8 @@ namespace dnvgl {
                     lcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     lcqs(dnvgl::extfem::fem::cards::gelref1 const*);
                     lcqs(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -1964,7 +1964,7 @@ namespace dnvgl {
                  */
                 class trs1 : public __base::elem {
                 public:
-                    trs1(void);
+                    trs1();
                     trs1(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1997,8 +1997,8 @@ namespace dnvgl {
                     trs1(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     trs1(dnvgl::extfem::fem::cards::gelref1 const*);
                     trs1(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2009,7 +2009,7 @@ namespace dnvgl {
                  */
                 class trs2 : public __base::elem {
                 public:
-                    trs2(void);
+                    trs2();
                     trs2(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2042,8 +2042,8 @@ namespace dnvgl {
                     trs2(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     trs2(dnvgl::extfem::fem::cards::gelref1 const*);
                     trs2(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2054,7 +2054,7 @@ namespace dnvgl {
                  */
                 class trs3 : public __base::elem {
                 public:
-                    trs3(void);
+                    trs3();
                     trs3(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2087,8 +2087,8 @@ namespace dnvgl {
                     trs3(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     trs3(dnvgl::extfem::fem::cards::gelref1 const*);
                     trs3(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2099,7 +2099,7 @@ namespace dnvgl {
                  */
                 class glsh : public __base::elem {
                 public:
-                    glsh(void);
+                    glsh();
                     glsh(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2132,8 +2132,8 @@ namespace dnvgl {
                     glsh(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     glsh(dnvgl::extfem::fem::cards::gelref1 const*);
                     glsh(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2144,7 +2144,7 @@ namespace dnvgl {
                  */
                 class axcs : public __base::elem {
                 public:
-                    axcs(void);
+                    axcs();
                     axcs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2177,8 +2177,8 @@ namespace dnvgl {
                     axcs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     axcs(dnvgl::extfem::fem::cards::gelref1 const*);
                     axcs(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2189,7 +2189,7 @@ namespace dnvgl {
                  */
                 class axlq : public __base::elem {
                 public:
-                    axlq(void);
+                    axlq();
                     axlq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2222,8 +2222,8 @@ namespace dnvgl {
                     axlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     axlq(dnvgl::extfem::fem::cards::gelref1 const*);
                     axlq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2234,7 +2234,7 @@ namespace dnvgl {
                  */
                 class axls : public __base::elem {
                 public:
-                    axls(void);
+                    axls();
                     axls(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2267,8 +2267,8 @@ namespace dnvgl {
                     axls(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     axls(dnvgl::extfem::fem::cards::gelref1 const*);
                     axls(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2279,7 +2279,7 @@ namespace dnvgl {
                  */
                 class axqq : public __base::elem {
                 public:
-                    axqq(void);
+                    axqq();
                     axqq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2312,8 +2312,8 @@ namespace dnvgl {
                     axqq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     axqq(dnvgl::extfem::fem::cards::gelref1 const*);
                     axqq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2324,7 +2324,7 @@ namespace dnvgl {
                  */
                 class pils : public __base::elem {
                 public:
-                    pils(void);
+                    pils();
                     pils(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2357,8 +2357,8 @@ namespace dnvgl {
                     pils(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     pils(dnvgl::extfem::fem::cards::gelref1 const*);
                     pils(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2369,7 +2369,7 @@ namespace dnvgl {
                  */
                 class pcab : public __base::elem {
                 public:
-                    pcab(void);
+                    pcab();
                     pcab(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2402,8 +2402,8 @@ namespace dnvgl {
                     pcab(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     pcab(dnvgl::extfem::fem::cards::gelref1 const*);
                     pcab(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2414,7 +2414,7 @@ namespace dnvgl {
                  */
                 class pspr : public __base::elem {
                 public:
-                    pspr(void);
+                    pspr();
                     pspr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2447,8 +2447,8 @@ namespace dnvgl {
                     pspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     pspr(dnvgl::extfem::fem::cards::gelref1 const*);
                     pspr(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2459,7 +2459,7 @@ namespace dnvgl {
                  */
                 class adva_4 : public __base::elem {
                 public:
-                    adva_4(void);
+                    adva_4();
                     adva_4(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2492,8 +2492,8 @@ namespace dnvgl {
                     adva_4(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     adva_4(dnvgl::extfem::fem::cards::gelref1 const*);
                     adva_4(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2504,7 +2504,7 @@ namespace dnvgl {
                  */
                 class adva_2 : public __base::elem {
                 public:
-                    adva_2(void);
+                    adva_2();
                     adva_2(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2537,8 +2537,8 @@ namespace dnvgl {
                     adva_2(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     adva_2(dnvgl::extfem::fem::cards::gelref1 const*);
                     adva_2(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2549,7 +2549,7 @@ namespace dnvgl {
                  */
                 class ctcp : public __base::elem {
                 public:
-                    ctcp(void);
+                    ctcp();
                     ctcp(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2582,8 +2582,8 @@ namespace dnvgl {
                     ctcp(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctcp(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctcp(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2594,7 +2594,7 @@ namespace dnvgl {
                  */
                 class ctcl : public __base::elem {
                 public:
-                    ctcl(void);
+                    ctcl();
                     ctcl(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2627,8 +2627,8 @@ namespace dnvgl {
                     ctcl(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctcl(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctcl(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2639,7 +2639,7 @@ namespace dnvgl {
                  */
                 class ctal : public __base::elem {
                 public:
-                    ctal(void);
+                    ctal();
                     ctal(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2672,8 +2672,8 @@ namespace dnvgl {
                     ctal(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctal(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctal(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2684,7 +2684,7 @@ namespace dnvgl {
                  */
                 class ctcc : public __base::elem {
                 public:
-                    ctcc(void);
+                    ctcc();
                     ctcc(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2717,8 +2717,8 @@ namespace dnvgl {
                     ctcc(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctcc(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctcc(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2729,7 +2729,7 @@ namespace dnvgl {
                  */
                 class ctaq : public __base::elem {
                 public:
-                    ctaq(void);
+                    ctaq();
                     ctaq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2762,8 +2762,8 @@ namespace dnvgl {
                     ctaq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctaq(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctaq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2774,7 +2774,7 @@ namespace dnvgl {
                  */
                 class ctlq : public __base::elem {
                 public:
-                    ctlq(void);
+                    ctlq();
                     ctlq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2807,8 +2807,8 @@ namespace dnvgl {
                     ctlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctlq(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctlq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2819,7 +2819,7 @@ namespace dnvgl {
                  */
                 class ctcq : public __base::elem {
                 public:
-                    ctcq(void);
+                    ctcq();
                     ctcq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2852,8 +2852,8 @@ namespace dnvgl {
                     ctcq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctcq(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctcq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2864,7 +2864,7 @@ namespace dnvgl {
                  */
                 class ctmq : public __base::elem {
                 public:
-                    ctmq(void);
+                    ctmq();
                     ctmq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2897,8 +2897,8 @@ namespace dnvgl {
                     ctmq(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ctmq(dnvgl::extfem::fem::cards::gelref1 const*);
                     ctmq(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2909,7 +2909,7 @@ namespace dnvgl {
                  */
                 class hcqs : public __base::elem {
                 public:
-                    hcqs(void);
+                    hcqs();
                     hcqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2942,8 +2942,8 @@ namespace dnvgl {
                     hcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     hcqs(dnvgl::extfem::fem::cards::gelref1 const*);
                     hcqs(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2954,7 +2954,7 @@ namespace dnvgl {
                  */
                 class slqs : public __base::elem {
                 public:
-                    slqs(void);
+                    slqs();
                     slqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2987,8 +2987,8 @@ namespace dnvgl {
                     slqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     slqs(dnvgl::extfem::fem::cards::gelref1 const*);
                     slqs(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -2999,7 +2999,7 @@ namespace dnvgl {
                  */
                 class slts : public __base::elem {
                 public:
-                    slts(void);
+                    slts();
                     slts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3032,8 +3032,8 @@ namespace dnvgl {
                     slts(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     slts(dnvgl::extfem::fem::cards::gelref1 const*);
                     slts(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3044,7 +3044,7 @@ namespace dnvgl {
                  */
                 class slcb : public __base::elem {
                 public:
-                    slcb(void);
+                    slcb();
                     slcb(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3077,8 +3077,8 @@ namespace dnvgl {
                     slcb(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     slcb(dnvgl::extfem::fem::cards::gelref1 const*);
                     slcb(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3089,7 +3089,7 @@ namespace dnvgl {
                  */
                 class matr : public __base::elem {
                 public:
-                    matr(void);
+                    matr();
                     matr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3122,8 +3122,8 @@ namespace dnvgl {
                     matr(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     matr(dnvgl::extfem::fem::cards::gelref1 const*);
                     matr(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3138,7 +3138,7 @@ namespace dnvgl {
                  */
                 class ghex100 : public __base::elem {
                 public:
-                    ghex100(void);
+                    ghex100();
                     ghex100(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3171,8 +3171,8 @@ namespace dnvgl {
                     ghex100(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex100(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex100(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3188,7 +3188,7 @@ namespace dnvgl {
                  */
                 class ghex101 : public __base::elem {
                 public:
-                    ghex101(void);
+                    ghex101();
                     ghex101(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3221,8 +3221,8 @@ namespace dnvgl {
                     ghex101(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex101(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex101(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3238,7 +3238,7 @@ namespace dnvgl {
                  */
                 class ghex102 : public __base::elem {
                 public:
-                    ghex102(void);
+                    ghex102();
                     ghex102(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3271,8 +3271,8 @@ namespace dnvgl {
                     ghex102(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex102(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex102(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3289,7 +3289,7 @@ namespace dnvgl {
                  */
                 class ghex103 : public __base::elem {
                 public:
-                    ghex103(void);
+                    ghex103();
                     ghex103(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3322,8 +3322,8 @@ namespace dnvgl {
                     ghex103(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex103(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex103(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3339,7 +3339,7 @@ namespace dnvgl {
                  */
                 class ghex104 : public __base::elem {
                 public:
-                    ghex104(void);
+                    ghex104();
                     ghex104(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3372,8 +3372,8 @@ namespace dnvgl {
                     ghex104(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex104(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex104(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3390,7 +3390,7 @@ namespace dnvgl {
                  */
                 class ghex105 : public __base::elem {
                 public:
-                    ghex105(void);
+                    ghex105();
                     ghex105(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3423,8 +3423,8 @@ namespace dnvgl {
                     ghex105(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex105(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex105(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3441,7 +3441,7 @@ namespace dnvgl {
                  */
                 class ghex106 : public __base::elem {
                 public:
-                    ghex106(void);
+                    ghex106();
                     ghex106(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3474,8 +3474,8 @@ namespace dnvgl {
                     ghex106(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex106(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex106(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3493,7 +3493,7 @@ namespace dnvgl {
                  */
                 class ghex107 : public __base::elem {
                 public:
-                    ghex107(void);
+                    ghex107();
                     ghex107(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3526,8 +3526,8 @@ namespace dnvgl {
                     ghex107(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex107(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex107(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3543,7 +3543,7 @@ namespace dnvgl {
                  */
                 class ghex108 : public __base::elem {
                 public:
-                    ghex108(void);
+                    ghex108();
                     ghex108(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3576,8 +3576,8 @@ namespace dnvgl {
                     ghex108(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex108(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex108(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3594,7 +3594,7 @@ namespace dnvgl {
                  */
                 class ghex109 : public __base::elem {
                 public:
-                    ghex109(void);
+                    ghex109();
                     ghex109(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3627,8 +3627,8 @@ namespace dnvgl {
                     ghex109(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex109(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex109(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3645,7 +3645,7 @@ namespace dnvgl {
                  */
                 class ghex110 : public __base::elem {
                 public:
-                    ghex110(void);
+                    ghex110();
                     ghex110(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3678,8 +3678,8 @@ namespace dnvgl {
                     ghex110(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex110(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex110(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3697,7 +3697,7 @@ namespace dnvgl {
                  */
                 class ghex111 : public __base::elem {
                 public:
-                    ghex111(void);
+                    ghex111();
                     ghex111(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3730,8 +3730,8 @@ namespace dnvgl {
                     ghex111(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex111(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex111(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3748,7 +3748,7 @@ namespace dnvgl {
                  */
                 class ghex112 : public __base::elem {
                 public:
-                    ghex112(void);
+                    ghex112();
                     ghex112(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3781,8 +3781,8 @@ namespace dnvgl {
                     ghex112(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex112(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex112(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3800,7 +3800,7 @@ namespace dnvgl {
                  */
                 class ghex113 : public __base::elem {
                 public:
-                    ghex113(void);
+                    ghex113();
                     ghex113(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3833,8 +3833,8 @@ namespace dnvgl {
                     ghex113(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex113(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex113(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3852,7 +3852,7 @@ namespace dnvgl {
                  */
                 class ghex114 : public __base::elem {
                 public:
-                    ghex114(void);
+                    ghex114();
                     ghex114(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3885,8 +3885,8 @@ namespace dnvgl {
                     ghex114(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex114(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex114(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3905,7 +3905,7 @@ namespace dnvgl {
                  */
                 class ghex115 : public __base::elem {
                 public:
-                    ghex115(void);
+                    ghex115();
                     ghex115(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3938,8 +3938,8 @@ namespace dnvgl {
                     ghex115(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex115(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex115(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -3955,7 +3955,7 @@ namespace dnvgl {
                  */
                 class ghex116 : public __base::elem {
                 public:
-                    ghex116(void);
+                    ghex116();
                     ghex116(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3988,8 +3988,8 @@ namespace dnvgl {
                     ghex116(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex116(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex116(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4006,7 +4006,7 @@ namespace dnvgl {
                  */
                 class ghex117 : public __base::elem {
                 public:
-                    ghex117(void);
+                    ghex117();
                     ghex117(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4039,8 +4039,8 @@ namespace dnvgl {
                     ghex117(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex117(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex117(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4057,7 +4057,7 @@ namespace dnvgl {
                  */
                 class ghex118 : public __base::elem {
                 public:
-                    ghex118(void);
+                    ghex118();
                     ghex118(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4090,8 +4090,8 @@ namespace dnvgl {
                     ghex118(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex118(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex118(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4109,7 +4109,7 @@ namespace dnvgl {
                  */
                 class ghex119 : public __base::elem {
                 public:
-                    ghex119(void);
+                    ghex119();
                     ghex119(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4142,8 +4142,8 @@ namespace dnvgl {
                     ghex119(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex119(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex119(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4160,7 +4160,7 @@ namespace dnvgl {
                  */
                 class ghex120 : public __base::elem {
                 public:
-                    ghex120(void);
+                    ghex120();
                     ghex120(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4193,8 +4193,8 @@ namespace dnvgl {
                     ghex120(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex120(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex120(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4212,7 +4212,7 @@ namespace dnvgl {
                  */
                 class ghex121 : public __base::elem {
                 public:
-                    ghex121(void);
+                    ghex121();
                     ghex121(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4245,8 +4245,8 @@ namespace dnvgl {
                     ghex121(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex121(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex121(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4264,7 +4264,7 @@ namespace dnvgl {
                  */
                 class ghex122 : public __base::elem {
                 public:
-                    ghex122(void);
+                    ghex122();
                     ghex122(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4297,8 +4297,8 @@ namespace dnvgl {
                     ghex122(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex122(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex122(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4317,7 +4317,7 @@ namespace dnvgl {
                  */
                 class ghex123 : public __base::elem {
                 public:
-                    ghex123(void);
+                    ghex123();
                     ghex123(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4350,8 +4350,8 @@ namespace dnvgl {
                     ghex123(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex123(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex123(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4368,7 +4368,7 @@ namespace dnvgl {
                  */
                 class ghex124 : public __base::elem {
                 public:
-                    ghex124(void);
+                    ghex124();
                     ghex124(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4401,8 +4401,8 @@ namespace dnvgl {
                     ghex124(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex124(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex124(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4420,7 +4420,7 @@ namespace dnvgl {
                  */
                 class ghex125 : public __base::elem {
                 public:
-                    ghex125(void);
+                    ghex125();
                     ghex125(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4453,8 +4453,8 @@ namespace dnvgl {
                     ghex125(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex125(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex125(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4472,7 +4472,7 @@ namespace dnvgl {
                  */
                 class ghex126 : public __base::elem {
                 public:
-                    ghex126(void);
+                    ghex126();
                     ghex126(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4505,8 +4505,8 @@ namespace dnvgl {
                     ghex126(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex126(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex126(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4525,7 +4525,7 @@ namespace dnvgl {
                  */
                 class ghex127 : public __base::elem {
                 public:
-                    ghex127(void);
+                    ghex127();
                     ghex127(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4558,8 +4558,8 @@ namespace dnvgl {
                     ghex127(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex127(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex127(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4577,7 +4577,7 @@ namespace dnvgl {
                  */
                 class ghex128 : public __base::elem {
                 public:
-                    ghex128(void);
+                    ghex128();
                     ghex128(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4610,8 +4610,8 @@ namespace dnvgl {
                     ghex128(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex128(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex128(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4630,7 +4630,7 @@ namespace dnvgl {
                  */
                 class ghex129 : public __base::elem {
                 public:
-                    ghex129(void);
+                    ghex129();
                     ghex129(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4663,8 +4663,8 @@ namespace dnvgl {
                     ghex129(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex129(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex129(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4683,7 +4683,7 @@ namespace dnvgl {
                  */
                 class ghex130 : public __base::elem {
                 public:
-                    ghex130(void);
+                    ghex130();
                     ghex130(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4716,8 +4716,8 @@ namespace dnvgl {
                     ghex130(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex130(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex130(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4737,7 +4737,7 @@ namespace dnvgl {
                  */
                 class ghex131 : public __base::elem {
                 public:
-                    ghex131(void);
+                    ghex131();
                     ghex131(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4770,8 +4770,8 @@ namespace dnvgl {
                     ghex131(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex131(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex131(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4787,7 +4787,7 @@ namespace dnvgl {
                  */
                 class ghex132 : public __base::elem {
                 public:
-                    ghex132(void);
+                    ghex132();
                     ghex132(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4820,8 +4820,8 @@ namespace dnvgl {
                     ghex132(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex132(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex132(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4838,7 +4838,7 @@ namespace dnvgl {
                  */
                 class ghex133 : public __base::elem {
                 public:
-                    ghex133(void);
+                    ghex133();
                     ghex133(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4871,8 +4871,8 @@ namespace dnvgl {
                     ghex133(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex133(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex133(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4889,7 +4889,7 @@ namespace dnvgl {
                  */
                 class ghex134 : public __base::elem {
                 public:
-                    ghex134(void);
+                    ghex134();
                     ghex134(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4922,8 +4922,8 @@ namespace dnvgl {
                     ghex134(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex134(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex134(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4941,7 +4941,7 @@ namespace dnvgl {
                  */
                 class ghex135 : public __base::elem {
                 public:
-                    ghex135(void);
+                    ghex135();
                     ghex135(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4974,8 +4974,8 @@ namespace dnvgl {
                     ghex135(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex135(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex135(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -4992,7 +4992,7 @@ namespace dnvgl {
                  */
                 class ghex136 : public __base::elem {
                 public:
-                    ghex136(void);
+                    ghex136();
                     ghex136(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5025,8 +5025,8 @@ namespace dnvgl {
                     ghex136(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex136(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex136(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5044,7 +5044,7 @@ namespace dnvgl {
                  */
                 class ghex137 : public __base::elem {
                 public:
-                    ghex137(void);
+                    ghex137();
                     ghex137(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5077,8 +5077,8 @@ namespace dnvgl {
                     ghex137(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex137(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex137(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5096,7 +5096,7 @@ namespace dnvgl {
                  */
                 class ghex138 : public __base::elem {
                 public:
-                    ghex138(void);
+                    ghex138();
                     ghex138(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5129,8 +5129,8 @@ namespace dnvgl {
                     ghex138(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex138(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex138(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5149,7 +5149,7 @@ namespace dnvgl {
                  */
                 class ghex139 : public __base::elem {
                 public:
-                    ghex139(void);
+                    ghex139();
                     ghex139(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5182,8 +5182,8 @@ namespace dnvgl {
                     ghex139(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex139(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex139(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5200,7 +5200,7 @@ namespace dnvgl {
                  */
                 class ghex140 : public __base::elem {
                 public:
-                    ghex140(void);
+                    ghex140();
                     ghex140(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5233,8 +5233,8 @@ namespace dnvgl {
                     ghex140(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex140(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex140(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5252,7 +5252,7 @@ namespace dnvgl {
                  */
                 class ghex141 : public __base::elem {
                 public:
-                    ghex141(void);
+                    ghex141();
                     ghex141(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5285,8 +5285,8 @@ namespace dnvgl {
                     ghex141(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex141(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex141(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5304,7 +5304,7 @@ namespace dnvgl {
                  */
                 class ghex142 : public __base::elem {
                 public:
-                    ghex142(void);
+                    ghex142();
                     ghex142(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5337,8 +5337,8 @@ namespace dnvgl {
                     ghex142(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex142(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex142(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5357,7 +5357,7 @@ namespace dnvgl {
                  */
                 class ghex143 : public __base::elem {
                 public:
-                    ghex143(void);
+                    ghex143();
                     ghex143(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5390,8 +5390,8 @@ namespace dnvgl {
                     ghex143(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex143(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex143(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5409,7 +5409,7 @@ namespace dnvgl {
                  */
                 class ghex144 : public __base::elem {
                 public:
-                    ghex144(void);
+                    ghex144();
                     ghex144(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5442,8 +5442,8 @@ namespace dnvgl {
                     ghex144(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex144(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex144(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5462,7 +5462,7 @@ namespace dnvgl {
                  */
                 class ghex145 : public __base::elem {
                 public:
-                    ghex145(void);
+                    ghex145();
                     ghex145(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5495,8 +5495,8 @@ namespace dnvgl {
                     ghex145(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex145(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex145(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5515,7 +5515,7 @@ namespace dnvgl {
                  */
                 class ghex146 : public __base::elem {
                 public:
-                    ghex146(void);
+                    ghex146();
                     ghex146(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5548,8 +5548,8 @@ namespace dnvgl {
                     ghex146(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex146(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex146(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5569,7 +5569,7 @@ namespace dnvgl {
                  */
                 class ghex147 : public __base::elem {
                 public:
-                    ghex147(void);
+                    ghex147();
                     ghex147(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5602,8 +5602,8 @@ namespace dnvgl {
                     ghex147(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex147(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex147(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5620,7 +5620,7 @@ namespace dnvgl {
                  */
                 class ghex148 : public __base::elem {
                 public:
-                    ghex148(void);
+                    ghex148();
                     ghex148(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5653,8 +5653,8 @@ namespace dnvgl {
                     ghex148(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex148(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex148(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5672,7 +5672,7 @@ namespace dnvgl {
                  */
                 class ghex149 : public __base::elem {
                 public:
-                    ghex149(void);
+                    ghex149();
                     ghex149(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5705,8 +5705,8 @@ namespace dnvgl {
                     ghex149(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex149(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex149(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5724,7 +5724,7 @@ namespace dnvgl {
                  */
                 class ghex150 : public __base::elem {
                 public:
-                    ghex150(void);
+                    ghex150();
                     ghex150(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5757,8 +5757,8 @@ namespace dnvgl {
                     ghex150(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex150(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex150(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5777,7 +5777,7 @@ namespace dnvgl {
                  */
                 class ghex151 : public __base::elem {
                 public:
-                    ghex151(void);
+                    ghex151();
                     ghex151(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5810,8 +5810,8 @@ namespace dnvgl {
                     ghex151(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex151(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex151(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5829,7 +5829,7 @@ namespace dnvgl {
                  */
                 class ghex152 : public __base::elem {
                 public:
-                    ghex152(void);
+                    ghex152();
                     ghex152(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5862,8 +5862,8 @@ namespace dnvgl {
                     ghex152(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex152(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex152(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5882,7 +5882,7 @@ namespace dnvgl {
                  */
                 class ghex153 : public __base::elem {
                 public:
-                    ghex153(void);
+                    ghex153();
                     ghex153(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5915,8 +5915,8 @@ namespace dnvgl {
                     ghex153(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex153(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex153(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5935,7 +5935,7 @@ namespace dnvgl {
                  */
                 class ghex154 : public __base::elem {
                 public:
-                    ghex154(void);
+                    ghex154();
                     ghex154(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5968,8 +5968,8 @@ namespace dnvgl {
                     ghex154(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex154(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex154(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -5989,7 +5989,7 @@ namespace dnvgl {
                  */
                 class ghex155 : public __base::elem {
                 public:
-                    ghex155(void);
+                    ghex155();
                     ghex155(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6022,8 +6022,8 @@ namespace dnvgl {
                     ghex155(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex155(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex155(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6041,7 +6041,7 @@ namespace dnvgl {
                  */
                 class ghex156 : public __base::elem {
                 public:
-                    ghex156(void);
+                    ghex156();
                     ghex156(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6074,8 +6074,8 @@ namespace dnvgl {
                     ghex156(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex156(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex156(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6094,7 +6094,7 @@ namespace dnvgl {
                  */
                 class ghex157 : public __base::elem {
                 public:
-                    ghex157(void);
+                    ghex157();
                     ghex157(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6127,8 +6127,8 @@ namespace dnvgl {
                     ghex157(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex157(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex157(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6147,7 +6147,7 @@ namespace dnvgl {
                  */
                 class ghex158 : public __base::elem {
                 public:
-                    ghex158(void);
+                    ghex158();
                     ghex158(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6180,8 +6180,8 @@ namespace dnvgl {
                     ghex158(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex158(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex158(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6201,7 +6201,7 @@ namespace dnvgl {
                  */
                 class ghex159 : public __base::elem {
                 public:
-                    ghex159(void);
+                    ghex159();
                     ghex159(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6234,8 +6234,8 @@ namespace dnvgl {
                     ghex159(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex159(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex159(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6254,7 +6254,7 @@ namespace dnvgl {
                  */
                 class ghex160 : public __base::elem {
                 public:
-                    ghex160(void);
+                    ghex160();
                     ghex160(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6287,8 +6287,8 @@ namespace dnvgl {
                     ghex160(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex160(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex160(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6308,7 +6308,7 @@ namespace dnvgl {
                  */
                 class ghex161 : public __base::elem {
                 public:
-                    ghex161(void);
+                    ghex161();
                     ghex161(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6341,8 +6341,8 @@ namespace dnvgl {
                     ghex161(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex161(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex161(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6362,7 +6362,7 @@ namespace dnvgl {
                  */
                 class ghex162 : public __base::elem {
                 public:
-                    ghex162(void);
+                    ghex162();
                     ghex162(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6395,8 +6395,8 @@ namespace dnvgl {
                     ghex162(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex162(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex162(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
@@ -6417,7 +6417,7 @@ namespace dnvgl {
                  */
                 class ghex163 : public __base::elem {
                 public:
-                    ghex163(void);
+                    ghex163();
                     ghex163(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6450,8 +6450,8 @@ namespace dnvgl {
                     ghex163(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     ghex163(dnvgl::extfem::fem::cards::gelref1 const*);
                     ghex163(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;

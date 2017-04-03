@@ -439,13 +439,13 @@ std::string dnvgl::extfem::fem::elements::name_elem(el_types const type) {
     return "";
 };
 
-undef::undef(void) {}
+undef::undef() {}
 
-long undef::nnodes(void) const {return -1;}
+long undef::nnodes() const {return -1;}
 
-el_types undef::get_type(void) const {return el_types::UNDEFINED;}
+el_types undef::get_type() const {return el_types::UNDEFINED;}
 
-elements::__base::elem::elem(void) :
+elements::__base::elem::elem() :
     eleno(-1), elident(-1), el_add(-1), nodes({}), matref(-1), add_no(-1),
     intno(-1), mass_intno(-1), i_strain_ref(-1), i_stress_ref(-1),
     strpoint_ref(-1), section({}), fixations({}), eccentrities({}),
@@ -531,7 +531,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
                       eccentrities, csys);
 }
 
-elements::__base::elem::~elem(void) {
+elements::__base::elem::~elem() {
     section.clear();
     fixations.clear();
     eccentrities.clear();
@@ -622,7 +622,7 @@ long elements::__base::elem::get_eleno(long const eleno) {
     return res;
 }
 
-long const elements::__base::elem::get_eleno(void) {
+long const elements::__base::elem::get_eleno() {
     do {;} while (used_nos.find(++max_no) != used_nos.end());
     used_nos.insert(max_no);
     return max_no;
@@ -635,7 +635,7 @@ long elements::__base::elem::get_elident(long const elident) {
     return res;
 }
 
-long const elements::__base::elem::get_elident(void) {
+long const elements::__base::elem::get_elident() {
     do {;} while (used_ids.find(++max_id) != used_ids.end());
     used_ids.insert(max_id);
     return max_id;
@@ -683,7 +683,7 @@ void elements::__base::elem::add(cards::gelref1 const *data) {
         this->csys = {data->TRANSNO_OPT};
 }
 
-cards::__base::card const &elements::__base::elem::gelmnt1(void) const {
+cards::__base::card const &elements::__base::elem::gelmnt1() const {
     return d_gelmnt1(
         this->eleno,   // ELNOX
         this->elident, // ELNO
@@ -692,7 +692,7 @@ cards::__base::card const &elements::__base::elem::gelmnt1(void) const {
         this->nodes);  // NODIN
 }
 
-cards::__base::card const &elements::__base::elem::gelref1(void) const {
+cards::__base::card const &elements::__base::elem::gelref1() const {
     long geono_opt;
     long fixno_opt;
     long eccno_opt;
@@ -746,7 +746,7 @@ cards::__base::card const &elements::__base::elem::gelref1(void) const {
         this->csys.size() > 1 ? this->csys : vector<long>({}));
 }
 
-void elements::__base::elem::reset(void) {
+void elements::__base::elem::reset() {
     used_ids.clear();
     max_id = 0;
     used_nos.clear();
@@ -778,15 +778,15 @@ ostream &operator<<(
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long beps::nnodes(void) const {return 2;}
+long beps::nnodes() const {return 2;}
 
-el_types beps::get_type(void) const {return el_types::BEPS;}
+el_types beps::get_type() const {return el_types::BEPS;}
 
 set<el_processor> const beps::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
     };
 
-beps::beps(void) : elem() {}
+beps::beps() : elem() {}
 
 beps::beps(
     long const eleno, long const elident, long const el_add,
@@ -839,15 +839,15 @@ beps::beps(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long csta::nnodes(void) const {return 3;}
+long csta::nnodes() const {return 3;}
 
-el_types csta::get_type(void) const {return el_types::CSTA;}
+el_types csta::get_type() const {return el_types::CSTA;}
 
 set<el_processor> const csta::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
     };
 
-csta::csta(void) : elem() {}
+csta::csta() : elem() {}
 
 csta::csta(
     long const eleno, long const elident, long const el_add,
@@ -900,15 +900,15 @@ csta::csta(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long rpbq::nnodes(void) const {return 4;}
+long rpbq::nnodes() const {return 4;}
 
-el_types rpbq::get_type(void) const {return el_types::RPBQ;}
+el_types rpbq::get_type() const {return el_types::RPBQ;}
 
 set<el_processor> const rpbq::processors{
         elements::el_processor::general
     };
 
-rpbq::rpbq(void) : elem() {}
+rpbq::rpbq() : elem() {}
 
 rpbq::rpbq(
     long const eleno, long const elident, long const el_add,
@@ -961,15 +961,15 @@ rpbq::rpbq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ilst::nnodes(void) const {return 6;}
+long ilst::nnodes() const {return 6;}
 
-el_types ilst::get_type(void) const {return el_types::ILST;}
+el_types ilst::get_type() const {return el_types::ILST;}
 
 set<el_processor> const ilst::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-ilst::ilst(void) : elem() {}
+ilst::ilst() : elem() {}
 
 ilst::ilst(
     long const eleno, long const elident, long const el_add,
@@ -1022,15 +1022,15 @@ ilst::ilst(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long iqqe::nnodes(void) const {return 8;}
+long iqqe::nnodes() const {return 8;}
 
-el_types iqqe::get_type(void) const {return el_types::IQQE;}
+el_types iqqe::get_type() const {return el_types::IQQE;}
 
 set<el_processor> const iqqe::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-iqqe::iqqe(void) : elem() {}
+iqqe::iqqe() : elem() {}
 
 iqqe::iqqe(
     long const eleno, long const elident, long const el_add,
@@ -1083,15 +1083,15 @@ iqqe::iqqe(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long lqua::nnodes(void) const {return 4;}
+long lqua::nnodes() const {return 4;}
 
-el_types lqua::get_type(void) const {return el_types::LQUA;}
+el_types lqua::get_type() const {return el_types::LQUA;}
 
 set<el_processor> const lqua::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Poseidon
     };
 
-lqua::lqua(void) : elem() {}
+lqua::lqua() : elem() {}
 
 lqua::lqua(
     long const eleno, long const elident, long const el_add,
@@ -1144,15 +1144,15 @@ lqua::lqua(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long tess::nnodes(void) const {return 2;}
+long tess::nnodes() const {return 2;}
 
-el_types tess::get_type(void) const {return el_types::TESS;}
+el_types tess::get_type() const {return el_types::TESS;}
 
 set<el_processor> const tess::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Poseidon
     };
 
-tess::tess(void) : elem() {}
+tess::tess() : elem() {}
 
 tess::tess(
     long const eleno, long const elident, long const el_add,
@@ -1205,15 +1205,15 @@ tess::tess(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long gmas::nnodes(void) const {return 1;}
+long gmas::nnodes() const {return 1;}
 
-el_types gmas::get_type(void) const {return el_types::GMAS;}
+el_types gmas::get_type() const {return el_types::GMAS;}
 
 set<el_processor> const gmas::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Poseidon
     };
 
-gmas::gmas(void) : elem() {}
+gmas::gmas() : elem() {}
 
 gmas::gmas(
     long const eleno, long const elident, long const el_add,
@@ -1266,15 +1266,15 @@ gmas::gmas(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long glma::nnodes(void) const {return 2;}
+long glma::nnodes() const {return 2;}
 
-el_types glma::get_type(void) const {return el_types::GLMA;}
+el_types glma::get_type() const {return el_types::GLMA;}
 
 set<el_processor> const glma::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-glma::glma(void) : elem() {}
+glma::glma() : elem() {}
 
 glma::glma(
     long const eleno, long const elident, long const el_add,
@@ -1327,15 +1327,15 @@ glma::glma(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long glda::nnodes(void) const {return 2;}
+long glda::nnodes() const {return 2;}
 
-el_types glda::get_type(void) const {return el_types::GLDA;}
+el_types glda::get_type() const {return el_types::GLDA;}
 
 set<el_processor> const glda::processors{
         elements::el_processor::general
     };
 
-glda::glda(void) : elem() {}
+glda::glda() : elem() {}
 
 glda::glda(
     long const eleno, long const elident, long const el_add,
@@ -1388,15 +1388,15 @@ glda::glda(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long beas::nnodes(void) const {return 2;}
+long beas::nnodes() const {return 2;}
 
-el_types beas::get_type(void) const {return el_types::BEAS;}
+el_types beas::get_type() const {return el_types::BEAS;}
 
 set<el_processor> const beas::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework, elements::el_processor::Launch, elements::el_processor::Platework, elements::el_processor::Pretube, elements::el_processor::Wadam, elements::el_processor::Poseidon
     };
 
-beas::beas(void) : elem() {}
+beas::beas() : elem() {}
 
 beas::beas(
     long const eleno, long const elident, long const el_add,
@@ -1449,15 +1449,15 @@ beas::beas(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long axis::nnodes(void) const {return 2;}
+long axis::nnodes() const {return 2;}
 
-el_types axis::get_type(void) const {return el_types::AXIS;}
+el_types axis::get_type() const {return el_types::AXIS;}
 
 set<el_processor> const axis::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework, elements::el_processor::Poseidon
     };
 
-axis::axis(void) : elem() {}
+axis::axis() : elem() {}
 
 axis::axis(
     long const eleno, long const elident, long const el_add,
@@ -1510,15 +1510,15 @@ axis::axis(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long axda::nnodes(void) const {return 2;}
+long axda::nnodes() const {return 2;}
 
-el_types axda::get_type(void) const {return el_types::AXDA;}
+el_types axda::get_type() const {return el_types::AXDA;}
 
 set<el_processor> const axda::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Poseidon
     };
 
-axda::axda(void) : elem() {}
+axda::axda() : elem() {}
 
 axda::axda(
     long const eleno, long const elident, long const el_add,
@@ -1571,15 +1571,15 @@ axda::axda(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long gspr::nnodes(void) const {return 1;}
+long gspr::nnodes() const {return 1;}
 
-el_types gspr::get_type(void) const {return el_types::GSPR;}
+el_types gspr::get_type() const {return el_types::GSPR;}
 
 set<el_processor> const gspr::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework, elements::el_processor::Poseidon
     };
 
-gspr::gspr(void) : elem() {}
+gspr::gspr() : elem() {}
 
 gspr::gspr(
     long const eleno, long const elident, long const el_add,
@@ -1632,15 +1632,15 @@ gspr::gspr(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long gdam::nnodes(void) const {return 1;}
+long gdam::nnodes() const {return 1;}
 
-el_types gdam::get_type(void) const {return el_types::GDAM;}
+el_types gdam::get_type() const {return el_types::GDAM;}
 
 set<el_processor> const gdam::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Poseidon
     };
 
-gdam::gdam(void) : elem() {}
+gdam::gdam() : elem() {}
 
 gdam::gdam(
     long const eleno, long const elident, long const el_add,
@@ -1693,15 +1693,15 @@ gdam::gdam(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ihex::nnodes(void) const {return 20;}
+long ihex::nnodes() const {return 20;}
 
-el_types ihex::get_type(void) const {return el_types::IHEX;}
+el_types ihex::get_type() const {return el_types::IHEX;}
 
 set<el_processor> const ihex::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework
     };
 
-ihex::ihex(void) : elem() {}
+ihex::ihex() : elem() {}
 
 ihex::ihex(
     long const eleno, long const elident, long const el_add,
@@ -1754,15 +1754,15 @@ ihex::ihex(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long lhex::nnodes(void) const {return 8;}
+long lhex::nnodes() const {return 8;}
 
-el_types lhex::get_type(void) const {return el_types::LHEX;}
+el_types lhex::get_type() const {return el_types::LHEX;}
 
 set<el_processor> const lhex::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework
     };
 
-lhex::lhex(void) : elem() {}
+lhex::lhex() : elem() {}
 
 lhex::lhex(
     long const eleno, long const elident, long const el_add,
@@ -1815,15 +1815,15 @@ lhex::lhex(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long secb::nnodes(void) const {return 3;}
+long secb::nnodes() const {return 3;}
 
-el_types secb::get_type(void) const {return el_types::SECB;}
+el_types secb::get_type() const {return el_types::SECB;}
 
 set<el_processor> const secb::processors{
         elements::el_processor::general
     };
 
-secb::secb(void) : elem() {}
+secb::secb() : elem() {}
 
 secb::secb(
     long const eleno, long const elident, long const el_add,
@@ -1876,15 +1876,15 @@ secb::secb(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long btss::nnodes(void) const {return 3;}
+long btss::nnodes() const {return 3;}
 
-el_types btss::get_type(void) const {return el_types::BTSS;}
+el_types btss::get_type() const {return el_types::BTSS;}
 
 set<el_processor> const btss::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework, elements::el_processor::Pretube
     };
 
-btss::btss(void) : elem() {}
+btss::btss() : elem() {}
 
 btss::btss(
     long const eleno, long const elident, long const el_add,
@@ -1937,15 +1937,15 @@ btss::btss(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long fqus_ffq::nnodes(void) const {return 4;}
+long fqus_ffq::nnodes() const {return 4;}
 
-el_types fqus_ffq::get_type(void) const {return el_types::FQUS_FFQ;}
+el_types fqus_ffq::get_type() const {return el_types::FQUS_FFQ;}
 
 set<el_processor> const fqus_ffq::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Platework, elements::el_processor::Pretube, elements::el_processor::Poseidon
     };
 
-fqus_ffq::fqus_ffq(void) : fem_thin_shell() {}
+fqus_ffq::fqus_ffq() : fem_thin_shell() {}
 
 fqus_ffq::fqus_ffq(
     long const eleno, long const elident, long const el_add,
@@ -1998,15 +1998,15 @@ fqus_ffq::fqus_ffq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ftrs_fftr::nnodes(void) const {return 3;}
+long ftrs_fftr::nnodes() const {return 3;}
 
-el_types ftrs_fftr::get_type(void) const {return el_types::FTRS_FFTR;}
+el_types ftrs_fftr::get_type() const {return el_types::FTRS_FFTR;}
 
 set<el_processor> const ftrs_fftr::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Platework, elements::el_processor::Poseidon
     };
 
-ftrs_fftr::ftrs_fftr(void) : fem_thin_shell() {}
+ftrs_fftr::ftrs_fftr() : fem_thin_shell() {}
 
 ftrs_fftr::ftrs_fftr(
     long const eleno, long const elident, long const el_add,
@@ -2059,15 +2059,15 @@ ftrs_fftr::ftrs_fftr(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long scts::nnodes(void) const {return 6;}
+long scts::nnodes() const {return 6;}
 
-el_types scts::get_type(void) const {return el_types::SCTS;}
+el_types scts::get_type() const {return el_types::SCTS;}
 
 set<el_processor> const scts::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework
     };
 
-scts::scts(void) : elem() {}
+scts::scts() : elem() {}
 
 scts::scts(
     long const eleno, long const elident, long const el_add,
@@ -2120,15 +2120,15 @@ scts::scts(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long mcts::nnodes(void) const {return 6;}
+long mcts::nnodes() const {return 6;}
 
-el_types mcts::get_type(void) const {return el_types::MCTS;}
+el_types mcts::get_type() const {return el_types::MCTS;}
 
 set<el_processor> const mcts::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-mcts::mcts(void) : elem() {}
+mcts::mcts() : elem() {}
 
 mcts::mcts(
     long const eleno, long const elident, long const el_add,
@@ -2181,15 +2181,15 @@ mcts::mcts(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long scqs::nnodes(void) const {return 8;}
+long scqs::nnodes() const {return 8;}
 
-el_types scqs::get_type(void) const {return el_types::SCQS;}
+el_types scqs::get_type() const {return el_types::SCQS;}
 
 set<el_processor> const scqs::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework, elements::el_processor::Pretube
     };
 
-scqs::scqs(void) : elem() {}
+scqs::scqs() : elem() {}
 
 scqs::scqs(
     long const eleno, long const elident, long const el_add,
@@ -2242,15 +2242,15 @@ scqs::scqs(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long mcqs::nnodes(void) const {return 8;}
+long mcqs::nnodes() const {return 8;}
 
-el_types mcqs::get_type(void) const {return el_types::MCQS;}
+el_types mcqs::get_type() const {return el_types::MCQS;}
 
 set<el_processor> const mcqs::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-mcqs::mcqs(void) : elem() {}
+mcqs::mcqs() : elem() {}
 
 mcqs::mcqs(
     long const eleno, long const elident, long const el_add,
@@ -2303,15 +2303,15 @@ mcqs::mcqs(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ipri::nnodes(void) const {return 15;}
+long ipri::nnodes() const {return 15;}
 
-el_types ipri::get_type(void) const {return el_types::IPRI;}
+el_types ipri::get_type() const {return el_types::IPRI;}
 
 set<el_processor> const ipri::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
     };
 
-ipri::ipri(void) : elem() {}
+ipri::ipri() : elem() {}
 
 ipri::ipri(
     long const eleno, long const elident, long const el_add,
@@ -2364,15 +2364,15 @@ ipri::ipri(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long itet::nnodes(void) const {return 10;}
+long itet::nnodes() const {return 10;}
 
-el_types itet::get_type(void) const {return el_types::ITET;}
+el_types itet::get_type() const {return el_types::ITET;}
 
 set<el_processor> const itet::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-itet::itet(void) : elem() {}
+itet::itet() : elem() {}
 
 itet::itet(
     long const eleno, long const elident, long const el_add,
@@ -2425,15 +2425,15 @@ itet::itet(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long tpri::nnodes(void) const {return 6;}
+long tpri::nnodes() const {return 6;}
 
-el_types tpri::get_type(void) const {return el_types::TPRI;}
+el_types tpri::get_type() const {return el_types::TPRI;}
 
 set<el_processor> const tpri::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework
     };
 
-tpri::tpri(void) : elem() {}
+tpri::tpri() : elem() {}
 
 tpri::tpri(
     long const eleno, long const elident, long const el_add,
@@ -2486,15 +2486,15 @@ tpri::tpri(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long tetr::nnodes(void) const {return 4;}
+long tetr::nnodes() const {return 4;}
 
-el_types tetr::get_type(void) const {return el_types::TETR;}
+el_types tetr::get_type() const {return el_types::TETR;}
 
 set<el_processor> const tetr::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-tetr::tetr(void) : elem() {}
+tetr::tetr() : elem() {}
 
 tetr::tetr(
     long const eleno, long const elident, long const el_add,
@@ -2547,15 +2547,15 @@ tetr::tetr(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long lcts::nnodes(void) const {return 6;}
+long lcts::nnodes() const {return 6;}
 
-el_types lcts::get_type(void) const {return el_types::LCTS;}
+el_types lcts::get_type() const {return el_types::LCTS;}
 
 set<el_processor> const lcts::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-lcts::lcts(void) : elem() {}
+lcts::lcts() : elem() {}
 
 lcts::lcts(
     long const eleno, long const elident, long const el_add,
@@ -2608,15 +2608,15 @@ lcts::lcts(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long lcqs::nnodes(void) const {return 8;}
+long lcqs::nnodes() const {return 8;}
 
-el_types lcqs::get_type(void) const {return el_types::LCQS;}
+el_types lcqs::get_type() const {return el_types::LCQS;}
 
 set<el_processor> const lcqs::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-lcqs::lcqs(void) : elem() {}
+lcqs::lcqs() : elem() {}
 
 lcqs::lcqs(
     long const eleno, long const elident, long const el_add,
@@ -2669,15 +2669,15 @@ lcqs::lcqs(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long trs1::nnodes(void) const {return 18;}
+long trs1::nnodes() const {return 18;}
 
-el_types trs1::get_type(void) const {return el_types::TRS1;}
+el_types trs1::get_type() const {return el_types::TRS1;}
 
 set<el_processor> const trs1::processors{
         elements::el_processor::general, elements::el_processor::Sestra, elements::el_processor::Pretube
     };
 
-trs1::trs1(void) : elem() {}
+trs1::trs1() : elem() {}
 
 trs1::trs1(
     long const eleno, long const elident, long const el_add,
@@ -2730,15 +2730,15 @@ trs1::trs1(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long trs2::nnodes(void) const {return 15;}
+long trs2::nnodes() const {return 15;}
 
-el_types trs2::get_type(void) const {return el_types::TRS2;}
+el_types trs2::get_type() const {return el_types::TRS2;}
 
 set<el_processor> const trs2::processors{
         elements::el_processor::general, elements::el_processor::Sestra, elements::el_processor::Pretube
     };
 
-trs2::trs2(void) : elem() {}
+trs2::trs2() : elem() {}
 
 trs2::trs2(
     long const eleno, long const elident, long const el_add,
@@ -2791,15 +2791,15 @@ trs2::trs2(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long trs3::nnodes(void) const {return 12;}
+long trs3::nnodes() const {return 12;}
 
-el_types trs3::get_type(void) const {return el_types::TRS3;}
+el_types trs3::get_type() const {return el_types::TRS3;}
 
 set<el_processor> const trs3::processors{
         elements::el_processor::general, elements::el_processor::Sestra, elements::el_processor::Pretube
     };
 
-trs3::trs3(void) : elem() {}
+trs3::trs3() : elem() {}
 
 trs3::trs3(
     long const eleno, long const elident, long const el_add,
@@ -2852,15 +2852,15 @@ trs3::trs3(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long glsh::nnodes(void) const {return 2;}
+long glsh::nnodes() const {return 2;}
 
-el_types glsh::get_type(void) const {return el_types::GLSH;}
+el_types glsh::get_type() const {return el_types::GLSH;}
 
 set<el_processor> const glsh::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Sestra, elements::el_processor::Poseidon
     };
 
-glsh::glsh(void) : elem() {}
+glsh::glsh() : elem() {}
 
 glsh::glsh(
     long const eleno, long const elident, long const el_add,
@@ -2913,15 +2913,15 @@ glsh::glsh(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long axcs::nnodes(void) const {return 3;}
+long axcs::nnodes() const {return 3;}
 
-el_types axcs::get_type(void) const {return el_types::AXCS;}
+el_types axcs::get_type() const {return el_types::AXCS;}
 
 set<el_processor> const axcs::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
     };
 
-axcs::axcs(void) : elem() {}
+axcs::axcs() : elem() {}
 
 axcs::axcs(
     long const eleno, long const elident, long const el_add,
@@ -2974,15 +2974,15 @@ axcs::axcs(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long axlq::nnodes(void) const {return 4;}
+long axlq::nnodes() const {return 4;}
 
-el_types axlq::get_type(void) const {return el_types::AXLQ;}
+el_types axlq::get_type() const {return el_types::AXLQ;}
 
 set<el_processor> const axlq::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
     };
 
-axlq::axlq(void) : elem() {}
+axlq::axlq() : elem() {}
 
 axlq::axlq(
     long const eleno, long const elident, long const el_add,
@@ -3035,15 +3035,15 @@ axlq::axlq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long axls::nnodes(void) const {return 6;}
+long axls::nnodes() const {return 6;}
 
-el_types axls::get_type(void) const {return el_types::AXLS;}
+el_types axls::get_type() const {return el_types::AXLS;}
 
 set<el_processor> const axls::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-axls::axls(void) : elem() {}
+axls::axls() : elem() {}
 
 axls::axls(
     long const eleno, long const elident, long const el_add,
@@ -3096,15 +3096,15 @@ axls::axls(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long axqq::nnodes(void) const {return 8;}
+long axqq::nnodes() const {return 8;}
 
-el_types axqq::get_type(void) const {return el_types::AXQQ;}
+el_types axqq::get_type() const {return el_types::AXQQ;}
 
 set<el_processor> const axqq::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
     };
 
-axqq::axqq(void) : elem() {}
+axqq::axqq() : elem() {}
 
 axqq::axqq(
     long const eleno, long const elident, long const el_add,
@@ -3157,15 +3157,15 @@ axqq::axqq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long pils::nnodes(void) const {return 1;}
+long pils::nnodes() const {return 1;}
 
-el_types pils::get_type(void) const {return el_types::PILS;}
+el_types pils::get_type() const {return el_types::PILS;}
 
 set<el_processor> const pils::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
     };
 
-pils::pils(void) : elem() {}
+pils::pils() : elem() {}
 
 pils::pils(
     long const eleno, long const elident, long const el_add,
@@ -3218,15 +3218,15 @@ pils::pils(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long pcab::nnodes(void) const {return 2;}
+long pcab::nnodes() const {return 2;}
 
-el_types pcab::get_type(void) const {return el_types::PCAB;}
+el_types pcab::get_type() const {return el_types::PCAB;}
 
 set<el_processor> const pcab::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
     };
 
-pcab::pcab(void) : elem() {}
+pcab::pcab() : elem() {}
 
 pcab::pcab(
     long const eleno, long const elident, long const el_add,
@@ -3279,15 +3279,15 @@ pcab::pcab(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long pspr::nnodes(void) const {return 1;}
+long pspr::nnodes() const {return 1;}
 
-el_types pspr::get_type(void) const {return el_types::PSPR;}
+el_types pspr::get_type() const {return el_types::PSPR;}
 
 set<el_processor> const pspr::processors{
         elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
     };
 
-pspr::pspr(void) : elem() {}
+pspr::pspr() : elem() {}
 
 pspr::pspr(
     long const eleno, long const elident, long const el_add,
@@ -3340,15 +3340,15 @@ pspr::pspr(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long adva_4::nnodes(void) const {return 4;}
+long adva_4::nnodes() const {return 4;}
 
-el_types adva_4::get_type(void) const {return el_types::ADVA_4;}
+el_types adva_4::get_type() const {return el_types::ADVA_4;}
 
 set<el_processor> const adva_4::processors{
         elements::el_processor::general, elements::el_processor::ADVANCE
     };
 
-adva_4::adva_4(void) : elem() {}
+adva_4::adva_4() : elem() {}
 
 adva_4::adva_4(
     long const eleno, long const elident, long const el_add,
@@ -3401,15 +3401,15 @@ adva_4::adva_4(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long adva_2::nnodes(void) const {return 2;}
+long adva_2::nnodes() const {return 2;}
 
-el_types adva_2::get_type(void) const {return el_types::ADVA_2;}
+el_types adva_2::get_type() const {return el_types::ADVA_2;}
 
 set<el_processor> const adva_2::processors{
         elements::el_processor::general, elements::el_processor::ADVANCE
     };
 
-adva_2::adva_2(void) : elem() {}
+adva_2::adva_2() : elem() {}
 
 adva_2::adva_2(
     long const eleno, long const elident, long const el_add,
@@ -3462,15 +3462,15 @@ adva_2::adva_2(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctcp::nnodes(void) const {return 2;}
+long ctcp::nnodes() const {return 2;}
 
-el_types ctcp::get_type(void) const {return el_types::CTCP;}
+el_types ctcp::get_type() const {return el_types::CTCP;}
 
 set<el_processor> const ctcp::processors{
         elements::el_processor::general
     };
 
-ctcp::ctcp(void) : elem() {}
+ctcp::ctcp() : elem() {}
 
 ctcp::ctcp(
     long const eleno, long const elident, long const el_add,
@@ -3523,15 +3523,15 @@ ctcp::ctcp(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctcl::nnodes(void) const {return 4;}
+long ctcl::nnodes() const {return 4;}
 
-el_types ctcl::get_type(void) const {return el_types::CTCL;}
+el_types ctcl::get_type() const {return el_types::CTCL;}
 
 set<el_processor> const ctcl::processors{
         elements::el_processor::general
     };
 
-ctcl::ctcl(void) : elem() {}
+ctcl::ctcl() : elem() {}
 
 ctcl::ctcl(
     long const eleno, long const elident, long const el_add,
@@ -3584,15 +3584,15 @@ ctcl::ctcl(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctal::nnodes(void) const {return 4;}
+long ctal::nnodes() const {return 4;}
 
-el_types ctal::get_type(void) const {return el_types::CTAL;}
+el_types ctal::get_type() const {return el_types::CTAL;}
 
 set<el_processor> const ctal::processors{
         elements::el_processor::general
     };
 
-ctal::ctal(void) : elem() {}
+ctal::ctal() : elem() {}
 
 ctal::ctal(
     long const eleno, long const elident, long const el_add,
@@ -3645,15 +3645,15 @@ ctal::ctal(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctcc::nnodes(void) const {return 6;}
+long ctcc::nnodes() const {return 6;}
 
-el_types ctcc::get_type(void) const {return el_types::CTCC;}
+el_types ctcc::get_type() const {return el_types::CTCC;}
 
 set<el_processor> const ctcc::processors{
         elements::el_processor::general
     };
 
-ctcc::ctcc(void) : elem() {}
+ctcc::ctcc() : elem() {}
 
 ctcc::ctcc(
     long const eleno, long const elident, long const el_add,
@@ -3706,15 +3706,15 @@ ctcc::ctcc(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctaq::nnodes(void) const {return 6;}
+long ctaq::nnodes() const {return 6;}
 
-el_types ctaq::get_type(void) const {return el_types::CTAQ;}
+el_types ctaq::get_type() const {return el_types::CTAQ;}
 
 set<el_processor> const ctaq::processors{
         elements::el_processor::general, elements::el_processor::Prefem
     };
 
-ctaq::ctaq(void) : elem() {}
+ctaq::ctaq() : elem() {}
 
 ctaq::ctaq(
     long const eleno, long const elident, long const el_add,
@@ -3767,15 +3767,15 @@ ctaq::ctaq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctlq::nnodes(void) const {return 8;}
+long ctlq::nnodes() const {return 8;}
 
-el_types ctlq::get_type(void) const {return el_types::CTLQ;}
+el_types ctlq::get_type() const {return el_types::CTLQ;}
 
 set<el_processor> const ctlq::processors{
         elements::el_processor::general, elements::el_processor::Pretube
     };
 
-ctlq::ctlq(void) : elem() {}
+ctlq::ctlq() : elem() {}
 
 ctlq::ctlq(
     long const eleno, long const elident, long const el_add,
@@ -3828,15 +3828,15 @@ ctlq::ctlq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctcq::nnodes(void) const {return 16;}
+long ctcq::nnodes() const {return 16;}
 
-el_types ctcq::get_type(void) const {return el_types::CTCQ;}
+el_types ctcq::get_type() const {return el_types::CTCQ;}
 
 set<el_processor> const ctcq::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Pretube
     };
 
-ctcq::ctcq(void) : elem() {}
+ctcq::ctcq() : elem() {}
 
 ctcq::ctcq(
     long const eleno, long const elident, long const el_add,
@@ -3889,15 +3889,15 @@ ctcq::ctcq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ctmq::nnodes(void) const {return 18;}
+long ctmq::nnodes() const {return 18;}
 
-el_types ctmq::get_type(void) const {return el_types::CTMQ;}
+el_types ctmq::get_type() const {return el_types::CTMQ;}
 
 set<el_processor> const ctmq::processors{
         elements::el_processor::general, elements::el_processor::Pretube
     };
 
-ctmq::ctmq(void) : elem() {}
+ctmq::ctmq() : elem() {}
 
 ctmq::ctmq(
     long const eleno, long const elident, long const el_add,
@@ -3950,15 +3950,15 @@ ctmq::ctmq(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long hcqs::nnodes(void) const {return 9;}
+long hcqs::nnodes() const {return 9;}
 
-el_types hcqs::get_type(void) const {return el_types::HCQS;}
+el_types hcqs::get_type() const {return el_types::HCQS;}
 
 set<el_processor> const hcqs::processors{
         elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Pretube
     };
 
-hcqs::hcqs(void) : elem() {}
+hcqs::hcqs() : elem() {}
 
 hcqs::hcqs(
     long const eleno, long const elident, long const el_add,
@@ -4011,15 +4011,15 @@ hcqs::hcqs(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long slqs::nnodes(void) const {return 8;}
+long slqs::nnodes() const {return 8;}
 
-el_types slqs::get_type(void) const {return el_types::SLQS;}
+el_types slqs::get_type() const {return el_types::SLQS;}
 
 set<el_processor> const slqs::processors{
         elements::el_processor::general
     };
 
-slqs::slqs(void) : elem() {}
+slqs::slqs() : elem() {}
 
 slqs::slqs(
     long const eleno, long const elident, long const el_add,
@@ -4072,15 +4072,15 @@ slqs::slqs(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long slts::nnodes(void) const {return 6;}
+long slts::nnodes() const {return 6;}
 
-el_types slts::get_type(void) const {return el_types::SLTS;}
+el_types slts::get_type() const {return el_types::SLTS;}
 
 set<el_processor> const slts::processors{
         elements::el_processor::general
     };
 
-slts::slts(void) : elem() {}
+slts::slts() : elem() {}
 
 slts::slts(
     long const eleno, long const elident, long const el_add,
@@ -4133,15 +4133,15 @@ slts::slts(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long slcb::nnodes(void) const {return 3;}
+long slcb::nnodes() const {return 3;}
 
-el_types slcb::get_type(void) const {return el_types::SLCB;}
+el_types slcb::get_type() const {return el_types::SLCB;}
 
 set<el_processor> const slcb::processors{
         elements::el_processor::general
     };
 
-slcb::slcb(void) : elem() {}
+slcb::slcb() : elem() {}
 
 slcb::slcb(
     long const eleno, long const elident, long const el_add,
@@ -4194,15 +4194,15 @@ slcb::slcb(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long matr::nnodes(void) const {return 0;}
+long matr::nnodes() const {return 0;}
 
-el_types matr::get_type(void) const {return el_types::MATR;}
+el_types matr::get_type() const {return el_types::MATR;}
 
 set<el_processor> const matr::processors{
         elements::el_processor::general, elements::el_processor::ADVANCE, elements::el_processor::Splice
     };
 
-matr::matr(void) : elem() {}
+matr::matr() : elem() {}
 
 matr::matr(
     long const eleno, long const elident, long const el_add,
@@ -4255,15 +4255,15 @@ matr::matr(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex100::nnodes(void) const {return 21;}
+long ghex100::nnodes() const {return 21;}
 
-el_types ghex100::get_type(void) const {return el_types::GHEX100;}
+el_types ghex100::get_type() const {return el_types::GHEX100;}
 
 set<el_processor> const ghex100::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex100::ghex100(void) : elem() {}
+ghex100::ghex100() : elem() {}
 
 ghex100::ghex100(
     long const eleno, long const elident, long const el_add,
@@ -4316,15 +4316,15 @@ ghex100::ghex100(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex101::nnodes(void) const {return 22;}
+long ghex101::nnodes() const {return 22;}
 
-el_types ghex101::get_type(void) const {return el_types::GHEX101;}
+el_types ghex101::get_type() const {return el_types::GHEX101;}
 
 set<el_processor> const ghex101::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex101::ghex101(void) : elem() {}
+ghex101::ghex101() : elem() {}
 
 ghex101::ghex101(
     long const eleno, long const elident, long const el_add,
@@ -4377,15 +4377,15 @@ ghex101::ghex101(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex102::nnodes(void) const {return 22;}
+long ghex102::nnodes() const {return 22;}
 
-el_types ghex102::get_type(void) const {return el_types::GHEX102;}
+el_types ghex102::get_type() const {return el_types::GHEX102;}
 
 set<el_processor> const ghex102::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex102::ghex102(void) : elem() {}
+ghex102::ghex102() : elem() {}
 
 ghex102::ghex102(
     long const eleno, long const elident, long const el_add,
@@ -4438,15 +4438,15 @@ ghex102::ghex102(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex103::nnodes(void) const {return 23;}
+long ghex103::nnodes() const {return 23;}
 
-el_types ghex103::get_type(void) const {return el_types::GHEX103;}
+el_types ghex103::get_type() const {return el_types::GHEX103;}
 
 set<el_processor> const ghex103::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex103::ghex103(void) : elem() {}
+ghex103::ghex103() : elem() {}
 
 ghex103::ghex103(
     long const eleno, long const elident, long const el_add,
@@ -4499,15 +4499,15 @@ ghex103::ghex103(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex104::nnodes(void) const {return 22;}
+long ghex104::nnodes() const {return 22;}
 
-el_types ghex104::get_type(void) const {return el_types::GHEX104;}
+el_types ghex104::get_type() const {return el_types::GHEX104;}
 
 set<el_processor> const ghex104::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex104::ghex104(void) : elem() {}
+ghex104::ghex104() : elem() {}
 
 ghex104::ghex104(
     long const eleno, long const elident, long const el_add,
@@ -4560,15 +4560,15 @@ ghex104::ghex104(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex105::nnodes(void) const {return 23;}
+long ghex105::nnodes() const {return 23;}
 
-el_types ghex105::get_type(void) const {return el_types::GHEX105;}
+el_types ghex105::get_type() const {return el_types::GHEX105;}
 
 set<el_processor> const ghex105::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex105::ghex105(void) : elem() {}
+ghex105::ghex105() : elem() {}
 
 ghex105::ghex105(
     long const eleno, long const elident, long const el_add,
@@ -4621,15 +4621,15 @@ ghex105::ghex105(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex106::nnodes(void) const {return 23;}
+long ghex106::nnodes() const {return 23;}
 
-el_types ghex106::get_type(void) const {return el_types::GHEX106;}
+el_types ghex106::get_type() const {return el_types::GHEX106;}
 
 set<el_processor> const ghex106::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex106::ghex106(void) : elem() {}
+ghex106::ghex106() : elem() {}
 
 ghex106::ghex106(
     long const eleno, long const elident, long const el_add,
@@ -4682,15 +4682,15 @@ ghex106::ghex106(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex107::nnodes(void) const {return 24;}
+long ghex107::nnodes() const {return 24;}
 
-el_types ghex107::get_type(void) const {return el_types::GHEX107;}
+el_types ghex107::get_type() const {return el_types::GHEX107;}
 
 set<el_processor> const ghex107::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex107::ghex107(void) : elem() {}
+ghex107::ghex107() : elem() {}
 
 ghex107::ghex107(
     long const eleno, long const elident, long const el_add,
@@ -4743,15 +4743,15 @@ ghex107::ghex107(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex108::nnodes(void) const {return 22;}
+long ghex108::nnodes() const {return 22;}
 
-el_types ghex108::get_type(void) const {return el_types::GHEX108;}
+el_types ghex108::get_type() const {return el_types::GHEX108;}
 
 set<el_processor> const ghex108::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex108::ghex108(void) : elem() {}
+ghex108::ghex108() : elem() {}
 
 ghex108::ghex108(
     long const eleno, long const elident, long const el_add,
@@ -4804,15 +4804,15 @@ ghex108::ghex108(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex109::nnodes(void) const {return 23;}
+long ghex109::nnodes() const {return 23;}
 
-el_types ghex109::get_type(void) const {return el_types::GHEX109;}
+el_types ghex109::get_type() const {return el_types::GHEX109;}
 
 set<el_processor> const ghex109::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex109::ghex109(void) : elem() {}
+ghex109::ghex109() : elem() {}
 
 ghex109::ghex109(
     long const eleno, long const elident, long const el_add,
@@ -4865,15 +4865,15 @@ ghex109::ghex109(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex110::nnodes(void) const {return 23;}
+long ghex110::nnodes() const {return 23;}
 
-el_types ghex110::get_type(void) const {return el_types::GHEX110;}
+el_types ghex110::get_type() const {return el_types::GHEX110;}
 
 set<el_processor> const ghex110::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex110::ghex110(void) : elem() {}
+ghex110::ghex110() : elem() {}
 
 ghex110::ghex110(
     long const eleno, long const elident, long const el_add,
@@ -4926,15 +4926,15 @@ ghex110::ghex110(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex111::nnodes(void) const {return 24;}
+long ghex111::nnodes() const {return 24;}
 
-el_types ghex111::get_type(void) const {return el_types::GHEX111;}
+el_types ghex111::get_type() const {return el_types::GHEX111;}
 
 set<el_processor> const ghex111::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex111::ghex111(void) : elem() {}
+ghex111::ghex111() : elem() {}
 
 ghex111::ghex111(
     long const eleno, long const elident, long const el_add,
@@ -4987,15 +4987,15 @@ ghex111::ghex111(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex112::nnodes(void) const {return 23;}
+long ghex112::nnodes() const {return 23;}
 
-el_types ghex112::get_type(void) const {return el_types::GHEX112;}
+el_types ghex112::get_type() const {return el_types::GHEX112;}
 
 set<el_processor> const ghex112::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex112::ghex112(void) : elem() {}
+ghex112::ghex112() : elem() {}
 
 ghex112::ghex112(
     long const eleno, long const elident, long const el_add,
@@ -5048,15 +5048,15 @@ ghex112::ghex112(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex113::nnodes(void) const {return 24;}
+long ghex113::nnodes() const {return 24;}
 
-el_types ghex113::get_type(void) const {return el_types::GHEX113;}
+el_types ghex113::get_type() const {return el_types::GHEX113;}
 
 set<el_processor> const ghex113::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex113::ghex113(void) : elem() {}
+ghex113::ghex113() : elem() {}
 
 ghex113::ghex113(
     long const eleno, long const elident, long const el_add,
@@ -5109,15 +5109,15 @@ ghex113::ghex113(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex114::nnodes(void) const {return 24;}
+long ghex114::nnodes() const {return 24;}
 
-el_types ghex114::get_type(void) const {return el_types::GHEX114;}
+el_types ghex114::get_type() const {return el_types::GHEX114;}
 
 set<el_processor> const ghex114::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex114::ghex114(void) : elem() {}
+ghex114::ghex114() : elem() {}
 
 ghex114::ghex114(
     long const eleno, long const elident, long const el_add,
@@ -5170,15 +5170,15 @@ ghex114::ghex114(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex115::nnodes(void) const {return 25;}
+long ghex115::nnodes() const {return 25;}
 
-el_types ghex115::get_type(void) const {return el_types::GHEX115;}
+el_types ghex115::get_type() const {return el_types::GHEX115;}
 
 set<el_processor> const ghex115::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex115::ghex115(void) : elem() {}
+ghex115::ghex115() : elem() {}
 
 ghex115::ghex115(
     long const eleno, long const elident, long const el_add,
@@ -5231,15 +5231,15 @@ ghex115::ghex115(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex116::nnodes(void) const {return 22;}
+long ghex116::nnodes() const {return 22;}
 
-el_types ghex116::get_type(void) const {return el_types::GHEX116;}
+el_types ghex116::get_type() const {return el_types::GHEX116;}
 
 set<el_processor> const ghex116::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex116::ghex116(void) : elem() {}
+ghex116::ghex116() : elem() {}
 
 ghex116::ghex116(
     long const eleno, long const elident, long const el_add,
@@ -5292,15 +5292,15 @@ ghex116::ghex116(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex117::nnodes(void) const {return 23;}
+long ghex117::nnodes() const {return 23;}
 
-el_types ghex117::get_type(void) const {return el_types::GHEX117;}
+el_types ghex117::get_type() const {return el_types::GHEX117;}
 
 set<el_processor> const ghex117::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex117::ghex117(void) : elem() {}
+ghex117::ghex117() : elem() {}
 
 ghex117::ghex117(
     long const eleno, long const elident, long const el_add,
@@ -5353,15 +5353,15 @@ ghex117::ghex117(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex118::nnodes(void) const {return 23;}
+long ghex118::nnodes() const {return 23;}
 
-el_types ghex118::get_type(void) const {return el_types::GHEX118;}
+el_types ghex118::get_type() const {return el_types::GHEX118;}
 
 set<el_processor> const ghex118::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex118::ghex118(void) : elem() {}
+ghex118::ghex118() : elem() {}
 
 ghex118::ghex118(
     long const eleno, long const elident, long const el_add,
@@ -5414,15 +5414,15 @@ ghex118::ghex118(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex119::nnodes(void) const {return 24;}
+long ghex119::nnodes() const {return 24;}
 
-el_types ghex119::get_type(void) const {return el_types::GHEX119;}
+el_types ghex119::get_type() const {return el_types::GHEX119;}
 
 set<el_processor> const ghex119::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex119::ghex119(void) : elem() {}
+ghex119::ghex119() : elem() {}
 
 ghex119::ghex119(
     long const eleno, long const elident, long const el_add,
@@ -5475,15 +5475,15 @@ ghex119::ghex119(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex120::nnodes(void) const {return 23;}
+long ghex120::nnodes() const {return 23;}
 
-el_types ghex120::get_type(void) const {return el_types::GHEX120;}
+el_types ghex120::get_type() const {return el_types::GHEX120;}
 
 set<el_processor> const ghex120::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex120::ghex120(void) : elem() {}
+ghex120::ghex120() : elem() {}
 
 ghex120::ghex120(
     long const eleno, long const elident, long const el_add,
@@ -5536,15 +5536,15 @@ ghex120::ghex120(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex121::nnodes(void) const {return 24;}
+long ghex121::nnodes() const {return 24;}
 
-el_types ghex121::get_type(void) const {return el_types::GHEX121;}
+el_types ghex121::get_type() const {return el_types::GHEX121;}
 
 set<el_processor> const ghex121::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex121::ghex121(void) : elem() {}
+ghex121::ghex121() : elem() {}
 
 ghex121::ghex121(
     long const eleno, long const elident, long const el_add,
@@ -5597,15 +5597,15 @@ ghex121::ghex121(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex122::nnodes(void) const {return 24;}
+long ghex122::nnodes() const {return 24;}
 
-el_types ghex122::get_type(void) const {return el_types::GHEX122;}
+el_types ghex122::get_type() const {return el_types::GHEX122;}
 
 set<el_processor> const ghex122::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex122::ghex122(void) : elem() {}
+ghex122::ghex122() : elem() {}
 
 ghex122::ghex122(
     long const eleno, long const elident, long const el_add,
@@ -5658,15 +5658,15 @@ ghex122::ghex122(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex123::nnodes(void) const {return 25;}
+long ghex123::nnodes() const {return 25;}
 
-el_types ghex123::get_type(void) const {return el_types::GHEX123;}
+el_types ghex123::get_type() const {return el_types::GHEX123;}
 
 set<el_processor> const ghex123::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex123::ghex123(void) : elem() {}
+ghex123::ghex123() : elem() {}
 
 ghex123::ghex123(
     long const eleno, long const elident, long const el_add,
@@ -5719,15 +5719,15 @@ ghex123::ghex123(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex124::nnodes(void) const {return 23;}
+long ghex124::nnodes() const {return 23;}
 
-el_types ghex124::get_type(void) const {return el_types::GHEX124;}
+el_types ghex124::get_type() const {return el_types::GHEX124;}
 
 set<el_processor> const ghex124::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex124::ghex124(void) : elem() {}
+ghex124::ghex124() : elem() {}
 
 ghex124::ghex124(
     long const eleno, long const elident, long const el_add,
@@ -5780,15 +5780,15 @@ ghex124::ghex124(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex125::nnodes(void) const {return 24;}
+long ghex125::nnodes() const {return 24;}
 
-el_types ghex125::get_type(void) const {return el_types::GHEX125;}
+el_types ghex125::get_type() const {return el_types::GHEX125;}
 
 set<el_processor> const ghex125::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex125::ghex125(void) : elem() {}
+ghex125::ghex125() : elem() {}
 
 ghex125::ghex125(
     long const eleno, long const elident, long const el_add,
@@ -5841,15 +5841,15 @@ ghex125::ghex125(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex126::nnodes(void) const {return 24;}
+long ghex126::nnodes() const {return 24;}
 
-el_types ghex126::get_type(void) const {return el_types::GHEX126;}
+el_types ghex126::get_type() const {return el_types::GHEX126;}
 
 set<el_processor> const ghex126::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex126::ghex126(void) : elem() {}
+ghex126::ghex126() : elem() {}
 
 ghex126::ghex126(
     long const eleno, long const elident, long const el_add,
@@ -5902,15 +5902,15 @@ ghex126::ghex126(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex127::nnodes(void) const {return 25;}
+long ghex127::nnodes() const {return 25;}
 
-el_types ghex127::get_type(void) const {return el_types::GHEX127;}
+el_types ghex127::get_type() const {return el_types::GHEX127;}
 
 set<el_processor> const ghex127::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex127::ghex127(void) : elem() {}
+ghex127::ghex127() : elem() {}
 
 ghex127::ghex127(
     long const eleno, long const elident, long const el_add,
@@ -5963,15 +5963,15 @@ ghex127::ghex127(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex128::nnodes(void) const {return 24;}
+long ghex128::nnodes() const {return 24;}
 
-el_types ghex128::get_type(void) const {return el_types::GHEX128;}
+el_types ghex128::get_type() const {return el_types::GHEX128;}
 
 set<el_processor> const ghex128::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex128::ghex128(void) : elem() {}
+ghex128::ghex128() : elem() {}
 
 ghex128::ghex128(
     long const eleno, long const elident, long const el_add,
@@ -6024,15 +6024,15 @@ ghex128::ghex128(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex129::nnodes(void) const {return 25;}
+long ghex129::nnodes() const {return 25;}
 
-el_types ghex129::get_type(void) const {return el_types::GHEX129;}
+el_types ghex129::get_type() const {return el_types::GHEX129;}
 
 set<el_processor> const ghex129::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex129::ghex129(void) : elem() {}
+ghex129::ghex129() : elem() {}
 
 ghex129::ghex129(
     long const eleno, long const elident, long const el_add,
@@ -6085,15 +6085,15 @@ ghex129::ghex129(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex130::nnodes(void) const {return 25;}
+long ghex130::nnodes() const {return 25;}
 
-el_types ghex130::get_type(void) const {return el_types::GHEX130;}
+el_types ghex130::get_type() const {return el_types::GHEX130;}
 
 set<el_processor> const ghex130::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex130::ghex130(void) : elem() {}
+ghex130::ghex130() : elem() {}
 
 ghex130::ghex130(
     long const eleno, long const elident, long const el_add,
@@ -6146,15 +6146,15 @@ ghex130::ghex130(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex131::nnodes(void) const {return 26;}
+long ghex131::nnodes() const {return 26;}
 
-el_types ghex131::get_type(void) const {return el_types::GHEX131;}
+el_types ghex131::get_type() const {return el_types::GHEX131;}
 
 set<el_processor> const ghex131::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex131::ghex131(void) : elem() {}
+ghex131::ghex131() : elem() {}
 
 ghex131::ghex131(
     long const eleno, long const elident, long const el_add,
@@ -6207,15 +6207,15 @@ ghex131::ghex131(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex132::nnodes(void) const {return 22;}
+long ghex132::nnodes() const {return 22;}
 
-el_types ghex132::get_type(void) const {return el_types::GHEX132;}
+el_types ghex132::get_type() const {return el_types::GHEX132;}
 
 set<el_processor> const ghex132::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex132::ghex132(void) : elem() {}
+ghex132::ghex132() : elem() {}
 
 ghex132::ghex132(
     long const eleno, long const elident, long const el_add,
@@ -6268,15 +6268,15 @@ ghex132::ghex132(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex133::nnodes(void) const {return 23;}
+long ghex133::nnodes() const {return 23;}
 
-el_types ghex133::get_type(void) const {return el_types::GHEX133;}
+el_types ghex133::get_type() const {return el_types::GHEX133;}
 
 set<el_processor> const ghex133::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex133::ghex133(void) : elem() {}
+ghex133::ghex133() : elem() {}
 
 ghex133::ghex133(
     long const eleno, long const elident, long const el_add,
@@ -6329,15 +6329,15 @@ ghex133::ghex133(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex134::nnodes(void) const {return 23;}
+long ghex134::nnodes() const {return 23;}
 
-el_types ghex134::get_type(void) const {return el_types::GHEX134;}
+el_types ghex134::get_type() const {return el_types::GHEX134;}
 
 set<el_processor> const ghex134::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex134::ghex134(void) : elem() {}
+ghex134::ghex134() : elem() {}
 
 ghex134::ghex134(
     long const eleno, long const elident, long const el_add,
@@ -6390,15 +6390,15 @@ ghex134::ghex134(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex135::nnodes(void) const {return 24;}
+long ghex135::nnodes() const {return 24;}
 
-el_types ghex135::get_type(void) const {return el_types::GHEX135;}
+el_types ghex135::get_type() const {return el_types::GHEX135;}
 
 set<el_processor> const ghex135::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex135::ghex135(void) : elem() {}
+ghex135::ghex135() : elem() {}
 
 ghex135::ghex135(
     long const eleno, long const elident, long const el_add,
@@ -6451,15 +6451,15 @@ ghex135::ghex135(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex136::nnodes(void) const {return 23;}
+long ghex136::nnodes() const {return 23;}
 
-el_types ghex136::get_type(void) const {return el_types::GHEX136;}
+el_types ghex136::get_type() const {return el_types::GHEX136;}
 
 set<el_processor> const ghex136::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex136::ghex136(void) : elem() {}
+ghex136::ghex136() : elem() {}
 
 ghex136::ghex136(
     long const eleno, long const elident, long const el_add,
@@ -6512,15 +6512,15 @@ ghex136::ghex136(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex137::nnodes(void) const {return 24;}
+long ghex137::nnodes() const {return 24;}
 
-el_types ghex137::get_type(void) const {return el_types::GHEX137;}
+el_types ghex137::get_type() const {return el_types::GHEX137;}
 
 set<el_processor> const ghex137::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex137::ghex137(void) : elem() {}
+ghex137::ghex137() : elem() {}
 
 ghex137::ghex137(
     long const eleno, long const elident, long const el_add,
@@ -6573,15 +6573,15 @@ ghex137::ghex137(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex138::nnodes(void) const {return 24;}
+long ghex138::nnodes() const {return 24;}
 
-el_types ghex138::get_type(void) const {return el_types::GHEX138;}
+el_types ghex138::get_type() const {return el_types::GHEX138;}
 
 set<el_processor> const ghex138::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex138::ghex138(void) : elem() {}
+ghex138::ghex138() : elem() {}
 
 ghex138::ghex138(
     long const eleno, long const elident, long const el_add,
@@ -6634,15 +6634,15 @@ ghex138::ghex138(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex139::nnodes(void) const {return 25;}
+long ghex139::nnodes() const {return 25;}
 
-el_types ghex139::get_type(void) const {return el_types::GHEX139;}
+el_types ghex139::get_type() const {return el_types::GHEX139;}
 
 set<el_processor> const ghex139::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex139::ghex139(void) : elem() {}
+ghex139::ghex139() : elem() {}
 
 ghex139::ghex139(
     long const eleno, long const elident, long const el_add,
@@ -6695,15 +6695,15 @@ ghex139::ghex139(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex140::nnodes(void) const {return 23;}
+long ghex140::nnodes() const {return 23;}
 
-el_types ghex140::get_type(void) const {return el_types::GHEX140;}
+el_types ghex140::get_type() const {return el_types::GHEX140;}
 
 set<el_processor> const ghex140::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex140::ghex140(void) : elem() {}
+ghex140::ghex140() : elem() {}
 
 ghex140::ghex140(
     long const eleno, long const elident, long const el_add,
@@ -6756,15 +6756,15 @@ ghex140::ghex140(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex141::nnodes(void) const {return 24;}
+long ghex141::nnodes() const {return 24;}
 
-el_types ghex141::get_type(void) const {return el_types::GHEX141;}
+el_types ghex141::get_type() const {return el_types::GHEX141;}
 
 set<el_processor> const ghex141::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex141::ghex141(void) : elem() {}
+ghex141::ghex141() : elem() {}
 
 ghex141::ghex141(
     long const eleno, long const elident, long const el_add,
@@ -6817,15 +6817,15 @@ ghex141::ghex141(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex142::nnodes(void) const {return 24;}
+long ghex142::nnodes() const {return 24;}
 
-el_types ghex142::get_type(void) const {return el_types::GHEX142;}
+el_types ghex142::get_type() const {return el_types::GHEX142;}
 
 set<el_processor> const ghex142::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex142::ghex142(void) : elem() {}
+ghex142::ghex142() : elem() {}
 
 ghex142::ghex142(
     long const eleno, long const elident, long const el_add,
@@ -6878,15 +6878,15 @@ ghex142::ghex142(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex143::nnodes(void) const {return 25;}
+long ghex143::nnodes() const {return 25;}
 
-el_types ghex143::get_type(void) const {return el_types::GHEX143;}
+el_types ghex143::get_type() const {return el_types::GHEX143;}
 
 set<el_processor> const ghex143::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex143::ghex143(void) : elem() {}
+ghex143::ghex143() : elem() {}
 
 ghex143::ghex143(
     long const eleno, long const elident, long const el_add,
@@ -6939,15 +6939,15 @@ ghex143::ghex143(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex144::nnodes(void) const {return 24;}
+long ghex144::nnodes() const {return 24;}
 
-el_types ghex144::get_type(void) const {return el_types::GHEX144;}
+el_types ghex144::get_type() const {return el_types::GHEX144;}
 
 set<el_processor> const ghex144::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex144::ghex144(void) : elem() {}
+ghex144::ghex144() : elem() {}
 
 ghex144::ghex144(
     long const eleno, long const elident, long const el_add,
@@ -7000,15 +7000,15 @@ ghex144::ghex144(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex145::nnodes(void) const {return 25;}
+long ghex145::nnodes() const {return 25;}
 
-el_types ghex145::get_type(void) const {return el_types::GHEX145;}
+el_types ghex145::get_type() const {return el_types::GHEX145;}
 
 set<el_processor> const ghex145::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex145::ghex145(void) : elem() {}
+ghex145::ghex145() : elem() {}
 
 ghex145::ghex145(
     long const eleno, long const elident, long const el_add,
@@ -7061,15 +7061,15 @@ ghex145::ghex145(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex146::nnodes(void) const {return 25;}
+long ghex146::nnodes() const {return 25;}
 
-el_types ghex146::get_type(void) const {return el_types::GHEX146;}
+el_types ghex146::get_type() const {return el_types::GHEX146;}
 
 set<el_processor> const ghex146::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex146::ghex146(void) : elem() {}
+ghex146::ghex146() : elem() {}
 
 ghex146::ghex146(
     long const eleno, long const elident, long const el_add,
@@ -7122,15 +7122,15 @@ ghex146::ghex146(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex147::nnodes(void) const {return 26;}
+long ghex147::nnodes() const {return 26;}
 
-el_types ghex147::get_type(void) const {return el_types::GHEX147;}
+el_types ghex147::get_type() const {return el_types::GHEX147;}
 
 set<el_processor> const ghex147::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex147::ghex147(void) : elem() {}
+ghex147::ghex147() : elem() {}
 
 ghex147::ghex147(
     long const eleno, long const elident, long const el_add,
@@ -7183,15 +7183,15 @@ ghex147::ghex147(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex148::nnodes(void) const {return 23;}
+long ghex148::nnodes() const {return 23;}
 
-el_types ghex148::get_type(void) const {return el_types::GHEX148;}
+el_types ghex148::get_type() const {return el_types::GHEX148;}
 
 set<el_processor> const ghex148::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex148::ghex148(void) : elem() {}
+ghex148::ghex148() : elem() {}
 
 ghex148::ghex148(
     long const eleno, long const elident, long const el_add,
@@ -7244,15 +7244,15 @@ ghex148::ghex148(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex149::nnodes(void) const {return 24;}
+long ghex149::nnodes() const {return 24;}
 
-el_types ghex149::get_type(void) const {return el_types::GHEX149;}
+el_types ghex149::get_type() const {return el_types::GHEX149;}
 
 set<el_processor> const ghex149::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex149::ghex149(void) : elem() {}
+ghex149::ghex149() : elem() {}
 
 ghex149::ghex149(
     long const eleno, long const elident, long const el_add,
@@ -7305,15 +7305,15 @@ ghex149::ghex149(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex150::nnodes(void) const {return 24;}
+long ghex150::nnodes() const {return 24;}
 
-el_types ghex150::get_type(void) const {return el_types::GHEX150;}
+el_types ghex150::get_type() const {return el_types::GHEX150;}
 
 set<el_processor> const ghex150::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex150::ghex150(void) : elem() {}
+ghex150::ghex150() : elem() {}
 
 ghex150::ghex150(
     long const eleno, long const elident, long const el_add,
@@ -7366,15 +7366,15 @@ ghex150::ghex150(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex151::nnodes(void) const {return 25;}
+long ghex151::nnodes() const {return 25;}
 
-el_types ghex151::get_type(void) const {return el_types::GHEX151;}
+el_types ghex151::get_type() const {return el_types::GHEX151;}
 
 set<el_processor> const ghex151::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex151::ghex151(void) : elem() {}
+ghex151::ghex151() : elem() {}
 
 ghex151::ghex151(
     long const eleno, long const elident, long const el_add,
@@ -7427,15 +7427,15 @@ ghex151::ghex151(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex152::nnodes(void) const {return 24;}
+long ghex152::nnodes() const {return 24;}
 
-el_types ghex152::get_type(void) const {return el_types::GHEX152;}
+el_types ghex152::get_type() const {return el_types::GHEX152;}
 
 set<el_processor> const ghex152::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex152::ghex152(void) : elem() {}
+ghex152::ghex152() : elem() {}
 
 ghex152::ghex152(
     long const eleno, long const elident, long const el_add,
@@ -7488,15 +7488,15 @@ ghex152::ghex152(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex153::nnodes(void) const {return 25;}
+long ghex153::nnodes() const {return 25;}
 
-el_types ghex153::get_type(void) const {return el_types::GHEX153;}
+el_types ghex153::get_type() const {return el_types::GHEX153;}
 
 set<el_processor> const ghex153::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex153::ghex153(void) : elem() {}
+ghex153::ghex153() : elem() {}
 
 ghex153::ghex153(
     long const eleno, long const elident, long const el_add,
@@ -7549,15 +7549,15 @@ ghex153::ghex153(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex154::nnodes(void) const {return 25;}
+long ghex154::nnodes() const {return 25;}
 
-el_types ghex154::get_type(void) const {return el_types::GHEX154;}
+el_types ghex154::get_type() const {return el_types::GHEX154;}
 
 set<el_processor> const ghex154::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex154::ghex154(void) : elem() {}
+ghex154::ghex154() : elem() {}
 
 ghex154::ghex154(
     long const eleno, long const elident, long const el_add,
@@ -7610,15 +7610,15 @@ ghex154::ghex154(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex155::nnodes(void) const {return 26;}
+long ghex155::nnodes() const {return 26;}
 
-el_types ghex155::get_type(void) const {return el_types::GHEX155;}
+el_types ghex155::get_type() const {return el_types::GHEX155;}
 
 set<el_processor> const ghex155::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex155::ghex155(void) : elem() {}
+ghex155::ghex155() : elem() {}
 
 ghex155::ghex155(
     long const eleno, long const elident, long const el_add,
@@ -7671,15 +7671,15 @@ ghex155::ghex155(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex156::nnodes(void) const {return 24;}
+long ghex156::nnodes() const {return 24;}
 
-el_types ghex156::get_type(void) const {return el_types::GHEX156;}
+el_types ghex156::get_type() const {return el_types::GHEX156;}
 
 set<el_processor> const ghex156::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex156::ghex156(void) : elem() {}
+ghex156::ghex156() : elem() {}
 
 ghex156::ghex156(
     long const eleno, long const elident, long const el_add,
@@ -7732,15 +7732,15 @@ ghex156::ghex156(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex157::nnodes(void) const {return 25;}
+long ghex157::nnodes() const {return 25;}
 
-el_types ghex157::get_type(void) const {return el_types::GHEX157;}
+el_types ghex157::get_type() const {return el_types::GHEX157;}
 
 set<el_processor> const ghex157::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex157::ghex157(void) : elem() {}
+ghex157::ghex157() : elem() {}
 
 ghex157::ghex157(
     long const eleno, long const elident, long const el_add,
@@ -7793,15 +7793,15 @@ ghex157::ghex157(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex158::nnodes(void) const {return 25;}
+long ghex158::nnodes() const {return 25;}
 
-el_types ghex158::get_type(void) const {return el_types::GHEX158;}
+el_types ghex158::get_type() const {return el_types::GHEX158;}
 
 set<el_processor> const ghex158::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex158::ghex158(void) : elem() {}
+ghex158::ghex158() : elem() {}
 
 ghex158::ghex158(
     long const eleno, long const elident, long const el_add,
@@ -7854,15 +7854,15 @@ ghex158::ghex158(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex159::nnodes(void) const {return 26;}
+long ghex159::nnodes() const {return 26;}
 
-el_types ghex159::get_type(void) const {return el_types::GHEX159;}
+el_types ghex159::get_type() const {return el_types::GHEX159;}
 
 set<el_processor> const ghex159::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex159::ghex159(void) : elem() {}
+ghex159::ghex159() : elem() {}
 
 ghex159::ghex159(
     long const eleno, long const elident, long const el_add,
@@ -7915,15 +7915,15 @@ ghex159::ghex159(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex160::nnodes(void) const {return 25;}
+long ghex160::nnodes() const {return 25;}
 
-el_types ghex160::get_type(void) const {return el_types::GHEX160;}
+el_types ghex160::get_type() const {return el_types::GHEX160;}
 
 set<el_processor> const ghex160::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex160::ghex160(void) : elem() {}
+ghex160::ghex160() : elem() {}
 
 ghex160::ghex160(
     long const eleno, long const elident, long const el_add,
@@ -7976,15 +7976,15 @@ ghex160::ghex160(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex161::nnodes(void) const {return 26;}
+long ghex161::nnodes() const {return 26;}
 
-el_types ghex161::get_type(void) const {return el_types::GHEX161;}
+el_types ghex161::get_type() const {return el_types::GHEX161;}
 
 set<el_processor> const ghex161::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex161::ghex161(void) : elem() {}
+ghex161::ghex161() : elem() {}
 
 ghex161::ghex161(
     long const eleno, long const elident, long const el_add,
@@ -8037,15 +8037,15 @@ ghex161::ghex161(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex162::nnodes(void) const {return 26;}
+long ghex162::nnodes() const {return 26;}
 
-el_types ghex162::get_type(void) const {return el_types::GHEX162;}
+el_types ghex162::get_type() const {return el_types::GHEX162;}
 
 set<el_processor> const ghex162::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex162::ghex162(void) : elem() {}
+ghex162::ghex162() : elem() {}
 
 ghex162::ghex162(
     long const eleno, long const elident, long const el_add,
@@ -8098,15 +8098,15 @@ ghex162::ghex162(elements::__base::elem const *data) :
 */
 #line 423 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
-long ghex163::nnodes(void) const {return 27;}
+long ghex163::nnodes() const {return 27;}
 
-el_types ghex163::get_type(void) const {return el_types::GHEX163;}
+el_types ghex163::get_type() const {return el_types::GHEX163;}
 
 set<el_processor> const ghex163::processors{
         elements::el_processor::general, elements::el_processor::Sestra
     };
 
-ghex163::ghex163(void) : elem() {}
+ghex163::ghex163() : elem() {}
 
 ghex163::ghex163(
     long const eleno, long const elident, long const el_add,
