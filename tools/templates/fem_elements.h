@@ -79,13 +79,13 @@ namespace dnvgl {
 
                     protected:
 
-                        long static const get_eleno(void);
+                        long static const get_eleno();
                         long static get_eleno(long const eleno);
                         long static const get_elident();
                         long static get_elident(long const elident);
                         el_types static const type;
 
-                        elem(void);
+                        elem();
 
                         elem(long const eleno, long const elident,
                              long const el_add,
@@ -221,13 +221,13 @@ namespace dnvgl {
                         elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
                         elem(dnvgl::extfem::fem::cards::gelref1 const*);
                         elem(elem const*);
-                        virtual ~elem(void);
+                        virtual ~elem();
 
-                        cards::__base::card const &gelmnt1(void) const;
-                        cards::__base::card const &gelref1(void) const;
+                        cards::__base::card const &gelmnt1() const;
+                        cards::__base::card const &gelref1() const;
 
                         /** Reset static values for id and no check */
-                        void static reset(void);
+                        void static reset();
 
                         /** Element number ->
                             dnvgl::extfem::fem::cards::gelmnt1::ELNOX
@@ -300,9 +300,9 @@ namespace dnvgl {
                         virtual void add(dnvgl::extfem::fem::cards::gelref1 const*);
                         virtual void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
 
-                        virtual long nnodes(void) const = 0;
+                        virtual long nnodes() const = 0;
 
-                        virtual el_types get_type(void) const = 0;
+                        virtual el_types get_type() const = 0;
 
                         friend std::ostream &::operator<<(std::ostream&, elem const &);
                     };
@@ -318,10 +318,10 @@ namespace dnvgl {
 
                 class undef : public __base::elem {
                 public:
-                    undef (void);
+                    undef ();
                     undef(dnvgl::extfem::fem::cards::gelref1 const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                 };
                 {% for elem, vals in elements %}
 {% line %}
@@ -329,7 +329,7 @@ namespace dnvgl {
                  */
                 class {{ elem }} : public __base::{{ vals.base }} {
                 public:
-                    {{ elem }}(void);
+                    {{ elem }}();
                     {{ elem }}(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -362,8 +362,8 @@ namespace dnvgl {
                     {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
                     {{ elem }}(__base::elem const*);
-                    long nnodes(void) const override;
-                    el_types get_type(void) const override;
+                    long nnodes() const override;
+                    el_types get_type() const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;

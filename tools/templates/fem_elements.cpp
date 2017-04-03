@@ -80,13 +80,13 @@ std::string dnvgl::extfem::fem::elements::name_elem(el_types const type) {
     return "";
 };
 
-undef::undef(void) {}
+undef::undef() {}
 
-long undef::nnodes(void) const {return -1;}
+long undef::nnodes() const {return -1;}
 
-el_types undef::get_type(void) const {return el_types::UNDEFINED;}
+el_types undef::get_type() const {return el_types::UNDEFINED;}
 
-elements::__base::elem::elem(void) :
+elements::__base::elem::elem() :
     eleno(-1), elident(-1), el_add(-1), nodes({}), matref(-1), add_no(-1),
     intno(-1), mass_intno(-1), i_strain_ref(-1), i_stress_ref(-1),
     strpoint_ref(-1), section({}), fixations({}), eccentrities({}),
@@ -172,7 +172,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
                       eccentrities, csys);
 }
 
-elements::__base::elem::~elem(void) {
+elements::__base::elem::~elem() {
     section.clear();
     fixations.clear();
     eccentrities.clear();
@@ -263,7 +263,7 @@ long elements::__base::elem::get_eleno(long const eleno) {
     return res;
 }
 
-long const elements::__base::elem::get_eleno(void) {
+long const elements::__base::elem::get_eleno() {
     do {;} while (used_nos.find(++max_no) != used_nos.end());
     used_nos.insert(max_no);
     return max_no;
@@ -276,7 +276,7 @@ long elements::__base::elem::get_elident(long const elident) {
     return res;
 }
 
-long const elements::__base::elem::get_elident(void) {
+long const elements::__base::elem::get_elident() {
     do {;} while (used_ids.find(++max_id) != used_ids.end());
     used_ids.insert(max_id);
     return max_id;
@@ -324,7 +324,7 @@ void elements::__base::elem::add(cards::gelref1 const *data) {
         this->csys = {data->TRANSNO_OPT};
 }
 
-cards::__base::card const &elements::__base::elem::gelmnt1(void) const {
+cards::__base::card const &elements::__base::elem::gelmnt1() const {
     return d_gelmnt1(
         this->eleno,   // ELNOX
         this->elident, // ELNO
@@ -333,7 +333,7 @@ cards::__base::card const &elements::__base::elem::gelmnt1(void) const {
         this->nodes);  // NODIN
 }
 
-cards::__base::card const &elements::__base::elem::gelref1(void) const {
+cards::__base::card const &elements::__base::elem::gelref1() const {
     long geono_opt;
     long fixno_opt;
     long eccno_opt;
@@ -387,7 +387,7 @@ cards::__base::card const &elements::__base::elem::gelref1(void) const {
         this->csys.size() > 1 ? this->csys : vector<long>({}));
 }
 
-void elements::__base::elem::reset(void) {
+void elements::__base::elem::reset() {
     used_ids.clear();
     max_id = 0;
     used_nos.clear();
@@ -421,15 +421,15 @@ ostream &operator<<(
 */
 {% line %}
 
-long {{ elem }}::nnodes(void) const {return {{ vals.nnodes }};}
+long {{ elem }}::nnodes() const {return {{ vals.nnodes }};}
 
-el_types {{ elem }}::get_type(void) const {return el_types::{{ elem|upper() }};}
+el_types {{ elem }}::get_type() const {return el_types::{{ elem|upper() }};}
 
 set<el_processor> const {{ elem }}::processors{
         {{ vals.procs|join(', ') }}
     };
 
-{{ elem }}::{{ elem }}(void) : {{ vals.base }}() {}
+{{ elem }}::{{ elem }}() : {{ vals.base }}() {}
 
 {{ elem }}::{{ elem }}(
     long const eleno, long const elident, long const el_add,
