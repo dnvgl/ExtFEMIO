@@ -320,8 +320,8 @@ namespace dnvgl {
                 public:
                     undef (void);
                     undef(dnvgl::extfem::fem::cards::gelref1 const*);
-                    virtual long nnodes(void) const;
-                    el_types get_type(void) const;
+                    long nnodes(void) const override;
+                    el_types get_type(void) const override;
                 };
                 {% for elem, vals in elements %}
 {% line %}
@@ -362,8 +362,8 @@ namespace dnvgl {
                     {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
                     {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
                     {{ elem }}(__base::elem const*);
-                    virtual long nnodes(void) const;
-                    el_types get_type(void) const;
+                    long nnodes(void) const override;
+                    el_types get_type(void) const override;
                     std::set<el_processor> static const processors;
                     using elem::operator();
                     using elem::add;
